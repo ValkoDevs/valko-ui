@@ -1,0 +1,3 @@
+<template>
+  SpinnerPage
+</template>

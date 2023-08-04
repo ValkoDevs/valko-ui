@@ -1,0 +1,3 @@
+<template>
+  ColorsPage
+</template>

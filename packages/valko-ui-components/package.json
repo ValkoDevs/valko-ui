@@ -1,0 +1,56 @@
+{
+  "name": "@valko-ui/components",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    },
+    "./styles": "./dist/valkoui.css",
+    "./nuxt": "./dist/nuxt.js",
+    "./nuxt.plugin": "./dist/nuxt.plugin.js",
+    "./nuxt.plugin.js": "./dist/nuxt.plugin.js",
+    "./tailwind.preset": "./dist/tailwind.preset.js",
+    "./tailwind.preset.js": "./dist/tailwind.preset.js"
+  },
+  "types": "./dist/index.es.d.ts",
+  "scripts": {
+    "build": "vue-tsc && vite build",
+    "lint": "eslint --ext .ts,.vue,.js ."
+  },
+  "peerDependencies": {
+    "nuxt": "^3.5.0",
+    "vue": "3.3.4"
+  },
+  "devDependencies": {
+    "@nuxt/bridge": "^0.10.1",
+    "@nuxt/kit": "^3.5.3",
+    "@types/node": "^20.3.0",
+    "@typescript-eslint/eslint-plugin": "^5.59.9",
+    "@typescript-eslint/parser": "^5.59.9",
+    "@vitejs/plugin-vue": "^4.2.3",
+    "autoprefixer": "^10.4.14",
+    "clean-css": "^5.3.2",
+    "eslint": "^8.42.0",
+    "eslint-plugin-vue": "^9.14.1",
+    "path": "^0.12.7",
+    "postcss": "^8.4.24",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "tailwindcss": "^3.3.2",
+    "typescript": "5.0.2",
+    "vite": "^4.3.9",
+    "vite-plugin-dts": "^2.3.0",
+    "vite-plugin-vue-type-imports": "^0.2.4",
+    "vue-tsc": "^1.6.5"
+  },
+  "dependencies": {
+    "tailwind-variants": "^0.1.13"
+  }
+}

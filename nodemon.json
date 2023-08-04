@@ -1,0 +1,11 @@
+{
+  "exec": "lerna run dev --scope=@valko-ui/docs",
+  "watch": [
+    "packages/valko-ui-components"
+  ],
+  "legacy-watch": true,
+  "ext": "js,ts,json,vue,css",
+  "ignore": [
+    "**/dist/**"
+  ]
+}

@@ -1,0 +1,11 @@
+body,
+#app {
+  @apply w-screen
+    h-screen
+    bg-light-2
+    text-dark-3
+    dark:bg-dark-4
+    dark:text-light-2
+    text-base
+    subpixel-antialiased;
+}
