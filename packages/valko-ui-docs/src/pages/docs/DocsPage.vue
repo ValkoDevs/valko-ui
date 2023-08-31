@@ -11,7 +11,8 @@ const darkTheme = ref(false)
 const menuItems: MenuItem[] = [
   { key: 'get-started', group: 'General', text: 'Get Started'},
   { key: 'button', group: 'Forms', text: 'Button'},
-  { key: 'divider', group: 'Layout', text: 'Divider'}
+  { key: 'divider', group: 'Layout', text: 'Divider'},
+  { key: 'input', group: 'Forms',  text:'Input'},
 ]
 const activeItem = ref<MenuItem['key'] | null>(null)
 

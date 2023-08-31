@@ -23,6 +23,10 @@ const routes = [
         path: 'divider',
         component: lazyLoad('layout', 'DividerPage')
       },
+      {
+        path: 'input',
+        component: lazyLoad('forms', 'InputPage')
+      },
     ]
   },
 ]
