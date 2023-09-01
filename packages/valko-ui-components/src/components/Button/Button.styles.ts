@@ -206,14 +206,11 @@ const useStyle = (props: ButtonProps) => {
     }
   })
 
-
-
   const buttonType = {
     filled: filledButton,
     outlined: outlinedButton,
     ghost: ghostButton
   }
-
 
   return computed(() => {
     const selectedButton = buttonType[props.type]

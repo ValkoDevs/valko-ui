@@ -13,6 +13,7 @@ const menuItems: MenuItem[] = [
   { key: 'divider', group: 'Layout', text: 'Divider'},
   { key: 'button', group: 'Forms', text: 'Button'},
   { key: 'input', group: 'Forms',  text:'Input'},
+  { key: 'checkout', group: 'Forms', text: 'Checkbox'},
 ]
 const activeItem = ref<MenuItem['key'] | null>(null)
 
