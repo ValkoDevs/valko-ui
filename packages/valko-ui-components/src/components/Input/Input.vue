@@ -7,7 +7,7 @@ const props = withDefaults(defineProps<InputProps>(), {
   variant: 'primary',
   kind: 'filled',
   size: 'md',
-  type: 'text',
+  type: 'text'
 })
 
 defineOptions({ name: 'VkInput' })
@@ -31,15 +31,18 @@ const classes = useStyle(props)
       :disabled="disabled"
       :type="type"
       placeholder=" "
-      :helpertext="helpertext"
       :value="modelValue"
       @input="updateValue"
-      :data-filled="modelValue !== ''"
+      :data-filled="!!modelValue"
     >
-    <label :class="classes.label"><slot name="label" /></label>
+    <label 
+      :class="classes.label"
+    >
+      <slot name="label" /></label>
     <span 
       :class="classes.helper"
-      v-if="helpertext"
+      v-if="helpertext !== ''"
+      :value="helpertext"
     ><slot name="helper" /></span>
   </div>
 </template>

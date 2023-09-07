@@ -8,42 +8,46 @@ const useStyle = (props: InputProps) => {
       input: [
         'peer',
         'transition-colors',
-        'duration-500',
+        'duration-200',
         'ease-in-out',
         'w-full',
         'focus:ring-0',
         'outline-none',
-        'text-zinc-900',
-        'dark:text-white',
-        'text-sm',
-        'pb-1'
+        'pb-1',
+        'placeholder-shown:truncate',
+        'px-2'
       ],
       label: [
+        'flex',
+        'px-1',
         'absolute',
-        'top-0',
-        'left-2',
+        'top-1.5',
+        'left-1',
         'transition-all',
-        'duration-300',
-        'text-slate-500',
-        'peer-placeholder-shown:text-md',
-        'peer-placeholder-shown:top-3',
-        'peer-placeholder-shown:left-2',
-        'peer-hover:bg-inherit',
-        'peer-focus:bg-gray-400',
-        'peer-focus:top-0',
-        'peer-focus:left-2',
-        'dark:text-white'
+        'duration-200',
+        'peer-placeholder-shown:left-1',
+        'peer-focus:top-1.5',
+        'cursor-text',
+        'truncate',
+        'w-full'
       ],
       container: [
         'relative',
+        'w-full',
         'm-0',
         'p-0',
         'flex',
-        'flex-col'
+        'flex-col',
+        'items-start'
       ],
       helper: [
-        'flex-start',
-        'max-w-xs'
+        'transition-all',
+        'duration-200',
+        'mt-2',
+        'break-words',
+        'break-before-all',
+        'inline-block',
+        'w-full'
       ]
     },
     variants: {
@@ -52,59 +56,42 @@ const useStyle = (props: InputProps) => {
           input: [
             'rounded-t-md',
             'border-b-2',
-            'bg-transparent',
-            'focus:border-transparent',
-            'hover:bg-neutral-200',
-            'focus:bg-neutral-300',
-            'bg-neutral-100',
+            'bg-light-3',
+            'focus:bg-light-4',
             'dark:bg-dark-3',
             'dark:focus:bg-dark-2'
-          ],
-          label: [
-            'bg-inherit',
-            'peer-hover:bg-inherit',
-            'peer-focus:bg-inherit',
-            'peer-data-[filled=true]:text-xs',
-            'peer-focus:text-xs'
-          ],
+          ]
         },
         ghost: {
           input: [
             'shadow-none',
             'border-b-2',
-            'bg-inherit',
-            'hover:bg-inherit',
-            'focus:bg-inherit'
+            'bg-inherit'
             
           ],
           label: [
             'shadow-none',
-            'bg-inherit',
-            'peer-hover:bg-inherit',
-            'peer-focus:bg-inherit',
-            'peer-data-[filled=true]:text-xs',
-            'peer-focus:text-xs'
+            'bg-inherit'
+
           ]
         },
         outlined: {
           input: [
-            'focus:bg-inherit',
-            'hover:bg-inherit',
             'rounded-md',
-            'bg-inherit',
-            'border-2'
+            'border-2',
+            'bg-transparent'
           ],
           label: [
             '-top-1',
-            'left-3',
-            'peer-hover:bg-inherit',
+            'left-2',
+            'peer-placeholder-shown:left-2',
+            'bg-transparent',
             'peer-focus:bg-light-2',
-            'peer-data-[filled=true]:-top-3',
-            'peer-focus:-top-3',
-            'peer-focus:left-3',
-            'bg-inherit',
-            'dark:bg-dark-4',
-            'dark:peer-focus:bg-dark-4'
+            'dark:peer-focus:bg-dark-4',
+            'peer-data-[filled=true]:-top-3.5',
+            'peer-data-[filled=true]:bg-light-2',
+            'dark:peer-data-[filled=true]:bg-dark-4',
+            'peer-focus:-top-3.5',
           ]
         }
       },
@@ -119,36 +106,62 @@ const useStyle = (props: InputProps) => {
       size: {
         xs: {
           input: [
-            'pr-1',
-            'pl-2', 
-            'pt-3',
+            'pt-6',
+            'text-xs'
           ],
           label: [
-            'peer-placeholder-shown:top-2'
+            'peer-placeholder-shown:top-4',
+            'text-xs'
+          ],
+          helper: [
+            'text-xs'
           ]
         },
         sm: {
           input: [
-            'pr-2.5',
-            'pl-2',
-            'pt-4'
+            'pt-8',
+            'text-sm'
+
           ],
           label: [
-            'peer-placeholder-shown:top-2'
+            'peer-placeholder-shown:top-5',
+            'text-sm',
+            'peer-data-[filled=true]:text-xs',
+            'peer-focus:text-xs'
+          ],
+          helper: [
+            'text-sm'
           ]
         },
         md: {
           input: [
-            'pr-10',
-            'pl-2',
-            'pt-5'
+            'pt-10',
+            'text-base'
+          ],
+          label: [
+            'text-base',
+            'peer-data-[filled=true]:text-sm',
+            'peer-focus:text-sm',
+            'peer-placeholder-shown:top-6'
+          ],
+          helper: [
+            'text-base'
           ]
         },
         lg: {
           input: [
-            'pr-20',
-            'pl-2',
-            'pt-6'
+            'pt-12',
+            'text-lg'
+
+          ],
+          label: [
+            'text-lg',
+            'peer-data-[filled=true]:text-base',
+            'peer-focus:text-base',
+            'peer-placeholder-shown:top-7'
+          ],
+          helper: [
+            'text-lg'
           ]
         }
       },
@@ -159,10 +172,13 @@ const useStyle = (props: InputProps) => {
             'pl-4'
           ],
           label: [
-            'peer-placeholder-shown:left-3',
-            'peer-focus:left-4',
-            'peer-data-[filled=true]:left-4'
+            'peer-placeholder-shown:left-6',
+            'peer-focus:left-6',
+            'peer-data-[filled=true]:left-6'
           ],
+          helper: [
+            'ml-7'
+          ]
         }
       },
       flat: {
@@ -178,12 +194,30 @@ const useStyle = (props: InputProps) => {
             'bg-gray-600',
             'opacity-50',
             'cursor-not-allowed',
-            'text-gray-950',
+            'text-gray-500',
             'border-gray-950',
-            'hover:bg-gray-600'
+            'hover:bg-gray-600',
+            'dark:border-gray-600',
+            'dark:hover:bg-gray-600',
+            'peer-data-[filled=true]:border-gray-500',
+            'peer-data-[filled=false]:border-gray-500',
+            'dark:peer-data-[filled=true]:border-gray-500',
+            'dark:peer-data-[filled=false]:border-gray-500',
           ],
           label: [
-            'text-slate-950'
+            'peer-data-[filled=true]:text-gray-500',
+            'peer-data-[filled=false]:text-gray-500',
+            'dark:peer-data-[filled=true]:text-gray-500',
+            'dark:peer-data-[filled=false]:text-gray-500',
+            'dark:bg-inherit',
+            'peer-data-[filled=true]:bg-inherit',
+            'peer-data-[filled=false]:bg-inherit',
+            'dark:peer-data-[filled=true]:bg-inherit',
+            'dark:peer-data-[filled=false]:bg-inherit',
+
+          ],
+          helper: [
+            'text-gray-500'
           ]
         },
       },
@@ -199,7 +233,13 @@ const useStyle = (props: InputProps) => {
             'focus:bg-gray-500'
           ],
           label: [
-            'text-slate-950'
+            'text-gray-500',
+            'bg-inherit',
+            'focus:bg-inherit',
+            'peer-data-[filled=true]:bg-inherit',
+            'peer-data-[filled=false]:bg-inherit',
+            'dark:peer-data-[filled=true]:bg-inherit',
+            'dark:peer-data-[filled=false]:bg-inherit'
           ]
         },
       },
@@ -215,6 +255,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'filled',
         color: 'primary',
+        disabled: false,
         class: {
           input: [
             'border-gray-300',
@@ -229,15 +270,16 @@ const useStyle = (props: InputProps) => {
             'dark:text-light-3'
           ],
           label: [
-            'text-slate-500',
-            'focus:text-dark-5',
-            'dark:text-white'
+            'text-dark-2',
+            'focus:text-dark-4',
+            'dark:text-light-2'
           ]
         }
       },
       {
         kind: 'filled',
         color: 'secondary',
+        disabled: false,
         class: {
           input: [
             'border-secondary-300',
@@ -245,7 +287,8 @@ const useStyle = (props: InputProps) => {
             'focus:border-secondary-500'
           ],
           helper: [
-            'text-secondary-500'
+            'text-secondary-500',
+            'dark:text-secondary-500'
           ],
           label: [
             'text-secondary-500',
@@ -257,6 +300,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'filled',
         color: 'success',
+        disabled: false,
         class: {
           input: [
             'border-success-300',
@@ -266,7 +310,8 @@ const useStyle = (props: InputProps) => {
             'dark:focus:border-success-700'
           ],
           helper: [
-            'text-success-500'
+            'text-success-500',
+            'dark:text-success-500'
           ],
           label: [
             'text-success-500',
@@ -278,6 +323,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'filled',
         color: 'info',
+        disabled: false,
         class: {
           input: [
             'border-info-300',
@@ -287,7 +333,8 @@ const useStyle = (props: InputProps) => {
             'dark:focus:border-info-700'
           ],
           helper: [
-            'text-info-500'
+            'text-info-500',
+            'dark:text-info-500'
           ],
           label: [
             'text-info-500',
@@ -299,6 +346,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'filled',
         color: 'warning',
+        disabled: false,
         class: {
           input: [
             'border-warning-300',
@@ -308,7 +356,8 @@ const useStyle = (props: InputProps) => {
             'dark:focus:border-warning-700'
           ],
           helper: [
-            'text-warning-500'
+            'text-warning-500',
+            'dark:text-warning-500'
           ],
           label: [
             'text-warning-500',
@@ -320,6 +369,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'filled',
         color: 'error',
+        disabled: false,
         class: {
           input: [
             'border-error-300',
@@ -329,7 +379,8 @@ const useStyle = (props: InputProps) => {
             'dark:focus:border-error-700'
           ],
           helper: [
-            'text-error-500'
+            'text-error-500',
+            'dark:text-error-500'
           ],
           label: [
             'text-error-500',
@@ -342,6 +393,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'ghost',
         color: 'primary',
+        disabled: false,
         class: {
           input: [
             'border-gray-300',
@@ -352,17 +404,20 @@ const useStyle = (props: InputProps) => {
             'dark:focus:border-light-3'
           ],
           helper: [
-            'text-gray-500'
+            'text-dark-1',
+            'dark:text-light-3'
           ],
           label: [
-            'text-dark-1',
-            'focus:text-light-5'
+            'text-dark-2',
+            'focus:text-dark-4',
+            'dark:text-light-2'
           ]
         }
       },
       {
         kind: 'ghost',
         color: 'secondary',
+        disabled: false,
         class: {
           input: [
             'border-secondary-300',
@@ -373,7 +428,8 @@ const useStyle = (props: InputProps) => {
             'dark:focus:border-light-5'
           ],
           helper: [
-            'text-secondary-500'
+            'text-secondary-500',
+            'dark:text-secondary-500'
           ],
           label: [
             'text-secondary-500',
@@ -385,6 +441,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'ghost',
         color: 'success',
+        disabled: false,
         class: {
           input: [
             'border-success-300',
@@ -394,7 +451,8 @@ const useStyle = (props: InputProps) => {
             'dark:focus:border-success-500'
           ],
           helper: [
-            'text-success-500'
+            'text-success-500',
+            'dark:text-success-500'
           ],
           label: [
             'text-success-500',
@@ -406,6 +464,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'ghost',
         color: 'info',
+        disabled: false,
         class: {
           input: [
             'border-info-300',
@@ -415,7 +474,8 @@ const useStyle = (props: InputProps) => {
             'dark:focus:border-info-500'
           ],
           helper: [
-            'text-info-500'
+            'text-info-500',
+            'dark:text-info-500'
           ],
           label: [
             'text-info-500',
@@ -427,6 +487,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'ghost',
         color: 'warning',
+        disabled: false,
         class: {
           input: [
             'border-warning-300',
@@ -436,7 +497,8 @@ const useStyle = (props: InputProps) => {
             'dark:focus:border-warning-500'
           ],
           helper: [
-            'text-warning-500'
+            'text-warning-500',
+            'dark:text-warning-500'
           ],
           label: [
             'text-warning-500',
@@ -448,6 +510,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'ghost',
         color: 'error',
+        disabled: false,
         class: {
           input: [
             'border-error-300',
@@ -457,7 +520,8 @@ const useStyle = (props: InputProps) => {
             'dark:focus:border-error-500'
           ],
           helper: [
-            'text-error-500'
+            'text-error-500',
+            'dark:text-error-500'
           ],
           label: [
             'text-error-500',
@@ -470,6 +534,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'outlined',
         color: 'primary',
+        disabled: false,
         class: {
           input: [
             'border-gray-200',
@@ -477,17 +542,20 @@ const useStyle = (props: InputProps) => {
             'focus:border-gray-400',
           ],
           helper: [
-            'text-gray-500'
+            'text-dark-1',
+            'dark:text-light-3'
           ],
           label: [
-            'text-light-5',
-            'focus:text-dark-5',
+            'text-dark-2',
+            'focus:text-dark-4',
+            'dark:text-light-2'
           ]
         }
       },
       {
         kind: 'outlined',
         color: 'secondary',
+        disabled: false,
         class: {
           input: [
             'border-secondary-300',
@@ -495,7 +563,8 @@ const useStyle = (props: InputProps) => {
             'focus:border-secondary-500'
           ],
           helper: [
-            'text-secondary-500'
+            'text-secondary-500',
+            'dark:text-secondary-500'
           ],
           label: [
             'text-secondary-500',
@@ -507,6 +576,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'outlined',
         color: 'success',
+        disabled: false,
         class: {
           input: [
             'border-success-400',
@@ -514,7 +584,8 @@ const useStyle = (props: InputProps) => {
             'focus:border-success-600'
           ],
           helper: [
-            'text-success-500'
+            'text-success-500',
+            'dark:text-success-500'
           ],
           label: [
             'text-success-500',
@@ -526,6 +597,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'outlined',
         color: 'info',
+        disabled: false,
         class: {
           input: [
             'border-info-400',
@@ -533,7 +605,8 @@ const useStyle = (props: InputProps) => {
             'focus:border-info-600'
           ],
           helper: [
-            'text-info-500'
+            'text-info-500',
+            'dark:text-info-500'
           ],
           label: [
             'text-info-500',
@@ -545,6 +618,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'outlined',
         color: 'warning',
+        disabled: false,
         class: {
           input: [
             'border-warning-400',
@@ -552,7 +626,8 @@ const useStyle = (props: InputProps) => {
             'focus:border-warning-600'
           ],
           helper: [
-            'text-warning-500'
+            'text-warning-500',
+            'dark:text-warning-500'
           ],
           label: [
             'text-warning-500',
@@ -564,6 +639,7 @@ const useStyle = (props: InputProps) => {
       {
         kind: 'outlined',
         color: 'error',
+        disabled: false,
         class: {
           input: [
             'border-error-400',
@@ -571,12 +647,137 @@ const useStyle = (props: InputProps) => {
             'focus:border-error-600'
           ],
           helper: [
-            'text-error-500'
+            'text-error-500',
+            'dark:text-error-500'
           ],
           label: [
             'text-error-500',
             'focus:text-error-950',
             'dark:text-error-500',
+          ]
+        }
+      },
+      // outlined & size
+      {
+        kind: 'outlined',
+        size: 'xs',
+        disabled: false,
+        class: {
+          label: [
+            'peer-data-[filled=true]:-top-2',
+            'peer-focus:-top-2',
+            'peer-data-[filled=true]:text-xs',
+            'peer-focus:text-xs'
+          ],
+          input: [
+            'py-3'
+          ]
+        }
+      },
+      {
+        kind: 'outlined',
+        size: 'sm',
+        disabled: false,
+        class: {
+          label: [
+            'peer-data-[filled=true]:-top-2.5',
+            'peer-focus:-top-2.5',
+            'peer-data-[filled=true]:text-sm',
+            'peer-focus:text-sm'
+          ],
+          input: [
+            'py-4'
+          ]
+        }
+      },
+      {
+        kind: 'outlined',
+        size: 'md',
+        disabled: false,
+        class: {
+          label: [
+            'peer-data-[filled=true]:-top-3',
+            'peer-focus:-top-3',
+            'peer-data-[filled=true]:text-md',
+            'peer-focus:text-md'
+          ],
+          input: [
+            'py-5'
+          ]
+        }
+      },
+      {
+        kind: 'outlined',
+        size: 'lg',
+        disabled: false,
+        class: {
+          label: [
+            'peer-data-[filled=true]:text-lg',
+            'peer-focus:text-lg'
+          ],
+          input: [
+            'py-6'
+          ]
+        }
+      },
+      // filled, ghost && rounded
+      {
+        kind: ['filled','ghost'],
+        rounded: true,
+        size: 'xs',
+        class: {
+          input: [
+            'py-3'
+          ],
+          label: [
+            'peer-placeholder-shown:top-3'
+          ]
+        }
+      },
+      {
+        kind: ['filled','ghost'],
+        rounded: true,
+        size: 'sm',
+        class: {
+          input: [
+            'py-4'
+          ],
+          label: [
+            'peer-placeholder-shown:top-4'
+          ]
+        }
+      },
+      {
+        kind: ['filled','ghost'],
+        rounded: true,
+        size: 'md',
+        class: {
+          input: [
+            'py-5'
+          ],
+          label: [
+            'peer-placeholder-shown:top-5'
+          ]
+        }
+      },
+      {
+        kind: ['filled','ghost'],
+        rounded: true,
+        size: 'lg',
+        class: {
+          input: [
+            'py-6'
+          ],
+          label: [
+            'peer-placeholder-shown:top-6'
+          ]
+        }
+      },
+      {
+        type: 'date',
+        class: {
+          label: [
+            'cursor-default'
           ]
         }
       }

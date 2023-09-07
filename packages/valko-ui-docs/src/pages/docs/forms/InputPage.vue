@@ -9,7 +9,6 @@ const inpFlat = ref(false)
 const inpRounded = ref(false)
 const inpReadonly = ref(false)
 const inpType = ref('text')
-const inpHelper = ref(false)
 const inpValue = ref('')
 const labelValue = ref('Label')
 const helperValue = ref('Helpertext')
@@ -28,7 +27,7 @@ const helperValue = ref('Helpertext')
       <h2>Playground</h2>
       <hr>
       <div class="flex">
-        <div class="w-1/2 flex justify-center items-center border border-light-4 dark:border-dark-1 rounded">
+        <div class="w-1/2 flex justify-center items-center border border-light-4 dark:border-dark-1 rounded px-10">
           <vk-input
             :variant="inpVariant"
             :kind="inpKind"
@@ -38,7 +37,6 @@ const helperValue = ref('Helpertext')
             :flat="inpFlat"
             :rounded="inpRounded"
             :type="inpType"
-            :helpertext="inpHelper"
             v-model="inpValue"
           >
             <template #label>
@@ -86,17 +84,17 @@ const helperValue = ref('Helpertext')
                 <option value="secondary">
                   Secondary
                 </option>
-                <option value="error">
-                  Error
-                </option>
-                <option value="warning">
-                  Warning
+                <option value="success">
+                  Success
                 </option>
                 <option value="info">
                   Info
                 </option>
-                <option value="success">
-                  Success
+                <option value="warning">
+                  Warning
+                </option>
+                <option value="error">
+                  Error
                 </option>
               </select>
             </div>
@@ -104,7 +102,7 @@ const helperValue = ref('Helpertext')
               <label
                 for="cb-inp-kind"
                 class="mr-2"
-              >Type: </label>
+              >Kind: </label>
               <select
                 name="cb-inp-kind"
                 v-model="inpKind"
@@ -146,7 +144,7 @@ const helperValue = ref('Helpertext')
               <label
                 for="cb-inp-type"
                 class="mr-2"
-              >Input Type: </label>
+              >Type: </label>
               <select
                 name="cb-inp-type"
                 v-model="inpType"
@@ -209,17 +207,6 @@ const helperValue = ref('Helpertext')
                 class="mr-2"
               >Readonly: </label>
             </div>
-            <div class="flex">
-              <input
-                name="cb-inp-helpertext"
-                type="checkbox"
-                v-model="inpHelper"
-              >
-              <label
-                for="cb-inp-helpertext"
-                class="mr-2"
-              >Helpertext: </label>
-            </div>
           </form>
         </div>
       </div>
@@ -228,46 +215,58 @@ const helperValue = ref('Helpertext')
     <section class="w-full">
       <h2>Colors</h2>
       <hr>
-      <div class="flex justify-evenly items-center">
-        <div class="mr-3">
-          <vk-input variant="primary">
+      <div class="flex justify-between items-center">
+        <div class="mr-2">
+          <vk-input 
+            variant="primary"
+          >
             <template #label>
               Primary
             </template>
           </vk-input>
         </div>
-        <div class="mr-3">
-          <vk-input variant="secondary">
+        <div class="mr-2">
+          <vk-input 
+            variant="secondary"
+          >
             <template #label>
               Secondary
             </template>
           </vk-input>
         </div>
-        <div class="mr-3">
-          <vk-input variant="error">
-            <template #label>
-              Error
-            </template>
-          </vk-input>
-        </div>
-        <div class="mr-3">
-          <vk-input variant="success">
+        <div class="mr-2">
+          <vk-input 
+            variant="success"
+          >
             <template #label>
               Success
             </template>
           </vk-input>
         </div>
-        <div class="mr-3">
-          <vk-input variant="warning">
+        <div class="mr-2">
+          <vk-input 
+            variant="info"
+          >
+            <template #label>
+              Info
+            </template>
+          </vk-input>
+        </div>
+        <div class="mr-2">
+          <vk-input 
+            variant="warning"
+          >
             <template #label>
               Warning
             </template>
           </vk-input>
         </div>
         <div>
-          <vk-input variant="info">
+          <vk-input 
+            variant="error"
+          >
             <template #label>
-              Info
+              Erorr
             </template>
           </vk-input>
         </div>
@@ -278,38 +277,48 @@ const helperValue = ref('Helpertext')
       <h2>Types</h2>
       <hr>
       <div class="flex justify-between items-center">
-        <div class="mr-3">
-          <vk-input flat>
+        <div class="mr-2">
+          <vk-input size="sm">
             <template #label>
-              Flat
+              Filled
             </template>
           </vk-input>
         </div>
-        <div class="mr-3">
-          <vk-input rounded>
-            <template #label>
-              Rounded
-            </template>
-          </vk-input>
-        </div>
-        <div class="mr-3">
+        <div class="mr-2">
           <vk-input kind="outlined">
             <template #label>
               Outlined
             </template>
           </vk-input>
         </div>
-        <div class="mr-3">
+        <div class="mr-2">
           <vk-input kind="ghost">
             <template #label>
               Ghost
             </template>
           </vk-input>
         </div>
-        <div>
+        <div class="mr-2">
           <vk-input disabled>
             <template #label>
               Disabled
+            </template>
+          </vk-input>
+        </div>
+        <div class="mr-2">
+          <vk-input flat>
+            <template #label>
+              Flat
+            </template>
+          </vk-input>
+        </div>
+        <div>
+          <vk-input 
+            kind="outlined"
+            rounded
+          >
+            <template #label>
+              Rounded
             </template>
           </vk-input>
         </div>
@@ -320,26 +329,34 @@ const helperValue = ref('Helpertext')
       <h2>Sizes</h2>
       <hr>
       <div class="flex justify-between items-center">
-        <vk-input size="xs">
-          <template #label>
-            Extra Small
-          </template>
-        </vk-input>
-        <vk-input size="sm">
-          <template #label>
-            Small
-          </template>
-        </vk-input>
-        <vk-input size="md">
-          <template #label>
-            Medium
-          </template>
-        </vk-input>
-        <vk-input size="lg">
-          <template #label>
-            Large
-          </template>
-        </vk-input>
+        <div class="w-full px-2">
+          <vk-input size="xs">
+            <template #label>
+              Extra Small
+            </template>
+          </vk-input>
+        </div>
+        <div class="w-full px-2">
+          <vk-input size="sm">
+            <template #label>
+              Small
+            </template>
+          </vk-input>
+        </div>
+        <div class="w-full px-2">
+          <vk-input size="md">
+            <template #label>
+              Medium
+            </template>
+          </vk-input>
+        </div>
+        <div class="w-full px-2">
+          <vk-input size="lg">
+            <template #label>
+              Large
+            </template>
+          </vk-input>
+        </div>
       </div>
     </section>
 
