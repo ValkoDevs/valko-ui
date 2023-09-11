@@ -206,7 +206,6 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
                 class="mr-2"
               >Error Text: </label>
             </div>
-
             <div class="flex">
               <input
                 name="cb-checkbox-indeterminate"
@@ -222,109 +221,138 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
         </div>
       </div>
     </section>
-
     <section class="w-full">
       <h2>Colors</h2>
       <hr>
-      <div class="flex justify-between items-center">
-        <vk-checkbox
-          :model-value="true"
-          label="Primary" 
-          variant="primary"
-        />
-        <vk-checkbox
-          :model-value="true"
-          label="Secondary" 
-          variant="secondary" 
-        />
-        <vk-checkbox
-          :model-value="true"
-          label="Error" 
-          variant="error" 
-        />
-        <vk-checkbox
-          :model-value="true"
-          label="Success" 
-          variant="success" 
-        />
-        <vk-checkbox
-          :model-value="true"
-          label="Warning" 
-          variant="warning" 
-        />
-        <vk-checkbox
-          :model-value="true"
-          label="Info" 
-          variant="info" 
-        />
+      <div class="flex flex-wrap gap-4 justify-center">
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Primary" 
+            variant="primary"
+          />
+        </div>
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Secondary" 
+            variant="secondary" 
+          />
+        </div>
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Error" 
+            variant="error" 
+          />
+        </div>
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Success" 
+            variant="success" 
+          />
+        </div>
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Warning" 
+            variant="warning" 
+          />
+        </div>
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Info" 
+            variant="info" 
+          />
+        </div>
       </div>
     </section>
     <br>
     <section class="w-full">
       <h2>Types</h2>
       <hr>
-      <div class="flex gap-4 flex-col">
-        <vk-checkbox
-          :model-value="true"
-          label="Error"
-          error-text
-        />      
-        <vk-checkbox
-          :model-value="true"
-          label="Flat"
-          flat
-        />
-        <vk-checkbox
-          :model-value="true"
-          label="Outlined" 
-          type="outlined" 
-        />
-        <vk-checkbox
-          :model-value="true"
-          label="Disabled"
-          disabled
-        />
-        <vk-checkbox 
-          :model-value="null"
-          label="Indeterminate"
-          indeterminate
-          read-only
-        />
-        <vk-checkbox 
-          label="Rounded"
-          :model-value="true"
-          rounded 
-        />
+      <div class="flex flex-wrap gap-6 justify-center">
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Flat"
+            flat
+          />
+        </div>
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Outlined"
+            type="outlined"
+          />
+        </div>
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Disabled"
+            disabled
+          />
+        </div>
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="null"
+            label="Indeterminate"
+            indeterminate
+            read-only
+          />
+        </div>
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Error"
+            error-text="Invalid Input"
+          />
+        </div>
+        <div class="w-1/3">
+          <vk-checkbox
+            label="Rounded"
+            :model-value="true"
+            rounded
+          />
+        </div>
       </div>
     </section>
-
     <section class="w-full">
       <h2>Sizes</h2>
       <hr>
-      <div class="flex justify-between items-center">
-        <vk-checkbox
-          :model-value="true"
-          label="Extra Small" 
-          size="xs" 
-        />
-        <vk-checkbox
-          :model-value="true"
-          label="Small" 
-          size="sm" 
-        />
-        <vk-checkbox
-          :model-value="true"
-          label="Medium" 
-          size="md" 
-        />
-        <vk-checkbox
-          :model-value="true"
-          label="Large" 
-          size="lg"
-        />
+      <div class="flex flex-wrap gap-4 justify-center">
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Extra Small" 
+            size="xs" 
+          />
+        </div>
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Medium" 
+            size="md" 
+          />
+        </div>
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Small" 
+            size="sm" 
+          />
+        </div>
+        <div class="w-1/3">
+          <vk-checkbox
+            :model-value="true"
+            label="Large" 
+            size="lg"
+          />
+        </div>
       </div>
     </section>
-
     <section class="w-full">
       <h2>API</h2>
       <hr>

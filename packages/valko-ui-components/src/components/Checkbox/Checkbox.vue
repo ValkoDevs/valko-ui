@@ -72,13 +72,13 @@ const classes = useStyle(props)
         >
           {{ label }}
         </label>
-        <p
-          v-if="errorText"
-          :class="classes.message"
-        >
-          Invalid input
-        </p>
       </div>
     </div>
+    <p
+      v-if="errorText"
+      :class="classes.message"
+    >
+      {{ errorText }}
+    </p>
   </div>
 </template>

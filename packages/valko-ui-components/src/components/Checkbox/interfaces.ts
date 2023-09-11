@@ -9,7 +9,7 @@ export interface CheckboxProps extends Variants, Sizes  {
   flat?: boolean;
   modelValue: boolean | null;
   label?: string;
-  errorText?: boolean;
+  errorText?: string;
   labelPosition?: boolean;
   readOnly?: boolean;
   indeterminate?: boolean;
