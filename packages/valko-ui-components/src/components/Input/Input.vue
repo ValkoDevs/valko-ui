@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { InputProps } from '@/components/Input/interfaces'
 import useStyle from './Input.styles'
-
+defineOptions({ name: 'VkInput' })
 
 const props = withDefaults(defineProps<InputProps>(), {
   variant: 'primary',
   kind: 'filled',
   size: 'md',
-  type: 'text'
+  type: 'text',
 })
 
-defineOptions({ name: 'VkInput' })
 const emit = defineEmits(['update:modelValue'])
 
 const updateValue = (e: Event) => {
@@ -20,7 +19,6 @@ const updateValue = (e: Event) => {
 }
 
 const classes = useStyle(props)
-
 </script>
 
 <template>
@@ -35,14 +33,10 @@ const classes = useStyle(props)
       @input="updateValue"
       :data-filled="!!modelValue"
     >
-    <label 
-      :class="classes.label"
-    >
-      <slot name="label" /></label>
+    <label :class="classes.label">{{ props.label }}</label>
     <span 
       :class="classes.helper"
       v-if="helpertext !== ''"
-      :value="helpertext"
-    ><slot name="helper" /></span>
+    >{{ props.helpertext }}</span>
   </div>
 </template>

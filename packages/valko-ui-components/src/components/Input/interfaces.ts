@@ -11,4 +11,5 @@ export interface InputProps extends Variants, Sizes  {
   readonly?: boolean;
   modelValue?: string;
   helpertext?: string;
+  label?: string;
 }

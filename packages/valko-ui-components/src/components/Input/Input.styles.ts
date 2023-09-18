@@ -28,8 +28,7 @@ const useStyle = (props: InputProps) => {
         'peer-placeholder-shown:left-1',
         'peer-focus:top-1.5',
         'cursor-text',
-        'truncate',
-        'w-full'
+        'truncate'
       ],
       container: [
         'relative',
@@ -67,12 +66,10 @@ const useStyle = (props: InputProps) => {
             'shadow-none',
             'border-b-2',
             'bg-inherit'
-            
           ],
           label: [
             'shadow-none',
             'bg-inherit'
-
           ]
         },
         outlined: {
@@ -121,7 +118,6 @@ const useStyle = (props: InputProps) => {
           input: [
             'pt-8',
             'text-sm'
-
           ],
           label: [
             'peer-placeholder-shown:top-5',
@@ -152,7 +148,6 @@ const useStyle = (props: InputProps) => {
           input: [
             'pt-12',
             'text-lg'
-
           ],
           label: [
             'text-lg',
@@ -214,7 +209,6 @@ const useStyle = (props: InputProps) => {
             'peer-data-[filled=false]:bg-inherit',
             'dark:peer-data-[filled=true]:bg-inherit',
             'dark:peer-data-[filled=false]:bg-inherit',
-
           ],
           helper: [
             'text-gray-500'
@@ -720,7 +714,7 @@ const useStyle = (props: InputProps) => {
           ]
         }
       },
-      // filled, ghost && rounded
+      // filled & ghost & rounded
       {
         kind: ['filled','ghost'],
         rounded: true,
@@ -785,7 +779,6 @@ const useStyle = (props: InputProps) => {
   })
 
   return computed(() => {
-
     const slots = input({
       color: props.variant,
       size: props.size,
