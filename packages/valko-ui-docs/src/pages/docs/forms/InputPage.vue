@@ -116,10 +116,18 @@ const helperValue = ref('Helpertext')
                 name="cb-inp-size"
                 v-model="inpSize"
               >
-                <option value="xs">xs</option>
-                <option value="sm">sm</option>
-                <option value="md">md</option>
-                <option value="lg">lg</option>
+                <option value="xs">
+                  xs
+                </option>
+                <option value="sm">
+                  sm
+                </option>
+                <option value="md">
+                  md
+                </option>
+                <option value="lg">
+                  lg
+                </option>
               </select>
             </div>
             <div class="flex mb-1">
@@ -242,7 +250,7 @@ const helperValue = ref('Helpertext')
       <hr>
       <div class="flex justify-between items-center">
         <div class="mr-2">
-          <vk-input label="Filled"/>
+          <vk-input label="Filled" />
         </div>
         <div class="mr-2">
           <vk-input 
