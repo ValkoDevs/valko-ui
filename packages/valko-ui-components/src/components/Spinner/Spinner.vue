@@ -2,11 +2,12 @@
 import { SpinnerProps } from '@/components/Spinner/interfaces'
 import useStyle from './Spinner.styles'
 
+defineOptions({ name: 'VkSpinner' })
+
 const props = withDefaults(defineProps<SpinnerProps>(), {
   variant: 'secondary',
   size: 'md'
 })
-defineOptions({ name: 'VkSpinner' })
 const classes = useStyle(props)
 </script>
 
