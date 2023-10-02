@@ -30,7 +30,7 @@ const routes = [
       {
         path: 'checkout',
         component: lazyLoad('forms', 'CheckboxPage')
-      },
+      }
     ]
   },
 ]

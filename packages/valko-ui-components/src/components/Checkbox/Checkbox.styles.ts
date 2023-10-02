@@ -43,19 +43,19 @@ const useStyle = (props: CheckboxProps) => {
     variants: {
       size: {
         xs: {
-          checkbox: ['w-3.5 h-3.5'],
+          checkbox: ['w-3.5', 'h-3.5'],
           label: ['text-xs']
         },
         sm: {
-          checkbox: ['w-4 h-4'],
+          checkbox: ['w-4', 'h-4'],
           label: ['text-sm']
         },
         md: {
-          checkbox: ['w-5 h-5'],
+          checkbox: ['w-5', 'h-5'],
           label: ['text-base']
         },
         lg: {
-          checkbox: ['w-6 h-6'],
+          checkbox: ['w-6', 'h-6'],
           label: ['text-lg']
         },        
       },
@@ -106,7 +106,7 @@ const useStyle = (props: CheckboxProps) => {
       }
     },
     compoundVariants: [
-      //Filled & colors
+      // filled & colors
       {
         type: 'filled',
         color: 'primary',

@@ -2,6 +2,8 @@
 import { CheckboxProps } from '@/components/Checkbox/interfaces'
 import useStyle from './Checkbox.styles'
 
+defineOptions({ name: 'VkCheckbox' })
+
 const props = withDefaults(defineProps<CheckboxProps>(), {
   variant: 'primary',
   modelValue: false,
@@ -12,7 +14,6 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   readOnly: false
 })
 
-defineOptions({ name: 'VkCheckbox' })
 const emit = defineEmits(['update:modelValue'])
 
 const onClick = () => {
@@ -65,20 +66,18 @@ const classes = useStyle(props)
         :indeterminate="modelValue === null"
         :errorText="errorText"
       >
-      <div>
-        <label
-          class="align-middle"
-          :class="classes.label"
-        >
-          {{ label }}
-        </label>
-      </div>
+      <label
+        class="align-middle"
+        :class="classes.label"
+      >
+        {{ label }}
+      </label>
     </div>
-    <p
+    <span
       v-if="errorText"
       :class="classes.message"
     >
       {{ errorText }}
-    </p>
+    </span>
   </div>
 </template>

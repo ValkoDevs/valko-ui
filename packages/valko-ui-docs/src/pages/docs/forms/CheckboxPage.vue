@@ -15,7 +15,7 @@ const cbReadOnly = ref(false)
 
 /* 
 * This two watch functions control the indeterminate checkbox
-* in the documentation page so it is sincronized 
+* in the documentation page so it is synchronized 
 * with the status of the checkbox in the sandbox
 */
 watch(checked, () => {
@@ -26,10 +26,8 @@ watch(cbIndeterminate, () => {
   else checked.value = true
 })
 watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
-  if (newReadOnly) {
-    if (newChecked !== true) {
-      checked.value = true
-    }
+  if (newReadOnly && newChecked !== true)  {
+    checked.value = true
   }
 })
 </script>
@@ -60,9 +58,7 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
             :indeterminate="cbIndeterminate"
             v-model="checked"
             label="Checkbox"
-          >
-            Primary
-          </vk-checkbox>
+          />
         </div>
         <div class="w-1/2 px-4">
           <form action="">
