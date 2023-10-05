@@ -16,12 +16,16 @@ const routes = [
         component: lazyLoad('general', 'StartPage')
       },
       {
+        path: 'divider',
+        component: lazyLoad('layout', 'DividerPage')
+      },
+      {
         path: 'button',
         component: lazyLoad('forms', 'ButtonPage')
       },
       {
-        path: 'divider',
-        component: lazyLoad('layout', 'DividerPage')
+        path: 'input',
+        component: lazyLoad('forms', 'InputPage')
       },
     ]
   },
