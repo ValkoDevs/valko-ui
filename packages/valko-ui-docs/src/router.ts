@@ -36,6 +36,10 @@ const routes = [
         component: lazyLoad('forms', 'SelectPage')
       },
       {
+        path: 'textarea',
+        component: lazyLoad('forms', 'TextareaPage')
+      },
+      {
         path: 'spinner',
         component: lazyLoad('ui', 'SpinnerPage')
       },
