@@ -15,16 +15,16 @@ const useStyle = (props: SpinnerProps) => {
     variants: {
       size: {
         xs: {
-          spinner: ['w-4 h-4']
+          spinner: ['w-4', 'h-4']
         },
         sm: {
-          spinner: ['w-5 h-5']
+          spinner: ['w-5', 'h-5']
         },
         md: {
-          spinner: ['w-6 h-6']
+          spinner: ['w-6', 'h-6']
         },
         lg: {
-          spinner: ['w-7 h-7']
+          spinner: ['w-7', 'h-7']
         }    
       },
       color: {
