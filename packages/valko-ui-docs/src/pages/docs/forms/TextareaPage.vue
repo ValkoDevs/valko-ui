@@ -43,8 +43,11 @@ const tareaMaxlength = ref(undefined)
         </div>
         <div class="w-1/2 px-4">
           <div class="flex mb-5">
-            <input>
-            <input>
+            <vk-input
+              kind="outlined"
+              label="Label"
+              v-model="labelValue"
+            />
           </div>
           <form action="">
             <div class="flex mb-1">
@@ -142,38 +145,23 @@ const tareaMaxlength = ref(undefined)
                 </option>
               </select>
             </div>
-            <div class="flex">
-              <input
-                name="cb-tarea-disabled"
-                type="checkbox"
+            <div>
+              <vk-checkbox 
+                label="Disabled"
                 v-model="tareaDisabled"
-              >
-              <label
-                for="cb-tarea-disabled"
-                class="mr-2"
-              >Disabled: </label>
+              />
             </div>
-            <div class="flex">
-              <input
-                name="cb-tarea-flat"
-                type="checkbox"
+            <div>
+              <vk-checkbox 
+                label="Flat"
                 v-model="tareaFlat"
-              >
-              <label
-                for="cb-tarea-flat"
-                class="mr-2"
-              >Flat: </label>
+              />
             </div>
-            <div class="flex">
-              <input
-                name="cb-tarea-readonly"
-                type="checkbox"
+            <div>
+              <vk-checkbox 
+                label="Readonly"
                 v-model="tareaReadonly"
-              >
-              <label
-                for="cb-tarea-readonly"
-                class="mr-2"
-              >Readonly: </label>
+              />
             </div>
           </form>
         </div>
