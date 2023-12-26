@@ -30,7 +30,6 @@ export default {
           4: colors.gray[300],
           5: colors.gray[400]
         },
-
       }
     }
   },
