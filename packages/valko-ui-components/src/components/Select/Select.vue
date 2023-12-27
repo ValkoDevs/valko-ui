@@ -87,9 +87,9 @@ const closeDropdown = () => {
 }
 
 const toggleDropdown = (isLabelClick: boolean) => {
-  if (isLabelClick) {
+  if (isLabelClick && !props.disabled && !props.readonly) {
     isOpen.value = !isOpen.value
-  } else {
+  } else if (!props.disabled && !props.readonly) {
     isOpen.value = true
   }
 }
@@ -99,7 +99,7 @@ const toggleDropdown = (isLabelClick: boolean) => {
 <template>
   <div
     ref="select"
-    :class="classes.divSelect"
+    :class="classes.container"
   >
     <select
       hidden
@@ -117,13 +117,12 @@ const toggleDropdown = (isLabelClick: boolean) => {
         {{ item.label }}
       </option>
     </select>
-    <div :class="classes.divInput">
+    <div :class="classes.field">
       <vk-input
         readonly
         :helpertext="helpertext"
         :label="placeholder"
         :disabled="disabled"
-        :flat="flat"
         :rounded="rounded"
         :kind="type"
         :variant="variant"

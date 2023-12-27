@@ -33,7 +33,9 @@ onMounted(() => {
 })
 
 const labelClick = () => {
-  emit('label-click', true)
+  if (!props.disabled && !props.readonly) {
+    emit('label-click', true)
+  }
 }
 
 const containerClick = () => {

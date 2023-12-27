@@ -5,14 +5,13 @@ import { computed } from 'vue'
 const useStyle = (props: SelectProps) => {
   const input = tv({
     slots: {
-      divSelect: [
+      container: [
         'w-full', 
-        'relative',
         'vk-select-container'
       ],
-      divInput: [
+      field: [
         'w-full',
-        'absolute'
+        'relative'
       ],
       select: [
         'w-full',
@@ -54,8 +53,6 @@ const useStyle = (props: SelectProps) => {
       ],
     },
     variants: {
-      type: [],
-      color: {},
       size: {
         xs: {
           item: [
@@ -83,17 +80,15 @@ const useStyle = (props: SelectProps) => {
 
   return computed(() => {
     const slots = input({
-      color: props.variant,
       size: props.size,
-      type: props.type,
     })
 
     return {
       select: slots.select(),
       dropdown: slots.dropdown(),
       item: slots.item(),
-      divSelect: slots.divSelect(),
-      divInput: slots.divInput(),
+      container: slots.container(),
+      field: slots.field(),
     }
   })
 }

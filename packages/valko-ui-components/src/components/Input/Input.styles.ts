@@ -93,8 +93,9 @@ const useStyle = (props: InputProps) => {
             'rounded-md',
             'px-2',
             'bg-light-3',
+            'dark:bg-dark-3',
             'border-2',
-            'border-light-5/[.2]'
+            'border-dark-1'
           ],
           label: [
             'left-1.5',
@@ -171,26 +172,15 @@ const useStyle = (props: InputProps) => {
           ]
         }
       },
-      flat: {
-        true: {
-          input: [
-            'shadow-none'
-          ]
-        }
-      },
       disabled: {
         true: {
           input: [
-            'bg-gray-500',
-            'opacity-25',
+            'bg-gray-500/[.25]',
             'text-gray-500',
-            'border-gray-950',
+            'border-gray-500/[.25]',
             'cursor-not-allowed',
-            'dark:border-gray-600',
-            'peer-data-[filled=true]:border-gray-500',
-            'peer-data-[filled=false]:border-gray-500',
-            'dark:peer-data-[filled=true]:border-gray-500',
-            'dark:peer-data-[filled=false]:border-gray-500'
+            'dark:bg-gray-400/[.25]',
+            'dark:border-gray-400/[.25]'
           ],
           label: [
             'dark:bg-inherit',
@@ -755,10 +745,9 @@ const useStyle = (props: InputProps) => {
       color: props.variant,
       size: props.size,
       rounded: props.rounded,
-      flat: props.flat,
       type: props.type,
       kind: props.kind,
-      disabled: props.disabled,
+      disabled: props.disabled
     })
 
     return {

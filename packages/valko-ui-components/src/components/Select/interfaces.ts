@@ -12,11 +12,9 @@ export interface SelectProps extends Variants, Sizes  {
   modelValue?: string | number | Array<string | number>;
   placeholder?: string;
   multiple?: boolean;
-  error?: string;
   disabled?: boolean;
   readonly?: boolean;
   isOpen?: boolean;
   rounded?: boolean;
-  flat?: boolean;
   helpertext?: string;
 }
