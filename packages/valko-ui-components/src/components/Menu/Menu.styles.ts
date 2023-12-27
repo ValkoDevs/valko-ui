@@ -5,8 +5,13 @@ import { computed } from 'vue'
 const useStyle = (props: MenuProps) => {
   const baseMenu = tv({
     slots: {
+      group: [
+        'font-bold',
+        'px-2'
+      ],
       menu: [
-        'w-full'
+        'w-full',
+        'mb-4'
       ],
       item: [
         'w-full',
@@ -26,13 +31,21 @@ const useStyle = (props: MenuProps) => {
     variants: {
       rounded: {
         true: {
-          content: ['rounded-full']
+          content: [
+            'rounded-full'
+          ]
         }
       },
       floating: {
         true: {
-          item: ['px-2 py-0.5'],
-          content: ['px-2.5 py-2'],
+          item: [
+            'px-2',
+            'py-0.5'
+          ],
+          content: [
+            'px-4',
+            'py-2'
+          ]
         }
       }
     }
@@ -45,6 +58,7 @@ const useStyle = (props: MenuProps) => {
     })
 
     return {
+      group: slots.group(),
       menu: slots.menu(),
       item: slots.item(),
       content: slots.content(),

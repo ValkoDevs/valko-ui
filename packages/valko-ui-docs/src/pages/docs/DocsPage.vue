@@ -14,8 +14,9 @@ const menuItems: MenuItem[] = [
   { key: 'button', group: 'Forms', text: 'Button'},
   { key: 'input', group: 'Forms',  text:'Input'},
   { key: 'checkbox', group: 'Forms', text: 'Checkbox'},
-  { key: 'spinner', group: 'Ui', text: 'Spinner'}, 
+  { key: 'spinner', group: 'Ui', text: 'Spinner'},
 ]
+
 const activeItem = ref<MenuItem['key'] | null>(null)
 
 const onItemClick = (item: MenuItem) => {
@@ -53,7 +54,7 @@ watchEffect(() => {
       </div>
     </vk-navbar>
     <div class="w-full flex flex-wrap grow overflow-y-auto">
-      <aside class="w-2/12 h-full overflow-y-auto pt-2 border-r border-light-4 dark:border-dark-2">
+      <aside class="w-2/12 h-full overflow-y-auto pt-2 px-2 border-r border-light-4 dark:border-dark-2">
         <vk-menu
           :items="menuItems"
           :active="activeItem"

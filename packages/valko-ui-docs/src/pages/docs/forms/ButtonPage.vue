@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import DocSection from '../../../components/DocSection.vue'
+import ExampleSection from '../../../components/ExampleSection.vue'
 
 const btnVariant = ref('primary')
 const btnType = ref('filled')
@@ -8,160 +10,194 @@ const btnDisabled = ref(false)
 const btnFlat = ref(false)
 const btnRounded = ref(false)
 const btnBlock = ref(false)
+
+const apiHeaders = [
+  {
+    key: 'prop',
+    label: 'Property'
+  },
+  {
+    key: 'required',
+    label: 'Required'
+  },
+  {
+    key: 'description',
+    label: 'Description'
+  },
+  {
+    key: 'values',
+    label: 'Values'
+  },
+  {
+    key: 'default',
+    label: 'Default'
+  }
+]
+
+const apiData = [
+  {
+    prop: 'variant',
+    required: false,
+    description: 'The color variant of the button.',
+    values: 'primary, secondary, error, warning, info, success',
+    default: 'primary'
+  },
+  {
+    prop: 'type',
+    required: false,
+    description: 'The type of the button.',
+    values: 'filled, outlined, ghost',
+    default: 'filled'
+  },
+  {
+    prop: 'size',
+    required: false,
+    description: 'The size of the button.',
+    values: 'xs, sm, md, lg',
+    default: 'md'
+  },
+  {
+    prop: 'disabled',
+    required: false,
+    description: 'Whether the button is disabled or not.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
+    prop: 'flat',
+    required: false,
+    description: 'Whether the button has a shadow or not.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
+    prop: 'rounded',
+    required: false,
+    description: 'Whether the button is rounded or not.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
+    prop: 'block',
+    required: false,
+    description: 'Whether the button width is equal to it\'s container.',
+    values: 'true, false',
+    default: 'false'
+  }
+]
 </script>
 
 <template>
-  <div class="container">
-    <h1>Button</h1>
-    <hr>
+  <doc-section
+    title="Button"
+    description="Buttons are used to initialize an action, either in the background or foreground of an experience."
+  >
+    <template #playground-view>
+      <vk-button
+        :variant="btnVariant"
+        :type="btnType"
+        :size="btnSize"
+        :disabled="btnDisabled"
+        :flat="btnFlat"
+        :rounded="btnRounded"
+        :block="btnBlock"
+      >
+        Primary
+      </vk-button>
+    </template>
 
-    <section class="w-full">
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores, eveniet! Accusantium repellat aliquam vel at natus, temporibus sapiente, quo optio officia nulla nihil repellendus mollitia neque, modi quisquam nesciunt! Fugiat!
-    </section>
-
-    <section class="w-full">
-      <h2>Playground</h2>
-      <hr>
+    <template #playground-options>
       <div class="flex">
-        <div class="w-1/2 flex justify-center items-center border border-light-4 dark:border-dark-1 rounded">
-          <vk-button
-            :variant="btnVariant"
-            :type="btnType"
-            :size="btnSize"
-            :disabled="btnDisabled"
-            :flat="btnFlat"
-            :rounded="btnRounded"
-            :block="btnBlock"
-          >
+        <label
+          for="cb-btn-variant"
+          class="mr-2"
+        >Variant: </label>
+        <select
+          name="cb-btn-variant"
+          v-model="btnVariant"
+        >
+          <option value="primary">
             Primary
-          </vk-button>
-        </div>
-        <div class="w-1/2 px-4">
-          <form action="">
-            <div class="flex">
-              <label
-                for="cb-btn-variant"
-                class="mr-2"
-              >Variant: </label>
-              <select
-                name="cb-btn-variant"
-                v-model="btnVariant"
-              >
-                <option value="primary">
-                  Primary
-                </option>
-                <option value="secondary">
-                  Secondary
-                </option>
-                <option value="error">
-                  Error
-                </option>
-                <option value="warning">
-                  Warning
-                </option>
-                <option value="info">
-                  Info
-                </option>
-                <option value="success">
-                  Success
-                </option>
-              </select>
-            </div>
-            <div class="flex">
-              <label
-                for="cb-btn-type"
-                class="mr-2"
-              >Type: </label>
-              <select
-                name="cb-btn-type"
-                v-model="btnType"
-              >
-                <option value="filled">
-                  Filled
-                </option>
-                <option value="outlined">
-                  Outlined
-                </option>
-                <option value="ghost">
-                  Ghost
-                </option>
-              </select>
-            </div>
-            <div class="flex">
-              <label
-                for="cb-btn-size"
-                class="mr-2"
-              >Size: </label>
-              <select
-                name="cb-btn-size"
-                v-model="btnSize"
-              >
-                <option value="xs">
-                  xs
-                </option>
-                <option value="sm">
-                  sm
-                </option>
-                <option value="md">
-                  md
-                </option><option value="lg">
-                  lg
-                </option>
-              </select>
-            </div>
-            <div class="flex">
-              <input
-                name="cb-btn-disabled"
-                type="checkbox"
-                v-model="btnDisabled"
-              >
-              <label
-                for="cb-btn-disabled"
-                class="mr-2"
-              >Disabled: </label>
-            </div>
-            <div class="flex">
-              <input
-                name="cb-btn-flat"
-                type="checkbox"
-                v-model="btnFlat"
-              >
-              <label
-                for="cb-btn-flat"
-                class="mr-2"
-              >Flat: </label>
-            </div>
-            <div class="flex">
-              <input
-                name="cb-btn-rounded"
-                type="checkbox"
-                v-model="btnRounded"
-              >
-              <label
-                for="cb-btn-rounded"
-                class="mr-2"
-              >Rounded: </label>
-            </div>
-            <div class="flex">
-              <input
-                name="cb-btn-block"
-                type="checkbox"
-                v-model="btnBlock"
-              >
-              <label
-                for="cb-btn-block"
-                class="mr-2"
-              >Block: </label>
-            </div>
-          </form>
-        </div>
+          </option>
+          <option value="secondary">
+            Secondary
+          </option>
+          <option value="error">
+            Error
+          </option>
+          <option value="warning">
+            Warning
+          </option>
+          <option value="info">
+            Info
+          </option>
+          <option value="success">
+            Success
+          </option>
+        </select>
       </div>
-    </section>
+      <div class="flex">
+        <label
+          for="cb-btn-type"
+          class="mr-2"
+        >Type: </label>
+        <select
+          name="cb-btn-type"
+          v-model="btnType"
+        >
+          <option value="filled">
+            Filled
+          </option>
+          <option value="outlined">
+            Outlined
+          </option>
+          <option value="ghost">
+            Ghost
+          </option>
+        </select>
+      </div>
+      <div class="flex">
+        <label
+          for="cb-btn-size"
+          class="mr-2"
+        >Size: </label>
+        <select
+          name="cb-btn-size"
+          v-model="btnSize"
+        >
+          <option value="xs">
+            xs
+          </option>
+          <option value="sm">
+            sm
+          </option>
+          <option value="md">
+            md
+          </option><option value="lg">
+            lg
+          </option>
+        </select>
+      </div>
+      <vk-checkbox
+        v-model="btnDisabled"
+        label="Disabled"
+      />
+      <vk-checkbox
+        v-model="btnFlat"
+        label="Flat"
+      />
+      <vk-checkbox
+        v-model="btnRounded"
+        label="Rounded"
+      />
+      <vk-checkbox
+        v-model="btnBlock"
+        label="Block"
+      />
+    </template>
 
-    <section class="w-full">
-      <h2>Colors</h2>
-      <hr>
-      <div class="flex justify-between items-center">
+    <template #examples>
+      <example-section title="Color">
         <vk-button variant="primary">
           Primary
         </vk-button>
@@ -180,13 +216,9 @@ const btnBlock = ref(false)
         <vk-button variant="info">
           Info
         </vk-button>
-      </div>
-    </section>
-    <br>
-    <section class="w-full">
-      <h2>Types</h2>
-      <hr>
-      <div class="flex justify-between items-center">
+      </example-section>
+
+      <example-section title="Types">
         <vk-button flat>
           Flat
         </vk-button>
@@ -202,18 +234,12 @@ const btnBlock = ref(false)
         <vk-button disabled>
           Disabled
         </vk-button>
-      </div>
-      <div class="w-full mt-4">
         <vk-button block>
           Block
         </vk-button>
-      </div>
-    </section>
+      </example-section>
 
-    <section class="w-full">
-      <h2>Sizes</h2>
-      <hr>
-      <div class="flex justify-between items-center">
+      <example-section title="Sizes">
         <vk-button size="xs">
           Extra Small
         </vk-button>
@@ -226,41 +252,14 @@ const btnBlock = ref(false)
         <vk-button size="lg">
           Large
         </vk-button>
-      </div>
-    </section>
+      </example-section>
+    </template>
 
-    <section class="w-full">
-      <h2>API</h2>
-      <hr>
-      <div class="flex justify-between items-center">
-        table with props, possible values, default values, and description
-      </div>
-    </section>
-  </div>
+    <template #api>
+      <vk-data-table
+        :headers="apiHeaders"
+        :data="apiData"
+      />
+    </template>
+  </doc-section>
 </template>
-
-<style lang="postcss" scoped>
-  h1 {
-    @apply text-4xl font-bold;
-  }
-  h2 {
-    @apply text-2xl;
-  }
-
-  hr {
-    @apply mb-4 mt-1 w-full border-light-4 dark:border-dark-1;
-  }
-
-  section {
-    @apply mb-16;
-  }
-  .container {
-    @apply
-    flex
-    flex-col
-    justify-start
-    items-start
-    px-10
-    py-5;
-  }
-</style>
