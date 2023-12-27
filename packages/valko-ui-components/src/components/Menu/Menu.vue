@@ -8,6 +8,11 @@ const props = withDefaults(defineProps<MenuProps>(), {
   rounded: false
 })
 
+const groups = props.items.reduce((acc, item) => {
+  if (item.group) acc.add(item.group)
+  return acc
+}, new Set(['default']) as Set<string>)
+
 const emit = defineEmits(['itemClick'])
 
 const onItemClick = (item: MenuItem) => {
@@ -22,26 +27,35 @@ const classes = useStyle(props)
 </script>
 
 <template>
-  <ul :class="classes.menu">
-    <slot name="items">
-      <li
-        v-for="item in props.items"
-        :key="item.key"
-        :class="classes.item"
-      >
-        <slot
-          name="item"
-          :item="item"
+  <div>
+    <div
+      v-for="group in groups"
+      :key="group"
+    >
+      <span
+        v-if="group != 'default'"
+        :class="classes.group"
+      >{{ group }}</span>
+      <ul :class="classes.menu">
+        <li
+          v-for="item in props.items.filter(i => i.group === group)"
+          :key="item.key"
+          :class="classes.item"
         >
-          <a
-            href="!#"
-            @click.prevent="onItemClick(item)"
-            :class="classes.content"
-            :data-active="item.key === props.active"
-            :data-disabled="item.disabled"
-          >{{ item.text }}</a>
-        </slot>
-      </li>
-    </slot>
-  </ul>
+          <slot
+            name="item"
+            :item="item"
+          >
+            <a
+              href="!#"
+              @click.prevent="onItemClick(item)"
+              :class="classes.content"
+              :data-active="item.key === props.active"
+              :data-disabled="item.disabled"
+            >{{ item.text }}</a>
+          </slot>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
