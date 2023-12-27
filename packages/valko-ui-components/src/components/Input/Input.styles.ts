@@ -5,32 +5,47 @@ import { computed } from 'vue'
 const useStyle = (props: InputProps) => {
   const input = tv({
     slots: {
+      container: [
+        'w-full',
+        'flex',
+        'flex-col',
+        'justify-items-start'
+      ],
       input: [
+        'w-full',
+        'px-2',
+        'outline-none',
         'peer',
         'transition-colors',
         'duration-200',
         'ease-in-out',
-        'w-full',
-        'focus:ring-0',
-        'outline-none',
-        'pb-1',
-        'placeholder-shown:truncate',
-        'px-2'
+        'focus:ring-0'
       ],
       label: [
-        'flex',
+        'opacity-80',
+        'text-left',
+        'font-bold',
+        'truncate',
+        'cursor-text',
         'px-1',
+        'ml-[1px]',
         'absolute',
-        'top-1.5',
+        'top-1/2',
         'left-1',
         'transition-all',
         'duration-200',
-        'peer-placeholder-shown:left-1',
-        'peer-focus:top-1.5',
-        'cursor-text',
-        'truncate'
+        'delay-[125ms]',
+        'origin-[center_left]',
+        '-translate-y-1/2',
+        'peer-focus:top-0',
+        'peer-focus:scale-[.8]',
+        'peer-focus:translate-y-0',
+        'peer-data-[filled=true]:top-0',
+        'peer-data-[filled=true]:scale-[.8]',
+        'peer-data-[filled=true]:translate-y-0'
+
       ],
-      container: [
+      field: [
         'relative',
         'w-full',
         'm-0',
@@ -40,13 +55,15 @@ const useStyle = (props: InputProps) => {
         'items-start'
       ],
       helper: [
+        'w-full',
+        'mt-1',
+        'origin-top-left',
         'transition-all',
         'duration-200',
-        'mt-2',
         'break-words',
         'break-before-all',
         'inline-block',
-        'w-full'
+        'scale-[.8]'
       ]
     },
     variants: {
@@ -54,18 +71,17 @@ const useStyle = (props: InputProps) => {
         filled: {
           input: [
             'rounded-t-md',
-            'border-b-2',
             'bg-light-3',
-            'focus:bg-light-4',
             'dark:bg-dark-3',
-            'dark:focus:bg-dark-2'
+            'border-b-2'
           ]
         },
         ghost: {
           input: [
             'shadow-none',
+            'bg-inherit',
             'border-b-2',
-            'bg-inherit'
+            'border-light-5'
           ],
           label: [
             'shadow-none',
@@ -75,20 +91,14 @@ const useStyle = (props: InputProps) => {
         outlined: {
           input: [
             'rounded-md',
+            'px-2',
+            'bg-light-3',
             'border-2',
-            'bg-transparent'
+            'border-light-5/[.2]'
           ],
           label: [
-            '-top-1',
-            'left-2',
-            'peer-placeholder-shown:left-2',
-            'bg-transparent',
-            'peer-focus:bg-light-2',
-            'dark:peer-focus:bg-dark-4',
-            'peer-data-[filled=true]:-top-3.5',
-            'peer-data-[filled=true]:bg-light-2',
-            'dark:peer-data-[filled=true]:bg-dark-4',
-            'peer-focus:-top-3.5',
+            'left-1.5',
+            'bg-transparent'
           ]
         }
       },
@@ -103,11 +113,11 @@ const useStyle = (props: InputProps) => {
       size: {
         xs: {
           input: [
-            'pt-6',
-            'text-xs'
+            'text-xs',
+            'h-10',
+            'pt-2'
           ],
           label: [
-            'peer-placeholder-shown:top-4',
             'text-xs'
           ],
           helper: [
@@ -116,14 +126,12 @@ const useStyle = (props: InputProps) => {
         },
         sm: {
           input: [
-            'pt-8',
-            'text-sm'
+            'text-sm',
+            'h-12',
+            'pt-2.5'
           ],
           label: [
-            'peer-placeholder-shown:top-5',
-            'text-sm',
-            'peer-data-[filled=true]:text-xs',
-            'peer-focus:text-xs'
+            'text-sm'
           ],
           helper: [
             'text-sm'
@@ -131,14 +139,12 @@ const useStyle = (props: InputProps) => {
         },
         md: {
           input: [
-            'pt-10',
-            'text-base'
+            'text-base',
+            'h-14',
+            'pt-3'
           ],
           label: [
-            'text-base',
-            'peer-data-[filled=true]:text-sm',
-            'peer-focus:text-sm',
-            'peer-placeholder-shown:top-6'
+            'text-base'
           ],
           helper: [
             'text-base'
@@ -146,14 +152,12 @@ const useStyle = (props: InputProps) => {
         },
         lg: {
           input: [
-            'pt-12',
-            'text-lg'
+            'text-lg',
+            'h-16',
+            'pt-4'
           ],
           label: [
-            'text-lg',
-            'peer-data-[filled=true]:text-base',
-            'peer-focus:text-base',
-            'peer-placeholder-shown:top-7'
+            'text-lg'
           ],
           helper: [
             'text-lg'
@@ -163,16 +167,7 @@ const useStyle = (props: InputProps) => {
       rounded: {
         true: {
           input: [
-            'rounded-full',
-            'pl-4'
-          ],
-          label: [
-            'peer-placeholder-shown:left-6',
-            'peer-focus:left-6',
-            'peer-data-[filled=true]:left-6'
-          ],
-          helper: [
-            'ml-7'
+            'rounded-full'
           ]
         }
       },
@@ -186,54 +181,30 @@ const useStyle = (props: InputProps) => {
       disabled: {
         true: {
           input: [
-            'bg-gray-600',
-            'opacity-50',
-            'cursor-not-allowed',
+            'bg-gray-500',
+            'opacity-25',
             'text-gray-500',
             'border-gray-950',
-            'hover:bg-gray-600',
+            'cursor-not-allowed',
             'dark:border-gray-600',
-            'dark:hover:bg-gray-600',
             'peer-data-[filled=true]:border-gray-500',
             'peer-data-[filled=false]:border-gray-500',
             'dark:peer-data-[filled=true]:border-gray-500',
-            'dark:peer-data-[filled=false]:border-gray-500',
+            'dark:peer-data-[filled=false]:border-gray-500'
           ],
           label: [
+            'dark:bg-inherit',
+            'peer-data-[filled=true]:bg-inherit',
+            'peer-data-[filled=false]:bg-inherit',
             'peer-data-[filled=true]:text-gray-500',
             'peer-data-[filled=false]:text-gray-500',
             'dark:peer-data-[filled=true]:text-gray-500',
             'dark:peer-data-[filled=false]:text-gray-500',
-            'dark:bg-inherit',
-            'peer-data-[filled=true]:bg-inherit',
-            'peer-data-[filled=false]:bg-inherit',
             'dark:peer-data-[filled=true]:bg-inherit',
-            'dark:peer-data-[filled=false]:bg-inherit',
+            'dark:peer-data-[filled=false]:bg-inherit'
           ],
           helper: [
             'text-gray-500'
-          ]
-        },
-      },
-      readonly: {
-        true: {
-          input: [
-            'bg-gray-500',
-            'opacity-50',
-            'cursor-not-allowed',
-            'text-gray-950',
-            'border-gray-500',
-            'hover:bg-gray-500',
-            'focus:bg-gray-500'
-          ],
-          label: [
-            'text-gray-500',
-            'bg-inherit',
-            'focus:bg-inherit',
-            'peer-data-[filled=true]:bg-inherit',
-            'peer-data-[filled=false]:bg-inherit',
-            'dark:peer-data-[filled=true]:bg-inherit',
-            'dark:peer-data-[filled=false]:bg-inherit'
           ]
         },
       },
@@ -252,21 +223,21 @@ const useStyle = (props: InputProps) => {
         disabled: false,
         class: {
           input: [
-            'border-gray-300',
-            'hover:border-gray-600',
-            'focus:border-gray-950',
+            'border-dark-1',
+            'hover:border-primary-400',
+            'focus:border-primary-500',
             'dark:border-light-5',
-            'dark:hover:border-light-3',
-            'dark:focus:border-light-1'
+            'dark:hover:border-primary-400',
+            'dark:focus:border-primary-500'
+          ],
+          label: [
+            'text-dark-2',
+            'peer-focus:text-primary-500',
+            'dark:text-light-2'
           ],
           helper: [
             'text-dark-1',
             'dark:text-light-3'
-          ],
-          label: [
-            'text-dark-2',
-            'focus:text-dark-4',
-            'dark:text-light-2'
           ]
         }
       },
@@ -280,15 +251,15 @@ const useStyle = (props: InputProps) => {
             'hover:border-secondary-400',
             'focus:border-secondary-500'
           ],
+          label: [
+            'text-secondary-500',
+            'peer-focus:text-secondary-600',
+            'dark:text-secondary-500'
+          ],         
           helper: [
             'text-secondary-500',
             'dark:text-secondary-500'
-          ],
-          label: [
-            'text-secondary-500',
-            'focus:text-secondary-950',
-            'dark:text-secondary-500'
-          ]         
+          ]
         }
       },
       {
@@ -303,14 +274,14 @@ const useStyle = (props: InputProps) => {
             'dark:border-success-500',
             'dark:focus:border-success-700'
           ],
-          helper: [
-            'text-success-500',
-            'dark:text-success-500'
-          ],
           label: [
             'text-success-500',
             'focus:text-success-950',
-            'dark:text-success-500',
+            'dark:text-success-500'
+          ],
+          helper: [
+            'text-success-500',
+            'dark:text-success-500'
           ]
         }
       },
@@ -326,14 +297,14 @@ const useStyle = (props: InputProps) => {
             'dark:border-info-500',
             'dark:focus:border-info-700'
           ],
-          helper: [
-            'text-info-500',
-            'dark:text-info-500'
-          ],
           label: [
             'text-info-500',
             'focus:text-info-950',
             'dark:text-info-500',
+          ],
+          helper: [
+            'text-info-500',
+            'dark:text-info-500'
           ]
         }
       },
@@ -349,14 +320,14 @@ const useStyle = (props: InputProps) => {
             'dark:border-warning-500',
             'dark:focus:border-warning-700'
           ],
-          helper: [
-            'text-warning-500',
-            'dark:text-warning-500'
-          ],
           label: [
             'text-warning-500',
             'focus:text-warning-950',
-            'dark:text-warning-500',
+            'dark:text-warning-500'
+          ],
+          helper: [
+            'text-warning-500',
+            'dark:text-warning-500'
           ]
         }
       },
@@ -372,14 +343,14 @@ const useStyle = (props: InputProps) => {
             'dark:border-error-500',
             'dark:focus:border-error-700'
           ],
-          helper: [
-            'text-error-500',
-            'dark:text-error-500'
-          ],
           label: [
             'text-error-500',
             'focus:text-error-950',
             'dark:text-error-500',
+          ],
+          helper: [
+            'text-error-500',
+            'dark:text-error-500'
           ]
         }
       },
@@ -390,21 +361,20 @@ const useStyle = (props: InputProps) => {
         disabled: false,
         class: {
           input: [
-            'border-gray-300',
-            'hover:border-gray-600',
-            'focus:border-gray-950',
+            'focus:border-primary-500',
             'dark:border-light-5',
             'dark:hover:border-light-4',
-            'dark:focus:border-light-3'
-          ],
-          helper: [
-            'text-dark-1',
-            'dark:text-light-3'
+            'dark:focus:border-primary-500'
           ],
           label: [
             'text-dark-2',
             'focus:text-dark-4',
-            'dark:text-light-2'
+            'dark:text-light-2',
+            'peer-focus:text-primary-500'
+          ],
+          helper: [
+            'text-dark-1',
+            'dark:text-light-3'
           ]
         }
       },
@@ -414,21 +384,20 @@ const useStyle = (props: InputProps) => {
         disabled: false,
         class: {
           input: [
-            'border-secondary-300',
             'hover:border-secondary-300',
             'focus:border-secondary-400',
             'dark:border-light-1',
             'dark:hover:border-light-3',
             'dark:focus:border-light-5'
           ],
-          helper: [
-            'text-secondary-500',
-            'dark:text-secondary-500'
-          ],
           label: [
             'text-secondary-500',
             'focus:text-secondary-950',
             'dark:text-secondary-500',
+          ],
+          helper: [
+            'text-secondary-500',
+            'dark:text-secondary-500'
           ]
         }
       },
@@ -438,20 +407,19 @@ const useStyle = (props: InputProps) => {
         disabled: false,
         class: {
           input: [
-            'border-success-300',
-            'hover:border-success-300',
-            'focus:border-success-400',
+            'border-success-400',
+            'focus:border-success-500',
             'dark:border-success-400',
             'dark:focus:border-success-500'
-          ],
-          helper: [
-            'text-success-500',
-            'dark:text-success-500'
           ],
           label: [
             'text-success-500',
             'focus:text-success-950',
-            'dark:text-success-500',
+            'dark:text-success-500'
+          ],
+          helper: [
+            'text-success-500',
+            'dark:text-success-500'
           ]
         }
       },
@@ -461,20 +429,19 @@ const useStyle = (props: InputProps) => {
         disabled: false,
         class: {
           input: [
-            'border-info-300',
-            'hover:border-info-300',
-            'focus:border-info-400',
+            'border-info-400',
+            'focus:border-info-500',
             'dark:border-info-400',
             'dark:focus:border-info-500'
-          ],
-          helper: [
-            'text-info-500',
-            'dark:text-info-500'
           ],
           label: [
             'text-info-500',
             'focus:text-info-950',
-            'dark:text-info-500',
+            'dark:text-info-500'
+          ],
+          helper: [
+            'text-info-500',
+            'dark:text-info-500'
           ]
         }
       },
@@ -484,20 +451,19 @@ const useStyle = (props: InputProps) => {
         disabled: false,
         class: {
           input: [
-            'border-warning-300',
-            'hover:border-warning-300',
-            'focus:border-warning-400',
+            'border-warning-400',
+            'focus:border-warning-500',
             'dark:border-warning-400',
             'dark:focus:border-warning-500'
-          ],
-          helper: [
-            'text-warning-500',
-            'dark:text-warning-500'
           ],
           label: [
             'text-warning-500',
             'focus:text-warning-950',
-            'dark:text-warning-500',
+            'dark:text-warning-500'
+          ],
+          helper: [
+            'text-warning-500',
+            'dark:text-warning-500'
           ]
         }
       },
@@ -507,20 +473,19 @@ const useStyle = (props: InputProps) => {
         disabled: false,
         class: {
           input: [
-            'border-error-300',
-            'hover:border-error-300',
-            'focus:border-error-400',
+            'border-error-400',
+            'focus:border-error-500',
             'dark:border-error-400',
             'dark:focus:border-error-500'
-          ],
-          helper: [
-            'text-error-500',
-            'dark:text-error-500'
           ],
           label: [
             'text-error-500',
             'focus:text-error-950',
-            'dark:text-error-500',
+            'dark:text-error-500'
+          ],
+          helper: [
+            'text-error-500',
+            'dark:text-error-500'
           ]
         }
       },
@@ -531,18 +496,17 @@ const useStyle = (props: InputProps) => {
         disabled: false,
         class: {
           input: [
-            'border-gray-200',
-            'hover:border-gray-300',
-            'focus:border-gray-400',
-          ],
-          helper: [
-            'text-dark-1',
-            'dark:text-light-3'
+            'focus:border-primary-500'
           ],
           label: [
             'text-dark-2',
             'focus:text-dark-4',
-            'dark:text-light-2'
+            'dark:text-light-2',
+            'peer-focus:text-primary-500'
+          ],
+          helper: [
+            'text-dark-1',
+            'dark:text-light-3'
           ]
         }
       },
@@ -552,18 +516,16 @@ const useStyle = (props: InputProps) => {
         disabled: false,
         class: {
           input: [
-            'border-secondary-300',
-            'hover:border-secondary-400',
             'focus:border-secondary-500'
-          ],
-          helper: [
-            'text-secondary-500',
-            'dark:text-secondary-500'
           ],
           label: [
             'text-secondary-500',
             'focus:text-secondary-950',
-            'dark:text-secondary-500',
+            'dark:text-secondary-500'
+          ],
+          helper: [
+            'text-secondary-500',
+            'dark:text-secondary-500'
           ]
         }
       },
@@ -573,18 +535,17 @@ const useStyle = (props: InputProps) => {
         disabled: false,
         class: {
           input: [
-            'border-success-400',
-            'hover:border-success-500',
-            'focus:border-success-600'
-          ],
-          helper: [
-            'text-success-500',
-            'dark:text-success-500'
+            'border-success-500',
+            'focus:border-success-500'
           ],
           label: [
             'text-success-500',
             'focus:text-success-950',
-            'dark:text-success-500',
+            'dark:text-success-500'
+          ],
+          helper: [
+            'text-success-500',
+            'dark:text-success-500'
           ]
         }
       },
@@ -594,18 +555,17 @@ const useStyle = (props: InputProps) => {
         disabled: false,
         class: {
           input: [
-            'border-info-400',
-            'hover:border-info-500',
+            'border-info-600',
             'focus:border-info-600'
-          ],
-          helper: [
-            'text-info-500',
-            'dark:text-info-500'
           ],
           label: [
             'text-info-500',
             'focus:text-info-950',
-            'dark:text-info-500',
+            'dark:text-info-500'
+          ],
+          helper: [
+            'text-info-500',
+            'dark:text-info-500'
           ]
         }
       },
@@ -615,18 +575,17 @@ const useStyle = (props: InputProps) => {
         disabled: false,
         class: {
           input: [
-            'border-warning-400',
-            'hover:border-warning-500',
+            'border-warning-600',
             'focus:border-warning-600'
-          ],
-          helper: [
-            'text-warning-500',
-            'dark:text-warning-500'
           ],
           label: [
             'text-warning-500',
             'focus:text-warning-950',
-            'dark:text-warning-500',
+            'dark:text-warning-500'
+          ],
+          helper: [
+            'text-warning-500',
+            'dark:text-warning-500'
           ]
         }
       },
@@ -636,134 +595,147 @@ const useStyle = (props: InputProps) => {
         disabled: false,
         class: {
           input: [
-            'border-error-400',
-            'hover:border-error-500',
+            'border-error-600',
             'focus:border-error-600'
-          ],
-          helper: [
-            'text-error-500',
-            'dark:text-error-500'
           ],
           label: [
             'text-error-500',
             'focus:text-error-950',
-            'dark:text-error-500',
-          ]
-        }
-      },
-      // outlined & size
-      {
-        kind: 'outlined',
-        size: 'xs',
-        disabled: false,
-        class: {
-          label: [
-            'peer-data-[filled=true]:-top-2',
-            'peer-focus:-top-2',
-            'peer-data-[filled=true]:text-xs',
-            'peer-focus:text-xs'
+            'dark:text-error-500'
           ],
-          input: [
-            'py-3'
-          ]
-        }
-      },
-      {
-        kind: 'outlined',
-        size: 'sm',
-        disabled: false,
-        class: {
-          label: [
-            'peer-data-[filled=true]:-top-2.5',
-            'peer-focus:-top-2.5',
-            'peer-data-[filled=true]:text-sm',
-            'peer-focus:text-sm'
-          ],
-          input: [
-            'py-4'
-          ]
-        }
-      },
-      {
-        kind: 'outlined',
-        size: 'md',
-        disabled: false,
-        class: {
-          label: [
-            'peer-data-[filled=true]:-top-3',
-            'peer-focus:-top-3',
-            'peer-data-[filled=true]:text-md',
-            'peer-focus:text-md'
-          ],
-          input: [
-            'py-5'
-          ]
-        }
-      },
-      {
-        kind: 'outlined',
-        size: 'lg',
-        disabled: false,
-        class: {
-          label: [
-            'peer-data-[filled=true]:text-lg',
-            'peer-focus:text-lg'
-          ],
-          input: [
-            'py-6'
+          helper: [
+            'text-error-500',
+            'dark:text-error-500'
           ]
         }
       },
       // filled & ghost & rounded
       {
-        kind: ['filled','ghost'],
+        kind: ['filled', 'ghost'],
         rounded: true,
         size: 'xs',
         class: {
           input: [
-            'py-3'
+            'pl-3'
           ],
           label: [
-            'peer-placeholder-shown:top-3'
+            'ml-2'
+          ],
+          helper: [
+            'ml-4'
           ]
         }
       },
       {
-        kind: ['filled','ghost'],
+        kind: ['filled', 'ghost'],
         rounded: true,
         size: 'sm',
         class: {
           input: [
-            'py-4'
+            'pl-5'
           ],
           label: [
-            'peer-placeholder-shown:top-4'
-          ]
+            'ml-3'
+          ],
+          helper: [
+            'ml-6'
+          ] 
         }
       },
       {
-        kind: ['filled','ghost'],
+        kind: ['filled', 'ghost'],
         rounded: true,
         size: 'md',
         class: {
           input: [
-            'py-5'
+            'pl-6'
           ],
           label: [
-            'peer-placeholder-shown:top-5'
+            'ml-4'
+          ],
+          helper: [
+            'ml-6'
           ]
         }
       },
       {
-        kind: ['filled','ghost'],
+        kind: ['filled', 'ghost'],
         rounded: true,
         size: 'lg',
         class: {
           input: [
-            'py-6'
+            'pl-7'
           ],
           label: [
-            'peer-placeholder-shown:top-6'
+            'ml-5'
+          ],
+          helper: [
+            'ml-8'
+          ]
+        }
+      },
+      // outlined & rounded
+      {
+        kind: 'outlined',
+        rounded: true,
+        size: 'xs',
+        class: {
+          input: [
+            'pl-[calc(1rem_-_3px)]'
+          ],
+          label: [
+            'ml-[calc(0.5rem_-_2px)]'
+          ],
+          helper: [
+            'ml-4'
+          ]
+        }
+      },
+      {
+        kind: 'outlined',
+        rounded: true,
+        size: 'sm',
+        class: {
+          input: [
+            'pl-[calc(1.17rem_-_1px)]'
+          ],
+          label: [
+            'ml-[calc(0.75rem_-_1px)]'
+          ],
+          helper: [
+            'ml-5'
+          ]
+        }
+      },
+      {
+        kind: 'outlined',
+        rounded: true,
+        size: 'md',
+        class: {
+          input: [
+            'pl-[calc(1.5rem_-_3px)]'
+          ],
+          label: [
+            'ml-[calc(1rem_-_2px)]'
+          ],
+          helper: [
+            'ml-6'
+          ]
+        }
+      },
+      {
+        kind: 'outlined',
+        rounded: true,
+        size: 'lg',
+        class: {
+          input: [
+            'pl-[calc(1.75rem_-_3px)]'
+          ],
+          label: [
+            'ml-[calc(1.25rem_-_2px)]'
+          ],
+          helper: [
+            'ml-7'
           ]
         }
       },
@@ -787,14 +759,14 @@ const useStyle = (props: InputProps) => {
       type: props.type,
       kind: props.kind,
       disabled: props.disabled,
-      readonly: props.readonly
     })
 
     return {
+      container: slots.container(),
+      field: slots.field(),
       input: slots.input(),
       label: slots.label(),
-      container: slots.container(),
-      helper: slots.helper(),
+      helper: slots.helper()
     }
   })
 }
