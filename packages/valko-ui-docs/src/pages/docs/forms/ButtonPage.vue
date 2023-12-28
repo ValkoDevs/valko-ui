@@ -3,13 +3,38 @@ import { ref } from 'vue'
 import DocSection from '../../../components/DocSection'
 import ExampleSection from '../../../components/ExampleSection'
 
-const btnVariant = ref('primary')
-const btnType = ref('filled')
-const btnSize = ref('md')
 const btnDisabled = ref(false)
 const btnFlat = ref(false)
 const btnRounded = ref(false)
 const btnBlock = ref(false)
+
+const variants = [
+  {value:'primary', label:'Primary'},
+  {value:'secondary', label:'Secondary'},
+  {value:'success', label:'Success'},
+  {value:'info', label:'Info'},
+  {value:'warning', label:'Warning'},
+  {value:'error', label:'Error'}
+]
+
+const types = [
+  {value:'filled', label:'Filled'},
+  {value:'outlined', label:'Outlined'},
+  {value:'ghost', label:'Ghost'}
+]
+
+const sizes = [
+  {value:'xs', label:'XS'},
+  {value:'sm', label:'SM'},
+  {value:'md', label:'MD'},
+  {value:'lg', label:'LG'}
+]
+ 
+const form = ref({
+  options_variants: 'primary',
+  options_types: 'filled',
+  options_sizes: 'md'
+})
 
 const apiHeaders = [
   {
@@ -94,9 +119,9 @@ const apiData = [
   >
     <template #playground-view>
       <vk-button
-        :variant="btnVariant"
-        :type="btnType"
-        :size="btnSize"
+        :variant="form.options_variants"
+        :type="form.options_types"
+        :size="form.options_sizes"
         :disabled="btnDisabled"
         :flat="btnFlat"
         :rounded="btnRounded"
@@ -108,96 +133,67 @@ const apiData = [
 
     <template #playground-options>
       <div class="flex">
-        <label
-          for="cb-btn-variant"
-          class="mr-2"
-        >Variant: </label>
-        <select
-          name="cb-btn-variant"
-          v-model="btnVariant"
-        >
-          <option value="primary">
-            Primary
-          </option>
-          <option value="secondary">
-            Secondary
-          </option>
-          <option value="error">
-            Error
-          </option>
-          <option value="warning">
-            Warning
-          </option>
-          <option value="info">
-            Info
-          </option>
-          <option value="success">
-            Success
-          </option>
-        </select>
+        <div class="w-1/2 px-4">
+          <div class="flex mb-1">
+            <vk-select
+              type="outlined"
+              placeholder="Variant"
+              size="sm"
+              :options="variants"
+              v-model="form.options_variants"
+            />
+          </div>
+          <div class="flex mb-1">
+            <vk-select
+              type="outlined"
+              placeholder="Type"
+              size="sm"
+              :options="types"
+              v-model="form.options_types"
+            />
+          </div>
+          <div class="flex mb-1">
+            <vk-select
+              type="outlined"
+              placeholder="Sizes"
+              size="sm"
+              :options="sizes"
+              v-model="form.options_sizes"
+            />
+          </div>
+          <div>
+            <vk-checkbox
+              v-model="btnDisabled"
+              label="Disabled"
+            />
+          </div>
+          <div>
+            <vk-checkbox
+              v-model="btnFlat"
+              label="Flat"
+            />
+          </div>
+          <div>
+            <vk-checkbox
+              v-model="btnRounded"
+              label="Rounded"
+            />
+          </div>
+          <div>
+            <vk-checkbox
+              v-model="btnBlock"
+              label="Block"
+            />
+          </div>
+        </div>
       </div>
-      <div class="flex">
-        <label
-          for="cb-btn-type"
-          class="mr-2"
-        >Type: </label>
-        <select
-          name="cb-btn-type"
-          v-model="btnType"
-        >
-          <option value="filled">
-            Filled
-          </option>
-          <option value="outlined">
-            Outlined
-          </option>
-          <option value="ghost">
-            Ghost
-          </option>
-        </select>
-      </div>
-      <div class="flex">
-        <label
-          for="cb-btn-size"
-          class="mr-2"
-        >Size: </label>
-        <select
-          name="cb-btn-size"
-          v-model="btnSize"
-        >
-          <option value="xs">
-            xs
-          </option>
-          <option value="sm">
-            sm
-          </option>
-          <option value="md">
-            md
-          </option><option value="lg">
-            lg
-          </option>
-        </select>
-      </div>
-      <vk-checkbox
-        v-model="btnDisabled"
-        label="Disabled"
-      />
-      <vk-checkbox
-        v-model="btnFlat"
-        label="Flat"
-      />
-      <vk-checkbox
-        v-model="btnRounded"
-        label="Rounded"
-      />
-      <vk-checkbox
-        v-model="btnBlock"
-        label="Block"
-      />
     </template>
 
     <template #examples>
-      <example-section title="Color">
+      <example-section
+        title="Color"
+        gap
+      >
         <vk-button variant="primary">
           Primary
         </vk-button>
@@ -218,7 +214,11 @@ const apiData = [
         </vk-button>
       </example-section>
 
-      <example-section title="Types">
+      <example-section 
+        title="Types"
+        gap
+        wrap
+      >
         <vk-button flat>
           Flat
         </vk-button>
@@ -239,7 +239,10 @@ const apiData = [
         </vk-button>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section 
+        title="Sizes"
+        gap
+      >
         <vk-button size="xs">
           Extra Small
         </vk-button>

@@ -193,7 +193,7 @@ const apiData = [
       <div class="flex">
         <div class="w-1/2 px-4">
           <form action="">
-            <div class="flex mb-5">
+            <div class="flex mb-1">
               <vk-input 
                 kind="outlined" 
                 label="Label"
@@ -201,7 +201,7 @@ const apiData = [
                 v-model="selectLabel"
               />
             </div>
-            <div class="flex mb-5">
+            <div class="flex mb-1">
               <vk-input 
                 kind="outlined" 
                 label="Helpertext"
@@ -268,7 +268,6 @@ const apiData = [
     <template #examples>
       <example-section
         title="Colors"
-        direction="row"
         justify="around"
         gap
       >
@@ -316,7 +315,6 @@ const apiData = [
 
       <example-section
         title="Types"
-        direction="row"
         justify="start"
         align="start"
         gap
