@@ -22,7 +22,6 @@ const showMap: Record<string, string> = props.options.reduce((acc, opt) => ({
   ...acc,
   [`${opt.value}`]: opt.label
 }), { 'undefined': '' })
-console.log(showMap)
 
 const showValue = computed(
   () => Array.isArray(props.modelValue)
@@ -54,7 +53,6 @@ const selectItem = (value: string | number ) => {
     const newValue = isSelected(value) ? undefined : value
     updateValue(newValue)
     toggleDropdown(false)
-    closeDropdown()
   }
 }
 
@@ -82,16 +80,8 @@ onUnmounted(() => {
   document.removeEventListener('click', closeDropdownOnOutsideClick)
 })
 
-const closeDropdown = () => {
-  isOpen.value = false
-}
-
-const toggleDropdown = (isLabelClick: boolean) => {
-  if (isLabelClick && !props.disabled && !props.readonly) {
-    isOpen.value = !isOpen.value
-  } else if (!props.disabled && !props.readonly) {
-    isOpen.value = true
-  }
+const toggleDropdown = (onFocus: boolean) => {
+  isOpen.value = onFocus && !props.disabled && !props.readonly
 }
 
 </script>
@@ -128,8 +118,7 @@ const toggleDropdown = (isLabelClick: boolean) => {
         :variant="variant"
         :size="size"
         :model-value="showValue"
-        @label-click="toggleDropdown"
-        @container-click="closeDropdown"
+        @focus="() => toggleDropdown(true)"
       />
       <ul
         :data-helper="!!helpertext"

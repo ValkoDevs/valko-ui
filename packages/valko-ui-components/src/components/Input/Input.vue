@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<InputProps>(), {
   type: 'text',
 })
 
-const emit = defineEmits(['update:modelValue', 'label-click'])
+const emit = defineEmits(['update:modelValue', 'focus'])
 
 const updateValue = (e: Event) => {
   if (!props.disabled && !props.readonly) {
@@ -32,14 +32,10 @@ onMounted(() => {
   }
 })
 
-const labelClick = () => {
-  if (!props.disabled && !props.readonly) {
-    emit('label-click', true)
+const onFocus = (event: Event) => {
+  if (!props.disabled) {
+    emit('focus', event)
   }
-}
-
-const containerClick = () => {
-  emit('label-click', false)
 }
 
 const classes = useStyle(props)
@@ -48,7 +44,6 @@ const classes = useStyle(props)
 <template>
   <div
     :class="classes.container"
-    @click="containerClick"
   >
     <div :class="classes.field">
       <input
@@ -58,6 +53,7 @@ const classes = useStyle(props)
         :type="type"
         placeholder=" "
         :value="modelValue"
+        @focus="onFocus"
         @input="updateValue"
         :data-filled="!!modelValue"
         :id="inputId"
@@ -65,7 +61,6 @@ const classes = useStyle(props)
       <label
         :for="inputId"
         :class="classes.label"
-        @click="labelClick"
       >{{ props.label }}</label>
     </div>
     <span 
