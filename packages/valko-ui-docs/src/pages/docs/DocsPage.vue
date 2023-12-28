@@ -14,9 +14,9 @@ const menuItems: MenuItem[] = [
   { key: 'button', group: 'Forms', text: 'Button'},
   { key: 'input', group: 'Forms',  text:'Input'},
   { key: 'checkbox', group: 'Forms', text: 'Checkbox'},
-  { key: 'spinner', group: 'Ui', text: 'Spinner'},
-]
-
+  { key: 'select', group: 'Forms', text: 'Select'},
+  { key: 'spinner', group: 'Ui', text: 'Spinner'}, 
+] 
 const activeItem = ref<MenuItem['key'] | null>(null)
 
 const onItemClick = (item: MenuItem) => {

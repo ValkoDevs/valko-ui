@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import DocSection from '../../../components/DocSection.vue'
-import ExampleSection from '../../../components/ExampleSection.vue'
+import DocSection from '../../../components/DocSection'
+import ExampleSection from '../../../components/ExampleSection'
 
 const btnVariant = ref('primary')
 const btnType = ref('filled')
