@@ -11,6 +11,7 @@ const cbErrorText = ref('')
 const cbIndeterminate = ref(false)
 const cbReadOnly = ref(false)
 const labelValue = ref('Checkbox')
+const exampleChecked = ref(true)
 
 const variants = [
   {value:'primary', label:'Primary'},
@@ -27,10 +28,10 @@ const types = [
 ]
 
 const sizes = [
-  {value:'xs', label:'XS'},
-  {value:'sm', label:'SM'},
-  {value:'md', label:'MD'},
-  {value:'lg', label:'LG'}
+  {value:'xs', label:'Extra Small'},
+  {value:'sm', label:'Small'},
+  {value:'md', label:'Medium'},
+  {value:'lg', label:'Large'}
 ]
 
 const positions = [
@@ -39,10 +40,10 @@ const positions = [
 ]
 
 const form = ref({
-  options_variants: 'primary',
-  options_types: 'filled',
-  options_sizes: 'md',
-  options_positions: false
+  variants: 'primary',
+  types: 'filled',
+  sizes: 'md',
+  positions: false
 })
 
 const apiHeaders = [
@@ -175,14 +176,14 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
     <template #playground-view>
       <div class="w-full flex justify-center">
         <vk-checkbox
-          :variant="form.options_variants"
-          :type="form.options_types"
-          :size="form.options_sizes"
+          :variant="form.variants"
+          :type="form.types"
+          :size="form.sizes"
           :error-text="cbErrorText"
           :disabled="cbDisabled"
           :flat="cbFlat"
           :rounded="cbRounded"
-          :label-position="form.options_positions"
+          :label-position="form.positions"
           :read-only="cbReadOnly"
           :indeterminate="cbIndeterminate"
           v-model="checked"
@@ -216,7 +217,7 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
                 placeholder="Variant"
                 size="sm"
                 :options="variants"
-                v-model="form.options_variants"
+                v-model="form.variants"
               />
             </div>
             <div class="flex mb-1">
@@ -225,7 +226,7 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
                 placeholder="Type"
                 size="sm"
                 :options="types"
-                v-model="form.options_types"
+                v-model="form.types"
               />
             </div>
             <div class="flex mb-1">
@@ -234,7 +235,7 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
                 placeholder="Sizes"
                 size="sm"
                 :options="sizes"
-                v-model="form.options_sizes"
+                v-model="form.sizes"
               />
             </div>
             <div class="flex mb-1">
@@ -243,7 +244,7 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
                 placeholder="Label Position"
                 size="sm"
                 :options="positions"
-                v-model="form.options_positions"
+                v-model="form.positions"
               />
             </div>
             <div class="flex">
@@ -284,84 +285,57 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
     <template #examples>
       <example-section
         title="Colors"
-        justify="evenly"
+        justify="start"
         gap
       >
-        <div class="grow gap-4 flex flex-col">
+        <div class="gap-x-12 gap-y-4 grid grid-cols-2">
           <vk-checkbox
-            :model-value="true"
-            label="Primary" 
-            variant="primary"
-          />
-          <vk-checkbox
-            :model-value="true"
-            label="Secondary" 
-            variant="secondary" 
-          />
-          <vk-checkbox
-            :model-value="true"
-            label="Error" 
-            variant="error" 
-          />
-        </div>
-        <div class="grow gap-4 flex flex-col">
-          <vk-checkbox
-            :model-value="true"
-            label="Success" 
-            variant="success" 
-          />
-          <vk-checkbox
-            :model-value="true"
-            label="Warning" 
-            variant="warning" 
-          />
-          <vk-checkbox
-            :model-value="true"
-            label="Info" 
-            variant="info" 
+            v-for="variant in variants"
+            :key="variant.value"
+            :variant="variant.value"
+            :label="variant.label"
+            :model-value="exampleChecked"
           />
         </div>
       </example-section>
 
       <example-section
         title="Types"
-        justify="center"
-        align="start"
+        justify="start"
         gap
       >
-        <div class="grow gap-4 flex flex-col">
+        <div class="gap-x-12 gap-y-4 grid grid-cols-2">
           <vk-checkbox
-            :model-value="true"
-            label="Flat"
-            flat
+            v-for="type in types"
+            :key="type.value"
+            :type="type.value"
+            :label="type.label"
+            :model-value="exampleChecked"
           />
           <vk-checkbox
-            :model-value="true"
-            label="Outlined"
-            type="outlined"
-          />
-          <vk-checkbox
-            :model-value="true"
             label="Disabled"
             disabled
-          />
-        </div>
-        <div class="grow gap-4 flex flex-col">
-          <vk-checkbox
-            :model-value="null"
-            label="Indeterminate"
-            indeterminate
-            read-only
-          />
-          <vk-checkbox
-            :model-value="true"
-            label="Error"
-            error-text="Invalid Input"
+            :model-value="exampleChecked"
           />
           <vk-checkbox
             label="Rounded"
-            :model-value="true"
             rounded
+            :model-value="exampleChecked"
+          />
+          <vk-checkbox
+            label="Flat"
+            flat
+            :model-value="exampleChecked"
+          />
+          <vk-checkbox
+            label="Readonly"
+            read-only
+            :model-value="exampleChecked"
+          />
+          <vk-checkbox
+            label="Inderterminate"
+            inderteminate
+            :model-value="exampleChecked"
           />
         </div>
       </example-section>
@@ -369,29 +343,15 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
       <example-section
         title="Sizes"
         justify="start"
-        align="start"
         gap
       >
-        <div class="w-full grid grid-cols-2 gap-4 items-start">
+        <div class="gap-x-12 gap-y-4 grid grid-cols-2">
           <vk-checkbox
-            :model-value="true"
-            label="Extra Small" 
-            size="xs" 
-          />
-          <vk-checkbox
-            :model-value="true"
-            label="Medium" 
-            size="md" 
-          />
-          <vk-checkbox
-            :model-value="true"
-            label="Small" 
-            size="sm" 
-          />
-          <vk-checkbox
-            :model-value="true"
-            label="Large" 
-            size="lg"
+            v-for="size in sizes"
+            :key="size.value"
+            :size="size.value"
+            :label="size.label"
+            :model-value="exampleChecked"
           />
         </div>
       </example-section>

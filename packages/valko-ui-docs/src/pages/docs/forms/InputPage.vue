@@ -10,6 +10,7 @@ const inpReadonly = ref(false)
 const inpValue = ref('')
 const labelValue = ref('Label')
 const helperValue = ref('Helpertext')
+const exampleReadonly = ref('Example readonly text')
 
 const variants = [
   {value:'primary', label:'Primary'},
@@ -27,10 +28,10 @@ const kinds = [
 ]
 
 const sizes = [
-  {value:'xs', label:'XS'},
-  {value:'sm', label:'SM'},
-  {value:'md', label:'MD'},
-  {value:'lg', label:'LG'}
+  {value:'xs', label:'Extra Small'},
+  {value:'sm', label:'Small'},
+  {value:'md', label:'Medium'},
+  {value:'lg', label:'Large'}
 ]
 
 const types = [
@@ -41,10 +42,10 @@ const types = [
 ]
 
 const form = ref({
-  options_variants: 'primary',
-  options_kinds: 'filled',
-  options_sizes: 'md',
-  options_types: 'text'
+  variants: 'primary',
+  kinds: 'filled',
+  sizes: 'md',
+  types: 'text'
 })
 
 const apiHeaders = [
@@ -166,14 +167,14 @@ const apiData = [
     <template #playground-view>
       <div class="w-full flex px-2">
         <vk-input
-          :variant="form.options_variants"
-          :kind="form.options_kinds"
-          :size="form.options_sizes"
+          :variant="form.variants"
+          :kind="form.kinds"
+          :size="form.sizes"
           :disabled="inpDisabled"
           :readonly="inpReadonly"
           :flat="inpFlat"
           :rounded="inpRounded"
-          :type="form.options_types"
+          :type="form.types"
           v-model="inpValue"
           :label="labelValue"
           :helpertext="helperValue"
@@ -207,7 +208,7 @@ const apiData = [
                 placeholder="Variant"
                 size="sm"
                 :options="variants"
-                v-model="form.options_variants"
+                v-model="form.variants"
               />
             </div>
             <div class="flex mb-1">
@@ -216,7 +217,7 @@ const apiData = [
                 placeholder="Kind"
                 size="sm"
                 :options="kinds"
-                v-model="form.options_kinds"
+                v-model="form.kinds"
               />
             </div>
             <div class="flex mb-1">
@@ -225,7 +226,7 @@ const apiData = [
                 placeholder="Sizes"
                 size="sm"
                 :options="sizes"
-                v-model="form.options_sizes"
+                v-model="form.sizes"
               />
             </div>
             <div class="flex mb-1">
@@ -234,7 +235,7 @@ const apiData = [
                 placeholder="Types"
                 size="sm"
                 :options="types"
-                v-model="form.options_types"
+                v-model="form.types"
               />
             </div>
             <div class="flex">
@@ -266,32 +267,42 @@ const apiData = [
         justify="around"
         gap
       >
-        <div class="grow gap-4 flex flex-col">
-          <vk-input 
-            variant="primary"
-            label="Primary"
-          />
-          <vk-input 
-            variant="secondary"
-            label="Secondary"
-          />
-          <vk-input 
-            variant="success"
-            label="Success"
+        <div class="grow gap-4 grid grid-cols-2">
+          <vk-input
+            v-for="variant in variants"
+            :key="variant.value"
+            :variant="variant.value"
+            :label="variant.label"
           />
         </div>
-        <div class="grow gap-4 flex flex-col">
-          <vk-input 
-            variant="info"
-            label="Info"
+      </example-section>
+
+      <example-section
+        title="Kinds"
+        justify="start"
+        align="start"
+        gap
+      >
+        <div class="grow gap-4 grid grid-cols-2">
+          <vk-input
+            v-for="kind in kinds"
+            :key="kind.value"
+            :kind="kind.value"
+            :label="kind.label"
           />
-          <vk-input 
-            variant="warning"
-            label="Warning"
+          <vk-input
+            disabled
+            label="Disabled"
           />
-          <vk-input 
-            variant="error"
-            label="Error"
+          <vk-input
+            rounded
+            kind="outlined"
+            label="Rounded"
+          />
+          <vk-input
+            readonly
+            label="Readonly"
+            v-model="exampleReadonly"
           />
         </div>
       </example-section>
@@ -302,30 +313,12 @@ const apiData = [
         align="start"
         gap
       >
-        <div class="grow gap-4 flex flex-col">
-          <vk-input label="Filled" />
-          <vk-input 
-            kind="outlined"
-            label="Outlined"
-          />
-          <vk-input 
-            kind="ghost"
-            label="Ghost"
-          />
-        </div>
-        <div class="grow gap-4 flex flex-col">
-          <vk-input 
-            disabled
-            label="Disabled"
-          />
-          <vk-input 
-            flat
-            label="Flat"
-          />
-          <vk-input 
-            kind="outlined"
-            rounded
-            label="Rounded"
+        <div class="grow gap-4 grid grid-cols-2">
+          <vk-input
+            v-for="type in types"
+            :key="type.value"
+            :type="type.value"
+            :label="type.label"
           />
         </div>
       </example-section>
@@ -336,22 +329,12 @@ const apiData = [
         align="start"
         gap
       >
-        <div class="w-full grid grid-cols-2 gap-4 items-end">
-          <vk-input 
-            size="xs"
-            label="Extra Small"
-          />
-          <vk-input 
-            size="sm"
-            label="Small"
-          />
+        <div class="grow gap-4 grid grid-cols-2 items-end">
           <vk-input
-            size="md"
-            label="Medium"
-          />
-          <vk-input 
-            size="lg"
-            label="Large"
+            v-for="size in sizes"
+            :key="size.value"
+            :size="size.value"
+            :label="size.label"
           />
         </div>
       </example-section>

@@ -1,314 +1,284 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import {ref} from 'vue'
+import DocSection from '../../../components/DocSection'
+import ExampleSection from '../../../components/ExampleSection'
 
-const tareaVariant = ref('primary')
-const tareaSize = ref('md')
-const tareaDisabled = ref(false)
-const tareaFlat = ref(false)
-const tareaRounded = ref(false)
-const tareaReadonly = ref(false)
-const tareaType = ref('filled')
-const tareaValue = ref('')
+const textareaDisabled = ref(false)
+const textareaReadonly = ref(false)
+const textareaValue = ref('')
 const labelValue = ref('Label')
-const tareaMaxlength = ref(undefined)
+const helperValue = ref('Helpertext')
+const textareaCounter = ref(null)
+const exampleReadonly = ref('Example readonly text')
+
+const variants = [
+  {value:'primary', label:'Primary'},
+  {value:'secondary', label:'Secondary'},
+  {value:'success', label:'Success'},
+  {value:'info', label:'Info'},
+  {value:'warning', label:'Warning'},
+  {value:'error', label:'Error'}
+]
+
+const types = [
+  {value:'filled', label:'Filled'},
+  {value:'outlined', label:'Outlined'},
+  {value:'ghost', label:'Ghost'}
+]
+
+const sizes = [
+  {value:'xs', label:'Extra Small'},
+  {value:'sm', label:'Small'},
+  {value:'md', label:'Medium'},
+  {value:'lg', label:'Large'}
+]
+
+const form = ref({
+  variants: 'primary',
+  types: 'filled',
+  sizes: 'md' 
+})
+
+const apiHeaders = [
+  {
+    key: 'prop',
+    label: 'Property'
+  },
+  {
+    key: 'required',
+    label: 'Required'
+  },
+  {
+    key: 'description',
+    label: 'Description'
+  },
+  {
+    key: 'values',
+    label: 'Values'
+  },
+  {
+    key: 'default',
+    label: 'Default'
+  }
+]
+
+const apiData = [
+  {
+    prop: 'variant',
+    required: false,
+    description: 'The color variant of the Textarea.',
+    values: 'primary, secondary, error, warning, info, success',
+    default: 'primary'
+  },
+  {
+    prop: 'type',
+    required: false,
+    description: 'The type of the Textarea.',
+    values: 'filled, outlined, ghost',
+    default: 'filled'
+  },
+  {
+    prop: 'size',
+    required: false,
+    description: 'The size of the Textarea.',
+    values: 'xs, sm, md, lg',
+    default: 'md'
+  },
+  {
+    prop: 'disabled',
+    required: false,
+    description: 'Whether the Textarea is disabled or not.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
+    prop: 'modelValue',
+    required: false,
+    description: 'The v-model for the Textarea',
+    values: 'string',
+    default: 'false'
+  },
+  {
+    prop: 'readonly',
+    required: false,
+    description: 'Wheter the Textarea is readonly or not',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
+    prop: 'label',
+    required: false,
+    description: 'The label for the Textarea',
+    values: 'string',
+    default: 'false'
+  },
+  {
+    prop: 'helpertext',
+    required: false,
+    description: 'A hint for the Textarea',
+    values: 'string',
+    default: 'false'
+  },
+]
 </script>
 
 <template>
-  <div class="container">
-    <h1>Textarea</h1>
-    <hr>
+  <doc-section
+    title="Textarea"
+    description="Textarea component is a multi-line Input which allows you to write large texts."
+  >
+    <template #playground-view>
+      <div class="w-full p-4">
+        <vk-textarea
+          :variant="form.variants"
+          :size="form.sizes"
+          :disabled="textareaDisabled"
+          :readonly="textareaReadonly"
+          :type="form.types"
+          v-model="textareaValue"
+          :label="labelValue"
+          :maxlength="textareaCounter"
+          :helpertext="helperValue"
+        />
+      </div>
+    </template>
 
-    <section class="w-full">
-      The textarea component similar to our input is a extesion of the same styles and elegancy.
-    </section>
-
-    <section class="w-full">
-      <h2>Playground</h2>
-      <hr>
+    <template #playground-options>
       <div class="flex">
-        <div class="w-1/2 flex justify-center items-center border border-light-4 dark:border-dark-1 rounded p-10">
-          <vk-textarea
-            :variant="tareaVariant"
-            :size="tareaSize"
-            :disabled="tareaDisabled"
-            :readonly="tareaReadonly"
-            :flat="tareaFlat"
-            :rounded="tareaRounded"
-            :type="tareaType"
-            v-model="tareaValue"
-            :label="labelValue"
-            :rows="1"
-            :maxlength="tareaMaxlength"
-          />
-        </div>
         <div class="w-1/2 px-4">
-          <div class="flex mb-5">
-            <vk-input
-              kind="outlined"
-              label="Label"
-              v-model="labelValue"
-            />
-          </div>
           <form action="">
             <div class="flex mb-1">
-              <label
-                for="cb-tarea-variant"
-                class="mr-2"
-              >Variant: </label>
-              <select
-                name="cb-tarea-variant"
-                v-model="tareaVariant"
-              >
-                <option value="primary">
-                  Primary
-                </option>
-                <option value="secondary">
-                  Secondary
-                </option>
-                <option value="success">
-                  Success
-                </option>
-                <option value="info">
-                  Info
-                </option>
-                <option value="warning">
-                  Warning
-                </option>
-                <option value="error">
-                  Error
-                </option>
-              </select>
+              <vk-input 
+                kind="outlined" 
+                label="Label"
+                size="sm"
+                v-model="labelValue"
+              />
             </div>
             <div class="flex mb-1">
-              <label
-                for="cb-tarea-type"
-                class="mr-2"
-              >Type: </label>
-              <select
-                name="cb-tarea-type"
-                v-model="tareaType"
-              >
-                <option value="filled">
-                  Filled
-                </option>
-                <option value="outlined">
-                  Outlined
-                </option>
-                <option value="ghost">
-                  Ghost
-                </option>
-              </select>
+              <vk-input 
+                kind="outlined" 
+                label="Helpertext"
+                size="sm"
+                v-model="helperValue"
+              />
             </div>
             <div class="flex mb-1">
-              <label
-                for="cb-tarea-size"
-                class="mr-2"
-              >Size: </label>
-              <select
-                name="cb-tarea-size"
-                v-model="tareaSize"
-              >
-                <option value="xs">
-                  xs
-                </option>
-                <option value="sm">
-                  sm
-                </option>
-                <option value="md">
-                  md
-                </option>
-                <option value="lg">
-                  lg
-                </option>
-              </select>
+              <vk-input 
+                kind="outlined" 
+                label="Counter"
+                type="number"
+                size="sm"
+                v-model="textareaCounter"
+              />
             </div>
             <div class="flex mb-1">
-              <label
-                for="cb-tarea-maxlength"
-                class="mr-2"
-              >Example Maxlength: </label>
-              <select
-                name="cb-tarea-size"
-                v-model="tareaMaxlength"
-              >
-                <option :value="undefined">
-                  None
-                </option>
-                <option value="25">
-                  25
-                </option>
-                <option value="50">
-                  50
-                </option>
-                <option value="100">
-                  100
-                </option>
-              </select>
+              <vk-select
+                type="outlined"
+                placeholder="Variant"
+                size="sm"
+                :options="variants"
+                v-model="form.variants"
+              />
             </div>
-            <div>
-              <vk-checkbox 
+            <div class="flex mb-1">
+              <vk-select
+                type="outlined"
+                placeholder="Type"
+                size="sm"
+                :options="types"
+                v-model="form.types"
+              />
+            </div>
+            <div class="flex mb-1">
+              <vk-select
+                type="outlined"
+                placeholder="Size"
+                size="sm"
+                :options="sizes"
+                v-model="form.sizes"
+              />
+            </div>
+            <div class="flex">
+              <vk-checkbox
                 label="Disabled"
-                v-model="tareaDisabled"
+                v-model="textareaDisabled"
               />
             </div>
-            <div>
-              <vk-checkbox 
-                label="Flat"
-                v-model="tareaFlat"
-              />
-            </div>
-            <div>
-              <vk-checkbox 
+            <div class="flex">
+              <vk-checkbox
                 label="Readonly"
-                v-model="tareaReadonly"
+                v-model="textareaReadonly"
               />
             </div>
           </form>
         </div>
       </div>
-    </section>
+    </template>
 
-    <section class="w-full">
-      <h2>Colors</h2>
-      <hr>
-      <div class="flex justify-between items-center">
-        <div class="mr-2">
-          <vk-textarea 
-            variant="primary"
-            label="Primary"
+    <template #examples>
+      <example-section
+        title="Colors"
+        justify="around"
+        gap
+      >
+        <div class="grow gap-4 grid grid-cols-2">
+          <vk-textarea
+            v-for="variant in variants"
+            :key="variant.value"
+            :variant="variant.value"
+            :label="variant.label"
           />
         </div>
-        <div class="mr-2">
+      </example-section>
+
+      <example-section
+        title="Types"
+        justify="start"
+        align="start"
+        gap
+      >
+        <div class="grow gap-4 grid grid-cols-2">
           <vk-textarea 
-            variant="secondary"
-            label="Secondary"
+            v-for="type in types"
+            :key="type.value"
+            :type="type.value"
+            :label="type.label"
           />
-        </div>
-        <div class="mr-2">
-          <vk-textarea 
-            variant="success"
-            label="Success"
-          />
-        </div>
-        <div class="mr-2">
-          <vk-textarea 
-            variant="info"
-            label="Info"
-          />
-        </div>
-        <div class="mr-2">
-          <vk-textarea 
-            variant="warning"
-            label="Warning"
-          />
-        </div>
-        <div>
-          <vk-textarea 
-            variant="error"
-            label="Error"
-          />
-        </div>
-      </div>
-    </section>
-    <br>
-    <section class="w-full">
-      <h2>Types</h2>
-      <hr>
-      <div class="flex justify-between items-center">
-        <div class="mr-2">
-          <vk-textarea label="Filled" />
-        </div>
-        <div class="mr-2">
-          <vk-textarea 
-            type="outlined"
-            label="Outlined"
-          />
-        </div>
-        <div class="mr-2">
-          <vk-textarea 
-            type="ghost"
-            label="Ghost"
-          />
-        </div>
-        <div class="mr-2">
-          <vk-textarea 
+          <vk-textarea
             disabled
             label="Disabled"
           />
-        </div>
-        <div class="mr-2">
-          <vk-textarea 
-            flat
-            label="Flat"
+          <vk-textarea
+            readonly
+            label="Readonly"
+            v-model="exampleReadonly"
           />
         </div>
-      </div>
-    </section>
+      </example-section>
 
-    <section class="w-full">
-      <h2>Sizes</h2>
-      <hr>
-      <div class="flex justify-between items-center">
-        <div class="w-full px-2">
-          <vk-textarea 
-            size="xs"
-            label="Extra Small"
+      <example-section
+        title="Sizes"
+        justify="start"
+        align="start"
+        gap
+      >
+        <div class="w-full grid grid-cols-2 gap-4 items-start">
+          <vk-textarea
+            v-for="size in sizes"
+            :key="size.value"
+            :size="size.value"
+            :label="size.label"
           />
         </div>
-        <div class="w-full px-2">
-          <vk-textarea 
-            size="sm"
-            label="Small"
-          />
-        </div>
-        <div class="w-full px-2">
-          <vk-textarea 
-            size="md"
-            label="Medium"
-          />
-        </div>
-        <div class="w-full px-2">
-          <vk-textarea 
-            size="lg"
-            label="Large"
-          />
-        </div>
-      </div>
-    </section>
+      </example-section>
+    </template>
 
-    <section class="w-full">
-      <h2>API</h2>
-      <hr>
-      <div class="flex justify-between items-center">
-        table with props, possible values, default values, and description
-      </div>
-    </section>
-  </div>
+    <template #api>
+      <vk-data-table
+        :headers="apiHeaders"
+        :data="apiData"
+      />
+    </template>
+  </doc-section>
 </template>
-
-<style lang="postcss" scoped>
-  h1 {
-    @apply text-4xl font-bold;
-  }
-  h2 {
-    @apply text-2xl;
-  }
-
-  hr {
-    @apply mb-4 mt-1 w-full border-light-4 dark:border-dark-1;
-  }
-
-  section {
-    @apply mb-16;
-  }
-  .container {
-    @apply
-    flex
-    flex-col
-    justify-start
-    items-start
-    px-10
-    py-5;
-  }
-</style>
-

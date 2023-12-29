@@ -5,33 +5,47 @@ import { computed } from 'vue'
 const useStyle = (props: TextareaProps) => {
   const textarea = tv({
     slots: {
+      container: [
+        'w-full',
+        'flex',
+        'flex-col',
+        'justify-items-start'
+      ],
       textarea: [
+        'w-full',
+        'px-2',
+        'align-middle',
+        'outline-none',
         'peer',
         'transition-colors',
         'duration-200',
         'ease-in-out',
-        'w-full',
         'focus:ring-0',
-        'outline-none',
-        'pb-1',
-        'placeholder-shown:truncate',
-        'px-2'
+        'min-h-[128px]',
+        'h-[128px]'
       ],
       label: [
-        'flex',
+        'opacity-80',
+        'text-left',
+        'font-bold',
+        'truncate',
+        'cursor-text',
         'px-1',
+        'ml-[1px]',
         'absolute',
-        'top-1.5',
+        'top-1',
         'left-1',
         'transition-all',
         'duration-200',
-        'peer-placeholder-shown:left-1',
-        'peer-placeholder-shown:top-2',
-        'peer-focus:top-1.5',
-        'cursor-text',
-        'truncate'
+        'origin-[center_left]',
+        'peer-focus:scale-[.8]',
+        'peer-data-[filled=true]:scale-[.8]',
+        'peer-focus:top-0',
+        'peer-data-[filled=true]:top-0',
+        'peer-data-[filled=true]:translate-y-0'
+
       ],
-      container: [
+      field: [
         'relative',
         'w-full',
         'm-0',
@@ -41,13 +55,16 @@ const useStyle = (props: TextareaProps) => {
         'items-start'
       ],
       helper: [
-        'transition-all',
-        'duration-200',
-        'mt-2',
-        'break-words',
-        'break-before-all',
-        'inline-block',
-        'w-full'
+        'grow'
+      ],
+      counter: [
+        'w-fit',
+        'whitespace-nowrap'
+      ],
+      footer: [
+        'w-full',
+        'flex',
+        'justify-between'
       ]
     },
     variants: {
@@ -55,43 +72,35 @@ const useStyle = (props: TextareaProps) => {
         filled: {
           textarea: [
             'rounded-t-md',
-            'border-b-2',
             'bg-light-3',
-            'focus:bg-light-4',
             'dark:bg-dark-3',
-            'dark:focus:bg-dark-2'
+            'border-b-2'
           ]
         },
         ghost: {
           textarea: [
             'shadow-none',
+            'bg-inherit',
             'border-b-2',
-            'bg-inherit'
-            
+            'border-light-5'
           ],
           label: [
             'shadow-none',
             'bg-inherit'
-
           ]
         },
         outlined: {
           textarea: [
             'rounded-md',
+            'px-2',
+            'bg-light-3',
+            'dark:bg-dark-3',
             'border-2',
-            'bg-transparent'
+            'border-dark-1'
           ],
           label: [
-            '-top-1',
-            'left-2',
-            'peer-placeholder-shown:left-2',
-            'bg-transparent',
-            'peer-focus:bg-light-2',
-            'dark:peer-focus:bg-dark-4',
-            'peer-data-[filled=true]:-top-3.5',
-            'peer-data-[filled=true]:bg-light-2',
-            'dark:peer-data-[filled=true]:bg-dark-4',
-            'peer-focus:-top-3.5',
+            'left-1.5',
+            'bg-transparent'
           ]
         }
       },
@@ -106,119 +115,88 @@ const useStyle = (props: TextareaProps) => {
       size: {
         xs: {
           textarea: [
-            'pt-6',
-            'text-xs'
+            'text-xs',
+            'pt-3'
           ],
           label: [
             'text-xs'
           ],
           helper: [
+            'text-xs'
+          ],
+          counter: [
             'text-xs'
           ]
         },
         sm: {
           textarea: [
-            'pt-8',
-            'text-sm'
-
+            'text-sm',
+            'pt-4'
           ],
           label: [
-            'text-sm',
-            'peer-data-[filled=true]:text-xs',
-            'peer-focus:text-xs'
+            'text-sm'
           ],
           helper: [
+            'text-sm'
+          ],
+          counter: [
             'text-sm'
           ]
         },
         md: {
           textarea: [
-            'pt-10',
-            'text-base'
+            'text-base',
+            'pt-5'
           ],
           label: [
-            'text-base',
-            'peer-data-[filled=true]:text-sm',
-            'peer-focus:text-sm'
+            'text-base'
           ],
           helper: [
+            'text-base'
+          ],
+          counter: [
             'text-base'
           ]
         },
         lg: {
           textarea: [
-            'pt-12',
-            'text-lg'
-
+            'text-lg',
+            'pt-6'
           ],
           label: [
-            'text-lg',
-            'peer-data-[filled=true]:text-base',
-            'peer-focus:text-base'
+            'text-lg'
           ],
           helper: [
             'text-lg'
-          ]
-        }
-      },
-      flat: {
-        true: {
-          textarea: [
-            'shadow-none'
+          ],
+          counter: [
+            'text-lg'
           ]
         }
       },
       disabled: {
         true: {
           textarea: [
-            'bg-gray-600',
-            'opacity-50',
-            'cursor-not-allowed',
+            'bg-gray-500/[.25]',
             'text-gray-500',
-            'border-gray-950',
-            'hover:bg-gray-600',
-            'dark:border-gray-600',
-            'dark:hover:bg-gray-600',
-            'peer-data-[filled=true]:border-gray-500',
-            'peer-data-[filled=false]:border-gray-500',
-            'dark:peer-data-[filled=true]:border-gray-500',
-            'dark:peer-data-[filled=false]:border-gray-500',
+            'border-gray-500/[.25]',
+            'cursor-not-allowed',
+            'dark:bg-gray-400/[.25]',
+            'dark:border-gray-400/[.25]'
           ],
           label: [
+            'dark:bg-inherit',
+            'peer-data-[filled=true]:bg-inherit',
+            'peer-data-[filled=false]:bg-inherit',
             'peer-data-[filled=true]:text-gray-500',
             'peer-data-[filled=false]:text-gray-500',
             'dark:peer-data-[filled=true]:text-gray-500',
             'dark:peer-data-[filled=false]:text-gray-500',
-            'dark:bg-inherit',
-            'peer-data-[filled=true]:bg-inherit',
-            'peer-data-[filled=false]:bg-inherit',
             'dark:peer-data-[filled=true]:bg-inherit',
-            'dark:peer-data-[filled=false]:bg-inherit',
+            'dark:peer-data-[filled=false]:bg-inherit'
           ],
           helper: [
             'text-gray-500'
-          ]
-        },
-      },
-      readonly: {
-        true: {
-          textarea: [
-            'bg-gray-500',
-            'opacity-50',
-            'cursor-not-allowed',
-            'text-gray-950',
-            'border-gray-500',
-            'hover:bg-gray-500',
-            'focus:bg-gray-500'
-          ],
-          label: [
-            'text-gray-500',
-            'bg-inherit',
-            'focus:bg-inherit',
-            'peer-data-[filled=true]:bg-inherit',
-            'peer-data-[filled=false]:bg-inherit',
-            'dark:peer-data-[filled=true]:bg-inherit',
-            'dark:peer-data-[filled=false]:bg-inherit'
           ]
         },
       }
@@ -231,21 +209,25 @@ const useStyle = (props: TextareaProps) => {
         disabled: false,
         class: {
           textarea: [
-            'border-gray-300',
-            'hover:border-gray-600',
-            'focus:border-gray-950',
+            'border-dark-1',
+            'hover:border-primary-400',
+            'focus:border-primary-500',
             'dark:border-light-5',
-            'dark:hover:border-light-3',
-            'dark:focus:border-light-1'
+            'dark:hover:border-primary-400',
+            'dark:focus:border-primary-500'
+          ],
+          label: [
+            'text-dark-2',
+            'peer-focus:text-primary-500',
+            'dark:text-light-2'
           ],
           helper: [
             'text-dark-1',
             'dark:text-light-3'
           ],
-          label: [
-            'text-dark-2',
-            'focus:text-dark-4',
-            'dark:text-light-2'
+          counter: [
+            'text-dark-1',
+            'dark:text-light-3'
           ]
         }
       },
@@ -259,15 +241,19 @@ const useStyle = (props: TextareaProps) => {
             'hover:border-secondary-400',
             'focus:border-secondary-500'
           ],
+          label: [
+            'text-secondary-500',
+            'peer-focus:text-secondary-600',
+            'dark:text-secondary-500'
+          ],         
           helper: [
             'text-secondary-500',
             'dark:text-secondary-500'
           ],
-          label: [
+          counter: [
             'text-secondary-500',
-            'focus:text-secondary-950',
             'dark:text-secondary-500'
-          ]         
+          ]
         }
       },
       {
@@ -282,14 +268,18 @@ const useStyle = (props: TextareaProps) => {
             'dark:border-success-500',
             'dark:focus:border-success-700'
           ],
+          label: [
+            'text-success-500',
+            'focus:text-success-950',
+            'dark:text-success-500'
+          ],
           helper: [
             'text-success-500',
             'dark:text-success-500'
           ],
-          label: [
+          counter: [
             'text-success-500',
-            'focus:text-success-950',
-            'dark:text-success-500',
+            'dark:text-success-500'
           ]
         }
       },
@@ -305,14 +295,18 @@ const useStyle = (props: TextareaProps) => {
             'dark:border-info-500',
             'dark:focus:border-info-700'
           ],
-          helper: [
-            'text-info-500',
-            'dark:text-info-500'
-          ],
           label: [
             'text-info-500',
             'focus:text-info-950',
             'dark:text-info-500',
+          ],
+          helper: [
+            'text-info-500',
+            'dark:text-info-500'
+          ],
+          counter: [
+            'text-info-500',
+            'dark:text-info-500'
           ]
         }
       },
@@ -328,14 +322,18 @@ const useStyle = (props: TextareaProps) => {
             'dark:border-warning-500',
             'dark:focus:border-warning-700'
           ],
+          label: [
+            'text-warning-500',
+            'focus:text-warning-950',
+            'dark:text-warning-500'
+          ],
           helper: [
             'text-warning-500',
             'dark:text-warning-500'
           ],
-          label: [
+          counter: [
             'text-warning-500',
-            'focus:text-warning-950',
-            'dark:text-warning-500',
+            'dark:text-warning-500'
           ]
         }
       },
@@ -351,14 +349,18 @@ const useStyle = (props: TextareaProps) => {
             'dark:border-error-500',
             'dark:focus:border-error-700'
           ],
-          helper: [
-            'text-error-500',
-            'dark:text-error-500'
-          ],
           label: [
             'text-error-500',
             'focus:text-error-950',
             'dark:text-error-500',
+          ],
+          helper: [
+            'text-error-500',
+            'dark:text-error-500'
+          ],
+          counter: [
+            'text-error-500',
+            'dark:text-error-500'
           ]
         }
       },
@@ -369,21 +371,24 @@ const useStyle = (props: TextareaProps) => {
         disabled: false,
         class: {
           textarea: [
-            'border-gray-300',
-            'hover:border-gray-600',
-            'focus:border-gray-950',
+            'focus:border-primary-500',
             'dark:border-light-5',
             'dark:hover:border-light-4',
-            'dark:focus:border-light-3'
+            'dark:focus:border-primary-500'
+          ],
+          label: [
+            'text-dark-2',
+            'focus:text-dark-4',
+            'dark:text-light-2',
+            'peer-focus:text-primary-500'
           ],
           helper: [
             'text-dark-1',
             'dark:text-light-3'
           ],
-          label: [
-            'text-dark-2',
-            'focus:text-dark-4',
-            'dark:text-light-2'
+          counter: [
+            'text-dark-1',
+            'dark:text-light-3'
           ]
         }
       },
@@ -393,21 +398,24 @@ const useStyle = (props: TextareaProps) => {
         disabled: false,
         class: {
           textarea: [
-            'border-secondary-300',
             'hover:border-secondary-300',
             'focus:border-secondary-400',
             'dark:border-light-1',
             'dark:hover:border-light-3',
             'dark:focus:border-light-5'
           ],
-          helper: [
-            'text-secondary-500',
-            'dark:text-secondary-500'
-          ],
           label: [
             'text-secondary-500',
             'focus:text-secondary-950',
             'dark:text-secondary-500',
+          ],
+          helper: [
+            'text-secondary-500',
+            'dark:text-secondary-500'
+          ],
+          counter: [
+            'text-secondary-500',
+            'dark:text-secondary-500'
           ]
         }
       },
@@ -417,20 +425,23 @@ const useStyle = (props: TextareaProps) => {
         disabled: false,
         class: {
           textarea: [
-            'border-success-300',
-            'hover:border-success-300',
-            'focus:border-success-400',
+            'border-success-400',
+            'focus:border-success-500',
             'dark:border-success-400',
             'dark:focus:border-success-500'
+          ],
+          label: [
+            'text-success-500',
+            'focus:text-success-950',
+            'dark:text-success-500'
           ],
           helper: [
             'text-success-500',
             'dark:text-success-500'
           ],
-          label: [
+          counter: [
             'text-success-500',
-            'focus:text-success-950',
-            'dark:text-success-500',
+            'dark:text-success-500'
           ]
         }
       },
@@ -440,20 +451,23 @@ const useStyle = (props: TextareaProps) => {
         disabled: false,
         class: {
           textarea: [
-            'border-info-300',
-            'hover:border-info-300',
-            'focus:border-info-400',
+            'border-info-400',
+            'focus:border-info-500',
             'dark:border-info-400',
             'dark:focus:border-info-500'
+          ],
+          label: [
+            'text-info-500',
+            'focus:text-info-950',
+            'dark:text-info-500'
           ],
           helper: [
             'text-info-500',
             'dark:text-info-500'
           ],
-          label: [
+          counter: [
             'text-info-500',
-            'focus:text-info-950',
-            'dark:text-info-500',
+            'dark:text-info-500'
           ]
         }
       },
@@ -463,20 +477,23 @@ const useStyle = (props: TextareaProps) => {
         disabled: false,
         class: {
           textarea: [
-            'border-warning-300',
-            'hover:border-warning-300',
-            'focus:border-warning-400',
+            'border-warning-400',
+            'focus:border-warning-500',
             'dark:border-warning-400',
             'dark:focus:border-warning-500'
+          ],
+          label: [
+            'text-warning-500',
+            'focus:text-warning-950',
+            'dark:text-warning-500'
           ],
           helper: [
             'text-warning-500',
             'dark:text-warning-500'
           ],
-          label: [
+          counter: [
             'text-warning-500',
-            'focus:text-warning-950',
-            'dark:text-warning-500',
+            'dark:text-warning-500'
           ]
         }
       },
@@ -486,20 +503,23 @@ const useStyle = (props: TextareaProps) => {
         disabled: false,
         class: {
           textarea: [
-            'border-error-300',
-            'hover:border-error-300',
-            'focus:border-error-400',
+            'border-error-400',
+            'focus:border-error-500',
             'dark:border-error-400',
             'dark:focus:border-error-500'
+          ],
+          label: [
+            'text-error-500',
+            'focus:text-error-950',
+            'dark:text-error-500'
           ],
           helper: [
             'text-error-500',
             'dark:text-error-500'
           ],
-          label: [
+          counter: [
             'text-error-500',
-            'focus:text-error-950',
-            'dark:text-error-500',
+            'dark:text-error-500'
           ]
         }
       },
@@ -510,18 +530,21 @@ const useStyle = (props: TextareaProps) => {
         disabled: false,
         class: {
           textarea: [
-            'border-gray-200',
-            'hover:border-gray-300',
-            'focus:border-gray-400',
+            'focus:border-primary-500'
+          ],
+          label: [
+            'text-dark-2',
+            'focus:text-dark-4',
+            'dark:text-light-2',
+            'peer-focus:text-primary-500'
           ],
           helper: [
             'text-dark-1',
             'dark:text-light-3'
           ],
-          label: [
-            'text-dark-2',
-            'focus:text-dark-4',
-            'dark:text-light-2'
+          counter: [
+            'text-dark-1',
+            'dark:text-light-3'
           ]
         }
       },
@@ -531,18 +554,20 @@ const useStyle = (props: TextareaProps) => {
         disabled: false,
         class: {
           textarea: [
-            'border-secondary-300',
-            'hover:border-secondary-400',
             'focus:border-secondary-500'
+          ],
+          label: [
+            'text-secondary-500',
+            'focus:text-secondary-950',
+            'dark:text-secondary-500'
           ],
           helper: [
             'text-secondary-500',
             'dark:text-secondary-500'
           ],
-          label: [
+          counter: [
             'text-secondary-500',
-            'focus:text-secondary-950',
-            'dark:text-secondary-500',
+            'dark:text-secondary-500'
           ]
         }
       },
@@ -552,18 +577,21 @@ const useStyle = (props: TextareaProps) => {
         disabled: false,
         class: {
           textarea: [
-            'border-success-400',
-            'hover:border-success-500',
-            'focus:border-success-600'
+            'border-success-500',
+            'focus:border-success-500'
+          ],
+          label: [
+            'text-success-500',
+            'focus:text-success-950',
+            'dark:text-success-500'
           ],
           helper: [
             'text-success-500',
             'dark:text-success-500'
           ],
-          label: [
+          counter: [
             'text-success-500',
-            'focus:text-success-950',
-            'dark:text-success-500',
+            'dark:text-success-500'
           ]
         }
       },
@@ -573,18 +601,21 @@ const useStyle = (props: TextareaProps) => {
         disabled: false,
         class: {
           textarea: [
-            'border-info-400',
-            'hover:border-info-500',
+            'border-info-600',
             'focus:border-info-600'
+          ],
+          label: [
+            'text-info-500',
+            'focus:text-info-950',
+            'dark:text-info-500'
           ],
           helper: [
             'text-info-500',
             'dark:text-info-500'
           ],
-          label: [
+          counter: [
             'text-info-500',
-            'focus:text-info-950',
-            'dark:text-info-500',
+            'dark:text-info-500'
           ]
         }
       },
@@ -594,18 +625,21 @@ const useStyle = (props: TextareaProps) => {
         disabled: false,
         class: {
           textarea: [
-            'border-warning-400',
-            'hover:border-warning-500',
+            'border-warning-600',
             'focus:border-warning-600'
+          ],
+          label: [
+            'text-warning-500',
+            'focus:text-warning-950',
+            'dark:text-warning-500'
           ],
           helper: [
             'text-warning-500',
             'dark:text-warning-500'
           ],
-          label: [
+          counter: [
             'text-warning-500',
-            'focus:text-warning-950',
-            'dark:text-warning-500',
+            'dark:text-warning-500'
           ]
         }
       },
@@ -615,134 +649,21 @@ const useStyle = (props: TextareaProps) => {
         disabled: false,
         class: {
           textarea: [
-            'border-error-400',
-            'hover:border-error-500',
+            'border-error-600',
             'focus:border-error-600'
+          ],
+          label: [
+            'text-error-500',
+            'focus:text-error-950',
+            'dark:text-error-500'
           ],
           helper: [
             'text-error-500',
             'dark:text-error-500'
           ],
-          label: [
+          counter: [
             'text-error-500',
-            'focus:text-error-950',
-            'dark:text-error-500',
-          ]
-        }
-      },
-      // outlined & size
-      {
-        type: 'outlined',
-        size: 'xs',
-        disabled: false,
-        class: {
-          label: [
-            'peer-data-[filled=true]:-top-2',
-            'peer-focus:-top-2',
-            'peer-data-[filled=true]:text-xs',
-            'peer-focus:text-xs'
-          ],
-          textarea: [
-            'py-3'
-          ]
-        }
-      },
-      {
-        type: 'outlined',
-        size: 'sm',
-        disabled: false,
-        class: {
-          label: [
-            'peer-data-[filled=true]:-top-2.5',
-            'peer-focus:-top-2.5',
-            'peer-data-[filled=true]:text-sm',
-            'peer-focus:text-sm'
-          ],
-          textarea: [
-            'py-4'
-          ]
-        }
-      },
-      {
-        type: 'outlined',
-        size: 'md',
-        disabled: false,
-        class: {
-          label: [
-            'peer-data-[filled=true]:-top-3',
-            'peer-focus:-top-3',
-            'peer-data-[filled=true]:text-md',
-            'peer-focus:text-md'
-          ],
-          textarea: [
-            'py-5'
-          ]
-        }
-      },
-      {
-        type: 'outlined',
-        size: 'lg',
-        disabled: false,
-        class: {
-          label: [
-            'peer-data-[filled=true]:text-lg',
-            'peer-focus:text-lg'
-          ],
-          textarea: [
-            'py-6'
-          ]
-        }
-      },
-      // filled & ghost & rounded
-      {
-        type: ['filled','ghost'],
-        rounded: true,
-        size: 'xs',
-        class: {
-          textarea: [
-            'py-3'
-          ],
-          label: [
-            'peer-placeholder-shown:top-3'
-          ]
-        }
-      },
-      {
-        type: ['filled','ghost'],
-        rounded: true,
-        size: 'sm',
-        class: {
-          textarea: [
-            'py-4'
-          ],
-          label: [
-            'peer-placeholder-shown:top-4'
-          ]
-        }
-      },
-      {
-        type: ['filled','ghost'],
-        rounded: true,
-        size: 'md',
-        class: {
-          textarea: [
-            'py-5'
-          ],
-          label: [
-            'peer-placeholder-shown:top-5'
-          ]
-        }
-      },
-      {
-        type: ['filled','ghost'],
-        rounded: true,
-        size: 'lg',
-        class: {
-          textarea: [
-            'py-6'
-          ],
-          label: [
-            'peer-placeholder-shown:top-6'
+            'dark:text-error-500'
           ]
         }
       }
@@ -753,17 +674,18 @@ const useStyle = (props: TextareaProps) => {
     const slots = textarea({
       color: props.variant,
       size: props.size,
-      flat: props.flat,
       type: props.type,
-      disabled: props.disabled,
-      readonly: props.readonly
+      disabled: props.disabled
     })
 
     return {
+      container: slots.container(),
+      field: slots.field(),
       textarea: slots.textarea(),
       label: slots.label(),
-      container: slots.container(),
       helper: slots.helper(),
+      footer: slots.footer(),
+      counter: slots.counter()
     }
   })
 }
