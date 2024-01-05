@@ -23,6 +23,11 @@ const classes = useStyle(props)
 <template>
   <button
     :class="classes"
+    :disabled="disabled"
+    :flat="flat"
+    :rounded="rounded"
+    :condensed="condensed"
+    :block="block"
     @click="onClick"
   >
     <slot />

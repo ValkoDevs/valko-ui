@@ -141,6 +141,20 @@ const apiData = [
     values: 'string',
     default: 'false'
   },
+  {
+    prop: 'iconLeft',
+    required: false,
+    description: 'A icon on the left side for the Input',
+    values: 'string',
+    default: ''
+  },
+  {
+    prop: 'iconRight',
+    required: false,
+    description: 'A icon on the right side for the Input',
+    values: 'string',
+    default: ''
+  }
 ]
 </script>
 

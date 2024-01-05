@@ -7,6 +7,7 @@ const btnDisabled = ref(false)
 const btnFlat = ref(false)
 const btnRounded = ref(false)
 const btnBlock = ref(false)
+const btnCondensed = ref(false)
 
 const variants = [
   {value:'primary', label:'Primary'},
@@ -126,6 +127,7 @@ const apiData = [
         :flat="btnFlat"
         :rounded="btnRounded"
         :block="btnBlock"
+        :condensed="btnCondensed"
       >
         Primary
       </vk-button>
@@ -165,6 +167,12 @@ const apiData = [
             <vk-checkbox
               v-model="btnDisabled"
               label="Disabled"
+            />
+          </div>
+          <div>
+            <vk-checkbox
+              v-model="btnCondensed"
+              label="Condensed"
             />
           </div>
           <div>

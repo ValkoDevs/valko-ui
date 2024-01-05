@@ -15,7 +15,8 @@ const menuItems: MenuItem[] = [
   { key: 'input', group: 'Forms',  text:'Input'},
   { key: 'checkbox', group: 'Forms', text: 'Checkbox'},
   { key: 'select', group: 'Forms', text: 'Select'},
-  { key: 'spinner', group: 'Ui', text: 'Spinner'}, 
+  { key: 'spinner', group: 'Ui', text: 'Spinner'},
+  { key: 'pagination', group: 'Data', text: 'Pagination'}
 ] 
 const activeItem = ref<MenuItem['key'] | null>(null)
 

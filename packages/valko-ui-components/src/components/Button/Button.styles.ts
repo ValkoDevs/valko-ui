@@ -20,119 +20,292 @@ const useStyle = (props: ButtonProps) => {
       'active:shadow-none'
     ],
     variants: {
+      type: {
+        filled: [
+          'text-white' 
+        ],
+        ghost: [
+          'shadow-none',
+          'bg-transparent'
+        ],
+        outlined: [
+          'border-2'
+        ]
+      },
+      color: {
+        primary: {},
+        secondary: {},
+        success: {},
+        info: {},
+        warning: {},
+        error: {}
+      },
       size: {
-        xs: 'px-2 py-2 text-xs',
-        sm: 'px-3 py-2.5 text-sm',
-        md: 'px-4 py-2.5 text-base',
-        lg: 'px-5 py-3 text-lg'
+        xs: [
+          'px-2', 
+          'py-2', 
+          'text-xs'
+        ],
+        sm: [
+          'px-3', 
+          'py-2.5', 
+          'text-sm'
+        ],
+        md: [
+          'px-4',
+          'py-2.5', 
+          'text-base'
+        ],
+        lg: [
+          'px-5', 
+          'py-3', 
+          'text-lg'
+        ]
       },
       block: {
-        true: 'w-full'
+        true: [
+          'w-full'
+        ]
       },
       rounded: {
-        true: 'rounded-full'
+        true: [
+          'rounded-full'
+        ]
       },
       flat: {
-        true: 'shadow-none'
+        true: [
+          'shadow-none'
+        ]
+      },
+      disabled: {
+        true: {}
+      },
+      condensed: {
+        true: {}
       }
-    }
-  })
-
-  const filledButton = tv({
-    extend: baseButton,
-    base: 'text-white',
-    variants: {
-      color: {
-        primary: [
+    },
+    compoundVariants: [
+      //filled & color
+      {
+        type: 'filled',
+        color: 'primary',
+        disabled: false,
+        class: [
           'bg-primary-600',
           'focus:ring-primary-700',
           'hover:bg-primary-500',
           'active:bg-primary-700',
-        ],
-        secondary: [
+        ]
+      },
+      {
+        type: 'filled',
+        color: 'secondary',
+        disabled: false,
+        class: [
           'bg-secondary-600',
           'focus:ring-secondary-700',
           'hover:bg-secondary-500',
-          'active:bg-secondary-700',
-        ],
-        success: [
+          'active:bg-secondary-700'
+        ]
+      },
+      {
+        type: 'filled',
+        color: 'success',
+        disabled: false,
+        class: [
           'bg-success-600',
           'focus:ring-success-700',
           'hover:bg-success-500',
-          'active:bg-success-700',
-        ],
-        info: [
+          'active:bg-success-700'
+        ]
+      }
+      ,{
+        type: 'filled',
+        color: 'info',
+        disabled: false,
+        class: [
           'bg-info-600',
           'focus:ring-info-700',
           'hover:bg-info-500',
-          'active:bg-info-700',
-        ],
-        warning: [
+          'active:bg-info-700'
+        ]
+      },
+      {
+        type: 'filled',
+        color: 'warning',
+        disabled: false,
+        class: [
           'bg-warning-600',
           'focus:ring-warning-700',
           'hover:bg-warning-500',
-          'active:bg-warning-700',
-        ],
-        error: [
+          'active:bg-warning-700'
+        ]
+      },
+      {
+        type: 'filled',
+        color: 'error',
+        disabled: false,
+        class: [
           'bg-error-600',
           'focus:ring-error-700',
           'hover:bg-error-500',
-          'active:bg-error-700',
-        ],
-        disabled: [
-          'bg-gray-600',
-          'opacity-50',
-          'cursor-not-allowed'
+          'active:bg-error-700'
         ]
-      }
-    }
-  })
-
-  const ghostButton = tv({
-    extend: baseButton,
-    base: [
-      'shadow-none',
-      'bg-transparent',
-    ],
-    variants: {
-      color: {
-        primary: [
+      },
+      // ghost & color
+      {
+        type: 'ghost',
+        color: 'primary',
+        disabled: false,
+        class: [
           'text-primary-600',
           'focus:ring-primary-400/20',
           'hover:bg-primary-300/20',
           'active:bg-primary-400/20'
-        ],
-        secondary: [
+        ]
+      },
+      {
+        type: 'ghost',
+        color: 'secondary',
+        disabled: false,
+        class: [
           'text-secondary-600',
           'focus:ring-secondary-400/20',
           'hover:bg-secondary-300/20',
           'active:bg-secondary-400/20'
-        ],
-        success: [
+        ]
+      },
+      {
+        type: 'ghost',
+        color: 'success',
+        disabled: false,
+        class: [
           'text-success-600',
           'focus:ring-success-400/20',
           'hover:bg-success-300/20',
           'active:bg-success-400/20'
-        ],
-        info: [
+        ]
+      },
+      {
+        type: 'ghost',
+        color: 'info',
+        disabled: false,
+        class: [
           'text-info-600',
           'focus:ring-info-400/20',
           'hover:bg-info-300/20',
-          'active:bg-info-400/20',
-        ],
-        warning: [
+          'active:bg-info-400/20'
+        ]
+      },
+      {
+        type: 'ghost',
+        color: 'warning',
+        disabled: false,
+        class: [
           'text-warning-600',
           'focus:ring-warning-400/20',
           'hover:bg-warning-300/20',
           'active:bg-warning-400/20'
-        ],
-        error: [
+        ]
+      },
+      {
+        type: 'ghost',
+        color: 'error',
+        disabled: false,
+        class: [
           'text-error-600',
           'focus:ring-error-400/20',
           'hover:bg-error-300/20',
           'active:bg-error-400/20'
-        ],
-        disabled: [
+        ]
+      },
+      // outlined & color
+      {
+        type: 'outlined',
+        color: 'primary',
+        disabled: false,
+        class: [
+          'text-primary-600',
+          'focus:ring-primary-400/20',
+          'hover:bg-primary-300/20',
+          'active:bg-primary-400/20',
+          'border-primary-600'
+        ]
+      },
+      {
+        type: 'outlined',
+        color: 'secondary',
+        disabled: false,
+        class: [
+          'text-secondary-600',
+          'focus:ring-secondary-400/20',
+          'hover:bg-secondary-300/20',
+          'active:bg-secondary-400/20',
+          'border-secondary-600'
+        ]
+      },
+      {
+        type: 'outlined',
+        color: 'success',
+        disabled: false,
+        class: [
+          'text-success-600',
+          'focus:ring-success-400/20',
+          'hover:bg-success-300/20',
+          'active:bg-success-400/20',
+          'border-success-600'
+        ]
+      },
+      {
+        type: 'outlined',
+        color: 'info',
+        disabled: false,
+        class: [
+          'text-info-600',
+          'focus:ring-info-400/20',
+          'hover:bg-info-300/20',
+          'active:bg-info-400/20',
+          'border-info-600'
+        ]
+      },
+      {
+        type: 'outlined',
+        color: 'warning',
+        disabled: false,
+        class: [
+          'text-warning-600',
+          'focus:ring-warning-400/20',
+          'hover:bg-warning-300/20',
+          'active:bg-warning-400/20',
+          'border-warning-600'
+        ]
+      },
+      {
+        type: 'outlined',
+        color: 'error',
+        disabled: false,
+        class: [
+          'text-error-600',
+          'focus:ring-error-400/20',
+          'hover:bg-error-300/20',
+          'active:bg-error-400/20',
+          'border-error-600'
+        ]
+      },
+      // disabled & type
+      {
+        type: 'filled',
+        disabled: true,
+        class: [
+          'bg-gray-600',
+          'opacity-50',
+          'cursor-not-allowed'
+        ]
+      },
+      {
+        type: 'ghost',
+        disabled: true,
+        class: [
           'text-gray-600',
           'focus:ring-none',
           'hover:bg-transparent',
@@ -140,60 +313,11 @@ const useStyle = (props: ButtonProps) => {
           'opacity-50',
           'cursor-not-allowed'
         ]
-      }
-    }
-  })
-
-  const outlinedButton = tv({
-    extend: baseButton,
-    base: [
-      'border-2'
-    ],
-    variants: {
-      color: {
-        primary: [
-          'text-primary-600',
-          'focus:ring-primary-400/20',
-          'hover:bg-primary-300/20',
-          'active:bg-primary-400/20',
-          'border-primary-600'
-        ],
-        secondary: [
-          'text-secondary-600',
-          'focus:ring-secondary-400/20',
-          'hover:bg-secondary-300/20',
-          'active:bg-secondary-400/20',
-          'border-secondary-600'
-        ],
-        success: [
-          'text-success-600',
-          'focus:ring-success-400/20',
-          'hover:bg-success-300/20',
-          'active:bg-success-400/20',
-          'border-success-600'
-        ],
-        info: [
-          'text-info-600',
-          'focus:ring-info-400/20',
-          'hover:bg-info-300/20',
-          'active:bg-info-400/20',
-          'border-info-600'
-        ],
-        warning: [
-          'text-warning-600',
-          'focus:ring-warning-400/20',
-          'hover:bg-warning-300/20',
-          'active:bg-warning-400/20',
-          'border-warning-600'
-        ],
-        error: [
-          'text-error-600',
-          'focus:ring-error-400/20',
-          'hover:bg-error-300/20',
-          'active:bg-error-400/20',
-          'border-error-600'
-        ],
-        disabled: [
+      },
+      {
+        type: 'outlined',
+        disabled: true,
+        class: [
           'text-gray-600',
           'focus:ring-none',
           'hover:bg-transparent',
@@ -202,24 +326,28 @@ const useStyle = (props: ButtonProps) => {
           'cursor-not-allowed',
           'border-gray-600'
         ]
+      },
+      // condensed
+      {
+        condensed: true,
+        class: [
+          'px-0',
+          'py-0'
+        ]
       }
-    }
+    ]
   })
 
-  const buttonType = {
-    filled: filledButton,
-    outlined: outlinedButton,
-    ghost: ghostButton
-  }
-
   return computed(() => {
-    const selectedButton = buttonType[props.type]
-    return selectedButton({
-      color: props.disabled ? 'disabled' : props.variant,
+    return baseButton({
       size: props.size,
+      color: props.variant,
+      type: props.type,
+      disabled: props.disabled,
+      flat: props.flat,
       block: props.block,
       rounded: props.rounded,
-      flat: props.flat
+      condensed: props.condensed
     })
   })
 }

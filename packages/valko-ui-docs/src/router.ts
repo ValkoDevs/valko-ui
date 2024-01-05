@@ -38,6 +38,10 @@ const routes = [
       {
         path: 'spinner',
         component: lazyLoad('ui', 'SpinnerPage')
+      },
+      {
+        path: 'pagination',
+        component: lazyLoad('data', 'PaginationPage')
       }
     ]
   },
