@@ -8,4 +8,5 @@ export interface ButtonProps extends Variants, Sizes  {
   disabled?: boolean;
   loading?: boolean;
   flat?: boolean;
+  condensed?: boolean;
 }

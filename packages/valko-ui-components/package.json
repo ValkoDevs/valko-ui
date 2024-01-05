@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.16",
+    "@tabler/icons-webfont": "^2.45.0",
     "tailwind-variants": "^0.1.13"
   }
 }

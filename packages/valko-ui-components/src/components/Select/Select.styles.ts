@@ -46,7 +46,7 @@ const useStyle = (props: SelectProps) => {
         'dark:text-white',
         'dark:bg-dark-3',
         'dark:hover:bg-dark-1',
-      ],
+      ]
     },
     variants: {
       color: {
@@ -135,7 +135,7 @@ const useStyle = (props: SelectProps) => {
       dropdown: slots.dropdown(),
       item: slots.item(),
       container: slots.container(),
-      field: slots.field(),
+      field: slots.field()
     }
   })
 }

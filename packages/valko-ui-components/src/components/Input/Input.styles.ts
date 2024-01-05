@@ -43,7 +43,6 @@ const useStyle = (props: InputProps) => {
         'peer-data-[filled=true]:top-0',
         'peer-data-[filled=true]:scale-[.8]',
         'peer-data-[filled=true]:translate-y-0'
-
       ],
       field: [
         'relative',
@@ -64,6 +63,22 @@ const useStyle = (props: InputProps) => {
         'break-before-all',
         'inline-block',
         'scale-[.8]'
+      ],
+      icon: [
+        'opacity-80',
+        'absolute',
+        'transition-all',
+        'top-1/2',
+        '-translate-y-1/2'
+      ],
+      iconRight: [
+        'right-1'
+      ],
+      iconLeft: [
+        'left-1'
+      ],
+      iconOpen: [
+        'rotate-180'
       ]
     },
     variants: {
@@ -99,7 +114,14 @@ const useStyle = (props: InputProps) => {
           ],
           label: [
             'left-1.5',
-            'bg-transparent'
+            'bg-transparent',
+            'peer-data-[hasIcon=true]:ml-0.5'
+          ],
+          iconLeft: [
+            'left-1.5'
+          ],
+          iconRight: [
+            'right-1.5'
           ]
         }
       },
@@ -116,52 +138,72 @@ const useStyle = (props: InputProps) => {
           input: [
             'text-xs',
             'h-10',
-            'pt-2'
+            'pt-2',
+            'data-[hasIcon=true]:pl-6'
           ],
           label: [
-            'text-xs'
+            'text-xs',
+            'peer-data-[hasIcon=true]:left-5',
           ],
           helper: [
             'text-xs'
+          ],
+          icon: [
+            'text-[16px]'
           ]
         },
         sm: {
           input: [
             'text-sm',
             'h-12',
-            'pt-2.5'
+            'pt-2.5',
+            'data-[hasIcon=true]:pl-7'
           ],
           label: [
-            'text-sm'
+            'text-sm',
+            'peer-data-[hasIcon=true]:left-6',
           ],
           helper: [
             'text-sm'
+          ],
+          icon: [
+            'text-[20px]'
           ]
         },
         md: {
           input: [
             'text-base',
             'h-14',
-            'pt-3'
+            'pt-3',
+            'data-[hasIcon=true]:pl-8'
           ],
           label: [
-            'text-base'
+            'text-base',
+            'peer-data-[hasIcon=true]:left-7'
           ],
           helper: [
             'text-base'
+          ],
+          icon: [
+            'text-[24px]'
           ]
         },
         lg: {
           input: [
             'text-lg',
             'h-16',
-            'pt-4'
+            'pt-4',
+            'data-[hasIcon=true]:pl-9'
           ],
           label: [
-            'text-lg'
+            'text-lg',
+            'peer-data-[hasIcon=true]:left-8'
           ],
           helper: [
             'text-lg'
+          ],
+          icon: [
+            'text-[28px]'
           ]
         }
       },
@@ -228,6 +270,11 @@ const useStyle = (props: InputProps) => {
           helper: [
             'text-dark-1',
             'dark:text-light-3'
+          ],
+          icon: [
+            'text-dark-2',
+            'peer-focus:text-primary-500',
+            'dark:text-light-2'
           ]
         }
       },
@@ -248,6 +295,11 @@ const useStyle = (props: InputProps) => {
           ],         
           helper: [
             'text-secondary-500',
+            'dark:text-secondary-500'
+          ],
+          icon: [
+            'text-secondary-500',
+            'peer-focus:text-secondary-600',
             'dark:text-secondary-500'
           ]
         }
@@ -272,6 +324,11 @@ const useStyle = (props: InputProps) => {
           helper: [
             'text-success-500',
             'dark:text-success-500'
+          ],
+          icon: [
+            'text-success-500',
+            'focus:text-success-950',
+            'dark:text-success-500'
           ]
         }
       },
@@ -295,6 +352,11 @@ const useStyle = (props: InputProps) => {
           helper: [
             'text-info-500',
             'dark:text-info-500'
+          ],
+          icon: [
+            'text-info-500',
+            'focus:text-info-950',
+            'dark:text-info-500',
           ]
         }
       },
@@ -317,6 +379,11 @@ const useStyle = (props: InputProps) => {
           ],
           helper: [
             'text-warning-500',
+            'dark:text-warning-500'
+          ],
+          icon: [
+            'text-warning-500',
+            'focus:text-warning-950',
             'dark:text-warning-500'
           ]
         }
@@ -341,6 +408,11 @@ const useStyle = (props: InputProps) => {
           helper: [
             'text-error-500',
             'dark:text-error-500'
+          ],
+          icon: [
+            'text-error-500',
+            'focus:text-error-950',
+            'dark:text-error-500',
           ]
         }
       },
@@ -365,6 +437,12 @@ const useStyle = (props: InputProps) => {
           helper: [
             'text-dark-1',
             'dark:text-light-3'
+          ],
+          icon: [
+            'text-dark-2',
+            'focus:text-dark-4',
+            'dark:text-light-2',
+            'peer-focus:text-primary-500'
           ]
         }
       },
@@ -388,6 +466,11 @@ const useStyle = (props: InputProps) => {
           helper: [
             'text-secondary-500',
             'dark:text-secondary-500'
+          ],
+          icon: [
+            'text-secondary-500',
+            'focus:text-secondary-950',
+            'dark:text-secondary-500',
           ]
         }
       },
@@ -409,6 +492,11 @@ const useStyle = (props: InputProps) => {
           ],
           helper: [
             'text-success-500',
+            'dark:text-success-500'
+          ],
+          icon: [
+            'text-success-500',
+            'focus:text-success-950',
             'dark:text-success-500'
           ]
         }
@@ -432,6 +520,11 @@ const useStyle = (props: InputProps) => {
           helper: [
             'text-info-500',
             'dark:text-info-500'
+          ],
+          icon: [
+            'text-info-500',
+            'focus:text-info-950',
+            'dark:text-info-500'
           ]
         }
       },
@@ -453,6 +546,11 @@ const useStyle = (props: InputProps) => {
           ],
           helper: [
             'text-warning-500',
+            'dark:text-warning-500'
+          ],
+          icon: [
+            'text-warning-500',
+            'focus:text-warning-950',
             'dark:text-warning-500'
           ]
         }
@@ -476,6 +574,11 @@ const useStyle = (props: InputProps) => {
           helper: [
             'text-error-500',
             'dark:text-error-500'
+          ],
+          icon: [
+            'text-error-500',
+            'focus:text-error-950',
+            'dark:text-error-500'
           ]
         }
       },
@@ -497,6 +600,12 @@ const useStyle = (props: InputProps) => {
           helper: [
             'text-dark-1',
             'dark:text-light-3'
+          ],
+          icon: [
+            'text-dark-2',
+            'focus:text-dark-4',
+            'dark:text-light-2',
+            'peer-focus:text-primary-500'
           ]
         }
       },
@@ -515,6 +624,11 @@ const useStyle = (props: InputProps) => {
           ],
           helper: [
             'text-secondary-500',
+            'dark:text-secondary-500'
+          ],
+          icon: [
+            'text-secondary-500',
+            'focus:text-secondary-950',
             'dark:text-secondary-500'
           ]
         }
@@ -536,6 +650,11 @@ const useStyle = (props: InputProps) => {
           helper: [
             'text-success-500',
             'dark:text-success-500'
+          ],
+          icon: [
+            'text-success-500',
+            'focus:text-success-950',
+            'dark:text-success-500'
           ]
         }
       },
@@ -555,6 +674,11 @@ const useStyle = (props: InputProps) => {
           ],
           helper: [
             'text-info-500',
+            'dark:text-info-500'
+          ],
+          icon: [
+            'text-info-500',
+            'focus:text-info-950',
             'dark:text-info-500'
           ]
         }
@@ -576,6 +700,11 @@ const useStyle = (props: InputProps) => {
           helper: [
             'text-warning-500',
             'dark:text-warning-500'
+          ],
+          icon: [
+            'text-warning-500',
+            'focus:text-warning-950',
+            'dark:text-warning-500'
           ]
         }
       },
@@ -596,6 +725,11 @@ const useStyle = (props: InputProps) => {
           helper: [
             'text-error-500',
             'dark:text-error-500'
+          ],
+          icon: [
+            'text-error-500',
+            'focus:text-error-950',
+            'dark:text-error-500'
           ]
         }
       },
@@ -606,10 +740,12 @@ const useStyle = (props: InputProps) => {
         size: 'xs',
         class: {
           input: [
-            'pl-3'
+            'pl-[calc(1rem_-_1px)]',
+            'data-[hasIcon=true]:pl-6'
           ],
           label: [
-            'ml-2'
+            'ml-2',
+            'peer-data-[hasIcon=true]:ml-[1px]'
           ],
           helper: [
             'ml-4'
@@ -622,10 +758,12 @@ const useStyle = (props: InputProps) => {
         size: 'sm',
         class: {
           input: [
-            'pl-5'
+            'pl-[calc(1.25rem_-_1px)]',
+            'data-[hasIcon=true]:[calc(1.75rem_+_1px)]'
           ],
           label: [
-            'ml-3'
+            'ml-3',
+            'peer-data-[hasIcon=true]:ml-[1px]'
           ],
           helper: [
             'ml-6'
@@ -638,10 +776,12 @@ const useStyle = (props: InputProps) => {
         size: 'md',
         class: {
           input: [
-            'pl-6'
+            'pl-[calc(1.5rem_-_1px)]',
+            'data-[hasIcon=true]:pl-8'
           ],
           label: [
-            'ml-4'
+            'ml-4',
+            'peer-data-[hasIcon=true]:ml-[1px]'
           ],
           helper: [
             'ml-6'
@@ -654,10 +794,12 @@ const useStyle = (props: InputProps) => {
         size: 'lg',
         class: {
           input: [
-            'pl-7'
+            'pl-[calc(1.75rem_-_1px)]',
+            'data-[hasIcon=true]:[calc(2.25rem_+_1px)]'
           ],
           label: [
-            'ml-5'
+            'ml-5',
+            'peer-data-[hasIcon=true]:ml-[1px]'
           ],
           helper: [
             'ml-8'
@@ -671,10 +813,12 @@ const useStyle = (props: InputProps) => {
         size: 'xs',
         class: {
           input: [
-            'pl-[calc(1rem_-_3px)]'
+            'pl-[calc(1rem_-_3px)]',
+            'data-[hasIcon=true]:pl-[calc(1.5rem_-_2px)]'
           ],
           label: [
-            'ml-[calc(0.5rem_-_2px)]'
+            'ml-[calc(0.5rem_-_2px)]',
+            'peer-data-[hasIcon=true]:ml-[1px]'
           ],
           helper: [
             'ml-4'
@@ -687,10 +831,12 @@ const useStyle = (props: InputProps) => {
         size: 'sm',
         class: {
           input: [
-            'pl-[calc(1.17rem_-_1px)]'
+            'pl-[calc(1.17rem_-_1px)]',
+            'data-[hasIcon=true]:pl-[1.67rem]'
           ],
           label: [
-            'ml-[calc(0.75rem_-_1px)]'
+            'ml-[calc(0.75rem_-_1px)]',
+            'peer-data-[hasIcon=true]:ml-[1px]'
           ],
           helper: [
             'ml-5'
@@ -703,10 +849,12 @@ const useStyle = (props: InputProps) => {
         size: 'md',
         class: {
           input: [
-            'pl-[calc(1.5rem_-_3px)]'
+            'pl-[calc(1.5rem_-_3px)]',
+            'data-[hasIcon=true]:pl-[calc(2rem_-_2px)]'
           ],
           label: [
-            'ml-[calc(1rem_-_2px)]'
+            'ml-[calc(1rem_-_2px)]',
+            'peer-data-[hasIcon=true]:ml-[1px]'
           ],
           helper: [
             'ml-6'
@@ -719,10 +867,12 @@ const useStyle = (props: InputProps) => {
         size: 'lg',
         class: {
           input: [
-            'pl-[calc(1.75rem_-_3px)]'
+            'pl-[calc(1.75rem_-_3px)]',
+            'data-[hasIcon=true]:pl-[calc(2.25rem_-_2px)]'
           ],
           label: [
-            'ml-[calc(1.25rem_-_2px)]'
+            'ml-[calc(1.25rem_-_2px)]',
+            'peer-data-[hasIcon=true]:ml-[1px]'
           ],
           helper: [
             'ml-7'
@@ -755,7 +905,11 @@ const useStyle = (props: InputProps) => {
       field: slots.field(),
       input: slots.input(),
       label: slots.label(),
-      helper: slots.helper()
+      helper: slots.helper(),
+      icon: slots.icon(),
+      iconRight: slots.iconRight(),
+      iconLeft: slots.iconLeft(),
+      iconOpen: slots.iconOpen(),
     }
   })
 }

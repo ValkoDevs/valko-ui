@@ -11,13 +11,15 @@ const props = withDefaults(defineProps<SelectProps>(), {
   type: 'filled',
   size: 'md',
   placeholder: 'Select an option',
-  options: () => [],
+  iconRight: 'chevron-down',
+  options: () => []
 })
 
 const emit = defineEmits(['update:modelValue'])
 
 const classes = useStyle(props)
 const select = ref(null)
+
 const showMap: Record<string, string> = props.options.reduce((acc, opt) => ({
   ...acc,
   [`${opt.value}`]: opt.label
@@ -118,6 +120,9 @@ const toggleDropdown = (onFocus: boolean) => {
         :variant="variant"
         :size="size"
         :model-value="showValue"
+        :icon-left="iconLeft"
+        :icon-right="iconRight"
+        :is-open="isOpen"
         @focus="() => toggleDropdown(true)"
       />
       <ul
