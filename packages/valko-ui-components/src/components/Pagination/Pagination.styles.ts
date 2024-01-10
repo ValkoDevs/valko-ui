@@ -8,17 +8,17 @@ const useStyle = (props: PaginationProps) => {
       nav: [
         'inline-flex',
         '-space-x-px',
-        'rounded-md', 
+        'rounded-md',
         'shadow-sm'
       ],
       button: [
         'flex',
-        'justify-center', 
+        'justify-center',
         'items-center'
       ],
       arrows: [
         'flex',
-        'justify-center', 
+        'justify-center',
         'items-center'
       ]
     },
@@ -34,47 +34,47 @@ const useStyle = (props: PaginationProps) => {
       size: {
         xs: {
           button: [
-            'w-6', 
+            'w-6',
             'h-6'
           ],
           arrows: [
-            'w-6', 
+            'w-6',
             'h-6'
           ]
         },
         sm: {
           button: [
-            'w-7', 
+            'w-7',
             'h-7'
           ],
           arrows: [
-            'w-7', 
+            'w-7',
             'h-7',
             'p-0.5'
           ]
         },
         md: {
           button: [
-            'w-9', 
-            'h-9', 
+            'w-9',
+            'h-9'
           ],
           arrows: [
-            'w-9', 
+            'w-9',
             'h-9',
             'p-1'
           ]
         },
         lg: {
           button: [
-            'w-11', 
+            'w-11',
             'h-11'
           ],
           arrows: [
-            'w-11', 
+            'w-11',
             'h-11',
             'p-1.5'
           ]
-        },
+        }
       },
       flat: {
         true: {
@@ -89,7 +89,7 @@ const useStyle = (props: PaginationProps) => {
   return computed(() => {
     const slots = pagination({
       size: props.size,
-      color: props.variant,
+      color: props.color,
       flat: props.flat
     })
 

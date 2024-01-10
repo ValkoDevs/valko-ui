@@ -8,8 +8,8 @@ import useStyle from './Tabs.styles'
 defineOptions({ name: 'VkTabs' })
 
 const props = withDefaults(defineProps<TabsProps>(), {
-  type: 'filled',
-  variant: 'primary',
+  variant: 'filled',
+  color: 'primary',
   shape: 'soft',
   size: 'md',
   defaultIndex: 0,
@@ -22,8 +22,8 @@ const onChange = async () => {
   await nextTick()
   await nextTick()
   if (cursor.value) {
-    const extraHeight = props.shape === 'underline' && props.type === 'outlined' && !props.vertical ? 2 : 0
-    const extraLeft = props.shape === 'underline' && props.type === 'outlined' && props.vertical ? 2 : 0
+    const extraHeight = props.shape === 'underline' && props.variant === 'outlined' && !props.vertical ? 2 : 0
+    const extraLeft = props.shape === 'underline' && props.variant === 'outlined' && props.vertical ? 2 : 0
     const selectedElement = cursor.value.closest('.tab-list')?.querySelector('button[data-headlessui-state=selected]') as HTMLElement
     cursor.value.style.width = `${selectedElement.clientWidth}px`
     cursor.value.style.height = `${+selectedElement.clientHeight + extraHeight}px`
@@ -34,7 +34,6 @@ const onChange = async () => {
 
 onMounted(onChange)
 onUpdated(onChange)
-
 </script>
 
 <template>
@@ -46,11 +45,11 @@ onUpdated(onChange)
       :class="classes.group"
       @change="onChange"
     >
-      <tab-list 
+      <tab-list
         :class="classes.list"
         as="nav"
       >
-        <div 
+        <div
           :class="classes.cursor"
           ref="cursor"
         />

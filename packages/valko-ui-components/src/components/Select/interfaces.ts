@@ -1,4 +1,5 @@
 import Sizes from '@/types/sizes'
+import Colors from '@/types/colors'
 import Variants from '@/types/variants'
 
 export interface Option {
@@ -6,8 +7,7 @@ export interface Option {
   label: string;
 }
 
-export interface SelectProps extends Variants, Sizes  {
-  type: 'filled' | 'outlined' | 'ghost';
+export interface SelectProps extends Variants, Sizes, Colors  {
   options?: Option[];
   modelValue?: string | number | Array<string | number>;
   placeholder?: string;

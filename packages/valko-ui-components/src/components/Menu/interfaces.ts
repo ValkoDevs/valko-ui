@@ -1,4 +1,4 @@
-import Variants from '@/types/variants'
+import Colors from '@/types/colors'
 
 export interface MenuItem {
   key: string | number;
@@ -10,7 +10,7 @@ export interface MenuItem {
   onClick?: () => void;
 }
 
-export interface MenuProps extends Variants  {
+export interface MenuProps extends Colors  {
   items: MenuItem[];
   active: null | string | number;
   rounded?: boolean;

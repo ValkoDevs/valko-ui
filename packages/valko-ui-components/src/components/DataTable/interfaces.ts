@@ -1,4 +1,5 @@
 import Sizes from '@/types/sizes'
+import Colors from '@/types/colors'
 import Variants from '@/types/variants'
 
 interface DataTableHeader{
@@ -12,8 +13,7 @@ interface DataTableItem{
   [key: string]: unknown;
 }
 
-export interface DataTableProps extends Variants, Sizes  {
-  type?: 'filled' | 'outlined' | 'ghost';
+export interface DataTableProps extends Colors, Sizes, Variants  {
   headers: DataTableHeader[];
   data: DataTableItem[];
   sortBy?: string | null;

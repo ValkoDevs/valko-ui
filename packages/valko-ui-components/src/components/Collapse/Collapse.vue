@@ -5,7 +5,7 @@ import useStyle from './Collapse.styles'
 defineOptions({ name: 'VkCollapse' })
 
 const props = withDefaults(defineProps<CollapseProps>(), {
-  type: 'filled',
+  variant: 'filled',
   size: 'md',
   separator: 'line'
 })
@@ -19,7 +19,7 @@ const classes = useStyle(props)
     :data-size="props.size"
     :data-compact="props.compact"
     :data-separator="props.separator"
-    :data-type="props.type"
+    :data-variant="props.variant"
     :data-multiple="props.multiple"
   >
     <slot />

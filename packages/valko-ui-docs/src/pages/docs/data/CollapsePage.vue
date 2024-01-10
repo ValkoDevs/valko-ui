@@ -1,63 +1,25 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
-
-const types = [
-  {value:'filled', label:'Filled'},
-  {value:'outlined', label:'Outlined'},
-  {value:'ghost', label:'Ghost'}
-]
-
-const sizes = [
-  {value:'xs', label:'Extra Small'},
-  {value:'sm', label:'Small'},
-  {value:'md', label:'Medium'},
-  {value:'lg', label:'Large'}
-]
-
-const separators = [
-  {value:'line', label:'Line'},
-  {value:'split', label:'Split'},
-  {value:'none', label:'None'},
-]
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
+import separatorOptions from '@/data/separatorOptions'
+import sizeOptions from '@/data/sizeOptions'
+import variantOptions from '@/data/variantOptions'
+import propHeaders from '@/data/propHeaders'
 
 const form = ref({
-  types: 'filled',
-  sizes: 'md',
+  variant: 'filled',
+  size: 'md',
   compact: false,
   multiple: false,
-  separators: 'line'
+  separator: 'line'
 })
-
-const apiHeaders = [
-  {
-    key: 'prop',
-    label: 'Property'
-  },
-  {
-    key: 'required',
-    label: 'Required'
-  },
-  {
-    key: 'description',
-    label: 'Description'
-  },
-  {
-    key: 'values',
-    label: 'Values'
-  },
-  {
-    key: 'default',
-    label: 'Default'
-  }
-]
 
 const apiData = [
   {
-    prop: 'type',
+    prop: 'variant',
     required: false,
-    description: 'The type of the Collapse.',
+    description: 'The variant of the Collapse.',
     values: 'filled, outlined, ghost',
     default: 'filled'
   },
@@ -100,9 +62,9 @@ const apiData = [
     <template #playground-view>
       <div class="w-full flex justify-center p-4">
         <vk-collapse
-          :type="form.types"
-          :size="form.sizes"
-          :separator="form.separators"
+          :variant="form.variant"
+          :size="form.size"
+          :separator="form.separator"
           :compact="form.compact"
           :multiple="form.multiple"
         >
@@ -131,39 +93,36 @@ const apiData = [
           <form action="">
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
-                placeholder="Type"
+                placeholder="Variant"
                 size="sm"
-                :options="types"
-                v-model="form.types"
+                :options="variantOptions"
+                v-model="form.variant"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
                 placeholder="Separator"
                 size="sm"
-                :options="separators"
-                v-model="form.separators"
+                :options="separatorOptions"
+                v-model="form.separator"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
                 size="sm"
-                placeholder="Sizes"
-                :options="sizes"
-                v-model="form.sizes"
+                placeholder="Size"
+                :options="sizeOptions"
+                v-model="form.size"
               />
             </div>
             <div class="flex mb-1">
-              <vk-checkbox 
+              <vk-checkbox
                 label="Compact"
                 v-model="form.compact"
               />
             </div>
             <div class="flex mb-1">
-              <vk-checkbox 
+              <vk-checkbox
                 label="Multiple"
                 v-model="form.multiple"
               />
@@ -175,29 +134,29 @@ const apiData = [
 
     <template #examples>
       <example-section
-        title="Types"
+        title="Variants"
         justify="evenly"
         gap
       >
         <div class="grow gap-4 grid grid-cols-2">
           <vk-collapse
-            v-for="type in types"
-            :type="type.value"
+            v-for="variant in variantOptions"
+            :variant="variant.value"
             size="sm"
-            :key="type.value"
+            :key="variant.value"
           >
             <vk-collapse-item
-              :title="`${type.label}-Example Item 1`"
+              :title="`${variant.label}-Example Item 1`"
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </vk-collapse-item>
             <vk-collapse-item
-              :title="`${type.label}-Example Item 2`"
+              :title="`${variant.label}-Example Item 2`"
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </vk-collapse-item>
             <vk-collapse-item
-              :title="`${type.label}-Example Item 3`"
+              :title="`${variant.label}-Example Item 3`"
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </vk-collapse-item>
@@ -254,7 +213,7 @@ const apiData = [
       >
         <div class="grow gap-4 grid grid-cols-2">
           <vk-collapse
-            v-for="separator in separators"
+            v-for="separator in separatorOptions"
             size="sm"
             :separator="separator.value"
             :key="separator.value"
@@ -285,7 +244,7 @@ const apiData = [
       >
         <div class="grow gap-4 grid grid-cols-2">
           <vk-collapse
-            v-for="size in sizes"
+            v-for="size in sizeOptions"
             :size="size.value"
             :key="size.value"
           >
@@ -311,9 +270,10 @@ const apiData = [
 
     <template #api>
       <vk-data-table
-        :headers="apiHeaders"
+        :headers="propHeaders"
         :data="apiData"
       />
     </template>
   </doc-section>
 </template>
+@/data/variantsOptions

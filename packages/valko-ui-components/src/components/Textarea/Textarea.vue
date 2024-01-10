@@ -4,10 +4,10 @@ import useStyle from './Textarea.styles'
 defineOptions({ name: 'VkTextarea' })
 
 const props = withDefaults(defineProps<TextareaProps>(), {
-  variant: 'primary',
-  type: 'filled',
+  color: 'primary',
+  variant: 'filled',
   size: 'md',
-  modelValue: '',
+  modelValue: ''
 })
 
 const emit = defineEmits(['update:modelValue'])

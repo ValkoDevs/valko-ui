@@ -6,11 +6,11 @@ export default defineNuxtModule({
     name: '@valko-ui/components',
     configKey: 'valko-ui',
     compatibility: {
-      nuxt: '^3.5.0',
-    },
+      nuxt: '^3.5.0'
+    }
   },
   defaults: {
-    prefix: 'Vk',
+    prefix: 'Vk'
   },
   async setup(options, nuxt) {
     // Create resolver to resolve relative paths
@@ -26,8 +26,8 @@ export default defineNuxtModule({
       dirs.push({
         path: fileURLToPath(new URL('../components', import.meta.url)),
         extensions: ['vue', 'tsx'],
-        prefix: options?.prefix ? options?.prefix : 'Vk',
+        prefix: options?.prefix ? options?.prefix : 'Vk'
       })
     })
-  },
+  }
 })

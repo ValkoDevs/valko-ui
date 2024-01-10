@@ -1,10 +1,7 @@
 interface Variants {
   variant?:
-    | 'primary'
-    | 'secondary'
-    | 'success'
-    | 'error'
-    | 'warning'
-    | 'info';
+    | 'filled'
+    | 'outlined'
+    | 'ghost';
 }
 export default Variants

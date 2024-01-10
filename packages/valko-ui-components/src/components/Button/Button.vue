@@ -3,8 +3,8 @@ import { ButtonProps } from '@/components/Button/interfaces'
 import useStyle from './Button.styles'
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  variant: 'primary',
-  type: 'filled',
+  color: 'primary',
+  variant: 'filled',
   size: 'md'
 })
 

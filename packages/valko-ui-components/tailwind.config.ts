@@ -6,10 +6,10 @@ export default {
   darkMode: 'class',
   content: [
     './src/**/*.{js, vue, ts, html}',
-    './**/*.{js, vue, ts, html}',
+    './**/*.{js, vue, ts, html}'
   ],
   theme: {
     extend: {}
   },
-  plugins: [],
+  plugins: []
 }

@@ -3,7 +3,7 @@ import { MenuProps, MenuItem } from '@/components/Menu/interfaces'
 import useStyle from './Menu.styles'
 
 const props = withDefaults(defineProps<MenuProps>(), {
-  variant: 'primary',
+  color: 'primary',
   active: null,
   rounded: false
 })

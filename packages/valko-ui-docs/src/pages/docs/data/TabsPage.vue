@@ -1,99 +1,53 @@
 <script setup lang="ts">
-import {ref} from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
-
-const variants = [
-  {value:'primary', label:'Primary'},
-  {value:'secondary', label:'Secondary'},
-  {value:'success', label:'Success'},
-  {value:'info', label:'Info'},
-  {value:'warning', label:'Warning'},
-  {value:'error', label:'Error'}
-]
-
-const types = [
-  {value:'filled', label:'Filled'},
-  {value:'outlined', label:'Outlined'},
-  {value:'ghost', label:'Ghost'}
-]
-
-const sizes = [
-  {value:'xs', label:'Extra Small'},
-  {value:'sm', label:'Small'},
-  {value:'md', label:'Medium'},
-  {value:'lg', label:'Large'}
-]
-
-const shapes = [
-  {value:'underline', label:'Underline'},
-  {value:'rounded', label:'Rounded'},
-  {value:'square', label:'Square'},
-  {value:'soft', label:'Soft'}
-]
+import { ref } from 'vue'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
+import colorOptions from '@/data/colorOptions'
+import variantOptions from '@/data/variantOptions'
+import sizeOptions from '@/data/sizeOptions'
+import propHeaders from '@/data/propHeaders'
+import shapeOptions from '@/data/shapeOptions'
+import slotHeaders from '@/data/slotHeaders'
 
 const tabs = [
-  {title: 'Photos'},
-  {title: 'Videos'},
-  {title: 'Favorite'},
-  {title: 'Trending'},
-  {title: 'Friends'}
+  { title: 'Photos' },
+  { title: 'Videos' },
+  { title: 'Favorite' },
+  { title: 'Trending' },
+  { title: 'Friends' }
 ]
 
 const tabWithIcon = [
-  {title: 'Photos', leftIcon: 'photo'},
-  {title: 'Videos', rightIcon: 'movie'},
-  {title: 'Favorite', leftIcon: 'heart'},
-  {title: 'Trending', leftIcon: 'flame', rightIcon: 'flame'},
-  {title: 'Friends', rightIcon: 'friends'}
+  { title: 'Photos', leftIcon: 'photo' },
+  { title: 'Videos', rightIcon: 'movie' },
+  { title: 'Favorite', leftIcon: 'heart' },
+  { title: 'Trending', leftIcon: 'flame', rightIcon: 'flame' },
+  { title: 'Friends', rightIcon: 'friends' }
 ]
 
 const tabDisabled = [
-  {title: 'Photos', disabled: true},
-  {title: 'Videos'},
-  {title: 'Favorite', disabled: true},
-  {title: 'Trending'},
-  {title: 'Friends'}
+  { title: 'Photos', disabled: true },
+  { title: 'Videos' },
+  { title: 'Favorite', disabled: true },
+  { title: 'Trending' },
+  { title: 'Friends' }
 ]
 
 const form = ref({
-  variants: 'primary',
-  types: 'filled',
-  sizes: 'md',
-  shapes: 'soft',
+  color: 'primary',
+  variant: 'filled',
+  size: 'md',
+  shape: 'soft',
   grow: false,
   vertical: false,
   icons: false
 })
 
-const propsHeader = [
-  {
-    key: 'prop',
-    label: 'Property'
-  },
-  {
-    key: 'required',
-    label: 'Required'
-  },
-  {
-    key: 'description',
-    label: 'Description'
-  },
-  {
-    key: 'values',
-    label: 'Values'
-  },
-  {
-    key: 'default',
-    label: 'Default'
-  }
-]
-
 const tabsPropsData = [
   {
-    prop: 'variant',
+    prop: 'color',
     required: false,
-    description: 'The color variant of the Tabs.',
+    description: 'The color theme of the Tabs.',
     values: 'primary, secondary, error, warning, info, success',
     default: 'primary'
   },
@@ -105,7 +59,7 @@ const tabsPropsData = [
     default: 'md'
   },
   {
-    prop: 'types',
+    prop: 'variant',
     required: false,
     description: 'The type of the Tabs',
     values: 'filled, outlined, ghost',
@@ -186,21 +140,6 @@ const tabInterfaceData = [
   }
 ]
 
-const tabsSlotsHeader = [
-  {
-    key: 'name',
-    label: 'Name'
-  },
-  {
-    key: 'description',
-    label: 'Description'
-  },
-  {
-    key: 'example',
-    label: 'Example'
-  }
-]
-
 const tabsSlotsData = [
   {
     name: '[key: Tab["key"]]',
@@ -218,10 +157,10 @@ const tabsSlotsData = [
     <template #playground-view>
       <div class="w-full flex justify-center items-center px-2">
         <vk-tabs
-          :variant="form.variants"
-          :shape="form.shapes"
-          :type="form.types"
-          :size="form.sizes"
+          :color="form.color"
+          :shape="form.shape"
+          :variant="form.variant"
+          :size="form.size"
           :tabs="form.icons ? tabWithIcon : tabs"
           :grow="form.grow"
           :vertical="form.vertical"
@@ -244,19 +183,19 @@ const tabsSlotsData = [
             <div class="flex mb-1">
               <vk-select
                 type="outlined"
-                placeholder="Variant"
+                placeholder="Color"
                 size="sm"
-                :options="variants"
-                v-model="form.variants"
+                :options="colorOptions"
+                v-model="form.color"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
                 type="outlined"
-                placeholder="Type"
+                placeholder="Variant"
                 size="sm"
-                :options="types"
-                v-model="form.types"
+                :options="variantOptions"
+                v-model="form.variant"
               />
             </div>
             <div class="flex mb-1">
@@ -264,8 +203,8 @@ const tabsSlotsData = [
                 type="outlined"
                 placeholder="Size"
                 size="sm"
-                :options="sizes"
-                v-model="form.sizes"
+                :options="sizeOptions"
+                v-model="form.size"
               />
             </div>
             <div class="flex mb-1">
@@ -273,8 +212,8 @@ const tabsSlotsData = [
                 type="outlined"
                 placeholder="Shape"
                 size="sm"
-                :options="shapes"
-                v-model="form.shapes"
+                :options="shapeOptions"
+                v-model="form.shape"
               />
             </div>
             <div class="flex mb-1">
@@ -307,12 +246,12 @@ const tabsSlotsData = [
       >
         <div class="grow gap-4 grid grid-cols-2">
           <div
-            v-for="variant in variants"
-            :key="variant.value"
+            v-for="color in colorOptions"
+            :key="color.value"
           >
-            <span> {{ variant.label }} </span>
+            <span> {{ color.label }} </span>
             <vk-tabs
-              :variant="variant.value"
+              :color="color.value"
               :tabs="tabs"
             />
           </div>
@@ -320,17 +259,17 @@ const tabsSlotsData = [
       </example-section>
 
       <example-section
-        title="Types"
+        title="Variants"
         gap
       >
         <div class="grow gap-4 grid grid-cols-2">
           <div
-            v-for="type in types"
-            :key="type.value"
+            v-for="variant in variantOptions"
+            :key="variant.value"
           >
-            <span> {{ type.label }} </span>
+            <span> {{ variant.label }} </span>
             <vk-tabs
-              :type="type.value"
+              :variant="variant.value"
               :tabs="tabs"
             />
           </div>
@@ -362,7 +301,7 @@ const tabsSlotsData = [
       >
         <div class="grow gap-4 grid grid-cols-2">
           <div
-            v-for="shape in shapes"
+            v-for="shape in shapeOptions"
             :key="shape.value"
             class="flex flex-col items-around"
           >
@@ -381,7 +320,7 @@ const tabsSlotsData = [
       >
         <div class="grow gap-4 grid grid-cols-2">
           <div
-            v-for="size in sizes"
+            v-for="size in sizeOptions"
             :key="size.value"
           >
             <span> {{ size.label }} </span>
@@ -401,7 +340,7 @@ const tabsSlotsData = [
           gap
         >
           <vk-data-table
-            :headers="propsHeader"
+            :headers="propHeaders"
             :data="tabsPropsData"
           />
         </example-section>
@@ -411,7 +350,7 @@ const tabsSlotsData = [
           gap
         >
           <vk-data-table
-            :headers="tabsSlotsHeader"
+            :headers="slotHeaders"
             :data="tabsSlotsData"
           />
         </example-section>
@@ -421,7 +360,7 @@ const tabsSlotsData = [
           gap
         >
           <vk-data-table
-            :headers="propsHeader"
+            :headers="propHeaders"
             :data="tabInterfaceData"
           />
         </example-section>

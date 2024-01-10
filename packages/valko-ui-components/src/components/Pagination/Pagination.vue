@@ -6,7 +6,7 @@ import useStyle from './Pagination.styles'
 defineOptions({ name: 'VkPagination' })
 
 const props = withDefaults(defineProps<PaginationProps>(), {
-  type: 'filled',
+  variant: 'filled',
   size: 'md',
   pages: 1,
   modelValue: 1
@@ -49,11 +49,11 @@ const pages = computed(() => {
 const changePage = (page: string | number) => {
   if (page !== props.modelValue && page !== '...' && !props.disabled)
     emit('update:modelValue', page)
-  
+
 }
 
 watchEffect(() => {
-  if (props.modelValue > +props.pages) 
+  if (props.modelValue > +props.pages)
     emit('update:modelValue', +props.pages)
 })
 

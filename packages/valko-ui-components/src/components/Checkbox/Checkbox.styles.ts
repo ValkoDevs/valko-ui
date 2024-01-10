@@ -26,7 +26,7 @@ const useStyle = (props: CheckboxProps) => {
         'border-2',
         'border-gray-500',
         'shadow-lg',
-        'cursor-pointer',
+        'cursor-pointer'
       ],
       input: [
         'hidden',
@@ -34,10 +34,10 @@ const useStyle = (props: CheckboxProps) => {
       ],
       message: [
         'text-red-500',
-        'text-xs',
+        'text-xs'
       ],
       svg: [
-        'dark:text-dark-4',
+        'dark:text-dark-4'
       ]
     },
     variants: {
@@ -57,15 +57,16 @@ const useStyle = (props: CheckboxProps) => {
         lg: {
           checkbox: ['w-6', 'h-6'],
           label: ['text-lg']
-        },        
+        }
       },
-      type: {
+      variant: {
         filled: {},
         outlined: {
           checkbox: [
             'border-gray-600'
           ]
-        }
+        },
+        ghost: {}
       },
       color: {
         primary: {},
@@ -91,7 +92,7 @@ const useStyle = (props: CheckboxProps) => {
         true: {
           label: ['flex-row-reverse', 'mr-2'],
           message: ['flex-row-reverse', 'mr-2'],
-          checkbox: ['flex-row-reverse', ]
+          checkbox: ['flex-row-reverse' ]
         }
       },
       rounded: {
@@ -108,7 +109,7 @@ const useStyle = (props: CheckboxProps) => {
     compoundVariants: [
       // filled & colors
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'primary',
         disabled: false,
         class: {
@@ -116,12 +117,12 @@ const useStyle = (props: CheckboxProps) => {
             'data-[checked=true]:bg-primary-500',
             'data-[checked=true]:border-primary-500',
             'data-[indeterminate=true]:border-primary-500',
-            'data-[indeterminate=true]:bg-primary-500',
+            'data-[indeterminate=true]:bg-primary-500'
           ]
         }
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'secondary',
         disabled: false,
         class: {
@@ -130,12 +131,12 @@ const useStyle = (props: CheckboxProps) => {
             'data-[checked=true]:bg-secondary-500',
             'data-[checked=true]:border-secondary-500',
             'data-[indeterminate=true]:border-secondary-500',
-            'data-[indeterminate=true]:bg-secondary-500',
+            'data-[indeterminate=true]:bg-secondary-500'
           ]
         }
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'success',
         disabled: false,
         class: {
@@ -144,12 +145,12 @@ const useStyle = (props: CheckboxProps) => {
             'data-[checked=true]:bg-success-500',
             'data-[checked=true]:border-success-500',
             'data-[indeterminate=true]:border-success-500',
-            'data-[indeterminate=true]:bg-success-500',
+            'data-[indeterminate=true]:bg-success-500'
           ]
         }
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'info',
         disabled: false,
         class: {
@@ -158,12 +159,12 @@ const useStyle = (props: CheckboxProps) => {
             'data-[checked=true]:bg-info-500',
             'data-[checked=true]:border-info-500',
             'data-[indeterminate=true]:border-info-500',
-            'data-[indeterminate=true]:bg-info-500',
+            'data-[indeterminate=true]:bg-info-500'
           ]
         }
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'warning',
         disabled: false,
         class: {
@@ -172,12 +173,12 @@ const useStyle = (props: CheckboxProps) => {
             'data-[checked=true]:bg-warning-500',
             'data-[checked=true]:border-warning-500',
             'data-[indeterminate=true]:border-warning-500',
-            'data-[indeterminate=true]:bg-warning-500',
+            'data-[indeterminate=true]:bg-warning-500'
           ]
         }
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'error',
         disabled: false,
         class: {
@@ -186,101 +187,101 @@ const useStyle = (props: CheckboxProps) => {
             'data-[checked=true]:bg-error-500',
             'data-[checked=true]:border-error-500',
             'data-[indeterminate=true]:border-error-500',
-            'data-[indeterminate=true]:bg-error-500',
+            'data-[indeterminate=true]:bg-error-500'
           ]
         }
       },
       // outlined & colors
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'primary',
         disabled: false,
         class: {
           checkbox: [
             'text-primary-600',
             'data-[checked=true]:border-primary-500',
-            'data-[indeterminate=true]:border-primary-500',
+            'data-[indeterminate=true]:border-primary-500'
           ],
           svg: ['dark:text-primary-500']
         }
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'secondary',
         disabled: false,
         class: {
           checkbox: [
             'text-secondary-600',
             'data-[checked=true]:border-secondary-500',
-            'data-[indeterminate=true]:border-secondary-500',
+            'data-[indeterminate=true]:border-secondary-500'
           ],
           svg: ['dark:text-secondary-500']
         }
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'success',
         disabled: false,
         class: {
           checkbox: [
             'text-success-600',
             'data-[checked=true]:border-success-500',
-            'data-[indeterminate=true]:border-success-500',
+            'data-[indeterminate=true]:border-success-500'
           ],
           svg: ['dark:text-success-500']
         }
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'info',
         disabled: false,
         class: {
           checkbox: [
             'text-info-600',
             'data-[checked=true]:border-info-500',
-            'data-[indeterminate=true]:border-info-500',
+            'data-[indeterminate=true]:border-info-500'
           ],
           svg: ['dark:text-info-500']
         }
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'warning',
         disabled: false,
         class: {
           checkbox: [
             'text-warning-600',
             'data-[checked=true]:border-warning-500',
-            'data-[indeterminate=true]:border-warning-500',
+            'data-[indeterminate=true]:border-warning-500'
           ],
           svg: ['dark:text-warning-500']
         }
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'error',
         disabled: false,
         class: {
           checkbox: [
             'text-error-600',
             'data-[checked=true]:border-error-500',
-            'data-[indeterminate=true]:border-error-500',
+            'data-[indeterminate=true]:border-error-500'
           ],
           svg: ['dark:text-error-500']
         }
-      },
+      }
     ]
   })
 
   return computed(() => {
     const slots = checkbox({
-      color: props.variant,
+      color: props.color,
       size: props.size,
       rounded: props.rounded,
       flat: props.flat,
       labelPosition: props.labelPosition,
       disabled: props.disabled,
-      type: props.type
+      variant: props.variant
     })
     return {
       label: slots.label(),

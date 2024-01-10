@@ -1,8 +1,8 @@
 import Sizes from '@/types/sizes'
+import Colors from '@/types/colors'
 import Variants from '@/types/variants'
 
-export interface ButtonProps extends Variants, Sizes  {
-  type: 'filled' | 'outlined' | 'ghost';
+export interface ButtonProps extends Colors, Sizes, Variants  {
   rounded?: boolean;
   block?: boolean;
   disabled?: boolean;

@@ -3,6 +3,6 @@ import create from './create'
 
 export default create({
   components: Object.keys(components).map(
-    (key) => components[key as keyof object],
-  ),
+    (key) => components[key as keyof object]
+  )
 })

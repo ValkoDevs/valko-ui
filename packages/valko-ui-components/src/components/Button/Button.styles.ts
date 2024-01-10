@@ -20,9 +20,9 @@ const useStyle = (props: ButtonProps) => {
       'active:shadow-none'
     ],
     variants: {
-      type: {
+      variant: {
         filled: [
-          'text-white' 
+          'text-white'
         ],
         ghost: [
           'shadow-none',
@@ -42,23 +42,23 @@ const useStyle = (props: ButtonProps) => {
       },
       size: {
         xs: [
-          'px-2', 
-          'py-2', 
+          'px-2',
+          'py-2',
           'text-xs'
         ],
         sm: [
-          'px-3', 
-          'py-2.5', 
+          'px-3',
+          'py-2.5',
           'text-sm'
         ],
         md: [
           'px-4',
-          'py-2.5', 
+          'py-2.5',
           'text-base'
         ],
         lg: [
-          'px-5', 
-          'py-3', 
+          'px-5',
+          'py-3',
           'text-lg'
         ]
       },
@@ -87,18 +87,18 @@ const useStyle = (props: ButtonProps) => {
     compoundVariants: [
       //filled & color
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'primary',
         disabled: false,
         class: [
           'bg-primary-600',
           'focus:ring-primary-700',
           'hover:bg-primary-500',
-          'active:bg-primary-700',
+          'active:bg-primary-700'
         ]
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'secondary',
         disabled: false,
         class: [
@@ -109,7 +109,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'success',
         disabled: false,
         class: [
@@ -118,9 +118,9 @@ const useStyle = (props: ButtonProps) => {
           'hover:bg-success-500',
           'active:bg-success-700'
         ]
-      }
-      ,{
-        type: 'filled',
+      },
+      {
+        variant: 'filled',
         color: 'info',
         disabled: false,
         class: [
@@ -131,7 +131,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'warning',
         disabled: false,
         class: [
@@ -142,7 +142,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'error',
         disabled: false,
         class: [
@@ -154,7 +154,7 @@ const useStyle = (props: ButtonProps) => {
       },
       // ghost & color
       {
-        type: 'ghost',
+        variant: 'ghost',
         color: 'primary',
         disabled: false,
         class: [
@@ -165,7 +165,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'ghost',
+        variant: 'ghost',
         color: 'secondary',
         disabled: false,
         class: [
@@ -176,7 +176,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'ghost',
+        variant: 'ghost',
         color: 'success',
         disabled: false,
         class: [
@@ -187,7 +187,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'ghost',
+        variant: 'ghost',
         color: 'info',
         disabled: false,
         class: [
@@ -198,7 +198,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'ghost',
+        variant: 'ghost',
         color: 'warning',
         disabled: false,
         class: [
@@ -209,7 +209,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'ghost',
+        variant: 'ghost',
         color: 'error',
         disabled: false,
         class: [
@@ -221,7 +221,7 @@ const useStyle = (props: ButtonProps) => {
       },
       // outlined & color
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'primary',
         disabled: false,
         class: [
@@ -233,7 +233,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'secondary',
         disabled: false,
         class: [
@@ -245,7 +245,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'success',
         disabled: false,
         class: [
@@ -257,7 +257,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'info',
         disabled: false,
         class: [
@@ -269,7 +269,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'warning',
         disabled: false,
         class: [
@@ -281,7 +281,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'error',
         disabled: false,
         class: [
@@ -292,9 +292,9 @@ const useStyle = (props: ButtonProps) => {
           'border-error-600'
         ]
       },
-      // disabled & type
+      // disabled & variant
       {
-        type: 'filled',
+        variant: 'filled',
         disabled: true,
         class: [
           'bg-gray-600',
@@ -303,7 +303,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'ghost',
+        variant: 'ghost',
         disabled: true,
         class: [
           'text-gray-600',
@@ -315,7 +315,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         disabled: true,
         class: [
           'text-gray-600',
@@ -341,8 +341,8 @@ const useStyle = (props: ButtonProps) => {
   return computed(() => {
     return baseButton({
       size: props.size,
-      color: props.variant,
-      type: props.type,
+      color: props.color,
+      variant: props.variant,
       disabled: props.disabled,
       flat: props.flat,
       block: props.block,

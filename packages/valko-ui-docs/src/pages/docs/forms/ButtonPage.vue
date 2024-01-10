@@ -1,77 +1,35 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
+import colorOptions from '@/data/colorOptions'
+import variantOptions from '@/data/variantOptions'
+import sizeOptions from '@/data/sizeOptions'
+import propHeaders from '@/data/propHeaders'
 
-const btnDisabled = ref(false)
-const btnFlat = ref(false)
-const btnRounded = ref(false)
-const btnBlock = ref(false)
-const btnCondensed = ref(false)
-
-const variants = [
-  {value:'primary', label:'Primary'},
-  {value:'secondary', label:'Secondary'},
-  {value:'success', label:'Success'},
-  {value:'info', label:'Info'},
-  {value:'warning', label:'Warning'},
-  {value:'error', label:'Error'}
-]
-
-const types = [
-  {value:'filled', label:'Filled'},
-  {value:'outlined', label:'Outlined'},
-  {value:'ghost', label:'Ghost'}
-]
-
-const sizes = [
-  {value:'xs', label:'Extra Small'},
-  {value:'sm', label:'Small'},
-  {value:'md', label:'Medium'},
-  {value:'lg', label:'Large'}
-]
- 
 const form = ref({
-  variants: 'primary',
-  types: 'filled',
-  sizes: 'md'
+  color: 'primary',
+  variant: 'filled',
+  size: 'md',
+  disabled: ref(false),
+  flat: ref(false),
+  rounded: ref(false),
+  block: ref(false),
+  condensed: ref(false)
 })
-
-const apiHeaders = [
-  {
-    key: 'prop',
-    label: 'Property'
-  },
-  {
-    key: 'required',
-    label: 'Required'
-  },
-  {
-    key: 'description',
-    label: 'Description'
-  },
-  {
-    key: 'values',
-    label: 'Values'
-  },
-  {
-    key: 'default',
-    label: 'Default'
-  }
-]
 
 const apiData = [
   {
-    prop: 'variant',
+    prop: 'color',
     required: false,
-    description: 'The color variant of the button.',
+    description: 'The color theme of the button.',
     values: 'primary, secondary, error, warning, info, success',
     default: 'primary'
   },
   {
-    prop: 'type',
+    prop: 'variant',
     required: false,
-    description: 'The type of the button.',
+    description: 'The variant of the button.',
     values: 'filled, outlined, ghost',
     default: 'filled'
   },
@@ -120,14 +78,14 @@ const apiData = [
   >
     <template #playground-view>
       <vk-button
-        :variant="form.variants"
-        :type="form.types"
-        :size="form.sizes"
-        :disabled="btnDisabled"
-        :flat="btnFlat"
-        :rounded="btnRounded"
-        :block="btnBlock"
-        :condensed="btnCondensed"
+        :color="form.color"
+        :variant="form.variant"
+        :size="form.size"
+        :disabled="form.disabled"
+        :flat="form.flat"
+        :rounded="form.rounded"
+        :block="form.block"
+        :condensed="form.condensed"
       >
         Primary
       </vk-button>
@@ -139,57 +97,57 @@ const apiData = [
           <div class="flex mb-1">
             <vk-select
               type="outlined"
+              placeholder="Colors"
+              size="sm"
+              :options="colorOptions"
+              v-model="form.color"
+            />
+          </div>
+          <div class="flex mb-1">
+            <vk-select
+              type="outlined"
               placeholder="Variant"
               size="sm"
-              :options="variants"
-              v-model="form.variants"
+              :options="variantOptions"
+              v-model="form.variant"
             />
           </div>
           <div class="flex mb-1">
             <vk-select
               type="outlined"
-              placeholder="Type"
+              placeholder="Size"
               size="sm"
-              :options="types"
-              v-model="form.types"
-            />
-          </div>
-          <div class="flex mb-1">
-            <vk-select
-              type="outlined"
-              placeholder="Sizes"
-              size="sm"
-              :options="sizes"
-              v-model="form.sizes"
+              :options="sizeOptions"
+              v-model="form.size"
             />
           </div>
           <div>
             <vk-checkbox
-              v-model="btnDisabled"
+              v-model="form.disabled"
               label="Disabled"
             />
           </div>
           <div>
             <vk-checkbox
-              v-model="btnCondensed"
+              v-model="form.condensed"
               label="Condensed"
             />
           </div>
           <div>
             <vk-checkbox
-              v-model="btnFlat"
+              v-model="form.flat"
               label="Flat"
             />
           </div>
           <div>
             <vk-checkbox
-              v-model="btnRounded"
+              v-model="form.rounded"
               label="Rounded"
             />
           </div>
           <div>
             <vk-checkbox
-              v-model="btnBlock"
+              v-model="form.block"
               label="Block"
             />
           </div>
@@ -199,29 +157,29 @@ const apiData = [
 
     <template #examples>
       <example-section
-        title="Color"
+        title="Colors"
         gap
       >
         <vk-button
-          v-for="variant in variants"
-          :key="variant.value"
-          :variant="variant.value"
+          v-for="color in colorOptions"
+          :key="color.value"
+          :color="color.value"
         >
-          {{ variant.label }}
+          {{ color.label }}
         </vk-button>
       </example-section>
 
-      <example-section 
-        title="Types"
+      <example-section
+        title="Variants"
         gap
         wrap
       >
         <vk-button
-          v-for="type in types"
-          :key="type.value"
-          :type="type.value"
+          v-for="variant in variantOptions"
+          :key="variant.value"
+          :variant="variant.value"
         >
-          {{ type.label }}
+          {{ variant.label }}
         </vk-button>
         <vk-button flat>
           Flat
@@ -232,17 +190,20 @@ const apiData = [
         <vk-button rounded>
           Rounded
         </vk-button>
+        <vk-button condensed>
+          Condensed
+        </vk-button>
         <vk-button block>
           Block
         </vk-button>
       </example-section>
 
-      <example-section 
+      <example-section
         title="Sizes"
         gap
       >
         <vk-button
-          v-for="size in sizes"
+          v-for="size in sizeOptions"
           :key="size.value"
           :size="size.value"
         >
@@ -253,7 +214,7 @@ const apiData = [
 
     <template #api>
       <vk-data-table
-        :headers="apiHeaders"
+        :headers="propHeaders"
         :data="apiData"
       />
     </template>

@@ -2,12 +2,12 @@
 import { DocSectionProps } from './interfaces'
 import  useStyle  from './DocSection.styles'
 
-defineOptions({name: 'DocSection'})
+defineOptions({ name: 'DocSection' })
 
 const props = withDefaults(defineProps<DocSectionProps>(), {
   title: 'Title',
-  description: 'Description',
-  
+  description: 'Description'
+
 })
 
 const classes = useStyle()
@@ -62,5 +62,5 @@ const classes = useStyle()
 </template>
 
 <style lang="postcss" scoped>
-  
+
 </style>
