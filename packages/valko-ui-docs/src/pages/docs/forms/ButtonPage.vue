@@ -25,16 +25,16 @@ const types = [
 ]
 
 const sizes = [
-  {value:'xs', label:'XS'},
-  {value:'sm', label:'SM'},
-  {value:'md', label:'MD'},
-  {value:'lg', label:'LG'}
+  {value:'xs', label:'Extra Small'},
+  {value:'sm', label:'Small'},
+  {value:'md', label:'Medium'},
+  {value:'lg', label:'Large'}
 ]
  
 const form = ref({
-  options_variants: 'primary',
-  options_types: 'filled',
-  options_sizes: 'md'
+  variants: 'primary',
+  types: 'filled',
+  sizes: 'md'
 })
 
 const apiHeaders = [
@@ -120,9 +120,9 @@ const apiData = [
   >
     <template #playground-view>
       <vk-button
-        :variant="form.options_variants"
-        :type="form.options_types"
-        :size="form.options_sizes"
+        :variant="form.variants"
+        :type="form.types"
+        :size="form.sizes"
         :disabled="btnDisabled"
         :flat="btnFlat"
         :rounded="btnRounded"
@@ -142,7 +142,7 @@ const apiData = [
               placeholder="Variant"
               size="sm"
               :options="variants"
-              v-model="form.options_variants"
+              v-model="form.variants"
             />
           </div>
           <div class="flex mb-1">
@@ -151,7 +151,7 @@ const apiData = [
               placeholder="Type"
               size="sm"
               :options="types"
-              v-model="form.options_types"
+              v-model="form.types"
             />
           </div>
           <div class="flex mb-1">
@@ -160,7 +160,7 @@ const apiData = [
               placeholder="Sizes"
               size="sm"
               :options="sizes"
-              v-model="form.options_sizes"
+              v-model="form.sizes"
             />
           </div>
           <div>
@@ -202,23 +202,12 @@ const apiData = [
         title="Color"
         gap
       >
-        <vk-button variant="primary">
-          Primary
-        </vk-button>
-        <vk-button variant="secondary">
-          Secondary
-        </vk-button>
-        <vk-button variant="error">
-          Error
-        </vk-button>
-        <vk-button variant="success">
-          Success
-        </vk-button>
-        <vk-button variant="warning">
-          Warning
-        </vk-button>
-        <vk-button variant="info">
-          Info
+        <vk-button
+          v-for="variant in variants"
+          :key="variant.value"
+          :variant="variant.value"
+        >
+          {{ variant.label }}
         </vk-button>
       </example-section>
 
@@ -227,20 +216,21 @@ const apiData = [
         gap
         wrap
       >
+        <vk-button
+          v-for="type in types"
+          :key="type.value"
+          :type="type.value"
+        >
+          {{ type.label }}
+        </vk-button>
         <vk-button flat>
           Flat
         </vk-button>
-        <vk-button rounded>
-          Rounded
-        </vk-button>
-        <vk-button type="outlined">
-          Outlined
-        </vk-button>
-        <vk-button type="ghost">
-          Ghost
-        </vk-button>
         <vk-button disabled>
           Disabled
+        </vk-button>
+        <vk-button rounded>
+          Rounded
         </vk-button>
         <vk-button block>
           Block
@@ -251,17 +241,12 @@ const apiData = [
         title="Sizes"
         gap
       >
-        <vk-button size="xs">
-          Extra Small
-        </vk-button>
-        <vk-button size="sm">
-          Small
-        </vk-button>
-        <vk-button size="md">
-          Medium
-        </vk-button>
-        <vk-button size="lg">
-          Large
+        <vk-button
+          v-for="size in sizes"
+          :key="size.value"
+          :size="size.value"
+        >
+          {{ size.label }}
         </vk-button>
       </example-section>
     </template>
