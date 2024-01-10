@@ -17,7 +17,8 @@ const menuItems: MenuItem[] = [
   { key: 'select', group: 'Forms', text: 'Select'},
   { key: 'textarea', group: 'Forms', text: 'Textarea'},
   { key: 'spinner', group: 'Ui', text: 'Spinner'},
-  { key: 'pagination', group: 'Data', text: 'Pagination'}
+  { key: 'pagination', group: 'Data', text: 'Pagination'},
+  { key: 'collapse', group: 'Data', text: 'Collapse'},
 ] 
 
 const activeItem = ref<MenuItem['key'] | null>(null)

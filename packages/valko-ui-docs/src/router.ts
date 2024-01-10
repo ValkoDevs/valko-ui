@@ -46,7 +46,11 @@ const routes = [
       {
         path: 'pagination',
         component: lazyLoad('data', 'PaginationPage')
-      }
+      },
+      {
+        path: 'collapse',
+        component: lazyLoad('data', 'CollapsePage')
+      },
     ]
   },
 ]
