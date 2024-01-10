@@ -51,6 +51,10 @@ const routes = [
         path: 'collapse',
         component: lazyLoad('data', 'CollapsePage')
       },
+      {
+        path: 'tabs',
+        component: lazyLoad('data', 'TabsPage')
+      }
     ]
   },
 ]

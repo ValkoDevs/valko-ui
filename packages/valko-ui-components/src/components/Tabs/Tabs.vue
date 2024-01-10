@@ -1,0 +1,87 @@
+<script setup lang="ts">
+import { Ref, ref, onUpdated, onMounted, nextTick } from 'vue'
+import { TabsProps } from '@/components/Tabs/interfaces'
+import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
+import { VkIcon } from '../'
+import useStyle from './Tabs.styles'
+
+defineOptions({ name: 'VkTabs' })
+
+const props = withDefaults(defineProps<TabsProps>(), {
+  type: 'filled',
+  variant: 'primary',
+  shape: 'soft',
+  size: 'md',
+  defaultIndex: 0,
+  tabs: () => []
+})
+const classes = useStyle(props)
+const cursor: Ref<HTMLElement | null> = ref(null)
+
+const onChange = async () => {
+  await nextTick()
+  await nextTick()
+  if (cursor.value) {
+    const extraHeight = props.shape === 'underline' && props.type === 'outlined' && !props.vertical ? 2 : 0
+    const extraLeft = props.shape === 'underline' && props.type === 'outlined' && props.vertical ? 2 : 0
+    const selectedElement = cursor.value.closest('.tab-list')?.querySelector('button[data-headlessui-state=selected]') as HTMLElement
+    cursor.value.style.width = `${selectedElement.clientWidth}px`
+    cursor.value.style.height = `${+selectedElement.clientHeight + extraHeight}px`
+    cursor.value.style.left = `${selectedElement.offsetLeft - extraLeft}px`
+    cursor.value.style.top = `${selectedElement.offsetTop}px`
+  }
+}
+
+onMounted(onChange)
+onUpdated(onChange)
+
+</script>
+
+<template>
+  <div :class="classes.container">
+    <tab-group
+      :vertical="props.vertical"
+      :default-index="props.defaultIndex"
+      as="div"
+      :class="classes.group"
+      @change="onChange"
+    >
+      <tab-list 
+        :class="classes.list"
+        as="nav"
+      >
+        <div 
+          :class="classes.cursor"
+          ref="cursor"
+        />
+        <tab
+          v-for="item in props.tabs"
+          :class="classes.tab"
+          :key="item.key"
+          :disabled="item.disabled"
+        >
+          <vk-icon
+            v-if="item.leftIcon"
+            :name="item.leftIcon"
+            :class="classes.leftIcon"
+          />
+          <span> {{ item.title }} </span>
+          <vk-icon
+            v-if="item.rightIcon"
+            :name="item.rightIcon"
+            :class="classes.rightIcon"
+          />
+        </tab>
+      </tab-list>
+
+      <tab-panels :class="classes.content">
+        <tab-panel
+          v-for="item in props.tabs"
+          :key="item.key"
+        >
+          <slot :name="item.key" />
+        </tab-panel>
+      </tab-panels>
+    </tab-group>
+  </div>
+</template>
