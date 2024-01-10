@@ -1,5 +1,5 @@
 interface Sizes {
-  size:
+  size?:
     | 'xs'
     | 'sm'
     | 'md'

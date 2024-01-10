@@ -1,5 +1,5 @@
 interface Variants {
-  variant:
+  variant?:
     | 'primary'
     | 'secondary'
     | 'success'
