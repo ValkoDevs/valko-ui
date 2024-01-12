@@ -5,19 +5,19 @@ import useStyle from './Checkbox.styles'
 defineOptions({ name: 'VkCheckbox' })
 
 const props = withDefaults(defineProps<CheckboxProps>(), {
-  variant: 'primary',
+  color: 'primary',
   modelValue: false,
   indeterminate: false,
-  type: 'filled',
+  variant: 'filled',
   size: 'md',
   label: 'Checkbox',
-  readOnly: false
+  readonly: false
 })
 
 const emit = defineEmits(['update:modelValue'])
 
 const onClick = () => {
-  if (!props.disabled && !props.loading) {
+  if (!props.disabled && !props.loading && !props.readonly) {
     emit('update:modelValue', !props.modelValue)
   }
 }
@@ -28,18 +28,18 @@ const classes = useStyle(props)
 <template>
   <div @click="onClick">
     <div :class="classes.label">
-      <div 
+      <div
         :class="classes.checkbox"
         :data-checked="modelValue === true"
         :data-indeterminate="modelValue === null"
       >
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          viewBox="0 0 24 24" 
-          fill="none" 
-          stroke="currentColor" 
-          stroke-width="4" 
-          stroke-linecap="round" 
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="4"
+          stroke-linecap="round"
           stroke-linejoin="round"
           v-if="modelValue !== false"
         >
@@ -51,10 +51,10 @@ const classes = useStyle(props)
           <line
             :class="classes.svg"
             v-else
-            x1="5" 
-            y1="12" 
-            x2="19" 
-            y2="12" 
+            x1="5"
+            y1="12"
+            x2="19"
+            y2="12"
           />
         </svg>
       </div>
@@ -64,7 +64,7 @@ const classes = useStyle(props)
         :checked="modelValue === true"
         :class="classes.input"
         :indeterminate="modelValue === null"
-        :errorText="errorText"
+        :helpertext="props.helpertext"
       >
       <label
         class="align-middle"
@@ -74,10 +74,10 @@ const classes = useStyle(props)
       </label>
     </div>
     <span
-      v-if="errorText"
+      v-if="props.helpertext"
       :class="classes.message"
     >
-      {{ errorText }}
+      {{ props.helpertext }}
     </span>
   </div>
 </template>

@@ -18,7 +18,7 @@ const onClick = () => {
     if (parent?.getAttribute('data-multiple') === 'true') return
 
     const collapseList = document.querySelectorAll('button[data-headlessui-state="open"]') as unknown as HTMLElement[]
-    for (let collapse of collapseList) {
+    for (const collapse of collapseList) {
       if (collapse !== current) collapse.click()
     }
   }

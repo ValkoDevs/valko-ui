@@ -24,39 +24,39 @@ const routes = [
         component: lazyLoad('forms', 'ButtonPage')
       },
       {
-        path: 'input',
-        component: lazyLoad('forms', 'InputPage')
-      },
-      {
         path: 'checkbox',
         component: lazyLoad('forms', 'CheckboxPage')
-      },
-      {
-        path: 'select',
-        component: lazyLoad('forms', 'SelectPage')
-      },
-      {
-        path: 'textarea',
-        component: lazyLoad('forms', 'TextareaPage')
-      },
-      {
-        path: 'spinner',
-        component: lazyLoad('ui', 'SpinnerPage')
-      },
-      {
-        path: 'pagination',
-        component: lazyLoad('data', 'PaginationPage')
       },
       {
         path: 'collapse',
         component: lazyLoad('data', 'CollapsePage')
       },
       {
+        path: 'input',
+        component: lazyLoad('forms', 'InputPage')
+      },
+      {
+        path: 'pagination',
+        component: lazyLoad('data', 'PaginationPage')
+      },
+      {
+        path: 'select',
+        component: lazyLoad('forms', 'SelectPage')
+      },
+      {
+        path: 'spinner',
+        component: lazyLoad('ui', 'SpinnerPage')
+      },
+      {
         path: 'tabs',
         component: lazyLoad('data', 'TabsPage')
+      },
+      {
+        path: 'textarea',
+        component: lazyLoad('forms', 'TextareaPage')
       }
     ]
-  },
+  }
 ]
 
 export default VueRouter.createRouter({

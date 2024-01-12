@@ -1,47 +1,20 @@
 <script setup lang="ts">
-import {Ref, ref} from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
-
-const selectDisabled = ref(false)
-const selectFlat = ref(false)
-const selectRounded = ref(false)
-const selectReadonly = ref(false)
-const selectMultiple = ref(false)
-const selectHelper = ref('Helpertext')
-const selectLabel = ref('Label')
-const exampleReadonly = ref(1)
+import { Ref, ref } from 'vue'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
+import variantOptions from '@/data/variantOptions'
+import colorOptions from '@/data/colorOptions'
+import sizeOptions from '@/data/sizeOptions'
+import propHeaders from '@/data/propHeaders'
 
 const people = [
-  {value: 1, label: 'Wade Cooper'},
-  {value: 2, label: 'Arlene Mccoy'},
-  {value: 3, label: 'Devon Webb'},
-  {value: 4, label: 'Tom Cook'}
+  { value: 1, label: 'Wade Cooper' },
+  { value: 2, label: 'Arlene Mccoy' },
+  { value: 3, label: 'Devon Webb' },
+  { value: 4, label: 'Tom Cook' }
 ]
 
-const variants = [
-  {value:'primary', label:'Primary'},
-  {value:'secondary', label:'Secondary'},
-  {value:'success', label:'Success'},
-  {value:'info', label:'Info'},
-  {value:'warning', label:'Warning'},
-  {value:'error', label:'Error'}
-]
-
-const types = [
-  {value:'filled', label:'Filled'},
-  {value:'outlined', label:'Outlined'},
-  {value:'ghost', label:'Ghost'}
-]
-
-const sizes = [
-  {value:'xs', label:'Extra Small'},
-  {value:'sm', label:'Small'},
-  {value:'md', label:'Medium'},
-  {value:'lg', label:'Large'}
-]
- 
-const form: Ref<Record<string, string>> = ref({
+const form: Ref<Record<string, string | boolean | number>> = ref({
   playground: '',
   primary: '',
   secondary: '',
@@ -57,46 +30,31 @@ const form: Ref<Record<string, string>> = ref({
   sm: '',
   md: '',
   lg: '',
-  variants: 'primary',
-  types: 'filled',
-  sizes: 'md'
+  color: 'primary',
+  variant: 'filled',
+  size: 'md',
+  disabled: false,
+  flat: false,
+  selectRounded: false,
+  readonly: false,
+  multiple: false,
+  helper: 'Helpertext',
+  label: 'Label',
+  exampleReadonly: 1
 })
-
-const apiHeaders = [
-  {
-    key: 'prop',
-    label: 'Property'
-  },
-  {
-    key: 'required',
-    label: 'Required'
-  },
-  {
-    key: 'description',
-    label: 'Description'
-  },
-  {
-    key: 'values',
-    label: 'Values'
-  },
-  {
-    key: 'default',
-    label: 'Default'
-  }
-]
 
 const apiData = [
   {
-    prop: 'variant',
+    prop: 'color',
     required: false,
-    description: 'The color variant of the Select.',
+    description: 'The color theme of the Select.',
     values: 'primary, secondary, error, warning, info, success',
     default: 'primary'
   },
   {
-    prop: 'type',
+    prop: 'variant',
     required: false,
-    description: 'The type of the Select.',
+    description: 'The variant of the Select.',
     values: 'filled, outlined, ghost',
     default: 'filled'
   },
@@ -179,7 +137,7 @@ const apiData = [
   }
 ]
 </script>
- 
+
 <template>
   <doc-section
     title="Select Component"
@@ -188,18 +146,18 @@ const apiData = [
     <template #playground-view>
       <div class="w-full flex px-2">
         <vk-select
-          :placeholder="selectLabel"
-          :helpertext="selectHelper"
+          :placeholder="form.label"
+          :helpertext="form.helper"
           v-model="form.playground"
           :options="people"
-          :type="form.types"
-          :variant="form.variants"
-          :readonly="selectReadonly"
-          :rounded="selectRounded"
-          :disabled="selectDisabled"
-          :flat="selectFlat"
-          :size="form.sizes"
-          :multiple="selectMultiple"
+          :color="form.color"
+          :variant="form.variant"
+          :readonly="form.readonly"
+          :rounded="form.selectRounded"
+          :disabled="form.disabled"
+          :flat="form.flat"
+          :size="form.size"
+          :multiple="form.multiple"
         />
       </div>
     </template>
@@ -209,70 +167,65 @@ const apiData = [
         <div class="w-1/2 px-4">
           <form action="">
             <div class="flex mb-1">
-              <vk-input 
-                kind="outlined" 
+              <vk-input
                 label="Label"
                 size="sm"
-                v-model="selectLabel"
+                v-model="form.label"
               />
             </div>
             <div class="flex mb-1">
-              <vk-input 
-                kind="outlined" 
+              <vk-input
                 label="Helpertext"
                 size="sm"
-                v-model="selectHelper"
+                v-model="form.helper"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
                 placeholder="Variant"
                 size="sm"
-                :options="variants"
-                v-model="form.variants"
+                :options="variantOptions"
+                v-model="form.variant"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
-                placeholder="Type"
+                placeholder="Color"
                 size="sm"
-                :options="types"
-                v-model="form.types"
+                :options="colorOptions"
+                v-model="form.color"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
-                placeholder="Sizes"
+                placeholder="Size"
                 size="sm"
-                :options="sizes"
-                v-model="form.sizes"
+                :options="sizeOptions"
+                v-model="form.size"
               />
             </div>
             <div class="flex">
               <vk-checkbox
                 label="Multiple"
-                v-model="selectMultiple"
+                v-model="form.multiple"
               />
             </div>
             <div class="flex">
               <vk-checkbox
                 label="Disabled"
-                v-model="selectDisabled"
+                v-model="form.disabled"
               />
             </div>
             <div class="flex">
               <vk-checkbox
                 label="Rounded"
-                v-model="selectRounded"
+                v-model="form.selectRounded"
               />
             </div>
             <div class="flex">
               <vk-checkbox
                 label="Readonly"
-                v-model="selectReadonly"
+                v-model="form.readonly"
               />
             </div>
           </form>
@@ -288,38 +241,38 @@ const apiData = [
       >
         <div class="grow gap-4 grid grid-cols-2">
           <vk-select
-            v-for="variant in variants"
-            :key="variant.value"
-            :variant="variant.value"
-            :placeholder="variant.label"
+            v-for="color in colorOptions"
+            :key="color.value"
+            :color="color.value"
+            :placeholder="color.label"
             :options="people"
-            v-model="form[variant.value]"
+            v-model="form[color.value]"
           />
         </div>
       </example-section>
 
       <example-section
-        title="Types"
+        title="Variants"
         justify="start"
         align="start"
         gap
       >
         <div class="grow gap-4 grid grid-cols-2">
           <vk-select
-            v-for="type in types"
-            :key="type.value"
-            :type="type.value"
-            :placeholder="type.label"
+            v-for="variant in variantOptions"
+            :key="variant.value"
+            :variant="variant.value"
+            :placeholder="variant.label"
             :options="people"
-            v-model="form[type.value]"
+            v-model="form[variant.value]"
           />
           <vk-select
             disabled
             placeholder="Disabled"
           />
           <vk-select
-            type="outlined"
             :options="people"
+            variant="outlined"
             rounded
             v-model="form.rounded"
             placeholder="Rounded"
@@ -328,12 +281,12 @@ const apiData = [
             readonly
             :options="people"
             placeholder="Readonly"
-            v-model="exampleReadonly"
+            v-model="form.exampleReadonly"
           />
         </div>
       </example-section>
 
-      <example-section 
+      <example-section
         title="Sizes"
         justify="start"
         align="start"
@@ -341,7 +294,7 @@ const apiData = [
       >
         <div class="grow gap-4 grid grid-cols-2 items-end">
           <vk-select
-            v-for="size in sizes"
+            v-for="size in sizeOptions"
             :key="size.value"
             :size="size.value"
             :placeholder="size.label"
@@ -354,7 +307,7 @@ const apiData = [
 
     <template #api>
       <vk-data-table
-        :headers="apiHeaders"
+        :headers="propHeaders"
         :data="apiData"
       />
     </template>

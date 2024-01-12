@@ -1,69 +1,32 @@
 <script setup lang="ts">
-import {ref} from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
-
-const currentPage = ref(1)
-const totalPages = ref(20)
-const paginationFlat = ref(false)
-const paginationDisabled = ref(false)
-
-const variants = [
-  {value:'primary', label:'Primary'},
-  {value:'secondary', label:'Secondary'},
-  {value:'success', label:'Success'},
-  {value:'info', label:'Info'},
-  {value:'warning', label:'Warning'},
-  {value:'error', label:'Error'}
-]
-
-const sizes = [
-  {value:'xs', label:'Extra Small'},
-  {value:'sm', label:'Small'},
-  {value:'md', label:'Medium'},
-  {value:'lg', label:'Large'}
-]
+import { ref } from 'vue'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
+import sizeOptions from '@/data/sizeOptions'
+import colorOptions from '@/data/colorOptions'
+import propHeaders from '@/data/propHeaders'
 
 const form = ref({
-  options_variants: 'primary',
-  options_sizes: 'md',
+  color: 'primary',
+  size: 'md',
+  currentPage: ref(1),
+  totalPages: ref(20),
+  flat: ref(false),
+  disabled: ref(false)
 })
-
-const apiHeaders = [
-  {
-    key: 'prop',
-    label: 'Property'
-  },
-  {
-    key: 'required',
-    label: 'Required'
-  },
-  {
-    key: 'description',
-    label: 'Description'
-  },
-  {
-    key: 'values',
-    label: 'Values'
-  },
-  {
-    key: 'default',
-    label: 'Default'
-  }
-]
 
 const apiData = [
   {
-    prop: 'variant',
+    prop: 'color',
     required: false,
-    description: 'The pagination color theme.',
+    description: 'The Pagination color theme.',
     values: 'primary, secondary, error, warning, info, success',
     default: 'primary'
   },
   {
     prop: 'size',
     required: false,
-    description: 'The pagination size.',
+    description: 'The Pagination size.',
     values: 'xs, sm, md, lg',
     default: 'md'
   },
@@ -80,7 +43,7 @@ const apiData = [
     description: 'The current page.',
     values: 'number',
     default: '1'
-  },
+  }
 ]
 </script>
 
@@ -92,13 +55,13 @@ const apiData = [
     <template #playground-view>
       <div class="w-full flex px-2 justify-center">
         <vk-pagination
-          :variant="form.options_variants"
-          :size="form.options_sizes"
-          :current-page="currentPage"
-          :pages="totalPages"
-          :flat="paginationFlat"
-          :disabled="paginationDisabled"
-          v-model="currentPage"
+          :color="form.color"
+          :size="form.size"
+          :current-page="form.currentPage"
+          :pages="form.totalPages"
+          :flat="form.flat"
+          :disabled="form.disabled"
+          v-model="form.currentPage"
         />
       </div>
     </template>
@@ -110,39 +73,36 @@ const apiData = [
             <div class="flex mb-1">
               <vk-input
                 type="number"
-                kind="outlined"
                 label="Total Pages"
                 size="sm"
-                v-model="totalPages"
+                v-model="form.totalPages"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
-                placeholder="Variant"
+                placeholder="Color"
                 size="sm"
-                :options="variants"
-                v-model="form.options_variants"
+                :options="colorOptions"
+                v-model="form.color"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
-                placeholder="Sizes"
+                placeholder="Size"
                 size="sm"
-                :options="sizes"
-                v-model="form.options_sizes"
+                :options="sizeOptions"
+                v-model="form.size"
               />
             </div>
             <div>
               <vk-checkbox
-                v-model="paginationFlat"
+                v-model="form.flat"
                 label="Flat"
               />
             </div>
             <div>
               <vk-checkbox
-                v-model="paginationDisabled"
+                v-model="form.disabled"
                 label="Disabled"
               />
             </div>
@@ -158,15 +118,15 @@ const apiData = [
       >
         <div class="gap-4 grid grid-cols-2">
           <div
-            v-for="variant in variants"
-            :key="variant.value"
+            v-for="color in colorOptions"
+            :key="color.value"
             class="flex flex-col items-start"
           >
-            <span class="mb-3"> {{ variant.label }}</span>
+            <span class="mb-3"> {{ color.label }}</span>
             <vk-pagination
-              :variant="variant.value"
-              :pages="totalPages"
-              v-model="currentPage"
+              :color="color.value"
+              :pages="form.totalPages"
+              v-model="form.currentPage"
             />
           </div>
         </div>
@@ -178,14 +138,14 @@ const apiData = [
       >
         <div class="gap-4 grid grid-cols-2">
           <div
-            v-for="size in sizes"
+            v-for="size in sizeOptions"
             :key="size.value"
           >
             <span class="mb-3"> {{ size.label }}</span>
             <vk-pagination
               :size="size.value"
-              :pages="totalPages"
-              v-model="currentPage"
+              :pages="form.totalPages"
+              v-model="form.currentPage"
             />
           </div>
         </div>
@@ -194,7 +154,7 @@ const apiData = [
 
     <template #api>
       <vk-data-table
-        :headers="apiHeaders"
+        :headers="propHeaders"
         :data="apiData"
       />
     </template>

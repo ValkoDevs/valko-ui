@@ -8,12 +8,12 @@ export default {
     './src/**/*.vue',
     './src/**/*.ts',
     './src/**/*.js',
-    '../valko-ui-components/**/*.{js, vue, ts, html}',
+    '../valko-ui-components/**/*.{js, vue, ts, html}'
   ],
   theme: {
     extend: {
       colors: {}
     }
   },
-  plugins: [],
+  plugins: []
 }

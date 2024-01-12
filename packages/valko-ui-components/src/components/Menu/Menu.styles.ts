@@ -14,7 +14,7 @@ const useStyle = (props: MenuProps) => {
         'mb-4'
       ],
       item: [
-        'w-full',
+        'w-full'
       ],
       content: [
         'flex',
@@ -25,7 +25,7 @@ const useStyle = (props: MenuProps) => {
         'hover:dark:bg-dark-3',
         'data-[active=true]:text-primary-500',
         'data-[active=true]:bg-primary-500/[.15]',
-        'data-[active=true]:dark:bg-primary-500/[.15]',
+        'data-[active=true]:dark:bg-primary-500/[.15]'
       ]
     },
     variants: {
@@ -54,14 +54,14 @@ const useStyle = (props: MenuProps) => {
   return computed(() => {
     const slots = baseMenu({
       rounded: props.rounded,
-      floating: props.floating,
+      floating: props.floating
     })
 
     return {
       group: slots.group(),
       menu: slots.menu(),
       item: slots.item(),
-      content: slots.content(),
+      content: slots.content()
     }
   })
 }

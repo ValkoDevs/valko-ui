@@ -6,7 +6,7 @@ const useStyle = (props: SelectProps) => {
   const input = tv({
     slots: {
       container: [
-        'w-full', 
+        'w-full',
         'vk-select-container'
       ],
       field: [
@@ -45,7 +45,7 @@ const useStyle = (props: SelectProps) => {
         'hover:bg-gray-100',
         'dark:text-white',
         'dark:bg-dark-3',
-        'dark:hover:bg-dark-1',
+        'dark:hover:bg-dark-1'
       ]
     },
     variants: {
@@ -119,7 +119,7 @@ const useStyle = (props: SelectProps) => {
           item: [
             'text-lg'
           ]
-        },
+        }
       }
     }
   })
@@ -127,7 +127,7 @@ const useStyle = (props: SelectProps) => {
   return computed(() => {
     const slots = input({
       size: props.size,
-      color: props.variant
+      color: props.color
     })
 
     return {

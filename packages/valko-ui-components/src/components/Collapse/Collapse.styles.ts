@@ -14,7 +14,7 @@ const useStyle = (props: CollapseProps) => {
       'group'
     ],
     variants: {
-      type: {
+      variant: {
         filled: [
           'bg-light-3',
           'dark:bg-dark-3'
@@ -46,7 +46,7 @@ const useStyle = (props: CollapseProps) => {
     },
     compoundVariants: [
       {
-        type: 'outlined',
+        variant: 'outlined',
         separator: 'split',
         class: [
           'border-0'
@@ -56,7 +56,7 @@ const useStyle = (props: CollapseProps) => {
   })
   return computed(() => {
     return collapse({
-      type: props.type,
+      variant: props.variant,
       separator: props.separator
     })
   })

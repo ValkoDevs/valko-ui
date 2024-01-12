@@ -6,10 +6,10 @@ import useStyle from './Input.styles'
 defineOptions({ name: 'VkInput' })
 
 const props = withDefaults(defineProps<InputProps>(), {
-  variant: 'primary',
-  kind: 'filled',
+  color: 'primary',
+  variant: 'filled',
   size: 'md',
-  type: 'text',
+  type: 'text'
 })
 
 const emit = defineEmits(['update:modelValue', 'focus', 'leftIconClick', 'rightIconClick'])
@@ -83,7 +83,7 @@ const classes = useStyle(props)
         @click="() => iconClick('right')"
       />
     </div>
-    <span 
+    <span
       :class="classes.helper"
       v-if="helpertext !== ''"
     >{{ props.helpertext }}</span>

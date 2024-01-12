@@ -1,0 +1,6 @@
+{
+  "root": true,
+  "extends": [
+    "@valko-ui/eslint-config"
+  ]
+}

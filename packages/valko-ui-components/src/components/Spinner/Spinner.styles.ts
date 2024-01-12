@@ -25,7 +25,7 @@ const useStyle = (props: SpinnerProps) => {
         },
         lg: {
           spinner: ['w-7', 'h-7']
-        }    
+        }
       },
       color: {
         primary: {},
@@ -90,8 +90,8 @@ const useStyle = (props: SpinnerProps) => {
   })
   return computed(() => {
     const slots = spinner({
-      color: props.variant,
-      size: props.size,
+      color: props.color,
+      size: props.size
     })
     return {
       spinner: slots.spinner(),

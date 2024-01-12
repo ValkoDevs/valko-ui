@@ -2,7 +2,7 @@
 import { ExampleSectionProps } from './interfaces'
 import  useStyle  from './ExampleSection.styles'
 
-defineOptions({name: 'ExampleSection'})
+defineOptions({ name: 'ExampleSection' })
 
 const props = withDefaults(defineProps<ExampleSectionProps>(), {
   title: 'Title',

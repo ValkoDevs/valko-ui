@@ -1,87 +1,46 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import { ref, watchEffect } from 'vue'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
+import variantOptions from '@/data/variantOptions'
+import sizeOptions from '@/data/sizeOptions'
+import propHeaders from '@/data/propHeaders'
+import colorOptions from '@/data/colorOptions'
 
-const cbDisabled = ref(false)
-const cbFlat = ref(false)
-const cbRounded = ref(false)
-const checked = ref<boolean | null>(false)
-const cbErrorText = ref('')
-const cbIndeterminate = ref(false)
-const cbReadOnly = ref(false)
-const labelValue = ref('Checkbox')
-const exampleChecked = ref(true)
-
-const variants = [
-  {value:'primary', label:'Primary'},
-  {value:'secondary', label:'Secondary'},
-  {value:'success', label:'Success'},
-  {value:'info', label:'Info'},
-  {value:'warning', label:'Warning'},
-  {value:'error', label:'Error'}
-]
-
-const types = [
-  {value:'filled', label:'Filled'},
-  {value:'outlined', label:'Outlined'}
-]
-
-const sizes = [
-  {value:'xs', label:'Extra Small'},
-  {value:'sm', label:'Small'},
-  {value:'md', label:'Medium'},
-  {value:'lg', label:'Large'}
-]
-
-const positions = [
-  {value: false, label:'Right'},
-  {value: true, label:'Left'},
+const position = [
+  { value: false, label:'Right' },
+  { value: true, label:'Left' }
 ]
 
 const form = ref({
-  variants: 'primary',
-  types: 'filled',
-  sizes: 'md',
-  positions: false
+  color: 'primary',
+  variant: 'filled',
+  size: 'md',
+  position: false,
+  disabled: false,
+  flat: false,
+  rounded: false,
+  helpertext: '',
+  label: 'Checkbox',
+  exampleChecked: true,
+  indeterminate: false,
+  checked: false as boolean | null,
+  readonly: false
 })
-
-const apiHeaders = [
-  {
-    key: 'prop',
-    label: 'Property'
-  },
-  {
-    key: 'required',
-    label: 'Required'
-  },
-  {
-    key: 'description',
-    label: 'Description'
-  },
-  {
-    key: 'values',
-    label: 'Values'
-  },
-  {
-    key: 'default',
-    label: 'Default'
-  }
-]
 
 const apiData = [
   {
-    prop: 'variant',
+    prop: 'color',
     required: false,
-    description: 'The color variant of the Checkbox.',
+    description: 'The color theme of the Checkbox.',
     values: 'primary, secondary, error, warning, info, success',
     default: 'primary'
   },
   {
-    prop: 'type',
+    prop: 'variant',
     required: false,
-    description: 'The type of the Checkbox.',
-    values: 'filled, outlined',
+    description: 'The variant of the Checkbox.',
+    values: 'filled, outlined, ghost',
     default: 'filled'
   },
   {
@@ -127,9 +86,9 @@ const apiData = [
     default: 'Checkbox'
   },
   {
-    prop: 'errorText',
+    prop: 'helpertext',
     required: false,
-    description: 'Displays a error message under the Checkbox',
+    description: 'Displays a hint under the Checkbox',
     values: 'string',
     default: ''
   },
@@ -146,25 +105,18 @@ const apiData = [
     description: 'Moves the label of the Checkbox to left or right',
     values: 'true, false',
     default: 'false'
-  },
+  }
 ]
 
-/* 
-* This two watch functions control the indeterminate checkbox
-* in the documentation page so it is synchronized 
+/*
+* This watch function controls the indeterminate checkbox
+* in the documentation page so it is synchronized
 * with the status of the checkbox in the sandbox
 */
-watch(checked, () => {
-  if (checked.value !== null) cbIndeterminate.value = false
-})
-watch(cbIndeterminate, () => {
-  if (cbIndeterminate.value) checked.value = null
-  else checked.value = true
-})
-watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
-  if (newReadOnly && newChecked !== true)  {
-    checked.value = true
-  }
+watchEffect(() => {
+  if (form.value.indeterminate) form.value.checked = null
+  if (form.value.checked !== null) form.value.indeterminate = false
+  if (!form.value.indeterminate && form.value.checked === null) form.value.checked = false
 })
 </script>
 
@@ -176,18 +128,18 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
     <template #playground-view>
       <div class="w-full flex justify-center">
         <vk-checkbox
-          :variant="form.variants"
-          :type="form.types"
-          :size="form.sizes"
-          :error-text="cbErrorText"
-          :disabled="cbDisabled"
-          :flat="cbFlat"
-          :rounded="cbRounded"
-          :label-position="form.positions"
-          :read-only="cbReadOnly"
-          :indeterminate="cbIndeterminate"
-          v-model="checked"
-          :label="labelValue"
+          :color="form.color"
+          :variant="form.variant"
+          :size="form.size"
+          :helpertext="form.helpertext"
+          :disabled="form.disabled"
+          :flat="form.flat"
+          :rounded="form.rounded"
+          :label-position="form.position"
+          :readonly="form.readonly"
+          :indeterminate="form.indeterminate"
+          v-model="form.checked"
+          :label="form.label"
         />
       </div>
     </template>
@@ -196,85 +148,79 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
         <div class="w-1/2 px-4">
           <form action="">
             <div class="flex mb-1">
-              <vk-input 
-                kind="outlined" 
+              <vk-input
                 label="Label"
                 size="sm"
-                v-model="labelValue"
+                v-model="form.label"
               />
             </div>
             <div class="flex mb-1">
-              <vk-input 
-                kind="outlined" 
-                label="Error Text"
+              <vk-input
+                label="Helpertext"
                 size="sm"
-                v-model="cbErrorText"
+                v-model="form.helpertext"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
                 placeholder="Variant"
                 size="sm"
-                :options="variants"
-                v-model="form.variants"
+                :options="variantOptions"
+                v-model="form.variant"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
-                placeholder="Type"
+                placeholder="Color"
                 size="sm"
-                :options="types"
-                v-model="form.types"
+                :options="colorOptions"
+                v-model="form.color"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
-                placeholder="Sizes"
+                placeholder="Size"
                 size="sm"
-                :options="sizes"
-                v-model="form.sizes"
+                :options="sizeOptions"
+                v-model="form.size"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
                 placeholder="Label Position"
                 size="sm"
-                :options="positions"
-                v-model="form.positions"
+                :options="position"
+                v-model="form.position"
               />
             </div>
             <div class="flex">
               <vk-checkbox
                 label="Disabled"
-                v-model="cbDisabled"
+                v-model="form.disabled"
               />
             </div>
             <div class="flex">
               <vk-checkbox
                 label="Rounded"
-                v-model="cbRounded"
+                v-model="form.rounded"
               />
             </div>
             <div class="flex">
               <vk-checkbox
                 label="Flat"
-                v-model="cbFlat"
+                v-model="form.flat"
               />
             </div>
             <div class="flex">
               <vk-checkbox
                 label="Readonly"
-                v-model="cbReadOnly"
+                v-model="form.readonly"
               />
             </div>
             <div class="flex">
               <vk-checkbox
-                label="Inderteminate"
-                v-model="cbIndeterminate"
+                label="Indeterminate"
+                v-model="form.indeterminate"
               />
             </div>
           </form>
@@ -290,52 +236,52 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
       >
         <div class="gap-x-12 gap-y-4 grid grid-cols-2">
           <vk-checkbox
-            v-for="variant in variants"
-            :key="variant.value"
-            :variant="variant.value"
-            :label="variant.label"
-            :model-value="exampleChecked"
+            v-for="color in colorOptions"
+            :key="color.value"
+            :color="color.value"
+            :label="color.label"
+            :model-value="form.exampleChecked"
           />
         </div>
       </example-section>
 
       <example-section
-        title="Types"
+        title="Variants"
         justify="start"
         gap
       >
         <div class="gap-x-12 gap-y-4 grid grid-cols-2">
           <vk-checkbox
-            v-for="type in types"
-            :key="type.value"
-            :type="type.value"
-            :label="type.label"
-            :model-value="exampleChecked"
+            v-for="variant in variantOptions"
+            :key="variant.value"
+            :variant="variant.value"
+            :label="variant.label"
+            :model-value="form.exampleChecked"
           />
           <vk-checkbox
             label="Disabled"
             disabled
-            :model-value="exampleChecked"
+            :model-value="form.exampleChecked"
           />
           <vk-checkbox
             label="Rounded"
             rounded
-            :model-value="exampleChecked"
+            :model-value="form.exampleChecked"
           />
           <vk-checkbox
             label="Flat"
             flat
-            :model-value="exampleChecked"
+            :model-value="form.exampleChecked"
           />
           <vk-checkbox
             label="Readonly"
             read-only
-            :model-value="exampleChecked"
+            :model-value="form.exampleChecked"
           />
           <vk-checkbox
             label="Inderterminate"
             inderteminate
-            :model-value="exampleChecked"
+            :model-value="form.exampleChecked"
           />
         </div>
       </example-section>
@@ -347,11 +293,11 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
       >
         <div class="gap-x-12 gap-y-4 grid grid-cols-2">
           <vk-checkbox
-            v-for="size in sizes"
+            v-for="size in sizeOptions"
             :key="size.value"
             :size="size.value"
             :label="size.label"
-            :model-value="exampleChecked"
+            :model-value="form.exampleChecked"
           />
         </div>
       </example-section>
@@ -359,7 +305,7 @@ watch([checked, cbReadOnly], ([newChecked, newReadOnly]) => {
 
     <template #api>
       <vk-data-table
-        :headers="apiHeaders"
+        :headers="propHeaders"
         :data="apiData"
       />
     </template>

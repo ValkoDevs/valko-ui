@@ -68,7 +68,7 @@ const useStyle = (props: TextareaProps) => {
       ]
     },
     variants: {
-      type: {
+      variant: {
         filled: {
           textarea: [
             'rounded-t-md',
@@ -198,13 +198,13 @@ const useStyle = (props: TextareaProps) => {
           helper: [
             'text-gray-500'
           ]
-        },
+        }
       }
     },
     compoundVariants: [
       // filled & color
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'primary',
         disabled: false,
         class: {
@@ -232,7 +232,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'secondary',
         disabled: false,
         class: {
@@ -245,7 +245,7 @@ const useStyle = (props: TextareaProps) => {
             'text-secondary-500',
             'peer-focus:text-secondary-600',
             'dark:text-secondary-500'
-          ],         
+          ],
           helper: [
             'text-secondary-500',
             'dark:text-secondary-500'
@@ -257,7 +257,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'success',
         disabled: false,
         class: {
@@ -284,7 +284,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'info',
         disabled: false,
         class: {
@@ -298,7 +298,7 @@ const useStyle = (props: TextareaProps) => {
           label: [
             'text-info-500',
             'focus:text-info-950',
-            'dark:text-info-500',
+            'dark:text-info-500'
           ],
           helper: [
             'text-info-500',
@@ -311,7 +311,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'warning',
         disabled: false,
         class: {
@@ -338,7 +338,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'filled',
+        variant: 'filled',
         color: 'error',
         disabled: false,
         class: {
@@ -352,7 +352,7 @@ const useStyle = (props: TextareaProps) => {
           label: [
             'text-error-500',
             'focus:text-error-950',
-            'dark:text-error-500',
+            'dark:text-error-500'
           ],
           helper: [
             'text-error-500',
@@ -366,7 +366,7 @@ const useStyle = (props: TextareaProps) => {
       },
       // ghost & color
       {
-        type: 'ghost',
+        variant: 'ghost',
         color: 'primary',
         disabled: false,
         class: {
@@ -393,7 +393,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'ghost',
+        variant: 'ghost',
         color: 'secondary',
         disabled: false,
         class: {
@@ -407,7 +407,7 @@ const useStyle = (props: TextareaProps) => {
           label: [
             'text-secondary-500',
             'focus:text-secondary-950',
-            'dark:text-secondary-500',
+            'dark:text-secondary-500'
           ],
           helper: [
             'text-secondary-500',
@@ -420,7 +420,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'ghost',
+        variant: 'ghost',
         color: 'success',
         disabled: false,
         class: {
@@ -446,7 +446,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'ghost',
+        variant: 'ghost',
         color: 'info',
         disabled: false,
         class: {
@@ -472,7 +472,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'ghost',
+        variant: 'ghost',
         color: 'warning',
         disabled: false,
         class: {
@@ -498,7 +498,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'ghost',
+        variant: 'ghost',
         color: 'error',
         disabled: false,
         class: {
@@ -525,7 +525,7 @@ const useStyle = (props: TextareaProps) => {
       },
       // outlined & color
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'primary',
         disabled: false,
         class: {
@@ -549,7 +549,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'secondary',
         disabled: false,
         class: {
@@ -572,7 +572,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'success',
         disabled: false,
         class: {
@@ -596,7 +596,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'info',
         disabled: false,
         class: {
@@ -620,7 +620,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'warning',
         disabled: false,
         class: {
@@ -644,7 +644,7 @@ const useStyle = (props: TextareaProps) => {
         }
       },
       {
-        type: 'outlined',
+        variant: 'outlined',
         color: 'error',
         disabled: false,
         class: {
@@ -672,9 +672,9 @@ const useStyle = (props: TextareaProps) => {
 
   return computed(() => {
     const slots = textarea({
-      color: props.variant,
+      color: props.color,
       size: props.size,
-      type: props.type,
+      variant: props.variant,
       disabled: props.disabled
     })
 

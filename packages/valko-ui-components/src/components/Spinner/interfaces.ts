@@ -1,6 +1,6 @@
 import Sizes from '@/types/sizes'
-import Variants from '@/types/variants'
+import Colors from '@/types/colors'
 
-export interface SpinnerProps extends Variants, Sizes  {
+export interface SpinnerProps extends Colors, Sizes  {
   loading?: boolean;
 }

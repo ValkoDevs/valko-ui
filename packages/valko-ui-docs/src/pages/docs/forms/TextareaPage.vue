@@ -1,79 +1,37 @@
 <script setup lang="ts">
-import {ref} from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
-
-const textareaDisabled = ref(false)
-const textareaReadonly = ref(false)
-const textareaValue = ref('')
-const labelValue = ref('Label')
-const helperValue = ref('Helpertext')
-const textareaCounter = ref(null)
-const exampleReadonly = ref('Example readonly text')
-
-const variants = [
-  {value:'primary', label:'Primary'},
-  {value:'secondary', label:'Secondary'},
-  {value:'success', label:'Success'},
-  {value:'info', label:'Info'},
-  {value:'warning', label:'Warning'},
-  {value:'error', label:'Error'}
-]
-
-const types = [
-  {value:'filled', label:'Filled'},
-  {value:'outlined', label:'Outlined'},
-  {value:'ghost', label:'Ghost'}
-]
-
-const sizes = [
-  {value:'xs', label:'Extra Small'},
-  {value:'sm', label:'Small'},
-  {value:'md', label:'Medium'},
-  {value:'lg', label:'Large'}
-]
+import { ref } from 'vue'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
+import variantOptions from '@/data/variantOptions'
+import sizeOptions from '@/data/sizeOptions'
+import propHeaders from '@/data/propHeaders'
+import colorOptions from '@/data/colorOptions'
 
 const form = ref({
-  variants: 'primary',
-  types: 'filled',
-  sizes: 'md' 
+  color: 'primary',
+  variant: 'filled',
+  size: 'md',
+  disabled: ref(false),
+  readonly: ref(false),
+  value: ref(''),
+  label: ref('Label'),
+  helper: ref('Helpertext'),
+  counter: ref(null),
+  exampleReadonly: ref('Example readonly text')
 })
-
-const apiHeaders = [
-  {
-    key: 'prop',
-    label: 'Property'
-  },
-  {
-    key: 'required',
-    label: 'Required'
-  },
-  {
-    key: 'description',
-    label: 'Description'
-  },
-  {
-    key: 'values',
-    label: 'Values'
-  },
-  {
-    key: 'default',
-    label: 'Default'
-  }
-]
 
 const apiData = [
   {
-    prop: 'variant',
+    prop: 'color',
     required: false,
-    description: 'The color variant of the Textarea.',
+    description: 'The color theme of the Textarea.',
     values: 'primary, secondary, error, warning, info, success',
     default: 'primary'
   },
   {
-    prop: 'type',
+    prop: 'variant',
     required: false,
-    description: 'The type of the Textarea.',
+    description: 'The variant of the Textarea.',
     values: 'filled, outlined, ghost',
     default: 'filled'
   },
@@ -118,7 +76,7 @@ const apiData = [
     description: 'A hint for the Textarea',
     values: 'string',
     default: 'false'
-  },
+  }
 ]
 </script>
 
@@ -130,15 +88,15 @@ const apiData = [
     <template #playground-view>
       <div class="w-full p-4">
         <vk-textarea
-          :variant="form.variants"
-          :size="form.sizes"
-          :disabled="textareaDisabled"
-          :readonly="textareaReadonly"
-          :type="form.types"
-          v-model="textareaValue"
-          :label="labelValue"
-          :maxlength="textareaCounter"
-          :helpertext="helperValue"
+          :variant="form.variant"
+          :size="form.size"
+          :disabled="form.disabled"
+          :readonly="form.readonly"
+          :color="form.color"
+          v-model="form.value"
+          :label="form.label"
+          :maxlength="form.counter"
+          :helpertext="form.helper"
         />
       </div>
     </template>
@@ -148,67 +106,61 @@ const apiData = [
         <div class="w-1/2 px-4">
           <form action="">
             <div class="flex mb-1">
-              <vk-input 
-                kind="outlined" 
+              <vk-input
                 label="Label"
                 size="sm"
-                v-model="labelValue"
+                v-model="form.value"
               />
             </div>
             <div class="flex mb-1">
-              <vk-input 
-                kind="outlined" 
+              <vk-input
                 label="Helpertext"
                 size="sm"
-                v-model="helperValue"
+                v-model="form.helper"
               />
             </div>
             <div class="flex mb-1">
-              <vk-input 
-                kind="outlined" 
+              <vk-input
                 label="Counter"
                 type="number"
                 size="sm"
-                v-model="textareaCounter"
+                v-model="form.counter"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
                 placeholder="Variant"
                 size="sm"
-                :options="variants"
-                v-model="form.variants"
+                :options="variantOptions"
+                v-model="form.variant"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
-                placeholder="Type"
+                placeholder="Color"
                 size="sm"
-                :options="types"
-                v-model="form.types"
+                :options="colorOptions"
+                v-model="form.color"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
                 placeholder="Size"
                 size="sm"
-                :options="sizes"
-                v-model="form.sizes"
+                :options="sizeOptions"
+                v-model="form.size"
               />
             </div>
             <div class="flex">
               <vk-checkbox
                 label="Disabled"
-                v-model="textareaDisabled"
+                v-model="form.disabled"
               />
             </div>
             <div class="flex">
               <vk-checkbox
                 label="Readonly"
-                v-model="textareaReadonly"
+                v-model="form.readonly"
               />
             </div>
           </form>
@@ -224,26 +176,26 @@ const apiData = [
       >
         <div class="grow gap-4 grid grid-cols-2">
           <vk-textarea
-            v-for="variant in variants"
-            :key="variant.value"
-            :variant="variant.value"
-            :label="variant.label"
+            v-for="color in colorOptions"
+            :key="color.value"
+            :color="color.value"
+            :label="color.label"
           />
         </div>
       </example-section>
 
       <example-section
-        title="Types"
+        title="Variants"
         justify="start"
         align="start"
         gap
       >
         <div class="grow gap-4 grid grid-cols-2">
-          <vk-textarea 
-            v-for="type in types"
-            :key="type.value"
-            :type="type.value"
-            :label="type.label"
+          <vk-textarea
+            v-for="variant in variantOptions"
+            :key="variant.value"
+            :variant="variant.value"
+            :label="variant.label"
           />
           <vk-textarea
             disabled
@@ -252,7 +204,7 @@ const apiData = [
           <vk-textarea
             readonly
             label="Readonly"
-            v-model="exampleReadonly"
+            v-model="form.exampleReadonly"
           />
         </div>
       </example-section>
@@ -265,7 +217,7 @@ const apiData = [
       >
         <div class="w-full grid grid-cols-2 gap-4 items-start">
           <vk-textarea
-            v-for="size in sizes"
+            v-for="size in sizeOptions"
             :key="size.value"
             :size="size.value"
             :label="size.label"
@@ -276,7 +228,7 @@ const apiData = [
 
     <template #api>
       <vk-data-table
-        :headers="apiHeaders"
+        :headers="propHeaders"
         :data="apiData"
       />
     </template>

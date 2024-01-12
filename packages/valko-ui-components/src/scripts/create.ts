@@ -15,7 +15,7 @@ const create = (createOptions: Partial<ValkoUIOptions> = {}): Plugin => ({
     const options: ValkoUIOptions = {
       ...defaultOptions,
       ...createOptions,
-      ...installOptions,
+      ...installOptions
     }
 
     for (const component of options.components) {

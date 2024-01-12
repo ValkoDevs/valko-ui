@@ -6,17 +6,17 @@ const useStyle = () => {
     slots: {
       collapse: [
         'w-full',
-        'group-data-[type=filled]:bg-light-3',
-        'group-data-[type=outlined]:group-data-[separator=split]:border-2',
-        'group-data-[type=outlined]:group-data-[separator=split]:border-light-5',
+        'group-data-[variant=filled]:bg-light-3',
+        'group-data-[variant=outlined]:group-data-[separator=split]:border-2',
+        'group-data-[variant=outlined]:group-data-[separator=split]:border-light-5',
         'group-data-[separator=split]:rounded-lg',
         'group-data-[separator=split]:p-3',
-        'dark:group-data-[type=filled]:bg-dark-3',
-        'dark:group-data-[type=outlined]:group-data-[separator=split]:border-dark-1'
+        'dark:group-data-[variant=filled]:bg-dark-3',
+        'dark:group-data-[variant=outlined]:group-data-[separator=split]:border-dark-1'
       ],
       button: [
         'w-full',
-        'py-2', 
+        'py-2',
         'rounded-lg',
         'font-bold',
         'text-left',
@@ -60,7 +60,7 @@ const useStyle = () => {
       button: slots.button(),
       panel: slots.panel(),
       icon: slots.icon(),
-      iconOpen: slots.iconOpen(),
+      iconOpen: slots.iconOpen()
     }
   })
 }

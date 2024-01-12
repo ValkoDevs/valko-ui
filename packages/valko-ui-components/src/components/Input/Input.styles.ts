@@ -82,7 +82,7 @@ const useStyle = (props: InputProps) => {
       ]
     },
     variants: {
-      kind: {
+      variant: {
         filled: {
           input: [
             'rounded-t-md',
@@ -143,7 +143,7 @@ const useStyle = (props: InputProps) => {
           ],
           label: [
             'text-xs',
-            'peer-data-[hasIcon=true]:left-5',
+            'peer-data-[hasIcon=true]:left-5'
           ],
           helper: [
             'text-xs'
@@ -161,7 +161,7 @@ const useStyle = (props: InputProps) => {
           ],
           label: [
             'text-sm',
-            'peer-data-[hasIcon=true]:left-6',
+            'peer-data-[hasIcon=true]:left-6'
           ],
           helper: [
             'text-sm'
@@ -238,7 +238,7 @@ const useStyle = (props: InputProps) => {
           helper: [
             'text-gray-500'
           ]
-        },
+        }
       },
       type: {
         text: 'text',
@@ -250,7 +250,7 @@ const useStyle = (props: InputProps) => {
     compoundVariants: [
       // filled & color
       {
-        kind: 'filled',
+        variant: 'filled',
         color: 'primary',
         disabled: false,
         class: {
@@ -279,7 +279,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'filled',
+        variant: 'filled',
         color: 'secondary',
         disabled: false,
         class: {
@@ -292,7 +292,7 @@ const useStyle = (props: InputProps) => {
             'text-secondary-500',
             'peer-focus:text-secondary-600',
             'dark:text-secondary-500'
-          ],         
+          ],
           helper: [
             'text-secondary-500',
             'dark:text-secondary-500'
@@ -305,7 +305,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'filled',
+        variant: 'filled',
         color: 'success',
         disabled: false,
         class: {
@@ -333,7 +333,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'filled',
+        variant: 'filled',
         color: 'info',
         disabled: false,
         class: {
@@ -347,7 +347,7 @@ const useStyle = (props: InputProps) => {
           label: [
             'text-info-500',
             'focus:text-info-950',
-            'dark:text-info-500',
+            'dark:text-info-500'
           ],
           helper: [
             'text-info-500',
@@ -356,12 +356,12 @@ const useStyle = (props: InputProps) => {
           icon: [
             'text-info-500',
             'focus:text-info-950',
-            'dark:text-info-500',
+            'dark:text-info-500'
           ]
         }
       },
       {
-        kind: 'filled',
+        variant: 'filled',
         color: 'warning',
         disabled: false,
         class: {
@@ -389,7 +389,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'filled',
+        variant: 'filled',
         color: 'error',
         disabled: false,
         class: {
@@ -403,7 +403,7 @@ const useStyle = (props: InputProps) => {
           label: [
             'text-error-500',
             'focus:text-error-950',
-            'dark:text-error-500',
+            'dark:text-error-500'
           ],
           helper: [
             'text-error-500',
@@ -412,13 +412,13 @@ const useStyle = (props: InputProps) => {
           icon: [
             'text-error-500',
             'focus:text-error-950',
-            'dark:text-error-500',
+            'dark:text-error-500'
           ]
         }
       },
       // ghost & color
       {
-        kind: 'ghost',
+        variant: 'ghost',
         color: 'primary',
         disabled: false,
         class: {
@@ -447,7 +447,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'ghost',
+        variant: 'ghost',
         color: 'secondary',
         disabled: false,
         class: {
@@ -461,7 +461,7 @@ const useStyle = (props: InputProps) => {
           label: [
             'text-secondary-500',
             'focus:text-secondary-950',
-            'dark:text-secondary-500',
+            'dark:text-secondary-500'
           ],
           helper: [
             'text-secondary-500',
@@ -470,12 +470,12 @@ const useStyle = (props: InputProps) => {
           icon: [
             'text-secondary-500',
             'focus:text-secondary-950',
-            'dark:text-secondary-500',
+            'dark:text-secondary-500'
           ]
         }
       },
       {
-        kind: 'ghost',
+        variant: 'ghost',
         color: 'success',
         disabled: false,
         class: {
@@ -502,7 +502,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'ghost',
+        variant: 'ghost',
         color: 'info',
         disabled: false,
         class: {
@@ -529,7 +529,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'ghost',
+        variant: 'ghost',
         color: 'warning',
         disabled: false,
         class: {
@@ -556,7 +556,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'ghost',
+        variant: 'ghost',
         color: 'error',
         disabled: false,
         class: {
@@ -584,7 +584,7 @@ const useStyle = (props: InputProps) => {
       },
       // outlined & color
       {
-        kind: 'outlined',
+        variant: 'outlined',
         color: 'primary',
         disabled: false,
         class: {
@@ -610,7 +610,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'outlined',
+        variant: 'outlined',
         color: 'secondary',
         disabled: false,
         class: {
@@ -634,7 +634,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'outlined',
+        variant: 'outlined',
         color: 'success',
         disabled: false,
         class: {
@@ -659,7 +659,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'outlined',
+        variant: 'outlined',
         color: 'info',
         disabled: false,
         class: {
@@ -684,7 +684,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'outlined',
+        variant: 'outlined',
         color: 'warning',
         disabled: false,
         class: {
@@ -709,7 +709,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'outlined',
+        variant: 'outlined',
         color: 'error',
         disabled: false,
         class: {
@@ -735,7 +735,7 @@ const useStyle = (props: InputProps) => {
       },
       // filled & ghost & rounded
       {
-        kind: ['filled', 'ghost'],
+        variant: ['filled', 'ghost'],
         rounded: true,
         size: 'xs',
         class: {
@@ -753,7 +753,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: ['filled', 'ghost'],
+        variant: ['filled', 'ghost'],
         rounded: true,
         size: 'sm',
         class: {
@@ -767,11 +767,11 @@ const useStyle = (props: InputProps) => {
           ],
           helper: [
             'ml-6'
-          ] 
+          ]
         }
       },
       {
-        kind: ['filled', 'ghost'],
+        variant: ['filled', 'ghost'],
         rounded: true,
         size: 'md',
         class: {
@@ -789,7 +789,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: ['filled', 'ghost'],
+        variant: ['filled', 'ghost'],
         rounded: true,
         size: 'lg',
         class: {
@@ -808,7 +808,7 @@ const useStyle = (props: InputProps) => {
       },
       // outlined & rounded
       {
-        kind: 'outlined',
+        variant: 'outlined',
         rounded: true,
         size: 'xs',
         class: {
@@ -826,7 +826,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'outlined',
+        variant: 'outlined',
         rounded: true,
         size: 'sm',
         class: {
@@ -844,7 +844,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'outlined',
+        variant: 'outlined',
         rounded: true,
         size: 'md',
         class: {
@@ -862,7 +862,7 @@ const useStyle = (props: InputProps) => {
         }
       },
       {
-        kind: 'outlined',
+        variant: 'outlined',
         rounded: true,
         size: 'lg',
         class: {
@@ -892,11 +892,11 @@ const useStyle = (props: InputProps) => {
 
   return computed(() => {
     const slots = input({
-      color: props.variant,
+      color: props.color,
       size: props.size,
       rounded: props.rounded,
       type: props.type,
-      kind: props.kind,
+      variant: props.variant,
       disabled: props.disabled
     })
 
@@ -909,7 +909,7 @@ const useStyle = (props: InputProps) => {
       icon: slots.icon(),
       iconRight: slots.iconRight(),
       iconLeft: slots.iconLeft(),
-      iconOpen: slots.iconOpen(),
+      iconOpen: slots.iconOpen()
     }
   })
 }

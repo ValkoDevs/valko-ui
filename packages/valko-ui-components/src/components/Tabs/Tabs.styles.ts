@@ -65,7 +65,7 @@ const useStyle = (props: TabsProps) => {
       ]
     },
     variants: {
-      type: {
+      variant: {
         filled: {
           list: [
             'bg-light-3',
@@ -152,7 +152,7 @@ const useStyle = (props: TabsProps) => {
             'p-4',
             'text-lg'
           ]
-        }    
+        }
       },
       color: {
         primary: {},
@@ -333,10 +333,10 @@ const useStyle = (props: TabsProps) => {
   })
   return computed(() => {
     const slots = tab({
-      color: props.variant,
+      color: props.color,
       size: props.size,
       shape: props.shape,
-      type: props.type,
+      variant: props.variant,
       grow: props.grow,
       vertical: props.vertical
     })

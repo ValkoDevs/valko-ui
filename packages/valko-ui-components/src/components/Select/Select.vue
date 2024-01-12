@@ -7,8 +7,8 @@ import useStyle from './Select.styles'
 defineOptions({ name: 'VkSelect' })
 
 const props = withDefaults(defineProps<SelectProps>(), {
-  variant: 'primary',
-  type: 'filled',
+  color: 'primary',
+  variant: 'filled',
   size: 'md',
   placeholder: 'Select an option',
   iconRight: 'chevron-down',
@@ -29,7 +29,7 @@ const showValue = computed(
   () => Array.isArray(props.modelValue)
     ? props.modelValue.map(
       (val: string | number) => showMap[`${val}`]
-    ).join(', ') 
+    ).join(', ')
     : showMap[`${props.modelValue}`]
 )
 
@@ -116,8 +116,8 @@ const toggleDropdown = (onFocus: boolean) => {
         :label="placeholder"
         :disabled="disabled"
         :rounded="rounded"
-        :kind="type"
         :variant="variant"
+        :color="color"
         :size="size"
         :model-value="showValue"
         :icon-left="iconLeft"

@@ -1,16 +1,16 @@
 import Sizes from '@/types/sizes'
+import Colors from '@/types/colors'
 import Variants from '@/types/variants'
 
-export interface CheckboxProps extends Variants, Sizes  {
-  type: 'filled' | 'outlined';
+export interface CheckboxProps extends Colors, Sizes, Variants  {
   rounded?: boolean;
   disabled?: boolean;
   loading?: boolean;
   flat?: boolean;
   modelValue: boolean | null;
   label?: string;
-  errorText?: string;
+  helpertext?: string;
   labelPosition?: boolean;
-  readOnly?: boolean;
+  readonly?: boolean;
   indeterminate?: boolean;
 }

@@ -1,54 +1,21 @@
 <script setup lang="ts">
-import {ref} from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import { ref } from 'vue'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
+import colorOptions from '@/data/colorOptions'
+import sizeOptions from '@/data/sizeOptions'
+import propHeaders from '@/data/propHeaders'
 
-const variants = [
-  {value:'primary', label:'Primary'},
-  {value:'secondary', label:'Secondary'},
-  {value:'success', label:'Success'},
-  {value:'info', label:'Info'},
-  {value:'warning', label:'Warning'},
-  {value:'error', label:'Error'}
-]
-const sizes = [
-  {value:'xs', label:'Extra Small'},
-  {value:'sm', label:'Small'},
-  {value:'md', label:'Medium'},
-  {value:'lg', label:'Large'}
-]
 const form = ref({
-  variants: 'primary',
-  sizes: 'md' 
+  color: 'primary',
+  size: 'md'
 })
 
-const apiHeaders = [
-  {
-    key: 'prop',
-    label: 'Property'
-  },
-  {
-    key: 'required',
-    label: 'Required'
-  },
-  {
-    key: 'description',
-    label: 'Description'
-  },
-  {
-    key: 'values',
-    label: 'Values'
-  },
-  {
-    key: 'default',
-    label: 'Default'
-  }
-]
 const apiData = [
   {
-    prop: 'variant',
+    prop: 'color',
     required: false,
-    description: 'The color variant of the Spinner.',
+    description: 'The color theme of the Spinner.',
     values: 'primary, secondary, error, warning, info, success',
     default: 'primary'
   },
@@ -70,8 +37,8 @@ const apiData = [
     <template #playground-view>
       <div class="w-full flex justify-center items-center">
         <vk-spinner
-          :variant="form.variants"
-          :size="form.sizes"
+          :color="form.color"
+          :size="form.size"
         />
       </div>
     </template>
@@ -82,20 +49,18 @@ const apiData = [
           <form action="">
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
-                placeholder="Variant"
+                placeholder="Color"
                 size="sm"
-                :options="variants"
-                v-model="form.variants"
+                :options="colorOptions"
+                v-model="form.color"
               />
             </div>
             <div class="flex mb-1">
               <vk-select
-                type="outlined"
                 placeholder="Size"
                 size="sm"
-                :options="sizes"
-                v-model="form.sizes"
+                :options="sizeOptions"
+                v-model="form.size"
               />
             </div>
           </form>
@@ -111,13 +76,13 @@ const apiData = [
       >
         <div class="gap-x-12 gap-y-4 grid grid-cols-2">
           <div
-            v-for="variant in variants"
-            :key="variant.value"
+            v-for="color in colorOptions"
+            :key="color.value"
             class="flex gap-2 items-center"
           >
-            <vk-spinner 
-              :variant="variant.value"
-            /> {{ variant.label }}
+            <vk-spinner
+              :color="color.value"
+            /> {{ color.label }}
           </div>
         </div>
       </example-section>
@@ -130,11 +95,11 @@ const apiData = [
       >
         <div class="gap-x-12 gap-y-4 grid grid-cols-2">
           <div
-            v-for="size in sizes"
+            v-for="size in sizeOptions"
             :key="size.value"
             class="flex gap-2 items-center"
           >
-            <vk-spinner 
+            <vk-spinner
               :size="size.value"
             /> {{ size.label }}
           </div>
@@ -144,7 +109,7 @@ const apiData = [
 
     <template #api>
       <vk-data-table
-        :headers="apiHeaders"
+        :headers="propHeaders"
         :data="apiData"
       />
     </template>

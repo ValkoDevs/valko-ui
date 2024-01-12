@@ -11,7 +11,7 @@ export default defineConfig({
     vue(),
     VueTypeImports(),
     dts({
-      insertTypesEntry: true,
+      insertTypesEntry: true
     }),
     typescript2({
       check: false,
@@ -21,8 +21,8 @@ export default defineConfig({
           outDir: 'dist',
           sourceMap: true,
           declaration: true,
-          declarationMap: true,
-        },
+          declarationMap: true
+        }
       },
       exclude: ['vite.config.ts']
     })
@@ -50,14 +50,14 @@ export default defineConfig({
       output: {
         exports: 'named',
         globals: {
-          vue: 'Vue',
-        },
-      },
-    },
+          vue: 'Vue'
+        }
+      }
+    }
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-    },
-  },
+      '@': path.resolve(__dirname, 'src')
+    }
+  }
 })

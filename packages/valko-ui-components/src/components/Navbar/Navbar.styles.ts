@@ -14,7 +14,7 @@ const useStyle = (props: NavbarProps) => {
       'flex',
       'justify-items-center',
       'items-center',
-      'shadow-lg',
+      'shadow-lg'
     ],
     variants: {
       fixed: {
@@ -33,7 +33,7 @@ const useStyle = (props: NavbarProps) => {
     return baseNavbar({
       fixed: props.fixed,
       rounded: props.rounded,
-      floating: props.floating,
+      floating: props.floating
     })
   })
 }

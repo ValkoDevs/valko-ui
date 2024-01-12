@@ -3,8 +3,8 @@ import { DataTableProps } from '@/components/DataTable/interfaces'
 import useStyle from './DataTable.styles'
 
 const props = withDefaults(defineProps<DataTableProps>(), {
-  variant: 'secondary',
-  type: 'filled',
+  color: 'secondary',
+  variant: 'filled',
   size: 'md',
   sortBy: null,
   sortDir: 'asc',

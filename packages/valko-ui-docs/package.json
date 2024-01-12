@@ -7,20 +7,19 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint --ext .ts,.vue,.js ."
+    "lint": "eslint --ext .ts,.vue,.js .",
+    "lint:fix": "eslint --fix --ext .ts,.vue,.js ./src"
   },
   "dependencies": {
     "vue": "3.3.4",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.59.9",
-    "@typescript-eslint/parser": "^5.59.9",
+    "@valko-ui/eslint-config": "*",
     "@valko-ui/components": "*",
     "@vitejs/plugin-vue": "^4.2.3",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.42.0",
-    "eslint-plugin-vue": "^9.14.1",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2",
     "tailwind-variants": "^0.1.13",
