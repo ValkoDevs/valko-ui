@@ -276,4 +276,3 @@ const apiData = [
     </template>
   </doc-section>
 </template>
-@/data/variantsOptions

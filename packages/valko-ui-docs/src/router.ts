@@ -44,6 +44,10 @@ const routes = [
         component: lazyLoad('forms', 'SelectPage')
       },
       {
+        path: 'progressbar',
+        component: lazyLoad('ui', 'ProgressbarPage')
+      },
+      {
         path: 'spinner',
         component: lazyLoad('ui', 'SpinnerPage')
       },

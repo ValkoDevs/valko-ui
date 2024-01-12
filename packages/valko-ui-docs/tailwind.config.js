@@ -11,9 +11,7 @@ export default {
     '../valko-ui-components/**/*.{js, vue, ts, html}'
   ],
   theme: {
-    extend: {
-      colors: {}
-    }
+    extend: {}
   },
   plugins: []
 }

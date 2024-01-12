@@ -16,6 +16,7 @@ const menuItems: MenuItem[] = [
   { key: 'input', group: 'Forms',  text:'Input' },
   { key: 'textarea', group: 'Forms', text: 'Textarea' },
   { key: 'select', group: 'Forms', text: 'Select' },
+  { key: 'progressbar', group: 'Ui', text: 'Progressbar' },
   { key: 'spinner', group: 'Ui', text: 'Spinner' },
   { key: 'collapse', group: 'Data', text: 'Collapse' },
   { key: 'pagination', group: 'Data', text: 'Pagination' },
