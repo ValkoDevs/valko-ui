@@ -23,6 +23,7 @@ const form = ref({
   helpertext: '',
   label: 'Checkbox',
   exampleChecked: true,
+  exampleIndeterminate: true,
   indeterminate: false,
   checked: false as boolean | null,
   readonly: false
@@ -126,7 +127,7 @@ watchEffect(() => {
     description="The checkbox component provides users the ability to choose between two distinct values. These are very similar to a switch and can be used in complex forms and checklists"
   >
     <template #playground-view>
-      <div class="w-full flex justify-center">
+      <div class="w-full flex justify-center p-4">
         <vk-checkbox
           :color="form.color"
           :variant="form.variant"
@@ -258,6 +259,15 @@ watchEffect(() => {
             :label="variant.label"
             :model-value="form.exampleChecked"
           />
+        </div>
+      </example-section>
+
+      <example-section
+        title="Misc"
+        justify="start"
+        gap
+      >
+        <div class="gap-x-12 gap-y-4 grid grid-cols-2">
           <vk-checkbox
             label="Disabled"
             disabled
@@ -280,8 +290,8 @@ watchEffect(() => {
           />
           <vk-checkbox
             label="Inderterminate"
-            inderteminate
-            :model-value="form.exampleChecked"
+            indeterminate
+            v-model="form.exampleIndeterminate"
           />
         </div>
       </example-section>
