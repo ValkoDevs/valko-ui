@@ -89,7 +89,7 @@ const tabsPropsData = [
   {
     prop: 'vertical',
     required: false,
-    description: 'Wether the Tabs displays vertically or not',
+    description: 'Wheter the Tabs displays vertically or not',
     values: 'true, false',
     default: 'false'
   },
@@ -134,7 +134,7 @@ const tabInterfaceData = [
   {
     prop: 'Disabled',
     required: false,
-    description: 'Wether the Tab is disabled or not',
+    description: 'Wheter the Tab is disabled or not',
     values: 'true, false',
     default: 'false'
   }

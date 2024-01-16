@@ -89,7 +89,7 @@ const useStyle = (props: TabsProps) => {
         }
       },
       shape: {
-        underline: {
+        line: {
           list: [
             'p-0'
           ],
@@ -189,10 +189,10 @@ const useStyle = (props: TabsProps) => {
       }
     },
     compoundVariants: [
-      //color & underline
+      //color & line
       {
         color: 'primary',
-        shape: 'underline',
+        shape: 'line',
         class: {
           cursor: [
             'border-primary-500'
@@ -201,7 +201,7 @@ const useStyle = (props: TabsProps) => {
       },
       {
         color: 'secondary',
-        shape: 'underline',
+        shape: 'line',
         class: {
           cursor: [
             'border-secondary-500'
@@ -210,7 +210,7 @@ const useStyle = (props: TabsProps) => {
       },
       {
         color: 'success',
-        shape: 'underline',
+        shape: 'line',
         class: {
           cursor: [
             'border-success-500'
@@ -219,7 +219,7 @@ const useStyle = (props: TabsProps) => {
       },
       {
         color: 'info',
-        shape: 'underline',
+        shape: 'line',
         class: {
           cursor: [
             'border-info-500'
@@ -228,7 +228,7 @@ const useStyle = (props: TabsProps) => {
       },
       {
         color: 'warning',
-        shape: 'underline',
+        shape: 'line',
         class: {
           cursor: [
             'border-warning-500'
@@ -237,7 +237,7 @@ const useStyle = (props: TabsProps) => {
       },
       {
         color: 'error',
-        shape: 'underline',
+        shape: 'line',
         class: {
           cursor: [
             'border-error-500'
@@ -299,9 +299,9 @@ const useStyle = (props: TabsProps) => {
           ]
         }
       },
-      // vertical & underline
+      // vertical & line
       {
-        shape: 'underline',
+        shape: 'line',
         vertical: true,
         class: {
           cursor: [

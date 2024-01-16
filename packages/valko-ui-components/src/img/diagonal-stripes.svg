@@ -1,0 +1,8 @@
+<svg viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g fill="rgba(0,0,0,0.1)">
+            <polygon points="0 40 40 0 20 0 0 20"></polygon>
+            <polygon points="40 40 40 20 20 40"></polygon>
+        </g>
+    </g>
+</svg>

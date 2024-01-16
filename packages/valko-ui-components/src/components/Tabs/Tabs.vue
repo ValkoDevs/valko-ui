@@ -22,8 +22,8 @@ const onChange = async () => {
   await nextTick()
   await nextTick()
   if (cursor.value) {
-    const extraHeight = props.shape === 'underline' && props.variant === 'outlined' && !props.vertical ? 2 : 0
-    const extraLeft = props.shape === 'underline' && props.variant === 'outlined' && props.vertical ? 2 : 0
+    const extraHeight = props.shape === 'line' && props.variant === 'outlined' && !props.vertical ? 2 : 0
+    const extraLeft = props.shape === 'line' && props.variant === 'outlined' && props.vertical ? 2 : 0
     const selectedElement = cursor.value.closest('.tab-list')?.querySelector('button[data-headlessui-state=selected]') as HTMLElement
     cursor.value.style.width = `${selectedElement.clientWidth}px`
     cursor.value.style.height = `${+selectedElement.clientHeight + extraHeight}px`

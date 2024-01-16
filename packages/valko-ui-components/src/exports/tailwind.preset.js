@@ -29,6 +29,28 @@ module.exports = () => ({
           4: colors.slate[300],
           5: colors.slate[400]
         },
+      },
+      backgroundImage: {
+        'gradient-striped': 'linear-gradient(125deg,rgba(0,0,0,.1) 10%,transparent 0,transparent 50%,rgba(0,0,0,.1) 0,rgba(0,0,0,.1) 10%,transparent 0,transparent)'
+      },
+      animation: {
+        progress: 'progress 1.5s infinite linear',
+        cicle: 'cicle 1s infinite linear'
+      },
+      keyframes: {
+        progress: {
+          '0%': { transform:  'translateX(0)', width: '0' },
+          '30%': { transform:  'translateX(0)', width: '30%'},
+          '70%': { transform:  'translateX(100%)', width: '70%'},
+          '100%': { transform:  'translateX(100%)', width: '100%'}
+        },
+        cicle: {
+          '0%': { transform: 'translateY(-50%)' },
+          '100%': { transform: 'translateY(0)' }
+        }
+      },
+      transformOrigin: {
+        'left-right': '0% 50%'
       }
     }
   },
