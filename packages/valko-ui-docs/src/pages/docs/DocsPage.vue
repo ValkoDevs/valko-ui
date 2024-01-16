@@ -12,14 +12,15 @@ const menuItems: MenuItem[] = [
   { key: 'get-started', group: 'General', text: 'Get Started' },
   { key: 'divider', group: 'Layout', text: 'Divider' },
   { key: 'button', group: 'Forms', text: 'Button' },
-  { key: 'checkbox', group: 'Forms', text: 'Checkbox' },
   { key: 'input', group: 'Forms',  text:'Input' },
-  { key: 'textarea', group: 'Forms', text: 'Textarea' },
+  { key: 'checkbox', group: 'Forms', text: 'Checkbox' },
   { key: 'select', group: 'Forms', text: 'Select' },
+  { key: 'textarea', group: 'Forms', text: 'Textarea' },
+  { key: 'alert', group: 'Ui', text: 'Alert' },
   { key: 'progressbar', group: 'Ui', text: 'Progressbar' },
   { key: 'spinner', group: 'Ui', text: 'Spinner' },
-  { key: 'collapse', group: 'Data', text: 'Collapse' },
   { key: 'pagination', group: 'Data', text: 'Pagination' },
+  { key: 'collapse', group: 'Data', text: 'Collapse' },
   { key: 'tabs', group: 'Data', text: 'Tabs' }
 ]
 

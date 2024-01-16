@@ -28,20 +28,32 @@ const routes = [
         component: lazyLoad('forms', 'CheckboxPage')
       },
       {
-        path: 'collapse',
-        component: lazyLoad('data', 'CollapsePage')
-      },
-      {
         path: 'input',
         component: lazyLoad('forms', 'InputPage')
+      },
+      {
+        path: 'select',
+        component: lazyLoad('forms', 'SelectPage')
+      },
+      {
+        path: 'textarea',
+        component: lazyLoad('forms', 'TextareaPage')
       },
       {
         path: 'pagination',
         component: lazyLoad('data', 'PaginationPage')
       },
       {
-        path: 'select',
-        component: lazyLoad('forms', 'SelectPage')
+        path: 'collapse',
+        component: lazyLoad('data', 'CollapsePage')
+      },
+      {
+        path: 'tabs',
+        component: lazyLoad('data', 'TabsPage')
+      },
+      {
+        path: 'alert',
+        component: lazyLoad('ui', 'AlertPage')
       },
       {
         path: 'progressbar',
@@ -50,14 +62,6 @@ const routes = [
       {
         path: 'spinner',
         component: lazyLoad('ui', 'SpinnerPage')
-      },
-      {
-        path: 'tabs',
-        component: lazyLoad('data', 'TabsPage')
-      },
-      {
-        path: 'textarea',
-        component: lazyLoad('forms', 'TextareaPage')
       }
     ]
   }
