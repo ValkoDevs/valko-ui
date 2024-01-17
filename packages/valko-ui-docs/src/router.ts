@@ -40,6 +40,10 @@ const routes = [
         component: lazyLoad('forms', 'TextareaPage')
       },
       {
+        path: 'radio',
+        component: lazyLoad('forms', 'RadioPage')
+      },
+      {
         path: 'pagination',
         component: lazyLoad('data', 'PaginationPage')
       },
