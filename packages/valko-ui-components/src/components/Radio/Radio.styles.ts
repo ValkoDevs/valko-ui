@@ -1,9 +1,9 @@
 import { tv } from 'tailwind-variants'
-import { CheckboxProps } from './interfaces'
+import { RadioProps } from './interfaces'
 import { computed } from 'vue'
 
-const useStyle = (props: CheckboxProps) => {
-  const checkbox = tv({
+const useStyle = (props: RadioProps) => {
+  const radio = tv({
     slots: {
       container: [
         'w-full',
@@ -12,10 +12,10 @@ const useStyle = (props: CheckboxProps) => {
         'items-center',
         'cursor-pointer'
       ],
-      checkbox: [
+      radio: [
         'shadow-lg',
         'border-2',
-        'rounded',
+        'rounded-full',
         'border-light-5',
         'relative',
         'flex',
@@ -36,7 +36,9 @@ const useStyle = (props: CheckboxProps) => {
         'inline-block',
         'scale-[.8]'
       ],
-      label: [],
+      label: [
+        'cursor-pointer'
+      ],
       icon: [
         'text-white'
       ]
@@ -44,7 +46,7 @@ const useStyle = (props: CheckboxProps) => {
     variants: {
       size: {
         xs: {
-          checkbox: [
+          radio: [
             'w-3.5',
             'h-3.5'
           ],
@@ -59,7 +61,7 @@ const useStyle = (props: CheckboxProps) => {
           ]
         },
         sm: {
-          checkbox: [
+          radio: [
             'w-4',
             'h-4'
           ],
@@ -74,7 +76,7 @@ const useStyle = (props: CheckboxProps) => {
           ]
         },
         md: {
-          checkbox: [
+          radio: [
             'w-5',
             'h-5'
           ],
@@ -89,7 +91,7 @@ const useStyle = (props: CheckboxProps) => {
           ]
         },
         lg: {
-          checkbox: [
+          radio: [
             'w-6',
             'h-6'
           ],
@@ -108,7 +110,7 @@ const useStyle = (props: CheckboxProps) => {
         filled: {},
         outlined: {},
         ghost: {
-          checkbox: [
+          radio: [
             'border-0',
             'bg-light-5/[.15]',
             'dark:bg-dark-1/[.15]'
@@ -151,17 +153,20 @@ const useStyle = (props: CheckboxProps) => {
       },
       disabled: {
         true: {
-          checkbox: [
+          radio: [
             'bg-gray-600',
-            'text-gray-600',
+            'border-gray-600',
             'opacity-50',
             'cursor-not-allowed',
             'data-[checked=true]:border-gray-600',
             'data-[checked=true]:bg-gray-600'
+          ],
+          icon: [
+            'text-gray-600'
           ]
         }
       },
-      labelPosition: {
+      position: {
         true: {
           container: [
             'flex-row-reverse',
@@ -176,20 +181,6 @@ const useStyle = (props: CheckboxProps) => {
             'ml-2'
           ]
         }
-      },
-      rounded: {
-        true: {
-          checkbox: [
-            'rounded-full'
-          ]
-        }
-      },
-      flat: {
-        true: {
-          checkbox: [
-            'shadow-none'
-          ]
-        }
       }
     },
     compoundVariants: [
@@ -199,7 +190,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'primary',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:bg-primary-500',
             'data-[checked=true]:border-primary-500',
             'data-[indeterminate=true]:border-primary-500',
@@ -216,7 +207,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'secondary',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:bg-secondary-500',
             'data-[checked=true]:border-secondary-500',
             'data-[indeterminate=true]:border-secondary-500',
@@ -233,7 +224,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'success',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:bg-success-500',
             'data-[checked=true]:border-success-500',
             'data-[indeterminate=true]:border-success-500',
@@ -250,7 +241,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'info',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:bg-info-500',
             'data-[checked=true]:border-info-500',
             'data-[indeterminate=true]:border-info-500',
@@ -267,7 +258,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'warning',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:bg-warning-500',
             'data-[checked=true]:border-warning-500',
             'data-[indeterminate=true]:border-warning-500',
@@ -284,7 +275,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'error',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:bg-error-500',
             'data-[checked=true]:border-error-500',
             'data-[indeterminate=true]:border-error-500',
@@ -302,7 +293,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'primary',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:border-primary-500',
             'data-[indeterminate=true]:border-primary-500',
             'dark:data-[checked=true]:border-primary-500',
@@ -319,7 +310,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'secondary',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:border-secondary-500',
             'data-[indeterminate=true]:border-secondary-500',
             'dark:data-[checked=true]:border-secondary-500',
@@ -336,7 +327,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'success',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:border-success-500',
             'data-[indeterminate=true]:border-success-500',
             'dark:data-[checked=true]:border-success-500',
@@ -353,7 +344,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'info',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:border-info-500',
             'data-[indeterminate=true]:border-info-500',
             'dark:data-[checked=true]:border-info-500',
@@ -370,7 +361,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'warning',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:border-warning-500',
             'data-[indeterminate=true]:border-warning-500',
             'dark:data-[checked=true]:border-warning-500',
@@ -387,7 +378,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'error',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:border-error-500',
             'data-[indeterminate=true]:border-error-500',
             'dark:data-[checked=true]:border-error-500',
@@ -405,7 +396,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'primary',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:bg-primary-500/[.15]',
             'data-[indeterminate=true]:bg-primary-500/[.15]',
             'dark:data-[checked=true]:bg-primary-500/[.15]',
@@ -421,7 +412,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'secondary',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:bg-secondary-500/[.15]',
             'data-[indeterminate=true]:bg-secondary-500/[.15]',
             'dark:data-[checked=true]:bg-secondary-500/[.15]',
@@ -437,7 +428,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'success',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:bg-success-500/[.15]',
             'data-[indeterminate=true]:bg-success-500/[.15]',
             'dark:data-[checked=true]:bg-success-500/[.15]',
@@ -453,7 +444,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'info',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:bg-info-500/[.15]',
             'data-[indeterminate=true]:bg-info-500/[.15]',
             'dark:data-[checked=true]:bg-info-500/[.15]',
@@ -469,7 +460,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'warning',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:bg-warning-500/[.15]',
             'data-[indeterminate=true]:bg-warning-500/[.15]',
             'dark:data-[checked=true]:bg-warning-500/[.15]',
@@ -485,7 +476,7 @@ const useStyle = (props: CheckboxProps) => {
         color: 'error',
         disabled: false,
         class: {
-          checkbox: [
+          radio: [
             'data-[checked=true]:bg-error-500/[.15]',
             'data-[indeterminate=true]:bg-error-500/[.15]',
             'dark:data-[checked=true]:bg-error-500/[.15]',
@@ -500,18 +491,16 @@ const useStyle = (props: CheckboxProps) => {
   })
 
   return computed(() => {
-    const slots = checkbox({
+    const slots = radio({
       color: props.color,
       size: props.size,
-      rounded: props.rounded,
-      flat: props.flat,
-      labelPosition: props.labelPosition,
       disabled: props.disabled,
-      variant: props.variant
+      variant: props.variant,
+      position: props.position
     })
     return {
       container: slots.container(),
-      checkbox: slots.checkbox(),
+      radio: slots.radio(),
       input: slots.input(),
       helpertext: slots.helpertext(),
       label: slots.label(),

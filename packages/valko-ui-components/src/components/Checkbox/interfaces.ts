@@ -8,7 +8,6 @@ export interface CheckboxProps extends Colors, Sizes, Variants  {
   modelValue: boolean | null;
   rounded?: boolean;
   disabled?: boolean;
-  loading?: boolean;
   flat?: boolean;
   labelPosition?: boolean;
   readonly?: boolean;

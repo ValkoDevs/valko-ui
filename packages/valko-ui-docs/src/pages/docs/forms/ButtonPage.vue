@@ -97,7 +97,7 @@ const apiData = [
           <div class="flex mb-1">
             <vk-select
               type="outlined"
-              placeholder="Colors"
+              placeholder="Color"
               size="sm"
               :options="colorOptions"
               v-model="form.color"
