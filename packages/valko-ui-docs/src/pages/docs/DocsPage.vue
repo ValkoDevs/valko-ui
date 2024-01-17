@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref, watchEffect } from 'vue'
-import type { MenuItem } from '@valko-ui/components'
+import type { MenuItem, VkCheckbox } from '@valko-ui/components'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -49,17 +49,11 @@ watchEffect(() => {
 <template>
   <div class="flex flex-col h-full justify-items-start overflow-hidden">
     <vk-navbar fixed>
-      <div class="flex">
-        <label
-          for="cb-dark-mode"
-          class="mr-2"
-        >Dark mode: </label>
-        <input
-          name="cb-dark-mode"
-          type="checkbox"
-          v-model="darkTheme"
-        >
-      </div>
+      <vk-checkbox
+        :label-position="true"
+        label="Dark mode:"
+        v-model="darkTheme"
+      />
     </vk-navbar>
     <div class="w-full flex flex-wrap grow overflow-y-auto">
       <aside class="w-2/12 h-full overflow-y-auto pt-2 px-2 border-r border-light-4 dark:border-dark-2">

@@ -10,7 +10,6 @@ const useStyle = (props: CollapseProps) => {
       'px-3',
       'grid',
       'grid-cols-1',
-      'rounded-md',
       'group'
     ],
     variants: {
@@ -37,11 +36,21 @@ const useStyle = (props: CollapseProps) => {
         split: [
           'p-0',
           'gap-2',
-          'bg-transparent'
+          'bg-transparent',
+          'dark:bg-transparent'
         ],
         none: [
           'gap-0'
         ]
+      },
+      shape: {
+        rounded: [
+          'rounded-2xl'
+        ],
+        soft: [
+          'rounded-lg'
+        ],
+        square: []
       }
     },
     compoundVariants: [
@@ -57,7 +66,8 @@ const useStyle = (props: CollapseProps) => {
   return computed(() => {
     return collapse({
       variant: props.variant,
-      separator: props.separator
+      separator: props.separator,
+      shape: props.shape
     })
   })
 }

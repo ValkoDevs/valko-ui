@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   color: 'primary',
   variant: 'filled',
   size: 'md',
+  shape: 'soft',
   label: 'Checkbox',
   modelValue: false,
   indeterminate: false,

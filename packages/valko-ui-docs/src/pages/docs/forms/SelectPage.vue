@@ -6,6 +6,7 @@ import variantOptions from '@/data/variantOptions'
 import colorOptions from '@/data/colorOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
+import shapeOptions from '@/data/shapeOptions'
 
 const people = [
   { value: 1, label: 'Wade Cooper' },
@@ -25,7 +26,7 @@ const form: Ref<Record<string, string | boolean | number>> = ref({
   filled: '',
   outlined: '',
   ghost: '',
-  rounded: '',
+  shape: '',
   xs: '',
   sm: '',
   md: '',
@@ -35,7 +36,7 @@ const form: Ref<Record<string, string | boolean | number>> = ref({
   size: 'md',
   disabled: false,
   flat: false,
-  selectRounded: false,
+  selectShape: 'soft',
   readonly: false,
   multiple: false,
   helper: 'Helpertext',
@@ -48,7 +49,7 @@ const apiData = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Select.',
-    values: 'primary, secondary, error, warning, info, success',
+    values: 'primary, secondary, error, warning, info, success, light, dark',
     default: 'primary'
   },
   {
@@ -134,6 +135,13 @@ const apiData = [
     description: 'A icon on the right side for the Select',
     values: 'string',
     default: 'chevron-down'
+  },
+  {
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Button.',
+    values: 'rounded, square, soft',
+    default: 'soft'
   }
 ]
 </script>
@@ -153,7 +161,7 @@ const apiData = [
           :color="form.color"
           :variant="form.variant"
           :readonly="form.readonly"
-          :rounded="form.selectRounded"
+          :shape="form.selectShape"
           :disabled="form.disabled"
           :flat="form.flat"
           :size="form.size"
@@ -198,6 +206,14 @@ const apiData = [
             </div>
             <div class="flex mb-1">
               <vk-select
+                placeholder="Shape"
+                size="sm"
+                :options="shapeOptions"
+                v-model="form.selectShape"
+              />
+            </div>
+            <div class="flex mb-1">
+              <vk-select
                 placeholder="Size"
                 size="sm"
                 :options="sizeOptions"
@@ -214,12 +230,6 @@ const apiData = [
               <vk-checkbox
                 label="Disabled"
                 v-model="form.disabled"
-              />
-            </div>
-            <div class="flex">
-              <vk-checkbox
-                label="Rounded"
-                v-model="form.selectRounded"
               />
             </div>
             <div class="flex">
@@ -282,6 +292,24 @@ const apiData = [
             :options="people"
             placeholder="Readonly"
             v-model="form.exampleReadonly"
+          />
+        </div>
+      </example-section>
+
+      <example-section
+        title="Shapes"
+        justify="start"
+        align="start"
+        gap
+      >
+        <div class="grow gap-4 grid grid-cols-2 items-end">
+          <vk-select
+            v-for="shape in shapeOptions"
+            :key="shape.value"
+            :shape="shape.value"
+            :placeholder="shape.label"
+            :options="people"
+            v-model="form[shape.value]"
           />
         </div>
       </example-section>

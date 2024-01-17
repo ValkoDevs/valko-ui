@@ -6,6 +6,7 @@ import variantOptions from '@/data/variantOptions'
 import colorOptions from '@/data/colorOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
+import shapeOptions from '@/data/shapeOptions'
 
 const isShown = ref(true)
 
@@ -14,6 +15,7 @@ const form = ref({
   variant: 'filled',
   size: 'md',
   title: '',
+  shape: 'soft',
   closable: false,
   customIcon: false,
   noIcon: false,
@@ -25,7 +27,7 @@ const apiData = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Alert.',
-    values: 'primary, secondary, error, warning, info, success',
+    values: 'primary, secondary, error, warning, info, success, light, dark',
     default: 'primary'
   },
   {
@@ -70,6 +72,13 @@ const apiData = [
     description: 'Displays a shadow for the Alert.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Button.',
+    values: 'rounded, square, soft',
+    default: 'soft'
   }
 ]
 
@@ -104,6 +113,7 @@ watch(isShown, () => {
             :title="form.title"
             :size="form.size"
             :variant="form.variant"
+            :shape="form.shape"
             :color="form.color"
             :closable="form.closable"
             :flat="form.flat"
@@ -140,6 +150,14 @@ watch(isShown, () => {
                 size="sm"
                 :options="colorOptions"
                 v-model="form.color"
+              />
+            </div>
+            <div class="flex mb-1">
+              <vk-select
+                placeholder="Shape"
+                size="sm"
+                :options="shapeOptions"
+                v-model="form.shape"
               />
             </div>
             <div class="flex mb-1">
@@ -236,6 +254,24 @@ watch(isShown, () => {
             color="secondary"
             :icon="null"
           />
+        </div>
+      </example-section>
+
+      <example-section
+        title="Shapes"
+        justify="start"
+        align="start"
+        gap
+      >
+        <div class="grow gap-4 grid grid-cols-2 items-start">
+          <vk-alert
+            v-for="shape in shapeOptions"
+            :key="shape.value"
+            :shape="shape.value"
+            :title="shape.label"
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+          </vk-alert>
         </div>
       </example-section>
 

@@ -6,6 +6,7 @@ import colorOptions from '@/data/colorOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import variantOptions from '@/data/variantOptions'
+import shapeOptions from '@/data/shapeOptions'
 
 const form = ref({
   variant: 'filled',
@@ -14,6 +15,7 @@ const form = ref({
   name: 'Radio',
   value: 'Radio-1',
   helpertext: '',
+  shape: 'rounded',
   disabled: false,
   readonly: false,
   position: false
@@ -29,7 +31,7 @@ const apiData = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Radio.',
-    values: 'primary, secondary, error, warning, info, success',
+    values: 'primary, secondary, error, warning, info, success, light, dark',
     default: 'primary'
   },
   {
@@ -101,6 +103,13 @@ const apiData = [
     description: 'The label of the Radio.',
     values: 'string',
     default: ''
+  },
+  {
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Radio.',
+    values: 'soft, rounded, square',
+    default: 'rounded'
   }
 ]
 </script>
@@ -120,6 +129,7 @@ const apiData = [
           :disabled="form.disabled"
           :readonly="form.readonly"
           :position="form.position"
+          :shape="form.shape"
           :helpertext="form.helpertext"
           label="Radio-1"
           value="Radio-1"
@@ -133,6 +143,7 @@ const apiData = [
           :disabled="form.disabled"
           :readonly="form.readonly"
           :position="form.position"
+          :shape="form.shape"
           label="Radio-2"
           value="Radio-2"
           v-model="form.value"
@@ -145,6 +156,7 @@ const apiData = [
           :disabled="form.disabled"
           :readonly="form.readonly"
           :position="form.position"
+          :shape="form.shape"
           label="Radio-3"
           value="Radio-3"
           v-model="form.value"
@@ -177,6 +189,14 @@ const apiData = [
                 size="sm"
                 :options="colorOptions"
                 v-model="form.color"
+              />
+            </div>
+            <div class="flex mb-1">
+              <vk-select
+                placeholder="Shape"
+                size="sm"
+                :options="shapeOptions"
+                v-model="form.shape"
               />
             </div>
             <div class="flex mb-1">
@@ -218,7 +238,7 @@ const apiData = [
         justify="start"
         gap
       >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-2">
+        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
           <vk-radio
             v-for="color in colorOptions"
             :key="color.value"
@@ -236,7 +256,7 @@ const apiData = [
         justify="start"
         gap
       >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-2">
+        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
           <vk-radio
             v-for="variant in variantOptions"
             :key="variant.value"
@@ -245,6 +265,24 @@ const apiData = [
             :label="variant.label"
             :value="variant.value"
             v-model="variant.value"
+          />
+        </div>
+      </example-section>
+
+      <example-section
+        title="Shapes"
+        justify="start"
+        gap
+      >
+        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
+          <vk-radio
+            v-for="shape in shapeOptions"
+            :key="shape.value"
+            :name="shape.value"
+            :shape="shape.value"
+            :label="shape.label"
+            :value="shape.value"
+            v-model="shape.value"
           />
         </div>
       </example-section>

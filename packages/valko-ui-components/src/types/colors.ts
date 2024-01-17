@@ -5,6 +5,8 @@ interface Colors {
     | 'success'
     | 'error'
     | 'warning'
-    | 'info';
+    | 'info'
+    | 'light'
+    | 'dark';
 }
 export default Colors

@@ -8,8 +8,8 @@ const useStyle = (props: AlertProps) => {
       container: [
         'w-full',
         'p-4',
-        'rounded-lg',
         'gap-4',
+        'shadow-lg',
         'flex',
         'justify-between',
         'items-stretch'
@@ -20,25 +20,24 @@ const useStyle = (props: AlertProps) => {
       title: [
         'font-bold'
       ],
-      leftIcon: [],
       button: [
         'flex',
         'flex-col',
         'justify-start'
       ],
+      span: [
+        'font-medium',
+        'break-all',
+        'text-justify'
+      ],
       rightIcon: [
         'vk-alert__close'
       ],
-      span: [
-        'font-medium'
-      ]
+      leftIcon: []
     },
     variants: {
       variant: {
         filled: {
-          container: [
-            'bg-light-5'
-          ],
           title: [
             'text-white'
           ],
@@ -66,7 +65,9 @@ const useStyle = (props: AlertProps) => {
         success: {},
         info: {},
         warning: {},
-        error: {}
+        error: {},
+        light: {},
+        dark: {}
       },
       size: {
         xs: {
@@ -117,9 +118,24 @@ const useStyle = (props: AlertProps) => {
       flat: {
         true: {
           container: [
-            'shadow-lg'
+            'shadow-none'
           ]
         }
+      },
+      shape: {
+        rounded: {
+          container: [
+            'py-4',
+            'px-12',
+            'rounded-full'
+          ]
+        },
+        soft: {
+          container: [
+            'rounded-lg'
+          ]
+        },
+        square: {}
       }
     },
     compoundVariants: [
@@ -178,25 +194,43 @@ const useStyle = (props: AlertProps) => {
           ]
         }
       },
-      // outlined & color
+      {
+        variant: 'filled',
+        color: 'light',
+        class: {
+          container: [
+            'bg-light-1'
+          ],
+          title: [
+            'text-black'
+          ],
+          span: [
+            'text-black'
+          ],
+          leftIcon: [
+            'text-black'
+          ],
+          rightIcon: [
+            'text-black'
+          ]
+        }
+      },
+      {
+        variant: 'filled',
+        color: 'dark',
+        class: {
+          container: [
+            'bg-dark-5'
+          ]
+        }
+      },
+      // outlined & color (container)
       {
         variant: 'outlined',
         color: 'primary',
         class: {
           container: [
             'border-primary-500'
-          ],
-          title: [
-            'text-primary-500'
-          ],
-          span: [
-            'text-primary-500'
-          ],
-          leftIcon: [
-            'text-primary-500'
-          ],
-          rightIcon: [
-            'text-primary-500'
           ]
         }
       },
@@ -206,18 +240,6 @@ const useStyle = (props: AlertProps) => {
         class: {
           container: [
             'border-secondary-500'
-          ],
-          title: [
-            'text-secondary-500'
-          ],
-          span: [
-            'text-secondary-500'
-          ],
-          leftIcon: [
-            'text-secondary-500'
-          ],
-          rightIcon: [
-            'text-secondary-500'
           ]
         }
       },
@@ -230,15 +252,6 @@ const useStyle = (props: AlertProps) => {
           ],
           title: [
             'text-success-500'
-          ],
-          span: [
-            'text-success-500'
-          ],
-          leftIcon: [
-            'text-success-500'
-          ],
-          rightIcon: [
-            'text-success-500'
           ]
         }
       },
@@ -248,18 +261,6 @@ const useStyle = (props: AlertProps) => {
         class: {
           container: [
             'border-info-500'
-          ],
-          title: [
-            'text-info-500'
-          ],
-          span: [
-            'text-info-500'
-          ],
-          leftIcon: [
-            'text-info-500'
-          ],
-          rightIcon: [
-            'text-info-500'
           ]
         }
       },
@@ -269,18 +270,6 @@ const useStyle = (props: AlertProps) => {
         class: {
           container: [
             'border-warning-500'
-          ],
-          title: [
-            'text-warning-500'
-          ],
-          span: [
-            'text-warning-500'
-          ],
-          leftIcon: [
-            'text-warning-500'
-          ],
-          rightIcon: [
-            'text-warning-500'
           ]
         }
       },
@@ -290,40 +279,37 @@ const useStyle = (props: AlertProps) => {
         class: {
           container: [
             'border-error-500'
-          ],
-          title: [
-            'text-error-500'
-          ],
-          span: [
-            'text-error-500'
-          ],
-          leftIcon: [
-            'text-error-500'
-          ],
-          rightIcon: [
-            'text-error-500'
           ]
         }
       },
-      // ghost & color
+      {
+        variant: 'outlined',
+        color: 'light',
+        class: {
+          container: [
+            'border-light-1'
+          ]
+        }
+      },
+      {
+        variant: 'outlined',
+        color: 'dark',
+        class: {
+          container: [
+            'border-dark-5'
+          ],
+          title: [
+            'text-dark-5'
+          ]
+        }
+      },
+      // ghost & color (container)
       {
         variant: 'ghost',
         color: 'primary',
         class: {
           container: [
             'bg-primary-500/[.20]'
-          ],
-          title: [
-            'text-primary-500'
-          ],
-          span: [
-            'text-primary-500'
-          ],
-          leftIcon: [
-            'text-primary-500'
-          ],
-          rightIcon: [
-            'text-primary-500'
           ]
         }
       },
@@ -333,18 +319,6 @@ const useStyle = (props: AlertProps) => {
         class: {
           container: [
             'bg-secondary-500/[.20]'
-          ],
-          title: [
-            'text-secondary-500'
-          ],
-          span: [
-            'text-secondary-500'
-          ],
-          leftIcon: [
-            'text-secondary-500'
-          ],
-          rightIcon: [
-            'text-secondary-500'
           ]
         }
       },
@@ -354,18 +328,6 @@ const useStyle = (props: AlertProps) => {
         class: {
           container: [
             'bg-success-500/[.20]'
-          ],
-          title: [
-            'text-success-500'
-          ],
-          span: [
-            'text-success-500'
-          ],
-          leftIcon: [
-            'text-success-500'
-          ],
-          rightIcon: [
-            'text-success-500'
           ]
         }
       },
@@ -375,18 +337,6 @@ const useStyle = (props: AlertProps) => {
         class: {
           container: [
             'bg-info-500/[.20]'
-          ],
-          title: [
-            'text-info-500'
-          ],
-          span: [
-            'text-info-500'
-          ],
-          leftIcon: [
-            'text-info-500'
-          ],
-          rightIcon: [
-            'text-info-500'
           ]
         }
       },
@@ -396,7 +346,113 @@ const useStyle = (props: AlertProps) => {
         class: {
           container: [
             'bg-warning-500/[.20]'
+          ]
+        }
+      },
+      {
+        variant: 'ghost',
+        color: 'error',
+        class: {
+          container: [
+            'bg-error-500/[.20]'
+          ]
+        }
+      },
+      {
+        variant: 'ghost',
+        color: 'light',
+        class: {
+          container: [
+            'bg-light-1/[.20]'
+          ]
+        }
+      },
+      {
+        variant: 'ghost',
+        color: 'dark',
+        class: {
+          container: [
+            'bg-dark-5/[.20]'
+          ]
+        }
+      },
+      // ghost & outlined & color (title, span, icons)
+      {
+        variant: ['ghost', 'outlined'],
+        color: 'primary',
+        class: {
+          title: [
+            'text-primary-500'
           ],
+          span: [
+            'text-primary-500'
+          ],
+          leftIcon: [
+            'text-primary-500'
+          ],
+          rightIcon: [
+            'text-primary-500'
+          ]
+        }
+      },
+      {
+        variant: ['ghost', 'outlined'],
+        color: 'secondary',
+        class: {
+          title: [
+            'text-secondary-500'
+          ],
+          span: [
+            'text-secondary-500'
+          ],
+          leftIcon: [
+            'text-secondary-500'
+          ],
+          rightIcon: [
+            'text-secondary-500'
+          ]
+        }
+      },
+      {
+        variant: ['ghost', 'outlined'],
+        color: 'success',
+        class: {
+          title: [
+            'text-success-500'
+          ],
+          span: [
+            'text-success-500'
+          ],
+          leftIcon: [
+            'text-success-500'
+          ],
+          rightIcon: [
+            'text-success-500'
+          ]
+        }
+      },
+      {
+        variant: ['ghost', 'outlined'],
+        color: 'info',
+        class: {
+          title: [
+            'text-info-500'
+          ],
+          span: [
+            'text-info-500'
+          ],
+          leftIcon: [
+            'text-info-500'
+          ],
+          rightIcon: [
+            'text-info-500'
+          ]
+        }
+      },
+      {
+        variant: ['ghost', 'outlined'],
+        color: 'warning',
+        class: {
           title: [
             'text-warning-500'
           ],
@@ -412,12 +468,9 @@ const useStyle = (props: AlertProps) => {
         }
       },
       {
-        variant: 'ghost',
+        variant: ['ghost', 'outlined'],
         color: 'error',
         class: {
-          container: [
-            'bg-error-500/[.20]'
-          ],
           title: [
             'text-error-500'
           ],
@@ -429,6 +482,42 @@ const useStyle = (props: AlertProps) => {
           ],
           rightIcon: [
             'text-error-500'
+          ]
+        }
+      },
+      {
+        variant: ['ghost', 'outlined'],
+        color: 'light',
+        class: {
+          title: [
+            'text-white'
+          ],
+          span: [
+            'text-white'
+          ],
+          leftIcon: [
+            'text-white'
+          ],
+          rightIcon: [
+            'text-white'
+          ]
+        }
+      },
+      {
+        variant: ['ghost', 'outlined'],
+        color: 'dark',
+        class: {
+          title: [
+            'text-black'
+          ],
+          span: [
+            'text-black'
+          ],
+          leftIcon: [
+            'text-black'
+          ],
+          rightIcon: [
+            'text-black'
           ]
         }
       }
@@ -440,7 +529,8 @@ const useStyle = (props: AlertProps) => {
       color: props.color,
       size: props.size,
       variant: props.variant,
-      flat: props.flat
+      flat: props.flat,
+      shape: props.shape
     })
 
     return {

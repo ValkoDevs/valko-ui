@@ -9,6 +9,7 @@ const props = withDefaults(defineProps<AlertProps>(), {
   color: 'primary',
   variant: 'filled',
   size: 'md',
+  shape: 'soft',
   icon: '',
   closable: false
 })

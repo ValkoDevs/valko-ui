@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { computed, watchEffect } from 'vue'
 import { PaginationProps } from '@/components/Pagination/interfaces'
+import { VkButton, VkIcon } from '..'
+import useDarkMode from '@/composables/useDarkMode'
 import useStyle from './Pagination.styles'
 
 defineOptions({ name: 'VkPagination' })
 
 const props = withDefaults(defineProps<PaginationProps>(), {
   variant: 'filled',
+  shape: 'soft',
   size: 'md',
   pages: 1,
   modelValue: 1
@@ -14,6 +17,8 @@ const props = withDefaults(defineProps<PaginationProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 const classes = useStyle(props)
+const isDarkMode = useDarkMode()
+const getButtonColor = computed(() => isDarkMode.value ? 'light' : 'dark')
 
 const pages = computed(() => {
   const maxPages = props.pages < 7 ? props.pages : 7
@@ -56,7 +61,6 @@ watchEffect(() => {
   if (props.modelValue > +props.pages)
     emit('update:modelValue', +props.pages)
 })
-
 </script>
 
 <template>
@@ -65,8 +69,9 @@ watchEffect(() => {
       :class="classes.nav"
     >
       <vk-button
-        type="ghost"
-        variant="secondary"
+        variant="ghost"
+        :color="getButtonColor"
+        :shape="props.shape"
         :size="size"
         condensed
         flat
@@ -82,9 +87,10 @@ watchEffect(() => {
         v-for="page in pages"
         :key="page"
         flat
-        :type="page === props.modelValue ? 'filled' : 'ghost'"
-        :variant="page === props.modelValue ? props.variant : 'secondary'"
+        :variant="page === props.modelValue ? 'filled' : 'ghost'"
+        :color="page === props.modelValue ? props.color : getButtonColor"
         :size="size"
+        :shape="props.shape"
         condensed
         :disabled="props.disabled"
         @click="() => changePage(page)"
@@ -94,8 +100,9 @@ watchEffect(() => {
         </div>
       </vk-button>
       <vk-button
-        type="ghost"
-        variant="secondary"
+        variant="ghost"
+        :color="getButtonColor"
+        :shape="props.shape"
         :size="size"
         flat
         condensed

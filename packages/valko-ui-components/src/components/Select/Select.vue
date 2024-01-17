@@ -10,6 +10,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   color: 'primary',
   variant: 'filled',
   size: 'md',
+  shape: 'soft',
   placeholder: 'Select an option',
   iconRight: 'chevron-down',
   options: () => []
@@ -119,6 +120,7 @@ const toggleDropdown = (onFocus: boolean) => {
         :variant="variant"
         :color="color"
         :size="size"
+        :shape="shape"
         :model-value="showValue"
         :icon-left="iconLeft"
         :icon-right="iconRight"

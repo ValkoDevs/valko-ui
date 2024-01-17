@@ -160,7 +160,13 @@ const useStyle = (props: TabsProps) => {
         success: {},
         info: {},
         warning: {},
-        error: {}
+        error: {},
+        light: {
+          tab: [
+            'data-[headlessui-state=selected]:text-black'
+          ]
+        },
+        dark: {}
       },
       grow: {
         true: {
@@ -244,6 +250,24 @@ const useStyle = (props: TabsProps) => {
           ]
         }
       },
+      {
+        color: 'light',
+        shape: 'line',
+        class: {
+          cursor: [
+            'border-light-1'
+          ]
+        }
+      },
+      {
+        color: 'dark',
+        shape: 'line',
+        class: {
+          cursor: [
+            'border-dark-5'
+          ]
+        }
+      },
       //color rounded square & soft
       {
         color: 'primary',
@@ -296,6 +320,24 @@ const useStyle = (props: TabsProps) => {
         class: {
           cursor: [
             'bg-error-500'
+          ]
+        }
+      },
+      {
+        color: 'light',
+        shape: ['rounded', 'square', 'soft'],
+        class: {
+          cursor: [
+            'bg-light-1'
+          ]
+        }
+      },
+      {
+        color: 'dark',
+        shape: ['rounded', 'square', 'soft'],
+        class: {
+          cursor: [
+            'bg-dark-5'
           ]
         }
       },

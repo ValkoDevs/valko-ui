@@ -7,6 +7,7 @@ defineOptions({ name: 'VkRadio' })
 const props = withDefaults(defineProps<RadioProps>(), {
   color: 'primary',
   variant: 'filled',
+  shape: 'rounded',
   size: 'md',
   label: 'Radio',
   readonly: false,

@@ -6,13 +6,15 @@ import separatorOptions from '@/data/separatorOptions'
 import sizeOptions from '@/data/sizeOptions'
 import variantOptions from '@/data/variantOptions'
 import propHeaders from '@/data/propHeaders'
+import shapeOptions from '@/data/shapeOptions'
 
 const form = ref({
   variant: 'filled',
   size: 'md',
+  separator: 'line',
+  shape: 'soft',
   compact: false,
-  multiple: false,
-  separator: 'line'
+  multiple: false
 })
 
 const apiData = [
@@ -67,6 +69,7 @@ const apiData = [
           :separator="form.separator"
           :compact="form.compact"
           :multiple="form.multiple"
+          :shape="form.shape"
         >
           <vk-collapse-item
             left-icon="user-circle"
@@ -105,6 +108,14 @@ const apiData = [
                 size="sm"
                 :options="separatorOptions"
                 v-model="form.separator"
+              />
+            </div>
+            <div class="flex mb-1">
+              <vk-select
+                placeholder="Shape"
+                size="sm"
+                :options="shapeOptions"
+                v-model="form.shape"
               />
             </div>
             <div class="flex mb-1">
@@ -169,7 +180,7 @@ const apiData = [
               left-icon="user-circle"
               title="Compact-Example Item 1"
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </vk-collapse-item>
             <vk-collapse-item
               title="Compact-Example Item 2"
@@ -230,6 +241,37 @@ const apiData = [
             </vk-collapse-item>
             <vk-collapse-item
               :title="`${separator.label}-Example Item 3`"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </vk-collapse-item>
+          </vk-collapse>
+        </div>
+      </example-section>
+
+      <example-section
+        title="Shapes"
+        justify="evenly"
+        gap
+      >
+        <div class="grow gap-4 grid grid-cols-2">
+          <vk-collapse
+            v-for="shape in shapeOptions"
+            size="sm"
+            :shape="shape.value"
+            :key="shape.value"
+          >
+            <vk-collapse-item
+              :title="`${shape.label}-Example Item 1`"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </vk-collapse-item>
+            <vk-collapse-item
+              :title="`${shape.label}-Example Item 2`"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </vk-collapse-item>
+            <vk-collapse-item
+              :title="`${shape.label}-Example Item 3`"
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </vk-collapse-item>

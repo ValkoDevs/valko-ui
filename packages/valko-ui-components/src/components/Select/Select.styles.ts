@@ -97,6 +97,22 @@ const useStyle = (props: SelectProps) => {
             'data-[selected=true]:bg-error-500/[.15]',
             'data-[selected=true]:dark:bg-error-500/[.15]'
           ]
+        },
+        light: {
+          item: [
+            'data-[selected=true]:text-light-1',
+            'data-[selected=true]:dark:text-light-1',
+            'data-[selected=true]:bg-light-1/[.15]',
+            'data-[selected=true]:dark:bg-light-1/[.15]'
+          ]
+        },
+        dark: {
+          item: [
+            'data-[selected=true]:text-dark-5',
+            'data-[selected=true]:dark:text-dark-5',
+            'data-[selected=true]:bg-dark-5/[.15]',
+            'data-[selected=true]:dark:bg-dark-5/[.15]'
+          ]
         }
       },
       size: {

@@ -6,18 +6,20 @@ import variantOptions from '@/data/variantOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import colorOptions from '@/data/colorOptions'
+import shapeOptions from '@/data/shapeOptions'
 
 const form = ref({
   color: 'primary',
   variant: 'filled',
   size: 'md',
-  disabled: ref(false),
-  readonly: ref(false),
-  value: ref(''),
-  label: ref('Label'),
-  helper: ref('Helpertext'),
-  counter: ref(null),
-  exampleReadonly: ref('Example readonly text')
+  value: '',
+  label: 'Label',
+  helper: 'Helpertext',
+  exampleReadonly: 'Example readonly text',
+  shape: 'soft',
+  disabled: false,
+  readonly: false,
+  counter: null
 })
 
 const apiData = [
@@ -25,7 +27,7 @@ const apiData = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Textarea.',
-    values: 'primary, secondary, error, warning, info, success',
+    values: 'primary, secondary, error, warning, info, success, light, dark',
     default: 'primary'
   },
   {
@@ -76,6 +78,13 @@ const apiData = [
     description: 'A hint for the Textarea',
     values: 'string',
     default: 'false'
+  },
+  {
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Textarea',
+    values: 'soft, rounded, square',
+    default: 'soft'
   }
 ]
 </script>
@@ -93,6 +102,7 @@ const apiData = [
           :disabled="form.disabled"
           :readonly="form.readonly"
           :color="form.color"
+          :shape="form.shape"
           v-model="form.value"
           :label="form.label"
           :maxlength="form.counter"
@@ -109,7 +119,7 @@ const apiData = [
               <vk-input
                 label="Label"
                 size="sm"
-                v-model="form.value"
+                v-model="form.label"
               />
             </div>
             <div class="flex mb-1">
@@ -141,6 +151,14 @@ const apiData = [
                 size="sm"
                 :options="colorOptions"
                 v-model="form.color"
+              />
+            </div>
+            <div class="flex mb-1">
+              <vk-select
+                placeholder="Shape"
+                size="sm"
+                :options="shapeOptions"
+                v-model="form.shape"
               />
             </div>
             <div class="flex mb-1">
@@ -205,6 +223,22 @@ const apiData = [
             readonly
             label="Readonly"
             v-model="form.exampleReadonly"
+          />
+        </div>
+      </example-section>
+
+      <example-section
+        title="Shapes"
+        justify="start"
+        align="start"
+        gap
+      >
+        <div class="w-full grid grid-cols-2 gap-4 items-start">
+          <vk-textarea
+            v-for="shape in shapeOptions"
+            :key="shape.value"
+            :shape="shape.value"
+            :label="shape.label"
           />
         </div>
       </example-section>

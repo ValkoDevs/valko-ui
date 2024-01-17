@@ -112,6 +112,22 @@ const useStyle = (props: ProgressbarProps) => {
           progress: [
             'bg-error-500'
           ]
+        },
+        light: {
+          progress: [
+            'bg-light-1'
+          ],
+          content: [
+            'text-dark-5'
+          ]
+        },
+        dark: {
+          progress: [
+            'bg-dark-5'
+          ],
+          content: [
+            'text-light-5'
+          ]
         }
       },
       size: {
@@ -264,6 +280,36 @@ const useStyle = (props: ProgressbarProps) => {
           ],
           content: [
             'text-error-500'
+          ]
+        }
+      },
+      {
+        variant: 'ghost',
+        color: 'light',
+        class: {
+          progress: [
+            'bg-light-1/[.15]'
+          ],
+          buffer: [
+            'border-light-1/[.15]'
+          ],
+          content: [
+            'text-light-1'
+          ]
+        }
+      },
+      {
+        variant: 'ghost',
+        color: 'dark',
+        class: {
+          progress: [
+            'bg-dark-5/[.15]'
+          ],
+          buffer: [
+            'border-dark-5/[.15]'
+          ],
+          content: [
+            'text-dark-5'
           ]
         }
       },

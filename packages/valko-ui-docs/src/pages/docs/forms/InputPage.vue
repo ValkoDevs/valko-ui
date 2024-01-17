@@ -6,6 +6,7 @@ import variantOptions from '@/data/variantOptions'
 import colorOptions from '@/data/colorOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
+import shapeOptions from '@/data/shapeOptions'
 
 const types = [
   { value:'text', label:'Text' },
@@ -19,14 +20,14 @@ const form = ref({
   variant: 'filled',
   size: 'md',
   type: 'text',
-  disabled: ref(false),
-  flat: ref(false),
-  rounded: ref(false),
-  readonly: ref(false),
-  value: ref(''),
-  labelValue: ref('Label'),
-  helperValue: ref('Helpertext'),
-  exampleReadonly: ref('Example readonly text')
+  shape: 'soft',
+  disabled: false,
+  flat: false,
+  readonly: false,
+  value: '',
+  labelValue: 'Label',
+  helperValue: 'Helpertext',
+  exampleReadonly: 'Example readonly text'
 })
 
 const apiData = [
@@ -34,7 +35,7 @@ const apiData = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Input.',
-    values: 'primary, secondary, error, warning, info, success',
+    values: 'primary, secondary, error, warning, info, success, light, dark',
     default: 'primary'
   },
   {
@@ -113,6 +114,13 @@ const apiData = [
     description: 'A icon on the right side for the Input',
     values: 'string',
     default: ''
+  },
+  {
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Input',
+    values: 'rounded, soft, square',
+    default: 'soft'
   }
 ]
 </script>
@@ -125,13 +133,14 @@ const apiData = [
     <template #playground-view>
       <div class="w-full flex px-2">
         <vk-input
+          icon-left="home"
           :variant="form.variant"
           :color="form.color"
           :size="form.size"
           :disabled="form.disabled"
           :readonly="form.readonly"
           :flat="form.flat"
-          :rounded="form.rounded"
+          :shape="form.shape"
           :type="form.type"
           v-model="form.value"
           :label="form.labelValue"
@@ -148,7 +157,7 @@ const apiData = [
               <vk-input
                 label="Label"
                 size="sm"
-                v-model="form.value"
+                v-model="form.labelValue"
               />
             </div>
             <div class="flex mb-1">
@@ -176,6 +185,14 @@ const apiData = [
             </div>
             <div class="flex mb-1">
               <vk-select
+                placeholder="Shape"
+                size="sm"
+                :options="shapeOptions"
+                v-model="form.shape"
+              />
+            </div>
+            <div class="flex mb-1">
+              <vk-select
                 placeholder="Size"
                 size="sm"
                 :options="sizeOptions"
@@ -194,12 +211,6 @@ const apiData = [
               <vk-checkbox
                 label="Disabled"
                 v-model="form.disabled"
-              />
-            </div>
-            <div class="flex">
-              <vk-checkbox
-                label="Rounded"
-                v-model="form.rounded"
               />
             </div>
             <div class="flex">
@@ -271,6 +282,22 @@ const apiData = [
             :key="type.value"
             :type="type.value"
             :label="type.label"
+          />
+        </div>
+      </example-section>
+
+      <example-section
+        title="Shapes"
+        justify="start"
+        align="start"
+        gap
+      >
+        <div class="grow gap-4 grid grid-cols-2">
+          <vk-input
+            v-for="shape in shapeOptions"
+            :key="shape.value"
+            :shape="shape.value"
+            :label="shape.label"
           />
         </div>
       </example-section>
