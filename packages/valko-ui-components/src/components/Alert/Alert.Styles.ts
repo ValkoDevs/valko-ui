@@ -26,7 +26,9 @@ const useStyle = (props: AlertProps) => {
         'flex-col',
         'justify-start'
       ],
-      rightIcon: [],
+      rightIcon: [
+        'vk-alert__close'
+      ],
       span: [
         'font-medium'
       ]

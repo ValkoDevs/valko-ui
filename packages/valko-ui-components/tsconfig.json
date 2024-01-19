@@ -30,7 +30,10 @@
     "noFallthroughCasesInSwitch": true,
     "declaration": true,
     "outDir": "dist",
-    "declarationDir": "dist"
+    "declarationDir": "dist",
+    "types": [
+      "vitest/globals"
+    ]
   },
   "include": [
     "src/**/*.ts",
