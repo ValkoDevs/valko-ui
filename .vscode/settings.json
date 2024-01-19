@@ -1,0 +1,6 @@
+{
+  "eslint.options": {
+    "overrideConfigFile": "packages/valko-ui-eslint-config/index.js"
+  },
+  "eslint.format.enable": true,
+}

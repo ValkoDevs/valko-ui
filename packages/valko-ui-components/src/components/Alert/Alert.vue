@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { AlertProps } from '@/components/Alert/interfaces'
-import { VkIcon } from '../Icon'
+import { VkIcon, VkButton } from '../'
+
 import useStyle from './Alert.Styles'
 
 const props = withDefaults(defineProps<AlertProps>(), {

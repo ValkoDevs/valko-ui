@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
 import VueTypeImports from 'vite-plugin-vue-type-imports'
 import * as path from 'path'
@@ -27,6 +27,18 @@ export default defineConfig({
       exclude: ['vite.config.ts']
     })
   ],
+  test: {
+    globals: true,
+    root: 'src',
+    include: ['**/*.spec.ts'],
+    environment: 'jsdom',
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
+      reportsDirectory: '../coverage',
+      exclude: ['exports', 'scripts', 'types']
+    }
+  },
   build: {
     cssCodeSplit: true,
     lib: {

@@ -117,11 +117,9 @@ const useStyle = (props: CheckboxProps) => {
       },
       color: {
         primary: {
-          class: {
-            helpertext: [
-              'text-primary-500'
-            ]
-          }
+          helpertext: [
+            'text-primary-500'
+          ]
         },
         secondary: {
           helpertext: [
