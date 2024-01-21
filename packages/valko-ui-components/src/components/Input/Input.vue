@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { InputProps } from '@/components/Input/interfaces'
+import { VkIcon } from '..'
 import useStyle from './Input.styles'
 
 defineOptions({ name: 'VkInput' })
@@ -9,6 +10,7 @@ const props = withDefaults(defineProps<InputProps>(), {
   color: 'primary',
   variant: 'filled',
   size: 'md',
+  shape: 'soft',
   type: 'text'
 })
 

@@ -15,7 +15,6 @@ const useStyle = (props: RadioProps) => {
       radio: [
         'shadow-lg',
         'border-2',
-        'rounded-full',
         'border-light-5',
         'relative',
         'flex',
@@ -119,11 +118,9 @@ const useStyle = (props: RadioProps) => {
       },
       color: {
         primary: {
-          class: {
-            helpertext: [
-              'text-primary-500'
-            ]
-          }
+          helpertext: [
+            'text-primary-500'
+          ]
         },
         secondary: {
           helpertext: [
@@ -148,6 +145,16 @@ const useStyle = (props: RadioProps) => {
         error: {
           helpertext: [
             'text-error-500'
+          ]
+        },
+        light: {
+          helpertext: [
+            'text-white'
+          ]
+        },
+        dark: {
+          helpertext: [
+            'text-black'
           ]
         }
       },
@@ -181,6 +188,19 @@ const useStyle = (props: RadioProps) => {
             'ml-2'
           ]
         }
+      },
+      shape: {
+        soft: {
+          radio: [
+            'rounded'
+          ]
+        },
+        rounded: {
+          radio: [
+            'rounded-full'
+          ]
+        },
+        square: {}
       }
     },
     compoundVariants: [
@@ -287,6 +307,46 @@ const useStyle = (props: RadioProps) => {
           ]
         }
       },
+      {
+        variant: 'filled',
+        color: 'light',
+        disabled: false,
+        class: {
+          radio: [
+            'data-[checked=true]:bg-light-1',
+            'data-[checked=true]:border-light-1',
+            'data-[indeterminate=true]:border-light-1',
+            'data-[indeterminate=true]:bg-light-1',
+            'dark:data-[checked=true]:bg-light-1',
+            'dark:data-[checked=true]:border-light-1',
+            'dark:data-[indeterminate=true]:border-light-1',
+            'dark:data-[indeterminate=true]:bg-light-1'
+          ],
+          icon: [
+            'text-dark-5'
+          ]
+        }
+      },
+      {
+        variant: 'filled',
+        color: 'dark',
+        disabled: false,
+        class: {
+          radio: [
+            'data-[checked=true]:bg-dark-5',
+            'data-[checked=true]:border-dark-5',
+            'data-[indeterminate=true]:border-dark-5',
+            'data-[indeterminate=true]:bg-dark-5',
+            'dark:data-[checked=true]:bg-dark-5',
+            'dark:data-[checked=true]:border-dark-5',
+            'dark:data-[indeterminate=true]:border-dark-5',
+            'dark:data-[indeterminate=true]:bg-dark-5'
+          ],
+          icon: [
+            'text-light-1'
+          ]
+        }
+      },
       // outlined & color
       {
         variant: 'outlined',
@@ -390,6 +450,40 @@ const useStyle = (props: RadioProps) => {
           ]
         }
       },
+      {
+        variant: 'outlined',
+        color: 'light',
+        disabled: false,
+        class: {
+          radio: [
+            'data-[checked=true]:border-light-1',
+            'data-[indeterminate=true]:border-light-1',
+            'dark:data-[checked=true]:border-light-1',
+            'dark:data-[indeterminate=true]:border-light-1'
+          ],
+          icon: [
+            'text-light-1',
+            'dark:text-light-1'
+          ]
+        }
+      },
+      {
+        variant: 'outlined',
+        color: 'dark',
+        disabled: false,
+        class: {
+          radio: [
+            'data-[checked=true]:border-dark-5',
+            'data-[indeterminate=true]:border-dark-5',
+            'dark:data-[checked=true]:border-dark-5',
+            'dark:data-[indeterminate=true]:border-dark-5'
+          ],
+          icon: [
+            'text-dark-5',
+            'dark:text-dark-5'
+          ]
+        }
+      },
       // ghost & color
       {
         variant: 'ghost',
@@ -486,6 +580,38 @@ const useStyle = (props: RadioProps) => {
             'text-error-500'
           ]
         }
+      },
+      {
+        variant: 'ghost',
+        color: 'light',
+        disabled: false,
+        class: {
+          radio: [
+            'data-[checked=true]:bg-light-1/[.15]',
+            'data-[indeterminate=true]:bg-light-1/[.15]',
+            'dark:data-[checked=true]:bg-light-1/[.15]',
+            'dark:data-[indeterminate=true]:bg-light-1/[.15]'
+          ],
+          icon: [
+            'text-light-1'
+          ]
+        }
+      },
+      {
+        variant: 'ghost',
+        color: 'dark',
+        disabled: false,
+        class: {
+          radio: [
+            'data-[checked=true]:bg-dark-5/[.15]',
+            'data-[indeterminate=true]:bg-dark-5/[.15]',
+            'dark:data-[checked=true]:bg-dark-5/[.15]',
+            'dark:data-[indeterminate=true]:bg-dark-5/[.15]'
+          ],
+          icon: [
+            'text-dark-5'
+          ]
+        }
       }
     ]
   })
@@ -496,7 +622,8 @@ const useStyle = (props: RadioProps) => {
       size: props.size,
       disabled: props.disabled,
       variant: props.variant,
-      position: props.position
+      position: props.position,
+      shape: props.shape
     })
     return {
       container: slots.container(),

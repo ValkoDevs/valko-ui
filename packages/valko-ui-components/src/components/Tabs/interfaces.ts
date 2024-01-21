@@ -1,7 +1,6 @@
 import Sizes from '@/types/sizes'
 import Colors from '@/types/colors'
 import Variants from '@/types/variants'
-import Shapes from '@/types/shapes'
 
 export interface Tab {
   key: string | number;
@@ -15,7 +14,8 @@ export interface TabKeymap {
   [key: string]: string
 }
 
-export interface TabsProps extends Colors, Sizes, Variants, Shapes {
+export interface TabsProps extends Colors, Sizes, Variants {
+  shape?: 'line' | 'rounded' | 'square' | 'soft';
   tabs: Tab[];
   defaultIndex?: number;
   grow?: boolean;

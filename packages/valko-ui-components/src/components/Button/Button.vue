@@ -2,13 +2,15 @@
 import { ButtonProps } from '@/components/Button/interfaces'
 import useStyle from './Button.styles'
 
+defineOptions({ name: 'VkButton' })
+
 const props = withDefaults(defineProps<ButtonProps>(), {
   color: 'primary',
   variant: 'filled',
-  size: 'md'
+  size: 'md',
+  shape: 'soft'
 })
 
-defineOptions({ name: 'VkButton' })
 const emit = defineEmits(['click'])
 
 const onClick = () => {
@@ -25,7 +27,6 @@ const classes = useStyle(props)
     :class="classes"
     :disabled="disabled"
     :flat="flat"
-    :rounded="rounded"
     :condensed="condensed"
     :block="block"
     @click="onClick"

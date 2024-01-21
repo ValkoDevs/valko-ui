@@ -5,7 +5,6 @@ import { computed } from 'vue'
 const useStyle = (props: ButtonProps) => {
   const baseButton = tv({
     base: [
-      'rounded',
       'font-semibold',
       'tracking-wider',
       'focus:outline-none',
@@ -38,7 +37,9 @@ const useStyle = (props: ButtonProps) => {
         success: {},
         info: {},
         warning: {},
-        error: {}
+        error: {},
+        light: {},
+        dark: {}
       },
       size: {
         xs: [
@@ -67,11 +68,6 @@ const useStyle = (props: ButtonProps) => {
           'w-full'
         ]
       },
-      rounded: {
-        true: [
-          'rounded-full'
-        ]
-      },
       flat: {
         true: [
           'shadow-none'
@@ -81,7 +77,19 @@ const useStyle = (props: ButtonProps) => {
         true: {}
       },
       condensed: {
-        true: {}
+        true: [
+          'px-0',
+          'py-0'
+        ]
+      },
+      shape: {
+        rounded: [
+          'rounded-full'
+        ],
+        soft: [
+          'rounded'
+        ],
+        square: {}
       }
     },
     compoundVariants: [
@@ -152,6 +160,29 @@ const useStyle = (props: ButtonProps) => {
           'active:bg-error-700'
         ]
       },
+      {
+        variant: 'filled',
+        color: 'light',
+        disabled: false,
+        class: [
+          'bg-light-2',
+          'focus:ring-light-1',
+          'hover:bg-light-3',
+          'active:bg-light-1',
+          'text-black'
+        ]
+      },
+      {
+        variant: 'filled',
+        color: 'dark',
+        disabled: false,
+        class: [
+          'bg-dark-4',
+          'focus:ring-dark-5',
+          'hover:bg-dark-3',
+          'active:bg-dark-5'
+        ]
+      },
       // ghost & color
       {
         variant: 'ghost',
@@ -217,6 +248,28 @@ const useStyle = (props: ButtonProps) => {
           'focus:ring-error-400/20',
           'hover:bg-error-300/20',
           'active:bg-error-400/20'
+        ]
+      },
+      {
+        variant: 'ghost',
+        color: 'light',
+        disabled: false,
+        class: [
+          'text-light-1',
+          'focus:ring-light-2/20',
+          'hover:bg-light-1/20',
+          'active:bg-light-1/20'
+        ]
+      },
+      {
+        variant: 'ghost',
+        color: 'dark',
+        disabled: false,
+        class: [
+          'text-dark-5',
+          'focus:ring-dark-4/20',
+          'hover:bg-dark-5/20',
+          'active:bg-dark-4/20'
         ]
       },
       // outlined & color
@@ -292,6 +345,30 @@ const useStyle = (props: ButtonProps) => {
           'border-error-600'
         ]
       },
+      {
+        variant: 'outlined',
+        color: 'light',
+        disabled: false,
+        class: [
+          'text-light-1',
+          'focus:ring-light-2/20',
+          'hover:bg-light-1/20',
+          'active:bg-light-2/20',
+          'border-light-1'
+        ]
+      },
+      {
+        variant: 'outlined',
+        color: 'dark',
+        disabled: false,
+        class: [
+          'text-dark-5',
+          'focus:ring-dark-4/20',
+          'hover:bg-dark-5/20',
+          'active:bg-dark-4/20',
+          'border-dark-5'
+        ]
+      },
       // disabled & variant
       {
         variant: 'filled',
@@ -326,30 +403,20 @@ const useStyle = (props: ButtonProps) => {
           'cursor-not-allowed',
           'border-gray-600'
         ]
-      },
-      // condensed
-      {
-        condensed: true,
-        class: [
-          'px-0',
-          'py-0'
-        ]
       }
     ]
   })
 
-  return computed(() => {
-    return baseButton({
-      size: props.size,
-      color: props.color,
-      variant: props.variant,
-      disabled: props.disabled,
-      flat: props.flat,
-      block: props.block,
-      rounded: props.rounded,
-      condensed: props.condensed
-    })
-  })
+  return computed(() => baseButton({
+    size: props.size,
+    color: props.color,
+    variant: props.variant,
+    disabled: props.disabled,
+    flat: props.flat,
+    block: props.block,
+    condensed: props.condensed,
+    shape: props.shape
+  }))
 }
 
 export default useStyle

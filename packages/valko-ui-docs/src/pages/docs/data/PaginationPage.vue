@@ -5,14 +5,18 @@ import ExampleSection from '@/components/ExampleSection'
 import sizeOptions from '@/data/sizeOptions'
 import colorOptions from '@/data/colorOptions'
 import propHeaders from '@/data/propHeaders'
+import shapeOptions from '@/data/shapeOptions'
+import variantOptions from '@/data/variantOptions'
 
 const form = ref({
   color: 'primary',
+  variant: 'filled',
   size: 'md',
-  currentPage: ref(1),
-  totalPages: ref(20),
-  flat: ref(false),
-  disabled: ref(false)
+  shape: 'soft',
+  currentPage: 1,
+  totalPages: 20,
+  flat: false,
+  disabled: false
 })
 
 const apiData = [
@@ -20,7 +24,7 @@ const apiData = [
     prop: 'color',
     required: false,
     description: 'The Pagination color theme.',
-    values: 'primary, secondary, error, warning, info, success',
+    values: 'primary, secondary, error, warning, info, success, light, dark',
     default: 'primary'
   },
   {
@@ -58,8 +62,10 @@ const apiData = [
           :color="form.color"
           :size="form.size"
           :current-page="form.currentPage"
+          :variant="form.variant"
           :pages="form.totalPages"
           :flat="form.flat"
+          :shape="form.shape"
           :disabled="form.disabled"
           v-model="form.currentPage"
         />
@@ -80,10 +86,26 @@ const apiData = [
             </div>
             <div class="flex mb-1">
               <vk-select
+                placeholder="Variant"
+                size="sm"
+                :options="variantOptions"
+                v-model="form.variant"
+              />
+            </div>
+            <div class="flex mb-1">
+              <vk-select
                 placeholder="Color"
                 size="sm"
                 :options="colorOptions"
                 v-model="form.color"
+              />
+            </div>
+            <div class="flex mb-1">
+              <vk-select
+                placeholder="Shape"
+                size="sm"
+                :options="shapeOptions"
+                v-model="form.shape"
               />
             </div>
             <div class="flex mb-1">
@@ -116,7 +138,7 @@ const apiData = [
         title="Colors"
         gap
       >
-        <div class="gap-4 grid grid-cols-2">
+        <div class="gap-4 grid grid-cols-4">
           <div
             v-for="color in colorOptions"
             :key="color.value"

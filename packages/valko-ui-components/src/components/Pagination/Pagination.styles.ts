@@ -6,9 +6,9 @@ const useStyle = (props: PaginationProps) => {
   const pagination = tv({
     slots: {
       nav: [
+        'p-2',
         'inline-flex',
         '-space-x-px',
-        'rounded-md',
         'shadow-sm'
       ],
       button: [
@@ -23,13 +23,34 @@ const useStyle = (props: PaginationProps) => {
       ]
     },
     variants: {
-      color: {
-        primary: {},
-        secondary: {},
-        success: {},
-        info: {},
-        warning: {},
-        error: {}
+      variant: {
+        filled: {
+          nav: [
+            'bg-light-3',
+            'dark:bg-dark-3'
+          ]
+        },
+        outlined: {
+          nav: [
+            'border-2',
+            'border-light-3',
+            'dark:border-dark-3'
+          ]
+        },
+        ghost: {}
+      },
+      shape: {
+        rounded: {
+          nav: [
+            'rounded-full'
+          ]
+        },
+        soft: {
+          nav: [
+            'rounded-lg'
+          ]
+        },
+        square: {}
       },
       size: {
         xs: {
@@ -89,8 +110,9 @@ const useStyle = (props: PaginationProps) => {
   return computed(() => {
     const slots = pagination({
       size: props.size,
-      color: props.color,
-      flat: props.flat
+      flat: props.flat,
+      variant: props.variant,
+      shape: props.shape
     })
 
     return {

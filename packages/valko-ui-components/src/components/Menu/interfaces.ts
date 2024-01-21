@@ -10,7 +10,7 @@ export interface MenuItem {
   onClick?: () => void;
 }
 
-export interface MenuProps extends Colors  {
+export interface MenuProps extends Colors {
   items: MenuItem[];
   active: null | string | number;
   rounded?: boolean;

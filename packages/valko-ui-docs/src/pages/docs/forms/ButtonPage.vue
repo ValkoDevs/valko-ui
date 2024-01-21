@@ -6,67 +6,75 @@ import colorOptions from '@/data/colorOptions'
 import variantOptions from '@/data/variantOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
+import shapeOptions from '@/data/shapeOptions'
 
 const form = ref({
   color: 'primary',
   variant: 'filled',
   size: 'md',
-  disabled: ref(false),
-  flat: ref(false),
-  rounded: ref(false),
-  block: ref(false),
-  condensed: ref(false)
+  shape: 'soft',
+  disabled: false,
+  flat: false,
+  block: false,
+  condensed: false
 })
 
 const apiData = [
   {
     prop: 'color',
     required: false,
-    description: 'The color theme of the button.',
-    values: 'primary, secondary, error, warning, info, success',
+    description: 'The color theme of the Button.',
+    values: 'primary, secondary, error, warning, info, success, light, dark',
     default: 'primary'
   },
   {
     prop: 'variant',
     required: false,
-    description: 'The variant of the button.',
+    description: 'The variant of the Button.',
     values: 'filled, outlined, ghost',
     default: 'filled'
   },
   {
     prop: 'size',
     required: false,
-    description: 'The size of the button.',
+    description: 'The size of the Button.',
     values: 'xs, sm, md, lg',
     default: 'md'
   },
   {
     prop: 'disabled',
     required: false,
-    description: 'Whether the button is disabled or not.',
+    description: 'Whether the Button is disabled or not.',
     values: 'true, false',
     default: 'false'
   },
   {
     prop: 'flat',
     required: false,
-    description: 'Whether the button has a shadow or not.',
+    description: 'Whether the Button has a shadow or not.',
     values: 'true, false',
     default: 'false'
   },
   {
     prop: 'rounded',
     required: false,
-    description: 'Whether the button is rounded or not.',
+    description: 'Whether the Button is rounded or not.',
     values: 'true, false',
     default: 'false'
   },
   {
     prop: 'block',
     required: false,
-    description: 'Whether the button width is equal to it\'s container.',
+    description: 'Whether the Button width is equal to it\'s container.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Button.',
+    values: 'rounded, square, soft',
+    default: 'soft'
   }
 ]
 </script>
@@ -83,9 +91,9 @@ const apiData = [
         :size="form.size"
         :disabled="form.disabled"
         :flat="form.flat"
-        :rounded="form.rounded"
         :block="form.block"
         :condensed="form.condensed"
+        :shape="form.shape"
       >
         Primary
       </vk-button>
@@ -96,7 +104,6 @@ const apiData = [
         <div class="w-1/2 px-4">
           <div class="flex mb-1">
             <vk-select
-              type="outlined"
               placeholder="Color"
               size="sm"
               :options="colorOptions"
@@ -105,7 +112,6 @@ const apiData = [
           </div>
           <div class="flex mb-1">
             <vk-select
-              type="outlined"
               placeholder="Variant"
               size="sm"
               :options="variantOptions"
@@ -114,11 +120,18 @@ const apiData = [
           </div>
           <div class="flex mb-1">
             <vk-select
-              type="outlined"
               placeholder="Size"
               size="sm"
               :options="sizeOptions"
               v-model="form.size"
+            />
+          </div>
+          <div class="flex mb-1">
+            <vk-select
+              placeholder="Shape"
+              size="sm"
+              :options="shapeOptions"
+              v-model="form.shape"
             />
           </div>
           <div>
@@ -137,12 +150,6 @@ const apiData = [
             <vk-checkbox
               v-model="form.flat"
               label="Flat"
-            />
-          </div>
-          <div>
-            <vk-checkbox
-              v-model="form.rounded"
-              label="Rounded"
             />
           </div>
           <div>
@@ -187,14 +194,24 @@ const apiData = [
         <vk-button disabled>
           Disabled
         </vk-button>
-        <vk-button rounded>
-          Rounded
-        </vk-button>
         <vk-button condensed>
           Condensed
         </vk-button>
         <vk-button block>
           Block
+        </vk-button>
+      </example-section>
+
+      <example-section
+        title="Shapes"
+        gap
+      >
+        <vk-button
+          v-for="shape in shapeOptions"
+          :key="shape.value"
+          :shape="shape.value"
+        >
+          {{ shape.label }}
         </vk-button>
       </example-section>
 

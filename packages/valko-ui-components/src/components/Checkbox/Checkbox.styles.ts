@@ -15,7 +15,6 @@ const useStyle = (props: CheckboxProps) => {
       checkbox: [
         'shadow-lg',
         'border-2',
-        'rounded',
         'border-light-5',
         'relative',
         'flex',
@@ -145,6 +144,16 @@ const useStyle = (props: CheckboxProps) => {
           helpertext: [
             'text-error-500'
           ]
+        },
+        light: {
+          helpertext: [
+            'text-white'
+          ]
+        },
+        dark: {
+          helpertext: [
+            'text-black'
+          ]
         }
       },
       disabled: {
@@ -175,12 +184,18 @@ const useStyle = (props: CheckboxProps) => {
           ]
         }
       },
-      rounded: {
-        true: {
+      shape: {
+        rounded: {
           checkbox: [
             'rounded-full'
           ]
-        }
+        },
+        soft: {
+          checkbox: [
+            'rounded'
+          ]
+        },
+        square: {}
       },
       flat: {
         true: {
@@ -294,6 +309,43 @@ const useStyle = (props: CheckboxProps) => {
           ]
         }
       },
+      {
+        variant: 'filled',
+        color: 'light',
+        disabled: false,
+        class: {
+          checkbox: [
+            'data-[checked=true]:bg-light-1',
+            'data-[checked=true]:border-light-1',
+            'data-[indeterminate=true]:border-light-1',
+            'data-[indeterminate=true]:bg-light-1',
+            'dark:data-[checked=true]:bg-light-1',
+            'dark:data-[checked=true]:border-light-1',
+            'dark:data-[indeterminate=true]:border-light-1',
+            'dark:data-[indeterminate=true]:bg-light-1'
+          ],
+          icon: [
+            'text-black'
+          ]
+        }
+      },
+      {
+        variant: 'filled',
+        color: 'dark',
+        disabled: false,
+        class: {
+          checkbox: [
+            'data-[checked=true]:bg-dark-5',
+            'data-[checked=true]:border-dark-5',
+            'data-[indeterminate=true]:border-dark-5',
+            'data-[indeterminate=true]:bg-dark-5',
+            'dark:data-[checked=true]:bg-dark-5',
+            'dark:data-[checked=true]:border-dark-5',
+            'dark:data-[indeterminate=true]:border-dark-5',
+            'dark:data-[indeterminate=true]:bg-dark-5'
+          ]
+        }
+      },
       // outlined & color
       {
         variant: 'outlined',
@@ -397,6 +449,40 @@ const useStyle = (props: CheckboxProps) => {
           ]
         }
       },
+      {
+        variant: 'outlined',
+        color: 'light',
+        disabled: false,
+        class: {
+          checkbox: [
+            'data-[checked=true]:border-light-1',
+            'data-[indeterminate=true]:border-light-1',
+            'dark:data-[checked=true]:border-light-1',
+            'dark:data-[indeterminate=true]:border-light-1'
+          ],
+          icon: [
+            'text-light-1',
+            'dark:text-light-1'
+          ]
+        }
+      },
+      {
+        variant: 'outlined',
+        color: 'dark',
+        disabled: false,
+        class: {
+          checkbox: [
+            'data-[checked=true]:border-dark-5',
+            'data-[indeterminate=true]:border-dark-5',
+            'dark:data-[checked=true]:border-dark-5',
+            'dark:data-[indeterminate=true]:border-dark-5'
+          ],
+          icon: [
+            'text-dark-5',
+            'dark:text-dark-5'
+          ]
+        }
+      },
       // ghost & color
       {
         variant: 'ghost',
@@ -493,6 +579,38 @@ const useStyle = (props: CheckboxProps) => {
             'text-error-500'
           ]
         }
+      },
+      {
+        variant: 'ghost',
+        color: 'light',
+        disabled: false,
+        class: {
+          checkbox: [
+            'data-[checked=true]:bg-light-1/[.15]',
+            'data-[indeterminate=true]:bg-light-1/[.15]',
+            'dark:data-[checked=true]:bg-light-1/[.15]',
+            'dark:data-[indeterminate=true]:bg-light-1/[.15]'
+          ],
+          icon: [
+            'text-white'
+          ]
+        }
+      },
+      {
+        variant: 'ghost',
+        color: 'dark',
+        disabled: false,
+        class: {
+          checkbox: [
+            'data-[checked=true]:bg-dark-5/[.15]',
+            'data-[indeterminate=true]:bg-dark-5/[.15]',
+            'dark:data-[checked=true]:bg-dark-5/[.15]',
+            'dark:data-[indeterminate=true]:bg-dark-5/[.15]'
+          ],
+          icon: [
+            'text-black'
+          ]
+        }
       }
     ]
   })
@@ -501,7 +619,7 @@ const useStyle = (props: CheckboxProps) => {
     const slots = checkbox({
       color: props.color,
       size: props.size,
-      rounded: props.rounded,
+      shape: props.shape,
       flat: props.flat,
       labelPosition: props.labelPosition,
       disabled: props.disabled,

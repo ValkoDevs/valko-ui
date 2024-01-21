@@ -6,6 +6,7 @@ import variantOptions from '@/data/variantOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import colorOptions from '@/data/colorOptions'
+import shapeOptions from '@/data/shapeOptions'
 
 const position = [
   { value: false, label:'Right' },
@@ -19,7 +20,7 @@ const form = ref({
   position: false,
   disabled: false,
   flat: false,
-  rounded: false,
+  shape: 'soft',
   helpertext: '',
   label: 'Checkbox',
   exampleChecked: true,
@@ -34,7 +35,7 @@ const apiData = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Checkbox.',
-    values: 'primary, secondary, error, warning, info, success',
+    values: 'primary, secondary, error, warning, info, success, light, dark',
     default: 'primary'
   },
   {
@@ -106,6 +107,13 @@ const apiData = [
     description: 'Moves the label of the Checkbox to left or right',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Checkbox',
+    values: 'soft, rounded, square',
+    default: 'soft'
   }
 ]
 
@@ -135,7 +143,7 @@ watchEffect(() => {
           :helpertext="form.helpertext"
           :disabled="form.disabled"
           :flat="form.flat"
-          :rounded="form.rounded"
+          :shape="form.shape"
           :label-position="form.position"
           :readonly="form.readonly"
           :indeterminate="form.indeterminate"
@@ -180,6 +188,14 @@ watchEffect(() => {
             </div>
             <div class="flex mb-1">
               <vk-select
+                placeholder="Shape"
+                size="sm"
+                :options="shapeOptions"
+                v-model="form.shape"
+              />
+            </div>
+            <div class="flex mb-1">
+              <vk-select
                 placeholder="Size"
                 size="sm"
                 :options="sizeOptions"
@@ -198,12 +214,6 @@ watchEffect(() => {
               <vk-checkbox
                 label="Disabled"
                 v-model="form.disabled"
-              />
-            </div>
-            <div class="flex">
-              <vk-checkbox
-                label="Rounded"
-                v-model="form.rounded"
               />
             </div>
             <div class="flex">
@@ -235,7 +245,7 @@ watchEffect(() => {
         justify="start"
         gap
       >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-2">
+        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
           <vk-checkbox
             v-for="color in colorOptions"
             :key="color.value"
@@ -251,12 +261,28 @@ watchEffect(() => {
         justify="start"
         gap
       >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-2">
+        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
           <vk-checkbox
             v-for="variant in variantOptions"
             :key="variant.value"
             :variant="variant.value"
             :label="variant.label"
+            :model-value="form.exampleChecked"
+          />
+        </div>
+      </example-section>
+
+      <example-section
+        title="Shapes"
+        justify="start"
+        gap
+      >
+        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
+          <vk-checkbox
+            v-for="shape in shapeOptions"
+            :key="shape.value"
+            :shape="shape.value"
+            :label="shape.label"
             :model-value="form.exampleChecked"
           />
         </div>
@@ -271,11 +297,6 @@ watchEffect(() => {
           <vk-checkbox
             label="Disabled"
             disabled
-            :model-value="form.exampleChecked"
-          />
-          <vk-checkbox
-            label="Rounded"
-            rounded
             :model-value="form.exampleChecked"
           />
           <vk-checkbox

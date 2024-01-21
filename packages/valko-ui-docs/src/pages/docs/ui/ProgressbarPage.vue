@@ -8,6 +8,11 @@ import variantOptions from '@/data/variantOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
 
+const shapes = [
+  ...shapeOptions,
+  { value: 'line', label: 'Line' }
+]
+
 const form = ref({
   variant: 'filled',
   size: 'md',
@@ -50,7 +55,7 @@ const apiData = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Progressbar.',
-    values: 'primary, secondary, success, info, warning, error',
+    values: 'primary, secondary, success, info, warning, error, light, dark',
     default: 'primary'
   },
   {
@@ -158,7 +163,7 @@ const apiData = [
               <vk-select
                 placeholder="Shape"
                 size="sm"
-                :options="shapeOptions"
+                :options="shapes"
                 v-model="form.shape"
               />
             </div>
@@ -235,7 +240,7 @@ const apiData = [
       >
         <div class="grow gap-4 grid grid-cols-2">
           <vk-progressbar
-            v-for="shape in shapeOptions"
+            v-for="shape in shapes"
             :key="shape.value"
             :shape="shape.value"
             progress="25"

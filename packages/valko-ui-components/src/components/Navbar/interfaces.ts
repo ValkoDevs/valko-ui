@@ -1,4 +1,4 @@
-export interface NavbarProps  {
+export interface NavbarProps {
   fixed?: boolean;
   floating?: boolean;
   rounded?: boolean;

@@ -9,6 +9,11 @@ import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
 import slotHeaders from '@/data/slotHeaders'
 
+const shapes = [
+  ...shapeOptions,
+  { value: 'line', label: 'Line' }
+]
+
 const tabs = [
   { title: 'Photos' },
   { title: 'Videos' },
@@ -48,7 +53,7 @@ const tabsPropsData = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Tabs.',
-    values: 'primary, secondary, error, warning, info, success',
+    values: 'primary, secondary, error, warning, info, success, light, dark',
     default: 'primary'
   },
   {
@@ -69,7 +74,7 @@ const tabsPropsData = [
     prop: 'shape',
     required: false,
     description: 'The Tabs appearance style.',
-    values: 'underline, rounded, soft, square',
+    values: 'line, rounded, soft, square',
     default: 'soft'
   },
   {
@@ -212,7 +217,7 @@ const tabsSlotsData = [
                 type="outlined"
                 placeholder="Shape"
                 size="sm"
-                :options="shapeOptions"
+                :options="shapes"
                 v-model="form.shape"
               />
             </div>
@@ -301,7 +306,7 @@ const tabsSlotsData = [
       >
         <div class="grow gap-4 grid grid-cols-2">
           <div
-            v-for="shape in shapeOptions"
+            v-for="shape in shapes"
             :key="shape.value"
             class="flex flex-col items-around"
           >

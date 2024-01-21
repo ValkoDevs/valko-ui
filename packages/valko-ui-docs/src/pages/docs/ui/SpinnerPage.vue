@@ -6,17 +6,24 @@ import colorOptions from '@/data/colorOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 
+const variants = [
+  { value: 'loader', label: 'Flower' },
+  { value: 'loader-2', label: 'Circle' }
+]
+
 const form = ref({
   color: 'primary',
-  size: 'md'
+  size: 'md',
+  variant: 'loader-2'
 })
+
 
 const apiData = [
   {
     prop: 'color',
     required: false,
     description: 'The color theme of the Spinner.',
-    values: 'primary, secondary, error, warning, info, success',
+    values: 'primary, secondary, error, warning, info, success, light, dark',
     default: 'primary'
   },
   {
@@ -25,6 +32,13 @@ const apiData = [
     description: 'The size of the Spinner.',
     values: 'xs, sm, md, lg',
     default: 'md'
+  },
+  {
+    prop: 'variant',
+    required: false,
+    description: 'The variant of Spinner.',
+    values: 'loader, loader-2',
+    default: 'loader-2'
   }
 ]
 </script>
@@ -39,6 +53,7 @@ const apiData = [
         <vk-spinner
           :color="form.color"
           :size="form.size"
+          :name="form.variant"
         />
       </div>
     </template>
@@ -47,6 +62,14 @@ const apiData = [
       <div class="flex">
         <div class="w-1/2 px-4">
           <form action="">
+            <div class="flex mb-1">
+              <vk-select
+                placeholder="Variant"
+                size="sm"
+                :options="variants"
+                v-model="form.variant"
+              />
+            </div>
             <div class="flex mb-1">
               <vk-select
                 placeholder="Color"
@@ -74,7 +97,7 @@ const apiData = [
         justify="start"
         gap
       >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-2">
+        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
           <div
             v-for="color in colorOptions"
             :key="color.value"
@@ -83,6 +106,24 @@ const apiData = [
             <vk-spinner
               :color="color.value"
             /> {{ color.label }}
+          </div>
+        </div>
+      </example-section>
+
+      <example-section
+        title="Variants"
+        justify="start"
+        gap
+      >
+        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
+          <div
+            v-for="variant in variants"
+            :key="variant.value"
+            class="flex gap-2 items-center"
+          >
+            <vk-spinner
+              :variant="variant.value"
+            /> {{ variant.label }}
           </div>
         </div>
       </example-section>

@@ -7,6 +7,7 @@ const props = withDefaults(defineProps<TextareaProps>(), {
   color: 'primary',
   variant: 'filled',
   size: 'md',
+  shape: 'soft',
   modelValue: ''
 })
 

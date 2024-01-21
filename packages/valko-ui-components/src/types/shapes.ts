@@ -1,6 +1,5 @@
 interface Shapes {
   shape?:
-    | 'line'
     | 'rounded'
     | 'square'
     | 'soft';
