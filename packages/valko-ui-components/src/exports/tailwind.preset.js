@@ -9,25 +9,25 @@ module.exports = () => ({
   theme: {
     extend: {
       colors: {
-        primary: colors.emerald,
+        primary: colors.violet,
         secondary: colors.slate,
-        error: colors.red,
-        success: colors.green,
+        error: colors.rose,
+        success: colors.emerald,
         warning: colors.orange,
         info: colors.blue,
         dark: {
-          1: colors.slate[600],
-          2: colors.slate[700],
-          3: colors.slate[800],
-          4: colors.slate[900],
-          5: colors.slate[950]
+          1: colors.zinc[600],
+          2: colors.zinc[700],
+          3: colors.zinc[800],
+          4: colors.zinc[900],
+          5: colors.zinc[950]
         },
         light: {
-          1: colors.slate[50],
-          2: colors.slate[100],
-          3: colors.slate[200],
-          4: colors.slate[300],
-          5: colors.slate[400]
+          1: colors.white,
+          2: colors.gray[50],
+          3: colors.gray[200],
+          4: colors.gray[300],
+          5: colors.gray[400]
         },
       },
       backgroundImage: {
