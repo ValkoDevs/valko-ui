@@ -91,56 +91,38 @@ const apiData = [
       </div>
     </template>
     <template #playground-options>
-      <div class="flex">
-        <div class="w-1/2 px-4">
-          <form action="">
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Variant"
-                size="sm"
-                :options="variantOptions"
-                v-model="form.variant"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Separator"
-                size="sm"
-                :options="separatorOptions"
-                v-model="form.separator"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Shape"
-                size="sm"
-                :options="shapeOptions"
-                v-model="form.shape"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                size="sm"
-                placeholder="Size"
-                :options="sizeOptions"
-                v-model="form.size"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-checkbox
-                label="Compact"
-                v-model="form.compact"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-checkbox
-                label="Multiple"
-                v-model="form.multiple"
-              />
-            </div>
-          </form>
-        </div>
-      </div>
+      <vk-select
+        placeholder="Variant"
+        size="sm"
+        :options="variantOptions"
+        v-model="form.variant"
+      />
+      <vk-select
+        placeholder="Separator"
+        size="sm"
+        :options="separatorOptions"
+        v-model="form.separator"
+      />
+      <vk-select
+        placeholder="Shape"
+        size="sm"
+        :options="shapeOptions"
+        v-model="form.shape"
+      />
+      <vk-select
+        size="sm"
+        placeholder="Size"
+        :options="sizeOptions"
+        v-model="form.size"
+      />
+      <vk-checkbox
+        label="Compact"
+        v-model="form.compact"
+      />
+      <vk-checkbox
+        label="Multiple"
+        v-model="form.multiple"
+      />
     </template>
 
     <template #examples>

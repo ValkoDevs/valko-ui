@@ -28,8 +28,36 @@ const useStyle = () => {
         'flex-col',
         'justify-start',
         'items-start',
-        'px-10',
         'py-5'
+      ],
+      playground: [
+        'flex',
+        'flex-col',
+        'gap-4',
+        'md:flex-row',
+        'items-stretch'
+      ],
+      playgroundView: [
+        'flex',
+        'w-full',
+        'md:w-auto',
+        'md:grow',
+        'justify-center',
+        'items-center',
+        'border',
+        'border-light-4',
+        'dark:border-dark-1',
+        'rounded'
+      ],
+      playgroundForm: [
+        'w-full',
+        'md:w-64',
+        'shrink-0',
+        'flex',
+        'flex-col',
+        'gap-2',
+        'justify-between',
+        'items-stretch'
       ]
     }
   })
@@ -42,7 +70,10 @@ const useStyle = () => {
       subtitle: slots.subtitle(),
       divider: slots.divider(),
       section: slots.section(),
-      container: slots.container()
+      container: slots.container(),
+      playground: slots.playground(),
+      playgroundView: slots.playgroundView(),
+      playgroundForm: slots.playgroundForm()
     }
   })
 }

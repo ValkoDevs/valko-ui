@@ -153,90 +153,62 @@ watchEffect(() => {
       </div>
     </template>
     <template #playground-options>
-      <div class="flex">
-        <div class="w-1/2 px-4">
-          <form action="">
-            <div class="flex mb-1">
-              <vk-input
-                label="Label"
-                size="sm"
-                v-model="form.label"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-input
-                label="Helpertext"
-                size="sm"
-                v-model="form.helpertext"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Variant"
-                size="sm"
-                :options="variantOptions"
-                v-model="form.variant"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Color"
-                size="sm"
-                :options="colorOptions"
-                v-model="form.color"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Shape"
-                size="sm"
-                :options="shapeOptions"
-                v-model="form.shape"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Size"
-                size="sm"
-                :options="sizeOptions"
-                v-model="form.size"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Label Position"
-                size="sm"
-                :options="position"
-                v-model="form.position"
-              />
-            </div>
-            <div class="flex">
-              <vk-checkbox
-                label="Disabled"
-                v-model="form.disabled"
-              />
-            </div>
-            <div class="flex">
-              <vk-checkbox
-                label="Flat"
-                v-model="form.flat"
-              />
-            </div>
-            <div class="flex">
-              <vk-checkbox
-                label="Readonly"
-                v-model="form.readonly"
-              />
-            </div>
-            <div class="flex">
-              <vk-checkbox
-                label="Indeterminate"
-                v-model="form.indeterminate"
-              />
-            </div>
-          </form>
-        </div>
-      </div>
+      <vk-input
+        label="Label"
+        size="sm"
+        v-model="form.label"
+      />
+      <vk-input
+        label="Helpertext"
+        size="sm"
+        v-model="form.helpertext"
+      />
+      <vk-select
+        placeholder="Variant"
+        size="sm"
+        :options="variantOptions"
+        v-model="form.variant"
+      />
+      <vk-select
+        placeholder="Color"
+        size="sm"
+        :options="colorOptions"
+        v-model="form.color"
+      />
+      <vk-select
+        placeholder="Shape"
+        size="sm"
+        :options="shapeOptions"
+        v-model="form.shape"
+      />
+      <vk-select
+        placeholder="Size"
+        size="sm"
+        :options="sizeOptions"
+        v-model="form.size"
+      />
+      <vk-select
+        placeholder="Label Position"
+        size="sm"
+        :options="position"
+        v-model="form.position"
+      />
+      <vk-checkbox
+        label="Disabled"
+        v-model="form.disabled"
+      />
+      <vk-checkbox
+        label="Flat"
+        v-model="form.flat"
+      />
+      <vk-checkbox
+        label="Readonly"
+        v-model="form.readonly"
+      />
+      <vk-checkbox
+        label="Indeterminate"
+        v-model="form.indeterminate"
+      />
     </template>
 
     <template #examples>

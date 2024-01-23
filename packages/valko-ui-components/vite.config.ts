@@ -15,7 +15,7 @@ export default defineConfig({
     }),
     typescript2({
       check: false,
-      include: ['src/components/**/*.vue'],
+      include: ['src/components/**/*.vue', 'src/components/**/*.ts'],
       tsconfigOverride: {
         compilerOptions: {
           outDir: 'dist',
@@ -56,6 +56,7 @@ export default defineConfig({
         'nuxt',
         '@nuxt/bridge',
         '@nuxt/kit',
+        'headlessui/vue',
         'vue-router/composables',
         'node:url'
       ],

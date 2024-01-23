@@ -4,8 +4,10 @@ import useStyle from './Menu.styles'
 
 const props = withDefaults(defineProps<MenuProps>(), {
   color: 'primary',
-  active: null,
-  rounded: false
+  size: 'md',
+  variant: 'filled',
+  shape: 'soft',
+  active: null
 })
 
 const groups = props.items.reduce((acc, item) => {

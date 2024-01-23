@@ -29,15 +29,16 @@ const classes = useStyle()
         Playground
       </h2>
       <hr :class="classes.divider">
-      <div class="flex">
-        <div class="w-1/2 flex justify-center items-center border border-light-4 dark:border-dark-1 rounded">
+      <div :class="classes.playground">
+        <div :class="classes.playgroundView">
           <slot name="playground-view" />
         </div>
-        <div class="w-1/2 px-4">
-          <form action="">
-            <slot name="playground-options" />
-          </form>
-        </div>
+        <form
+          action=""
+          :class="classes.playgroundForm"
+        >
+          <slot name="playground-options" />
+        </form>
       </div>
     </section>
 

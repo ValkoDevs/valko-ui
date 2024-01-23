@@ -171,76 +171,52 @@ const apiData = [
     </template>
 
     <template #playground-options>
-      <div class="flex">
-        <div class="w-1/2 px-4">
-          <form action="">
-            <div class="flex mb-1">
-              <vk-input
-                label="Label"
-                size="sm"
-                v-model="form.label"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-input
-                label="Helpertext"
-                size="sm"
-                v-model="form.helper"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Variant"
-                size="sm"
-                :options="variantOptions"
-                v-model="form.variant"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Color"
-                size="sm"
-                :options="colorOptions"
-                v-model="form.color"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Shape"
-                size="sm"
-                :options="shapeOptions"
-                v-model="form.selectShape"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Size"
-                size="sm"
-                :options="sizeOptions"
-                v-model="form.size"
-              />
-            </div>
-            <div class="flex">
-              <vk-checkbox
-                label="Multiple"
-                v-model="form.multiple"
-              />
-            </div>
-            <div class="flex">
-              <vk-checkbox
-                label="Disabled"
-                v-model="form.disabled"
-              />
-            </div>
-            <div class="flex">
-              <vk-checkbox
-                label="Readonly"
-                v-model="form.readonly"
-              />
-            </div>
-          </form>
-        </div>
-      </div>
+      <vk-input
+        label="Label"
+        size="sm"
+        v-model="form.label"
+      />
+      <vk-input
+        label="Helpertext"
+        size="sm"
+        v-model="form.helper"
+      />
+      <vk-select
+        placeholder="Variant"
+        size="sm"
+        :options="variantOptions"
+        v-model="form.variant"
+      />
+      <vk-select
+        placeholder="Color"
+        size="sm"
+        :options="colorOptions"
+        v-model="form.color"
+      />
+      <vk-select
+        placeholder="Shape"
+        size="sm"
+        :options="shapeOptions"
+        v-model="form.selectShape"
+      />
+      <vk-select
+        placeholder="Size"
+        size="sm"
+        :options="sizeOptions"
+        v-model="form.size"
+      />
+      <vk-checkbox
+        label="Multiple"
+        v-model="form.multiple"
+      />
+      <vk-checkbox
+        label="Disabled"
+        v-model="form.disabled"
+      />
+      <vk-checkbox
+        label="Readonly"
+        v-model="form.readonly"
+      />
     </template>
 
     <template #examples>

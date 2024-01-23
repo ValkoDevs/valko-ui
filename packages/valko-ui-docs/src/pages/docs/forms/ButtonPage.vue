@@ -100,66 +100,46 @@ const apiData = [
     </template>
 
     <template #playground-options>
-      <div class="flex">
-        <div class="w-1/2 px-4">
-          <div class="flex mb-1">
-            <vk-select
-              placeholder="Color"
-              size="sm"
-              :options="colorOptions"
-              v-model="form.color"
-            />
-          </div>
-          <div class="flex mb-1">
-            <vk-select
-              placeholder="Variant"
-              size="sm"
-              :options="variantOptions"
-              v-model="form.variant"
-            />
-          </div>
-          <div class="flex mb-1">
-            <vk-select
-              placeholder="Size"
-              size="sm"
-              :options="sizeOptions"
-              v-model="form.size"
-            />
-          </div>
-          <div class="flex mb-1">
-            <vk-select
-              placeholder="Shape"
-              size="sm"
-              :options="shapeOptions"
-              v-model="form.shape"
-            />
-          </div>
-          <div>
-            <vk-checkbox
-              v-model="form.disabled"
-              label="Disabled"
-            />
-          </div>
-          <div>
-            <vk-checkbox
-              v-model="form.condensed"
-              label="Condensed"
-            />
-          </div>
-          <div>
-            <vk-checkbox
-              v-model="form.flat"
-              label="Flat"
-            />
-          </div>
-          <div>
-            <vk-checkbox
-              v-model="form.block"
-              label="Block"
-            />
-          </div>
-        </div>
-      </div>
+      <vk-select
+        placeholder="Color"
+        size="sm"
+        :options="colorOptions"
+        v-model="form.color"
+      />
+      <vk-select
+        placeholder="Variant"
+        size="sm"
+        :options="variantOptions"
+        v-model="form.variant"
+      />
+      <vk-select
+        placeholder="Size"
+        size="sm"
+        :options="sizeOptions"
+        v-model="form.size"
+      />
+      <vk-select
+        placeholder="Shape"
+        size="sm"
+        :options="shapeOptions"
+        v-model="form.shape"
+      />
+      <vk-checkbox
+        v-model="form.disabled"
+        label="Disabled"
+      />
+      <vk-checkbox
+        v-model="form.condensed"
+        label="Condensed"
+      />
+      <vk-checkbox
+        v-model="form.flat"
+        label="Flat"
+      />
+      <vk-checkbox
+        v-model="form.block"
+        label="Block"
+      />
     </template>
 
     <template #examples>

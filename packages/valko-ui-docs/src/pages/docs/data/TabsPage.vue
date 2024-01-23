@@ -182,66 +182,46 @@ const tabsSlotsData = [
     </template>
 
     <template #playground-options>
-      <div class="flex">
-        <div class="w-1/2 px-4">
-          <form action="">
-            <div class="flex mb-1">
-              <vk-select
-                type="outlined"
-                placeholder="Color"
-                size="sm"
-                :options="colorOptions"
-                v-model="form.color"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                type="outlined"
-                placeholder="Variant"
-                size="sm"
-                :options="variantOptions"
-                v-model="form.variant"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                type="outlined"
-                placeholder="Size"
-                size="sm"
-                :options="sizeOptions"
-                v-model="form.size"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                type="outlined"
-                placeholder="Shape"
-                size="sm"
-                :options="shapes"
-                v-model="form.shape"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-checkbox
-                label="Grow"
-                v-model="form.grow"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-checkbox
-                label="Vertical"
-                v-model="form.vertical"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-checkbox
-                label="With Icons"
-                v-model="form.icons"
-              />
-            </div>
-          </form>
-        </div>
-      </div>
+      <vk-select
+        type="outlined"
+        placeholder="Color"
+        size="sm"
+        :options="colorOptions"
+        v-model="form.color"
+      />
+      <vk-select
+        type="outlined"
+        placeholder="Variant"
+        size="sm"
+        :options="variantOptions"
+        v-model="form.variant"
+      />
+      <vk-select
+        type="outlined"
+        placeholder="Size"
+        size="sm"
+        :options="sizeOptions"
+        v-model="form.size"
+      />
+      <vk-select
+        type="outlined"
+        placeholder="Shape"
+        size="sm"
+        :options="shapes"
+        v-model="form.shape"
+      />
+      <vk-checkbox
+        label="Grow"
+        v-model="form.grow"
+      />
+      <vk-checkbox
+        label="Vertical"
+        v-model="form.vertical"
+      />
+      <vk-checkbox
+        label="With Icons"
+        v-model="form.icons"
+      />
     </template>
 
     <template #examples>

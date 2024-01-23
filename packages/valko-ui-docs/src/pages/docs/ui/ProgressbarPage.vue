@@ -111,91 +111,69 @@ const apiData = [
       </div>
     </template>
     <template #playground-options>
-      <div class="flex">
-        <div class="w-1/2 px-4">
-          <form action="">
-            <div class="flex flex-col mb-1">
-              <label for="rg-progress">Progress</label>
-              <input
-                name="rg-progress"
-                type="range"
-                min="0"
-                max="100"
-                step="1"
-                v-model="form.progress"
-              >
-            </div>
-            <div class="flex flex-col mb-1">
-              <label for="rg-buffer">Buffer</label>
-              <input
-                name="rg-buffer"
-                type="range"
-                min="0"
-                max="100"
-                step="1"
-                v-model="form.buffer"
-              >
-            </div>
-            <div class="flex mb-1">
-              <vk-input
-                label="Slot Text"
-                size="sm"
-                v-model="form.slot"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Variant"
-                size="sm"
-                :options="variantOptions"
-                v-model="form.variant"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Color"
-                size="sm"
-                :options="colorOptions"
-                v-model="form.color"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Shape"
-                size="sm"
-                :options="shapes"
-                v-model="form.shape"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                size="sm"
-                placeholder="Size"
-                :options="sizeOptions"
-                v-model="form.size"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-checkbox
-                label="Indeterminate"
-                v-model="form.indeterminate"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-checkbox
-                label="Striped"
-                v-model="form.striped"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-checkbox
-                label="Display Buffer"
-                v-model="form.showBuffer"
-              />
-            </div>
-          </form>
-        </div>
+      <div class="flex flex-col mb-1">
+        <label for="rg-progress">Progress</label>
+        <input
+          name="rg-progress"
+          type="range"
+          min="0"
+          max="100"
+          step="1"
+          v-model="form.progress"
+        >
       </div>
+      <div class="flex flex-col mb-1">
+        <label for="rg-buffer">Buffer</label>
+        <input
+          name="rg-buffer"
+          type="range"
+          min="0"
+          max="100"
+          step="1"
+          v-model="form.buffer"
+        >
+      </div>
+      <vk-input
+        label="Slot Text"
+        size="sm"
+        v-model="form.slot"
+      />
+      <vk-select
+        placeholder="Variant"
+        size="sm"
+        :options="variantOptions"
+        v-model="form.variant"
+      />
+      <vk-select
+        placeholder="Color"
+        size="sm"
+        :options="colorOptions"
+        v-model="form.color"
+      />
+      <vk-select
+        placeholder="Shape"
+        size="sm"
+        :options="shapes"
+        v-model="form.shape"
+      />
+      <vk-select
+        size="sm"
+        placeholder="Size"
+        :options="sizeOptions"
+        v-model="form.size"
+      />
+      <vk-checkbox
+        label="Indeterminate"
+        v-model="form.indeterminate"
+      />
+      <vk-checkbox
+        label="Striped"
+        v-model="form.striped"
+      />
+      <vk-checkbox
+        label="Display Buffer"
+        v-model="form.showBuffer"
+      />
     </template>
 
     <template #examples>
