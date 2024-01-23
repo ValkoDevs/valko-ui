@@ -126,75 +126,51 @@ watch(isShown, () => {
       </div>
     </template>
     <template #playground-options>
-      <div class="flex">
-        <div class="w-1/2 px-4">
-          <form action="">
-            <div class="flex mb-1">
-              <vk-input
-                label="Title"
-                size="sm"
-                v-model="form.title"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Variant"
-                size="sm"
-                :options="variantOptions"
-                v-model="form.variant"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Color"
-                size="sm"
-                :options="colorOptions"
-                v-model="form.color"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Shape"
-                size="sm"
-                :options="shapeOptions"
-                v-model="form.shape"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Size"
-                size="sm"
-                :options="sizeOptions"
-                v-model="form.size"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-checkbox
-                label="Closable"
-                v-model="form.closable"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-checkbox
-                label="Custom Icon"
-                v-model="form.customIcon"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-checkbox
-                label="Without Icon"
-                v-model="form.noIcon"
-              />
-            </div>
-            <div class="flex">
-              <vk-checkbox
-                label="Flat"
-                v-model="form.flat"
-              />
-            </div>
-          </form>
-        </div>
-      </div>
+      <vk-input
+        label="Title"
+        size="sm"
+        v-model="form.title"
+      />
+      <vk-select
+        placeholder="Variant"
+        size="sm"
+        :options="variantOptions"
+        v-model="form.variant"
+      />
+      <vk-select
+        placeholder="Color"
+        size="sm"
+        :options="colorOptions"
+        v-model="form.color"
+      />
+      <vk-select
+        placeholder="Shape"
+        size="sm"
+        :options="shapeOptions"
+        v-model="form.shape"
+      />
+      <vk-select
+        placeholder="Size"
+        size="sm"
+        :options="sizeOptions"
+        v-model="form.size"
+      />
+      <vk-checkbox
+        label="Closable"
+        v-model="form.closable"
+      />
+      <vk-checkbox
+        label="Custom Icon"
+        v-model="form.customIcon"
+      />
+      <vk-checkbox
+        label="Without Icon"
+        v-model="form.noIcon"
+      />
+      <vk-checkbox
+        label="Flat"
+        v-model="form.flat"
+      />
     </template>
 
     <template #examples>

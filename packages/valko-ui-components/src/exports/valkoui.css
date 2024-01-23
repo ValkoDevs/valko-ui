@@ -2,11 +2,9 @@
 
 body,
 #app {
-  @apply w-screen
-    h-screen
-    bg-light-2
+  @apply bg-light-2
     text-dark-1
-    dark:bg-dark-5
+    dark:bg-dark-4
     dark:text-light-4
     text-base
     subpixel-antialiased;

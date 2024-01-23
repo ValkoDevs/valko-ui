@@ -59,36 +59,24 @@ const apiData = [
     </template>
 
     <template #playground-options>
-      <div class="flex">
-        <div class="w-1/2 px-4">
-          <form action="">
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Variant"
-                size="sm"
-                :options="variants"
-                v-model="form.variant"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Color"
-                size="sm"
-                :options="colorOptions"
-                v-model="form.color"
-              />
-            </div>
-            <div class="flex mb-1">
-              <vk-select
-                placeholder="Size"
-                size="sm"
-                :options="sizeOptions"
-                v-model="form.size"
-              />
-            </div>
-          </form>
-        </div>
-      </div>
+      <vk-select
+        placeholder="Variant"
+        size="sm"
+        :options="variants"
+        v-model="form.variant"
+      />
+      <vk-select
+        placeholder="Color"
+        size="sm"
+        :options="colorOptions"
+        v-model="form.color"
+      />
+      <vk-select
+        placeholder="Size"
+        size="sm"
+        :options="sizeOptions"
+        v-model="form.size"
+      />
     </template>
 
     <template #examples>

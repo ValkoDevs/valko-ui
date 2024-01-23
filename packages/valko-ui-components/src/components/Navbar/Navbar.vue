@@ -3,9 +3,13 @@ import { NavbarProps } from '@/components/Navbar/interfaces'
 import useStyle from './Navbar.styles'
 
 const props = withDefaults(defineProps<NavbarProps>(), {
+  color: 'neutral',
+  size: 'md',
+  variant: 'filled',
+  shape: 'soft',
   fixed: false,
-  floating: false,
-  rounded: false
+  flat: false,
+  floating: false
 })
 
 defineOptions({ name: 'VkNavbar' })
