@@ -13,11 +13,7 @@ export interface SelectProps extends Variants, Sizes, Colors, Shapes {
   modelValue?: string | number | Array<string | number>;
   placeholder?: string;
   helpertext?: string;
-  iconLeft?: string;
-  iconRight?: string;
   multiple?: boolean;
   disabled?: boolean;
   readonly?: boolean;
-  isOpen?: boolean;
-  rounded?: boolean;
 }

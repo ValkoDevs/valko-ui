@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { SelectProps } from '@/components/Select/interfaces'
-import { VkInput } from '../'
+import { VkInput, VkIcon } from '../'
 import useStyle from './Select.styles'
 
 defineOptions({ name: 'VkSelect' })
@@ -12,14 +12,13 @@ const props = withDefaults(defineProps<SelectProps>(), {
   size: 'md',
   shape: 'soft',
   placeholder: 'Select an option',
-  iconRight: 'chevron-down',
   options: () => []
 })
 
 const emit = defineEmits(['update:modelValue'])
-
 const classes = useStyle(props)
 const select = ref(null)
+const isOpen = ref(false)
 
 const showMap: Record<string, string> = props.options.reduce((acc, opt) => ({
   ...acc,
@@ -66,13 +65,15 @@ const isSelected = (value: string | number) => {
   return props.modelValue === value
 }
 
-const isOpen = ref(false)
-
 const closeDropdownOnOutsideClick = (event: MouseEvent) => {
   const target = event.target as HTMLElement
-  if (target.closest('.vk-select-container') !== select.value) {
+  if (target.closest('.vk-select__container') !== select.value) {
     isOpen.value = false
   }
+}
+
+const toggleDropdown = (onFocus: boolean) => {
+  isOpen.value = onFocus && !props.disabled && !props.readonly
 }
 
 onMounted(() => {
@@ -82,11 +83,6 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener('click', closeDropdownOnOutsideClick)
 })
-
-const toggleDropdown = (onFocus: boolean) => {
-  isOpen.value = onFocus && !props.disabled && !props.readonly
-}
-
 </script>
 
 <template>
@@ -116,32 +112,48 @@ const toggleDropdown = (onFocus: boolean) => {
         :helpertext="helpertext"
         :label="placeholder"
         :disabled="disabled"
-        :rounded="rounded"
         :variant="variant"
         :color="color"
         :size="size"
         :shape="shape"
         :model-value="showValue"
-        :icon-left="iconLeft"
-        :icon-right="iconRight"
-        :is-open="isOpen"
+        cursor="pointer"
         @focus="() => toggleDropdown(true)"
-      />
-      <ul
-        :data-helper="!!helpertext"
-        :class="classes.dropdown"
-        v-show="isOpen"
       >
-        <li
-          v-for="item in options"
-          :key="item.value"
-          :data-selected="isSelected(item.value)"
-          :class="classes.item"
-          @click="selectItem(item.value)"
+        <template #rightIcon>
+          <vk-icon
+            name="chevron-down"
+            :data-open="isOpen"
+            :class="classes.icon"
+          />
+        </template>
+      </vk-input>
+      <transition
+        enter-active-class="transition-all duration-200 ease-out origin-top"
+        enter-from-class="opacity-50 scale-y-90"
+        enter-to-class="opacity-100 scale-y-100"
+        leave-active-class="transition-all duration-200 ease-out origin-top"
+        leave-from-class="opacity-100 scale-y-100"
+        leave-to-class="opacity-50 scale-y-90"
+      >
+        <ul
+          v-if="isOpen"
+          :data-helper="!!helpertext"
+          :class="classes.dropdown"
+          :data-shape="shape"
         >
-          {{ item.label }}
-        </li>
-      </ul>
+          <li
+            v-for="item in options"
+            :key="item.value"
+            :data-selected="isSelected(item.value)"
+            :data-shape="shape"
+            :class="classes.item"
+            @click="selectItem(item.value)"
+          >
+            {{ item.label }}
+          </li>
+        </ul>
+      </transition>
     </div>
   </div>
 </template>

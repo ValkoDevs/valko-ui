@@ -6,6 +6,7 @@ const useStyle = (props: DataTableProps) => {
   const table = tv({
     slots: {
       table: [
+        'vk-data-table',
         'w-full',
         'dark:border-dark-3',
         'rounded'

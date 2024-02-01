@@ -6,6 +6,7 @@ const useStyle = (props: TextareaProps) => {
   const textarea = tv({
     slots: {
       container: [
+        'vk-textarea__container',
         'w-full',
         'flex',
         'flex-col',
@@ -55,9 +56,11 @@ const useStyle = (props: TextareaProps) => {
         'items-start'
       ],
       helper: [
+        'vk-textarea__helper',
         'grow'
       ],
       counter: [
+        'vk-textarea__counter',
         'w-fit',
         'whitespace-nowrap'
       ],
@@ -319,7 +322,11 @@ const useStyle = (props: TextareaProps) => {
             'rounded-xl'
           ]
         },
-        square: {}
+        square: {
+          textarea: [
+            'rounded-none'
+          ]
+        }
       }
     },
     compoundVariants: [

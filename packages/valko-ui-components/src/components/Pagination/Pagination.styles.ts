@@ -6,17 +6,20 @@ const useStyle = (props: PaginationProps) => {
   const pagination = tv({
     slots: {
       nav: [
+        'vk-pagination__nav',
         'p-2',
         'inline-flex',
         '-space-x-px',
         'shadow-sm'
       ],
       button: [
+        'vk-pagination__button',
         'flex',
         'justify-center',
         'items-center'
       ],
       arrows: [
+        'vk-pagination__arrows',
         'flex',
         'justify-center',
         'items-center'
@@ -37,7 +40,11 @@ const useStyle = (props: PaginationProps) => {
             'dark:border-dark-3'
           ]
         },
-        ghost: {}
+        ghost: {
+          nav: [
+            'bg-transparent'
+          ]
+        }
       },
       shape: {
         rounded: {

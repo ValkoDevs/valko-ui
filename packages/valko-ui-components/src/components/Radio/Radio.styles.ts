@@ -6,6 +6,7 @@ const useStyle = (props: RadioProps) => {
   const radio = tv({
     slots: {
       container: [
+        'vk-radio__container',
         'w-full',
         'flex',
         'justify-start',
@@ -13,6 +14,7 @@ const useStyle = (props: RadioProps) => {
         'cursor-pointer'
       ],
       radio: [
+        'vk-radio__radio',
         'shadow-lg',
         'border-2',
         'border-light-5',
@@ -39,6 +41,7 @@ const useStyle = (props: RadioProps) => {
         'cursor-pointer'
       ],
       icon: [
+        'vk-radio__icon',
         'text-white'
       ]
     },
@@ -117,16 +120,8 @@ const useStyle = (props: RadioProps) => {
         }
       },
       color: {
-        primary: {
-          helpertext: [
-            'text-primary-500'
-          ]
-        },
-        secondary: {
-          helpertext: [
-            'text-secondary-500'
-          ]
-        },
+        primary: {},
+        secondary: {},
         success: {
           helpertext: [
             'text-success-500'
@@ -200,7 +195,11 @@ const useStyle = (props: RadioProps) => {
             'rounded-full'
           ]
         },
-        square: {}
+        square: {
+          radio: [
+            'rounded-none'
+          ]
+        }
       }
     },
     compoundVariants: [

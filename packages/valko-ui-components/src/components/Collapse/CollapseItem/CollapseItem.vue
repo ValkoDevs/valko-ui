@@ -15,11 +15,14 @@ const onClick = () => {
   if (buttonRef.value) {
     const current = buttonRef.value.$el
     const parent = current.closest('.vk-collapse')
+    const collapseId = parent?.getAttribute('data-collapse-id')
     if (parent?.getAttribute('data-multiple') === 'true') return
 
-    const collapseList = document.querySelectorAll('button[data-headlessui-state="open"]') as unknown as HTMLElement[]
-    for (const collapse of collapseList) {
-      if (collapse !== current) collapse.click()
+    if (collapseId) {
+      const collapseList = document.querySelectorAll(`[data-collapse-id="${collapseId}"] button[data-headlessui-state="open"]`) as unknown as HTMLElement[]
+      for (const collapse of collapseList) {
+        if (collapse !== current) collapse.click()
+      }
     }
   }
 }

@@ -15,11 +15,11 @@ const shapes = [
 ]
 
 const tabs = [
-  { title: 'Photos' },
-  { title: 'Videos' },
-  { title: 'Favorite' },
-  { title: 'Trending' },
-  { title: 'Friends' }
+  { key: 'photos', title: 'Photos' },
+  { key: 'videos', title: 'Videos' },
+  { key: 'favorite', title: 'Favorite' },
+  { key: 'trending', title: 'Trending' },
+  { key: 'friends', title: 'Friends' }
 ]
 
 const tabWithIcon = [
@@ -170,7 +170,7 @@ const tabsSlotsData = [
           :grow="form.grow"
           :vertical="form.vertical"
         >
-          <template #content-photos>
+          <template #photos>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti sequi perspiciatis ab reprehenderit molestias voluptas illo nostrum nesciunt! Facere explicabo eum esse laboriosam illum aliquam minima molestiae quo similique vitae.</p>
             <p>Esse aspernatur consectetur, recusandae architecto qui quae dolores porro, nemo eveniet assumenda explicabo exercitationem id officia voluptatum ipsam, enim vitae sit? Quaerat sapiente aperiam, natus et ipsa quos praesentium at?</p>
             <p>Tempore blanditiis labore non reiciendis sapiente obcaecati earum odit ad sunt voluptas animi ipsum, veritatis harum rerum optio minima voluptate nihil quis et nulla quo assumenda consequatur. Sequi, vitae cum?</p>

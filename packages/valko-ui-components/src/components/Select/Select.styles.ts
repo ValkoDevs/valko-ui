@@ -6,14 +6,15 @@ const useStyle = (props: SelectProps) => {
   const input = tv({
     slots: {
       container: [
-        'w-full',
-        'vk-select-container'
+        'vk-select__container',
+        'w-full'
       ],
       field: [
         'w-full',
         'relative'
       ],
       select: [
+        'vk-select__field',
         'w-full',
         'relative',
         'outline-none',
@@ -26,26 +27,37 @@ const useStyle = (props: SelectProps) => {
         'z-10',
         'mt-1',
         'p-2',
-        'rounded-lg',
         'bg-white',
         'shadow-lg',
         'overflow-auto',
         'whitespace-nowrap',
         'max-h-48',
-        'transition-max-height duration-300 ease-out',
-        'data-[helper=true]:-mt-6',
+        'select-none',
         'dark:bg-dark-3',
-        'select-none'
+        'data-[helper=true]:-mt-6',
+        'data-[shape=rounded]:rounded-lg',
+        'data-[shape=soft]:rounded-b-lg',
+        'data-[shape=square]:rounded-none'
       ],
       item: [
-        'rounded-lg',
+        'vk-select__item',
         'p-2',
         'mb-1',
         'cursor-pointer',
         'hover:bg-gray-100',
         'dark:text-white',
         'dark:bg-dark-3',
-        'dark:hover:bg-dark-1'
+        'dark:hover:bg-dark-1',
+        'data-[shape=rounded]:rounded-full',
+        'data-[shape=soft]:rounded-lg',
+        'data-[shape=square]:rounded-none'
+      ],
+      icon: [
+        'block',
+        'transition-transform',
+        'duration-200',
+        'ease-out',
+        'data-[open=true]:rotate-180'
       ]
     },
     variants: {
@@ -151,7 +163,8 @@ const useStyle = (props: SelectProps) => {
       dropdown: slots.dropdown(),
       item: slots.item(),
       container: slots.container(),
-      field: slots.field()
+      field: slots.field(),
+      icon: slots.icon()
     }
   })
 }

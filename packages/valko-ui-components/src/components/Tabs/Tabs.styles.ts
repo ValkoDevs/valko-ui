@@ -6,6 +6,7 @@ const useStyle = (props: TabsProps) => {
   const tab = tv({
     slots: {
       container: [
+        'vk-tabs__container',
         'w-full',
         'flex',
         'overflow-x-auto'
@@ -29,6 +30,7 @@ const useStyle = (props: TabsProps) => {
         'ease-out'
       ],
       tab: [
+        'vk-tabs__tab',
         'w-fit',
         'h-fit',
         'tracking-wider',
@@ -58,9 +60,11 @@ const useStyle = (props: TabsProps) => {
         'duration-200'
       ],
       leftIcon: [
+        'vk-tabs__left',
         'mr-1'
       ],
       rightIcon: [
+        'vk-tabs__right',
         'ml-1'
       ]
     },
@@ -111,6 +115,9 @@ const useStyle = (props: TabsProps) => {
           ]
         },
         square: {
+          list: [
+            'rounded-none'
+          ],
           tab: [
             'data-[headlessui-state=selected]:text-white'
           ]

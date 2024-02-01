@@ -6,6 +6,7 @@ const useStyle = (props: ProgressbarProps) => {
   const progressbar = tv({
     slots: {
       container: [
+        'vk-progressbar__container',
         'w-full',
         'overflow-hidden',
         'relative',
@@ -30,6 +31,7 @@ const useStyle = (props: ProgressbarProps) => {
         'z-30'
       ],
       buffer: [
+        'vk-progressbar__buffer',
         'w-full',
         'h-full',
         'absolute',
@@ -75,7 +77,11 @@ const useStyle = (props: ProgressbarProps) => {
             'rounded-full'
           ]
         },
-        square: {},
+        square: {
+          container: [
+            'rounded-none'
+          ]
+        },
         soft: {
           container: [
             'rounded-lg'

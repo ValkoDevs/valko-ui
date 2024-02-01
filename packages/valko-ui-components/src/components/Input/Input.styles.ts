@@ -6,12 +6,14 @@ const useStyle = (props: InputProps) => {
   const input = tv({
     slots: {
       container: [
+        'vk-input__container',
         'w-full',
         'flex',
         'flex-col',
         'justify-items-start'
       ],
       input: [
+        'vk-input__input',
         'w-full',
         'px-2',
         'outline-none',
@@ -26,7 +28,6 @@ const useStyle = (props: InputProps) => {
         'text-left',
         'font-bold',
         'truncate',
-        'cursor-text',
         'px-1',
         'ml-[1px]',
         'absolute',
@@ -54,6 +55,7 @@ const useStyle = (props: InputProps) => {
         'items-start'
       ],
       helper: [
+        'vk-input__helper',
         'w-full',
         'mt-1',
         'origin-top-left',
@@ -330,7 +332,11 @@ const useStyle = (props: InputProps) => {
           ]
         },
         soft: {},
-        square: {}
+        square: {
+          input: [
+            'rounded-none'
+          ]
+        }
       },
       disabled: {
         true: {
@@ -355,6 +361,24 @@ const useStyle = (props: InputProps) => {
           ],
           helper: [
             'text-gray-500'
+          ]
+        }
+      },
+      cursor: {
+        pointer: {
+          input: [
+            'cursor-pointer'
+          ],
+          label: [
+            'cursor-pointer'
+          ]
+        },
+        text: {
+          input: [
+            'cursor-text'
+          ],
+          label: [
+            'cursor-text'
           ]
         }
       }
@@ -854,7 +878,8 @@ const useStyle = (props: InputProps) => {
       size: props.size,
       shape: props.shape,
       variant: props.variant,
-      disabled: props.disabled
+      disabled: props.disabled,
+      cursor: props.cursor
     })
 
     return {

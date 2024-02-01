@@ -13,7 +13,9 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   label: 'Checkbox',
   modelValue: false,
   indeterminate: false,
-  readonly: false
+  readonly: false,
+  labelPosition: false,
+  disabled: false
 })
 
 const emit = defineEmits(['update:modelValue'])

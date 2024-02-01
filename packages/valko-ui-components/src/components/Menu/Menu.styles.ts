@@ -6,6 +6,7 @@ const useStyle = (props: MenuProps) => {
   const baseMenu = tv({
     slots: {
       group: [
+        'vk-menu__group',
         'font-bold',
         'px-2'
       ],
@@ -17,6 +18,7 @@ const useStyle = (props: MenuProps) => {
         'w-full'
       ],
       content: [
+        'vk-menu__content',
         'flex',
         'py-2.5',
         'px-4',

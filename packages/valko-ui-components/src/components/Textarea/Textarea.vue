@@ -8,7 +8,8 @@ const props = withDefaults(defineProps<TextareaProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  modelValue: ''
+  modelValue: '',
+  maxlenght: 0
 })
 
 const emit = defineEmits(['update:modelValue'])

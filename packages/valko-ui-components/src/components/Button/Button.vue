@@ -8,7 +8,11 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   color: 'primary',
   variant: 'filled',
   size: 'md',
-  shape: 'soft'
+  shape: 'soft',
+  block: false,
+  flat: false,
+  disabled: false,
+  condensed: false
 })
 
 const emit = defineEmits(['click'])
