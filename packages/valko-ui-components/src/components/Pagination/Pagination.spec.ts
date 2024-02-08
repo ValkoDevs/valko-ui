@@ -2,7 +2,7 @@ import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import { VkPagination } from '.'
 
-describe('Switch component', () => {
+describe('Pagination component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {

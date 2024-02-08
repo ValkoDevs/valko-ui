@@ -1,7 +1,7 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { VkCheckbox } from '.'
 
-describe('Switch component', () => {
+describe('Checkbox component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {

@@ -1,7 +1,7 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { VkInput } from '.'
 
-describe('Switch component', () => {
+describe('Input component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {

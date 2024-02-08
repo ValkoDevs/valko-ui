@@ -2,7 +2,7 @@ import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import { VkSelect } from '.'
 
-describe('Switch component', () => {
+describe('Select component', () => {
   const options = [
     { value: 1, label: 'Wade Cooper' },
     { value: 2, label: 'Arlene Mccoy' },
@@ -26,7 +26,7 @@ describe('Switch component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[selected=true]:text-primary-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-primary-500')
       })
 
       it('should be size md', () => {
@@ -65,7 +65,7 @@ describe('Switch component', () => {
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[selected=true]:text-primary-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-primary-500')
       })
 
       it('should be color secondary when props.color is secondary', async () => {
@@ -78,7 +78,7 @@ describe('Switch component', () => {
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[selected=true]:text-secondary-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-secondary-500')
       })
 
       it('should be color success when props.color is success', async () => {
@@ -91,7 +91,7 @@ describe('Switch component', () => {
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[selected=true]:text-success-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-success-500')
       })
 
       it('should be color info when props.color is info', async () => {
@@ -104,7 +104,7 @@ describe('Switch component', () => {
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[selected=true]:text-info-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-info-500')
       })
 
       it('should be color warning when props.color is warning', async () => {
@@ -117,7 +117,7 @@ describe('Switch component', () => {
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[selected=true]:text-warning-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-warning-500')
       })
 
       it('should be color error when props.color is error', async () => {
@@ -130,7 +130,7 @@ describe('Switch component', () => {
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[selected=true]:text-error-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-error-500')
       })
 
       it('should be color light when props.color is light', async () => {
@@ -143,7 +143,7 @@ describe('Switch component', () => {
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[selected=true]:text-light-1')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-light-1')
       })
 
       it('should be color dark when props.color is dark', async () => {
@@ -156,7 +156,7 @@ describe('Switch component', () => {
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[selected=true]:text-dark-5')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-dark-5')
       })
     })
 

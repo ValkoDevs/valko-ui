@@ -1,7 +1,7 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { VkRadio } from '.'
 
-describe('Switch component', () => {
+describe('Radio component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {

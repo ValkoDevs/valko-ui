@@ -22,7 +22,8 @@ const menuItems: MenuItem[] = [
   { key: 'spinner', group: 'Ui', text: 'Spinner' },
   { key: 'pagination', group: 'Data', text: 'Pagination' },
   { key: 'collapse', group: 'Data', text: 'Collapse' },
-  { key: 'tabs', group: 'Data', text: 'Tabs' }
+  { key: 'tabs', group: 'Data', text: 'Tabs' },
+  { key: 'dropdown', group: 'Data', text: 'Dropdown' }
 ]
 
 const activeItem = ref<MenuItem['key'] | null>(null)

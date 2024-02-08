@@ -3,7 +3,7 @@ import { VueWrapper, mount } from '@vue/test-utils'
 import { VkCollapseItem } from '.'
 import { VkCollapse } from '../'
 
-describe('Switch component', () => {
+describe('CollapseItem component', () => {
   let wrapper: VueWrapper
   let childWrapper: VueWrapper
   describe('Props', () => {
