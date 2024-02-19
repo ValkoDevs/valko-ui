@@ -11,20 +11,22 @@ const darkTheme = ref(false)
 const menuItems: MenuItem[] = [
   { key: 'get-started', group: 'General', text: 'Get Started' },
   { key: 'divider', group: 'Layout', text: 'Divider' },
+  { key: 'modal', group: 'Layout', text: 'Modal' },
   { key: 'button', group: 'Forms', text: 'Button' },
-  { key: 'input', group: 'Forms',  text:'Input' },
   { key: 'checkbox', group: 'Forms', text: 'Checkbox' },
-  { key: 'select', group: 'Forms', text: 'Select' },
-  { key: 'textarea', group: 'Forms', text: 'Textarea' },
+  { key: 'input', group: 'Forms',  text: 'Input' },
   { key: 'radio', group: 'Forms', text: 'Radio' },
+  { key: 'select', group: 'Forms', text: 'Select' },
   { key: 'switch', group: 'Forms', text: 'Switch' },
+  { key: 'textarea', group: 'Forms', text: 'Textarea' },
   { key: 'alert', group: 'Ui', text: 'Alert' },
+  { key: 'card', group: 'Ui', text: 'Card' },
   { key: 'progressbar', group: 'Ui', text: 'Progressbar' },
   { key: 'spinner', group: 'Ui', text: 'Spinner' },
-  { key: 'pagination', group: 'Data', text: 'Pagination' },
   { key: 'collapse', group: 'Data', text: 'Collapse' },
-  { key: 'tabs', group: 'Data', text: 'Tabs' },
-  { key: 'dropdown', group: 'Data', text: 'Dropdown' }
+  { key: 'dropdown', group: 'Data', text: 'Dropdown' },
+  { key: 'pagination', group: 'Data', text: 'Pagination' },
+  { key: 'tabs', group: 'Data', text: 'Tabs' }
 ]
 
 const activeItem = ref<MenuItem['key'] | null>(null)
