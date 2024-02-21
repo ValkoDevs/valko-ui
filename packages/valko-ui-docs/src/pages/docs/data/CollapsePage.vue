@@ -131,7 +131,7 @@ const apiData = [
         justify="evenly"
         gap
       >
-        <div class="grow gap-4 grid grid-cols-2">
+        <div class="grow gap-4 grid grid-cols-2 items-start">
           <vk-collapse
             v-for="variant in variantOptions"
             :variant="variant.value"
@@ -157,7 +157,6 @@ const apiData = [
             :compact="true"
           >
             <vk-collapse-item
-              left-icon="user-circle"
               title="Compact-Example Item 1"
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

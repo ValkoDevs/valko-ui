@@ -6,6 +6,7 @@ const useStyle = (props: AlertProps) => {
   const alert = tv({
     slots: {
       container: [
+        'vk-alert__container',
         'w-full',
         'p-4',
         'gap-4',
@@ -51,7 +52,11 @@ const useStyle = (props: AlertProps) => {
             'text-white'
           ]
         },
-        ghost: {},
+        ghost: {
+          container: [
+            'bg-transparent'
+          ]
+        },
         outlined: {
           container: [
             'p-[calc(1rem_-_2px)]',
@@ -135,7 +140,11 @@ const useStyle = (props: AlertProps) => {
             'rounded-lg'
           ]
         },
-        square: {}
+        square: {
+          container: [
+            'rounded-none'
+          ]
+        }
       }
     },
     compoundVariants: [

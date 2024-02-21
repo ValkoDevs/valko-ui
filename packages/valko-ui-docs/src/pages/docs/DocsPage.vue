@@ -17,6 +17,7 @@ const menuItems: MenuItem[] = [
   { key: 'select', group: 'Forms', text: 'Select' },
   { key: 'textarea', group: 'Forms', text: 'Textarea' },
   { key: 'radio', group: 'Forms', text: 'Radio' },
+  { key: 'switch', group: 'Forms', text: 'Switch' },
   { key: 'alert', group: 'Ui', text: 'Alert' },
   { key: 'progressbar', group: 'Ui', text: 'Progressbar' },
   { key: 'spinner', group: 'Ui', text: 'Spinner' },
