@@ -133,7 +133,6 @@ const apiData = [
     <template #playground-view>
       <div class="w-full flex px-2">
         <vk-input
-          icon-left="home"
           :variant="form.variant"
           :color="form.color"
           :size="form.size"
@@ -145,7 +144,14 @@ const apiData = [
           v-model="form.value"
           :label="form.labelValue"
           :helpertext="form.helperValue"
-        />
+        >
+          <template #leftIcon>
+            <vk-icon name="home" />
+          </template>
+          <template #rightIcon>
+            <vk-icon name="home" />
+          </template>
+        </vk-input>
       </div>
     </template>
 

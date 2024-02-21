@@ -15,8 +15,8 @@ export interface TabKeymap {
 }
 
 export interface TabsProps extends Colors, Sizes, Variants {
-  shape?: 'line' | 'rounded' | 'square' | 'soft';
   tabs: Tab[];
+  shape?: 'line' | 'rounded' | 'square' | 'soft';
   defaultIndex?: number;
   grow?: boolean;
   vertical?: boolean;

@@ -5,6 +5,7 @@ import { computed } from 'vue'
 const useStyle = (props: ButtonProps) => {
   const baseButton = tv({
     base: [
+      'vk-button__base',
       'font-semibold',
       'tracking-wider',
       'focus:outline-none',
@@ -89,7 +90,9 @@ const useStyle = (props: ButtonProps) => {
         soft: [
           'rounded'
         ],
-        square: {}
+        square: [
+          'rounded-none'
+        ]
       }
     },
     compoundVariants: [

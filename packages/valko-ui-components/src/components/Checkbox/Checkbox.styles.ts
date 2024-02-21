@@ -6,6 +6,7 @@ const useStyle = (props: CheckboxProps) => {
   const checkbox = tv({
     slots: {
       container: [
+        'vk-checkbox__container',
         'w-full',
         'flex',
         'justify-start',
@@ -13,6 +14,7 @@ const useStyle = (props: CheckboxProps) => {
         'cursor-pointer'
       ],
       checkbox: [
+        'vk-checkbox__checkbox',
         'shadow-lg',
         'border-2',
         'border-light-5',
@@ -115,16 +117,8 @@ const useStyle = (props: CheckboxProps) => {
         }
       },
       color: {
-        primary: {
-          helpertext: [
-            'text-primary-500'
-          ]
-        },
-        secondary: {
-          helpertext: [
-            'text-secondary-500'
-          ]
-        },
+        primary: {},
+        secondary: {},
         success: {
           helpertext: [
             'text-success-500'
@@ -195,7 +189,11 @@ const useStyle = (props: CheckboxProps) => {
             'rounded'
           ]
         },
-        square: {}
+        square: {
+          checkbox: [
+            'rounded-none'
+          ]
+        }
       },
       flat: {
         true: {

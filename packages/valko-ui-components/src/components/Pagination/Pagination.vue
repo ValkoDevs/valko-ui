@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<PaginationProps>(), {
 const emit = defineEmits(['update:modelValue'])
 const classes = useStyle(props)
 const isDarkMode = useDarkMode()
-const getButtonColor = computed(() => isDarkMode.value ? 'light' : 'dark')
+const buttonColor = computed(() => isDarkMode.value ? 'light' : 'dark')
 
 const pages = computed(() => {
   const maxPages = props.pages < 7 ? props.pages : 7
@@ -58,8 +58,7 @@ const changePage = (page: string | number) => {
 }
 
 watchEffect(() => {
-  if (props.modelValue > +props.pages)
-    emit('update:modelValue', +props.pages)
+  if (props.modelValue > +props.pages) emit('update:modelValue', +props.pages)
 })
 </script>
 
@@ -70,7 +69,8 @@ watchEffect(() => {
     >
       <vk-button
         variant="ghost"
-        :color="getButtonColor"
+        class="vk-pagination__left"
+        :color="buttonColor"
         :shape="props.shape"
         :size="size"
         condensed
@@ -88,7 +88,7 @@ watchEffect(() => {
         :key="page"
         flat
         :variant="page === props.modelValue ? 'filled' : 'ghost'"
-        :color="page === props.modelValue ? props.color : getButtonColor"
+        :color="page === props.modelValue ? props.color : buttonColor"
         :size="size"
         :shape="props.shape"
         condensed
@@ -101,7 +101,8 @@ watchEffect(() => {
       </vk-button>
       <vk-button
         variant="ghost"
-        :color="getButtonColor"
+        class="vk-pagination__right"
+        :color="buttonColor"
         :shape="props.shape"
         :size="size"
         flat

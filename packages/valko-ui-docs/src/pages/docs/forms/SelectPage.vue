@@ -34,14 +34,14 @@ const form: Ref<Record<string, string | boolean | number>> = ref({
   color: 'primary',
   variant: 'filled',
   size: 'md',
-  disabled: false,
-  flat: false,
   selectShape: 'soft',
-  readonly: false,
-  multiple: false,
   helper: 'Helpertext',
   label: 'Label',
-  exampleReadonly: 1
+  exampleReadonly: 1,
+  disabled: false,
+  flat: false,
+  readonly: false,
+  multiple: false
 })
 
 const apiData = [

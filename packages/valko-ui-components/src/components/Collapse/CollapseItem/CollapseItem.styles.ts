@@ -5,17 +5,21 @@ const useStyle = () => {
   const collapse = tv({
     slots: {
       collapse: [
+        'vk-collapse-item',
         'w-full',
+        'group-data-[variant=ghost]:bg-transparent',
         'group-data-[variant=filled]:bg-light-3',
         'group-data-[variant=outlined]:group-data-[separator=split]:border-2',
         'group-data-[variant=outlined]:group-data-[separator=split]:border-light-5',
         'group-data-[shape=rounded]:group-data-[separator=split]:rounded-3xl',
         'group-data-[shape=soft]:group-data-[separator=split]:rounded-lg',
+        'group-data-[shape=square]:rounded-none',
         'group-data-[separator=split]:p-3',
         'dark:group-data-[variant=filled]:bg-dark-3',
         'dark:group-data-[variant=outlined]:group-data-[separator=split]:border-dark-1'
       ],
       button: [
+        'vk-collapse-item__button',
         'w-full',
         'py-2',
         'font-bold',
@@ -41,6 +45,7 @@ const useStyle = () => {
         'group-data-[size=lg]:text-lg'
       ],
       icon: [
+        'vk-collapse-item__icon',
         'transition-all',
         'duration-300',
         'ease-out',

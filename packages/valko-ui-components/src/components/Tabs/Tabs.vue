@@ -13,6 +13,7 @@ const props = withDefaults(defineProps<TabsProps>(), {
   shape: 'soft',
   size: 'md',
   defaultIndex: 0,
+  vertical: false,
   tabs: () => []
 })
 const classes = useStyle(props)
@@ -25,10 +26,12 @@ const onChange = async () => {
     const extraHeight = props.shape === 'line' && props.variant === 'outlined' && !props.vertical ? 2 : 0
     const extraLeft = props.shape === 'line' && props.variant === 'outlined' && props.vertical ? 2 : 0
     const selectedElement = cursor.value.closest('.tab-list')?.querySelector('button[data-headlessui-state=selected]') as HTMLElement
-    cursor.value.style.width = `${selectedElement.clientWidth}px`
-    cursor.value.style.height = `${+selectedElement.clientHeight + extraHeight}px`
-    cursor.value.style.left = `${selectedElement.offsetLeft - extraLeft}px`
-    cursor.value.style.top = `${selectedElement.offsetTop}px`
+    if (selectedElement) {
+      cursor.value.style.width = `${selectedElement.clientWidth}px`
+      cursor.value.style.height = `${+selectedElement.clientHeight + extraHeight}px`
+      cursor.value.style.left = `${selectedElement.offsetLeft - extraLeft}px`
+      cursor.value.style.top = `${selectedElement.offsetTop}px`
+    }
   }
 }
 
@@ -77,6 +80,7 @@ onUpdated(onChange)
         <tab-panel
           v-for="item in props.tabs"
           :key="item.key"
+          :data-key="item.key"
         >
           <slot :name="item.key" />
         </tab-panel>

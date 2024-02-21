@@ -5,6 +5,7 @@ import { computed } from 'vue'
 const useStyle = (props: NavbarProps) => {
   const navbar = tv({
     base: [
+      'vk-navbar',
       'w-full',
       'px-4',
       'flex',

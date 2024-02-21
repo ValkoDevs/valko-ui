@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { InputProps } from '@/components/Input/interfaces'
-import { VkIcon } from '..'
 import useStyle from './Input.styles'
 
 defineOptions({ name: 'VkInput' })
@@ -11,11 +10,11 @@ const props = withDefaults(defineProps<InputProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  type: 'text'
+  type: 'text',
+  cursor: 'text'
 })
 
 const emit = defineEmits(['update:modelValue', 'focus', 'leftIconClick', 'rightIconClick'])
-
 const inputId = `input-${Math.random().toString(36).substr(2, 7)}`
 const inputRef = ref<HTMLInputElement | null>(null)
 
@@ -41,11 +40,6 @@ const onFocus = (event: Event) => {
   }
 }
 
-const iconClick = (side: 'left' | 'right') => {
-  emit(side === 'left' ? 'leftIconClick' : 'rightIconClick')
-  inputRef?.value?.focus()
-}
-
 const classes = useStyle(props)
 </script>
 
@@ -56,7 +50,7 @@ const classes = useStyle(props)
     <div :class="classes.field">
       <input
         ref="inputRef"
-        :data-hasIcon="!!props.iconLeft"
+        :data-hasIcon="!!$slots.leftIcon"
         :class="classes.input"
         :readonly="readonly"
         :disabled="disabled"
@@ -72,22 +66,24 @@ const classes = useStyle(props)
         :for="inputId"
         :class="classes.label"
       >{{ props.label }}</label>
-      <vk-icon
-        v-if="iconLeft"
-        :name="props.iconLeft"
+      <span
+        v-if="$slots.leftIcon"
         :class="`${classes.icon} ${classes.iconLeft}`"
-        @click="() => iconClick('left')"
-      />
-      <vk-icon
-        v-if="iconRight"
-        :name="props.iconRight"
-        :class="`${classes.icon} ${classes.iconRight} ${isOpen ? classes.iconOpen : ''}`"
-        @click="() => iconClick('right')"
-      />
+      >
+        <slot name="leftIcon" />
+      </span>
+      <span
+        v-if="$slots.rightIcon"
+        :class="`${classes.icon} ${classes.iconRight}`"
+      >
+        <slot name="rightIcon" />
+      </span>
     </div>
     <span
       :class="classes.helper"
-      v-if="helpertext !== ''"
-    >{{ props.helpertext }}</span>
+      v-if="helpertext"
+    >
+      {{ props.helpertext }}
+    </span>
   </div>
 </template>

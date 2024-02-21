@@ -50,7 +50,9 @@ const useStyle = (props: CollapseProps) => {
         soft: [
           'rounded-lg'
         ],
-        square: []
+        square: [
+          'rounded-none'
+        ]
       }
     },
     compoundVariants: [

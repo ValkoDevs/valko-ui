@@ -12,6 +12,7 @@ const props = withDefaults(defineProps<CollapseProps>(), {
 })
 
 const classes = useStyle(props)
+const collapseId = 'collapse-' + Math.floor(Math.random() * 100000)
 </script>
 
 <template>
@@ -23,6 +24,7 @@ const classes = useStyle(props)
     :data-variant="props.variant"
     :data-multiple="props.multiple"
     :data-shape="props.shape"
+    :data-collapse-id="collapseId"
   >
     <slot />
   </div>

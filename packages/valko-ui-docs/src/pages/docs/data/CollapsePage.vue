@@ -135,7 +135,6 @@ const apiData = [
           <vk-collapse
             v-for="variant in variantOptions"
             :variant="variant.value"
-            size="sm"
             :key="variant.value"
           >
             <vk-collapse-item
@@ -156,7 +155,6 @@ const apiData = [
           </vk-collapse>
           <vk-collapse
             :compact="true"
-            size="sm"
           >
             <vk-collapse-item
               left-icon="user-circle"
@@ -177,7 +175,6 @@ const apiData = [
           </vk-collapse>
           <vk-collapse
             :multiple="true"
-            size="sm"
           >
             <vk-collapse-item
               left-icon="user-circle"
@@ -207,7 +204,6 @@ const apiData = [
         <div class="grow gap-4 grid grid-cols-2">
           <vk-collapse
             v-for="separator in separatorOptions"
-            size="sm"
             :separator="separator.value"
             :key="separator.value"
           >
@@ -238,7 +234,6 @@ const apiData = [
         <div class="grow gap-4 grid grid-cols-2">
           <vk-collapse
             v-for="shape in shapeOptions"
-            size="sm"
             :shape="shape.value"
             :key="shape.value"
           >
