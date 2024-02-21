@@ -44,6 +44,10 @@ const routes = [
         component: lazyLoad('forms', 'RadioPage')
       },
       {
+        path: 'switch',
+        component: lazyLoad('forms', 'SwitchPage')
+      },
+      {
         path: 'pagination',
         component: lazyLoad('data', 'PaginationPage')
       },

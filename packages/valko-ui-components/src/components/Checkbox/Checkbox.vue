@@ -21,9 +21,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
 const emit = defineEmits(['update:modelValue'])
 
 const onClick = () => {
-  if (!props.disabled && !props.readonly) {
-    emit('update:modelValue', !props.modelValue)
-  }
+  if (!props.disabled && !props.readonly) emit('update:modelValue', !props.modelValue)
 }
 
 const classes = useStyle(props)

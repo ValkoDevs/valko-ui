@@ -10,7 +10,8 @@ const props = withDefaults(defineProps<AlertProps>(), {
   size: 'md',
   shape: 'soft',
   icon: '',
-  closable: false
+  closable: false,
+  flat: false
 })
 
 defineOptions({ name: 'VkAlert' })

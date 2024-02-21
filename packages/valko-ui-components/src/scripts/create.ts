@@ -10,7 +10,7 @@ const defaultOptions: ValkoUIOptions = {
   components: []
 }
 
-const create = (createOptions: Partial<ValkoUIOptions> = {}): Plugin => ({
+const create = (createOptions: Partial<ValkoUIOptions> = {}): Plugin<[]> => ({
   install: (app: App, installOptions: Partial<ValkoUIOptions> = {}) => {
     const options: ValkoUIOptions = {
       ...defaultOptions,
