@@ -1,7 +1,7 @@
 import { VueWrapper, mount, flushPromises } from '@vue/test-utils'
 import { VkTabs } from '.'
 
-describe('Switch component', () => {
+describe('Tabs component', () => {
   const tabs = [
     { key: 'photos', title: 'Photos', leftIcon: 'photo' },
     { key: 'videos', title: 'Videos', rightIcon: 'movie' },

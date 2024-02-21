@@ -1,7 +1,7 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { VkCollapse } from '.'
 
-describe('Switch component', () => {
+describe('Collapse component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {

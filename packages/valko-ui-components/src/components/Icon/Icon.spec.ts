@@ -1,19 +1,23 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { VkIcon } from '.'
 
-describe('Switch component', () => {
+describe('Icon component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(() => {
-        wrapper = mount(VkIcon, {})
+        wrapper = mount(VkIcon, {
+          props: {
+            name: 'home'
+          }
+        })
       })
 
       it('should render', () => {
         expect(wrapper.find('i.ti').exists()).toBe(true)
       })
 
-      it('should have default icon', () => {
+      it('should have home icon', () => {
         expect(wrapper.find('i.ti.ti-home').exists()).toBe(true)
       })
     })

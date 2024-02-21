@@ -141,7 +141,7 @@ const tabInterfaceData = [
     required: false,
     description: 'Wheter the Tab is disabled or not',
     values: 'true, false',
-    default: 'false'
+    default: ''
   }
 ]
 

@@ -2,8 +2,7 @@
 import { computed } from 'vue'
 import { AlertProps } from '@/components/Alert/interfaces'
 import { VkIcon, VkButton } from '../'
-
-import useStyle from './Alert.Styles'
+import useStyle from './Alert.styles'
 
 const props = withDefaults(defineProps<AlertProps>(), {
   color: 'primary',

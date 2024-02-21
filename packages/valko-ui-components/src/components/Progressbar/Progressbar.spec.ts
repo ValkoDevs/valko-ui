@@ -1,7 +1,7 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { VkProgressbar } from '.'
 
-describe('Switch component', () => {
+describe('Progressbar component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {

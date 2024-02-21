@@ -1,7 +1,7 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { VkNavbar } from '.'
 
-describe('Switch component', () => {
+describe('Navbar component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {

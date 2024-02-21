@@ -1,7 +1,7 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { VkButton } from '.'
 
-describe('Switch component', () => {
+describe('Button component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {

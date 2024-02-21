@@ -3,9 +3,7 @@ import { IconProps } from '@/components/Icon/interfaces'
 
 defineOptions({ name: 'VkIcon' })
 
-const props = withDefaults(defineProps<IconProps>(), {
-  name: 'home'
-})
+const props = defineProps<IconProps>()
 
 </script>
 

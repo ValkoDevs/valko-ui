@@ -147,6 +147,7 @@ onUnmounted(() => {
             :key="item.value"
             :data-selected="isSelected(item.value)"
             :data-shape="shape"
+            :data-variant="props.variant"
             :class="classes.item"
             @click="selectItem(item.value)"
           >

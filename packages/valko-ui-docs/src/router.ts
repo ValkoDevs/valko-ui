@@ -56,6 +56,10 @@ const routes = [
         component: lazyLoad('data', 'TabsPage')
       },
       {
+        path: 'dropdown',
+        component: lazyLoad('data', 'DropdownPage')
+      },
+      {
         path: 'alert',
         component: lazyLoad('ui', 'AlertPage')
       },

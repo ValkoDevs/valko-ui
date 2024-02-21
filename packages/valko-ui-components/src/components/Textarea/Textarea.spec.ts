@@ -1,7 +1,7 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { VkTextarea } from '.'
 
-describe('Switch component', () => {
+describe('Textarea component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {

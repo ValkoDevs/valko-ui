@@ -1,7 +1,7 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { VkMenu, MenuItem } from '.'
 
-describe('Switch component', () => {
+describe('Menu component', () => {
   const menuItems: MenuItem[] = [
     { key: 'get-started', group: 'General', text: 'Get Started' },
     { key: 'divider', group: 'Layout', text: 'Divider' },
@@ -24,7 +24,8 @@ describe('Switch component', () => {
       beforeEach(() => {
         wrapper = mount(VkMenu, {
           props: {
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
       })
@@ -55,7 +56,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             color: 'primary',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -66,7 +68,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             color: 'secondary',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -77,7 +80,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             color: 'success',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -88,7 +92,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             color: 'info',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -99,7 +104,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             color: 'warning',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -110,7 +116,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             color: 'error',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -121,7 +128,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             color: 'light',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -132,7 +140,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             color: 'dark',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -145,7 +154,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             shape: 'rounded',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -156,7 +166,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             shape: 'soft',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -167,7 +178,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             shape: 'square',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -180,7 +192,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             size: 'xs',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -191,7 +204,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             size: 'sm',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -202,7 +216,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             size: 'md',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -213,7 +228,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             size: 'lg',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -226,7 +242,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             variant: 'filled',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -237,7 +254,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             variant: 'outlined',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
@@ -248,7 +266,8 @@ describe('Switch component', () => {
         wrapper = mount(VkMenu, {
           props: {
             variant: 'ghost',
-            items: menuItems
+            items: menuItems,
+            active: 1
           }
         })
 
