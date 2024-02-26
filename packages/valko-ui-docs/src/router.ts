@@ -80,8 +80,8 @@ const routes = [
         component: lazyLoad('ui', 'SpinnerPage')
       },
       {
-        path: 'card',
-        component: lazyLoad('ui', 'CardPage')
+        path: 'avatar',
+        component: lazyLoad('ui', 'AvatarPage')
       }
     ]
   }

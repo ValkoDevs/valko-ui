@@ -117,7 +117,7 @@ const apiData = [
 <template>
   <doc-section
     title="Radio"
-    description="Radio desc"
+    description="The Radio component allow users to select a single option from a list of mutually exclusive options."
   >
     <template #playground-view>
       <div class="w-full flex flex-col justify-center items-center p-4">
