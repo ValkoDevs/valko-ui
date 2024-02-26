@@ -86,6 +86,10 @@ const routes = [
       {
         path: 'spinner',
         component: lazyLoad('ui', 'SpinnerPage')
+      },
+      {
+        path: 'avatar',
+        component: lazyLoad('ui', 'AvatarPage')
       }
     ]
   }
