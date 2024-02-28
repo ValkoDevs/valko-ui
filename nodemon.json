@@ -6,6 +6,7 @@
   "legacy-watch": true,
   "ext": "js,ts,json,vue,css",
   "ignore": [
-    "**/dist/**"
+    "**/dist/**",
+    "**/node_modules/**"
   ]
 }

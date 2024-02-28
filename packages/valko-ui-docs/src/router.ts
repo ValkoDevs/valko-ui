@@ -36,40 +36,48 @@ const routes = [
         component: lazyLoad('forms', 'InputPage')
       },
       {
-        path: 'select',
-        component: lazyLoad('forms', 'SelectPage')
-      },
-      {
-        path: 'textarea',
-        component: lazyLoad('forms', 'TextareaPage')
-      },
-      {
         path: 'radio',
         component: lazyLoad('forms', 'RadioPage')
+      },
+      {
+        path: 'select',
+        component: lazyLoad('forms', 'SelectPage')
       },
       {
         path: 'switch',
         component: lazyLoad('forms', 'SwitchPage')
       },
       {
-        path: 'pagination',
-        component: lazyLoad('data', 'PaginationPage')
+        path: 'textarea',
+        component: lazyLoad('forms', 'TextareaPage')
       },
       {
         path: 'collapse',
         component: lazyLoad('data', 'CollapsePage')
       },
       {
-        path: 'tabs',
-        component: lazyLoad('data', 'TabsPage')
-      },
-      {
         path: 'dropdown',
         component: lazyLoad('data', 'DropdownPage')
       },
       {
+        path: 'pagination',
+        component: lazyLoad('data', 'PaginationPage')
+      },
+      {
+        path: 'tabs',
+        component: lazyLoad('data', 'TabsPage')
+      },
+      {
         path: 'alert',
         component: lazyLoad('ui', 'AlertPage')
+      },
+      {
+        path: 'avatar',
+        component: lazyLoad('ui', 'AvatarPage')
+      },
+      {
+        path: 'badge',
+        component: lazyLoad('ui', 'BadgePage')
       },
       {
         path: 'progressbar',
@@ -78,10 +86,6 @@ const routes = [
       {
         path: 'spinner',
         component: lazyLoad('ui', 'SpinnerPage')
-      },
-      {
-        path: 'avatar',
-        component: lazyLoad('ui', 'AvatarPage')
       }
     ]
   }
