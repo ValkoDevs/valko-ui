@@ -56,13 +56,6 @@ const apiData = [
     default: 'false'
   },
   {
-    prop: 'rounded',
-    required: false,
-    description: 'Whether the Button is rounded or not.',
-    values: 'true, false',
-    default: 'false'
-  },
-  {
     prop: 'block',
     required: false,
     description: 'Whether the Button width is equal to it\'s container.',

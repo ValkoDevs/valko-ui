@@ -20,6 +20,10 @@ const routes = [
         component: lazyLoad('layout', 'DividerPage')
       },
       {
+        path: 'modal',
+        component: lazyLoad('layout', 'ModalPage')
+      },
+      {
         path: 'button',
         component: lazyLoad('forms', 'ButtonPage')
       },
@@ -74,6 +78,10 @@ const routes = [
       {
         path: 'spinner',
         component: lazyLoad('ui', 'SpinnerPage')
+      },
+      {
+        path: 'card',
+        component: lazyLoad('ui', 'CardPage')
       }
     ]
   }
