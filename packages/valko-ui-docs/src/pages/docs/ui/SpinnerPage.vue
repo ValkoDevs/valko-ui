@@ -46,7 +46,7 @@ const apiData = [
 <template>
   <doc-section
     title="Spinner"
-    description="Spinner desc"
+    description="The Spinner component express an unspecified wait time or display the length of a process."
   >
     <template #playground-view>
       <div class="w-full flex justify-center items-center">

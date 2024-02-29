@@ -54,7 +54,7 @@ const apiData = [
 <template>
   <doc-section
     title="Pagination Component"
-    description="A simple but elegant pagination component"
+    description="The Pagination component allows you to display active page and navigate between multiple pages."
   >
     <template #playground-view>
       <div class="w-full flex px-2 justify-center">

@@ -133,7 +133,7 @@ const itemInterfaceData = [
 <template>
   <doc-section
     title="Dropdown Component"
-    description="A simple but elegant dropdown component"
+    description="The Dropdown component displays a list of actions or options that a user can choose."
   >
     <template #playground-view>
       <div class="w-full flex px-2 justify-center">
