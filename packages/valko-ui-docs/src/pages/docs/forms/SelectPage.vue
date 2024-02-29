@@ -148,7 +148,7 @@ const apiData = [
 
 <template>
   <doc-section
-    title="Select Component"
+    title="Select"
     description="Selects are used to choose between many options either one or several enabling a more dynamic form"
   >
     <template #playground-view>

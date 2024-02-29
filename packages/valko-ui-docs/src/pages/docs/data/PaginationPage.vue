@@ -53,7 +53,7 @@ const apiData = [
 
 <template>
   <doc-section
-    title="Pagination Component"
+    title="Pagination"
     description="The Pagination component allows you to display active page and navigate between multiple pages."
   >
     <template #playground-view>
