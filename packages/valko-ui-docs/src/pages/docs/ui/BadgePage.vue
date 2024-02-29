@@ -97,7 +97,7 @@ const apiData = [
 
 <template>
   <doc-section
-    title="Badge Component"
+    title="Badge"
     description="The Badge component are used as a small numerical value or status descriptor for UI elements."
   >
     <template #playground-view>

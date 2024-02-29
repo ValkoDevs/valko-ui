@@ -127,7 +127,7 @@ const apiData = [
 
 <template>
   <doc-section
-    title="Input Component"
+    title="Input"
     description="The input component allows our users to build complex forms quickly, it has different variations of styles and a range of versatile colors with a subtle animation."
   >
     <template #playground-view>

@@ -137,7 +137,7 @@ const tabInterfaceData = [
     default: ''
   },
   {
-    prop: 'Disabled',
+    prop: 'disabled',
     required: false,
     description: 'Wheter the Tab is disabled or not',
     values: 'true, false',
@@ -169,15 +169,7 @@ const tabsSlotsData = [
           :tabs="form.icons ? tabWithIcon : tabs"
           :grow="form.grow"
           :vertical="form.vertical"
-        >
-          <template #photos>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti sequi perspiciatis ab reprehenderit molestias voluptas illo nostrum nesciunt! Facere explicabo eum esse laboriosam illum aliquam minima molestiae quo similique vitae.</p>
-            <p>Esse aspernatur consectetur, recusandae architecto qui quae dolores porro, nemo eveniet assumenda explicabo exercitationem id officia voluptatum ipsam, enim vitae sit? Quaerat sapiente aperiam, natus et ipsa quos praesentium at?</p>
-            <p>Tempore blanditiis labore non reiciendis sapiente obcaecati earum odit ad sunt voluptas animi ipsum, veritatis harum rerum optio minima voluptate nihil quis et nulla quo assumenda consequatur. Sequi, vitae cum?</p>
-            <p>Numquam, sit! Dolores iusto velit exercitationem perferendis soluta vero nulla earum alias at reprehenderit ducimus commodi, eaque, deserunt fugit nihil, quo quasi tenetur illum sequi. Ipsam accusantium temporibus suscipit eligendi.</p>
-            <p>Reiciendis iusto distinctio vero velit perferendis? Quidem soluta veritatis voluptate, hic dolore impedit rem pariatur numquam non nam accusantium repellat, placeat at, odit officiis in incidunt itaque aspernatur assumenda? Aperiam?</p>
-          </template>
-        </vk-tabs>
+        />
       </div>
     </template>
 
@@ -321,7 +313,7 @@ const tabsSlotsData = [
     <template #api>
       <div class="w-full flex flex-col">
         <example-section
-          title="Tabs props"
+          title="Tabs Props"
           gap
         >
           <vk-data-table
@@ -341,7 +333,7 @@ const tabsSlotsData = [
         </example-section>
 
         <example-section
-          title="Tab interface"
+          title="Tab Interface"
           gap
         >
           <vk-data-table
