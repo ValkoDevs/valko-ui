@@ -6,6 +6,7 @@ import sizeOptions from '@/data/sizeOptions'
 import colorOptions from '@/data/colorOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
+import slotHeaders from '@/data/slotHeaders'
 
 const form = ref({
   size: 'md',
@@ -93,12 +94,21 @@ const apiData = [
     default: 'false'
   }
 ]
+
+const slotData = [
+  {
+    name: 'default',
+    description: 'Slot for additional content to be placed inside the badge. This slot is typically used to include custom elements like icons, text, or other components.',
+    example: '<template #default>\n  <!-- Your custom content goes here -->\n</template>'
+  }
+]
+
 </script>
 
 <template>
   <doc-section
     title="Badge"
-    description="The Badge component are used as a small numerical value or status descriptor for UI elements."
+    description="Visual element that displays additional information, such as notifications or states. Badges are typically used to indicate new or unread items, status indicators, or numeric counters."
   >
     <template #playground-view>
       <vk-badge
@@ -190,28 +200,6 @@ const apiData = [
       </example-section>
 
       <example-section
-        title="Placements"
-        gap
-      >
-        <div
-          v-for="placement in placementOptions"
-          :key="placement.value"
-          class="flex flex-col items-center"
-        >
-          <span class="mb-2">{{ placement.label }}</span>
-          <vk-badge
-            :placement="placement.value"
-            content="new"
-          >
-            <vk-avatar
-              :src="src"
-              color="secondary"
-            />
-          </vk-badge>
-        </div>
-      </example-section>
-
-      <example-section
         title="Shapes"
         gap
       >
@@ -254,13 +242,115 @@ const apiData = [
           </vk-badge>
         </div>
       </example-section>
+
+      <example-section
+        title="Placements"
+        gap
+      >
+        <div
+          v-for="placement in placementOptions"
+          :key="placement.value"
+          class="flex flex-col items-center"
+        >
+          <span class="mb-2">{{ placement.label }}</span>
+          <vk-badge
+            :placement="placement.value"
+            content="new"
+          >
+            <vk-avatar
+              :src="src"
+              color="secondary"
+            />
+          </vk-badge>
+        </div>
+      </example-section>
+
+      <example-section
+        title="Flat"
+      >
+        <vk-badge
+          flat
+          content="new"
+        >
+          <vk-avatar
+            :src="src"
+            color="secondary"
+          />
+        </vk-badge>
+      </example-section>
+
+      <example-section
+        title="Outlined"
+      >
+        <vk-badge
+          outlined
+          content="new"
+        >
+          <vk-avatar
+            :src="src"
+            color="secondary"
+          />
+        </vk-badge>
+      </example-section>
+
+      <example-section
+        title="Dot"
+        gap
+      >
+        <div
+          v-for="size in sizeOptions"
+          :key="size.value"
+          class="flex flex-col items-center"
+        >
+          <span class="mb-2">{{ size.label }}</span>
+          <vk-badge
+            :size="size.value"
+            dot
+          >
+            <vk-avatar
+              :src="src"
+              color="secondary"
+            />
+          </vk-badge>
+        </div>
+      </example-section>
+
+      <example-section
+        title="Hidden"
+      >
+        <vk-badge
+          hidden
+        >
+          <vk-avatar
+            :src="src"
+            color="secondary"
+          />
+        </vk-badge>
+      </example-section>
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Badge Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+
+        <example-section
+          title="Badge Slots"
+          gap
+        >
+          <vk-data-table
+            :headers="slotHeaders"
+            :data="slotData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>

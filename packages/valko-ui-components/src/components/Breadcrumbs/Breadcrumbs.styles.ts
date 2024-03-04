@@ -9,7 +9,9 @@ const useStyle = (props: BreadcrumbsProps) => {
         'vk-breadcrumbs',
         'py-2',
         'px-4',
-        'flex'
+        'shadow-light-4',
+        'flex',
+        'dark:shadow-dark-5'
       ],
       a: [
         'vk-breadcrumbs__a',

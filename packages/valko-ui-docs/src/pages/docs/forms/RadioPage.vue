@@ -7,6 +7,7 @@ import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import variantOptions from '@/data/variantOptions'
 import shapeOptions from '@/data/shapeOptions'
+import emitHeaders from '@/data/emitHeaders'
 
 const form = ref({
   variant: 'filled',
@@ -112,12 +113,21 @@ const apiData = [
     default: 'rounded'
   }
 ]
+
+const emitData = [
+  {
+    event: 'update:modelValue',
+    description: 'Emitted when this radio button is selected.',
+    values: 'any',
+    type: '(value: any) => void'
+  }
+]
 </script>
 
 <template>
   <doc-section
     title="Radio"
-    description="The Radio component allow users to select a single option from a list of mutually exclusive options."
+    description="Selection element that allows the user to choose an exclusive option among several. Radio buttons are used when users need to select only one option from a predefined list of choices."
   >
     <template #playground-view>
       <div class="w-full flex flex-col justify-center items-center p-4">
@@ -283,13 +293,42 @@ const apiData = [
           />
         </div>
       </example-section>
+
+      <example-section
+        title="Disabled"
+      >
+        <vk-radio disabled />
+      </example-section>
+
+      <example-section
+        title="Readonly"
+      >
+        <vk-radio readonly />
+      </example-section>
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Radio Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+
+        <example-section
+          title="Radio Emits"
+          gap
+        >
+          <vk-data-table
+            :headers="emitHeaders"
+            :data="emitData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>

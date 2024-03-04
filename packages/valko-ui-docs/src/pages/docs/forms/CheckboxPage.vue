@@ -7,6 +7,7 @@ import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import colorOptions from '@/data/colorOptions'
 import shapeOptions from '@/data/shapeOptions'
+import emitHeaders from '@/data/emitHeaders'
 
 const position = [
   { value: false, label:'Right' },
@@ -117,6 +118,15 @@ const apiData = [
   }
 ]
 
+const emitData = [
+  {
+    event: 'update:modelValue',
+    description: 'Emitted when the checkbox value is updated.',
+    values: 'boolean',
+    type: '(value: boolean) => void'
+  }
+]
+
 /*
 * This watch function controls the indeterminate checkbox
 * in the documentation page so it is synchronized
@@ -132,7 +142,7 @@ watchEffect(() => {
 <template>
   <doc-section
     title="Checkbox"
-    description="The checkbox component provides users the ability to choose between two distinct values. These are very similar to a switch and can be used in complex forms and checklists"
+    description="Selection element that allows the user to choose between two states, checked or unchecked. Checkboxes are commonly used in forms and settings to enable users to select multiple options."
   >
     <template #playground-view>
       <div class="w-full flex justify-center p-4">
@@ -261,35 +271,6 @@ watchEffect(() => {
       </example-section>
 
       <example-section
-        title="Misc"
-        justify="start"
-        gap
-      >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-2">
-          <vk-checkbox
-            label="Disabled"
-            disabled
-            :model-value="form.exampleChecked"
-          />
-          <vk-checkbox
-            label="Flat"
-            flat
-            :model-value="form.exampleChecked"
-          />
-          <vk-checkbox
-            label="Readonly"
-            read-only
-            :model-value="form.exampleChecked"
-          />
-          <vk-checkbox
-            label="Inderterminate"
-            indeterminate
-            v-model="form.exampleIndeterminate"
-          />
-        </div>
-      </example-section>
-
-      <example-section
         title="Sizes"
         justify="start"
         gap
@@ -304,13 +285,85 @@ watchEffect(() => {
           />
         </div>
       </example-section>
+
+      <example-section
+        title="Disabled"
+      >
+        <vk-checkbox
+          label="Disabled"
+          disabled
+          :model-value="form.exampleChecked"
+        />
+      </example-section>
+
+      <example-section
+        title="Flat"
+      >
+        <vk-checkbox
+          label="Flat"
+          flat
+          :model-value="form.exampleChecked"
+        />
+      </example-section>
+
+      <example-section
+        title="Readonly"
+      >
+        <vk-checkbox
+          label="Readonly"
+          read-only
+          :model-value="form.exampleChecked"
+        />
+      </example-section>
+
+      <example-section
+        title="Indeterminate"
+      >
+        <vk-checkbox
+          label="Inderterminate"
+          indeterminate
+          v-model="form.exampleIndeterminate"
+        />
+      </example-section>
+
+      <example-section
+        title="Label Position"
+        gap
+      >
+        <vk-checkbox
+          label="Left"
+          :model-value="form.exampleChecked"
+        />
+        <vk-checkbox
+          label="Right"
+          :label-position="true"
+          :model-value="form.exampleChecked"
+        />
+      </example-section>
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Checkbox Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+
+        <example-section
+          title="Checkbox Emits"
+          gap
+        >
+          <vk-data-table
+            :headers="emitHeaders"
+            :data="emitData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>

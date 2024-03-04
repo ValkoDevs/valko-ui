@@ -5,6 +5,8 @@ import ExampleSection from '@/components/ExampleSection'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
+import emitHeaders from '@/data/emitHeaders'
+import slotHeaders from '@/data/slotHeaders'
 
 const form = ref({
   size: 'md',
@@ -24,7 +26,9 @@ const form = ref({
   full: false,
   opaque: false,
   blur: false,
-  transparent: false
+  transparent: false,
+  flatExample: false,
+  closableExample: false
 } as Record<string, string | boolean>)
 
 const sizes = [...sizeOptions, {
@@ -88,12 +92,29 @@ const apiData = [
     default: 'false'
   }
 ]
+
+const emitData = [
+  {
+    event: 'close',
+    description: 'Emitted when the modal is closed.',
+    values: '',
+    type: '() => void'
+  }
+]
+
+const slotData = [
+  {
+    name: 'default',
+    description: 'Slot for the main content of the modal. This slot is typically used to include additional content inside the modal.',
+    example: '<template #default>\n  <!-- Your main content goes here -->\n</template>'
+  }
+]
 </script>
 
 <template>
   <doc-section
     title="Modal Component"
-    description="The Modal component isplays a dialog with a custom content that requires attention or provides additional information."
+    description="Popup window that requires user attention before proceeding. Modals are used to display important messages, gather user input, or confirm actions, and typically require user interaction before the underlying content can be accessed."
   >
     <template #playground-view>
       <vk-button @click="() => {form.isOpen = true}">
@@ -176,6 +197,31 @@ const apiData = [
       </example-section>
 
       <example-section
+        title="Sizes"
+        gap
+      >
+        <div
+          v-for="size in sizes"
+          :key="size.value"
+        >
+          <vk-button @click="() => {form[size.value] = true}">
+            Open {{ size.label }}
+          </vk-button>
+          <vk-modal
+            :size="size.value"
+            :is-open="form[size.value]"
+            :title="size.label"
+            @close="() => {form[size.value] = false}"
+          >
+            <template #default>
+              {{ size.label }} Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+            </template>
+          </vk-modal>
+        </div>
+      </example-section>
+
+      <example-section
         title="Backdrops"
         gap
       >
@@ -201,36 +247,75 @@ const apiData = [
       </example-section>
 
       <example-section
-        title="Sizes"
-        gap
+        title="Flat"
       >
-        <div
-          v-for="size in sizes"
-          :key="size.value"
+        <vk-button @click="() => {form.flatExample = true}">
+          Flat
+        </vk-button>
+        <vk-modal
+          :is-open="form.flatExample"
+          title="Flat"
+          @close="() => {form.flatExample = false}"
         >
-          <vk-button @click="() => {form[size.value] = true}">
-            Open {{ size.label }}
-          </vk-button>
-          <vk-modal
-            :size="size.value"
-            :is-open="form[size.value]"
-            :title="size.label"
-            @close="() => {form[size.value] = false}"
-          >
-            <template #default>
-              {{ size.label }} Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
-            </template>
-          </vk-modal>
-        </div>
+          <template #default>
+            Flat Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+          </template>
+        </vk-modal>
+      </example-section>
+
+      <example-section
+        title="Closable"
+      >
+        <vk-button @click="() => {form.closableExample = true}">
+          Closable
+        </vk-button>
+        <vk-modal
+          :is-open="form.closableExample"
+          title="Closable"
+          :closable="false"
+          @close="() => {form.closableExample = false}"
+        >
+          <template #default>
+            Closable Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+          </template>
+        </vk-modal>
       </example-section>
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Modal Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+
+        <example-section
+          title="Modal Emits"
+          gap
+        >
+          <vk-data-table
+            :headers="emitHeaders"
+            :data="emitData"
+          />
+        </example-section>
+
+        <example-section
+          title="Modal Slots"
+          gap
+        >
+          <vk-data-table
+            :headers="slotHeaders"
+            :data="slotData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>

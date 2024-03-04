@@ -16,13 +16,15 @@ const useStyle = (props: RadioProps) => {
       radio: [
         'vk-radio__radio',
         'shadow-lg',
+        'shadow-light-4',
         'border-2',
         'border-light-5',
         'relative',
         'flex',
         'items-center',
         'justify-center',
-        'dark:border-dark-1'
+        'dark:border-dark-1',
+        'dark:shadow-dark-5'
       ],
       input: [
         'hidden'
@@ -115,6 +117,7 @@ const useStyle = (props: RadioProps) => {
           radio: [
             'border-0',
             'bg-light-5/[.15]',
+            'shadow-none',
             'dark:bg-dark-1/[.15]'
           ]
         }

@@ -16,13 +16,15 @@ const useStyle = (props: CheckboxProps) => {
       checkbox: [
         'vk-checkbox__checkbox',
         'shadow-lg',
+        'shadow-light-4',
         'border-2',
         'border-light-5',
         'relative',
         'flex',
         'items-center',
         'justify-center',
-        'dark:border-dark-1'
+        'dark:border-dark-1',
+        'dark:shadow-dark-5'
       ],
       input: [
         'hidden'
@@ -110,6 +112,7 @@ const useStyle = (props: CheckboxProps) => {
         outlined: {},
         ghost: {
           checkbox: [
+            'shadow-none',
             'border-0',
             'bg-light-5/[.15]',
             'dark:bg-dark-1/[.15]'

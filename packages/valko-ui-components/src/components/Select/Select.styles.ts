@@ -29,15 +29,18 @@ const useStyle = (props: SelectProps) => {
         'p-2',
         'bg-white',
         'shadow-lg',
+        'shadow-light-4',
         'overflow-auto',
         'whitespace-nowrap',
         'max-h-48',
         'select-none',
         'dark:bg-dark-3',
+        'dark:shadow-dark-5',
         'data-[helper=true]:-mt-6',
         'data-[shape=rounded]:rounded-lg',
         'data-[shape=soft]:rounded-b-lg',
-        'data-[shape=square]:rounded-none'
+        'data-[shape=square]:rounded-none',
+        'data-[variant=ghost]:shadow-none'
       ],
       item: [
         'vk-select__item',

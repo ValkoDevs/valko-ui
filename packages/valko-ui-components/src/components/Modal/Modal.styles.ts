@@ -57,13 +57,13 @@ const useStyle = (props: ModalProps) => {
         'text-lg',
         'font-medium'
       ],
-      modalButton: [
-        'flex',
-        'justify-end',
-        'align-center'
-      ],
       closeButton: [
-        'mr-2'
+        'text-black',
+        'dark:text-white',
+        'justify-self-end'
+      ],
+      closeIcon: [
+        'p-1'
       ]
     },
     variants: {
@@ -159,9 +159,9 @@ const useStyle = (props: ModalProps) => {
       panel: slots.panel(),
       panelChild: slots.panelChild(),
       title: slots.title(),
-      modalButton: slots.modalButton(),
       dialog: slots.dialog(),
-      closeButton: slots.closeButton()
+      closeButton: slots.closeButton(),
+      closeIcon: slots.closeIcon()
     }
   })
 }

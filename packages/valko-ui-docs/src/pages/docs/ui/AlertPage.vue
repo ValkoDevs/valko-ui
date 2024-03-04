@@ -7,6 +7,8 @@ import colorOptions from '@/data/colorOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
+import emitHeaders from '@/data/emitHeaders'
+import slotHeaders from '@/data/slotHeaders'
 
 const isShown = ref(true)
 
@@ -82,6 +84,23 @@ const apiData = [
   }
 ]
 
+const emitData = [
+  {
+    event: 'close',
+    type: '() => void',
+    values: '',
+    description: 'Emitted when the alert is closed by the user.'
+  }
+]
+
+const slotData = [
+  {
+    name: 'default',
+    description: 'Slot for the main content of the alert.',
+    example: '<template #default>\n  <p>This is the main content of the alert.</p>\n</template>'
+  }
+]
+
 const closeAlert = () => {
   isShown.value = false
 }
@@ -96,7 +115,7 @@ watch(isShown, () => {
 <template>
   <doc-section
     title="Alert"
-    description="The Alert component is used to convey important information to the user through the use of contextual types, icons, and colors."
+    description="Visual notification that informs the user about an important state or action. Alerts are commonly used to communicate success messages, warnings, or errors to the user."
   >
     <template #playground-view>
       <div class="w-full flex justify-center p-4">
@@ -210,30 +229,6 @@ watch(isShown, () => {
       </example-section>
 
       <example-section
-        title="Icons"
-        justify="start"
-        align="start"
-        gap
-      >
-        <div class="grow gap-4 grid grid-cols-3">
-          <vk-alert
-            title="Default Icon"
-            color="success"
-          />
-          <vk-alert
-            title="Custom Icon"
-            color="info"
-            icon="home"
-          />
-          <vk-alert
-            title="Without Icon"
-            color="secondary"
-            :icon="null"
-          />
-        </div>
-      </example-section>
-
-      <example-section
         title="Shapes"
         justify="start"
         align="start"
@@ -268,13 +263,97 @@ watch(isShown, () => {
           </vk-alert>
         </div>
       </example-section>
+
+      <example-section
+        title="Icons"
+        justify="start"
+        align="start"
+        gap
+      >
+        <div class="grow gap-4 grid grid-cols-3">
+          <vk-alert
+            title="Default Icon"
+            color="success"
+          />
+          <vk-alert
+            title="Custom Icon"
+            color="info"
+            icon="home"
+          />
+          <vk-alert
+            title="Without Icon"
+            color="secondary"
+            :icon="null"
+          />
+        </div>
+      </example-section>
+
+      <example-section
+        title="Flat"
+      >
+        <vk-alert
+          title="Flat"
+          flat
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem aut recusandae obcaecati qui neque? Magni aperiam odio aliquid ratione. Aliquam atque voluptates velit praesentium a sequi unde maiores tempora fugit!
+        </vk-alert>
+      </example-section>
+
+      <example-section
+        title="Closable"
+      >
+        <transition
+          enter-active-class="transition ease-out durantion-200"
+          enter-from-class="opacity-0 scale-90"
+          enter-to-class="opactiy-1 scale-100"
+          leave-active-class="transition ease-out durantion-200"
+          leave-from-class="opactiy-1 scale-100"
+          leave-to-class="opacity-0 scale-90"
+        >
+          <vk-alert
+            v-if="isShown"
+            title="Closable"
+            closable
+            @close="closeAlert()"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quo ad, voluptates necessitatibus quis ipsum recusandae, quia laborum accusantium earum distinctio velit blanditiis quidem enim commodi accusamus fuga eveniet incidunt.
+          </vk-alert>
+        </transition>
+      </example-section>
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Alert Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+
+        <example-section
+          title="Alert Emits"
+          gap
+        >
+          <vk-data-table
+            :headers="emitHeaders"
+            :data="emitData"
+          />
+        </example-section>
+
+        <example-section
+          title="Alert Slots"
+          gap
+        >
+          <vk-data-table
+            :headers="slotHeaders"
+            :data="slotData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>

@@ -12,8 +12,10 @@ const useStyle = (props: AvatarProps) => {
         'items-center',
         'font-bold',
         'select-none',
-        'shadow-sm',
-        'overflow-hidden'
+        'shadow-lg',
+        'shadow-light-4',
+        'overflow-hidden',
+        'dark:shadow-dark-5'
       ],
       img: [
         'w-full',
@@ -38,7 +40,11 @@ const useStyle = (props: AvatarProps) => {
             'border-2'
           ]
         },
-        ghost: {}
+        ghost: {
+          container: [
+            'shadow-none'
+          ]
+        }
       },
       color: {
         primary: {},

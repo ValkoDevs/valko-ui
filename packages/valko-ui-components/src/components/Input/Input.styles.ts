@@ -94,13 +94,11 @@ const useStyle = (props: InputProps) => {
         },
         ghost: {
           input: [
-            'shadow-none',
             'bg-inherit',
             'border-b-2',
             'border-light-5'
           ],
           label: [
-            'shadow-none',
             'bg-inherit'
           ]
         },

@@ -7,6 +7,7 @@ import colorOptions from '@/data/colorOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
+import emitHeaders from '@/data/emitHeaders'
 
 const people = [
   { value: 1, label: 'Wade Cooper' },
@@ -144,12 +145,21 @@ const apiData = [
     default: 'soft'
   }
 ]
+
+const emitData = [
+  {
+    event: 'update:modelValue',
+    description: 'Emitted when the selected value(s) in the Select component change.',
+    values: 'any',
+    type: '(value: any) => void'
+  }
+]
 </script>
 
 <template>
   <doc-section
     title="Select"
-    description="Selects are used to choose between many options either one or several enabling a more dynamic form"
+    description="Dropdown list that allows the user to choose an option among several. Selects provide users with a convenient way to select from a predefined set of options and are commonly used in forms and settings."
   >
     <template #playground-view>
       <div class="w-full flex px-2">
@@ -252,23 +262,6 @@ const apiData = [
             :options="people"
             v-model="form[variant.value]"
           />
-          <vk-select
-            disabled
-            placeholder="Disabled"
-          />
-          <vk-select
-            :options="people"
-            variant="outlined"
-            rounded
-            v-model="form.rounded"
-            placeholder="Rounded"
-          />
-          <vk-select
-            readonly
-            :options="people"
-            placeholder="Readonly"
-            v-model="form.exampleReadonly"
-          />
         </div>
       </example-section>
 
@@ -307,13 +300,50 @@ const apiData = [
           />
         </div>
       </example-section>
+
+      <example-section
+        title="Disabled"
+      >
+        <vk-select
+          disabled
+          placeholder="Disabled"
+        />
+      </example-section>
+
+      <example-section
+        title="Readonly"
+      >
+        <vk-select
+          readonly
+          :options="people"
+          placeholder="Readonly"
+          v-model="form.exampleReadonly"
+        />
+      </example-section>
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Select Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+
+        <example-section
+          title="Select Emits"
+          gap
+        >
+          <vk-data-table
+            :headers="emitHeaders"
+            :data="emitData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>

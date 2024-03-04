@@ -7,6 +7,8 @@ import colorOptions from '@/data/colorOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
+import emitHeaders from '@/data/emitHeaders'
+import slotHeaders from '@/data/slotHeaders'
 
 const types = [
   { value:'text', label:'Text' },
@@ -123,12 +125,52 @@ const apiData = [
     default: 'soft'
   }
 ]
+
+const emitData = [
+  {
+    event: 'update:modelValue',
+    description: 'Emitted when the value of the input is updated.',
+    values: 'string',
+    type: '(value: string) => void'
+  },
+  {
+    event: 'focus',
+    description: 'Emitted when the input is focused.',
+    values: '',
+    type: '(event: FocusEvent) => void'
+  },
+  {
+    event: 'leftIconClick',
+    description: 'Emitted when the left icon of the input is clicked.',
+    values: '',
+    type: '() => void'
+  },
+  {
+    event: 'rightIconClick',
+    description: 'Emitted when the right icon of the input is clicked.',
+    values: '',
+    type: '() => void'
+  }
+]
+
+const slotData = [
+  {
+    name: 'leftIcon',
+    description: 'Slot for placing an icon on the left side of the input field. This slot is typically used to include an icon for visual enhancement or to indicate input type.',
+    example: '<template #leftIcon>\n  <!-- Your icon component goes here -->\n</template>'
+  },
+  {
+    name: 'rightIcon',
+    description: 'Slot for placing an icon on the right side of the input field. This slot is typically used to include an icon for actions like clear input or show/hide password.',
+    example: '<template #rightIcon>\n  <!-- Your icon component goes here -->\n</template>'
+  }
+]
 </script>
 
 <template>
   <doc-section
     title="Input"
-    description="The input component allows our users to build complex forms quickly, it has different variations of styles and a range of versatile colors with a subtle animation."
+    description="Area where the user can enter text or other data. Inputs allow users to provide information such as text, numbers, or selections, and are commonly used in forms and search fields."
   >
     <template #playground-view>
       <div class="w-full flex px-2">
@@ -235,36 +277,6 @@ const apiData = [
             :variant="variant.value"
             :label="variant.label"
           />
-          <vk-input
-            disabled
-            label="Disabled"
-          />
-          <vk-input
-            rounded
-            kind="outlined"
-            label="Rounded"
-          />
-          <vk-input
-            readonly
-            label="Readonly"
-            v-model="form.exampleReadonly"
-          />
-        </div>
-      </example-section>
-
-      <example-section
-        title="Types"
-        justify="start"
-        align="start"
-        gap
-      >
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-input
-            v-for="type in types"
-            :key="type.value"
-            :type="type.value"
-            :label="type.label"
-          />
         </div>
       </example-section>
 
@@ -299,13 +311,75 @@ const apiData = [
           />
         </div>
       </example-section>
+
+      <example-section
+        title="Types"
+        justify="start"
+        align="start"
+        gap
+      >
+        <div class="grow gap-4 grid grid-cols-2">
+          <vk-input
+            v-for="type in types"
+            :key="type.value"
+            :type="type.value"
+            :label="type.label"
+          />
+        </div>
+      </example-section>
+
+      <example-section
+        title="Disabled"
+      >
+        <vk-input
+          disabled
+          label="Disabled"
+        />
+      </example-section>
+
+      <example-section
+        title="Readonly"
+      >
+        <vk-input
+          readonly
+          label="Readonly"
+          v-model="form.exampleReadonly"
+        />
+      </example-section>
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Input Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+
+        <example-section
+          title="Input Emits"
+          gap
+        >
+          <vk-data-table
+            :headers="emitHeaders"
+            :data="emitData"
+          />
+        </example-section>
+
+        <example-section
+          title="Input Slots"
+          gap
+        >
+          <vk-data-table
+            :headers="slotHeaders"
+            :data="slotData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>

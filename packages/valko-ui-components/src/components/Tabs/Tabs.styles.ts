@@ -53,11 +53,13 @@ const useStyle = (props: TabsProps) => {
       ],
       cursor: [
         'shadow-lg',
+        'shadow-light-4',
         'absolute',
         'inset-0',
         'z-10',
         'transition-all',
-        'duration-200'
+        'duration-200',
+        'dark:shadow-dark-5'
       ],
       leftIcon: [
         'vk-tabs__left',
@@ -89,6 +91,9 @@ const useStyle = (props: TabsProps) => {
           ],
           tab: [
             'bg-transparent'
+          ],
+          cursor: [
+            'shadow-none'
           ]
         }
       },

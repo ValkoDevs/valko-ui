@@ -7,6 +7,7 @@ import sizeOptions from '@/data/sizeOptions'
 import variantOptions from '@/data/variantOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
+import slotHeaders from '@/data/slotHeaders'
 
 const shapes = [
   ...shapeOptions,
@@ -87,12 +88,20 @@ const apiData = [
     default: 'false'
   }
 ]
+
+const slotData = [
+  {
+    name: 'default',
+    description: 'Slot for custom content to be placed inside the progress bar. This slot is typically used to include additional elements or text inside the progress bar.',
+    example: '<template #default>\n  <!-- Your custom content goes here -->\n</template>'
+  }
+]
 </script>
 
 <template>
   <doc-section
     title="Progressbar"
-    description="The Progressbar component is used to convey data visually to users. It supports both indeterminate amounts, such as loading or processing, and finite amounts of progress (including separate buffer values)."
+    description="Visual indicator that shows the progress or status of a task. Progress bars are used to convey information about the completion status of an operation, such as file uploads, form submissions, or loading processes."
   >
     <template #playground-view>
       <div class="w-full flex justify-center p-4">
@@ -246,41 +255,69 @@ const apiData = [
       </example-section>
 
       <example-section
-        title="Misc"
-        justify="evenly"
-        gap
+        title="Indeterminate"
       >
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-progressbar indeterminate>
-            Indeterminate
-          </vk-progressbar>
-          <vk-progressbar
-            striped
-            progress="25"
-          >
-            Striped
-          </vk-progressbar>
-          <vk-progressbar
-            indeterminate
-            striped
-          >
-            {{ `Indeterminate & Striped` }}
-          </vk-progressbar>
-          <vk-progressbar
-            buffer="50"
-            progress="25"
-          >
-            Buffer
-          </vk-progressbar>
-        </div>
+        <vk-progressbar indeterminate>
+          Indeterminate
+        </vk-progressbar>
+      </example-section>
+
+      <example-section
+        title="Stripped"
+      >
+        <vk-progressbar
+          striped
+          progress="25"
+        >
+          Striped
+        </vk-progressbar>
+      </example-section>
+
+      <example-section
+        title="Striped & Indeterminate"
+      >
+        <vk-progressbar
+          indeterminate
+          striped
+        >
+          {{ `Indeterminate & Striped` }}
+        </vk-progressbar>
+      </example-section>
+
+      <example-section
+        title="Buffer"
+      >
+        <vk-progressbar
+          buffer="50"
+          progress="25"
+        >
+          Buffer
+        </vk-progressbar>
       </example-section>
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Progressbar Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+
+        <example-section
+          title="Progressbar Slots"
+          gap
+        >
+          <vk-data-table
+            :headers="slotHeaders"
+            :data="slotData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>

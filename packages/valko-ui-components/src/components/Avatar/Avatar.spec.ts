@@ -14,7 +14,7 @@ describe('Avatar component', () => {
     describe('With default props', () => {
       beforeEach(() => {
         wrapper = mount(VkAvatar, {
-          src: ''
+          src: 'example.url'
         })
       })
 
@@ -47,7 +47,7 @@ describe('Avatar component', () => {
       it('should be color primary when props.color is primary', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             color: 'primary'
           }
         })
@@ -58,7 +58,7 @@ describe('Avatar component', () => {
       it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             color: 'secondary'
           }
         })
@@ -69,7 +69,7 @@ describe('Avatar component', () => {
       it('should be color success when props.color is success', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             color: 'success'
           }
         })
@@ -80,7 +80,7 @@ describe('Avatar component', () => {
       it('should be color info when props.color is info', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             color: 'info'
           }
         })
@@ -91,7 +91,7 @@ describe('Avatar component', () => {
       it('should be color warning when props.color is warning', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             color: 'warning'
           }
         })
@@ -102,7 +102,7 @@ describe('Avatar component', () => {
       it('should be color error when props.color is error', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             color: 'error'
           }
         })
@@ -113,7 +113,7 @@ describe('Avatar component', () => {
       it('should be color light when props.color is light', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             color: 'light'
           }
         })
@@ -124,7 +124,7 @@ describe('Avatar component', () => {
       it('should be color dark when props.color is dark', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             color: 'dark'
           }
         })
@@ -137,7 +137,7 @@ describe('Avatar component', () => {
       it('should be rounded when props.shape is rounded', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             shape: 'rounded'
           }
         })
@@ -148,7 +148,7 @@ describe('Avatar component', () => {
       it('should be soft when props.shape is soft', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             shape: 'soft'
           }
         })
@@ -159,7 +159,7 @@ describe('Avatar component', () => {
       it('should be square when props.shape is square', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             shape: 'square'
           }
         })
@@ -172,7 +172,7 @@ describe('Avatar component', () => {
       it('should be xs when props.size is xs', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             size: 'xs'
           }
         })
@@ -183,7 +183,7 @@ describe('Avatar component', () => {
       it('should be sm when props.size is sm', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             size: 'sm'
           }
         })
@@ -194,7 +194,7 @@ describe('Avatar component', () => {
       it('should be md when props.size is md', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             size: 'md'
           }
         })
@@ -205,7 +205,7 @@ describe('Avatar component', () => {
       it('should be lg when props.size is lg', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             size: 'lg'
           }
         })
@@ -218,7 +218,7 @@ describe('Avatar component', () => {
       it('should be filled when props.size is filled', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             variant: 'filled'
           }
         })
@@ -229,7 +229,7 @@ describe('Avatar component', () => {
       it('should be outlined when props.size is outlined', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             variant: 'outlined'
           }
         })
@@ -240,7 +240,7 @@ describe('Avatar component', () => {
       it('should be ghost when props.size is ghost', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             variant: 'ghost'
           }
         })
@@ -263,7 +263,7 @@ describe('Avatar component', () => {
       it('should display the initials of the given name if there is no src', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: '',
+            src: 'example.url',
             name: 'Brandon Coper'
           }
         })
@@ -274,7 +274,7 @@ describe('Avatar component', () => {
       it('should display an user icon if there is no src or name given', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: ''
+            src: 'example.url'
           }
         })
 

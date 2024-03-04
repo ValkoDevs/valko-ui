@@ -7,6 +7,7 @@ import colorOptions from '@/data/colorOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
 import variantOptions from '@/data/variantOptions'
+import emitHeaders from '@/data/emitHeaders'
 
 const form = ref({
   size: 'md',
@@ -137,12 +138,21 @@ const crumbInterface = [
     default: ''
   }
 ]
+
+const crumbEmitsData = [
+  {
+    event: 'crumbClick',
+    description: 'Emitted when a breadcrumb is clicked.',
+    values: 'Crumb',
+    type: 'Crumb => void'
+  }
+]
 </script>
 
 <template>
   <doc-section
     title="Breadcrumbs"
-    description="Breadcrumbs component display a hierarchy of links to the current page or resource in an application."
+    description="Visual navigation that displays the hierarchy of the current location within a website. Breadcrumbs help users understand their current location within a website's structure and provide a way to navigate back to previous pages."
   >
     <template #playground-view>
       <vk-breadcrumbs
@@ -286,6 +296,15 @@ const crumbInterface = [
           </div>
         </div>
       </example-section>
+
+      <example-section
+        title="Flat"
+      >
+        <vk-breadcrumbs
+          flat
+          :crumbs="crumbs"
+        />
+      </example-section>
     </template>
 
     <template #api>
@@ -308,6 +327,16 @@ const crumbInterface = [
           <vk-data-table
             :headers="propHeaders"
             :data="crumbInterface"
+          />
+        </example-section>
+
+        <example-section
+          title="Breadcrumbs Emits"
+          gap
+        >
+          <vk-data-table
+            :headers="emitHeaders"
+            :data="crumbEmitsData"
           />
         </example-section>
       </div>

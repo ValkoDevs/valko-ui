@@ -31,11 +31,13 @@ const useStyle = (props: DropdownProps) => {
         'mt-2',
         'bg-white',
         'shadow-lg',
+        'shadow-light-4',
         'z-10',
         'absolute',
         'right-0',
         'origin-top-right',
-        'dark:bg-dark-3'
+        'dark:bg-dark-3',
+        'dark:shadow-dark-5'
       ],
       itemsButton: [
         'vk-dropdown__item-button',
@@ -47,9 +49,11 @@ const useStyle = (props: DropdownProps) => {
         'data-[shape=rounded]:rounded-full',
         'data-[shape=soft]:rounded-lg',
         'data-[shape=square]:rounded-none',
+        'data-[disabled=true]:cursor-not-allowed',
         'data-[disabled=true]:text-gray-400',
         'data-[disabled=true]:bg-gray-200',
-        'data-[disabled=true]:border-transparent'
+        'data-[disabled=true]:border-transparent',
+        'data-[disabled=true]:dark:bg-dark-1'
       ],
       itemsIcon: [
         'mr-2'
@@ -103,8 +107,7 @@ const useStyle = (props: DropdownProps) => {
       variant: {
         filled: {
           button: [
-            'text-white',
-            'dark:text-black'
+            'text-white'
           ],
           itemsButton: [
             'data-[active=true]:text-white'
@@ -116,7 +119,17 @@ const useStyle = (props: DropdownProps) => {
             'border-transparent'
           ]
         },
-        ghost: {}
+        ghost: {
+          itemsMenu: [
+            'shadow-none'
+          ]
+        },
+        link: {
+          itemsMenu: [
+            'bg-transparent',
+            'shadow-none'
+          ]
+        }
       },
       shape: {
         rounded: {
@@ -204,8 +217,11 @@ const useStyle = (props: DropdownProps) => {
         class: {
           itemsButton: [
             'data-[active=true]:text-black',
-            'data-[active=true]:bg-light-1',
+            'data-[active=true]:bg-light-3',
             'data-[active=true]:dark:bg-light-1'
+          ],
+          button: [
+            'text-black'
           ]
         }
       },
@@ -285,8 +301,14 @@ const useStyle = (props: DropdownProps) => {
         color: 'light',
         class: {
           itemsButton: [
-            'data-[active=true]:text-light-1',
-            'data-[active=true]:border-light-1'
+            'data-[active=true]:text-black',
+            'data-[active=true]:border-light-5',
+            'data-[active=true]:dark:text-light-1',
+            'data-[active=true]:dark:border-light-1'
+          ],
+          button: [
+            'text-black',
+            'dark:text-white'
           ]
         }
       },
@@ -372,9 +394,14 @@ const useStyle = (props: DropdownProps) => {
         color: 'light',
         class: {
           itemsButton: [
-            'data-[active=true]:text-light-1',
-            'data-[active=true]:bg-light-1/[.15]',
+            'data-[active=true]:text-dark-1',
+            'data-[active=true]:bg-dark-1/[.15]',
+            'data-[active=true]:dark:text-light-1',
             'data-[active=true]:dark:bg-light-1/[.15]'
+          ],
+          button: [
+            'text-black',
+            'dark:text-white'
           ]
         }
       },
@@ -386,6 +413,79 @@ const useStyle = (props: DropdownProps) => {
             'data-[active=true]:text-dark-5',
             'data-[active=true]:bg-dark-5/[.15]',
             'data-[active=true]:dark:bg-dark-5/[.15]'
+          ]
+        }
+      },
+      // link & color
+      {
+        variant: 'link',
+        color: 'primary',
+        class: {
+          itemsButton: [
+            'data-[active=true]:text-primary-500'
+          ]
+        }
+      },
+      {
+        variant: 'link',
+        color: 'secondary',
+        class: {
+          itemsButton: [
+            'data-[active=true]:text-secondary-500'
+          ]
+        }
+      },
+      {
+        variant: 'link',
+        color: 'success',
+        class: {
+          itemsButton: [
+            'data-[active=true]:text-success-500'
+          ]
+        }
+      },
+      {
+        variant: 'link',
+        color: 'info',
+        class: {
+          itemsButton: [
+            'data-[active=true]:text-info-500'
+          ]
+        }
+      },
+      {
+        variant: 'link',
+        color: 'warning',
+        class: {
+          itemsButton: [
+            'data-[active=true]:text-warning-500'
+          ]
+        }
+      },
+      {
+        variant: 'link',
+        color: 'error',
+        class: {
+          itemsButton: [
+            'data-[active=true]:text-error-500'
+          ]
+        }
+      },
+      {
+        variant: 'link',
+        color: 'light',
+        class: {
+          itemsButton: [
+            'data-[active=true]:text-light-1'
+          ]
+        }
+      },
+      {
+        variant: 'link',
+        color: 'dark',
+        class: {
+          itemsButton: [
+            'data-[active=true]:text-dark-5'
           ]
         }
       }

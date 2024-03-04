@@ -46,7 +46,7 @@ const apiData = [
 <template>
   <doc-section
     title="Spinner"
-    description="The Spinner component express an unspecified wait time or display the length of a process."
+    description="Visual animation that indicates a task is being processed. Spinners are used to provide feedback to users while they wait for an operation to complete, such as loading content or submitting a request."
   >
     <template #playground-view>
       <div class="w-full flex justify-center items-center">
@@ -137,10 +137,17 @@ const apiData = [
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Spinner Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>

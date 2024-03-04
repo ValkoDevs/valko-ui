@@ -13,25 +13,13 @@ const useStyle = (props: ButtonProps) => {
       'ring-inset',
       'shadow-lg',
       'shadow-light-4',
-      'dark:shadow-dark-5',
       'transition',
       'duration-150',
       'focus:outline-none',
-      'active:shadow-none'
+      'active:shadow-none',
+      'dark:shadow-dark-5'
     ],
     variants: {
-      variant: {
-        filled: [
-          'text-white'
-        ],
-        ghost: [
-          'shadow-none',
-          'bg-transparent'
-        ],
-        outlined: [
-          'border-2'
-        ]
-      },
       color: {
         primary: {},
         secondary: {},
@@ -62,6 +50,21 @@ const useStyle = (props: ButtonProps) => {
           'px-5',
           'py-3',
           'text-lg'
+        ]
+      },
+      variant: {
+        filled: [
+          'text-white'
+        ],
+        ghost: [
+          'shadow-none'
+        ],
+        outlined: [
+          'border-2'
+        ],
+        link: [
+          'bg-transparent',
+          'shadow-none'
         ]
       },
       block: {
@@ -193,13 +196,110 @@ const useStyle = (props: ButtonProps) => {
         disabled: false,
         class: [
           'text-primary-600',
+          'bg-primary-500/[.15]',
+          'focus:ring-primary-500/[.30]',
+          'hover:bg-primary-500/[.25]',
+          'active:bg-primary-500/[.30]'
+        ]
+      },
+      {
+        variant: 'ghost',
+        color: 'secondary',
+        disabled: false,
+        class: [
+          'text-secondary-600',
+          'bg-secondary-500/[.15]',
+          'focus:ring-secondary-500/[.30]',
+          'hover:bg-secondary-500/[.25]',
+          'active:bg-secondary-500/[.30]'
+        ]
+      },
+      {
+        variant: 'ghost',
+        color: 'success',
+        disabled: false,
+        class: [
+          'text-success-600',
+          'bg-success-500/[.15]',
+          'focus:ring-success-500/[.30]',
+          'hover:bg-success-500/[.25]',
+          'active:bg-success-500/[.30]'
+        ]
+      },
+      {
+        variant: 'ghost',
+        color: 'info',
+        disabled: false,
+        class: [
+          'text-info-600',
+          'bg-info-500/[.15]',
+          'focus:ring-info-500/[.30]',
+          'hover:bg-info-500/[.25]',
+          'active:bg-info-500/[.30]'
+        ]
+      },
+      {
+        variant: 'ghost',
+        color: 'warning',
+        disabled: false,
+        class: [
+          'text-warning-600',
+          'bg-warning-500/[.15]',
+          'focus:ring-warning-500/[.30]',
+          'hover:bg-warning-500/[.25]',
+          'active:bg-warning-500/[.30]'
+        ]
+      },
+      {
+        variant: 'ghost',
+        color: 'error',
+        disabled: false,
+        class: [
+          'text-error-600',
+          'bg-error-500/[.15]',
+          'focus:ring-error-500/[.30]',
+          'hover:bg-error-500/[.25]',
+          'active:bg-error-500/[.30]'
+        ]
+      },
+      {
+        variant: 'ghost',
+        color: 'light',
+        disabled: false,
+        class: [
+          'text-light-1',
+          'bg-light-1/[.15]',
+          'focus:ring-light-1/[.30]',
+          'hover:bg-light-1/[.25]',
+          'active:bg-light-1/[.30]'
+        ]
+      },
+      {
+        variant: 'ghost',
+        color: 'dark',
+        disabled: false,
+        class: [
+          'text-dark-5',
+          'bg-dark-5/[.15]',
+          'focus:ring-dark-5/[.30]',
+          'hover:bg-dark-5/[.25]',
+          'active:bg-dark-5/[.30]'
+        ]
+      },
+      // link & color
+      {
+        variant: 'link',
+        color: 'primary',
+        disabled: false,
+        class: [
+          'text-primary-600',
           'focus:ring-primary-400/20',
           'hover:bg-primary-300/20',
           'active:bg-primary-400/20'
         ]
       },
       {
-        variant: 'ghost',
+        variant: 'link',
         color: 'secondary',
         disabled: false,
         class: [
@@ -210,7 +310,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        variant: 'ghost',
+        variant: 'link',
         color: 'success',
         disabled: false,
         class: [
@@ -221,7 +321,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        variant: 'ghost',
+        variant: 'link',
         color: 'info',
         disabled: false,
         class: [
@@ -232,7 +332,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        variant: 'ghost',
+        variant: 'link',
         color: 'warning',
         disabled: false,
         class: [
@@ -243,7 +343,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        variant: 'ghost',
+        variant: 'link',
         color: 'error',
         disabled: false,
         class: [
@@ -254,7 +354,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        variant: 'ghost',
+        variant: 'link',
         color: 'light',
         disabled: false,
         class: [
@@ -265,7 +365,7 @@ const useStyle = (props: ButtonProps) => {
         ]
       },
       {
-        variant: 'ghost',
+        variant: 'link',
         color: 'dark',
         disabled: false,
         class: [
@@ -405,6 +505,39 @@ const useStyle = (props: ButtonProps) => {
           'opacity-50',
           'cursor-not-allowed',
           'border-gray-600'
+        ]
+      },
+      // outlined & size
+      {
+        size: 'xs',
+        variant: 'outlined',
+        class: [
+          'px-[calc(0.5rem_-_2px)]',
+          'py-[calc(0.5rem_-_2px)]'
+        ]
+      },
+      {
+        size: 'sm',
+        variant: 'outlined',
+        class: [
+          'px-[calc(0.75rem_-_2px)]',
+          'py-[calc(0.625rem_-_2px)]'
+        ]
+      },
+      {
+        size: 'md',
+        variant: 'outlined',
+        class: [
+          'px-[calc(1rem_-_2px)]',
+          'py-[calc(0.625rem_-_2px)]'
+        ]
+      },
+      {
+        size: 'lg',
+        variant: 'outlined',
+        class: [
+          'px-[calc(1.25rem_-_2px)]',
+          'py-[calc(0.75rem_-_2px)]'
         ]
       }
     ]

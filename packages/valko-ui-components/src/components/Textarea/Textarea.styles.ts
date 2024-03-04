@@ -81,13 +81,11 @@ const useStyle = (props: TextareaProps) => {
         },
         ghost: {
           textarea: [
-            'shadow-none',
             'bg-inherit',
             'border-b-2',
             'border-light-5'
           ],
           label: [
-            'shadow-none',
             'bg-inherit'
           ]
         },

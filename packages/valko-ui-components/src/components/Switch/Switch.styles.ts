@@ -26,6 +26,7 @@ const useStyle = (props: SwitchProps) => {
       thumb: [
         'inline-block',
         'shadow-lg',
+        'shadow-light-4',
         'ring-0',
         'pointer-events-none',
         'transition-all',
@@ -33,6 +34,7 @@ const useStyle = (props: SwitchProps) => {
         'duration-200',
         'ease-in-out',
         'absolute',
+        'dark:shadow-dark-5',
         'data-[selected=false]:left-0',
         'data-[selected=true]:left-full',
         'data-[selected=true]:-translate-x-full'
@@ -49,12 +51,12 @@ const useStyle = (props: SwitchProps) => {
       size: {
         xs: {
           switch: [
-            'h-[1.125rem]',
-            'w-[2.075rem]'
+            'h-[1rem]',
+            'w-[2rem]'
           ],
           thumb: [
-            'h-[0.875rem]',
-            'w-[0.875rem]'
+            'h-[0.750rem]',
+            'w-[0.750rem]'
           ],
           label: [
             'text-xs'
@@ -62,12 +64,12 @@ const useStyle = (props: SwitchProps) => {
         },
         sm: {
           switch: [
-            'h-[1.75rem]',
-            'w-[3.325rem]'
+            'h-[1.250rem]',
+            'w-[2.5rem]'
           ],
           thumb: [
-            'h-[1.5rem]',
-            'w-[1.5rem]'
+            'h-[1rem]',
+            'w-[1rem]'
           ],
           label: [
             'text-sm'
@@ -75,12 +77,12 @@ const useStyle = (props: SwitchProps) => {
         },
         md: {
           switch: [
-            'h-[2.375rem]',
-            'w-[4.625rem]'
+            'h-[1.5rem]',
+            'w-[3rem]'
           ],
           thumb: [
-            'h-[2.125rem]',
-            'w-[2.125rem]'
+            'h-[1.250rem]',
+            'w-[1.250rem]'
           ],
           label: [
             'text-base'
@@ -88,12 +90,12 @@ const useStyle = (props: SwitchProps) => {
         },
         lg: {
           switch: [
-            'h-[3rem]',
-            'w-[5.825rem]'
+            'h-[1.750rem]',
+            'w-[3.5rem]'
           ],
           thumb: [
-            'h-[2.75rem]',
-            'w-[2.75rem]'
+            'h-[1.5rem]',
+            'w-[1.5rem]'
           ],
           label: [
             'text-lg'
@@ -110,7 +112,7 @@ const useStyle = (props: SwitchProps) => {
           ],
           thumb: [
             'bg-light-2',
-            'dark:bg-dark-5'
+            'dark:bg-light-3'
           ]
         },
         outlined: {
@@ -132,6 +134,7 @@ const useStyle = (props: SwitchProps) => {
           ],
           thumb: [
             'bg-light-5/[.5]',
+            'shadow-none',
             'dark:bg-dark-5/[.5]'
           ]
         }
@@ -142,9 +145,7 @@ const useStyle = (props: SwitchProps) => {
         success: {},
         info: {},
         warning: {},
-        error: {},
-        light: {},
-        dark: {}
+        error: {}
       },
       shape: {
         rounded: {
@@ -281,32 +282,6 @@ const useStyle = (props: SwitchProps) => {
           ]
         }
       },
-      {
-        variant: 'filled',
-        color: 'light',
-        disabled: false,
-        class: {
-          switch: [
-            'data-[active=true]:bg-light-1',
-            'data-[active=true]:border-light-1',
-            'dark:data-[active=true]:bg-light-1',
-            'dark:data-[active=true]:border-light-1'
-          ]
-        }
-      },
-      {
-        variant: 'filled',
-        color: 'dark',
-        disabled: false,
-        class: {
-          switch: [
-            'data-[active=true]:bg-dark-5',
-            'data-[active=true]:border-dark-5',
-            'dark:data-[active=true]:bg-dark-5',
-            'dark:data-[active=true]:border-dark-5'
-          ]
-        }
-      },
       // outlined & color
       {
         variant: 'outlined',
@@ -398,36 +373,6 @@ const useStyle = (props: SwitchProps) => {
           ]
         }
       },
-      {
-        variant: 'outlined',
-        color: 'light',
-        disabled: false,
-        class: {
-          switch: [
-            'data-[active=true]:border-light-1',
-            'dark:data-[active=true]:border-light-1'
-          ],
-          thumb: [
-            'data-[selected=true]:bg-light-1',
-            'dark:data-[selected=true]:bg-light-1'
-          ]
-        }
-      },
-      {
-        variant: 'outlined',
-        color: 'dark',
-        disabled: false,
-        class: {
-          switch: [
-            'data-[active=true]:border-dark-5',
-            'dark:data-[active=true]:border-light-5'
-          ],
-          thumb: [
-            'data-[selected=true]:bg-dark-5',
-            'dark:data-[selected=true]:bg-light-5'
-          ]
-        }
-      },
       // ghost & color
       {
         variant: 'ghost',
@@ -516,36 +461,6 @@ const useStyle = (props: SwitchProps) => {
           thumb: [
             'data-[selected=true]:bg-error-500/[.5]',
             'dark:data-[selected=true]:bg-error-500/[.5]'
-          ]
-        }
-      },
-      {
-        variant: 'ghost',
-        color: 'light',
-        disabled: false,
-        class: {
-          switch: [
-            'data-[active=true]:bg-light-1/[.15]',
-            'dark:data-[active=true]:bg-light-1/[.15]'
-          ],
-          thumb: [
-            'data-[selected=true]:bg-light-1/[.5]',
-            'dark:data-[selected=true]:bg-light-1/[.5]'
-          ]
-        }
-      },
-      {
-        variant: 'ghost',
-        color: 'dark',
-        disabled: false,
-        class: {
-          switch: [
-            'data-[active=true]:bg-dark-5/[.15]',
-            'dark:data-[active=true]:bg-dark-5/[.15]'
-          ],
-          thumb: [
-            'data-[selected=true]:bg-dark-5/[.5]',
-            'dark:data-[selected=true]:bg-dark-5/[.5]'
           ]
         }
       }

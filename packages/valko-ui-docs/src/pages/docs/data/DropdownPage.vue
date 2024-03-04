@@ -6,7 +6,8 @@ import sizeOptions from '@/data/sizeOptions'
 import colorOptions from '@/data/colorOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
-import variantOptions from '@/data/variantOptions'
+import variantOptionsExtended from '@/data/variantOptionsExtended'
+import emitHeaders from '@/data/emitHeaders'
 
 const form = ref({
   color: 'primary',
@@ -128,12 +129,21 @@ const itemInterfaceData = [
     default: ''
   }
 ]
+
+const dropdownEmitsData = [
+  {
+    event: 'itemClick',
+    description: 'Emitted when an item in the dropdown menu is clicked.',
+    values: 'Item',
+    type: '(item: Item) => void'
+  }
+]
 </script>
 
 <template>
   <doc-section
     title="Dropdown"
-    description="The Dropdown component displays a list of actions or options that a user can choose."
+    description="List of options that expands when the user interacts with a trigger element. Dropdowns provide a compact way to display a list of choices and are commonly used in forms and navigation menus."
   >
     <template #playground-view>
       <div class="w-full flex px-2 justify-center">
@@ -153,7 +163,7 @@ const itemInterfaceData = [
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptions"
+        :options="variantOptionsExtended"
         v-model="form.variant"
       />
       <vk-select
@@ -189,60 +199,73 @@ const itemInterfaceData = [
         title="Colors"
         gap
       >
-        <div class="gap-4 grid grid-cols-4">
-          <vk-dropdown
-            v-for="color in colorOptions"
-            :key="color.value"
-            :color="color.value"
-            :title="color.label"
-            :items="items"
-          />
-        </div>
+        <vk-dropdown
+          v-for="color in colorOptions"
+          :key="color.value"
+          :color="color.value"
+          :title="color.label"
+          :items="items"
+        />
       </example-section>
 
       <example-section
         title="Variants"
         gap
       >
-        <div class="gap-4 grid grid-cols-4">
-          <vk-dropdown
-            v-for="variant in variantOptions"
-            :key="variant.value"
-            :variant="variant.value"
-            :title="variant.label"
-            :items="items"
-          />
-        </div>
+        <vk-dropdown
+          v-for="variant in variantOptionsExtended"
+          :key="variant.value"
+          :variant="variant.value"
+          :title="variant.label"
+          :items="items"
+        />
       </example-section>
 
       <example-section
         title="Shapes"
         gap
       >
-        <div class="gap-4 grid grid-cols-4">
-          <vk-dropdown
-            v-for="shape in shapeOptions"
-            :key="shape.value"
-            :shape="shape.value"
-            :title="shape.label"
-            :items="items"
-          />
-        </div>
+        <vk-dropdown
+          v-for="shape in shapeOptions"
+          :key="shape.value"
+          :shape="shape.value"
+          :title="shape.label"
+          :items="items"
+        />
       </example-section>
 
       <example-section
         title="Sizes"
         gap
       >
-        <div class="gap-4 grid grid-cols-2">
-          <vk-dropdown
-            v-for="size in sizeOptions"
-            :key="size.value"
-            :size="size.value"
-            :title="size.label"
-            :items="items"
-          />
-        </div>
+        <vk-dropdown
+          v-for="size in sizeOptions"
+          :key="size.value"
+          :size="size.value"
+          :title="size.label"
+          :items="items"
+        />
+      </example-section>
+
+      <example-section
+        title="Flat"
+        gap
+      >
+        <vk-dropdown
+          title="Flat"
+          :items="items"
+        />
+      </example-section>
+
+      <example-section
+        title="Disabled"
+        gap
+      >
+        <vk-dropdown
+          title="Disabled"
+          disabled
+          :items="items"
+        />
       </example-section>
     </template>
 
@@ -265,6 +288,16 @@ const itemInterfaceData = [
           <vk-data-table
             :headers="propHeaders"
             :data="itemInterfaceData"
+          />
+        </example-section>
+
+        <example-section
+          title="Dropdown Emits"
+          gap
+        >
+          <vk-data-table
+            :headers="emitHeaders"
+            :data="dropdownEmitsData"
           />
         </example-section>
       </div>

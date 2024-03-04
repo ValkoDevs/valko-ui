@@ -134,7 +134,7 @@ describe('Dropdown component', () => {
         })
         wrapper.find('.vk-dropdown__button').trigger('click')
         await nextTick()
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-light-1')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-light-3')
       })
 
       it('should be color dark when props.color is dark', async () => {
@@ -267,6 +267,17 @@ describe('Dropdown component', () => {
         wrapper = mount(VkDropdown, {
           props: {
             variant: 'ghost',
+            items
+          }
+        })
+
+        expect(wrapper.find('.shadow-none').exists()).toBe(true)
+      })
+
+      it('should be link when props.size is link', () => {
+        wrapper = mount(VkDropdown, {
+          props: {
+            variant: 'link',
             items
           }
         })
