@@ -25,6 +25,7 @@ const menuItems: MenuItem[] = [
   { key: 'breadcrumbs', group: 'Ui', text: 'Breadcrumbs' },
   { key: 'progressbar', group: 'Ui', text: 'Progressbar' },
   { key: 'spinner', group: 'Ui', text: 'Spinner' },
+  { key: 'tooltip', group: 'Ui', text: 'Tooltip' },
   { key: 'collapse', group: 'Data', text: 'Collapse' },
   { key: 'dropdown', group: 'Data', text: 'Dropdown' },
   { key: 'pagination', group: 'Data', text: 'Pagination' },
@@ -62,9 +63,9 @@ watchEffect(() => {
       flat
       fixed
     >
-      <vk-checkbox
-        label-position="right"
-        label="Dark mode"
+      <vk-switch
+        :position="true"
+        label="Dark Mode"
         v-model="darkTheme"
       />
     </vk-navbar>
