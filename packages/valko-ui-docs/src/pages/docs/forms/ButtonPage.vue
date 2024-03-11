@@ -3,10 +3,12 @@ import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
-import variantOptions from '@/data/variantOptions'
+import variantOptionsExtended from '@/data/variantOptionsExtended'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
+import emitHeaders from '@/data/emitHeaders'
+import slotHeaders from '@/data/slotHeaders'
 
 const form = ref({
   color: 'primary',
@@ -31,7 +33,7 @@ const apiData = [
     prop: 'variant',
     required: false,
     description: 'The variant of the Button.',
-    values: 'filled, outlined, ghost',
+    values: 'filled, outlined, ghost, link',
     default: 'filled'
   },
   {
@@ -70,12 +72,30 @@ const apiData = [
     default: 'soft'
   }
 ]
+
+const emitData = [
+  {
+    event: 'click',
+    description: 'Emitted when the button is clicked.',
+    values: '',
+    type: '() => void'
+  }
+]
+
+const slotData = [
+  {
+    name: 'default',
+    description: 'Slot for the content of the button. This slot is typically used to include text or other components inside the button.',
+    example: '<template #default>\n  <!-- Your button content goes here -->\n</template>'
+  }
+]
+
 </script>
 
 <template>
   <doc-section
     title="Button"
-    description="Buttons are used to initialize an action, either in the background or foreground of an experience."
+    description="Interactive element that triggers an action when pressed. Buttons are used to initiate actions such as submitting forms, navigating to different pages, or performing specific tasks within an application."
   >
     <template #playground-view>
       <vk-button
@@ -88,7 +108,7 @@ const apiData = [
         :condensed="form.condensed"
         :shape="form.shape"
       >
-        Primary
+        Button
       </vk-button>
     </template>
 
@@ -102,7 +122,7 @@ const apiData = [
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptions"
+        :options="variantOptionsExtended"
         v-model="form.variant"
       />
       <vk-select
@@ -155,23 +175,11 @@ const apiData = [
         wrap
       >
         <vk-button
-          v-for="variant in variantOptions"
+          v-for="variant in variantOptionsExtended"
           :key="variant.value"
           :variant="variant.value"
         >
           {{ variant.label }}
-        </vk-button>
-        <vk-button flat>
-          Flat
-        </vk-button>
-        <vk-button disabled>
-          Disabled
-        </vk-button>
-        <vk-button condensed>
-          Condensed
-        </vk-button>
-        <vk-button block>
-          Block
         </vk-button>
       </example-section>
 
@@ -200,13 +208,74 @@ const apiData = [
           {{ size.label }}
         </vk-button>
       </example-section>
+
+      <example-section
+        title="Flat"
+      >
+        <vk-button flat>
+          Flat
+        </vk-button>
+      </example-section>
+
+      <example-section
+        title="Disabled"
+      >
+        <vk-button disabled>
+          Disabled
+        </vk-button>
+      </example-section>
+
+      <example-section
+        title="Condensed"
+      >
+        <vk-button condensed>
+          Condensed
+        </vk-button>
+      </example-section>
+
+      <example-section
+        title="Block"
+        gap
+        wrap
+      >
+        <vk-button block>
+          Block
+        </vk-button>
+      </example-section>
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Button Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+
+        <example-section
+          title="Button Emits"
+          gap
+        >
+          <vk-data-table
+            :headers="emitHeaders"
+            :data="emitData"
+          />
+        </example-section>
+
+        <example-section
+          title="Button Slots"
+          gap
+        >
+          <vk-data-table
+            :headers="slotHeaders"
+            :data="slotData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>

@@ -10,7 +10,9 @@ const useStyle = (props: PaginationProps) => {
         'p-2',
         'inline-flex',
         '-space-x-px',
-        'shadow-sm'
+        'shadow-sm',
+        'shadow-light-4',
+        'dark:shadow-dark-5'
       ],
       button: [
         'vk-pagination__button',
@@ -42,7 +44,8 @@ const useStyle = (props: PaginationProps) => {
         },
         ghost: {
           nav: [
-            'bg-transparent'
+            'bg-transparent',
+            'shadow-none'
           ]
         }
       },

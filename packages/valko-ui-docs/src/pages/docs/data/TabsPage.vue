@@ -148,8 +148,8 @@ const tabInterfaceData = [
 const tabsSlotsData = [
   {
     name: '[key: Tab["key"]]',
-    description: 'Content for Tab with the same key',
-    example: '<template #tab-1> Content for tab with key "tab-1" </template>'
+    description: 'Slot for content associated with a specific tab. Each tab in the `VkTabs` component should have a corresponding slot with a unique name matching the `key` prop of the tab.',
+    example: '<template #tab1>\n  <!-- Content for tab 1 -->\n</template>\n<template #tab2>\n  <!-- Content for tab 2 -->\n</template>\n<!-- Add more templates for additional tabs as needed -->'
   }
 ]
 </script>
@@ -157,7 +157,7 @@ const tabsSlotsData = [
 <template>
   <doc-section
     title="Tabs"
-    description="Tabs organize content into multiple sections and allow users to navigate between them."
+    description=" Organization of content into tabs for easier navigation. Tabs allow users to switch between different sections of content within the same page or interface, improving the organization and usability of the interface."
   >
     <template #playground-view>
       <div class="w-full flex justify-center items-center px-2">
@@ -250,25 +250,6 @@ const tabsSlotsData = [
               :tabs="tabs"
             />
           </div>
-          <div>
-            <span>Grow</span>
-            <vk-tabs
-              grow
-              :tabs="tabs"
-            />
-          </div>
-          <div>
-            <span>Disabled</span>
-            <vk-tabs
-              :tabs="tabDisabled"
-            />
-          </div>
-          <div>
-            <span>With Icons</span>
-            <vk-tabs
-              :tabs="tabWithIcon"
-            />
-          </div>
         </div>
       </example-section>
 
@@ -307,6 +288,31 @@ const tabsSlotsData = [
             />
           </div>
         </div>
+      </example-section>
+
+      <example-section
+        title="Grow"
+      >
+        <vk-tabs
+          grow
+          :tabs="tabs"
+        />
+      </example-section>
+
+      <example-section
+        title="With Icons"
+      >
+        <vk-tabs
+          :tabs="tabWithIcon"
+        />
+      </example-section>
+
+      <example-section
+        title="Disabled"
+      >
+        <vk-tabs
+          :tabs="tabDisabled"
+        />
       </example-section>
     </template>
 

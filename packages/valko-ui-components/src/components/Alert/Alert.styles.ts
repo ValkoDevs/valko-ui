@@ -11,9 +11,11 @@ const useStyle = (props: AlertProps) => {
         'p-4',
         'gap-4',
         'shadow-lg',
+        'shadow-light-4',
         'flex',
         'justify-between',
-        'items-stretch'
+        'items-stretch',
+        'dark:shadow-dark-5'
       ],
       content: [
         'grow'
@@ -54,7 +56,8 @@ const useStyle = (props: AlertProps) => {
         },
         ghost: {
           container: [
-            'bg-transparent'
+            'bg-transparent',
+            'shadow-none'
           ]
         },
         outlined: {

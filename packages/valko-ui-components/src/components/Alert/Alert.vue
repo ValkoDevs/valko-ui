@@ -19,9 +19,7 @@ const emit = defineEmits(['close'])
 
 const classes = useStyle(props)
 
-const onClick = () => {
-  emit('close')
-}
+const onClick = () => emit('close')
 
 const defaultIcon = computed(() => {
   switch (props.color) {
@@ -61,7 +59,8 @@ const defaultIcon = computed(() => {
       v-if="props.closable"
     >
       <vk-button
-        variant="ghost"
+        variant="link"
+        color="secondary"
         size="xs"
         rounded
         flat

@@ -141,6 +141,7 @@ onUnmounted(() => {
           :data-helper="!!helpertext"
           :class="classes.dropdown"
           :data-shape="shape"
+          :data-variant="props.variant"
         >
           <li
             v-for="item in options"

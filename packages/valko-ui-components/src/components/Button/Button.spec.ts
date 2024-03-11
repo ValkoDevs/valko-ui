@@ -230,6 +230,16 @@ describe('Button component', () => {
           }
         })
 
+        expect(wrapper.find('.shadow-none').exists()).toBe(true)
+      })
+
+      it('should be link when props.size is link', () => {
+        wrapper = mount(VkButton, {
+          props: {
+            variant: 'link'
+          }
+        })
+
         expect(wrapper.find('.bg-transparent').exists()).toBe(true)
       })
     })

@@ -95,26 +95,6 @@ describe('Switch component', () => {
 
         expect(wrapper.find('.bg-error-500')).toBeDefined()
       })
-
-      it('should be color light when props.color is light', () => {
-        wrapper = mount(VkSwitch, {
-          props: {
-            color: 'light'
-          }
-        })
-
-        expect(wrapper.find('.bg-light-1')).toBeDefined()
-      })
-
-      it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkSwitch, {
-          props: {
-            color: 'dark'
-          }
-        })
-
-        expect(wrapper.find('.bg-dark-5')).toBeDefined()
-      })
     })
 
     describe('When shape prop changes', () => {

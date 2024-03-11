@@ -7,6 +7,7 @@ import sizeOptions from '@/data/sizeOptions'
 import variantOptions from '@/data/variantOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
+import slotHeaders from '@/data/slotHeaders'
 
 const form = ref({
   variant: 'filled',
@@ -54,12 +55,33 @@ const apiData = [
     default: 'false'
   }
 ]
+
+const slotData = [
+  {
+    name: 'default',
+    description: 'Slot for containing VkCollapseItem components. This slot is used to wrap VkCollapseItem components inside VkCollapse.',
+    example: '<template #default>\n  <!-- Your VkCollapseItem components go here -->\n</template>'
+  }
+]
+
+const itemSlotData = [
+  {
+    name: 'title',
+    description: 'Slot for the title content of the collapse item. This slot is typically used to provide a custom title for the collapse item.',
+    example: '<template #title>\n  <!-- Your custom title content goes here -->\n</template>'
+  },
+  {
+    name: 'default',
+    description: 'Slot for the main content of the collapse item. This slot is typically used to include additional content inside the collapse item.',
+    example: '<template #default>\n  <!-- Your main content goes here -->\n</template>'
+  }
+]
 </script>
 
 <template>
   <doc-section
     title="Collapse"
-    description="Collapse display a list of high-level options that can expand/collapse to reveal more information."
+    description="Interactive element that hides or reveals additional content with a single click. Collapses are often used to manage large amounts of content or to create expandable sections within a page."
   >
     <template #playground-view>
       <div class="w-full flex justify-center p-4">
@@ -153,75 +175,6 @@ const apiData = [
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </vk-collapse-item>
           </vk-collapse>
-          <vk-collapse
-            :compact="true"
-          >
-            <vk-collapse-item
-              title="Compact-Example Item 1"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </vk-collapse-item>
-            <vk-collapse-item
-              title="Compact-Example Item 2"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </vk-collapse-item>
-            <vk-collapse-item
-              title="Compact-Example Item 3"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </vk-collapse-item>
-          </vk-collapse>
-          <vk-collapse
-            :multiple="true"
-          >
-            <vk-collapse-item
-              left-icon="user-circle"
-              title="Multiple-Example Item 1"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </vk-collapse-item>
-            <vk-collapse-item
-              title="Multiple-Example Item 2"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </vk-collapse-item>
-            <vk-collapse-item
-              title="Multiple-Example Item 3"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </vk-collapse-item>
-          </vk-collapse>
-        </div>
-      </example-section>
-
-      <example-section
-        title="Separators"
-        justify="evenly"
-        gap
-      >
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-collapse
-            v-for="separator in separatorOptions"
-            :separator="separator.value"
-            :key="separator.value"
-          >
-            <vk-collapse-item
-              :title="`${separator.label}-Example Item 1`"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </vk-collapse-item>
-            <vk-collapse-item
-              :title="`${separator.label}-Example Item 2`"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </vk-collapse-item>
-            <vk-collapse-item
-              :title="`${separator.label}-Example Item 3`"
-            >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            </vk-collapse-item>
-          </vk-collapse>
         </div>
       </example-section>
 
@@ -284,13 +237,119 @@ const apiData = [
           </vk-collapse>
         </div>
       </example-section>
+
+      <example-section
+        title="Separators"
+        justify="evenly"
+        gap
+      >
+        <div class="grow gap-4 grid grid-cols-2">
+          <vk-collapse
+            v-for="separator in separatorOptions"
+            :separator="separator.value"
+            :key="separator.value"
+          >
+            <vk-collapse-item
+              :title="`${separator.label}-Example Item 1`"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </vk-collapse-item>
+            <vk-collapse-item
+              :title="`${separator.label}-Example Item 2`"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </vk-collapse-item>
+            <vk-collapse-item
+              :title="`${separator.label}-Example Item 3`"
+            >
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </vk-collapse-item>
+          </vk-collapse>
+        </div>
+      </example-section>
+
+      <example-section
+        title="Multiple"
+      >
+        <vk-collapse
+          :multiple="true"
+        >
+          <vk-collapse-item
+            left-icon="user-circle"
+            title="Multiple-Example Item 1"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </vk-collapse-item>
+          <vk-collapse-item
+            title="Multiple-Example Item 2"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </vk-collapse-item>
+          <vk-collapse-item
+            title="Multiple-Example Item 3"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </vk-collapse-item>
+        </vk-collapse>
+      </example-section>
+
+      <example-section
+        title="Compact"
+      >
+        <vk-collapse
+          :compact="true"
+        >
+          <vk-collapse-item
+            title="Compact-Example Item 1"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </vk-collapse-item>
+          <vk-collapse-item
+            title="Compact-Example Item 2"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </vk-collapse-item>
+          <vk-collapse-item
+            title="Compact-Example Item 3"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </vk-collapse-item>
+        </vk-collapse>
+      </example-section>
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Collapse Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+
+        <example-section
+          title="Collapse Slots"
+          gap
+        >
+          <vk-data-table
+            :headers="slotHeaders"
+            :data="slotData"
+          />
+        </example-section>
+
+        <example-section
+          title="Collapse Items Slots"
+          gap
+        >
+          <vk-data-table
+            :headers="slotHeaders"
+            :data="itemSlotData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>

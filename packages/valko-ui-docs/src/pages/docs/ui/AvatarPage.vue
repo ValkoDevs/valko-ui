@@ -139,7 +139,7 @@ const avatarSrc = computed(() => { return form.value.avatar ? '###' : form.value
 <template>
   <doc-section
     title="Avatar"
-    description="The Avatar component is used to represent a user, and displays the profile picture, initials or fallback icon."
+    description="Graphic representation of a user or entity in the form of a small image. Avatars are often used to personalize user profiles or identify users within a system."
   >
     <template #playground-view>
       <vk-avatar
@@ -297,13 +297,33 @@ const avatarSrc = computed(() => { return form.value.avatar ? '###' : form.value
           />
         </div>
       </example-section>
+
+      <example-section
+        title="Flat"
+      >
+        <div
+          class="flex flex-col items-center"
+        >
+          <span class="mb-1">Flat</span>
+          <vk-avatar
+            flat
+          />
+        </div>
+      </example-section>
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Avatar Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>

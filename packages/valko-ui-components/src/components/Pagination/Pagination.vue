@@ -68,7 +68,7 @@ watchEffect(() => {
       :class="classes.nav"
     >
       <vk-button
-        variant="ghost"
+        variant="link"
         class="vk-pagination__left"
         :color="buttonColor"
         :shape="props.shape"
@@ -87,7 +87,7 @@ watchEffect(() => {
         v-for="page in pages"
         :key="page"
         flat
-        :variant="page === props.modelValue ? 'filled' : 'ghost'"
+        :variant="page === props.modelValue ? props.variant : 'link'"
         :color="page === props.modelValue ? props.color : buttonColor"
         :size="size"
         :shape="props.shape"
@@ -100,7 +100,7 @@ watchEffect(() => {
         </div>
       </vk-button>
       <vk-button
-        variant="ghost"
+        variant="link"
         class="vk-pagination__right"
         :color="buttonColor"
         :shape="props.shape"

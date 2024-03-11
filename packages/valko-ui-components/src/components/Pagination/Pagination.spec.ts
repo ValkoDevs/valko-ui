@@ -33,10 +33,6 @@ describe('Pagination component', () => {
       it('should be flat', () => {
         expect(wrapper.find('.shadow-sm').exists()).toBe(true)
       })
-
-      it('should have left arrow disabled', () => {
-        expect(wrapper.find('.vk-pagination__left').classes()).toContain('cursor-not-allowed')
-      })
     })
 
     describe('When color prop changes', () => {

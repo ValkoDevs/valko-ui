@@ -14,12 +14,14 @@ const useStyle = (props: BadgeProps) => {
         'vk-badge__content',
         'text-white',
         'shadow-md',
+        'shadow-light-4',
         'overflow-hidden',
         'flex',
         'justify-center',
         'items-center',
         'align-middle',
-        'absolute'
+        'absolute',
+        'dark:shadow-dark-5'
       ]
     },
     variants: {

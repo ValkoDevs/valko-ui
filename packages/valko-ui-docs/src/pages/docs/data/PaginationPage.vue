@@ -7,6 +7,7 @@ import colorOptions from '@/data/colorOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
 import variantOptions from '@/data/variantOptions'
+import emitHeaders from '@/data/emitHeaders'
 
 const form = ref({
   color: 'primary',
@@ -49,12 +50,21 @@ const apiData = [
     default: '1'
   }
 ]
+
+const emitData = [
+  {
+    event: 'update:modelValue',
+    description: 'Emitted when the current page is changed.',
+    values: 'number | string',
+    type: '(page: number | string) => void'
+  }
+]
 </script>
 
 <template>
   <doc-section
     title="Pagination"
-    description="The Pagination component allows you to display active page and navigate between multiple pages."
+    description="Navigation that divides content into pages for easier viewing. Pagination is used to break up large amounts of content into manageable sections and provides users with controls to navigate between pages."
   >
     <template #playground-view>
       <div class="w-full flex px-2 justify-center">
@@ -118,7 +128,7 @@ const apiData = [
         title="Colors"
         gap
       >
-        <div class="gap-4 grid grid-cols-4">
+        <div class="gap-4 grid grid-cols-3">
           <div
             v-for="color in colorOptions"
             :key="color.value"
@@ -127,6 +137,46 @@ const apiData = [
             <span class="mb-3"> {{ color.label }}</span>
             <vk-pagination
               :color="color.value"
+              :pages="form.totalPages"
+              v-model="form.currentPage"
+            />
+          </div>
+        </div>
+      </example-section>
+
+      <example-section
+        title="Variants"
+        gap
+      >
+        <div class="gap-4 grid grid-cols-3">
+          <div
+            v-for="variant in variantOptions"
+            :key="variant.value"
+            class="flex flex-col items-start"
+          >
+            <span class="mb-3"> {{ variant.label }}</span>
+            <vk-pagination
+              :variant="variant.value"
+              :pages="form.totalPages"
+              v-model="form.currentPage"
+            />
+          </div>
+        </div>
+      </example-section>
+
+      <example-section
+        title="Shapes"
+        gap
+      >
+        <div class="gap-4 grid grid-cols-3">
+          <div
+            v-for="shape in shapeOptions"
+            :key="shape.value"
+            class="flex flex-col items-start"
+          >
+            <span class="mb-3"> {{ shape.label }}</span>
+            <vk-pagination
+              :shape="shape.value"
               :pages="form.totalPages"
               v-model="form.currentPage"
             />
@@ -152,13 +202,50 @@ const apiData = [
           </div>
         </div>
       </example-section>
+
+      <example-section
+        title="Flat"
+      >
+        <vk-pagination
+          flat
+          :pages="form.totalPages"
+          v-model="form.currentPage"
+        />
+      </example-section>
+
+      <example-section
+        title="Disabled"
+      >
+        <vk-pagination
+          disabled
+          :pages="form.totalPages"
+          v-model="form.currentPage"
+        />
+      </example-section>
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Pagination Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+
+        <example-section
+          title="Pagination Emits"
+          gap
+        >
+          <vk-data-table
+            :headers="emitHeaders"
+            :data="emitData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>

@@ -71,16 +71,16 @@ const closeModal = () => { emit('close') }
                 </dialog-title>
                 <vk-button
                   v-if="props.closable"
-                  tab-index="-1"
+                  tabindex="-1"
                   size="xs"
-                  variant="ghost"
+                  variant="link"
                   shape="rounded"
                   color="secondary"
                   condensed
-                  class="justify-self-end"
+                  :class="classes.closeButton"
                   @click="closeModal"
                 >
-                  <div class="p-1">
+                  <div :class="classes.closeIcon">
                     <vk-icon name="x" />
                   </div>
                 </vk-button>

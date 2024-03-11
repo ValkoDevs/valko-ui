@@ -7,6 +7,7 @@ import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import colorOptions from '@/data/colorOptions'
 import shapeOptions from '@/data/shapeOptions'
+import emitHeaders from '@/data/emitHeaders'
 
 const form = ref({
   color: 'primary',
@@ -87,12 +88,21 @@ const apiData = [
     default: 'soft'
   }
 ]
+
+const emitData = [
+  {
+    event: 'update:modelValue',
+    description: 'Emitted when the value of the textarea changes.',
+    values: 'value: string',
+    type: '(value: string) => void'
+  }
+]
 </script>
 
 <template>
   <doc-section
     title="Textarea"
-    description="Textarea component is a multi-line Input which allows you to write large texts."
+    description="Input field that allows the user to enter and edit extensive text. Textareas are used for capturing longer-form textual input from users, such as comments, messages, or descriptions."
   >
     <template #playground-view>
       <div class="w-full p-4">
@@ -191,15 +201,6 @@ const apiData = [
             :variant="variant.value"
             :label="variant.label"
           />
-          <vk-textarea
-            disabled
-            label="Disabled"
-          />
-          <vk-textarea
-            readonly
-            label="Readonly"
-            v-model="form.exampleReadonly"
-          />
         </div>
       </example-section>
 
@@ -234,13 +235,49 @@ const apiData = [
           />
         </div>
       </example-section>
+
+      <example-section
+        title="Disabled"
+      >
+        <vk-textarea
+          disabled
+          label="Disabled"
+        />
+      </example-section>
+
+      <example-section
+        title="Readonly"
+      >
+        <vk-textarea
+          readonly
+          label="Readonly"
+          v-model="form.exampleReadonly"
+        />
+      </example-section>
     </template>
 
     <template #api>
-      <vk-data-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Textarea Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="apiData"
+          />
+        </example-section>
+
+        <example-section
+          title="Textarea Emits"
+          gap
+        >
+          <vk-data-table
+            :headers="emitHeaders"
+            :data="emitData"
+          />
+        </example-section>
+      </div>
     </template>
   </doc-section>
 </template>
