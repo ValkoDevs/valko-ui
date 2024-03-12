@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, Ref, watchEffect } from 'vue'
 import { VkIcon } from '../'
-import { AvatarProps } from '@/components/Avatar/interfaces'
+import { AvatarProps } from '#valkoui/components/Avatar/interfaces'
 import useStyle from './Avatar.styles'
 
 const props = withDefaults(defineProps<AvatarProps>(), {

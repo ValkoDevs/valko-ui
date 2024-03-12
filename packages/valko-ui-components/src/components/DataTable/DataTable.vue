@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { DataTableProps } from '@/components/DataTable/interfaces'
+import { DataTableProps } from '#valkoui/components/DataTable/interfaces'
 import useStyle from './DataTable.styles'
 
 const props = withDefaults(defineProps<DataTableProps>(), {

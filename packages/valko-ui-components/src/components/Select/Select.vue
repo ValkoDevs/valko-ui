@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from 'vue'
-import { SelectProps } from '@/components/Select/interfaces'
+import { SelectProps } from '#valkoui/components/Select/interfaces'
 import { VkInput, VkIcon } from '../'
 import useStyle from './Select.styles'
 

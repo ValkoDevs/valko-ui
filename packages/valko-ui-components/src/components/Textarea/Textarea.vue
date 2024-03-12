@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TextareaProps } from '@/components/Textarea/interfaces'
+import { TextareaProps } from '#valkoui/components/Textarea/interfaces'
 import useStyle from './Textarea.styles'
 defineOptions({ name: 'VkTextarea' })
 

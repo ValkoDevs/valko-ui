@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
-import { SwitchProps } from '@/components/Switch/interfaces'
+import { SwitchProps } from '#valkoui/components/Switch/interfaces'
 import useStyle from './Switch.styles'
 
 defineOptions({ name: 'VkSwitch' })

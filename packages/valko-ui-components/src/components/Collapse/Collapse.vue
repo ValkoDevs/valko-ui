@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CollapseProps } from '@/components/Collapse/interfaces'
+import { CollapseProps } from '#valkoui/components/Collapse/interfaces'
 import useStyle from './Collapse.styles'
 
 defineOptions({ name: 'VkCollapse' })

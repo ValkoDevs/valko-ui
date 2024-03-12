@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { BreadcrumbsProps, Crumb } from '@/components/Breadcrumbs/interfaces'
+import { BreadcrumbsProps, Crumb } from '#valkoui/components/Breadcrumbs/interfaces'
 import { VkIcon } from '../'
 import useStyle from './Breadcrumbs.styles'
 

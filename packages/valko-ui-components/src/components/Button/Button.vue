@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ButtonProps } from '@/components/Button/interfaces'
+import { ButtonProps } from '#valkoui/components/Button/interfaces'
 import useStyle from './Button.styles'
 
 defineOptions({ name: 'VkButton' })

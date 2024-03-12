@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { InputProps } from '@/components/Input/interfaces'
+import { InputProps } from '#valkoui/components/Input/interfaces'
 import useStyle from './Input.styles'
 
 defineOptions({ name: 'VkInput' })

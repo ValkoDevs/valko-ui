@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { NavbarProps } from '@/components/Navbar/interfaces'
+import { NavbarProps } from '#valkoui/components/Navbar/interfaces'
 import useStyle from './Navbar.styles'
 
 const props = withDefaults(defineProps<NavbarProps>(), {

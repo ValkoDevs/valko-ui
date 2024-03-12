@@ -1,5 +1,5 @@
-import Sizes from '@/types/sizes'
-import Shapes from '@/types/shapes'
+import Sizes from '#valkoui/types/sizes'
+import Shapes from '#valkoui/types/shapes'
 
 export interface ModalProps extends Shapes {
   isOpen: boolean;

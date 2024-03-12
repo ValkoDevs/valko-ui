@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import { DropdownProps, Item } from '@/components/Dropdown/interfaces'
+import { DropdownProps, Item } from '#valkoui/components/Dropdown/interfaces'
 import { VkIcon, VkButton } from '../'
 import useStyle from './Dropdown.styles'
 

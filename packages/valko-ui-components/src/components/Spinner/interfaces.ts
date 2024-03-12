@@ -1,5 +1,5 @@
-import Sizes from '@/types/sizes'
-import Colors from '@/types/colors'
+import Sizes from '#valkoui/types/sizes'
+import Colors from '#valkoui/types/colors'
 
 export interface SpinnerProps extends Colors, Sizes {
   variant?: 'loader' | 'loader-2'

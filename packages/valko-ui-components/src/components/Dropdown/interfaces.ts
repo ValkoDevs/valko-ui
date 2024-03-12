@@ -1,7 +1,7 @@
-import Sizes from '@/types/sizes'
-import Colors from '@/types/colors'
-import VariantsExtended from '@/types/variantsExtended'
-import Shapes from '@/types/shapes'
+import Sizes from '#valkoui/types/sizes'
+import Colors from '#valkoui/types/colors'
+import VariantsExtended from '#valkoui/types/variantsExtended'
+import Shapes from '#valkoui/types/shapes'
 
 export interface Item {
   key: string | number;

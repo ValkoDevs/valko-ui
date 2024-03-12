@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RadioProps } from '@/components/Radio/interfaces'
+import { RadioProps } from '#valkoui/components/Radio/interfaces'
 import useStyle from './Radio.styles'
 import { VkIcon } from '../'
 

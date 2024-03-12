@@ -1,6 +1,6 @@
-import Sizes from '@/types/sizes'
-import Colors from '@/types/colors'
-import Variants from '@/types/variants'
+import Sizes from '#valkoui/types/sizes'
+import Colors from '#valkoui/types/colors'
+import Variants from '#valkoui/types/variants'
 
 export interface ProgressbarProps extends Variants, Sizes, Colors {
   shape?: 'line' | 'rounded' | 'square' | 'soft';

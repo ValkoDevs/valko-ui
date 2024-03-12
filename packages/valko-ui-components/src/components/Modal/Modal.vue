@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
-import { ModalProps } from '@/components/Modal/interfaces'
+import { ModalProps } from '#valkoui/components/Modal/interfaces'
 import { VkButton, VkIcon } from '../'
 import useStyle from './Modal.styles'
 

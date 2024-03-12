@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { AlertProps } from '@/components/Alert/interfaces'
+import { AlertProps } from '#valkoui/components/Alert/interfaces'
 import { VkIcon, VkButton } from '../'
 import useStyle from './Alert.styles'
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { IconProps } from '@/components/Icon/interfaces'
+import { IconProps } from '#valkoui/components/Icon/interfaces'
 
 defineOptions({ name: 'VkIcon' })
 

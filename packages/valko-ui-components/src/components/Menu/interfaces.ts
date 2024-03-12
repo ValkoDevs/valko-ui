@@ -1,7 +1,7 @@
-import Colors from '@/types/colors'
-import Shapes from '@/types/shapes'
-import Sizes from '@/types/sizes'
-import Variants from '@/types/variants'
+import Colors from '#valkoui/types/colors'
+import Shapes from '#valkoui/types/shapes'
+import Sizes from '#valkoui/types/sizes'
+import Variants from '#valkoui/types/variants'
 
 export interface MenuItem {
   key: string | number;

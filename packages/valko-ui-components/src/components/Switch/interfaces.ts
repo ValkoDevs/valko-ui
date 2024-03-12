@@ -1,7 +1,7 @@
-import Sizes from '@/types/sizes'
-import ColorsReduced from '@/types/colorsReduced'
-import Shapes from '@/types/shapes'
-import Variants from '@/types/variants'
+import Sizes from '#valkoui/types/sizes'
+import ColorsReduced from '#valkoui/types/colorsReduced'
+import Shapes from '#valkoui/types/shapes'
+import Variants from '#valkoui/types/variants'
 
 export interface SwitchProps extends ColorsReduced, Sizes, Shapes, Variants {
   label?: string;

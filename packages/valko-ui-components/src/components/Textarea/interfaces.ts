@@ -1,7 +1,7 @@
-import Sizes from '@/types/sizes'
-import Colors from '@/types/colors'
-import Variants from '@/types/variants'
-import Shapes from '@/types/shapes'
+import Sizes from '#valkoui/types/sizes'
+import Colors from '#valkoui/types/colors'
+import Variants from '#valkoui/types/variants'
+import Shapes from '#valkoui/types/shapes'
 
 export interface TextareaProps extends Colors, Sizes, Variants, Shapes {
   disabled?: boolean;

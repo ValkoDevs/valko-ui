@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SpinnerProps } from '@/components/Spinner/interfaces'
+import { SpinnerProps } from '#valkoui/components/Spinner/interfaces'
 import { VkIcon } from '..'
 import useStyle from './Spinner.styles'
 
