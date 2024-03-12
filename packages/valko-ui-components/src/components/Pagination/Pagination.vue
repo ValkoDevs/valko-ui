@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, watchEffect } from 'vue'
-import { PaginationProps } from '#valkoui/components/Pagination/interfaces'
+import { PaginationProps } from '#valkoui/types'
 import { VkButton, VkIcon } from '..'
 import useDarkMode from '#valkoui/composables/useDarkMode'
-import useStyle from './Pagination.styles'
+import { useStyle } from './Pagination.styles'
 
 defineOptions({ name: 'VkPagination' })
 

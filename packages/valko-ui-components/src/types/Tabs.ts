@@ -1,6 +1,4 @@
-import Sizes from '#valkoui/types/sizes'
-import Colors from '#valkoui/types/colors'
-import Variants from '#valkoui/types/variants'
+import type { Sizes, Colors, Variants, Shape } from '#valkoui/types'
 
 export interface Tab {
   key: string | number;
@@ -16,7 +14,7 @@ export interface TabKeymap {
 
 export interface TabsProps extends Colors, Sizes, Variants {
   tabs: Tab[];
-  shape?: 'line' | 'rounded' | 'square' | 'soft';
+  shape?: Shape | 'line';
   defaultIndex?: number;
   grow?: boolean;
   vertical?: boolean;

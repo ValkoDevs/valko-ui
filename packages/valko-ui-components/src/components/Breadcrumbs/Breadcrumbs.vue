@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { BreadcrumbsProps, Crumb } from '#valkoui/components/Breadcrumbs/interfaces'
+import { BreadcrumbsProps, Crumb } from '#valkoui/types'
 import { VkIcon } from '../'
-import useStyle from './Breadcrumbs.styles'
+import { useStyle } from './Breadcrumbs.styles'
 
 const props = withDefaults(defineProps<BreadcrumbsProps>(), {
   color: 'primary',

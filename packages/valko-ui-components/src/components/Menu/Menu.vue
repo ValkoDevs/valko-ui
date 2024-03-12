@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { MenuProps, MenuItem } from '#valkoui/components/Menu/interfaces'
-import useStyle from './Menu.styles'
+import { MenuProps, MenuItem } from '#valkoui/types'
+import { useStyle } from './Menu.styles'
 
 const props = withDefaults(defineProps<MenuProps>(), {
   color: 'primary',

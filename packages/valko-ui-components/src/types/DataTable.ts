@@ -1,6 +1,4 @@
-import Sizes from '#valkoui/types/sizes'
-import Colors from '#valkoui/types/colors'
-import Variants from '#valkoui/types/variants'
+import { type DefaultComponent } from '#valkoui/types'
 
 interface DataTableHeader {
   key: string;
@@ -13,7 +11,7 @@ interface DataTableItem {
   [key: string]: unknown;
 }
 
-export interface DataTableProps extends Colors, Sizes, Variants {
+export interface DataTableProps extends DefaultComponent {
   headers: DataTableHeader[];
   data: DataTableItem[];
   sortBy?: string | null;

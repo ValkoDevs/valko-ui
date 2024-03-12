@@ -1,7 +1,4 @@
-import Colors from '#valkoui/types/colors'
-import Shapes from '#valkoui/types/shapes'
-import Sizes from '#valkoui/types/sizes'
-import Variants from '#valkoui/types/variants'
+import { type DefaultComponent } from '#valkoui/types'
 
 export interface MenuItem {
   key: string | number;
@@ -13,7 +10,7 @@ export interface MenuItem {
   onClick?: () => void;
 }
 
-export interface MenuProps extends Colors, Shapes, Variants, Sizes {
+export interface MenuProps extends DefaultComponent {
   items: MenuItem[];
   active: null | string | number;
   floating?: boolean;

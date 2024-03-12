@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { NavbarProps } from '#valkoui/components/Navbar/interfaces'
-import useStyle from './Navbar.styles'
+import { NavbarProps } from '#valkoui/types'
+import { useStyle } from './Navbar.styles'
 
 const props = withDefaults(defineProps<NavbarProps>(), {
   color: 'neutral',

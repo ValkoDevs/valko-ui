@@ -15,7 +15,7 @@ export default defineConfig({
     }),
     typescript2({
       check: false,
-      include: ['src/components/**/*.vue', 'src/components/**/*.ts'],
+      include: ['src/components/**/*.vue', 'src/components/**/*.ts', 'src/types/**/*.ts'],
       tsconfigOverride: {
         compilerOptions: {
           outDir: 'dist',

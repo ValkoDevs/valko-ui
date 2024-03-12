@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { RadioProps } from '#valkoui/components/Radio/interfaces'
-import useStyle from './Radio.styles'
+import { RadioProps } from '#valkoui/types'
 import { VkIcon } from '../'
+import { useStyle } from './Radio.styles'
 
 defineOptions({ name: 'VkRadio' })
 

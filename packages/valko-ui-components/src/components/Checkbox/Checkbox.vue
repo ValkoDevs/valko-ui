@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { CheckboxProps } from '#valkoui/components/Checkbox/interfaces'
-import { VkIcon } from '#valkoui/components/Icon'
-import useStyle from './Checkbox.styles'
+import { VkIcon } from '../'
+import { CheckboxProps } from '#valkoui/types'
+import { useStyle } from './Checkbox.styles'
 
 defineOptions({ name: 'VkCheckbox' })
 

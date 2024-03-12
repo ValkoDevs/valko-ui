@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { BadgeProps } from '#valkoui/components/Badge/interfaces'
-import useStyle from './Badge.styles'
+import { BadgeProps } from '#valkoui/types'
+import { useStyle } from './Badge.styles'
 
 const props = withDefaults(defineProps<BadgeProps>(), {
   content: '',

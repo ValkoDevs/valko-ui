@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ProgressbarProps } from '#valkoui/components/Progressbar/interfaces'
+import { ProgressbarProps } from '#valkoui/types'
 import diagonalStripes from '#valkoui/img/diagonal-stripes.svg'
-import useStyle from './Progressbar.styles'
+import { useStyle } from './Progressbar.styles'
 
 const props = withDefaults(defineProps<ProgressbarProps>(), {
   color: 'primary',

@@ -1,5 +1,6 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkBreadcrumbs, Crumb } from '.'
+import { Crumb } from '#valkoui/types'
+import { VkBreadcrumbs } from '.'
 
 describe('Breadcrumbs component', () => {
   let wrapper: VueWrapper

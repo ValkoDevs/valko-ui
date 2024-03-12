@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { Ref, ref } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-import { CollapseItemProps } from '#valkoui/components/Collapse/CollapseItem/interfaces'
 import { VkIcon } from '../../'
-import useStyle from './CollapseItem.styles'
+import { CollapseItemProps } from '#valkoui/types'
+import { useStyle } from './CollapseItem.styles'
 
 defineOptions({ name: 'VkCollapseItem' })
 

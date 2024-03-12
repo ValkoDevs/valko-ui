@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { DataTableProps } from '#valkoui/components/DataTable/interfaces'
-import useStyle from './DataTable.styles'
+import { DataTableProps } from '#valkoui/types'
+import { useStyle } from './DataTable.styles'
 
 const props = withDefaults(defineProps<DataTableProps>(), {
   color: 'secondary',

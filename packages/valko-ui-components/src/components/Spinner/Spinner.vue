@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { SpinnerProps } from '#valkoui/components/Spinner/interfaces'
+import { SpinnerProps } from '#valkoui/types'
 import { VkIcon } from '..'
-import useStyle from './Spinner.styles'
+import { useStyle } from './Spinner.styles'
 
 defineOptions({ name: 'VkSpinner' })
 
