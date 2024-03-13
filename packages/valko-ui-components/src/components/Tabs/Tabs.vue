@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { Ref, ref, onUpdated, onMounted, nextTick } from 'vue'
-import { TabsProps } from '@/components/Tabs/interfaces'
+import { TabsProps } from '#valkoui/types'
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 import { VkIcon } from '../'
-import useStyle from './Tabs.styles'
+import { useStyle } from './Tabs.styles'
 
 defineOptions({ name: 'VkTabs' })
 
@@ -16,6 +16,7 @@ const props = withDefaults(defineProps<TabsProps>(), {
   vertical: false,
   tabs: () => []
 })
+
 const classes = useStyle(props)
 const cursor: Ref<HTMLElement | null> = ref(null)
 

@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ProgressbarProps } from '@/components/Progressbar/interfaces'
-import diagonalStripes from '@/img/diagonal-stripes.svg'
-import useStyle from './Progressbar.styles'
+import { ProgressbarProps } from '#valkoui/types'
+import diagonalStripes from '#valkoui/img/diagonal-stripes.svg'
+import { useStyle } from './Progressbar.styles'
+
+defineOptions({ name: 'VkProgressbar' })
 
 const props = withDefaults(defineProps<ProgressbarProps>(), {
   color: 'primary',
@@ -14,19 +16,18 @@ const props = withDefaults(defineProps<ProgressbarProps>(), {
   buffer: 0
 })
 
-defineOptions({ name: 'VkProgressbar' })
 const classes = useStyle(props)
 
 const inlineStyles = computed(() => {
-  const sizeMap = {
+  const sizeMap: Record<string, string> = {
     xs: '1rem',
     sm: '1.25rem',
     md: '1.50rem',
     lg: '1.75rem'
   }
   let styles = ''
-  if (props.striped) styles += ` background-image: url("${diagonalStripes}"); background-size: ${sizeMap[props.size]};`
-  if (!props.indeterminate) styles += ` left: ${props.progress - 100}%;`
+  if (props.striped) styles += `background-image: url("${diagonalStripes}"); background-size: ${sizeMap[props.size]};`
+  if (!props.indeterminate) styles += `left: ${props.progress - 100}%;`
 
   return styles.trimStart()
 })

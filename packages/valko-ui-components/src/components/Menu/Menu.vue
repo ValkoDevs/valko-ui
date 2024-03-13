@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { MenuProps, MenuItem } from '@/components/Menu/interfaces'
-import useStyle from './Menu.styles'
+import { MenuProps, MenuItem } from '#valkoui/types'
+import { useStyle } from './Menu.styles'
+
+defineOptions({ name: 'VkMenu' })
 
 const props = withDefaults(defineProps<MenuProps>(), {
   color: 'primary',
@@ -10,7 +12,7 @@ const props = withDefaults(defineProps<MenuProps>(), {
   active: null
 })
 
-const groups = props.items.reduce((acc, item) => {
+const groups = props.items.reduce((acc: Set<string>, item: MenuItem) => {
   if (item.group) acc.add(item.group)
   return acc
 }, new Set(['default']) as Set<string>)
@@ -22,8 +24,6 @@ const onItemClick = (item: MenuItem) => {
   emit('itemClick', item)
   item.onClick?.()
 }
-
-defineOptions({ name: 'VkMenu' })
 
 const classes = useStyle(props)
 </script>

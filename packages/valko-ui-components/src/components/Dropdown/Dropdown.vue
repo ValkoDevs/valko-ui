@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import { DropdownProps, Item } from '@/components/Dropdown/interfaces'
+import { DropdownProps, Item } from '#valkoui/types'
 import { VkIcon, VkButton } from '../'
-import useStyle from './Dropdown.styles'
+import { useStyle } from './Dropdown.styles'
+
+defineOptions({ name: 'VkDropdown' })
 
 const props = withDefaults(defineProps<DropdownProps>(), {
   color: 'primary',
@@ -16,10 +18,9 @@ const props = withDefaults(defineProps<DropdownProps>(), {
   items: () => []
 })
 
-defineOptions({ name: 'VkDropdown' })
+const emit = defineEmits(['itemClick'])
 
 const classes = useStyle(props)
-const emit = defineEmits(['itemClick'])
 
 const onItemClick = (item: Item) => {
   if (item.disabled) return

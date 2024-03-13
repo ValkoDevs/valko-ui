@@ -3,7 +3,7 @@
     "baseUrl": "./",
     "rootDir": ".",
     "paths": {
-      "@/*": [
+      "#valkoui/*": [
         "./src/*"
       ]
     },

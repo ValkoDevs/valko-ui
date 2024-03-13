@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { SpinnerProps } from '@/components/Spinner/interfaces'
+import { SpinnerProps } from '#valkoui/types'
 import { VkIcon } from '..'
-import useStyle from './Spinner.styles'
+import { useStyle } from './Spinner.styles'
 
 defineOptions({ name: 'VkSpinner' })
 
@@ -10,6 +10,7 @@ const props = withDefaults(defineProps<SpinnerProps>(), {
   color: 'primary',
   size: 'md'
 })
+
 const classes = useStyle(props)
 </script>
 

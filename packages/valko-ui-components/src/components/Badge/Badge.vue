@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { BadgeProps } from '@/components/Badge/interfaces'
-import useStyle from './Badge.styles'
+import { BadgeProps } from '#valkoui/types'
+import { useStyle } from './Badge.styles'
+
+defineOptions({ name: 'VkBadge' })
 
 const props = withDefaults(defineProps<BadgeProps>(), {
   content: '',
@@ -13,8 +15,6 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   hidden: false,
   flat: false
 })
-
-defineOptions({ name: 'VkBadge' })
 
 const classes = useStyle(props)
 </script>

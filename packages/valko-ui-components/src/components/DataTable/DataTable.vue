@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { DataTableProps } from '@/components/DataTable/interfaces'
-import useStyle from './DataTable.styles'
+import { DataTableProps } from '#valkoui/types'
+import { useStyle } from './DataTable.styles'
+
+defineOptions({ name: 'VkDataTable' })
 
 const props = withDefaults(defineProps<DataTableProps>(), {
   color: 'secondary',
@@ -17,8 +19,6 @@ const props = withDefaults(defineProps<DataTableProps>(), {
   loading: false,
   shadow: false
 })
-
-defineOptions({ name: 'VkDataTable' })
 
 const classes = useStyle(props)
 </script>

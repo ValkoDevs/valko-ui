@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { NavbarProps } from '@/components/Navbar/interfaces'
-import useStyle from './Navbar.styles'
+import { NavbarProps } from '#valkoui/types'
+import { useStyle } from './Navbar.styles'
+
+defineOptions({ name: 'VkNavbar' })
 
 const props = withDefaults(defineProps<NavbarProps>(), {
   color: 'neutral',
@@ -11,8 +13,6 @@ const props = withDefaults(defineProps<NavbarProps>(), {
   flat: false,
   floating: false
 })
-
-defineOptions({ name: 'VkNavbar' })
 
 const classes = useStyle(props)
 </script>

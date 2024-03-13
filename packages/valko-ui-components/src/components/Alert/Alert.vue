@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { AlertProps } from '@/components/Alert/interfaces'
+import { AlertProps } from '#valkoui/types'
 import { VkIcon, VkButton } from '../'
-import useStyle from './Alert.styles'
+import { useStyle } from './Alert.styles'
+
+defineOptions({ name: 'VkAlert' })
 
 const props = withDefaults(defineProps<AlertProps>(), {
   color: 'primary',
@@ -14,7 +16,6 @@ const props = withDefaults(defineProps<AlertProps>(), {
   flat: false
 })
 
-defineOptions({ name: 'VkAlert' })
 const emit = defineEmits(['close'])
 
 const classes = useStyle(props)

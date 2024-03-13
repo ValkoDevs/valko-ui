@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { InputProps } from '@/components/Input/interfaces'
-import useStyle from './Input.styles'
+import { InputProps } from '#valkoui/types'
+import { useStyle } from './Input.styles'
 
 defineOptions({ name: 'VkInput' })
 
@@ -15,6 +15,7 @@ const props = withDefaults(defineProps<InputProps>(), {
 })
 
 const emit = defineEmits(['update:modelValue', 'focus', 'leftIconClick', 'rightIconClick'])
+
 const inputId = `input-${Math.random().toString(36).substr(2, 7)}`
 const inputRef = ref<HTMLInputElement | null>(null)
 

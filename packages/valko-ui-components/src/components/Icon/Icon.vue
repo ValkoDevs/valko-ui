@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { IconProps } from '@/components/Icon/interfaces'
+import { IconProps } from '#valkoui/types'
 
 defineOptions({ name: 'VkIcon' })
 
 const props = defineProps<IconProps>()
-
 </script>
 
 <template>
