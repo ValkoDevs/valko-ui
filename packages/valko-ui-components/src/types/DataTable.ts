@@ -1,12 +1,12 @@
 import { type DefaultComponent } from '#valkoui/types'
 
-interface DataTableHeader {
+export interface DataTableHeader {
   key: string;
   label: string;
   sortable: boolean;
 }
 
-interface DataTableItem {
+export interface DataTableItem {
   key: string;
   [key: string]: unknown;
 }

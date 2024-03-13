@@ -4,7 +4,6 @@ import { IconProps } from '#valkoui/types'
 defineOptions({ name: 'VkIcon' })
 
 const props = defineProps<IconProps>()
-
 </script>
 
 <template>

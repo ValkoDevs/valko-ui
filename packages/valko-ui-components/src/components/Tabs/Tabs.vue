@@ -16,6 +16,7 @@ const props = withDefaults(defineProps<TabsProps>(), {
   vertical: false,
   tabs: () => []
 })
+
 const classes = useStyle(props)
 const cursor: Ref<HTMLElement | null> = ref(null)
 

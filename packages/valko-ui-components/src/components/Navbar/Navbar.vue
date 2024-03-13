@@ -2,6 +2,8 @@
 import { NavbarProps } from '#valkoui/types'
 import { useStyle } from './Navbar.styles'
 
+defineOptions({ name: 'VkNavbar' })
+
 const props = withDefaults(defineProps<NavbarProps>(), {
   color: 'neutral',
   size: 'md',
@@ -11,8 +13,6 @@ const props = withDefaults(defineProps<NavbarProps>(), {
   flat: false,
   floating: false
 })
-
-defineOptions({ name: 'VkNavbar' })
 
 const classes = useStyle(props)
 </script>

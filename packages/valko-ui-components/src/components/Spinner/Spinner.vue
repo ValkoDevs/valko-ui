@@ -10,6 +10,7 @@ const props = withDefaults(defineProps<SpinnerProps>(), {
   color: 'primary',
   size: 'md'
 })
+
 const classes = useStyle(props)
 </script>
 

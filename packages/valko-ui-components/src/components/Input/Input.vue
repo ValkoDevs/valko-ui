@@ -15,6 +15,7 @@ const props = withDefaults(defineProps<InputProps>(), {
 })
 
 const emit = defineEmits(['update:modelValue', 'focus', 'leftIconClick', 'rightIconClick'])
+
 const inputId = `input-${Math.random().toString(36).substr(2, 7)}`
 const inputRef = ref<HTMLInputElement | null>(null)
 

@@ -4,14 +4,14 @@ import { VkIcon } from '../'
 import { AvatarProps } from '#valkoui/types'
 import { useStyle } from './Avatar.styles'
 
+defineOptions({ name: 'VkAvatar' })
+
 const props = withDefaults(defineProps<AvatarProps>(), {
   color: 'primary',
   variant: 'filled',
   size: 'md',
   shape: 'soft'
 })
-
-defineOptions({ name: 'VkAvatar' })
 
 const classes = useStyle(props)
 const verifiedSrc: Ref<string | null> = ref(null)

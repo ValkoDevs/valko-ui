@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from 'vue'
-import { SelectProps } from '#valkoui/types'
+import { SelectProps, SelectOption } from '#valkoui/types'
 import { VkInput, VkIcon } from '../'
 import { useStyle } from './Select.styles'
 
@@ -16,11 +16,12 @@ const props = withDefaults(defineProps<SelectProps>(), {
 })
 
 const emit = defineEmits(['update:modelValue'])
+
 const classes = useStyle(props)
 const select = ref(null)
 const isOpen = ref(false)
 
-const showMap: Record<string, string> = props.options.reduce((acc, opt) => ({
+const showMap: Record<string, string> = props.options.reduce((acc: Record<string, string>, opt: SelectOption) => ({
   ...acc,
   [`${opt.value}`]: opt.label
 }), { 'undefined': '' })

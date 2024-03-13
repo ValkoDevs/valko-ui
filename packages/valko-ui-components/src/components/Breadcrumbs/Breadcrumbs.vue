@@ -3,6 +3,8 @@ import { BreadcrumbsProps, Crumb } from '#valkoui/types'
 import { VkIcon } from '../'
 import { useStyle } from './Breadcrumbs.styles'
 
+defineOptions({ name: 'VkBreadcrumbs' })
+
 const props = withDefaults(defineProps<BreadcrumbsProps>(), {
   color: 'primary',
   variant: 'filled',
@@ -12,11 +14,10 @@ const props = withDefaults(defineProps<BreadcrumbsProps>(), {
   crumbs: () => []
 })
 
-defineOptions({ name: 'VkBreadcrumbs' })
+const emit = defineEmits(['crumbClick'])
 
 const classes = useStyle(props)
 const lastCrumbKey = props.crumbs[props.crumbs.length - 1]?.key
-const emit = defineEmits(['crumbClick'])
 
 const onCrumbClick = (item: Crumb) => {
   if (item.disabled) return

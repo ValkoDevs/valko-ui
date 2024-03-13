@@ -2,6 +2,8 @@
 import { DataTableProps } from '#valkoui/types'
 import { useStyle } from './DataTable.styles'
 
+defineOptions({ name: 'VkDataTable' })
+
 const props = withDefaults(defineProps<DataTableProps>(), {
   color: 'secondary',
   variant: 'filled',
@@ -17,8 +19,6 @@ const props = withDefaults(defineProps<DataTableProps>(), {
   loading: false,
   shadow: false
 })
-
-defineOptions({ name: 'VkDataTable' })
 
 const classes = useStyle(props)
 </script>

@@ -96,6 +96,18 @@ describe('Modal component', () => {
         modal = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
         expect(modal.find('.vk-modal__title').text()).toContain('Modal Title')
       })
+
+      it('should be closable and not have title', async () => {
+        wrapper = mount(VkModal, {
+          props: {
+            isOpen: true,
+            closable: true
+          }
+        })
+        await nextTick()
+        modal = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
+        expect(modal.find('i.ti.ti-x').exists()).toBe(true)
+      })
     })
 
     describe('When shape prop changes', () => {

@@ -13,8 +13,10 @@ const props = withDefaults(defineProps<RadioProps>(), {
   readonly: false,
   position: false
 })
-const classes = useStyle(props)
+
 const emit = defineEmits(['update:modelValue'])
+
+const classes = useStyle(props)
 
 const onClick = () => {
   if (!props.disabled && !props.readonly) emit('update:modelValue', props.value)

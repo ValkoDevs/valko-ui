@@ -16,6 +16,7 @@ const props = withDefaults(defineProps<PaginationProps>(), {
 })
 
 const emit = defineEmits(['update:modelValue'])
+
 const classes = useStyle(props)
 const isDarkMode = useDarkMode()
 const buttonColor = computed(() => isDarkMode.value ? 'light' : 'dark')

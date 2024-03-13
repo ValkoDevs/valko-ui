@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 import { ModalProps } from '#valkoui/types'
 import { VkButton, VkIcon } from '../'
 import { useStyle } from './Modal.styles'
+
+defineOptions({ name: 'VkModal' })
 
 const props = withDefaults(defineProps<ModalProps>(), {
   size: 'md',
@@ -12,10 +15,10 @@ const props = withDefaults(defineProps<ModalProps>(), {
   flat: false
 })
 
-defineOptions({ name: 'VkModal' })
+const emit = defineEmits(['close'])
 
 const classes = useStyle(props)
-const emit = defineEmits(['close'])
+const containerRef = ref(null)
 
 const closeModal = () => { emit('close') }
 </script>
@@ -29,6 +32,7 @@ const closeModal = () => { emit('close') }
     <Dialog
       @close="closeModal"
       :class="classes.dialog"
+      :initial-focus="containerRef"
     >
       <transition-child
         as="template"
@@ -44,7 +48,10 @@ const closeModal = () => { emit('close') }
         />
       </transition-child>
 
-      <div :class="classes.container">
+      <div
+        :class="classes.container"
+        ref="containerRef"
+      >
         <div
           :class="classes.content"
         >

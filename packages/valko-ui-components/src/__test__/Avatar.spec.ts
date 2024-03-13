@@ -12,10 +12,13 @@ describe('Avatar component', () => {
   })
   describe('Props', () => {
     describe('With default props', () => {
-      beforeEach(() => {
+      beforeEach(async () => {
         wrapper = mount(VkAvatar, {
-          src: 'example.url'
+          props: {
+            src: 'example.url'
+          }
         })
+        await nextTick()
       })
 
       it('should render', () => {

@@ -32,6 +32,10 @@ describe('Avatar component', () => {
       it('should not be flat', () => {
         expect(wrapper.find('.shadow-none').exists()).toBe(false)
       })
+
+      it('should not be dot', () => {
+        expect(wrapper.find('.vk-badge__content').classes()).not.toContain('size-4')
+      })
     })
 
     describe('When color prop changes', () => {
@@ -190,16 +194,28 @@ describe('Avatar component', () => {
       })
     })
 
-    describe('Slots', () => {
-      it('should display the content given', () => {
+    describe('When prop dot changes', () => {
+      it('should be dot when is true', () => {
         wrapper = mount(VkBadge, {
-          slots: {
-            default: 'Hello World'
+          props: {
+            dot: true
           }
         })
 
-        expect(wrapper.find('.vk-badge').text()).toContain('Hello World')
+        expect(wrapper.find('.vk-badge__content').classes()).toContain('size-4')
       })
+    })
+  })
+
+  describe('Slots', () => {
+    it('should display the content given', () => {
+      wrapper = mount(VkBadge, {
+        slots: {
+          default: 'Hello World'
+        }
+      })
+
+      expect(wrapper.find('.vk-badge').text()).toContain('Hello World')
     })
   })
 })
