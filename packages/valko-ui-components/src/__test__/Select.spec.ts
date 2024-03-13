@@ -1,6 +1,6 @@
 import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkSelect } from '.'
+import { VkSelect } from '#valkoui/components'
 
 describe('Select component', () => {
   const options = [

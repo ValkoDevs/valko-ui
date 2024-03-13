@@ -1,16 +1,16 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkBadge } from '.'
+import { VkProgressbar } from '#valkoui/components'
 
-describe('Avatar component', () => {
+describe('Progressbar component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(() => {
-        wrapper = mount(VkBadge, {})
+        wrapper = mount(VkProgressbar, {})
       })
 
       it('should render', () => {
-        expect(wrapper.find('.vk-badge').exists()).toBe(true)
+        expect(wrapper.find('.vk-progressbar__container').exists()).toBe(true)
       })
 
       it('should be color primary', () => {
@@ -18,25 +18,33 @@ describe('Avatar component', () => {
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-sm')
+        expect(wrapper.find('.text-base').exists()).toBe(true)
+      })
+
+      it('should be variant filled', () => {
+        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
         expect(wrapper.find('.rounded-lg').exists()).toBe(true)
       })
 
-      it('should be displayed on top-right', () => {
-        expect(wrapper.find('.right-0').exists()).toBe(true)
+      it('should not be indeterminate', () => {
+        expect(wrapper.find('.animate-progress').exists()).toBe(false)
       })
 
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
+      it('should not be striped', () => {
+        expect(wrapper.find('.animate-cicle').exists()).toBe(false)
+      })
+
+      it('should not have buffer', () => {
+        expect(wrapper.find('.vk-progressbar__buffer').exists()).toBe(false)
       })
     })
 
     describe('When color prop changes', () => {
       it('should be color primary when props.color is primary', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             color: 'primary'
           }
@@ -46,7 +54,7 @@ describe('Avatar component', () => {
       })
 
       it('should be color secondary when props.color is secondary', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             color: 'secondary'
           }
@@ -56,7 +64,7 @@ describe('Avatar component', () => {
       })
 
       it('should be color success when props.color is success', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             color: 'success'
           }
@@ -66,7 +74,7 @@ describe('Avatar component', () => {
       })
 
       it('should be color info when props.color is info', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             color: 'info'
           }
@@ -76,7 +84,7 @@ describe('Avatar component', () => {
       })
 
       it('should be color warning when props.color is warning', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             color: 'warning'
           }
@@ -86,7 +94,7 @@ describe('Avatar component', () => {
       })
 
       it('should be color error when props.color is error', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             color: 'error'
           }
@@ -96,7 +104,7 @@ describe('Avatar component', () => {
       })
 
       it('should be color light when props.color is light', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             color: 'light'
           }
@@ -106,7 +114,7 @@ describe('Avatar component', () => {
       })
 
       it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             color: 'dark'
           }
@@ -118,7 +126,7 @@ describe('Avatar component', () => {
 
     describe('When shape prop changes', () => {
       it('should be rounded when props.shape is rounded', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             shape: 'rounded'
           }
@@ -128,7 +136,7 @@ describe('Avatar component', () => {
       })
 
       it('should be soft when props.shape is soft', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             shape: 'soft'
           }
@@ -138,7 +146,7 @@ describe('Avatar component', () => {
       })
 
       it('should be square when props.shape is square', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             shape: 'square'
           }
@@ -146,59 +154,107 @@ describe('Avatar component', () => {
 
         expect(wrapper.find('.rounded-none').exists()).toBe(true)
       })
+
+      it('should be line when props.shape is line', () => {
+        wrapper = mount(VkProgressbar, {
+          props: {
+            shape: 'line'
+          }
+        })
+
+        expect(wrapper.find('.hidden').exists()).toBe(true)
+      })
     })
 
     describe('When size prop changes', () => {
       it('should be xs when props.size is xs', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             size: 'xs'
           }
         })
 
-        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-[0.6321875rem]')
+        expect(wrapper.find('.text-xs').exists()).toBe(true)
       })
 
       it('should be sm when props.size is sm', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             size: 'sm'
           }
         })
 
-        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-[0.74375rem]')
+        expect(wrapper.find('.text-sm').exists()).toBe(true)
       })
 
       it('should be md when props.size is md', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             size: 'md'
           }
         })
 
-        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-sm')
+        expect(wrapper.find('.text-base').exists()).toBe(true)
       })
 
       it('should be lg when props.size is lg', () => {
-        wrapper = mount(VkBadge, {
+        wrapper = mount(VkProgressbar, {
           props: {
             size: 'lg'
           }
         })
 
-        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-[1.00625rem]')
+        expect(wrapper.find('.text-lg').exists()).toBe(true)
       })
     })
 
-    describe('Slots', () => {
-      it('should display the content given', () => {
-        wrapper = mount(VkBadge, {
-          slots: {
-            default: 'Hello World'
+    describe('When variant prop changes', () => {
+      it('should be filled when props.size is filled', () => {
+        wrapper = mount(VkProgressbar, {
+          props: {
+            variant: 'filled'
           }
         })
 
-        expect(wrapper.find('.vk-badge').text()).toContain('Hello World')
+        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
+      })
+
+      it('should be outlined when props.size is outlined', () => {
+        wrapper = mount(VkProgressbar, {
+          props: {
+            variant: 'outlined'
+          }
+        })
+
+        expect(wrapper.find('.border-2').exists()).toBe(true)
+      })
+
+      it('should be ghost when props.size is ghost', () => {
+        wrapper = mount(VkProgressbar, {
+          props: {
+            variant: 'ghost'
+          }
+        })
+
+        expect(wrapper.find('.bg-transparent').exists()).toBe(true)
+      })
+    })
+
+    describe('When buffer prop changes', () => {
+      it('should have buffer when props.buffer is set', () => {
+        wrapper = mount(VkProgressbar, {
+          props: {
+            buffer: 20
+          }
+        })
+
+        expect(wrapper.find('.vk-progressbar__buffer').exists()).toBe(true)
+      })
+
+      it('should not have buffer when props.buffer is not set', () => {
+        wrapper = mount(VkProgressbar, {})
+
+        expect(wrapper.find('.vk-progressbar__buffer').exists()).toBe(false)
       })
     })
   })

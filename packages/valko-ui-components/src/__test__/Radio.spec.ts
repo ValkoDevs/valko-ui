@@ -1,20 +1,20 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkButton } from '.'
+import { VkRadio } from '#valkoui/components'
 
-describe('Button component', () => {
+describe('Radio component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(() => {
-        wrapper = mount(VkButton, {})
+        wrapper = mount(VkRadio, {})
       })
 
       it('should render', () => {
-        expect(wrapper.find('.vk-button__base').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio__container').exists()).toBe(true)
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-600').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary-500')
       })
 
       it('should be size md', () => {
@@ -22,23 +22,23 @@ describe('Button component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.text-white').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary-500')
       })
 
       it('should be shape soft', () => {
         expect(wrapper.find('.rounded').exists()).toBe(true)
       })
 
+      it('should have label on left', () => {
+        expect(wrapper.find('.ml-2').exists()).toBe(true)
+      })
+
+      it('Should not be selected', () => {
+        expect(wrapper.find('.vk-radio__icon').exists()).toBe(false)
+      })
+
       it('should not be flat', () => {
         expect(wrapper.find('.shadow-none').exists()).toBe(false)
-      })
-
-      it('should not be block', () => {
-        expect(wrapper.find('.w-full').exists()).toBe(false)
-      })
-
-      it('should not be condensed', () => {
-        expect(wrapper.find('.py-0').exists()).toBe(false)
       })
 
       it('should not be disabled', () => {
@@ -48,89 +48,89 @@ describe('Button component', () => {
 
     describe('When color prop changes', () => {
       it('should be color primary when props.color is primary', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             color: 'primary'
           }
         })
 
-        expect(wrapper.find('.bg-primary-600').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary-500')
       })
 
       it('should be color secondary when props.color is secondary', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             color: 'secondary'
           }
         })
 
-        expect(wrapper.find('.bg-secondary-600').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-secondary-500')
       })
 
       it('should be color success when props.color is success', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             color: 'success'
           }
         })
 
-        expect(wrapper.find('.bg-success-600').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-success-500')
       })
 
       it('should be color info when props.color is info', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             color: 'info'
           }
         })
 
-        expect(wrapper.find('.bg-info-600').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-info-500')
       })
 
       it('should be color warning when props.color is warning', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             color: 'warning'
           }
         })
 
-        expect(wrapper.find('.bg-warning-600').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-warning-500')
       })
 
       it('should be color error when props.color is error', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             color: 'error'
           }
         })
 
-        expect(wrapper.find('.bg-error-600').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-error-500')
       })
 
       it('should be color light when props.color is light', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             color: 'light'
           }
         })
 
-        expect(wrapper.find('.bg-light-2').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-light-1')
       })
 
       it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             color: 'dark'
           }
         })
 
-        expect(wrapper.find('.bg-dark-4').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-dark-5')
       })
     })
 
     describe('When shape prop changes', () => {
       it('should be rounded when props.shape is rounded', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             shape: 'rounded'
           }
@@ -140,7 +140,7 @@ describe('Button component', () => {
       })
 
       it('should be soft when props.shape is soft', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             shape: 'soft'
           }
@@ -150,7 +150,7 @@ describe('Button component', () => {
       })
 
       it('should be square when props.shape is square', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             shape: 'square'
           }
@@ -162,7 +162,7 @@ describe('Button component', () => {
 
     describe('When size prop changes', () => {
       it('should be xs when props.size is xs', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             size: 'xs'
           }
@@ -172,7 +172,7 @@ describe('Button component', () => {
       })
 
       it('should be sm when props.size is sm', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             size: 'sm'
           }
@@ -182,7 +182,7 @@ describe('Button component', () => {
       })
 
       it('should be md when props.size is md', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             size: 'md'
           }
@@ -192,7 +192,7 @@ describe('Button component', () => {
       })
 
       it('should be lg when props.size is lg', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             size: 'lg'
           }
@@ -204,61 +204,63 @@ describe('Button component', () => {
 
     describe('When variant prop changes', () => {
       it('should be filled when props.size is filled', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             variant: 'filled'
           }
         })
 
-        expect(wrapper.find('.text-white').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary-500')
       })
 
       it('should be outlined when props.size is outlined', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
-            variant: 'outlined'
+            variant: 'outlined',
+            modelValue: 'hello',
+            value: 'hello'
           }
         })
 
-        expect(wrapper.find('.border-2').exists()).toBe(true)
+        expect(wrapper.find('.text-primary-500').exists()).toBe(true)
       })
 
       it('should be ghost when props.size is ghost', () => {
-        wrapper = mount(VkButton, {
+        wrapper = mount(VkRadio, {
           props: {
             variant: 'ghost'
           }
         })
 
-        expect(wrapper.find('.shadow-none').exists()).toBe(true)
-      })
-
-      it('should be link when props.size is link', () => {
-        wrapper = mount(VkButton, {
-          props: {
-            variant: 'link'
-          }
-        })
-
-        expect(wrapper.find('.bg-transparent').exists()).toBe(true)
+        expect(wrapper.find('.border-0').exists()).toBe(true)
       })
     })
   })
 
-  describe('With slots', () => {
+  describe('Helpertext', () => {
     it('should be empty', () => {
-      const wrapper = mount(VkButton, {})
+      const wrapper = mount(VkRadio, {})
 
-      expect(wrapper.find('.vk-button__base').text()).toContain('')
+      expect(wrapper.find('span').exists()).toBe(false)
+    })
+
+    it('should have a helpertext', () => {
+      const wrapper = mount(VkRadio, {
+        props: {
+          helpertext: 'Hello World'
+        }
+      })
+
+      expect(wrapper.find('.inline-block').text()).toContain('Hello World')
     })
   })
 
   describe('Emits', () => {
-    it('should emit click event', () => {
-      const wrapper = mount(VkButton, {})
+    it('should emit update event', () => {
+      const wrapper = mount(VkRadio, {})
 
-      wrapper.find('.vk-button__base').trigger('click')
-      expect(wrapper.emitted()).toHaveProperty('click')
+      wrapper.find('.vk-radio__container').trigger('click')
+      expect(wrapper.emitted('update:modelValue'))
     })
   })
 })

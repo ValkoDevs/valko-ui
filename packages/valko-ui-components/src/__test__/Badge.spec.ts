@@ -1,25 +1,16 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { nextTick } from 'vue'
-import { VkAvatar } from '.'
+import { VkBadge } from '#valkoui/components'
 
 describe('Avatar component', () => {
   let wrapper: VueWrapper
-  beforeAll(() => {
-    Image.prototype.decode = async () => this
-  })
-  afterAll(() => {
-    Image.prototype.decode = undefined
-  })
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(() => {
-        wrapper = mount(VkAvatar, {
-          src: 'example.url'
-        })
+        wrapper = mount(VkBadge, {})
       })
 
       it('should render', () => {
-        expect(wrapper.find('.vk-avatar').exists()).toBe(true)
+        expect(wrapper.find('.vk-badge').exists()).toBe(true)
       })
 
       it('should be color primary', () => {
@@ -27,15 +18,15 @@ describe('Avatar component', () => {
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('.text-5xl').exists()).toBe(true)
-      })
-
-      it('should be variant filled', () => {
-        expect(wrapper.find('.text-white').exists()).toBe(true)
+        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-sm')
       })
 
       it('should be shape soft', () => {
         expect(wrapper.find('.rounded-lg').exists()).toBe(true)
+      })
+
+      it('should be displayed on top-right', () => {
+        expect(wrapper.find('.right-0').exists()).toBe(true)
       })
 
       it('should not be flat', () => {
@@ -45,9 +36,8 @@ describe('Avatar component', () => {
 
     describe('When color prop changes', () => {
       it('should be color primary when props.color is primary', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             color: 'primary'
           }
         })
@@ -56,9 +46,8 @@ describe('Avatar component', () => {
       })
 
       it('should be color secondary when props.color is secondary', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             color: 'secondary'
           }
         })
@@ -67,9 +56,8 @@ describe('Avatar component', () => {
       })
 
       it('should be color success when props.color is success', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             color: 'success'
           }
         })
@@ -78,9 +66,8 @@ describe('Avatar component', () => {
       })
 
       it('should be color info when props.color is info', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             color: 'info'
           }
         })
@@ -89,9 +76,8 @@ describe('Avatar component', () => {
       })
 
       it('should be color warning when props.color is warning', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             color: 'warning'
           }
         })
@@ -100,9 +86,8 @@ describe('Avatar component', () => {
       })
 
       it('should be color error when props.color is error', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             color: 'error'
           }
         })
@@ -111,9 +96,8 @@ describe('Avatar component', () => {
       })
 
       it('should be color light when props.color is light', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             color: 'light'
           }
         })
@@ -122,9 +106,8 @@ describe('Avatar component', () => {
       })
 
       it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             color: 'dark'
           }
         })
@@ -135,9 +118,8 @@ describe('Avatar component', () => {
 
     describe('When shape prop changes', () => {
       it('should be rounded when props.shape is rounded', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             shape: 'rounded'
           }
         })
@@ -146,9 +128,8 @@ describe('Avatar component', () => {
       })
 
       it('should be soft when props.shape is soft', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             shape: 'soft'
           }
         })
@@ -157,9 +138,8 @@ describe('Avatar component', () => {
       })
 
       it('should be square when props.shape is square', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             shape: 'square'
           }
         })
@@ -170,115 +150,55 @@ describe('Avatar component', () => {
 
     describe('When size prop changes', () => {
       it('should be xs when props.size is xs', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             size: 'xs'
           }
         })
 
-        expect(wrapper.find('.text-xl').exists()).toBe(true)
+        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-[0.6321875rem]')
       })
 
       it('should be sm when props.size is sm', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             size: 'sm'
           }
         })
 
-        expect(wrapper.find('.text-3xl').exists()).toBe(true)
+        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-[0.74375rem]')
       })
 
       it('should be md when props.size is md', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             size: 'md'
           }
         })
 
-        expect(wrapper.find('.text-5xl').exists()).toBe(true)
+        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-sm')
       })
 
       it('should be lg when props.size is lg', () => {
-        wrapper = mount(VkAvatar, {
+        wrapper = mount(VkBadge, {
           props: {
-            src: 'example.url',
             size: 'lg'
           }
         })
 
-        expect(wrapper.find('.text-6xl').exists()).toBe(true)
+        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-[1.00625rem]')
       })
     })
 
-    describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
-        wrapper = mount(VkAvatar, {
-          props: {
-            src: 'example.url',
-            variant: 'filled'
+    describe('Slots', () => {
+      it('should display the content given', () => {
+        wrapper = mount(VkBadge, {
+          slots: {
+            default: 'Hello World'
           }
         })
 
-        expect(wrapper.find('.text-white').exists()).toBe(true)
-      })
-
-      it('should be outlined when props.size is outlined', () => {
-        wrapper = mount(VkAvatar, {
-          props: {
-            src: 'example.url',
-            variant: 'outlined'
-          }
-        })
-
-        expect(wrapper.find('.border-2').exists()).toBe(true)
-      })
-
-      it('should be ghost when props.size is ghost', () => {
-        wrapper = mount(VkAvatar, {
-          props: {
-            src: 'example.url',
-            variant: 'ghost'
-          }
-        })
-
-        expect(wrapper.find('.vk-avatar').classes()).toContain('bg-primary-500/[.20]')
-      })
-    })
-
-    describe('When props name and props src are defined or not', () => {
-      it('should display an img with the given src', async () => {
-        wrapper = mount(VkAvatar, {
-          props: {
-            src: 'example.url'
-          }
-        })
-        await nextTick()
-        expect(wrapper.find('img').attributes('src')).toBe('example.url')
-      })
-
-      it('should display the initials of the given name if there is no src', () => {
-        wrapper = mount(VkAvatar, {
-          props: {
-            src: 'example.url',
-            name: 'Brandon Coper'
-          }
-        })
-
-        expect(wrapper.find('span').text()).toContain('BC')
-      })
-
-      it('should display an user icon if there is no src or name given', () => {
-        wrapper = mount(VkAvatar, {
-          props: {
-            src: 'example.url'
-          }
-        })
-
-        expect(wrapper.find('i.ti.ti-user').exists()).toBe(true)
+        expect(wrapper.find('.vk-badge').text()).toContain('Hello World')
       })
     })
   })

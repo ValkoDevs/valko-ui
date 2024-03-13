@@ -1,20 +1,20 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkCheckbox } from '.'
+import { VkButton } from '#valkoui/components'
 
-describe('Checkbox component', () => {
+describe('Button component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(() => {
-        wrapper = mount(VkCheckbox, {})
+        wrapper = mount(VkButton, {})
       })
 
       it('should render', () => {
-        expect(wrapper.find('.vk-checkbox__container').exists()).toBe(true)
+        expect(wrapper.find('.vk-button__base').exists()).toBe(true)
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.bg-primary-600').exists()).toBe(true)
       })
 
       it('should be size md', () => {
@@ -22,19 +22,23 @@ describe('Checkbox component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.text-white').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
         expect(wrapper.find('.rounded').exists()).toBe(true)
       })
 
-      it('should have label on left', () => {
-        expect(wrapper.find('.ml-2').exists()).toBe(true)
-      })
-
       it('should not be flat', () => {
         expect(wrapper.find('.shadow-none').exists()).toBe(false)
+      })
+
+      it('should not be block', () => {
+        expect(wrapper.find('.w-full').exists()).toBe(false)
+      })
+
+      it('should not be condensed', () => {
+        expect(wrapper.find('.py-0').exists()).toBe(false)
       })
 
       it('should not be disabled', () => {
@@ -44,89 +48,89 @@ describe('Checkbox component', () => {
 
     describe('When color prop changes', () => {
       it('should be color primary when props.color is primary', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             color: 'primary'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.bg-primary-600').exists()).toBe(true)
       })
 
       it('should be color secondary when props.color is secondary', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             color: 'secondary'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-secondary-500')
+        expect(wrapper.find('.bg-secondary-600').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             color: 'success'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-success-500')
+        expect(wrapper.find('.bg-success-600').exists()).toBe(true)
       })
 
       it('should be color info when props.color is info', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             color: 'info'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-info-500')
+        expect(wrapper.find('.bg-info-600').exists()).toBe(true)
       })
 
       it('should be color warning when props.color is warning', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             color: 'warning'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-warning-500')
+        expect(wrapper.find('.bg-warning-600').exists()).toBe(true)
       })
 
       it('should be color error when props.color is error', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             color: 'error'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-error-500')
+        expect(wrapper.find('.bg-error-600').exists()).toBe(true)
       })
 
       it('should be color light when props.color is light', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             color: 'light'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-light-1')
+        expect(wrapper.find('.bg-light-2').exists()).toBe(true)
       })
 
       it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             color: 'dark'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-dark-5')
+        expect(wrapper.find('.bg-dark-4').exists()).toBe(true)
       })
     })
 
     describe('When shape prop changes', () => {
       it('should be rounded when props.shape is rounded', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             shape: 'rounded'
           }
@@ -136,7 +140,7 @@ describe('Checkbox component', () => {
       })
 
       it('should be soft when props.shape is soft', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             shape: 'soft'
           }
@@ -146,7 +150,7 @@ describe('Checkbox component', () => {
       })
 
       it('should be square when props.shape is square', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             shape: 'square'
           }
@@ -158,7 +162,7 @@ describe('Checkbox component', () => {
 
     describe('When size prop changes', () => {
       it('should be xs when props.size is xs', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             size: 'xs'
           }
@@ -168,7 +172,7 @@ describe('Checkbox component', () => {
       })
 
       it('should be sm when props.size is sm', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             size: 'sm'
           }
@@ -178,7 +182,7 @@ describe('Checkbox component', () => {
       })
 
       it('should be md when props.size is md', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             size: 'md'
           }
@@ -188,7 +192,7 @@ describe('Checkbox component', () => {
       })
 
       it('should be lg when props.size is lg', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             size: 'lg'
           }
@@ -200,83 +204,61 @@ describe('Checkbox component', () => {
 
     describe('When variant prop changes', () => {
       it('should be filled when props.size is filled', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             variant: 'filled'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.text-white').exists()).toBe(true)
       })
 
       it('should be outlined when props.size is outlined', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             variant: 'outlined'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:border-primary-500')
+        expect(wrapper.find('.border-2').exists()).toBe(true)
       })
 
       it('should be ghost when props.size is ghost', () => {
-        wrapper = mount(VkCheckbox, {
+        wrapper = mount(VkButton, {
           props: {
             variant: 'ghost'
           }
         })
 
-        expect(wrapper.find('.border-0')).toBeDefined()
+        expect(wrapper.find('.shadow-none').exists()).toBe(true)
+      })
+
+      it('should be link when props.size is link', () => {
+        wrapper = mount(VkButton, {
+          props: {
+            variant: 'link'
+          }
+        })
+
+        expect(wrapper.find('.bg-transparent').exists()).toBe(true)
       })
     })
   })
 
-  describe('Icon', () => {
-    it('should show check icon as default', () => {
-      wrapper = mount(VkCheckbox, {
-        props: {
-          modelValue: true
-        }
-      })
-
-      expect(wrapper.find('i.ti.ti-check').exists()).toBe(true)
-    })
-
-    it('should show indeterminate icon', () => {
-      wrapper = mount(VkCheckbox, {
-        props: {
-          indeterminate: true
-        }
-      })
-
-      expect(wrapper.find('i.ti.ti-minus').exists()).toBe(true)
-    })
-  })
-
-  describe('Helpertext', () => {
+  describe('With slots', () => {
     it('should be empty', () => {
-      const wrapper = mount(VkCheckbox, {})
+      const wrapper = mount(VkButton, {})
 
-      expect(wrapper.find('span').exists()).toBe(false)
-    })
-
-    it('should have a helpertext', () => {
-      const wrapper = mount(VkCheckbox, {
-        props: {
-          helpertext: 'Hello World'
-        }
-      })
-
-      expect(wrapper.find('.inline-block').text()).toContain('Hello World')
+      expect(wrapper.find('.vk-button__base').text()).toContain('')
     })
   })
 
   describe('Emits', () => {
-    it('should emit update event', () => {
-      const wrapper = mount(VkCheckbox, {})
+    it('should emit click event', () => {
+      const wrapper = mount(VkButton, {})
 
-      wrapper.find('.vk-checkbox__container').trigger('click')
-      expect(wrapper.emitted('update:modelValue'))
+      wrapper.find('.vk-button__base').trigger('click')
+      expect(wrapper.emitted()).toHaveProperty('click')
     })
   })
 })

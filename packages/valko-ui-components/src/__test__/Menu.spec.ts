@@ -1,6 +1,6 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { MenuItem } from '#valkoui/types'
-import { VkMenu } from '.'
+import { VkMenu } from '#valkoui/components'
 
 describe('Menu component', () => {
   const menuItems: MenuItem[] = [

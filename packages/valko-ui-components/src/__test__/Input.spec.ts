@@ -1,16 +1,16 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkTextarea } from '.'
+import { VkInput } from '#valkoui/components'
 
-describe('Textarea component', () => {
+describe('Input component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(() => {
-        wrapper = mount(VkTextarea, {})
+        wrapper = mount(VkInput, {})
       })
 
       it('should render', () => {
-        expect(wrapper.find('.vk-textarea__container').exists()).toBe(true)
+        expect(wrapper.find('.vk-input__container').exists()).toBe(true)
       })
 
       it('should be color primary', () => {
@@ -30,7 +30,7 @@ describe('Textarea component', () => {
       })
 
       it('should be type text', () => {
-        expect(wrapper.find('.vk-textarea__container').exists()).toBe(true)
+        expect(wrapper.find('.vk-input__container').exists()).toBe(true)
       })
 
       it('should not be disabled', () => {
@@ -42,13 +42,13 @@ describe('Textarea component', () => {
       })
 
       it('should not have helpertext', () => {
-        expect(wrapper.find('.vk-textarea__helper').exists()).toBe(false)
+        expect(wrapper.find('vk-input__helper').exists()).toBe(false)
       })
     })
 
     describe('When color prop changes', () => {
       it('should be color primary when props.color is primary', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             color: 'primary'
           }
@@ -58,7 +58,7 @@ describe('Textarea component', () => {
       })
 
       it('should be color secondary when props.color is secondary', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             color: 'secondary'
           }
@@ -68,7 +68,7 @@ describe('Textarea component', () => {
       })
 
       it('should be color success when props.color is success', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             color: 'success'
           }
@@ -78,7 +78,7 @@ describe('Textarea component', () => {
       })
 
       it('should be color info when props.color is info', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             color: 'info'
           }
@@ -88,7 +88,7 @@ describe('Textarea component', () => {
       })
 
       it('should be color warning when props.color is warning', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             color: 'warning'
           }
@@ -98,7 +98,7 @@ describe('Textarea component', () => {
       })
 
       it('should be color error when props.color is error', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             color: 'error'
           }
@@ -108,39 +108,39 @@ describe('Textarea component', () => {
       })
 
       it('should be color light when props.color is light', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             color: 'light'
           }
         })
 
-        expect(wrapper.find('.text-light-2').exists()).toBe(true)
+        expect(wrapper.find('.text-white').exists()).toBe(true)
       })
 
       it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             color: 'dark'
           }
         })
 
-        expect(wrapper.find('.text-dark-4').exists()).toBe(true)
+        expect(wrapper.find('.text-black').exists()).toBe(true)
       })
     })
 
     describe('When shape prop changes', () => {
       it('should be rounded when props.shape is rounded', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             shape: 'rounded'
           }
         })
 
-        expect(wrapper.find('.rounded-xl').exists()).toBe(true)
+        expect(wrapper.find('.rounded-full').exists()).toBe(true)
       })
 
       it('should be soft when props.shape is soft', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             shape: 'soft'
           }
@@ -150,7 +150,7 @@ describe('Textarea component', () => {
       })
 
       it('should be square when props.shape is square', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             shape: 'square'
           }
@@ -162,7 +162,7 @@ describe('Textarea component', () => {
 
     describe('When size prop changes', () => {
       it('should be xs when props.size is xs', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             size: 'xs'
           }
@@ -172,7 +172,7 @@ describe('Textarea component', () => {
       })
 
       it('should be sm when props.size is sm', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             size: 'sm'
           }
@@ -182,7 +182,7 @@ describe('Textarea component', () => {
       })
 
       it('should be md when props.size is md', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             size: 'md'
           }
@@ -192,7 +192,7 @@ describe('Textarea component', () => {
       })
 
       it('should be lg when props.size is lg', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             size: 'lg'
           }
@@ -204,7 +204,7 @@ describe('Textarea component', () => {
 
     describe('When variant prop changes', () => {
       it('should be filled when props.size is filled', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             variant: 'filled'
           }
@@ -214,7 +214,7 @@ describe('Textarea component', () => {
       })
 
       it('should be outlined when props.size is outlined', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             variant: 'outlined'
           }
@@ -224,7 +224,7 @@ describe('Textarea component', () => {
       })
 
       it('should be ghost when props.size is ghost', () => {
-        wrapper = mount(VkTextarea, {
+        wrapper = mount(VkInput, {
           props: {
             variant: 'ghost'
           }
@@ -235,41 +235,51 @@ describe('Textarea component', () => {
     })
   })
 
-  describe('Counter', () => {
-    it('should show counter when props.maxlenght is set', () => {
-      wrapper = mount(VkTextarea, {
-        props: {
-          maxlength: 50
+  describe('Slots', () => {
+    it('Should render leftIcon when slot leftIcon is set', () => {
+      wrapper = mount(VkInput, {
+        slots: {
+          leftIcon: '<i class="ti ti-brand-vue"></i>'
         }
       })
 
-      expect(wrapper.find('.vk-textarea__counter').exists()).toBe(true)
+      expect(wrapper.find('i.ti.ti-brand-vue').exists()).toBe(true)
+    })
+
+    it('Should render rightIcon when slot rightIcon is set', () => {
+      wrapper = mount(VkInput, {
+        slots: {
+          rightIcon: '<i class="ti ti-home"></i>'
+        }
+      })
+
+      expect(wrapper.find('i.ti.ti-home').exists()).toBe(true)
     })
   })
 
   describe('Helpertext', () => {
     it('should not show when props.helpertext is not set', () => {
-      wrapper = mount(VkTextarea, {})
+      wrapper = mount(VkInput, {})
 
-      expect(wrapper.find('.vk-textarea__helper').exists()).toBe(false)
+      expect(wrapper.find('.vk-input__helper').exists()).toBe(false)
     })
 
-    it('should show helpertext when props.helpertext is set', () => {
-      wrapper = mount(VkTextarea, {
+    it('should show when props.helpertext is set', () => {
+      wrapper = mount(VkInput, {
         props: {
           helpertext: 'Hello World'
         }
       })
 
-      expect(wrapper.find('.vk-textarea__helper').exists()).toBe(true)
+      expect(wrapper.find('.vk-input__helper').text()).toContain('Hello World')
     })
   })
 
   describe('Emits', () => {
     it('should emit focus event', () => {
-      const wrapper = mount(VkTextarea, {})
+      const wrapper = mount(VkInput, {})
 
-      wrapper.find('.vk-textarea__container').trigger('click')
+      wrapper.find('.vk-input__container').trigger('click')
       expect(wrapper.emitted('focus'))
     })
   })

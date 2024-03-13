@@ -1,5 +1,5 @@
 import { VueWrapper, mount, flushPromises } from '@vue/test-utils'
-import { VkTabs } from '.'
+import { VkTabs } from '#valkoui/components'
 
 describe('Tabs component', () => {
   const tabs = [

@@ -1,6 +1,6 @@
 import { VueWrapper, mount, flushPromises } from '@vue/test-utils'
 import { nextTick } from 'vue'
-import { VkDropdown } from '.'
+import { VkDropdown } from '#valkoui/components'
 
 describe('Dropdown component', () => {
   let wrapper: VueWrapper

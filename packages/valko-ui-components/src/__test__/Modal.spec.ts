@@ -1,7 +1,7 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { DialogPanel } from '@headlessui/vue'
 import { nextTick } from 'vue'
-import { VkModal } from '.'
+import { VkModal } from '#valkoui/components'
 
 class ResizeObserver {
   observe() {return}

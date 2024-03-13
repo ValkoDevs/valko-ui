@@ -1,6 +1,6 @@
 import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkPagination } from '.'
+import { VkPagination } from '#valkoui/components'
 
 describe('Pagination component', () => {
   let wrapper: VueWrapper

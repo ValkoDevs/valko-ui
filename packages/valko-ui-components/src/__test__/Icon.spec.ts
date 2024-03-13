@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkIcon } from '.'
+import { VkIcon } from '#valkoui/components'
 
 describe('Icon component', () => {
   let wrapper: VueWrapper
