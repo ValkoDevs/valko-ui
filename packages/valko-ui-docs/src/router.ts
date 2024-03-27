@@ -104,6 +104,10 @@ const routes = [
         component: lazyLoad('ui', 'SpinnerPage')
       },
       {
+        path: 'tag',
+        component: lazyLoad('ui', 'TagPage')
+      },
+      {
         path: 'tooltip',
         component: lazyLoad('ui', 'TooltipPage')
       }
