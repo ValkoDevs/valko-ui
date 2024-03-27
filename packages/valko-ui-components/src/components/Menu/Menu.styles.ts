@@ -39,9 +39,15 @@ const styles = tv({
       dark: {}
     },
     variant: {
-      filled: {},
+      filled: {
+        content: [
+          'data-[active=true]:text-light-1'
+        ]
+      },
       outlined: {
         content: [
+          'py-[calc(0.625rem_-_2px)]',
+          'px-[calc(1rem_-_2px)]',
           'border-2',
           'border-transparent',
           'data-[active=true]:bg-transparent',
@@ -109,7 +115,6 @@ const styles = tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:text-light-1',
           'data-[active=true]:bg-primary-500',
           'data-[active=true]:dark:bg-primary-500'
         ]
@@ -120,7 +125,6 @@ const styles = tv({
       color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:text-light-1',
           'data-[active=true]:bg-secondary-500',
           'data-[active=true]:dark:bg-secondary-500'
         ]
@@ -131,7 +135,6 @@ const styles = tv({
       color: 'success',
       class: {
         content: [
-          'data-[active=true]:text-light-1',
           'data-[active=true]:bg-success-500',
           'data-[active=true]:dark:bg-success-500'
         ]
@@ -142,7 +145,6 @@ const styles = tv({
       color: 'error',
       class: {
         content: [
-          'data-[active=true]:text-light-1',
           'data-[active=true]:bg-error-500',
           'data-[active=true]:dark:bg-error-500'
         ]
@@ -153,7 +155,6 @@ const styles = tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:text-light-1',
           'data-[active=true]:bg-warning-500',
           'data-[active=true]:dark:bg-warning-500'
         ]
@@ -164,7 +165,6 @@ const styles = tv({
       color: 'info',
       class: {
         content: [
-          'data-[active=true]:text-light-1',
           'data-[active=true]:bg-info-500',
           'data-[active=true]:dark:bg-info-500'
         ]
@@ -176,8 +176,7 @@ const styles = tv({
       class: {
         content: [
           'data-[active=true]:text-dark-5',
-          'data-[active=true]:bg-light-1',
-          'data-[active=true]:dark:bg-dark-1'
+          'data-[active=true]:bg-light-1'
         ]
       }
     },
@@ -186,9 +185,7 @@ const styles = tv({
       color: 'dark',
       class: {
         content: [
-          'data-[active=true]:text-light-1',
-          'data-[active=true]:bg-dark-1',
-          'data-[active=true]:dark:bg-light-1'
+          'data-[active=true]:bg-dark-3'
         ]
       }
     },
@@ -259,9 +256,8 @@ const styles = tv({
       color: 'light',
       class: {
         content: [
-          'data-[active=true]:text-dark-5',
-          'data-[active=true]:border-light-1',
-          'data-[active=true]:dark:border-dark-1'
+          'data-[active=true]:text-light-1',
+          'data-[active=true]:border-light-1'
         ]
       }
     },
@@ -270,9 +266,8 @@ const styles = tv({
       color: 'dark',
       class: {
         content: [
-          'data-[active=true]:text-light-1',
-          'data-[active=true]:border-dark-1',
-          'data-[active=true]:dark:border-light-1'
+          'data-[active=true]:text-dark-3',
+          'data-[active=true]:border-dark-3'
         ]
       }
     },
@@ -349,9 +344,9 @@ const styles = tv({
       color: 'light',
       class: {
         content: [
-          'data-[active=true]:text-dark-5',
-          'data-[active=true]:bg-light-1/[.15]',
-          'data-[active=true]:dark:bg-light-1/[.15]'
+          'data-[active=true]:text-light-1',
+          'data-[active=true]:bg-light-1/[.5]',
+          'hover:dark:bg-light-1/[.15]'
         ]
       }
     },
@@ -360,9 +355,8 @@ const styles = tv({
       color: 'dark',
       class: {
         content: [
-          'data-[active=true]:text-light-1',
-          'data-[active=true]:bg-dark-1/[.15]',
-          'data-[active=true]:dark:bg-dark-1/[.15]'
+          'data-[active=true]:text-dark-1',
+          'data-[active=true]:bg-dark-1/[.5]'
         ]
       }
     }
