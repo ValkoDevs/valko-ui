@@ -63,7 +63,7 @@ const defaultIcon = computed(() => {
         variant="link"
         color="secondary"
         size="xs"
-        rounded
+        shape="rounded"
         flat
         @click="onClick"
       >

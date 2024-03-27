@@ -25,6 +25,7 @@ const menuItems: MenuItem[] = [
   { key: 'breadcrumbs', group: 'Ui', text: 'Breadcrumbs' },
   { key: 'progressbar', group: 'Ui', text: 'Progressbar' },
   { key: 'spinner', group: 'Ui', text: 'Spinner' },
+  { key: 'tag', group: 'Ui', text: 'Tag' },
   { key: 'tooltip', group: 'Ui', text: 'Tooltip' },
   { key: 'collapse', group: 'Data', text: 'Collapse' },
   { key: 'dropdown', group: 'Data', text: 'Dropdown' },

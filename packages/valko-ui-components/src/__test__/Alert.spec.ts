@@ -11,27 +11,27 @@ describe('Alert component', () => {
       })
 
       it('should render', () => {
-        expect(wrapper.find('.vk-alert__container')).toBeDefined()
+        expect(wrapper.find('.vk-alert__container').exists()).toBe(true)
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-500')).toBeDefined()
+        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('span.text-base')).toBeDefined()
+        expect(wrapper.find('span.text-base').exists()).toBe(true)
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-primary-500')).toBeDefined()
+        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
-        expect(wrapper.find('.rounded-lg')).toBeDefined()
+        expect(wrapper.find('.rounded-lg').exists()).toBe(true)
       })
 
       it('should have default icon', () => {
-        expect(wrapper.find('i.ti.ti-bulb-filled')).toBeDefined()
+        expect(wrapper.find('i.ti.ti-bulb-filled').exists()).toBe(true)
       })
 
       it('should not be flat', () => {
@@ -55,7 +55,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-500')).toBeDefined()
+        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -65,7 +65,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-secondary-500')).toBeDefined()
+        expect(wrapper.find('.bg-secondary-500').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -75,7 +75,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-success-500')).toBeDefined()
+        expect(wrapper.find('.bg-success-500').exists()).toBe(true)
       })
 
       it('should be color info when props.color is info', () => {
@@ -85,7 +85,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-info-500')).toBeDefined()
+        expect(wrapper.find('.bg-info-500').exists()).toBe(true)
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -95,7 +95,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-warning-500')).toBeDefined()
+        expect(wrapper.find('.bg-warning-500').exists()).toBe(true)
       })
 
       it('should be color error when props.color is error', () => {
@@ -105,7 +105,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-error-500')).toBeDefined()
+        expect(wrapper.find('.bg-error-500').exists()).toBe(true)
       })
 
       it('should be color light when props.color is light', () => {
@@ -115,7 +115,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-1')).toBeDefined()
+        expect(wrapper.find('.bg-light-1').exists()).toBe(true)
       })
 
       it('should be color dark when props.color is dark', () => {
@@ -125,7 +125,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-dark-5')).toBeDefined()
+        expect(wrapper.find('.bg-dark-5').exists()).toBe(true)
       })
     })
 
@@ -137,7 +137,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded-full')).toBeDefined()
+        expect(wrapper.find('.rounded-full').exists()).toBe(true)
       })
 
       it('should be soft when props.shape is soft', () => {
@@ -147,7 +147,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded-lg')).toBeDefined()
+        expect(wrapper.find('.rounded-lg').exists()).toBe(true)
       })
 
       it('should be square when props.shape is square', () => {
@@ -157,7 +157,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded-none')).toBeDefined()
+        expect(wrapper.find('.rounded-none').exists()).toBe(true)
       })
     })
 
@@ -169,7 +169,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.text-xs')).toBeDefined()
+        expect(wrapper.find('.text-xs').exists()).toBe(true)
       })
 
       it('should be sm when props.size is sm', () => {
@@ -179,7 +179,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.text-sm')).toBeDefined()
+        expect(wrapper.find('.text-sm').exists()).toBe(true)
       })
 
       it('should be md when props.size is md', () => {
@@ -189,7 +189,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.text-base')).toBeDefined()
+        expect(wrapper.find('.text-base').exists()).toBe(true)
       })
 
       it('should be lg when props.size is lg', () => {
@@ -199,7 +199,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.text-lg')).toBeDefined()
+        expect(wrapper.find('.text-lg').exists()).toBe(true)
       })
     })
 
@@ -211,7 +211,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.text-white')).toBeDefined()
+        expect(wrapper.find('.text-white').exists()).toBe(true)
       })
 
       it('should be outlined when props.size is outlined', () => {
@@ -221,7 +221,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.border-2')).toBeDefined()
+        expect(wrapper.find('.border-2').exists()).toBe(true)
       })
 
       it('should be ghost when props.size is ghost', () => {
@@ -231,7 +231,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-transparent')).toBeDefined()
+        expect(wrapper.find('.shadow-none').exists()).toBe(true)
       })
     })
 
@@ -255,7 +255,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('i.ti.ti-bulb-filled')).toBeDefined()
+        expect(wrapper.find('i.ti.ti-bulb-filled').exists()).toBe(true)
       })
 
       it('should show custom icon when props.icon is an icon name', () => {
@@ -265,7 +265,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('i.ti.ti-home')).toBeDefined()
+        expect(wrapper.find('i.ti.ti-home').exists()).toBe(true)
       })
 
       it('should not show icon when props.icon is null', () => {
