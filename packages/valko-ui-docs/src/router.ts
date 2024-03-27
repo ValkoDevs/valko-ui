@@ -84,6 +84,14 @@ const routes = [
         component: lazyLoad('ui', 'BreadcrumbsPage')
       },
       {
+        path: 'menu',
+        component: lazyLoad('ui', 'MenuPage')
+      },
+      {
+        path: 'navbar',
+        component: lazyLoad('ui', 'NavbarPage')
+      },
+      {
         path: 'notification',
         component: lazyLoad('ui', 'NotificationPage')
       },
