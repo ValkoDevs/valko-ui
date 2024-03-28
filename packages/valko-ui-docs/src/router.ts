@@ -84,6 +84,10 @@ const routes = [
         component: lazyLoad('ui', 'BreadcrumbsPage')
       },
       {
+        path: 'card',
+        component: lazyLoad('ui', 'CardPage')
+      },
+      {
         path: 'progressbar',
         component: lazyLoad('ui', 'ProgressbarPage')
       },
