@@ -23,6 +23,7 @@ const menuItems: MenuItem[] = [
   { key: 'avatar', group: 'Ui', text: 'Avatar' },
   { key: 'badge', group: 'Ui', text: 'Badge' },
   { key: 'breadcrumbs', group: 'Ui', text: 'Breadcrumbs' },
+  { key: 'card', group: 'Ui', text: 'Card' },
   { key: 'progressbar', group: 'Ui', text: 'Progressbar' },
   { key: 'spinner', group: 'Ui', text: 'Spinner' },
   { key: 'tooltip', group: 'Ui', text: 'Tooltip' },
