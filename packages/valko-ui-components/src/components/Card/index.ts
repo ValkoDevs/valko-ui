@@ -1,0 +1,5 @@
+export { default as VkCard } from './Card.vue'
+export { VkCardHeader } from './CardHeader'
+export { VkCardBody } from './CardBody'
+export { VkCardFooter } from './CardFooter'
+export { VkCardImage } from './CardImage'

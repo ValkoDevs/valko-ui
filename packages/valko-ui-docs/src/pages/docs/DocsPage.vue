@@ -29,6 +29,7 @@ const menuItems: MenuItem[] = [
   { key: 'avatar', group: 'Ui', text: 'Avatar' },
   { key: 'badge', group: 'Ui', text: 'Badge' },
   { key: 'breadcrumbs', group: 'Ui', text: 'Breadcrumbs' },
+  { key: 'card', group: 'Ui', text: 'Card' },
   { key: 'menu', group: 'Ui', text: 'Menu' },
   { key: 'navbar', group: 'Ui', text: 'Navbar' },
   { key: 'notification', group: 'Ui', text: 'Notification' },
