@@ -30,7 +30,7 @@ const sizes = [
   { value: 'full', label: 'Full' }
 ]
 
-const apiData = [
+const cardProps = [
   {
     prop: 'variant',
     required: false,
@@ -61,7 +61,7 @@ const apiData = [
   }
 ]
 
-const emitData = [
+const cardEmits = [
   {
     event: 'close',
     type: '() => void',
@@ -70,7 +70,7 @@ const emitData = [
   }
 ]
 
-const slotData = [
+const cardSlots = [
   {
     name: 'default',
     description: 'Slot for the main content of the alert.',
@@ -163,7 +163,7 @@ const onClick = () => {
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="apiData"
+            :data="cardProps"
           />
         </example-section>
 
@@ -173,7 +173,7 @@ const onClick = () => {
         >
           <vk-data-table
             :headers="emitHeaders"
-            :data="emitData"
+            :data="cardEmits"
           />
         </example-section>
 
@@ -183,7 +183,7 @@ const onClick = () => {
         >
           <vk-data-table
             :headers="slotHeaders"
-            :data="slotData"
+            :data="cardSlots"
           />
         </example-section>
       </div>
