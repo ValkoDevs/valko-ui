@@ -3,8 +3,8 @@ import { ref } from 'vue'
 import { MenuItem } from '@valko-ui/components'
 import DocSection from '../../../components/DocSection'
 import ExampleSection from '../../../components/ExampleSection'
-import variantOptions from '@/data/variantOptions'
 import colorOptions from '@/data/colorOptions'
+import variantOptions from '@/data/variantOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
@@ -25,7 +25,7 @@ const menuItems: MenuItem[] = [
   { key: 'checkbox', group: 'Forms', text: 'Checkbox' }
 ]
 
-const menuData = [
+const menuProps = [
   {
     prop: 'color',
     required: false,
@@ -77,7 +77,7 @@ const menuData = [
   }
 ]
 
-const menuItemData = [
+const menuItemsInterface = [
   {
     prop: 'key',
     required: true,
@@ -190,16 +190,16 @@ const onClick = (item: MenuItem) => {
     </template>
     <template #playground-options>
       <vk-select
-        placeholder="Variant"
-        size="sm"
-        :options="variantOptions"
-        v-model="form.variant"
-      />
-      <vk-select
         placeholder="Color"
         size="sm"
         :options="colorOptions"
         v-model="form.color"
+      />
+      <vk-select
+        placeholder="Variant"
+        size="sm"
+        :options="variantOptions"
+        v-model="form.variant"
       />
       <vk-select
         placeholder="Shape"
@@ -302,7 +302,7 @@ const onClick = (item: MenuItem) => {
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="menuData"
+            :data="menuProps"
           />
         </example-section>
 
@@ -312,7 +312,7 @@ const onClick = (item: MenuItem) => {
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="menuItemData"
+            :data="menuItemsInterface"
           />
         </example-section>
 

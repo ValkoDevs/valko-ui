@@ -13,8 +13,8 @@ describe('Navbar component', () => {
         expect(wrapper.find('.vk-navbar').exists()).toBe(true)
       })
 
-      it('should be color neutral', () => {
-        expect(wrapper.find('.bg-light-1').exists()).toBe(true)
+      it('should be color primary', () => {
+        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
       })
 
       it('should be size md', () => {

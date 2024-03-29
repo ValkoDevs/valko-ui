@@ -85,6 +85,211 @@ const styles = tv({
     }
   },
   compoundVariants: [
+    // filled & color
+    {
+      color: 'primary',
+      variant: 'filled',
+      class: [
+        'bg-primary-500'
+      ]
+    },
+    {
+      color: 'secondary',
+      variant: 'filled',
+      class: [
+        'bg-secondary-500'
+      ]
+    },
+    {
+      color: 'success',
+      variant: 'filled',
+      class: [
+        'bg-success-500'
+      ]
+    },
+    {
+      color: 'info',
+      variant: 'filled',
+      class: [
+        'bg-info-500'
+      ]
+    },
+    {
+      color: 'warning',
+      variant: 'filled',
+      class: [
+        'bg-warning-500'
+      ]
+    },
+    {
+      color: 'error',
+      variant: 'filled',
+      class: [
+        'bg-error-500'
+      ]
+    },
+    {
+      color: 'light',
+      variant: 'filled',
+      class: [
+        'bg-white'
+      ]
+    },
+    {
+      color: 'dark',
+      variant: 'filled',
+      class: [
+        'bg-black'
+      ]
+    },
+    {
+      color: 'neutral',
+      variant: 'filled',
+      class: [
+        'bg-light-1',
+        'dark:bg-dark-3'
+      ]
+    },
+    // outlined & color
+    {
+      color: 'primary',
+      variant: 'outlined',
+      class: [
+        'bg-transparent',
+        'border-primary-500'
+      ]
+    },
+    {
+      color: 'secondary',
+      variant: 'outlined',
+      class: [
+        'bg-transparent',
+        'border-secondary-500'
+      ]
+    },
+    {
+      color: 'success',
+      variant: 'outlined',
+      class: [
+        'bg-transparent',
+        'border-success-500'
+      ]
+    },
+    {
+      color: 'info',
+      variant: 'outlined',
+      class: [
+        'bg-transparent',
+        'border-info-500'
+      ]
+    },
+    {
+      color: 'warning',
+      variant: 'outlined',
+      class: [
+        'bg-transparent',
+        'border-warning-500'
+      ]
+    },
+    {
+      color: 'error',
+      variant: 'outlined',
+      class: [
+        'bg-transparent',
+        'border-error-500'
+      ]
+    },
+    {
+      color: 'light',
+      variant: 'outlined',
+      class: [
+        'bg-transparent',
+        'border-white'
+      ]
+    },
+    {
+      color: 'dark',
+      variant: 'outlined',
+      class: [
+        'bg-transparent',
+        'border-black'
+      ]
+    },
+    {
+      color: 'neutral',
+      variant: 'outlined',
+      class: [
+        'bg-transparent',
+        'border-light-4',
+        'dark:border-dark-1'
+      ]
+    },
+    // ghost & color
+    {
+      color: 'primary',
+      variant: 'ghost',
+      class: [
+        'bg-primary-500/[.15]'
+      ]
+    },
+    {
+      color: 'secondary',
+      variant: 'ghost',
+      class: [
+        'bg-secondary-500/[.15]',
+        'text-secondary-500'
+      ]
+    },
+    {
+      color: 'success',
+      variant: 'ghost',
+      class: [
+        'bg-success-500/[.15]'
+      ]
+    },
+    {
+      color: 'info',
+      variant: 'ghost',
+      class: [
+        'bg-info-500/[.15]'
+      ]
+    },
+    {
+      color: 'warning',
+      variant: 'ghost',
+      class: [
+        'bg-warning-500/[.15]'
+      ]
+    },
+    {
+      color: 'error',
+      variant: 'ghost',
+      class: [
+        'bg-error-500/[.15]'
+      ]
+    },
+    {
+      color: 'light',
+      variant: 'ghost',
+      class: [
+        'bg-white/[.15]'
+      ]
+    },
+    {
+      color: 'dark',
+      variant: 'ghost',
+      class: [
+        'bg-black/[.15]'
+      ]
+    },
+    {
+      color: 'neutral',
+      variant: 'ghost',
+      class: [
+        'bg-light-1/[.15]',
+        'dark:bg-dark-3/[.15]'
+      ]
+    },
     // floating & variant
     {
       floating: true,
@@ -106,209 +311,6 @@ const styles = tv({
       shape: 'soft',
       class: [
         'rounded-2xl'
-      ]
-    },
-    // color & variant
-    {
-      color: 'primary',
-      variant: 'filled',
-      class: [
-        'bg-primary-500'
-      ]
-    },
-    {
-      color: 'primary',
-      variant: 'outlined',
-      class: [
-        'bg-transparent',
-        'border-primary-500'
-      ]
-    },
-    {
-      color: 'primary',
-      variant: 'ghost',
-      class: [
-        'bg-primary-500/[.15]'
-      ]
-    },
-    {
-      color: 'secondary',
-      variant: 'filled',
-      class: [
-        'bg-secondary-500'
-      ]
-    },
-    {
-      color: 'secondary',
-      variant: 'outlined',
-      class: [
-        'bg-transparent',
-        'border-secondary-500'
-      ]
-    },
-    {
-      color: 'secondary',
-      variant: 'ghost',
-      class: [
-        'bg-secondary-500/[.15]',
-        'text-secondary-500'
-      ]
-    },
-    {
-      color: 'success',
-      variant: 'filled',
-      class: [
-        'bg-success-500'
-      ]
-    },
-    {
-      color: 'success',
-      variant: 'outlined',
-      class: [
-        'bg-transparent',
-        'border-success-500'
-      ]
-    },
-    {
-      color: 'success',
-      variant: 'ghost',
-      class: [
-        'bg-success-500/[.15]'
-      ]
-    },
-    {
-      color: 'error',
-      variant: 'filled',
-      class: [
-        'bg-error-500'
-      ]
-    },
-    {
-      color: 'error',
-      variant: 'outlined',
-      class: [
-        'bg-transparent',
-        'border-error-500'
-      ]
-    },
-    {
-      color: 'error',
-      variant: 'ghost',
-      class: [
-        'bg-error-500/[.15]'
-      ]
-    },
-    {
-      color: 'warning',
-      variant: 'filled',
-      class: [
-        'bg-warning-500'
-      ]
-    },
-    {
-      color: 'warning',
-      variant: 'outlined',
-      class: [
-        'bg-transparent',
-        'border-warning-500'
-      ]
-    },
-    {
-      color: 'warning',
-      variant: 'ghost',
-      class: [
-        'bg-warning-500/[.15]'
-      ]
-    },
-    {
-      color: 'info',
-      variant: 'filled',
-      class: [
-        'bg-info-500'
-      ]
-    },
-    {
-      color: 'info',
-      variant: 'outlined',
-      class: [
-        'bg-transparent',
-        'border-info-500'
-      ]
-    },
-    {
-      color: 'info',
-      variant: 'ghost',
-      class: [
-        'bg-info-500/[.15]'
-      ]
-    },
-    {
-      color: 'light',
-      variant: 'filled',
-      class: [
-        'bg-white'
-      ]
-    },
-    {
-      color: 'light',
-      variant: 'outlined',
-      class: [
-        'bg-transparent',
-        'border-white'
-      ]
-    },
-    {
-      color: 'light',
-      variant: 'ghost',
-      class: [
-        'bg-white/[.15]'
-      ]
-    },
-    {
-      color: 'dark',
-      variant: 'filled',
-      class: [
-        'bg-black'
-      ]
-    },
-    {
-      color: 'dark',
-      variant: 'outlined',
-      class: [
-        'bg-transparent',
-        'border-black'
-      ]
-    },
-    {
-      color: 'dark',
-      variant: 'ghost',
-      class: [
-        'bg-black/[.15]'
-      ]
-    },
-    {
-      color: 'neutral',
-      variant: 'filled',
-      class: [
-        'bg-light-1',
-        'dark:bg-dark-3'
-      ]
-    },
-    {
-      color: 'neutral',
-      variant: 'outlined',
-      class: [
-        'bg-transparent',
-        'border-light-4',
-        'dark:border-dark-1'
-      ]
-    },
-    {
-      color: 'neutral',
-      variant: 'ghost',
-      class: [
-        'bg-light-1/[.15]',
-        'dark:bg-dark-3/[.15]'
       ]
     }
   ]
