@@ -18,7 +18,7 @@ const form = ref({
 })
 
 
-const apiData = [
+const spinnerProps = [
   {
     prop: 'color',
     required: false,
@@ -27,18 +27,18 @@ const apiData = [
     default: 'primary'
   },
   {
-    prop: 'size',
-    required: false,
-    description: 'The size of the Spinner.',
-    values: 'xs, sm, md, lg',
-    default: 'md'
-  },
-  {
     prop: 'variant',
     required: false,
     description: 'The variant of Spinner.',
     values: 'loader, loader-2',
     default: 'loader-2'
+  },
+  {
+    prop: 'size',
+    required: false,
+    description: 'The size of the Spinner.',
+    values: 'xs, sm, md, lg',
+    default: 'md'
   }
 ]
 </script>
@@ -60,16 +60,16 @@ const apiData = [
 
     <template #playground-options>
       <vk-select
-        placeholder="Variant"
-        size="sm"
-        :options="variants"
-        v-model="form.variant"
-      />
-      <vk-select
         placeholder="Color"
         size="sm"
         :options="colorOptions"
         v-model="form.color"
+      />
+      <vk-select
+        placeholder="Variant"
+        size="sm"
+        :options="variants"
+        v-model="form.variant"
       />
       <vk-select
         placeholder="Size"
@@ -144,7 +144,7 @@ const apiData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="apiData"
+            :data="spinnerProps"
           />
         </example-section>
       </div>

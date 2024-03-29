@@ -2,16 +2,14 @@
 import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
+import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
-import shapeOptions from '@/data/shapeOptions'
 import slotHeaders from '@/data/slotHeaders'
 
 const form = ref({
-  size: 'md',
   shape: 'soft',
-  color: 'primary',
-  variant: 'filled',
+  size: 'md',
   placement: 'top',
   content: 'Tooltip Content',
   flat: false
@@ -24,7 +22,7 @@ const placementOptions = [
   { value:'right', label:'Right' }
 ]
 
-const apiData = [
+const tooltipProps = [
   {
     prop: 'shape',
     required: false,
@@ -62,7 +60,7 @@ const apiData = [
   }
 ]
 
-const slotData = [
+const tooltipSlots = [
   {
     name: 'default',
     description: 'Slot for the content to trigger the tooltip.',
@@ -86,8 +84,6 @@ const slotData = [
       <vk-tooltip
         :size="form.size"
         :shape="form.shape"
-        :color="form.color"
-        :variant="form.variant"
         :placement="form.placement"
         :content="form.content"
         :flat="form.flat"
@@ -99,9 +95,11 @@ const slotData = [
     </template>
 
     <template #playground-options>
-      <vk-input
-        label="Content"
-        v-model="form.content"
+      <vk-select
+        placeholder="Shape"
+        size="sm"
+        :options="shapeOptions"
+        v-model="form.shape"
       />
       <vk-select
         placeholder="Size"
@@ -109,11 +107,9 @@ const slotData = [
         :options="sizeOptions"
         v-model="form.size"
       />
-      <vk-select
-        placeholder="Shape"
-        size="sm"
-        :options="shapeOptions"
-        v-model="form.shape"
+      <vk-input
+        label="Content"
+        v-model="form.content"
       />
       <vk-select
         placeholder="Placement"
@@ -198,7 +194,7 @@ const slotData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="apiData"
+            :data="tooltipProps"
           />
         </example-section>
 
@@ -208,7 +204,7 @@ const slotData = [
         >
           <vk-data-table
             :headers="slotHeaders"
-            :data="slotData"
+            :data="tooltipSlots"
           />
         </example-section>
       </div>

@@ -2,23 +2,23 @@
 import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
-import separatorOptions from '@/data/separatorOptions'
-import sizeOptions from '@/data/sizeOptions'
 import variantOptions from '@/data/variantOptions'
-import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
+import sizeOptions from '@/data/sizeOptions'
+import separatorOptions from '@/data/separatorOptions'
+import propHeaders from '@/data/propHeaders'
 import slotHeaders from '@/data/slotHeaders'
 
 const form = ref({
   variant: 'filled',
+  shape: 'soft',
   size: 'md',
   separator: 'line',
-  shape: 'soft',
   compact: false,
   multiple: false
 })
 
-const apiData = [
+const collapseProps = [
   {
     prop: 'variant',
     required: false,
@@ -27,11 +27,11 @@ const apiData = [
     default: 'filled'
   },
   {
-    prop: 'separator',
+    prop: 'shape',
     required: false,
-    description: 'The separator of the Collapse.',
-    values: 'line, split, none',
-    default: 'line'
+    description: 'The shape of the Collapse.',
+    values: 'soft, rounded, square',
+    default: 'soft'
   },
   {
     prop: 'size',
@@ -39,6 +39,13 @@ const apiData = [
     description: 'The size of the Collapse.',
     values: 'xs, sm, md, lg',
     default: 'md'
+  },
+  {
+    prop: 'separator',
+    required: false,
+    description: 'The separator of the Collapse.',
+    values: 'line, split, none',
+    default: 'line'
   },
   {
     prop: 'compact',
@@ -56,7 +63,7 @@ const apiData = [
   }
 ]
 
-const slotData = [
+const collapseSlots = [
   {
     name: 'default',
     description: 'Slot for containing VkCollapseItem components. This slot is used to wrap VkCollapseItem components inside VkCollapse.',
@@ -64,7 +71,7 @@ const slotData = [
   }
 ]
 
-const itemSlotData = [
+const itemSlots = [
   {
     name: 'title',
     description: 'Slot for the title content of the collapse item. This slot is typically used to provide a custom title for the collapse item.',
@@ -120,12 +127,6 @@ const itemSlotData = [
         v-model="form.variant"
       />
       <vk-select
-        placeholder="Separator"
-        size="sm"
-        :options="separatorOptions"
-        v-model="form.separator"
-      />
-      <vk-select
         placeholder="Shape"
         size="sm"
         :options="shapeOptions"
@@ -136,6 +137,12 @@ const itemSlotData = [
         placeholder="Size"
         :options="sizeOptions"
         v-model="form.size"
+      />
+      <vk-select
+        placeholder="Separator"
+        size="sm"
+        :options="separatorOptions"
+        v-model="form.separator"
       />
       <vk-checkbox
         label="Compact"
@@ -326,7 +333,7 @@ const itemSlotData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="apiData"
+            :data="collapseProps"
           />
         </example-section>
 
@@ -336,7 +343,7 @@ const itemSlotData = [
         >
           <vk-data-table
             :headers="slotHeaders"
-            :data="slotData"
+            :data="collapseSlots"
           />
         </example-section>
 
@@ -346,7 +353,7 @@ const itemSlotData = [
         >
           <vk-data-table
             :headers="slotHeaders"
-            :data="itemSlotData"
+            :data="itemSlots"
           />
         </example-section>
       </div>

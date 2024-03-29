@@ -2,11 +2,11 @@
 import { ref, watch } from 'vue'
 import DocSection from '../../../components/DocSection'
 import ExampleSection from '../../../components/ExampleSection'
-import variantOptions from '@/data/variantOptions'
 import colorOptions from '@/data/colorOptions'
+import variantOptions from '@/data/variantOptions'
+import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
-import shapeOptions from '@/data/shapeOptions'
 import emitHeaders from '@/data/emitHeaders'
 import slotHeaders from '@/data/slotHeaders'
 
@@ -24,7 +24,7 @@ const form = ref({
   flat: false
 })
 
-const apiData = [
+const alertProps = [
   {
     prop: 'color',
     required: false,
@@ -38,6 +38,13 @@ const apiData = [
     description: 'The variant of the Alert.',
     values: 'filled, outlined, ghost',
     default: 'filled'
+  },
+  {
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Alert.',
+    values: 'rounded, square, soft',
+    default: 'soft'
   },
   {
     prop: 'size',
@@ -74,17 +81,10 @@ const apiData = [
     description: 'Displays a shadow for the Alert.',
     values: 'true, false',
     default: 'false'
-  },
-  {
-    prop: 'shape',
-    required: false,
-    description: 'The shape of the Button.',
-    values: 'rounded, square, soft',
-    default: 'soft'
   }
 ]
 
-const emitData = [
+const alertEmits = [
   {
     event: 'close',
     type: '() => void',
@@ -93,7 +93,7 @@ const emitData = [
   }
 ]
 
-const slotData = [
+const alertSlots = [
   {
     name: 'default',
     description: 'Slot for the main content of the alert.',
@@ -145,22 +145,17 @@ watch(isShown, () => {
       </div>
     </template>
     <template #playground-options>
-      <vk-input
-        label="Title"
+      <vk-select
+        placeholder="Color"
         size="sm"
-        v-model="form.title"
+        :options="colorOptions"
+        v-model="form.color"
       />
       <vk-select
         placeholder="Variant"
         size="sm"
         :options="variantOptions"
         v-model="form.variant"
-      />
-      <vk-select
-        placeholder="Color"
-        size="sm"
-        :options="colorOptions"
-        v-model="form.color"
       />
       <vk-select
         placeholder="Shape"
@@ -173,6 +168,11 @@ watch(isShown, () => {
         size="sm"
         :options="sizeOptions"
         v-model="form.size"
+      />
+      <vk-input
+        label="Title"
+        size="sm"
+        v-model="form.title"
       />
       <vk-checkbox
         label="Closable"
@@ -330,7 +330,7 @@ watch(isShown, () => {
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="apiData"
+            :data="alertProps"
           />
         </example-section>
 
@@ -340,7 +340,7 @@ watch(isShown, () => {
         >
           <vk-data-table
             :headers="emitHeaders"
-            :data="emitData"
+            :data="alertEmits"
           />
         </example-section>
 
@@ -350,7 +350,7 @@ watch(isShown, () => {
         >
           <vk-data-table
             :headers="slotHeaders"
-            :data="slotData"
+            :data="alertSlots"
           />
         </example-section>
       </div>

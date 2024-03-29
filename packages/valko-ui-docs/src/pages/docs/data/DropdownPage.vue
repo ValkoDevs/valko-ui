@@ -2,18 +2,18 @@
 import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
-import sizeOptions from '@/data/sizeOptions'
 import colorOptions from '@/data/colorOptions'
-import propHeaders from '@/data/propHeaders'
-import shapeOptions from '@/data/shapeOptions'
 import variantOptionsExtended from '@/data/variantOptionsExtended'
+import shapeOptions from '@/data/shapeOptions'
+import sizeOptions from '@/data/sizeOptions'
+import propHeaders from '@/data/propHeaders'
 import emitHeaders from '@/data/emitHeaders'
 
 const form = ref({
   color: 'primary',
   variant: 'filled',
-  size: 'md',
   shape: 'soft',
+  size: 'md',
   flat: false,
   disabled: false
 })
@@ -26,20 +26,13 @@ const items = [
   { key: 'delete', title: 'Delete', icon: 'trash', onClick: () => alert('Delete') }
 ]
 
-const dropdownPropsData = [
+const dropdownProps = [
   {
     prop: 'color',
     required: false,
     description: 'The Dropdown color theme.',
     values: 'primary, secondary, error, warning, info, success, light, dark',
     default: 'primary'
-  },
-  {
-    prop: 'size',
-    required: false,
-    description: 'The Dropdown size.',
-    values: 'xs, sm, md, lg',
-    default: 'md'
   },
   {
     prop: 'variant',
@@ -54,6 +47,13 @@ const dropdownPropsData = [
     description: 'The Dropdown shape.',
     values: 'rounded, soft, square',
     default: 'soft'
+  },
+  {
+    prop: 'size',
+    required: false,
+    description: 'The Dropdown size.',
+    values: 'xs, sm, md, lg',
+    default: 'md'
   },
   {
     prop: 'flat',
@@ -92,7 +92,7 @@ const dropdownPropsData = [
   }
 ]
 
-const itemInterfaceData = [
+const itemInterface = [
   {
     prop: 'key',
     required: true,
@@ -130,7 +130,7 @@ const itemInterfaceData = [
   }
 ]
 
-const dropdownEmitsData = [
+const dropdownEmits = [
   {
     event: 'itemClick',
     description: 'Emitted when an item in the dropdown menu is clicked.',
@@ -161,16 +161,16 @@ const dropdownEmitsData = [
 
     <template #playground-options>
       <vk-select
-        placeholder="Variant"
-        size="sm"
-        :options="variantOptionsExtended"
-        v-model="form.variant"
-      />
-      <vk-select
         placeholder="Color"
         size="sm"
         :options="colorOptions"
         v-model="form.color"
+      />
+      <vk-select
+        placeholder="Variant"
+        size="sm"
+        :options="variantOptionsExtended"
+        v-model="form.variant"
       />
       <vk-select
         placeholder="Shape"
@@ -277,17 +277,6 @@ const dropdownEmitsData = [
           :items="items"
         />
       </example-section>
-
-      <example-section
-        title="Disabled"
-        gap
-      >
-        <vk-dropdown
-          title="Disabled"
-          disabled
-          :items="items"
-        />
-      </example-section>
     </template>
 
     <template #api>
@@ -298,7 +287,7 @@ const dropdownEmitsData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="dropdownPropsData"
+            :data="dropdownProps"
           />
         </example-section>
 
@@ -308,7 +297,7 @@ const dropdownEmitsData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="itemInterfaceData"
+            :data="itemInterface"
           />
         </example-section>
 
@@ -318,7 +307,7 @@ const dropdownEmitsData = [
         >
           <vk-data-table
             :headers="emitHeaders"
-            :data="dropdownEmitsData"
+            :data="dropdownEmits"
           />
         </example-section>
       </div>

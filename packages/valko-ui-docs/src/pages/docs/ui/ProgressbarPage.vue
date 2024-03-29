@@ -3,10 +3,10 @@ import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
-import sizeOptions from '@/data/sizeOptions'
 import variantOptions from '@/data/variantOptions'
-import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
+import sizeOptions from '@/data/sizeOptions'
+import propHeaders from '@/data/propHeaders'
 import slotHeaders from '@/data/slotHeaders'
 
 const shapes = [
@@ -15,12 +15,12 @@ const shapes = [
 ]
 
 const form = ref({
-  variant: 'filled',
-  size: 'md',
   color: 'primary',
-  progress: 50,
-  slot: 'Progress',
+  variant: 'filled',
   shape: 'soft',
+  size: 'md',
+  slot: 'Progress',
+  progress: 50,
   buffer: 70,
   incrementProgress: 4.5,
   incrementBuffer: 5,
@@ -30,20 +30,20 @@ const form = ref({
 })
 
 
-const apiData = [
+const progressbarProps = [
+  {
+    prop: 'color',
+    required: false,
+    description: 'The color theme of the Progressbar.',
+    values: 'primary, secondary, success, info, warning, error, light, dark',
+    default: 'primary'
+  },
   {
     prop: 'variant',
     required: false,
     description: 'The variant of the Progressbar.',
     values: 'filled, outlined, ghost',
     default: 'filled'
-  },
-  {
-    prop: 'size',
-    required: false,
-    description: 'The size of the Progressbar.',
-    values: 'xs, sm, md, lg',
-    default: 'md'
   },
   {
     prop: 'shape',
@@ -53,11 +53,11 @@ const apiData = [
     default: 'soft'
   },
   {
-    prop: 'color',
+    prop: 'size',
     required: false,
-    description: 'The color theme of the Progressbar.',
-    values: 'primary, secondary, success, info, warning, error, light, dark',
-    default: 'primary'
+    description: 'The size of the Progressbar.',
+    values: 'xs, sm, md, lg',
+    default: 'md'
   },
   {
     prop: 'progress',
@@ -89,7 +89,7 @@ const apiData = [
   }
 ]
 
-const slotData = [
+const progressbarSlots = [
   {
     name: 'default',
     description: 'Slot for custom content to be placed inside the progress bar. This slot is typically used to include additional elements or text inside the progress bar.',
@@ -120,6 +120,35 @@ const slotData = [
       </div>
     </template>
     <template #playground-options>
+      <vk-select
+        placeholder="Color"
+        size="sm"
+        :options="colorOptions"
+        v-model="form.color"
+      />
+      <vk-select
+        placeholder="Variant"
+        size="sm"
+        :options="variantOptions"
+        v-model="form.variant"
+      />
+      <vk-select
+        placeholder="Shape"
+        size="sm"
+        :options="shapes"
+        v-model="form.shape"
+      />
+      <vk-select
+        size="sm"
+        placeholder="Size"
+        :options="sizeOptions"
+        v-model="form.size"
+      />
+      <vk-input
+        label="Slot Text"
+        size="sm"
+        v-model="form.slot"
+      />
       <div class="flex flex-col mb-1">
         <label for="rg-progress">Progress</label>
         <input
@@ -142,35 +171,6 @@ const slotData = [
           v-model="form.buffer"
         >
       </div>
-      <vk-input
-        label="Slot Text"
-        size="sm"
-        v-model="form.slot"
-      />
-      <vk-select
-        placeholder="Variant"
-        size="sm"
-        :options="variantOptions"
-        v-model="form.variant"
-      />
-      <vk-select
-        placeholder="Color"
-        size="sm"
-        :options="colorOptions"
-        v-model="form.color"
-      />
-      <vk-select
-        placeholder="Shape"
-        size="sm"
-        :options="shapes"
-        v-model="form.shape"
-      />
-      <vk-select
-        size="sm"
-        placeholder="Size"
-        :options="sizeOptions"
-        v-model="form.size"
-      />
       <vk-checkbox
         label="Indeterminate"
         v-model="form.indeterminate"
@@ -304,7 +304,7 @@ const slotData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="apiData"
+            :data="progressbarProps"
           />
         </example-section>
 
@@ -314,7 +314,7 @@ const slotData = [
         >
           <vk-data-table
             :headers="slotHeaders"
-            :data="slotData"
+            :data="progressbarSlots"
           />
         </example-section>
       </div>
