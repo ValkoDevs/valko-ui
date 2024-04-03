@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { MenuItem } from '@valko-ui/components'
 import DocSection from '../../../components/DocSection'
 import ExampleSection from '../../../components/ExampleSection'
@@ -156,19 +156,73 @@ const generateMenuItems = (items: { value: string; label: string }[], groupName:
   }))
 }
 
-const activeItemsList = ref<Record<string, MenuItem['active'] | null>>({})
+const activeItemsList = ref<Record<string, MenuItem['key'] | null>>({})
 
 const onItemClick = (item: MenuItem, menuKey: string) => {
-  activeItemsList.value[menuKey] = item.active
+  activeItemsList.value[menuKey] = item.key
 }
 
-// active & onClick for playground
+// active & onClick for playground menu
 
 const activeItem = ref<MenuItem['key'] | null>(null)
 
 const onClick = (item: MenuItem) => {
   activeItem.value = item.key
 }
+
+onMounted(() => {
+  // Initialize every menu with the first item active
+  // Click the first item in each menu
+  colorOptions.forEach((_, index) => {
+    const firstItemKey = colorOptions[0].value
+    const menuKey = `color-menu-${index}`
+    activeItemsList.value[menuKey] = firstItemKey
+    const menuItem = menuItems.find(item => item.key === firstItemKey)
+    if (menuItem) {
+      onItemClick(menuItem, menuKey)
+    }
+  })
+
+  variantOptions.forEach((_, index) => {
+    const firstItemKey = variantOptions[0].value
+    const menuKey = `variant-menu-${index}`
+    activeItemsList.value[menuKey] = firstItemKey
+    const menuItem = menuItems.find(item => item.key === firstItemKey)
+    if (menuItem) {
+      onItemClick(menuItem, menuKey)
+    }
+  })
+
+  shapeOptions.forEach((_, index) => {
+    const firstItemKey = shapeOptions[0].value
+    const menuKey = `shape-menu-${index}`
+    activeItemsList.value[menuKey] = firstItemKey
+    const menuItem = menuItems.find(item => item.key === firstItemKey)
+    if (menuItem) {
+      onItemClick(menuItem, menuKey)
+    }
+  })
+
+  sizeOptions.forEach((_, index) => {
+    const firstItemKey = sizeOptions[0].value
+    const menuKey = `size-menu-${index}`
+    activeItemsList.value[menuKey] = firstItemKey
+    const menuItem = menuItems.find(item => item.key === firstItemKey)
+    if (menuItem) {
+      onItemClick(menuItem, menuKey)
+    }
+  })
+
+  // Click on the first item in the playground menu
+  const firstPlaygroundItemKey = menuItems[0].key
+  activeItem.value = firstPlaygroundItemKey
+  const firstPlaygroundItem = menuItems.find(item => item.key === firstPlaygroundItemKey)
+  if (firstPlaygroundItem) {
+    onClick(firstPlaygroundItem)
+  }
+})
+
+
 </script>
 
 <template>

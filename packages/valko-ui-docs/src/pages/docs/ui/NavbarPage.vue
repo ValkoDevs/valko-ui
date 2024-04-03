@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import DocSection from '../../../components/DocSection'
 import ExampleSection from '../../../components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
@@ -90,6 +90,24 @@ const navbarSlots = [
     example: '<template #default>\n  <p>This is the main content of the Navbar.</p>\n</template>'
   }
 ]
+
+const playgroundClass = computed(() => {
+  if (form.value.variant === 'filled') {
+    if (form.value.color === 'light' || form.value.color === 'neutral') return 'text-black'
+    return 'text-white'
+  }
+  return `text-${form.value.color}-500`
+})
+
+const playgroundColor = computed(() => {
+  if (form.value.variant === 'filled') {
+    if (form.value.color === 'light' || form.value.color === 'neutral') return 'dark'
+    if (form.value.color === 'dark') return 'secondary'
+    return 'light'
+  }
+  if (form.value.color === 'light' || form.value.color === 'neutral') return 'dark'
+  return form.value.color
+})
 </script>
 
 <template>
@@ -108,11 +126,11 @@ const navbarSlots = [
           :fixed="form.fixed"
           :flat="form.flat"
         >
-          <div class="w-full flex justify-between items-center">
+          <div :class="`w-full flex ${form.size === 'xs' ? 'flex-row-reverse' : ''} justify-between items-center`">
             <vk-icon
               name="brand-vite"
               :size="form.size"
-              :class="`${form.color === 'light' ? 'text-black' : (form.color === 'neutral' ? 'text-black' : (form.variant === 'filled' ? 'text-white' : 'text-black'))}`"
+              :class="playgroundClass"
             />
             <div>
               <vk-tabs
@@ -120,14 +138,15 @@ const navbarSlots = [
                 shape="line"
                 variant="ghost"
                 :size="form.size"
-                :class="`${form.color === 'light' ? 'text-black' : (form.color === 'neutral' ? 'text-black' : (form.variant === 'filled' ? 'text-white' : form.color))}`"
-                :color="`${form.color === 'light' ? 'dark' : (form.color === 'neutral' ? 'dark' : (form.variant === 'filled' ? 'light' : form.color))}`"
+                :class="playgroundClass"
+                :color="playgroundColor"
               />
             </div>
             <vk-avatar
               size="xs"
               shape="rounded"
-              :color="`${form.variant === 'filled' ? 'light' : (form.color === 'neutral' ? 'dark' : (form.color === 'light' ? 'dark' : form.color))}`"
+              :class="`${form.size === 'xs' ? 'hidden' : ''}`"
+              :color="playgroundColor"
               flat
             />
           </div>
