@@ -11,6 +11,8 @@ const styles = tv({
     'justify-items-center',
     'items-center',
     'shadow-lg',
+    'shadow-light-4',
+    'dark:shadow-dark-5',
     'shrink-0'
   ],
   variants: {
@@ -27,27 +29,27 @@ const styles = tv({
     },
     size: {
       xs: [
-        'h-8'
+        'h-10'
       ],
       sm: [
         'h-12'
       ],
       md: [
-        'h-16'
+        'h-14'
       ],
       lg: [
-        'h-20'
+        'h-16'
       ]
     },
     shape: {
       rounded: [
-        'rounded-b-full'
+        'rounded-b-2xl'
       ],
       square: [
         'rounded-none'
       ],
       soft: [
-        'rounded-b-2xl'
+        'rounded-b-lg'
       ]
     },
     variant: {

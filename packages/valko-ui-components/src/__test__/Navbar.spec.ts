@@ -18,7 +18,7 @@ describe('Navbar component', () => {
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('.h-16').exists()).toBe(true)
+        expect(wrapper.find('.h-14').exists()).toBe(true)
       })
 
       it('should be variant filled', () => {
@@ -26,7 +26,7 @@ describe('Navbar component', () => {
       })
 
       it('should be shape soft', () => {
-        expect(wrapper.find('.rounded-b-2xl').exists()).toBe(true)
+        expect(wrapper.find('.rounded-b-lg').exists()).toBe(true)
       })
 
       it('should not be flat', () => {
@@ -134,7 +134,7 @@ describe('Navbar component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded-b-full').exists()).toBe(true)
+        expect(wrapper.find('.rounded-b-2xl').exists()).toBe(true)
       })
 
       it('should be soft when props.shape is soft', () => {
@@ -144,7 +144,7 @@ describe('Navbar component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded-b-2xl').exists()).toBe(true)
+        expect(wrapper.find('.rounded-b-lg').exists()).toBe(true)
       })
 
       it('should be square when props.shape is square', () => {
@@ -166,7 +166,7 @@ describe('Navbar component', () => {
           }
         })
 
-        expect(wrapper.find('.h-8').exists()).toBe(true)
+        expect(wrapper.find('.h-10').exists()).toBe(true)
       })
 
       it('should be sm when props.size is sm', () => {
@@ -186,7 +186,7 @@ describe('Navbar component', () => {
           }
         })
 
-        expect(wrapper.find('.h-16').exists()).toBe(true)
+        expect(wrapper.find('.h-14').exists()).toBe(true)
       })
 
       it('should be lg when props.size is lg', () => {
@@ -196,7 +196,7 @@ describe('Navbar component', () => {
           }
         })
 
-        expect(wrapper.find('.h-20').exists()).toBe(true)
+        expect(wrapper.find('.h-16').exists()).toBe(true)
       })
     })
 

@@ -74,7 +74,7 @@ watchEffect(() => {
     </vk-navbar>
 
     <div class="w-full flex">
-      <aside class="hidden md:block md:w-40 lg:w-52 xl:w-60 shrink-0 overflow-y-auto border-r border-light-4 dark:border-dark-2 max-h-[calc(100vh_-_4rem)] h-screen sticky top-16">
+      <aside class="hidden md:block md:w-40 lg:w-52 xl:w-60 shrink-0 overflow-y-auto border-r border-light-4 dark:border-dark-2 max-h-[calc(100vh_-_3.5rem)] h-screen sticky top-14">
         <vk-menu
           :items="menuItems"
           :active="activeItem"

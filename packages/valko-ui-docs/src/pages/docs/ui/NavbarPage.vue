@@ -25,12 +25,6 @@ const colors = [
   { value: 'neutral', label: 'Neutral' }
 ]
 
-const tabs = [
-  { key: 'home', title: 'Home' },
-  { key: 'doc', title: 'Docs' },
-  { key: 'blog', title: 'Blog' }
-]
-
 const navbarProps = [
   {
     prop: 'color',
@@ -98,16 +92,6 @@ const playgroundClass = computed(() => {
   }
   return `text-${form.value.color}-500`
 })
-
-const playgroundColor = computed(() => {
-  if (form.value.variant === 'filled') {
-    if (form.value.color === 'light' || form.value.color === 'neutral') return 'dark'
-    if (form.value.color === 'dark') return 'secondary'
-    return 'light'
-  }
-  if (form.value.color === 'light' || form.value.color === 'neutral') return 'dark'
-  return form.value.color
-})
 </script>
 
 <template>
@@ -126,30 +110,11 @@ const playgroundColor = computed(() => {
           :fixed="form.fixed"
           :flat="form.flat"
         >
-          <div :class="`w-full flex ${form.size === 'xs' ? 'flex-row-reverse' : ''} justify-between items-center`">
-            <vk-icon
-              name="brand-vite"
-              :size="form.size"
-              :class="playgroundClass"
-            />
-            <div>
-              <vk-tabs
-                :tabs="tabs"
-                shape="line"
-                variant="ghost"
-                :size="form.size"
-                :class="playgroundClass"
-                :color="playgroundColor"
-              />
-            </div>
-            <vk-avatar
-              size="xs"
-              shape="rounded"
-              :class="`${form.size === 'xs' ? 'hidden' : ''}`"
-              :color="playgroundColor"
-              flat
-            />
-          </div>
+          <vk-icon
+            name="brand-vite"
+            :size="form.size"
+            :class="playgroundClass"
+          />
         </vk-navbar>
       </div>
     </template>
@@ -199,39 +164,21 @@ const playgroundColor = computed(() => {
         wrap
         gap
       >
-        <div class="grid grid-cols-3 gap-10">
+        <div class="w-full grid grid-cols-3 gap-4">
           <div
             v-for="color in colors"
             :key="color.value"
             class="w-full"
           >
-            <span>{{ color.label }}</span>
             <vk-navbar
               :color="color.value"
-              class="mt-4"
             >
-              <div class="w-full flex justify-between items-center">
-                <vk-icon
-                  name="brand-vite"
-                  size="md"
-                  :class="`${color.value === 'light' ? 'text-black' : (color.value === 'neutral' ? 'text-black' : 'text-white')}`"
-                />
-                <div>
-                  <vk-tabs
-                    :tabs="tabs"
-                    shape="line"
-                    variant="ghost"
-                    :class="`${color.value === 'dark' ? 'text-white' : 'text-black'}`"
-                    :color="`${color.value === 'dark' ? 'secondary' : (color.value === 'light' ? 'dark' : (color.value === 'neutral' ? 'dark' : 'light'))}`"
-                  />
-                </div>
-                <vk-avatar
-                  size="xs"
-                  shape="rounded"
-                  :color="`${color.value === 'light' ? 'dark' : (color.value === 'neutral' ? 'dark' : 'light')}`"
-                  flat
-                />
-              </div>
+              <vk-icon
+                name="brand-vite"
+                size="md"
+                :class="`${color.value === 'light' ? 'text-black' : (color.value === 'neutral' ? 'text-black' : 'text-white')}`"
+              />
+              <span class="font-semibold ml-4">{{ color.label }}</span>
             </vk-navbar>
           </div>
         </div>
@@ -248,33 +195,15 @@ const playgroundColor = computed(() => {
           :key="variant.value"
           class="w-full"
         >
-          <span>{{ variant.label }}</span>
           <vk-navbar
             :variant="variant.value"
-            class="mt-4"
           >
-            <div class="w-full flex justify-between items-center">
-              <vk-icon
-                name="brand-vite"
-                size="md"
-                :class="`${variant.value === 'filled' ? 'text-white' : 'text-black'}`"
-              />
-              <div>
-                <vk-tabs
-                  :tabs="tabs"
-                  shape="line"
-                  :class="`${variant.value === 'filled' ? 'text-white' : 'text-black'}`"
-                  :color="`${variant.value === 'filled' ? 'light' : 'primary'}`"
-                  variant="ghost"
-                />
-              </div>
-              <vk-avatar
-                size="xs"
-                shape="rounded"
-                :color="`${variant.value === 'filled' ? 'light' : 'primary'}`"
-                flat
-              />
-            </div>
+            <vk-icon
+              name="brand-vite"
+              size="md"
+              :class="`${variant.value === 'filled' ? 'text-white' : 'text-black'}`"
+            />
+            <span class="font-semibold ml-4">{{ variant.label }}</span>
           </vk-navbar>
         </div>
       </example-section>
@@ -290,33 +219,15 @@ const playgroundColor = computed(() => {
           :key="shape.value"
           class="w-full"
         >
-          <span>{{ shape.label }}</span>
           <vk-navbar
             :shape="shape.value"
-            class="mt-4"
           >
-            <div class="w-full flex justify-between items-center">
-              <vk-icon
-                name="brand-vite"
-                size="md"
-                class="text-white"
-              />
-              <div>
-                <vk-tabs
-                  :tabs="tabs"
-                  shape="line"
-                  variant="ghost"
-                  class="text-white"
-                  color="light"
-                />
-              </div>
-              <vk-avatar
-                size="xs"
-                shape="rounded"
-                color="light"
-                flat
-              />
-            </div>
+            <vk-icon
+              name="brand-vite"
+              size="md"
+              class="text-white"
+            />
+            <span class="font-semibold ml-4">{{ shape.label }}</span>
           </vk-navbar>
         </div>
       </example-section>
@@ -324,42 +235,24 @@ const playgroundColor = computed(() => {
       <example-section
         title="Sizes"
         justify="start"
-        wrap
         gap
       >
-        <div
-          v-for="size in sizeOptions"
-          :key="size.value"
-          class="w-full"
-        >
-          <span>{{ size.label }}</span>
-          <vk-navbar
-            :size="size.value"
-            class="mt-4"
+        <div class="w-full grid grid-cols-2 gap-4">
+          <div
+            v-for="size in sizeOptions"
+            :key="size.value"
           >
-            <div class="w-full flex justify-between items-center">
+            <vk-navbar
+              :size="size.value"
+            >
               <vk-icon
                 name="brand-vite"
                 size="md"
                 class="text-white"
               />
-              <div>
-                <vk-tabs
-                  :tabs="tabs"
-                  shape="line"
-                  variant="ghost"
-                  class="text-white"
-                  color="light"
-                />
-              </div>
-              <vk-avatar
-                size="xs"
-                shape="rounded"
-                color="light"
-                flat
-              />
-            </div>
-          </vk-navbar>
+              <span class="font-semibold ml-4">{{ size.label }}</span>
+            </vk-navbar>
+          </div>
         </div>
       </example-section>
 
@@ -370,33 +263,15 @@ const playgroundColor = computed(() => {
         gap
       >
         <div class="w-full">
-          <span>Floating</span>
           <vk-navbar
-            class="mt-4"
             floating
           >
-            <div class="w-full flex justify-between items-center">
-              <vk-icon
-                name="brand-vite"
-                size="md"
-                class="text-white"
-              />
-              <div>
-                <vk-tabs
-                  :tabs="tabs"
-                  shape="line"
-                  variant="ghost"
-                  class="text-white"
-                  color="light"
-                />
-              </div>
-              <vk-avatar
-                size="xs"
-                shape="rounded"
-                color="light"
-                flat
-              />
-            </div>
+            <vk-icon
+              name="brand-vite"
+              size="md"
+              class="text-white"
+            />
+            <span class="font-semibold ml-4">Floating</span>
           </vk-navbar>
         </div>
       </example-section>
@@ -408,33 +283,15 @@ const playgroundColor = computed(() => {
         gap
       >
         <div class="w-full">
-          <span>Flat</span>
           <vk-navbar
-            class="mt-4"
             flat
           >
-            <div class="w-full flex justify-between items-center">
-              <vk-icon
-                name="brand-vite"
-                size="md"
-                class="text-white"
-              />
-              <div>
-                <vk-tabs
-                  :tabs="tabs"
-                  shape="line"
-                  variant="ghost"
-                  class="text-white"
-                  color="light"
-                />
-              </div>
-              <vk-avatar
-                size="xs"
-                shape="rounded"
-                color="light"
-                flat
-              />
-            </div>
+            <vk-icon
+              name="brand-vite"
+              size="md"
+              class="text-white"
+            />
+            <span class="font-semibold ml-4">Flat</span>
           </vk-navbar>
         </div>
       </example-section>
@@ -446,33 +303,15 @@ const playgroundColor = computed(() => {
         gap
       >
         <div class="w-full">
-          <span>Fixed</span>
           <vk-navbar
-            class="mt-4"
             fixed
           >
-            <div class="w-full flex justify-between items-center">
-              <vk-icon
-                name="brand-vite"
-                size="md"
-                class="text-white"
-              />
-              <div>
-                <vk-tabs
-                  :tabs="tabs"
-                  shape="line"
-                  variant="ghost"
-                  class="text-white"
-                  color="light"
-                />
-              </div>
-              <vk-avatar
-                size="xs"
-                shape="rounded"
-                color="light"
-                flat
-              />
-            </div>
+            <vk-icon
+              name="brand-vite"
+              size="md"
+              class="text-white"
+            />
+            <span class="font-semibold ml-4">Fixed</span>
           </vk-navbar>
         </div>
       </example-section>
