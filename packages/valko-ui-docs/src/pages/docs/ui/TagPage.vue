@@ -14,12 +14,12 @@ const form = ref({
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  content: 'JavaScript',
+  text: 'ValkoUI',
   iconLeft: false,
   iconRight: false,
   closable: false,
-  flat: false,
-  disabled: false
+  disabled: false,
+  isPressable: false
 })
 
 const tagProps = [
@@ -52,9 +52,9 @@ const tagProps = [
     default: 'md'
   },
   {
-    prop: 'content',
-    required: false,
-    description: 'The text content displayed in the Tag.',
+    prop: 'text',
+    required: true,
+    description: 'The text displayed in the Tag.',
     values: 'string',
     default: ''
   },
@@ -80,9 +80,9 @@ const tagProps = [
     default: 'false'
   },
   {
-    prop: 'flat',
+    prop: 'isPressable',
     required: false,
-    description: 'Disables interaction with the Tag.',
+    description: 'Whether the Tag should allow to be pressed.',
     values: 'true, false',
     default: 'false'
   },
@@ -146,11 +146,11 @@ watch(isShown, () => {
             :variant="form.variant"
             :shape="form.shape"
             :size="form.size"
-            :content="form.content"
+            :text="form.text"
             :icon-left="form.iconLeft ? 'tag' : ''"
             :icon-right="form.iconRight ? 'tag' : ''"
             :closable="form.closable"
-            :flat="form.flat"
+            :is-pressable="form.isPressable"
             :disabled="form.disabled"
             @click="onClick"
             @close="closeTag"
@@ -159,11 +159,6 @@ watch(isShown, () => {
       </div>
     </template>
     <template #playground-options>
-      <vk-input
-        label="Content"
-        size="sm"
-        v-model="form.content"
-      />
       <vk-select
         placeholder="Color"
         size="sm"
@@ -188,6 +183,11 @@ watch(isShown, () => {
         :options="sizeOptions"
         v-model="form.size"
       />
+      <vk-input
+        label="Text"
+        size="sm"
+        v-model="form.text"
+      />
       <vk-checkbox
         label="Icon Left"
         v-model="form.iconLeft"
@@ -201,8 +201,8 @@ watch(isShown, () => {
         v-model="form.closable"
       />
       <vk-checkbox
-        label="Flat"
-        v-model="form.flat"
+        label="Pressable"
+        v-model="form.isPressable"
       />
       <vk-checkbox
         label="Disabled"
@@ -220,7 +220,7 @@ watch(isShown, () => {
           v-for="color in colorOptions"
           :key="color.value"
           :color="color.value"
-          :content="color.label"
+          :text="color.label"
         />
       </example-section>
 
@@ -233,7 +233,7 @@ watch(isShown, () => {
           v-for="variant in variantOptions"
           :key="variant.value"
           :variant="variant.value"
-          :content="variant.label"
+          :text="variant.label"
         />
       </example-section>
 
@@ -246,7 +246,7 @@ watch(isShown, () => {
           v-for="shape in shapeOptions"
           :key="shape.value"
           :shape="shape.value"
-          :content="shape.label"
+          :text="shape.label"
         />
       </example-section>
 
@@ -259,7 +259,7 @@ watch(isShown, () => {
           v-for="size in sizeOptions"
           :key="size.value"
           :size="size.value"
-          :content="size.label"
+          :text="size.label"
         />
       </example-section>
 
@@ -269,38 +269,20 @@ watch(isShown, () => {
         gap
       >
         <vk-tag
-          content="Without Icons"
+          text="Without Icons"
         />
         <vk-tag
-          content="Icon Left"
+          text="Icon Left"
           icon-left="tag"
         />
         <vk-tag
-          content="Icon Right"
+          text="Icon Right"
           icon-right="tag"
         />
         <vk-tag
-          content="Icons"
+          text="Icons"
           icon-left="tag"
           icon-right="tag"
-        />
-      </example-section>
-
-      <example-section
-        title="Disabled"
-      >
-        <vk-tag
-          content="Disabled"
-          disabled
-        />
-      </example-section>
-
-      <example-section
-        title="Flat"
-      >
-        <vk-tag
-          content="Flat"
-          flat
         />
       </example-section>
 
@@ -319,11 +301,30 @@ watch(isShown, () => {
         >
           <vk-tag
             v-if="isShown"
-            content="Closable"
+            text="Closable"
             closable
             @close="closeTag"
           />
         </transition>
+      </example-section>
+
+      <example-section
+        title="Pressable"
+      >
+        <vk-tag
+          text="Pressable"
+          is-pressable
+          @click="onClick"
+        />
+      </example-section>
+
+      <example-section
+        title="Disabled"
+      >
+        <vk-tag
+          text="Disabled"
+          disabled
+        />
       </example-section>
     </template>
 

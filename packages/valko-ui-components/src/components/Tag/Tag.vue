@@ -10,21 +10,20 @@ const props = withDefaults(defineProps<TagProps>(), {
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  content: 'Tag',
   closable: false,
-  loading: false
+  isPressable: false
 })
 
 const emit = defineEmits(['click', 'close'])
 
 const onClick = () => {
-  if (!props.disabled && !props.loading) {
+  if (!props.disabled && props.isPressable) {
     emit('click')
   }
 }
 
 const onClose = () => {
-  if (!props.disabled && !props.loading) {
+  if (!props.disabled) {
     emit('close')
   }
 }
@@ -43,7 +42,7 @@ const classes = useStyle(props)
         :name="iconLeft"
         :class="classes.icons"
       />
-      <span :class="classes.content">{{ content }}</span>
+      <span :class="classes.content">{{ text }}</span>
       <vk-icon
         v-if="iconRight"
         :name="iconRight"
@@ -59,6 +58,7 @@ const classes = useStyle(props)
       flat
       :class="classes.closable"
       :disabled="disabled"
+      :style="{ padding: '0' }"
       @click="onClose"
     >
       <vk-icon

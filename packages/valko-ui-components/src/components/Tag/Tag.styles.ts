@@ -6,26 +6,23 @@ const styles = tv({
   slots: {
     container: [
       'vk-tag',
-      'w-fit',
-      'p-2',
-      'shadow-md',
       'flex',
       'justify-between',
-      'items-center',
-      'cursor-pointer'
+      'items-center'
     ],
     icons: [
       'mx-1'
     ],
     content: [
-      'font-semibold'
+      'mx-1',
+      'font-semibold',
+      'tracking-wider'
     ],
     closable: [
       'vk-tag__closable',
-      'ml-2',
+      'ml-1',
       'flex',
-      'flex-col',
-      'justify-start'
+      'items-center'
     ]
   },
   variants: {
@@ -42,7 +39,6 @@ const styles = tv({
       },
       outlined: {
         container: [
-          'p-[calc(0.5rem_-_2px)]',
           'border-2'
         ]
       }
@@ -67,22 +63,30 @@ const styles = tv({
     size: {
       xs: {
         container: [
-          'text-xs'
+          'text-[0.6321875rem]',
+          'leading-[0.6321875rem]',
+          'p-[0.180625rem]'
         ]
       },
       sm: {
         container: [
-          'text-sm'
+          'text-[0.74375rem]',
+          'leading-[0.74375rem]',
+          'p-[0.2125rem]'
         ]
       },
       md: {
         container: [
-          'text-base'
+          'text-sm',
+          'leading-[0.875rem]',
+          'p-1'
         ]
       },
       lg: {
         container: [
-          'text-lg'
+          'text-[1.00625rem]',
+          'leading-[1.00625rem]',
+          'p-[0.2875rem]'
         ]
       }
     },
@@ -99,10 +103,10 @@ const styles = tv({
     disabled: {
       true: {}
     },
-    flat: {
+    isPressable: {
       true: {
         container: [
-          'shadow-none'
+          'cursor-pointer'
         ]
       }
     }
@@ -462,6 +466,43 @@ const styles = tv({
       class: {
         closable: [
           'cursor-not-allowed'
+        ]
+      }
+    },
+    // outlined & size
+    {
+      variant: 'outlined',
+      size: 'xs',
+      class: {
+        container: [
+          'p-[calc(0.180625rem_-_2px)]'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: 'sm',
+      class: {
+        container: [
+          'p-[calc(0.2125rem_-_2px)]'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: 'md',
+      class: {
+        container: [
+          'p-[calc(0.25rem_-_2px)]'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: 'lg',
+      class: {
+        container: [
+          'p-[calc(0.2875rem_-_2px)]'
         ]
       }
     }
