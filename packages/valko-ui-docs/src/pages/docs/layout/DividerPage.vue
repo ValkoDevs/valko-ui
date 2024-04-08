@@ -16,6 +16,11 @@ const form = ref({
   direction: 'horizontal'
 })
 
+const colors = [
+  ...colorOptions,
+  { value: 'neutral', label: 'Neutral' }
+]
+
 const directionOptions = [
   { value: 'vertical', label: 'Vertical' },
   { value: 'horizontal', label: 'Horizontal' }
@@ -26,7 +31,7 @@ const dividerProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Divider.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
+    values: 'primary, secondary, error, warning, info, success, light, dark, neutral',
     default: 'primary'
   },
   {
@@ -90,7 +95,7 @@ const dividerProps = [
       <vk-select
         placeholder="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colors"
         v-model="form.color"
       />
       <vk-select
@@ -127,7 +132,7 @@ const dividerProps = [
       >
         <div class="w-full grid grid-cols-3 gap-4">
           <div
-            v-for="color in colorOptions"
+            v-for="color in colors"
             :key="color.value"
           >
             <span class="font-semibold">{{ color.label }}</span>

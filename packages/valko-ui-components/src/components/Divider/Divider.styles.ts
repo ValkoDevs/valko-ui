@@ -16,7 +16,8 @@ const divider = tv({
       warning: [],
       error: [],
       light: [],
-      dark: []
+      dark: [],
+      neutral: []
     },
     variant: {
       filled: [
@@ -116,6 +117,14 @@ const divider = tv({
         'bg-dark-5'
       ]
     },
+    {
+      variant: 'filled',
+      color: 'neutral',
+      class: [
+        'bg-light-4',
+        'dark:bg-dark-1'
+      ]
+    },
     // outlined & color
     {
       variant: 'outlined',
@@ -173,61 +182,77 @@ const divider = tv({
         'border-dark-5'
       ]
     },
+    {
+      variant: 'outlined',
+      color: 'neutral',
+      class: [
+        'border-light-4',
+        'dark:border-dark-1'
+      ]
+    },
     // ghost & color
     {
       variant: 'ghost',
       color: 'primary',
       class: [
-        'bg-primary-500/[.20]'
+        'bg-primary-500/[.5]'
       ]
     },
     {
       variant: 'ghost',
       color: 'secondary',
       class: [
-        'bg-secondary-500/[.20]'
+        'bg-secondary-500/[.5]'
       ]
     },
     {
       variant: 'ghost',
       color: 'success',
       class: [
-        'bg-success-500/[.20]'
+        'bg-success-500/[.5]'
       ]
     },
     {
       variant: 'ghost',
       color: 'info',
       class: [
-        'bg-info-500/[.20]'
+        'bg-info-500/[.5]'
       ]
     },
     {
       variant: 'ghost',
       color: 'warning',
       class: [
-        'bg-warning-500/[.20]'
+        'bg-warning-500/[.5]'
       ]
     },
     {
       variant: 'ghost',
       color: 'error',
       class: [
-        'bg-error-500/[.20]'
+        'bg-error-500/[.5]'
       ]
     },
     {
       variant: 'ghost',
       color: 'light',
       class: [
-        'bg-light-1/[.20]'
+        'bg-light-1/[.5]'
       ]
     },
     {
       variant: 'ghost',
       color: 'dark',
       class: [
-        'bg-dark-5/[.20]'
+        'bg-dark-5/[.5]'
+      ]
+    },
+    {
+      variant: 'ghost',
+      color: 'neutral',
+      class: [
+        'bg-light-4/[.5]',
+        'dark:bg-dark-1/[.5]'
       ]
     },
     // vertical & size
@@ -235,28 +260,28 @@ const divider = tv({
       direction: 'vertical',
       size: 'xs',
       class: [
-        'w-0.5'
+        'w-px'
       ]
     },
     {
       direction: 'vertical',
       size: 'sm',
       class: [
-        'w-1'
+        'w-0.5'
       ]
     },
     {
       direction: 'vertical',
       size: 'md',
       class: [
-        'w-1.5'
+        'w-[3px]'
       ]
     },
     {
       direction: 'vertical',
       size: 'lg',
       class: [
-        'w-2'
+        'w-1'
       ]
     },
     // horizontal & size
@@ -264,28 +289,28 @@ const divider = tv({
       direction: 'horizontal',
       size: 'xs',
       class: [
-        'h-0.5'
+        'h-px'
       ]
     },
     {
       direction: 'horizontal',
       size: 'sm',
       class: [
-        'h-1'
+        'h-0.5'
       ]
     },
     {
       direction: 'horizontal',
       size: 'md',
       class: [
-        'h-1.5'
+        'h-[3px]'
       ]
     },
     {
       direction: 'horizontal',
       size: 'lg',
       class: [
-        'h-2'
+        'h-1'
       ]
     }
   ]

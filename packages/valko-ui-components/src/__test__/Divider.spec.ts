@@ -18,7 +18,7 @@ describe('Divider component', () => {
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('.vk-divider').classes()).toContain('h-1.5')
+        expect(wrapper.find('.vk-divider').classes()).toContain('h-[3px]')
       })
 
       it('should be variant filled', () => {
@@ -114,6 +114,16 @@ describe('Divider component', () => {
 
         expect(wrapper.find('.bg-dark-5').exists()).toBe(true)
       })
+
+      it('should be color neutral when props.color is neutral', () => {
+        wrapper = mount(VkDivider, {
+          props: {
+            color: 'neutral'
+          }
+        })
+
+        expect(wrapper.find('.bg-light-4').exists()).toBe(true)
+      })
     })
 
     describe('When shape prop changes', () => {
@@ -156,7 +166,7 @@ describe('Divider component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-divider').classes()).toContain('h-0.5')
+        expect(wrapper.find('.vk-divider').classes()).toContain('h-px')
       })
 
       it('should be sm when props.size is sm', () => {
@@ -166,7 +176,7 @@ describe('Divider component', () => {
           }
         })
 
-        expect(wrapper.find('.h-1').exists()).toBe(true)
+        expect(wrapper.find('.vk-divider').classes()).toContain('h-0.5')
       })
 
       it('should be md when props.size is md', () => {
@@ -176,7 +186,7 @@ describe('Divider component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-divider').classes()).toContain('h-1.5')
+        expect(wrapper.find('.vk-divider').classes()).toContain('h-[3px]')
       })
 
       it('should be lg when props.size is lg', () => {
@@ -186,7 +196,7 @@ describe('Divider component', () => {
           }
         })
 
-        expect(wrapper.find('.h-2').exists()).toBe(true)
+        expect(wrapper.find('.vk-divider').classes()).toContain('h-1')
       })
     })
 
