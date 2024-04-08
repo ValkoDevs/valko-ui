@@ -8,7 +8,6 @@ const styles = tv({
     'group-data-[direction=col]:border-b-2',
     'group-data-[direction=col-reverse]:border-t-2',
     'border-light-4',
-    'text-lg',
     'dark:border-dark-1'
   ]
 })

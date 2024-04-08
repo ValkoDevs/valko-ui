@@ -4,7 +4,8 @@ import { tv } from 'tailwind-variants'
 const styles = tv({
   base: [
     'vk-cardbody',
-    'p-4'
+    'p-4',
+    'grow'
   ]
 })
 

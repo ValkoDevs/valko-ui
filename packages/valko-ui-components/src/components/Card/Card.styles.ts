@@ -7,6 +7,7 @@ const styles = tv({
     'vk-card',
     'w-fit',
     'flex',
+    'items-stretch',
     'shadow-md',
     'overflow-hidden',
     'group'

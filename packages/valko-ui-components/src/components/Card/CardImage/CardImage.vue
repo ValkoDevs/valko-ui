@@ -1,27 +1,45 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { watchEffect, ref, Ref } from 'vue'
 import { useStyle } from './CardImage.styles'
 import { CardImageProps } from '#valkoui/types'
 
 defineOptions({ name: 'VkCardImage' })
 
-const props = defineProps<CardImageProps>()
-
+const props = withDefaults(defineProps<CardImageProps>(), {
+  width: '100%',
+  height: 'auto'
+})
 const classes = useStyle()
+const verifiedSrc: Ref<string | null> = ref(null)
+const img: HTMLImageElement = new Image()
 
-const imageUrl = ref(props.src)
+watchEffect(async () => {
+  img.src = props.src ?? ''
+
+  try {
+    await img.decode()
+    verifiedSrc.value = props.src
+  } catch (error) {
+    verifiedSrc.value = null
+  }
+})
 </script>
 
 <template>
   <div
+    :style="`width:${width}; height:${height};`"
     :class="classes.container"
   >
-    <div
+    <img
+      v-if="verifiedSrc"
+      :src="verifiedSrc"
+      :alt="alt"
       :class="classes.img"
-      :style="{ backgroundImage: 'url(' + imageUrl + ')' }"
-    />
-    <div :class="classes.gradient" />
-    <div :class="classes.slot">
+    >
+    <div
+      v-if="$slots.default"
+      :class="classes.gradient"
+    >
       <slot />
     </div>
   </div>

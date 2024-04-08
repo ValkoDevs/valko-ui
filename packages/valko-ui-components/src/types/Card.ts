@@ -5,7 +5,10 @@ export interface CardFooterProps {
 }
 
 export interface CardImageProps {
-  src?: string;
+  src: string;
+  alt?: string;
+  width?: string;
+  height?: string;
 }
 
 export interface CardProps extends Variants, Shapes {
