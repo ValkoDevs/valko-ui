@@ -5,33 +5,29 @@ const styles = tv({
   slots: {
     container: [
       'vk-cardimage',
-      'h-full',
       'w-full',
       'overflow-hidden',
-      'relative'
+      'relative',
+      'grow'
     ],
     img: [
-      'bg-cover',
-      'bg-no-repeat',
-      'bg-center',
-      'absolute',
-      'inset-0',
-      'z-10'
+      'w-full',
+      'h-full',
+      'object-cover',
+      'object-center'
     ],
     gradient: [
-      'bg-gradient-to-b from-transparent to-black opacity-40',
-      'absolute',
-      'inset-0',
-      'z-20'
-    ],
-    slot: [
-      'px-4',
+      'w-full',
       'py-3',
+      'px-4',
+      'bg-gradient-to-b',
+      'from-transparent',
+      'to-black',
       'flex',
       'items-end',
       'absolute',
       'inset-0',
-      'z-30'
+      'z-20'
     ]
   }
 })

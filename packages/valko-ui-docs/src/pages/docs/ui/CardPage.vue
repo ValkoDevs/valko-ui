@@ -53,6 +53,13 @@ const cardProps = [
     default: 'md'
   },
   {
+    prop: 'isPressable',
+    required: false,
+    description: 'Wether the Card allows to be clicked.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
     prop: 'flat',
     required: false,
     description: 'Displays a shadow for the Card.',
@@ -79,7 +86,7 @@ const cardSlots = [
 ]
 
 const onClick = () => {
-  console.log('Pressed')
+  alert('Pressed')
 }
 </script>
 
@@ -98,17 +105,18 @@ const onClick = () => {
           :direction="form.direction"
           :flat="form.flat"
           @click="onClick"
-          class="w-64 h-64"
         >
-          <vk-card-header>Hello Header</vk-card-header>
           <vk-card-image
-            src="https://picsum.photos/200"
+            src="https://picsum.photos/id/237/200"
             class="text-white"
-          >
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam in fugit consectetur, quos sit culpa atque odio officia sapiente enim assumenda dolorem ipsa odit. Commodi iure laborum veritatis aut laudantium.</p>
-          </vk-card-image>
-          <vk-card-body>Hello Body</vk-card-body>
-          <vk-card-footer>Hello Footer</vk-card-footer>
+            height="15rem"
+          />
+          <vk-card-body>
+            <h2 class="font-semibold">
+              My Dog
+            </h2>
+            <p>Pana's name is Roberto</p>
+          </vk-card-body>
         </vk-card>
       </div>
     </template>
@@ -149,10 +157,136 @@ const onClick = () => {
 
     <template #examples>
       <example-section
-        title="Colors"
-        justify="around"
+        title="Variants"
+        justify="start"
         gap
-      />
+      >
+        <vk-card
+          v-for="variant in variantOptions"
+          :key="variant.value"
+          :variant="variant.value"
+        >
+          <vk-card-image
+            src="https://picsum.photos/id/237/200"
+            class="text-white"
+            height="15rem"
+          />
+          <vk-card-body>
+            <h2 class="font-bold">
+              {{ variant.label }}
+            </h2>
+            <h3 class="font-semibold">
+              My Dog
+            </h3>
+            <p>Pana's name is Roberto</p>
+          </vk-card-body>
+        </vk-card>
+      </example-section>
+
+      <example-section
+        title="Shapes"
+        justify="start"
+        gap
+      >
+        <vk-card
+          v-for="shape in shapeOptions"
+          :key="shape.value"
+          :shape="shape.value"
+        >
+          <vk-card-image
+            src="https://picsum.photos/id/237/200"
+            class="text-white"
+            height="15rem"
+          />
+          <vk-card-body>
+            <h2 class="font-bold">
+              {{ shape.label }}
+            </h2>
+            <h3 class="font-semibold">
+              My Dog
+            </h3>
+            <p>Pana's name is Roberto</p>
+          </vk-card-body>
+        </vk-card>
+      </example-section>
+
+      <example-section
+        title="Sizes"
+        justify="around"
+        wrap
+        gap
+      >
+        <vk-card
+          v-for="size in sizes"
+          :key="size.value"
+          :size="size.value"
+        >
+          <vk-card-image
+            src="https://picsum.photos/id/237/200"
+            class="text-white"
+            height="15rem"
+          />
+          <vk-card-body>
+            <h2 class="font-bold">
+              {{ size.label }}
+            </h2>
+            <h3 class="font-semibold">
+              My Dog
+            </h3>
+            <p>Pana's name is Roberto</p>
+          </vk-card-body>
+        </vk-card>
+      </example-section>
+
+      <example-section
+        title="Pressable"
+        justify="start"
+        gap
+      >
+        <vk-card
+          is-pressable
+        >
+          <vk-card-image
+            src="https://picsum.photos/id/237/200"
+            class="text-white"
+            height="15rem"
+          />
+          <vk-card-body>
+            <h2 class="font-bold">
+              Pressable
+            </h2>
+            <h3 class="font-semibold">
+              My Dog
+            </h3>
+            <p>Pana's name is Roberto</p>
+          </vk-card-body>
+        </vk-card>
+      </example-section>
+
+      <example-section
+        title="Flat"
+        justify="start"
+        gap
+      >
+        <vk-card
+          flat
+        >
+          <vk-card-image
+            src="https://picsum.photos/id/237/200"
+            class="text-white"
+            height="15rem"
+          />
+          <vk-card-body>
+            <h2 class="font-bold">
+              Flat
+            </h2>
+            <h3 class="font-semibold">
+              My Dog
+            </h3>
+            <p>Pana's name is Roberto</p>
+          </vk-card-body>
+        </vk-card>
+      </example-section>
     </template>
 
     <template #api>
