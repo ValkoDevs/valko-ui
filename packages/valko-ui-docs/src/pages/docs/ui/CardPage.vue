@@ -49,7 +49,7 @@ const cardProps = [
     prop: 'size',
     required: false,
     description: 'The size of the Card.',
-    values: 'xs, sm, md, lg',
+    values: 'xs, sm, md, lg, full',
     default: 'md'
   },
   {
@@ -70,18 +70,18 @@ const cardProps = [
 
 const cardEmits = [
   {
-    event: 'close',
+    event: 'click',
     type: '() => void',
     values: '',
-    description: 'Emitted when the alert is closed by the user.'
+    description: 'Emitted when the Card is clicked by the user.'
   }
 ]
 
 const cardSlots = [
   {
     name: 'default',
-    description: 'Slot for the main content of the alert.',
-    example: '<template #default>\n  <p>This is the main content of the alert.</p>\n</template>'
+    description: 'Slot for the main content of the Card.',
+    example: '<template #default>\n<vk-card-body>This is the main content of the Card.</vk-card-body>\n</template>'
   }
 ]
 
@@ -115,7 +115,7 @@ const onClick = () => {
             <h2 class="font-semibold">
               My Dog
             </h2>
-            <p>Pana's name is Roberto</p>
+            <p>He's name is Drago</p>
           </vk-card-body>
         </vk-card>
       </div>
@@ -172,13 +172,13 @@ const onClick = () => {
             height="15rem"
           />
           <vk-card-body>
-            <h2 class="font-bold">
+            <h2 class="font-black mb-4">
               {{ variant.label }}
             </h2>
             <h3 class="font-semibold">
               My Dog
             </h3>
-            <p>Pana's name is Roberto</p>
+            <p>He's name is Drago</p>
           </vk-card-body>
         </vk-card>
       </example-section>
@@ -199,13 +199,13 @@ const onClick = () => {
             height="15rem"
           />
           <vk-card-body>
-            <h2 class="font-bold">
+            <h2 class="font-black mb-4">
               {{ shape.label }}
             </h2>
             <h3 class="font-semibold">
               My Dog
             </h3>
-            <p>Pana's name is Roberto</p>
+            <p>He's name is Drago</p>
           </vk-card-body>
         </vk-card>
       </example-section>
@@ -227,13 +227,13 @@ const onClick = () => {
             height="15rem"
           />
           <vk-card-body>
-            <h2 class="font-bold">
+            <h2 class="font-black mb-4">
               {{ size.label }}
             </h2>
             <h3 class="font-semibold">
               My Dog
             </h3>
-            <p>Pana's name is Roberto</p>
+            <p>He's name is Drago</p>
           </vk-card-body>
         </vk-card>
       </example-section>
@@ -252,13 +252,13 @@ const onClick = () => {
             height="15rem"
           />
           <vk-card-body>
-            <h2 class="font-bold">
+            <h2 class="font-black mb-4">
               Pressable
             </h2>
             <h3 class="font-semibold">
               My Dog
             </h3>
-            <p>Pana's name is Roberto</p>
+            <p>He's name is Drago</p>
           </vk-card-body>
         </vk-card>
       </example-section>
@@ -277,13 +277,13 @@ const onClick = () => {
             height="15rem"
           />
           <vk-card-body>
-            <h2 class="font-bold">
+            <h2 class="font-black mb-4">
               Flat
             </h2>
             <h3 class="font-semibold">
               My Dog
             </h3>
-            <p>Pana's name is Roberto</p>
+            <p>He's name is Drago</p>
           </vk-card-body>
         </vk-card>
       </example-section>
