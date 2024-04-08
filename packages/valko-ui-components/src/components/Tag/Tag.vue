@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { TagProps } from '#valkoui/types'
+import useDarkMode from '#valkoui/composables/useDarkMode'
 import { VkIcon, VkButton } from '../'
 import { useStyle } from './Tag.styles'
 
@@ -15,6 +17,16 @@ const props = withDefaults(defineProps<TagProps>(), {
 })
 
 const emit = defineEmits(['click', 'close'])
+const isDarkMode = useDarkMode()
+const neutralColor = computed(() => isDarkMode.value ? 'light' : 'dark')
+
+const buttonColor = computed(() => {
+  if (props.color === 'neutral' && props.variant === 'filled') return neutralColor.value
+  if (props.variant === 'filled' && props.color === 'light') return 'dark'
+  if (props.variant === 'filled' && props.color !== 'neutral') return 'light'
+  if (props.color === 'neutral') return neutralColor.value
+  return props.color
+})
 
 const onClick = () => {
   if (!props.disabled && props.isPressable) {
@@ -52,7 +64,7 @@ const classes = useStyle(props)
     <vk-button
       v-if="closable"
       variant="link"
-      :color="variant === 'filled' ? 'light' : color"
+      :color="buttonColor"
       size="xs"
       shape="rounded"
       flat

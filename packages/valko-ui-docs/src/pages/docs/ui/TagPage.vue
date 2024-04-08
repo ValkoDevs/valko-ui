@@ -22,12 +22,17 @@ const form = ref({
   isPressable: false
 })
 
+const colors = [
+  ...colorOptions,
+  { value: 'neutral', label: 'Neutral' }
+]
+
 const tagProps = [
   {
     prop: 'color',
     required: false,
     description: 'The color theme of the Tag.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
+    values: 'primary, secondary, error, warning, info, success, light, dark, neutral',
     default: 'primary'
   },
   {
@@ -162,7 +167,7 @@ watch(isShown, () => {
       <vk-select
         placeholder="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colors"
         v-model="form.color"
       />
       <vk-select
@@ -217,7 +222,7 @@ watch(isShown, () => {
         gap
       >
         <vk-tag
-          v-for="color in colorOptions"
+          v-for="color in colors"
           :key="color.value"
           :color="color.value"
           :text="color.label"

@@ -135,6 +135,17 @@ describe('Tag component', () => {
 
         expect(wrapper.find('.bg-dark-4').exists()).toBe(true)
       })
+
+      it('should be color neutral when props.color is neutral', () => {
+        wrapper = mount(VkTag, {
+          props: {
+            color: 'neutral',
+            text: 'Hello World'
+          }
+        })
+
+        expect(wrapper.find('.bg-light-4').exists()).toBe(true)
+      })
     })
 
     describe('When shape prop changes', () => {

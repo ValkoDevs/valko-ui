@@ -98,7 +98,8 @@ const styles = tv({
       warning: {},
       error: {},
       light: {},
-      dark: {}
+      dark: {},
+      neutral: {}
     },
     disabled: {
       true: {}
@@ -119,9 +120,7 @@ const styles = tv({
       disabled: false,
       class: {
         container: [
-          'bg-primary-600',
-          'focus:ring-primary-700',
-          'hover:bg-primary-500'
+          'bg-primary-600'
         ]
       }
     },
@@ -131,9 +130,7 @@ const styles = tv({
       disabled: false,
       class: {
         container: [
-          'bg-secondary-600',
-          'focus:ring-secondary-700',
-          'hover:bg-secondary-500'
+          'bg-secondary-600'
         ]
       }
     },
@@ -143,9 +140,7 @@ const styles = tv({
       disabled: false,
       class: {
         container: [
-          'bg-success-600',
-          'focus:ring-success-700',
-          'hover:bg-success-500'
+          'bg-success-600'
         ]
       }
     },
@@ -155,10 +150,7 @@ const styles = tv({
       disabled: false,
       class: {
         container: [
-          'bg-info-600',
-          'focus:ring-info-700',
-          'hover:bg-info-500',
-          'active:bg-info-700'
+          'bg-info-600'
         ]
       }
     },
@@ -168,9 +160,7 @@ const styles = tv({
       disabled: false,
       class: {
         container: [
-          'bg-warning-600',
-          'focus:ring-warning-700',
-          'hover:bg-warning-500'
+          'bg-warning-600'
         ]
       }
     },
@@ -180,9 +170,7 @@ const styles = tv({
       disabled: false,
       class: {
         container: [
-          'bg-error-600',
-          'focus:ring-error-700',
-          'hover:bg-error-500'
+          'bg-error-600'
         ]
       }
     },
@@ -193,8 +181,6 @@ const styles = tv({
       class: {
         container: [
           'bg-light-2',
-          'focus:ring-light-1',
-          'hover:bg-light-3',
           'text-black'
         ]
       }
@@ -205,9 +191,20 @@ const styles = tv({
       disabled: false,
       class: {
         container: [
-          'bg-dark-4',
-          'focus:ring-dark-5',
-          'hover:bg-dark-3'
+          'bg-dark-4'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'neutral',
+      disabled: false,
+      class: {
+        container: [
+          'bg-light-4',
+          'text-black',
+          'dark:text-white',
+          'dark:bg-dark-3'
         ]
       }
     },
@@ -219,9 +216,7 @@ const styles = tv({
       class: {
         container: [
           'text-primary-600',
-          'bg-primary-500/[.15]',
-          'focus:ring-primary-500/[.30]',
-          'hover:bg-primary-500/[.25]'
+          'bg-primary-500/[.15]'
         ]
       }
     },
@@ -232,9 +227,7 @@ const styles = tv({
       class: {
         container: [
           'text-secondary-600',
-          'bg-secondary-500/[.15]',
-          'focus:ring-secondary-500/[.30]',
-          'hover:bg-secondary-500/[.25]'
+          'bg-secondary-500/[.15]'
         ]
       }
     },
@@ -245,9 +238,7 @@ const styles = tv({
       class: {
         container: [
           'text-success-600',
-          'bg-success-500/[.15]',
-          'focus:ring-success-500/[.30]',
-          'hover:bg-success-500/[.25]'
+          'bg-success-500/[.15]'
         ]
       }
     },
@@ -258,9 +249,7 @@ const styles = tv({
       class: {
         container: [
           'text-info-600',
-          'bg-info-500/[.15]',
-          'focus:ring-info-500/[.30]',
-          'hover:bg-info-500/[.25]'
+          'bg-info-500/[.15]'
         ]
       }
     },
@@ -271,9 +260,7 @@ const styles = tv({
       class: {
         container: [
           'text-warning-600',
-          'bg-warning-500/[.15]',
-          'focus:ring-warning-500/[.30]',
-          'hover:bg-warning-500/[.25]'
+          'bg-warning-500/[.15]'
         ]
       }
     },
@@ -284,9 +271,7 @@ const styles = tv({
       class: {
         container: [
           'text-error-600',
-          'bg-error-500/[.15]',
-          'focus:ring-error-500/[.30]',
-          'hover:bg-error-500/[.25]'
+          'bg-error-500/[.15]'
         ]
       }
     },
@@ -297,9 +282,7 @@ const styles = tv({
       class: {
         container: [
           'text-light-1',
-          'bg-light-1/[.15]',
-          'focus:ring-light-1/[.30]',
-          'hover:bg-light-1/[.25]'
+          'bg-light-1/[.15]'
         ]
       }
     },
@@ -310,9 +293,18 @@ const styles = tv({
       class: {
         container: [
           'text-dark-5',
-          'bg-dark-5/[.15]',
-          'focus:ring-dark-5/[.30]',
-          'hover:bg-dark-5/[.25]'
+          'bg-dark-5/[.15]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'neutral',
+      disabled: false,
+      class: {
+        container: [
+          'bg-light-5/[.15]',
+          'dark:bg-dark-1/[.15]'
         ]
       }
     },
@@ -324,8 +316,6 @@ const styles = tv({
       class: {
         container: [
           'text-primary-600',
-          'focus:ring-primary-400/20',
-          'hover:bg-primary-300/20',
           'border-primary-600'
         ]
       }
@@ -337,8 +327,6 @@ const styles = tv({
       class: {
         container: [
           'text-secondary-600',
-          'focus:ring-secondary-400/20',
-          'hover:bg-secondary-300/20',
           'border-secondary-600'
         ]
       }
@@ -350,8 +338,6 @@ const styles = tv({
       class: {
         container: [
           'text-success-600',
-          'focus:ring-success-400/20',
-          'hover:bg-success-300/20',
           'border-success-600'
         ]
       }
@@ -363,8 +349,6 @@ const styles = tv({
       class: {
         container: [
           'text-info-600',
-          'focus:ring-info-400/20',
-          'hover:bg-info-300/20',
           'border-info-600'
         ]
       }
@@ -376,8 +360,6 @@ const styles = tv({
       class: {
         container: [
           'text-warning-600',
-          'focus:ring-warning-400/20',
-          'hover:bg-warning-300/20',
           'border-warning-600'
         ]
       }
@@ -389,8 +371,6 @@ const styles = tv({
       class: {
         container: [
           'text-error-600',
-          'focus:ring-error-400/20',
-          'hover:bg-error-300/20',
           'border-error-600'
         ]
       }
@@ -402,8 +382,6 @@ const styles = tv({
       class: {
         container: [
           'text-light-1',
-          'focus:ring-light-2/20',
-          'hover:bg-light-1/20',
           'border-light-1'
         ]
       }
@@ -415,9 +393,18 @@ const styles = tv({
       class: {
         container: [
           'text-dark-5',
-          'focus:ring-dark-4/20',
-          'hover:bg-dark-5/20',
           'border-dark-5'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'neutral',
+      disabled: false,
+      class: {
+        container: [
+          'border-light-4',
+          'dark:border-dark-3'
         ]
       }
     },
@@ -503,6 +490,308 @@ const styles = tv({
       class: {
         container: [
           'p-[calc(0.2875rem_-_2px)]'
+        ]
+      }
+    },
+    // pressable styles filled
+    {
+      variant: 'filled',
+      color: 'primary',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-primary-700'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'secondary',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-secondary-700'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'success',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-success-700'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'info',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-info-700'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'warning',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-warning-700'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'error',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-error-700'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'light',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-light-1'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'dark',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-dark-5'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'neutral',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-light-5',
+          'dark:focus:ring-dark-4'
+        ]
+      }
+    },
+    // pressable styles ghost
+    {
+      variant: 'ghost',
+      color: 'primary',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-primary-500/[.30]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'secondary',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-secondary-500/[.30]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'success',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-success-500/[.30]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'info',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-info-500/[.30]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'warning',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-warning-500/[.30]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'error',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-error-500/[.30]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'light',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-light-1/[.30]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'dark',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-dark-5/[.30]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'neutral',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-light-5/[.30]',
+          'dark:focus:ring-dark-5/[.30]'
+        ]
+      }
+    },
+    // pressable styles outlined
+    {
+      variant: 'outlined',
+      color: 'primary',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-primary-400/20'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'secondary',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-secondary-400/20'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'success',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-success-400/20'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'info',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-info-400/20'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'warning',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-warning-400/20'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'error',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-error-400/20'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'light',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-light-2/20'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'dark',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'focus:ring-dark-4/20'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'neutral',
+      isPressable: true,
+      disabled: false,
+      class: {
+        container: [
+          'dark:focus:ring-dark-4/20'
         ]
       }
     }
