@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
 import variantOptions from '@/data/variantOptions'
 import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
@@ -53,6 +53,13 @@ const cardProps = [
     default: 'md'
   },
   {
+    prop: 'direction',
+    required: false,
+    description: 'The direction in what the slots are gonna be displayed.',
+    values: 'row, col, row-reverse, col-reverse',
+    default: 'col'
+  },
+  {
     prop: 'isPressable',
     required: false,
     description: 'Wether the Card allows to be clicked.',
@@ -65,6 +72,37 @@ const cardProps = [
     description: 'Displays a shadow for the Card.',
     values: 'true, false',
     default: 'false'
+  }
+]
+
+const cardImageProps = [
+  {
+    prop: 'src',
+    required: true,
+    description: 'The src for the image.',
+    values: 'string',
+    default: ''
+  },
+  {
+    prop: 'alt',
+    required: false,
+    description: 'The alt for the image.',
+    values: 'string',
+    default: ''
+  },
+  {
+    prop: 'width',
+    required: false,
+    description: 'The widht for the image.',
+    values: 'string',
+    default: '100%'
+  },
+  {
+    prop: 'height',
+    required: false,
+    description: 'The height for the image.',
+    values: 'string',
+    default: 'auto'
   }
 ]
 
@@ -93,7 +131,12 @@ const onClick = () => {
 <template>
   <doc-section
     title="Card"
-    description=""
+    description="
+      Card is a container for text, photos, and actions in the context of a single subject. ValkoUI export 5 card-related componets: Card: The main component to display a card.
+      CardHeader: Commonly used for the title of a card.
+      CardBody: The content of the card.
+      CardFooter: Commonly used for actions.
+      CardImage: An special component who allows to display a background image in the card."
   >
     <template #playground-view>
       <div class="w-full flex justify-center p-4">
@@ -318,6 +361,16 @@ const onClick = () => {
           <vk-data-table
             :headers="slotHeaders"
             :data="cardSlots"
+          />
+        </example-section>
+
+        <example-section
+          title="Card Image Props"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="cardImageProps"
           />
         </example-section>
       </div>
