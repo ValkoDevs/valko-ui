@@ -11,6 +11,7 @@
     "lint:fix": "eslint --fix --ext .ts,.vue,.js ./src"
   },
   "dependencies": {
+    "@vueuse/core": "^10.9.0",
     "vue": "3.4.15",
     "vue-router": "^4.2.4"
   },

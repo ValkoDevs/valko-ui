@@ -172,16 +172,22 @@ const onClick = (item: MenuItem) => {
 
 onMounted(() => {
   // Initialize every menu with the first item active
-  // Click the first item in each menu
   colorOptions.forEach((_, index) => {
+    // Get the key of the first element in the array
     const firstItemKey = colorOptions[0].value
+    // Create a unique menu key based on the index
     const menuKey = `color-menu-${index}`
+    // Set the value of the active item in the menu list to the key of the first item
     activeItemsList.value[menuKey] = firstItemKey
+    // Find the object of the first element in the menuItems array
     const menuItem = menuItems.find(item => item.key === firstItemKey)
+    // If the object of the first element is found
     if (menuItem) {
-      onItemClick(menuItem, menuKey)
+      // Set the 'active' property to true
+      menuItem.active = true
     }
   })
+
 
   variantOptions.forEach((_, index) => {
     const firstItemKey = variantOptions[0].value
@@ -189,7 +195,7 @@ onMounted(() => {
     activeItemsList.value[menuKey] = firstItemKey
     const menuItem = menuItems.find(item => item.key === firstItemKey)
     if (menuItem) {
-      onItemClick(menuItem, menuKey)
+      menuItem.active = true
     }
   })
 
@@ -199,7 +205,7 @@ onMounted(() => {
     activeItemsList.value[menuKey] = firstItemKey
     const menuItem = menuItems.find(item => item.key === firstItemKey)
     if (menuItem) {
-      onItemClick(menuItem, menuKey)
+      menuItem.active = true
     }
   })
 
@@ -209,16 +215,16 @@ onMounted(() => {
     activeItemsList.value[menuKey] = firstItemKey
     const menuItem = menuItems.find(item => item.key === firstItemKey)
     if (menuItem) {
-      onItemClick(menuItem, menuKey)
+      menuItem.active = true
     }
   })
 
-  // Click on the first item in the playground menu
+  // Initialize the playground menu with the first item active
   const firstPlaygroundItemKey = menuItems[0].key
   activeItem.value = firstPlaygroundItemKey
   const firstPlaygroundItem = menuItems.find(item => item.key === firstPlaygroundItemKey)
   if (firstPlaygroundItem) {
-    onClick(firstPlaygroundItem)
+    firstPlaygroundItem.active = true
   }
 })
 
