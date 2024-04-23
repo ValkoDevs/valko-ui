@@ -63,14 +63,14 @@ const classes = useStyle(props)
     </div>
     <vk-button
       v-if="closable"
-      variant="link"
-      :color="buttonColor"
-      size="xs"
-      shape="rounded"
-      flat
       :class="classes.closable"
+      :color="buttonColor"
+      variant="link"
+      shape="rounded"
+      size="xs"
+      flat
+      condensed
       :disabled="disabled"
-      :style="{ padding: '0' }"
       @click="onClose"
     >
       <vk-icon

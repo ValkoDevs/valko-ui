@@ -1,8 +1,8 @@
 import type { Shapes, Color, Sizes, Variants } from '#valkoui/types'
 
 export interface TagProps extends Shapes, Sizes, Variants {
-  color?: Color | 'neutral';
   text: string;
+  color?: Color | 'neutral';
   iconLeft?: string;
   iconRight?: string;
   disabled?: boolean;
