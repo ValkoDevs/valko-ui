@@ -8,7 +8,7 @@ import VkIcon from './Icon.vue'
 defineOptions({ name: 'VkSpinner' })
 
 const props = withDefaults(defineProps<SpinnerProps>(), {
-  variant: 'loader-2',
+  name: 'loader-2',
   color: 'primary',
   size: 'md'
 })
@@ -17,8 +17,10 @@ const classes = useStyle<SpinnerProps, SlotStyles>(props, styles)
 </script>
 
 <template>
-  <vk-icon
-    :name="props.variant"
-    :class="classes"
-  />
+  <div :class="classes.container">
+    <vk-icon
+      :name="name"
+      :class="classes.icon"
+    />
+  </div>
 </template>
