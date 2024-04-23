@@ -12,7 +12,7 @@ export interface CardImageProps {
 }
 
 export interface CardProps extends Variants, Shapes {
-  size: Size | 'full';
+  size?: Size | 'full';
   direction?: 'row' | 'col' | 'row-reverse' | 'col-reverse';
   isPressable?: boolean;
   disabled?: boolean;

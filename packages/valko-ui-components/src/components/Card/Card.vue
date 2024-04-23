@@ -8,7 +8,8 @@ defineOptions({ name: 'VkCard' })
 const props = withDefaults(defineProps<CardProps>(), {
   variant: 'filled',
   shape: 'soft',
-  size: 'md'
+  size: 'md',
+  direction: 'col'
 })
 
 const emit = defineEmits(['click'])
