@@ -146,7 +146,7 @@ describe('Menu component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-dark-1')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-dark-3')
       })
     })
 

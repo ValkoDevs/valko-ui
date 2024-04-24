@@ -5,7 +5,7 @@ import { useStyle } from './Navbar.styles'
 defineOptions({ name: 'VkNavbar' })
 
 const props = withDefaults(defineProps<NavbarProps>(), {
-  color: 'neutral',
+  color: 'primary',
   size: 'md',
   variant: 'filled',
   shape: 'soft',

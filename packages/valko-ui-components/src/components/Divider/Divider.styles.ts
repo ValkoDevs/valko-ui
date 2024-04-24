@@ -1,321 +1,319 @@
-import { computed } from 'vue'
 import { tv } from 'tailwind-variants'
-import { NavbarProps } from '#valkoui/types'
+import { DividerProps } from '#valkoui/types'
+import { computed } from 'vue'
 
-const styles = tv({
+const divider = tv({
   base: [
-    'vk-navbar',
-    'w-full',
-    'px-4',
-    'flex',
-    'justify-items-center',
-    'items-center',
-    'shadow-lg',
-    'shadow-light-4',
-    'dark:shadow-dark-5',
-    'shrink-0'
+    'vk-divider',
+    'border-0'
   ],
   variants: {
     color: {
       primary: [],
       secondary: [],
       success: [],
-      error: [],
-      warning: [],
       info: [],
+      warning: [],
+      error: [],
       light: [],
       dark: [],
       neutral: []
     },
-    size: {
-      xs: [
-        'h-10'
+    variant: {
+      filled: [
+        'vk-filled'
       ],
-      sm: [
-        'h-12'
+      outlined: [
+        'border'
       ],
-      md: [
-        'h-14'
-      ],
-      lg: [
-        'h-16'
+      ghost: [
+        'vk-ghost'
       ]
     },
     shape: {
       rounded: [
-        'rounded-b-2xl'
+        'rounded-full'
       ],
       square: [
         'rounded-none'
       ],
       soft: [
-        'rounded-b-lg'
+        'rounded'
       ]
     },
-    variant: {
-      filled: [
-        'filter-none'
+    size: {
+      xs: [],
+      sm: [],
+      md: [],
+      lg: []
+    },
+    direction: {
+      horizontal: [
+        'w-full',
+        'my-2'
       ],
-      outlined: [
-        'bg-transparent',
-        'backdrop-blur-lg',
-        'border-b'
-      ],
-      ghost: [
-        'backdrop-blur-lg'
-      ]
-    },
-    fixed: {
-      true: [
-        'sticky',
-        'top-0',
-        'left-0',
-        'right-0',
-        'z-50'
-      ]
-    },
-    floating: {
-      true: [
-        'm-2',
-        'w-[calc(100%_-_1rem)]'
-      ]
-    },
-    flat: {
-      true: [
-        'shadow-none'
+      vertical: [
+        'h-full',
+        'mx-2',
+        'rotate-180'
       ]
     }
   },
   compoundVariants: [
     // filled & color
     {
-      color: 'primary',
       variant: 'filled',
+      color: 'primary',
       class: [
         'bg-primary-500'
       ]
     },
     {
-      color: 'secondary',
       variant: 'filled',
+      color: 'secondary',
       class: [
         'bg-secondary-500'
       ]
     },
     {
-      color: 'success',
       variant: 'filled',
+      color: 'success',
       class: [
         'bg-success-500'
       ]
     },
     {
-      color: 'info',
       variant: 'filled',
+      color: 'info',
       class: [
         'bg-info-500'
       ]
     },
     {
-      color: 'warning',
       variant: 'filled',
+      color: 'warning',
       class: [
         'bg-warning-500'
       ]
     },
     {
-      color: 'error',
       variant: 'filled',
+      color: 'error',
       class: [
         'bg-error-500'
       ]
     },
     {
+      variant: 'filled',
       color: 'light',
-      variant: 'filled',
       class: [
-        'bg-white'
+        'bg-light-1'
       ]
     },
     {
+      variant: 'filled',
       color: 'dark',
-      variant: 'filled',
       class: [
-        'bg-black'
+        'bg-dark-5'
       ]
     },
     {
-      color: 'neutral',
       variant: 'filled',
+      color: 'neutral',
       class: [
-        'bg-light-1',
-        'dark:bg-dark-3'
+        'bg-light-4',
+        'dark:bg-dark-1'
       ]
     },
     // outlined & color
     {
-      color: 'primary',
       variant: 'outlined',
+      color: 'primary',
       class: [
-        'bg-transparent',
         'border-primary-500'
       ]
     },
     {
-      color: 'secondary',
       variant: 'outlined',
+      color: 'secondary',
       class: [
-        'bg-transparent',
         'border-secondary-500'
       ]
     },
     {
-      color: 'success',
       variant: 'outlined',
+      color: 'success',
       class: [
-        'bg-transparent',
         'border-success-500'
       ]
     },
     {
-      color: 'info',
       variant: 'outlined',
+      color: 'info',
       class: [
-        'bg-transparent',
         'border-info-500'
       ]
     },
     {
-      color: 'warning',
       variant: 'outlined',
+      color: 'warning',
       class: [
-        'bg-transparent',
         'border-warning-500'
       ]
     },
     {
-      color: 'error',
       variant: 'outlined',
+      color: 'error',
       class: [
-        'bg-transparent',
         'border-error-500'
       ]
     },
     {
+      variant: 'outlined',
       color: 'light',
-      variant: 'outlined',
       class: [
-        'bg-transparent',
-        'border-white'
+        'border-light-1'
       ]
     },
     {
+      variant: 'outlined',
       color: 'dark',
-      variant: 'outlined',
       class: [
-        'bg-transparent',
-        'border-black'
+        'border-dark-5'
       ]
     },
     {
-      color: 'neutral',
       variant: 'outlined',
+      color: 'neutral',
       class: [
-        'bg-transparent',
         'border-light-4',
         'dark:border-dark-1'
       ]
     },
     // ghost & color
     {
+      variant: 'ghost',
       color: 'primary',
-      variant: 'ghost',
       class: [
-        'bg-primary-500/[.15]'
+        'bg-primary-500/[.5]'
       ]
     },
     {
+      variant: 'ghost',
       color: 'secondary',
-      variant: 'ghost',
       class: [
-        'bg-secondary-500/[.15]',
-        'text-secondary-500'
+        'bg-secondary-500/[.5]'
       ]
     },
     {
+      variant: 'ghost',
       color: 'success',
-      variant: 'ghost',
       class: [
-        'bg-success-500/[.15]'
+        'bg-success-500/[.5]'
       ]
     },
     {
+      variant: 'ghost',
       color: 'info',
-      variant: 'ghost',
       class: [
-        'bg-info-500/[.15]'
+        'bg-info-500/[.5]'
       ]
     },
     {
+      variant: 'ghost',
       color: 'warning',
-      variant: 'ghost',
       class: [
-        'bg-warning-500/[.15]'
+        'bg-warning-500/[.5]'
       ]
     },
     {
+      variant: 'ghost',
       color: 'error',
-      variant: 'ghost',
       class: [
-        'bg-error-500/[.15]'
+        'bg-error-500/[.5]'
       ]
     },
     {
+      variant: 'ghost',
       color: 'light',
-      variant: 'ghost',
       class: [
-        'bg-white/[.15]'
+        'bg-light-1/[.5]'
       ]
     },
     {
+      variant: 'ghost',
       color: 'dark',
-      variant: 'ghost',
       class: [
-        'bg-black/[.15]'
+        'bg-dark-5/[.5]'
       ]
     },
     {
+      variant: 'ghost',
       color: 'neutral',
-      variant: 'ghost',
       class: [
-        'bg-light-1/[.15]',
-        'dark:bg-dark-3/[.15]'
+        'bg-light-4/[.5]',
+        'dark:bg-dark-1/[.5]'
       ]
     },
-    // floating & variant
+    // vertical & size
     {
-      floating: true,
-      variant: 'outlined',
+      direction: 'vertical',
+      size: 'xs',
       class: [
-        'border'
-      ]
-    },
-    // floating & shape
-    {
-      floating: true,
-      shape: 'rounded',
-      class: [
-        'rounded-full'
+        'w-px'
       ]
     },
     {
-      floating: true,
-      shape: 'soft',
+      direction: 'vertical',
+      size: 'sm',
       class: [
-        'rounded-2xl'
+        'w-0.5'
+      ]
+    },
+    {
+      direction: 'vertical',
+      size: 'md',
+      class: [
+        'w-[3px]'
+      ]
+    },
+    {
+      direction: 'vertical',
+      size: 'lg',
+      class: [
+        'w-1'
+      ]
+    },
+    // horizontal & size
+    {
+      direction: 'horizontal',
+      size: 'xs',
+      class: [
+        'h-px'
+      ]
+    },
+    {
+      direction: 'horizontal',
+      size: 'sm',
+      class: [
+        'h-0.5'
+      ]
+    },
+    {
+      direction: 'horizontal',
+      size: 'md',
+      class: [
+        'h-[3px]'
+      ]
+    },
+    {
+      direction: 'horizontal',
+      size: 'lg',
+      class: [
+        'h-1'
       ]
     }
   ]
 })
 
-export const useStyle = (props: NavbarProps) => computed(() => styles(props))
+export const useStyle = (props: DividerProps) => computed(() => divider(props))

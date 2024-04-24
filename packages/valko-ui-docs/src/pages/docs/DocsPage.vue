@@ -1,12 +1,18 @@
 <script setup lang="ts">
-import { onMounted, ref, watchEffect } from 'vue'
+import { onMounted, ref, watchEffect, computed } from 'vue'
 import { MenuItem } from '@valko-ui/components'
 import { useRouter } from 'vue-router'
+import { useLocalStorage } from '@vueuse/core'
 
 const router = useRouter()
+const theme = useLocalStorage('theme', 'dark')
+
+const isDarkTheme = computed({
+  get: () => theme.value === 'dark',
+  set: (value: boolean) => theme.value = value ? 'dark' : 'light'
+})
 
 const htmlElement = document.querySelector('html')
-const darkTheme = ref(false)
 
 const menuItems: MenuItem[] = [
   { key: 'get-started', group: 'General', text: 'Get Started' },
@@ -23,6 +29,8 @@ const menuItems: MenuItem[] = [
   { key: 'avatar', group: 'Ui', text: 'Avatar' },
   { key: 'badge', group: 'Ui', text: 'Badge' },
   { key: 'breadcrumbs', group: 'Ui', text: 'Breadcrumbs' },
+  { key: 'menu', group: 'Ui', text: 'Menu' },
+  { key: 'navbar', group: 'Ui', text: 'Navbar' },
   { key: 'notification', group: 'Ui', text: 'Notification' },
   { key: 'progressbar', group: 'Ui', text: 'Progressbar' },
   { key: 'spinner', group: 'Ui', text: 'Spinner' },
@@ -49,7 +57,7 @@ onMounted(() => {
 })
 
 watchEffect(() => {
-  if (darkTheme.value) htmlElement?.classList.add('dark')
+  if (theme.value === 'dark') htmlElement?.classList.add('dark')
   else htmlElement?.classList.remove('dark')
 })
 </script>
@@ -67,12 +75,12 @@ watchEffect(() => {
       <vk-switch
         :position="true"
         label="Dark Mode"
-        v-model="darkTheme"
+        v-model="isDarkTheme"
       />
     </vk-navbar>
 
     <div class="w-full flex">
-      <aside class="hidden md:block md:w-40 lg:w-52 xl:w-60 shrink-0 overflow-y-auto border-r border-light-4 dark:border-dark-2 max-h-[calc(100vh_-_4rem)] h-screen sticky top-16">
+      <aside class="hidden md:block md:w-40 lg:w-52 xl:w-60 shrink-0 overflow-y-auto border-r border-light-4 dark:border-dark-2 max-h-[calc(100vh_-_3.5rem)] h-screen sticky top-14">
         <vk-menu
           :items="menuItems"
           :active="activeItem"
