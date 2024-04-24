@@ -73,22 +73,16 @@ const spinnerProps = [
         v-model="form.color"
       />
       <vk-select
-        placeholder="Variant"
+        placeholder="Name"
         size="sm"
-        :options="variants"
-        v-model="form.variant"
+        :options="names"
+        v-model="form.name"
       />
       <vk-select
         placeholder="Size"
         size="sm"
         :options="sizeOptions"
         v-model="form.size"
-      />
-      <vk-select
-        placeholder="Name"
-        size="sm"
-        :options="names"
-        v-model="form.name"
       />
       <vk-checkbox
         label="Condensed"
@@ -117,7 +111,7 @@ const spinnerProps = [
       </example-section>
 
       <example-section
-        title="Name"
+        title="Names"
         justify="start"
         gap
       >

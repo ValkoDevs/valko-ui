@@ -146,25 +146,15 @@ describe('Spinner component', () => {
       })
     })
 
-    describe('When variant prop changes', () => {
-      it('should be loader when props.variant is loader', () => {
+    describe('When name prop changes', () => {
+      it('should be loader when props.name is loader', () => {
         wrapper = mount(VkSpinner, {
           props: {
-            variant: 'loader'
+            name: 'loader'
           }
         })
 
         expect(wrapper.find('i.ti.ti-loader').exists()).toBe(true)
-      })
-
-      it('should be loader-2 when props.variant is loader-2', () => {
-        wrapper = mount(VkSpinner, {
-          props: {
-            variant: 'loader-2'
-          }
-        })
-
-        expect(wrapper.find('i.ti.ti-loader-2').exists()).toBe(true)
       })
     })
   })

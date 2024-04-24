@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { ButtonProps } from '#valkoui/types/Button'
+import type { SlotStyles } from '#valkoui/types/common'
+import useDarkMode from '#valkoui/composables/useDarkMode.ts'
 import styles from '#valkoui/styles/Button.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import VkSpinner from './Spinner.vue'
@@ -21,7 +23,9 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 
 const emit = defineEmits(['click'])
 
-const classes = useStyle<ButtonProps, Record<string, string>>(props, styles)
+const classes = useStyle<ButtonProps, SlotStyles>(props, styles)
+
+const isDarkMode = useDarkMode()
 
 const onClick = () => {
   if (!props.disabled && !props.loading) {
@@ -30,6 +34,10 @@ const onClick = () => {
 }
 
 const spinnerColor = computed(() => {
+  if (props.color === 'neutral') {
+    if (props.variant === 'filled') return isDarkMode.value ? 'dark' : 'light'
+    return isDarkMode.value ? 'light' : 'dark'
+  }
   if (props.variant === 'filled' && props.color !== 'light') return 'light'
   if (props.variant === 'filled' && props.color === 'light') return 'dark'
   return props.color
