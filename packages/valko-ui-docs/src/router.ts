@@ -68,6 +68,10 @@ const routes = [
         component: lazyLoad('data', 'PaginationPage')
       },
       {
+        path: 'table',
+        component: lazyLoad('data', 'TablePage')
+      },
+      {
         path: 'tabs',
         component: lazyLoad('data', 'TabsPage')
       },

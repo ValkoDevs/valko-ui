@@ -1,4 +1,4 @@
-import type { DefaultComponent } from './common'
+import type { Shapes, Color, Sizes, Variants } from './common'
 
 export interface DataTableHeader {
   key: string;
@@ -11,9 +11,10 @@ export interface DataTableItem {
   [key: string]: unknown;
 }
 
-export interface DataTableProps extends DefaultComponent {
+export interface DataTableProps extends Shapes, Sizes, Variants {
   headers: DataTableHeader[];
   data: DataTableItem[];
+  color?: Color | 'neutral';
   sortBy?: string | null;
   sortDir?: 'asc' | 'desc';
   records?: number;
