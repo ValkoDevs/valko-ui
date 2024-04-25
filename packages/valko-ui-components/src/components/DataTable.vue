@@ -9,6 +9,7 @@ defineOptions({ name: 'VkDataTable' })
 const props = withDefaults(defineProps<DataTableProps>(), {
   color: 'neutral',
   variant: 'filled',
+  shape: 'soft',
   size: 'md',
   sortBy: null,
   sortDir: 'asc',
