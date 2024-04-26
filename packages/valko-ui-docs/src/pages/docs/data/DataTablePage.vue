@@ -18,6 +18,8 @@ const form = ref({
   size: 'md',
   sortBy: null,
   sortDir: 'asc',
+  records: 20,
+  page: 1,
   selectable: 'single',
   selectionType: 'row',
   striped: false,
@@ -57,14 +59,14 @@ const dataTableProps = [
     prop: 'headers',
     required: true,
     description: 'An array of objects defining the headers of the table.',
-    values: 'TableHeader[]',
+    values: 'DataTableHeader[]',
     default: '[]'
   },
   {
     prop: 'data',
     required: true,
     description: 'An array of objects representing the data rows of the table.',
-    values: 'TableItem[]',
+    values: 'DataTableItem[]',
     default: '[]'
   },
   {
@@ -82,6 +84,20 @@ const dataTableProps = [
     default: 'asc'
   },
   {
+    prop: 'records',
+    required: false,
+    description: 'The total number of records in the table.',
+    values: 'number',
+    default: 'undefined'
+  },
+  {
+    prop: 'page',
+    required: false,
+    description: 'The current page number.',
+    values: 'number',
+    default: 'undefined'
+  },
+  {
     prop: 'selectable',
     required: false,
     description: 'Controls the selection behavior of the table.',
@@ -96,6 +112,13 @@ const dataTableProps = [
     default: 'check'
   },
   {
+    prop: 'rounded',
+    required: false,
+    description: 'Specifies whether the table has rounded corners.',
+    values: 'boolean',
+    default: 'false'
+  },
+  {
     prop: 'striped',
     required: false,
     description: 'Specifies whether the table rows are striped for better readability.',
@@ -106,6 +129,13 @@ const dataTableProps = [
     prop: 'loading',
     required: false,
     description: 'Specifies whether the table is in a loading state.',
+    values: 'boolean',
+    default: 'false'
+  },
+  {
+    prop: 'shadow',
+    required: false,
+    description: 'Specifies whether the table has a shadow effect.',
     values: 'boolean',
     default: 'false'
   }
@@ -168,7 +198,7 @@ const slotData = [
 
 <template>
   <doc-section
-    title="Table"
+    title="Data Table"
     description=""
   >
     <template #playground-view>
@@ -180,6 +210,8 @@ const slotData = [
           :size="form.size"
           :sort-by="form.sortBy"
           :sort-dir="form.sortDir"
+          :records="form.records"
+          :page="form.page"
           :selectable="form.selectable"
           :selection-type="form.selectionType"
           :striped="form.striped"
@@ -239,6 +271,16 @@ const slotData = [
         size="sm"
         :options="sortDir"
         v-model="form.sortDir"
+      />
+      <vk-input
+        label="Records"
+        type="number"
+        v-model="form.records"
+      />
+      <vk-input
+        label="Page"
+        type="number"
+        v-model="form.page"
       />
       <vk-checkbox
         label="Flat"

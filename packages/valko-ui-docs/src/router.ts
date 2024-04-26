@@ -56,6 +56,10 @@ const routes = [
         component: lazyLoad('data', 'CollapsePage')
       },
       {
+        path: 'datatable',
+        component: lazyLoad('data', 'DataTablePage')
+      },
+      {
         path: 'dropdown',
         component: lazyLoad('data', 'DropdownPage')
       },
