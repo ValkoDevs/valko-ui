@@ -27,6 +27,11 @@ const form = ref({
   stopOnFocus: false
 }) as NotificationProps
 
+const variants = [
+  ...variantOptions,
+  { value: 'line', label: 'Line' }
+]
+
 const positionOptions = [
   { value: 'right', label: 'Right' },
   { value: 'left', label: 'Left' }
@@ -197,7 +202,7 @@ const createNotification = (props: NotificationProps) => {
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptions"
+        :options="variants"
         v-model="form.variant"
       />
       <vk-select

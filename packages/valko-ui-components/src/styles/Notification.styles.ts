@@ -6,6 +6,8 @@ export default tv({
     'p-4',
     'shadow-md',
     'flex',
+    'flex-wrap',
+    'break-all',
     'justify-between',
     '*:px-1',
     '*:self-start',
@@ -17,11 +19,18 @@ export default tv({
         'text-white'
       ],
       ghost: [
-        'shadow-none'
+        'shadow-none',
+        'backdrop-blur'
       ],
       outlined: [
         'p-[calc(1rem_-_2px)]',
-        'border-2'
+        'border-2',
+        'bg-light-1',
+        'dark:bg-dark-4'
+      ],
+      line: [
+        'bg-light-3',
+        'dark:bg-dark-3'
       ]
     },
     color: {
