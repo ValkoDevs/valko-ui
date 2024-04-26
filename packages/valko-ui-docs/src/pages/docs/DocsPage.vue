@@ -42,6 +42,7 @@ const menuItems: MenuItem[] = [
   { key: 'collapse', group: 'Data', text: 'Collapse' },
   { key: 'dropdown', group: 'Data', text: 'Dropdown' },
   { key: 'pagination', group: 'Data', text: 'Pagination' },
+  { key: 'datatable', group: 'Data', text: 'Data Table' },
   { key: 'table', group: 'Data', text: 'Table' },
   { key: 'tabs', group: 'Data', text: 'Tabs' }
 ]

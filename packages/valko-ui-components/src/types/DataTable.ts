@@ -21,8 +21,8 @@ export interface DataTableProps extends Shapes, Sizes, Variants {
   page?: number;
   selectable?: 'single' | 'multiple' | 'none';
   selectionType?: 'check' | 'row';
-  rounded?: boolean;
   striped?: boolean;
   loading?: boolean;
-  shadow?: boolean;
+  flat?: boolean;
+  layout?: 'auto' | 'fixed';
 }

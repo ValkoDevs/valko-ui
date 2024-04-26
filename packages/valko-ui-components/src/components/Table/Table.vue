@@ -1,31 +1,27 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { DataTableProps } from '#valkoui/types/DataTable'
-import type { SlotStyles } from '#valkoui/types/common'
-import styles from '#valkoui/styles/DataTable.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
-import VkCheckbox from './Checkbox.vue'
+import { TableProps } from '#valkoui/types'
+import { useStyle } from './Table.styles'
+import { VkCheckbox, VkRadio } from '../'
 
-defineOptions({ name: 'VkDataTable' })
+defineOptions({ name: 'VkTable' })
 
-const props = withDefaults(defineProps<DataTableProps>(), {
+const props = withDefaults(defineProps<TableProps>(), {
   color: 'neutral',
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  sortBy: null,
   sortDir: 'asc',
-  records: 20,
-  page: 1,
   selectable: 'single',
   selectionType: 'row',
+  layout: 'auto',
+  sortBy: null,
   striped: false,
   loading: false,
-  flat: false,
-  layout: 'auto'
+  flat: false
 })
 
-const classes = useStyle<DataTableProps, SlotStyles>(props, styles)
+const classes = useStyle(props)
 
 const checkboxRef = ref(false)
 </script>
@@ -45,6 +41,7 @@ const checkboxRef = ref(false)
             label="Select All"
             v-model="checkboxRef"
           />
+          <span v-if="selectable === 'single'">Single</span>
         </th>
         <th
           v-for="header in headers"
@@ -69,6 +66,15 @@ const checkboxRef = ref(false)
             :indeterminate="checkboxRef"
             :variant="variant"
             :color="color === 'neutral' ? 'dark' : color"
+          />
+          <vk-radio
+            v-if="selectable === 'single'"
+            :name="item.key"
+            :variant="variant"
+            :color="color === 'neutral' ? 'dark' : color"
+            :value="item.key"
+            :label="item.key"
+            v-model="item.key"
           />
         </td>
         <td

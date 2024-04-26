@@ -1,6 +1,8 @@
-import { tv, type TV } from 'tailwind-variants'
+import { computed } from 'vue'
+import { tv } from 'tailwind-variants'
+import { TableProps } from '#valkoui/types'
 
-export default tv({
+const styles = tv({
   slots: {
     table: [
       'vk-data-table',
@@ -537,4 +539,16 @@ export default tv({
       }
     }
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export const useStyle = (props: TableProps) => computed(() => {
+  const slots = styles(props)
+  type Slot = keyof typeof slots
+
+  const keys = Object.keys(slots) as Slot[]
+
+  return keys.reduce((acc, key) => ({
+    ...acc,
+    [key]: slots[key]()
+  }), {}) as Record<Slot, string>
+})
