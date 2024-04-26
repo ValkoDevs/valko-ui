@@ -15,9 +15,9 @@ const useNotification = (props: NotificationProps) => {
 
   const classes = useStyle<NotificationProps>(styleProps, styles)
 
-  const defaultOnClick = () => notification.hideToast()
+  const defaultOnClick = () => notification?.hideToast()
 
-  const notification: any = Toastify({
+  const notification = Toastify({
     text: props.text,
     className: classes.value,
     duration: props.duration || 3000,
@@ -29,7 +29,7 @@ const useNotification = (props: NotificationProps) => {
     offset: props.offset || undefined,
     close: props.close || false,
     onClick: props.onClick || defaultOnClick
-  }).showToast()
+  })
 
   const closeButton = document.querySelector('.toast-close')
   if (closeButton) {
@@ -38,6 +38,8 @@ const useNotification = (props: NotificationProps) => {
     customIcon.classList.add('ti', 'ti-x')
     closeButton.appendChild(customIcon)
   }
+
+  notification.showToast()
 
   return notification
 }
