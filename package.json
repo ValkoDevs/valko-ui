@@ -3,12 +3,11 @@
   "private": true,
   "scripts": {
     "dev": "nodemon",
-    "preview": "lerna run dev --scope=@valko-ui/docs",
-    "build": "lerna run build",
-    "test": "lerna run test",
-    "lint": "lerna run lint",
-    "lint:fix": "lerna run lint:fix",
-    "publish": "lerna publish"
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "publish": "turbo run publish"
   },
   "workspaces": [
     "packages/*"
@@ -17,9 +16,9 @@
     "@valko-ui/eslint-config": "*",
     "@vitejs/plugin-vue": "^4.2.3",
     "eslint": "^8.42.0",
-    "lerna": "^6.6.2",
     "nodemon": "^3.0.1",
     "pre-commit": "^1.2.2",
+    "turbo": "^1.13.3",
     "typescript": "5.0.2",
     "vite": "^5.0.12",
     "vue": "3.4.15",
