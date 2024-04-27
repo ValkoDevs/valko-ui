@@ -1,5 +1,5 @@
 {
-  "exec": "lerna run dev --scope=@valko-ui/docs",
+  "exec": "turbo run dev --filter=@valko-ui/docs",
   "watch": [
     "packages/valko-ui-components"
   ],
