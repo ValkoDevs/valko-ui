@@ -31,15 +31,65 @@ const useNotification = (props: NotificationProps) => {
     onClick: props.onClick || defaultOnClick
   })
 
-  const closeButton = document.querySelector('.toast-close')
-  if (closeButton) {
-    closeButton.innerHTML = ''
-    const customIcon = document.createElement('i')
-    customIcon.classList.add('ti', 'ti-x')
-    closeButton.appendChild(customIcon)
+  notification.showToast()
+
+  let animationPaused = false
+  let animationStartTime: number
+  let elapsedTimeBeforePause: number
+  let resumeTimeout: NodeJS.Timeout | null = null
+  const notificationContainer = document.querySelector('.vk-notification')
+
+  const progressBarContainer = document.createElement('div')
+  // progressBarContainer.className = classes.value.progressbar
+
+  const updateProgress = () => {
+    const currentTime = Date.now()
+    const elapsedTime = animationPaused ? elapsedTimeBeforePause : currentTime - animationStartTime
+    const duration = props.duration || 3000
+    const progress = Math.max(0, 100 - (elapsedTime / duration) * 100)
+
+    progressBarContainer.style.width = `${progress}%`
+
+    if (!animationPaused && elapsedTime < duration) {
+      requestAnimationFrame(updateProgress)
+    }
   }
 
-  notification.showToast()
+  setTimeout(() => {
+    if (notificationContainer) {
+      notificationContainer.appendChild(progressBarContainer)
+      animationStartTime = Date.now()
+      updateProgress()
+    }
+  }, 100)
+
+  if (notificationContainer && props.stopOnFocus) {
+    notificationContainer.addEventListener('mouseover', () => {
+      animationPaused = true
+      elapsedTimeBeforePause = Date.now() - animationStartTime
+    })
+
+    notificationContainer.addEventListener('mouseleave', () => {
+      animationPaused = false
+      animationStartTime = Date.now() - elapsedTimeBeforePause
+
+      if (resumeTimeout) clearTimeout(resumeTimeout)
+      resumeTimeout = setTimeout(() => {
+        updateProgress()
+      }, 100)
+    })
+  }
+
+  setTimeout(() => {
+    const closeButton = document.querySelector('.toast-close')
+    if (closeButton) {
+      closeButton.innerHTML = ''
+      closeButton.classList.add('self-start')
+      const customIcon = document.createElement('i')
+      // customIcon.className = classes.value.close
+      closeButton.appendChild(customIcon)
+    }
+  }, 100)
 
   return notification
 }

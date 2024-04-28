@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
 import variantOptions from '@/data/variantOptions'
 import shapeOptions from '@/data/shapeOptions'
@@ -54,7 +54,7 @@ const notificationProps = [
     prop: 'variant',
     required: false,
     description: 'The variant of the Notification.',
-    values: 'filled, outlined, ghost',
+    values: 'filled, outlined, ghost, line',
     default: 'filled'
   },
   {
