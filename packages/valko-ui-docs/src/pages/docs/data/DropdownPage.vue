@@ -267,16 +267,6 @@ const dropdownEmits = [
           :items="items"
         />
       </example-section>
-
-      <example-section
-        title="Flat"
-        gap
-      >
-        <vk-dropdown
-          title="Flat"
-          :items="items"
-        />
-      </example-section>
     </template>
 
     <template #api>

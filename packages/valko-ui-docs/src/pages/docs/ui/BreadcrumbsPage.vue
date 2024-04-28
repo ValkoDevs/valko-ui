@@ -237,25 +237,6 @@ const breadcrumbsEmits = [
               :crumbs="crumbs"
             />
           </div>
-          <div class="flex flex-col">
-            <span>Flat</span>
-            <vk-breadcrumbs
-              :crumbs="crumbs"
-              flat="true"
-            />
-          </div>
-          <div class="flex flex-col">
-            <span>Disabled Crumbs</span>
-            <vk-breadcrumbs
-              :crumbs="crumbsDisabled"
-            />
-          </div>
-          <div class="flex flex-col">
-            <span>Crumbs With Icons</span>
-            <vk-breadcrumbs
-              :crumbs="crumbsIcons"
-            />
-          </div>
         </div>
       </example-section>
 
@@ -303,6 +284,22 @@ const breadcrumbsEmits = [
         <vk-breadcrumbs
           flat
           :crumbs="crumbs"
+        />
+      </example-section>
+
+      <example-section
+        title="Disabled Crumbs"
+      >
+        <vk-breadcrumbs
+          :crumbs="crumbsDisabled"
+        />
+      </example-section>
+
+      <example-section
+        title="Crumbs with icons"
+      >
+        <vk-breadcrumbs
+          :crumbs="crumbsIcons"
         />
       </example-section>
     </template>

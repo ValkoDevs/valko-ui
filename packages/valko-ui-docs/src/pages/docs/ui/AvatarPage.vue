@@ -301,14 +301,9 @@ const avatarSrc = computed(() => { return form.value.avatar ? '###' : form.value
       <example-section
         title="Flat"
       >
-        <div
-          class="flex flex-col items-center"
-        >
-          <span class="mb-1">Flat</span>
-          <vk-avatar
-            flat
-          />
-        </div>
+        <vk-avatar
+          flat
+        />
       </example-section>
     </template>
 
