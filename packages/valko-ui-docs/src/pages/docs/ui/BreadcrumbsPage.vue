@@ -8,6 +8,7 @@ import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import emitHeaders from '@/data/emitHeaders'
+import { useNotification } from '@valko-ui/components'
 
 const form = ref({
   color: 'primary',
@@ -19,10 +20,10 @@ const form = ref({
 })
 
 const crumbs = [
-  { key: 'home', title: 'Home', onClick: () => alert('Home') },
-  { key: 'music', title: 'Music', onClick: () => alert('Music') },
-  { key: 'artist', title: 'Artist', onClick: () => alert('Artist') },
-  { key: 'album', title: 'Album', onClick: () => alert('Album') },
+  { key: 'home', title: 'Home', onClick: () => useNotification({ text: 'Home' }) },
+  { key: 'music', title: 'Music', onClick: () => useNotification({ text: 'Music' }) },
+  { key: 'artist', title: 'Artist', onClick: () => useNotification({ text: 'Artist' }) },
+  { key: 'album', title: 'Album', onClick: () => useNotification({ text: 'Album' }) },
   { key: 'song', title: 'Song' }
 ]
 

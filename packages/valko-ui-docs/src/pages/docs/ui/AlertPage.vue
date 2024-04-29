@@ -120,11 +120,11 @@ watch(isShown, () => {
     <template #playground-view>
       <div class="w-full flex justify-center p-4">
         <transition
-          enter-active-class="transition ease-out durantion-200"
+          enter-active-class="transition ease-out duration-200"
           enter-from-class="opacity-0 scale-90"
-          enter-to-class="opactiy-1 scale-100"
-          leave-active-class="transition ease-out durantion-200"
-          leave-from-class="opactiy-1 scale-100"
+          enter-to-class="opacity-100 scale-100"
+          leave-active-class="transition ease-out duration-200"
+          leave-from-class="opacity-100 scale-100"
           leave-to-class="opacity-0 scale-90"
         >
           <vk-alert
@@ -303,11 +303,11 @@ watch(isShown, () => {
         title="Closable"
       >
         <transition
-          enter-active-class="transition ease-out durantion-200"
+          enter-active-class="transition ease-out duration-200"
           enter-from-class="opacity-0 scale-90"
-          enter-to-class="opactiy-1 scale-100"
-          leave-active-class="transition ease-out durantion-200"
-          leave-from-class="opactiy-1 scale-100"
+          enter-to-class="opacity-100 scale-100"
+          leave-active-class="transition ease-out duration-200"
+          leave-from-class="opacity-100 scale-100"
           leave-to-class="opacity-0 scale-90"
         >
           <vk-alert

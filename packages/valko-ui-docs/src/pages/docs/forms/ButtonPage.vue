@@ -9,6 +9,7 @@ import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
 import emitHeaders from '@/data/emitHeaders'
 import slotHeaders from '@/data/slotHeaders'
+import { useNotification } from '@valko-ui/components'
 
 const form = ref({
   color: 'primary',
@@ -90,6 +91,7 @@ const slotData = [
   }
 ]
 
+const onClick = () => useNotification({ text: 'Clicked' })
 </script>
 
 <template>
@@ -107,6 +109,7 @@ const slotData = [
         :block="form.block"
         :condensed="form.condensed"
         :shape="form.shape"
+        @click="onClick"
       >
         Button
       </vk-button>

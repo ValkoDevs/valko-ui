@@ -8,6 +8,7 @@ import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import emitHeaders from '@/data/emitHeaders'
+import { useNotification } from '@valko-ui/components'
 
 const form = ref({
   color: 'primary',
@@ -19,11 +20,11 @@ const form = ref({
 })
 
 const items = [
-  { key: 'image', title: 'Upload Image', icon: 'photo', onClick: () => alert('Image') },
-  { key: 'edit', title: 'Edit', icon: 'edit', onClick: () => alert('Edit') },
+  { key: 'image', title: 'Upload Image', icon: 'photo', onClick: () => useNotification({ text: 'Image Uploaded' }) },
+  { key: 'edit', title: 'Edit', icon: 'edit', onClick: () => useNotification({ text: 'Editing' }) },
   { key: 'disabled', title: 'Disabled', icon: 'error-404', disabled: true },
-  { key: 'video', title: 'Upload Video', icon: 'video', onClick: () => alert('Video') },
-  { key: 'delete', title: 'Delete', icon: 'trash', onClick: () => alert('Delete') }
+  { key: 'video', title: 'Upload Video', icon: 'video', onClick: () => useNotification({ text: 'Video uploaded' }) },
+  { key: 'delete', title: 'Delete', icon: 'trash', onClick: () => useNotification({ text: 'Item Deleted' }) }
 ]
 
 const dropdownProps = [
