@@ -49,6 +49,12 @@ export default tv({
       },
       ghost: {
         container: [
+          'bg-light-3/[.50]',
+          'dark:bg-dark-3/[.50]'
+        ]
+      },
+      link: {
+        container: [
           'bg-transparent'
         ]
       }
@@ -92,6 +98,12 @@ export default tv({
       dark: {
         a: [
           'text-dark-5'
+        ]
+      },
+      neutral: {
+        a: [
+          'text-black',
+          'dark:text-white'
         ]
       }
     },
@@ -139,7 +151,7 @@ export default tv({
     }
   },
   compoundVariants: [
-    // flat & variant
+    // flat & variants
     {
       variant: ['filled', 'outlined'],
       flat: false,

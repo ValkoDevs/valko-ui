@@ -27,12 +27,14 @@ const onCrumbClick = (item: Crumb) => {
   emit('crumbClick', item)
   item.onClick?.()
 }
+
+const useIcon = (separator: string) => separator.length > 2
 </script>
 
 <template>
   <div :class="classes.container">
     <a
-      v-for="crumb in props.crumbs"
+      v-for="crumb in crumbs"
       :key="crumb.key"
       :class="classes.a"
       :data-disabled="crumb.disabled"
@@ -52,7 +54,14 @@ const onCrumbClick = (item: Crumb) => {
       <span
         v-if="crumb.key !== lastCrumbKey"
         :class="classes.separator"
-      >{{ props.separator }}</span>
+      >
+        <template v-if="useIcon(separator)">
+          <vk-icon :name="separator" />
+        </template>
+        <template v-else>
+          {{ separator }}
+        </template>
+      </span>
     </a>
   </div>
 </template>
