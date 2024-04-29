@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkRadio } from '#valkoui/components'
+import { VkRadio } from '#valkoui'
 
 describe('Radio component', () => {
   let wrapper: VueWrapper

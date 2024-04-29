@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { Ref, ref, onUpdated, onMounted, nextTick } from 'vue'
-import { TabsProps } from '#valkoui/types'
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
-import { VkIcon } from '../'
-import { useStyle } from './Tabs.styles'
+import { VkIcon, type TabsProps, type SlotStyles, useStyle } from '#valkoui'
+import styles from './Tabs.styles.ts'
 
 defineOptions({ name: 'VkTabs' })
 
@@ -17,7 +16,7 @@ const props = withDefaults(defineProps<TabsProps>(), {
   tabs: () => []
 })
 
-const classes = useStyle(props)
+const classes = useStyle<TabsProps, SlotStyles>(props, styles)
 const cursor: Ref<HTMLElement | null> = ref(null)
 
 const onChange = async () => {

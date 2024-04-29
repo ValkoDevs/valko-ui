@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import { DataTableProps } from '#valkoui/types'
-import { useStyle } from './DataTable.styles'
+import { type DataTableProps, type SlotStyles, useStyle } from '#valkoui'
+import styles from './DataTable.styles.ts'
 
 defineOptions({ name: 'VkDataTable' })
 
@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<DataTableProps>(), {
   shadow: false
 })
 
-const classes = useStyle(props)
+const classes = useStyle<DataTableProps, SlotStyles>(props, styles)
 </script>
 
 <template>

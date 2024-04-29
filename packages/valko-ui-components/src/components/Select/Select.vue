@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from 'vue'
-import { SelectProps, SelectOption } from '#valkoui/types'
-import { VkInput, VkIcon } from '../'
-import { useStyle } from './Select.styles'
+import { VkInput, VkIcon, type SelectProps, type SlotStyles, type SelectOption, useStyle } from '#valkoui'
+import styles from './Select.styles.ts'
 
 defineOptions({ name: 'VkSelect' })
 
@@ -17,7 +16,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
-const classes = useStyle(props)
+const classes = useStyle<SelectProps, SlotStyles>(props, styles)
 const select = ref(null)
 const isOpen = ref(false)
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
-import { SwitchProps } from '#valkoui/types'
-import { useStyle } from './Switch.styles'
+import { type SwitchProps, type SlotStyles, useStyle } from '#valkoui'
+import styles from './Switch.styles.ts'
 
 defineOptions({ name: 'VkSwitch' })
 
@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<SwitchProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
-const classes = useStyle(props)
+const classes = useStyle<SwitchProps, SlotStyles>(props, styles)
 
 const onClick = (event: boolean) => {
   if (!props.disabled && !props.readonly) emit('update:modelValue', event)

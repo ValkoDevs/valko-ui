@@ -1,8 +1,6 @@
-import { computed } from 'vue'
-import { tv } from 'tailwind-variants'
-import { NavbarProps } from '#valkoui/types'
+import { tv, type TV } from 'tailwind-variants'
 
-const styles = tv({
+export default tv({
   base: [
     'vk-navbar',
     'w-full',
@@ -316,6 +314,4 @@ const styles = tv({
       ]
     }
   ]
-})
-
-export const useStyle = (props: NavbarProps) => computed(() => styles(props))
+}) as unknown as ReturnType<TV>

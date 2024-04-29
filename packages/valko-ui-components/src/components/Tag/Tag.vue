@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { TagProps } from '#valkoui/types'
-import useDarkMode from '#valkoui/composables/useDarkMode'
-import { VkIcon, VkButton } from '../'
-import { useStyle } from './Tag.styles'
+import { VkIcon, VkButton, type TagProps, type SlotStyles, useStyle, useDarkMode } from '#valkoui'
+import styles from './Tag.styles.ts'
 
 defineOptions({ name: 'VkTag' })
 
@@ -17,6 +15,9 @@ const props = withDefaults(defineProps<TagProps>(), {
 })
 
 const emit = defineEmits(['click', 'close'])
+
+const classes = useStyle<TagProps, SlotStyles>(props, styles)
+
 const isDarkMode = useDarkMode()
 const neutralColor = computed(() => isDarkMode.value ? 'light' : 'dark')
 
@@ -40,7 +41,6 @@ const onClose = () => {
   }
 }
 
-const classes = useStyle(props)
 </script>
 
 <template>

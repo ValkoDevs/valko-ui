@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { AlertProps } from '#valkoui/types'
-import { VkIcon, VkButton } from '../'
-import { useStyle } from './Alert.styles'
+import { VkIcon, VkButton, type AlertProps, useStyle, type SlotStyles } from '#valkoui'
+import styles from './Alert.styles.ts'
 
 defineOptions({ name: 'VkAlert' })
 
@@ -18,7 +17,7 @@ const props = withDefaults(defineProps<AlertProps>(), {
 
 const emit = defineEmits(['close'])
 
-const classes = useStyle(props)
+const classes = useStyle<AlertProps, SlotStyles>(props, styles)
 
 const onClick = () => emit('close')
 

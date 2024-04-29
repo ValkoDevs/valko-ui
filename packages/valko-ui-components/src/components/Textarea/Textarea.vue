@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { TextareaProps } from '#valkoui/types'
-import { useStyle } from './Textarea.styles'
+import { type TextareaProps, type SlotStyles, useStyle } from '#valkoui'
+import styles from './Textarea.styles.ts'
 
 defineOptions({ name: 'VkTextarea' })
 
@@ -21,7 +21,7 @@ const updateValue = (e: Event) => {
   }
 }
 
-const classes = useStyle(props)
+const classes = useStyle<TextareaProps, SlotStyles>(props, styles)
 </script>
 
 <template>

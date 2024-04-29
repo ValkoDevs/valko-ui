@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkSpinner } from '#valkoui/components'
+import { VkSpinner } from '#valkoui'
 
 describe('Spinner component', () => {
   let wrapper: VueWrapper

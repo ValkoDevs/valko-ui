@@ -1,8 +1,6 @@
-import { tv } from 'tailwind-variants'
-import { ButtonProps } from '#valkoui/types'
-import { computed } from 'vue'
+import { tv, type TV } from 'tailwind-variants'
 
-const button = tv({
+export default tv({
   base: [
     'vk-button__base',
     'font-semibold',
@@ -540,6 +538,4 @@ const button = tv({
       ]
     }
   ]
-})
-
-export const useStyle = (props: ButtonProps) => computed(() => button(props))
+}) as unknown as ReturnType<TV>

@@ -1,4 +1,4 @@
-import type { Color, Sizes, Variants, Shapes } from '#valkoui/types'
+import type { Color, Sizes, Variants, Shapes } from '#valkoui'
 
 export interface SwitchProps extends Sizes, Shapes, Variants {
   color?: Exclude<Color, 'light' | 'dark'>;

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { RadioProps } from '#valkoui/types'
-import { VkIcon } from '../'
-import { useStyle } from './Radio.styles'
+import { VkIcon, type RadioProps, type SlotStyles, useStyle } from '#valkoui'
+import styles from './Radio.styles.ts'
 
 defineOptions({ name: 'VkRadio' })
 
@@ -16,7 +15,7 @@ const props = withDefaults(defineProps<RadioProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
-const classes = useStyle(props)
+const classes = useStyle<RadioProps, SlotStyles>(props, styles)
 
 const onClick = () => {
   if (!props.disabled && !props.readonly) emit('update:modelValue', props.value)

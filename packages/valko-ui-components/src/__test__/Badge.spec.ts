@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkBadge } from '#valkoui/components'
+import { VkBadge } from '#valkoui'
 
 describe('Avatar component', () => {
   let wrapper: VueWrapper

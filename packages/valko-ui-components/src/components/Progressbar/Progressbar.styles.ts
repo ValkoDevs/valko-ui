@@ -1,8 +1,6 @@
-import { computed } from 'vue'
-import { tv } from 'tailwind-variants'
-import { ProgressbarProps } from '#valkoui/types'
+import { tv, type TV } from 'tailwind-variants'
 
-const styles = tv({
+export default tv({
   slots: {
     container: [
       'vk-progressbar__container',
@@ -430,16 +428,4 @@ const styles = tv({
       }
     }
   ]
-})
-
-export const useStyle = (props: ProgressbarProps) => computed(() => {
-  const slots = styles(props)
-  type Slot = keyof typeof slots
-
-  const keys = Object.keys(slots) as Slot[]
-
-  return keys.reduce((acc, key) => ({
-    ...acc,
-    [key]: slots[key]()
-  }), {}) as Record<Slot, string>
-})
+}) as unknown as ReturnType<TV>

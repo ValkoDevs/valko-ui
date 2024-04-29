@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { InputProps } from '#valkoui/types'
-import { useStyle } from './Input.styles'
+import { type InputProps, type SlotStyles, useStyle } from '#valkoui'
+import styles from './Input.styles.ts'
 
 defineOptions({ name: 'VkInput' })
 
@@ -15,6 +15,8 @@ const props = withDefaults(defineProps<InputProps>(), {
 })
 
 const emit = defineEmits(['update:modelValue', 'focus', 'leftIconClick', 'rightIconClick'])
+
+const classes = useStyle<InputProps, SlotStyles>(props, styles)
 
 const inputId = `input-${Math.random().toString(36).substr(2, 7)}`
 const inputRef = ref<HTMLInputElement | null>(null)
@@ -40,8 +42,6 @@ const onFocus = (event: Event) => {
     emit('focus', event)
   }
 }
-
-const classes = useStyle(props)
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ButtonProps } from '#valkoui/types'
-import { useStyle } from './Button.styles'
+import { type ButtonProps, type SlotStyles, useStyle } from '#valkoui'
+import styles from './Button.styles.ts'
 
 defineOptions({ name: 'VkButton' })
 
@@ -23,7 +23,7 @@ const onClick = () => {
   }
 }
 
-const classes = useStyle(props)
+const classes = useStyle<ButtonProps, SlotStyles>(props, styles)
 </script>
 
 <template>

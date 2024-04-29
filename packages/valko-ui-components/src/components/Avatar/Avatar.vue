@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { ref, Ref, watchEffect } from 'vue'
-import { VkIcon } from '../'
-import { AvatarProps } from '#valkoui/types'
-import { useStyle } from './Avatar.styles'
+import { VkIcon, type AvatarProps, useStyle } from '#valkoui'
+import styles from './Avatar.styles.ts'
 
 defineOptions({ name: 'VkAvatar' })
 
@@ -13,7 +12,7 @@ const props = withDefaults(defineProps<AvatarProps>(), {
   shape: 'soft'
 })
 
-const classes = useStyle(props)
+const classes = useStyle<AvatarProps, Record<string, string>>(props, styles)
 const verifiedSrc: Ref<string | null> = ref(null)
 const img: HTMLImageElement = new Image()
 

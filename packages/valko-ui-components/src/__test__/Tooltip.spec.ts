@@ -1,6 +1,6 @@
 import { nextTick  } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkTooltip } from '#valkoui/components'
+import { VkTooltip } from '#valkoui'
 
 describe('Tooltip component', () => {
   let wrapper: VueWrapper

@@ -1,8 +1,6 @@
-import { computed } from 'vue'
-import { tv } from 'tailwind-variants'
-import { SpinnerProps } from '#valkoui/types'
+import { tv, type TV } from 'tailwind-variants'
 
-const styles = tv({
+export default tv({
   base: [
     'animate-spin'
   ],
@@ -48,6 +46,4 @@ const styles = tv({
       ]
     }
   }
-})
-
-export const useStyle = (props: SpinnerProps) => computed(() => styles(props))
+}) as unknown as ReturnType<TV>

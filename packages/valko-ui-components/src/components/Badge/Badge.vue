@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { BadgeProps } from '#valkoui/types'
-import { useStyle } from './Badge.styles'
+import { type BadgeProps, type SlotStyles, useStyle } from '#valkoui'
+import style from './Badge.styles.ts'
 
 defineOptions({ name: 'VkBadge' })
 
@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   flat: false
 })
 
-const classes = useStyle(props)
+const classes = useStyle<BadgeProps, SlotStyles>(props, style)
 </script>
 
 <template>

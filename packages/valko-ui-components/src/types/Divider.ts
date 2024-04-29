@@ -1,4 +1,4 @@
-import type { Shapes, Color, Sizes, Variants } from '#valkoui/types'
+import type { Shapes, Color, Sizes, Variants } from '#valkoui'
 
 export interface DividerProps extends Shapes, Sizes, Variants {
   color?: Color | 'neutral';

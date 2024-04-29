@@ -1,4 +1,4 @@
-import { type DefaultComponent } from '#valkoui/types'
+import { type DefaultComponent } from '#valkoui'
 
 export interface Crumb {
   key: string;

@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkButton } from '#valkoui/components'
+import { VkButton } from '#valkoui'
 
 describe('Button component', () => {
   let wrapper: VueWrapper

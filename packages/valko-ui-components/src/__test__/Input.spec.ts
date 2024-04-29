@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkInput } from '#valkoui/components'
+import { VkInput } from '#valkoui'
 
 describe('Input component', () => {
   let wrapper: VueWrapper

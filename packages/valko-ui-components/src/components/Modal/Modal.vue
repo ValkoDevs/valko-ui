@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
-import { ModalProps } from '#valkoui/types'
-import { VkButton, VkIcon } from '../'
-import { useStyle } from './Modal.styles'
+import { VkButton, VkIcon, type ModalProps, type SlotStyles, useStyle } from '#valkoui'
+import styles from './Modal.styles.ts'
 
 defineOptions({ name: 'VkModal' })
 
@@ -17,7 +16,7 @@ const props = withDefaults(defineProps<ModalProps>(), {
 
 const emit = defineEmits(['close'])
 
-const classes = useStyle(props)
+const classes = useStyle<ModalProps, SlotStyles>(props, styles)
 const containerRef = ref(null)
 
 const closeModal = () => { emit('close') }

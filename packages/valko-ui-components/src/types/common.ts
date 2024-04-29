@@ -1,3 +1,8 @@
+// style types
+export type BaseStyles = string
+export type SlotStyles = Record<string, string>
+
+// prop types
 export type Shape = 'rounded' | 'square' | 'soft'
 export type Variant = 'filled' | 'outlined' | 'ghost'
 export type Size = 'xs' | 'sm' | 'md' | 'lg'

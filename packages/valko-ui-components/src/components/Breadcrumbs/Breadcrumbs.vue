@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { BreadcrumbsProps, Crumb } from '#valkoui/types'
-import { VkIcon } from '../'
-import { useStyle } from './Breadcrumbs.styles'
+import { SlotStyles, VkIcon, useStyle, type BreadcrumbsProps, type Crumb } from '#valkoui'
+import styles from './Breadcrumbs.styles.ts'
 
 defineOptions({ name: 'VkBreadcrumbs' })
 
@@ -16,7 +15,7 @@ const props = withDefaults(defineProps<BreadcrumbsProps>(), {
 
 const emit = defineEmits(['crumbClick'])
 
-const classes = useStyle(props)
+const classes = useStyle<BreadcrumbsProps, SlotStyles>(props, styles)
 const lastCrumbKey = props.crumbs[props.crumbs.length - 1]?.key
 
 const onCrumbClick = (item: Crumb) => {

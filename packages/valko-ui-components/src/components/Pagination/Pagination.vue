@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { computed, watchEffect } from 'vue'
-import { PaginationProps } from '#valkoui/types'
-import { VkButton, VkIcon } from '..'
+import { VkButton, VkIcon, type PaginationProps, type SlotStyles, useStyle } from '#valkoui'
 import useDarkMode from '#valkoui/composables/useDarkMode'
-import { useStyle } from './Pagination.styles'
+import styles from './Pagination.styles.ts'
 
 defineOptions({ name: 'VkPagination' })
 
@@ -17,7 +16,7 @@ const props = withDefaults(defineProps<PaginationProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
-const classes = useStyle(props)
+const classes = useStyle<PaginationProps, SlotStyles>(props, styles)
 const isDarkMode = useDarkMode()
 const buttonColor = computed(() => isDarkMode.value ? 'light' : 'dark')
 

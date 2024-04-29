@@ -1,8 +1,6 @@
-import { computed } from 'vue'
-import { tv } from 'tailwind-variants'
-import { SwitchProps } from '#valkoui/types'
+import { tv, type TV } from 'tailwind-variants'
 
-const styles = tv({
+export default tv({
   slots: {
     container: [
       'vk-switch__container',
@@ -464,16 +462,4 @@ const styles = tv({
       }
     }
   ]
-})
-
-export const useStyle = (props: SwitchProps) => computed(() => {
-  const slots = styles(props)
-  type Slot = keyof typeof slots
-
-  const keys = Object.keys(slots) as Slot[]
-
-  return keys.reduce((acc, key) => ({
-    ...acc,
-    [key]: slots[key]()
-  }), {}) as Record<Slot, string>
-})
+}) as unknown as ReturnType<TV>

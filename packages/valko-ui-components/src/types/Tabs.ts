@@ -1,4 +1,4 @@
-import type { Sizes, Colors, Variants, Shape } from '#valkoui/types'
+import type { Sizes, Colors, Variants, Shape } from '#valkoui'
 
 export interface Tab {
   key: string | number;

@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkProgressbar } from '#valkoui/components'
+import { VkProgressbar } from '#valkoui'
 
 describe('Progressbar component', () => {
   let wrapper: VueWrapper

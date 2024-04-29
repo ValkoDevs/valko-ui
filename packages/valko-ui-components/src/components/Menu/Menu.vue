@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { MenuProps, MenuItem } from '#valkoui/types'
-import { useStyle } from './Menu.styles'
+import { type MenuProps, type SlotStyles, type MenuItem, useStyle } from '#valkoui'
+import styles from './Menu.styles.ts'
 
 defineOptions({ name: 'VkMenu' })
 
@@ -25,7 +25,7 @@ const onItemClick = (item: MenuItem) => {
   item.onClick?.()
 }
 
-const classes = useStyle(props)
+const classes = useStyle<MenuProps, SlotStyles>(props, styles)
 </script>
 
 <template>

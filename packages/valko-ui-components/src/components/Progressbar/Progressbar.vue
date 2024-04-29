@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { ProgressbarProps } from '#valkoui/types'
+import { type ProgressbarProps, type SlotStyles, useStyle } from '#valkoui'
 import diagonalStripes from '#valkoui/img/diagonal-stripes.svg'
-import { useStyle } from './Progressbar.styles'
+import styles from './Progressbar.styles.ts'
 
 defineOptions({ name: 'VkProgressbar' })
 
@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<ProgressbarProps>(), {
   buffer: 0
 })
 
-const classes = useStyle(props)
+const classes = useStyle<ProgressbarProps, SlotStyles>(props, styles)
 
 const inlineStyles = computed(() => {
   const sizeMap: Record<string, string> = {

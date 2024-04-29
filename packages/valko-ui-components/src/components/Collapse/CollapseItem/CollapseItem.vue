@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import { Ref, ref } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-import { VkIcon } from '../../'
-import { CollapseItemProps } from '#valkoui/types'
-import { useStyle } from './CollapseItem.styles'
+import { VkIcon, type CollapseItemProps, type SlotStyles, useStyle } from '#valkoui'
+import styles from './CollapseItem.styles.ts'
 
 defineOptions({ name: 'VkCollapseItem' })
 
 const props = defineProps<CollapseItemProps>()
 
-const classes = useStyle()
+const classes = useStyle<CollapseItemProps, SlotStyles>(props, styles)
 const buttonRef: Ref<Record<string, HTMLElement> | null> = ref(null)
 const onClick = () => {
   if (buttonRef.value) {

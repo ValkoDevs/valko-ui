@@ -1,8 +1,6 @@
-import { tv } from 'tailwind-variants'
-import { DividerProps } from '#valkoui/types'
-import { computed } from 'vue'
+import { tv, type TV } from 'tailwind-variants'
 
-const divider = tv({
+export default tv({
   base: [
     'vk-divider',
     'border-0'
@@ -314,6 +312,4 @@ const divider = tv({
       ]
     }
   ]
-})
-
-export const useStyle = (props: DividerProps) => computed(() => divider(props))
+}) as unknown as ReturnType<TV>

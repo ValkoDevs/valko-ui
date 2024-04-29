@@ -18,8 +18,12 @@ const create = (createOptions: Partial<ValkoUIOptions> = {}): Plugin<[]> => ({
       ...installOptions
     }
 
+    const prefixChange = options.prefix !== defaultOptions.prefix
     for (const component of options.components) {
-      const name = component.name?.startsWith(options.prefix) ? component.name.slice(defaultOptions.prefix.length) : component.name
+      let name = component.name || ''
+      if (prefixChange) {
+        name = `${options.prefix}${name.slice(defaultOptions.prefix.length)}`
+      }
 
       app.component(`${options.prefix}${name}`, component)
     }

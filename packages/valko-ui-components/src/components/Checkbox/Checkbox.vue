@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { VkIcon } from '../'
-import { CheckboxProps } from '#valkoui/types'
-import { useStyle } from './Checkbox.styles'
+import { VkIcon, type CheckboxProps, type SlotStyles, useStyle } from '#valkoui'
+import styles from './Checkbox.styles.ts'
 
 defineOptions({ name: 'VkCheckbox' })
 
@@ -24,7 +23,7 @@ const onClick = () => {
   if (!props.disabled && !props.readonly) emit('update:modelValue', !props.modelValue)
 }
 
-const classes = useStyle(props)
+const classes = useStyle<CheckboxProps, SlotStyles>(props, styles)
 </script>
 
 <template>

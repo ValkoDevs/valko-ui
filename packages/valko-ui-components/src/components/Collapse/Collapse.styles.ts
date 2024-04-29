@@ -1,8 +1,6 @@
-import { computed } from 'vue'
-import { tv } from 'tailwind-variants'
-import { CollapseProps } from '#valkoui/types'
+import { tv, type TV } from 'tailwind-variants'
 
-const styles = tv({
+export default tv({
   base: [
     'vk-collapse',
     'w-full',
@@ -63,6 +61,4 @@ const styles = tv({
       ]
     }
   ]
-})
-
-export const useStyle = (props: CollapseProps) => computed(() => styles(props))
+}) as unknown as ReturnType<TV>

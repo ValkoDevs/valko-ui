@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { CollapseProps } from '#valkoui/types'
-import { useStyle } from './Collapse.styles'
+import { type CollapseProps, useStyle } from '#valkoui'
+import styles from './Collapse.styles.ts'
 
 defineOptions({ name: 'VkCollapse' })
 
@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<CollapseProps>(), {
   shape: 'soft'
 })
 
-const classes = useStyle(props)
+const classes = useStyle<CollapseProps>(props, styles)
 const collapseId = 'collapse-' + Math.floor(Math.random() * 100000)
 </script>
 

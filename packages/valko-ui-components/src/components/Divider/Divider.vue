@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { DividerProps } from '#valkoui/types'
-import { useStyle } from './Divider.styles'
+import { type DividerProps, useStyle } from '#valkoui'
+import styles from './Divider.styles.ts'
 
 defineOptions({ name: 'VkDivider' })
 
@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<DividerProps>(), {
   direction: 'horizontal'
 })
 
-const classes = useStyle(props)
+const classes = useStyle<DividerProps>(props, styles)
 </script>
 
 <template>

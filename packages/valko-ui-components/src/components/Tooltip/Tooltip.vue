@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Popover, PopoverPanel } from '@headlessui/vue'
-import { TooltipProps } from '#valkoui/types'
-import { useStyle } from './Tooltip.styles'
+import { type TooltipProps, type SlotStyles, useStyle } from '#valkoui'
+import styles from './Tooltip.styles.ts'
 
 defineOptions({ name: 'VkTooltip' })
 
@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   placement: 'top'
 })
 
-const classes = useStyle(props)
+const classes = useStyle<TooltipProps, SlotStyles>(props, styles)
 const isShown = ref(false)
 
 const showTooltip = (value: boolean) => {

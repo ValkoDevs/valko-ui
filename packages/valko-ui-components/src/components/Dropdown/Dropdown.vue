@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import { DropdownProps, Item } from '#valkoui/types'
-import { VkIcon, VkButton } from '../'
-import { useStyle } from './Dropdown.styles'
+import { VkButton, VkIcon, type DropdownProps, type SlotStyles, type Item, useStyle } from '#valkoui'
+import styles from './Dropdown.styles.ts'
 
 defineOptions({ name: 'VkDropdown' })
 
@@ -20,7 +19,7 @@ const props = withDefaults(defineProps<DropdownProps>(), {
 
 const emit = defineEmits(['itemClick'])
 
-const classes = useStyle(props)
+const classes = useStyle<DropdownProps, SlotStyles>(props, styles)
 
 const onItemClick = (item: Item) => {
   if (item.disabled) return
