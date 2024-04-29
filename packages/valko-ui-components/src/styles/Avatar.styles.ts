@@ -32,11 +32,7 @@ export default tv({
           'text-white'
         ]
       },
-      outlined: {
-        container: [
-          'border-2'
-        ]
-      },
+      outlined: {},
       ghost: {
         container: [
           'shadow-none'
@@ -59,19 +55,11 @@ export default tv({
           'text-xl',
           'h-10',
           'w-10'
-        ],
-        img: [
-          'h-10',
-          'w-10'
         ]
       },
       sm: {
         container: [
           'text-3xl',
-          'h-14',
-          'w-14'
-        ],
-        img: [
           'h-14',
           'w-14'
         ]
@@ -81,19 +69,11 @@ export default tv({
           'text-5xl',
           'h-20',
           'w-20'
-        ],
-        img: [
-          'h-20',
-          'w-20'
         ]
       },
       lg: {
         container: [
           'text-6xl',
-          'h-24',
-          'w-24'
-        ],
-        img: [
           'h-24',
           'w-24'
         ]
@@ -103,24 +83,15 @@ export default tv({
       rounded: {
         container: [
           'rounded-full'
-        ],
-        img: [
-          'rounded-full'
         ]
       },
       soft: {
         container: [
           'rounded-lg'
-        ],
-        img: [
-          'rounded-lg'
         ]
       },
       square: {
         container: [
-          'rounded-none'
-        ],
-        img: [
           'rounded-none'
         ]
       }
@@ -367,6 +338,25 @@ export default tv({
         container: [
           'bg-dark-5/[.20]',
           'text-dark-5'
+        ]
+      }
+    },
+    // outlined & size
+    {
+      variant: 'outlined',
+      size: ['xs', 'sm'],
+      class: {
+        container: [
+          'border-2'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: ['md', 'lg'],
+      class: {
+        container: [
+          'border-[3px]'
         ]
       }
     }
