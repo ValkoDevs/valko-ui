@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkDivider } from '#valkoui/components'
+import VkDivider from '#valkoui/components/Divider.vue'
 
 describe('Divider component', () => {
   let wrapper: VueWrapper

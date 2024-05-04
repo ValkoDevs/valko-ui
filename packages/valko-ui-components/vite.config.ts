@@ -15,13 +15,18 @@ export default defineConfig({
     }),
     typescript2({
       check: false,
-      include: ['src/components/**/*.vue', 'src/components/**/*.ts', 'src/types/**/*.ts'],
+      include: [
+        'src/components/**/*.{vue, ts}',
+        'src/types/**/*.ts',
+        'src/composables/**/*.ts',
+        'src/styles/**/*.ts'
+      ],
       tsconfigOverride: {
         compilerOptions: {
           outDir: 'dist',
-          sourceMap: true,
-          declaration: true,
-          declarationMap: true
+          sourceMap: false,
+          declaration: false,
+          declarationMap: false
         }
       },
       exclude: ['vite.config.ts']
@@ -36,7 +41,7 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'html'],
       reportsDirectory: '../coverage',
-      exclude: ['exports', 'scripts', 'types']
+      exclude: ['exports', 'scripts', 'types', 'img']
     }
   },
   build: {
@@ -44,8 +49,8 @@ export default defineConfig({
     lib: {
       entry: 'src/index.ts',
       name: 'ValkoUI',
-      formats: ['es', 'cjs', 'umd'],
-      fileName: format => `index.${format}.js`
+      formats: ['es', 'cjs'],
+      fileName: format => `index${format === 'es' ? '' : '.' + format}.js`
     },
     rollupOptions: {
       input: {
@@ -71,6 +76,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '#valkoui': path.resolve(__dirname, 'src')
-    }
+    },
+    extensions: ['.ts', '.vue', '.json', 'svg']
   }
 })

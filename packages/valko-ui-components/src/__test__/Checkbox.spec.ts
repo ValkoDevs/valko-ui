@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkCheckbox } from '#valkoui/components'
+import VkCheckbox from '#valkoui/components/Checkbox.vue'
 
 describe('Checkbox component', () => {
   let wrapper: VueWrapper

@@ -1,4 +1,4 @@
-import { type DefaultComponent } from '#valkoui/types'
+import type { DefaultComponent } from './common'
 
 export interface AvatarProps extends DefaultComponent {
   src: string;

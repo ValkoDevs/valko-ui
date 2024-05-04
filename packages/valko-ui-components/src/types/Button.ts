@@ -1,4 +1,4 @@
-import type { Shapes, Colors, Sizes, Variant } from '#valkoui/types'
+import type { Shapes, Colors, Sizes, Variant } from './common'
 
 export interface ButtonProps extends Shapes, Colors, Sizes {
   variant?: Variant | 'link';

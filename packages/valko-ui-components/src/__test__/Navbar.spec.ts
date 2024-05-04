@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkNavbar } from '#valkoui/components'
+import VkNavbar from '#valkoui/components/Navbar.vue'
 
 describe('Navbar component', () => {
   let wrapper: VueWrapper

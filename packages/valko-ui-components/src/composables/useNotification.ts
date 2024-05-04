@@ -1,16 +1,19 @@
 import Toastify from 'toastify-js'
-import { NotificationProps } from '#valkoui/types'
-import { useStyle } from '#valkoui/components/Notification/'
+import type { NotificationProps } from '#valkoui/types/Notification.ts'
+import useStyle from './useStyle.ts'
+import styles from '#valkoui/styles/Notification.styles.ts'
 
 const useNotification = (props: NotificationProps) => {
 
-  const classes = useStyle({
+  const styleProps: Omit<NotificationProps, 'className'> = {
     color: props.color || 'primary',
     variant: props.variant || 'filled',
     shape: props.shape || 'soft',
     size: props.size || 'md',
     flat: props.flat || false
-  })
+  }
+
+  const classes = useStyle<NotificationProps>(styleProps, styles)
 
   const notification = Toastify({
     text: props.text,

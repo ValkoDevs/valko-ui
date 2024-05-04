@@ -1,4 +1,4 @@
-import type { Shapes, Color, Sizes, Variants } from '#valkoui/types'
+import type { Shapes, Color, Sizes, Variants } from './common'
 
 export interface TagProps extends Shapes, Sizes, Variants {
   text: string;

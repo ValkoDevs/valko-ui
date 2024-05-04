@@ -2,11 +2,12 @@
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
     "dev": {
+      "cache": false,
       "outputs": [
         "dist/**"
       ],
       "inputs": [
-        "src/**/*.{vue, ts, js, css}",
+        "src/**",
         "!src/__tests__"
       ],
       "persistent": true,
@@ -19,7 +20,7 @@
         "dist/**"
       ],
       "inputs": [
-        "src/**/*.{vue, ts, js, css}",
+        "src/**",
         "!src/__tests__"
       ],
       "dependsOn": [
@@ -31,7 +32,7 @@
         "dist/**"
       ],
       "inputs": [
-        "src/**/*.{vue, ts, js, css}",
+        "src/**",
         "!src/__tests__"
       ],
       "dependsOn": [
@@ -49,12 +50,8 @@
         "!src/scripts"
       ]
     },
-    "lint": {
-      "cache": false
-    },
-    "lint:fix": {
-      "cache": false
-    },
+    "lint": {},
+    "lint:fix": {},
     "publish": {
       "dependsOn": [
         "build"

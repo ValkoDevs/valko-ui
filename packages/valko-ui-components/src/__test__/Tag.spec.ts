@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkTag } from '#valkoui/components'
+import VkTag from '#valkoui/components/Tag.vue'
 
 describe('Tag component', () => {
   let wrapper: VueWrapper
