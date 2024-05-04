@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkAlert } from '#valkoui'
+import VkAlert from '#valkoui/components/Alert.vue'
 
 describe('Alert component', () => {
   let wrapper: VueWrapper

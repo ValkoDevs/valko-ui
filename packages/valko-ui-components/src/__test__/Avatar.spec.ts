@@ -1,6 +1,6 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { nextTick } from 'vue'
-import { VkAvatar } from '#valkoui'
+import VkAvatar from '#valkoui/components/Avatar.vue'
 
 describe('Avatar component', () => {
   let wrapper: VueWrapper

@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkSwitch } from '#valkoui'
+import VkSwitch from '#valkoui/components/Switch.vue'
 
 describe('Switch component', () => {
   let wrapper: VueWrapper

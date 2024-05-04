@@ -1,4 +1,4 @@
-import type { Color, Shapes, Variants, Sizes } from '#valkoui'
+import type { Color, Shapes, Variants, Sizes } from './common'
 
 export interface NavbarProps extends Sizes, Shapes, Variants {
   color?: Color | 'neutral';

@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkCollapse } from '#valkoui'
+import VkCollapse from '#valkoui/components/Collapse.vue'
 
 describe('Collapse component', () => {
   let wrapper: VueWrapper

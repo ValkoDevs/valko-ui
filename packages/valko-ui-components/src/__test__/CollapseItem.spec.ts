@@ -1,6 +1,7 @@
 import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkCollapse, VkCollapseItem } from '#valkoui'
+import VkCollapse from '#valkoui/components/Collapse.vue'
+import VkCollapseItem from '#valkoui/components/CollapseItem.vue'
 
 describe('CollapseItem component', () => {
   let wrapper: VueWrapper

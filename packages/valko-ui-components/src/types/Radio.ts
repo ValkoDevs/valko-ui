@@ -1,4 +1,4 @@
-import { type DefaultComponent } from '#valkoui'
+import type { DefaultComponent } from './common'
 
 export interface RadioProps extends DefaultComponent {
   name?: string;

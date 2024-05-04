@@ -19,7 +19,7 @@ export default defineConfig({
         'src/components/**/*.{vue, ts}',
         'src/types/**/*.ts',
         'src/composables/**/*.ts',
-        'src/index.ts'
+        'src/styles/**/*.ts'
       ],
       tsconfigOverride: {
         compilerOptions: {
@@ -49,8 +49,8 @@ export default defineConfig({
     lib: {
       entry: 'src/index.ts',
       name: 'ValkoUI',
-      formats: ['es', 'cjs', 'umd'],
-      fileName: format => `index.${format}.js`
+      formats: ['es', 'cjs'],
+      fileName: format => `index${format === 'es' ? '' : '.' + format}.js`
     },
     rollupOptions: {
       input: {

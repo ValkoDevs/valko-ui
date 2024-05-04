@@ -1,48 +1,47 @@
 ////////////////////////
 ////// COMPONENTS //////
 ////////////////////////
-export * from './components'
+export * from '#valkoui/components/index.ts'
 
 /////////////////////////
 ////// COMPOSABLES //////
 /////////////////////////
-export { default as useNotification } from './composables/useNotification'
-export { default as useDarkMode } from './composables/useDarkMode'
-export { default as useStyle } from './composables/useStyle'
+export { default as useNotification } from '#valkoui/composables/useNotification.ts'
+export { default as useDarkMode } from '#valkoui/composables/useDarkMode.ts'
+export { default as useStyle } from '#valkoui/composables/useStyle.ts'
 
 ///////////////////
 ////// TYPES //////
 ///////////////////
-export * from './types/common'
-export * from './types/Alert'
-export * from './types/Avatar'
-export * from './types/Badge'
-export * from './types/Breadcrumbs'
-export * from './types/Button'
-export * from './types/Checkbox'
-export * from './types/Collapse'
-export * from './types/DataTable'
-export * from './types/Divider'
-export * from './types/Dropdown'
-export * from './types/Icon'
-export * from './types/Input'
-export * from './types/Menu'
-export * from './types/Modal'
-export * from './types/Navbar'
-export * from './types/Notification'
-export * from './types/Pagination'
-export * from './types/Progressbar'
-export * from './types/Radio'
-export * from './types/Select'
-export * from './types/Spinner'
-export * from './types/Switch'
-export * from './types/Tabs'
-export * from './types/Tag'
-export * from './types/Textarea'
-export * from './types/Tooltip'
+export * from '#valkoui/types/common'
+export * from '#valkoui/types/Alert'
+export * from '#valkoui/types/Avatar'
+export * from '#valkoui/types/Badge'
+export * from '#valkoui/types/Breadcrumbs'
+export * from '#valkoui/types/Button'
+export * from '#valkoui/types/Checkbox'
+export * from '#valkoui/types/Collapse'
+export * from '#valkoui/types/DataTable'
+export * from '#valkoui/types/Divider'
+export * from '#valkoui/types/Dropdown'
+export * from '#valkoui/types/Icon'
+export * from '#valkoui/types/Input'
+export * from '#valkoui/types/Menu'
+export * from '#valkoui/types/Modal'
+export * from '#valkoui/types/Navbar'
+export * from '#valkoui/types/Notification'
+export * from '#valkoui/types/Pagination'
+export * from '#valkoui/types/Progressbar'
+export * from '#valkoui/types/Radio'
+export * from '#valkoui/types/Select'
+export * from '#valkoui/types/Spinner'
+export * from '#valkoui/types/Switch'
+export * from '#valkoui/types/Tabs'
+export * from '#valkoui/types/Tag'
+export * from '#valkoui/types/Textarea'
+export * from '#valkoui/types/Tooltip'
 
 /////////////////////
 ////// SCRIPTS //////
 /////////////////////
-export { default as createValkoUI } from './scripts/create'
-export { default } from './scripts/install'
+export { default, createValkoUI, type ValkoUIOptions } from '#valkoui/scripts/install.ts'

@@ -7,10 +7,10 @@
     "dist"
   ],
   "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
+  "module": "./dist/index.js",
   "exports": {
     ".": {
-      "import": "./dist/index.es.js",
+      "import": "./dist/index.js",
       "require": "./dist/index.umd.js"
     },
     "./styles": "./dist/valkoui.css",
@@ -20,7 +20,7 @@
     "./tailwind.preset": "./dist/tailwind.preset.js",
     "./tailwind.preset.js": "./dist/tailwind.preset.js"
   },
-  "types": "./dist/index.es.d.ts",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "build": "vue-tsc && vite build",
     "lint": "eslint --ext .ts,.vue,.js .",

@@ -1,4 +1,4 @@
-import { type DefaultComponent } from '#valkoui'
+import type { DefaultComponent } from './common'
 
 export interface DataTableHeader {
   key: string;

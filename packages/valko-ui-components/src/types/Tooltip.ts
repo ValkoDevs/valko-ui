@@ -1,4 +1,4 @@
-import type { Sizes, Shapes } from '#valkoui'
+import type { Sizes, Shapes } from './common'
 
 export interface TooltipProps extends Sizes, Shapes {
   content: string;

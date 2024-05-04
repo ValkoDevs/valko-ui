@@ -1,4 +1,4 @@
-import type { Shapes, Colors, Sizes, Variant } from '#valkoui'
+import type { Shapes, Colors, Sizes, Variant } from './common'
 
 export interface Item {
   key: string | number;

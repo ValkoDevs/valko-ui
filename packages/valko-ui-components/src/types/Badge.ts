@@ -1,4 +1,4 @@
-import { type DefaultComponent } from '#valkoui'
+import type { DefaultComponent } from './common'
 
 export interface BadgeProps extends DefaultComponent {
   placement?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';

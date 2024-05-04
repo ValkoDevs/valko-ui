@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { VkTextarea } from '#valkoui'
+import VkTextarea from '#valkoui/components/Textarea.vue'
 
 describe('Textarea component', () => {
   let wrapper: VueWrapper
