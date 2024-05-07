@@ -1,6 +1,7 @@
-import type { Shapes, Colors, Sizes, Variant } from './common'
+import type { Shapes, Color, Sizes, Variant } from './common'
 
-export interface ButtonProps extends Shapes, Colors, Sizes {
+export interface ButtonProps extends Shapes, Sizes {
+  color?: Color | 'neutral';
   variant?: Variant | 'link';
   block?: boolean;
   disabled?: boolean;

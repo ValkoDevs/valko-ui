@@ -18,7 +18,8 @@ export default tv({
       'transition-colors',
       'duration-200',
       'ease-in-out',
-      'focus:ring-0'
+      'focus:ring-0',
+      'overflow-hidden'
     ],
     label: [
       'opacity-80',

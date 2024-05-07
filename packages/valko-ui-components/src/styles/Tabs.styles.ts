@@ -175,7 +175,8 @@ export default tv({
           'data-[headlessui-state=selected]:text-black'
         ]
       },
-      dark: {}
+      dark: {},
+      neutral: {}
     },
     grow: {
       true: {
@@ -277,6 +278,16 @@ export default tv({
         ]
       }
     },
+    {
+      color: 'neutral',
+      shape: 'line',
+      class: {
+        cursor: [
+          'border-dark-3',
+          'dark:border-light-3'
+        ]
+      }
+    },
     //color rounded square & soft
     {
       color: 'primary',
@@ -347,6 +358,20 @@ export default tv({
       class: {
         cursor: [
           'bg-dark-5'
+        ]
+      }
+    },
+    {
+      color: 'neutral',
+      shape: ['rounded', 'square', 'soft'],
+      class: {
+        cursor: [
+          'bg-dark-3',
+          'dark:bg-light-3'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-white',
+          'dark:data-[headlessui-state=selected]:text-black'
         ]
       }
     },

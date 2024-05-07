@@ -96,7 +96,7 @@ watchEffect(() => {
         :color="page === props.modelValue ? props.color : buttonColor"
         :size="size"
         :shape="props.shape"
-        condensed
+        :condensed="true"
         :disabled="props.disabled"
         @click="() => changePage(page)"
       >

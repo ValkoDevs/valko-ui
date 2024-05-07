@@ -20,12 +20,17 @@ const form = ref({
   disabled: false
 })
 
+const colors = [
+  ...colorOptions,
+  { value: 'neutral', label: 'Neutral' }
+]
+
 const paginationProps = [
   {
     prop: 'color',
     required: false,
     description: 'The Pagination color theme.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
+    values: 'primary, secondary, error, warning, info, success, light, dark, neutral',
     default: 'primary'
   },
   {
@@ -110,6 +115,12 @@ const paginationEmits = [
         v-model="form.variant"
       />
       <vk-select
+        placeholder="Color"
+        size="sm"
+        :options="colors"
+        v-model="form.color"
+      />
+      <vk-select
         placeholder="Shape"
         size="sm"
         :options="shapeOptions"
@@ -144,7 +155,7 @@ const paginationEmits = [
       >
         <div class="gap-4 grid grid-cols-3">
           <div
-            v-for="color in colorOptions"
+            v-for="color in colors"
             :key="color.value"
             class="flex flex-col items-start"
           >

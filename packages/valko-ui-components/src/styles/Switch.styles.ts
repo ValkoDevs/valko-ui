@@ -18,12 +18,12 @@ export default tv({
       'transition-all',
       'duration-200',
       'ease-in-out',
-      'relative'
+      'relative',
+      'shadow-sm',
+      'shadow-dark-3'
     ],
     thumb: [
       'inline-block',
-      'shadow-lg',
-      'shadow-light-4',
       'ring-0',
       'pointer-events-none',
       'transition-all',
@@ -31,7 +31,6 @@ export default tv({
       'duration-200',
       'ease-in-out',
       'absolute',
-      'dark:shadow-dark-5',
       'data-[selected=false]:left-0',
       'data-[selected=true]:left-full',
       'data-[selected=true]:-translate-x-full'
@@ -127,11 +126,11 @@ export default tv({
         switch: [
           'border-transparent',
           'bg-light-5/[.15]',
+          'shadow-none',
           'dark:bg-dark-2/[.15]'
         ],
         thumb: [
           'bg-light-5/[.5]',
-          'shadow-none',
           'dark:bg-dark-5/[.5]'
         ]
       }
@@ -195,6 +194,13 @@ export default tv({
       false: {
         label: [
           'mr-2'
+        ]
+      }
+    },
+    flat: {
+      true: {
+        switch: [
+          'shadow-none'
         ]
       }
     }

@@ -8,24 +8,25 @@ export default tv({
     'focus:outline-none',
     'focus:ring-2',
     'ring-inset',
-    'shadow-lg',
-    'shadow-light-4',
+    'shadow-md',
     'transition',
     'duration-150',
+    'shadow-light-4',
+    'dark:shadow-dark-3',
     'focus:outline-none',
-    'active:shadow-none',
-    'dark:shadow-dark-5'
+    'active:shadow-none'
   ],
   variants: {
     color: {
-      primary: {},
-      secondary: {},
-      success: {},
-      info: {},
-      warning: {},
-      error: {},
-      light: {},
-      dark: {}
+      primary: [],
+      secondary: [],
+      success: [],
+      info: [],
+      warning: [],
+      error: [],
+      light: [],
+      dark: [],
+      neutral: []
     },
     size: {
       xs: [
@@ -186,6 +187,23 @@ export default tv({
         'active:bg-dark-5'
       ]
     },
+    {
+      variant: 'filled',
+      color: 'neutral',
+      disabled: false,
+      class: [
+        'bg-dark-3',
+        'focus:ring-dark-4',
+        'hover:bg-dark-2',
+        'active:bg-dark-4',
+        'text-light-1',
+        'dark:bg-light-3',
+        'dark:focus:ring-light-2',
+        'dark:hover:bg-light-4',
+        'dark:active:bg-light-2',
+        'dark:text-dark-5'
+      ]
+    },
     // ghost & color
     {
       variant: 'ghost',
@@ -283,6 +301,23 @@ export default tv({
         'active:bg-dark-5/[.30]'
       ]
     },
+    {
+      variant: 'ghost',
+      color: 'neutral',
+      disabled: false,
+      class: [
+        'text-dark-5',
+        'bg-dark-5/[.15]',
+        'focus:ring-dark-5/[.30]',
+        'hover:bg-dark-5/[.25]',
+        'active:bg-dark-5/[.30]',
+        'dark:text-light-5',
+        'dark:bg-light-5/[.15]',
+        'dark:focus:ring-light-5/[.30]',
+        'dark:hover:bg-light-5/[.25]',
+        'dark:active:bg-light-5/[.30]'
+      ]
+    },
     // link & color
     {
       variant: 'link',
@@ -370,6 +405,21 @@ export default tv({
         'focus:ring-dark-4/20',
         'hover:bg-dark-5/20',
         'active:bg-dark-4/20'
+      ]
+    },
+    {
+      variant: 'link',
+      color: 'neutral',
+      disabled: false,
+      class: [
+        'text-dark-5',
+        'focus:ring-dark-4/20',
+        'hover:bg-dark-5/20',
+        'active:bg-dark-4/20',
+        'dark:text-light-5',
+        'dark:focus:ring-light-4/20',
+        'dark:hover:bg-light-5/20',
+        'dark:active:bg-light-4/20'
       ]
     },
     // outlined & color
@@ -469,6 +519,23 @@ export default tv({
         'border-dark-5'
       ]
     },
+    {
+      variant: 'outlined',
+      color: 'neutral',
+      disabled: false,
+      class: [
+        'text-dark-5',
+        'focus:ring-dark-4/20',
+        'hover:bg-dark-5/20',
+        'active:bg-dark-4/20',
+        'border-dark-5',
+        'dark:text-light-5',
+        'dark:focus:ring-light-4/20',
+        'dark:hover:bg-light-5/20',
+        'dark:active:bg-light-4/20',
+        'dark:border-light-5'
+      ]
+    },
     // disabled & variant
     {
       variant: 'filled',
@@ -508,6 +575,7 @@ export default tv({
     {
       size: 'xs',
       variant: 'outlined',
+      condensed: false,
       class: [
         'px-[calc(0.5rem_-_2px)]',
         'py-[calc(0.5rem_-_2px)]'
@@ -516,6 +584,7 @@ export default tv({
     {
       size: 'sm',
       variant: 'outlined',
+      condensed: false,
       class: [
         'px-[calc(0.75rem_-_2px)]',
         'py-[calc(0.625rem_-_2px)]'
@@ -524,6 +593,7 @@ export default tv({
     {
       size: 'md',
       variant: 'outlined',
+      condensed: false,
       class: [
         'px-[calc(1rem_-_2px)]',
         'py-[calc(0.625rem_-_2px)]'
@@ -532,6 +602,7 @@ export default tv({
     {
       size: 'lg',
       variant: 'outlined',
+      condensed: false,
       class: [
         'px-[calc(1.25rem_-_2px)]',
         'py-[calc(0.75rem_-_2px)]'

@@ -48,14 +48,14 @@ const breadcrumbsProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Breadcrumbs.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
+    values: 'primary, secondary, error, warning, info, success, light, dark, neutral',
     default: 'primary'
   },
   {
     prop: 'variant',
     required: false,
     description: 'The variant of the Breadcrumbs.',
-    values: 'filled, outlined, ghost',
+    values: 'filled, outlined, ghost, link',
     default: 'filled'
   },
   {
