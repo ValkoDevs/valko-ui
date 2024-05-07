@@ -4,22 +4,21 @@ import useStyle from './useStyle.ts'
 import styles from '#valkoui/styles/Notification.styles.ts'
 
 const useNotification = (props: NotificationProps) => {
+  if (!props.text) throw new Error('Text prop is required.')
 
-  const styleProps: Omit<NotificationProps, 'className'> = {
-    color: props.color || 'primary',
-    variant: props.variant || 'filled',
-    shape: props.shape || 'soft',
-    size: props.size || 'md',
-    flat: props.flat || false
-  }
+  let notification: ReturnType<typeof Toastify> | null = null
 
-  const classes = useStyle<NotificationProps>(styleProps, styles)
+  const classes = useStyle<NotificationProps, Record<string, string>>(props, styles)
 
   const defaultOnClick = () => notification?.hideToast()
 
-  const notification = Toastify({
-    text: props.text,
-    className: classes.value,
+  const notificationNode = document.createElement('div')
+  notificationNode.innerText = props.text
+  notificationNode.className = classes.value.content
+
+  notification = Toastify({
+    node: notificationNode,
+    className: classes.value.notification,
     duration: props.duration || 3000,
     destination: props.destination,
     newWindow: props.newWindow || false,
@@ -37,10 +36,8 @@ const useNotification = (props: NotificationProps) => {
   let animationStartTime: number
   let elapsedTimeBeforePause: number
   let resumeTimeout: NodeJS.Timeout | null = null
+  let progressBarContainer: HTMLDivElement | null = null
   const notificationContainer = document.querySelector('.vk-notification')
-
-  const progressBarContainer = document.createElement('div')
-  // progressBarContainer.className = classes.value.progressbar
 
   const updateProgress = () => {
     const currentTime = Date.now()
@@ -48,18 +45,32 @@ const useNotification = (props: NotificationProps) => {
     const duration = props.duration || 3000
     const progress = Math.max(0, 100 - (elapsedTime / duration) * 100)
 
-    progressBarContainer.style.width = `${progress}%`
+    if (progressBarContainer) {
+      progressBarContainer.style.width = `${progress}%`
+    }
 
     if (!animationPaused && elapsedTime < duration) {
       requestAnimationFrame(updateProgress)
     }
   }
 
+  const startProgress = () => {
+    animationStartTime = Date.now()
+    updateProgress()
+  }
+
+  const resetProgress = () => {
+    animationStartTime = Date.now()
+    elapsedTimeBeforePause = 0
+    startProgress()
+  }
+
   setTimeout(() => {
     if (notificationContainer) {
+      progressBarContainer = document.createElement('div')
+      progressBarContainer.className = classes.value.progressbar
       notificationContainer.appendChild(progressBarContainer)
-      animationStartTime = Date.now()
-      updateProgress()
+      startProgress()
     }
   }, 100)
 
@@ -71,11 +82,9 @@ const useNotification = (props: NotificationProps) => {
 
     notificationContainer.addEventListener('mouseleave', () => {
       animationPaused = false
-      animationStartTime = Date.now() - elapsedTimeBeforePause
-
       if (resumeTimeout) clearTimeout(resumeTimeout)
       resumeTimeout = setTimeout(() => {
-        updateProgress()
+        resetProgress()
       }, 100)
     })
   }
@@ -86,7 +95,7 @@ const useNotification = (props: NotificationProps) => {
       closeButton.innerHTML = ''
       closeButton.classList.add('self-start')
       const customIcon = document.createElement('i')
-      // customIcon.className = classes.value.close
+      customIcon.className = classes.value.close
       closeButton.appendChild(customIcon)
     }
   }, 100)
