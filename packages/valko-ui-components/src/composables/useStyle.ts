@@ -3,7 +3,7 @@ import { computed, ComputedRef } from 'vue'
 import { BaseStyles } from '#valkoui/types/common'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const useStyle= <T extends Record<string, any>, R = BaseStyles>(props: T, styles: ReturnType<TV>) => computed(() => {
+const useStyle = <T extends Record<string, any>, R = BaseStyles>(props: T, styles: ReturnType<TV>) => computed(() => {
   const result = styles(props)
 
   if (typeof result === 'string') return styles(props) as unknown as string

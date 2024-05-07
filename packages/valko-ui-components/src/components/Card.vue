@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { CardProps } from '#valkoui/types'
-import { useStyle } from './Card.styles'
+import type { CardProps } from '#valkoui/types/Card'
+import useStyle from '#valkoui/composables/useStyle.ts'
+import styles from '#valkoui/styles/Card.styles.ts'
 
 defineOptions({ name: 'VkCard' })
 
@@ -14,15 +15,15 @@ const props = withDefaults(defineProps<CardProps>(), {
 
 const emit = defineEmits(['click'])
 
-const classes = useStyle(props)
+const classes = useStyle<CardProps>(props, styles)
+
+const element = computed(() => props.isPressable ? 'button' : 'div')
 
 const onClick = () => {
   if (!props.disabled && props.isPressable) {
     emit('click')
   }
 }
-
-const element = computed(() => props.isPressable ? 'button' : 'div')
 </script>
 
 <template>

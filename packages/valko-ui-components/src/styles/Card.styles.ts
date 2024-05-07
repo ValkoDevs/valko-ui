@@ -1,8 +1,6 @@
-import { computed } from 'vue'
-import { tv } from 'tailwind-variants'
-import { CardProps } from '#valkoui/types'
+import { tv, type TV } from 'tailwind-variants'
 
-const styles = tv({
+export default tv({
   base: [
     'vk-card',
     'w-fit',
@@ -78,6 +76,4 @@ const styles = tv({
       ]
     }
   }
-})
-
-export const useStyle = (props: CardProps) => computed(() => styles(props))
+}) as unknown as ReturnType<TV>
