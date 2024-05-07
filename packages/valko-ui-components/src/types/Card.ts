@@ -1,4 +1,4 @@
-import type { Size, Variants, Shapes } from '#valkoui/types'
+import type { Size, Variants, Shapes } from './common'
 
 export interface CardFooterProps {
   isBlurred?: boolean;

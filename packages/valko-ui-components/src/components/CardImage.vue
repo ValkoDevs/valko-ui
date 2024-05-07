@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { watchEffect, ref, Ref } from 'vue'
-import { useStyle } from './CardImage.styles'
-import { CardImageProps } from '#valkoui/types'
+import type { CardImageProps } from '#valkoui/types/Card'
+import type { SlotStyles } from '#valkoui/types/common'
+import useStyle from '#valkoui/composables/useStyle.ts'
+import styles from '#valkoui/styles/CardImage.styles.ts'
 
 defineOptions({ name: 'VkCardImage' })
 
@@ -9,7 +11,9 @@ const props = withDefaults(defineProps<CardImageProps>(), {
   width: '100%',
   height: 'auto'
 })
-const classes = useStyle()
+
+const classes = useStyle<CardImageProps, SlotStyles>(props, styles)
+
 const verifiedSrc: Ref<string | null> = ref(null)
 const img: HTMLImageElement = new Image()
 

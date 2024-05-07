@@ -1,7 +1,6 @@
-import { computed } from 'vue'
-import { tv } from 'tailwind-variants'
+import { tv, type TV } from 'tailwind-variants'
 
-const styles = tv({
+export default tv({
   base: [
     'vk-cardheader',
     'p-4',
@@ -10,6 +9,4 @@ const styles = tv({
     'border-light-4',
     'dark:border-dark-1'
   ]
-})
-
-export const useStyle = () => computed(() => styles())
+}) as unknown as ReturnType<TV>
