@@ -1,8 +1,11 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { TableProps } from '#valkoui/types'
-import { useStyle } from './Table.styles'
-import { VkCheckbox, VkRadio } from '../'
+import type { TableProps } from '#valkoui/types/Table'
+import type { SlotStyles } from '#valkoui/types/common'
+import useStyle from '#valkoui/composables/useStyle.ts'
+import styles from '#valkoui/styles/Tabs.styles.ts'
+import VkCheckbox from './Checkbox.vue'
+import VkRadio from './Radio.vue'
 
 defineOptions({ name: 'VkTable' })
 
@@ -21,7 +24,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   flat: false
 })
 
-const classes = useStyle(props)
+const classes = useStyle<TableProps, SlotStyles>(props, styles)
 
 const checkboxRef = ref(false)
 </script>
