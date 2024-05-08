@@ -12,7 +12,9 @@ defineOptions({ name: 'VkCollapseItem' })
 const props = defineProps<CollapseItemProps>()
 
 const classes = useStyle<CollapseItemProps, SlotStyles>(props, styles)
+
 const buttonRef: Ref<Record<string, HTMLElement> | null> = ref(null)
+
 const onClick = () => {
   if (buttonRef.value) {
     const current = buttonRef.value.$el

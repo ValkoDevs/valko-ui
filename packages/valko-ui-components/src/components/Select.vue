@@ -21,6 +21,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
 const emit = defineEmits(['update:modelValue'])
 
 const classes = useStyle<SelectProps, SlotStyles>(props, styles)
+
 const select = ref(null)
 const isOpen = ref(false)
 

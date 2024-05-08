@@ -29,6 +29,12 @@ const updateValue = (e: Event) => {
   }
 }
 
+const onFocus = (event: Event) => {
+  if (!props.disabled) {
+    emit('focus', event)
+  }
+}
+
 onMounted(() => {
   if (inputRef.value) {
     inputRef.value.addEventListener('click', () => {
@@ -38,12 +44,6 @@ onMounted(() => {
     })
   }
 })
-
-const onFocus = (event: Event) => {
-  if (!props.disabled) {
-    emit('focus', event)
-  }
-}
 </script>
 
 <template>

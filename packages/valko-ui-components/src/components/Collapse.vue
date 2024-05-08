@@ -13,6 +13,7 @@ const props = withDefaults(defineProps<CollapseProps>(), {
 })
 
 const classes = useStyle<CollapseProps>(props, styles)
+
 const collapseId = 'collapse-' + Math.floor(Math.random() * 100000)
 </script>
 

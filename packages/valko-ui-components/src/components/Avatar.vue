@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, Ref, watchEffect } from 'vue'
 import type { AvatarProps } from '#valkoui/types/Avatar'
+import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Avatar.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import VkIcon from './Icon.vue'
@@ -14,7 +15,8 @@ const props = withDefaults(defineProps<AvatarProps>(), {
   shape: 'soft'
 })
 
-const classes = useStyle<AvatarProps, Record<string, string>>(props, styles)
+const classes = useStyle<AvatarProps, SlotStyles>(props, styles)
+
 const verifiedSrc: Ref<string | null> = ref(null)
 const img: HTMLImageElement = new Image()
 

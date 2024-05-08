@@ -19,6 +19,7 @@ const props = withDefaults(defineProps<BreadcrumbsProps>(), {
 const emit = defineEmits(['crumbClick'])
 
 const classes = useStyle<BreadcrumbsProps, SlotStyles>(props, styles)
+
 const lastCrumbKey = props.crumbs[props.crumbs.length - 1]?.key
 
 const onCrumbClick = (item: Crumb) => {

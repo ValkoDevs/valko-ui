@@ -17,13 +17,13 @@ const props = withDefaults(defineProps<TextareaProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
+const classes = useStyle<TextareaProps, SlotStyles>(props, styles)
+
 const updateValue = (e: Event) => {
   if (!props.disabled && !props.readonly) {
     emit('update:modelValue', (e.target as HTMLInputElement).value)
   }
 }
-
-const classes = useStyle<TextareaProps, SlotStyles>(props, styles)
 </script>
 
 <template>

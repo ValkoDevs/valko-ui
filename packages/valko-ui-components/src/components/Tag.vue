@@ -45,7 +45,6 @@ const onClose = () => {
     emit('close')
   }
 }
-
 </script>
 
 <template>
