@@ -2,16 +2,16 @@
 import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
-import sizeOptions from '@/data/sizeOptions'
 import colorOptions from '@/data/colorOptions'
-import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
+import sizeOptions from '@/data/sizeOptions'
+import propHeaders from '@/data/propHeaders'
 import slotHeaders from '@/data/slotHeaders'
 
 const form = ref({
-  size: 'md',
-  shape: 'soft',
   color: 'primary',
+  shape: 'soft',
+  size: 'md',
   placement: 'top-right',
   content: 'new',
   outlined: false,
@@ -27,15 +27,15 @@ const placementOptions = [
   { value: 'bottom-left', label: 'Bottom Left' }
 ]
 
-const src = 'https://randomuser.me/api/portraits/men/33.jpg'
+const src = 'https://randomuser.me/api/portraits/women/12.jpg'
 
-const apiData = [
+const badgeProps = [
   {
-    prop: 'size',
+    prop: 'color',
     required: false,
-    description: 'The size of the Badge.',
-    values: 'xs, sm, md, lg',
-    default: 'md'
+    description: 'The color theme of the Badge.',
+    values: 'primary, secondary, error, warning, info, success, light, dark',
+    default: 'primary'
   },
   {
     prop: 'shape',
@@ -45,11 +45,11 @@ const apiData = [
     default: 'soft'
   },
   {
-    prop: 'color',
+    prop: 'size',
     required: false,
-    description: 'The color theme of the Badge.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
-    default: 'primary'
+    description: 'The size of the Badge.',
+    values: 'xs, sm, md, lg',
+    default: 'md'
   },
   {
     prop: 'placement',
@@ -68,7 +68,7 @@ const apiData = [
   {
     prop: 'outlined',
     required: false,
-    description: 'An outlined for the Badge.',
+    description: 'Displays an outline for the Badge.',
     values: 'true, false',
     default: 'false'
   },
@@ -95,7 +95,7 @@ const apiData = [
   }
 ]
 
-const slotData = [
+const badgeSlots = [
   {
     name: 'default',
     description: 'Slot for additional content to be placed inside the badge. This slot is typically used to include custom elements like icons, text, or other components.',
@@ -130,10 +130,6 @@ const slotData = [
     </template>
 
     <template #playground-options>
-      <vk-input
-        label="Content"
-        v-model="form.content"
-      />
       <vk-select
         placeholder="Color"
         size="sm"
@@ -141,10 +137,10 @@ const slotData = [
         v-model="form.color"
       />
       <vk-select
-        placeholder="Placement"
+        placeholder="Shape"
         size="sm"
-        :options="placementOptions"
-        v-model="form.placement"
+        :options="shapeOptions"
+        v-model="form.shape"
       />
       <vk-select
         placeholder="Size"
@@ -152,11 +148,15 @@ const slotData = [
         :options="sizeOptions"
         v-model="form.size"
       />
+      <vk-input
+        label="Content"
+        v-model="form.content"
+      />
       <vk-select
-        placeholder="Shape"
+        placeholder="Placement"
         size="sm"
-        :options="shapeOptions"
-        v-model="form.shape"
+        :options="placementOptions"
+        v-model="form.placement"
       />
       <vk-checkbox
         label="Outlined"
@@ -337,7 +337,7 @@ const slotData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="apiData"
+            :data="badgeProps"
           />
         </example-section>
 
@@ -347,7 +347,7 @@ const slotData = [
         >
           <vk-data-table
             :headers="slotHeaders"
-            :data="slotData"
+            :data="badgeSlots"
           />
         </example-section>
       </div>

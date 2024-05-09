@@ -2,17 +2,17 @@
 import { ref, computed } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
-import sizeOptions from '@/data/sizeOptions'
 import colorOptions from '@/data/colorOptions'
-import propHeaders from '@/data/propHeaders'
-import shapeOptions from '@/data/shapeOptions'
 import variantOptions from '@/data/variantOptions'
+import shapeOptions from '@/data/shapeOptions'
+import sizeOptions from '@/data/sizeOptions'
+import propHeaders from '@/data/propHeaders'
 
 const form = ref({
-  size: 'md',
-  shape: 'soft',
-  variant: 'filled',
   color: 'primary',
+  variant: 'filled',
+  shape: 'soft',
+  size: 'md',
   name: 'Brand Copper',
   avatar: false,
   flat: false,
@@ -72,21 +72,7 @@ const urls: Avatar[] = [
   }
 ]
 
-const apiData = [
-  {
-    prop: 'size',
-    required: false,
-    description: 'The size of the Avatar.',
-    values: 'xs, sm, md, lg',
-    default: 'md'
-  },
-  {
-    prop: 'shape',
-    required: false,
-    description: 'The shape of the Avatar.',
-    values: 'rounded, square, soft',
-    default: 'soft'
-  },
+const avatarProps = [
   {
     prop: 'color',
     required: false,
@@ -100,6 +86,20 @@ const apiData = [
     description: 'The variant of the Avatar.',
     values: 'filled, outlined, ghost',
     default: 'filled'
+  },
+  {
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Avatar.',
+    values: 'rounded, square, soft',
+    default: 'soft'
+  },
+  {
+    prop: 'size',
+    required: false,
+    description: 'The size of the Avatar.',
+    values: 'xs, sm, md, lg',
+    default: 'md'
   },
   {
     prop: 'src',
@@ -167,16 +167,16 @@ const avatarSrc = computed(() => { return form.value.avatar ? '###' : form.value
         v-model="form.variant"
       />
       <vk-select
-        placeholder="Size"
-        size="sm"
-        :options="sizeOptions"
-        v-model="form.size"
-      />
-      <vk-select
         placeholder="Shape"
         size="sm"
         :options="shapeOptions"
         v-model="form.shape"
+      />
+      <vk-select
+        placeholder="Size"
+        size="sm"
+        :options="sizeOptions"
+        v-model="form.size"
       />
       <vk-checkbox
         label="Hide Avatar"
@@ -301,14 +301,9 @@ const avatarSrc = computed(() => { return form.value.avatar ? '###' : form.value
       <example-section
         title="Flat"
       >
-        <div
-          class="flex flex-col items-center"
-        >
-          <span class="mb-1">Flat</span>
-          <vk-avatar
-            flat
-          />
-        </div>
+        <vk-avatar
+          flat
+        />
       </example-section>
     </template>
 
@@ -320,7 +315,7 @@ const avatarSrc = computed(() => { return form.value.avatar ? '###' : form.value
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="apiData"
+            :data="avatarProps"
           />
         </example-section>
       </div>

@@ -20,6 +20,7 @@ const props = withDefaults(defineProps<TabsProps>(), {
 })
 
 const classes = useStyle<TabsProps, SlotStyles>(props, styles)
+
 const cursor: Ref<HTMLElement | null> = ref(null)
 
 const onChange = async () => {

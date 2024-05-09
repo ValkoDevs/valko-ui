@@ -17,6 +17,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
 })
 
 const classes = useStyle<TooltipProps, SlotStyles>(props, styles)
+
 const isShown = ref(false)
 
 const showTooltip = (value: boolean) => {

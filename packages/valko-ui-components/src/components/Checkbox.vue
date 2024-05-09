@@ -22,11 +22,11 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
+const classes = useStyle<CheckboxProps, SlotStyles>(props, styles)
+
 const onClick = () => {
   if (!props.disabled && !props.readonly) emit('update:modelValue', !props.modelValue)
 }
-
-const classes = useStyle<CheckboxProps, SlotStyles>(props, styles)
 </script>
 
 <template>

@@ -21,6 +21,7 @@ const props = withDefaults(defineProps<ModalProps>(), {
 const emit = defineEmits(['close'])
 
 const classes = useStyle<ModalProps, SlotStyles>(props, styles)
+
 const containerRef = ref(null)
 
 const closeModal = () => { emit('close') }

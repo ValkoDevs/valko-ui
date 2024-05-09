@@ -2,27 +2,28 @@
 import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
-import sizeOptions from '@/data/sizeOptions'
 import colorOptions from '@/data/colorOptions'
-import propHeaders from '@/data/propHeaders'
-import shapeOptions from '@/data/shapeOptions'
 import variantOptions from '@/data/variantOptions'
+import shapeOptions from '@/data/shapeOptions'
+import sizeOptions from '@/data/sizeOptions'
+import propHeaders from '@/data/propHeaders'
 import emitHeaders from '@/data/emitHeaders'
+import { useNotification } from '@valko-ui/components'
 
 const form = ref({
-  size: 'md',
-  shape: 'soft',
   color: 'primary',
   variant: 'filled',
+  shape: 'soft',
+  size: 'md',
   separator: '>',
   flat: false
 })
 
 const crumbs = [
-  { key: 'home', title: 'Home', onClick: () => alert('Home') },
-  { key: 'music', title: 'Music', onClick: () => alert('Music') },
-  { key: 'artist', title: 'Artist', onClick: () => alert('Artist') },
-  { key: 'album', title: 'Album', onClick: () => alert('Album') },
+  { key: 'home', title: 'Home', onClick: () => useNotification({ text: 'Home' }) },
+  { key: 'music', title: 'Music', onClick: () => useNotification({ text: 'Music' }) },
+  { key: 'artist', title: 'Artist', onClick: () => useNotification({ text: 'Artist' }) },
+  { key: 'album', title: 'Album', onClick: () => useNotification({ text: 'Album' }) },
   { key: 'song', title: 'Song' }
 ]
 
@@ -42,21 +43,7 @@ const crumbsIcons = [
   { key: 'song', title: 'Song', leftIcon: 'music' }
 ]
 
-const crumbPropsData = [
-  {
-    prop: 'size',
-    required: false,
-    description: 'The size of the Breadcrumbs.',
-    values: 'xs, sm, md, lg',
-    default: 'md'
-  },
-  {
-    prop: 'shape',
-    required: false,
-    description: 'The shape of the Breadcrumbs.',
-    values: 'rounded, square, soft',
-    default: 'soft'
-  },
+const breadcrumbsProps = [
   {
     prop: 'color',
     required: false,
@@ -70,6 +57,20 @@ const crumbPropsData = [
     description: 'The variant of the Breadcrumbs.',
     values: 'filled, outlined, ghost',
     default: 'filled'
+  },
+  {
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Breadcrumbs.',
+    values: 'rounded, square, soft',
+    default: 'soft'
+  },
+  {
+    prop: 'size',
+    required: false,
+    description: 'The size of the Breadcrumbs.',
+    values: 'xs, sm, md, lg',
+    default: 'md'
   },
   {
     prop: 'crumbs',
@@ -139,7 +140,7 @@ const crumbInterface = [
   }
 ]
 
-const crumbEmitsData = [
+const breadcrumbsEmits = [
   {
     event: 'crumbClick',
     description: 'Emitted when a breadcrumb is clicked.',
@@ -167,10 +168,6 @@ const crumbEmitsData = [
     </template>
 
     <template #playground-options>
-      <vk-input
-        label="Separator"
-        v-model="form.separator"
-      />
       <vk-select
         placeholder="Color"
         size="sm"
@@ -184,16 +181,20 @@ const crumbEmitsData = [
         v-model="form.variant"
       />
       <vk-select
+        placeholder="Shape"
+        size="sm"
+        :options="shapeOptions"
+        v-model="form.shape"
+      />
+      <vk-select
         placeholder="Size"
         size="sm"
         :options="sizeOptions"
         v-model="form.size"
       />
-      <vk-select
-        placeholder="Shape"
-        size="sm"
-        :options="shapeOptions"
-        v-model="form.shape"
+      <vk-input
+        label="Separator"
+        v-model="form.separator"
       />
       <vk-checkbox
         label="Flat"
@@ -235,25 +236,6 @@ const crumbEmitsData = [
             <vk-breadcrumbs
               :variant="variant.value"
               :crumbs="crumbs"
-            />
-          </div>
-          <div class="flex flex-col">
-            <span>Flat</span>
-            <vk-breadcrumbs
-              :crumbs="crumbs"
-              flat="true"
-            />
-          </div>
-          <div class="flex flex-col">
-            <span>Disabled Crumbs</span>
-            <vk-breadcrumbs
-              :crumbs="crumbsDisabled"
-            />
-          </div>
-          <div class="flex flex-col">
-            <span>Crumbs With Icons</span>
-            <vk-breadcrumbs
-              :crumbs="crumbsIcons"
             />
           </div>
         </div>
@@ -305,6 +287,22 @@ const crumbEmitsData = [
           :crumbs="crumbs"
         />
       </example-section>
+
+      <example-section
+        title="Disabled Crumbs"
+      >
+        <vk-breadcrumbs
+          :crumbs="crumbsDisabled"
+        />
+      </example-section>
+
+      <example-section
+        title="Crumbs with icons"
+      >
+        <vk-breadcrumbs
+          :crumbs="crumbsIcons"
+        />
+      </example-section>
     </template>
 
     <template #api>
@@ -316,7 +314,7 @@ const crumbEmitsData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="crumbPropsData"
+            :data="breadcrumbsProps"
           />
         </example-section>
 
@@ -336,7 +334,7 @@ const crumbEmitsData = [
         >
           <vk-data-table
             :headers="emitHeaders"
-            :data="crumbEmitsData"
+            :data="breadcrumbsEmits"
           />
         </example-section>
       </div>

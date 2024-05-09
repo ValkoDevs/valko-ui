@@ -18,13 +18,13 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 
 const emit = defineEmits(['click'])
 
+const classes = useStyle<ButtonProps>(props, styles)
+
 const onClick = () => {
   if (!props.disabled && !props.loading) {
     emit('click')
   }
 }
-
-const classes = useStyle<ButtonProps>(props, styles)
 </script>
 
 <template>

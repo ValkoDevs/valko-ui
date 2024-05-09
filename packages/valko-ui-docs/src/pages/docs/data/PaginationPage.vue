@@ -2,31 +2,45 @@
 import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
-import sizeOptions from '@/data/sizeOptions'
 import colorOptions from '@/data/colorOptions'
-import propHeaders from '@/data/propHeaders'
-import shapeOptions from '@/data/shapeOptions'
 import variantOptions from '@/data/variantOptions'
+import shapeOptions from '@/data/shapeOptions'
+import sizeOptions from '@/data/sizeOptions'
+import propHeaders from '@/data/propHeaders'
 import emitHeaders from '@/data/emitHeaders'
 
 const form = ref({
   color: 'primary',
   variant: 'filled',
-  size: 'md',
   shape: 'soft',
+  size: 'md',
   currentPage: 1,
   totalPages: 20,
   flat: false,
   disabled: false
 })
 
-const apiData = [
+const paginationProps = [
   {
     prop: 'color',
     required: false,
     description: 'The Pagination color theme.',
     values: 'primary, secondary, error, warning, info, success, light, dark',
     default: 'primary'
+  },
+  {
+    prop: 'variant',
+    required: false,
+    description: 'The Pagination variant.',
+    values: 'filled, outlined, ghost',
+    default: 'filled'
+  },
+  {
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Pagination.',
+    values: 'soft, rounded, square',
+    default: 'soft'
   },
   {
     prop: 'size',
@@ -51,7 +65,7 @@ const apiData = [
   }
 ]
 
-const emitData = [
+const paginationEmits = [
   {
     event: 'update:modelValue',
     description: 'Emitted when the current page is changed.',
@@ -83,23 +97,17 @@ const emitData = [
     </template>
 
     <template #playground-options>
-      <vk-input
-        type="number"
-        label="Total Pages"
+      <vk-select
+        placeholder="Color"
         size="sm"
-        v-model="form.totalPages"
+        :options="colorOptions"
+        v-model="form.color"
       />
       <vk-select
         placeholder="Variant"
         size="sm"
         :options="variantOptions"
         v-model="form.variant"
-      />
-      <vk-select
-        placeholder="Color"
-        size="sm"
-        :options="colorOptions"
-        v-model="form.color"
       />
       <vk-select
         placeholder="Shape"
@@ -112,6 +120,12 @@ const emitData = [
         size="sm"
         :options="sizeOptions"
         v-model="form.size"
+      />
+      <vk-input
+        type="number"
+        label="Total Pages"
+        size="sm"
+        v-model="form.totalPages"
       />
       <vk-checkbox
         v-model="form.flat"
@@ -232,7 +246,7 @@ const emitData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="apiData"
+            :data="paginationProps"
           />
         </example-section>
 
@@ -242,7 +256,7 @@ const emitData = [
         >
           <vk-data-table
             :headers="emitHeaders"
-            :data="emitData"
+            :data="paginationEmits"
           />
         </example-section>
       </div>

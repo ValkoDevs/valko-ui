@@ -2,15 +2,15 @@
 import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
+import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
-import shapeOptions from '@/data/shapeOptions'
 import emitHeaders from '@/data/emitHeaders'
 import slotHeaders from '@/data/slotHeaders'
 
 const form = ref({
-  size: 'md',
   shape: 'soft',
+  size: 'md',
   backdrop: 'opaque',
   title: 'Modal',
   flat: false,
@@ -41,13 +41,13 @@ const backdropOptions = [
   { value: 'transparent', label: 'Transparent' }
 ]
 
-const apiData = [
+const modalProps = [
   {
-    prop: 'isOpen',
-    required: true,
-    description: 'Wheter the Modal is open or not.',
-    values: 'true, false',
-    default: 'false'
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Modal.',
+    values: 'rounded, square, soft',
+    default: 'soft'
   },
   {
     prop: 'size',
@@ -57,11 +57,11 @@ const apiData = [
     default: 'md'
   },
   {
-    prop: 'shape',
-    required: false,
-    description: 'The shape of the Modal.',
-    values: 'rounded, square, soft',
-    default: 'soft'
+    prop: 'isOpen',
+    required: true,
+    description: 'Wheter the Modal is open or not.',
+    values: 'true, false',
+    default: 'false'
   },
   {
     prop: 'title',
@@ -93,7 +93,7 @@ const apiData = [
   }
 ]
 
-const emitData = [
+const modalEmits = [
   {
     event: 'close',
     description: 'Emitted when the modal is closed.',
@@ -102,7 +102,7 @@ const emitData = [
   }
 ]
 
-const slotData = [
+const modalSlots = [
   {
     name: 'default',
     description: 'Slot for the main content of the modal. This slot is typically used to include additional content inside the modal.',
@@ -138,9 +138,11 @@ const slotData = [
     </template>
 
     <template #playground-options>
-      <vk-input
-        label="Title"
-        v-model="form.title"
+      <vk-select
+        placeholder="Shape"
+        size="sm"
+        :options="shapeOptions"
+        v-model="form.shape"
       />
       <vk-select
         placeholder="Size"
@@ -148,11 +150,9 @@ const slotData = [
         :options="sizes"
         v-model="form.size"
       />
-      <vk-select
-        placeholder="Shape"
-        size="sm"
-        :options="shapeOptions"
-        v-model="form.shape"
+      <vk-input
+        label="Title"
+        v-model="form.title"
       />
       <vk-select
         placeholder="Backdrop"
@@ -292,7 +292,7 @@ const slotData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="apiData"
+            :data="modalProps"
           />
         </example-section>
 
@@ -302,7 +302,7 @@ const slotData = [
         >
           <vk-data-table
             :headers="emitHeaders"
-            :data="emitData"
+            :data="modalEmits"
           />
         </example-section>
 
@@ -312,7 +312,7 @@ const slotData = [
         >
           <vk-data-table
             :headers="slotHeaders"
-            :data="slotData"
+            :data="modalSlots"
           />
         </example-section>
       </div>

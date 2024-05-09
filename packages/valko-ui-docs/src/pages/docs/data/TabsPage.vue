@@ -4,9 +4,9 @@ import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
 import variantOptions from '@/data/variantOptions'
+import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
-import shapeOptions from '@/data/shapeOptions'
 import slotHeaders from '@/data/slotHeaders'
 
 const shapes = [
@@ -41,27 +41,20 @@ const tabDisabled = [
 const form = ref({
   color: 'primary',
   variant: 'filled',
-  size: 'md',
   shape: 'soft',
+  size: 'md',
   grow: false,
   vertical: false,
   icons: false
 })
 
-const tabsPropsData = [
+const tabsProps = [
   {
     prop: 'color',
     required: false,
     description: 'The color theme of the Tabs.',
     values: 'primary, secondary, error, warning, info, success, light, dark',
     default: 'primary'
-  },
-  {
-    prop: 'size',
-    required: false,
-    description: 'The Tabs size.',
-    values: 'xs, sm, md, lg',
-    default: 'md'
   },
   {
     prop: 'variant',
@@ -73,9 +66,16 @@ const tabsPropsData = [
   {
     prop: 'shape',
     required: false,
-    description: 'The Tabs appearance style.',
+    description: 'The Tabs shape.',
     values: 'line, rounded, soft, square',
     default: 'soft'
+  },
+  {
+    prop: 'size',
+    required: false,
+    description: 'The Tabs size.',
+    values: 'xs, sm, md, lg',
+    default: 'md'
   },
   {
     prop: 'grow',
@@ -107,7 +107,7 @@ const tabsPropsData = [
   }
 ]
 
-const tabInterfaceData = [
+const tabInterface = [
   {
     prop: 'key',
     required: true,
@@ -145,7 +145,7 @@ const tabInterfaceData = [
   }
 ]
 
-const tabsSlotsData = [
+const tabsSlots = [
   {
     name: '[key: Tab["key"]]',
     description: 'Slot for content associated with a specific tab. Each tab in the `VkTabs` component should have a corresponding slot with a unique name matching the `key` prop of the tab.',
@@ -190,17 +190,17 @@ const tabsSlotsData = [
       />
       <vk-select
         type="outlined"
-        placeholder="Size"
-        size="sm"
-        :options="sizeOptions"
-        v-model="form.size"
-      />
-      <vk-select
-        type="outlined"
         placeholder="Shape"
         size="sm"
         :options="shapes"
         v-model="form.shape"
+      />
+      <vk-select
+        type="outlined"
+        placeholder="Size"
+        size="sm"
+        :options="sizeOptions"
+        v-model="form.size"
       />
       <vk-checkbox
         label="Grow"
@@ -324,7 +324,7 @@ const tabsSlotsData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="tabsPropsData"
+            :data="tabsProps"
           />
         </example-section>
 
@@ -334,7 +334,7 @@ const tabsSlotsData = [
         >
           <vk-data-table
             :headers="slotHeaders"
-            :data="tabsSlotsData"
+            :data="tabsSlots"
           />
         </example-section>
 
@@ -344,7 +344,7 @@ const tabsSlotsData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="tabInterfaceData"
+            :data="tabInterface"
           />
         </example-section>
       </div>

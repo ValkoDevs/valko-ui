@@ -8,6 +8,7 @@ import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import emitHeaders from '@/data/emitHeaders'
+import { useNotification } from '@valko-ui/components'
 
 const form = ref({
   color: 'primary',
@@ -121,7 +122,7 @@ const closeTag = () => {
   isShown.value = false
 }
 
-const onClick = () => {alert('Clicked')}
+const onClick = () => useNotification({ text: 'Clickled' })
 
 watch(isShown, () => {
   if (!isShown.value) {

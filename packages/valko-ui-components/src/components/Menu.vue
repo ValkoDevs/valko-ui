@@ -14,20 +14,20 @@ const props = withDefaults(defineProps<MenuProps>(), {
   active: null
 })
 
+const emit = defineEmits(['itemClick'])
+
+const classes = useStyle<MenuProps, SlotStyles>(props, styles)
+
 const groups = props.items.reduce((acc: Set<string>, item: MenuItem) => {
   if (item.group) acc.add(item.group)
   return acc
 }, new Set(['default']) as Set<string>)
-
-const emit = defineEmits(['itemClick'])
 
 const onItemClick = (item: MenuItem) => {
   if (item.disabled) return
   emit('itemClick', item)
   item.onClick?.()
 }
-
-const classes = useStyle<MenuProps, SlotStyles>(props, styles)
 </script>
 
 <template>
