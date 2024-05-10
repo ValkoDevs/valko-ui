@@ -53,7 +53,8 @@ onMounted(() => {
     <div :class="classes.field">
       <input
         ref="inputRef"
-        :data-hasIcon="!!$slots.leftIcon"
+        :data-leftIcon="!!$slots.leftIcon"
+        :data-rightIcon="!!$slots.rightIcon"
         :class="classes.input"
         :readonly="readonly"
         :disabled="disabled"

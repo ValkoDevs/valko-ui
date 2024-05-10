@@ -7,4 +7,5 @@ export interface SwitchProps extends Sizes, Shapes, Variants {
   disabled?: boolean;
   readonly?: boolean;
   modelValue?: boolean;
+  flat?: boolean;
 }

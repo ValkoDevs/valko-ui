@@ -12,13 +12,16 @@ export default tv({
     input: [
       'vk-input__input',
       'w-full',
-      'px-2',
+      'pl-2',
       'outline-none',
       'peer',
       'transition-colors',
       'duration-200',
       'ease-in-out',
-      'focus:ring-0'
+      'focus:ring-0',
+      'overflow-hidden',
+      'data-[rightIcon=false]:pr-2',
+      'data-[rightIcon=true]:pr-8'
     ],
     label: [
       'opacity-80',
@@ -32,7 +35,6 @@ export default tv({
       'left-1',
       'transition-all',
       'duration-200',
-      'delay-[125ms]',
       'origin-[center_left]',
       '-translate-y-1/2',
       'peer-focus:top-0',
@@ -110,7 +112,7 @@ export default tv({
         label: [
           'left-1.5',
           'bg-transparent',
-          'peer-data-[hasIcon=true]:ml-0.5'
+          'peer-data-[leftIcon=true]:ml-0.5'
         ],
         iconLeft: [
           'left-1.5'
@@ -252,11 +254,11 @@ export default tv({
           'h-10',
           'pt-2',
           'text-xs',
-          'data-[hasIcon=true]:pl-6'
+          'data-[leftIcon=true]:pl-6'
         ],
         label: [
           'text-xs',
-          'peer-data-[hasIcon=true]:left-5'
+          'peer-data-[leftIcon=true]:left-5'
         ],
         helper: [
           'text-xs'
@@ -270,11 +272,11 @@ export default tv({
           'h-12',
           'pt-2.5',
           'text-sm',
-          'data-[hasIcon=true]:pl-7'
+          'data-[leftIcon=true]:pl-7'
         ],
         label: [
           'text-sm',
-          'peer-data-[hasIcon=true]:left-6'
+          'peer-data-[leftIcon=true]:left-6'
         ],
         helper: [
           'text-sm'
@@ -288,11 +290,11 @@ export default tv({
           'h-14',
           'pt-3',
           'text-base',
-          'data-[hasIcon=true]:pl-8'
+          'data-[leftIcon=true]:pl-8'
         ],
         label: [
           'text-base',
-          'peer-data-[hasIcon=true]:left-7'
+          'peer-data-[leftIcon=true]:left-7'
         ],
         helper: [
           'text-base'
@@ -306,11 +308,11 @@ export default tv({
           'h-16',
           'pt-4',
           'text-lg',
-          'data-[hasIcon=true]:pl-9'
+          'data-[leftIcon=true]:pl-9'
         ],
         label: [
           'text-lg',
-          'peer-data-[hasIcon=true]:left-8'
+          'peer-data-[leftIcon=true]:left-8'
         ],
         helper: [
           'text-lg'
@@ -698,11 +700,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1rem_-_1px)]',
-          'data-[hasIcon=true]:pl-6'
+          'data-[leftIcon=true]:pl-6'
         ],
         label: [
           'ml-2',
-          'peer-data-[hasIcon=true]:ml-[1px]'
+          'peer-data-[leftIcon=true]:ml-[1px]'
         ],
         helper: [
           'ml-4'
@@ -716,11 +718,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1.25rem_-_1px)]',
-          'data-[hasIcon=true]:[calc(1.75rem_+_1px)]'
+          'data-[leftIcon=true]:[calc(1.75rem_+_1px)]'
         ],
         label: [
           'ml-3',
-          'peer-data-[hasIcon=true]:ml-[1px]'
+          'peer-data-[leftIcon=true]:ml-[1px]'
         ],
         helper: [
           'ml-6'
@@ -734,11 +736,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1.5rem_-_1px)]',
-          'data-[hasIcon=true]:pl-8'
+          'data-[leftIcon=true]:pl-8'
         ],
         label: [
           'ml-4',
-          'peer-data-[hasIcon=true]:ml-[1px]'
+          'peer-data-[leftIcon=true]:ml-[1px]'
         ],
         helper: [
           'ml-6'
@@ -752,11 +754,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1.75rem_-_1px)]',
-          'data-[hasIcon=true]:[calc(2.25rem_+_1px)]'
+          'data-[leftIcon=true]:[calc(2.25rem_+_1px)]'
         ],
         label: [
           'ml-5',
-          'peer-data-[hasIcon=true]:ml-[1px]'
+          'peer-data-[leftIcon=true]:ml-[1px]'
         ],
         helper: [
           'ml-8'
@@ -771,11 +773,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1rem_-_3px)]',
-          'data-[hasIcon=true]:pl-[calc(1.5rem_-_2px)]'
+          'data-[leftIcon=true]:pl-[calc(1.5rem_-_2px)]'
         ],
         label: [
           'ml-[calc(0.5rem_-_2px)]',
-          'peer-data-[hasIcon=true]:ml-[1px]'
+          'peer-data-[leftIcon=true]:ml-[1px]'
         ],
         helper: [
           'ml-4'
@@ -789,11 +791,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1.17rem_-_1px)]',
-          'data-[hasIcon=true]:pl-[1.67rem]'
+          'data-[leftIcon=true]:pl-[1.67rem]'
         ],
         label: [
           'ml-[calc(0.75rem_-_1px)]',
-          'peer-data-[hasIcon=true]:ml-[1px]'
+          'peer-data-[leftIcon=true]:ml-[1px]'
         ],
         helper: [
           'ml-5'
@@ -807,11 +809,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1.5rem_-_3px)]',
-          'data-[hasIcon=true]:pl-[calc(2rem_-_2px)]'
+          'data-[leftIcon=true]:pl-[calc(2rem_-_2px)]'
         ],
         label: [
           'ml-[calc(1rem_-_2px)]',
-          'peer-data-[hasIcon=true]:ml-[1px]'
+          'peer-data-[leftIcon=true]:ml-[1px]'
         ],
         helper: [
           'ml-6'
@@ -825,11 +827,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1.75rem_-_3px)]',
-          'data-[hasIcon=true]:pl-[calc(2.25rem_-_2px)]'
+          'data-[leftIcon=true]:pl-[calc(2.25rem_-_2px)]'
         ],
         label: [
           'ml-[calc(1.25rem_-_2px)]',
-          'peer-data-[hasIcon=true]:ml-[1px]'
+          'peer-data-[leftIcon=true]:ml-[1px]'
         ],
         helper: [
           'ml-7'

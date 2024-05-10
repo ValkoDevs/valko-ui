@@ -19,7 +19,8 @@ const form = ref({
   readonly: false,
   position: false,
   value: false,
-  exampleValue: true
+  exampleValue: true,
+  flat: false
 })
 
 const position = [
@@ -119,6 +120,7 @@ const emitData = [
           :disabled="form.disabled"
           :readonly="form.readonly"
           :position="form.position"
+          :flat="form.flat"
           v-model="form.value"
         />
       </div>
@@ -167,6 +169,10 @@ const emitData = [
       <vk-checkbox
         label="Readonly"
         v-model="form.readonly"
+      />
+      <vk-checkbox
+        label="Flat"
+        v-model="form.flat"
       />
     </template>
 

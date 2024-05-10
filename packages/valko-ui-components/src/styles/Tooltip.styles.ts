@@ -12,16 +12,15 @@ export default tv({
       'w-fit',
       'h-fit',
       'max-w-xs',
-      'bg-dark-1',
-      'text-light-1',
-      'shadow-sm',
-      'shadow-dark-3',
+      'shadow-md',
       'truncate',
       'origin-center',
       'absolute',
-      'dark:bg-light-3',
-      'dark:text-dark-5',
-      'dark:shadow-light-5'
+      'bg-light-3',
+      'text-dark-5',
+      'shadow-dark-3',
+      'dark:text-light-1',
+      'dark:bg-dark-3'
     ],
     mouseover: [
       'vk-tooltip_mouseover'

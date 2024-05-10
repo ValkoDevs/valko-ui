@@ -34,6 +34,7 @@ export default tv({
       },
       outlined: {
         nav: [
+          'p-[calc(0.5rem_-_2px)]',
           'border-2',
           'border-light-3',
           'dark:border-dark-3'

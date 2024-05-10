@@ -29,7 +29,9 @@ const form = ref({
   value: '',
   labelValue: 'Label',
   helperValue: 'Helpertext',
-  exampleReadonly: 'Example readonly text'
+  exampleReadonly: 'Example readonly text',
+  left: false,
+  right: false
 })
 
 const apiData = [
@@ -187,10 +189,16 @@ const slotData = [
           :label="form.labelValue"
           :helpertext="form.helperValue"
         >
-          <template #leftIcon>
+          <template
+            #leftIcon
+            v-if="form.left"
+          >
             <vk-icon name="home" />
           </template>
-          <template #rightIcon>
+          <template
+            #rightIcon
+            v-if="form.right"
+          >
             <vk-icon name="home" />
           </template>
         </vk-input>
@@ -245,6 +253,14 @@ const slotData = [
       <vk-checkbox
         label="Readonly"
         v-model="form.readonly"
+      />
+      <vk-checkbox
+        label="Left Icon"
+        v-model="form.left"
+      />
+      <vk-checkbox
+        label="Right Icon"
+        v-model="form.right"
       />
     </template>
 

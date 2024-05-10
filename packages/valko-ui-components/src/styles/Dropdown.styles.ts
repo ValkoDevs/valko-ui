@@ -27,14 +27,14 @@ export default tv({
       'p-2',
       'mt-2',
       'bg-white',
-      'shadow-lg',
+      'shadow-sm',
       'shadow-light-4',
       'z-10',
       'absolute',
       'right-0',
       'origin-top-right',
       'dark:bg-dark-3',
-      'dark:shadow-dark-5'
+      'dark:shadow-dark-3'
     ],
     itemsButton: [
       'vk-dropdown__item-button',
@@ -142,6 +142,13 @@ export default tv({
       square: {
         itemsMenu: [
           'rounded-none'
+        ]
+      }
+    },
+    flat: {
+      true: {
+        itemsMenu: [
+          'shadow-none'
         ]
       }
     }
