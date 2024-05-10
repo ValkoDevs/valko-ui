@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import DocSection from '../../../components/DocSection'
 import ExampleSection from '../../../components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
@@ -84,14 +84,6 @@ const navbarSlots = [
     example: '<template #default>\n  <p>This is the main content of the Navbar.</p>\n</template>'
   }
 ]
-
-const playgroundClass = computed(() => {
-  if (form.value.variant === 'filled') {
-    if (form.value.color === 'light' || form.value.color === 'neutral') return 'text-black'
-    return 'text-white'
-  }
-  return `text-${form.value.color}-500`
-})
 </script>
 
 <template>
@@ -113,7 +105,6 @@ const playgroundClass = computed(() => {
           <vk-icon
             name="brand-vite"
             :size="form.size"
-            :class="playgroundClass"
           />
         </vk-navbar>
       </div>
@@ -176,7 +167,6 @@ const playgroundClass = computed(() => {
               <vk-icon
                 name="brand-vite"
                 size="md"
-                :class="`${color.value === 'light' ? 'text-black' : (color.value === 'neutral' ? 'text-black' : 'text-white')}`"
               />
               <span class="font-semibold ml-4">{{ color.label }}</span>
             </vk-navbar>
@@ -201,7 +191,6 @@ const playgroundClass = computed(() => {
             <vk-icon
               name="brand-vite"
               size="md"
-              :class="`${variant.value === 'filled' ? 'text-white' : 'text-black'}`"
             />
             <span class="font-semibold ml-4">{{ variant.label }}</span>
           </vk-navbar>
