@@ -19,7 +19,8 @@ const form = ref({
   disabled: false,
   flat: false,
   block: false,
-  condensed: false
+  condensed: false,
+  loading: false
 })
 
 const colors = [
@@ -41,6 +42,13 @@ const apiData = [
     description: 'The variant of the Button.',
     values: 'filled, outlined, ghost, link',
     default: 'filled'
+  },
+  {
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Button.',
+    values: 'rounded, square, soft',
+    default: 'soft'
   },
   {
     prop: 'size',
@@ -71,11 +79,11 @@ const apiData = [
     default: 'false'
   },
   {
-    prop: 'shape',
+    prop: 'loading',
     required: false,
-    description: 'The shape of the Button.',
-    values: 'rounded, square, soft',
-    default: 'soft'
+    description: 'Whether the Button is loading or not.',
+    values: 'true, false',
+    default: 'false'
   }
 ]
 
@@ -114,6 +122,7 @@ const onClick = () => useNotification({ text: 'Clicked' })
         :block="form.block"
         :condensed="form.condensed"
         :shape="form.shape"
+        :loading="form.loading"
         @click="onClick"
       >
         Button
@@ -160,6 +169,10 @@ const onClick = () => useNotification({ text: 'Clicked' })
       <vk-checkbox
         v-model="form.block"
         label="Block"
+      />
+      <vk-checkbox
+        v-model="form.loading"
+        label="Loading"
       />
     </template>
 
@@ -248,6 +261,16 @@ const onClick = () => useNotification({ text: 'Clicked' })
       >
         <vk-button block>
           Block
+        </vk-button>
+      </example-section>
+
+      <example-section
+        title="Loading"
+        gap
+        wrap
+      >
+        <vk-button loading>
+          Loading
         </vk-button>
       </example-section>
     </template>

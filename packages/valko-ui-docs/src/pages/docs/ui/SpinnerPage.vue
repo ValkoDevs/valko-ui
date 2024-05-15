@@ -6,15 +6,16 @@ import colorOptions from '@/data/colorOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 
-const variants = [
-  { value: 'loader', label: 'Flower' },
-  { value: 'loader-2', label: 'Circle' }
+const names = [
+  { value: 'loader', label: 'Loader' },
+  { value: 'loader-2', label: 'Loader-2' }
 ]
 
 const form = ref({
   color: 'primary',
   size: 'md',
-  variant: 'loader-2'
+  name: 'loader-2',
+  condensed: false
 })
 
 
@@ -27,10 +28,10 @@ const spinnerProps = [
     default: 'primary'
   },
   {
-    prop: 'variant',
+    prop: 'name',
     required: false,
-    description: 'The variant of Spinner.',
-    values: 'loader, loader-2',
+    description: 'The icon of the Spinner.',
+    values: 'string',
     default: 'loader-2'
   },
   {
@@ -39,6 +40,13 @@ const spinnerProps = [
     description: 'The size of the Spinner.',
     values: 'xs, sm, md, lg',
     default: 'md'
+  },
+  {
+    prop: 'condensed',
+    required: false,
+    description: 'Reduces the Spinner\'s size.',
+    values: 'true, false',
+    default: 'false'
   }
 ]
 </script>
@@ -49,13 +57,12 @@ const spinnerProps = [
     description="Visual animation that indicates a task is being processed. Spinners are used to provide feedback to users while they wait for an operation to complete, such as loading content or submitting a request."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center items-center">
-        <vk-spinner
-          :color="form.color"
-          :size="form.size"
-          :name="form.variant"
-        />
-      </div>
+      <vk-spinner
+        :color="form.color"
+        :size="form.size"
+        :name="form.name"
+        :condensed="form.condensed"
+      />
     </template>
 
     <template #playground-options>
@@ -66,16 +73,20 @@ const spinnerProps = [
         v-model="form.color"
       />
       <vk-select
-        placeholder="Variant"
+        placeholder="Name"
         size="sm"
-        :options="variants"
-        v-model="form.variant"
+        :options="names"
+        v-model="form.name"
       />
       <vk-select
         placeholder="Size"
         size="sm"
         :options="sizeOptions"
         v-model="form.size"
+      />
+      <vk-checkbox
+        label="Condensed"
+        v-model="form.condensed"
       />
     </template>
 
@@ -89,29 +100,30 @@ const spinnerProps = [
           <div
             v-for="color in colorOptions"
             :key="color.value"
-            class="flex gap-2 items-center"
+            class="flex items-center gap-2"
           >
             <vk-spinner
               :color="color.value"
-            /> {{ color.label }}
+            />
+            <span>{{ color.label }}</span>
           </div>
         </div>
       </example-section>
 
       <example-section
-        title="Variants"
+        title="Names"
         justify="start"
         gap
       >
         <div class="gap-x-12 gap-y-4 grid grid-cols-3">
           <div
-            v-for="variant in variants"
-            :key="variant.value"
+            v-for="name in names"
+            :key="name.value"
             class="flex gap-2 items-center"
           >
             <vk-spinner
-              :variant="variant.value"
-            /> {{ variant.label }}
+              :name="name.value"
+            /> {{ name.label }}
           </div>
         </div>
       </example-section>
