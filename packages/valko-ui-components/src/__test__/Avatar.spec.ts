@@ -237,7 +237,7 @@ describe('Avatar component', () => {
           }
         })
 
-        expect(wrapper.find('.border-2').exists()).toBe(true)
+        expect(wrapper.find('.vk-avatar').classes()).toContain('border-[3px]')
       })
 
       it('should be ghost when props.size is ghost', () => {
