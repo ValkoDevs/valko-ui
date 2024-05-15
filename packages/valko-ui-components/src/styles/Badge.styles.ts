@@ -10,15 +10,15 @@ export default tv({
     content: [
       'vk-badge__content',
       'text-white',
-      'shadow-md',
-      'shadow-light-4',
+      'shadow-sm',
+      'shadow-light-3',
       'overflow-hidden',
       'flex',
       'justify-center',
       'items-center',
       'align-middle',
       'absolute',
-      'dark:shadow-dark-5'
+      'dark:shadow-dark-3'
     ]
   },
   variants: {
@@ -130,7 +130,7 @@ export default tv({
     outlined: {
       true: {
         content: [
-          'border',
+          'border-2',
           'border-light-1',
           'dark:border-dark-3'
         ]

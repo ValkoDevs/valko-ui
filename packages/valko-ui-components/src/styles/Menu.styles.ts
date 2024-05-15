@@ -52,7 +52,22 @@ export default tv({
           'data-[active=true]:dark:-transparent'
         ]
       },
-      ghost: {}
+      ghost: {
+        content: [
+          'vk-menu__ghost'
+        ]
+      },
+      link: {
+        content: [
+          'vk-menu__line'
+        ]
+      },
+      line: {
+        content: [
+          'border-l-2',
+          'border-transparent'
+        ]
+      }
     },
     size: {
       xs: {
@@ -187,7 +202,6 @@ export default tv({
         ]
       }
     },
-
     // variant=outlined && colors
     {
       variant: 'outlined',
@@ -269,7 +283,6 @@ export default tv({
         ]
       }
     },
-
     // variant=ghost && colors
     {
       variant: 'ghost',
@@ -355,6 +368,162 @@ export default tv({
         content: [
           'data-[active=true]:text-dark-1',
           'data-[active=true]:bg-dark-1/[.5]'
+        ]
+      }
+    },
+    // variant=link && colors
+    {
+      variant: 'link',
+      color: 'primary',
+      class: {
+        content: [
+          'data-[active=true]:text-primary-500'
+        ]
+      }
+    },
+    {
+      variant: 'link',
+      color: 'secondary',
+      class: {
+        content: [
+          'data-[active=true]:text-secondary-500'
+        ]
+      }
+    },
+    {
+      variant: 'link',
+      color: 'success',
+      class: {
+        content: [
+          'data-[active=true]:text-success-500'
+        ]
+      }
+    },
+    {
+      variant: 'link',
+      color: 'error',
+      class: {
+        content: [
+          'data-[active=true]:text-error-500'
+        ]
+      }
+    },
+    {
+      variant: 'link',
+      color: 'warning',
+      class: {
+        content: [
+          'data-[active=true]:text-warning-500'
+        ]
+      }
+    },
+    {
+      variant: 'link',
+      color: 'info',
+      class: {
+        content: [
+          'data-[active=true]:text-info-500'
+        ]
+      }
+    },
+    {
+      variant: 'link',
+      color: 'light',
+      class: {
+        content: [
+          'data-[active=true]:text-dark-5'
+        ]
+      }
+    },
+    {
+      variant: 'link',
+      color: 'dark',
+      class: {
+        content: [
+          'data-[active=true]:text-dark-3'
+        ]
+      }
+    },
+    // variant=line && colors
+    {
+      variant: 'line',
+      color: 'primary',
+      class: {
+        content: [
+          'data-[active=true]:border-primary-500'
+        ]
+      }
+    },
+    {
+      variant: 'line',
+      color: 'secondary',
+      class: {
+        content: [
+          'data-[active=true]:border-secondary-500'
+        ]
+      }
+    },
+    {
+      variant: 'line',
+      color: 'success',
+      class: {
+        content: [
+          'data-[active=true]:border-success-500'
+        ]
+      }
+    },
+    {
+      variant: 'line',
+      color: 'error',
+      class: {
+        content: [
+          'data-[active=true]:border-error-500'
+        ]
+      }
+    },
+    {
+      variant: 'line',
+      color: 'warning',
+      class: {
+        content: [
+          'data-[active=true]:border-warning-500'
+        ]
+      }
+    },
+    {
+      variant: 'line',
+      color: 'info',
+      class: {
+        content: [
+          'data-[active=true]:border-info-500'
+        ]
+      }
+    },
+    {
+      variant: 'line',
+      color: 'light',
+      class: {
+        content: [
+          'data-[active=true]:border-dark-5'
+        ]
+      }
+    },
+    {
+      variant: 'line',
+      color: 'dark',
+      class: {
+        content: [
+          'data-[active=true]:border-dark-3'
+        ]
+      }
+    },
+    // shape=rounded && variant=line
+    {
+      variant: 'line',
+      shape: 'rounded',
+      class: {
+        content: [
+          'rounded-2xl'
         ]
       }
     }

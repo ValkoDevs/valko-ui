@@ -272,7 +272,31 @@ describe('Menu component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-menu__group').exists()).toBe(true)
+        expect(wrapper.find('.vk-menu__ghost').exists()).toBe(true)
+      })
+
+      it('should be link when props.size is link', () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            variant: 'link',
+            items: menuItems,
+            active: 1
+          }
+        })
+
+        expect(wrapper.find('.vk-menu__line').exists()).toBe(true)
+      })
+
+      it('should be line when props.size is line', () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            variant: 'line',
+            items: menuItems,
+            active: 1
+          }
+        })
+
+        expect(wrapper.find('.border-l-2').exists()).toBe(true)
       })
     })
   })

@@ -14,6 +14,20 @@ export default tv({
     'shrink-0'
   ],
   variants: {
+    variant: {
+      filled: [
+        'filter-none',
+        'text-white'
+      ],
+      outlined: [
+        'bg-transparent',
+        'backdrop-blur-lg',
+        'border-b'
+      ],
+      ghost: [
+        'backdrop-blur-lg'
+      ]
+    },
     color: {
       primary: [],
       secondary: [],
@@ -21,9 +35,14 @@ export default tv({
       error: [],
       warning: [],
       info: [],
-      light: [],
+      light: [
+        'text-black'
+      ],
       dark: [],
-      neutral: []
+      neutral: [
+        'text-black',
+        'dark:text-white'
+      ]
     },
     size: {
       xs: [
@@ -48,19 +67,6 @@ export default tv({
       ],
       soft: [
         'rounded-b-lg'
-      ]
-    },
-    variant: {
-      filled: [
-        'filter-none'
-      ],
-      outlined: [
-        'bg-transparent',
-        'backdrop-blur-lg',
-        'border-b'
-      ],
-      ghost: [
-        'backdrop-blur-lg'
       ]
     },
     fixed: {

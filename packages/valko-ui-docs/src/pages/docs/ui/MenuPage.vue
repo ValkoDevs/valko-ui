@@ -19,6 +19,12 @@ const form = ref({
   floating: false
 })
 
+const variants = [
+  ...variantOptions,
+  { value: 'link', label: 'Link' },
+  { value: 'line', label: 'Line' }
+]
+
 const menuItems: MenuItem[] = [
   { key: 'button', group: 'Forms', text: 'Button' },
   { key: 'input', group: 'Forms',  text:'Input' },
@@ -189,8 +195,8 @@ onMounted(() => {
   })
 
 
-  variantOptions.forEach((_, index) => {
-    const firstItemKey = variantOptions[0].value
+  variants.forEach((_, index) => {
+    const firstItemKey = variants[0].value
     const menuKey = `variant-menu-${index}`
     activeItemsList.value[menuKey] = firstItemKey
     const menuItem = menuItems.find(item => item.key === firstItemKey)
@@ -258,7 +264,7 @@ onMounted(() => {
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptions"
+        :options="variants"
         v-model="form.variant"
       />
       <vk-select
@@ -301,9 +307,9 @@ onMounted(() => {
         gap
       >
         <vk-menu
-          v-for="(variant, index) in variantOptions"
+          v-for="(variant, index) in variants"
           :key="`variant-menu-${index}`"
-          :items="generateMenuItems(variantOptions, variant.label)"
+          :items="generateMenuItems(variants, variant.label)"
           :variant="variant.value"
           :active="activeItemsList[`variant-menu-${index}`]"
           @item-click="(item: MenuItem) => onItemClick(item, `variant-menu-${index}`)"
