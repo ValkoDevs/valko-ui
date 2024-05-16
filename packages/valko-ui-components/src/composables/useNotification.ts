@@ -1,5 +1,6 @@
 import Toastify from 'toastify-js'
 import type { NotificationProps } from '#valkoui/types/Notification.ts'
+import type { SlotStyles } from '#valkoui/types/common'
 import useStyle from './useStyle.ts'
 import styles from '#valkoui/styles/Notification.styles.ts'
 
@@ -8,13 +9,42 @@ const useNotification = (props: NotificationProps) => {
 
   let notification: ReturnType<typeof Toastify> | null = null
 
-  const classes = useStyle<NotificationProps, Record<string, string>>(props, styles)
+  const defaultProps = {
+    color: props.color || 'primary',
+    variant: props.variant || 'filled',
+    shape: props.shape || 'soft',
+    size: props.size || 'md',
+    flat: props.flat || false
+  }
+
+  const combinedProps = { ...props, ...defaultProps }
+
+  const classes = useStyle<NotificationProps, SlotStyles>(combinedProps, styles)
 
   const defaultOnClick = () => notification?.hideToast()
 
   const notificationNode = document.createElement('div')
-  notificationNode.innerText = props.text
-  notificationNode.className = classes.value.content
+  notificationNode.className = classes.value.container
+
+  const content = document.createElement('div')
+  content.className = classes.value.content
+  content.innerText = props.text
+  notificationNode.appendChild(content)
+
+  const progressBarContainer = document.createElement('div')
+  progressBarContainer.className = classes.value.progressbar
+  notificationNode.appendChild(progressBarContainer)
+
+  if (props.close) {
+    const closeButton = document.createElement('button')
+    closeButton.onclick = () => notification?.hideToast()
+
+    const customIcon = document.createElement('i')
+    customIcon.className = classes.value.icon
+
+    closeButton.appendChild(customIcon)
+    notificationNode.appendChild(closeButton)
+  }
 
   notification = Toastify({
     node: notificationNode,
@@ -26,22 +56,16 @@ const useNotification = (props: NotificationProps) => {
     position: props.position || 'right',
     stopOnFocus: props.stopOnFocus === false ? false : true,
     offset: props.offset || undefined,
-    close: props.close || false,
+    close: false,
     onClick: props.onClick || defaultOnClick
   })
 
-  notification.showToast()
-
-  let animationPaused = false
   let animationStartTime: number
-  let elapsedTimeBeforePause: number
-  let resumeTimeout: NodeJS.Timeout | null = null
-  let progressBarContainer: HTMLDivElement | null = null
-  const notificationContainer = document.querySelector('.vk-notification')
+  let isPaused = false
 
   const updateProgress = () => {
     const currentTime = Date.now()
-    const elapsedTime = animationPaused ? elapsedTimeBeforePause : currentTime - animationStartTime
+    const elapsedTime = currentTime - animationStartTime
     const duration = props.duration || 3000
     const progress = Math.max(0, 100 - (elapsedTime / duration) * 100)
 
@@ -49,57 +73,35 @@ const useNotification = (props: NotificationProps) => {
       progressBarContainer.style.width = `${progress}%`
     }
 
-    if (!animationPaused && elapsedTime < duration) {
+    if (!isPaused && elapsedTime < duration) {
       requestAnimationFrame(updateProgress)
     }
   }
 
   const startProgress = () => {
     animationStartTime = Date.now()
+    isPaused = false
     updateProgress()
   }
 
-  const resetProgress = () => {
+  const stopProgress = () => {
     animationStartTime = Date.now()
-    elapsedTimeBeforePause = 0
-    startProgress()
+    isPaused = true
+    updateProgress()
   }
 
-  setTimeout(() => {
-    if (notificationContainer) {
-      progressBarContainer = document.createElement('div')
-      progressBarContainer.className = classes.value.progressbar
-      notificationContainer.appendChild(progressBarContainer)
+  if (props.stopOnFocus) {
+    notificationNode.addEventListener('mouseover', () => {
+      stopProgress()
+    })
+
+    notificationNode.addEventListener('mouseleave', () => {
       startProgress()
-    }
-  }, 100)
-
-  if (notificationContainer && props.stopOnFocus) {
-    notificationContainer.addEventListener('mouseover', () => {
-      animationPaused = true
-      elapsedTimeBeforePause = Date.now() - animationStartTime
-    })
-
-    notificationContainer.addEventListener('mouseleave', () => {
-      animationPaused = false
-      if (resumeTimeout) clearTimeout(resumeTimeout)
-      resumeTimeout = setTimeout(() => {
-        resetProgress()
-      }, 100)
     })
   }
 
-  setTimeout(() => {
-    const closeButton = document.querySelector('.toast-close')
-    if (closeButton) {
-      closeButton.innerHTML = ''
-      closeButton.classList.add('self-start')
-      const customIcon = document.createElement('i')
-      customIcon.className = classes.value.close
-      closeButton.appendChild(customIcon)
-    }
-  }, 100)
-
+  notification.showToast()
+  startProgress()
   return notification
 }
 

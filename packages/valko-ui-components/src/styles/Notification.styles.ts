@@ -5,14 +5,21 @@ export default tv({
     notification: [
       'vk-notification',
       'shadow-md',
-      'flex',
-      'items-stretch',
       'overflow-hidden'
+    ],
+    container: [
+      'w-full',
+      'flex',
+      'justify-start',
+      'items-start'
     ],
     content: [
       'w-full',
-      'p-4',
-      'break-all'
+      'p-3',
+      'break-words',
+      'flex',
+      'justify-start',
+      'items-start'
     ],
     progressbar: [
       'absolute',
@@ -21,7 +28,7 @@ export default tv({
       'transition-all',
       'duration-100'
     ],
-    close: [
+    icon: [
       'ti',
       'ti-x',
       'p-2',
@@ -35,8 +42,7 @@ export default tv({
           'text-white'
         ],
         progressbar: [
-          'bg-dark-3',
-          'dark:bg-light-1'
+          'bg-light-1'
         ]
       },
       ghost: {
@@ -48,11 +54,11 @@ export default tv({
       outlined: {
         notification: [
           'border-2',
-          'bg-light-3',
+          'bg-light-1',
           'dark:bg-dark-3'
         ],
         content: [
-          'p-[calc(1rem_-_2px)]'
+          'p-[calc(0.75rem_-_2px)]'
         ]
       },
       line: {

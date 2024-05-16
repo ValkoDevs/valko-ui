@@ -19,7 +19,7 @@ const form = ref({
   text: 'Notification Text',
   gravity: 'top',
   position: 'right',
-  duration: 4000,
+  duration: 3000,
   flat: false,
   close: false,
   newWindow: false,
@@ -342,6 +342,50 @@ const createNotification = (props: NotificationProps) => {
       </example-section>
 
       <example-section
+        title="Gravity"
+        justify="start"
+        wrap
+        gap
+      >
+        <div
+          v-for="gravity in gravityOptions"
+          :key="gravity.value"
+          class="flex flex-col"
+        >
+          <span>{{ gravity.label }}</span>
+          <vk-button
+            :gravity="gravity.value"
+            class="mt-4"
+            @click="createNotification({text: gravity.label, gravity: gravity.value as any})"
+          >
+            Click Me
+          </vk-button>
+        </div>
+      </example-section>
+
+      <example-section
+        title="Position"
+        justify="start"
+        wrap
+        gap
+      >
+        <div
+          v-for="position in positionOptions"
+          :key="position.value"
+          class="flex flex-col"
+        >
+          <span>{{ position.label }}</span>
+          <vk-button
+            :position="position.value"
+            class="mt-4"
+            @click="createNotification({text: position.label, position: position.value as any})"
+          >
+            Click Me
+          </vk-button>
+        </div>
+      </example-section>
+
+      <example-section
         title="Flat"
         justify="start"
         wrap
@@ -351,6 +395,36 @@ const createNotification = (props: NotificationProps) => {
           flat
           class="mt-4"
           @click="createNotification({text: 'Flat', flat: true})"
+        >
+          Click Me
+        </vk-button>
+      </example-section>
+
+      <example-section
+        title="Close"
+        justify="start"
+        wrap
+        gap
+      >
+        <vk-button
+          close
+          class="mt-4"
+          @click="createNotification({text: 'Close', close: true})"
+        >
+          Click Me
+        </vk-button>
+      </example-section>
+
+      <example-section
+        title="Stop on Focus"
+        justify="start"
+        wrap
+        gap
+      >
+        <vk-button
+          close
+          class="mt-4"
+          @click="createNotification({text: 'Stop on Focus', stopOnFocus: true})"
         >
           Click Me
         </vk-button>
