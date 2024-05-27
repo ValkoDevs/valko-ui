@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitest/config'
 import vue from '@vitejs/plugin-vue'
-import VueTypeImports from 'vite-plugin-vue-type-imports'
 import * as path from 'path'
 import typescript2 from 'rollup-plugin-typescript2'
 import dts from 'vite-plugin-dts'
@@ -9,7 +8,6 @@ export default defineConfig({
   publicDir: './src/exports',
   plugins: [
     vue(),
-    VueTypeImports(),
     dts({
       insertTypesEntry: true
     }),
