@@ -15,7 +15,8 @@ const props = withDefaults(defineProps<SelectProps>(), {
   size: 'md',
   shape: 'soft',
   placeholder: 'Select an option',
-  options: () => []
+  options: () => [],
+  allowClear: false
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -58,6 +59,9 @@ const selectItem = (value: string | number ) => {
     updateValue(selectedValues)
   } else {
     const newValue = isSelected(value) ? undefined : value
+
+    if (!props.allowClear && newValue === undefined) return
+
     updateValue(newValue)
     toggleDropdown(false)
   }

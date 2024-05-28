@@ -42,7 +42,8 @@ const form: Ref<Record<string, string | boolean | number>> = ref({
   disabled: false,
   flat: false,
   readonly: false,
-  multiple: false
+  multiple: false,
+  allowClear: true
 })
 
 const apiData = [
@@ -143,6 +144,13 @@ const apiData = [
     description: 'The shape of the Button.',
     values: 'rounded, square, soft',
     default: 'soft'
+  },
+  {
+    prop: 'allowClear',
+    required: false,
+    description: 'Indicates whether the Select can be cleared.',
+    values: 'true, false',
+    default: 'true'
   }
 ]
 
@@ -176,6 +184,7 @@ const emitData = [
           :flat="form.flat"
           :size="form.size"
           :multiple="form.multiple"
+          :allow-clear="form.allowClear"
         />
       </div>
     </template>
@@ -226,6 +235,10 @@ const emitData = [
       <vk-checkbox
         label="Readonly"
         v-model="form.readonly"
+      />
+      <vk-checkbox
+        label="Allow Clear"
+        v-model="form.allowClear"
       />
     </template>
 
