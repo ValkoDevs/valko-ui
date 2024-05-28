@@ -23,23 +23,23 @@ describe('Breadcrumbs component', () => {
       })
 
       it('should render', () => {
-        expect(wrapper.find('.vk-breadcrumbs')).toBeDefined()
+        expect(wrapper.find('.vk-breadcrumbs').exists()).toBe(true)
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-500')).toBeDefined()
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('text-primary-500')
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('.text-base')).toBeDefined()
+        expect(wrapper.find('.text-base').exists()).toBe(true)
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-primary-500')).toBeDefined()
+        expect(wrapper.find('.vk-breadcrumbs').classes()).toContain('bg-light-3')
       })
 
       it('should be shape soft', () => {
-        expect(wrapper.find('.rounded-lg')).toBeDefined()
+        expect(wrapper.find('.rounded-lg').exists()).toBe(true)
       })
 
       it('should not be flat', () => {
@@ -56,7 +56,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-500')).toBeDefined()
+        expect(wrapper.find('.text-primary-500').exists()).toBe(true)
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -67,7 +67,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-secondary-500')).toBeDefined()
+        expect(wrapper.find('.text-secondary-500').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -78,7 +78,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-success-500')).toBeDefined()
+        expect(wrapper.find('.text-success-500').exists()).toBe(true)
       })
 
       it('should be color info when props.color is info', () => {
@@ -89,7 +89,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-info-500')).toBeDefined()
+        expect(wrapper.find('.text-info-500').exists()).toBe(true)
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -100,7 +100,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-warning-500')).toBeDefined()
+        expect(wrapper.find('.text-warning-500').exists()).toBe(true)
       })
 
       it('should be color error when props.color is error', () => {
@@ -111,7 +111,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-error-500')).toBeDefined()
+        expect(wrapper.find('.text-error-500').exists()).toBe(true)
       })
 
       it('should be color light when props.color is light', () => {
@@ -122,7 +122,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-1')).toBeDefined()
+        expect(wrapper.find('.text-light-1').exists()).toBe(true)
       })
 
       it('should be color dark when props.color is dark', () => {
@@ -133,7 +133,18 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-dark-5')).toBeDefined()
+        expect(wrapper.find('.text-dark-5').exists()).toBe(true)
+      })
+
+      it('should be color neutral when props.color is neutral', () => {
+        wrapper = mount(VkBreadcrumbs, {
+          props: {
+            crumbs,
+            color: 'neutral'
+          }
+        })
+
+        expect(wrapper.find('.text-black').exists()).toBe(true)
       })
     })
 
@@ -146,7 +157,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded-full')).toBeDefined()
+        expect(wrapper.find('.rounded-full').exists()).toBe(true)
       })
 
       it('should be soft when props.shape is soft', () => {
@@ -157,7 +168,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded-lg')).toBeDefined()
+        expect(wrapper.find('.rounded-lg').exists()).toBe(true)
       })
 
       it('should be square when props.shape is square', () => {
@@ -168,7 +179,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded-none')).toBeDefined()
+        expect(wrapper.find('.rounded-none').exists()).toBe(true)
       })
     })
 
@@ -181,7 +192,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.text-xs')).toBeDefined()
+        expect(wrapper.find('.text-xs').exists()).toBe(true)
       })
 
       it('should be sm when props.size is sm', () => {
@@ -192,7 +203,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.text-sm')).toBeDefined()
+        expect(wrapper.find('.text-sm').exists()).toBe(true)
       })
 
       it('should be md when props.size is md', () => {
@@ -203,7 +214,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.text-base')).toBeDefined()
+        expect(wrapper.find('.text-base').exists()).toBe(true)
       })
 
       it('should be lg when props.size is lg', () => {
@@ -214,7 +225,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.text-lg')).toBeDefined()
+        expect(wrapper.find('.text-lg').exists()).toBe(true)
       })
     })
 
@@ -246,6 +257,17 @@ describe('Breadcrumbs component', () => {
           props: {
             crumbs,
             variant: 'ghost'
+          }
+        })
+
+        expect(wrapper.find('.vk-breadcrumbs').classes()).toContain('bg-light-3/[.50]')
+      })
+
+      it('should be link when props.size is link', () => {
+        wrapper = mount(VkBreadcrumbs, {
+          props: {
+            crumbs,
+            variant: 'link'
           }
         })
 

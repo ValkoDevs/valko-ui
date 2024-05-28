@@ -19,6 +19,16 @@ const form = ref({
   flat: false
 })
 
+const variants = [
+  ...variantOptions,
+  { value: 'link', label: 'Link' }
+]
+
+const colors = [
+  ...colorOptions,
+  { value: 'neutral', label: 'Neutral' }
+]
+
 const crumbs = [
   { key: 'home', title: 'Home', onClick: () => useNotification({ text: 'Home' }) },
   { key: 'music', title: 'Music', onClick: () => useNotification({ text: 'Music' }) },
@@ -82,7 +92,7 @@ const breadcrumbsProps = [
   {
     prop: 'separator',
     required: false,
-    description: 'The separator for the Breadcrumbs.',
+    description: 'The separator for the Breadcrumbs. Up to 2 character or an icon if passed the name.',
     values: 'string',
     default: '>'
   },
@@ -171,13 +181,13 @@ const breadcrumbsEmits = [
       <vk-select
         placeholder="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colors"
         v-model="form.color"
       />
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptions"
+        :options="variants"
         v-model="form.variant"
       />
       <vk-select
@@ -209,7 +219,7 @@ const breadcrumbsEmits = [
       >
         <div class="flex flex-wrap gap-4">
           <div
-            v-for="color in colorOptions"
+            v-for="color in colors"
             :key="color.value"
             class="flex flex-col gap-1"
           >
@@ -226,9 +236,9 @@ const breadcrumbsEmits = [
         title="Variants"
         gap
       >
-        <div class="flex flex-wrap gap-4">
+        <div class="grid grid-cols-2 gap-4">
           <div
-            v-for="variant in variantOptions"
+            v-for="variant in variants"
             :key="variant.value"
             class="flex flex-col gap-1"
           >
@@ -264,7 +274,7 @@ const breadcrumbsEmits = [
         title="Sizes"
         gap
       >
-        <div class="flex flex-wrap gap-4">
+        <div class="grid grid-cols-2 gap-4">
           <div
             v-for="size in sizeOptions"
             :key="size.value"

@@ -1,4 +1,4 @@
-import type { DefaultComponent } from './common'
+import type { Shapes, Color, Sizes, Variant } from './common'
 
 export interface Crumb {
   key: string;
@@ -9,7 +9,9 @@ export interface Crumb {
   onClick?: () => void;
 }
 
-export interface BreadcrumbsProps extends DefaultComponent {
+export interface BreadcrumbsProps extends Shapes, Sizes {
+  variant?: Variant | 'link';
+  color?: Color | 'neutral';
   crumbs: Crumb[];
   separator?: string;
   flat?: boolean;
