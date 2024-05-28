@@ -5,7 +5,7 @@ import useStyle from './useStyle.ts'
 import styles from '#valkoui/styles/Notification.styles.ts'
 
 const useNotification = (props: NotificationProps) => {
-  if (!props.text) throw new Error('Text prop is required.')
+  if (!props.text) throw new Error('Property "text" is required')
 
   let notification: ReturnType<typeof Toastify> | null = null
 

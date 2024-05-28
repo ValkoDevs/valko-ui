@@ -268,7 +268,7 @@ const createNotification = (props: NotificationProps) => {
           <vk-button
             :color="color.value"
             class="mt-4"
-            @click="createNotification({text: color.label, color: color.value as Color})"
+            @click="createNotification({ text: color.label, color: color.value as Color })"
           >
             Click Me
           </vk-button>
@@ -290,7 +290,7 @@ const createNotification = (props: NotificationProps) => {
           <vk-button
             :variant="variant.value"
             class="mt-4"
-            @click="createNotification({text: variant.label, variant: variant.value as Variant})"
+            @click="createNotification({ text: variant.label, variant: variant.value as Variant })"
           >
             Click Me
           </vk-button>
@@ -312,7 +312,7 @@ const createNotification = (props: NotificationProps) => {
           <vk-button
             :shape="shape.value"
             class="mt-4"
-            @click="createNotification({text: shape.label, shape: shape.value as Shape})"
+            @click="createNotification({ text: shape.label, shape: shape.value as Shape })"
           >
             Click Me
           </vk-button>
@@ -334,7 +334,7 @@ const createNotification = (props: NotificationProps) => {
           <vk-button
             :size="size.value"
             class="mt-4"
-            @click="createNotification({text: size.label, size: size.value as Size})"
+            @click="createNotification({ text: size.label, size: size.value as Size })"
           >
             Click Me
           </vk-button>
@@ -356,7 +356,7 @@ const createNotification = (props: NotificationProps) => {
           <vk-button
             :gravity="gravity.value"
             class="mt-4"
-            @click="createNotification({text: gravity.label, gravity: gravity.value as any})"
+            @click="createNotification({ text: gravity.label, gravity: gravity.value as any })"
           >
             Click Me
           </vk-button>
@@ -378,7 +378,7 @@ const createNotification = (props: NotificationProps) => {
           <vk-button
             :position="position.value"
             class="mt-4"
-            @click="createNotification({text: position.label, position: position.value as any})"
+            @click="createNotification({ text: position.label, position: position.value as any })"
           >
             Click Me
           </vk-button>
@@ -394,7 +394,7 @@ const createNotification = (props: NotificationProps) => {
         <vk-button
           flat
           class="mt-4"
-          @click="createNotification({text: 'Flat', flat: true})"
+          @click="createNotification({ text: 'Flat', flat: true })"
         >
           Click Me
         </vk-button>
@@ -409,7 +409,7 @@ const createNotification = (props: NotificationProps) => {
         <vk-button
           close
           class="mt-4"
-          @click="createNotification({text: 'Close', close: true})"
+          @click="createNotification({ text: 'Close', close: true })"
         >
           Click Me
         </vk-button>
@@ -424,7 +424,7 @@ const createNotification = (props: NotificationProps) => {
         <vk-button
           close
           class="mt-4"
-          @click="createNotification({text: 'Stop on Focus', stopOnFocus: true})"
+          @click="createNotification({ text: 'Stop on Focus', stopOnFocus: true })"
         >
           Click Me
         </vk-button>
