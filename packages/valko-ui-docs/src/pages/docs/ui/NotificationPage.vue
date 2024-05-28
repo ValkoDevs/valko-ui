@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
 import variantOptions from '@/data/variantOptions'
 import shapeOptions from '@/data/shapeOptions'
@@ -19,13 +19,18 @@ const form = ref({
   text: 'Notification Text',
   gravity: 'top',
   position: 'right',
-  duration: 4000,
+  duration: 3000,
   flat: false,
   close: false,
   newWindow: false,
   destination: '',
   stopOnFocus: false
 }) as NotificationProps
+
+const variants = [
+  ...variantOptions,
+  { value: 'line', label: 'Line' }
+]
 
 const positionOptions = [
   { value: 'right', label: 'Right' },
@@ -49,7 +54,7 @@ const notificationProps = [
     prop: 'variant',
     required: false,
     description: 'The variant of the Notification.',
-    values: 'filled, outlined, ghost',
+    values: 'filled, outlined, ghost, line',
     default: 'filled'
   },
   {
@@ -197,7 +202,7 @@ const createNotification = (props: NotificationProps) => {
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptions"
+        :options="variants"
         v-model="form.variant"
       />
       <vk-select
@@ -263,7 +268,7 @@ const createNotification = (props: NotificationProps) => {
           <vk-button
             :color="color.value"
             class="mt-4"
-            @click="createNotification({text: color.label, color: color.value as Color})"
+            @click="createNotification({ text: color.label, color: color.value as Color })"
           >
             Click Me
           </vk-button>
@@ -285,7 +290,7 @@ const createNotification = (props: NotificationProps) => {
           <vk-button
             :variant="variant.value"
             class="mt-4"
-            @click="createNotification({text: variant.label, variant: variant.value as Variant})"
+            @click="createNotification({ text: variant.label, variant: variant.value as Variant })"
           >
             Click Me
           </vk-button>
@@ -307,7 +312,7 @@ const createNotification = (props: NotificationProps) => {
           <vk-button
             :shape="shape.value"
             class="mt-4"
-            @click="createNotification({text: shape.label, shape: shape.value as Shape})"
+            @click="createNotification({ text: shape.label, shape: shape.value as Shape })"
           >
             Click Me
           </vk-button>
@@ -329,7 +334,51 @@ const createNotification = (props: NotificationProps) => {
           <vk-button
             :size="size.value"
             class="mt-4"
-            @click="createNotification({text: size.label, size: size.value as Size})"
+            @click="createNotification({ text: size.label, size: size.value as Size })"
+          >
+            Click Me
+          </vk-button>
+        </div>
+      </example-section>
+
+      <example-section
+        title="Gravity"
+        justify="start"
+        wrap
+        gap
+      >
+        <div
+          v-for="gravity in gravityOptions"
+          :key="gravity.value"
+          class="flex flex-col"
+        >
+          <span>{{ gravity.label }}</span>
+          <vk-button
+            :gravity="gravity.value"
+            class="mt-4"
+            @click="createNotification({ text: gravity.label, gravity: gravity.value as any })"
+          >
+            Click Me
+          </vk-button>
+        </div>
+      </example-section>
+
+      <example-section
+        title="Position"
+        justify="start"
+        wrap
+        gap
+      >
+        <div
+          v-for="position in positionOptions"
+          :key="position.value"
+          class="flex flex-col"
+        >
+          <span>{{ position.label }}</span>
+          <vk-button
+            :position="position.value"
+            class="mt-4"
+            @click="createNotification({ text: position.label, position: position.value as any })"
           >
             Click Me
           </vk-button>
@@ -345,7 +394,37 @@ const createNotification = (props: NotificationProps) => {
         <vk-button
           flat
           class="mt-4"
-          @click="createNotification({text: 'Flat', flat: true})"
+          @click="createNotification({ text: 'Flat', flat: true })"
+        >
+          Click Me
+        </vk-button>
+      </example-section>
+
+      <example-section
+        title="Close"
+        justify="start"
+        wrap
+        gap
+      >
+        <vk-button
+          close
+          class="mt-4"
+          @click="createNotification({ text: 'Close', close: true })"
+        >
+          Click Me
+        </vk-button>
+      </example-section>
+
+      <example-section
+        title="Stop on Focus"
+        justify="start"
+        wrap
+        gap
+      >
+        <vk-button
+          close
+          class="mt-4"
+          @click="createNotification({ text: 'Stop on Focus', stopOnFocus: true })"
         >
           Click Me
         </vk-button>
