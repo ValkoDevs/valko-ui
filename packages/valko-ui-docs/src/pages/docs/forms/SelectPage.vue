@@ -43,7 +43,7 @@ const form: Ref<Record<string, string | boolean | number>> = ref({
   flat: false,
   readonly: false,
   multiple: false,
-  required: true
+  allowClear: true
 })
 
 const apiData = [
@@ -146,9 +146,9 @@ const apiData = [
     default: 'soft'
   },
   {
-    prop: 'required',
+    prop: 'allowClear',
     required: false,
-    description: 'Indicates whether the Select is required to have a value selected.',
+    description: 'Indicates whether the Select can be cleared.',
     values: 'true, false',
     default: 'true'
   }
@@ -184,7 +184,7 @@ const emitData = [
           :flat="form.flat"
           :size="form.size"
           :multiple="form.multiple"
-          :required="form.required"
+          :allow-clear="form.allowClear"
         />
       </div>
     </template>
@@ -237,8 +237,8 @@ const emitData = [
         v-model="form.readonly"
       />
       <vk-checkbox
-        label="Required"
-        v-model="form.required"
+        label="Allow Clear"
+        v-model="form.allowClear"
       />
     </template>
 
