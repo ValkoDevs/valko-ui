@@ -1,8 +1,6 @@
 import type { App, Component, Plugin } from 'vue'
 import * as components from '../components/index.ts'
 
-console.log(components)
-
 export type ValkoUIOptions = {
   prefix: string,
   components: Component[]
@@ -33,4 +31,3 @@ export default createValkoUI({
   components: Object.keys(components)
     .map(key => components[key as keyof object])
 }) as Plugin<[]>
-

@@ -1,97 +1,85 @@
-<script lang="ts" setup>
-import { ref } from 'vue'
-import type { TableProps } from '#valkoui/types/Table'
+<script setup lang="ts">
+import { computed } from 'vue'
+import type { TableProps, TableItem } from '#valkoui/types/Table'
 import type { SlotStyles } from '#valkoui/types/common'
 import useStyle from '#valkoui/composables/useStyle.ts'
-import styles from '#valkoui/styles/Tabs.styles.ts'
-import VkCheckbox from './Checkbox.vue'
-import VkRadio from './Radio.vue'
+import styles from '#valkoui/styles/Table.styles.ts'
+import useDarkMode from '#valkoui/composables/useDarkMode.ts'
+import { v4 as uuid } from 'uuid'
 
 defineOptions({ name: 'VkTable' })
 
 const props = withDefaults(defineProps<TableProps>(), {
-  color: 'neutral',
+  color: 'primary',
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  sortDir: 'asc',
-  selectable: 'single',
-  selectionType: 'row',
-  layout: 'auto',
-  sortBy: null,
   striped: false,
-  loading: false,
-  flat: false
+  data: () => []
 })
 
 const classes = useStyle<TableProps, SlotStyles>(props, styles)
 
-const checkboxRef = ref(false)
+const isDarkMode = useDarkMode()
+
+const stripColor = computed(() => {
+  if (isDarkMode.value) {
+    return 'odd:bg-dark-3 even:bg-dark-2'
+  }
+  return 'odd:bg-light-3 even:bg-light-4'
+})
+
+const items = computed<TableItem[]>(() => props.data.map((item) => ({
+  ...item,
+  key: item.key || uuid()
+})))
+
+const headers = computed(() => props.headers)
 </script>
 
 <template>
-  <table
-    :class="classes.table"
-  >
+  <table :class="classes.table">
     <thead :class="classes.thead">
       <tr>
-        <th
-          v-if="selectable !== 'none' && selectionType === 'check'"
-          :class="classes.th"
-        >
-          <vk-checkbox
-            v-if="selectable === 'multiple'"
-            label="Select All"
-            v-model="checkboxRef"
-          />
-          <span v-if="selectable === 'single'">Single</span>
-        </th>
         <th
           v-for="header in headers"
           :key="header.key"
           :class="classes.th"
         >
-          {{ header.label }}
+          <slot
+            :name="`header-cell-${header.key}`"
+            :key="header.key"
+            :header="header"
+          >
+            {{ header.label }}
+          </slot>
         </th>
-        <slot name="actions-header" />
       </tr>
     </thead>
     <tbody :class="classes.body">
       <tr
-        v-for="item in data"
+        v-for="(item, index) in items"
         :key="item.key"
-        :class="classes.tr"
+        :class="[classes.tr, striped ? stripColor : '']"
+        :data-key="item.key"
       >
-        <td v-if="selectable !== 'none' && selectionType === 'check'">
-          <vk-checkbox
-            v-if="selectable === 'multiple'"
-            :name="item.key"
-            :indeterminate="checkboxRef"
-            :variant="variant"
-            :color="color === 'neutral' ? 'dark' : color"
-          />
-          <vk-radio
-            v-if="selectable === 'single'"
-            :name="item.key"
-            :variant="variant"
-            :color="color === 'neutral' ? 'dark' : color"
-            :value="item.key"
-            :label="item.key"
-            v-model="item.key"
-          />
-        </td>
         <td
-          v-for="{ key } in headers"
-          :key="key"
-          :class="classes.td"
+          v-for="{ field } in headers"
+          :key="`cell-${field}`"
+          :class="[classes.td, index === items.length - 1 ? classes.shape : '']"
         >
-          {{ item[key] }}
+          <slot
+            :name="`cell-${field}-${item.key}`"
+            :item="item"
+            :key="item.key"
+          >
+            {{ item[field] }}
+          </slot>
         </td>
-        <slot
-          name="actions"
-          :key="item.key"
-        />
       </tr>
     </tbody>
+    <tfoot v-if="$slots['table-footer']">
+      <slot name="table-footer" />
+    </tfoot>
   </table>
 </template>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
 import variantOptions from '@/data/variantOptions'
 import colorOptions from '@/data/colorOptions'
 import sizeOptions from '@/data/sizeOptions'
@@ -9,7 +9,7 @@ import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
 import emitHeaders from '@/data/emitHeaders'
 import slotHeaders from '@/data/slotHeaders'
-
+import type { TableItem } from '@valko-ui/components'
 
 const form = ref({
   color: 'primary',
@@ -18,14 +18,16 @@ const form = ref({
   size: 'md',
   sortBy: null,
   sortDir: 'asc',
-  records: 20,
-  page: 1,
   selectable: 'single',
   selectionType: 'row',
   striped: false,
   loading: false,
   flat: false,
-  layout: 'auto'
+  layout: 'auto',
+  bulkDelete: false,
+  actions: false,
+  records: 5,
+  page: 1
 })
 
 const layout = [
@@ -46,7 +48,8 @@ const selectable = [
 
 const selectionType = [
   { value: 'check', label: 'Check' },
-  { value: 'row', label: 'Row' }
+  { value: 'row', label: 'Row' },
+  { value: 'none', label: 'None' }
 ]
 
 const sortDir = [
@@ -54,19 +57,19 @@ const sortDir = [
   { value: 'desc', label: 'Descendant' }
 ]
 
-const dataTableProps = [
+const tableProps = [
   {
     prop: 'headers',
     required: true,
     description: 'An array of objects defining the headers of the table.',
-    values: 'DataTableHeader[]',
+    values: 'TableHeader[]',
     default: '[]'
   },
   {
     prop: 'data',
     required: true,
     description: 'An array of objects representing the data rows of the table.',
-    values: 'DataTableItem[]',
+    values: 'TableItem[]',
     default: '[]'
   },
   {
@@ -84,20 +87,6 @@ const dataTableProps = [
     default: 'asc'
   },
   {
-    prop: 'records',
-    required: false,
-    description: 'The total number of records in the table.',
-    values: 'number',
-    default: 'undefined'
-  },
-  {
-    prop: 'page',
-    required: false,
-    description: 'The current page number.',
-    values: 'number',
-    default: 'undefined'
-  },
-  {
     prop: 'selectable',
     required: false,
     description: 'Controls the selection behavior of the table.',
@@ -112,13 +101,6 @@ const dataTableProps = [
     default: 'check'
   },
   {
-    prop: 'rounded',
-    required: false,
-    description: 'Specifies whether the table has rounded corners.',
-    values: 'boolean',
-    default: 'false'
-  },
-  {
     prop: 'striped',
     required: false,
     description: 'Specifies whether the table rows are striped for better readability.',
@@ -131,17 +113,10 @@ const dataTableProps = [
     description: 'Specifies whether the table is in a loading state.',
     values: 'boolean',
     default: 'false'
-  },
-  {
-    prop: 'shadow',
-    required: false,
-    description: 'Specifies whether the table has a shadow effect.',
-    values: 'boolean',
-    default: 'false'
   }
 ]
 
-const dataTableItem = [
+const tableItem = [
   {
     prop: 'key',
     required: true,
@@ -156,7 +131,7 @@ const dataTableItem = [
   }
 ]
 
-const dataTableHeader = [
+const tableHeader = [
   {
     prop: 'key',
     required: true,
@@ -194,11 +169,67 @@ const slotData = [
     example: '<template #default>\n  <p>This is the main content of the alert.</p>\n</template>'
   }
 ]
+
+const tableItems = ref([
+  {
+    prop: 'key',
+    required: true,
+    description: 'The unique identifier for the column.',
+    values: 'string'
+  },
+  {
+    prop: 'label',
+    required: true,
+    description: 'The label to display for the column header.',
+    values: 'string'
+  },
+  {
+    prop: 'sortable',
+    required: true,
+    description: 'Specifies whether the column is sortable.',
+    values: 'boolean'
+  },
+  {
+    prop: 'example-03',
+    required: true,
+    description: 'Example prop for test pourpuses, example-03.',
+    values: 'string'
+  },
+  {
+    prop: 'example-04',
+    required: true,
+    description: 'Example prop for test pourpuses, example-04.',
+    values: 'string'
+  },
+  {
+    prop: 'example-05',
+    required: true,
+    description: 'Example prop for test pourpuses, example-05.',
+    values: 'boolean'
+  }
+])
+
+const selectedItems = ref<TableItem[]>([])
+
+const handleSelectedItems = (items: TableItem[]) => {
+  // Limpiar la lista de elementos seleccionados y añadir los nuevos elementos seleccionados
+  selectedItems.value = items
+}
+
+//const deleteSelectedItems = (itemsToDelete?: TableItem[]) => {
+//  const items = itemsToDelete || selectedItems.value
+//  items.forEach(selectedItem => {
+//    const selectedIndex = tableItems.value.findIndex(item => item.key === selectedItem.key)
+//    if (selectedIndex !== -1) {
+//      tableItems.value.splice(selectedIndex, 1)
+//    }
+//  })
+//}
 </script>
 
 <template>
   <doc-section
-    title="Data Table"
+    title="Table"
     description=""
   >
     <template #playground-view>
@@ -210,8 +241,6 @@ const slotData = [
           :size="form.size"
           :sort-by="form.sortBy"
           :sort-dir="form.sortDir"
-          :records="form.records"
-          :page="form.page"
           :selectable="form.selectable"
           :selection-type="form.selectionType"
           :striped="form.striped"
@@ -219,8 +248,35 @@ const slotData = [
           :flat="form.flat"
           :layout="form.layout"
           :headers="propHeaders"
-          :data="dataTableHeader"
-        />
+          :data="tableItems"
+          :records="form.records"
+          :page="form.page"
+          @selected-items="handleSelectedItems"
+          @update:page="form.page"
+        >
+          <template
+            #header-actions
+            v-if="form.bulkDelete"
+          >
+            <vk-button
+              size="xs"
+              color="error"
+            >
+              Bulk Delete
+            </vk-button>
+          </template>
+          <template
+            #row-actions="{}"
+            v-if="form.actions"
+          >
+            <vk-button
+              size="xs"
+              color="info"
+            >
+              Edit Item
+            </vk-button>
+          </template>
+        </vk-data-table>
       </div>
     </template>
     <template #playground-options>
@@ -274,13 +330,15 @@ const slotData = [
       />
       <vk-input
         label="Records"
-        type="number"
+        size="sm"
         v-model="form.records"
+        type="number"
       />
       <vk-input
         label="Page"
-        type="number"
+        size="sm"
         v-model="form.page"
+        type="number"
       />
       <vk-checkbox
         label="Flat"
@@ -293,6 +351,14 @@ const slotData = [
       <vk-checkbox
         label="Loading"
         v-model="form.loading"
+      />
+      <vk-checkbox
+        label="Header Actions"
+        v-model="form.bulkDelete"
+      />
+      <vk-checkbox
+        label="Item Actions"
+        v-model="form.actions"
       />
     </template>
 
@@ -314,7 +380,7 @@ const slotData = [
             <vk-data-table
               :color="color.value"
               :headers="propHeaders"
-              :data="dataTableHeader"
+              :data="tableHeader"
               class="mt-4"
             />
           </div>
@@ -338,7 +404,7 @@ const slotData = [
             <vk-data-table
               :variant="variant.value"
               :headers="propHeaders"
-              :data="dataTableHeader"
+              :data="tableHeader"
               class="mt-4"
             />
           </div>
@@ -362,7 +428,7 @@ const slotData = [
             <vk-data-table
               :shape="shape.value"
               :headers="propHeaders"
-              :data="dataTableHeader"
+              :data="tableHeader"
               class="mt-4"
             />
           </div>
@@ -386,7 +452,7 @@ const slotData = [
             <vk-data-table
               :size="size.value"
               :headers="propHeaders"
-              :data="dataTableHeader"
+              :data="tableHeader"
               class="mt-4"
             />
           </div>
@@ -402,7 +468,7 @@ const slotData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="dataTableProps"
+            :data="tableProps"
           />
         </example-section>
 
@@ -412,7 +478,7 @@ const slotData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="dataTableItem"
+            :data="tableItem"
           />
         </example-section>
 
@@ -422,7 +488,7 @@ const slotData = [
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="dataTableHeader"
+            :data="tableHeader"
           />
         </example-section>
 

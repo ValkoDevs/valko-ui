@@ -1,26 +1,31 @@
-import type { Shapes, Color, Sizes, Variants } from './common'
+import type { Shapes, Sizes, Variants, Colors } from './common'
+
+export interface TableItem {
+  key: string | number;
+  [key: string]: unknown;
+}
 
 export interface TableHeader {
   key: string;
   label: string;
+  field: keyof TableItem;
   sortable: boolean;
-}
-
-export interface TableItem {
-  key: string;
-  [key: string]: unknown;
+  filterable: boolean;
+  class?: string;
 }
 
 export interface TableProps extends Shapes, Sizes, Variants {
   headers: TableHeader[];
-  data: TableItem[];
-  color?: Color | 'neutral';
-  selectable?: 'single' | 'multiple' | 'none';
-  sortDir?: 'asc' | 'desc';
-  selectionType?: 'check' | 'row';
-  layout?: 'auto' | 'fixed';
-  sortBy?: string | null;
+  data: Partial<TableItem>[];
   striped?: boolean;
+}
+
+export interface DataTableProps extends TableProps, Colors {
+  selectable?: 'single' | 'multiple' | 'none';
+  selectionType?: 'check' | 'row' | 'none';
+  sortDir?: 'asc' | 'desc';
+  sortBy?: string | null;
   loading?: boolean;
-  flat?: boolean;
+  records?: number;
+  page?: number;
 }
