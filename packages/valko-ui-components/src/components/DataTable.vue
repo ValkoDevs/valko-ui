@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
-import type { DataTableProps, TableItem, TableHeader } from '#valkoui/types/Table'
-import type { SlotStyles } from '#valkoui/types/common'
+import { computed, ref } from 'vue'
+import type { DataTableProps, TableItem } from '#valkoui/types/Table'
+import type { SlotStyles, Sort } from '#valkoui/types/common'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import styles from '#valkoui/styles/DataTable.styles.ts'
 import VkCheckbox from './Checkbox.vue'
-import VkRadio from './Radio.vue'
-import VkTable from './Table.vue'
+import VkIcon from './Icon.vue'
 import VkPagination from './Pagination.vue'
-import { v4 as uuid } from 'uuid'
+import VkRadio from './Radio.vue'
+import VkSelect from './Select.vue'
+import VkTable from './Table.vue'
 
 defineOptions({ name: 'VkDataTable' })
 
@@ -17,195 +18,169 @@ const props = withDefaults(defineProps<DataTableProps>(), {
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  selectable: 'none',
-  selectionType: 'none',
+  selectionMode: 'none',
   striped: false,
-  records: 10,
-  page: 1
+  sort: undefined,
+  selection: undefined,
+  pagination: () => ({
+    records: [],
+    total: 0,
+    limit: 10,
+    offset: 0
+  }),
+  filters: () => [],
+  data: () => []
 })
 
-const emit = defineEmits(['selectedItems', 'update:page'])
+const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll'])
 
 const classes = useStyle<DataTableProps, SlotStyles>(props, styles)
 
-// declaration of vars
-
-const selectedItems = ref<TableItem[]>([])
-const allItemsSelected = ref(false)
-const currentPage = ref(props.page)
-const itemsPerPage = computed(() => props.records)
-const totalPages = computed(() => Math.ceil(props.data.length / itemsPerPage.value))
-
-// maping props
-
-const mapedHeaders = computed(() => {
-  const headers: TableHeader[] = [...props.headers]
-
-  if (props.selectionType === 'check') {
-    headers.unshift({
-      key: 'selection',
-      field: 'selection',
-      label: 'Selection',
-      sortable: false,
-      filterable: true
-    })
-  }
-
-  return headers
-})
-
-const mapedData = computed(() => {
-  return props.data.map((item) => ({
-    ...item,
-    key: item.key || uuid(),
-    selected: !!item.selected
-  }))
-})
-
-// pagination
-const changePage = (newPage: number) => {
-  currentPage.value = newPage
-  emit('update:page', newPage)
+const sortIconMap = {
+  asc: 'arrow-up',
+  desc: 'arrow-down',
+  none: 'arrows-sort'
 }
 
-const paginatedData = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage.value
-  const end = start + itemsPerPage.value
-  return mapedData.value.slice(start, end)
-})
+const limitRef = ref(2)
 
-// emit func
+const selectLimit = [
+  { value: 2, label: '2' },
+  { value: 25, label: '25' },
+  { value: 50, label: '50' },
+  { value: 100, label: '100' }
+]
 
-const emitSelectedItems = () => {
-  emit('selectedItems', selectedItems.value)
-}
 
-// Selection items funcs
 
-const toggleSelection = (item: TableItem) => {
-  if (props.selectable === 'multiple') {
-    if (item.selected) {
-      selectedItems.value.push(item)
-    } else {
-      const index = selectedItems.value.findIndex(selected => selected.key === item.key)
-      if (index !== -1) {
-        selectedItems.value.splice(index, 1)
-      }
-    }
-  }
-
-  if (props.selectable === 'single') {
-    selectedItems.value.forEach(selectedItem => {
-      selectedItem.selected = false
-    })
-    item.selected = true
-    selectedItems.value = [item]
-  }
-
-  emitSelectedItems()
-}
-
-const toggleAllSelection = () => {
-  allItemsSelected.value = !allItemsSelected.value
-  selectedItems.value = []
-
-  paginatedData.value.forEach((item) => {
-    item.selected = allItemsSelected.value
-    if (allItemsSelected.value) {
-      selectedItems.value.push(item)
-    }
-  })
-
-  emitSelectedItems()
-}
-
-const isIndeterminate = computed(() => {
-  const totalSelected = selectedItems.value.length
-  return totalSelected > 0 && totalSelected < paginatedData.value.length
-})
-
-// watchers
-
-watch(
-  () => props.page,
-  (newPage) => {
-    currentPage.value = newPage
-  }
-)
-
-watch(
-  () => props.data,
+const selectedItems = computed(
   () => {
-    selectedItems.value = []
-    allItemsSelected.value = false
-  },
-  { deep: true }
+    return props.data.reduce((acc, item) => ({
+      ...acc,
+      [item.key]: Array.isArray(props.selection) ? props.selection.some((el) => el.key === item.key) : props.selection?.key === item.key
+    }), {} as Record<string | number, boolean>)
+  }
 )
+
+// Pagination
+const totalPages = computed(() => Math.ceil(props.pagination.total / props.pagination.limit))
+const currentPage = computed({
+  get: () => props.pagination.offset / props.pagination.limit + 1,
+  set: (page: number) => emit('onPageChange', page * props.pagination.limit - props.pagination.limit)
+})
+
+const handleSort = (field: keyof TableItem) => {
+  const nextSortMap: Record<string, Sort['direction']> = {
+    asc: 'desc',
+    desc: undefined,
+    none: 'asc'
+  }
+
+  const newSort: Sort = {
+    field: field as string,
+    direction: field === props.sort?.field ? nextSortMap[props.sort.direction || 'none'] : 'asc'
+  }
+
+  emit('onSort', newSort.direction ? newSort : null)
+}
 </script>
 
 <template>
-  <div>
-    <VkTable
-      :headers="mapedHeaders"
-      :data="paginatedData"
+  <div :class="classes.table">
+    <vk-table
+      :headers="headers"
+      :data="data"
       :color="color"
       :variant="variant"
       :shape="shape"
       :size="size"
       :striped="striped"
     >
-      <template #header-cell-selection>
-        <div
-          v-if="selectable !== 'none' && selectionType === 'check'"
-          :class="classes.th"
-        >
-          <VkCheckbox
-            v-if="selectable === 'multiple'"
-            label="Select All"
-            :color="color"
-            :model-value="allItemsSelected"
-            :indeterminate="isIndeterminate"
-            @update:model-value="toggleAllSelection"
-          />
+      <template
+        v-for="header in headers"
+        #[`header-cell-${header.key}`]
+        :key="header.key"
+      >
+        <div :class="classes.headerContainer">
+          <div :class="classes.headerLabel">
+            <vk-checkbox
+              v-if="selectionMode === 'multiple' && header.key === 'selection'"
+              :color="color"
+              :model-value="isAllSelected"
+              @update:model-value="(val) => emit('onSelectAll', val)"
+            />
+            {{ header.key === 'selection' ? '' : header.label }}
+          </div>
+          <div
+            v-if="header.filterable"
+            :class="classes.headerUtilities"
+          >
+            <vk-icon
+              name="search"
+              class="cursor-pointer"
+              @click="() => emit('onFilter', data, header.key)"
+            />
+          </div>
+          <div
+            v-if="header.sortable"
+            :class="classes.headerUtilities"
+          >
+            <vk-icon
+              :name="sortIconMap[sort?.field === header.key && sort.direction ? sort.direction : 'none']"
+              class="cursor-pointer"
+              @click="handleSort(header.field)"
+            />
+          </div>
         </div>
       </template>
 
       <template
-        v-for="item in paginatedData"
+        v-for="item in data"
         #[`cell-selection-${item.key}`]
         :key="item.key"
       >
-        <div
-          v-if="selectable !== 'none' && selectionType === 'check'"
-        >
-          <VkCheckbox
-            v-if="selectable === 'multiple'"
-            label=""
-            :color="color"
-            :model-value="item.selected"
-            @update:model-value="() => toggleSelection(item)"
-          />
-          <VkRadio
-            v-else-if="selectable === 'single'"
-            :color="color"
-            :name="`radio-${item.key}`"
-            :value="item.key"
-            :model-value="item.selected ? item.key : undefined"
-            @update:model-value="() => toggleSelection(item)"
-          />
-        </div>
+        <vk-checkbox
+          v-if="selectionMode === 'multiple'"
+          :color="color"
+          :model-value="selectedItems[item.key]"
+          @update:model-value="() => emit('onSelect', item)"
+        />
+        <vk-radio
+          v-else-if="selectionMode === 'single'"
+          :color="color"
+          :name="`radio-${item.key}`"
+          :value="item.key"
+          :model-value="selectedItems[item.key] ? item.key : undefined"
+          @update:model-value="() => emit('onSelect', item)"
+        />
       </template>
-    </VkTable>
+    </vk-table>
 
-    <VkPagination
-      v-if="totalPages > 1"
-      :variant="variant"
-      :color="color"
-      :shape="shape"
-      :size="size"
-      :pages="totalPages"
-      :model-value="currentPage"
-      @update:model-value="changePage"
-    />
+    <div :class="classes.footer">
+      <div>
+        <vk-pagination
+          v-if="pagination && limitRef < pagination.total"
+          :color="color"
+          :variant="variant"
+          :shape="shape"
+          :size="size"
+          :pages="totalPages"
+          v-model="currentPage"
+        />
+      </div>
+
+      <div>
+        <vk-select
+          placeholder="Limit"
+          :options="selectLimit"
+          :color="color"
+          :variant="variant"
+          :shape="shape"
+          :size="size"
+          v-model="limitRef"
+          @update:model-value="(newLimit: number) => emit('onLimitChange', newLimit)"
+        />
+      </div>
+    </div>
   </div>
 </template>

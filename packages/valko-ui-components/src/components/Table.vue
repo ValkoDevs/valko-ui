@@ -4,8 +4,6 @@ import type { TableProps, TableItem } from '#valkoui/types/Table'
 import type { SlotStyles } from '#valkoui/types/common'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import styles from '#valkoui/styles/Table.styles.ts'
-import useDarkMode from '#valkoui/composables/useDarkMode.ts'
-import { v4 as uuid } from 'uuid'
 
 defineOptions({ name: 'VkTable' })
 
@@ -20,18 +18,9 @@ const props = withDefaults(defineProps<TableProps>(), {
 
 const classes = useStyle<TableProps, SlotStyles>(props, styles)
 
-const isDarkMode = useDarkMode()
-
-const stripColor = computed(() => {
-  if (isDarkMode.value) {
-    return 'odd:bg-dark-3 even:bg-dark-2'
-  }
-  return 'odd:bg-light-3 even:bg-light-4'
-})
-
-const items = computed<TableItem[]>(() => props.data.map((item) => ({
+const items = computed<TableItem[]>(() => props.data.map((item, index) => ({
   ...item,
-  key: item.key || uuid()
+  key: item.key || index
 })))
 
 const headers = computed(() => props.headers)
@@ -60,7 +49,7 @@ const headers = computed(() => props.headers)
       <tr
         v-for="(item, index) in items"
         :key="item.key"
-        :class="[classes.tr, striped ? stripColor : '']"
+        :class="classes.tr"
         :data-key="item.key"
       >
         <td

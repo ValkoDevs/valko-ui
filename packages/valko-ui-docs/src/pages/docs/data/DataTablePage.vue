@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import variantOptions from '@/data/variantOptions'
@@ -9,52 +9,28 @@ import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
 import emitHeaders from '@/data/emitHeaders'
 import slotHeaders from '@/data/slotHeaders'
-import type { TableItem } from '@valko-ui/components'
+import { type SelectionMode, useDataTable, useClientSidePagination, useClientSideSort } from '@valko-ui/components'
 
-const form = ref({
+const form = reactive({
   color: 'primary',
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  sortBy: null,
-  sortDir: 'asc',
-  selectable: 'single',
-  selectionType: 'row',
   striped: false,
-  loading: false,
-  flat: false,
-  layout: 'auto',
-  bulkDelete: false,
-  actions: false,
-  records: 5,
-  page: 1
+  sortable: false,
+  filterable: false
 })
-
-const layout = [
-  { value: 'auto', label: 'Auto' },
-  { value: 'fixed', label: 'Fixed' }
-]
 
 const colors = [
   ...colorOptions,
   { value: 'neutral', label: 'Neutral' }
 ]
 
-const selectable = [
+const selectionMode = [
   { value: 'single', label: 'Single' },
   { value: 'multiple', label: 'Multiple' },
-  { value: 'none', label: 'None' }
-]
-
-const selectionType = [
-  { value: 'check', label: 'Check' },
   { value: 'row', label: 'Row' },
   { value: 'none', label: 'None' }
-]
-
-const sortDir = [
-  { value: 'asc', label: 'Ascendant' },
-  { value: 'desc', label: 'Descendant' }
 ]
 
 const tableProps = [
@@ -131,28 +107,6 @@ const tableItem = [
   }
 ]
 
-const tableHeader = [
-  {
-    prop: 'key',
-    required: true,
-    description: 'The unique identifier for the column.',
-    values: 'string'
-  },
-  {
-    prop: 'label',
-    required: true,
-    description: 'The label to display for the column header.',
-    values: 'string'
-  },
-  {
-    prop: 'sortable',
-    required: true,
-    description: 'Specifies whether the column is sortable.',
-    values: 'boolean'
-  }
-]
-
-
 const emitData = [
   {
     event: 'close',
@@ -170,67 +124,69 @@ const slotData = [
   }
 ]
 
-const tableItems = ref([
+const tableItems = [
   {
+    key: 'example-01',
     prop: 'key',
     required: true,
     description: 'The unique identifier for the column.',
     values: 'string'
   },
   {
+    key: 'example-02',
     prop: 'label',
     required: true,
     description: 'The label to display for the column header.',
     values: 'string'
   },
   {
+    key: 'example-03',
     prop: 'sortable',
     required: true,
     description: 'Specifies whether the column is sortable.',
     values: 'boolean'
   },
   {
+    key: 'example-04',
     prop: 'example-03',
-    required: true,
+    required: false,
     description: 'Example prop for test pourpuses, example-03.',
     values: 'string'
   },
   {
+    key: 'example-05',
     prop: 'example-04',
     required: true,
     description: 'Example prop for test pourpuses, example-04.',
     values: 'string'
   },
   {
+    key: 'example-06',
     prop: 'example-05',
-    required: true,
+    required: false,
     description: 'Example prop for test pourpuses, example-05.',
     values: 'boolean'
   }
-])
+]
 
-const selectedItems = ref<TableItem[]>([])
+const { result: sortedResult, sort, setSort } = useClientSideSort(tableItems, { field: 'required', direction: 'desc' })
+const { result: paginatedResult, setOffset, setLimit } = useClientSidePagination(sortedResult)
 
-const handleSelectedItems = (items: TableItem[]) => {
-  // Limpiar la lista de elementos seleccionados y añadir los nuevos elementos seleccionados
-  selectedItems.value = items
-}
+const selectionModeRef = ref<SelectionMode>('none')
 
-//const deleteSelectedItems = (itemsToDelete?: TableItem[]) => {
-//  const items = itemsToDelete || selectedItems.value
-//  items.forEach(selectedItem => {
-//    const selectedIndex = tableItems.value.findIndex(item => item.key === selectedItem.key)
-//    if (selectedIndex !== -1) {
-//      tableItems.value.splice(selectedIndex, 1)
-//    }
-//  })
-//}
+const dataTable = useDataTable({
+  headers: propHeaders,
+  paginatedResult,
+  selectionMode: selectionModeRef,
+  selectAllStatus: undefined
+})
 </script>
 
 <template>
+  {{ sortedResult }}
   <doc-section
     title="Table"
-    description=""
+    description="A more complex Table component that allows to sort, filter & edit the data that contains."
   >
     <template #playground-view>
       <div class="w-full flex justify-center p-4">
@@ -239,44 +195,20 @@ const handleSelectedItems = (items: TableItem[]) => {
           :variant="form.variant"
           :shape="form.shape"
           :size="form.size"
-          :sort-by="form.sortBy"
-          :sort-dir="form.sortDir"
-          :selectable="form.selectable"
-          :selection-type="form.selectionType"
+          :selection-mode="selectionModeRef"
           :striped="form.striped"
-          :loading="form.loading"
-          :flat="form.flat"
-          :layout="form.layout"
-          :headers="propHeaders"
-          :data="tableItems"
-          :records="form.records"
-          :page="form.page"
-          @selected-items="handleSelectedItems"
-          @update:page="form.page"
-        >
-          <template
-            #header-actions
-            v-if="form.bulkDelete"
-          >
-            <vk-button
-              size="xs"
-              color="error"
-            >
-              Bulk Delete
-            </vk-button>
-          </template>
-          <template
-            #row-actions="{}"
-            v-if="form.actions"
-          >
-            <vk-button
-              size="xs"
-              color="info"
-            >
-              Edit Item
-            </vk-button>
-          </template>
-        </vk-data-table>
+          :headers="dataTable.headers"
+          :data="dataTable.data"
+          :selection="dataTable.selection"
+          :is-all-selected="dataTable.isAllSelected"
+          :pagination="paginatedResult"
+          :sort="sort"
+          @on-select="dataTable.handleSelect"
+          @on-select-all="dataTable.handleSelectAll"
+          @on-page-change="setOffset"
+          @on-limit-change="setLimit"
+          @on-sort="setSort"
+        />
       </div>
     </template>
     <template #playground-options>
@@ -305,60 +237,22 @@ const handleSelectedItems = (items: TableItem[]) => {
         v-model="form.size"
       />
       <vk-select
-        placeholder="Layout"
+        placeholder="Selection Mode"
         size="sm"
-        :options="layout"
-        v-model="form.layout"
-      />
-      <vk-select
-        placeholder="Selectable"
-        size="sm"
-        :options="selectable"
-        v-model="form.selectable"
-      />
-      <vk-select
-        placeholder="Selection Type"
-        size="sm"
-        :options="selectionType"
-        v-model="form.selectionType"
-      />
-      <vk-select
-        placeholder="Sort Direction"
-        size="sm"
-        :options="sortDir"
-        v-model="form.sortDir"
-      />
-      <vk-input
-        label="Records"
-        size="sm"
-        v-model="form.records"
-        type="number"
-      />
-      <vk-input
-        label="Page"
-        size="sm"
-        v-model="form.page"
-        type="number"
+        :options="selectionMode"
+        v-model="selectionModeRef"
       />
       <vk-checkbox
-        label="Flat"
-        v-model="form.flat"
+        label="Sortable"
+        v-model="form.sortable"
+      />
+      <vk-checkbox
+        label="Filterable"
+        v-model="form.filterable"
       />
       <vk-checkbox
         label="Striped"
         v-model="form.striped"
-      />
-      <vk-checkbox
-        label="Loading"
-        v-model="form.loading"
-      />
-      <vk-checkbox
-        label="Header Actions"
-        v-model="form.bulkDelete"
-      />
-      <vk-checkbox
-        label="Item Actions"
-        v-model="form.actions"
       />
     </template>
 
@@ -380,7 +274,7 @@ const handleSelectedItems = (items: TableItem[]) => {
             <vk-data-table
               :color="color.value"
               :headers="propHeaders"
-              :data="tableHeader"
+              :data="tableItems"
               class="mt-4"
             />
           </div>
@@ -404,7 +298,7 @@ const handleSelectedItems = (items: TableItem[]) => {
             <vk-data-table
               :variant="variant.value"
               :headers="propHeaders"
-              :data="tableHeader"
+              :data="tableItems"
               class="mt-4"
             />
           </div>
@@ -428,7 +322,7 @@ const handleSelectedItems = (items: TableItem[]) => {
             <vk-data-table
               :shape="shape.value"
               :headers="propHeaders"
-              :data="tableHeader"
+              :data="tableItems"
               class="mt-4"
             />
           </div>
@@ -452,7 +346,7 @@ const handleSelectedItems = (items: TableItem[]) => {
             <vk-data-table
               :size="size.value"
               :headers="propHeaders"
-              :data="tableHeader"
+              :data="tableItems"
               class="mt-4"
             />
           </div>
@@ -488,7 +382,7 @@ const handleSelectedItems = (items: TableItem[]) => {
         >
           <vk-data-table
             :headers="propHeaders"
-            :data="tableHeader"
+            :data="tableItems"
           />
         </example-section>
 

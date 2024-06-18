@@ -3,29 +3,30 @@ import { tv, type TV } from 'tailwind-variants'
 export default tv({
   slots: {
     table: [
-      'vk-data-table'
+      'vk-data-table',
+      'flex',
+      'flex-col',
+      'justify-between'
     ],
-    th: [
-      'px-4',
-      'py-2',
-      'text-left'
+    headerContainer: [
+      'flex',
+      'gap-1',
+      'items-center'
     ],
-    td: [
-      'px-4',
-      'py-2',
-      'text-left'
+    headerLabel: [
+      'mr-2',
+      'self-center'
     ],
-    selected: [
-      'bg-success-500'
+    headerUtilities: [
+      ''
     ],
-    rowSelection: [
-      'cursor-pointer'
+    footer: [
+      'flex',
+      'justify-between',
+      'mt-2',
+      'first:w-1/2',
+      'last:w-1/5',
+      'last:self-end'
     ]
-  },
-  variants: {
-    sortDir: {
-      asc: {},
-      desc: {}
-    }
   }
 }) as unknown as ReturnType<TV>
