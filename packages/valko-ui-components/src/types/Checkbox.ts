@@ -8,5 +8,4 @@ export interface CheckboxProps extends DefaultComponent {
   flat?: boolean;
   labelPosition?: boolean;
   readonly?: boolean;
-  indeterminate?: boolean;
 }
