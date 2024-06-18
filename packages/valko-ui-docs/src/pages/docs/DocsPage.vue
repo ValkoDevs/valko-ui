@@ -32,6 +32,7 @@ const menuItems: MenuItem[] = [
   { key: 'menu', group: 'Ui', text: 'Menu' },
   { key: 'navbar', group: 'Ui', text: 'Navbar' },
   { key: 'notification', group: 'Ui', text: 'Notification' },
+  { key: 'popover', group: 'Ui', text: 'Popover' },
   { key: 'progressbar', group: 'Ui', text: 'Progressbar' },
   { key: 'spinner', group: 'Ui', text: 'Spinner' },
   { key: 'tag', group: 'Ui', text: 'Tag' },
