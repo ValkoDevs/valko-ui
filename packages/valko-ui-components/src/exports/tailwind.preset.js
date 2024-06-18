@@ -23,8 +23,8 @@ module.exports = () => ({
           5: colors.zinc[950]
         },
         light: {
-          1: colors.white,
-          2: colors.gray[50],
+          1: colors.gray[50],
+          2: colors.gray[100],
           3: colors.gray[200],
           4: colors.gray[300],
           5: colors.gray[400]

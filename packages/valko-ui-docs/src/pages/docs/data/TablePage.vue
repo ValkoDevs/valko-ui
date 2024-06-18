@@ -112,6 +112,18 @@ const tableItems = ref([
     required: true,
     description: 'Specifies whether the column is sortable.',
     values: 'boolean'
+  },
+  {
+    prop: 'sortable',
+    required: true,
+    description: 'Specifies whether the column is sortable.',
+    values: 'boolean'
+  },
+  {
+    prop: 'sortable',
+    required: true,
+    description: 'Specifies whether the column is sortable.',
+    values: 'boolean'
   }
 ])
 </script>

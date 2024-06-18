@@ -5,7 +5,7 @@ export default tv({
     table: [
       'vk-data-table',
       'w-full',
-      'table-fixed'
+      'overflow-hidden'
     ],
     thead: [],
     th: [
@@ -36,58 +36,39 @@ export default tv({
           'border-light-4',
           'dark:border-dark-4'
         ],
-        body: [
-          'bg-light-3',
+        tr: [
+          'bg-light-2/[.5]',
           'dark:bg-dark-3'
         ]
       },
       outlined: {
-        table: [
-          'border-2',
-          'border-light-3',
-          'border-dark-3'
-        ],
         thead: [
           'border-b',
-          'border-light-3',
-          'border-dark-3'
+          'border-dark-4',
+          'dark:border-light-4'
         ],
         tr: [
           'border-b',
-          'border-light-3',
-          'border-dark-3'
+          'border-dark-1/[.1]',
+          'dark:border-light-4/[.1]'
         ]
       },
       ghost: {
         thead: [
-          'bg-light-4/[.30]',
+          'bg-light-4/[.60]',
           'dark:bg-dark-2/[.30]'
-        ],
-        body: [
-          'bg-light-3/[.30]',
-          'dark:bg-dark-3/[.30]'
         ]
       }
     },
     shape: {
       rounded: {
-        shape: [
-          'first:rounded-bl-xl',
-          'last:rounded-br-xl'
-        ],
-        th: [
-          'first:rounded-tl-xl',
-          'last:rounded-tr-xl'
+        table: [
+          'rounded-xl'
         ]
       },
       soft: {
-        shape: [
-          'first:rounded-bl-lg',
-          'last:rounded-br-lg'
-        ],
-        th: [
-          'first:rounded-tl-lg',
-          'last:rounded-tr-lg'
+        table: [
+          'rounded-lg'
         ]
       },
       square: {
@@ -118,5 +99,48 @@ export default tv({
         ]
       }
     }
-  }
+  },
+  compoundVariants: [
+    // striped & variant
+    {
+      variant: 'filled',
+      striped: true,
+      class: {
+        tr: [
+          'even:bg-light-3/[.8]',
+          'dark:even:bg-dark-3/[.5]'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      striped: true,
+      class: {
+        tr: [
+          'even:bg-light-3/[.5]',
+          'dark:even:bg-dark-3/[.5]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      striped: true,
+      class: {
+        tr: [
+          'even:bg-light-3/[.5]',
+          'dark:even:bg-dark-3/[.5]'
+        ]
+      }
+    },
+    // outlined & shape
+    {
+      variant: 'outlined',
+      shape: ['rounded', 'soft'],
+      class: {
+        table: [
+          'rounded-none'
+        ]
+      }
+    }
+  ]
 }) as unknown as ReturnType<TV>
