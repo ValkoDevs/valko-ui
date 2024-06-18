@@ -4,32 +4,29 @@ export default tv({
   slots: {
     table: [
       'vk-data-table',
-      'w-full',
-      'dark:border-dark-3',
-      'rounded'
+      'flex',
+      'flex-col',
+      'justify-between'
     ],
-    thead: [
-      'border-b',
-      'border-light-3',
-      'dark:border-dark-3'
+    headerContainer: [
+      'flex',
+      'gap-1',
+      'items-center'
     ],
-    th: [
-      'px-4',
-      'py-2',
-      'text-dark-1',
-      'dark:text-light-1'
+    headerLabel: [
+      'mr-2',
+      'self-center'
     ],
-    tr: [
-      'border-b',
-      'border-light-3',
-      'dark:border-dark-3'
+    headerUtilities: [
+      ''
     ],
-    td: [
-      'px-4',
-      'py-2',
-      'text-left',
-      'text-dark-1',
-      'dark:text-light-1'
+    footer: [
+      'flex',
+      'justify-between',
+      'mt-2',
+      'first:w-1/2',
+      'last:w-1/5',
+      'last:self-end'
     ]
   }
 }) as unknown as ReturnType<TV>
