@@ -8,14 +8,19 @@ import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import emitHeaders from '@/data/emitHeaders'
 import slotHeaders from '@/data/slotHeaders'
+import { useNotification } from '@valko-ui/components'
 
 const form = ref({
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  direction: 'col',
+  direction: 'row',
   pressable: false,
-  flat: false
+  flat: false,
+  bgImage: false,
+  cardBody: false,
+  cardFooter: false,
+  cardHeader: false
 })
 
 const directionOptions = [
@@ -57,7 +62,7 @@ const cardProps = [
     required: false,
     description: 'The direction in what the slots are gonna be displayed.',
     values: 'row, col, row-reverse, col-reverse',
-    default: 'col'
+    default: 'row'
   },
   {
     prop: 'isPressable',
@@ -123,9 +128,9 @@ const cardSlots = [
   }
 ]
 
-const onClick = () => {
-  alert('Pressed')
-}
+const onClick = () => useNotification({ text: 'Pressed' })
+const adoptBuddy = () => useNotification({ text: 'Adopted!' })
+const nextBuddy = () => useNotification({ text: 'Showing new buddy!' })
 </script>
 
 <template>
@@ -149,17 +154,87 @@ const onClick = () => {
           :flat="form.flat"
           @click="onClick"
         >
+          <vk-card-header
+            v-if="form.bgImage ? false : true && form.cardHeader"
+          >
+            <h2 class="font-semibold">
+              Adopt a new buddy!
+            </h2>
+          </vk-card-header>
           <vk-card-image
+            v-if="form.bgImage ? false : true"
             src="https://picsum.photos/id/237/200"
             class="text-white"
             height="15rem"
           />
-          <vk-card-body>
-            <h2 class="font-semibold">
-              My Dog
-            </h2>
+          <vk-card-body
+            v-if="form.bgImage ? false : true && form.cardBody"
+          >
             <p>He's name is Drago</p>
           </vk-card-body>
+          <vk-card-footer
+            v-if="form.bgImage ? false : true && form.cardFooter"
+          >
+            <div class="flex justify-between">
+              <vk-button
+                color="success"
+                size="xs"
+                class="mr-2"
+                @click="adoptBuddy"
+              >
+                Adopt the buddy!
+              </vk-button>
+              <vk-button
+                color="error"
+                size="xs"
+                @click="nextBuddy"
+              >
+                Other buddys
+              </vk-button>
+            </div>
+          </vk-card-footer>
+          <vk-card-image
+            v-if="form.bgImage"
+            src="https://picsum.photos/id/237/200"
+            class="text-white"
+            height="15rem"
+          >
+            <div class="flex flex-col justify-between">
+              <vk-card-header
+                v-if="form.cardHeader && form.bgImage ? true : false"
+              >
+                <h2 class="font-semibold">
+                  Adopt a new buddy!
+                </h2>
+              </vk-card-header>
+              <vk-card-body
+                v-if="form.cardBody && form.bgImage ? true : false"
+              >
+                <p>He's name is Drago</p>
+              </vk-card-body>
+              <vk-card-footer
+                v-if="form.cardFooter && form.bgImage ? true : false"
+              >
+                <div class="flex justify-between">
+                  <vk-button
+                    color="success"
+                    size="xs"
+                    class="mr-2"
+                    @click="adoptBuddy"
+                  >
+                    Adopt the buddy!
+                  </vk-button>
+                  <vk-button
+                    color="error"
+                    size="xs"
+                    @click="nextBuddy"
+                  >
+                    Other buddys
+                  </vk-button>
+                </div>
+              </vk-card-footer>
+            </div>
+          </vk-card-image>
         </vk-card>
       </div>
     </template>
@@ -196,6 +271,22 @@ const onClick = () => {
         label="Flat"
         v-model="form.flat"
       />
+      <vk-checkbox
+        label="Card Header"
+        v-model="form.cardHeader"
+      />
+      <vk-checkbox
+        label="Card Body"
+        v-model="form.cardBody"
+      />
+      <vk-checkbox
+        label="Card Footer"
+        v-model="form.cardFooter"
+      />
+      <vk-checkbox
+        label="Card Image as background"
+        v-model="form.bgImage"
+      />
     </template>
 
     <template #examples>
@@ -219,7 +310,7 @@ const onClick = () => {
               {{ variant.label }}
             </h2>
             <h3 class="font-semibold">
-              My Dog
+              Adopt our buddy!
             </h3>
             <p>He's name is Drago</p>
           </vk-card-body>
@@ -246,7 +337,7 @@ const onClick = () => {
               {{ shape.label }}
             </h2>
             <h3 class="font-semibold">
-              My Dog
+              Adopt our buddy!
             </h3>
             <p>He's name is Drago</p>
           </vk-card-body>
@@ -274,7 +365,7 @@ const onClick = () => {
               {{ size.label }}
             </h2>
             <h3 class="font-semibold">
-              My Dog
+              Adopt our buddy!
             </h3>
             <p>He's name is Drago</p>
           </vk-card-body>
@@ -288,6 +379,7 @@ const onClick = () => {
       >
         <vk-card
           is-pressable
+          @click="onClick"
         >
           <vk-card-image
             src="https://picsum.photos/id/237/200"
@@ -299,7 +391,7 @@ const onClick = () => {
               Pressable
             </h2>
             <h3 class="font-semibold">
-              My Dog
+              Adopt our buddy!
             </h3>
             <p>He's name is Drago</p>
           </vk-card-body>
@@ -324,7 +416,7 @@ const onClick = () => {
               Flat
             </h2>
             <h3 class="font-semibold">
-              My Dog
+              Adopt our buddy!
             </h3>
             <p>He's name is Drago</p>
           </vk-card-body>
