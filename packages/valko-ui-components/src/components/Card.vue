@@ -10,7 +10,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  direction: 'col'
+  direction: 'row'
 })
 
 const emit = defineEmits(['click'])
