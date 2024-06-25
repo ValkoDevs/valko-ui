@@ -61,15 +61,17 @@ onMounted(() => {
         :type="type"
         placeholder=" "
         :value="modelValue"
-        @focus="onFocus"
-        @input="updateValue"
         :data-filled="!!modelValue"
         :id="inputId"
+        @focus="onFocus"
+        @input="updateValue"
       >
       <label
         :for="inputId"
         :class="classes.label"
-      >{{ props.label }}</label>
+      >
+        {{ props.label }}
+      </label>
       <span
         v-if="$slots.leftIcon"
         :class="`${classes.icon} ${classes.iconLeft}`"

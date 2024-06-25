@@ -10,12 +10,24 @@ import shapeOptions from '@/data/shapeOptions'
 import emitHeaders from '@/data/emitHeaders'
 import slotHeaders from '@/data/slotHeaders'
 
-const types = [
+interface Option {
+  value: string
+  label: string
+}
+
+const typeOptions: Option[] = [
   { value:'text', label:'Text' },
   { value:'email', label:'Email' },
   { value:'password', label:'Password' },
   { value:'date', label:'Date' }
 ]
+
+const generateInputValues = (options: Option[]): Record<string, string> => {
+  return options.reduce((acc, option) => {
+    acc[option.value] = ''
+    return acc
+  }, {} as Record<string, string>)
+}
 
 const form = ref({
   color: 'primary',
@@ -31,7 +43,12 @@ const form = ref({
   helperValue: 'Helpertext',
   exampleReadonly: 'Example readonly text',
   left: false,
-  right: false
+  right: false,
+  colorInputs: generateInputValues(colorOptions),
+  variantInputs: generateInputValues(variantOptions),
+  shapeInputs: generateInputValues(shapeOptions),
+  sizeInputs: generateInputValues(sizeOptions),
+  typeInputs: generateInputValues(typeOptions)
 })
 
 const apiData = [
@@ -243,7 +260,7 @@ const slotData = [
       <vk-select
         placeholder="Type"
         size="sm"
-        :options="types"
+        :options="typeOptions"
         v-model="form.type"
       />
       <vk-checkbox
@@ -276,6 +293,7 @@ const slotData = [
             :key="color.value"
             :color="color.value"
             :label="color.label"
+            v-model="form.variantInputs[color.value]"
           />
         </div>
       </example-section>
@@ -292,6 +310,7 @@ const slotData = [
             :key="variant.value"
             :variant="variant.value"
             :label="variant.label"
+            v-model="form.variantInputs[variant.value]"
           />
         </div>
       </example-section>
@@ -308,6 +327,7 @@ const slotData = [
             :key="shape.value"
             :shape="shape.value"
             :label="shape.label"
+            v-model="form.variantInputs[shape.value]"
           />
         </div>
       </example-section>
@@ -324,6 +344,7 @@ const slotData = [
             :key="size.value"
             :size="size.value"
             :label="size.label"
+            v-model="form.variantInputs[size.value]"
           />
         </div>
       </example-section>
@@ -336,10 +357,11 @@ const slotData = [
       >
         <div class="grow gap-4 grid grid-cols-2">
           <vk-input
-            v-for="type in types"
+            v-for="type in typeOptions"
             :key="type.value"
             :type="type.value"
             :label="type.label"
+            v-model="form.variantInputs[type.value]"
           />
         </div>
       </example-section>

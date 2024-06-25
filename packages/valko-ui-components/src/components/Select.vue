@@ -134,6 +134,7 @@ onUnmounted(() => {
             name="chevron-down"
             :data-open="isOpen"
             :class="classes.icon"
+            @click="() => toggleDropdown(true)"
           />
         </template>
       </vk-input>

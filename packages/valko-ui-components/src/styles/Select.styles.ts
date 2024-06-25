@@ -59,7 +59,8 @@ export default tv({
       'transition-transform',
       'duration-200',
       'ease-out',
-      'data-[open=true]:rotate-180'
+      'data-[open=true]:rotate-180',
+      'cursor-pointer'
     ]
   },
   variants: {
