@@ -37,7 +37,7 @@ describe('Dropdown component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:text-white')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:text-light-1')
       })
 
       it('should be shape soft', () => {
@@ -224,7 +224,7 @@ describe('Dropdown component', () => {
         })
         wrapper.find('.vk-dropdown__button').trigger('click')
         await nextTick()
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:text-white')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:text-light-1')
       })
 
       it('should be outlined when props.size is outlined', async () => {

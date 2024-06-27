@@ -65,6 +65,12 @@ export default tv({
           'border-l-2',
           'border-transparent'
         ]
+      },
+      gradient: {
+        content: [
+          'bg-gradient-to-br',
+          'data-[active=true]:text-light-1'
+        ]
       }
     },
     size: {
@@ -423,6 +429,71 @@ export default tv({
       class: {
         content: [
           'data-[active=true]:border-info-500'
+        ]
+      }
+    },
+    // gradient & color
+    {
+      variant: 'gradient',
+      color: 'primary',
+      class: {
+        content: [
+          'data-[active=true]:from-primary-500',
+          'data-[active=true]:to-primary-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'neutral',
+      class: {
+        content: [
+          'data-[active=true]:from-light-3',
+          'data-[active=true]:to-light-5',
+          'data-[active=true]:text-dark-3',
+          'data-[active=true]:dark:from-dark-1',
+          'data-[active=true]:dark:to-dark-3',
+          'data-[active=true]:dark:text-light-1'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'success',
+      class: {
+        content: [
+          'data-[active=true]:from-success-500',
+          'data-[active=true]:to-success-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'info',
+      class: {
+        content: [
+          'data-[active=true]:from-info-500',
+          'data-[active=true]:to-info-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'warning',
+      class: {
+        content: [
+          'data-[active=true]:from-warning-500',
+          'data-[active=true]:to-warning-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'error',
+      class: {
+        content: [
+          'data-[active=true]:from-error-500',
+          'data-[active=true]:to-error-900'
         ]
       }
     },

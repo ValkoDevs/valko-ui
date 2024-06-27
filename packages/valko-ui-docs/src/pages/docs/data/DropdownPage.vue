@@ -19,6 +19,11 @@ const form = ref({
   disabled: false
 })
 
+const variants = [
+  ...variantOptionsExtended,
+  { value: 'gradient', label: 'Gradient' }
+]
+
 const items = [
   { key: 'image', title: 'Upload Image', icon: 'photo', onClick: () => useNotification({ text: 'Image Uploaded' }) },
   { key: 'edit', title: 'Edit', icon: 'edit', onClick: () => useNotification({ text: 'Editing' }) },
@@ -39,7 +44,7 @@ const dropdownProps = [
     prop: 'variant',
     required: false,
     description: 'The Dropdown variant.',
-    values: 'filled, outlined, ghost',
+    values: 'filled, outlined, ghost, gradient',
     default: 'filled'
   },
   {
@@ -170,7 +175,7 @@ const dropdownEmits = [
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptionsExtended"
+        :options="variants"
         v-model="form.variant"
       />
       <vk-select
@@ -214,7 +219,7 @@ const dropdownEmits = [
         gap
       >
         <vk-dropdown
-          v-for="variant in variantOptionsExtended"
+          v-for="variant in variants"
           :key="variant.value"
           :variant="variant.value"
           :title="variant.label"

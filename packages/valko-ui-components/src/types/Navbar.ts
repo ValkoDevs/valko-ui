@@ -1,6 +1,6 @@
-import type { Color, Shapes, Variants, Sizes } from './common'
+import type { Color, Shapes, VariantsAlt, Sizes } from './common'
 
-export interface NavbarProps extends Sizes, Shapes, Variants {
+export interface NavbarProps extends Sizes, Shapes, VariantsAlt {
   color?: Color | 'neutral';
   fixed?: boolean;
   floating?: boolean;

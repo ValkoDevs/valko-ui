@@ -71,7 +71,7 @@ export default tv({
     variant: {
       filled: {
         button: [
-          'text-white'
+          'text-light-1'
         ]
       },
       ghost: {
@@ -88,6 +88,12 @@ export default tv({
         button: [
           'bg-transparent',
           'shadow-none'
+        ]
+      },
+      gradient: {
+        button: [
+          'bg-gradient-to-br',
+          'text-light-1'
         ]
       }
     },
@@ -500,6 +506,69 @@ export default tv({
           'hover:bg-error-300/20',
           'active:bg-error-400/20',
           'border-error-600'
+        ]
+      }
+    },
+    // gradient & color
+    {
+      variant: 'gradient',
+      color: 'primary',
+      class: {
+        button: [
+          'from-primary-500',
+          'to-primary-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'neutral',
+      class: {
+        button: [
+          'from-light-4',
+          'to-light-5',
+          'dark:from-dark-1',
+          'dark:to-dark-5'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'success',
+      class: {
+        button: [
+          'from-success-500',
+          'to-success-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'info',
+      class: {
+        button: [
+          'from-info-500',
+          'to-info-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'warning',
+      class: {
+        button: [
+          'from-warning-500',
+          'to-warning-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'error',
+      class: {
+        button: [
+          'from-error-500',
+          'to-error-900'
         ]
       }
     },

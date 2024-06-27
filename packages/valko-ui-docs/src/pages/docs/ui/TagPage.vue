@@ -3,7 +3,7 @@ import { ref, watch } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
-import variantOptions from '@/data/variantOptions'
+import variantWithGradient from '@/data/variantWithGradient'
 import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
@@ -35,7 +35,7 @@ const tagProps = [
     prop: 'variant',
     required: false,
     description: 'The variant style of the Tag.',
-    values: 'filled, outlined, ghost',
+    values: 'filled, outlined, ghost, gradient',
     default: 'filled'
   },
   {
@@ -169,7 +169,7 @@ watch(isShown, () => {
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptions"
+        :options="variantWithGradient"
         v-model="form.variant"
       />
       <vk-select
@@ -231,7 +231,7 @@ watch(isShown, () => {
         gap
       >
         <vk-tag
-          v-for="variant in variantOptions"
+          v-for="variant in variantWithGradient"
           :key="variant.value"
           :variant="variant.value"
           :text="variant.label"

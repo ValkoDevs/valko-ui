@@ -23,6 +23,11 @@ const form = ref({
   loading: false
 })
 
+const variants = [
+  ...variantOptionsExtended,
+  { value: 'gradient', label: 'Gradient' }
+]
+
 const apiData = [
   {
     prop: 'color',
@@ -35,7 +40,7 @@ const apiData = [
     prop: 'variant',
     required: false,
     description: 'The variant of the Button.',
-    values: 'filled, outlined, ghost, link',
+    values: 'filled, outlined, ghost, link, gradient',
     default: 'filled'
   },
   {
@@ -134,7 +139,7 @@ const onClick = () => useNotification({ text: 'Clicked' })
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptionsExtended"
+        :options="variants"
         v-model="form.variant"
       />
       <vk-select
@@ -191,7 +196,7 @@ const onClick = () => useNotification({ text: 'Clicked' })
         wrap
       >
         <vk-button
-          v-for="variant in variantOptionsExtended"
+          v-for="variant in variants"
           :key="variant.value"
           :variant="variant.value"
         >

@@ -441,8 +441,8 @@ export default tv({
           'focus:border-error-500',
           'dark:border-error-500',
           'dark:focus:border-error-700',
-          'text-white',
-          'dark:text-white'
+          'text-light-1',
+          'dark:text-light-1'
         ]
       }
     },

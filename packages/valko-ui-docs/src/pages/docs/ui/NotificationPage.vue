@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
-import variantOptions from '@/data/variantOptions'
+import variantWithGradient from '@/data/variantWithGradient'
 import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
@@ -28,7 +28,7 @@ const form = ref({
 }) as NotificationProps
 
 const variants = [
-  ...variantOptions,
+  ...variantWithGradient,
   { value: 'line', label: 'Line' }
 ]
 
@@ -54,7 +54,7 @@ const notificationProps = [
     prop: 'variant',
     required: false,
     description: 'The variant of the Notification.',
-    values: 'filled, outlined, ghost, line',
+    values: 'filled, outlined, ghost, line, gradient',
     default: 'filled'
   },
   {
@@ -282,7 +282,7 @@ const createNotification = (props: NotificationProps) => {
         gap
       >
         <div
-          v-for="variant in variantOptions"
+          v-for="variant in variantWithGradient"
           :key="variant.value"
           class="flex flex-col"
         >
@@ -291,6 +291,15 @@ const createNotification = (props: NotificationProps) => {
             :variant="variant.value"
             class="mt-4"
             @click="createNotification({ text: variant.label, variant: variant.value as Variant })"
+          >
+            Click Me
+          </vk-button>
+        </div>
+        <div class="flex flex-col">
+          <span>Line</span>
+          <vk-button
+            class="mt-4"
+            @click="createNotification({ text: 'Line', variant: 'line' as Variant })"
           >
             Click Me
           </vk-button>

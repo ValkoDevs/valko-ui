@@ -135,6 +135,19 @@ export default tv({
         cursor: [
           'rounded-lg'
         ]
+      },
+      gradient: {
+        list: [
+          'rounded-lg'
+        ],
+        tab: [
+          'rounded-lg',
+          'data-[headlessui-state=selected]:text-white'
+        ],
+        cursor: [
+          'bg-gradient-to-br',
+          'rounded-lg'
+        ]
       }
     },
     size: {
@@ -311,6 +324,73 @@ export default tv({
       class: {
         cursor: [
           'bg-error-500'
+        ]
+      }
+    },
+    // color & gradient
+    {
+      shape: 'gradient',
+      color: 'primary',
+      class: {
+        container: [
+          'from-primary-500',
+          'to-primary-900'
+        ]
+      }
+    },
+    {
+      shape: 'gradient',
+      color: 'neutral',
+      class: {
+        container: [
+          'from-light-1',
+          'to-light-5',
+          'dark:from-dark-1',
+          'dark:to-dark-5'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-dark-1',
+          'dark:data-[headlessui-state=selected]:text-light-3'
+        ]
+      }
+    },
+    {
+      shape: 'gradient',
+      color: 'success',
+      class: {
+        container: [
+          'from-success-500',
+          'to-success-900'
+        ]
+      }
+    },
+    {
+      shape: 'gradient',
+      color: 'info',
+      class: {
+        container: [
+          'from-info-500',
+          'to-info-900'
+        ]
+      }
+    },
+    {
+      shape: 'gradient',
+      color: 'warning',
+      class: {
+        container: [
+          'from-warning-500',
+          'to-warning-900'
+        ]
+      }
+    },
+    {
+      shape: 'gradient',
+      color: 'error',
+      class: {
+        container: [
+          'from-error-500',
+          'to-error-900'
         ]
       }
     },

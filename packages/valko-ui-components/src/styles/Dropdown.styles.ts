@@ -102,10 +102,10 @@ export default tv({
     variant: {
       filled: {
         button: [
-          'text-white'
+          'text-light-1'
         ],
         itemsButton: [
-          'data-[active=true]:text-white'
+          'data-[active=true]:text-light-1'
         ]
       },
       outlined: {
@@ -123,6 +123,15 @@ export default tv({
         itemsMenu: [
           'bg-transparent',
           'shadow-none'
+        ]
+      },
+      gradient: {
+        button: [
+          'text-light-1'
+        ],
+        itemsButton: [
+          'bg-gradient-to-br',
+          'data-[active=true]:text-light-1'
         ]
       }
     },
@@ -403,6 +412,75 @@ export default tv({
       class: {
         itemsButton: [
           'data-[active=true]:text-error-500'
+        ]
+      }
+    },
+    // gradient & color
+    {
+      variant: 'gradient',
+      color: 'primary',
+      class: {
+        itemsButton: [
+          'data-[active=true]:from-primary-500',
+          'data-[active=true]:to-primary-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'neutral',
+      class: {
+        itemsButton: [
+          'data-[active=true]:from-light-1',
+          'data-[active=true]:to-light-5',
+          'data-[active=true]:text-dark-1',
+          'data-[active=true]:dark:from-dark-1',
+          'data-[active=true]:dark:to-dark-5',
+          'data-[active=true]:dark:text-light-3'
+        ],
+        button: [
+          'text-dark-1',
+          'dark:text-light-3'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'success',
+      class: {
+        itemsButton: [
+          'data-[active=true]:from-success-500',
+          'data-[active=true]:to-success-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'info',
+      class: {
+        itemsButton: [
+          'data-[active=true]:from-info-500',
+          'data-[active=true]:to-info-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'warning',
+      class: {
+        itemsButton: [
+          'data-[active=true]:from-warning-500',
+          'data-[active=true]:to-warning-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'error',
+      class: {
+        itemsButton: [
+          'data-[active=true]:from-error-500',
+          'data-[active=true]:to-error-900'
         ]
       }
     }

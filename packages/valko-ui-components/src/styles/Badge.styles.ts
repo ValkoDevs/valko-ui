@@ -31,7 +31,7 @@ export default tv({
       neutral: {
         content: [
           'bg-light-3',
-          'text-light-1',
+          'text-dark-1',
           'dark:bg-dark-2',
           'dark:text-light-3'
         ]
@@ -143,9 +143,79 @@ export default tv({
     },
     dot: {
       true: {}
+    },
+    gradient: {
+      true: {
+        content: [
+          'bg-gradient-to-br'
+        ]
+      }
     }
   },
   compoundVariants: [
+    // gradient & color
+    {
+      gradient: true,
+      color: 'primary',
+      class: {
+        content: [
+          'from-primary-500',
+          'to-primary-900'
+        ]
+      }
+    },
+    {
+      gradient: true,
+      color: 'neutral',
+      class: {
+        content: [
+          'from-light-1',
+          'to-light-5',
+          'text-dark-1',
+          'dark:to-dark-5'
+        ]
+      }
+    },
+    {
+      gradient: true,
+      color: 'success',
+      class: {
+        content: [
+          'from-success-500',
+          'to-success-900'
+        ]
+      }
+    },
+    {
+      gradient: true,
+      color: 'info',
+      class: {
+        content: [
+          'from-info-500',
+          'to-info-900'
+        ]
+      }
+    },
+    {
+      gradient: true,
+      color: 'warning',
+      class: {
+        content: [
+          'from-warning-500',
+          'to-warning-900'
+        ]
+      }
+    },
+    {
+      gradient: true,
+      color: 'error',
+      class: {
+        content: [
+          'from-error-500',
+          'to-error-900'
+        ]
+      }
+    },
     // dot & size
     {
       size: 'xs',

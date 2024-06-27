@@ -38,7 +38,7 @@ export default tv({
     ],
     label: [],
     icon: [
-      'text-white'
+      'text-light-1'
     ]
   },
   variants: {
@@ -120,8 +120,8 @@ export default tv({
       primary: {},
       neutral: {
         helpertext: [
-          'text-white',
-          'dark:text-black'
+          'text-dark-1',
+          'dark:text-light-3'
         ]
       },
       success: {

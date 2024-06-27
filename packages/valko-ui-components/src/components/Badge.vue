@@ -12,6 +12,7 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   size: 'md',
   shape: 'soft',
   placement: 'top-right',
+  gradient: false,
   outlined: false,
   dot: false,
   hidden: false,

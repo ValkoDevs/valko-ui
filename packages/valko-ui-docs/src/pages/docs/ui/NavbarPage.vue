@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
-import variantOptions from '@/data/variantOptions'
+import variantWithGradient from '@/data/variantWithGradient'
 import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
@@ -32,7 +32,7 @@ const navbarProps = [
     prop: 'variant',
     required: false,
     description: 'The variant of the Navbar.',
-    values: 'filled, outlined, ghost',
+    values: 'filled, outlined, ghost, gradient',
     default: 'filled'
   },
   {
@@ -114,7 +114,7 @@ const navbarSlots = [
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptions"
+        :options="variantWithGradient"
         v-model="form.variant"
       />
       <vk-select
@@ -176,7 +176,7 @@ const navbarSlots = [
         gap
       >
         <div
-          v-for="variant in variantOptions"
+          v-for="variant in variantWithGradient"
           :key="variant.value"
           class="w-full"
         >

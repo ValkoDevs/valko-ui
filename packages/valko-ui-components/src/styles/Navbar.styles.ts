@@ -17,7 +17,7 @@ export default tv({
     variant: {
       filled: [
         'filter-none',
-        'text-white'
+        'text-light-1'
       ],
       outlined: [
         'bg-transparent',
@@ -26,13 +26,18 @@ export default tv({
       ],
       ghost: [
         'backdrop-blur-lg'
+      ],
+      gradient: [
+        'bg-gradient-to-br',
+        'filter-none',
+        'text-light-1'
       ]
     },
     color: {
       primary: [],
       neutral: [
-        'text-black',
-        'dark:text-white'
+        'text-dark-1',
+        'dark:text-light-1'
       ],
       success: [],
       error: [],
@@ -222,6 +227,57 @@ export default tv({
       variant: 'ghost',
       class: [
         'bg-error-500/[.15]'
+      ]
+    },
+    // gradient & color
+    {
+      variant: 'gradient',
+      color: 'primary',
+      class: [
+        'from-primary-500',
+        'to-primary-900'
+      ]
+    },
+    {
+      variant: 'gradient',
+      color: 'neutral',
+      class: [
+        'from-light-1',
+        'to-light-5',
+        'dark:from-dark-1',
+        'dark:to-dark-5'
+      ]
+    },
+    {
+      variant: 'gradient',
+      color: 'success',
+      class: [
+        'from-success-500',
+        'to-success-900'
+      ]
+    },
+    {
+      variant: 'gradient',
+      color: 'info',
+      class: [
+        'from-info-500',
+        'to-info-900'
+      ]
+    },
+    {
+      variant: 'gradient',
+      color: 'warning',
+      class: [
+        'from-warning-500',
+        'to-warning-900'
+      ]
+    },
+    {
+      variant: 'gradient',
+      color: 'error',
+      class: [
+        'from-error-500',
+        'to-error-900'
       ]
     },
     // floating & variant

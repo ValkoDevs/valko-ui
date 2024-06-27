@@ -11,7 +11,8 @@ import slotHeaders from '@/data/slotHeaders'
 
 const shapes = [
   ...shapeOptions,
-  { value: 'line', label: 'Line' }
+  { value: 'line', label: 'Line' },
+  { value: 'gradient', label: 'Gradient' }
 ]
 
 const tabs = [
@@ -67,7 +68,7 @@ const tabsProps = [
     prop: 'shape',
     required: false,
     description: 'The Tabs shape.',
-    values: 'line, rounded, soft, square',
+    values: 'line, rounded, soft, square, gradient',
     default: 'soft'
   },
   {

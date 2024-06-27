@@ -19,4 +19,5 @@ export interface Shapes { shape?: Shape; }
 export interface Variants { variant?: Variant; }
 export interface Sizes { size?: Size; }
 export interface Colors { color?: Color; }
+export interface VariantsAlt { variant?: VariantWithGradient }
 export interface DefaultComponent extends Shapes, Variants, Colors, Sizes {}

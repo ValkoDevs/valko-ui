@@ -39,7 +39,7 @@ export default tv({
     variant: {
       filled: {
         notification: [
-          'text-white'
+          'text-light-1'
         ],
         progressbar: [
           'bg-light-1'
@@ -65,6 +65,15 @@ export default tv({
         notification: [
           'bg-light-3',
           'dark:bg-dark-3'
+        ]
+      },
+      gradient: {
+        notification: [
+          'bg-gradient-to-br',
+          'text-light-1'
+        ],
+        progressbar: [
+          'bg-light-1'
         ]
       }
     },
@@ -427,6 +436,75 @@ export default tv({
       class: {
         progressbar: [
           'bg-error-500'
+        ]
+      }
+    },
+    // gradient & color
+    {
+      variant: 'gradient',
+      color: 'primary',
+      class: {
+        notification: [
+          'from-primary-500',
+          'to-primary-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'neutral',
+      class: {
+        notification: [
+          'from-light-3',
+          'to-light-5',
+          'text-dark-1',
+          'dark:from-dark-1',
+          'dark:to-dark-5',
+          'dark:text-light-3'
+        ],
+        progressbar: [
+          'bg-dark-1',
+          'dark:bg-light-3'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'success',
+      class: {
+        notification: [
+          'from-success-500',
+          'to-success-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'info',
+      class: {
+        notification: [
+          'from-info-500',
+          'to-info-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'warning',
+      class: {
+        notification: [
+          'from-warning-500',
+          'to-warning-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'error',
+      class: {
+        notification: [
+          'from-error-500',
+          'to-error-900'
         ]
       }
     }

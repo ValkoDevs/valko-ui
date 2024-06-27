@@ -191,7 +191,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.text-white').exists()).toBe(true)
+        expect(wrapper.find('.text-light-1').exists()).toBe(true)
       })
 
       it('should be outlined when props.size is outlined', () => {

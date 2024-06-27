@@ -61,6 +61,15 @@ export default tv({
           'border-light-5',
           'dark:border-dark-1'
         ]
+      },
+      gradient: {
+        container: [
+          'bg-light-3',
+          'dark:bg-dark-1'
+        ],
+        progress: [
+          'bg-gradient-to-br'
+        ]
       }
     },
     shape: {
@@ -181,6 +190,7 @@ export default tv({
     }
   },
   compoundVariants: [
+    // ghost & color
     {
       variant: 'ghost',
       color: 'primary',
@@ -271,6 +281,69 @@ export default tv({
         ],
         content: [
           'text-error-500'
+        ]
+      }
+    },
+    // gradient & color
+    {
+      variant: 'gradient',
+      color: 'primary',
+      class: {
+        progress: [
+          'from-primary-500',
+          'to-primary-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'neutral',
+      class: {
+        progress: [
+          'from-light-1',
+          'to-light-5',
+          'text-dark-1',
+          'dark:to-dark-5'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'success',
+      class: {
+        progress: [
+          'from-success-500',
+          'to-success-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'info',
+      class: {
+        progress: [
+          'from-info-500',
+          'to-info-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'warning',
+      class: {
+        progress: [
+          'from-warning-500',
+          'to-warning-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'error',
+      class: {
+        progress: [
+          'from-error-500',
+          'to-error-900'
         ]
       }
     },

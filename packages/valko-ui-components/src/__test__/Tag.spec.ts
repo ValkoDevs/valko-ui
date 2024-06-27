@@ -23,7 +23,7 @@ describe('Tag component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.text-white').exists()).toBe(true)
+        expect(wrapper.find('.text-light-1').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -205,7 +205,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.text-white').exists()).toBe(true)
+        expect(wrapper.find('.text-light-1').exists()).toBe(true)
       })
 
       it('should be outlined when props.size is outlined', () => {

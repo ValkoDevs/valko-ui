@@ -29,13 +29,19 @@ export default tv({
     variant: {
       filled: {
         container: [
-          'text-white'
+          'text-light-1'
         ]
       },
       outlined: {},
       ghost: {
         container: [
           'shadow-none'
+        ]
+      },
+      gradient: {
+        container: [
+          'bg-gradient-to-br',
+          'text-light-1'
         ]
       }
     },
@@ -282,6 +288,69 @@ export default tv({
         container: [
           'bg-error-500/[.20]',
           'text-error-500'
+        ]
+      }
+    },
+    // gradient & color
+    {
+      variant: 'gradient',
+      color: 'primary',
+      class: {
+        container: [
+          'from-primary-500',
+          'to-primary-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'neutral',
+      class: {
+        container: [
+          'from-light-3',
+          'to-light-5',
+          'dark:from-dark-1',
+          'dark:to-dark-3'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'success',
+      class: {
+        container: [
+          'from-success-500',
+          'to-success-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'info',
+      class: {
+        container: [
+          'from-info-500',
+          'to-info-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'warning',
+      class: {
+        container: [
+          'from-warning-500',
+          'to-warning-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'error',
+      class: {
+        container: [
+          'from-error-500',
+          'to-error-900'
         ]
       }
     },
