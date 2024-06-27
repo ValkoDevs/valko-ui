@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
 import variantOptions from '@/data/variantOptions'
 import shapeOptions from '@/data/shapeOptions'
@@ -20,17 +20,12 @@ const form = ref({
   flat: false
 })
 
-const colors = [
-  ...colorOptions,
-  { value: 'neutral', label: 'Neutral' }
-]
-
 const navbarProps = [
   {
     prop: 'color',
     required: false,
     description: 'The color theme of the Navbar.',
-    values: 'primary, secondary, error, warning, info, success, light, dark, neutral',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'neutral'
   },
   {
@@ -113,7 +108,7 @@ const navbarSlots = [
       <vk-select
         placeholder="Color"
         size="sm"
-        :options="colors"
+        :options="colorOptions"
         v-model="form.color"
       />
       <vk-select
@@ -157,7 +152,7 @@ const navbarSlots = [
       >
         <div class="w-full grid grid-cols-3 gap-4">
           <div
-            v-for="color in colors"
+            v-for="color in colorOptions"
             :key="color.value"
             class="w-full"
           >

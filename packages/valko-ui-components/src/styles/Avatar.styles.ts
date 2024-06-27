@@ -41,13 +41,11 @@ export default tv({
     },
     color: {
       primary: {},
-      secondary: {},
+      neutral: {},
       success: {},
       info: {},
       warning: {},
-      error: {},
-      light: {},
-      dark: {}
+      error: {}
     },
     size: {
       xs: {
@@ -117,10 +115,11 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         container: [
-          'bg-secondary-500'
+          'bg-light-4',
+          'dark:bg-dark-3'
         ]
       }
     },
@@ -160,25 +159,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'filled',
-      color: 'light',
-      class: {
-        container: [
-          'bg-light-1',
-          'text-black'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'dark',
-      class: {
-        container: [
-          'bg-dark-5'
-        ]
-      }
-    },
     // outlined & color
     {
       variant: 'outlined',
@@ -192,11 +172,13 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         container: [
-          'border-secondary-500',
-          'text-secondary-500'
+          'border-light-4',
+          'text-light-4',
+          'dark:border-dark-3',
+          'dark:text-dark-1'
         ]
       }
     },
@@ -240,26 +222,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'outlined',
-      color: 'light',
-      class: {
-        container: [
-          'border-light-1',
-          'text-light-1'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'dark',
-      class: {
-        container: [
-          'border-dark-5',
-          'text-dark-5'
-        ]
-      }
-    },
     // ghost & color
     {
       variant: 'ghost',
@@ -273,11 +235,13 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         container: [
-          'bg-secondary-500/[.20]',
-          'text-secondary-500'
+          'bg-light-4/[.20]',
+          'text-light-4',
+          'dark:bg-dark-3/[.20]',
+          'dark:text-dark-1'
         ]
       }
     },
@@ -318,26 +282,6 @@ export default tv({
         container: [
           'bg-error-500/[.20]',
           'text-error-500'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'light',
-      class: {
-        container: [
-          'bg-light-1/[.20]',
-          'text-light-1'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'dark',
-      class: {
-        container: [
-          'bg-dark-5/[.20]',
-          'text-dark-5'
         ]
       }
     },

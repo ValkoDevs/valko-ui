@@ -23,17 +23,12 @@ const form = ref({
   loading: false
 })
 
-const colors = [
-  ...colorOptions,
-  { value: 'neutral', label: 'Neutral' }
-]
-
 const apiData = [
   {
     prop: 'color',
     required: false,
     description: 'The color theme of the Button.',
-    values: 'primary, secondary, error, warning, info, success, light, dark, neutral',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {
@@ -133,7 +128,7 @@ const onClick = () => useNotification({ text: 'Clicked' })
       <vk-select
         placeholder="Color"
         size="sm"
-        :options="colors"
+        :options="colorOptions"
         v-model="form.color"
       />
       <vk-select
@@ -182,7 +177,7 @@ const onClick = () => useNotification({ text: 'Clicked' })
         gap
       >
         <vk-button
-          v-for="color in colors"
+          v-for="color in colorOptions"
           :key="color.value"
           :color="color.value"
         >

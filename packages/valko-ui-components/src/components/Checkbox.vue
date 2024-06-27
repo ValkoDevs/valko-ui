@@ -41,8 +41,8 @@ const onClick = () => {
         :data-indeterminate="modelValue === null"
       >
         <vk-icon
-          v-if="modelValue || props.indeterminate"
-          :name="`${props.indeterminate ? 'minus' : 'check'}`"
+          v-if="modelValue || indeterminate"
+          :name="`${indeterminate ? 'minus' : 'check'}`"
           :class="classes.icon"
         />
       </div>
@@ -52,17 +52,17 @@ const onClick = () => {
         :checked="!!modelValue"
         :class="classes.input"
         :indeterminate="modelValue === null"
-        :helpertext="props.helpertext"
+        :helpertext="helpertext"
       >
       <label :class="classes.label">
         {{ label }}
       </label>
     </div>
     <span
-      v-if="props.helpertext"
+      v-if="helpertext"
       :class="classes.helpertext"
     >
-      {{ props.helpertext }}
+      {{ helpertext }}
     </span>
   </div>
 </template>

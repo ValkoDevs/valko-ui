@@ -77,7 +77,7 @@ const avatarProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Avatar.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {

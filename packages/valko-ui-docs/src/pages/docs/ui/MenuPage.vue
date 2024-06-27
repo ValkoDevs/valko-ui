@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { MenuItem } from '@valko-ui/components'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
 import variantOptions from '@/data/variantOptions'
 import sizeOptions from '@/data/sizeOptions'
@@ -36,7 +36,7 @@ const menuProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Menu.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {

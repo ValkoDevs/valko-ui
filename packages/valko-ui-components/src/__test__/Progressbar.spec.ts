@@ -53,14 +53,14 @@ describe('Progressbar component', () => {
         expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
       })
 
-      it('should be color secondary when props.color is secondary', () => {
+      it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkProgressbar, {
           props: {
-            color: 'secondary'
+            color: 'neutral'
           }
         })
 
-        expect(wrapper.find('.bg-secondary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-5').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -101,26 +101,6 @@ describe('Progressbar component', () => {
         })
 
         expect(wrapper.find('.bg-error-500').exists()).toBe(true)
-      })
-
-      it('should be color light when props.color is light', () => {
-        wrapper = mount(VkProgressbar, {
-          props: {
-            color: 'light'
-          }
-        })
-
-        expect(wrapper.find('.bg-light-1').exists()).toBe(true)
-      })
-
-      it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkProgressbar, {
-          props: {
-            color: 'dark'
-          }
-        })
-
-        expect(wrapper.find('.bg-dark-5').exists()).toBe(true)
       })
     })
 

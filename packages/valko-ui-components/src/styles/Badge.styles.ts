@@ -28,9 +28,12 @@ export default tv({
           'bg-primary-500'
         ]
       },
-      secondary: {
+      neutral: {
         content: [
-          'bg-secondary-500'
+          'bg-light-3',
+          'text-light-1',
+          'dark:bg-dark-2',
+          'dark:text-light-3'
         ]
       },
       success: {
@@ -51,18 +54,6 @@ export default tv({
       error: {
         content: [
           'bg-error-500'
-        ]
-      },
-      light: {
-        content: [
-          'bg-light-1',
-          'text-black'
-        ]
-      },
-      dark: {
-        content: [
-          'bg-dark-5',
-          'border-white'
         ]
       }
     },

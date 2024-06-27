@@ -65,16 +65,16 @@ describe('Menu component', () => {
         expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-primary-500')
       })
 
-      it('should be color secondary when props.color is secondary', () => {
+      it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkMenu, {
           props: {
-            color: 'secondary',
+            color: 'neutral',
             items: menuItems,
             active: 1
           }
         })
 
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-secondary-500')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-light-3')
       })
 
       it('should be color success when props.color is success', () => {
@@ -123,30 +123,6 @@ describe('Menu component', () => {
         })
 
         expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-error-500')
-      })
-
-      it('should be color light when props.color is light', () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            color: 'light',
-            items: menuItems,
-            active: 1
-          }
-        })
-
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-light-1')
-      })
-
-      it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            color: 'dark',
-            items: menuItems,
-            active: 1
-          }
-        })
-
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-dark-3')
       })
     })
 

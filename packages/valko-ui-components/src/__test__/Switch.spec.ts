@@ -46,14 +46,14 @@ describe('Switch component', () => {
         expect(wrapper.find('.bg-primary-500')).toBeDefined()
       })
 
-      it('should be color secondary when props.color is secondary', () => {
+      it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkSwitch, {
           props: {
-            color: 'secondary'
+            color: 'neutral'
           }
         })
 
-        expect(wrapper.find('.bg-secondary-500')).toBeDefined()
+        expect(wrapper.find('.bg-light-5')).toBeDefined()
       })
 
       it('should be color success when props.color is success', () => {

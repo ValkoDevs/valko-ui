@@ -23,7 +23,7 @@ const classes = useStyle<BadgeProps, SlotStyles>(props, styles)
 
 <template>
   <div :class="classes.container">
-    <span :class="classes.content">{{ !props.dot ? props.content : '' }}</span>
+    <span :class="classes.content">{{ !dot ? content : '' }}</span>
     <slot />
   </div>
 </template>

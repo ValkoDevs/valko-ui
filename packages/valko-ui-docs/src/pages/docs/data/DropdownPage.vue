@@ -32,7 +32,7 @@ const dropdownProps = [
     prop: 'color',
     required: false,
     description: 'The Dropdown color theme.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {

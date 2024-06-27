@@ -57,14 +57,14 @@ describe('Input component', () => {
         expect(wrapper.find('.text-dark-2').exists()).toBe(true)
       })
 
-      it('should be color secondary when props.color is secondary', () => {
+      it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkInput, {
           props: {
-            color: 'secondary'
+            color: 'neutral'
           }
         })
 
-        expect(wrapper.find('.text-secondary-500').exists()).toBe(true)
+        expect(wrapper.find('.text-dark-1').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -105,26 +105,6 @@ describe('Input component', () => {
         })
 
         expect(wrapper.find('.text-error-500').exists()).toBe(true)
-      })
-
-      it('should be color light when props.color is light', () => {
-        wrapper = mount(VkInput, {
-          props: {
-            color: 'light'
-          }
-        })
-
-        expect(wrapper.find('.text-white').exists()).toBe(true)
-      })
-
-      it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkInput, {
-          props: {
-            color: 'dark'
-          }
-        })
-
-        expect(wrapper.find('.text-black').exists()).toBe(true)
       })
     })
 

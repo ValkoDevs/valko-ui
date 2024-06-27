@@ -66,13 +66,11 @@ export default tv({
     },
     color: {
       primary: {},
-      secondary: {},
+      neutral: {},
       success: {},
       info: {},
       warning: {},
-      error: {},
-      light: {},
-      dark: {}
+      error: {}
     },
     size: {
       xs: {
@@ -160,10 +158,27 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         container: [
-          'bg-secondary-500'
+          'bg-light-3',
+          'dark:bg-dark-3'
+        ],
+        title: [
+          'text-dark-1',
+          'dark:text-light-1'
+        ],
+        span: [
+          'text-dark-1',
+          'dark:text-light-1'
+        ],
+        leftIcon: [
+          'text-dark-1',
+          'dark:text-light-1'
+        ],
+        rightIcon: [
+          'text-dark-1',
+          'dark:text-light-1'
         ]
       }
     },
@@ -203,36 +218,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'filled',
-      color: 'light',
-      class: {
-        container: [
-          'bg-light-1'
-        ],
-        title: [
-          'text-black'
-        ],
-        span: [
-          'text-black'
-        ],
-        leftIcon: [
-          'text-black'
-        ],
-        rightIcon: [
-          'text-black'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'dark',
-      class: {
-        container: [
-          'bg-dark-5'
-        ]
-      }
-    },
     // outlined & color (container)
     {
       variant: 'outlined',
@@ -245,10 +230,15 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         container: [
-          'border-secondary-500'
+          'border-light-3',
+          'dark:border-dark-3'
+        ],
+        title: [
+          'text-dark-1',
+          'dark:text-light-1'
         ]
       }
     },
@@ -291,27 +281,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'outlined',
-      color: 'light',
-      class: {
-        container: [
-          'border-light-1'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'dark',
-      class: {
-        container: [
-          'border-dark-5'
-        ],
-        title: [
-          'text-dark-5'
-        ]
-      }
-    },
     // ghost & color (container)
     {
       variant: 'ghost',
@@ -324,10 +293,11 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         container: [
-          'bg-secondary-500/[.20]'
+          'bg-light-3/[.4]',
+          'dark:bg-dark-3/[.4]'
         ]
       }
     },
@@ -367,24 +337,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'ghost',
-      color: 'light',
-      class: {
-        container: [
-          'bg-light-1/[.20]'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'dark',
-      class: {
-        container: [
-          'bg-dark-5/[.20]'
-        ]
-      }
-    },
     // ghost & outlined & color (title, span, icons)
     {
       variant: ['ghost', 'outlined'],
@@ -406,19 +358,23 @@ export default tv({
     },
     {
       variant: ['ghost', 'outlined'],
-      color: 'secondary',
+      color: 'neutral',
       class: {
         title: [
-          'text-secondary-500'
+          'text-dark-1',
+          'dark:text-light-1'
         ],
         span: [
-          'text-secondary-500'
+          'text-dark-1',
+          'dark:text-light-1'
         ],
         leftIcon: [
-          'text-secondary-500'
+          'text-dark-1',
+          'dark:text-light-1'
         ],
         rightIcon: [
-          'text-secondary-500'
+          'text-dark-1',
+          'dark:text-light-1'
         ]
       }
     },
@@ -491,42 +447,6 @@ export default tv({
         ],
         rightIcon: [
           'text-error-500'
-        ]
-      }
-    },
-    {
-      variant: ['ghost', 'outlined'],
-      color: 'light',
-      class: {
-        title: [
-          'text-white'
-        ],
-        span: [
-          'text-white'
-        ],
-        leftIcon: [
-          'text-white'
-        ],
-        rightIcon: [
-          'text-white'
-        ]
-      }
-    },
-    {
-      variant: ['ghost', 'outlined'],
-      color: 'dark',
-      class: {
-        title: [
-          'text-black'
-        ],
-        span: [
-          'text-black'
-        ],
-        leftIcon: [
-          'text-black'
-        ],
-        rightIcon: [
-          'text-black'
         ]
       }
     }

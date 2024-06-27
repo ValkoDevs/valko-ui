@@ -5,16 +5,15 @@ export type SlotStyles = Record<string, string>
 // prop types
 export type Shape = 'rounded' | 'square' | 'soft'
 export type Variant = 'filled' | 'outlined' | 'ghost'
+export type VariantWithGradient = Variant | 'gradient'
 export type Size = 'xs' | 'sm' | 'md' | 'lg'
 export type Color =
   | 'primary'
-  | 'secondary'
+  | 'neutral'
   | 'success'
-  | 'error'
-  | 'warning'
   | 'info'
-  | 'light'
-  | 'dark'
+  | 'warning'
+  | 'error'
 
 export interface Shapes { shape?: Shape; }
 export interface Variants { variant?: Variant; }

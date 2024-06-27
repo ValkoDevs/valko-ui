@@ -65,16 +65,16 @@ describe('Dropdown component', () => {
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-primary-500')
       })
-      it('should be color secondary when props.color is secondary', async () => {
+      it('should be color neutral when props.color is neutral', async () => {
         wrapper = mount(VkDropdown, {
           props: {
-            color: 'secondary',
+            color: 'neutral',
             items
           }
         })
         wrapper.find('.vk-dropdown__button').trigger('click')
         await nextTick()
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-secondary-500')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-light-4')
       })
 
       it('should be color success when props.color is success', async () => {
@@ -123,30 +123,6 @@ describe('Dropdown component', () => {
         wrapper.find('.vk-dropdown__button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-error-500')
-      })
-
-      it('should be color light when props.color is light', async () => {
-        wrapper = mount(VkDropdown, {
-          props: {
-            color: 'light',
-            items
-          }
-        })
-        wrapper.find('.vk-dropdown__button').trigger('click')
-        await nextTick()
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-light-3')
-      })
-
-      it('should be color dark when props.color is dark', async () => {
-        wrapper = mount(VkDropdown, {
-          props: {
-            color: 'dark',
-            items
-          }
-        })
-        wrapper.find('.vk-dropdown__button').trigger('click')
-        await nextTick()
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-dark-5')
       })
     })
 

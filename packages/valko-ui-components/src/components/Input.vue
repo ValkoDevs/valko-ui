@@ -70,7 +70,7 @@ onMounted(() => {
         :for="inputId"
         :class="classes.label"
       >
-        {{ props.label }}
+        {{ label }}
       </label>
       <span
         v-if="$slots.leftIcon"
@@ -89,7 +89,7 @@ onMounted(() => {
       :class="classes.helper"
       v-if="helpertext"
     >
-      {{ props.helpertext }}
+      {{ helpertext }}
     </span>
   </div>
 </template>

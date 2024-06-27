@@ -28,13 +28,11 @@ export default tv({
   variants: {
     color: {
       primary: {},
-      secondary: {},
+      neutral: {},
       success: {},
-      error: {},
-      warning: {},
       info: {},
-      light: {},
-      dark: {}
+      warning: {},
+      error: {}
     },
     variant: {
       filled: {
@@ -135,11 +133,13 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         content: [
-          'data-[active=true]:bg-secondary-500',
-          'data-[active=true]:dark:bg-secondary-500'
+          'data-[active=true]:bg-light-3',
+          'data-[active=true]:text-dark-3',
+          'data-[active=true]:dark:bg-dark-3',
+          'data-[active=true]:dark:text-light-1'
         ]
       }
     },
@@ -183,25 +183,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'filled',
-      color: 'light',
-      class: {
-        content: [
-          'data-[active=true]:text-dark-5',
-          'data-[active=true]:bg-light-1'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'dark',
-      class: {
-        content: [
-          'data-[active=true]:bg-dark-3'
-        ]
-      }
-    },
     // variant=outlined && colors
     {
       variant: 'outlined',
@@ -215,11 +196,13 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         content: [
-          'data-[active=true]:text-secondary-500',
-          'data-[active=true]:border-secondary-500'
+          'data-[active=true]:text-dark-1',
+          'data-[active=true]:border-light-4',
+          'data-[active=true]:dark:text-light-3',
+          'data-[active=true]:dark:border-dark-2'
         ]
       }
     },
@@ -263,26 +246,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'outlined',
-      color: 'light',
-      class: {
-        content: [
-          'data-[active=true]:text-light-1',
-          'data-[active=true]:border-light-1'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'dark',
-      class: {
-        content: [
-          'data-[active=true]:text-dark-3',
-          'data-[active=true]:border-dark-3'
-        ]
-      }
-    },
     // variant=ghost && colors
     {
       variant: 'ghost',
@@ -297,12 +260,13 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         content: [
-          'data-[active=true]:text-secondary-500',
-          'data-[active=true]:bg-secondary-500/[.15]',
-          'data-[active=true]:dark:bg-secondary-500/[.15]'
+          'data-[active=true]:text-dark-1',
+          'data-[active=true]:bg-light-4/[.2]',
+          'data-[active=true]:dark:text-light-3',
+          'data-[active=true]:dark:bg-dark-2/[.2]'
         ]
       }
     },
@@ -350,27 +314,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'ghost',
-      color: 'light',
-      class: {
-        content: [
-          'data-[active=true]:text-light-1',
-          'data-[active=true]:bg-light-1/[.5]',
-          'hover:dark:bg-light-1/[.15]'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'dark',
-      class: {
-        content: [
-          'data-[active=true]:text-dark-1',
-          'data-[active=true]:bg-dark-1/[.5]'
-        ]
-      }
-    },
     // variant=link && colors
     {
       variant: 'link',
@@ -383,10 +326,11 @@ export default tv({
     },
     {
       variant: 'link',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         content: [
-          'data-[active=true]:text-secondary-500'
+          'data-[active=true]:text-dark-5',
+          'data-[active=true]:dark:text-light-5'
         ]
       }
     },
@@ -426,24 +370,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'link',
-      color: 'light',
-      class: {
-        content: [
-          'data-[active=true]:text-dark-5'
-        ]
-      }
-    },
-    {
-      variant: 'link',
-      color: 'dark',
-      class: {
-        content: [
-          'data-[active=true]:text-dark-3'
-        ]
-      }
-    },
     // variant=line && colors
     {
       variant: 'line',
@@ -456,10 +382,11 @@ export default tv({
     },
     {
       variant: 'line',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         content: [
-          'data-[active=true]:border-secondary-500'
+          'data-[active=true]:border-light-4',
+          'data-[active=true]:dark:border-dark-2'
         ]
       }
     },
@@ -496,24 +423,6 @@ export default tv({
       class: {
         content: [
           'data-[active=true]:border-info-500'
-        ]
-      }
-    },
-    {
-      variant: 'line',
-      color: 'light',
-      class: {
-        content: [
-          'data-[active=true]:border-dark-5'
-        ]
-      }
-    },
-    {
-      variant: 'line',
-      color: 'dark',
-      class: {
-        content: [
-          'data-[active=true]:border-dark-3'
         ]
       }
     },

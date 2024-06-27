@@ -56,7 +56,7 @@ const apiData = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Input.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {
@@ -234,16 +234,16 @@ const slotData = [
         v-model="form.helperValue"
       />
       <vk-select
-        placeholder="Variant"
-        size="sm"
-        :options="variantOptions"
-        v-model="form.variant"
-      />
-      <vk-select
         placeholder="Color"
         size="sm"
         :options="colorOptions"
         v-model="form.color"
+      />
+      <vk-select
+        placeholder="Variant"
+        size="sm"
+        :options="variantOptions"
+        v-model="form.variant"
       />
       <vk-select
         placeholder="Shape"

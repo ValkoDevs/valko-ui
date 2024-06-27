@@ -84,23 +84,38 @@ export default tv({
           'data-[variant=ghost]:data-[selected=true]:dark:bg-primary-500/[.15]'
         ]
       },
-      secondary: {
+      neutral: {
         item: [
           //filled
-          'data-[variant=filled]:hover:bg-secondary-500',
-          'data-[variant=filled]:data-[selected=true]:bg-secondary-500',
-          'data-[variant=filled]:data-[selected=true]:dark:bg-secondary-500',
+          'data-[variant=filled]:data-[selected=true]:bg-light-3',
+          'data-[variant=filled]:hover:bg-light-3',
+          'data-[variant=filled]:hover:text-dark-1',
+          'data-[variant=filled]:data-[selected=true]:text-dark-1',
+          //filled dark
+          'data-[variant=filled]:data-[selected=true]:dark:bg-dark-2',
+          'data-[variant=filled]:hover:dark:bg-dark-2',
+          'data-[variant=filled]:hover:dark:text-light-3',
+          'data-[variant=filled]:data-[selected=true]:dark:text-light-3',
           //outlined
-          'data-[variant=outlined]:hover:border-secondary-500',
-          'data-[variant=outlined]:hover:text-secondary-500',
-          'data-[variant=outlined]:data-[selected=true]:text-secondary-500',
-          'data-[variant=outlined]:data-[selected=true]:border-secondary-500',
+          'data-[variant=outlined]:hover:border-light-4',
+          'data-[variant=outlined]:hover:text-dark-1',
+          'data-[variant=outlined]:data-[selected=true]:text-dark-1',
+          'data-[variant=outlined]:data-[selected=true]:border-light-4',
+          //outlined dark
+          'data-[variant=outlined]:hover:dark:border-dark-2',
+          'data-[variant=outlined]:hover:dark:text-light-3',
+          'data-[variant=outlined]:data-[selected=true]:dark:text-light-3',
+          'data-[variant=outlined]:data-[selected=true]:dark:border-dark-2',
           //ghost
-          'data-[variant=ghost]:hover:bg-secondary-500/[.15]',
-          'data-[variant=ghost]:hover:text-secondary-500',
-          'data-[variant=ghost]:data-[selected=true]:text-secondary-500',
-          'data-[variant=ghost]:data-[selected=true]:bg-secondary-500/[.15]',
-          'data-[variant=ghost]:data-[selected=true]:dark:bg-secondary-500/[.15]'
+          'data-[variant=ghost]:hover:bg-light-4/[.4]',
+          'data-[variant=ghost]:hover:text-dark-1',
+          'data-[variant=ghost]:data-[selected=true]:text-dark-1',
+          'data-[variant=ghost]:data-[selected=true]:bg-light-4/[.4]',
+          //ghost dark
+          'data-[variant=ghost]:hover:dark:bg-dark-2/[.4]',
+          'data-[variant=ghost]:hover:dark:text-light-3',
+          'data-[variant=ghost]:data-[selected=true]:dark:text-light-3',
+          'data-[variant=ghost]:data-[selected=true]:dark:bg-dark-2/[.4]'
         ]
       },
       success: {
@@ -177,44 +192,6 @@ export default tv({
           'data-[variant=ghost]:data-[selected=true]:text-error-500',
           'data-[variant=ghost]:data-[selected=true]:bg-error-500/[.15]',
           'data-[variant=ghost]:data-[selected=true]:dark:bg-error-500/[.15]'
-        ]
-      },
-      light: {
-        item: [
-          //filled
-          'data-[variant=filled]:hover:bg-light-1',
-          'data-[variant=filled]:data-[selected=true]:bg-light-1',
-          'data-[variant=filled]:data-[selected=true]:dark:bg-light-1',
-          //outlined
-          'data-[variant=outlined]:hover:border-light-1',
-          'data-[variant=outlined]:hover:text-light-1',
-          'data-[variant=outlined]:data-[selected=true]:text-light-1',
-          'data-[variant=outlined]:data-[selected=true]:border-light-1',
-          //ghost
-          'data-[variant=ghost]:hover:bg-light-1/[.15]',
-          'data-[variant=ghost]:hover:text-light-1',
-          'data-[variant=ghost]:data-[selected=true]:text-light-1',
-          'data-[variant=ghost]:data-[selected=true]:bg-light-1/[.15]',
-          'data-[variant=ghost]:data-[selected=true]:dark:bg-light-1/[.15]'
-        ]
-      },
-      dark: {
-        item: [
-          //filled
-          'data-[variant=filled]:hover:bg-dark-5',
-          'data-[variant=filled]:data-[selected=true]:bg-dark-5',
-          'data-[variant=filled]:data-[selected=true]:dark:bg-dark-5',
-          //outlined
-          'data-[variant=outlined]:hover:border-dark-5',
-          'data-[variant=outlined]:hover:text-dark-5',
-          'data-[variant=outlined]:data-[selected=true]:text-dark-5',
-          'data-[variant=outlined]:data-[selected=true]:border-dark-5',
-          //ghost
-          'data-[variant=ghost]:hover:bg-dark-5/[.15]',
-          'data-[variant=ghost]:hover:text-dark-5',
-          'data-[variant=ghost]:data-[selected=true]:text-dark-5',
-          'data-[variant=ghost]:data-[selected=true]:bg-dark-5/[.15]',
-          'data-[variant=ghost]:data-[selected=true]:dark:bg-dark-5/[.15]'
         ]
       }
     },

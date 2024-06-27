@@ -35,7 +35,7 @@ const progressbarProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Progressbar.',
-    values: 'primary, secondary, success, info, warning, error, light, dark',
+    values: 'primary, neutral, success, info, warning, error',
     default: 'primary'
   },
   {

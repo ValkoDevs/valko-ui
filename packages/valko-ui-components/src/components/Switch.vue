@@ -35,20 +35,20 @@ const onClick = (event: boolean) => {
       >
         <switch-label
           passive
-          v-if="props.label"
+          v-if="label"
           :class="classes.label"
         >
-          {{ props.label }}
+          {{ label }}
         </switch-label>
         <Switch
-          :model-value="props.modelValue"
-          :data-active="props.modelValue"
+          :model-value="modelValue"
+          :data-active="modelValue"
           :class="classes.switch"
           @update:model-value="onClick"
         >
           <span
             aria-hidden="true"
-            :data-selected="props.modelValue"
+            :data-selected="modelValue"
             :class="`${classes.thumb}`"
           />
         </Switch>

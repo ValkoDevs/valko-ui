@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
-import colorOptionsReduced from '@/data/colorOptionsReduced'
+import colorOptions from '@/data/colorOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import variantOptions from '@/data/variantOptions'
@@ -33,7 +33,7 @@ const apiData = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Switch.',
-    values: 'primary, secondary, error, warning, info, success',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {
@@ -133,16 +133,16 @@ const emitData = [
         v-model="form.label"
       />
       <vk-select
+        placeholder="Color"
+        size="sm"
+        :options="colorOptions"
+        v-model="form.color"
+      />
+      <vk-select
         placeholder="Variant"
         size="sm"
         :options="variantOptions"
         v-model="form.variant"
-      />
-      <vk-select
-        placeholder="Color"
-        size="sm"
-        :options="colorOptionsReduced"
-        v-model="form.color"
       />
       <vk-select
         placeholder="Shape"
@@ -183,7 +183,7 @@ const emitData = [
       >
         <div class="grid grid-cols-3 gap-4">
           <vk-switch
-            v-for="color in colorOptionsReduced"
+            v-for="color in colorOptions"
             :key="color.value"
             :color="color.value"
             :label="color.label"

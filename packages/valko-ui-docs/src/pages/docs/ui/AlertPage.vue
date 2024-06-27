@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
 import variantOptions from '@/data/variantOptions'
 import shapeOptions from '@/data/shapeOptions'
@@ -29,7 +29,7 @@ const alertProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Alert.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {

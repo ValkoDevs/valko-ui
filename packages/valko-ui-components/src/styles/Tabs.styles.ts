@@ -165,18 +165,11 @@ export default tv({
     },
     color: {
       primary: {},
-      secondary: {},
+      neutral: {},
       success: {},
       info: {},
       warning: {},
-      error: {},
-      light: {
-        tab: [
-          'data-[headlessui-state=selected]:text-black'
-        ]
-      },
-      dark: {},
-      neutral: {}
+      error: {}
     },
     grow: {
       true: {
@@ -216,11 +209,12 @@ export default tv({
       }
     },
     {
-      color: 'secondary',
+      color: 'neutral',
       shape: 'line',
       class: {
         cursor: [
-          'border-secondary-500'
+          'border-light-4',
+          'dark:border-dark-2'
         ]
       }
     },
@@ -260,34 +254,6 @@ export default tv({
         ]
       }
     },
-    {
-      color: 'light',
-      shape: 'line',
-      class: {
-        cursor: [
-          'border-light-1'
-        ]
-      }
-    },
-    {
-      color: 'dark',
-      shape: 'line',
-      class: {
-        cursor: [
-          'border-dark-5'
-        ]
-      }
-    },
-    {
-      color: 'neutral',
-      shape: 'line',
-      class: {
-        cursor: [
-          'border-dark-3',
-          'dark:border-light-3'
-        ]
-      }
-    },
     //color rounded square & soft
     {
       color: 'primary',
@@ -299,11 +265,16 @@ export default tv({
       }
     },
     {
-      color: 'secondary',
+      color: 'neutral',
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-secondary-500'
+          'bg-light-4',
+          'dark:bg-dark-2'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-dark-1',
+          'dark:data-[headlessui-state=selected]:text-light-3'
         ]
       }
     },
@@ -340,38 +311,6 @@ export default tv({
       class: {
         cursor: [
           'bg-error-500'
-        ]
-      }
-    },
-    {
-      color: 'light',
-      shape: ['rounded', 'square', 'soft'],
-      class: {
-        cursor: [
-          'bg-light-1'
-        ]
-      }
-    },
-    {
-      color: 'dark',
-      shape: ['rounded', 'square', 'soft'],
-      class: {
-        cursor: [
-          'bg-dark-5'
-        ]
-      }
-    },
-    {
-      color: 'neutral',
-      shape: ['rounded', 'square', 'soft'],
-      class: {
-        cursor: [
-          'bg-dark-3',
-          'dark:bg-light-3'
-        ],
-        tab: [
-          'data-[headlessui-state=selected]:text-white',
-          'dark:data-[headlessui-state=selected]:text-black'
         ]
       }
     },
