@@ -45,10 +45,10 @@ const onItemClick = (item: Item) => {
             :class="classes.button"
             v-bind="props"
           >
-            {{ props.title }}
+            {{ title }}
             <vk-icon
               :class="classes.icon"
-              :name="props.icon"
+              :name="icon"
               :data-open="open"
             />
           </vk-button>
@@ -77,7 +77,7 @@ const onItemClick = (item: Item) => {
               :class="classes.itemsButton"
               :data-active="active"
               :data-disabled="item.disabled"
-              :data-shape="props.shape"
+              :data-shape="shape"
             >
               <vk-icon
                 v-if="item.icon"

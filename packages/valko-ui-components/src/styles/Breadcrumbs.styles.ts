@@ -65,9 +65,10 @@ export default tv({
           'text-primary-500'
         ]
       },
-      secondary: {
+      neutral: {
         a: [
-          'text-secondary-500'
+          'text-dark-1',
+          'dark:text-light-3'
         ]
       },
       success: {
@@ -88,22 +89,6 @@ export default tv({
       error: {
         a: [
           'text-error-500'
-        ]
-      },
-      light: {
-        a: [
-          'text-light-1'
-        ]
-      },
-      dark: {
-        a: [
-          'text-dark-5'
-        ]
-      },
-      neutral: {
-        a: [
-          'text-black',
-          'dark:text-white'
         ]
       }
     },

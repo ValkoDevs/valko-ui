@@ -45,14 +45,14 @@ describe('Navbar component', () => {
         expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
       })
 
-      it('should be color secondary when props.color is secondary', () => {
+      it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkNavbar, {
           props: {
-            color: 'secondary'
+            color: 'neutral'
           }
         })
 
-        expect(wrapper.find('.bg-secondary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -93,36 +93,6 @@ describe('Navbar component', () => {
         })
 
         expect(wrapper.find('.bg-error-500').exists()).toBe(true)
-      })
-
-      it('should be color light when props.color is light', () => {
-        wrapper = mount(VkNavbar, {
-          props: {
-            color: 'light'
-          }
-        })
-
-        expect(wrapper.find('.bg-white').exists()).toBe(true)
-      })
-
-      it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkNavbar, {
-          props: {
-            color: 'dark'
-          }
-        })
-
-        expect(wrapper.find('.bg-black').exists()).toBe(true)
-      })
-
-      it('should be color neutral when props.color is neutral', () => {
-        wrapper = mount(VkNavbar, {
-          props: {
-            color: 'neutral'
-          }
-        })
-
-        expect(wrapper.find('.bg-light-1').exists()).toBe(true)
       })
     })
 
@@ -201,7 +171,7 @@ describe('Navbar component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkNavbar, {
           props: {
             variant: 'filled'
@@ -211,7 +181,7 @@ describe('Navbar component', () => {
         expect(wrapper.find('.filter-none').exists()).toBe(true)
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkNavbar, {
           props: {
             variant: 'outlined'
@@ -221,7 +191,7 @@ describe('Navbar component', () => {
         expect(wrapper.find('.border-b').exists()).toBe(true)
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkNavbar, {
           props: {
             variant: 'ghost'
@@ -229,6 +199,16 @@ describe('Navbar component', () => {
         })
 
         expect(wrapper.find('.backdrop-blur-lg').exists()).toBe(true)
+      })
+
+      it('should be gradient when props.variant is gradient', () => {
+        wrapper = mount(VkNavbar, {
+          props: {
+            variant: 'gradient'
+          }
+        })
+
+        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
       })
     })
   })

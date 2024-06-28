@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
-import variantOptions from '@/data/variantOptions'
+import variantWithGradient from '@/data/variantWithGradient'
 import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
@@ -77,14 +77,14 @@ const avatarProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Avatar.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {
     prop: 'variant',
     required: false,
     description: 'The variant of the Avatar.',
-    values: 'filled, outlined, ghost',
+    values: 'filled, outlined, ghost, gradient',
     default: 'filled'
   },
   {
@@ -163,7 +163,7 @@ const avatarSrc = computed(() => { return form.value.avatar ? '###' : form.value
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptions"
+        :options="variantWithGradient"
         v-model="form.variant"
       />
       <vk-select
@@ -227,7 +227,7 @@ const avatarSrc = computed(() => { return form.value.avatar ? '###' : form.value
         gap
       >
         <div
-          v-for="variant in variantOptions"
+          v-for="variant in variantWithGradient"
           :key="variant.value"
           class="flex flex-col items-center"
         >
@@ -235,10 +235,6 @@ const avatarSrc = computed(() => { return form.value.avatar ? '###' : form.value
           <vk-avatar
             :variant="variant.value"
           />
-        </div>
-        <div class="flex flex-col items-center">
-          <span class="mb-1"> Flat </span>
-          <vk-avatar flat />
         </div>
       </example-section>
 
@@ -247,7 +243,7 @@ const avatarSrc = computed(() => { return form.value.avatar ? '###' : form.value
         gap
       >
         <div
-          v-for="variant in variantOptions"
+          v-for="variant in variantWithGradient"
           :key="variant.value"
           class="flex flex-col items-center"
         >
@@ -255,13 +251,6 @@ const avatarSrc = computed(() => { return form.value.avatar ? '###' : form.value
           <vk-avatar
             :src="avatarSrc"
             :variant="variant.value"
-          />
-        </div>
-        <div class="flex flex-col items-center">
-          <span class="mb-1"> Flat </span>
-          <vk-avatar
-            :src="avatarSrc"
-            flat
           />
         </div>
       </example-section>

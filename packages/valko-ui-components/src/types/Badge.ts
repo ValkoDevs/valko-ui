@@ -7,4 +7,5 @@ export interface BadgeProps extends DefaultComponent {
   flat?: boolean;
   hidden?: boolean;
   dot?: boolean;
+  gradient?: boolean;
 }

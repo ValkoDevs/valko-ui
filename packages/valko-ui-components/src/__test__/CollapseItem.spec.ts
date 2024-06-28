@@ -158,7 +158,7 @@ describe('CollapseItem component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkCollapse, {
           slots: {
             default: VkCollapseItem
@@ -172,7 +172,7 @@ describe('CollapseItem component', () => {
         expect(childWrapper.find('.vk-collapse-item').classes()).toContain('group-data-[variant=filled]:bg-light-3')
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkCollapse, {
           slots: {
             default: VkCollapseItem
@@ -186,7 +186,7 @@ describe('CollapseItem component', () => {
         expect(childWrapper.find('.vk-collapse-item').classes()).toContain('group-data-[variant=outlined]:group-data-[separator=split]:border-2')
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkCollapse, {
           slots: {
             default: VkCollapseItem

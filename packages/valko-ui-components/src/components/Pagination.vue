@@ -4,7 +4,6 @@ import type { PaginationProps } from '#valkoui/types/Pagination'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Pagination.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
-import useDarkMode from '#valkoui/composables/useDarkMode.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 
@@ -21,9 +20,6 @@ const props = withDefaults(defineProps<PaginationProps>(), {
 const emit = defineEmits(['update:modelValue'])
 
 const classes = useStyle<PaginationProps, SlotStyles>(props, styles)
-
-const isDarkMode = useDarkMode()
-const buttonColor = computed(() => isDarkMode.value ? 'light' : 'dark')
 
 const pages = computed(() => {
   const maxPages = props.pages < 7 ? props.pages : 7
@@ -75,13 +71,13 @@ watchEffect(() => {
       <vk-button
         variant="link"
         class="vk-pagination__left"
-        :color="buttonColor"
-        :shape="props.shape"
+        color="neutral"
+        :shape="shape"
         :size="size"
         condensed
         flat
-        :disabled="props.modelValue === 1 || props.disabled"
-        @click="() => changePage(props.modelValue - 1)"
+        :disabled="modelValue === 1 || disabled"
+        @click="() => changePage(modelValue - 1)"
       >
         <div :class="classes.arrows">
           <span class="sr-only">Previous</span>
@@ -92,12 +88,12 @@ watchEffect(() => {
         v-for="page in pages"
         :key="page"
         flat
-        :variant="page === props.modelValue ? props.variant : 'link'"
-        :color="page === props.modelValue ? props.color : buttonColor"
+        :variant="page === modelValue ? variant : 'link'"
+        :color="page === modelValue ? color : 'neutral'"
         :size="size"
-        :shape="props.shape"
+        :shape="shape"
         condensed
-        :disabled="props.disabled"
+        :disabled="disabled"
         @click="() => changePage(page)"
       >
         <div :class="classes.button">
@@ -107,13 +103,13 @@ watchEffect(() => {
       <vk-button
         variant="link"
         class="vk-pagination__right"
-        :color="buttonColor"
-        :shape="props.shape"
+        color="neutral"
+        :shape="shape"
         :size="size"
         flat
         condensed
-        :disabled="props.modelValue === +props.pages || props.disabled"
-        @click="() => changePage(props.modelValue + 1)"
+        :disabled="modelValue === +pages || disabled"
+        @click="() => changePage(modelValue + 1)"
       >
         <div :class="classes.arrows">
           <span class="sr-only">Next</span>

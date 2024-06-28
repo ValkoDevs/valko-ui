@@ -39,7 +39,7 @@ export default tv({
     variant: {
       filled: {
         notification: [
-          'text-white'
+          'text-light-1'
         ],
         progressbar: [
           'bg-light-1'
@@ -66,17 +66,24 @@ export default tv({
           'bg-light-3',
           'dark:bg-dark-3'
         ]
+      },
+      gradient: {
+        notification: [
+          'bg-gradient-to-br',
+          'text-light-1'
+        ],
+        progressbar: [
+          'bg-light-1'
+        ]
       }
     },
     color: {
       primary: {},
-      secondary: {},
+      neutral: {},
       success: {},
       info: {},
       warning: {},
-      error: {},
-      light: {},
-      dark: {}
+      error: {}
     },
     size: {
       xs: {
@@ -162,10 +169,17 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         notification: [
-          'bg-secondary-500'
+          'bg-light-4',
+          'text-dark-1',
+          'dark:bg-dark-3',
+          'dark:text-light-3'
+        ],
+        progressbar: [
+          'bg-dark-1',
+          'dark:bg-light-3'
         ]
       }
     },
@@ -205,28 +219,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'filled',
-      color: 'light',
-      class: {
-        notification: [
-          'bg-light-1',
-          'text-black'
-        ],
-        progressbar: [
-          'bg-dark-3'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'dark',
-      class: {
-        notification: [
-          'bg-dark-5'
-        ]
-      }
-    },
     // outlined & color
     {
       variant: 'outlined',
@@ -243,14 +235,17 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         notification: [
-          'border-secondary-500',
-          'text-secondary-500'
+          'border-light-4',
+          'text-dark-1',
+          'dark:border-dark-2',
+          'dark:text-light-3'
         ],
         progressbar: [
-          'bg-secondary-500'
+          'bg-light-4',
+          'dark:bg-dark-2'
         ]
       }
     },
@@ -306,32 +301,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'outlined',
-      color: 'light',
-      class: {
-        notification: [
-          'border-light-1',
-          'text-light-1'
-        ],
-        progressbar: [
-          'bg-light-1'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'dark',
-      class: {
-        notification: [
-          'border-dark-5',
-          'text-dark-5'
-        ],
-        progressbar: [
-          'bg-dark-5'
-        ]
-      }
-    },
     // ghost & color
     {
       variant: 'ghost',
@@ -348,14 +317,17 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         notification: [
-          'bg-secondary-500/[.20]',
-          'text-secondary-500'
+          'bg-light-4/[.20]',
+          'text-dark-1',
+          'dark:bg-dark-2/[.20]',
+          'dark:text-light-3'
         ],
         progressbar: [
-          'bg-secondary-500/[.40]'
+          'bg-light-4/[.40]',
+          'dark:bg-dark-2/[.40]'
         ]
       }
     },
@@ -411,32 +383,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'ghost',
-      color: 'light',
-      class: {
-        notification: [
-          'bg-light-1/[.20]',
-          'text-light-1'
-        ],
-        progressbar: [
-          'bg-light-1/[.40]'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'dark',
-      class: {
-        notification: [
-          'bg-dark-5/[.20]',
-          'text-dark-1'
-        ],
-        progressbar: [
-          'bg-dark-5/[.40]'
-        ]
-      }
-    },
     // line & color
     {
       variant: 'line',
@@ -449,10 +395,11 @@ export default tv({
     },
     {
       variant: 'line',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         progressbar: [
-          'bg-secondary-500'
+          'bg-light-4',
+          'dark:bg-dark-2'
         ]
       }
     },
@@ -492,21 +439,72 @@ export default tv({
         ]
       }
     },
+    // gradient & color
     {
-      variant: 'line',
-      color: 'light',
+      variant: 'gradient',
+      color: 'primary',
       class: {
-        progressbar: [
-          'bg-light-1'
+        notification: [
+          'from-primary-500',
+          'to-primary-900'
         ]
       }
     },
     {
-      variant: 'line',
-      color: 'dark',
+      variant: 'gradient',
+      color: 'neutral',
       class: {
+        notification: [
+          'from-light-3',
+          'to-light-5',
+          'text-dark-1',
+          'dark:from-dark-1',
+          'dark:to-dark-5',
+          'dark:text-light-3'
+        ],
         progressbar: [
-          'bg-dark-5'
+          'bg-dark-1',
+          'dark:bg-light-3'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'success',
+      class: {
+        notification: [
+          'from-success-500',
+          'to-success-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'info',
+      class: {
+        notification: [
+          'from-info-500',
+          'to-info-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'warning',
+      class: {
+        notification: [
+          'from-warning-500',
+          'to-warning-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'error',
+      class: {
+        notification: [
+          'from-error-500',
+          'to-error-900'
         ]
       }
     }

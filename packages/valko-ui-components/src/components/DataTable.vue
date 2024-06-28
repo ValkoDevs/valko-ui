@@ -7,7 +7,7 @@ import useStyle from '#valkoui/composables/useStyle.ts'
 defineOptions({ name: 'VkDataTable' })
 
 const props = withDefaults(defineProps<DataTableProps>(), {
-  color: 'secondary',
+  color: 'neutral',
   variant: 'filled',
   size: 'md',
   sortBy: null,

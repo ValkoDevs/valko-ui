@@ -10,7 +10,7 @@ defineOptions({ name: 'VkRadio' })
 const props = withDefaults(defineProps<RadioProps>(), {
   color: 'primary',
   variant: 'filled',
-  shape: 'soft',
+  shape: 'rounded',
   size: 'md',
   readonly: false,
   position: false
@@ -33,10 +33,10 @@ const onClick = () => {
     >
       <div
         :class="classes.radio"
-        :data-checked="props.value && props.modelValue === props.value"
+        :data-checked="value && modelValue === value"
       >
         <vk-icon
-          v-if="props.value && props.modelValue === props.value"
+          v-if="value && modelValue === value"
           name="point-filled"
           :class="classes.icon"
         />
@@ -44,22 +44,22 @@ const onClick = () => {
       <input
         :class="classes.input"
         type="radio"
-        :value="props.value"
-        :name="props.name"
-        :checked="props.modelValue === props.value"
+        :value="value"
+        :name="name"
+        :checked="modelValue === value"
       >
       <label
-        :for="props.name"
+        :for="name"
         :class="classes.label"
       >
-        {{ props.label }}
+        {{ label }}
       </label>
     </div>
     <span
-      v-if="props.helpertext"
+      v-if="helpertext"
       :class="classes.helpertext"
     >
-      {{ props.helpertext }}
+      {{ helpertext }}
     </span>
   </div>
 </template>

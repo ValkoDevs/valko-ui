@@ -61,15 +61,17 @@ onMounted(() => {
         :type="type"
         placeholder=" "
         :value="modelValue"
-        @focus="onFocus"
-        @input="updateValue"
         :data-filled="!!modelValue"
         :id="inputId"
+        @focus="onFocus"
+        @input="updateValue"
       >
       <label
         :for="inputId"
         :class="classes.label"
-      >{{ props.label }}</label>
+      >
+        {{ label }}
+      </label>
       <span
         v-if="$slots.leftIcon"
         :class="`${classes.icon} ${classes.iconLeft}`"
@@ -87,7 +89,7 @@ onMounted(() => {
       :class="classes.helper"
       v-if="helpertext"
     >
-      {{ props.helpertext }}
+      {{ helpertext }}
     </span>
   </div>
 </template>

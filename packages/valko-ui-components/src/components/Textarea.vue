@@ -39,17 +39,17 @@ const updateValue = (e: Event) => {
         :data-filled="!!modelValue"
         :maxlength="maxlength"
       />
-      <label :class="classes.label">{{ props.label }}</label>
+      <label :class="classes.label">{{ label }}</label>
     </div>
     <div :class="classes.footer">
       <span
         v-if="helpertext"
         :class="classes.helper"
-      > {{ props.helpertext }}</span>
+      > {{ helpertext }}</span>
       <span
         v-if="maxlength && maxlength > 0"
         :class="classes.counter"
-      >{{ `${props.modelValue.length} / ${props.maxlength}` }}</span>
+      >{{ `${modelValue.length} / ${maxlength}` }}</span>
     </div>
   </div>
 </template>

@@ -17,7 +17,7 @@ export default tv({
     variant: {
       filled: [
         'filter-none',
-        'text-white'
+        'text-light-1'
       ],
       outlined: [
         'bg-transparent',
@@ -26,23 +26,23 @@ export default tv({
       ],
       ghost: [
         'backdrop-blur-lg'
+      ],
+      gradient: [
+        'bg-gradient-to-br',
+        'filter-none',
+        'text-light-1'
       ]
     },
     color: {
       primary: [],
-      secondary: [],
+      neutral: [
+        'text-dark-1',
+        'dark:text-light-1'
+      ],
       success: [],
       error: [],
       warning: [],
-      info: [],
-      light: [
-        'text-black'
-      ],
-      dark: [],
-      neutral: [
-        'text-black',
-        'dark:text-white'
-      ]
+      info: []
     },
     size: {
       xs: [
@@ -100,10 +100,11 @@ export default tv({
       ]
     },
     {
-      color: 'secondary',
+      color: 'neutral',
       variant: 'filled',
       class: [
-        'bg-secondary-500'
+        'bg-light-3',
+        'dark:bg-dark-3'
       ]
     },
     {
@@ -134,28 +135,6 @@ export default tv({
         'bg-error-500'
       ]
     },
-    {
-      color: 'light',
-      variant: 'filled',
-      class: [
-        'bg-white'
-      ]
-    },
-    {
-      color: 'dark',
-      variant: 'filled',
-      class: [
-        'bg-black'
-      ]
-    },
-    {
-      color: 'neutral',
-      variant: 'filled',
-      class: [
-        'bg-light-1',
-        'dark:bg-dark-3'
-      ]
-    },
     // outlined & color
     {
       color: 'primary',
@@ -166,11 +145,12 @@ export default tv({
       ]
     },
     {
-      color: 'secondary',
+      color: 'neutral',
       variant: 'outlined',
       class: [
         'bg-transparent',
-        'border-secondary-500'
+        'border-light-4',
+        'dark:border-dark-2'
       ]
     },
     {
@@ -205,31 +185,6 @@ export default tv({
         'border-error-500'
       ]
     },
-    {
-      color: 'light',
-      variant: 'outlined',
-      class: [
-        'bg-transparent',
-        'border-white'
-      ]
-    },
-    {
-      color: 'dark',
-      variant: 'outlined',
-      class: [
-        'bg-transparent',
-        'border-black'
-      ]
-    },
-    {
-      color: 'neutral',
-      variant: 'outlined',
-      class: [
-        'bg-transparent',
-        'border-light-4',
-        'dark:border-dark-1'
-      ]
-    },
     // ghost & color
     {
       color: 'primary',
@@ -239,11 +194,11 @@ export default tv({
       ]
     },
     {
-      color: 'secondary',
+      color: 'neutral',
       variant: 'ghost',
       class: [
-        'bg-secondary-500/[.15]',
-        'text-secondary-500'
+        'bg-light-4/[.3]',
+        'dark:bg-dark-3/[.3]'
       ]
     },
     {
@@ -274,26 +229,55 @@ export default tv({
         'bg-error-500/[.15]'
       ]
     },
+    // gradient & color
     {
-      color: 'light',
-      variant: 'ghost',
+      variant: 'gradient',
+      color: 'primary',
       class: [
-        'bg-white/[.15]'
+        'from-primary-500',
+        'to-primary-900'
       ]
     },
     {
-      color: 'dark',
-      variant: 'ghost',
-      class: [
-        'bg-black/[.15]'
-      ]
-    },
-    {
+      variant: 'gradient',
       color: 'neutral',
-      variant: 'ghost',
       class: [
-        'bg-light-1/[.15]',
-        'dark:bg-dark-3/[.15]'
+        'from-light-1',
+        'to-light-5',
+        'dark:from-dark-1',
+        'dark:to-dark-5'
+      ]
+    },
+    {
+      variant: 'gradient',
+      color: 'success',
+      class: [
+        'from-success-500',
+        'to-success-900'
+      ]
+    },
+    {
+      variant: 'gradient',
+      color: 'info',
+      class: [
+        'from-info-500',
+        'to-info-900'
+      ]
+    },
+    {
+      variant: 'gradient',
+      color: 'warning',
+      class: [
+        'from-warning-500',
+        'to-warning-900'
+      ]
+    },
+    {
+      variant: 'gradient',
+      color: 'error',
+      class: [
+        'from-error-500',
+        'to-error-900'
       ]
     },
     // floating & variant

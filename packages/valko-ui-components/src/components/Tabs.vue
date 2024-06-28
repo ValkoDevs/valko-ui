@@ -46,8 +46,8 @@ onUpdated(onChange)
 <template>
   <div :class="classes.container">
     <tab-group
-      :vertical="props.vertical"
-      :default-index="props.defaultIndex"
+      :vertical="vertical"
+      :default-index="defaultIndex"
       as="div"
       :class="classes.group"
       @change="onChange"
@@ -61,7 +61,7 @@ onUpdated(onChange)
           ref="cursor"
         />
         <tab
-          v-for="item in props.tabs"
+          v-for="item in tabs"
           :class="classes.tab"
           :key="item.key"
           :disabled="item.disabled"
@@ -82,7 +82,7 @@ onUpdated(onChange)
 
       <tab-panels :class="classes.content">
         <tab-panel
-          v-for="item in props.tabs"
+          v-for="item in tabs"
           :key="item.key"
           :data-key="item.key"
         >

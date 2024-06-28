@@ -72,21 +72,21 @@ const closeModal = () => { emit('close') }
               :class="classes.panel"
             >
               <div
-                v-if="props.title || props.closable"
+                v-if="title || closable"
                 :class="classes.panelChild"
               >
                 <dialog-title
                   :class="classes.title"
                 >
-                  {{ props.title }}
+                  {{ title }}
                 </dialog-title>
                 <vk-button
-                  v-if="props.closable"
+                  v-if="closable"
                   tabindex="-1"
                   size="xs"
                   variant="link"
                   shape="rounded"
-                  color="secondary"
+                  color="neutral"
                   condensed
                   :class="classes.closeButton"
                   @click="closeModal"

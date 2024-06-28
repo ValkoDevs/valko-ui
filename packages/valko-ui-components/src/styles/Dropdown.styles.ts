@@ -59,13 +59,11 @@ export default tv({
   variants: {
     color: {
       primary: {},
-      secondary: {},
+      neutral: {},
       success: {},
       info: {},
       warning: {},
-      error: {},
-      light: {},
-      dark: {}
+      error: {}
     },
     size: {
       xs: {
@@ -104,10 +102,10 @@ export default tv({
     variant: {
       filled: {
         button: [
-          'text-white'
+          'text-light-1'
         ],
         itemsButton: [
-          'data-[active=true]:text-white'
+          'data-[active=true]:text-light-1'
         ]
       },
       outlined: {
@@ -125,6 +123,15 @@ export default tv({
         itemsMenu: [
           'bg-transparent',
           'shadow-none'
+        ]
+      },
+      gradient: {
+        button: [
+          'text-light-1'
+        ],
+        itemsButton: [
+          'bg-gradient-to-br',
+          'data-[active=true]:text-light-1'
         ]
       }
     },
@@ -167,11 +174,17 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         itemsButton: [
-          'data-[active=true]:bg-secondary-500',
-          'data-[active=true]:dark:bg-secondary-500'
+          'data-[active=true]:bg-light-4',
+          'data-[active=true]:text-dark-1',
+          'data-[active=true]:dark:bg-dark-2',
+          'data-[active=true]:dark:text-light-3'
+        ],
+        button: [
+          'text-dark-1',
+          'dark:text-light-3'
         ]
       }
     },
@@ -215,30 +228,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'filled',
-      color: 'light',
-      class: {
-        itemsButton: [
-          'data-[active=true]:text-black',
-          'data-[active=true]:bg-light-3',
-          'data-[active=true]:dark:bg-light-1'
-        ],
-        button: [
-          'text-black'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'dark',
-      class: {
-        itemsButton: [
-          'data-[active=true]:bg-dark-5',
-          'data-[active=true]:dark:bg-dark-5'
-        ]
-      }
-    },
     // outlined & color
     {
       variant: 'outlined',
@@ -252,11 +241,13 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         itemsButton: [
-          'data-[active=true]:text-secondary-500',
-          'data-[active=true]:border-secondary-500'
+          'data-[active=true]:text-dark-1',
+          'data-[active=true]:border-light-4',
+          'data-[active=true]:dark:text-light-4',
+          'data-[active=true]:dark:border-dark-2'
         ]
       }
     },
@@ -300,32 +291,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'outlined',
-      color: 'light',
-      class: {
-        itemsButton: [
-          'data-[active=true]:text-black',
-          'data-[active=true]:border-light-5',
-          'data-[active=true]:dark:text-light-1',
-          'data-[active=true]:dark:border-light-1'
-        ],
-        button: [
-          'text-black',
-          'dark:text-white'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'dark',
-      class: {
-        itemsButton: [
-          'data-[active=true]:text-dark-5',
-          'data-[active=true]:border-dark-5'
-        ]
-      }
-    },
     // ghost & color
     {
       variant: 'ghost',
@@ -340,12 +305,13 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         itemsButton: [
-          'data-[active=true]:text-secondary-500',
-          'data-[active=true]:bg-secondary-500/[.15]',
-          'data-[active=true]:dark:bg-secondary-500/[.15]'
+          'data-[active=true]:text-dark-1',
+          'data-[active=true]:bg-light-5/[.15]',
+          'data-[active=true]:dark:text-light-4',
+          'data-[active=true]:dark:bg-dark-4/[.15]'
         ]
       }
     },
@@ -393,33 +359,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'ghost',
-      color: 'light',
-      class: {
-        itemsButton: [
-          'data-[active=true]:text-dark-1',
-          'data-[active=true]:bg-dark-1/[.15]',
-          'data-[active=true]:dark:text-light-1',
-          'data-[active=true]:dark:bg-light-1/[.15]'
-        ],
-        button: [
-          'text-black',
-          'dark:text-white'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'dark',
-      class: {
-        itemsButton: [
-          'data-[active=true]:text-dark-5',
-          'data-[active=true]:bg-dark-5/[.15]',
-          'data-[active=true]:dark:bg-dark-5/[.15]'
-        ]
-      }
-    },
     // link & color
     {
       variant: 'link',
@@ -432,10 +371,11 @@ export default tv({
     },
     {
       variant: 'link',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         itemsButton: [
-          'data-[active=true]:text-secondary-500'
+          'data-[active=true]:text-dark-3',
+          'data-[active=true]:dark:text-light-5'
         ]
       }
     },
@@ -475,21 +415,72 @@ export default tv({
         ]
       }
     },
+    // gradient & color
     {
-      variant: 'link',
-      color: 'light',
+      variant: 'gradient',
+      color: 'primary',
       class: {
         itemsButton: [
-          'data-[active=true]:text-light-1'
+          'data-[active=true]:from-primary-500',
+          'data-[active=true]:to-primary-900'
         ]
       }
     },
     {
-      variant: 'link',
-      color: 'dark',
+      variant: 'gradient',
+      color: 'neutral',
       class: {
         itemsButton: [
-          'data-[active=true]:text-dark-5'
+          'data-[active=true]:from-light-1',
+          'data-[active=true]:to-light-5',
+          'data-[active=true]:text-dark-1',
+          'data-[active=true]:dark:from-dark-1',
+          'data-[active=true]:dark:to-dark-5',
+          'data-[active=true]:dark:text-light-3'
+        ],
+        button: [
+          'text-dark-1',
+          'dark:text-light-3'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'success',
+      class: {
+        itemsButton: [
+          'data-[active=true]:from-success-500',
+          'data-[active=true]:to-success-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'info',
+      class: {
+        itemsButton: [
+          'data-[active=true]:from-info-500',
+          'data-[active=true]:to-info-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'warning',
+      class: {
+        itemsButton: [
+          'data-[active=true]:from-warning-500',
+          'data-[active=true]:to-warning-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'error',
+      class: {
+        itemsButton: [
+          'data-[active=true]:from-error-500',
+          'data-[active=true]:to-error-900'
         ]
       }
     }

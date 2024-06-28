@@ -66,15 +66,15 @@ describe('Tabs component', () => {
         expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
       })
 
-      it('should be color secondary when props.color is secondary', () => {
+      it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkTabs, {
           props: {
-            color: 'secondary',
+            color: 'neutral',
             tabs
           }
         })
 
-        expect(wrapper.find('.bg-secondary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-4').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -120,28 +120,6 @@ describe('Tabs component', () => {
 
         expect(wrapper.find('.bg-error-500').exists()).toBe(true)
       })
-
-      it('should be color light when props.color is light', () => {
-        wrapper = mount(VkTabs, {
-          props: {
-            color: 'light',
-            tabs
-          }
-        })
-
-        expect(wrapper.find('.bg-light-1').exists()).toBe(true)
-      })
-
-      it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkTabs, {
-          props: {
-            color: 'dark',
-            tabs
-          }
-        })
-
-        expect(wrapper.find('.bg-dark-5').exists()).toBe(true)
-      })
     })
 
     describe('When shape prop changes', () => {
@@ -176,6 +154,17 @@ describe('Tabs component', () => {
         })
 
         expect(wrapper.find('.rounded-none').exists()).toBe(true)
+      })
+
+      it('should be gradient when props.shape is gradient', () => {
+        wrapper = mount(VkTabs, {
+          props: {
+            shape: 'gradient',
+            tabs
+          }
+        })
+
+        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
       })
     })
 
@@ -226,7 +215,7 @@ describe('Tabs component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkTabs, {
           props: {
             variant: 'filled',
@@ -237,7 +226,7 @@ describe('Tabs component', () => {
         expect(wrapper.find('.bg-light-3').exists()).toBe(true)
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkTabs, {
           props: {
             variant: 'outlined',
@@ -248,7 +237,7 @@ describe('Tabs component', () => {
         expect(wrapper.find('.border-2').exists()).toBe(true)
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkTabs, {
           props: {
             variant: 'ghost',

@@ -20,12 +20,12 @@ const collapseId = 'collapse-' + Math.floor(Math.random() * 100000)
 <template>
   <div
     :class="classes"
-    :data-size="props.size"
-    :data-compact="props.compact"
-    :data-separator="props.separator"
-    :data-variant="props.variant"
-    :data-multiple="props.multiple"
-    :data-shape="props.shape"
+    :data-size="size"
+    :data-compact="compact"
+    :data-separator="separator"
+    :data-variant="variant"
+    :data-multiple="multiple"
+    :data-shape="shape"
     :data-collapse-id="collapseId"
   >
     <slot />

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
-import variantOptions from '@/data/variantOptions'
+import variantWithGradient from '@/data/variantWithGradient'
 import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
@@ -20,24 +20,19 @@ const form = ref({
   flat: false
 })
 
-const colors = [
-  ...colorOptions,
-  { value: 'neutral', label: 'Neutral' }
-]
-
 const navbarProps = [
   {
     prop: 'color',
     required: false,
     description: 'The color theme of the Navbar.',
-    values: 'primary, secondary, error, warning, info, success, light, dark, neutral',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'neutral'
   },
   {
     prop: 'variant',
     required: false,
     description: 'The variant of the Navbar.',
-    values: 'filled, outlined, ghost',
+    values: 'filled, outlined, ghost, gradient',
     default: 'filled'
   },
   {
@@ -113,13 +108,13 @@ const navbarSlots = [
       <vk-select
         placeholder="Color"
         size="sm"
-        :options="colors"
+        :options="colorOptions"
         v-model="form.color"
       />
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptions"
+        :options="variantWithGradient"
         v-model="form.variant"
       />
       <vk-select
@@ -157,7 +152,7 @@ const navbarSlots = [
       >
         <div class="w-full grid grid-cols-3 gap-4">
           <div
-            v-for="color in colors"
+            v-for="color in colorOptions"
             :key="color.value"
             class="w-full"
           >
@@ -181,7 +176,7 @@ const navbarSlots = [
         gap
       >
         <div
-          v-for="variant in variantOptions"
+          v-for="variant in variantWithGradient"
           :key="variant.value"
           class="w-full"
         >

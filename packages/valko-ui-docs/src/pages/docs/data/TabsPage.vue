@@ -11,12 +11,8 @@ import slotHeaders from '@/data/slotHeaders'
 
 const shapes = [
   ...shapeOptions,
-  { value: 'line', label: 'Line' }
-]
-
-const colors = [
-  ...colorOptions,
-  { value: 'neutral', label: 'Neutral' }
+  { value: 'line', label: 'Line' },
+  { value: 'gradient', label: 'Gradient' }
 ]
 
 const tabs = [
@@ -58,7 +54,7 @@ const tabsProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Tabs.',
-    values: 'primary, secondary, error, warning, info, success, light, dark, neutral',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {
@@ -72,7 +68,7 @@ const tabsProps = [
     prop: 'shape',
     required: false,
     description: 'The Tabs shape.',
-    values: 'line, rounded, soft, square',
+    values: 'line, rounded, soft, square, gradient',
     default: 'soft'
   },
   {
@@ -183,7 +179,7 @@ const tabsSlots = [
         type="outlined"
         placeholder="Color"
         size="sm"
-        :options="colors"
+        :options="colorOptions"
         v-model="form.color"
       />
       <vk-select
@@ -228,7 +224,7 @@ const tabsSlots = [
       >
         <div class="grow gap-4 grid grid-cols-2">
           <div
-            v-for="color in colors"
+            v-for="color in colorOptions"
             :key="color.value"
           >
             <span> {{ color.label }} </span>

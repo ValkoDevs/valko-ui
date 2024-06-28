@@ -1,6 +1,6 @@
-import type { Shapes, Color, Sizes, Variants } from './common'
+import type { Shapes, Color, Sizes, VariantsAlt } from './common'
 
-export interface TagProps extends Shapes, Sizes, Variants {
+export interface TagProps extends Shapes, Sizes, VariantsAlt {
   text: string;
   color?: Color | 'neutral';
   iconLeft?: string;
