@@ -196,7 +196,7 @@ describe('Avatar component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkAvatar, {
           props: {
             src: 'example.url',
@@ -207,7 +207,7 @@ describe('Avatar component', () => {
         expect(wrapper.find('.text-light-1').exists()).toBe(true)
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkAvatar, {
           props: {
             src: 'example.url',
@@ -218,7 +218,7 @@ describe('Avatar component', () => {
         expect(wrapper.find('.vk-avatar').classes()).toContain('border-[3px]')
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkAvatar, {
           props: {
             src: 'example.url',
@@ -227,6 +227,17 @@ describe('Avatar component', () => {
         })
 
         expect(wrapper.find('.vk-avatar').classes()).toContain('bg-primary-500/[.20]')
+      })
+
+      it('should be gradient when props.variant is gradient', () => {
+        wrapper = mount(VkAvatar, {
+          props: {
+            src: 'example.url',
+            variant: 'gradient'
+          }
+        })
+
+        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
       })
     })
 

@@ -184,7 +184,7 @@ describe('Alert component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkAlert, {
           props: {
             variant: 'filled'
@@ -194,7 +194,7 @@ describe('Alert component', () => {
         expect(wrapper.find('.text-light-1').exists()).toBe(true)
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkAlert, {
           props: {
             variant: 'outlined'
@@ -204,7 +204,7 @@ describe('Alert component', () => {
         expect(wrapper.find('.border-2').exists()).toBe(true)
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkAlert, {
           props: {
             variant: 'ghost'
@@ -212,6 +212,16 @@ describe('Alert component', () => {
         })
 
         expect(wrapper.find('.shadow-none').exists()).toBe(true)
+      })
+
+      it('should be gradient when props.variant is gradient', () => {
+        wrapper = mount(VkAlert, {
+          props: {
+            variant: 'gradient'
+          }
+        })
+
+        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
       })
     })
 

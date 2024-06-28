@@ -171,7 +171,7 @@ describe('Divider component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkDivider, {
           props: {
             variant: 'filled'
@@ -181,7 +181,7 @@ describe('Divider component', () => {
         expect(wrapper.find('.vk-filled').exists()).toBe(true)
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkDivider, {
           props: {
             variant: 'outlined'
@@ -191,7 +191,7 @@ describe('Divider component', () => {
         expect(wrapper.find('.border').exists()).toBe(true)
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkDivider, {
           props: {
             variant: 'ghost'

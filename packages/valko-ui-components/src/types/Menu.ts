@@ -11,7 +11,7 @@ export interface MenuItem {
 }
 
 export interface MenuProps extends Colors, Sizes, Shapes {
-  variant: VariantWithGradient | 'link' | 'line';
+  variant?: VariantWithGradient | 'link' | 'line';
   items: MenuItem[];
   active: null | string | number;
   floating?: boolean;

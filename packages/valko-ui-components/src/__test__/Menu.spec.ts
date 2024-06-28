@@ -215,7 +215,7 @@ describe('Menu component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkMenu, {
           props: {
             variant: 'filled',
@@ -227,7 +227,7 @@ describe('Menu component', () => {
         expect(wrapper.find('.vk-menu__group').exists()).toBe(true)
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkMenu, {
           props: {
             variant: 'outlined',
@@ -239,7 +239,7 @@ describe('Menu component', () => {
         expect(wrapper.find('.border-2').exists()).toBe(true)
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkMenu, {
           props: {
             variant: 'ghost',
@@ -251,7 +251,7 @@ describe('Menu component', () => {
         expect(wrapper.find('.vk-menu__ghost').exists()).toBe(true)
       })
 
-      it('should be link when props.size is link', () => {
+      it('should be link when props.variant is link', () => {
         wrapper = mount(VkMenu, {
           props: {
             variant: 'link',
@@ -263,7 +263,7 @@ describe('Menu component', () => {
         expect(wrapper.find('.vk-menu__line').exists()).toBe(true)
       })
 
-      it('should be line when props.size is line', () => {
+      it('should be line when props.variant is line', () => {
         wrapper = mount(VkMenu, {
           props: {
             variant: 'line',
@@ -273,6 +273,18 @@ describe('Menu component', () => {
         })
 
         expect(wrapper.find('.border-l-2').exists()).toBe(true)
+      })
+
+      it('should be gradient when props.variant is gradient', () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            variant: 'gradient',
+            items: menuItems,
+            active: 1
+          }
+        })
+
+        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
       })
     })
   })

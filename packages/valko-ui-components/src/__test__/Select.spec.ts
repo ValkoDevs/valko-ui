@@ -230,7 +230,7 @@ describe('Select component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkSelect, {
           props: {
             options,
@@ -241,7 +241,7 @@ describe('Select component', () => {
         expect(wrapper.find('.border-b-2').exists()).toBe(true)
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkSelect, {
           props: {
             options,
@@ -252,7 +252,7 @@ describe('Select component', () => {
         expect(wrapper.find('.border-2').exists()).toBe(true)
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkSelect, {
           props: {
             options,

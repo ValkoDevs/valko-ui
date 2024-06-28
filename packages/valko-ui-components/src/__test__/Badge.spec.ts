@@ -185,6 +185,18 @@ describe('Avatar component', () => {
         expect(wrapper.find('.vk-badge__content').classes()).toContain('size-4')
       })
     })
+
+    describe('When prop gradient changes', () => {
+      it('should be gradient when is true', () => {
+        wrapper = mount(VkBadge, {
+          props: {
+            gradient: true
+          }
+        })
+
+        expect(wrapper.find('.vk-badge__content').classes()).toContain('bg-gradient-to-br')
+      })
+    })
   })
 
   describe('Slots', () => {

@@ -227,7 +227,7 @@ describe('Dropdown component', () => {
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:text-light-1')
       })
 
-      it('should be outlined when props.size is outlined', async () => {
+      it('should be outlined when props.variant is outlined', async () => {
         wrapper = mount(VkDropdown, {
           props: {
             variant: 'outlined',
@@ -239,7 +239,7 @@ describe('Dropdown component', () => {
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('border-2')
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkDropdown, {
           props: {
             variant: 'ghost',
@@ -250,7 +250,7 @@ describe('Dropdown component', () => {
         expect(wrapper.find('.shadow-none').exists()).toBe(true)
       })
 
-      it('should be link when props.size is link', () => {
+      it('should be link when props.variant is link', () => {
         wrapper = mount(VkDropdown, {
           props: {
             variant: 'link',
@@ -259,6 +259,17 @@ describe('Dropdown component', () => {
         })
 
         expect(wrapper.find('.bg-transparent').exists()).toBe(true)
+      })
+
+      it('should be gradient when props.variant is gradient', () => {
+        wrapper = mount(VkDropdown, {
+          props: {
+            variant: 'gradient',
+            items
+          }
+        })
+
+        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
       })
     })
   })

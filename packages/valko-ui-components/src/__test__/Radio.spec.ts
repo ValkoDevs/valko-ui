@@ -183,7 +183,7 @@ describe('Radio component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkRadio, {
           props: {
             variant: 'filled'
@@ -193,7 +193,7 @@ describe('Radio component', () => {
         expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary-500')
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkRadio, {
           props: {
             variant: 'outlined',
@@ -205,7 +205,7 @@ describe('Radio component', () => {
         expect(wrapper.find('.text-primary-500').exists()).toBe(true)
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkRadio, {
           props: {
             variant: 'ghost'

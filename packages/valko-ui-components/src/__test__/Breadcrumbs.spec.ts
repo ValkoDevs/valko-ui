@@ -197,7 +197,7 @@ describe('Breadcrumbs component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkBreadcrumbs, {
           props: {
             crumbs,
@@ -208,7 +208,7 @@ describe('Breadcrumbs component', () => {
         expect(wrapper.find('.bg-light-3').exists()).toBe(true)
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkBreadcrumbs, {
           props: {
             crumbs,
@@ -219,7 +219,7 @@ describe('Breadcrumbs component', () => {
         expect(wrapper.find('.border-2').exists()).toBe(true)
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkBreadcrumbs, {
           props: {
             crumbs,
@@ -230,7 +230,7 @@ describe('Breadcrumbs component', () => {
         expect(wrapper.find('.vk-breadcrumbs').classes()).toContain('bg-light-3/[.50]')
       })
 
-      it('should be link when props.size is link', () => {
+      it('should be link when props.variant is link', () => {
         wrapper = mount(VkBreadcrumbs, {
           props: {
             crumbs,
