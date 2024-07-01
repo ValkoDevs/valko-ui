@@ -9,14 +9,15 @@ export default tv({
     panel: [
       'vk-popover__panel',
       'p-2',
-      'mt-3',
       'bg-light-3',
       'shadow-md',
       'absolute',
-      'left-1/2',
       'z-10',
-      'transform',
-      '-translate-x-1/2',
+      'origin-center',
+      'data-[text=true]:max-w-xs',
+      'data-[text=true]:w-fit',
+      'data-[text=true]:h-fit',
+      'data-[text=true]:truncate',
       'dark:bg-dark-3'
     ]
   },
@@ -42,6 +43,40 @@ export default tv({
       square: {
         panel: [
           'rounded-none'
+        ]
+      }
+    },
+    placement: {
+      top: {
+        panel: [
+          'mb-1',
+          'bottom-full',
+          'left-1/2',
+          '-translate-x-1/2'
+        ]
+      },
+      bottom: {
+        panel: [
+          'mt-1',
+          'top-full',
+          'left-1/2',
+          '-translate-x-1/2'
+        ]
+      },
+      left: {
+        panel: [
+          'mr-1',
+          'right-full',
+          'top-1/2',
+          '-translate-y-1/2'
+        ]
+      },
+      right: {
+        panel: [
+          'ml-1',
+          'left-full',
+          'top-1/2',
+          '-translate-y-1/2'
         ]
       }
     }

@@ -9,7 +9,9 @@ defineOptions({ name: 'VkPopover' })
 
 const props = withDefaults(defineProps<PopoverProps>(), {
   isOpen: false,
-  shape: 'soft'
+  shape: 'soft',
+  text: '',
+  placement: 'bottom'
 })
 
 const classes = useStyle<PopoverProps, SlotStyles>(props, styles)
@@ -20,19 +22,22 @@ const classes = useStyle<PopoverProps, SlotStyles>(props, styles)
     <slot name="default" />
 
     <transition
-      enter-active-class="transition duration-200 ease-out"
-      enter-from-class="translate-y-1 opacity-0"
-      enter-to-class="translate-y-0 opacity-100"
-      leave-active-class="transition duration-150 ease-in"
-      leave-from-class="translate-y-0 opacity-100"
-      leave-to-class="translate-y-1 opacity-0"
+      enter-active-class="transition-transform duration-200 ease-out"
+      enter-from-class="opacity-0 scale-95"
+      enter-to-class="opacity-100 scale-100"
+      leave-active-class="transition-opacity duration-150 ease-in"
+      leave-from-class="opacity-100"
+      leave-to-class="opacity-0"
     >
       <popover-panel
         v-if="isOpen"
         static
         :class="classes.panel"
+        :data-text="!!text"
       >
-        <slot name="popover-content" />
+        <slot name="popover-content">
+          {{ text }}
+        </slot>
       </popover-panel>
     </transition>
   </popover>

@@ -22,6 +22,10 @@ describe('Popover component', () => {
         expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
 
+      it('should be placement bottom', () => {
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('mt-1')
+      })
+
       it('should not be flat', () => {
         expect(wrapper.find('.shadow-none').exists()).toBe(false)
       })
@@ -59,6 +63,52 @@ describe('Popover component', () => {
         })
 
         expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-none')
+      })
+    })
+
+    describe('When placement prop changes', () => {
+      it('should be top when props.placement is top', () => {
+        wrapper = mount(VkPopover, {
+          props: {
+            isOpen: true,
+            placement: 'top'
+          }
+        })
+
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('mb-1')
+      })
+
+      it('should be bottom when props.placement is bottom', () => {
+        wrapper = mount(VkPopover, {
+          props: {
+            isOpen: true,
+            placement: 'bottom'
+          }
+        })
+
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('mt-1')
+      })
+
+      it('should be left when props.placement is left', () => {
+        wrapper = mount(VkPopover, {
+          props: {
+            isOpen: true,
+            placement: 'left'
+          }
+        })
+
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('mr-1')
+      })
+
+      it('should be right when props.placement is right', () => {
+        wrapper = mount(VkPopover, {
+          props: {
+            isOpen: true,
+            placement: 'right'
+          }
+        })
+
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('ml-1')
       })
     })
   })

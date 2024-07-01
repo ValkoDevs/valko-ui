@@ -15,6 +15,7 @@ export default tv({
       'shadow-md',
       'truncate',
       'origin-center',
+      'transform',
       'absolute',
       'bg-light-3',
       'text-dark-5',
@@ -72,7 +73,7 @@ export default tv({
           'mb-1',
           'bottom-full',
           'left-1/2',
-          'transform -translate-x-1/2'
+          '-translate-x-1/2'
         ]
       },
       bottom: {
@@ -80,7 +81,7 @@ export default tv({
           'mt-1',
           'top-full',
           'left-1/2',
-          'transform -translate-x-1/2'
+          '-translate-x-1/2'
         ]
       },
       left: {
@@ -88,7 +89,7 @@ export default tv({
           'mr-1',
           'right-full',
           'top-1/2',
-          'transform -translate-y-1/2'
+          '-translate-y-1/2'
         ]
       },
       right: {
@@ -96,7 +97,7 @@ export default tv({
           'ml-1',
           'left-full',
           'top-1/2',
-          'transform -translate-y-1/2'
+          '-translate-y-1/2'
         ]
       }
     },

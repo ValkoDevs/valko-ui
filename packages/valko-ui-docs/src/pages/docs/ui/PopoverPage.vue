@@ -10,16 +10,15 @@ const form = ref({
   shape: 'soft',
   isOpen: false,
   flat: false,
-  rounded: false,
-  soft: false,
-  square: false
+  placement: 'bottom'
 })
 
-const popoverStates = ref(shapeOptions.map(() => false))
-
-const togglePopover = (index: number) => {
-  popoverStates.value[index] = !popoverStates.value[index]
-}
+const placementOptions = [
+  { value: 'top', label: 'Top' },
+  { value: 'bottom', label: 'Bottom' },
+  { value: 'left', label: 'Left' },
+  { value: 'right', label: 'Right' }
+]
 
 const popoverProps = [
   {
@@ -35,6 +34,27 @@ const popoverProps = [
     description: 'The state of the Popover.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    prop: 'placement',
+    required: false,
+    description: 'The placement of the Popover.',
+    values: 'top, bottom, left, right',
+    default: 'bottom'
+  },
+  {
+    prop: 'flat',
+    required: false,
+    description: 'Whether the Popover displays a shadow.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
+    prop: 'text',
+    required: false,
+    description: 'Text displayed instead of the slot popover-content if the slot is not provided.',
+    values: 'string',
+    default: ''
   }
 ]
 
@@ -47,9 +67,20 @@ const popoverSlots = [
   {
     name: 'popover-content',
     description: 'Slot for the main content of the Popover.',
-    example: '<template #default>\n  <p>This is the main content of the Popover.</p>\n</template>'
+    example: '<template #popover-content>\n  <p>This is the main content of the Popover.</p>\n</template>'
   }
 ]
+
+const shapePopoverStates = ref(shapeOptions.map(() => false))
+const placementPopoverStates = ref(placementOptions.map(() => false))
+
+const toggleShapePopover = (index: number) => {
+  shapePopoverStates.value[index] = !shapePopoverStates.value[index]
+}
+
+const togglePlacementPopover = (index: number) => {
+  placementPopoverStates.value[index] = !placementPopoverStates.value[index]
+}
 </script>
 
 <template>
@@ -63,22 +94,12 @@ const popoverSlots = [
           :shape="form.shape"
           :is-open="form.isOpen"
           :flat="form.flat"
+          :placement="form.placement"
+          text="Popover Content"
         >
-          <template #default>
-            <vk-button @click="() => { form.isOpen = !form.isOpen }">
-              Click Me
-            </vk-button>
-          </template>
-
-          <template #popover-content>
-            <span>This is the popover</span>
-            <div class="flex justify-start items-center w-40 p-2">
-              <vk-button size="xs">
-                <vk-icon name="home" />
-                <span>Back to home</span>
-              </vk-button>
-            </div>
-          </template>
+          <vk-button @click="() => { form.isOpen = !form.isOpen }">
+            Click Me
+          </vk-button>
         </vk-popover>
       </div>
     </template>
@@ -89,6 +110,12 @@ const popoverSlots = [
         :options="shapeOptions"
         v-model="form.shape"
       />
+      <vk-select
+        placeholder="Placement"
+        size="sm"
+        :options="placementOptions"
+        v-model="form.placement"
+      />
       <vk-checkbox
         label="Flat"
         v-model="form.flat"
@@ -98,23 +125,37 @@ const popoverSlots = [
     <template #examples>
       <example-section
         title="Shapes"
-        justify="around"
+        justify="start"
         gap
       >
         <vk-popover
           v-for="(shape, index) in shapeOptions"
           :key="shape.value"
           :shape="shape.value"
-          :is-open="popoverStates[index]"
+          :is-open="shapePopoverStates[index]"
+          :text="shape.label"
         >
-          <template #default>
-            <vk-button @click="togglePopover(index)">
-              {{ shape.label }}
-            </vk-button>
-          </template>
-          <template #popover-content>
+          <vk-button @click="() => toggleShapePopover(index)">
             {{ shape.label }}
-          </template>
+          </vk-button>
+        </vk-popover>
+      </example-section>
+
+      <example-section
+        title="Placement"
+        justify="start"
+        gap
+      >
+        <vk-popover
+          v-for="(placement, index) in placementOptions"
+          :key="placement.value"
+          :placement="placement.value"
+          :is-open="placementPopoverStates[index]"
+          :text="placement.label"
+        >
+          <vk-button @click="() => togglePlacementPopover(index)">
+            {{ placement.label }}
+          </vk-button>
         </vk-popover>
       </example-section>
     </template>
