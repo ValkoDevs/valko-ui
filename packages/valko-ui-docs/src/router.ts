@@ -96,6 +96,10 @@ const routes = [
         component: lazyLoad('ui', 'NotificationPage')
       },
       {
+        path: 'popover',
+        component: lazyLoad('ui', 'PopoverPage')
+      },
+      {
         path: 'progressbar',
         component: lazyLoad('ui', 'ProgressbarPage')
       },

@@ -2,74 +2,53 @@ import { tv, type TV } from 'tailwind-variants'
 
 export default tv({
   slots: {
-    container: [
-      'vk-tooltip',
+    popover: [
+      'vk-popover',
       'relative'
     ],
-    tip: [
-      'vk-tooltip_tip',
+    panel: [
+      'vk-popover__panel',
       'p-2',
-      'w-fit',
-      'h-fit',
-      'max-w-xs',
-      'shadow-md',
-      'truncate',
-      'origin-center',
-      'transform',
-      'absolute',
       'bg-light-3',
-      'text-dark-5',
-      'shadow-dark-3',
-      'dark:text-light-1',
+      'shadow-md',
+      'absolute',
+      'z-10',
+      'origin-center',
+      'data-[text=true]:max-w-xs',
+      'data-[text=true]:w-fit',
+      'data-[text=true]:h-fit',
+      'data-[text=true]:truncate',
       'dark:bg-dark-3'
-    ],
-    mouseover: [
-      'vk-tooltip_mouseover'
     ]
   },
   variants: {
-    size: {
-      xs: {
-        tip: [
-          'text-xs'
-        ]
-      },
-      sm: {
-        tip: [
-          'text-sm'
-        ]
-      },
-      md: {
-        tip: [
-          'text-base'
-        ]
-      },
-      lg: {
-        tip: [
-          'text-lg'
+    flat: {
+      true: {
+        panel: [
+          'shadow-none'
         ]
       }
     },
     shape: {
       rounded: {
-        tip: [
-          'rounded-full'
+        panel: [
+          'rounded-2xl'
         ]
       },
       soft: {
-        tip: [
+        panel: [
           'rounded-lg'
         ]
       },
       square: {
-        tip: [
+        panel: [
           'rounded-none'
         ]
       }
     },
     placement: {
       top: {
-        tip: [
+        panel: [
           'mb-1',
           'bottom-full',
           'left-1/2',
@@ -77,7 +56,7 @@ export default tv({
         ]
       },
       bottom: {
-        tip: [
+        panel: [
           'mt-1',
           'top-full',
           'left-1/2',
@@ -85,7 +64,7 @@ export default tv({
         ]
       },
       left: {
-        tip: [
+        panel: [
           'mr-1',
           'right-full',
           'top-1/2',
@@ -93,18 +72,11 @@ export default tv({
         ]
       },
       right: {
-        tip: [
+        panel: [
           'ml-1',
           'left-full',
           'top-1/2',
           '-translate-y-1/2'
-        ]
-      }
-    },
-    flat: {
-      true: {
-        tip: [
-          'shadow-none'
         ]
       }
     }
