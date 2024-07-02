@@ -82,17 +82,17 @@ describe('Select component', () => {
         expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-primary-500')
       })
 
-      it('should be color secondary when props.color is secondary', async () => {
+      it('should be color neutral when props.color is neutral', async () => {
         wrapper = mount(VkSelect, {
           props: {
             options,
-            color: 'secondary'
+            color: 'neutral'
           }
         })
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-secondary-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-light-3')
       })
 
       it('should be color success when props.color is success', async () => {
@@ -145,32 +145,6 @@ describe('Select component', () => {
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
         expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-error-500')
-      })
-
-      it('should be color light when props.color is light', async () => {
-        wrapper = mount(VkSelect, {
-          props: {
-            options,
-            color: 'light'
-          }
-        })
-
-        wrapper.find('.vk-input__input').trigger('focus')
-        await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-light-1')
-      })
-
-      it('should be color dark when props.color is dark', async () => {
-        wrapper = mount(VkSelect, {
-          props: {
-            options,
-            color: 'dark'
-          }
-        })
-
-        wrapper.find('.vk-input__input').trigger('focus')
-        await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-dark-5')
       })
     })
 
@@ -256,7 +230,7 @@ describe('Select component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkSelect, {
           props: {
             options,
@@ -267,7 +241,7 @@ describe('Select component', () => {
         expect(wrapper.find('.border-b-2').exists()).toBe(true)
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkSelect, {
           props: {
             options,
@@ -278,7 +252,7 @@ describe('Select component', () => {
         expect(wrapper.find('.border-2').exists()).toBe(true)
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkSelect, {
           props: {
             options,

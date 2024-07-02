@@ -28,7 +28,7 @@ const onClick = () => emit('close')
 const defaultIcon = computed(() => {
   switch (props.color) {
     case 'primary': return 'bulb-filled'
-    case 'secondary': return 'bug-filled'
+    case 'neutral': return 'bug-filled'
     case 'success': return 'circle-check-filled'
     case 'info': return 'info-circle-filled'
     case 'warning': return 'alert-circle-filled'
@@ -43,16 +43,16 @@ const defaultIcon = computed(() => {
     :class="classes.container"
   >
     <vk-icon
-      v-if="props.icon !== null"
-      :name="props.icon ? props.icon : defaultIcon"
+      v-if="icon !== null"
+      :name="icon ? icon : defaultIcon"
       :class="classes.leftIcon"
     />
     <div :class="classes.content">
       <h6
         :class="classes.title"
-        v-if="props.title"
+        v-if="title"
       >
-        {{ props.title }}
+        {{ title }}
       </h6>
       <span :class="classes.span">
         <slot />
@@ -60,11 +60,11 @@ const defaultIcon = computed(() => {
     </div>
     <div
       :class="classes.button"
-      v-if="props.closable"
+      v-if="closable"
     >
       <vk-button
         variant="link"
-        color="secondary"
+        color="neutral"
         size="xs"
         shape="rounded"
         flat

@@ -39,9 +39,10 @@ export default tv({
           'text-primary-500'
         ]
       },
-      secondary: {
+      neutral: {
         icon: [
-          'text-secondary-500'
+          'text-light-4',
+          'dark:text-dark-3'
         ]
       },
       success: {
@@ -62,16 +63,6 @@ export default tv({
       error: {
         icon: [
           'text-error-500'
-        ]
-      },
-      light: {
-        icon: [
-          'text-light-1'
-        ]
-      },
-      dark: {
-        icon: [
-          'text-dark-5'
         ]
       }
     },

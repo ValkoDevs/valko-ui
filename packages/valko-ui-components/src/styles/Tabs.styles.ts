@@ -135,6 +135,19 @@ export default tv({
         cursor: [
           'rounded-lg'
         ]
+      },
+      gradient: {
+        list: [
+          'rounded-lg'
+        ],
+        tab: [
+          'rounded-lg',
+          'data-[headlessui-state=selected]:text-white'
+        ],
+        cursor: [
+          'bg-gradient-to-br',
+          'rounded-lg'
+        ]
       }
     },
     size: {
@@ -165,18 +178,11 @@ export default tv({
     },
     color: {
       primary: {},
-      secondary: {},
+      neutral: {},
       success: {},
       info: {},
       warning: {},
-      error: {},
-      light: {
-        tab: [
-          'data-[headlessui-state=selected]:text-black'
-        ]
-      },
-      dark: {},
-      neutral: {}
+      error: {}
     },
     grow: {
       true: {
@@ -216,11 +222,12 @@ export default tv({
       }
     },
     {
-      color: 'secondary',
+      color: 'neutral',
       shape: 'line',
       class: {
         cursor: [
-          'border-secondary-500'
+          'border-light-4',
+          'dark:border-dark-2'
         ]
       }
     },
@@ -260,34 +267,6 @@ export default tv({
         ]
       }
     },
-    {
-      color: 'light',
-      shape: 'line',
-      class: {
-        cursor: [
-          'border-light-1'
-        ]
-      }
-    },
-    {
-      color: 'dark',
-      shape: 'line',
-      class: {
-        cursor: [
-          'border-dark-5'
-        ]
-      }
-    },
-    {
-      color: 'neutral',
-      shape: 'line',
-      class: {
-        cursor: [
-          'border-dark-3',
-          'dark:border-light-3'
-        ]
-      }
-    },
     //color rounded square & soft
     {
       color: 'primary',
@@ -299,11 +278,16 @@ export default tv({
       }
     },
     {
-      color: 'secondary',
+      color: 'neutral',
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-secondary-500'
+          'bg-light-4',
+          'dark:bg-dark-2'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-dark-1',
+          'dark:data-[headlessui-state=selected]:text-light-3'
         ]
       }
     },
@@ -343,35 +327,70 @@ export default tv({
         ]
       }
     },
+    // color & gradient
     {
-      color: 'light',
-      shape: ['rounded', 'square', 'soft'],
+      shape: 'gradient',
+      color: 'primary',
       class: {
-        cursor: [
-          'bg-light-1'
+        container: [
+          'from-primary-500',
+          'to-primary-900'
         ]
       }
     },
     {
-      color: 'dark',
-      shape: ['rounded', 'square', 'soft'],
-      class: {
-        cursor: [
-          'bg-dark-5'
-        ]
-      }
-    },
-    {
+      shape: 'gradient',
       color: 'neutral',
-      shape: ['rounded', 'square', 'soft'],
       class: {
-        cursor: [
-          'bg-dark-3',
-          'dark:bg-light-3'
+        container: [
+          'from-light-1',
+          'to-light-5',
+          'dark:from-dark-1',
+          'dark:to-dark-5'
         ],
         tab: [
-          'data-[headlessui-state=selected]:text-white',
-          'dark:data-[headlessui-state=selected]:text-black'
+          'data-[headlessui-state=selected]:text-dark-1',
+          'dark:data-[headlessui-state=selected]:text-light-3'
+        ]
+      }
+    },
+    {
+      shape: 'gradient',
+      color: 'success',
+      class: {
+        container: [
+          'from-success-500',
+          'to-success-900'
+        ]
+      }
+    },
+    {
+      shape: 'gradient',
+      color: 'info',
+      class: {
+        container: [
+          'from-info-500',
+          'to-info-900'
+        ]
+      }
+    },
+    {
+      shape: 'gradient',
+      color: 'warning',
+      class: {
+        container: [
+          'from-warning-500',
+          'to-warning-900'
+        ]
+      }
+    },
+    {
+      shape: 'gradient',
+      color: 'error',
+      class: {
+        container: [
+          'from-error-500',
+          'to-error-900'
         ]
       }
     },

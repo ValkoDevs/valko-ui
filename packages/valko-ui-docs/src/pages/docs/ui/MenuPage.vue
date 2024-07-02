@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import { MenuItem } from '@valko-ui/components'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
-import variantOptions from '@/data/variantOptions'
+import variantWithGradient from '@/data/variantWithGradient'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
@@ -20,7 +20,7 @@ const form = ref({
 })
 
 const variants = [
-  ...variantOptions,
+  ...variantWithGradient,
   { value: 'link', label: 'Link' },
   { value: 'line', label: 'Line' }
 ]
@@ -36,14 +36,14 @@ const menuProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Menu.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {
     prop: 'variant',
     required: false,
     description: 'The variant of the Menu.',
-    values: 'filled, outlined, ghost',
+    values: 'filled, outlined, ghost, link, line, gradient',
     default: 'filled'
   },
   {
@@ -288,7 +288,7 @@ onMounted(() => {
     <template #examples>
       <example-section
         title="Colors"
-        justify="between"
+        justify="start"
         gap
       >
         <vk-menu

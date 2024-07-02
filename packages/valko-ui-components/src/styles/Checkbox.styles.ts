@@ -38,7 +38,7 @@ export default tv({
     ],
     label: [],
     icon: [
-      'text-white'
+      'text-light-1'
     ]
   },
   variants: {
@@ -118,7 +118,12 @@ export default tv({
     },
     color: {
       primary: {},
-      secondary: {},
+      neutral: {
+        helpertext: [
+          'text-dark-1',
+          'dark:text-light-3'
+        ]
+      },
       success: {
         helpertext: [
           'text-success-500'
@@ -137,16 +142,6 @@ export default tv({
       error: {
         helpertext: [
           'text-error-500'
-        ]
-      },
-      light: {
-        helpertext: [
-          'text-white'
-        ]
-      },
-      dark: {
-        helpertext: [
-          'text-black'
         ]
       }
     },
@@ -224,18 +219,22 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'secondary',
+      color: 'neutral',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-secondary-500',
-          'data-[checked=true]:border-secondary-500',
-          'data-[indeterminate=true]:border-secondary-500',
-          'data-[indeterminate=true]:bg-secondary-500',
-          'dark:data-[checked=true]:bg-secondary-500',
-          'dark:data-[checked=true]:border-secondary-500',
-          'dark:data-[indeterminate=true]:border-secondary-500',
-          'dark:data-[indeterminate=true]:bg-secondary-500'
+          'data-[checked=true]:bg-light-4',
+          'data-[checked=true]:border-light-4',
+          'data-[indeterminate=true]:border-light-4',
+          'data-[indeterminate=true]:bg-light-4',
+          'dark:data-[checked=true]:bg-dark-3',
+          'dark:data-[checked=true]:border-dark-3',
+          'dark:data-[indeterminate=true]:border-dark-3',
+          'dark:data-[indeterminate=true]:bg-dark-3'
+        ],
+        icon: [
+          'text-dark-1',
+          'dark:text-light-3'
         ]
       }
     },
@@ -307,43 +306,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'filled',
-      color: 'light',
-      disabled: false,
-      class: {
-        checkbox: [
-          'data-[checked=true]:bg-light-1',
-          'data-[checked=true]:border-light-1',
-          'data-[indeterminate=true]:border-light-1',
-          'data-[indeterminate=true]:bg-light-1',
-          'dark:data-[checked=true]:bg-light-1',
-          'dark:data-[checked=true]:border-light-1',
-          'dark:data-[indeterminate=true]:border-light-1',
-          'dark:data-[indeterminate=true]:bg-light-1'
-        ],
-        icon: [
-          'text-black'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'dark',
-      disabled: false,
-      class: {
-        checkbox: [
-          'data-[checked=true]:bg-dark-5',
-          'data-[checked=true]:border-dark-5',
-          'data-[indeterminate=true]:border-dark-5',
-          'data-[indeterminate=true]:bg-dark-5',
-          'dark:data-[checked=true]:bg-dark-5',
-          'dark:data-[checked=true]:border-dark-5',
-          'dark:data-[indeterminate=true]:border-dark-5',
-          'dark:data-[indeterminate=true]:bg-dark-5'
-        ]
-      }
-    },
     // outlined & color
     {
       variant: 'outlined',
@@ -364,18 +326,18 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'secondary',
+      color: 'neutral',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:border-secondary-500',
-          'data-[indeterminate=true]:border-secondary-500',
-          'dark:data-[checked=true]:border-secondary-500',
-          'dark:data-[indeterminate=true]:border-secondary-500'
+          'data-[checked=true]:border-light-4',
+          'data-[indeterminate=true]:border-light-4',
+          'dark:data-[checked=true]:border-dark-3',
+          'dark:data-[indeterminate=true]:border-dark-3'
         ],
         icon: [
-          'text-secondary-500',
-          'dark:text-secondary-500'
+          'text-dark-1',
+          'dark:text-light-3'
         ]
       }
     },
@@ -447,40 +409,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'outlined',
-      color: 'light',
-      disabled: false,
-      class: {
-        checkbox: [
-          'data-[checked=true]:border-light-1',
-          'data-[indeterminate=true]:border-light-1',
-          'dark:data-[checked=true]:border-light-1',
-          'dark:data-[indeterminate=true]:border-light-1'
-        ],
-        icon: [
-          'text-light-1',
-          'dark:text-light-1'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'dark',
-      disabled: false,
-      class: {
-        checkbox: [
-          'data-[checked=true]:border-dark-5',
-          'data-[indeterminate=true]:border-dark-5',
-          'dark:data-[checked=true]:border-dark-5',
-          'dark:data-[indeterminate=true]:border-dark-5'
-        ],
-        icon: [
-          'text-dark-5',
-          'dark:text-dark-5'
-        ]
-      }
-    },
     // ghost & color
     {
       variant: 'ghost',
@@ -500,17 +428,18 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'secondary',
+      color: 'neutral',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-secondary-500/[.15]',
-          'data-[indeterminate=true]:bg-secondary-500/[.15]',
-          'dark:data-[checked=true]:bg-secondary-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-secondary-500/[.15]'
+          'data-[checked=true]:bg-light-4/[.15]',
+          'data-[indeterminate=true]:bg-light-4/[.15]',
+          'dark:data-[checked=true]:bg-dark-3/[.15]',
+          'dark:data-[indeterminate=true]:bg-dark-3/[.15]'
         ],
         icon: [
-          'text-secondary-500'
+          'text-dark-1',
+          'dark:text-light-3'
         ]
       }
     },
@@ -575,38 +504,6 @@ export default tv({
         ],
         icon: [
           'text-error-500'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'light',
-      disabled: false,
-      class: {
-        checkbox: [
-          'data-[checked=true]:bg-light-1/[.15]',
-          'data-[indeterminate=true]:bg-light-1/[.15]',
-          'dark:data-[checked=true]:bg-light-1/[.15]',
-          'dark:data-[indeterminate=true]:bg-light-1/[.15]'
-        ],
-        icon: [
-          'text-white'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'dark',
-      disabled: false,
-      class: {
-        checkbox: [
-          'data-[checked=true]:bg-dark-5/[.15]',
-          'data-[indeterminate=true]:bg-dark-5/[.15]',
-          'dark:data-[checked=true]:bg-dark-5/[.15]',
-          'dark:data-[indeterminate=true]:bg-dark-5/[.15]'
-        ],
-        icon: [
-          'text-black'
         ]
       }
     }

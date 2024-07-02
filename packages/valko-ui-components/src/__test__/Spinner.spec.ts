@@ -33,14 +33,14 @@ describe('Spinner component', () => {
         expect(wrapper.find('.text-primary-500').exists()).toBe(true)
       })
 
-      it('should be color secondary when props.color is secondary', () => {
+      it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkSpinner, {
           props: {
-            color: 'secondary'
+            color: 'neutral'
           }
         })
 
-        expect(wrapper.find('.text-secondary-500').exists()).toBe(true)
+        expect(wrapper.find('.text-light-4').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -81,26 +81,6 @@ describe('Spinner component', () => {
         })
 
         expect(wrapper.find('.text-error-500').exists()).toBe(true)
-      })
-
-      it('should be color light when props.color is light', () => {
-        wrapper = mount(VkSpinner, {
-          props: {
-            color: 'light'
-          }
-        })
-
-        expect(wrapper.find('.text-light-1').exists()).toBe(true)
-      })
-
-      it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkSpinner, {
-          props: {
-            color: 'dark'
-          }
-        })
-
-        expect(wrapper.find('.text-dark-5').exists()).toBe(true)
       })
     })
 

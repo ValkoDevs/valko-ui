@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
-import variantOptions from '@/data/variantOptions'
+import variantOptionsExtended from '@/data/variantOptionsExtended'
 import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
@@ -18,16 +18,6 @@ const form = ref({
   separator: '>',
   flat: false
 })
-
-const variants = [
-  ...variantOptions,
-  { value: 'link', label: 'Link' }
-]
-
-const colors = [
-  ...colorOptions,
-  { value: 'neutral', label: 'Neutral' }
-]
 
 const crumbs = [
   { key: 'home', title: 'Home', onClick: () => useNotification({ text: 'Home' }) },
@@ -58,7 +48,7 @@ const breadcrumbsProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Breadcrumbs.',
-    values: 'primary, secondary, error, warning, info, success, light, dark, neutral',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {
@@ -181,13 +171,13 @@ const breadcrumbsEmits = [
       <vk-select
         placeholder="Color"
         size="sm"
-        :options="colors"
+        :options="colorOptions"
         v-model="form.color"
       />
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variants"
+        :options="variantOptionsExtended"
         v-model="form.variant"
       />
       <vk-select
@@ -219,7 +209,7 @@ const breadcrumbsEmits = [
       >
         <div class="flex flex-wrap gap-4">
           <div
-            v-for="color in colors"
+            v-for="color in colorOptions"
             :key="color.value"
             class="flex flex-col gap-1"
           >
@@ -238,7 +228,7 @@ const breadcrumbsEmits = [
       >
         <div class="grid grid-cols-2 gap-4">
           <div
-            v-for="variant in variants"
+            v-for="variant in variantOptionsExtended"
             :key="variant.value"
             class="flex flex-col gap-1"
           >

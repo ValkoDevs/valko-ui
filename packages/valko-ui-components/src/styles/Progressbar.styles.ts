@@ -61,6 +61,15 @@ export default tv({
           'border-light-5',
           'dark:border-dark-1'
         ]
+      },
+      gradient: {
+        container: [
+          'bg-light-3',
+          'dark:bg-dark-1'
+        ],
+        progress: [
+          'bg-gradient-to-br'
+        ]
       }
     },
     shape: {
@@ -91,9 +100,10 @@ export default tv({
           'bg-primary-500'
         ]
       },
-      secondary: {
+      neutral: {
         progress: [
-          'bg-secondary-500'
+          'bg-light-5',
+          'dark:bg-dark-3'
         ]
       },
       success: {
@@ -114,22 +124,6 @@ export default tv({
       error: {
         progress: [
           'bg-error-500'
-        ]
-      },
-      light: {
-        progress: [
-          'bg-light-1'
-        ],
-        content: [
-          'text-dark-5'
-        ]
-      },
-      dark: {
-        progress: [
-          'bg-dark-5'
-        ],
-        content: [
-          'text-light-5'
         ]
       }
     },
@@ -196,6 +190,7 @@ export default tv({
     }
   },
   compoundVariants: [
+    // ghost & color
     {
       variant: 'ghost',
       color: 'primary',
@@ -213,16 +208,19 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'secondary',
+      color: 'neutral',
       class: {
         progress: [
-          'bg-secondary-500/[.15]'
+          'bg-light-5/[.15]',
+          'dark:bg-dark-2/[.15]'
         ],
         buffer: [
-          'border-secondary-500/[.15]'
+          'border-light-3/[.15]',
+          'dark:border-dark-1/[.15]'
         ],
         content: [
-          'text-secondary-500'
+          'text-dark-1',
+          'dark:text-light-3'
         ]
       }
     },
@@ -286,33 +284,66 @@ export default tv({
         ]
       }
     },
+    // gradient & color
     {
-      variant: 'ghost',
-      color: 'light',
+      variant: 'gradient',
+      color: 'primary',
       class: {
         progress: [
-          'bg-light-1/[.15]'
-        ],
-        buffer: [
-          'border-light-1/[.15]'
-        ],
-        content: [
-          'text-light-1'
+          'from-primary-500',
+          'to-primary-900'
         ]
       }
     },
     {
-      variant: 'ghost',
-      color: 'dark',
+      variant: 'gradient',
+      color: 'neutral',
       class: {
         progress: [
-          'bg-dark-5/[.15]'
-        ],
-        buffer: [
-          'border-dark-5/[.15]'
-        ],
-        content: [
-          'text-dark-5'
+          'from-light-1',
+          'to-light-5',
+          'text-dark-1',
+          'dark:to-dark-5'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'success',
+      class: {
+        progress: [
+          'from-success-500',
+          'to-success-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'info',
+      class: {
+        progress: [
+          'from-info-500',
+          'to-info-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'warning',
+      class: {
+        progress: [
+          'from-warning-500',
+          'to-warning-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'error',
+      class: {
+        progress: [
+          'from-error-500',
+          'to-error-900'
         ]
       }
     },

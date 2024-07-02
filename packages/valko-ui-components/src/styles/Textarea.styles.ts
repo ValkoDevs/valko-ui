@@ -116,19 +116,24 @@ export default tv({
           'dark:text-light-3'
         ]
       },
-      secondary: {
+      neutral: {
         label: [
-          'text-secondary-500',
-          'peer-focus:text-secondary-600',
-          'dark:text-secondary-500'
+          'text-dark-1',
+          'peer-focus:text-dark-3',
+          'dark:text-light-3',
+          'dark:peer-focus:text-light-1'
         ],
         helper: [
-          'text-secondary-500',
-          'dark:text-secondary-500'
+          'text-dark-1',
+          'peer-focus:text-dark-3',
+          'dark:text-light-3',
+          'dark:peer-focus:text-light-1'
         ],
         counter: [
-          'text-secondary-500',
-          'dark:text-secondary-500'
+          'text-dark-1',
+          'peer-focus:text-dark-3',
+          'dark:text-light-3',
+          'dark:peer-focus:text-light-1'
         ]
       },
       success: {
@@ -189,36 +194,6 @@ export default tv({
         counter: [
           'text-error-500',
           'dark:text-error-500'
-        ]
-      },
-      light: {
-        label: [
-          'text-light-2',
-          'focus:text-light-1',
-          'dark:text-light-2'
-        ],
-        helper: [
-          'text-light-1',
-          'dark:text-light-1'
-        ],
-        counter: [
-          'text-light-1',
-          'dark:text-light-1'
-        ]
-      },
-      dark: {
-        label: [
-          'text-dark-4',
-          'focus:text-dark-5',
-          'dark:text-dark-4'
-        ],
-        helper: [
-          'text-dark-5',
-          'dark:text-dark-5'
-        ],
-        counter: [
-          'text-dark-5',
-          'dark:text-dark-5'
         ]
       }
     },
@@ -343,13 +318,16 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'secondary',
+      color: 'neutral',
       disabled: false,
       class: {
         textarea: [
-          'border-secondary-300',
-          'hover:border-secondary-400',
-          'focus:border-secondary-500'
+          'border-light-3',
+          'hover:border-light-4',
+          'focus:border-light-5',
+          'dark:border-dark-3',
+          'dark:hover:border-dark-2',
+          'dark:focus:border-dark-1'
         ]
       }
     },
@@ -409,34 +387,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'filled',
-      color: 'light',
-      disabled: false,
-      class: {
-        textarea: [
-          'border-light-3',
-          'hover:border-light-2',
-          'focus:border-light-1',
-          'dark:border-light-2',
-          'dark:focus:border-light-1'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'dark',
-      disabled: false,
-      class: {
-        textarea: [
-          'border-dark-3',
-          'hover:border-dark-4',
-          'focus:border-dark-5',
-          'dark:border-dark-4',
-          'dark:focus:border-dark-5'
-        ]
-      }
-    },
     // ghost & color
     {
       variant: 'ghost',
@@ -453,12 +403,12 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'secondary',
+      color: 'neutral',
       disabled: false,
       class: {
         textarea: [
-          'hover:border-secondary-300',
-          'focus:border-secondary-400',
+          'hover:border-neutral-300',
+          'focus:border-neutral-400',
           'dark:border-light-1',
           'dark:hover:border-light-3',
           'dark:focus:border-light-5'
@@ -517,32 +467,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'ghost',
-      color: 'light',
-      disabled: false,
-      class: {
-        textarea: [
-          'border-light-2',
-          'focus:border-light-1',
-          'dark:border-light-2',
-          'dark:focus:border-light-1'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'error',
-      disabled: false,
-      class: {
-        textarea: [
-          'border-error-4',
-          'focus:border-error-5',
-          'dark:border-error-4',
-          'dark:focus:border-error-5'
-        ]
-      }
-    },
     // outlined & color
     {
       variant: 'outlined',
@@ -556,11 +480,11 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'secondary',
+      color: 'neutral',
       disabled: false,
       class: {
         textarea: [
-          'focus:border-secondary-500'
+          'focus:border-neutral-500'
         ]
       }
     },
@@ -605,28 +529,6 @@ export default tv({
         textarea: [
           'border-error-600',
           'focus:border-error-600'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'light',
-      disabled: false,
-      class: {
-        textarea: [
-          'border-light-2',
-          'focus:border-light-1'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'dark',
-      disabled: false,
-      class: {
-        textarea: [
-          'border-dark-4',
-          'focus:border-dark-5'
         ]
       }
     },

@@ -51,16 +51,16 @@ watchEffect(async () => {
 <template>
   <div
     :class="classes.container"
-    :title="props.name"
+    :title="name"
   >
     <img
       v-if="verifiedSrc"
       :src="verifiedSrc"
-      :alt="props.name"
+      :alt="name"
       :class="classes.img"
     >
-    <span v-else-if="props.name">
-      {{ getInitials(props.name) }}
+    <span v-else-if="name">
+      {{ getInitials(name) }}
     </span>
     <vk-icon
       v-else

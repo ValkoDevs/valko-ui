@@ -22,7 +22,7 @@ describe('Button component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.text-white').exists()).toBe(true)
+        expect(wrapper.find('.text-light-1').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -57,14 +57,14 @@ describe('Button component', () => {
         expect(wrapper.find('.bg-primary-600').exists()).toBe(true)
       })
 
-      it('should be color secondary when props.color is secondary', () => {
+      it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkButton, {
           props: {
-            color: 'secondary'
+            color: 'neutral'
           }
         })
 
-        expect(wrapper.find('.bg-secondary-600').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -105,26 +105,6 @@ describe('Button component', () => {
         })
 
         expect(wrapper.find('.bg-error-600').exists()).toBe(true)
-      })
-
-      it('should be color light when props.color is light', () => {
-        wrapper = mount(VkButton, {
-          props: {
-            color: 'light'
-          }
-        })
-
-        expect(wrapper.find('.bg-light-2').exists()).toBe(true)
-      })
-
-      it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkButton, {
-          props: {
-            color: 'dark'
-          }
-        })
-
-        expect(wrapper.find('.bg-dark-4').exists()).toBe(true)
       })
     })
 
@@ -203,17 +183,17 @@ describe('Button component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkButton, {
           props: {
             variant: 'filled'
           }
         })
 
-        expect(wrapper.find('.text-white').exists()).toBe(true)
+        expect(wrapper.find('.text-light-1').exists()).toBe(true)
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkButton, {
           props: {
             variant: 'outlined'
@@ -223,7 +203,7 @@ describe('Button component', () => {
         expect(wrapper.find('.border-2').exists()).toBe(true)
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkButton, {
           props: {
             variant: 'ghost'
@@ -233,7 +213,7 @@ describe('Button component', () => {
         expect(wrapper.find('.shadow-none').exists()).toBe(true)
       })
 
-      it('should be link when props.size is link', () => {
+      it('should be link when props.variant is link', () => {
         wrapper = mount(VkButton, {
           props: {
             variant: 'link'
@@ -241,6 +221,16 @@ describe('Button component', () => {
         })
 
         expect(wrapper.find('.bg-transparent').exists()).toBe(true)
+      })
+
+      it('should be gradient when props.variant is gradient', () => {
+        wrapper = mount(VkButton, {
+          props: {
+            variant: 'gradient'
+          }
+        })
+
+        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
       })
     })
   })

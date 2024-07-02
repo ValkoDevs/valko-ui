@@ -65,16 +65,16 @@ describe('Menu component', () => {
         expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-primary-500')
       })
 
-      it('should be color secondary when props.color is secondary', () => {
+      it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkMenu, {
           props: {
-            color: 'secondary',
+            color: 'neutral',
             items: menuItems,
             active: 1
           }
         })
 
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-secondary-500')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-light-3')
       })
 
       it('should be color success when props.color is success', () => {
@@ -123,30 +123,6 @@ describe('Menu component', () => {
         })
 
         expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-error-500')
-      })
-
-      it('should be color light when props.color is light', () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            color: 'light',
-            items: menuItems,
-            active: 1
-          }
-        })
-
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-light-1')
-      })
-
-      it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            color: 'dark',
-            items: menuItems,
-            active: 1
-          }
-        })
-
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-dark-3')
       })
     })
 
@@ -239,7 +215,7 @@ describe('Menu component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkMenu, {
           props: {
             variant: 'filled',
@@ -251,7 +227,7 @@ describe('Menu component', () => {
         expect(wrapper.find('.vk-menu__group').exists()).toBe(true)
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkMenu, {
           props: {
             variant: 'outlined',
@@ -263,7 +239,7 @@ describe('Menu component', () => {
         expect(wrapper.find('.border-2').exists()).toBe(true)
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkMenu, {
           props: {
             variant: 'ghost',
@@ -275,7 +251,7 @@ describe('Menu component', () => {
         expect(wrapper.find('.vk-menu__ghost').exists()).toBe(true)
       })
 
-      it('should be link when props.size is link', () => {
+      it('should be link when props.variant is link', () => {
         wrapper = mount(VkMenu, {
           props: {
             variant: 'link',
@@ -287,7 +263,7 @@ describe('Menu component', () => {
         expect(wrapper.find('.vk-menu__line').exists()).toBe(true)
       })
 
-      it('should be line when props.size is line', () => {
+      it('should be line when props.variant is line', () => {
         wrapper = mount(VkMenu, {
           props: {
             variant: 'line',
@@ -297,6 +273,18 @@ describe('Menu component', () => {
         })
 
         expect(wrapper.find('.border-l-2').exists()).toBe(true)
+      })
+
+      it('should be gradient when props.variant is gradient', () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            variant: 'gradient',
+            items: menuItems,
+            active: 1
+          }
+        })
+
+        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
       })
     })
   })

@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
-import variantOptions from '@/data/variantOptions'
+import variantWithGradient from '@/data/variantWithGradient'
 import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
@@ -35,14 +35,14 @@ const progressbarProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Progressbar.',
-    values: 'primary, secondary, success, info, warning, error, light, dark',
+    values: 'primary, neutral, success, info, warning, error',
     default: 'primary'
   },
   {
     prop: 'variant',
     required: false,
     description: 'The variant of the Progressbar.',
-    values: 'filled, outlined, ghost',
+    values: 'filled, outlined, ghost, gradient',
     default: 'filled'
   },
   {
@@ -129,7 +129,7 @@ const progressbarSlots = [
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptions"
+        :options="variantWithGradient"
         v-model="form.variant"
       />
       <vk-select
@@ -210,7 +210,7 @@ const progressbarSlots = [
       >
         <div class="grow gap-4 grid grid-cols-3">
           <vk-progressbar
-            v-for="variant in variantOptions"
+            v-for="variant in variantWithGradient"
             :key="variant.value"
             :variant="variant.value"
             progress="25"

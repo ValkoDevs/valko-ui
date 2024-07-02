@@ -23,7 +23,7 @@ describe('Tag component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.text-white').exists()).toBe(true)
+        expect(wrapper.find('.text-light-1').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -59,15 +59,15 @@ describe('Tag component', () => {
         expect(wrapper.find('.bg-primary-600').exists()).toBe(true)
       })
 
-      it('should be color secondary when props.color is secondary', () => {
+      it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkTag, {
           props: {
-            color: 'secondary',
+            color: 'neutral',
             text: 'Hello World'
           }
         })
 
-        expect(wrapper.find('.bg-secondary-600').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-4').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -112,39 +112,6 @@ describe('Tag component', () => {
         })
 
         expect(wrapper.find('.bg-error-600').exists()).toBe(true)
-      })
-
-      it('should be color light when props.color is light', () => {
-        wrapper = mount(VkTag, {
-          props: {
-            color: 'light',
-            text: 'Hello World'
-          }
-        })
-
-        expect(wrapper.find('.bg-light-2').exists()).toBe(true)
-      })
-
-      it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkTag, {
-          props: {
-            color: 'dark',
-            text: 'Hello World'
-          }
-        })
-
-        expect(wrapper.find('.bg-dark-4').exists()).toBe(true)
-      })
-
-      it('should be color neutral when props.color is neutral', () => {
-        wrapper = mount(VkTag, {
-          props: {
-            color: 'neutral',
-            text: 'Hello World'
-          }
-        })
-
-        expect(wrapper.find('.bg-light-4').exists()).toBe(true)
       })
     })
 
@@ -230,7 +197,7 @@ describe('Tag component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkTag, {
           props: {
             variant: 'filled',
@@ -238,10 +205,10 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.text-white').exists()).toBe(true)
+        expect(wrapper.find('.text-light-1').exists()).toBe(true)
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkTag, {
           props: {
             variant: 'outlined',
@@ -252,7 +219,7 @@ describe('Tag component', () => {
         expect(wrapper.find('.border-2').exists()).toBe(true)
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkTag, {
           props: {
             variant: 'ghost',
@@ -261,6 +228,17 @@ describe('Tag component', () => {
         })
 
         expect(wrapper.find('.shadow-none').exists()).toBe(true)
+      })
+
+      it('should be gradient when props.variant is gradient', () => {
+        wrapper = mount(VkTag, {
+          props: {
+            variant: 'gradient',
+            text: 'Hello World'
+          }
+        })
+
+        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
       })
     })
 
@@ -289,7 +267,7 @@ describe('Tag component', () => {
     })
 
     describe('Closable button color', () => {
-      it('should be light if variant is filled', () => {
+      it('should be neutral if variant is filled', () => {
         wrapper = mount(VkTag, {
           props: {
             variant: 'filled',
@@ -298,10 +276,10 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-tag__closable').classes()).toContain('text-light-1')
+        expect(wrapper.find('.vk-tag__closable').classes()).toContain('text-dark-3')
       })
 
-      it('should hava props.color if variant is outlined or ghost', () => {
+      it('should have props.color if variant is outlined or ghost', () => {
         wrapper = mount(VkTag, {
           props: {
             variant: 'outlined',

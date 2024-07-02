@@ -14,6 +14,7 @@ const form = ref({
   size: 'md',
   placement: 'top-right',
   content: 'new',
+  gradient: false,
   outlined: false,
   flat: false,
   hidden: false,
@@ -34,7 +35,7 @@ const badgeProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Badge.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {
@@ -121,6 +122,7 @@ const badgeSlots = [
         :flat="form.flat"
         :hidden="form.hidden"
         :dot="form.dot"
+        :gradient="form.gradient"
       >
         <vk-avatar
           :src="src"
@@ -173,6 +175,10 @@ const badgeSlots = [
       <vk-checkbox
         label="Dot"
         v-model="form.dot"
+      />
+      <vk-checkbox
+        label="Gradient"
+        v-model="form.gradient"
       />
     </template>
 
