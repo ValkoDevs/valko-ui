@@ -45,12 +45,12 @@ const bufferStyles = computed(() => !props.indeterminate ? `left: ${props.buffer
     />
     <div :class="classes.content">
       <slot
-        :pogress="props.progress"
-        :buffer="props.buffer"
+        :pogress="progress"
+        :buffer="buffer"
       />
     </div>
     <div
-      v-if="!!props.buffer && !props.indeterminate"
+      v-if="!!buffer && !indeterminate"
       :class="classes.buffer"
       :style="bufferStyles"
     />

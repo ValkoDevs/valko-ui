@@ -46,14 +46,14 @@ describe('Switch component', () => {
         expect(wrapper.find('.bg-primary-500')).toBeDefined()
       })
 
-      it('should be color secondary when props.color is secondary', () => {
+      it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkSwitch, {
           props: {
-            color: 'secondary'
+            color: 'neutral'
           }
         })
 
-        expect(wrapper.find('.bg-secondary-500')).toBeDefined()
+        expect(wrapper.find('.bg-light-5')).toBeDefined()
       })
 
       it('should be color success when props.color is success', () => {
@@ -172,7 +172,7 @@ describe('Switch component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkSwitch, {
           props: {
             variant: 'filled'
@@ -182,7 +182,7 @@ describe('Switch component', () => {
         expect(wrapper.find('.text-white')).toBeDefined()
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkSwitch, {
           props: {
             variant: 'outlined'
@@ -192,7 +192,7 @@ describe('Switch component', () => {
         expect(wrapper.find('.border-2')).toBeDefined()
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkSwitch, {
           props: {
             variant: 'ghost'

@@ -45,14 +45,14 @@ describe('Divider component', () => {
         expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
       })
 
-      it('should be color secondary when props.color is secondary', () => {
+      it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkDivider, {
           props: {
-            color: 'secondary'
+            color: 'neutral'
           }
         })
 
-        expect(wrapper.find('.bg-secondary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-4').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -93,36 +93,6 @@ describe('Divider component', () => {
         })
 
         expect(wrapper.find('.bg-error-500').exists()).toBe(true)
-      })
-
-      it('should be color light when props.color is light', () => {
-        wrapper = mount(VkDivider, {
-          props: {
-            color: 'light'
-          }
-        })
-
-        expect(wrapper.find('.bg-light-1').exists()).toBe(true)
-      })
-
-      it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkDivider, {
-          props: {
-            color: 'dark'
-          }
-        })
-
-        expect(wrapper.find('.bg-dark-5').exists()).toBe(true)
-      })
-
-      it('should be color neutral when props.color is neutral', () => {
-        wrapper = mount(VkDivider, {
-          props: {
-            color: 'neutral'
-          }
-        })
-
-        expect(wrapper.find('.bg-light-4').exists()).toBe(true)
       })
     })
 
@@ -201,7 +171,7 @@ describe('Divider component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkDivider, {
           props: {
             variant: 'filled'
@@ -211,7 +181,7 @@ describe('Divider component', () => {
         expect(wrapper.find('.vk-filled').exists()).toBe(true)
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkDivider, {
           props: {
             variant: 'outlined'
@@ -221,7 +191,7 @@ describe('Divider component', () => {
         expect(wrapper.find('.border').exists()).toBe(true)
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkDivider, {
           props: {
             variant: 'ghost'

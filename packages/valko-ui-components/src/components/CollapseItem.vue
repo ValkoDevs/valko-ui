@@ -45,7 +45,7 @@ const onClick = () => {
     >
       <slot name="title">
         <div>
-          {{ props.title }}
+          {{ title }}
         </div>
         <vk-icon
           name="chevron-left"

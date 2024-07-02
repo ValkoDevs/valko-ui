@@ -27,7 +27,7 @@ export default tv({
     variant: {
       filled: {
         container: [
-          'text-white'
+          'text-light-1'
         ]
       },
       ghost: {
@@ -38,6 +38,12 @@ export default tv({
       outlined: {
         container: [
           'border-2'
+        ]
+      },
+      gradient: {
+        container: [
+          'bg-gradient-to-br',
+          'text-light-1'
         ]
       }
     },
@@ -90,14 +96,11 @@ export default tv({
     },
     color: {
       primary: {},
-      secondary: {},
+      neutral: {},
       success: {},
       info: {},
       warning: {},
-      error: {},
-      light: {},
-      dark: {},
-      neutral: {}
+      error: {}
     },
     disabled: {
       true: {}
@@ -124,11 +127,14 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'secondary',
+      color: 'neutral',
       disabled: false,
       class: {
         container: [
-          'bg-secondary-600'
+          'bg-light-4',
+          'text-dark-1',
+          'dark:text-light-3',
+          'dark:bg-dark-3'
         ]
       }
     },
@@ -172,40 +178,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'filled',
-      color: 'light',
-      disabled: false,
-      class: {
-        container: [
-          'bg-light-2',
-          'text-black'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'dark',
-      disabled: false,
-      class: {
-        container: [
-          'bg-dark-4'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'neutral',
-      disabled: false,
-      class: {
-        container: [
-          'bg-light-4',
-          'text-black',
-          'dark:text-white',
-          'dark:bg-dark-3'
-        ]
-      }
-    },
     // ghost & color
     {
       variant: 'ghost',
@@ -220,12 +192,12 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'secondary',
+      color: 'neutral',
       disabled: false,
       class: {
         container: [
-          'text-secondary-600',
-          'bg-secondary-500/[.15]'
+          'bg-light-5/[.15]',
+          'dark:bg-dark-1/[.15]'
         ]
       }
     },
@@ -273,39 +245,6 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'ghost',
-      color: 'light',
-      disabled: false,
-      class: {
-        container: [
-          'text-light-1',
-          'bg-light-1/[.15]'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'dark',
-      disabled: false,
-      class: {
-        container: [
-          'text-dark-5',
-          'bg-dark-5/[.15]'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'neutral',
-      disabled: false,
-      class: {
-        container: [
-          'bg-light-5/[.15]',
-          'dark:bg-dark-1/[.15]'
-        ]
-      }
-    },
     // outlined & color
     {
       variant: 'outlined',
@@ -320,12 +259,12 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'secondary',
+      color: 'neutral',
       disabled: false,
       class: {
         container: [
-          'text-secondary-600',
-          'border-secondary-600'
+          'border-light-4',
+          'dark:border-dark-3'
         ]
       }
     },
@@ -373,36 +312,68 @@ export default tv({
         ]
       }
     },
+    // gradient & color
     {
-      variant: 'outlined',
-      color: 'light',
-      disabled: false,
+      variant: 'gradient',
+      color: 'primary',
       class: {
         container: [
-          'text-light-1',
-          'border-light-1'
+          'from-primary-500',
+          'to-primary-900'
         ]
       }
     },
     {
-      variant: 'outlined',
-      color: 'dark',
-      disabled: false,
-      class: {
-        container: [
-          'text-dark-5',
-          'border-dark-5'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
+      variant: 'gradient',
       color: 'neutral',
-      disabled: false,
       class: {
         container: [
-          'border-light-4',
-          'dark:border-dark-3'
+          'from-light-3',
+          'to-light-5',
+          'text-dark-1',
+          'dark:from-dark-1',
+          'dark:to-dark-3',
+          'dark:text-light-3'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'success',
+      class: {
+        container: [
+          'from-success-500',
+          'to-success-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'info',
+      class: {
+        container: [
+          'from-info-500',
+          'to-info-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'warning',
+      class: {
+        container: [
+          'from-warning-500',
+          'to-warning-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'error',
+      class: {
+        container: [
+          'from-error-500',
+          'to-error-900'
         ]
       }
     },
@@ -491,7 +462,7 @@ export default tv({
         ]
       }
     },
-    // pressable styles filled
+    // isPressable & filled
     {
       variant: 'filled',
       color: 'primary',
@@ -505,12 +476,13 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'secondary',
+      color: 'neutral',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-secondary-700'
+          'focus:ring-light-5',
+          'dark:focus:ring-dark-4'
         ]
       }
     },
@@ -558,41 +530,7 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'filled',
-      color: 'light',
-      isPressable: true,
-      disabled: false,
-      class: {
-        container: [
-          'focus:ring-light-1'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'dark',
-      isPressable: true,
-      disabled: false,
-      class: {
-        container: [
-          'focus:ring-dark-5'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'neutral',
-      isPressable: true,
-      disabled: false,
-      class: {
-        container: [
-          'focus:ring-light-5',
-          'dark:focus:ring-dark-4'
-        ]
-      }
-    },
-    // pressable styles ghost
+    // isPressable & ghost
     {
       variant: 'ghost',
       color: 'primary',
@@ -606,12 +544,13 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'secondary',
+      color: 'neutral',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-secondary-500/[.30]'
+          'focus:ring-light-5/[.30]',
+          'dark:focus:ring-dark-5/[.30]'
         ]
       }
     },
@@ -659,41 +598,7 @@ export default tv({
         ]
       }
     },
-    {
-      variant: 'ghost',
-      color: 'light',
-      isPressable: true,
-      disabled: false,
-      class: {
-        container: [
-          'focus:ring-light-1/[.30]'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'dark',
-      isPressable: true,
-      disabled: false,
-      class: {
-        container: [
-          'focus:ring-dark-5/[.30]'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'neutral',
-      isPressable: true,
-      disabled: false,
-      class: {
-        container: [
-          'focus:ring-light-5/[.30]',
-          'dark:focus:ring-dark-5/[.30]'
-        ]
-      }
-    },
-    // pressable styles outlined
+    // isPressable & outlined
     {
       variant: 'outlined',
       color: 'primary',
@@ -707,12 +612,12 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'secondary',
+      color: 'neutral',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-secondary-400/20'
+          'dark:focus:ring-dark-4/20'
         ]
       }
     },
@@ -757,39 +662,6 @@ export default tv({
       class: {
         container: [
           'focus:ring-error-400/20'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'light',
-      isPressable: true,
-      disabled: false,
-      class: {
-        container: [
-          'focus:ring-light-2/20'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'dark',
-      isPressable: true,
-      disabled: false,
-      class: {
-        container: [
-          'focus:ring-dark-4/20'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'neutral',
-      isPressable: true,
-      disabled: false,
-      class: {
-        container: [
-          'dark:focus:ring-dark-4/20'
         ]
       }
     }

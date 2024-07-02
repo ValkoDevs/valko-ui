@@ -53,14 +53,14 @@ describe('Checkbox component', () => {
         expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
       })
 
-      it('should be color secondary when props.color is secondary', () => {
+      it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkCheckbox, {
           props: {
-            color: 'secondary'
+            color: 'neutral'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-secondary-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-light-4')
       })
 
       it('should be color success when props.color is success', () => {
@@ -101,26 +101,6 @@ describe('Checkbox component', () => {
         })
 
         expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-error-500')
-      })
-
-      it('should be color light when props.color is light', () => {
-        wrapper = mount(VkCheckbox, {
-          props: {
-            color: 'light'
-          }
-        })
-
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-light-1')
-      })
-
-      it('should be color dark when props.color is dark', () => {
-        wrapper = mount(VkCheckbox, {
-          props: {
-            color: 'dark'
-          }
-        })
-
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-dark-5')
       })
     })
 
@@ -199,7 +179,7 @@ describe('Checkbox component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkCheckbox, {
           props: {
             variant: 'filled'
@@ -209,7 +189,7 @@ describe('Checkbox component', () => {
         expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
       })
 
-      it('should be outlined when props.size is outlined', () => {
+      it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkCheckbox, {
           props: {
             variant: 'outlined'
@@ -219,7 +199,7 @@ describe('Checkbox component', () => {
         expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:border-primary-500')
       })
 
-      it('should be ghost when props.size is ghost', () => {
+      it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkCheckbox, {
           props: {
             variant: 'ghost'

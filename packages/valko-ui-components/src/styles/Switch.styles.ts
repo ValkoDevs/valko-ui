@@ -119,7 +119,7 @@ export default tv({
         thumb: [
           'scale-[.9]',
           'bg-light-5',
-          'dark:bg-dark-5'
+          'dark:bg-dark-1'
         ]
       },
       ghost: {
@@ -137,7 +137,7 @@ export default tv({
     },
     color: {
       primary: {},
-      secondary: {},
+      neutral: {},
       success: {},
       info: {},
       warning: {},
@@ -222,14 +222,14 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'secondary',
+      color: 'neutral',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-secondary-500',
-          'data-[active=true]:border-secondary-500',
-          'dark:data-[active=true]:bg-secondary-500',
-          'dark:data-[active=true]:border-secondary-500'
+          'data-[active=true]:bg-light-5',
+          'data-[active=true]:border-light-5',
+          'dark:data-[active=true]:bg-dark-3',
+          'dark:data-[active=true]:border-dark-3'
         ]
       }
     },
@@ -303,16 +303,16 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'secondary',
+      color: 'neutral',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-secondary-500',
-          'dark:data-[active=true]:border-secondary-500'
+          'data-[active=true]:border-light-4',
+          'dark:data-[active=true]:border-dark-3'
         ],
         thumb: [
-          'data-[selected=true]:bg-secondary-500',
-          'dark:data-[selected=true]:bg-secondary-500'
+          'data-[selected=true]:bg-light-4',
+          'dark:data-[selected=true]:bg-dark-3'
         ]
       }
     },
@@ -394,16 +394,16 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'secondary',
+      color: 'neutral',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-secondary-500/[.15]',
-          'dark:data-[active=true]:bg-secondary-500/[.15]'
+          'data-[active=true]:bg-light-5/[.4]',
+          'dark:data-[active=true]:bg-dark-2/[.4]'
         ],
         thumb: [
-          'data-[selected=true]:bg-secondary-500/[.5]',
-          'dark:data-[selected=true]:bg-secondary-500/[.5]'
+          'data-[selected=true]:bg-light-5/[.5]',
+          'dark:data-[selected=true]:bg-dark-2/[.5]'
         ]
       }
     },

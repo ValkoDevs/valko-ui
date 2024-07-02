@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
-import variantOptions from '@/data/variantOptions'
+import variantWithGradient from '@/data/variantWithGradient'
 import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
@@ -29,14 +29,14 @@ const alertProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Alert.',
-    values: 'primary, secondary, error, warning, info, success, light, dark',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {
     prop: 'variant',
     required: false,
     description: 'The variant of the Alert.',
-    values: 'filled, outlined, ghost',
+    values: 'filled, outlined, ghost, gradient',
     default: 'filled'
   },
   {
@@ -154,7 +154,7 @@ watch(isShown, () => {
       <vk-select
         placeholder="Variant"
         size="sm"
-        :options="variantOptions"
+        :options="variantWithGradient"
         v-model="form.variant"
       />
       <vk-select
@@ -218,7 +218,7 @@ watch(isShown, () => {
       >
         <div class="grow gap-4 grid grid-cols-2">
           <vk-alert
-            v-for="variant in variantOptions"
+            v-for="variant in variantWithGradient"
             :key="variant.value"
             :variant="variant.value"
             :title="variant.label"

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import DocSection from '../../../components/DocSection'
-import ExampleSection from '../../../components/ExampleSection'
+import DocSection from '@/components/DocSection'
+import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
 import variantOptions from '@/data/variantOptions'
 import shapeOptions from '@/data/shapeOptions'
@@ -16,11 +16,6 @@ const form = ref({
   direction: 'horizontal'
 })
 
-const colors = [
-  ...colorOptions,
-  { value: 'neutral', label: 'Neutral' }
-]
-
 const directionOptions = [
   { value: 'vertical', label: 'Vertical' },
   { value: 'horizontal', label: 'Horizontal' }
@@ -31,7 +26,7 @@ const dividerProps = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Divider.',
-    values: 'primary, secondary, error, warning, info, success, light, dark, neutral',
+    values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
   {
@@ -95,7 +90,7 @@ const dividerProps = [
       <vk-select
         placeholder="Color"
         size="sm"
-        :options="colors"
+        :options="colorOptions"
         v-model="form.color"
       />
       <vk-select
@@ -132,7 +127,7 @@ const dividerProps = [
       >
         <div class="w-full grid grid-cols-3 gap-4">
           <div
-            v-for="color in colors"
+            v-for="color in colorOptions"
             :key="color.value"
           >
             <span class="font-semibold">{{ color.label }}</span>

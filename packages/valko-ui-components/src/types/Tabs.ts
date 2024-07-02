@@ -14,7 +14,7 @@ export interface TabKeymap {
 
 export interface TabsProps extends Sizes, Variants {
   tabs: Tab[];
-  shape?: Shape | 'line';
+  shape?: Shape | 'line' | 'gradient';
   color?: Color | 'neutral';
   defaultIndex?: number;
   grow?: boolean;

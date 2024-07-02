@@ -134,6 +134,7 @@ onUnmounted(() => {
             name="chevron-down"
             :data-open="isOpen"
             :class="classes.icon"
+            @click="() => toggleDropdown(true)"
           />
         </template>
       </vk-input>
@@ -150,14 +151,14 @@ onUnmounted(() => {
           :data-helper="!!helpertext"
           :class="classes.dropdown"
           :data-shape="shape"
-          :data-variant="props.variant"
+          :data-variant="variant"
         >
           <li
             v-for="item in options"
             :key="item.value"
             :data-selected="isSelected(item.value)"
             :data-shape="shape"
-            :data-variant="props.variant"
+            :data-variant="variant"
             :class="classes.item"
             @click="selectItem(item.value)"
           >
