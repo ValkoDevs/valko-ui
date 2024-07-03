@@ -30,10 +30,6 @@ const onClick = () => {
   <component
     :is="element"
     :class="classes"
-    :data-size="size"
-    :data-variant="variant"
-    :data-shape="shape"
-    :data-direction="direction"
     @click="onClick"
   >
     <slot />

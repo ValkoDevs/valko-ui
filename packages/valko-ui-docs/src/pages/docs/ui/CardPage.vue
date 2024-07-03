@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import variantOptions from '@/data/variantOptions'
@@ -131,6 +131,16 @@ const cardSlots = [
 const onClick = () => useNotification({ text: 'Pressed' })
 const adoptBuddy = () => useNotification({ text: 'Adopted!' })
 const nextBuddy = () => useNotification({ text: 'Showing new buddy!' })
+
+const footerClasses = computed(() => {
+  if (form.value.direction === 'row' || form.value.direction === 'row-reverse') return 'flex-col'
+  return 'flex-row'
+})
+
+const buttonClasses = computed(() => {
+  if (form.value.direction === 'row' || form.value.direction === 'row-reverse') return 'mb-2'
+  return 'mr-2'
+})
 </script>
 
 <template>
@@ -153,9 +163,11 @@ const nextBuddy = () => useNotification({ text: 'Showing new buddy!' })
           :direction="form.direction"
           :flat="form.flat"
           @click="onClick"
+          :class="form.direction === 'row' || 'row-reverse' ? 'justify-evenly' : 'justify-normal'"
         >
           <vk-card-header
             v-if="form.bgImage ? false : true && form.cardHeader"
+            class="w-4/12"
           >
             <h2 class="font-semibold">
               Adopt a new buddy!
@@ -169,17 +181,19 @@ const nextBuddy = () => useNotification({ text: 'Showing new buddy!' })
           />
           <vk-card-body
             v-if="form.bgImage ? false : true && form.cardBody"
+            class="w-4/12"
           >
             <p>He's name is Drago</p>
           </vk-card-body>
           <vk-card-footer
             v-if="form.bgImage ? false : true && form.cardFooter"
+            class="w-4/12"
           >
-            <div class="flex justify-between">
+            <div :class="footerClasses">
               <vk-button
                 color="success"
                 size="xs"
-                class="mr-2"
+                :class="buttonClasses"
                 @click="adoptBuddy"
               >
                 Adopt the buddy!
@@ -359,6 +373,7 @@ const nextBuddy = () => useNotification({ text: 'Showing new buddy!' })
             src="https://picsum.photos/id/237/200"
             class="text-white"
             height="15rem"
+            :width="size.value === 'full' ? '5rem' : '15rem'"
           />
           <vk-card-body>
             <h2 class="font-black mb-4">
