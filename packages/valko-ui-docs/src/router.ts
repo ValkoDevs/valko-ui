@@ -40,6 +40,10 @@ const routes = [
         component: lazyLoad('forms', 'RadioPage')
       },
       {
+        path: 'range',
+        component: lazyLoad('forms', 'RangePage')
+      },
+      {
         path: 'select',
         component: lazyLoad('forms', 'SelectPage')
       },
