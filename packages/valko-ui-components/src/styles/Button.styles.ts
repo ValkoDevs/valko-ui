@@ -180,14 +180,14 @@ export default tv({
       class: {
         button: [
           [
-            'bg-light-3',
-            'focus:ring-light-3',
-            'hover:bg-light-4',
+            'bg-light-4',
+            'focus:ring-light-4',
+            'hover:bg-light-3',
             'active:bg-light-3',
             'text-dark-1',
-            'dark:bg-dark-3',
-            'dark:focus:ring-dark-3',
-            'dark:hover:bg-dark-2',
+            'dark:bg-dark-2',
+            'dark:focus:ring-dark-2',
+            'dark:hover:bg-dark-1',
             'dark:active:bg-dark-3',
             'dark:text-light-3'
           ]
