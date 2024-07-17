@@ -12,8 +12,8 @@ export interface CardImageProps {
 }
 
 export interface CardProps extends Variants, Shapes {
+  layout?: 'vertical' | 'horizontal' | 'cover';
   size?: Size | 'full';
-  direction?: 'row' | 'col' | 'row-reverse' | 'col-reverse';
   isPressable?: boolean;
   disabled?: boolean;
   flat?: boolean;

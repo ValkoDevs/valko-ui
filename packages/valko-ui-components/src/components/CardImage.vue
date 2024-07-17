@@ -40,11 +40,6 @@ watchEffect(async () => {
       :alt="alt"
       :class="classes.img"
     >
-    <div
-      v-if="$slots.default"
-      :class="classes.gradient"
-    >
-      <slot />
-    </div>
+    <div :class="classes.gradient" />
   </div>
 </template>

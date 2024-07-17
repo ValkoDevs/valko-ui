@@ -3,11 +3,12 @@ import { tv, type TV } from 'tailwind-variants'
 export default tv({
   base: [
     'vk-card',
-    'w-fit',
-    'flex',
-    'items-stretch',
-    'shadow-md',
+    'min-h-48',
+    'min-w-48',
     'overflow-hidden',
+    'grid',
+    'gap-4',
+    'shadow-md',
     'group'
   ],
   variants: {
@@ -37,34 +38,23 @@ export default tv({
       ]
     },
     size: {
-      xs: [
-        'w-48'
-      ],
-      sm: [
-        'w-64'
-      ],
-      md: [
-        'w-80'
-      ],
-      lg: [
-        'w-96'
-      ],
-      full: [
-        'w-full'
-      ]
+      xs: [],
+      sm: [],
+      md: [],
+      lg: [],
+      full: []
     },
-    direction: {
-      row: [
-        'flex-row'
+    layout: {
+      vertical: [
+        'grid-cols-1'
       ],
-      col: [
-        'flex-col'
+      horizontal: [
+        'grid-cols-2',
+        'grid-rows-[auto_1fr_auto]'
       ],
-      'row-reverse': [
-        'flex-row-reverse'
-      ],
-      'col-reverse': [
-        'flex-col-reverse'
+      cover: [
+        'grid-cols-1',
+        'relative'
       ]
     },
     disabled: {
@@ -75,5 +65,77 @@ export default tv({
         'shadow-none'
       ]
     }
-  }
+  },
+  compoundVariants: [
+    {
+      layout: ['vertical', 'cover'],
+      size: 'xs',
+      class: [
+        'w-48'
+      ]
+    },
+    {
+      layout: ['vertical', 'cover'],
+      size: 'sm',
+      class: [
+        'w-64'
+      ]
+    },
+    {
+      layout: ['vertical', 'cover'],
+      size: 'md',
+      class: [
+        'w-80'
+      ]
+    },
+    {
+      layout: ['vertical', 'cover'],
+      size: 'lg',
+      class: [
+        'w-96'
+      ]
+    },
+    {
+      layout: ['vertical', 'cover'],
+      size: 'full',
+      class: [
+        'w-full'
+      ]
+    },
+    {
+      layout: 'horizontal',
+      size: 'xs',
+      class: [
+        'h-48'
+      ]
+    },
+    {
+      layout: 'horizontal',
+      size: 'sm',
+      class: [
+        'h-64'
+      ]
+    },
+    {
+      layout: 'horizontal',
+      size: 'md',
+      class: [
+        'h-80'
+      ]
+    },
+    {
+      layout: 'horizontal',
+      size: 'lg',
+      class: [
+        'h-96'
+      ]
+    },
+    {
+      layout: 'horizontal',
+      size: 'full',
+      class: [
+        'h-full'
+      ]
+    }
+  ]
 }) as unknown as ReturnType<TV>

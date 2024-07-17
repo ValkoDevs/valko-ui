@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import variantOptions from '@/data/variantOptions'
@@ -14,20 +14,18 @@ const form = ref({
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  direction: 'row',
+  layout: 'vertical',
   pressable: false,
   flat: false,
-  bgImage: false,
   cardBody: false,
   cardFooter: false,
   cardHeader: false
 })
 
-const directionOptions = [
-  { value: 'row', label: 'Row' },
-  { value: 'col', label: 'Column' },
-  { value: 'row-reverse', label: 'Row Reverse' },
-  { value: 'col-reverse', label: 'Column Reverse' }
+const layoutOptions = [
+  { value: 'vertical', label: 'Vertical' },
+  { value: 'horizontal', label: 'Horizontal' },
+  { value: 'cover', label: 'Cover' }
 ]
 
 const sizes = [
@@ -58,11 +56,11 @@ const cardProps = [
     default: 'md'
   },
   {
-    prop: 'direction',
+    prop: 'layout',
     required: false,
-    description: 'The direction in what the slots are gonna be displayed.',
-    values: 'row, col, row-reverse, col-reverse',
-    default: 'row'
+    description: 'The layout of the elements inside the Card.',
+    values: 'vertical, horizontal, cover',
+    default: 'vertical'
   },
   {
     prop: 'isPressable',
@@ -129,18 +127,8 @@ const cardSlots = [
 ]
 
 const onClick = () => useNotification({ text: 'Pressed' })
-const adoptBuddy = () => useNotification({ text: 'Adopted!' })
-const nextBuddy = () => useNotification({ text: 'Showing new buddy!' })
-
-const footerClasses = computed(() => {
-  if (form.value.direction === 'row' || form.value.direction === 'row-reverse') return 'flex-col'
-  return 'flex-row'
-})
-
-const buttonClasses = computed(() => {
-  if (form.value.direction === 'row' || form.value.direction === 'row-reverse') return 'mb-2'
-  return 'mr-2'
-})
+const nextImage = () => useNotification({ text: 'Loading next image...' })
+const randomImage = () => useNotification({ text: 'Loading random image...' })
 </script>
 
 <template>
@@ -160,95 +148,44 @@ const buttonClasses = computed(() => {
           :variant="form.variant"
           :shape="form.shape"
           :size="form.size"
-          :direction="form.direction"
+          :layout="form.layout"
           :flat="form.flat"
           @click="onClick"
-          :class="form.direction === 'row' || 'row-reverse' ? 'justify-evenly' : 'justify-normal'"
         >
           <vk-card-header
-            v-if="form.bgImage ? false : true && form.cardHeader"
-            class="w-4/12"
+            v-if="form.cardHeader"
           >
-            <h2 class="font-semibold">
-              Adopt a new buddy!
-            </h2>
+            Best nature pics 2024!
           </vk-card-header>
           <vk-card-image
-            v-if="form.bgImage ? false : true"
-            src="https://picsum.photos/id/237/200"
-            class="text-white"
-            height="15rem"
+            src="https://picsum.photos/id/152/1080"
+            class="text-white w-1/2"
           />
+
           <vk-card-body
-            v-if="form.bgImage ? false : true && form.cardBody"
-            class="w-4/12"
+            v-if="form.cardBody"
           >
-            <p>He's name is Drago</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
           </vk-card-body>
           <vk-card-footer
-            v-if="form.bgImage ? false : true && form.cardFooter"
-            class="w-4/12"
+            v-if="form.cardFooter"
           >
-            <div :class="footerClasses">
-              <vk-button
-                color="success"
-                size="xs"
-                :class="buttonClasses"
-                @click="adoptBuddy"
-              >
-                Adopt the buddy!
-              </vk-button>
-              <vk-button
-                color="error"
-                size="xs"
-                @click="nextBuddy"
-              >
-                Other buddys
-              </vk-button>
-            </div>
+            <vk-button
+              color="success"
+              size="xs"
+              class="mr-2"
+              @click="nextImage"
+            >
+              See next
+            </vk-button>
+            <vk-button
+              color="error"
+              size="xs"
+              @click="randomImage"
+            >
+              Random
+            </vk-button>
           </vk-card-footer>
-          <vk-card-image
-            v-if="form.bgImage"
-            src="https://picsum.photos/id/237/200"
-            class="text-white"
-            height="15rem"
-          >
-            <div class="flex flex-col justify-between">
-              <vk-card-header
-                v-if="form.cardHeader && form.bgImage ? true : false"
-              >
-                <h2 class="font-semibold">
-                  Adopt a new buddy!
-                </h2>
-              </vk-card-header>
-              <vk-card-body
-                v-if="form.cardBody && form.bgImage ? true : false"
-              >
-                <p>He's name is Drago</p>
-              </vk-card-body>
-              <vk-card-footer
-                v-if="form.cardFooter && form.bgImage ? true : false"
-              >
-                <div class="flex justify-between">
-                  <vk-button
-                    color="success"
-                    size="xs"
-                    class="mr-2"
-                    @click="adoptBuddy"
-                  >
-                    Adopt the buddy!
-                  </vk-button>
-                  <vk-button
-                    color="error"
-                    size="xs"
-                    @click="nextBuddy"
-                  >
-                    Other buddys
-                  </vk-button>
-                </div>
-              </vk-card-footer>
-            </div>
-          </vk-card-image>
         </vk-card>
       </div>
     </template>
@@ -272,10 +209,10 @@ const buttonClasses = computed(() => {
         v-model="form.size"
       />
       <vk-select
-        placeholder="Direction"
+        placeholder="Layout"
         size="sm"
-        :options="directionOptions"
-        v-model="form.direction"
+        :options="layoutOptions"
+        v-model="form.layout"
       />
       <vk-checkbox
         label="Pressable"
@@ -297,10 +234,6 @@ const buttonClasses = computed(() => {
         label="Card Footer"
         v-model="form.cardFooter"
       />
-      <vk-checkbox
-        label="Card Image as background"
-        v-model="form.bgImage"
-      />
     </template>
 
     <template #examples>
@@ -315,7 +248,7 @@ const buttonClasses = computed(() => {
           :variant="variant.value"
         >
           <vk-card-image
-            src="https://picsum.photos/id/237/200"
+            src="https://picsum.photos/id/152/1080"
             class="text-white"
             height="15rem"
           />
@@ -324,9 +257,9 @@ const buttonClasses = computed(() => {
               {{ variant.label }}
             </h2>
             <h3 class="font-semibold">
-              Adopt our buddy!
+              Best nature pics 2024!
             </h3>
-            <p>He's name is Drago</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
           </vk-card-body>
         </vk-card>
       </example-section>
@@ -342,25 +275,52 @@ const buttonClasses = computed(() => {
           :shape="shape.value"
         >
           <vk-card-image
-            src="https://picsum.photos/id/237/200"
+            src="https://picsum.photos/id/152/1080"
             class="text-white"
-            height="15rem"
           />
           <vk-card-body>
             <h2 class="font-black mb-4">
               {{ shape.label }}
             </h2>
             <h3 class="font-semibold">
-              Adopt our buddy!
+              Best nature pics 2024!
             </h3>
-            <p>He's name is Drago</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
+          </vk-card-body>
+        </vk-card>
+      </example-section>
+
+      <example-section
+        title="Layout"
+        justify="start"
+        gap
+        wrap
+      >
+        <vk-card
+          v-for="layout in layoutOptions"
+          :key="layout.value"
+          :layout="layout.value"
+        >
+          <vk-card-image
+            src="https://picsum.photos/id/152/1080"
+            class="text-white"
+          />
+          <vk-card-body>
+            <h2 class="font-black mb-4">
+              {{ layout.label }}
+            </h2>
+            <h3 class="font-semibold">
+              Best nature pics 2024!
+            </h3>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
           </vk-card-body>
         </vk-card>
       </example-section>
 
       <example-section
         title="Sizes"
-        justify="around"
+        justify="start"
+        align="start"
         wrap
         gap
       >
@@ -370,19 +330,17 @@ const buttonClasses = computed(() => {
           :size="size.value"
         >
           <vk-card-image
-            src="https://picsum.photos/id/237/200"
+            src="https://picsum.photos/id/152/1080"
             class="text-white"
-            height="15rem"
-            :width="size.value === 'full' ? '5rem' : '15rem'"
           />
           <vk-card-body>
             <h2 class="font-black mb-4">
               {{ size.label }}
             </h2>
             <h3 class="font-semibold">
-              Adopt our buddy!
+              Best nature pics 2024!
             </h3>
-            <p>He's name is Drago</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
           </vk-card-body>
         </vk-card>
       </example-section>
@@ -397,18 +355,17 @@ const buttonClasses = computed(() => {
           @click="onClick"
         >
           <vk-card-image
-            src="https://picsum.photos/id/237/200"
+            src="https://picsum.photos/id/152/1080"
             class="text-white"
-            height="15rem"
           />
           <vk-card-body>
             <h2 class="font-black mb-4">
               Pressable
             </h2>
             <h3 class="font-semibold">
-              Adopt our buddy!
+              Best nature pics 2024!
             </h3>
-            <p>He's name is Drago</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
           </vk-card-body>
         </vk-card>
       </example-section>
@@ -422,18 +379,17 @@ const buttonClasses = computed(() => {
           flat
         >
           <vk-card-image
-            src="https://picsum.photos/id/237/200"
+            src="https://picsum.photos/id/152/1080"
             class="text-white"
-            height="15rem"
           />
           <vk-card-body>
             <h2 class="font-black mb-4">
               Flat
             </h2>
             <h3 class="font-semibold">
-              Adopt our buddy!
+              Best nature pics 2024!
             </h3>
-            <p>He's name is Drago</p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
           </vk-card-body>
         </vk-card>
       </example-section>

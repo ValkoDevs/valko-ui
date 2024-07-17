@@ -3,8 +3,15 @@ import { tv, type TV } from 'tailwind-variants'
 export default tv({
   base: [
     'vk-cardfooter',
-    'p-4',
+    'px-4',
+    'py-2',
+    'min-h-10',
     'border-light-4',
+    'text-left',
+    'z-30',
+    'flex',
+    'order-4',
+    'group-data-[layout=horizontal]:[grid-column:_2]',
     'dark:border-dark-1'
   ]
 }) as unknown as ReturnType<TV>

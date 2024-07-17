@@ -4,10 +4,19 @@ export default tv({
   slots: {
     container: [
       'vk-cardimage',
+      'min-h-48',
+      'min-w-48',
       'w-full',
       'overflow-hidden',
       'relative',
-      'grow'
+      'grow',
+      'group-data-[layout=vertical]:order-2',
+      'group-data-[layout=horizontal]:order-1',
+      'group-data-[layout=horizontal]:[grid-column:_1]',
+      'group-data-[layout=horizontal]:[grid-row:_1_/_span_3]',
+      'group-data-[layout=cover]:order-2',
+      'group-data-[layout=cover]:absolute',
+      'group-data-[layout=cover]:inset-0'
     ],
     img: [
       'w-full',
@@ -16,17 +25,13 @@ export default tv({
       'object-center'
     ],
     gradient: [
-      'w-full',
-      'py-3',
-      'px-4',
       'bg-gradient-to-b',
       'from-transparent',
       'to-black',
-      'flex',
-      'items-end',
       'absolute',
       'inset-0',
-      'z-20'
+      'group-data-[layout=cover]:block',
+      'hidden'
     ]
   }
 }) as unknown as ReturnType<TV>
