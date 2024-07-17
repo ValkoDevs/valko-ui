@@ -4,7 +4,8 @@ export default tv({
   base: [
     'vk-cardheader',
     'px-4',
-    'py-2',
+    'pt-4',
+    'mb-4',
     'min-h-10',
     'border-light-4',
     'font-bold',

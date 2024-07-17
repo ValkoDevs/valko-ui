@@ -19,7 +19,7 @@ describe('Card component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-1').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -39,7 +39,7 @@ describe('Card component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded-2xl').exists()).toBe(true)
+        expect(wrapper.find('.rounded-3xl').exists()).toBe(true)
       })
 
       it('should be soft when props.shape is soft', () => {
@@ -123,7 +123,7 @@ describe('Card component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-1').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {

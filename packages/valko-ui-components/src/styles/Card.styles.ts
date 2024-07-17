@@ -7,14 +7,13 @@ export default tv({
     'min-w-48',
     'overflow-hidden',
     'grid',
-    'gap-4',
-    'shadow-md',
+    'shadow-lg',
     'group'
   ],
   variants: {
     variant: {
       filled: [
-        'bg-light-3',
+        'bg-light-1',
         'dark:bg-dark-3'
       ],
       outlined: [
@@ -23,12 +22,15 @@ export default tv({
         'dark:border-dark-1'
       ],
       ghost: [
+        'bg-light-3/[.5]',
+        'dark:bg-dark-3/[.5]',
+        'backdrop-blur-lg',
         'shadow-none'
       ]
     },
     shape: {
       rounded: [
-        'rounded-2xl'
+        'rounded-3xl'
       ],
       square: [
         'rounded-none'
@@ -54,6 +56,7 @@ export default tv({
       ],
       cover: [
         'grid-cols-1',
+        'content-end',
         'relative'
       ]
     },
@@ -63,6 +66,15 @@ export default tv({
     flat: {
       true: [
         'shadow-none'
+      ]
+    },
+    isPressable: {
+      true: [
+        'transition-all',
+        'duration-200',
+        'ease-in-out',
+        'active:shadow-none',
+        'active:scale-95'
       ]
     }
   },

@@ -17,15 +17,16 @@ const form = ref({
   layout: 'vertical',
   pressable: false,
   flat: false,
-  cardBody: false,
-  cardFooter: false,
-  cardHeader: false
+  cardBody: true,
+  cardFooter: true,
+  cardHeader: true,
+  cardImage: true
 })
 
 const layoutOptions = [
   { value: 'vertical', label: 'Vertical' },
-  { value: 'horizontal', label: 'Horizontal' },
-  { value: 'cover', label: 'Cover' }
+  { value: 'cover', label: 'Cover' },
+  { value: 'horizontal', label: 'Horizontal' }
 ]
 
 const sizes = [
@@ -158,6 +159,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
             Best nature pics 2024!
           </vk-card-header>
           <vk-card-image
+            v-if="form.cardImage"
             src="https://picsum.photos/id/152/1080"
             class="text-white w-1/2"
           />
@@ -169,21 +171,25 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
           </vk-card-body>
           <vk-card-footer
             v-if="form.cardFooter"
+            class="flex justify-between"
           >
             <vk-button
-              color="success"
-              size="xs"
-              class="mr-2"
-              @click="nextImage"
-            >
-              See next
-            </vk-button>
-            <vk-button
-              color="error"
-              size="xs"
+              color="neutral"
+              size="sm"
+              :variant="form.variant"
+              flat
               @click="randomImage"
             >
               Random
+            </vk-button>
+            <vk-button
+              color="primary"
+              size="sm"
+              :variant="form.variant"
+              flat
+              @click="nextImage"
+            >
+              See next
             </vk-button>
           </vk-card-footer>
         </vk-card>
@@ -227,6 +233,10 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
         v-model="form.cardHeader"
       />
       <vk-checkbox
+        label="Card Image"
+        v-model="form.cardImage"
+      />
+      <vk-checkbox
         label="Card Body"
         v-model="form.cardBody"
       />
@@ -252,10 +262,10 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
             class="text-white"
             height="15rem"
           />
+          <vk-card-header>
+            {{ variant.label }}
+          </vk-card-header>
           <vk-card-body>
-            <h2 class="font-black mb-4">
-              {{ variant.label }}
-            </h2>
             <h3 class="font-semibold">
               Best nature pics 2024!
             </h3>
@@ -278,10 +288,10 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
             src="https://picsum.photos/id/152/1080"
             class="text-white"
           />
+          <vk-card-header>
+            {{ shape.label }}
+          </vk-card-header>
           <vk-card-body>
-            <h2 class="font-black mb-4">
-              {{ shape.label }}
-            </h2>
             <h3 class="font-semibold">
               Best nature pics 2024!
             </h3>
@@ -293,6 +303,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
       <example-section
         title="Layout"
         justify="start"
+        align="stretch"
         gap
         wrap
       >
@@ -305,10 +316,10 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
             src="https://picsum.photos/id/152/1080"
             class="text-white"
           />
+          <vk-card-header>
+            {{ layout.label }}
+          </vk-card-header>
           <vk-card-body>
-            <h2 class="font-black mb-4">
-              {{ layout.label }}
-            </h2>
             <h3 class="font-semibold">
               Best nature pics 2024!
             </h3>
@@ -320,7 +331,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
       <example-section
         title="Sizes"
         justify="start"
-        align="start"
+        align="stretch"
         wrap
         gap
       >
@@ -333,10 +344,10 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
             src="https://picsum.photos/id/152/1080"
             class="text-white"
           />
+          <vk-card-header>
+            {{ size.label }}
+          </vk-card-header>
           <vk-card-body>
-            <h2 class="font-black mb-4">
-              {{ size.label }}
-            </h2>
             <h3 class="font-semibold">
               Best nature pics 2024!
             </h3>
@@ -358,10 +369,10 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
             src="https://picsum.photos/id/152/1080"
             class="text-white"
           />
+          <vk-card-header>
+            Pressable
+          </vk-card-header>
           <vk-card-body>
-            <h2 class="font-black mb-4">
-              Pressable
-            </h2>
             <h3 class="font-semibold">
               Best nature pics 2024!
             </h3>
@@ -382,10 +393,10 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
             src="https://picsum.photos/id/152/1080"
             class="text-white"
           />
+          <vk-card-header>
+            Flat
+          </vk-card-header>
           <vk-card-body>
-            <h2 class="font-black mb-4">
-              Flat
-            </h2>
             <h3 class="font-semibold">
               Best nature pics 2024!
             </h3>
