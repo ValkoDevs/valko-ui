@@ -4,41 +4,45 @@ export default tv({
   slots: {
     container: [
       'vk-range',
-      'relative',
-      'w-full'
+      'w-full',
+      'relative'
     ],
     progressContainer: [
-      'relative',
       'overflow-hidden',
-      'bg-light-3',
-      'dark:bg-dark-1'
+      'relative'
     ],
     progress: [
       'h-full',
       'absolute',
-      'transition-all',
-      'duration-100',
-      'ease-out',
-      'z-10',
-      'bg-primary-500'
+      'z-20'
     ],
     thumbContainer: [
       'absolute',
       'inset-0',
-      'origin-top',
       'pointer-events-none'
     ],
     thumb: [
+      'bg-light-4',
+      'shadow-lg',
+      'absolute',
+      'transform',
+      '-translate-x-1/4',
+      '-translate-y-1/2',
+      'top-1/2',
+      'z-30',
+      'cursor-pointer',
+      'pointer-events-auto',
+      'dark:bg-light-3'
+    ],
+    stepMark: [
+      'w-2',
+      'h-2',
+      'bg-dark-3',
+      'rounded-full',
       'absolute',
       'top-1/2',
-      'transform -translate-y-1/2',
-      'z-20',
-      'shadow-md',
-      'cursor-pointer',
-      'transition-all',
-      'duration-100',
-      'ease-out',
-      'pointer-events-auto'
+      '-translate-y-1/2',
+      'z-10'
     ]
   },
   variants: {
@@ -51,11 +55,8 @@ export default tv({
       },
       ghost: {
         progressContainer: [
-          'bg-transparent'
-        ],
-        buffer: [
-          'bg-light-5/[.15]',
-          'dark:bg-dark-1/[.15]'
+          'bg-light-3/[.5]',
+          'dark:bg-dark-1/[.5]'
         ]
       },
       outlined: {
@@ -79,9 +80,6 @@ export default tv({
       primary: {
         progress: [
           'bg-primary-500'
-        ],
-        thumb: [
-          'bg-primary-600'
         ]
       },
       neutral: {
@@ -114,43 +112,42 @@ export default tv({
     size: {
       xs: {
         progressContainer: [
-          'h-4'
+          'h-2'
         ],
         thumb: [
-          'w-5',
-          'h-5'
+          'w-3',
+          'h-3'
         ]
       },
       sm: {
         progressContainer: [
-          'h-5'
+          'h-2.5'
         ],
         thumb: [
-          'w-6',
-          'h-6'
+          'w-3.5',
+          'h-3.5'
         ]
       },
       md: {
         progressContainer: [
-          'h-6'
+          'h-3'
         ],
         thumb: [
-          'w-7',
-          'h-7'
+          'w-4',
+          'h-4'
         ]
       },
       lg: {
         progressContainer: [
-          'h-7'
+          'h-3.5'
         ],
         thumb: [
-          'w-8',
-          'h-8'
+          'w-[1.125rem]',
+          'h-[1.125rem]'
         ]
       }
     },
     shape: {
-      line: {},
       rounded: {
         progressContainer: [
           'rounded-full'
@@ -169,10 +166,10 @@ export default tv({
       },
       soft: {
         progressContainer: [
-          'rounded-lg'
+          'rounded-md'
         ],
         thumb: [
-          'rounded-lg'
+          'rounded-md'
         ]
       }
     },
@@ -194,7 +191,7 @@ export default tv({
       color: 'primary',
       class: {
         progress: [
-          'bg-primary-500/[.15]'
+          'bg-primary-500/[.5]'
         ]
       }
     },
@@ -203,8 +200,8 @@ export default tv({
       color: 'neutral',
       class: {
         progress: [
-          'bg-light-5/[.15]',
-          'dark:bg-dark-2/[.15]'
+          'bg-light-5/[.5]',
+          'dark:bg-dark-2/[.5]'
         ]
       }
     },
@@ -213,7 +210,7 @@ export default tv({
       color: 'success',
       class: {
         progress: [
-          'bg-success-500/[.15]'
+          'bg-success-500/[.5]'
         ]
       }
     },
@@ -222,7 +219,7 @@ export default tv({
       color: 'info',
       class: {
         progress: [
-          'bg-info-500/[.15]'
+          'bg-info-500/[.5]'
         ]
       }
     },
@@ -231,7 +228,7 @@ export default tv({
       color: 'warning',
       class: {
         progress: [
-          'bg-warning-500/[.15]'
+          'bg-warning-500/[.5]'
         ]
       }
     },
@@ -240,7 +237,7 @@ export default tv({
       color: 'error',
       class: {
         progress: [
-          'bg-error-500/[.15]'
+          'bg-error-500/[.5]'
         ]
       }
     },
@@ -341,96 +338,6 @@ export default tv({
       class: {
         progress: [
           'h-14'
-        ]
-      }
-    },
-    // line & size
-    {
-      condensed: true,
-      size: 'xs',
-      class: {
-        progressContainer: [
-          'h-1'
-        ],
-        thumb: [
-          'h-1.5',
-          'w-1.5'
-        ]
-      }
-    },
-    {
-      condensed: true,
-      size: 'sm',
-      class: {
-        progressContainer: [
-          'h-1.5'
-        ],
-        thumb: [
-          'h-2',
-          'w-2'
-        ]
-      }
-    },
-    {
-      condensed: true,
-      size: 'md',
-      class: {
-        progressContainer: [
-          'h-2'
-        ],
-        thumb: [
-          'h-2.5',
-          'w-2.5'
-        ]
-      }
-    },
-    {
-      condensed: true,
-      size: 'lg',
-      class: {
-        progressContainer: [
-          'h-2.5'
-        ],
-        thumb: [
-          'h-3',
-          'w-3'
-        ]
-      }
-    },
-    // outlined & size
-    {
-      variant: 'outlined',
-      size: 'xs',
-      class: {
-        content: [
-          'leading-[calc(1rem_-_4px)]'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      size: 'sm',
-      class: {
-        content: [
-          'leading-[calc(1.25rem_-_4px)]'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      size: 'md',
-      class: {
-        content: [
-          'leading-[calc(1.50rem_-_4px)]'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      size: 'lg',
-      class: {
-        content: [
-          'leading-[calc(2rem_-_4px)]'
         ]
       }
     }

@@ -151,25 +151,11 @@ const progressbarSlots = [
       />
       <div class="flex flex-col mb-1">
         <label for="rg-progress">Progress</label>
-        <input
-          name="rg-progress"
-          type="range"
-          min="0"
-          max="100"
-          step="1"
-          v-model="form.progress"
-        >
+        <vk-range @update:min-thumb-value="form.progress = $event" />
       </div>
       <div class="flex flex-col mb-1">
         <label for="rg-buffer">Buffer</label>
-        <input
-          name="rg-buffer"
-          type="range"
-          min="0"
-          max="100"
-          step="1"
-          v-model="form.buffer"
-        >
+        <vk-range @update:min-thumb-value="form.buffer = $event" />
       </div>
       <vk-checkbox
         label="Indeterminate"

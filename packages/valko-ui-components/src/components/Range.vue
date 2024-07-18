@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onMounted } from 'vue'
 import type { RangeProps } from '#valkoui/types/Range'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Range.styles.ts'
@@ -16,51 +16,84 @@ const props = withDefaults(defineProps<RangeProps>(), {
   progress: 0,
   min: 0,
   max: 100,
-  step: 1,
-  firstValue: 0,
-  secondValue: 100,
-  condensed: false,
-  striped: false
+  step: 10,
+  minThumbValue: 50,
+  maxThumbValue: 100,
+  striped: false,
+  isRange: false,
+  showSteps: false
 })
 
-const emit = defineEmits(['update:firstValue', 'update:secondValue'])
+const emit = defineEmits(['update:minThumbValue', 'update:maxThumbValue'])
 
 const classes = useStyle<RangeProps, SlotStyles>(props, styles)
 
 const isDragging = ref(false)
 const sliderRef = ref<HTMLElement | null>(null)
 const draggingThumb = ref<'first' | 'second'>('first')
+const minThumbProgress = ref(props.minThumbValue)
+const maxThumbProgress = ref(props.isRange ? props.maxThumbValue : props.minThumbValue)
 
-const firstProgress = ref(props.firstValue)
-const secondProgress = ref(props.double ? props.secondValue : props.firstValue)
+const getNewProgress = (event: MouseEvent): number => {
+  if (!sliderRef.value) return 0
+  const sliderRect = sliderRef.value.getBoundingClientRect()
+  let newProgress = ((event.clientX - sliderRect.left) / sliderRect.width) * (props.max - props.min) + props.min
+  newProgress = Math.round(newProgress / props.step) * props.step
+  return Math.min(props.max, Math.max(props.min, newProgress))
+}
+
+const updateProgress = (newProgress: number, thumb: 'first' | 'second') => {
+  if (thumb === 'first') {
+    minThumbProgress.value = newProgress
+    if (props.isRange && minThumbProgress.value > maxThumbProgress.value) {
+      minThumbProgress.value = maxThumbProgress.value
+    }
+    emit('update:minThumbValue', minThumbProgress.value)
+  } else {
+    maxThumbProgress.value = newProgress
+    if (props.isRange && maxThumbProgress.value < minThumbProgress.value) {
+      maxThumbProgress.value = minThumbProgress.value
+    }
+    emit('update:maxThumbValue', maxThumbProgress.value)
+  }
+}
 
 const onMouseDown = (event: MouseEvent, thumb: 'first' | 'second') => {
-  sliderRef.value = (event.target as HTMLElement).closest('.vk-range')
   isDragging.value = true
   draggingThumb.value = thumb
+  document.addEventListener('mousemove', onMouseMove)
+  document.addEventListener('mouseup', onMouseUp)
+  updateProgress(getNewProgress(event), thumb)
+}
+
+const onSliderClick = (event: MouseEvent) => {
+  const newProgress = getNewProgress(event)
+  if (!props.isRange) {
+    updateProgress(newProgress, 'first')
+    isDragging.value = true
+    draggingThumb.value = 'first'
+  } else {
+    const firstDistance = Math.abs(newProgress - minThumbProgress.value)
+    const secondDistance = Math.abs(newProgress - maxThumbProgress.value)
+
+    if (firstDistance < secondDistance) {
+      updateProgress(newProgress, 'first')
+      draggingThumb.value = 'first'
+    } else {
+      updateProgress(newProgress, 'second')
+      draggingThumb.value = 'second'
+    }
+    isDragging.value = true
+  }
   document.addEventListener('mousemove', onMouseMove)
   document.addEventListener('mouseup', onMouseUp)
 }
 
 const onMouseMove = (event: MouseEvent) => {
-  if (!isDragging.value || !sliderRef.value) return
-  const sliderRect = sliderRef.value.getBoundingClientRect()
-  let newProgress = ((event.clientX - sliderRect.left) / sliderRect.width) * 100
-  newProgress = Math.min(100, Math.max(0, newProgress))
-
-  if (draggingThumb.value === 'first') {
-    firstProgress.value = newProgress
-    if (props.double && firstProgress.value > secondProgress.value) {
-      firstProgress.value = secondProgress.value
-    }
-    emit('update:firstValue', firstProgress.value)
-  } else {
-    secondProgress.value = newProgress
-    if (props.double && secondProgress.value < firstProgress.value) {
-      secondProgress.value = firstProgress.value
-    }
-    emit('update:secondValue', secondProgress.value)
-  }
+  if (!isDragging.value) return
+  requestAnimationFrame(() => {
+    updateProgress(getNewProgress(event), draggingThumb.value)
+  })
 }
 
 const onMouseUp = () => {
@@ -69,24 +102,6 @@ const onMouseUp = () => {
   document.removeEventListener('mouseup', onMouseUp)
 }
 
-watch(() => props.firstValue, (newProgress) => {
-  firstProgress.value = newProgress
-})
-
-watch(() => props.secondValue, (newProgress) => {
-  if (props.double) {
-    secondProgress.value = newProgress
-  }
-})
-
-watch(() => props.double, (newDouble) => {
-  if (newDouble) {
-    secondProgress.value = props.secondValue
-  } else {
-    secondProgress.value = props.firstValue
-  }
-})
-
 const inlineStyles = computed(() => {
   const sizeMap: Record<string, string> = {
     xs: '1rem',
@@ -94,26 +109,69 @@ const inlineStyles = computed(() => {
     md: '1.50rem',
     lg: '1.75rem'
   }
-  const start = Math.min(firstProgress.value, secondProgress.value)
-  const end = Math.max(firstProgress.value, secondProgress.value)
-  let styles = `left: ${start}%; width: ${end - start}%;`
-  if (props.striped) styles += `background-image: url("${diagonalStripes}"); background-size: ${sizeMap[props.size]};`
+
+  const range = props.max - props.min
+  const start = ((minThumbProgress.value - props.min) / range) * 100
+  const end = props.isRange ? ((maxThumbProgress.value - props.min) / range) * 100 : start
+
+  let styles = `left: ${props.isRange ? start : 0}%; width: ${props.isRange ? end - start : start}%;`
+
+  if (props.striped) {
+    styles += `background-image: url("${diagonalStripes}"); background-size: ${sizeMap[props.size]};`
+  }
+
   return styles.trimStart()
 })
 
 const thumbStyles = (thumb: 'first' | 'second') => {
-  const position = thumb === 'first' ? firstProgress.value : secondProgress.value
-  return { left: `${position}%` }
+  const range = props.max - props.min
+  const position = thumb === 'first' ? ((minThumbProgress.value - props.min) / range) * 100
+    : ((maxThumbProgress.value - props.min) / range) * 100
+
+  const clampedPosition = Math.min(100, Math.max(0, position))
+
+  return { left: `${clampedPosition}%` }
 }
+
+const stepMarks = computed(() => {
+  return Array.from({ length: (props.max - props.min) / props.step - 1 }, (_, i) => {
+    return ((i + 1) * props.step / (props.max - props.min)) * 100
+  })
+})
+
+watch([() => props.minThumbValue, () => props.maxThumbValue, () => props.isRange], ([newMinThumbValue, newMaxThumbValue, newisRange]) => {
+  minThumbProgress.value = newMinThumbValue
+  if (newisRange) {
+    maxThumbProgress.value = newMaxThumbValue
+  } else {
+    maxThumbProgress.value = newMinThumbValue
+  }
+})
+
+onMounted(() => {
+  sliderRef.value = document.querySelector('.vk-range')
+})
 </script>
 
 <template>
-  <div :class="classes.container">
+  <div
+    :class="classes.container"
+    ref="sliderRef"
+    @mousedown="onSliderClick"
+  >
     <div :class="classes.progressContainer">
       <div
         :class="classes.progress"
         :style="inlineStyles"
       />
+      <div v-if="showSteps">
+        <div
+          v-for="(mark, index) in stepMarks"
+          :key="index"
+          :style="`left:${mark}%`"
+          :class="classes.stepMark"
+        />
+      </div>
     </div>
     <div :class="classes.thumbContainer">
       <div
@@ -122,7 +180,7 @@ const thumbStyles = (thumb: 'first' | 'second') => {
         @mousedown="(event) => onMouseDown(event, 'first')"
       />
       <div
-        v-if="double"
+        v-if="isRange"
         :class="classes.thumb"
         :style="thumbStyles('second')"
         @mousedown="(event) => onMouseDown(event, 'second')"
