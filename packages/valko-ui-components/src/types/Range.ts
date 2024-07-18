@@ -1,6 +1,6 @@
-import type { DefaultComponent } from './common'
+import type { VariantsAlt, Sizes, Colors, Shapes } from './common'
 
-export interface RangeProps extends DefaultComponent {
+export interface RangeProps extends VariantsAlt, Sizes, Colors, Shapes {
   minThumbValue?: number;
   maxThumbValue?: number
   progress?: number;
