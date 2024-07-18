@@ -21,7 +21,8 @@ const props = withDefaults(defineProps<RangeProps>(), {
   maxThumbValue: 100,
   striped: false,
   isRange: false,
-  showSteps: false
+  showSteps: false,
+  hideThumbs: false
 })
 
 const emit = defineEmits(['update:minThumbValue', 'update:maxThumbValue'])

@@ -24,7 +24,7 @@ export default tv({
     ],
     thumb: [
       'vk-range__thumb',
-      'bg-light-4',
+      'bg-light-1',
       'shadow-lg',
       'absolute',
       'transform',
@@ -37,14 +37,15 @@ export default tv({
       'dark:bg-light-3'
     ],
     stepMark: [
-      'w-2',
-      'h-2',
-      'bg-dark-3',
+      'w-1.5',
+      'h-1.5',
+      'bg-light-5',
       'rounded-full',
       'absolute',
       'top-1/2',
       '-translate-y-1/2',
-      'z-10'
+      'z-10',
+      'dark:bg-dark-2'
     ]
   },
   variants: {
@@ -146,6 +147,10 @@ export default tv({
         thumb: [
           'w-[1.125rem]',
           'h-[1.125rem]'
+        ],
+        stepMark: [
+          'w-2',
+          'h-2'
         ]
       }
     },
@@ -182,6 +187,13 @@ export default tv({
           'bg-repeat',
           'bg-blend-multiply',
           'animate-cicle'
+        ]
+      }
+    },
+    hideThumbs: {
+      true: {
+        thumb: [
+          'hidden'
         ]
       }
     }

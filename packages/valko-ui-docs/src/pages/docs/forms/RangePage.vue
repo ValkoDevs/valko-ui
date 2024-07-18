@@ -17,11 +17,12 @@ const form = ref({
   striped: false,
   isRange: false,
   showSteps: false,
+  hideThumbs: false,
   min: 0,
   max: 100,
   step: 10,
-  first: 50,
-  second: 100
+  minThumb: 50,
+  maxThumb: 100
 })
 
 const rangeProps = [
@@ -115,6 +116,13 @@ const rangeProps = [
     description: 'The maximum value of the Range slider.',
     values: 'number',
     default: '100'
+  },
+  {
+    prop: 'hideThumbs',
+    required: false,
+    description: 'Allows to hide the thumbs.',
+    values: 'true, false',
+    default: 'false'
   }
 ]
 
@@ -142,8 +150,8 @@ const rangeEmits = [
     <template #playground-view>
       <div class="w-full flex justify-center p-4 flex-col">
         <div class="flex justify-between py-2">
-          <span>Min thumb value: {{ form.first }}</span>
-          <span v-if="form.isRange">Max thumb value: {{ form.second }}</span>
+          <span>Min thumb value: {{ form.minThumb }}</span>
+          <span v-if="form.isRange">Max thumb value: {{ form.maxThumb }}</span>
         </div>
         <vk-range
           :color="form.color"
@@ -156,8 +164,9 @@ const rangeEmits = [
           :max="form.max"
           :step="form.step"
           :show-steps="form.showSteps"
-          @update:min-thumb-value="form.first = $event"
-          @update:max-thumb-value="form.second = $event"
+          :hide-thumbs="form.hideThumbs"
+          @update:min-thumb-value="form.minThumb = $event"
+          @update:max-thumb-value="form.maxThumb = $event"
         />
       </div>
     </template>
@@ -215,6 +224,10 @@ const rangeEmits = [
       <vk-checkbox
         label="Show Steps"
         v-model="form.showSteps"
+      />
+      <vk-checkbox
+        label="Hide Thumbs"
+        v-model="form.hideThumbs"
       />
     </template>
 
