@@ -8,6 +8,7 @@ export default tv({
       'relative'
     ],
     progressContainer: [
+      'vk-range__progress',
       'overflow-hidden',
       'relative'
     ],
@@ -22,6 +23,7 @@ export default tv({
       'pointer-events-none'
     ],
     thumb: [
+      'vk-range__thumb',
       'bg-light-4',
       'shadow-lg',
       'absolute',
