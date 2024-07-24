@@ -13,87 +13,94 @@ const props = withDefaults(defineProps<RangeProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  progress: 0,
   min: 0,
   max: 100,
   step: 10,
-  minThumbValue: 50,
-  maxThumbValue: 100,
+  modelValue: 50,
   striped: false,
   isRange: false,
   showSteps: false,
-  hideThumbs: false
+  labels: () => []
 })
 
-const emit = defineEmits(['update:minThumbValue', 'update:maxThumbValue'])
+const emit = defineEmits(['update:modelValue'])
 
 const classes = useStyle<RangeProps, SlotStyles>(props, styles)
 
 const isDragging = ref(false)
 const sliderRef = ref<HTMLElement | null>(null)
-const draggingThumb = ref<'first' | 'second'>('first')
-const minThumbProgress = ref(props.minThumbValue)
-const maxThumbProgress = ref(props.isRange ? props.maxThumbValue : props.minThumbValue)
-
-const getNewProgress = (event: MouseEvent): number => {
-  if (!sliderRef.value) return 0
-  const sliderRect = sliderRef.value.getBoundingClientRect()
-  let newProgress = ((event.clientX - sliderRect.left) / sliderRect.width) * (props.max - props.min) + props.min
-  newProgress = Math.round(newProgress / props.step) * props.step
-  return Math.min(props.max, Math.max(props.min, newProgress))
+const draggingThumb = ref<'min' | 'max'>('min')
+const thumbRefMap = {
+  min: ref(Array.isArray(props.modelValue) ? props.modelValue[0] : 0),
+  max: ref(Array.isArray(props.modelValue) ? props.modelValue[1] : props.modelValue)
 }
 
-const updateProgress = (newProgress: number, thumb: 'first' | 'second') => {
-  if (thumb === 'first') {
-    minThumbProgress.value = newProgress
-    if (props.isRange && minThumbProgress.value > maxThumbProgress.value) {
-      minThumbProgress.value = maxThumbProgress.value
-    }
-    emit('update:minThumbValue', minThumbProgress.value)
+const getNewThumbPosition = (event: MouseEvent): number => {
+  if (!sliderRef.value) return 0
+  const sliderRect = sliderRef.value.getBoundingClientRect()
+  let newPosition = ((event.clientX - sliderRect.left) / sliderRect.width) * (props.max - props.min) + props.min
+  newPosition = Math.round(newPosition / props.step) * props.step
+  return Math.min(props.max, Math.max(props.min, newPosition))
+}
+
+const updateThumbPosition = (newPosition: number, thumb: 'min' | 'max') => {
+  const primaryThumb = thumb === 'min' ? 'min' : 'max'
+  const secondaryThumb = thumb === 'max' ? 'min' : 'max'
+  thumbRefMap[primaryThumb].value = newPosition
+
+  if (props.isRange) {
+    const isOverlapping = primaryThumb === 'min'
+      ? thumbRefMap[primaryThumb].value > thumbRefMap[secondaryThumb].value
+      : thumbRefMap[primaryThumb].value < thumbRefMap[secondaryThumb].value
+
+    thumbRefMap[primaryThumb].value = isOverlapping ? thumbRefMap[secondaryThumb].value : newPosition
+
+    emit('update:modelValue', [thumbRefMap.min.value, thumbRefMap.max.value])
   } else {
-    maxThumbProgress.value = newProgress
-    if (props.isRange && maxThumbProgress.value < minThumbProgress.value) {
-      maxThumbProgress.value = minThumbProgress.value
-    }
-    emit('update:maxThumbValue', maxThumbProgress.value)
+    emit('update:modelValue', thumbRefMap.max.value)
   }
 }
 
-const onMouseDown = (event: MouseEvent, thumb: 'first' | 'second') => {
+const onMouseDown = (event: MouseEvent, thumb: 'min' | 'max') => {
   isDragging.value = true
   draggingThumb.value = thumb
   document.addEventListener('mousemove', onMouseMove)
   document.addEventListener('mouseup', onMouseUp)
-  updateProgress(getNewProgress(event), thumb)
+  updateThumbPosition(getNewThumbPosition(event), thumb)
+}
+
+const handleSingleThumb = (newPosition: number) => {
+  updateThumbPosition(newPosition, 'max')
+  isDragging.value = true
+  draggingThumb.value = 'max'
+}
+
+const handleMultipleThumbs = (newPosition: number) => {
+  const minThumb = Math.abs(newPosition - thumbRefMap.min.value)
+  const maxThumb = Math.abs(newPosition - thumbRefMap.max.value)
+  const selectedThumb = minThumb < maxThumb ? 'min' : 'max'
+
+  updateThumbPosition(newPosition, selectedThumb)
+  draggingThumb.value = selectedThumb
+
+  isDragging.value = true
 }
 
 const onSliderClick = (event: MouseEvent) => {
-  const newProgress = getNewProgress(event)
-  if (!props.isRange) {
-    updateProgress(newProgress, 'first')
-    isDragging.value = true
-    draggingThumb.value = 'first'
-  } else {
-    const firstDistance = Math.abs(newProgress - minThumbProgress.value)
-    const secondDistance = Math.abs(newProgress - maxThumbProgress.value)
+  const newPosition = getNewThumbPosition(event)
 
-    if (firstDistance < secondDistance) {
-      updateProgress(newProgress, 'first')
-      draggingThumb.value = 'first'
-    } else {
-      updateProgress(newProgress, 'second')
-      draggingThumb.value = 'second'
-    }
-    isDragging.value = true
-  }
+  if (!props.isRange) handleSingleThumb(newPosition)
+  else handleMultipleThumbs(newPosition)
+
   document.addEventListener('mousemove', onMouseMove)
   document.addEventListener('mouseup', onMouseUp)
 }
 
 const onMouseMove = (event: MouseEvent) => {
   if (!isDragging.value) return
+
   requestAnimationFrame(() => {
-    updateProgress(getNewProgress(event), draggingThumb.value)
+    updateThumbPosition(getNewThumbPosition(event), draggingThumb.value)
   })
 }
 
@@ -112,10 +119,14 @@ const inlineStyles = computed(() => {
   }
 
   const range = props.max - props.min
-  const start = ((minThumbProgress.value - props.min) / range) * 100
-  const end = props.isRange ? ((maxThumbProgress.value - props.min) / range) * 100 : start
+  const center = ((0 - props.min) / range) * 100
+  const start = props.isRange ? ((thumbRefMap.min.value - props.min) / range) * 100 : center
+  const end = props.isRange ? ((thumbRefMap.max.value - props.min) / range) * 100 : ((thumbRefMap.max.value - props.min) / range) * 100
 
-  let styles = `left: ${props.isRange ? start : 0}%; width: ${props.isRange ? end - start : start}%;`
+  const left = Math.min(start, end)
+  const width = Math.abs(end - start)
+
+  let styles = `left: ${left}%; width: ${width}%;`
 
   if (props.striped) {
     styles += `background-image: url("${diagonalStripes}"); background-size: ${sizeMap[props.size]};`
@@ -124,29 +135,36 @@ const inlineStyles = computed(() => {
   return styles.trimStart()
 })
 
-const thumbStyles = (thumb: 'first' | 'second') => {
-  const range = props.max - props.min
-  const position = thumb === 'first' ? ((minThumbProgress.value - props.min) / range) * 100
-    : ((maxThumbProgress.value - props.min) / range) * 100
+const thumbStyles = computed(() => {
+  const calculateStyles = (thumb: 'min' | 'max') => {
+    const range = props.max - props.min
+    const position = ((thumbRefMap[thumb].value - props.min) / range) * 100
+    const clampedPosition = Math.min(100, Math.max(0, position))
 
-  const clampedPosition = Math.min(100, Math.max(0, position))
+    return { left: `${clampedPosition}%` }
+  }
 
-  return { left: `${clampedPosition}%` }
-}
+  return {
+    start: calculateStyles('min'),
+    end: calculateStyles('max')
+  }
+})
 
 const stepMarks = computed(() => {
-  return Array.from({ length: (props.max - props.min) / props.step - 1 }, (_, i) => {
+  return Array.from({ length: Math.round((props.max - props.min) / props.step - 1) }, (_, i) => {
     return ((i + 1) * props.step / (props.max - props.min)) * 100
   })
 })
 
-watch([() => props.minThumbValue, () => props.maxThumbValue, () => props.isRange], ([newMinThumbValue, newMaxThumbValue, newisRange]) => {
-  minThumbProgress.value = newMinThumbValue
-  if (newisRange) {
-    maxThumbProgress.value = newMaxThumbValue
-  } else {
-    maxThumbProgress.value = newMinThumbValue
-  }
+const onLabelClick = (newPosition: number) => {
+  if (!props.isRange) handleSingleThumb(newPosition)
+  else handleMultipleThumbs(newPosition)
+}
+
+watch([() => props.min, () => props.max, () => props.isRange, () => props.step], ([min, max, isRange]) => {
+  thumbRefMap.min.value = min
+  thumbRefMap.max.value = max
+  emit('update:modelValue', isRange ? [min, max] : max)
 })
 
 onMounted(() => {
@@ -167,25 +185,39 @@ onMounted(() => {
       />
       <div v-if="showSteps">
         <div
-          v-for="(mark, index) in stepMarks"
+          v-for="(position, index) in stepMarks"
           :key="index"
-          :style="`left:${mark}%`"
+          :style="`left:${position}%`"
           :class="classes.stepMark"
         />
       </div>
     </div>
     <div :class="classes.thumbContainer">
       <div
-        :class="classes.thumb"
-        :style="thumbStyles('first')"
-        @mousedown="(event) => onMouseDown(event, 'first')"
-      />
-      <div
         v-if="isRange"
         :class="classes.thumb"
-        :style="thumbStyles('second')"
-        @mousedown="(event) => onMouseDown(event, 'second')"
+        :style="thumbStyles.start"
+        @mousedown="(event) => onMouseDown(event, 'min')"
       />
+      <div
+        :class="classes.thumb"
+        :style="thumbStyles.end"
+        @mousedown="(event) => onMouseDown(event, 'max')"
+      />
+    </div>
+    <div
+      v-if="labels.length > 0"
+      :class="classes.labelContainer"
+    >
+      <span
+        v-for="(el, index) in labels"
+        :key="index"
+        :style="`left:${el.value}%`"
+        :class="classes.label"
+        @click="() => onLabelClick(el.value)"
+      >
+        {{ el.label }}
+      </span>
     </div>
   </div>
 </template>
