@@ -29,7 +29,8 @@ const props = withDefaults(defineProps<DataTableProps>(), {
     offset: 0
   }),
   filters: () => [],
-  data: () => []
+  data: () => [],
+  pageSizeOptions: () => [10, 20, 50, 100]
 })
 
 const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll'])
@@ -44,12 +45,7 @@ const sortIconMap = {
 
 const limitRef = ref(2)
 
-const selectLimit = [
-  { value: 2, label: '2' },
-  { value: 25, label: '25' },
-  { value: 50, label: '50' },
-  { value: 100, label: '100' }
-]
+const selectLimit = computed(() => props.pageSizeOptions.map((i) => ({ value: i, label: `${i}` })))
 
 const selectedItems = computed(
   () => {
@@ -80,6 +76,7 @@ const handleSort = (field: keyof TableItem) => {
   }
 
   emit('onSort', newSort.direction ? newSort : null)
+  currentPage.value = 1
 }
 
 onMounted(() => {

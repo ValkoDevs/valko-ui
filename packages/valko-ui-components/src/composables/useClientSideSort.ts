@@ -1,4 +1,4 @@
-import { ref, watchEffect, Ref, toValue } from 'vue'
+import { ref, Ref, toValue, watch } from 'vue'
 import type { Sort } from '#valkoui/types/common'
 
 const useClientSideSort = <T extends Record<string, string | number | boolean>>(data: T[], initialSort?: Sort) => {
@@ -8,33 +8,34 @@ const useClientSideSort = <T extends Record<string, string | number | boolean>>(
 
   const result: Ref<T[]> = ref([])
 
-  watchEffect(() => {
+  watch(() => sort, () => {
+    console.log(sort)
     const normalizeSort = toValue(sort)
-    if (normalizeSort) {
-      const { field, direction } = normalizeSort
-      result.value = data.sort((prev, next) => {
-        let comparisonResult = 0
-        switch (typeof prev[field]) {
-          case 'string':
-            comparisonResult = `${prev[field]}`.localeCompare(`${next[field]}`)
-            break
-          case 'number':
-          case 'boolean':
-            comparisonResult = +prev[field] - +next[field]
-            break
-          default:
-            comparisonResult = 0
-            break
-        }
+    if (!normalizeSort) return result.value = [...data]
 
-        const multiplier = direction === 'asc' ? 1 : -1
+    const { field, direction } = normalizeSort
+    const sortedResult = data.sort((prev, next) => {
+      let comparisonResult = 0
+      switch (typeof prev[field]) {
+        case 'string':
+          comparisonResult = `${prev[field]}`.localeCompare(`${next[field]}`)
+          break
+        case 'number':
+        case 'boolean':
+          comparisonResult = +prev[field] - +next[field]
+          break
+        default:
+          comparisonResult = 0
+          break
+      }
 
-        return comparisonResult * multiplier
-      })
-    } else {
-      result.value = data
-    }
-  })
+      const multiplier = direction === 'asc' ? 1 : -1
+
+      return comparisonResult * multiplier
+    })
+
+    result.value = [...sortedResult]
+  }, { deep: true, immediate: true })
 
   return  {
     result,

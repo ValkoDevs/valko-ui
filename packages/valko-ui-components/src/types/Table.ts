@@ -46,4 +46,5 @@ export interface DataTableProps extends TableProps, Colors {
   pagination?: Pagination<TableItem>;
   selectionMode?: SelectionMode;
   page?: number;
+  pageSizeOptions?: number[];
 }

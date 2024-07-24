@@ -21,11 +21,6 @@ const form = reactive({
   filterable: false
 })
 
-const colors = [
-  ...colorOptions,
-  { value: 'neutral', label: 'Neutral' }
-]
-
 const selectionMode = [
   { value: 'single', label: 'Single' },
   { value: 'multiple', label: 'Multiple' },
@@ -183,7 +178,6 @@ const dataTable = useDataTable({
 </script>
 
 <template>
-  {{ sortedResult }}
   <doc-section
     title="Table"
     description="A more complex Table component that allows to sort, filter & edit the data that contains."
@@ -203,6 +197,7 @@ const dataTable = useDataTable({
           :is-all-selected="dataTable.isAllSelected"
           :pagination="paginatedResult"
           :sort="sort"
+          :page-size-options="[2, 5, 10, 20]"
           @on-select="dataTable.handleSelect"
           @on-select-all="dataTable.handleSelectAll"
           @on-page-change="setOffset"
@@ -215,7 +210,7 @@ const dataTable = useDataTable({
       <vk-select
         placeholder="Color"
         size="sm"
-        :options="colors"
+        :options="colorOptions"
         v-model="form.color"
       />
       <vk-select
@@ -260,96 +255,88 @@ const dataTable = useDataTable({
       <example-section
         title="Colors"
         justify="start"
-        gap
         wrap
       >
-        <div class="grid grid-cols-2 gap-4">
-          <div
-            v-for="color in colors"
-            :key="color.value"
-          >
-            <span>
-              {{ color.label }}
-            </span>
-            <vk-data-table
-              :color="color.value"
-              :headers="propHeaders"
-              :data="tableItems"
-              class="mt-4"
-            />
-          </div>
+        <div
+          v-for="color in colorOptions"
+          :key="color.value"
+          class="w-full"
+        >
+          <span>
+            {{ color.label }}
+          </span>
+          <vk-data-table
+            :color="color.value"
+            :headers="propHeaders"
+            :data="tableItems"
+            class="mt-4"
+          />
         </div>
       </example-section>
 
       <example-section
         title="Variants"
         justify="start"
-        gap
         wrap
       >
-        <div class="grid grid-cols-2 gap-4">
-          <div
-            v-for="variant in variantOptions"
-            :key="variant.value"
-          >
-            <span>
-              {{ variant.label }}
-            </span>
-            <vk-data-table
-              :variant="variant.value"
-              :headers="propHeaders"
-              :data="tableItems"
-              class="mt-4"
-            />
-          </div>
+        <div
+          v-for="variant in variantOptions"
+          :key="variant.value"
+          class="w-full"
+        >
+          <span>
+            {{ variant.label }}
+          </span>
+          <vk-data-table
+            :variant="variant.value"
+            :headers="propHeaders"
+            :data="tableItems"
+            class="mt-4"
+          />
         </div>
       </example-section>
 
       <example-section
         title="Shapes"
         justify="start"
-        gap
         wrap
       >
-        <div class="grid grid-cols-2 gap-4">
-          <div
-            v-for="shape in shapeOptions"
-            :key="shape.value"
-          >
-            <span>
-              {{ shape.label }}
-            </span>
-            <vk-data-table
-              :shape="shape.value"
-              :headers="propHeaders"
-              :data="tableItems"
-              class="mt-4"
-            />
-          </div>
+        <div
+          v-for="shape in shapeOptions"
+          :key="shape.value"
+          class="w-full"
+        >
+          <span>
+            {{ shape.label }}
+          </span>
+          <vk-data-table
+            :shape="shape.value"
+            :headers="propHeaders"
+            :data="tableItems"
+            class="mt-4"
+          />
         </div>
       </example-section>
 
       <example-section
         title="Sizes"
         justify="start"
-        gap
         wrap
       >
-        <div class="grid grid-cols-2 gap-4">
-          <div
-            v-for="size in sizeOptions"
-            :key="size.value"
-          >
-            <span>
-              {{ size.label }}
-            </span>
-            <vk-data-table
-              :size="size.value"
-              :headers="propHeaders"
-              :data="tableItems"
-              class="mt-4"
-            />
-          </div>
+        <div
+          v-for="size in sizeOptions"
+          :key="size.value"
+          class="w-full"
+        >
+          <span>
+            {{ size.label }}
+          </span>
+          <vk-data-table
+            :size="size.value"
+            :headers="propHeaders"
+            :data="tableItems"
+            class="mt-4"
+          />
         </div>
       </example-section>
     </template>
@@ -360,7 +347,7 @@ const dataTable = useDataTable({
           title="Table Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="tableProps"
           />
@@ -370,7 +357,7 @@ const dataTable = useDataTable({
           title="Table Item Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="tableItem"
           />
@@ -380,7 +367,7 @@ const dataTable = useDataTable({
           title="Table Header Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="tableItems"
           />
@@ -390,7 +377,7 @@ const dataTable = useDataTable({
           title="Table Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="emitData"
           />
@@ -400,7 +387,7 @@ const dataTable = useDataTable({
           title="Table Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="slotData"
           />
