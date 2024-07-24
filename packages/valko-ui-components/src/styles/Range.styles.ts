@@ -45,7 +45,25 @@ export default tv({
       'top-1/2',
       '-translate-y-1/2',
       'z-10',
-      'dark:bg-dark-2'
+      'dark:bg-dark-4'
+    ],
+    labelContainer: [
+      'absolute',
+      'inset-0',
+      'pointer-events-none'
+    ],
+    label: [
+      'mt-2',
+      'text-dark-1',
+      'hover:text-dark-5',
+      'cursor-pointer',
+      'pointer-events-auto',
+      'absolute',
+      'top-1/2',
+      '-translate-x-1/4',
+      'z-10',
+      'dark:text-light-4',
+      'dark:hover:text-light-1'
     ]
   },
   variants: {
@@ -120,6 +138,9 @@ export default tv({
         thumb: [
           'w-3',
           'h-3'
+        ],
+        label: [
+          'text-xs'
         ]
       },
       sm: {
@@ -129,6 +150,9 @@ export default tv({
         thumb: [
           'w-3.5',
           'h-3.5'
+        ],
+        label: [
+          'text-sm'
         ]
       },
       md: {
@@ -138,6 +162,9 @@ export default tv({
         thumb: [
           'w-4',
           'h-4'
+        ],
+        label: [
+          'text-base'
         ]
       },
       lg: {
@@ -151,6 +178,9 @@ export default tv({
         stepMark: [
           'w-2',
           'h-2'
+        ],
+        label: [
+          'text-lg'
         ]
       }
     },
@@ -187,13 +217,6 @@ export default tv({
           'bg-repeat',
           'bg-blend-multiply',
           'animate-cicle'
-        ]
-      }
-    },
-    hideThumbs: {
-      true: {
-        thumb: [
-          'hidden'
         ]
       }
     }

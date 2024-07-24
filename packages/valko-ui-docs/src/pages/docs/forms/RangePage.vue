@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
@@ -8,6 +8,7 @@ import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
 import emitHeaders from '@/data/emitHeaders'
+import type { Label } from '@valko-ui/components'
 
 const form = ref({
   color: 'primary',
@@ -17,13 +18,25 @@ const form = ref({
   striped: false,
   isRange: false,
   showSteps: false,
-  hideThumbs: false,
+  hasLabel: false,
   min: 0,
   max: 100,
   step: 10,
-  minThumb: 50,
-  maxThumb: 100
+  modelValue: 50,
+  labels: [] as Label[]
 })
+
+const generateLabels = () => {
+  const labels: Label[] = []
+  const stepCount = (form.value.max - form.value.min) / form.value.step
+
+  for (let i = 1; i < stepCount; i++) {
+    const value = form.value.min + (i * form.value.step)
+    labels.push({ value, label: `${value.toString()}%` })
+  }
+
+  return labels
+}
 
 const rangeProps = [
   {
@@ -53,27 +66,6 @@ const rangeProps = [
     description: 'The size of the Range slider.',
     values: 'xs, sm, md, lg',
     default: 'md'
-  },
-  {
-    prop: 'minThumbValue',
-    required: false,
-    description: 'The value of the primary thumb in the Range slider.',
-    values: 'number',
-    default: '50'
-  },
-  {
-    prop: 'maxThumbValue',
-    required: false,
-    description: 'The value of the secondary thumb in the Range slider.',
-    values: 'number',
-    default: '100'
-  },
-  {
-    prop: 'progress',
-    required: false,
-    description: 'The progress percentage of the Range slider.',
-    values: 'number (0-100)',
-    default: '0'
   },
   {
     prop: 'striped',
@@ -118,40 +110,69 @@ const rangeProps = [
     default: '100'
   },
   {
-    prop: 'hideThumbs',
+    prop: 'offset',
     required: false,
-    description: 'Allows to hide the thumbs.',
-    values: 'true, false',
-    default: 'false'
+    description: 'The offset value for the Range slider.',
+    values: 'number',
+    default: '0'
+  },
+  {
+    prop: 'modelValue',
+    required: true,
+    description: 'The value of the Range slider.',
+    values: 'number | number[]',
+    default: '50'
+  },
+  {
+    prop: 'labels',
+    required: false,
+    description: 'The labels for the stepmarks in the slider.',
+    values: 'Label[]',
+    default: '[]'
   }
 ]
 
 const rangeEmits = [
   {
-    event: 'update:primaryThumbVal',
-    type: '(value: number) => void',
-    values: 'value: The new value of the primary thumb.',
-    description: 'Emitted when the value of the primary thumb of the slider is updated.'
-  },
-  {
-    event: 'update:secondaryThumbVal',
-    type: '(value: number) => void',
-    values: 'value: The new value of the secondary thumb.',
-    description: 'Emitted when the value of the secondary thumb of the slider is updated.'
+    event: 'update:modelValue',
+    type: '(value: number | [number, number]) => void',
+    description: 'Emitted when the value of the slider is updated.'
   }
 ]
+
+const labelsInterface = [
+  {
+    prop: 'value',
+    required: true,
+    description: 'The value where the label is gonna be displayed on the slider.',
+    values: 'number',
+    default: ''
+  },
+  {
+    prop: 'label',
+    required: true,
+    description: 'The displayed name of the label.',
+    values: 'string',
+    default: ''
+  }
+]
+
+watch([() => form.value.min, () => form.value.max, () => form.value.step], () => {
+  form.value.labels = generateLabels()
+})
+
+form.value.labels = generateLabels()
 </script>
 
 <template>
   <doc-section
     title="Range"
-    description="A versatile slider interface for selecting a single value or a range of values within specified bounds.  Features include optional step marks, striped backgrounds, and the ability to display two thumbs for selecting a range (isRange mode). The component offers precise control over minimum (min) and maximum (max) values, along with the positions of the primary (minThumbValue) and secondary (maxThumbValue) thumbs. Ideal for scenarios where precise value selection and visual feedback are crucial."
+    description="A versatile slider interface for selecting a single value or a range of values within specified bounds. Features include optional step marks, striped backgrounds, and the ability to display two thumbs for selecting a range (isRange mode). The component offers precise control over minimum (min) and maximum (max) values, step intervals, and visual styling options such as color, variant, shape, and size. Ideal for scenarios where precise value selection and visual feedback are crucial."
   >
     <template #playground-view>
       <div class="w-full flex justify-center p-4 flex-col">
         <div class="flex justify-between py-2">
-          <span>Min thumb value: {{ form.minThumb }}</span>
-          <span v-if="form.isRange">Max thumb value: {{ form.maxThumb }}</span>
+          value: {{ form.modelValue }}
         </div>
         <vk-range
           :color="form.color"
@@ -160,13 +181,12 @@ const rangeEmits = [
           :size="form.size"
           :striped="form.striped"
           :is-range="form.isRange"
-          :min="form.min"
-          :max="form.max"
+          :min="+form.min"
+          :max="+form.max"
           :step="form.step"
           :show-steps="form.showSteps"
-          :hide-thumbs="form.hideThumbs"
-          @update:min-thumb-value="form.minThumb = $event"
-          @update:max-thumb-value="form.maxThumb = $event"
+          :labels="form.hasLabel ? form.labels : []"
+          v-model="form.modelValue"
         />
       </div>
     </template>
@@ -226,8 +246,8 @@ const rangeEmits = [
         v-model="form.showSteps"
       />
       <vk-checkbox
-        label="Hide Thumbs"
-        v-model="form.hideThumbs"
+        label="Show Labels"
+        v-model="form.hasLabel"
       />
     </template>
 
@@ -301,7 +321,7 @@ const rangeEmits = [
         gap
       >
         <vk-range
-          is-range
+          :is-range="true"
           class="w-1/3"
         />
       </example-section>
@@ -347,6 +367,16 @@ const rangeEmits = [
           <vk-data-table
             :headers="propHeaders"
             :data="rangeProps"
+          />
+        </example-section>
+
+        <example-section
+          title="Label Interface"
+          gap
+        >
+          <vk-data-table
+            :headers="propHeaders"
+            :data="labelsInterface"
           />
         </example-section>
 

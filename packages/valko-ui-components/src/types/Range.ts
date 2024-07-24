@@ -1,14 +1,16 @@
 import type { VariantsAlt, Sizes, Colors, Shapes } from './common'
 
-export interface RangeProps extends VariantsAlt, Sizes, Colors, Shapes {
-  minThumbValue?: number;
-  maxThumbValue?: number;
-  progress?: number;
+export interface Label {
+  value: number;
+  label: string;
+}
+export interface RangeProps<R = boolean, T = R extends true ? number[] : number> extends VariantsAlt, Sizes, Colors, Shapes {
+  modelValue: T;
+  isRange?: R;
+  labels?: Label[]
   min?: number;
   max?: number;
   step?: number;
   striped?: boolean;
-  isRange?: boolean;
   showSteps?: boolean;
-  hideThumbs?: boolean;
 }
