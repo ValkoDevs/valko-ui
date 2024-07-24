@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import type { DataTableProps, TableItem } from '#valkoui/types/Table'
 import type { SlotStyles, Sort } from '#valkoui/types/common'
 import useStyle from '#valkoui/composables/useStyle.ts'
@@ -51,8 +51,6 @@ const selectLimit = [
   { value: 100, label: '100' }
 ]
 
-
-
 const selectedItems = computed(
   () => {
     return props.data.reduce((acc, item) => ({
@@ -83,6 +81,11 @@ const handleSort = (field: keyof TableItem) => {
 
   emit('onSort', newSort.direction ? newSort : null)
 }
+
+onMounted(() => {
+  limitRef.value = 2
+  emit('onLimitChange', 2)
+})
 </script>
 
 <template>
@@ -165,6 +168,7 @@ const handleSort = (field: keyof TableItem) => {
           :shape="shape"
           :size="size"
           :pages="totalPages"
+          :class="classes.footerNav"
           v-model="currentPage"
         />
       </div>
@@ -177,6 +181,7 @@ const handleSort = (field: keyof TableItem) => {
           :variant="variant"
           :shape="shape"
           :size="size"
+          :class="classes.footerSelect"
           v-model="limitRef"
           @update:model-value="(newLimit: number) => emit('onLimitChange', newLimit)"
         />

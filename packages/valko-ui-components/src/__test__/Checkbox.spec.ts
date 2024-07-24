@@ -225,7 +225,7 @@ describe('Checkbox component', () => {
     it('should show indeterminate icon', () => {
       wrapper = mount(VkCheckbox, {
         props: {
-          indeterminate: true
+          modelValue: null
         }
       })
 

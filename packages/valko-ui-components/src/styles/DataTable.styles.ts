@@ -5,8 +5,7 @@ export default tv({
     table: [
       'vk-data-table',
       'flex',
-      'flex-col',
-      'justify-between'
+      'flex-col'
     ],
     headerContainer: [
       'flex',
@@ -23,10 +22,14 @@ export default tv({
     footer: [
       'flex',
       'justify-between',
-      'mt-2',
-      'first:w-1/2',
-      'last:w-1/5',
-      'last:self-end'
+      'items-center',
+      'mt-2'
+    ],
+    footerNav: [
+      'mr-auto'
+    ],
+    footerSelect: [
+      'ml-auto'
     ]
   }
 }) as unknown as ReturnType<TV>
