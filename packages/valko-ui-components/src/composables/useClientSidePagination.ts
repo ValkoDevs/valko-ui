@@ -17,7 +17,6 @@ const useClientSidePagination = <T>(data: T[] | Ref<T[]>, initialLimit = 10) => 
 
   watchEffect(() => {
     const normalizedData = toValue(data)
-    console.log(normalizedData)
     result.value = {
       records: normalizedData.slice(offset.value, offset.value + limit.value) as T[],
       total: normalizedData.length,

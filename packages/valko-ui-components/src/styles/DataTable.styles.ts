@@ -4,6 +4,7 @@ export default tv({
   slots: {
     table: [
       'vk-data-table',
+      'w-full',
       'flex',
       'flex-col'
     ],
