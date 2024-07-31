@@ -9,7 +9,6 @@ const useClientSideSort = <T extends Record<string, string | number | boolean>>(
   const result: Ref<T[]> = ref([])
 
   watch(() => sort, () => {
-    console.log(sort)
     const normalizeSort = toValue(sort)
     if (!normalizeSort) return result.value = [...data]
 

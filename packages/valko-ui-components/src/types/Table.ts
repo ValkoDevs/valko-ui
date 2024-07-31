@@ -22,6 +22,7 @@ export interface TableProps extends Shapes, Sizes, Variants {
 }
 
 export type SelectionMode = 'single' | 'multiple' | 'row' | 'none'
+
 export interface DataTableConfig<T> {
   headers: TableHeader[];
   paginatedResult: Pagination<T> | Ref<Pagination<T>>;
@@ -37,6 +38,7 @@ export interface DataTableInput {
   handleSelect: (item: TableItem) => void;
   handleSelectAll: (allSelected: boolean) => void;
 }
+
 export interface DataTableProps extends TableProps, Colors {
   selection: TableItem[] | TableItem;
   isAllSelected?: boolean | null;
@@ -47,4 +49,5 @@ export interface DataTableProps extends TableProps, Colors {
   selectionMode?: SelectionMode;
   page?: number;
   pageSizeOptions?: number[];
+  popoverPlacement?: 'top' | 'bottom' | 'left' | 'right';
 }
