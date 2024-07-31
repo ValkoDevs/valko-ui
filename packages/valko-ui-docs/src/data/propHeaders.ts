@@ -1,22 +1,37 @@
 export default [
   {
     key: 'prop',
-    label: 'Property'
+    field: 'prop',
+    label: 'Property',
+    sortable: true,
+    filterable: true
   },
   {
     key: 'required',
-    label: 'Required'
+    field: 'required',
+    label: 'Required',
+    sortable: true,
+    filterable: true
   },
   {
     key: 'description',
-    label: 'Description'
+    field: 'description',
+    label: 'Description',
+    sortable: true,
+    filterable: true
   },
   {
     key: 'values',
-    label: 'Values'
+    field: 'values',
+    label: 'Values',
+    sortable: true,
+    filterable: true
   },
   {
     key: 'default',
-    label: 'Default'
+    field: 'default',
+    label: 'Default',
+    sortable: true,
+    filterable: true
   }
 ]

@@ -5,31 +5,37 @@ export default tv({
     table: [
       'vk-data-table',
       'w-full',
-      'dark:border-dark-3',
-      'rounded'
+      'flex',
+      'flex-col',
+      'relative'
     ],
-    thead: [
-      'border-b',
-      'border-light-3',
-      'dark:border-dark-3'
+    headerContainer: [
+      'flex',
+      'gap-1',
+      'items-center'
     ],
-    th: [
-      'px-4',
-      'py-2',
+    headerLabel: [
+      'mr-2',
+      'self-center'
+    ],
+    headerUtilities: [
+      'cursor-pointer',
       'text-dark-1',
-      'dark:text-light-1'
+      'hover:text-dark-5',
+      'dark:text-light-1',
+      'dark:hover:text-light-5'
     ],
-    tr: [
-      'border-b',
-      'border-light-3',
-      'dark:border-dark-3'
+    footer: [
+      'flex',
+      'justify-between',
+      'items-center',
+      'mt-2'
     ],
-    td: [
-      'px-4',
-      'py-2',
-      'text-left',
-      'text-dark-1',
-      'dark:text-light-1'
+    footerNav: [
+      'mr-auto'
+    ],
+    footerSelect: [
+      'ml-auto'
     ]
   }
 }) as unknown as ReturnType<TV>
