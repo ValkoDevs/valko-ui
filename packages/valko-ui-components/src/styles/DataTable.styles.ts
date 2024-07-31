@@ -6,7 +6,8 @@ export default tv({
       'vk-data-table',
       'w-full',
       'flex',
-      'flex-col'
+      'flex-col',
+      'relative'
     ],
     headerContainer: [
       'flex',
@@ -18,7 +19,11 @@ export default tv({
       'self-center'
     ],
     headerUtilities: [
-      ''
+      'cursor-pointer',
+      'text-dark-1',
+      'hover:text-dark-5',
+      'dark:text-light-1',
+      'dark:hover:text-light-5'
     ],
     footer: [
       'flex',

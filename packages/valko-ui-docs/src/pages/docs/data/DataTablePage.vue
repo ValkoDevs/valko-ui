@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref, Ref, watch } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
-import variantOptions from '@/data/variantOptions'
 import colorOptions from '@/data/colorOptions'
+import variantOptions from '@/data/variantOptions'
 import sizeOptions from '@/data/sizeOptions'
-import propHeaders from '@/data/propHeaders'
 import shapeOptions from '@/data/shapeOptions'
+import propHeaders from '@/data/propHeaders'
 import emitHeaders from '@/data/emitHeaders'
 import slotHeaders from '@/data/slotHeaders'
-import { type SelectionMode, useDataTable, useClientSidePagination, useClientSideSort } from '@valko-ui/components'
+import { type SelectionMode, useDataTable, useClientSidePagination, useClientSideSort, TableItem, Pagination } from '@valko-ui/components'
 
 const form = reactive({
   color: 'primary',
@@ -17,8 +17,7 @@ const form = reactive({
   shape: 'soft',
   size: 'md',
   striped: false,
-  sortable: false,
-  filterable: false
+  popoverPlacement: 'bottom'
 })
 
 const selectionMode = [
@@ -28,8 +27,17 @@ const selectionMode = [
   { value: 'none', label: 'None' }
 ]
 
+const popoverPlacement = [
+  { value: 'top', label: 'Top' },
+  { value: 'bottom', label: 'Bottom' },
+  { value: 'left', label: 'Left' },
+  { value: 'right', label: 'Right' }
+]
+
+// API
 const tableProps = [
   {
+    key: 'prop',
     prop: 'headers',
     required: true,
     description: 'An array of objects defining the headers of the table.',
@@ -37,6 +45,7 @@ const tableProps = [
     default: '[]'
   },
   {
+    key: 'prop',
     prop: 'data',
     required: true,
     description: 'An array of objects representing the data rows of the table.',
@@ -44,50 +53,120 @@ const tableProps = [
     default: '[]'
   },
   {
-    prop: 'sortBy',
+    key: 'prop',
+    prop: 'color',
     required: false,
-    description: 'The key of the column used for sorting.',
-    values: 'string | null',
-    default: 'null'
+    description: 'The color theme of the table.',
+    values: 'primary, neutral, success, info, warning, error',
+    default: 'primary'
   },
   {
-    prop: 'sortDir',
+    key: 'prop',
+    prop: 'variant',
     required: false,
-    description: 'The sorting direction.',
-    values: 'asc, desc',
-    default: 'asc'
+    description: 'The variant of the table.',
+    values: 'filled, outlined, ghost',
+    default: 'filled'
   },
   {
-    prop: 'selectable',
+    key: 'prop',
+    prop: 'shape',
     required: false,
-    description: 'Controls the selection behavior of the table.',
-    values: 'single, multiple, none',
-    default: 'none'
+    description: 'The shape of the table.',
+    values: 'soft, rounded, square',
+    default: 'soft'
   },
   {
-    prop: 'selectionType',
+    key: 'prop',
+    prop: 'size',
     required: false,
-    description: 'The type of selection interface.',
-    values: 'check, row',
-    default: 'check'
+    description: 'The size of the table.',
+    values: 'xs, sm, md, lg',
+    default: 'md'
   },
   {
+    key: 'prop',
     prop: 'striped',
     required: false,
     description: 'Specifies whether the table rows are striped for better readability.',
-    values: 'boolean',
+    values: 'true, false',
     default: 'false'
   },
   {
+    key: 'prop',
+    prop: 'selectionMode',
+    required: false,
+    description: 'Controls the selection behavior of the table.',
+    values: 'single, multiple, row, none',
+    default: 'none'
+  },
+  {
+    key: 'prop',
+    prop: 'sort',
+    required: false,
+    description: 'The sorting configuration of the table.',
+    values: 'Sort',
+    default: ''
+  },
+  {
+    key: 'prop',
+    prop: 'pagination',
+    required: false,
+    description: 'The pagination configuration of the table.',
+    values: 'Pagination<TableItem>',
+    default: '() => ({ records: [], total: 0, limit: 10, offset: 0 })'
+  },
+  {
+    key: 'prop',
+    prop: 'filters',
+    required: false,
+    description: 'The filters applied to the table.',
+    values: 'Filter[]',
+    default: '() => []'
+  },
+  {
+    key: 'prop',
+    prop: 'pageSizeOptions',
+    required: false,
+    description: 'Options for page size selection.',
+    values: 'number[]',
+    default: '() => [10, 20, 50, 100]'
+  },
+  {
+    key: 'prop',
+    prop: 'selection',
+    required: false,
+    description: 'The selected items in the table.',
+    values: 'TableItem[] | TableItem',
+    default: 'undefined'
+  },
+  {
+    key: 'prop',
+    prop: 'isAllSelected',
+    required: false,
+    description: 'Specifies if all items are selected.',
+    values: 'true, false | null',
+    default: 'null'
+  },
+  {
+    key: 'prop',
     prop: 'loading',
     required: false,
     description: 'Specifies whether the table is in a loading state.',
-    values: 'boolean',
+    values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'prop',
+    prop: 'popoverPlacement',
+    required: true,
+    description: 'The placement of the filter popover.',
+    values: 'top, bottom, left, right',
+    default: 'bottom'
   }
 ]
 
-const tableItem = [
+const tableItemInterface = [
   {
     prop: 'key',
     required: true,
@@ -102,24 +181,125 @@ const tableItem = [
   }
 ]
 
-const emitData = [
+const tableEmits = [
   {
-    event: 'close',
-    type: '() => void',
+    key: 'emit',
+    event: 'onSelect',
+    type: '(item: TableItem) => void',
     values: '',
-    description: 'Emitted when the alert is closed by the user.'
-  }
-]
-
-const slotData = [
+    description: 'Emitted when an item is selected.'
+  },
   {
-    name: 'default',
-    description: 'Slot for the main content of the alert.',
-    example: '<template #default>\n  <p>This is the main content of the alert.</p>\n</template>'
+    key: 'emit',
+    event: 'onSelectAll',
+    type: '(allSelected: boolean) => void',
+    values: '',
+    description: 'Emitted when all items are selected or deselected.'
+  },
+  {
+    key: 'emit',
+    event: 'onPageChange',
+    type: '(page: number) => void',
+    values: '',
+    description: 'Emitted when the current page is changed.'
+  },
+  {
+    key: 'emit',
+    event: 'onLimitChange',
+    type: '(limit: number) => void',
+    values: '',
+    description: 'Emitted when the page size limit is changed.'
+  },
+  {
+    key: 'emit',
+    event: 'onSort',
+    type: '(sort: Sort | null) => void',
+    values: '',
+    description: 'Emitted when the sort configuration is changed.'
+  },
+  {
+    key: 'emit',
+    event: 'onFilter',
+    type: '(data: TableItem[], key: string) => void',
+    values: '',
+    description: 'Emitted when a filter is applied.'
   }
 ]
 
-const tableItems = [
+const tableSlots = [
+  {
+    name: 'filter-content-${header.key}',
+    description: 'Slot for customizing the popover displayed when clicking the filter icon.',
+    example: '<template #filter-content-${header-key}><div class="custom-header-filter">Filter here!</div></template>'
+  }
+]
+
+const sortInterface = [
+  {
+    prop: 'field',
+    required: true,
+    description: 'The key of the field to be sorted.',
+    values: 'string',
+    default: 'undefined'
+  },
+  {
+    prop: 'direction',
+    required: false,
+    description: 'The direction of the sort. Can be ascending ("asc") or descending ("desc").',
+    values: 'asc | desc | undefined',
+    default: 'undefined'
+  }
+]
+
+const filterInterface = [
+  {
+    prop: 'field',
+    required: true,
+    description: 'The key of the field to be filtered.',
+    values: 'string',
+    default: 'undefined'
+  },
+  {
+    prop: 'value',
+    required: true,
+    description: 'The value to filter by. This can be of any type depending on the field being filtered.',
+    values: 'unknown',
+    default: 'undefined'
+  }
+]
+
+const paginationInterface = [
+  {
+    prop: 'records',
+    required: true,
+    description: 'The records for the current page.',
+    values: 'T[]',
+    default: '[]'
+  },
+  {
+    prop: 'total',
+    required: true,
+    description: 'The total number of records.',
+    values: 'number',
+    default: '0'
+  },
+  {
+    prop: 'limit',
+    required: true,
+    description: 'The number of records per page.',
+    values: 'number',
+    default: '10'
+  },
+  {
+    prop: 'offset',
+    required: true,
+    description: 'The offset for the current page. Indicates the starting point for the records on the current page.',
+    values: 'number',
+    default: '0'
+  }
+]
+
+const tableHeaderInterface = [
   {
     key: 'example-01',
     prop: 'key',
@@ -136,42 +316,95 @@ const tableItems = [
   },
   {
     key: 'example-03',
-    prop: 'sortable',
+    prop: 'field',
     required: true,
-    description: 'Specifies whether the column is sortable.',
-    values: 'boolean'
+    description: 'The property of TableItem that this column should display.',
+    values: 'keyof TableItem'
   },
   {
     key: 'example-04',
-    prop: 'example-03',
+    prop: 'sortable',
     required: false,
-    description: 'Example prop for test pourpuses, example-03.',
-    values: 'string'
+    description: 'Specifies whether the column is sortable.',
+    values: 'boolean',
+    default: 'false'
   },
   {
     key: 'example-05',
-    prop: 'example-04',
-    required: true,
-    description: 'Example prop for test pourpuses, example-04.',
-    values: 'string'
+    prop: 'filterable',
+    required: false,
+    description: 'Specifies whether the column is filterable.',
+    values: 'boolean',
+    default: 'false'
   },
   {
     key: 'example-06',
-    prop: 'example-05',
+    prop: 'class',
     required: false,
-    description: 'Example prop for test pourpuses, example-05.',
-    values: 'boolean'
+    description: 'Additional classes for the column.',
+    values: 'string'
   }
 ]
-
-const { result: sortedResult, sort, setSort } = useClientSideSort(tableItems, { field: 'required', direction: 'desc' })
+// API END
+const { result: sortedResult, sort, setSort } = useClientSideSort(tableProps, { field: 'required', direction: 'desc' })
 const { result: paginatedResult, setOffset, setLimit } = useClientSidePagination(sortedResult)
 
 const selectionModeRef = ref<SelectionMode>('none')
+const filteredData = ref<TableItem[]>(paginatedResult.value.records)
+
+const newData: Ref<Pagination<TableItem>> = ref({
+  records: filteredData,
+  total: paginatedResult.value.total,
+  limit: paginatedResult.value.limit,
+  offset: paginatedResult.value.offset
+})
+
+type DataRecord = {
+  [key: string]: unknown
+}
+
+const handleFilter = ({ key, searchValue }: { key: string; searchValue: string; }) => {
+  const header = dataTable.value.headers.find((el) => el.key === key)
+
+  if (!header) return
+
+  filteredData.value = paginatedResult.value.records.filter(item => {
+    const itemValue = (item as DataRecord)[header.field as string]
+    return itemValue && itemValue.toString().toLowerCase().includes(searchValue.toLowerCase())
+  })
+
+  if (filteredData.value.length === 0) {
+    filteredData.value = [{
+      key: 'noResults',
+      prop: 'Property not found',
+      required: '',
+      description: 'The item was not found.',
+      values: ''
+    }]
+  }
+
+  newData.value = {
+    records: filteredData.value,
+    total: paginatedResult.value.total,
+    limit: paginatedResult.value.limit,
+    offset: paginatedResult.value.offset
+  }
+}
+
+watch(paginatedResult, (newValue) => {
+  filteredData.value = newValue.records
+
+  newData.value = {
+    records: filteredData.value,
+    total: newValue.total,
+    limit: newValue.limit,
+    offset: newValue.offset
+  }
+})
 
 const dataTable = useDataTable({
   headers: propHeaders,
-  paginatedResult,
+  paginatedResult: newData,
   selectionMode: selectionModeRef,
   selectAllStatus: undefined
 })
@@ -179,7 +412,7 @@ const dataTable = useDataTable({
 
 <template>
   <doc-section
-    title="Table"
+    title="Data Table"
     description="A more complex Table component that allows to sort, filter & edit the data that contains."
   >
     <template #playground-view>
@@ -198,11 +431,13 @@ const dataTable = useDataTable({
           :pagination="paginatedResult"
           :sort="sort"
           :page-size-options="[2, 5, 10, 20]"
+          :popover-placement="form.popoverPlacement"
           @on-select="dataTable.handleSelect"
           @on-select-all="dataTable.handleSelectAll"
           @on-page-change="setOffset"
           @on-limit-change="setLimit"
           @on-sort="setSort"
+          @on-filter="handleFilter"
         />
       </div>
     </template>
@@ -232,18 +467,16 @@ const dataTable = useDataTable({
         v-model="form.size"
       />
       <vk-select
+        placeholder="Popover Placement"
+        size="sm"
+        :options="popoverPlacement"
+        v-model="form.popoverPlacement"
+      />
+      <vk-select
         placeholder="Selection Mode"
         size="sm"
         :options="selectionMode"
         v-model="selectionModeRef"
-      />
-      <vk-checkbox
-        label="Sortable"
-        v-model="form.sortable"
-      />
-      <vk-checkbox
-        label="Filterable"
-        v-model="form.filterable"
       />
       <vk-checkbox
         label="Striped"
@@ -268,7 +501,7 @@ const dataTable = useDataTable({
           <vk-data-table
             :color="color.value"
             :headers="propHeaders"
-            :data="tableItems"
+            :data="tableHeaderInterface"
             class="mt-4"
           />
         </div>
@@ -290,7 +523,7 @@ const dataTable = useDataTable({
           <vk-data-table
             :variant="variant.value"
             :headers="propHeaders"
-            :data="tableItems"
+            :data="tableHeaderInterface"
             class="mt-4"
           />
         </div>
@@ -312,7 +545,7 @@ const dataTable = useDataTable({
           <vk-data-table
             :shape="shape.value"
             :headers="propHeaders"
-            :data="tableItems"
+            :data="tableHeaderInterface"
             class="mt-4"
           />
         </div>
@@ -334,7 +567,7 @@ const dataTable = useDataTable({
           <vk-data-table
             :size="size.value"
             :headers="propHeaders"
-            :data="tableItems"
+            :data="tableHeaderInterface"
             class="mt-4"
           />
         </div>
@@ -354,22 +587,12 @@ const dataTable = useDataTable({
         </example-section>
 
         <example-section
-          title="Table Item Props"
+          title="Table Slots"
           gap
         >
           <vk-table
-            :headers="propHeaders"
-            :data="tableItem"
-          />
-        </example-section>
-
-        <example-section
-          title="Table Header Props"
-          gap
-        >
-          <vk-table
-            :headers="propHeaders"
-            :data="tableItems"
+            :headers="slotHeaders"
+            :data="tableSlots"
           />
         </example-section>
 
@@ -379,17 +602,57 @@ const dataTable = useDataTable({
         >
           <vk-table
             :headers="emitHeaders"
-            :data="emitData"
+            :data="tableEmits"
           />
         </example-section>
 
         <example-section
-          title="Table Slots"
+          title="Table Item Interface"
           gap
         >
           <vk-table
-            :headers="slotHeaders"
-            :data="slotData"
+            :headers="propHeaders"
+            :data="tableItemInterface"
+          />
+        </example-section>
+
+        <example-section
+          title="Table Header Interface"
+          gap
+        >
+          <vk-table
+            :headers="propHeaders"
+            :data="tableHeaderInterface"
+          />
+        </example-section>
+
+        <example-section
+          title="Table Sort Interface"
+          gap
+        >
+          <vk-table
+            :headers="propHeaders"
+            :data="sortInterface"
+          />
+        </example-section>
+
+        <example-section
+          title="Table Pagination Interface"
+          gap
+        >
+          <vk-table
+            :headers="propHeaders"
+            :data="paginationInterface"
+          />
+        </example-section>
+
+        <example-section
+          title="Table Filter Interface"
+          gap
+        >
+          <vk-table
+            :headers="propHeaders"
+            :data="filterInterface"
           />
         </example-section>
       </div>

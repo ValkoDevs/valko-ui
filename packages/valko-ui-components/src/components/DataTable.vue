@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import type { DataTableProps, TableItem } from '#valkoui/types/Table'
 import type { SlotStyles, Sort } from '#valkoui/types/common'
 import useStyle from '#valkoui/composables/useStyle.ts'
@@ -10,6 +10,8 @@ import VkPagination from './Pagination.vue'
 import VkRadio from './Radio.vue'
 import VkSelect from './Select.vue'
 import VkTable from './Table.vue'
+import VkPopover from './Popover.vue'
+import VkInput from './Input.vue'
 
 defineOptions({ name: 'VkDataTable' })
 
@@ -43,9 +45,10 @@ const sortIconMap = {
   none: 'arrows-sort'
 }
 
-const limitRef = ref(2)
+const pageSizeRef = ref(2)
+const searchValue = ref('')
 
-const selectLimit = computed(() => props.pageSizeOptions.map((i) => ({ value: i, label: `${i}` })))
+const selectSize = computed(() => props.pageSizeOptions.map((i) => ({ value: i, label: `${i}` })))
 
 const selectedItems = computed(
   () => {
@@ -55,6 +58,28 @@ const selectedItems = computed(
     }), {} as Record<string | number, boolean>)
   }
 )
+
+// Popovers
+const activePopover = ref<string | null>(null)
+
+const togglePopover = (headerKey: string) => {
+  activePopover.value = activePopover.value === headerKey ? null : headerKey
+}
+
+const closePopover = () => {
+  activePopover.value = null
+}
+
+const handleClickOutside = (event: MouseEvent) => {
+  const popoverElements = document.querySelectorAll('.vk-popover')
+  let isClickInside = false
+
+  popoverElements.forEach((element) => {
+    if (element.contains(event.target as Node)) isClickInside = true
+  })
+
+  if (!isClickInside) closePopover()
+}
 
 // Pagination
 const totalPages = computed(() => Math.ceil(props.pagination.total / props.pagination.limit))
@@ -80,8 +105,13 @@ const handleSort = (field: keyof TableItem) => {
 }
 
 onMounted(() => {
-  limitRef.value = 2
+  document.addEventListener('click', handleClickOutside)
+  pageSizeRef.value = 2
   emit('onLimitChange', 2)
+})
+
+onBeforeUnmount(() => {
+  document.removeEventListener('click', handleClickOutside)
 })
 </script>
 
@@ -106,6 +136,7 @@ onMounted(() => {
             <vk-checkbox
               v-if="selectionMode === 'multiple' && header.key === 'selection'"
               :color="color"
+              :size="size"
               :model-value="isAllSelected"
               @update:model-value="(val) => emit('onSelectAll', val)"
             />
@@ -113,21 +144,50 @@ onMounted(() => {
           </div>
           <div
             v-if="header.filterable"
-            :class="classes.headerUtilities"
           >
-            <vk-icon
-              name="search"
-              class="cursor-pointer"
-              @click="() => emit('onFilter', data, header.key)"
-            />
+            <vk-popover
+              :shape="shape"
+              :placement="popoverPlacement"
+              :is-open="activePopover === header.key"
+            >
+              <template #default>
+                <vk-icon
+                  :size="size"
+                  name="search"
+                  :class="classes.headerUtilities"
+                  @click="togglePopover(header.key)"
+                />
+              </template>
+
+              <template #popover-content>
+                <slot
+                  :name="`filter-content-${header.key}`"
+                  :data="data"
+                  :headers="headers"
+                  :emit="emit"
+                >
+                  <div class="w-40">
+                    <vk-input
+                      :variant="variant"
+                      type="text"
+                      size="xs"
+                      label="Search..."
+                      v-model="searchValue"
+                      @update:model-value="() => emit('onFilter', { key: header.key, searchValue })"
+                    />
+                  </div>
+                </slot>
+              </template>
+            </vk-popover>
           </div>
           <div
             v-if="header.sortable"
             :class="classes.headerUtilities"
           >
             <vk-icon
+              :size="size"
               :name="sortIconMap[sort?.field === header.key && sort.direction ? sort.direction : 'none']"
-              class="cursor-pointer"
+              :class="classes.headerUtilities"
               @click="handleSort(header.field)"
             />
           </div>
@@ -142,12 +202,14 @@ onMounted(() => {
         <vk-checkbox
           v-if="selectionMode === 'multiple'"
           :color="color"
+          :size="size"
           :model-value="selectedItems[item.key]"
           @update:model-value="() => emit('onSelect', item)"
         />
         <vk-radio
           v-else-if="selectionMode === 'single'"
           :color="color"
+          :size="size"
           :name="`radio-${item.key}`"
           :value="item.key"
           :model-value="selectedItems[item.key] ? item.key : undefined"
@@ -159,7 +221,7 @@ onMounted(() => {
     <div :class="classes.footer">
       <div>
         <vk-pagination
-          v-if="pagination && limitRef < pagination.total"
+          v-if="pagination && pageSizeRef < pagination.total"
           :color="color"
           :variant="variant"
           :shape="shape"
@@ -172,14 +234,14 @@ onMounted(() => {
 
       <div>
         <vk-select
-          placeholder="Limit"
-          :options="selectLimit"
+          placeholder="Page Size"
+          :options="selectSize"
           :color="color"
           :variant="variant"
           :shape="shape"
           :size="size"
           :class="classes.footerSelect"
-          v-model="limitRef"
+          v-model="pageSizeRef"
           @update:model-value="(newLimit: number) => emit('onLimitChange', newLimit)"
         />
       </div>
