@@ -328,7 +328,7 @@ watch(isShown, () => {
           title="Alert Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="alertProps"
           />
@@ -338,7 +338,7 @@ watch(isShown, () => {
           title="Alert Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="alertEmits"
           />
@@ -348,7 +348,7 @@ watch(isShown, () => {
           title="Alert Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="alertSlots"
           />

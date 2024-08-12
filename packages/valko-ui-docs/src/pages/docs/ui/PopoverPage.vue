@@ -166,7 +166,7 @@ const togglePlacementPopover = (index: number) => {
           title="Popover Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="popoverProps"
           />
@@ -176,7 +176,7 @@ const togglePlacementPopover = (index: number) => {
           title="Popover Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="popoverSlots"
           />

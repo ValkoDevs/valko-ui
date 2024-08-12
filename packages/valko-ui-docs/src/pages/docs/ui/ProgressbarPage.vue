@@ -288,7 +288,7 @@ const progressbarSlots = [
           title="Progressbar Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="progressbarProps"
           />
@@ -298,7 +298,7 @@ const progressbarSlots = [
           title="Progressbar Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="progressbarSlots"
           />

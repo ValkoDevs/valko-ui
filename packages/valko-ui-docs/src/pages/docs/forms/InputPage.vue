@@ -398,7 +398,7 @@ const slotData = [
           title="Input Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="apiData"
           />
@@ -408,7 +408,7 @@ const slotData = [
           title="Input Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="emitData"
           />
@@ -418,7 +418,7 @@ const slotData = [
           title="Input Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="slotData"
           />

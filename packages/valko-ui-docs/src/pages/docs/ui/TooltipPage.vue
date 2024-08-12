@@ -192,7 +192,7 @@ const tooltipSlots = [
           title="Tooltip Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="tooltipProps"
           />
@@ -202,7 +202,7 @@ const tooltipSlots = [
           title="Tooltip Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="tooltipSlots"
           />

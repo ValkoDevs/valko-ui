@@ -445,7 +445,7 @@ const createNotification = (props: NotificationProps) => {
         <example-section
           title="Notification Props"
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="notificationProps"
           />

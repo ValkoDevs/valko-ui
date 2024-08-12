@@ -250,7 +250,7 @@ const paginationEmits = [
           title="Pagination Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="paginationProps"
           />
@@ -260,7 +260,7 @@ const paginationEmits = [
           title="Pagination Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="paginationEmits"
           />

@@ -154,7 +154,7 @@ const spinnerProps = [
           title="Spinner Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="spinnerProps"
           />

@@ -335,7 +335,7 @@ watch(isShown, () => {
           title="Tag Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="tagProps"
           />
@@ -345,7 +345,7 @@ watch(isShown, () => {
           title="Tag Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="tagEmits"
           />

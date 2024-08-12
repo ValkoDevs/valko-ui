@@ -302,7 +302,7 @@ const avatarSrc = computed(() => { return form.value.avatar ? '###' : form.value
           title="Avatar Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="avatarProps"
           />

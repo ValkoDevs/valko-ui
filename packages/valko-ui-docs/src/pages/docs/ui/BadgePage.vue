@@ -341,7 +341,7 @@ const badgeSlots = [
           title="Badge Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="badgeProps"
           />
@@ -351,7 +351,7 @@ const badgeSlots = [
           title="Badge Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="badgeSlots"
           />

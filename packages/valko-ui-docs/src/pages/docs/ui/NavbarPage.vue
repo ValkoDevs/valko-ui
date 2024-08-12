@@ -307,7 +307,7 @@ const navbarSlots = [
           title="Navbar Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="navbarProps"
           />
@@ -317,7 +317,7 @@ const navbarSlots = [
           title="Navbar Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="navbarSlots"
           />
