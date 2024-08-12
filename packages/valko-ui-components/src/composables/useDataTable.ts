@@ -1,12 +1,14 @@
 import { computed, ref, toValue } from 'vue'
-import type { TableItem, DataTableConfig, TableHeader, DataTableInput } from '#valkoui/types/Table'
+import type { TableItem, TableHeader } from '#valkoui/types/Table'
+import type { DataTableConfig, DataTableInput } from '#valkoui/types/DataTable'
 
 const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAllStatus, selectionMode = 'none' }: DataTableConfig<T>) => {
   const rawSelection = ref<TableItem | Set<TableItem> | undefined>(undefined)
 
   return computed(() => {
     const selection = rawSelection.value instanceof Set ? Array.from(rawSelection.value) : rawSelection.value
-    const data = toValue(paginatedResult).records
+    const normalizedPagination = toValue(paginatedResult)
+    const data = normalizedPagination.records
     const normalizedSelectionMode = toValue(selectionMode)
 
     const mappedHeaders: TableHeader[] = [...headers]
@@ -29,7 +31,7 @@ const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAll
       }
     }
 
-    const handleSelect = (item: TableItem) => {
+    const onSelect = (item: TableItem) => {
       if (normalizedSelectionMode === 'multiple') {
         if (!(rawSelection.value instanceof Set)) {
           rawSelection.value = new Set()
@@ -43,19 +45,21 @@ const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAll
       }
     }
 
-    const handleSelectAll = (allSelected: boolean) => {
+    const onSelectAll = (allSelected: boolean) => {
       rawSelection.value = new Set(allSelected ? data : undefined)
     }
 
     return {
       headers: mappedHeaders,
       data,
-      limit: toValue(paginatedResult).limit,
-      offset: toValue(paginatedResult).offset,
+      limit: normalizedPagination.limit,
+      offset: normalizedPagination.offset,
+      total: normalizedPagination.total,
       isAllSelected: calculateAllSelected(),
       selection: selection,
-      handleSelect,
-      handleSelectAll
+      selectionMode: normalizedSelectionMode,
+      onSelect,
+      onSelectAll
     } as DataTableInput
   })
 }

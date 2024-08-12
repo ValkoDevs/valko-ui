@@ -4,6 +4,7 @@ import type { InputProps } from '#valkoui/types/Input'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Input.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
+import VkIcon from './Icon.vue'
 
 defineOptions({ name: 'VkInput' })
 
@@ -13,7 +14,8 @@ const props = withDefaults(defineProps<InputProps>(), {
   size: 'md',
   shape: 'soft',
   type: 'text',
-  cursor: 'text'
+  cursor: 'text',
+  clearable: false
 })
 
 const emit = defineEmits(['update:modelValue', 'focus', 'leftIconClick', 'rightIconClick'])
@@ -33,6 +35,10 @@ const onFocus = (event: Event) => {
   if (!props.disabled) {
     emit('focus', event)
   }
+}
+
+const clearInput = () => {
+  emit('update:modelValue', '')
 }
 
 onMounted(() => {
@@ -72,15 +78,22 @@ onMounted(() => {
       >
         {{ label }}
       </label>
+      <vk-icon
+        v-if="clearable && !!modelValue"
+        name="circle-x"
+        :data-rightIcon="!!$slots.rightIcon"
+        :class="classes.iconClear"
+        @click="clearInput"
+      />
       <span
         v-if="$slots.leftIcon"
-        :class="`${classes.icon} ${classes.iconLeft}`"
+        :class="[classes.icon, classes.iconLeft]"
       >
         <slot name="leftIcon" />
       </span>
       <span
         v-if="$slots.rightIcon"
-        :class="`${classes.icon} ${classes.iconRight}`"
+        :class="[classes.icon, classes.iconRight]"
       >
         <slot name="rightIcon" />
       </span>

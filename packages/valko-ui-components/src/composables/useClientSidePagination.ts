@@ -1,4 +1,4 @@
-import { ref, watchEffect, Ref, toValue } from 'vue'
+import { type Ref, ref, watchEffect, toValue } from 'vue'
 import type { Pagination } from '#valkoui/types/common'
 
 const useClientSidePagination = <T>(data: T[] | Ref<T[]>, initialLimit = 10) => {

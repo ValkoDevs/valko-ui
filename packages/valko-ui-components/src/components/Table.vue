@@ -29,7 +29,7 @@ const headers = computed(() => props.headers)
 <template>
   <table :class="classes.table">
     <thead :class="classes.thead">
-      <tr>
+      <tr :class="classes.htr">
         <th
           v-for="header in headers"
           :key="header.key"
@@ -63,6 +63,19 @@ const headers = computed(() => props.headers)
             :key="item.key"
           >
             {{ item[field] }}
+          </slot>
+        </td>
+      </tr>
+      <tr
+        v-if="items.length === 0"
+        :class="classes.tr"
+      >
+        <td
+          :colspan="headers.length"
+          :class="classes.td"
+        >
+          <slot name="no-data-message">
+            No items found.
           </slot>
         </td>
       </tr>

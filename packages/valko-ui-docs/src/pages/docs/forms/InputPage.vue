@@ -44,6 +44,7 @@ const form = ref({
   exampleReadonly: 'Example readonly text',
   left: false,
   right: false,
+  clearable: false,
   colorInputs: generateInputValues(colorOptions),
   variantInputs: generateInputValues(variantOptions),
   shapeInputs: generateInputValues(shapeOptions),
@@ -202,9 +203,10 @@ const slotData = [
           :flat="form.flat"
           :shape="form.shape"
           :type="form.type"
-          v-model="form.value"
           :label="form.labelValue"
           :helpertext="form.helperValue"
+          :clearable="form.clearable"
+          v-model="form.value"
         >
           <template
             #leftIcon
@@ -270,6 +272,10 @@ const slotData = [
       <vk-checkbox
         label="Readonly"
         v-model="form.readonly"
+      />
+      <vk-checkbox
+        label="Clearable"
+        v-model="form.clearable"
       />
       <vk-checkbox
         label="Left Icon"

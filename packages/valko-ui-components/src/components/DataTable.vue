@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
-import type { DataTableProps, TableItem } from '#valkoui/types/Table'
+import { type Ref, computed, ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import type { DataTableProps } from '#valkoui/types/DataTable'
+import type { TableItem } from '#valkoui/types/Table'
 import type { SlotStyles, Sort } from '#valkoui/types/common'
 import useStyle from '#valkoui/composables/useStyle.ts'
+import useDebounce from '#valkoui/composables/useDebounce.ts'
 import styles from '#valkoui/styles/DataTable.styles.ts'
 import VkCheckbox from './Checkbox.vue'
 import VkIcon from './Icon.vue'
@@ -24,12 +26,9 @@ const props = withDefaults(defineProps<DataTableProps>(), {
   striped: false,
   sort: undefined,
   selection: undefined,
-  pagination: () => ({
-    records: [],
-    total: 0,
-    limit: 10,
-    offset: 0
-  }),
+  total: 0,
+  limit: 10,
+  offset: 0,
   filters: () => [],
   data: () => [],
   pageSizeOptions: () => [10, 20, 50, 100]
@@ -45,8 +44,9 @@ const sortIconMap = {
   none: 'arrows-sort'
 }
 
-const pageSizeRef = ref(2)
-const searchValue = ref('')
+const localFilters: Ref<Record<keyof TableItem, string>> = ref({})
+const activePopover = ref<string | null>(null)
+const activeFilters = ref<Record<string, boolean>>({})
 
 const selectSize = computed(() => props.pageSizeOptions.map((i) => ({ value: i, label: `${i}` })))
 
@@ -59,15 +59,20 @@ const selectedItems = computed(
   }
 )
 
-// Popovers
-const activePopover = ref<string | null>(null)
-
 const togglePopover = (headerKey: string) => {
   activePopover.value = activePopover.value === headerKey ? null : headerKey
 }
 
 const closePopover = () => {
   activePopover.value = null
+}
+
+const setActiveFilter = (headerKey: string, isActive: boolean) => {
+  activeFilters.value[headerKey] = isActive
+}
+
+const isSortActive = (field: string) => {
+  return props.sort?.field === field && !!props.sort.direction
 }
 
 const handleClickOutside = (event: MouseEvent) => {
@@ -81,11 +86,10 @@ const handleClickOutside = (event: MouseEvent) => {
   if (!isClickInside) closePopover()
 }
 
-// Pagination
-const totalPages = computed(() => Math.ceil(props.pagination.total / props.pagination.limit))
+const totalPages = computed(() => Math.ceil(props.total / props.limit))
 const currentPage = computed({
-  get: () => props.pagination.offset / props.pagination.limit + 1,
-  set: (page: number) => emit('onPageChange', page * props.pagination.limit - props.pagination.limit)
+  get: () => props.offset / props.limit + 1,
+  set: (page: number) => emit('onPageChange', page * props.limit - props.limit)
 })
 
 const handleSort = (field: keyof TableItem) => {
@@ -104,10 +108,24 @@ const handleSort = (field: keyof TableItem) => {
   currentPage.value = 1
 }
 
+const debouncedFilters = useDebounce(() => {
+  const mappedFilters = Object.entries(localFilters.value)
+    .map(([key, value]) => ({ field: key, value }))
+    .filter(({ value }) => !!value)
+
+  emit('onFilter', mappedFilters)
+}, 500)
+
+watch(localFilters, debouncedFilters, { deep: true })
+
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
-  pageSizeRef.value = 2
   emit('onLimitChange', 2)
+
+  localFilters.value = props.headers.reduce((acc, { field }) => {
+    acc[field] = ''
+    return acc
+  }, {} as Record<keyof TableItem, string>)
 })
 
 onBeforeUnmount(() => {
@@ -147,7 +165,6 @@ onBeforeUnmount(() => {
           >
             <vk-popover
               :shape="shape"
-              :placement="popoverPlacement"
               :is-open="activePopover === header.key"
             >
               <template #default>
@@ -155,6 +172,7 @@ onBeforeUnmount(() => {
                   :size="size"
                   name="search"
                   :class="classes.headerUtilities"
+                  :data-active="activeFilters[header.key]"
                   @click="togglePopover(header.key)"
                 />
               </template>
@@ -164,16 +182,19 @@ onBeforeUnmount(() => {
                   :name="`filter-content-${header.key}`"
                   :data="data"
                   :headers="headers"
+                  :set-active="(isActive: boolean) => setActiveFilter(header.key, isActive)"
                   :emit="emit"
                 >
                   <div class="w-40">
                     <vk-input
                       :variant="variant"
+                      :color="color"
                       type="text"
                       size="xs"
                       label="Search..."
-                      v-model="searchValue"
-                      @update:model-value="() => emit('onFilter', { key: header.key, searchValue })"
+                      clearable
+                      v-model="localFilters[header.key]"
+                      @input="() => setActiveFilter(header.key, !!localFilters[header.key])"
                     />
                   </div>
                 </slot>
@@ -188,6 +209,7 @@ onBeforeUnmount(() => {
               :size="size"
               :name="sortIconMap[sort?.field === header.key && sort.direction ? sort.direction : 'none']"
               :class="classes.headerUtilities"
+              :data-active="isSortActive(header.key)"
               @click="handleSort(header.field)"
             />
           </div>
@@ -221,12 +243,13 @@ onBeforeUnmount(() => {
     <div :class="classes.footer">
       <div>
         <vk-pagination
-          v-if="pagination && pageSizeRef < pagination.total"
+          v-if="data.length < total"
           :color="color"
           :variant="variant"
           :shape="shape"
           :size="size"
           :pages="totalPages"
+          flat
           :class="classes.footerNav"
           v-model="currentPage"
         />
@@ -241,7 +264,7 @@ onBeforeUnmount(() => {
           :shape="shape"
           :size="size"
           :class="classes.footerSelect"
-          v-model="pageSizeRef"
+          :model-value="limit"
           @update:model-value="(newLimit: number) => emit('onLimitChange', newLimit)"
         />
       </div>

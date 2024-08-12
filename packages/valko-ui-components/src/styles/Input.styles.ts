@@ -80,6 +80,18 @@ export default tv({
     ],
     iconOpen: [
       'rotate-180'
+    ],
+    iconClear: [
+      'text-dark-1',
+      'cursor-pointer',
+      'opacity-80',
+      'absolute',
+      'transition-all',
+      'top-1/2',
+      '-translate-y-1/2',
+      'scale-90',
+      'right-1',
+      'dark:text-light-5'
     ]
   },
   variants: {
@@ -137,6 +149,10 @@ export default tv({
           'text-dark-2',
           'peer-focus:text-primary-500',
           'dark:text-light-2'
+        ],
+        iconClear: [
+          'hover:text-primary-500',
+          'dark:hover:text-primary-500'
         ]
       },
       neutral: {
@@ -157,6 +173,10 @@ export default tv({
           'peer-focus:text-dark-3',
           'dark:text-light-3',
           'dark:peer-focus:text-light-1'
+        ],
+        iconClear: [
+          'hover:text-dark-5',
+          'dark:hover:text-light-1'
         ]
       },
       success: {
@@ -173,6 +193,10 @@ export default tv({
           'text-success-500',
           'focus:text-success-950',
           'dark:text-success-500'
+        ],
+        iconClear: [
+          'hover:text-success-500',
+          'dark:hover:text-success-500'
         ]
       },
       info: {
@@ -189,6 +213,10 @@ export default tv({
           'text-info-500',
           'focus:text-info-950',
           'dark:text-info-500'
+        ],
+        iconClear: [
+          'hover:text-info-500',
+          'dark:hover:text-info-500'
         ]
       },
       warning: {
@@ -205,6 +233,10 @@ export default tv({
           'text-warning-500',
           'focus:text-warning-950',
           'dark:text-warning-500'
+        ],
+        iconClear: [
+          'hover:text-warning-500',
+          'dark:hover:text-warning-500'
         ]
       },
       error: {
@@ -221,6 +253,10 @@ export default tv({
           'text-error-500',
           'focus:text-error-950',
           'dark:text-error-500'
+        ],
+        iconClear: [
+          'hover:text-error-500',
+          'dark:hover:text-error-500'
         ]
       }
     },
@@ -766,6 +802,43 @@ export default tv({
       class: {
         input: [
           'rounded-t-lg'
+        ]
+      }
+    },
+    // clear icon & size
+    {
+      clearable: true,
+      size: 'xs',
+      class: {
+        iconClear: [
+          'data-[rightIcon=true]:-translate-x-5'
+        ]
+      }
+    },
+    {
+      clearable: true,
+      size: 'sm',
+      class: {
+        iconClear: [
+          'data-[rightIcon=true]:-translate-x-6'
+        ]
+      }
+    },
+    {
+      clearable: true,
+      size: 'md',
+      class: {
+        iconClear: [
+          'data-[rightIcon=true]:-translate-x-7'
+        ]
+      }
+    },
+    {
+      clearable: true,
+      size: 'lg',
+      class: {
+        iconClear: [
+          'data-[rightIcon=true]:-translate-x-8'
         ]
       }
     }

@@ -9,4 +9,5 @@ export interface InputProps extends DefaultComponent {
   disabled?: boolean;
   loading?: boolean;
   readonly?: boolean;
+  clearable?: boolean;
 }

@@ -4,7 +4,7 @@ export type SlotStyles = Record<string, string>
 
 // data types
 export type Sort = { field: string; direction?: 'asc' | 'desc'; }
-export type Filter = { field: string; value: unknown; }
+export type Filter = { field: string; value: string; }
 export interface Pagination<T> { records: T[]; total: number; limit: number; offset: number; }
 
 // prop types
