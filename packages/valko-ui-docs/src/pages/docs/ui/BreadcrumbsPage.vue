@@ -73,6 +73,20 @@ const breadcrumbsProps = [
     default: 'md'
   },
   {
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the Breadcrumbs.',
+    values: 'rounded, square, soft',
+    default: 'soft'
+  },
+  {
+    prop: 'size',
+    required: false,
+    description: 'The size of the Breadcrumbs.',
+    values: 'xs, sm, md, lg',
+    default: 'md'
+  },
+  {
     prop: 'crumbs',
     required: true,
     description: 'The list of Crumbs.',
