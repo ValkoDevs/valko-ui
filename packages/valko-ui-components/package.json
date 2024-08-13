@@ -37,7 +37,6 @@
     "@nuxt/kit": "^3.11.2",
     "@types/node": "^20.10.7",
     "@types/toastify-js": "^1.12.3",
-    "@types/uuid": "^9.0.8",
     "@valko-ui/eslint-config": "*",
     "@vitejs/plugin-vue": "5.0.4",
     "@vitest/coverage-v8": "^1.2.1",
@@ -59,7 +58,6 @@
   },
   "dependencies": {
     "@tabler/icons-webfont": "^2.45.0",
-    "toastify-js": "^1.12.0",
-    "uuid": "^9.0.1"
+    "toastify-js": "^1.12.0"
   }
 }
