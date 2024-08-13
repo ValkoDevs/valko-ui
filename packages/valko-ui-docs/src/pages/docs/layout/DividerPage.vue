@@ -242,7 +242,7 @@ const dividerProps = [
           title="Divider Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="dividerProps"
           />

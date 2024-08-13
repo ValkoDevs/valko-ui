@@ -72,8 +72,8 @@
 
 body,
 #app {
-  @apply bg-light-2
-    text-dark-1
+  @apply bg-light-1
+    text-dark-2
     dark:bg-dark-4
     dark:text-light-4
     text-base

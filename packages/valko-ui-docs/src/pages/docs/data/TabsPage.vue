@@ -323,7 +323,7 @@ const tabsSlots = [
           title="Tabs Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="tabsProps"
           />
@@ -333,7 +333,7 @@ const tabsSlots = [
           title="Tabs Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="tabsSlots"
           />
@@ -343,7 +343,7 @@ const tabsSlots = [
           title="Tab Interface"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="tabInterface"
           />

@@ -341,7 +341,7 @@ const emitData = [
           title="Select Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="apiData"
           />
@@ -351,7 +351,7 @@ const emitData = [
           title="Select Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="emitData"
           />

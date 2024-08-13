@@ -331,7 +331,7 @@ const itemSlots = [
           title="Collapse Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="collapseProps"
           />
@@ -341,7 +341,7 @@ const itemSlots = [
           title="Collapse Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="collapseSlots"
           />
@@ -351,7 +351,7 @@ const itemSlots = [
           title="Collapse Items Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="itemSlots"
           />

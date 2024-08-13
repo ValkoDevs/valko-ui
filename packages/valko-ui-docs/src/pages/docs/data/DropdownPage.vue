@@ -281,7 +281,7 @@ const dropdownEmits = [
           title="Dropdown Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="dropdownProps"
           />
@@ -291,7 +291,7 @@ const dropdownEmits = [
           title="Item interface"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="itemInterface"
           />
@@ -301,7 +301,7 @@ const dropdownEmits = [
           title="Dropdown Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="dropdownEmits"
           />

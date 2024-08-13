@@ -1,4 +1,4 @@
-import { onMounted, onUnmounted, ref, Ref } from 'vue'
+import { type Ref, onMounted, onUnmounted, ref } from 'vue'
 
 const useDarkMode = () => {
   const target: Ref<HTMLElement | null> = ref(null)

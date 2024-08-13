@@ -313,7 +313,7 @@ const emitData = [
           title="Radio Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="apiData"
           />
@@ -323,7 +323,7 @@ const emitData = [
           title="Radio Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="emitData"
           />

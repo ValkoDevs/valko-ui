@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  label: 'Checkbox',
+  label: '',
   modelValue: false,
   indeterminate: false,
   readonly: false,
@@ -41,8 +41,8 @@ const onClick = () => {
         :data-indeterminate="modelValue === null"
       >
         <vk-icon
-          v-if="modelValue || indeterminate"
-          :name="`${indeterminate ? 'minus' : 'check'}`"
+          v-if="modelValue !== false"
+          :name="`${modelValue === null ? 'minus' : 'check'}`"
           :class="classes.icon"
         />
       </div>

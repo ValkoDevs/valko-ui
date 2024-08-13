@@ -281,7 +281,7 @@ const onClick = () => useNotification({ text: 'Clicked' })
           title="Button Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="apiData"
           />
@@ -291,7 +291,7 @@ const onClick = () => useNotification({ text: 'Clicked' })
           title="Button Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="emitData"
           />
@@ -301,7 +301,7 @@ const onClick = () => useNotification({ text: 'Clicked' })
           title="Button Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="slotData"
           />

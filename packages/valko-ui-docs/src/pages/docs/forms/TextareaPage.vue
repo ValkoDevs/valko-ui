@@ -262,7 +262,7 @@ const emitData = [
           title="Textarea Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="apiData"
           />
@@ -272,7 +272,7 @@ const emitData = [
           title="Textarea Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="emitData"
           />

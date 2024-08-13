@@ -366,7 +366,7 @@ onMounted(() => {
           title="Menu Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="menuProps"
           />
@@ -376,7 +376,7 @@ onMounted(() => {
           title="Menu Items Interface"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="menuItemsInterface"
           />
@@ -386,7 +386,7 @@ onMounted(() => {
           title="Menu Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="menuEmits"
           />
@@ -396,7 +396,7 @@ onMounted(() => {
           title="Menu Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="menuSlots"
           />

@@ -290,7 +290,7 @@ const modalSlots = [
           title="Modal Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="modalProps"
           />
@@ -300,7 +300,7 @@ const modalSlots = [
           title="Modal Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="modalEmits"
           />
@@ -310,7 +310,7 @@ const modalSlots = [
           title="Modal Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="modalSlots"
           />

@@ -348,7 +348,7 @@ watchEffect(() => {
           title="Checkbox Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="apiData"
           />
@@ -358,7 +358,7 @@ watchEffect(() => {
           title="Checkbox Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="emitData"
           />

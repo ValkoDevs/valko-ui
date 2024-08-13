@@ -2,6 +2,11 @@
 export type BaseStyles = string
 export type SlotStyles = Record<string, string>
 
+// data types
+export type Sort = { field: string; direction?: 'asc' | 'desc'; }
+export type Filter = { field: string; value: string; }
+export interface Pagination<T> { records: T[]; total: number; limit: number; offset: number; }
+
 // prop types
 export type Shape = 'rounded' | 'square' | 'soft'
 export type Variant = 'filled' | 'outlined' | 'ghost'

@@ -326,7 +326,7 @@ const breadcrumbsEmits = [
           gap
           wrap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="breadcrumbsProps"
           />
@@ -336,7 +336,7 @@ const breadcrumbsEmits = [
           title="Crumb Interface"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="crumbInterface"
           />
@@ -346,7 +346,7 @@ const breadcrumbsEmits = [
           title="Breadcrumbs Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="breadcrumbsEmits"
           />
