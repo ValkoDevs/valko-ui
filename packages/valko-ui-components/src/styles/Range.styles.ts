@@ -5,7 +5,8 @@ export default tv({
     container: [
       'vk-range',
       'w-full',
-      'relative'
+      'relative',
+      'select-none'
     ],
     progressContainer: [
       'vk-range__progress',

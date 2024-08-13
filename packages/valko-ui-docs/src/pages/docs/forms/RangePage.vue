@@ -16,7 +16,7 @@ const form = ref({
   shape: 'soft',
   size: 'md',
   striped: false,
-  isRange: false,
+  isDouble: false,
   showSteps: false,
   hasLabel: false,
   min: 0,
@@ -89,7 +89,7 @@ const rangeProps = [
     default: '10'
   },
   {
-    prop: 'isRange',
+    prop: 'isDouble',
     required: false,
     description: 'Enables the Range slider to have two thumbs for selecting a range.',
     values: 'true, false',
@@ -167,7 +167,7 @@ form.value.labels = generateLabels()
 <template>
   <doc-section
     title="Range"
-    description="A versatile slider interface for selecting a single value or a range of values within specified bounds. Features include optional step marks, striped backgrounds, and the ability to display two thumbs for selecting a range (isRange mode). The component offers precise control over minimum (min) and maximum (max) values, step intervals, and visual styling options such as color, variant, shape, and size. Ideal for scenarios where precise value selection and visual feedback are crucial."
+    description="A versatile slider interface for selecting a single value or a range of values within specified bounds. Features include optional step marks, striped backgrounds, and the ability to display two thumbs for selecting a range (isDouble mode). The component offers precise control over minimum (min) and maximum (max) values, step intervals, and visual styling options such as color, variant, shape, and size. Ideal for scenarios where precise value selection and visual feedback are crucial."
   >
     <template #playground-view>
       <div class="w-full flex justify-center p-4 flex-col">
@@ -180,7 +180,7 @@ form.value.labels = generateLabels()
           :shape="form.shape"
           :size="form.size"
           :striped="form.striped"
-          :is-range="form.isRange"
+          :is-double="form.isDouble"
           :min="+form.min"
           :max="+form.max"
           :step="form.step"
@@ -234,8 +234,8 @@ form.value.labels = generateLabels()
         v-model="form.step"
       />
       <vk-checkbox
-        label="isRange"
-        v-model="form.isRange"
+        label="isDouble"
+        v-model="form.isDouble"
       />
       <vk-checkbox
         label="Striped"
@@ -316,12 +316,12 @@ form.value.labels = generateLabels()
       </example-section>
 
       <example-section
-        title="Range"
+        title="Double"
         justify="start"
         gap
       >
         <vk-range
-          :is-range="true"
+          :is-double="true"
           class="w-1/3"
         />
       </example-section>

@@ -235,7 +235,7 @@ describe('Range component', () => {
         const wrapper = mount(VkRange, {
           props: {
             modelValue: 0,
-            isRange: false
+            isDouble: false
           }
         })
 
@@ -248,7 +248,7 @@ describe('Range component', () => {
         const wrapper = mount(VkRange, {
           props: {
             modelValue: 0,
-            isRange: true
+            isDouble: true
           }
         })
 
@@ -261,7 +261,7 @@ describe('Range component', () => {
         const wrapper = mount(VkRange, {
           props: {
             modelValue: 0,
-            isRange: false
+            isDouble: false
           }
         })
 
@@ -272,7 +272,7 @@ describe('Range component', () => {
         const wrapper = mount(VkRange, {
           props: {
             modelValue: [0, 50],
-            isRange: false
+            isDouble: false
           }
         })
 

@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<RangeProps>(), {
   step: 10,
   modelValue: 50,
   striped: false,
-  isRange: false,
+  isDouble: false,
   showSteps: false,
   labels: () => []
 })
@@ -48,7 +48,7 @@ const updateThumbPosition = (newPosition: number, thumb: 'min' | 'max') => {
   const secondaryThumb = thumb === 'max' ? 'min' : 'max'
   thumbRefMap[primaryThumb].value = newPosition
 
-  if (props.isRange) {
+  if (props.isDouble) {
     const isOverlapping = primaryThumb === 'min'
       ? thumbRefMap[primaryThumb].value > thumbRefMap[secondaryThumb].value
       : thumbRefMap[primaryThumb].value < thumbRefMap[secondaryThumb].value
@@ -89,7 +89,7 @@ const handleMultipleThumbs = (newPosition: number) => {
 const onSliderClick = (event: MouseEvent) => {
   const newPosition = getNewThumbPosition(event)
 
-  if (!props.isRange) handleSingleThumb(newPosition)
+  if (!props.isDouble) handleSingleThumb(newPosition)
   else handleMultipleThumbs(newPosition)
 
   document.addEventListener('mousemove', onMouseMove)
@@ -120,8 +120,8 @@ const inlineStyles = computed(() => {
 
   const range = props.max - props.min
   const center = ((0 - props.min) / range) * 100
-  const start = props.isRange ? ((thumbRefMap.min.value - props.min) / range) * 100 : center
-  const end = props.isRange ? ((thumbRefMap.max.value - props.min) / range) * 100 : ((thumbRefMap.max.value - props.min) / range) * 100
+  const start = props.isDouble ? ((thumbRefMap.min.value - props.min) / range) * 100 : center
+  const end = props.isDouble ? ((thumbRefMap.max.value - props.min) / range) * 100 : ((thumbRefMap.max.value - props.min) / range) * 100
 
   const left = Math.min(start, end)
   const width = Math.abs(end - start)
@@ -157,14 +157,14 @@ const stepMarks = computed(() => {
 })
 
 const onLabelClick = (newPosition: number) => {
-  if (!props.isRange) handleSingleThumb(newPosition)
+  if (!props.isDouble) handleSingleThumb(newPosition)
   else handleMultipleThumbs(newPosition)
 }
 
-watch([() => props.min, () => props.max, () => props.isRange, () => props.step], ([min, max, isRange]) => {
+watch([() => props.min, () => props.max, () => props.isDouble, () => props.step], ([min, max, isDouble]) => {
   thumbRefMap.min.value = min
   thumbRefMap.max.value = max
-  emit('update:modelValue', isRange ? [min, max] : max)
+  emit('update:modelValue', isDouble ? [min, max] : max)
 })
 
 onMounted(() => {
@@ -194,7 +194,7 @@ onMounted(() => {
     </div>
     <div :class="classes.thumbContainer">
       <div
-        v-if="isRange"
+        v-if="isDouble"
         :class="classes.thumb"
         :style="thumbStyles.start"
         @mousedown="(event) => onMouseDown(event, 'min')"
