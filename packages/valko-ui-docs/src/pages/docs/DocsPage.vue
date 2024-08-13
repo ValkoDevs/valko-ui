@@ -22,6 +22,7 @@ const menuItems: MenuItem[] = [
   { key: 'checkbox', group: 'Forms', text: 'Checkbox' },
   { key: 'input', group: 'Forms',  text: 'Input' },
   { key: 'radio', group: 'Forms', text: 'Radio' },
+  { key: 'range', group: 'Forms', text: 'Range' },
   { key: 'select', group: 'Forms', text: 'Select' },
   { key: 'switch', group: 'Forms', text: 'Switch' },
   { key: 'textarea', group: 'Forms', text: 'Textarea' },
