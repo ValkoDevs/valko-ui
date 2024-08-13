@@ -339,6 +339,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
           v-for="size in sizes"
           :key="size.value"
           :size="size.value"
+          :layout="size.value === 'full' ? 'horizontal' : 'vertical'"
         >
           <vk-card-image
             src="https://picsum.photos/id/152/1080"
