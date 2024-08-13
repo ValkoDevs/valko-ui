@@ -72,7 +72,7 @@ const headers = computed(() => props.headers)
       >
         <td
           :colspan="headers.length"
-          :class="classes.td"
+          :class="classes.noDataMessage"
         >
           <slot name="no-data-message">
             No items found.

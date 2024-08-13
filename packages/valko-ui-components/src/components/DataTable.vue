@@ -68,7 +68,8 @@ const closePopover = () => {
 }
 
 const setActiveFilter = (headerKey: string, isActive: boolean) => {
-  activeFilters.value[headerKey] = isActive
+  if (localFilters.value[headerKey] && localFilters.value[headerKey].trim() !== '') activeFilters.value[headerKey] = isActive
+  else activeFilters.value[headerKey] = false
 }
 
 const isSortActive = (field: string) => {
@@ -117,6 +118,12 @@ const debouncedFilters = useDebounce(() => {
 }, 500)
 
 watch(localFilters, debouncedFilters, { deep: true })
+
+watch(localFilters, (newFilters) => {
+  for (const key in newFilters) {
+    setActiveFilter(key, !!newFilters[key].trim())
+  }
+}, { deep: true })
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
@@ -194,7 +201,7 @@ onBeforeUnmount(() => {
                       label="Search..."
                       clearable
                       v-model="localFilters[header.key]"
-                      @input="() => setActiveFilter(header.key, !!localFilters[header.key])"
+                      @input="() => setActiveFilter(header.key, !!localFilters[header.key].trim())"
                     />
                   </div>
                 </slot>

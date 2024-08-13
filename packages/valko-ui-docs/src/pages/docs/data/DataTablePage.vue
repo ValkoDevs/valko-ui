@@ -506,6 +506,19 @@ const dataTable = useClientSideDataTable({
           />
         </div>
       </example-section>
+
+      <example-section
+        title="Striped"
+        justify="start"
+        wrap
+      >
+        <vk-data-table
+          striped
+          :headers="propHeaders"
+          :data="tableHeaderInterface"
+          class="mt-4"
+        />
+      </example-section>
     </template>
 
     <template #api>

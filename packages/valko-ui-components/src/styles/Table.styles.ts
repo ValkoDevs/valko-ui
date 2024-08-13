@@ -20,9 +20,7 @@ export default tv({
       'text-left'
     ],
     noDataMessage: [
-      'px-4',
-      'py-2',
-      'min-h-32',
+      'p-4',
       'text-center'
     ],
     body: [],

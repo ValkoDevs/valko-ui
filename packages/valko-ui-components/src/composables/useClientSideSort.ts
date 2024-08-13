@@ -6,7 +6,6 @@ const useClientSideSort = <T extends TableItem>(data: T[] | Ref<T[]>, initialSor
   const sort = ref(initialSort)
 
   const setSort = (newSort: Sort) => {
-    console.log('Sort')
     sort.value = newSort
   }
 
