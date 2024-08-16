@@ -1,8 +1,8 @@
-import { computed, ref, toValue } from 'vue'
+import { computed, toValue, ref } from 'vue'
 import type { TableItem, TableHeader } from '#valkoui/types/Table'
 import type { DataTableConfig, DataTableInput } from '#valkoui/types/DataTable'
 
-const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAllStatus, selectionMode = 'none' }: DataTableConfig<T>) => {
+const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAllStatus, selectionMode = 'none', draggable = false }: DataTableConfig<T>) => {
   const rawSelection = ref<TableItem | Set<TableItem> | undefined>(undefined)
 
   return computed(() => {
@@ -10,8 +10,17 @@ const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAll
     const normalizedPagination = toValue(paginatedResult)
     const data = normalizedPagination.records
     const normalizedSelectionMode = toValue(selectionMode)
-
+    const normalizedDraggable = toValue(draggable)
     const mappedHeaders: TableHeader[] = [...headers]
+
+    if (normalizedDraggable) {
+      mappedHeaders.unshift({
+        key: 'draggable',
+        field: 'draggable',
+        label: ''
+      })
+    }
+
     if (normalizedSelectionMode === 'multiple' || normalizedSelectionMode === 'single') {
       mappedHeaders.unshift({
         key: 'selection',

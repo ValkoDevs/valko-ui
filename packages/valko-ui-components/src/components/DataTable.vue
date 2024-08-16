@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<DataTableProps>(), {
   pageSizeOptions: () => [10, 20, 50, 100]
 })
 
-const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll'])
+const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll', 'update:data', 'dragStart', 'dragOver', 'dragDrop'])
 
 const classes = useStyle<DataTableProps, SlotStyles>(props, styles)
 
@@ -221,6 +221,21 @@ onBeforeUnmount(() => {
             />
           </div>
         </div>
+      </template>
+
+      <template
+        v-for="(item, index) in data"
+        #[`cell-draggable-${item.key}`]
+        :key="item.key"
+      >
+        <vk-icon
+          name="grip-vertical"
+          draggable="true"
+          :class="classes.dragIcon"
+          @dragstart="() => emit('dragStart', index)"
+          @dragover="(event: DragEvent) => emit('dragOver', event)"
+          @drop="(event: DragEvent) => emit('dragDrop', event, index)"
+        />
       </template>
 
       <template

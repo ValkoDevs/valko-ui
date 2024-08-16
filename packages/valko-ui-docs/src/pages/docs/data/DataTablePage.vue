@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
@@ -16,7 +16,8 @@ const form = reactive({
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  striped: false
+  striped: false,
+  draggable: false
 })
 
 const selectionOptions = [
@@ -349,12 +350,18 @@ const tableHeaderInterface = [
 ]
 // API END
 const selectionModeRef = ref<SelectionMode>('none')
+const draggableRef = ref<boolean>(form.draggable)
 
 const dataTable = useClientSideDataTable({
   headers: propHeaders,
   data: tableProps,
   selectionMode: selectionModeRef,
-  pageSizeOptions: [2, 5, 10, 20]
+  pageSizeOptions: [2, 5, 10, 20],
+  draggable: draggableRef
+})
+
+watch(() => form.draggable, (newValue: boolean) => {
+  draggableRef.value = newValue
 })
 </script>
 
@@ -378,6 +385,9 @@ const dataTable = useClientSideDataTable({
           @on-limit-change="dataTable.onLimitChange"
           @on-select="dataTable.onSelect"
           @on-select-all="dataTable.onSelectAll"
+          @drag-start="dataTable.onDragStart"
+          @drag-over="dataTable.onDragOver"
+          @drag-drop="dataTable.onDrop"
         />
       </div>
     </template>
@@ -411,6 +421,10 @@ const dataTable = useClientSideDataTable({
         size="sm"
         :options="selectionOptions"
         v-model="selectionModeRef"
+      />
+      <vk-checkbox
+        label="Draggable"
+        v-model="form.draggable"
       />
       <vk-checkbox
         label="Striped"

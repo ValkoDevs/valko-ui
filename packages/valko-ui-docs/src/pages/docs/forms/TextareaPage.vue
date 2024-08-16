@@ -9,6 +9,18 @@ import colorOptions from '@/data/colorOptions'
 import shapeOptions from '@/data/shapeOptions'
 import emitHeaders from '@/data/emitHeaders'
 
+interface Option {
+  value: string
+  label: string
+}
+
+const generateInputValues = (options: Option[]): Record<string, string> => {
+  return options.reduce((acc, option) => {
+    acc[option.value] = ''
+    return acc
+  }, {} as Record<string, string>)
+}
+
 const form = ref({
   color: 'primary',
   variant: 'filled',
@@ -20,7 +32,11 @@ const form = ref({
   shape: 'soft',
   disabled: false,
   readonly: false,
-  counter: null
+  counter: null,
+  colorInputs: generateInputValues(colorOptions),
+  variantInputs: generateInputValues(variantOptions),
+  shapeInputs: generateInputValues(shapeOptions),
+  sizeInputs: generateInputValues(sizeOptions)
 })
 
 const apiData = [
@@ -184,6 +200,7 @@ const emitData = [
             :key="color.value"
             :color="color.value"
             :label="color.label"
+            v-model="form.colorInputs[color.value]"
           />
         </div>
       </example-section>
@@ -200,6 +217,7 @@ const emitData = [
             :key="variant.value"
             :variant="variant.value"
             :label="variant.label"
+            v-model="form.variantInputs[variant.value]"
           />
         </div>
       </example-section>
@@ -216,6 +234,7 @@ const emitData = [
             :key="shape.value"
             :shape="shape.value"
             :label="shape.label"
+            v-model="form.shapeInputs[shape.value]"
           />
         </div>
       </example-section>
@@ -232,6 +251,7 @@ const emitData = [
             :key="size.value"
             :size="size.value"
             :label="size.label"
+            v-model="form.sizeInputs[size.value]"
           />
         </div>
       </example-section>

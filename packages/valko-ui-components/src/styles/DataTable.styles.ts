@@ -33,6 +33,10 @@ export default tv({
     ],
     footerSelect: [
       'ml-auto'
+    ],
+    dragIcon: [
+      'p-4',
+      'cursor-move'
     ]
   },
   variants: {

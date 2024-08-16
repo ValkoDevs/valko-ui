@@ -41,8 +41,8 @@ export default tv({
       },
       neutral: {
         icon: [
-          'text-light-4',
-          'dark:text-dark-3'
+          'text-dark-3',
+          'dark:text-light-2'
         ]
       },
       success: {

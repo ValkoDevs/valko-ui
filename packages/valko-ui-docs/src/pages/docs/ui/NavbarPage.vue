@@ -286,7 +286,7 @@ const navbarSlots = [
         wrap
         gap
       >
-        <div class="w-full">
+        <div class="w-full z-20">
           <vk-navbar
             fixed
           >

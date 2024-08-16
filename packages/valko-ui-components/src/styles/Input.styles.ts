@@ -415,10 +415,10 @@ export default tv({
       disabled: false,
       class: {
         input: [
-          'border-light-3',
+          'border-light-4/[.5]',
           'hover:border-light-4',
           'focus:border-light-5',
-          'dark:border-dark-3',
+          'dark:border-dark-2/[.5]',
           'dark:hover:border-dark-2',
           'dark:focus:border-dark-1'
         ]

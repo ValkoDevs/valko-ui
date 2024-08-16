@@ -364,7 +364,7 @@ form.value.labels = generateLabels()
           title="Range Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="rangeProps"
           />
@@ -374,7 +374,7 @@ form.value.labels = generateLabels()
           title="Label Interface"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="labelsInterface"
           />
@@ -384,7 +384,7 @@ form.value.labels = generateLabels()
           title="Range Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="rangeEmits"
           />

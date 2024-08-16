@@ -13,7 +13,10 @@ export default tv({
       'py-2',
       'text-left'
     ],
-    tr: [],
+    tr: [
+      'hover:bg-light-4',
+      'dark:hover:bg-dark-2'
+    ],
     td: [
       'px-4',
       'py-2',
