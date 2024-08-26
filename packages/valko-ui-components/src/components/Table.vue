@@ -13,8 +13,12 @@ const props = withDefaults(defineProps<TableProps>(), {
   shape: 'soft',
   size: 'md',
   striped: false,
+  selectedItem: undefined,
+  rowEvents: false,
   data: () => []
 })
+
+const emit = defineEmits(['onRowClick', 'update:data'])
 
 const classes = useStyle<TableProps, SlotStyles>(props, styles)
 
@@ -51,6 +55,13 @@ const headers = computed(() => props.headers)
         :key="item.key"
         :class="classes.tr"
         :data-key="item.key"
+        :data-row-events="rowEvents"
+        :data-selected="!!selectedItem && rowEvents && (
+          Array.isArray(selectedItem)
+            ? selectedItem.some(row => row?.key === item.key)
+            : selectedItem?.key === item.key
+        )"
+        @click="rowEvents ? emit('onRowClick', item) : undefined"
       >
         <td
           v-for="{ field } in headers"

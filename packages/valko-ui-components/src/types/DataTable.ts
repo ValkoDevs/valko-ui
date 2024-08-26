@@ -1,8 +1,8 @@
 import type { Ref } from 'vue'
 import type { TableHeader, TableItem, TableProps } from './Table'
-import type { Colors, Pagination, Sort, Filter } from './common'
+import type { Pagination, Sort, Filter } from './common'
 
-export type SelectionMode = 'single' | 'multiple' | 'row' | 'none'
+export type SelectionMode = 'single' | 'multiple' | 'rowSingle' | 'rowMultiple' | 'none'
 
 export interface DataTableConfig<T> {
   headers: TableHeader[];
@@ -33,7 +33,7 @@ export interface DataTableInput {
   onDrop?: (event: DragEvent, index: number) => void;
 }
 
-export interface DataTableProps extends TableProps, Colors {
+export interface DataTableProps extends TableProps {
   selection: TableItem[] | TableItem;
   isAllSelected?: boolean | null;
   filters?: Filter[];

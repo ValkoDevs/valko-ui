@@ -150,6 +150,9 @@ onBeforeUnmount(() => {
       :shape="shape"
       :size="size"
       :striped="striped"
+      :selected-item="selection"
+      :row-events="selectionMode === 'rowSingle' || selectionMode === 'rowMultiple'"
+      @on-row-click="(item) => emit('onSelect', item)"
     >
       <template
         v-for="header in headers"
@@ -233,8 +236,8 @@ onBeforeUnmount(() => {
           draggable="true"
           :class="classes.dragIcon"
           @dragstart="() => emit('dragStart', index)"
-          @dragover="(event: DragEvent) => emit('dragOver', event)"
-          @drop="(event: DragEvent) => emit('dragDrop', event, index)"
+          @dragover="(event) => emit('dragOver', event)"
+          @drop="(event) => emit('dragDrop', event, index)"
         />
       </template>
 

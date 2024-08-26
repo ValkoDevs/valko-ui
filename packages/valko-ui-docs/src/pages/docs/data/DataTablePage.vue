@@ -23,7 +23,8 @@ const form = reactive({
 const selectionOptions = [
   { value: 'single', label: 'Single' },
   { value: 'multiple', label: 'Multiple' },
-  { value: 'row', label: 'Row' },
+  { value: 'rowSingle', label: 'Row Single' },
+  { value: 'rowMultiple', label: 'Row Multiple' },
   { value: 'none', label: 'None' }
 ]
 
@@ -148,14 +149,6 @@ const tableProps = [
     description: 'Specifies whether the table is in a loading state.',
     values: 'true, false',
     default: 'false'
-  },
-  {
-    key: 'popoverPlacement',
-    prop: 'popoverPlacement',
-    required: true,
-    description: 'The placement of the filter popover.',
-    values: 'top, bottom, left, right',
-    default: 'bottom'
   }
 ]
 
@@ -218,6 +211,27 @@ const tableEmits = [
     type: '(data: TableItem[], key: string) => void',
     values: '',
     description: 'Emitted when a filter is applied.'
+  },
+  {
+    key: 'dragStart',
+    event: 'dragStart',
+    type: '(index: number) => void',
+    values: '',
+    description: 'Emitted when dragging starts on an item.'
+  },
+  {
+    key: 'dragOver',
+    event: 'dragOver',
+    type: '(event: DragEvent) => void',
+    values: '',
+    description: 'Emitted when dragging over an area.'
+  },
+  {
+    key: 'dragDrop',
+    event: 'dragDrop',
+    type: '(event: DragEvent, index: number) => void',
+    values: '',
+    description: 'Emitted when an item is dropped.'
   }
 ]
 
@@ -348,6 +362,49 @@ const tableHeaderInterface = [
     values: 'string'
   }
 ]
+
+const clientSideDataTableProps = [
+  {
+    key: 'data',
+    prop: 'data',
+    required: true,
+    description: 'An array of objects representing the data rows of the table.',
+    values: 'T[] | Ref<T[]>',
+    default: '[]'
+  },
+  {
+    key: 'headers',
+    prop: 'headers',
+    required: true,
+    description: 'An array of objects defining the headers of the table.',
+    values: 'TableHeader[]',
+    default: '[]'
+  },
+  {
+    key: 'selectionMode',
+    prop: 'selectionMode',
+    required: false,
+    description: 'The mode of selection (single, multiple, or none).',
+    values: 'SelectionMode | Ref<SelectionMode>',
+    default: 'none'
+  },
+  {
+    key: 'pageSizeOptions',
+    prop: 'pageSizeOptions',
+    required: false,
+    description: 'An array of page size options for pagination.',
+    values: 'number[]',
+    default: '[10, 20, 50, 100]'
+  },
+  {
+    key: 'draggable',
+    prop: 'draggable',
+    required: false,
+    description: 'Determines if table rows are draggable.',
+    values: 'boolean | Ref<boolean>',
+    default: 'false'
+  }
+]
 // API END
 const selectionModeRef = ref<SelectionMode>('none')
 const draggableRef = ref<boolean>(form.draggable)
@@ -385,9 +442,6 @@ watch(() => form.draggable, (newValue: boolean) => {
           @on-limit-change="dataTable.onLimitChange"
           @on-select="dataTable.onSelect"
           @on-select-all="dataTable.onSelectAll"
-          @drag-start="dataTable.onDragStart"
-          @drag-over="dataTable.onDragOver"
-          @drag-drop="dataTable.onDrop"
         />
       </div>
     </template>
@@ -614,6 +668,16 @@ watch(() => form.draggable, (newValue: boolean) => {
           <vk-table
             :headers="propHeaders"
             :data="filterInterface"
+          />
+        </example-section>
+
+        <example-section
+          title="Composable Client Side Props"
+          gap
+        >
+          <vk-table
+            :headers="propHeaders"
+            :data="clientSideDataTableProps"
           />
         </example-section>
       </div>

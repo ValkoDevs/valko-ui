@@ -41,7 +41,7 @@ const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAll
     }
 
     const onSelect = (item: TableItem) => {
-      if (normalizedSelectionMode === 'multiple') {
+      if (normalizedSelectionMode === 'multiple' || normalizedSelectionMode === 'rowMultiple') {
         if (!(rawSelection.value instanceof Set)) {
           rawSelection.value = new Set()
         }
@@ -49,7 +49,7 @@ const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAll
         rawSelection.value.has(item) ? rawSelection.value.delete(item) : rawSelection.value.add(item)
       }
 
-      if (normalizedSelectionMode === 'single') {
+      if (normalizedSelectionMode === 'single' || normalizedSelectionMode === 'rowSingle') {
         rawSelection.value = item
       }
     }
