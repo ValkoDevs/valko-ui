@@ -18,6 +18,6 @@ export interface TableProps extends DefaultComponent {
   headers: TableHeader[];
   data: TableItem[];
   striped?: boolean;
-  selectedItem?: TableItem[] | TableItem | undefined;
+  selection?: TableItem[] | TableItem | undefined;
   rowEvents?: boolean;
 }

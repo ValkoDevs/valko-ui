@@ -3,10 +3,10 @@ import type { TableItem, TableHeader } from '#valkoui/types/Table'
 import type { DataTableConfig, DataTableInput } from '#valkoui/types/DataTable'
 
 const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAllStatus, selectionMode = 'none', draggable = false }: DataTableConfig<T>) => {
-  const rawSelection = ref<TableItem | Set<TableItem> | undefined>(undefined)
+  const rawSelection = ref<TableItem | TableItem[] | undefined>(undefined)
 
   return computed(() => {
-    const selection = rawSelection.value instanceof Set ? Array.from(rawSelection.value) : rawSelection.value
+    const selection = toValue(rawSelection.value)
     const normalizedPagination = toValue(paginatedResult)
     const data = normalizedPagination.records
     const normalizedSelectionMode = toValue(selectionMode)
@@ -42,11 +42,12 @@ const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAll
 
     const onSelect = (item: TableItem) => {
       if (normalizedSelectionMode === 'multiple' || normalizedSelectionMode === 'rowMultiple') {
-        if (!(rawSelection.value instanceof Set)) {
-          rawSelection.value = new Set()
+        if (!Array.isArray(rawSelection.value)) {
+          rawSelection.value = []
         }
+        const existingItem = rawSelection.value.findIndex(({ key }) => key === item.key)
 
-        rawSelection.value.has(item) ? rawSelection.value.delete(item) : rawSelection.value.add(item)
+        existingItem > -1 ? rawSelection.value.splice(existingItem, 1) : rawSelection.value.push(item)
       }
 
       if (normalizedSelectionMode === 'single' || normalizedSelectionMode === 'rowSingle') {
@@ -55,7 +56,7 @@ const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAll
     }
 
     const onSelectAll = (allSelected: boolean) => {
-      rawSelection.value = new Set(allSelected ? data : undefined)
+      rawSelection.value = allSelected ? data : undefined
     }
 
     return {
@@ -65,7 +66,7 @@ const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAll
       offset: normalizedPagination.offset,
       total: normalizedPagination.total,
       isAllSelected: calculateAllSelected(),
-      selection: selection,
+      selection,
       selectionMode: normalizedSelectionMode,
       onSelect,
       onSelectAll

@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<DataTableProps>(), {
   pageSizeOptions: () => [10, 20, 50, 100]
 })
 
-const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll', 'update:data', 'dragStart', 'dragOver', 'dragDrop'])
+const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll', 'dragStart', 'dragOver', 'dragDrop'])
 
 const classes = useStyle<DataTableProps, SlotStyles>(props, styles)
 
@@ -150,7 +150,7 @@ onBeforeUnmount(() => {
       :shape="shape"
       :size="size"
       :striped="striped"
-      :selected-item="selection"
+      :selection="selection"
       :row-events="selectionMode === 'rowSingle' || selectionMode === 'rowMultiple'"
       @on-row-click="(item) => emit('onSelect', item)"
     >
