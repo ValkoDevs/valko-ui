@@ -17,6 +17,7 @@ const htmlElement = document.querySelector('html')
 const menuItems: MenuItem[] = [
   { key: 'get-started', group: 'General', text: 'Get Started' },
   { key: 'divider', group: 'Layout', text: 'Divider' },
+  { key: 'drawer', group: 'Layout', text: 'Drawer' },
   { key: 'modal', group: 'Layout', text: 'Modal' },
   { key: 'button', group: 'Forms', text: 'Button' },
   { key: 'checkbox', group: 'Forms', text: 'Checkbox' },
