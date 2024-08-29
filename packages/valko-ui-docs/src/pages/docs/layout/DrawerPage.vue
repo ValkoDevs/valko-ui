@@ -6,9 +6,11 @@ import propHeaders from '@/data/propHeaders'
 import emitHeaders from '@/data/emitHeaders'
 import slotHeaders from '@/data/slotHeaders'
 import shapeOptions from '@/data/shapeOptions'
+import sizeOptions from '@/data/sizeOptions'
 
 const form = ref({
   shape: 'soft',
+  size: 'md',
   placement: 'right',
   backdrop: 'opaque',
   title: 'Drawer',
@@ -37,6 +39,14 @@ const drawerProps = [
     description: 'The shape of the Drawer.',
     values: 'soft, square, rounded',
     default: 'soft'
+  },
+  {
+    key: 'propSize',
+    prop: 'size',
+    required: false,
+    description: 'The size of the Drawer.',
+    values: 'xs, sm, md, lg',
+    default: 'md'
   },
   {
     key: 'propPlacement',
@@ -127,6 +137,7 @@ const toggleDrawer = (drawerId: string) => {
         :closable="form.closable"
         :title="form.title"
         :flat="form.flat"
+        :size="form.size"
         @close="toggleDrawer('playground-drawer')"
       >
         <template #default>
@@ -145,6 +156,12 @@ const toggleDrawer = (drawerId: string) => {
         size="sm"
         :options="shapeOptions"
         v-model="form.shape"
+      />
+      <vk-select
+        placeholder="Size"
+        size="sm"
+        :options="sizeOptions"
+        v-model="form.size"
       />
       <vk-select
         placeholder="Placement"
@@ -215,6 +232,32 @@ const toggleDrawer = (drawerId: string) => {
           >
             <template #default>
               {{ shape.label }} Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+            </template>
+          </vk-drawer>
+        </div>
+      </example-section>
+
+      <example-section
+        title="Size"
+        justify="start"
+        gap
+      >
+        <div
+          v-for="size in sizeOptions"
+          :key="size.value"
+        >
+          <vk-button @click="toggleDrawer(size.value)">
+            Open {{ size.label }}
+          </vk-button>
+          <vk-drawer
+            :is-open="drawerStates[size.value]"
+            :size="size.value"
+            :title="size.label"
+            @close="toggleDrawer(size.value)"
+          >
+            <template #default>
+              {{ size.label }} Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
             </template>
           </vk-drawer>

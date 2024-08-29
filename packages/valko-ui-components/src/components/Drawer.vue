@@ -12,6 +12,7 @@ defineOptions({ name: 'VkDrawer' })
 
 const props = withDefaults(defineProps<DrawerProps>(), {
   shape: 'soft',
+  size: 'md',
   backdrop: 'opaque',
   placement: 'right',
   isOpen: false,

@@ -40,6 +40,10 @@ describe('Drawer component', () => {
         expect(drawer.classes()).toContain('rounded-lg')
       })
 
+      it('should be size md', () => {
+        expect(drawer.classes()).toContain('max-w-xl')
+      })
+
       it('should be closable', () => {
         expect(drawer.find('i.ti.ti-x').exists()).toBe(true)
       })
@@ -148,6 +152,68 @@ describe('Drawer component', () => {
         await nextTick()
         drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
         expect(drawer.classes()).toContain('rounded-none')
+      })
+    })
+
+    describe('When size prop changes', () => {
+      it('should be xs when props.size is xs', async () => {
+        wrapper = mount(VkDrawer, {
+          props: {
+            isOpen: true,
+            size: 'xs'
+          },
+          slots: {
+            default: 'Hello World'
+          }
+        })
+        await nextTick()
+        drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
+        expect(drawer.classes()).toContain('max-w-xs')
+      })
+
+      it('should be sm when props.size is sm', async () => {
+        wrapper = mount(VkDrawer, {
+          props: {
+            isOpen: true,
+            size: 'sm'
+          },
+          slots: {
+            default: 'Hello World'
+          }
+        })
+        await nextTick()
+        drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
+        expect(drawer.classes()).toContain('max-w-lg')
+      })
+
+      it('should be md when props.size is md', async () => {
+        wrapper = mount(VkDrawer, {
+          props: {
+            isOpen: true,
+            size: 'md'
+          },
+          slots: {
+            default: 'Hello World'
+          }
+        })
+        await nextTick()
+        drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
+        expect(drawer.classes()).toContain('max-w-xl')
+      })
+
+      it('should be lg when props.size is lg', async () => {
+        wrapper = mount(VkDrawer, {
+          props: {
+            isOpen: true,
+            size: 'lg'
+          },
+          slots: {
+            default: 'Hello World'
+          }
+        })
+        await nextTick()
+        drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
+        expect(drawer.classes()).toContain('max-w-2xl')
       })
     })
 

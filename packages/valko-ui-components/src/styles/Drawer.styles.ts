@@ -31,14 +31,14 @@ export default tv({
     ],
     panel: [
       'vk-drawer__panel',
-      'absolute',
-      'max-w-full',
-      'max-h-full',
+      'w-full',
+      'h-full',
       'p-6',
       'bg-white',
       'shadow-lg',
       'text-left',
       'overflow-hidden',
+      'absolute',
       'flex',
       'flex-col',
       'justify-start',
@@ -103,34 +103,32 @@ export default tv({
         ]
       }
     },
+    sizes: {
+      xs: {},
+      sm: {},
+      md: {},
+      lg: {}
+    },
     placement: {
       bottom: {
         panel: [
-          'w-full',
-          'h-96',
           'right-0',
           'bottom-0'
         ]
       },
       top: {
         panel: [
-          'w-full',
-          'h-96',
           'right-0',
           'top-0'
         ]
       },
       left: {
         panel: [
-          'h-full',
-          'w-96',
           'left-0'
         ]
       },
       right: {
         panel: [
-          'h-full',
-          'w-96',
           'right-0'
         ]
       }
@@ -142,5 +140,80 @@ export default tv({
         ]
       }
     }
-  }
+  },
+  compoundVariants: [
+    // sizes
+    {
+      placement: ['top', 'bottom'],
+      size: 'xs',
+      class: {
+        panel: [
+          'max-h-[14rem]'
+        ]
+      }
+    },
+    {
+      placement: ['top', 'bottom'],
+      size: 'sm',
+      class: {
+        panel: [
+          'max-h-[18rem]'
+        ]
+      }
+    },
+    {
+      placement: ['top', 'bottom'],
+      size: 'md',
+      class: {
+        panel: [
+          'max-h-[22rem]'
+        ]
+      }
+    },
+    {
+      placement: ['top', 'bottom'],
+      size: 'lg',
+      class: {
+        panel: [
+          'max-h-[26rem]'
+        ]
+      }
+    },
+    {
+      placement: ['left', 'right'],
+      size: 'xs',
+      class: {
+        panel: [
+          'max-w-xs'
+        ]
+      }
+    },
+    {
+      placement: ['left', 'right'],
+      size: 'sm',
+      class: {
+        panel: [
+          'max-w-lg'
+        ]
+      }
+    },
+    {
+      placement: ['left', 'right'],
+      size: 'md',
+      class: {
+        panel: [
+          'max-w-xl'
+        ]
+      }
+    },
+    {
+      placement: ['left', 'right'],
+      size: 'lg',
+      class: {
+        panel: [
+          'max-w-2xl'
+        ]
+      }
+    }
+  ]
 }) as unknown as ReturnType<TV>
