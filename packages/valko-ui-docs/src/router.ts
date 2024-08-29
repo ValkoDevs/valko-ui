@@ -20,6 +20,10 @@ const routes = [
         component: lazyLoad('layout', 'DividerPage')
       },
       {
+        path: 'drawer',
+        component: lazyLoad('layout', 'DrawerPage')
+      },
+      {
         path: 'modal',
         component: lazyLoad('layout', 'ModalPage')
       },
