@@ -18,6 +18,7 @@ const form = ref({
 
 const tableProps = [
   {
+    key: 'headersKey',
     prop: 'headers',
     required: true,
     description: 'An array of objects defining the headers of the table.',
@@ -25,6 +26,7 @@ const tableProps = [
     default: '[]'
   },
   {
+    key: 'dataKey',
     prop: 'data',
     required: true,
     description: 'An array of objects representing the data rows of the table.',
@@ -32,22 +34,41 @@ const tableProps = [
     default: '[]'
   },
   {
+    key: 'stripedKey',
     prop: 'striped',
     required: false,
     description: 'Specifies whether the table rows are striped for better readability.',
     values: 'boolean',
+    default: 'false'
+  },
+  {
+    key: 'selectedItemKey',
+    prop: 'selectedItem',
+    required: false,
+    description: 'Helper prop to determine if a row is being selected using the key of the item pass by, only for styles purposes.',
+    values: 'TableItem, TableItem[], undefined',
+    default: 'undefined'
+  },
+  {
+    key: 'rowEventsKey',
+    prop: 'rowEvents',
+    required: false,
+    description: 'Allows rows to emit event onRowClick.',
+    values: 'false, true',
     default: 'false'
   }
 ]
 
 const tableItem = [
   {
+    key: 'itemKey',
     prop: 'key',
     required: true,
     description: 'The unique identifier for the data row.',
     values: 'string'
   },
   {
+    key: 'anyProp',
     prop: 'Any other property',
     required: false,
     description: 'Any other property specific to your data row.',
@@ -57,75 +78,78 @@ const tableItem = [
 
 const tableHeader = [
   {
+    key: 'headerKey',
     prop: 'key',
     required: true,
     description: 'The unique identifier for the column.',
     values: 'string'
   },
   {
+    key: 'headerLabel',
     prop: 'label',
     required: true,
     description: 'The label to display for the column header.',
     values: 'string'
   },
   {
-    prop: 'sortable',
+    key: 'headerField',
+    prop: 'field',
     required: true,
+    description: 'The property of TableItem that this column should display.',
+    values: 'keyof TableItem'
+  },
+  {
+    key: 'headerSort',
+    prop: 'sortable',
+    required: false,
     description: 'Specifies whether the column is sortable.',
-    values: 'boolean'
+    values: 'false, true',
+    default: 'false'
+  },
+  {
+    key: 'headerFilter',
+    prop: 'filterable',
+    required: false,
+    description: 'Specifies whether the column is filterable.',
+    values: 'false, true',
+    default: 'false'
+  },
+  {
+    key: 'headerClass',
+    prop: 'class',
+    required: false,
+    description: 'Additional classes for the column.',
+    values: 'string'
   }
 ]
 
 
 const emitData = [
   {
-    event: 'close',
-    type: '() => void',
+    event: 'onRowClick',
+    type: '(item: TableItem) => void',
     values: '',
-    description: 'Emitted when the alert is closed by the user.'
+    description: 'Emitted when a row is clicked, only if prop rowEvents is true.'
   }
 ]
 
 const slotData = [
   {
-    name: 'default',
-    description: 'Slot for the main content of the alert.',
-    example: '<template #default>\n  <p>This is the main content of the alert.</p>\n</template>'
+    name: 'header-cell-${header.key}',
+    description: 'Slot that displays by default the header label value.',
+    example: '<template #header-cell-propKey>\n  <p>Properties</p>\n</template>'
+  },
+  {
+    name: 'cell-${field}-${item.key}',
+    description: 'Slot that displays by default the item field value.',
+    example: '<template #cell-prop-propKey>\n  <p>Data</p>\n</template>'
+  },
+  {
+    name: 'no-data-message',
+    description: 'Slot that display the message when no data is found.',
+    example: '<template #no-data-message>\n  <p>No items found.</p>\n</template>'
   }
 ]
-
-const tableItems = ref([
-  {
-    prop: 'key',
-    required: true,
-    description: 'The unique identifier for the column.',
-    values: 'string'
-  },
-  {
-    prop: 'label',
-    required: true,
-    description: 'The label to display for the column header.',
-    values: 'string'
-  },
-  {
-    prop: 'sortable',
-    required: true,
-    description: 'Specifies whether the column is sortable.',
-    values: 'boolean'
-  },
-  {
-    prop: 'sortable',
-    required: true,
-    description: 'Specifies whether the column is sortable.',
-    values: 'boolean'
-  },
-  {
-    prop: 'sortable',
-    required: true,
-    description: 'Specifies whether the column is sortable.',
-    values: 'boolean'
-  }
-])
 </script>
 
 <template>
@@ -140,7 +164,7 @@ const tableItems = ref([
           :shape="form.shape"
           :size="form.size"
           :striped="form.striped"
-          :data="tableItems"
+          :data="tableHeader"
           :headers="propHeaders"
         />
       </div>

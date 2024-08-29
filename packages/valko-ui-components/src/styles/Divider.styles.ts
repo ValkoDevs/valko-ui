@@ -68,7 +68,7 @@ export default tv({
       color: 'neutral',
       class: [
         'bg-light-4',
-        'dark:bg-dark-3'
+        'dark:bg-dark-2'
       ]
     },
     {

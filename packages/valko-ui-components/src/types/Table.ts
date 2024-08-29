@@ -1,4 +1,4 @@
-import type { Shapes, Sizes, Variants } from './common'
+import type { DefaultComponent } from './common'
 
 export interface TableItem {
   key: string | number;
@@ -14,8 +14,10 @@ export interface TableHeader {
   class?: string;
 }
 
-export interface TableProps extends Shapes, Sizes, Variants {
+export interface TableProps extends DefaultComponent {
   headers: TableHeader[];
   data: TableItem[];
   striped?: boolean;
+  selection?: TableItem[] | TableItem | undefined;
+  rowEvents?: boolean;
 }

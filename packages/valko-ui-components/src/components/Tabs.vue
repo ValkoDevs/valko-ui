@@ -59,7 +59,12 @@ onUpdated(onChange)
         <div
           :class="classes.cursor"
           ref="cursor"
-        />
+        >
+          <div
+            v-if="variant === 'gradient'"
+            :class="classes.cursorGradient"
+          />
+        </div>
         <tab
           v-for="item in tabs"
           :class="classes.tab"

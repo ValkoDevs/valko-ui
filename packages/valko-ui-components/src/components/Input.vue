@@ -67,7 +67,7 @@ onMounted(() => {
         :type="type"
         placeholder=" "
         :value="modelValue"
-        :data-filled="!!modelValue"
+        :data-filled="modelValue !== null && modelValue !== undefined && modelValue !== ''"
         :id="inputId"
         @focus="onFocus"
         @input="updateValue"

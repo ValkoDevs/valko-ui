@@ -57,7 +57,8 @@ const useStyle = () => {
         'flex-col',
         'gap-2',
         'justify-between',
-        'items-stretch'
+        'items-stretch',
+        'mb-auto'
       ]
     }
   })

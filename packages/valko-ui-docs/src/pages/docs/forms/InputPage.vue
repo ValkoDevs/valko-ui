@@ -299,7 +299,7 @@ const slotData = [
             :key="color.value"
             :color="color.value"
             :label="color.label"
-            v-model="form.variantInputs[color.value]"
+            v-model="form.colorInputs[color.value]"
           />
         </div>
       </example-section>
@@ -333,7 +333,7 @@ const slotData = [
             :key="shape.value"
             :shape="shape.value"
             :label="shape.label"
-            v-model="form.variantInputs[shape.value]"
+            v-model="form.shapeInputs[shape.value]"
           />
         </div>
       </example-section>
@@ -350,7 +350,7 @@ const slotData = [
             :key="size.value"
             :size="size.value"
             :label="size.label"
-            v-model="form.variantInputs[size.value]"
+            v-model="form.sizeInputs[size.value]"
           />
         </div>
       </example-section>
@@ -367,7 +367,7 @@ const slotData = [
             :key="type.value"
             :type="type.value"
             :label="type.label"
-            v-model="form.variantInputs[type.value]"
+            v-model="form.typeInputs[type.value]"
           />
         </div>
       </example-section>

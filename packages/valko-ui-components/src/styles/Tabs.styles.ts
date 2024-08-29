@@ -58,6 +58,13 @@ export default tv({
       'duration-200',
       'dark:shadow-dark-5'
     ],
+    cursorGradient: [
+      'absolute',
+      'inset-0',
+      'z-20',
+      'transition-all',
+      'duration-200'
+    ],
     leftIcon: [
       'vk-tabs__left',
       'mr-1'
@@ -91,6 +98,15 @@ export default tv({
         ],
         cursor: [
           'shadow-none'
+        ]
+      },
+      gradient: {
+        list: [
+          'bg-light-3',
+          'dark:bg-dark-3'
+        ],
+        cursor: [
+          'bg-gradient-to-br'
         ]
       }
     },
@@ -133,19 +149,6 @@ export default tv({
           'data-[headlessui-state=selected]:text-white'
         ],
         cursor: [
-          'rounded-lg'
-        ]
-      },
-      gradient: {
-        list: [
-          'rounded-lg'
-        ],
-        tab: [
-          'rounded-lg',
-          'data-[headlessui-state=selected]:text-white'
-        ],
-        cursor: [
-          'bg-gradient-to-br',
           'rounded-lg'
         ]
       }
@@ -211,6 +214,79 @@ export default tv({
     }
   },
   compoundVariants: [
+    // color & gradient
+    {
+      variant: 'gradient',
+      shape: ['soft', 'rounded', 'square'],
+      color: 'primary',
+      class: {
+        cursor: [
+          'from-primary-500',
+          'to-primary-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      shape: ['soft', 'rounded', 'square'],
+      color: 'neutral',
+      class: {
+        cursor: [
+          'from-light-1',
+          'to-light-5',
+          'dark:from-dark-1',
+          'dark:to-dark-5'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-dark-1',
+          'dark:data-[headlessui-state=selected]:text-light-3'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      shape: ['soft', 'rounded', 'square'],
+      color: 'success',
+      class: {
+        cursor: [
+          'from-success-500',
+          'to-success-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      shape: ['soft', 'rounded', 'square'],
+      color: 'info',
+      class: {
+        cursor: [
+          'from-info-500',
+          'to-info-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      shape: ['soft', 'rounded', 'square'],
+      color: 'warning',
+      class: {
+        cursor: [
+          'from-warning-500',
+          'to-warning-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      shape: ['soft', 'rounded', 'square'],
+      color: 'error',
+      class: {
+        cursor: [
+          'from-error-500',
+          'to-error-900'
+        ]
+      }
+    },
     //color & line
     {
       color: 'primary',
@@ -327,73 +403,6 @@ export default tv({
         ]
       }
     },
-    // color & gradient
-    {
-      shape: 'gradient',
-      color: 'primary',
-      class: {
-        container: [
-          'from-primary-500',
-          'to-primary-900'
-        ]
-      }
-    },
-    {
-      shape: 'gradient',
-      color: 'neutral',
-      class: {
-        container: [
-          'from-light-1',
-          'to-light-5',
-          'dark:from-dark-1',
-          'dark:to-dark-5'
-        ],
-        tab: [
-          'data-[headlessui-state=selected]:text-dark-1',
-          'dark:data-[headlessui-state=selected]:text-light-3'
-        ]
-      }
-    },
-    {
-      shape: 'gradient',
-      color: 'success',
-      class: {
-        container: [
-          'from-success-500',
-          'to-success-900'
-        ]
-      }
-    },
-    {
-      shape: 'gradient',
-      color: 'info',
-      class: {
-        container: [
-          'from-info-500',
-          'to-info-900'
-        ]
-      }
-    },
-    {
-      shape: 'gradient',
-      color: 'warning',
-      class: {
-        container: [
-          'from-warning-500',
-          'to-warning-900'
-        ]
-      }
-    },
-    {
-      shape: 'gradient',
-      color: 'error',
-      class: {
-        container: [
-          'from-error-500',
-          'to-error-900'
-        ]
-      }
-    },
     // vertical & line
     {
       shape: 'line',
@@ -421,6 +430,105 @@ export default tv({
       class: {
         group: [
           'flex-row'
+        ]
+      }
+    },
+    // gradient & line
+    {
+      variant: 'gradient',
+      shape: 'line',
+      vertical: true,
+      class: {
+        cursor: [
+          'border-b-0',
+          'border-l-0'
+        ],
+        cursorGradient: [
+          'mr-auto',
+          'w-0.5',
+          'bg-gradient-to-tr'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      shape: 'line',
+      vertical: false,
+      class: {
+        cursor: [
+          'border-b-0',
+          'border-l-0'
+        ],
+        cursorGradient: [
+          'mt-auto',
+          'h-0.5',
+          'bg-gradient-to-br'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'primary',
+      shape: 'line',
+      class: {
+        cursorGradient: [
+          'from-primary-500',
+          'to-primary-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'neutral',
+      shape: 'line',
+      class: {
+        cursorGradient: [
+          'from-primary-500',
+          'to-primary-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'success',
+      shape: 'line',
+      class: {
+        cursorGradient: [
+          'from-success-500',
+          'to-success-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'info',
+      shape: 'line',
+      class: {
+        cursorGradient: [
+          'from-info-500',
+          'to-info-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'warning',
+      shape: 'line',
+      class: {
+        cursorGradient: [
+          'from-warning-500',
+          'to-warning-900'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'error',
+      shape: 'line',
+      class: {
+        cursorGradient: [
+          'from-error-500',
+          'to-error-900'
         ]
       }
     }

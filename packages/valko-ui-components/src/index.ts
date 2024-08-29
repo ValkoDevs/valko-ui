@@ -14,6 +14,7 @@ export { default as useDataTable } from '#valkoui/composables/useDataTable.ts'
 export { default as useClientSidePagination } from '#valkoui/composables/useClientSidePagination.ts'
 export { default as useClientSideSort } from '#valkoui/composables/useClientSideSort.ts'
 export { default as useClientSideFilter } from '#valkoui/composables/useClientSideFilter.ts'
+export { default as useClientSideDragAndDrop } from '#valkoui/composables/useClientSideDragAndDrop.ts'
 export { default as useClientSideDataTable } from '#valkoui/composables/useClientSideDataTable.ts'
 
 ///////////////////

@@ -36,7 +36,7 @@ const updateValue = (e: Event) => {
         :readonly="readonly"
         :value="modelValue"
         @input="updateValue"
-        :data-filled="!!modelValue"
+        :data-filled="modelValue !== null && modelValue !== undefined && modelValue !== ''"
         :maxlength="maxlength"
       />
       <label :class="classes.label">{{ label }}</label>

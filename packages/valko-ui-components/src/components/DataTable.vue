@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<DataTableProps>(), {
   pageSizeOptions: () => [10, 20, 50, 100]
 })
 
-const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll'])
+const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll', 'dragStart', 'dragOver', 'dragDrop'])
 
 const classes = useStyle<DataTableProps, SlotStyles>(props, styles)
 
@@ -150,6 +150,9 @@ onBeforeUnmount(() => {
       :shape="shape"
       :size="size"
       :striped="striped"
+      :selection="selection"
+      :row-events="selectionMode === 'rowSingle' || selectionMode === 'rowMultiple'"
+      @on-row-click="(item) => emit('onSelect', item)"
     >
       <template
         v-for="header in headers"
@@ -221,6 +224,21 @@ onBeforeUnmount(() => {
             />
           </div>
         </div>
+      </template>
+
+      <template
+        v-for="(item, index) in data"
+        #[`cell-draggable-${item.key}`]
+        :key="item.key"
+      >
+        <vk-icon
+          name="grip-vertical"
+          draggable="true"
+          :class="classes.dragIcon"
+          @dragstart="() => emit('dragStart', index)"
+          @dragover="(event) => emit('dragOver', event)"
+          @drop="(event) => emit('dragDrop', event, index)"
+        />
       </template>
 
       <template

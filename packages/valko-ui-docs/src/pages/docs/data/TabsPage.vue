@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import DocSection from '@/components/DocSection'
 import ExampleSection from '@/components/ExampleSection'
 import colorOptions from '@/data/colorOptions'
-import variantOptions from '@/data/variantOptions'
+import variantWithGradient from '@/data/variantWithGradient'
 import shapeOptions from '@/data/shapeOptions'
 import sizeOptions from '@/data/sizeOptions'
 import propHeaders from '@/data/propHeaders'
@@ -11,8 +11,7 @@ import slotHeaders from '@/data/slotHeaders'
 
 const shapes = [
   ...shapeOptions,
-  { value: 'line', label: 'Line' },
-  { value: 'gradient', label: 'Gradient' }
+  { value: 'line', label: 'Line' }
 ]
 
 const tabs = [
@@ -61,14 +60,14 @@ const tabsProps = [
     prop: 'variant',
     required: false,
     description: 'The type of the Tabs',
-    values: 'filled, outlined, ghost',
+    values: 'filled, outlined, ghost, gradient',
     default: 'filled'
   },
   {
     prop: 'shape',
     required: false,
     description: 'The Tabs shape.',
-    values: 'line, rounded, soft, square, gradient',
+    values: 'line, rounded, soft, square',
     default: 'soft'
   },
   {
@@ -186,7 +185,7 @@ const tabsSlots = [
         type="outlined"
         placeholder="Variant"
         size="sm"
-        :options="variantOptions"
+        :options="variantWithGradient"
         v-model="form.variant"
       />
       <vk-select
@@ -242,7 +241,7 @@ const tabsSlots = [
       >
         <div class="grow gap-4 grid grid-cols-2">
           <div
-            v-for="variant in variantOptions"
+            v-for="variant in variantWithGradient"
             :key="variant.value"
           >
             <span> {{ variant.label }} </span>

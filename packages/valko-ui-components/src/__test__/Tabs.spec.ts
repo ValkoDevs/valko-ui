@@ -155,17 +155,6 @@ describe('Tabs component', () => {
 
         expect(wrapper.find('.rounded-none').exists()).toBe(true)
       })
-
-      it('should be gradient when props.shape is gradient', () => {
-        wrapper = mount(VkTabs, {
-          props: {
-            shape: 'gradient',
-            tabs
-          }
-        })
-
-        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
-      })
     })
 
     describe('When size prop changes', () => {
@@ -246,6 +235,17 @@ describe('Tabs component', () => {
         })
 
         expect(wrapper.find('.bg-transparent').exists()).toBe(true)
+      })
+
+      it('should be gradient when props.variant is gradient', () => {
+        wrapper = mount(VkTabs, {
+          props: {
+            variant: 'gradient',
+            tabs
+          }
+        })
+
+        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
       })
     })
   })
