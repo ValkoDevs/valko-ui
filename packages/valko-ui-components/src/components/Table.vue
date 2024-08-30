@@ -91,7 +91,10 @@ const headers = computed(() => props.headers)
         </td>
       </tr>
     </tbody>
-    <tfoot v-if="$slots['table-footer']">
+    <tfoot
+      v-if="$slots['table-footer']"
+      :class="classes.tableFooter"
+    >
       <slot name="table-footer" />
     </tfoot>
   </table>

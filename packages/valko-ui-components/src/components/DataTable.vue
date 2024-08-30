@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<DataTableProps>(), {
   pageSizeOptions: () => [10, 20, 50, 100]
 })
 
-const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll', 'dragStart', 'dragOver', 'dragDrop'])
+const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll', 'onDragStart', 'onDragOver', 'onDrop'])
 
 const classes = useStyle<DataTableProps, SlotStyles>(props, styles)
 
@@ -235,9 +235,9 @@ onBeforeUnmount(() => {
           name="grip-vertical"
           draggable="true"
           :class="classes.dragIcon"
-          @dragstart="() => emit('dragStart', index)"
-          @dragover="(event) => emit('dragOver', event)"
-          @drop="(event) => emit('dragDrop', event, index)"
+          @dragstart="() => emit('onDragStart', index)"
+          @dragover="(event) => emit('onDragOver', event)"
+          @drop="(event) => emit('onDrop', event, index)"
         />
       </template>
 
