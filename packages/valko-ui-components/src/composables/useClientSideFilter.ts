@@ -1,10 +1,10 @@
-import { type Ref, ref, watch, toValue } from 'vue'
+import { type Ref, shallowRef, watch, toValue } from 'vue'
 import type { TableItem } from '#valkoui/types/Table'
 import type { Filter } from '#valkoui/types/common'
 
 const useClientSideFilter = <T extends TableItem>(data: T[] | Ref<T[]>) => {
-  const filters: Ref<Filter[]> = ref([])
-  const result: Ref<TableItem[]> = ref(data)
+  const filters: Ref<Filter[]> = shallowRef([])
+  const result: Ref<TableItem[]> = shallowRef(data)
 
   const setFilters = (newFilters: Filter[]) => {
     filters.value = newFilters

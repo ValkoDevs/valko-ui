@@ -1,6 +1,7 @@
-import { ref, nextTick } from 'vue'
+import { type ComputedRef, ref, nextTick } from 'vue'
 import useDataTable from '#valkoui/composables/useDataTable'
-import type { TableHeader, TableItem } from '#valkoui/types/Table'
+import type { TableHeader } from '#valkoui/types/Table'
+import type { DataTableInput } from '#valkoui/types/DataTable'
 
 describe('useDataTable composable', () => {
   const headers: TableHeader[] = [
@@ -19,107 +20,298 @@ describe('useDataTable composable', () => {
     total: 3
   })
 
-  const dataTable = useDataTable({
-    headers,
-    paginatedResult,
-    selectAllStatus: undefined,
-    selectionMode: 'none',
-    draggable: false
-  })
-
-  it('should return the correct initial headers and data', () => {
-    expect(dataTable.value.headers).toEqual(headers)
-    expect(dataTable.value.data).toEqual(paginatedResult.value.records)
-    expect(dataTable.value.isAllSelected).toBe(false)
-  })
-
-  it('should add a selection column when selectionMode is single or multiple', () => {
-    const multipleTable = useDataTable({
-      headers,
-      paginatedResult,
-      selectAllStatus: undefined,
-      selectionMode: 'multiple',
-      draggable: false
+  describe('When no extra functionality is added', () => {
+    let dataTable: ComputedRef<DataTableInput>
+    beforeEach(() => {
+      dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'none',
+        draggable: false
+      })
     })
 
-    expect(multipleTable.value.headers[0]).toEqual({ key: 'selection', field: 'selection', label: 'Selection' })
+    it('should return headers without changes', () => {
+      expect(dataTable.value.headers).toEqual(headers)
+    })
+
+    it('should return data without changes', () => {
+      expect(dataTable.value.data).toEqual(paginatedResult.value.records)
+    })
+
+    it('should update data when paginatedResult changes', async () => {
+      const newPaginatedResult = ref({
+        records: [
+          { key: '4', name: 'David', age: 40 },
+          { key: '5', name: 'Eve', age: 28 }
+        ],
+        limit: 10,
+        offset: 0,
+        total: 2
+      })
+
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'none',
+        draggable: false
+      })
+
+      paginatedResult.value = newPaginatedResult.value
+      await nextTick()
+
+      expect(dataTable.value.data).toEqual(newPaginatedResult.value.records)
+    })
   })
 
-  it('should add a draggable column when draggable is true', () => {
-    const draggableTable = useDataTable({
-      headers,
-      paginatedResult,
-      selectAllStatus: undefined,
-      selectionMode: 'none',
-      draggable: true
+  describe('When selectionMode changes', () => {
+    it('should return headers without changes when selectionMode is none', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'none',
+        draggable: false
+      })
+
+      expect(dataTable.value.headers).toEqual(headers)
     })
 
-    expect(draggableTable.value.headers[0]).toEqual({ key: 'draggable', field: 'draggable', label: '' })
+    it('should add a selection header when selectionMode is multiple', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'multiple',
+        draggable: false
+      })
+
+      expect(dataTable.value.headers[0]).toEqual({ key: 'selection', field: 'selection', label: 'Selection' })
+    })
+
+    it('should add a selection header when selectionMode is single', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'single',
+        draggable: false
+      })
+
+      expect(dataTable.value.headers[0]).toEqual({ key: 'selection', field: 'selection', label: 'Selection' })
+    })
+
+    it('should handle unexpected selectionMode gracefully', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        selectionMode: 'unexpectedMode' as any,
+        draggable: false
+      })
+
+      expect(dataTable.value.headers).toEqual(headers)
+    })
   })
 
-  it('should update selection when onSelect is called in single selection mode', async () => {
-    const selectionTable = useDataTable({
-      headers,
-      paginatedResult,
-      selectAllStatus: undefined,
-      selectionMode: 'single',
-      draggable: false
+  describe('When draggable changes', () => {
+    it('should return headers without changes if draggable is false', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'none',
+        draggable: false
+      })
+
+      expect(dataTable.value.headers).toEqual(headers)
     })
 
-    if (selectionTable.value.onSelect) selectionTable.value.onSelect(paginatedResult.value.records[1])
+    it('should add a draggable header when draggable is true', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'none',
+        draggable: true
+      })
 
-    await nextTick()
-
-    expect(selectionTable.value.selection).toEqual(paginatedResult.value.records[1])
+      expect(dataTable.value.headers[0]).toEqual({ key: 'draggable', field: 'draggable', label: '' })
+    })
   })
 
-  it('should update selection when onSelect is called in multiple selection mode', async () => {
-    const multipleTable = useDataTable({
-      headers,
-      paginatedResult,
-      selectAllStatus: undefined,
-      selectionMode: 'multiple',
-      draggable: false
+  describe('When draggable and selectionMode are both enabled', () => {
+    it('should add both draggable and selection headers when both options are enabled', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'multiple',
+        draggable: true
+      })
+
+      expect(dataTable.value.headers).toEqual([
+        { key: 'selection', field: 'selection', label: 'Selection' },
+        { key: 'draggable', field: 'draggable', label: '' },
+        ...headers
+      ])
     })
-
-    if (multipleTable.value.onSelect) {
-      multipleTable.value.onSelect(paginatedResult.value.records[0])
-      multipleTable.value.onSelect(paginatedResult.value.records[1])
-    }
-    await nextTick()
-
-    expect(multipleTable.value.selection).toEqual([paginatedResult.value.records[0], paginatedResult.value.records[1]])
   })
 
-  it('should select all items when onSelectAll is called with true', async () => {
-    const multipleTable = useDataTable({
-      headers,
-      paginatedResult,
-      selectAllStatus: true,
-      selectionMode: 'multiple',
-      draggable: false
+  describe('When onSelect is called', () => {
+    it('should return one selected item when selectionMode is single', async () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'single',
+        draggable: false
+      })
+
+      if (dataTable.value.onSelect) dataTable.value.onSelect(paginatedResult.value.records[0])
+      if (dataTable.value.onSelect) dataTable.value.onSelect(paginatedResult.value.records[1])
+      await nextTick()
+
+      expect(dataTable.value.selection).toEqual(paginatedResult.value.records[1])
     })
 
-    paginatedResult.value.records.forEach((item: TableItem) => {
-      if (multipleTable.value.onSelect) multipleTable.value.onSelect(item)
+    it('should return one selected item when selectionMode is rowSingle', async () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'rowSingle',
+        draggable: false
+      })
+
+      if (dataTable.value.onSelect) dataTable.value.onSelect(paginatedResult.value.records[0])
+      if (dataTable.value.onSelect) dataTable.value.onSelect(paginatedResult.value.records[1])
+      await nextTick()
+
+      expect(dataTable.value.selection).toEqual(paginatedResult.value.records[1])
     })
 
-    await nextTick()
+    it('should return an array of items when selectionMode is multiple', async () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'multiple',
+        draggable: false
+      })
 
-    expect(multipleTable.value.selection).toEqual(paginatedResult.value.records)
-    expect(multipleTable.value.isAllSelected).toBe(true)
+      if (dataTable.value.onSelect) {
+        dataTable.value.onSelect(paginatedResult.value.records[0])
+        dataTable.value.onSelect(paginatedResult.value.records[1])
+      }
+      await nextTick()
+
+      expect(dataTable.value.selection).toEqual([paginatedResult.value.records[0], paginatedResult.value.records[1]])
+    })
+
+    it('should return an array of items when selectionMode is rowMultiple', async () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'rowMultiple',
+        draggable: false
+      })
+
+      if (dataTable.value.onSelect) {
+        dataTable.value.onSelect(paginatedResult.value.records[0])
+        dataTable.value.onSelect(paginatedResult.value.records[1])
+      }
+      await nextTick()
+
+      expect(dataTable.value.selection).toEqual([paginatedResult.value.records[0], paginatedResult.value.records[1]])
+    })
   })
 
-  it('should deselect all items when onSelectAll is called with false', () => {
-    const multipleTable = useDataTable({
-      headers,
-      paginatedResult,
-      selectAllStatus: undefined,
-      selectionMode: 'multiple',
-      draggable: false
+  describe('When selectAllStatus changes', () => {
+    it('should return false when selectAllStatus is undefined', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'none',
+        draggable: false
+      })
+
+      expect(dataTable.value.isAllSelected).toEqual(false)
     })
 
-    expect(multipleTable.value.selection).toBeUndefined()
-    expect(multipleTable.value.isAllSelected).toBe(false)
+    it('should return false when selectAllStatus is false', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: false,
+        selectionMode: 'none',
+        draggable: false
+      })
+
+      expect(dataTable.value.isAllSelected).toEqual(false)
+    })
+
+    it('should return true when selectAllStatus is true', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: true,
+        selectionMode: 'none',
+        draggable: false
+      })
+
+      expect(dataTable.value.isAllSelected).toEqual(true)
+    })
+  })
+
+  describe('When onSelectAll is called', () => {
+    it('should return all the data when is called with true', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'none',
+        draggable: false
+      })
+
+      if (dataTable.value.onSelectAll) dataTable.value.onSelectAll(true)
+
+      expect(dataTable.value.selection).toEqual(paginatedResult.value.records)
+    })
+
+    it('should deselect all the data when is called with false', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'none',
+        draggable: false
+      })
+
+      if (dataTable.value.onSelectAll) dataTable.value.onSelectAll(false)
+
+      expect(dataTable.value.selection).toBeUndefined()
+    })
+
+    it('should handle an existing selection correctly', async () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'none',
+        draggable: false
+      })
+
+      if (dataTable.value.onSelect) dataTable.value.onSelect(paginatedResult.value.records[0])
+      if (dataTable.value.onSelectAll) dataTable.value.onSelectAll(true)
+      await nextTick()
+
+      expect(dataTable.value.selection).toEqual(paginatedResult.value.records)
+    })
   })
 })

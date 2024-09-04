@@ -397,7 +397,6 @@ describe('DataTable component', () => {
     })
 
     it('should emit onPageChange when the page is changed', async () => {
-      console.log(wrapper.html())
       const pagination = wrapper.findComponent(VkPagination)
       await pagination.vm.$emit('update:model-value', 2)
 

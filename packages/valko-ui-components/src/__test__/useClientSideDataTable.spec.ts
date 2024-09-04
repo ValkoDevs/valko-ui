@@ -3,6 +3,68 @@ import useClientSideDataTable from '#valkoui/composables/useClientSideDataTable'
 import type { TableHeader, TableItem } from '#valkoui/types/Table'
 import type { DataTableInput } from '#valkoui/types/DataTable'
 
+const {
+  useClientSideFilter,
+  useClientSideSort,
+  useClientSidePagination,
+  useClientSideDragAndDrop,
+  useDataTable
+} = vi.hoisted(() => ({
+  useClientSideFilter: vi.fn(() => ({
+    result: [],
+    filters: [{}],
+    setFilters: vi.fn()
+  })),
+  useClientSideSort: vi.fn(() => ({
+    result: [],
+    sort: {},
+    setSort: vi.fn()
+  })),
+  useClientSidePagination: vi.fn(() => ({
+    result: [],
+    setOffset: vi.fn(),
+    setLimit: vi.fn()
+  })),
+  useClientSideDragAndDrop: vi.fn(() => ({
+    result: [],
+    handleDragStart: vi.fn(),
+    handleDragOver: vi.fn(),
+    handleDrop: vi.fn()
+  })),
+  useDataTable: vi.fn(() => ({
+    headers: [],
+    data: [],
+    limit: 0,
+    offset: 0,
+    total: 0,
+    isAllSelected: undefined,
+    selection: [],
+    selectionMode: 'none',
+    onSelect: vi.fn(),
+    onSelectAll: vi.fn()
+  }))
+}))
+
+vi.mock('#valkoui/composables/useClientSideFilter.js', () => ({
+  default: useClientSideFilter
+}))
+
+vi.mock('#valkoui/composables/useClientSideSort.js', () => ({
+  default: useClientSideSort
+}))
+
+vi.mock('#valkoui/composables/useClientSidePagination.js', () => ({
+  default: useClientSidePagination
+}))
+
+vi.mock('#valkoui/composables/useClientSideDragAndDrop.js', () => ({
+  default: useClientSideDragAndDrop
+}))
+
+vi.mock('#valkoui/composables/useDataTable.js', () => ({
+  default: useDataTable
+}))
+
 describe('useClientSideDataTable composable', () => {
   const headers: TableHeader[] = [
     { key: 'name', field: 'name', label: 'Name' },
@@ -15,17 +77,13 @@ describe('useClientSideDataTable composable', () => {
     { key: '3', name: 'Charlie', age: 35 }
   ]
 
-  beforeEach(() => {
-    vi.resetAllMocks()
-  })
-
   describe('Should return an object with all the props and methods from composables', () => {
     let result: Ref<DataTableInput>
     beforeEach(async () => {
       result = useClientSideDataTable({
         data,
         headers,
-        selectionMode: 'none',
+        selectionMode: 'multiple',
         pageSizeOptions: [10, 20, 30],
         draggable: false
       })
@@ -33,12 +91,52 @@ describe('useClientSideDataTable composable', () => {
       await nextTick()
     })
 
-    // it('should return data array from useDataTable composable', () => {
-    //   expect(result.value.data).toEqual(data)
-    // })
+    it('should call useClientSideFilter', () => {
+      expect(useClientSideFilter).toHaveBeenCalled()
+    })
 
-    it('should return headers array from useDataTable composable', () => {
-      expect(result.value.headers).toEqual(headers)
+    it('should call useClientSideSort', () => {
+      expect(useClientSideSort).toHaveBeenCalled()
+    })
+
+    it('should call useClientSidePagination', () => {
+      expect(useClientSidePagination).toHaveBeenCalled()
+    })
+
+    it('should call useClientSideDragAndDrop', () => {
+      expect(useClientSideDragAndDrop).toHaveBeenCalled()
+    })
+
+    it('should call useDataTable', () => {
+      expect(useDataTable).toHaveBeenCalled()
+    })
+
+    it('should return the expected object props', () => {
+      const expectedProps = [
+        'headers',
+        'data',
+        'limit',
+        'offset',
+        'total',
+        'isAllSelected',
+        'selection',
+        'selectionMode',
+        'onSelect',
+        'onSelectAll',
+        'sort',
+        'filters',
+        'pageSizeOptions',
+        'draggable',
+        'onPageChange',
+        'onLimitChange',
+        'onSort',
+        'onFilter',
+        'onDragStart',
+        'onDragOver',
+        'onDrop'
+      ]
+
+      expect(Object.keys(result.value)).toMatchObject(expectedProps)
     })
   })
 })

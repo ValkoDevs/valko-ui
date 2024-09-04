@@ -19,43 +19,21 @@ describe('useClientSideDragAndDrop composable', () => {
     } as unknown as DragEvent
   }
 
-  const { result, handleDragStart, handleDrop } = useClientSideDragAndDrop(data)
-  const mockDragEvent = createMockDragEvent()
-
-  // it('should initialize with the provided sorted data', () => {
-  //   expect(result.value).toEqual(data)
-  // })
-
   it('should handle drop and reorder items', async () => {
+    const { result, handleDragStart, handleDrop, handleDragOver } = useClientSideDragAndDrop(data)
+    const mockDragEvent = createMockDragEvent()
+
     handleDragStart(0)
+    await nextTick()
+    handleDragOver(mockDragEvent)
+    await nextTick()
     handleDrop(mockDragEvent, 2)
     await nextTick()
 
-    const expectedData = [
+    expect(result.value).toEqual([
       { key: 'item2', name: 'Alice', age: 25 },
       { key: 'item3', name: 'Bob', age: 28 },
       { key: 'item1', name: 'John', age: 30 }
-    ]
-
-    expect(result.value).toEqual(expectedData)
+    ])
   })
-
-  // it('should not reorder items if drag is not started', async () => {
-  //   handleDrop(mockDragEvent, 2)
-  //   await nextTick()
-
-  //   expect(result.value).toEqual(data)
-  // })
-
-  // it('should reset drag start index and dragged item after drop', async () => {
-  //   handleDragStart(1)
-  //   handleDrop(mockDragEvent, 2)
-  //   await nextTick()
-
-  //   expect(result.value).toEqual([
-  //     { key: 'item2', name: 'Alice', age: 25 },
-  //     { key: 'item3', name: 'Bob', age: 28 },
-  //     { key: 'item1', name: 'John', age: 30 }
-  //   ])
-  // })
 })

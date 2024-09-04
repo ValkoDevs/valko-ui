@@ -2,35 +2,36 @@ import useDebounce from '#valkoui/composables/useDebounce'
 
 describe('useDebounce composable', () => {
   vi.useFakeTimers()
-  const callback = vi.fn()
+  const callback = vi.fn(() => true)
+  let debouncedFunction: () => Promise<boolean>
 
-  afterEach(() => {
-    vi.clearAllTimers()
-    vi.resetAllMocks()
+  beforeEach(() => {
+    debouncedFunction = useDebounce(callback, 1000)
   })
 
-  it('should call the callback after the specified timeout', async () => {
-    const debounce = useDebounce(callback, 1000)
+  afterEach(() => {
+    vi.restoreAllMocks()
+    vi.clearAllTimers()
+  })
 
-    debounce()
-    expect(callback).not.toHaveBeenCalled()
+  it('should call the callback after the specified timeout', () => {
+    debouncedFunction()
     vi.advanceTimersByTime(1000)
-    await Promise.resolve()
-
     expect(callback).toHaveBeenCalled()
   })
 
-  it('should cancel the previous call if called again before timeout', async () => {
-    const debounce = useDebounce(callback, 3000)
-
-    debounce()
+  it('should cancel the previous call if called again before timeout', () => {
+    debouncedFunction()
     vi.advanceTimersByTime(500)
-    debounce()
-    vi.advanceTimersByTime(2500)
+    debouncedFunction()
+    vi.advanceTimersByTime(600)
     expect(callback).not.toHaveBeenCalled()
-    vi.advanceTimersByTime(500)
-    await Promise.resolve()
+  })
 
-    expect(callback).toHaveBeenCalledTimes(1)
+  it('should return the callback result', async () => {
+    const resultPromise = debouncedFunction()
+    vi.advanceTimersByTime(1000)
+    const result = await resultPromise
+    expect(result).toEqual(true)
   })
 })

@@ -1,10 +1,21 @@
-import { nextTick } from 'vue'
+import { nextTick, defineComponent } from 'vue'
 import { mount, VueWrapper } from '@vue/test-utils'
-import VkButton from '#valkoui/components/Button.vue'
 import useNotification from '#valkoui/composables/useNotification'
 import type { NotificationProps } from '#valkoui/types/Notification'
 
 describe('useNotification composable', () => {
+  const TestButton = defineComponent({
+    name: 'TestButton',
+    setup() {
+      const onClick = () => {}
+
+      return {
+        onClick
+      }
+    },
+    template: '<button @click="onClick">Click Me</button>'
+  })
+
   let wrapper: VueWrapper
   let notification: HTMLElement | null
   const props: NotificationProps = {
@@ -20,7 +31,7 @@ describe('useNotification composable', () => {
 
   describe('With default props', () => {
     beforeEach(async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification(props)
         }
@@ -62,7 +73,7 @@ describe('useNotification composable', () => {
 
   describe('When color props changes', () => {
     it('should be primary when color props is primary', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', color: 'primary' })
         }
@@ -76,7 +87,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be neutral when color props is neutral', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', color: 'neutral' })
         }
@@ -90,7 +101,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be success when color props is success', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', color: 'success' })
         }
@@ -104,7 +115,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be info when color props is info', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', color: 'info' })
         }
@@ -118,7 +129,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be warning when color props is warning', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', color: 'warning' })
         }
@@ -132,7 +143,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be error when color props is error', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', color: 'error' })
         }
@@ -148,7 +159,7 @@ describe('useNotification composable', () => {
 
   describe('When variant props changes', () => {
     it('should be filled when variant props is filled', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', variant: 'filled' })
         }
@@ -162,7 +173,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be outlined when variant props is outlined', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', variant: 'outlined' })
         }
@@ -176,7 +187,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be ghost when variant props is ghost', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', variant: 'ghost' })
         }
@@ -192,7 +203,7 @@ describe('useNotification composable', () => {
 
   describe('When shape props changes', () => {
     it('should be rounded when shape prop is rounded', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', shape: 'rounded' })
         }
@@ -206,7 +217,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be soft when shape prop is soft', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', shape: 'soft' })
         }
@@ -220,7 +231,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be square when shape prop is square', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', shape: 'square' })
         }
@@ -236,7 +247,7 @@ describe('useNotification composable', () => {
 
   describe('When size prop changes', () => {
     it('should be xs when size prop is xs', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', size: 'xs' })
         }
@@ -250,7 +261,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be sm when size prop is sm', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', size: 'sm' })
         }
@@ -264,7 +275,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be md when size prop is md', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', size: 'md' })
         }
@@ -278,7 +289,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be lg when size prop is lg', async () => {
-      wrapper = mount(VkButton, {
+      wrapper = mount(TestButton, {
         props: {
           onClick: () => useNotification({ text: 'Hello World', size: 'lg' })
         }

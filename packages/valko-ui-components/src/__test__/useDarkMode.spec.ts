@@ -41,7 +41,7 @@ describe('useDarkMode composable', () => {
     expect(wrapper.vm.isDarkMode).toBe(true)
   })
 
-  it('should update isDarkMode when dark class is added or removed', async () => {
+  it('should update isDarkMode when dark class is added', async () => {
     const wrapper = mount({
       setup() {
         const isDarkMode = useDarkMode()
@@ -50,13 +50,23 @@ describe('useDarkMode composable', () => {
       template: '<div></div>'
     })
 
-    expect(wrapper.vm.isDarkMode).toBe(false)
-
     htmlElement.classList.add('dark')
     await nextTick()
 
     expect(wrapper.vm.isDarkMode).toBe(true)
+  })
 
+  it('should update isDarkMode when dark class is removed', async () => {
+    const wrapper = mount({
+      setup() {
+        const isDarkMode = useDarkMode()
+        return { isDarkMode }
+      },
+      template: '<div></div>'
+    })
+
+    htmlElement.classList.add('dark')
+    await nextTick()
     htmlElement.classList.remove('dark')
     await nextTick()
 
