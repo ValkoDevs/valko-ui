@@ -379,10 +379,21 @@ describe('Table component', () => {
 
       expect(wrapper.find('.vk-table_footer').text()).toBe('table footer')
     })
+
+    it('should not display table footer when not provided', () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data
+        }
+      })
+
+      expect(wrapper.find('.vk-table_footer').exists()).toBe(false)
+    })
   })
 
   describe('Emits', () => {
-    it('should emit onRowClick event when a row is clicked', () => {
+    it('should emit onRowClick event when a row is clicked and rowEvents is true', () => {
       const wrapper = mount(VkTable, {
         props: {
           headers,
@@ -393,6 +404,83 @@ describe('Table component', () => {
 
       wrapper.find('.vk-table__tr').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('onRowClick')
+    })
+
+    it('should not emit onRowClick event when a row is clicked and rowEvents is false', () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data,
+          rowEvents: false
+        }
+      })
+
+      wrapper.find('.vk-table__tr').trigger('click')
+      expect(wrapper.emitted()).not.toHaveProperty('onRowClick')
+    })
+  })
+
+  describe('With different data states', () => {
+    it('should display "No items found" when data is empty', () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data: []
+        }
+      })
+
+      expect(wrapper.find('.vk-table__no_data_message').text()).toBe('No items found.')
+    })
+
+    it('should display rows with data correctly', () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data
+        }
+      })
+
+      const rows = wrapper.findAll('.vk-table__tr')
+      const firstRow = rows[0]
+      expect(firstRow.text()).toContain('headers')
+    })
+
+    it('should display No items found when data is undefined', () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data: undefined
+        }
+      })
+
+      expect(wrapper.find('.vk-table__no_data_message').text()).toBe('No items found.')
+    })
+  })
+
+  describe('When prop selection changes', () => {
+    it('should handle selection with different types', () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data,
+          rowEvents: true,
+          selection: { key: 'prop' }
+        }
+      })
+
+      expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-primary-500/[.3]')
+    })
+
+    it('should handle empty selection', () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data,
+          rowEvents: true,
+          selection: []
+        }
+      })
+      expect(wrapper.find('.vk-table__tr').classes()).not.toContain('data-[selected=true]:bg-success-500/[.3]')
     })
   })
 })

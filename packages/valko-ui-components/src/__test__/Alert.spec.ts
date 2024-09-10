@@ -248,6 +248,27 @@ describe('Alert component', () => {
         expect(wrapper.find('i.ti.ti-bulb-filled').exists()).toBe(true)
       })
 
+      it('should use default icon when icon is undefined', () => {
+        wrapper = mount(VkAlert, {
+          props: {
+            icon: undefined
+          }
+        })
+
+        expect(wrapper.find('i.ti.ti-bulb-filled').exists()).toBe(true)
+      })
+
+      it('should return default icon when color is unrecognized', () => {
+        wrapper = mount(VkAlert, {
+          props: {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            color: 'unknown' as any
+          }
+        })
+
+        expect(wrapper.find('i.ti.ti-bulb-filled').exists()).toBe(true)
+      })
+
       it('should show custom icon when props.icon is an icon name', () => {
         wrapper = mount(VkAlert, {
           props: {
@@ -266,6 +287,28 @@ describe('Alert component', () => {
         })
 
         expect(wrapper.find('i.ti').exists()).toBe(false)
+      })
+    })
+
+    describe('When prop close changes', () => {
+      it('should show close button when closable is true', () => {
+        wrapper = mount(VkAlert, {
+          props: {
+            closable: true
+          }
+        })
+
+        expect(wrapper.find('.vk-alert__close').exists()).toBe(true)
+      })
+
+      it('should not show close button when closable is false', () => {
+        wrapper = mount(VkAlert, {
+          props: {
+            closable: false
+          }
+        })
+
+        expect(wrapper.find('.vk-alert__close').exists()).toBe(false)
       })
     })
   })

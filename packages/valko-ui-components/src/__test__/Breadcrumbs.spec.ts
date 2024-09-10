@@ -6,7 +6,7 @@ describe('Breadcrumbs component', () => {
   let wrapper: VueWrapper
   const crumbs: Crumb[] = [
     { key: 'home', title: 'Home', onClick: () => vi.fn(), leftIcon: 'home' },
-    { key: 'music', title: 'Music', rightIcon: 'music' },
+    { key: 'music', title: 'Music', rightIcon: 'music', disabled: true },
     { key: 'artist', title: 'Artist' },
     { key: 'album', title: 'Album' },
     { key: 'song', title: 'Song' }
@@ -241,6 +241,30 @@ describe('Breadcrumbs component', () => {
         expect(wrapper.find('.bg-transparent').exists()).toBe(true)
       })
     })
+
+    describe('When separator prop changes', () => {
+      it('should use the given string in separator', () => {
+        wrapper = mount(VkBreadcrumbs, {
+          props: {
+            crumbs,
+            separator: '/'
+          }
+        })
+
+        expect(wrapper.find('.vk-breadcrumbs').html()).toContain('/')
+      })
+
+      it('should be an icon if the string has more than two characters', () => {
+        wrapper = mount(VkBreadcrumbs, {
+          props: {
+            crumbs,
+            separator: 'minus'
+          }
+        })
+
+        expect(wrapper.find('i.ti.ti-minus').exists()).toBe(true)
+      })
+    })
   })
 
   describe('Icons', () => {
@@ -266,7 +290,7 @@ describe('Breadcrumbs component', () => {
   })
 
   describe('Emits', () => {
-    it('should emit crumbClick event', () => {
+    it('should emit crumbClick event when an item is clicked', () => {
       const wrapper = mount(VkBreadcrumbs, {
         props: {
           crumbs
@@ -275,6 +299,18 @@ describe('Breadcrumbs component', () => {
 
       wrapper.find('.vk-breadcrumbs__a').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('crumbClick')
+    })
+
+    it('should emit crumbClick event when a clicked item is disabled', () => {
+      const wrapper = mount(VkBreadcrumbs, {
+        props: {
+          crumbs
+        }
+      })
+
+      const itemList = wrapper.findAll('.vk-breadcrumbs__a')
+      itemList[1].trigger('click')
+      expect(wrapper.emitted()).not.toHaveProperty('crumbClick')
     })
   })
 })

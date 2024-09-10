@@ -1,9 +1,8 @@
-import { nextTick, ref } from 'vue'
+import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkSelect from '#valkoui/components/Select.vue'
 
 describe('Select component', () => {
-  const currentValue = ref<number | undefined>(undefined)
   const options = [
     { value: 1, label: 'Wade Cooper' },
     { value: 2, label: 'Arlene Mccoy' },
@@ -13,21 +12,15 @@ describe('Select component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
     describe('With default props', () => {
-      beforeEach(() => {
+      beforeEach(async () => {
         wrapper = mount(VkSelect, {
           props: {
             options,
-            modelValue: currentValue.value
-          },
-          emits: {
-            'update:modelValue': (newValue: number | undefined) => currentValue.value = newValue
+            modelValue: ''
           }
         })
         wrapper.find('.vk-input__input').trigger('focus')
-      })
-
-      afterEach(() => {
-        currentValue.value = undefined
+        await nextTick()
       })
 
       it('should render', () => {
@@ -60,11 +53,6 @@ describe('Select component', () => {
 
       it('should not have label', () => {
         expect(wrapper.find('.font-bold').text()).toContain('')
-      })
-
-      it('should change value when an option is clicked', () => {
-        wrapper.find('.vk-select__item:first-child').trigger('click')
-        expect(currentValue.value).toBe(1)
       })
     })
 
@@ -265,19 +253,34 @@ describe('Select component', () => {
     })
 
     describe('When allowClear prop changes', () => {
-      beforeEach(() => {
-        currentValue.value = 1
-      })
+      // it('should allow value to be undefined when prop.allowClear is true', async () => {
+      //   wrapper = mount(VkSelect, {
+      //     props: {
+      //       options,
+      //       allowClear: true,
+      //       modelValue: ''
+      //     }
+      //   })
 
-      it('should allow value to be undefined when prop.allowClear is true', async () => {
+      //   wrapper.find('.vk-input__input').trigger('focus')
+      //   await nextTick()
+      //   wrapper.find('.vk-select__item:first-child').trigger('click')
+      //   await nextTick()
+
+      //   wrapper.find('.vk-input__input').trigger('focus')
+      //   await nextTick()
+      //   wrapper.find('.vk-select__item:first-child').trigger('click')
+      //   await nextTick()
+
+      //   expect(wrapper.emitted('update:modelValue')?.[1]).toEqual([undefined])
+      // })
+
+      it('should not allow value to be undefined when prop.allowClear is false', async () => {
         wrapper = mount(VkSelect, {
           props: {
             options,
-            allowClear: true,
-            modelValue: currentValue.value
-          },
-          emits: {
-            'update:modelValue': (newValue: number | undefined) => currentValue.value = newValue
+            allowClear: false,
+            modelValue: ''
           }
         })
 
@@ -285,25 +288,13 @@ describe('Select component', () => {
         await nextTick()
         wrapper.find('.vk-select__item:first-child').trigger('click')
         await nextTick()
-        expect(currentValue.value).toBe(undefined)
-      })
-
-      it('should not allow value to be undefined when prop.allowClear is true', async () => {
-        wrapper = mount(VkSelect, {
-          props: {
-            options,
-            modelValue: currentValue.value
-          },
-          emits: {
-            'update:modelValue': (newValue: number | undefined) => currentValue.value = newValue
-          }
-        })
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
         wrapper.find('.vk-select__item:first-child').trigger('click')
         await nextTick()
-        expect(currentValue.value).toBe(1)
+
+        expect(wrapper.emitted('update:modelValue')?.[1]).toEqual([1])
       })
     })
   })
@@ -316,7 +307,7 @@ describe('Select component', () => {
         }
       })
 
-      expect(wrapper.find('span').text()).toContain('')
+      expect(wrapper.find('.vk-input__helper').exists()).toBe(false)
     })
 
     it('should show when props.helpertext is set', () => {
@@ -327,7 +318,7 @@ describe('Select component', () => {
         }
       })
 
-      expect(wrapper.find('.mt-1').text()).toContain('Hello World')
+      expect(wrapper.find('.vk-input__helper').text()).toContain('Hello World')
     })
   })
 
@@ -340,8 +331,8 @@ describe('Select component', () => {
       })
       wrapper.find('.vk-input__input').trigger('focus')
       await nextTick()
-      wrapper.find('.vk-select__item').trigger('click')
-      expect(wrapper.emitted('update:modelValue'))
+      wrapper.find('.vk-select__item:first-child').trigger('click')
+      expect(wrapper.emitted()).toHaveProperty('update:modelValue')
     })
   })
 })

@@ -45,23 +45,23 @@ const {
   }))
 }))
 
-vi.mock('#valkoui/composables/useClientSideFilter.js', () => ({
+vi.mock('#valkoui/composables/useClientSideFilter.ts', () => ({
   default: useClientSideFilter
 }))
 
-vi.mock('#valkoui/composables/useClientSideSort.js', () => ({
+vi.mock('#valkoui/composables/useClientSideSort.ts', () => ({
   default: useClientSideSort
 }))
 
-vi.mock('#valkoui/composables/useClientSidePagination.js', () => ({
+vi.mock('#valkoui/composables/useClientSidePagination.ts', () => ({
   default: useClientSidePagination
 }))
 
-vi.mock('#valkoui/composables/useClientSideDragAndDrop.js', () => ({
+vi.mock('#valkoui/composables/useClientSideDragAndDrop.ts', () => ({
   default: useClientSideDragAndDrop
 }))
 
-vi.mock('#valkoui/composables/useDataTable.js', () => ({
+vi.mock('#valkoui/composables/useDataTable.ts', () => ({
   default: useDataTable
 }))
 

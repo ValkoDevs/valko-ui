@@ -4,13 +4,14 @@ import VkAvatar from '#valkoui/components/Avatar.vue'
 
 describe('Avatar component', () => {
   let wrapper: VueWrapper
-  beforeAll(() => {
-    Image.prototype.decode = async () => this
-  })
-  afterAll(() => {
-    Image.prototype.decode = undefined
-  })
   describe('Props', () => {
+    beforeAll(() => {
+      Image.prototype.decode = async () => this
+    })
+    afterAll(() => {
+      Image.prototype.decode = undefined
+    })
+
     describe('With default props', () => {
       beforeEach(async () => {
         wrapper = mount(VkAvatar, {
@@ -241,8 +242,8 @@ describe('Avatar component', () => {
       })
     })
 
-    describe('When props name and props src are defined or not', () => {
-      it('should display an img with the given src', async () => {
+    describe('When prop name and prop src change', () => {
+      it('should display an img when src is given', async () => {
         wrapper = mount(VkAvatar, {
           props: {
             src: 'example.url'
@@ -255,20 +256,25 @@ describe('Avatar component', () => {
       it('should display the initials of the given name if there is no src', () => {
         wrapper = mount(VkAvatar, {
           props: {
-            src: 'example.url',
+            src: '',
             name: 'Brandon Coper'
           }
         })
 
-        expect(wrapper.find('span').text()).toContain('BC')
+        expect(wrapper.find('.vk-avatar > span').text()).toContain('BC')
+      })
+    })
+
+    describe('When prop src is invalid', () => {
+      beforeAll(() => {
+        Image.prototype.decode = async () => { throw new Error('Invalid source') }
+      })
+      afterAll(() => {
+        Image.prototype.decode = undefined
       })
 
       it('should display an user icon if there is no src or name given', () => {
-        wrapper = mount(VkAvatar, {
-          props: {
-            src: 'example.url'
-          }
-        })
+        wrapper = mount(VkAvatar, {})
 
         expect(wrapper.find('i.ti.ti-user').exists()).toBe(true)
       })

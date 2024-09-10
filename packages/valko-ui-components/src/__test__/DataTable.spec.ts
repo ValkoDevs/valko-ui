@@ -1,4 +1,4 @@
-// import { nextTick } from 'vue'
+import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkDataTable from '#valkoui/components/DataTable.vue'
 import VkInput from '#valkoui/components/Input.vue'
@@ -384,21 +384,26 @@ describe('DataTable component', () => {
         props: {
           headers,
           data,
-          total: 10
+          total: 10,
+          limit: 2
         }
       })
     })
 
     it('should emit onLimitChange when the limit is changed using the select', async () => {
       const select = wrapper.findComponent(VkSelect)
-      await select.vm.$emit('update:model-value', 20)
+      select.find('.vk-input__input').trigger('focus')
+      await nextTick()
+      select.find('.vk-select__item:first-child').trigger('click')
+      await nextTick()
 
       expect(wrapper.emitted()).toHaveProperty('onLimitChange')
     })
 
     it('should emit onPageChange when the page is changed', async () => {
       const pagination = wrapper.findComponent(VkPagination)
-      await pagination.vm.$emit('update:model-value', 2)
+      pagination.find('.vk-pagination__right').trigger('click')
+      await nextTick()
 
       expect(wrapper.emitted()).toHaveProperty('onPageChange')
     })

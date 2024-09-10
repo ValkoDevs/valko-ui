@@ -38,6 +38,7 @@ export default tv({
       'dark:bg-light-3'
     ],
     stepMark: [
+      'vk-range__mark',
       'w-1.5',
       'h-1.5',
       'bg-light-5',

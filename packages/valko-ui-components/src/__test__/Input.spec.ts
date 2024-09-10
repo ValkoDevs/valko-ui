@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkInput from '#valkoui/components/Input.vue'
 
@@ -235,6 +236,18 @@ describe('Input component', () => {
 
       expect(wrapper.find('i.ti.ti-home').exists()).toBe(true)
     })
+
+    it('should not render leftIcon when not provided', () => {
+      const wrapper = mount(VkInput)
+
+      expect(wrapper.find('.left-icon').exists()).toBe(false)
+    })
+
+    it('should not render rightIcon when not provided', () => {
+      const wrapper = mount(VkInput)
+
+      expect(wrapper.find('.right-icon').exists()).toBe(false)
+    })
   })
 
   describe('Helpertext', () => {
@@ -256,11 +269,26 @@ describe('Input component', () => {
   })
 
   describe('Emits', () => {
-    it('should emit focus event', () => {
+    it('should emit focus event', async () => {
       const wrapper = mount(VkInput, {})
 
-      wrapper.find('.vk-input__container').trigger('click')
-      expect(wrapper.emitted('focus'))
+      wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('focus')
+    })
+
+    it('should not emit focus event when disabled is true', async () => {
+      const wrapper = mount(VkInput, {
+        props: {
+          disabled: true
+        }
+      })
+
+      wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+
+      expect(wrapper.emitted()).not.toHaveProperty('focus')
     })
   })
 })
