@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "@tabler/icons-webfont": "^2.45.0",
+    "dayjs": "^1.11.13",
     "toastify-js": "^1.12.0"
   }
 }
