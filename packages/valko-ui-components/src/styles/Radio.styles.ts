@@ -217,18 +217,18 @@ export default tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-light-4',
-          'data-[checked=true]:border-light-4',
-          'data-[indeterminate=true]:border-light-4',
-          'data-[indeterminate=true]:bg-light-4',
-          'dark:data-[checked=true]:bg-dark-3',
-          'dark:data-[checked=true]:border-dark-3',
-          'dark:data-[indeterminate=true]:border-dark-3',
-          'dark:data-[indeterminate=true]:bg-dark-3'
+          'data-[checked=true]:bg-dark-4',
+          'data-[checked=true]:border-dark-4',
+          'data-[indeterminate=true]:border-dark-4',
+          'data-[indeterminate=true]:bg-dark-4',
+          'dark:data-[checked=true]:bg-light-3',
+          'dark:data-[checked=true]:border-light-3',
+          'dark:data-[indeterminate=true]:border-light-3',
+          'dark:data-[indeterminate=true]:bg-light-3'
         ],
         icon: [
-          'text-dark-1',
-          'dark:text-light-3'
+          'text-light-1',
+          'dark:text-dark-3'
         ]
       }
     },
@@ -324,10 +324,10 @@ export default tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-light-4',
-          'data-[indeterminate=true]:border-light-4',
-          'dark:data-[checked=true]:border-dark-3',
-          'dark:data-[indeterminate=true]:border-dark-3'
+          'data-[checked=true]:border-dark-4',
+          'data-[indeterminate=true]:border-dark-4',
+          'dark:data-[checked=true]:border-light-3',
+          'dark:data-[indeterminate=true]:border-light-3'
         ],
         icon: [
           'text-dark-1',
@@ -426,10 +426,10 @@ export default tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-light-5/[.5]',
-          'data-[indeterminate=true]:bg-light-5/[.5]',
-          'dark:data-[checked=true]:bg-dark-5/[.5]',
-          'dark:data-[indeterminate=true]:bg-dark-5/[.5]'
+          'data-[checked=true]:bg-dark-5/[.5]',
+          'data-[indeterminate=true]:bg-dark-5/[.5]',
+          'dark:data-[checked=true]:bg-light-5/[.5]',
+          'dark:data-[indeterminate=true]:bg-light-5/[.5]'
         ],
         icon: [
           'text-dark-1',

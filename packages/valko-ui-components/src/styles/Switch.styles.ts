@@ -226,10 +226,14 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-light-5',
-          'data-[active=true]:border-light-5',
-          'dark:data-[active=true]:bg-dark-3',
-          'dark:data-[active=true]:border-dark-3'
+          'data-[active=true]:bg-dark-5',
+          'data-[active=true]:border-dark-5',
+          'dark:data-[active=true]:bg-light-3',
+          'dark:data-[active=true]:border-light-3'
+        ],
+        thumb: [
+          'bg-light-2',
+          'dark:bg-dark-3'
         ]
       }
     },
@@ -307,12 +311,12 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-light-4',
-          'dark:data-[active=true]:border-dark-3'
+          'data-[active=true]:border-dark-4',
+          'dark:data-[active=true]:border-light-3'
         ],
         thumb: [
-          'data-[selected=true]:bg-light-4',
-          'dark:data-[selected=true]:bg-dark-3'
+          'data-[selected=true]:bg-dark-4',
+          'dark:data-[selected=true]:bg-light-3'
         ]
       }
     },
@@ -398,12 +402,12 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-light-5/[.4]',
-          'dark:data-[active=true]:bg-dark-2/[.4]'
+          'data-[active=true]:bg-dark-5/[.4]',
+          'dark:data-[active=true]:bg-light-2/[.4]'
         ],
         thumb: [
-          'data-[selected=true]:bg-light-5/[.5]',
-          'dark:data-[selected=true]:bg-dark-2/[.5]'
+          'data-[selected=true]:bg-dark-5/[.5]',
+          'dark:data-[selected=true]:bg-light-2/[.5]'
         ]
       }
     },

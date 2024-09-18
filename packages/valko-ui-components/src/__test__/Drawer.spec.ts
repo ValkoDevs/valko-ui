@@ -37,7 +37,7 @@ describe('Drawer component', () => {
       })
 
       it('should be shape soft', () => {
-        expect(drawer.classes()).toContain('rounded-lg')
+        expect(drawer.classes()).toContain('rounded-l-lg')
       })
 
       it('should be size md', () => {
@@ -121,7 +121,7 @@ describe('Drawer component', () => {
         })
         await nextTick()
         drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
-        expect(drawer.classes()).toContain('rounded-2xl')
+        expect(drawer.classes()).toContain('rounded-l-2xl')
       })
 
       it('should be soft when props.shape is soft', async () => {
@@ -136,7 +136,7 @@ describe('Drawer component', () => {
         })
         await nextTick()
         drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
-        expect(drawer.classes()).toContain('rounded-lg')
+        expect(drawer.classes()).toContain('rounded-l-lg')
       })
 
       it('should be square when props.shape is square', async () => {
