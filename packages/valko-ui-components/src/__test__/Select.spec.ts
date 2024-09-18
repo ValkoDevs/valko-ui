@@ -329,10 +329,100 @@ describe('Select component', () => {
           options
         }
       })
+
       wrapper.find('.vk-input__input').trigger('focus')
       await nextTick()
       wrapper.find('.vk-select__item:first-child').trigger('click')
+
       expect(wrapper.emitted()).toHaveProperty('update:modelValue')
+    })
+  })
+
+  describe('SelectItem functionality', () => {
+    beforeEach(async () => {
+      wrapper = mount(VkSelect, {
+        props: {
+          options
+        }
+      })
+
+      wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+    })
+
+    it('should select an item', async () => {
+      wrapper.find('.vk-select__item:first-child').trigger('click')
+      await nextTick()
+
+      expect(wrapper.emitted('update:modelValue')).toEqual([[1]])
+    })
+
+    it('should deselect an item if it is already selected', async () => {
+      wrapper = mount(VkSelect, {
+        props: {
+          options,
+          modelValue: 1
+        }
+      })
+
+      wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+      wrapper.find('.vk-select__item:first-child').trigger('click')
+      await nextTick()
+
+      expect(wrapper.emitted('update:modelValue')).toEqual(undefined)
+    })
+
+    it('should handle multiple selections', async () => {
+      wrapper = mount(VkSelect, {
+        props: {
+          options,
+          multiple: true
+        }
+      })
+
+      wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+      wrapper.find('.vk-select__item:first-child').trigger('click')
+      await nextTick()
+      wrapper.find('.vk-select__item:nth-child(2)').trigger('click')
+      await nextTick()
+
+      expect(wrapper.emitted('update:modelValue')).toEqual([[[1]], [[2]]])
+    })
+
+    it('should not clear value if allowClear is false', async () => {
+      wrapper = mount(VkSelect, {
+        props: {
+          options,
+          modelValue: 1,
+          allowClear: false
+        }
+      })
+
+      wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+      wrapper.find('.vk-select__item:first-child').trigger('click')
+      await nextTick()
+
+      expect(wrapper.emitted('update:modelValue')).toEqual(undefined)
+    })
+
+    it('should clear value if allowClear is true', async () => {
+      wrapper = mount(VkSelect, {
+        props: {
+          options,
+          modelValue: 1,
+          allowClear: true
+        }
+      })
+
+      wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+      wrapper.find('.vk-select__item:first-child').trigger('click')
+      await nextTick()
+
+      expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
     })
   })
 })

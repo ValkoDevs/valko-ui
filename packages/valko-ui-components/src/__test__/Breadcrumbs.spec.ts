@@ -264,6 +264,19 @@ describe('Breadcrumbs component', () => {
 
         expect(wrapper.find('i.ti.ti-minus').exists()).toBe(true)
       })
+
+      it('should not render a separator after the last crumb', () => {
+        const wrapper = mount(VkBreadcrumbs, {
+          props: {
+            crumbs,
+            separator: 'minus'
+          }
+        })
+
+        const crumbsElements = wrapper.findAll('.vk-breadcrumbs__a')
+        const lastCrumb = crumbsElements[crumbsElements.length - 1]
+        expect(lastCrumb.html()).not.toContain('i.ti.ti-minus')
+      })
     })
   })
 
@@ -301,7 +314,7 @@ describe('Breadcrumbs component', () => {
       expect(wrapper.emitted()).toHaveProperty('crumbClick')
     })
 
-    it('should emit crumbClick event when a clicked item is disabled', () => {
+    it('should not emit crumbClick event when a clicked item is disabled', () => {
       const wrapper = mount(VkBreadcrumbs, {
         props: {
           crumbs

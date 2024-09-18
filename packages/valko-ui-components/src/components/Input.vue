@@ -86,12 +86,14 @@ watch(() => props.modelValue, (newValue) => {
       <span
         v-if="$slots.leftIcon"
         :class="[classes.icon, classes.iconLeft]"
+        @click="$emit('leftIconClick')"
       >
         <slot name="leftIcon" />
       </span>
       <span
         v-if="$slots.rightIcon"
         :class="[classes.icon, classes.iconRight]"
+        @click="$emit('rightIconClick')"
       >
         <slot name="rightIcon" />
       </span>

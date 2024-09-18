@@ -1,3 +1,4 @@
+//import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkRange from '#valkoui/components/Range.vue'
 
@@ -299,4 +300,51 @@ describe('Range component', () => {
       expect(wrapper.emitted()).toHaveProperty('update:modelValue')
     })
   })
+
+  // describe('Range functionality', () => {
+  //   it('should calculate the new thumb position correctly on slider click', async () => {
+  //     wrapper = mount(VkRange, {
+  //       props: {
+  //         modelValue: 0
+  //       }
+  //     })
+
+  //     const slider = wrapper.find('.vk-range')
+  //     nextTick()
+  //     slider.trigger('mousedown', { clientX: 50 })
+  //     nextTick()
+  //     slider.trigger('mousemove', { clientX: 150 })
+  //     nextTick()
+  //     slider.trigger('mouseup')
+  //     nextTick()
+
+  //     expect(wrapper.emitted('update:modelValue')).toEqual([150])
+  //   })
+
+  //   it('should handle missing sliderRef gracefully', async () => {
+  //     wrapper = mount(VkRange, {
+  //       props: {
+  //         modelValue: 0
+  //       },
+  //       data() {
+  //         return {
+  //           sliderRef: null
+  //         }
+  //       }
+  //     })
+
+  //     const thumbs = wrapper.findAll('.vk-range__thumb')
+  //     await nextTick()
+  //     const firstThumb = thumbs[0]
+  //     await nextTick()
+  //     firstThumb.trigger('mousedown', { clientX: 50 })
+  //     await nextTick()
+  //     firstThumb.trigger('mousemove', { clientX: 100 })
+  //     await nextTick()
+  //     firstThumb.trigger('mouseup')
+  //     await nextTick()
+
+  //     expect(wrapper.emitted('update:modelValue')).toEqual([[0], [0]])
+  //   })
+  // })
 })

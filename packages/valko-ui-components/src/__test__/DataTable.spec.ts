@@ -336,6 +336,7 @@ describe('DataTable component', () => {
   describe('When filterable functionality is added', () => {
     let wrapper: VueWrapper
     const filterHeaders = headers.map(header => ({ ...header, filterable: true }))
+
     beforeEach(() => {
       wrapper = mount(VkDataTable, {
         props: {
@@ -344,37 +345,90 @@ describe('DataTable component', () => {
         }
       })
     })
+
     it('should display the search icon in the header when true', () => {
       expect(wrapper.find('i.ti.ti-search').exists()).toBe(true)
+    })
+
+    it('should apply the active filter style when input is used', async () => {
+      wrapper.find('i.ti.ti-search').trigger('click')
+      const input = wrapper.findComponent(VkInput)
+      await input.setValue('some filter')
+
+      expect(wrapper.find('i.ti.ti-search').classes()).toContain('data-[active=true]:text-primary-500')
     })
 
     it('should emit onFilter when the filter is being used', async () => {
       wrapper.find('i.ti.ti-search').trigger('click')
       wrapper.findComponent(VkInput).trigger('input')
       await new Promise(resolve => setTimeout(resolve, 500))
+
       expect(wrapper.emitted()).toHaveProperty('onFilter')
+    })
+
+    it('should close all popovers when a click is done outside', async () => {
+      await wrapper.find('i.ti.ti-search').trigger('click')
+      await document.body.click()
+
+      expect(wrapper.find('[data-isOpen-state=true]').exists()).toBe(false)
     })
   })
 
   describe('When sortable functionality is added', () => {
     let wrapper: VueWrapper
     const sortHeaders = headers.map(header => ({ ...header, sortable: true }))
-    beforeEach(() => {
+
+    it('should display the sort icon in the header when true', () => {
       wrapper = mount(VkDataTable, {
         props: {
           headers: sortHeaders,
           data
         }
       })
-    })
-    it('should display the sort icon in the header when true', () => {
+
       expect(wrapper.find('i.ti.ti-arrows-sort').exists()).toBe(true)
     })
 
     it('should emit onSort when the sort icon is clicked', async () => {
+      wrapper = mount(VkDataTable, {
+        props: {
+          headers: sortHeaders,
+          data
+        }
+      })
+
       wrapper.find('i.ti.ti-arrows-sort').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('onSort')
     })
+
+    // it('should display the correct sort icon based on sort state', async () => {
+    //   wrapper = mount(VkDataTable, {
+    //     props: {
+    //       headers: sortHeaders,
+    //       data,
+    //       sort: { field: 'name', direction: 'asc' }
+    //     }
+    //   })
+
+    //   await nextTick()
+    //   expect(wrapper.find('i.ti.ti-arrow-up').exists()).toBe(true)
+    // })
+
+    // it('should update sort icon when sort direction changes', async () => {
+    //   wrapper = mount(VkDataTable, {
+    //     props: {
+    //       headers: sortHeaders,
+    //       data,
+    //       sort: { field: 'name', direction: 'asc' }
+    //     }
+    //   })
+
+    //   await nextTick()
+    //   wrapper.find('i.ti.ti-arrow-up').trigger('click')
+    //   await nextTick()
+
+    //   expect(wrapper.find('i.ti.ti-arrow-down').exists()).toBe(true)
+    // })
   })
 
   describe('When pagination functionality is added', () => {

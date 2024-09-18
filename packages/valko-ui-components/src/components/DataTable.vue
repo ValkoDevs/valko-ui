@@ -63,10 +63,6 @@ const togglePopover = (headerKey: string) => {
   activePopover.value = activePopover.value === headerKey ? null : headerKey
 }
 
-const closePopover = () => {
-  activePopover.value = null
-}
-
 const setActiveFilter = (headerKey: string, isActive: boolean) => {
   if (localFilters.value[headerKey] && localFilters.value[headerKey].trim() !== '') activeFilters.value[headerKey] = isActive
   else activeFilters.value[headerKey] = false
@@ -84,7 +80,7 @@ const handleClickOutside = (event: MouseEvent) => {
     if (element.contains(event.target as Node)) isClickInside = true
   })
 
-  if (!isClickInside) closePopover()
+  if (!isClickInside) activePopover.value = null
 }
 
 const totalPages = computed(() => Math.ceil(props.total / props.limit))
