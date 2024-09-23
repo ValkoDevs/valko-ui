@@ -39,9 +39,7 @@ const defaultIcon = computed(() => {
 </script>
 
 <template>
-  <div
-    :class="classes.container"
-  >
+  <div :class="classes.container">
     <vk-icon
       v-if="icon !== null"
       :name="icon ? icon : defaultIcon"

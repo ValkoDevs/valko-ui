@@ -3,7 +3,7 @@ name: PR Check
 on: pull_request
 
 jobs:
-  lint:
+  validate:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,44 +15,23 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Install dependencies for components
+        run: npm ci --workspace=@valko-ui/components
 
-      - name: Run linting
-        run: npm run lint
+      - name: Lint components
+        run: npm run lint --workspace=@valko-ui/components
 
-  test:
-    runs-on: ubuntu-latest
+      - name: Test components
+        run: npm run test --workspace=@valko-ui/components
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Build components
+        run: npm run build --workspace=@valko-ui/components
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 20
+      - name: Install dependencies for docs
+        run: npm ci --workspace=@valko-ui/docs-v2
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Lint docs
+        run: npm run lint --workspace=@valko-ui/docs-v2
 
-      - name: Run tests
-        run: npm run test
-
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build project
-        run: npm run build
+      - name: Build docs
+        run: npm run build --workspace=@valko-ui/docs-v2

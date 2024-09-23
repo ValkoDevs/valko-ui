@@ -1,7 +1,7 @@
 import type { DefaultComponent } from './common'
 
 export interface InputProps extends DefaultComponent {
-  type?: 'text' | 'password' | 'email' | 'date';
+  type?: 'text' | 'password' | 'email' | 'date' | 'number';
   cursor?: 'text' | 'pointer';
   modelValue?: string;
   helpertext?: string;

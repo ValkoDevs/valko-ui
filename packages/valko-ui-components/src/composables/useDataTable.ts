@@ -33,7 +33,7 @@ const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAll
       if (selectAllStatus !== undefined) return selectAllStatus
       if (!Array.isArray(selection)) return false
 
-      switch(selection.length) {
+      switch (selection.length) {
         case 0: return false
         case data.length: return true
         default: return null
@@ -41,17 +41,26 @@ const useDataTable = <T extends TableItem>({ headers, paginatedResult, selectAll
     }
 
     const onSelect = (item: TableItem) => {
-      if (normalizedSelectionMode === 'multiple' || normalizedSelectionMode === 'rowMultiple') {
-        if (!Array.isArray(rawSelection.value)) {
-          rawSelection.value = []
+      switch (normalizedSelectionMode) {
+        case 'multiple':
+        case 'rowMultiple': {
+          if (!Array.isArray(rawSelection.value)) {
+            rawSelection.value = []
+          }
+          const existingItem = rawSelection.value.findIndex(({ key }) => key === item.key)
+
+          if (existingItem > -1) rawSelection.value.splice(existingItem, 1)
+          else rawSelection.value.push(item)
+          break
         }
-        const existingItem = rawSelection.value.findIndex(({ key }) => key === item.key)
 
-        existingItem > -1 ? rawSelection.value.splice(existingItem, 1) : rawSelection.value.push(item)
-      }
+        case 'single':
+        case 'rowSingle':
+          rawSelection.value = item
+          break
 
-      if (normalizedSelectionMode === 'single' || normalizedSelectionMode === 'rowSingle') {
-        rawSelection.value = item
+        default:
+          break
       }
     }
 
