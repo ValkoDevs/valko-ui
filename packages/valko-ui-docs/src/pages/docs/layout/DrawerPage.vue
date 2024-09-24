@@ -83,7 +83,7 @@ const drawerProps = [
   {
     prop: 'closable',
     required: false,
-    description: 'Displays a close button on the Drawer',
+    description: 'Displays a close button on the Drawer and allows to close it by clicking outside or pressing esc',
     values: 'true, false',
     default: 'true'
   },
@@ -123,7 +123,7 @@ const toggleDrawer = (drawerId: string) => {
 <template>
   <doc-section
     title="Drawer"
-    description="A customizable drawer component that opens from any side of the screen, with options for shape, backdrop, and close button."
+    description="A versatile sliding drawer component that can appear from any side of the viewport, with options for shape, size, backdrop, placement, title, shadow, and optional close functionality."
   >
     <template #playground-view>
       <vk-button @click="toggleDrawer('playground-drawer')">

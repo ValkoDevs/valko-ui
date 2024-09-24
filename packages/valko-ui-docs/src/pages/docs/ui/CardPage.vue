@@ -413,7 +413,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
           title="Card Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="cardProps"
           />
@@ -423,7 +423,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
           title="Card Emits"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="emitHeaders"
             :data="cardEmits"
           />
@@ -433,7 +433,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
           title="Card Slots"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="slotHeaders"
             :data="cardSlots"
           />
@@ -443,7 +443,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
           title="Card Image Props"
           gap
         >
-          <vk-data-table
+          <vk-table
             :headers="propHeaders"
             :data="cardImageProps"
           />

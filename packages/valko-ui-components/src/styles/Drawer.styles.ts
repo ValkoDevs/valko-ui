@@ -69,16 +69,8 @@ export default tv({
   },
   variants: {
     shape: {
-      rounded: {
-        panel: [
-          'rounded-2xl'
-        ]
-      },
-      soft: {
-        panel: [
-          'rounded-lg'
-        ]
-      },
+      rounded: {},
+      soft: {},
       square: {
         panel: [
           'rounded-none'
@@ -212,6 +204,117 @@ export default tv({
       class: {
         panel: [
           'max-w-2xl'
+        ]
+      }
+    },
+    // shape soft & placement
+    {
+      placement: 'right',
+      shape: 'soft',
+      class: {
+        panel: [
+          'rounded-l-lg'
+        ]
+      }
+    },
+    {
+      placement: 'left',
+      shape: 'soft',
+      class: {
+        panel: [
+          'rounded-r-lg'
+        ]
+      }
+    },
+    {
+      placement: 'top',
+      shape: 'soft',
+      class: {
+        panel: [
+          'rounded-b-lg'
+        ]
+      }
+    },
+    {
+      placement: 'bottom',
+      shape: 'soft',
+      class: {
+        panel: [
+          'rounded-t-lg'
+        ]
+      }
+    },
+    // shape soft & placement
+    {
+      placement: 'right',
+      shape: 'soft',
+      class: {
+        panel: [
+          'rounded-l-lg'
+        ]
+      }
+    },
+    {
+      placement: 'left',
+      shape: 'soft',
+      class: {
+        panel: [
+          'rounded-r-lg'
+        ]
+      }
+    },
+    {
+      placement: 'top',
+      shape: 'soft',
+      class: {
+        panel: [
+          'rounded-b-lg'
+        ]
+      }
+    },
+    {
+      placement: 'bottom',
+      shape: 'soft',
+      class: {
+        panel: [
+          'rounded-t-lg'
+        ]
+      }
+    },
+    // shape rounded & placement
+    {
+      placement: 'right',
+      shape: 'rounded',
+      class: {
+        panel: [
+          'rounded-l-2xl'
+        ]
+      }
+    },
+    {
+      placement: 'left',
+      shape: 'rounded',
+      class: {
+        panel: [
+          'rounded-r-2xl'
+        ]
+      }
+    },
+    {
+      placement: 'top',
+      shape: 'rounded',
+      class: {
+        panel: [
+          'rounded-b-2xl'
+        ]
+      }
+    },
+    {
+      placement: 'bottom',
+      shape: 'rounded',
+      class: {
+        panel: [
+          'rounded-t-2xl'
         ]
       }
     }

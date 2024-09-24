@@ -80,7 +80,7 @@ const modalProps = [
   {
     prop: 'closable',
     required: false,
-    description: 'Displays a close button on the Modal',
+    description: 'Displays a close button on the Modal and allows to close it by clicking outside or pressing esc',
     values: 'true, false',
     default: 'true'
   },

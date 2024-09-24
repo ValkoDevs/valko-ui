@@ -27,7 +27,7 @@ const classes = useStyle<DrawerProps, SlotStyles>(props, styles)
 
 const containerRef = ref(null)
 
-const closeDrawer = () => { emit('close') }
+const closeDrawer = () => { if (props.closable) emit('close') }
 
 const transitionClasses = computed(() => {
   switch (props.placement) {
