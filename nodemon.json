@@ -1,5 +1,5 @@
 {
-  "exec": "turbo run dev --filter=@valko-ui/docs",
+  "exec": "turbo run dev --filter=@valko-ui/docs-v2",
   "watch": [
     "packages/valko-ui-components"
   ],

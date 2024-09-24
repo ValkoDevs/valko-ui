@@ -1,8 +1,7 @@
 import { defineNuxtPlugin } from '#app'
-import create from '../create'
+import { createValkoUI } from '#valkoui'
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const UI = create(nuxtApp.$config.indielayerOptions)
-
+  const UI = createValkoUI(nuxtApp.$config.valkoUiOptions)
   nuxtApp.vueApp.use(UI)
 })

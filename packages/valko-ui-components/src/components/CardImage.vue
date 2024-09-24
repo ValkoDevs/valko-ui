@@ -23,7 +23,7 @@ watchEffect(async () => {
   try {
     await img.decode()
     verifiedSrc.value = props.src
-  } catch (error) {
+  } catch {
     verifiedSrc.value = null
   }
 })

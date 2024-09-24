@@ -1,7 +1,7 @@
-import type { Shapes, Colors, Sizes, VariantWithGradient } from './common'
+import type { Shapes, Colors, Sizes, VariantWithGradientAndLink } from './common'
 
 export interface ButtonProps extends Shapes, Sizes, Colors {
-  variant?: VariantWithGradient | 'link';
+  variant?: VariantWithGradientAndLink;
   block?: boolean;
   disabled?: boolean;
   loading?: boolean;

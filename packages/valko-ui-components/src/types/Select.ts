@@ -1,7 +1,7 @@
 import type { DefaultComponent } from './common'
 
-export interface SelectOption {
-  value: number;
+export interface SelectOption<T = string | number> {
+  value: T;
   label: string;
 }
 

@@ -19,9 +19,7 @@ const useDarkMode = () => {
     })
   })
 
-  onUnmounted(() => {
-    observer && observer.disconnect()
-  })
+  onUnmounted(() => observer && observer.disconnect())
   return isDarkMode
 }
 

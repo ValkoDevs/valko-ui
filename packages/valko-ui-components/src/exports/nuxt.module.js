@@ -1,5 +1,10 @@
-import { defineNuxtModule, addPlugin, createResolver } from '@nuxt/kit'
-import { fileURLToPath } from 'node:url'
+import {
+  defineNuxtModule,
+  addPlugin,
+  createResolver,
+  addImportsDir,
+  addComponentsDir
+} from '@nuxt/kit'
 
 export default defineNuxtModule({
   meta: {
@@ -18,16 +23,28 @@ export default defineNuxtModule({
 
     nuxt.options.runtimeConfig.public.valkoUIOptions = options
 
+    // Transpile runtime
+    const runtimeDir = resolve('./')
+    nuxt.options.build.transpile.push(runtimeDir)
+    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
+
+    nuxt.options.alias['#valkoui'] = runtimeDir
+
+    nuxt.options.css.push(resolve(runtimeDir, 'valkoui.css'))
+
     // plugin install
-    addPlugin(resolve('./nuxt.plugin.js'))
+    addPlugin({
+      src: resolve(runtimeDir, 'nuxt.plugin.js')
+    })
 
     // nuxt install
-    nuxt.hook('components:dirs', (dirs) => {
-      dirs.push({
-        path: fileURLToPath(new URL('../components', import.meta.url)),
-        extensions: ['vue', 'tsx'],
-        prefix: options?.prefix ? options?.prefix : 'Vk'
-      })
+    addComponentsDir({
+      path: resolve(runtimeDir, 'components'),
+      extensions: ['vue'],
+      prefix: options?.prefix ? options?.prefix : 'Vk',
+      watch: false
     })
+
+    addImportsDir(resolve(runtimeDir, 'composables'))
   }
 })
