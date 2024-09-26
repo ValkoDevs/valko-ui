@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Ref, ref, onUpdated, onMounted, nextTick } from 'vue'
+import { type Ref, ref, onUpdated, onMounted, nextTick } from 'vue'
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 import type { TabsProps } from '#valkoui/types/Tabs'
 import type { SlotStyles } from '#valkoui/types/common'

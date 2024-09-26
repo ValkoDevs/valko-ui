@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<SwitchProps>(), {
   shape: 'soft',
   color: 'primary',
   label: 'Switch',
-  position: false,
+  labelPosition: 'right',
   disabled: false,
   modelValue: false
 })
@@ -30,9 +30,7 @@ const onClick = (event: boolean) => {
 <template>
   <div :class="classes.container">
     <switch-group>
-      <div
-        :class="classes.content"
-      >
+      <div :class="classes.content">
         <switch-label
           passive
           v-if="label"

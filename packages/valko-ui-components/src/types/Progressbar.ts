@@ -1,7 +1,7 @@
-import type { VariantsAlt, Sizes, Colors, Shape } from './common'
+import type { VariantsAlt, Sizes, Colors, ShapeWithLine } from './common'
 
 export interface ProgressbarProps extends VariantsAlt, Sizes, Colors {
-  shape?: Shape | 'line';
+  shape?: ShapeWithLine
   progress?: number;
   buffer?: number;
   indeterminateLabel?: string;

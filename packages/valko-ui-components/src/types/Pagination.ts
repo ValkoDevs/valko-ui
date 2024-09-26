@@ -1,7 +1,6 @@
-import type { Shapes, Color, Sizes, Variants } from './common'
+import type { DefaultComponent } from './common'
 
-export interface PaginationProps extends Shapes, Sizes, Variants {
-  color?: Color | 'neutral';
+export interface PaginationProps extends DefaultComponent {
   pages?: number;
   modelValue?: number;
   flat?: boolean;

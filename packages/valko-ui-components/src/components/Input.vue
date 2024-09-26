@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { useId, ref, watch } from 'vue'
 import type { InputProps } from '#valkoui/types/Input'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Input.styles.ts'
@@ -15,6 +15,7 @@ const props = withDefaults(defineProps<InputProps>(), {
   shape: 'soft',
   type: 'text',
   cursor: 'text',
+  modelValue: '',
   clearable: false
 })
 
@@ -22,43 +23,40 @@ const emit = defineEmits(['update:modelValue', 'focus', 'leftIconClick', 'rightI
 
 const classes = useStyle<InputProps, SlotStyles>(props, styles)
 
-const inputId = `input-${Math.random().toString(36).substr(2, 7)}`
-const inputRef = ref<HTMLInputElement | null>(null)
+const inputId = useId()
+const isFilled = ref(false)
+const inputValue = ref(props.modelValue || '')
 
 const updateValue = (e: Event) => {
+  const value = (e.target as HTMLInputElement).value
+
   if (!props.disabled && !props.readonly) {
-    emit('update:modelValue', (e.target as HTMLInputElement).value)
+    inputValue.value = value
+    emit('update:modelValue', value)
+    isFilled.value = value !== ''
   }
 }
 
 const onFocus = (event: Event) => {
-  if (!props.disabled) {
-    emit('focus', event)
-  }
+  if (!props.disabled) emit('focus', event)
 }
 
 const clearInput = () => {
+  inputValue.value = ''
   emit('update:modelValue', '')
+  isFilled.value = false
 }
 
-onMounted(() => {
-  if (inputRef.value) {
-    inputRef.value.addEventListener('click', () => {
-      if (!props.disabled && !props.readonly) {
-        emit('update:modelValue', props.modelValue)
-      }
-    })
-  }
-})
+watch(() => props.modelValue, (newValue) => {
+  inputValue.value = newValue
+  isFilled.value = newValue !== null && newValue !== undefined && newValue !== ''
+}, { immediate: true })
 </script>
 
 <template>
-  <div
-    :class="classes.container"
-  >
+  <div :class="classes.container">
     <div :class="classes.field">
       <input
-        ref="inputRef"
         :data-leftIcon="!!$slots.leftIcon"
         :data-rightIcon="!!$slots.rightIcon"
         :class="classes.input"
@@ -66,8 +64,8 @@ onMounted(() => {
         :disabled="disabled"
         :type="type"
         placeholder=" "
-        :value="modelValue"
-        :data-filled="modelValue !== null && modelValue !== undefined && modelValue !== ''"
+        :value="inputValue"
+        :data-filled="isFilled"
         :id="inputId"
         @focus="onFocus"
         @input="updateValue"
@@ -79,7 +77,7 @@ onMounted(() => {
         {{ label }}
       </label>
       <vk-icon
-        v-if="clearable && !!modelValue"
+        v-if="clearable && !!inputValue"
         name="circle-x"
         :data-rightIcon="!!$slots.rightIcon"
         :class="classes.iconClear"

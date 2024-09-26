@@ -17,8 +17,8 @@ export interface DataTableInput {
   data: TableItem[];
   isAllSelected?: boolean | null;
   selection?: TableItem[] | TableItem;
-  sort?: Ref<{ field: string; direction?: 'desc' | 'asc' | undefined; } | undefined>;
-  filters?: Ref<Filter[]>;
+  sort?: Sort | undefined;
+  filters?: Filter[];
   pageSizeOptions?: number[];
   selectionMode?: SelectionMode;
   draggable?: boolean | Ref<boolean>;
@@ -34,7 +34,7 @@ export interface DataTableInput {
 }
 
 export interface DataTableProps extends TableProps {
-  selection: TableItem[] | TableItem;
+  selection?: TableItem[] | TableItem;
   isAllSelected?: boolean | null;
   filters?: Filter[];
   sort?: Sort;

@@ -127,7 +127,7 @@ watch(localFilters, (newFilters) => {
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
-  emit('onLimitChange', 2)
+  emit('onLimitChange', props.limit)
 
   localFilters.value = props.headers.reduce((acc, { field }) => {
     acc[field] = ''

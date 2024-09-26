@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { provide, useId } from 'vue'
 import type { CollapseProps } from '#valkoui/types/Collapse'
 import styles from '#valkoui/styles/Collapse.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
@@ -14,7 +15,8 @@ const props = withDefaults(defineProps<CollapseProps>(), {
 
 const classes = useStyle<CollapseProps>(props, styles)
 
-const collapseId = 'collapse-' + Math.floor(Math.random() * 100000)
+const collapseId = useId()
+provide('collapseId', collapseId)
 </script>
 
 <template>

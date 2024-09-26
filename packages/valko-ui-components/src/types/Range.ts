@@ -5,7 +5,7 @@ export interface Label {
   label: string;
 }
 export interface RangeProps<R = boolean, T = R extends true ? number[] : number> extends VariantsAlt, Sizes, Colors, Shapes {
-  modelValue: T;
+  modelValue?: T;
   isDouble?: R;
   labels?: Label[]
   min?: number;

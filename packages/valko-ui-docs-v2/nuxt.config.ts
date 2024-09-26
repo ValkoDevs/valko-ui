@@ -2,11 +2,14 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@valko-ui/components/nuxt', '@nuxtjs/tailwindcss', '@nuxt/eslint'],
+
   postcss: {
     plugins: {
       'tailwindcss/nesting': {},
       tailwindcss: {},
       autoprefixer: {}
     }
-  }
+  },
+
+  compatibilityDate: '2024-09-24'
 })

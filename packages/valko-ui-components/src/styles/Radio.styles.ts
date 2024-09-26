@@ -158,8 +158,8 @@ export default tv({
         ]
       }
     },
-    position: {
-      true: {
+    labelPosition: {
+      left: {
         container: [
           'flex-row-reverse',
           'justify-end'
@@ -168,7 +168,7 @@ export default tv({
           'mr-2'
         ]
       },
-      false: {
+      right: {
         label: [
           'ml-2'
         ]

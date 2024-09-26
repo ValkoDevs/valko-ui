@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watchEffect, ref, Ref } from 'vue'
+import { type Ref, watchEffect, ref } from 'vue'
 import type { CardImageProps } from '#valkoui/types/Card'
 import type { SlotStyles } from '#valkoui/types/common'
 import useStyle from '#valkoui/composables/useStyle.ts'

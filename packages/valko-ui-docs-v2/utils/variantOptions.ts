@@ -1,4 +1,4 @@
-import type { SelectOption, Variant, VariantWithGradient, VariantWithLink, VariantWithGradientAndLink } from '#valkoui'
+import type { SelectOption, Variant, VariantWithGradient, VariantWithLink, VariantWithGradientAndLink, VariantWithGradientLinkAndLine, VariantWithGradientAndLine } from '#valkoui'
 
 const general = [
   { value: 'filled', label: 'Filled' },
@@ -21,11 +21,23 @@ const withGradientAndLink = [
   { value: 'link', label: 'Link' }
 ] as SelectOption<VariantWithGradientAndLink>[]
 
+const withGradientAndLine = [
+  ...withGradient,
+  { value: 'line', label: 'Line' }
+] as SelectOption<VariantWithGradientAndLine>[]
+
+const withGradientLinkAndLine = [
+  ...withGradientAndLink,
+  { value: 'line', label: 'Line' }
+] as SelectOption<VariantWithGradientLinkAndLine>[]
+
 const variantOptions = {
   general,
   withGradient,
   withLink,
-  withGradientAndLink
+  withGradientAndLink,
+  withGradientAndLine,
+  withGradientLinkAndLine
 }
 
 export default variantOptions

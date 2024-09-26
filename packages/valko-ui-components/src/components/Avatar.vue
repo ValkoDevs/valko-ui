@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, Ref, watchEffect } from 'vue'
+import { type Ref, ref, watchEffect } from 'vue'
 import type { AvatarProps } from '#valkoui/types/Avatar'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Avatar.styles.ts'

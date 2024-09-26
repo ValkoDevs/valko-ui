@@ -1,0 +1,357 @@
+<script setup lang="ts">
+import type { TagProps, TableItem } from '#valkoui'
+import { useNotification } from '#valkoui'
+
+const form = ref<TagProps>({
+  color: 'primary',
+  variant: 'filled',
+  shape: 'soft',
+  size: 'md',
+  text: 'ValkoUI',
+  closable: false,
+  disabled: false,
+  isPressable: false
+})
+
+const iconsForm = ref({
+  left: false,
+  right: false
+})
+
+const tagProps: TableItem[] = [
+  {
+    key: 'colorProp',
+    prop: 'color',
+    required: false,
+    description: 'The color theme of the Tag.',
+    values: 'primary, neutral, error, warning, info, success',
+    default: 'primary'
+  },
+  {
+    key: 'variantProp',
+    prop: 'variant',
+    required: false,
+    description: 'The variant style of the Tag.',
+    values: 'filled, outlined, ghost, gradient',
+    default: 'filled'
+  },
+  {
+    key: 'shapeProp',
+    prop: 'shape',
+    required: false,
+    description: 'The shape style of the Tag.',
+    values: 'rounded, square, soft',
+    default: 'soft'
+  },
+  {
+    key: 'sizeProp',
+    prop: 'size',
+    required: false,
+    description: 'The size of the Tag.',
+    values: 'xs, sm, md, lg',
+    default: 'md'
+  },
+  {
+    key: 'textProp',
+    prop: 'text',
+    required: true,
+    description: 'The text displayed in the Tag.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'iconLeftProp',
+    prop: 'iconLeft',
+    required: false,
+    description: 'The icon displayed on the left side of the Tag.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'iconRightProp',
+    prop: 'iconRight',
+    required: false,
+    description: 'The icon displayed on the right side of the Tag.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'closableProp',
+    prop: 'closable',
+    required: false,
+    description: 'Displays a close button on the Tag.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
+    key: 'isPressableProp',
+    prop: 'isPressable',
+    required: false,
+    description: 'Whether the Tag should allow to be pressed.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
+    key: 'disabledProp',
+    prop: 'disabled',
+    required: false,
+    description: 'Disables interaction with the Tag.',
+    values: 'true, false',
+    default: 'false'
+  }
+]
+
+const tagEmits: TableItem[] = [
+  {
+    key: 'clickEmit',
+    event: 'click',
+    type: '() => void',
+    values: '',
+    description: 'Emitted when the Tag is clicked.'
+  },
+  {
+    key: 'closeEmit',
+    event: 'close',
+    type: '() => void',
+    values: '',
+    description: 'Emitted when the close button on the Tag is clicked.'
+  }
+]
+
+const isShown = ref(true)
+
+const closeTag = () => isShown.value = false
+
+const onClick = () => useNotification({ text: 'Clickled' })
+
+watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true, 1000) })
+</script>
+
+<template>
+  <doc-section
+    title="Tag"
+    description="Provides a visually distinctive way to represent labels or categories in a user interface. Tags are useful for highlighting or classifying items such as articles, products, or topics."
+  >
+    <template #playground-view>
+      <div class="w-full flex justify-center p-4">
+        <transition
+          enter-active-class="transition ease-out durantion-200"
+          enter-from-class="opacity-0 scale-90"
+          enter-to-class="opactiy-1 scale-100"
+          leave-active-class="transition ease-out durantion-200"
+          leave-from-class="opactiy-1 scale-100"
+          leave-to-class="opacity-0 scale-90"
+        >
+          <vk-tag
+            v-if="isShown"
+            :color="form.color"
+            :variant="form.variant"
+            :shape="form.shape"
+            :size="form.size"
+            :text="form.text"
+            :icon-left="form.iconLeft ? 'tag' : ''"
+            :icon-right="form.iconRight ? 'tag' : ''"
+            :closable="form.closable"
+            :is-pressable="form.isPressable"
+            :disabled="form.disabled"
+            @click="onClick"
+            @close="closeTag"
+          />
+        </transition>
+      </div>
+    </template>
+    <template #playground-options>
+      <vk-select
+        v-model="form.color"
+        label="Color"
+        size="sm"
+        :options="colorOptions"
+      />
+      <vk-select
+        v-model="form.variant"
+        label="Variant"
+        size="sm"
+        :options="variantOptions.withGradient"
+      />
+      <vk-select
+        v-model="form.shape"
+        label="Shape"
+        size="sm"
+        :options="shapeOptions.general"
+      />
+      <vk-select
+        v-model="form.size"
+        label="Size"
+        size="sm"
+        :options="sizeOptions.general"
+      />
+      <vk-input
+        v-model="form.text"
+        label="Text"
+        size="sm"
+      />
+      <vk-checkbox
+        v-model="iconsForm.left"
+        label="Icon Left"
+      />
+      <vk-checkbox
+        v-model="iconsForm.right"
+        label="Icon Right"
+      />
+      <vk-checkbox
+        v-model="form.closable"
+        label="Closable"
+      />
+      <vk-checkbox
+        v-model="form.isPressable"
+        label="Pressable"
+      />
+      <vk-checkbox
+        v-model="form.disabled"
+        label="Disabled"
+      />
+    </template>
+
+    <template #examples>
+      <example-section
+        title="Colors"
+        justify="start"
+        gap
+      >
+        <vk-tag
+          v-for="color in colorOptions"
+          :key="color.value"
+          :color="color.value"
+          :text="color.label"
+        />
+      </example-section>
+
+      <example-section
+        title="Variants"
+        justify="start"
+        gap
+      >
+        <vk-tag
+          v-for="variant in variantOptions.withGradient"
+          :key="variant.value"
+          :variant="variant.value"
+          :text="variant.label"
+        />
+      </example-section>
+
+      <example-section
+        title="Shapes"
+        justify="start"
+        gap
+      >
+        <vk-tag
+          v-for="shape in shapeOptions.general"
+          :key="shape.value"
+          :shape="shape.value"
+          :text="shape.label"
+        />
+      </example-section>
+
+      <example-section
+        title="Sizes"
+        justify="start"
+        gap
+      >
+        <vk-tag
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+          :size="size.value"
+          :text="size.label"
+        />
+      </example-section>
+
+      <example-section
+        title="Icons"
+        justify="start"
+        gap
+      >
+        <vk-tag
+          text="Without Icons"
+        />
+        <vk-tag
+          text="Icon Left"
+          icon-left="tag"
+        />
+        <vk-tag
+          text="Icon Right"
+          icon-right="tag"
+        />
+        <vk-tag
+          text="Icons"
+          icon-left="tag"
+          icon-right="tag"
+        />
+      </example-section>
+
+      <example-section
+        title="Closable"
+        justify="start"
+        gap
+      >
+        <transition
+          enter-active-class="transition ease-out durantion-200"
+          enter-from-class="opacity-0 scale-90"
+          enter-to-class="opactiy-1 scale-100"
+          leave-active-class="transition ease-out durantion-200"
+          leave-from-class="opactiy-1 scale-100"
+          leave-to-class="opacity-0 scale-90"
+        >
+          <vk-tag
+            v-if="isShown"
+            text="Closable"
+            closable
+            @close="closeTag"
+          />
+        </transition>
+      </example-section>
+
+      <example-section
+        title="Pressable"
+      >
+        <vk-tag
+          text="Pressable"
+          is-pressable
+          @click="onClick"
+        />
+      </example-section>
+
+      <example-section
+        title="Disabled"
+      >
+        <vk-tag
+          text="Disabled"
+          disabled
+        />
+      </example-section>
+    </template>
+
+    <template #api>
+      <div class="w-full flex flex-col">
+        <example-section
+          title="Tag Props"
+          gap
+        >
+          <vk-table
+            :headers="propHeaders"
+            :data="tagProps"
+          />
+        </example-section>
+
+        <example-section
+          title="Tag Emits"
+          gap
+        >
+          <vk-table
+            :headers="emitHeaders"
+            :data="tagEmits"
+          />
+        </example-section>
+      </div>
+    </template>
+  </doc-section>
+</template>
