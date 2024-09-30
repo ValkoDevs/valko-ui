@@ -1,4 +1,4 @@
-import type { DefaultComponent } from './common'
+import type { DefaultComponent, LabelPosition } from './common'
 
 export interface RadioProps extends DefaultComponent {
   name?: string;
@@ -6,7 +6,7 @@ export interface RadioProps extends DefaultComponent {
   value?: string | number;
   label?: string;
   helpertext?: string;
-  position?: boolean;
+  labelPosition?: LabelPosition;
   disabled?: boolean;
   readonly?: boolean;
 }

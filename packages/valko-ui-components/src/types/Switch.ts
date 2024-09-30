@@ -1,9 +1,8 @@
-import type { Color, Sizes, Variants, Shapes } from './common'
+import type { DefaultComponent, LabelPosition } from './common'
 
-export interface SwitchProps extends Sizes, Shapes, Variants {
-  color?: Exclude<Color, 'light' | 'dark'>;
+export interface SwitchProps extends DefaultComponent {
   label?: string;
-  position?: boolean;
+  labelPosition?: LabelPosition;
   disabled?: boolean;
   readonly?: boolean;
   modelValue?: boolean;

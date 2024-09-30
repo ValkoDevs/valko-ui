@@ -516,7 +516,11 @@ export default tv({
       class: {
         button: [
           'from-primary-500',
-          'to-primary-900'
+          'to-primary-900',
+          'focus:ring-primary-700',
+          'hover:to-primary-700',
+          'active:from-primary-600',
+          'active:to-primary-800'
         ]
       }
     },
@@ -527,8 +531,16 @@ export default tv({
         button: [
           'from-light-4',
           'to-light-5',
+          'focus:ring-light-5',
+          'hover:from-light-5',
+          'active:from-light-5',
+          'active:to-light-4',
           'dark:from-dark-1',
-          'dark:to-dark-5'
+          'dark:to-dark-5',
+          'dark:focus:ring-dark-3',
+          'dark:hover:to-dark-3',
+          'dark:active:from-dark-2',
+          'dark:active:to-dark-4'
         ]
       }
     },
@@ -538,7 +550,11 @@ export default tv({
       class: {
         button: [
           'from-success-500',
-          'to-success-900'
+          'to-success-900',
+          'focus:ring-success-700',
+          'hover:to-success-700',
+          'active:from-success-600',
+          'active:to-success-800'
         ]
       }
     },
@@ -548,7 +564,11 @@ export default tv({
       class: {
         button: [
           'from-info-500',
-          'to-info-900'
+          'to-info-900',
+          'focus:ring-info-700',
+          'hover:to-info-700',
+          'active:from-info-600',
+          'active:to-info-800'
         ]
       }
     },
@@ -558,7 +578,11 @@ export default tv({
       class: {
         button: [
           'from-warning-500',
-          'to-warning-900'
+          'to-warning-900',
+          'focus:ring-warning-700',
+          'hover:to-warning-700',
+          'active:from-warning-600',
+          'active:to-warning-800'
         ]
       }
     },
@@ -568,7 +592,11 @@ export default tv({
       class: {
         button: [
           'from-error-500',
-          'to-error-900'
+          'to-error-900',
+          'focus:ring-error-700',
+          'hover:to-error-700',
+          'active:from-error-600',
+          'active:to-error-800'
         ]
       }
     },

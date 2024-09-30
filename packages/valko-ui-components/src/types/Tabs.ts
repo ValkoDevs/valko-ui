@@ -1,4 +1,4 @@
-import type { Sizes, Color, VariantsAlt, Shape } from './common'
+import type { Sizes, Colors, VariantsAlt, ShapeWithLine } from './common'
 
 export interface Tab {
   key: string | number;
@@ -12,10 +12,9 @@ export interface TabKeymap {
   [key: string]: string
 }
 
-export interface TabsProps extends Sizes, VariantsAlt {
+export interface TabsProps extends Sizes, VariantsAlt, Colors {
   tabs: Tab[];
-  shape?: Shape | 'line';
-  color?: Color | 'neutral';
+  shape?: ShapeWithLine;
   defaultIndex?: number;
   grow?: boolean;
   vertical?: boolean;

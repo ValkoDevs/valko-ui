@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   modelValue: false,
   indeterminate: false,
   readonly: false,
-  labelPosition: false,
+  labelPosition: 'right',
   disabled: false
 })
 

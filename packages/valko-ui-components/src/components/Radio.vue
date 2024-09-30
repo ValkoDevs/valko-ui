@@ -12,8 +12,8 @@ const props = withDefaults(defineProps<RadioProps>(), {
   variant: 'filled',
   shape: 'rounded',
   size: 'md',
-  readonly: false,
-  position: false
+  labelPosition: 'right',
+  readonly: false
 })
 
 const emit = defineEmits(['update:modelValue'])

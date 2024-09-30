@@ -1,6 +1,5 @@
-import type { Shapes, Color, Sizes, Variants } from './common'
+import type { DefaultComponent } from './common'
 
-export interface DividerProps extends Shapes, Sizes, Variants {
-  color?: Color | 'neutral';
+export interface DividerProps extends DefaultComponent {
   direction?: 'vertical' | 'horizontal';
 }

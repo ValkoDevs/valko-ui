@@ -53,8 +53,8 @@ export default tv({
       'shrink-0',
       'flex',
       'flex-col',
-      'gap-2',
-      'justify-between',
+      'gap-4',
+      'justify-start',
       'items-stretch'
     ]
   }

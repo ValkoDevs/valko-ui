@@ -1,8 +1,8 @@
-import type { Shapes } from './common'
+import type { Shapes, Placement } from './common'
 
 export interface PopoverProps extends Shapes {
   text?: string;
   isOpen?: boolean;
-  placement?: 'top' | 'bottom' | 'left' | 'right';
+  placement?: Placement;
   flat?: boolean;
 }

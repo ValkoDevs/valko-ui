@@ -4,9 +4,11 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxi cleanup && nuxi prepare && nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "clean": "nuxi cleanup",
+    "prepare": "nuxi prepare",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."

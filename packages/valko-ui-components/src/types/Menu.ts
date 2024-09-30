@@ -1,4 +1,4 @@
-import type { Colors, VariantWithGradient, Sizes, Shapes } from './common'
+import type { Colors, VariantWithGradientLinkAndLine, Sizes, Shapes } from './common'
 
 export interface MenuItem {
   key: string | number;
@@ -11,7 +11,7 @@ export interface MenuItem {
 }
 
 export interface MenuProps extends Colors, Sizes, Shapes {
-  variant?: VariantWithGradient | 'link' | 'line';
+  variant?: VariantWithGradientLinkAndLine;
   items: MenuItem[];
   active: null | string | number;
   floating?: boolean;

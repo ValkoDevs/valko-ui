@@ -1,7 +1,7 @@
-import type { Sizes, Shapes } from './common'
+import type { Sizes, Shapes, Placement } from './common'
 
 export interface TooltipProps extends Sizes, Shapes {
   content: string;
-  placement?: 'top' | 'bottom' | 'left' | 'right';
+  placement?: Placement;
   flat?: boolean;
 }

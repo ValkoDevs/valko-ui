@@ -1,4 +1,6 @@
-import type { Size, Variants, Shapes } from './common'
+import type { SizeWithFull, Variants, Shapes } from './common'
+
+export type Layout = 'vertical' | 'horizontal' | 'cover'
 
 export interface CardFooterProps {
   isBlurred?: boolean;
@@ -12,8 +14,8 @@ export interface CardImageProps {
 }
 
 export interface CardProps extends Variants, Shapes {
-  layout?: 'vertical' | 'horizontal' | 'cover';
-  size?: Size | 'full';
+  layout?: Layout;
+  size?: SizeWithFull;
   isPressable?: boolean;
   disabled?: boolean;
   flat?: boolean;
