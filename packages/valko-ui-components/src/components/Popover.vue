@@ -18,7 +18,10 @@ const classes = useStyle<PopoverProps, SlotStyles>(props, styles)
 </script>
 
 <template>
-  <popover :class="classes.popover">
+  <popover
+    :class="classes.popover"
+    :data-isOpen-state="isOpen"
+  >
     <slot name="default" />
 
     <transition

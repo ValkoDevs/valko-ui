@@ -378,4 +378,77 @@ describe('Drawer component', () => {
       expect(wrapper.emitted()).toHaveProperty('close')
     })
   })
+
+  describe('Animations based on prop placement', () => {
+    it('should apply the correct transition classes for right placement', async () => {
+      const wrapper = mount(VkDrawer, {
+        props: {
+          isOpen: true,
+          placement: 'right'
+        }
+      })
+
+      await nextTick()
+      const panel = wrapper.findComponent({ name: 'DialogPanel' })
+
+      expect(panel.classes()).toContain('translate-x-full')
+    })
+
+    it('should apply the correct transition classes for left placement', async () => {
+      const wrapper = mount(VkDrawer, {
+        props: {
+          isOpen: true,
+          placement: 'left'
+        }
+      })
+
+      await nextTick()
+      const panel = wrapper.findComponent({ name: 'DialogPanel' })
+
+      expect(panel.classes()).toContain('-translate-x-full')
+    })
+
+    it('should apply the correct transition classes for top placement', async () => {
+      const wrapper = mount(VkDrawer, {
+        props: {
+          isOpen: true,
+          placement: 'top'
+        }
+      })
+
+      await nextTick()
+      const panel = wrapper.findComponent({ name: 'DialogPanel' })
+
+      expect(panel.classes()).toContain('-translate-y-full')
+    })
+
+    it('should apply the correct transition classes for bottom placement', async () => {
+      const wrapper = mount(VkDrawer, {
+        props: {
+          isOpen: true,
+          placement: 'bottom'
+        }
+      })
+
+      await nextTick()
+      const panel = wrapper.findComponent({ name: 'DialogPanel' })
+
+      expect(panel.classes()).toContain('translate-y-full')
+    })
+
+    it('should apply default transition classes when placement is unrecognized', async () => {
+      const wrapper = mount(VkDrawer, {
+        props: {
+          isOpen: true,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          placement: 'invalid-placement' as any
+        }
+      })
+
+      await nextTick()
+      const panel = wrapper.findComponent({ name: 'DialogPanel' })
+
+      expect(panel.classes()).toContain('opacity-0')
+    })
+  })
 })

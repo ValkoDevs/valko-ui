@@ -10,6 +10,7 @@ export default tv({
       'justify-items-start'
     ],
     textarea: [
+      'vk-textarea__textarea',
       'w-full',
       'px-2',
       'align-middle',

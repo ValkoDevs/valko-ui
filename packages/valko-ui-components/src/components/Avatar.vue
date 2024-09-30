@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { type Ref, ref, watchEffect } from 'vue'
 import type { AvatarProps } from '#valkoui/types/Avatar'
 import type { SlotStyles } from '#valkoui/types/common'
-import styles from '#valkoui/styles/Avatar.styles.ts'
+import useImage from '#valkoui/composables/useImage.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
+import styles from '#valkoui/styles/Avatar.styles.ts'
 import VkIcon from './Icon.vue'
 
 defineOptions({ name: 'VkAvatar' })
@@ -16,9 +16,6 @@ const props = withDefaults(defineProps<AvatarProps>(), {
 })
 
 const classes = useStyle<AvatarProps, SlotStyles>(props, styles)
-
-const verifiedSrc: Ref<string | null> = ref(null)
-const img: HTMLImageElement = new Image()
 
 const getInitials = (name: string) => {
   const words = name.split(' ')
@@ -36,16 +33,7 @@ const getInitials = (name: string) => {
   return initials
 }
 
-watchEffect(async () => {
-  img.src = props.src ?? ''
-
-  try {
-    await img.decode()
-    verifiedSrc.value = props.src
-  } catch {
-    verifiedSrc.value = null
-  }
-})
+const { verifiedSrc } = useImage(props.src)
 </script>
 
 <template>
