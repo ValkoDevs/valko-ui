@@ -273,7 +273,7 @@ describe('Avatar component', () => {
         Image.prototype.decode = undefined
       })
 
-      it('should display an user icon if there is no src or name given', () => {
+      it('should display a user icon if there is no src or name given', () => {
         wrapper = mount(VkAvatar, {})
 
         expect(wrapper.find('i.ti.ti-user').exists()).toBe(true)

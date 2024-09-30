@@ -55,7 +55,7 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'html'],
       reportsDirectory: '../coverage',
-      exclude: ['exports', 'scripts', 'types', 'img', '**/__mocks__']
+      exclude: ['exports', 'scripts', 'types', 'img', '**/__mocks__', '**/__test__']
     }
   },
   build: {

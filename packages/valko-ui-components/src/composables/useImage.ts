@@ -10,7 +10,7 @@ const useImage = (src?: string) => {
     try {
       await img.decode()
       verifiedSrc.value = src || null
-    } catch (error) {
+    } catch {
       verifiedSrc.value = null
     }
   })

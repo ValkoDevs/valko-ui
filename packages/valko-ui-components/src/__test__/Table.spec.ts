@@ -356,7 +356,7 @@ describe('Table component', () => {
       wrapper = mount(VkTable, {
         props: {
           headers,
-          data: undefined
+          data: []
         },
         slots: {
           'no-data-message': 'no data message'
@@ -449,7 +449,7 @@ describe('Table component', () => {
       const wrapper = mount(VkTable, {
         props: {
           headers,
-          data: undefined
+          data: []
         }
       })
 
