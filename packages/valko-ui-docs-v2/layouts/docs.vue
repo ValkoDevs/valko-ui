@@ -27,6 +27,7 @@ const menuItems: MenuItem[] = [
   { key: 'ui/avatar', group: 'Ui', text: 'Avatar' },
   { key: 'ui/badge', group: 'Ui', text: 'Badge' },
   { key: 'ui/breadcrumbs', group: 'Ui', text: 'Breadcrumbs' },
+  { key: 'ui/calendar', group: 'Ui', text: 'Calendar' },
   { key: 'ui/card', group: 'Ui', text: 'Card' },
   { key: 'ui/menu', group: 'Ui', text: 'Menu' },
   { key: 'ui/navbar', group: 'Ui', text: 'Navbar' },
