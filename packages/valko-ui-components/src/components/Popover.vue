@@ -35,7 +35,7 @@ const classes = useStyle<PopoverProps, SlotStyles>(props, styles)
       <popover-panel
         v-if="isOpen"
         static
-        :class="classes.panel"
+        :class="[classes.panel, ...(Array.isArray(panelClasses) ? panelClasses : [panelClasses])]"
         :data-text="!!text"
       >
         <slot name="popover-content">

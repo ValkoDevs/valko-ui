@@ -1,7 +1,8 @@
 import type { DefaultComponent } from './common'
+import type { CalendarProps } from './Calendar'
 
-export type viewType = 'days' | 'months' | 'years'
-
-export interface DatepickerProps extends DefaultComponent {
+export interface DatepickerProps extends DefaultComponent, CalendarProps {
+  parsedModel: string;
   flat?: boolean;
+  label?: string;
 }

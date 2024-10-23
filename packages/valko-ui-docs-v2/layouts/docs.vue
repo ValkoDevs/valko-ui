@@ -17,6 +17,7 @@ const menuItems: MenuItem[] = [
   { key: 'layout/drawer', group: 'Layout', text: 'Drawer' },
   { key: 'forms/button', group: 'Forms', text: 'Button' },
   { key: 'forms/checkbox', group: 'Forms', text: 'Checkbox' },
+  { key: 'forms/datepicker', group: 'Forms', text: 'Datepicker' },
   { key: 'forms/input', group: 'Forms',  text: 'Input' },
   { key: 'forms/radio', group: 'Forms', text: 'Radio' },
   { key: 'forms/range', group: 'Forms', text: 'Range' },

@@ -12,7 +12,6 @@ const props = withDefaults(defineProps<SwitchProps>(), {
   size: 'md',
   shape: 'soft',
   color: 'primary',
-  label: 'Switch',
   labelPosition: 'right',
   disabled: false,
   modelValue: false
