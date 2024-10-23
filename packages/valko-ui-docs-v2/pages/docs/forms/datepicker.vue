@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import type { TableItem, CalendarProps, SelectOption } from '#valkoui'
+import type { TableItem, DatepickerProps, SelectOption } from '#valkoui'
 
-const form = ref<Partial<CalendarProps>>({
+const form = ref<Partial<DatepickerProps>>({
   color: 'primary',
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  format: 'dddd, DD/MM/YYYY',
+  format: 'YYYY-MM-DD',
   modelValue: 1728076036007,
   disabledDates: [
     1705320000000,
@@ -18,7 +18,8 @@ const form = ref<Partial<CalendarProps>>({
     2215004400000
   ],
   disableWeekends: false,
-  locale: 'en-US'
+  locale: 'en-US',
+  label: 'Date'
 })
 
 const locales: SelectOption[] = [
@@ -133,7 +134,7 @@ const formats: TableItem[] = [
   }
 ]
 
-const calendarProp: TableItem[] = [
+const datepickerProps: TableItem[] = [
   {
     key: 'colorProp',
     prop: 'color',
@@ -404,27 +405,30 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
 
 <template>
   <doc-section
-    title="Calendar"
-    description="The Calendar component is a customizable and versatile date picker that allows users to select dates within a specific range. It provides options to customize the appearance with different themes, shapes, and sizes. The component also supports disabled dates, minimum and maximum selectable dates, and custom date formatting. With the ability to adapt to different locales using custom labels for weekdays and months, Calendar is a flexible tool for handling date selection in any application. It seamlessly integrates with CalendarAdapter for dynamic date management and offers full control over its behavior."
+    title="Datepicker"
+    description="The Datepicker component is a customizable and versatile date picker that allows users to select dates within a specific range. It provides options to customize the appearance with different themes, shapes, and sizes. The component also supports disabled dates, minimum and maximum selectable dates, and custom date formatting. With the ability to adapt to different locales using custom labels for weekdays and months, Calendar is a flexible tool for handling date selection in any application. It seamlessly integrates with CalendarAdapter for dynamic date management and offers full control over its behavior."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center items-center flex-col p-4">
-        <strong>Selected Date: {{ parsedModel }}</strong>
-        <vk-calendar
-          v-model="model"
-          :adapter="adapter"
-          :color="form.color"
-          :variant="form.variant"
-          :size="form.size"
-          :shape="form.shape"
-          :format="form.format"
-          :max-date="form.maxDate"
-          :min-date="form.minDate"
-          :disable-weekends="form.disableWeekends"
-        />
-      </div>
+      <vk-datepicker
+        v-model="model"
+        :label="form.label"
+        :parsed-model="parsedModel"
+        :adapter="adapter"
+        :color="form.color"
+        :variant="form.variant"
+        :size="form.size"
+        :shape="form.shape"
+        :format="form.format"
+        :max-date="form.maxDate"
+        :min-date="form.minDate"
+        :disable-weekends="form.disableWeekends"
+      />
     </template>
     <template #playground-options>
+      <vk-input
+        v-model="form.label"
+        label="Label"
+      />
       <vk-input
         v-model="form.format"
         size="sm"
@@ -476,12 +480,15 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
         <div
           v-for="color in colorOptions"
           :key="color.value"
+          class="w-1/3"
         >
           <span>{{ color.label }}</span>
-          <vk-calendar
+          <vk-datepicker
             v-model="model"
-            :color="color.value"
+            class="mt-2"
             :adapter="adapter"
+            :color="color.value"
+            :parsed-model="parsedModel"
           />
         </div>
       </example-section>
@@ -497,10 +504,12 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
           :key="variant.value"
         >
           <span>{{ variant.label }}</span>
-          <vk-calendar
+          <vk-datepicker
             v-model="model"
-            :variant="variant.value"
+            class="mt-2"
             :adapter="adapter"
+            :variant="variant.value"
+            :parsed-model="parsedModel"
           />
         </div>
       </example-section>
@@ -516,10 +525,12 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
           :key="shape.value"
         >
           <span>{{ shape.label }}</span>
-          <vk-calendar
+          <vk-datepicker
             v-model="model"
-            :shape="shape.value"
+            class="mt-2"
             :adapter="adapter"
+            :shape="shape.value"
+            :parsed-model="parsedModel"
           />
         </div>
       </example-section>
@@ -530,63 +541,46 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
         wrap
         gap
       >
-        <div class="grid grid-cols-2">
-          <div
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-          >
-            <span>{{ size.label }}</span>
-            <vk-calendar
-              v-model="model"
-              :size="size.value"
-              :adapter="adapter"
-            />
-          </div>
+        <div
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+          class="w-1/3"
+        >
+          <span>{{ size.label }}</span>
+          <vk-datepicker
+            v-model="model"
+            class="mt-2"
+            :adapter="adapter"
+            :size="size.value"
+            :parsed-model="parsedModel"
+          />
         </div>
       </example-section>
 
       <example-section
         title="Disable Weekends"
+        justify="start"
+        wrap
+        gap
       >
-        <vk-calendar
+        <vk-datepicker
           v-model="model"
           :adapter="adapter"
+          :parsed-model="parsedModel"
           disable-weekends
         />
-      </example-section>
-
-      <example-section
-        title="Disabled Dates"
-      >
-        <vk-calendar
-          v-model="model"
-          :adapter="adapter"
-          :disabled-dates="form.disabledDates"
-        />
-        <div class="ml-5 flex flex-col">
-          <strong class="break-words">The following dates are disabled in this example:</strong>
-          <ul class="list-disc list-inside mb-4">
-            <li>2024-01-15</li>
-            <li>2024-03-20</li>
-            <li>2024-06-05</li>
-            <li>2024-08-12</li>
-            <li>2025-01-15</li>
-            <li>2030-03-20</li>
-            <li>2040-03-10</li>
-          </ul>
-        </div>
       </example-section>
     </template>
 
     <template #api>
       <div class="w-full flex flex-col">
         <example-section
-          title="Calendar Props"
+          title="Datepicker Props"
           gap
         >
           <vk-table
             :headers="propHeaders"
-            :data="calendarProp"
+            :data="datepickerProps"
           />
         </example-section>
 

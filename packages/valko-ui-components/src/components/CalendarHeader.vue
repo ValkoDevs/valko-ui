@@ -3,6 +3,8 @@ import type { CalendarHeaderProps } from '#valkoui/types/Calendar'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Calendar.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
+import VkButton from './Button.vue'
+import VkIcon from './Icon.vue'
 
 defineOptions({ name: 'VkCalendarHeader' })
 
@@ -15,7 +17,7 @@ const classes = useStyle<CalendarHeaderProps, SlotStyles>(props, styles)
 
 <template>
   <div :class="classes.headerContainer">
-    <VkButton
+    <vk-button
       :size="size"
       :color="color"
       variant="link"
@@ -26,22 +28,23 @@ const classes = useStyle<CalendarHeaderProps, SlotStyles>(props, styles)
       flat
       @click="() => emit('previousClick')"
     >
-      <VkIcon name="chevron-left" />
-    </VkButton>
+      <vk-icon name="chevron-left" />
+    </vk-button>
 
-    <VkButton
+    <vk-button
       :size="size"
       color="neutral"
       variant="link"
+      condensed
       :shape="shape"
       :class="classes.periodButton"
       flat
       @click="() => emit('viewChange')"
     >
       {{ loadedPeriod }}
-    </VkButton>
+    </vk-button>
 
-    <VkButton
+    <vk-button
       :color="color"
       :size="size"
       variant="link"
@@ -52,7 +55,7 @@ const classes = useStyle<CalendarHeaderProps, SlotStyles>(props, styles)
       flat
       @click="() => emit('nextClick')"
     >
-      <VkIcon name="chevron-right" />
-    </VkButton>
+      <vk-icon name="chevron-right" />
+    </vk-button>
   </div>
 </template>

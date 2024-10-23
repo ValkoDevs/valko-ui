@@ -5,4 +5,5 @@ export interface PopoverProps extends Shapes {
   isOpen?: boolean;
   placement?: Placement;
   flat?: boolean;
+  panelClasses?: string | string[];
 }

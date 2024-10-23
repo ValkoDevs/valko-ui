@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { CalendarMonthViewProps } from '#valkoui/types/Calendar'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Calendar.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
+import VkCalendarHeader from './CalendarHeader.vue'
+import VkButton from './Button.vue'
 
 defineOptions({ name: 'VkCalendarMonthView' })
 
@@ -12,8 +13,6 @@ const props = defineProps<CalendarMonthViewProps>()
 const emit = defineEmits(['selectMonth', 'viewChange', 'changeYear'])
 
 const classes = useStyle<CalendarMonthViewProps, SlotStyles>(props, styles)
-
-const months = computed(() => props.monthNames || [...new Array(12).keys()])
 
 const isSelected = (index: number) => props.selected.year === props.display.year && props.selected.month === index
 const onSelectMonth = (month: number) => emit('selectMonth', month)
@@ -33,7 +32,7 @@ const onArrowClick = (operation: 1 | -1) => emit('changeYear', props.display.yea
     />
     <div :class="classes.panel">
       <vk-button
-        v-for="(month, index) in months"
+        v-for="(month, index) in monthNames"
         :key="`month-cell-${index}`"
         :disabled="(min && display.year === min.year && index < min.month) || (max && display.year === max.year && index > max.month)"
         :class="classes.gridButton"

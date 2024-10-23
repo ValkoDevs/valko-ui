@@ -36,8 +36,8 @@ export interface CalendarDayViewProps extends CalendarProps {
   startsOn: DayOfWeek;
   selected: FormattedDate;
   display: FormattedDate;
-  weekDays?: string[];
-  monthNames?: string[];
+  weekDays: string[];
+  monthNames: string[];
   min?: FormattedDate;
   max?: FormattedDate;
   disabledDays?: number[];
@@ -46,7 +46,7 @@ export interface CalendarDayViewProps extends CalendarProps {
 export interface CalendarMonthViewProps extends CalendarProps {
   selected: FormattedDate;
   display: FormattedDate;
-  monthNames?: string[];
+  monthNames: string[];
   min?: FormattedDate;
   max?: FormattedDate;
 }

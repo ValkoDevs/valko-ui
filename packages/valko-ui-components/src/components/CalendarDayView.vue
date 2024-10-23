@@ -5,6 +5,7 @@ import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Calendar.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import VkCalendarHeader from './CalendarHeader.vue'
+import VkButton from './Button.vue'
 
 defineOptions({ name: 'VkCalendarDayView' })
 
@@ -14,18 +15,12 @@ const emit = defineEmits(['selectDay', 'viewChange', 'changeMonth'])
 
 const classes = useStyle<CalendarDayViewProps, SlotStyles>(props, styles)
 
-const weekDays = computed(() => {
-  return props.weekDays || new Array(7).keys()
-})
-
 const gridCells = computed(() => {
   const daysInMonth = [...new Array(props.daysInMonth).keys()].map((day) => day + 1)
   const result = new Array(42).fill(null).map((_, index) => index < props.startsOn ? null : daysInMonth[index - props.startsOn] || null)
 
   return result
 })
-
-const months = computed(() => props.monthNames || [...new Array(12).keys()])
 
 const isSelected = (day: number) =>
   props.selected.year === props.display.year
@@ -47,7 +42,7 @@ const onArrowClick = (operation: 1 | -1) => emit('changeMonth', props.display.mo
   <div :class="classes.viewContainer">
     <vk-calendar-header
       v-bind="props"
-      :loaded-period="`${months[display.month]} - ${display.year}`"
+      :loaded-period="`${monthNames[display.month]} - ${display.year}`"
       :disabled-left="isArrowDisabled('min')"
       :disabled-right="isArrowDisabled('max')"
       @next-click="onArrowClick(1)"
@@ -80,6 +75,7 @@ const onArrowClick = (operation: 1 | -1) => emit('changeMonth', props.display.mo
           :color="isSelected(cell) ? color : 'neutral'"
           :variant="isSelected(cell) ? variant : 'link'"
           :shape="shape"
+          condensed
           flat
           @click="onSelectDate(cell)"
         >

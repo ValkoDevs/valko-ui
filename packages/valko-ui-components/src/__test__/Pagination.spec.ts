@@ -11,6 +11,7 @@ describe('Pagination component', () => {
       })
 
       it('should render', () => {
+        console.warn(wrapper.find('.vk-pagination__left').classes())
         expect(wrapper.find('.vk-pagination__nav').exists()).toBe(true)
       })
 

@@ -5,6 +5,7 @@ import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Calendar.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import VkCalendarHeader from './CalendarHeader.vue'
+import VkButton from './Button.vue'
 
 defineOptions({ name: 'VkCalendarYearView' })
 
@@ -43,7 +44,7 @@ onMounted(() => {
       <vk-button
         v-for="(year, index) in yearList"
         :key="`year-cell-${index}`"
-        :disabled="(minYear && year < minYear) || (maxYear && year > maxYear)"
+        :disabled="!!(minYear && year < minYear) || !!(maxYear && year > maxYear)"
         :class="classes.gridButton"
         :size="size"
         :color="selected.year === year ? color : 'neutral'"

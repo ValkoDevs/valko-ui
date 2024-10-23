@@ -15,9 +15,7 @@ const props = withDefaults(defineProps<CalendarProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  format: 'YYYY-MM-DD',
-  selectionType: 'full',
-  locale: 'en-US'
+  format: 'YYYY-MM-DD'
 })
 
 const emit = defineEmits(['update:modelValue'])
