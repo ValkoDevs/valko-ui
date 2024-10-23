@@ -30,8 +30,8 @@ describe('Switch component', () => {
         expect(wrapper.find('.rounded')).toBeDefined()
       })
 
-      it('should have label', () => {
-        expect(wrapper.find('.vk-switch__label').text()).toContain('Switch')
+      it('should not have label', () => {
+        expect(wrapper.find('.vk-switch__label').exists()).toBe(false)
       })
     })
 

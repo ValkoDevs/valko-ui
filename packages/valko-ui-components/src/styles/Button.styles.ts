@@ -7,7 +7,6 @@ export default tv({
       'flex',
       'items-center',
       'justify-center',
-      'font-semibold',
       'tracking-wider',
       'ring-inset',
       'shadow-lg',
@@ -126,7 +125,13 @@ export default tv({
       true: {
         button: [
           'px-0',
-          'py-0'
+          'py-0',
+          'font-normal'
+        ]
+      },
+      false: {
+        button: [
+          'font-semibold'
         ]
       }
     },
