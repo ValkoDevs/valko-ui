@@ -73,7 +73,6 @@ export default defineConfig({
       external: [
         'vue',
         'nuxt',
-        '@nuxt/bridge',
         '@nuxt/kit',
         'headlessui/vue',
         'vue-router/composables'

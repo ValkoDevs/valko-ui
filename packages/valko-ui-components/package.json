@@ -1,7 +1,7 @@
 {
   "name": "@valko-ui/components",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.0",
   "type": "module",
   "files": [
     "dist"
@@ -33,7 +33,6 @@
   },
   "devDependencies": {
     "@headlessui/vue": "^1.7.22",
-    "@nuxt/bridge": "^3.3.1",
     "@nuxt/kit": "^3.13.2",
     "@types/node": "^20.10.7",
     "@types/toastify-js": "^1.12.3",
