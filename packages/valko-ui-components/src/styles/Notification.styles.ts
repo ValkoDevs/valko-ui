@@ -22,6 +22,7 @@ export default tv({
       'items-start'
     ],
     progressbar: [
+      'vk-notification__progressbar',
       'absolute',
       'bottom-0',
       'left-0',

@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<DataTableProps>(), {
   pageSizeOptions: () => [10, 20, 50, 100]
 })
 
-const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll', 'dragStart', 'dragOver', 'dragDrop'])
+const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll', 'onDragStart', 'onDragOver', 'onDrop'])
 
 const classes = useStyle<DataTableProps, SlotStyles>(props, styles)
 
@@ -63,10 +63,6 @@ const togglePopover = (headerKey: string) => {
   activePopover.value = activePopover.value === headerKey ? null : headerKey
 }
 
-const closePopover = () => {
-  activePopover.value = null
-}
-
 const setActiveFilter = (headerKey: string, isActive: boolean) => {
   if (localFilters.value[headerKey] && localFilters.value[headerKey].trim() !== '') activeFilters.value[headerKey] = isActive
   else activeFilters.value[headerKey] = false
@@ -84,7 +80,7 @@ const handleClickOutside = (event: MouseEvent) => {
     if (element.contains(event.target as Node)) isClickInside = true
   })
 
-  if (!isClickInside) closePopover()
+  if (!isClickInside) activePopover.value = null
 }
 
 const totalPages = computed(() => Math.ceil(props.total / props.limit))
@@ -127,7 +123,7 @@ watch(localFilters, (newFilters) => {
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
-  emit('onLimitChange', 2)
+  emit('onLimitChange', props.limit)
 
   localFilters.value = props.headers.reduce((acc, { field }) => {
     acc[field] = ''
@@ -235,9 +231,9 @@ onBeforeUnmount(() => {
           name="grip-vertical"
           draggable="true"
           :class="classes.dragIcon"
-          @dragstart="() => emit('dragStart', index)"
-          @dragover="(event) => emit('dragOver', event)"
-          @drop="(event) => emit('dragDrop', event, index)"
+          @dragstart="() => emit('onDragStart', index)"
+          @dragover="(event) => emit('onDragOver', event)"
+          @drop="(event) => emit('onDrop', event, index)"
         />
       </template>
 

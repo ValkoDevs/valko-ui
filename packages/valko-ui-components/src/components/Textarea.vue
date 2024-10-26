@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { TextareaProps } from '#valkoui/types/Textarea'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Textarea.styles.ts'
@@ -19,9 +20,16 @@ const emit = defineEmits(['update:modelValue'])
 
 const classes = useStyle<TextareaProps, SlotStyles>(props, styles)
 
+const isFilled = ref(false)
+const inputValue = ref(props.modelValue || '')
+
 const updateValue = (e: Event) => {
+  const value = (e.target as HTMLInputElement).value
+
   if (!props.disabled && !props.readonly) {
-    emit('update:modelValue', (e.target as HTMLInputElement).value)
+    inputValue.value = value
+    emit('update:modelValue', value)
+    isFilled.value = value !== ''
   }
 }
 </script>
@@ -34,9 +42,9 @@ const updateValue = (e: Event) => {
         placeholder=" "
         :disabled="disabled"
         :readonly="readonly"
-        :value="modelValue"
+        :value="inputValue"
         @input="updateValue"
-        :data-filled="modelValue !== null && modelValue !== undefined && modelValue !== ''"
+        :data-filled="isFilled"
         :maxlength="maxlength"
       />
       <label :class="classes.label">{{ label }}</label>
@@ -49,7 +57,7 @@ const updateValue = (e: Event) => {
       <span
         v-if="maxlength && maxlength > 0"
         :class="classes.counter"
-      >{{ `${modelValue.length} / ${maxlength}` }}</span>
+      >{{ `${inputValue.length} / ${maxlength}` }}</span>
     </div>
   </div>
 </template>

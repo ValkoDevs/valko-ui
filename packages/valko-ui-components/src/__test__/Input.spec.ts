@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkInput from '#valkoui/components/Input.vue'
 
@@ -235,6 +236,18 @@ describe('Input component', () => {
 
       expect(wrapper.find('i.ti.ti-home').exists()).toBe(true)
     })
+
+    it('should not render leftIcon when not provided', () => {
+      const wrapper = mount(VkInput)
+
+      expect(wrapper.find('.left-icon').exists()).toBe(false)
+    })
+
+    it('should not render rightIcon when not provided', () => {
+      const wrapper = mount(VkInput)
+
+      expect(wrapper.find('.right-icon').exists()).toBe(false)
+    })
   })
 
   describe('Helpertext', () => {
@@ -255,12 +268,123 @@ describe('Input component', () => {
     })
   })
 
+  describe('Cleareable', () => {
+    it('Should not display cleareable icon when cleareable is false', () => {
+      wrapper = mount(VkInput, {
+        props: {
+          clereable: false
+        }
+      })
+
+      expect(wrapper.find('i.ti.ti-circle-x').exists()).toBe(false)
+    })
+
+    it('Should display cleareable icon when cleareable is true and the input has a value', () => {
+      wrapper = mount(VkInput, {
+        props: {
+          clearable: true,
+          modelValue: 'Hello World'
+        }
+      })
+
+      expect(wrapper.find('i.ti.ti-circle-x').exists()).toBe(true)
+    })
+
+    it('should clear the input value when clearable icon is clicked', async () => {
+      const wrapper = mount(VkInput, {
+        props: {
+          clearable: true,
+          modelValue: 'Hello World'
+        }
+      })
+
+      wrapper.find('i.ti.ti-circle-x').trigger('click')
+      await nextTick()
+
+      expect(wrapper.emitted('update:modelValue')).toStrictEqual([['']])
+    })
+  })
+
   describe('Emits', () => {
-    it('should emit focus event', () => {
+    it('should emit focus event', async () => {
       const wrapper = mount(VkInput, {})
 
-      wrapper.find('.vk-input__container').trigger('click')
-      expect(wrapper.emitted('focus'))
+      wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('focus')
+    })
+
+    it('should not emit focus event when disabled is true', async () => {
+      const wrapper = mount(VkInput, {
+        props: {
+          disabled: true
+        }
+      })
+
+      wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+
+      expect(wrapper.emitted()).not.toHaveProperty('focus')
+    })
+
+    it('should emit update:modelvalue on input', async () => {
+      wrapper = mount(VkInput, {})
+
+      wrapper.find('.vk-input__input').trigger('input')
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('update:modelValue')
+    })
+
+    it('should not emit update:modelvalue when input is readonly', async () => {
+      wrapper = mount(VkInput, {
+        props: {
+          readonly: true
+        }
+      })
+
+      wrapper.find('.vk-input__input').trigger('input')
+      await nextTick()
+
+      expect(wrapper.emitted()).not.toHaveProperty('update:modelValue')
+    })
+
+    it('should not emit update:modelvalue when input is disabled', async () => {
+      wrapper = mount(VkInput, {
+        props: {
+          disabled: true
+        }
+      })
+
+      wrapper.find('.vk-input__input').trigger('input')
+      await nextTick()
+
+      expect(wrapper.emitted()).not.toHaveProperty('update:modelValue')
+    })
+
+    it('Should emit leftIconClick when slot leftIcon is clicked', async () => {
+      wrapper = mount(VkInput, {
+        slots: {
+          leftIcon: '<i class="ti ti-brand-vue"></i>'
+        }
+      })
+
+      wrapper.find('i.ti.ti-brand-vue').trigger('click')
+      await nextTick()
+      expect(wrapper.emitted()).toHaveProperty('leftIconClick')
+    })
+
+    it('Should emit rightIconClick when slot rightIcon is clicked', async () => {
+      wrapper = mount(VkInput, {
+        slots: {
+          rightIcon: '<i class="ti ti-home"></i>'
+        }
+      })
+
+      wrapper.find('i.ti.ti-home').trigger('click')
+      await nextTick()
+      expect(wrapper.emitted()).toHaveProperty('rightIconClick')
     })
   })
 })

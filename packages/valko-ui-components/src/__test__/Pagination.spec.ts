@@ -239,4 +239,105 @@ describe('Pagination component', () => {
       expect(wrapper.emitted('update:modelValue'))
     })
   })
+
+  describe('Pages computed', () => {
+    it('should show all pages when total pages are 7 or fewer', () => {
+      const wrapper = mount(VkPagination, {
+        props: {
+          pages: 5,
+          modelValue: 3
+        }
+      })
+
+      expect(wrapper.vm.pages).toEqual([1, 2, 3, 4, 5])
+    })
+
+    it('should show pages correctly when currentPage is greater than 4 and totalPages is greater than 7', () => {
+      const wrapper = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5
+        }
+      })
+
+      expect(wrapper.vm.pages).toEqual([1, '...', 4, 5, 6, '...', 10])
+    })
+
+    it('should show pages correctly when currentPage is less than or equal to 4 and totalPages is greater than 7', () => {
+      const wrapper = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 3
+        }
+      })
+
+      expect(wrapper.vm.pages).toEqual([1, 2, 3, 4, 5, '...', 10])
+    })
+
+    it('should handle cases where currentPage is in the middle and totalPages is greater than 7', () => {
+      const wrapper = mount(VkPagination, {
+        props: {
+          pages: 15,
+          modelValue: 8
+        }
+      })
+
+      expect(wrapper.vm.pages).toEqual([1, '...', 7, 8, 9, '...', 15])
+    })
+
+    it('should handle edge case where currentPage is greater than totalPages', () => {
+      const wrapper = mount(VkPagination, {
+        props: {
+          pages: 5,
+          modelValue: 10
+        }
+      })
+
+      expect(wrapper.vm.pages).toEqual([1, 2, 3, 4, 5])
+    })
+
+    it('should handle edge case where currentPage is exactly at the end', () => {
+      const wrapper = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 10
+        }
+      })
+
+      expect(wrapper.vm.pages).toEqual([1, '...', 6, 7, 8, 9, 10])
+    })
+
+    it('should use default page values when currentPage <= 4', () => {
+      const wrapper = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 4
+        }
+      })
+
+      expect(wrapper.vm.pages).toEqual([1, 2, 3, 4, 5, '...', 10])
+    })
+
+    it('should use currentPage and currentPage + 1 when currentPage > 4', () => {
+      const wrapper = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 6
+        }
+      })
+
+      expect(wrapper.vm.pages).toEqual([1, '...', 5, 6, 7, '...', 10])
+    })
+
+    it('should handle cases where currentPage is near the end and totalPages is greater than 7', () => {
+      const wrapper = mount(VkPagination, {
+        props: {
+          pages: 15,
+          modelValue: 13
+        }
+      })
+
+      expect(wrapper.vm.pages).toEqual([1, '...', 11, 12, 13, 14, 15])
+    })
+  })
 })

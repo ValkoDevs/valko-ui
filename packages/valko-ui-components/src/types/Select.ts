@@ -8,7 +8,7 @@ export interface SelectOption<T = string | number> {
 export interface SelectProps extends DefaultComponent {
   options?: SelectOption[];
   modelValue?: string | number | Array<string | number>;
-  placeholder?: string;
+  label?: string;
   helpertext?: string;
   multiple?: boolean;
   disabled?: boolean;

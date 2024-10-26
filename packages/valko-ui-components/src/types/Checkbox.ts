@@ -1,4 +1,4 @@
-import type { DefaultComponent } from './common'
+import type { DefaultComponent, LabelPosition } from './common'
 
 export interface CheckboxProps extends DefaultComponent {
   helpertext?: string;
@@ -6,6 +6,6 @@ export interface CheckboxProps extends DefaultComponent {
   modelValue?: boolean | null;
   disabled?: boolean;
   flat?: boolean;
-  labelPosition?: boolean;
+  labelPosition?: LabelPosition;
   readonly?: boolean;
 }

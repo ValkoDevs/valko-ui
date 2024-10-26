@@ -1,7 +1,7 @@
-import type { DefaultComponent } from './common'
+import type { DefaultComponent, Corner } from './common'
 
 export interface BadgeProps extends DefaultComponent {
-  placement?: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+  placement?: Corner;
   content?: number | string;
   outlined?: boolean;
   flat?: boolean;

@@ -3,17 +3,20 @@ import { tv, type TV } from 'tailwind-variants'
 export default tv({
   slots: {
     table: [
-      'vk-data-table',
+      'vk-table',
       'w-full',
       'overflow-hidden'
     ],
-    thead: [],
+    thead: [
+      'vk-table__thead'
+    ],
     th: [
       'px-4',
       'py-2',
       'text-left'
     ],
     tr: [
+      'vk-table__tr',
       'hover:bg-light-4',
       'dark:hover:bg-dark-2',
       'data-[row-events=true]:cursor-pointer'
@@ -24,11 +27,15 @@ export default tv({
       'text-left'
     ],
     noDataMessage: [
+      'vk-table__no_data_message',
       'p-4',
       'text-center'
     ],
     body: [],
-    shape: []
+    shape: [],
+    tableFooter: [
+      'vk-table_footer'
+    ]
   },
   variants: {
     variant: {

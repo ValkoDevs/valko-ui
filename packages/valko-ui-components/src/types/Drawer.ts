@@ -1,9 +1,9 @@
-import type { Shapes, Sizes } from './common'
+import type { Shapes, Sizes, Backdrop, Placement } from './common'
 
 export interface DrawerProps extends Shapes, Sizes {
   isOpen: boolean;
-  backdrop?: 'opaque' | 'blur' | 'transparent';
-  placement?: 'top' | 'bottom' | 'right' | 'left';
+  backdrop?: Backdrop;
+  placement?: Placement;
   title?: string;
   closable?: boolean;
   flat?: boolean;

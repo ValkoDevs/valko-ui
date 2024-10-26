@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Ref, ref } from 'vue'
+import { type Ref, ref, inject } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import type { CollapseItemProps } from '#valkoui/types/Collapse'
 import type { SlotStyles } from '#valkoui/types/common'
@@ -14,12 +14,13 @@ const props = defineProps<CollapseItemProps>()
 const classes = useStyle<CollapseItemProps, SlotStyles>(props, styles)
 
 const buttonRef: Ref<Record<string, HTMLElement> | null> = ref(null)
+const collapseId = inject<string>('collapseId', '')
 
 const onClick = () => {
   if (buttonRef.value) {
     const current = buttonRef.value.$el
     const parent = current.closest('.vk-collapse')
-    const collapseId = parent?.getAttribute('data-collapse-id')
+
     if (parent?.getAttribute('data-multiple') === 'true') return
 
     if (collapseId) {

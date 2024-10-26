@@ -16,6 +16,7 @@ export { default as useClientSideSort } from '#valkoui/composables/useClientSide
 export { default as useClientSideFilter } from '#valkoui/composables/useClientSideFilter.ts'
 export { default as useClientSideDragAndDrop } from '#valkoui/composables/useClientSideDragAndDrop.ts'
 export { default as useClientSideDataTable } from '#valkoui/composables/useClientSideDataTable.ts'
+export { default as useImage } from '#valkoui/composables/useImage.ts'
 
 ///////////////////
 ////// TYPES //////
@@ -26,6 +27,7 @@ export * from '#valkoui/types/Avatar'
 export * from '#valkoui/types/Badge'
 export * from '#valkoui/types/Breadcrumbs'
 export * from '#valkoui/types/Button'
+export * from '#valkoui/types/Card'
 export * from '#valkoui/types/Checkbox'
 export * from '#valkoui/types/Collapse'
 export * from '#valkoui/types/DataTable'

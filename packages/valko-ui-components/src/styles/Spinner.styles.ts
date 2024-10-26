@@ -3,6 +3,7 @@ import { tv, type TV } from 'tailwind-variants'
 export default tv({
   slots: {
     container: [
+      'vk-spinner',
       'flex'
     ],
     icon: [

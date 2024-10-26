@@ -25,8 +25,8 @@ const useClientSideDataTable = <T extends TableItem>({ data, headers, selectionM
   watchEffect(() => {
     result.value = {
       ...toValue(dataTable),
-      sort,
-      filters,
+      sort: toValue(sort),
+      filters: toValue(filters),
       pageSizeOptions,
       draggable,
       onPageChange: setOffset,

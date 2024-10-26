@@ -288,4 +288,20 @@ describe('Menu component', () => {
       })
     })
   })
+
+  describe('Emits', () => {
+    it('should emit itemClick when an Item in the menu is clicked', async () => {
+      wrapper = mount(VkMenu, {
+        props: {
+          items: menuItems,
+          active: 1
+        }
+      })
+
+      const firstMenuItem = wrapper.find('a')
+      await firstMenuItem.trigger('click')
+
+      expect(wrapper.emitted()).toHaveProperty('itemClick')
+    })
+  })
 })

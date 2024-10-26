@@ -19,6 +19,7 @@ const menuItems: MenuItem[] = [
   { key: 'forms/checkbox', group: 'Forms', text: 'Checkbox' },
   { key: 'forms/input', group: 'Forms',  text: 'Input' },
   { key: 'forms/radio', group: 'Forms', text: 'Radio' },
+  { key: 'forms/range', group: 'Forms', text: 'Range' },
   { key: 'forms/select', group: 'Forms', text: 'Select' },
   { key: 'forms/switch', group: 'Forms', text: 'Switch' },
   { key: 'forms/textarea', group: 'Forms', text: 'Textarea' },
@@ -26,16 +27,20 @@ const menuItems: MenuItem[] = [
   { key: 'ui/avatar', group: 'Ui', text: 'Avatar' },
   { key: 'ui/badge', group: 'Ui', text: 'Badge' },
   { key: 'ui/breadcrumbs', group: 'Ui', text: 'Breadcrumbs' },
+  { key: 'ui/card', group: 'Ui', text: 'Card' },
   { key: 'ui/menu', group: 'Ui', text: 'Menu' },
   { key: 'ui/navbar', group: 'Ui', text: 'Navbar' },
   { key: 'ui/notification', group: 'Ui', text: 'Notification' },
+  { key: 'ui/popover', group: 'Ui', text: 'Popover' },
   { key: 'ui/progressbar', group: 'Ui', text: 'Progressbar' },
   { key: 'ui/spinner', group: 'Ui', text: 'Spinner' },
   { key: 'ui/tag', group: 'Ui', text: 'Tag' },
   { key: 'ui/tooltip', group: 'Ui', text: 'Tooltip' },
   { key: 'data/collapse', group: 'Data', text: 'Collapse' },
+  { key: 'data/datatable', group: 'Data', text: 'DataTable' },
   { key: 'data/dropdown', group: 'Data', text: 'Dropdown' },
   { key: 'data/pagination', group: 'Data', text: 'Pagination' },
+  { key: 'data/table', group: 'Data', text: 'Table' },
   { key: 'data/tabs', group: 'Data', text: 'Tabs' }
 ]
 

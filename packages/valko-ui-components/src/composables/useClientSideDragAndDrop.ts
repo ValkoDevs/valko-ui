@@ -1,12 +1,13 @@
-import { type Ref, shallowRef, watch } from 'vue'
+import { type Ref, shallowRef, watch, toValue } from 'vue'
+import type { TableItem } from '#valkoui/types/Table'
 
-const useClientSideDragAndDrop = <T>(sortedData: Ref<T[]>) => {
+const useClientSideDragAndDrop = <T extends TableItem>(data: T[] | Ref<T[]>) => {
   const dragStartIndex = shallowRef<number | null>(null)
   const draggedItem = shallowRef<T | null>(null)
   const reOrderedData = shallowRef<T[]>([])
 
-  watch(sortedData, (newData) => {
-    reOrderedData.value = [...newData]
+  watch(data, (newData) => {
+    reOrderedData.value = [...toValue(newData)]
   }, { immediate: true })
 
   const handleDragStart = (index: number) => {

@@ -18,6 +18,7 @@ export default tv({
       'self-center'
     ],
     headerUtilities: [
+      'vk-data-table__utilities',
       'cursor-pointer',
       'text-dark-1',
       'dark:text-light-5'
@@ -32,6 +33,7 @@ export default tv({
       'mr-auto'
     ],
     footerSelect: [
+      'vk-data-table__select',
       'ml-auto'
     ],
     dragIcon: [

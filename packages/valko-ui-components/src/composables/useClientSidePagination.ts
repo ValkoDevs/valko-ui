@@ -1,14 +1,14 @@
-import { type Ref, ref, watchEffect, toValue } from 'vue'
+import { type Ref, shallowRef, watchEffect, toValue } from 'vue'
 import type { Pagination } from '#valkoui/types/common'
 
 const useClientSidePagination = <T>(data: T[] | Ref<T[]>, initialLimit = 10) => {
-  const limit = ref(initialLimit)
-  const offset = ref(0)
+  const limit = shallowRef(initialLimit)
+  const offset = shallowRef(0)
 
   const setLimit = (newLimit: number) => limit.value = newLimit
   const setOffset = (newOffset: number) => offset.value = newOffset
 
-  const result: Ref<Pagination<T>> = ref({
+  const result: Ref<Pagination<T>> = shallowRef({
     records: [],
     total: 0,
     limit: limit.value,

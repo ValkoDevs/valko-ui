@@ -233,6 +233,28 @@ describe('Button component', () => {
         expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
       })
     })
+
+    describe('When loading prop changes', () => {
+      it('should display a spinner when prop loading is true', () => {
+        wrapper = mount(VkButton, {
+          props: {
+            loading: true
+          }
+        })
+
+        expect(wrapper.find('.vk-spinner').exists()).toBe(true)
+      })
+
+      it('should not display a spinner when prop loading is false', () => {
+        wrapper = mount(VkButton, {
+          props: {
+            loading: false
+          }
+        })
+
+        expect(wrapper.find('.vk-spinner').exists()).toBe(false)
+      })
+    })
   })
 
   describe('With slots', () => {

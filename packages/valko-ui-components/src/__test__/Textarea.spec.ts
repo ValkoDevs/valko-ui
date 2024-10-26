@@ -249,8 +249,8 @@ describe('Textarea component', () => {
     it('should emit focus event', () => {
       const wrapper = mount(VkTextarea, {})
 
-      wrapper.find('.vk-textarea__container').trigger('click')
-      expect(wrapper.emitted('focus'))
+      wrapper.find('.vk-textarea__textarea').trigger('input')
+      expect(wrapper.emitted()).toHaveProperty('update:modelValue')
     })
   })
 })

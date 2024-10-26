@@ -1,4 +1,4 @@
-const useDebounce = (callback: () => unknown, timeout: number) => {
+const useDebounce = <T = unknown>(callback: () => T, timeout: number): () => Promise<T> => {
   let timer: NodeJS.Timeout
 
   return () => {

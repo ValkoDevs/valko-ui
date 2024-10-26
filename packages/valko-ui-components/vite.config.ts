@@ -55,7 +55,7 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'html'],
       reportsDirectory: '../coverage',
-      exclude: ['exports', 'scripts', 'types', 'img']
+      exclude: ['exports', 'scripts', 'types', 'img', '**/__mocks__', '**/__test__']
     }
   },
   build: {
@@ -73,7 +73,6 @@ export default defineConfig({
       external: [
         'vue',
         'nuxt',
-        '@nuxt/bridge',
         '@nuxt/kit',
         'headlessui/vue',
         'vue-router/composables'
