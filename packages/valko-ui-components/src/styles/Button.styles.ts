@@ -15,9 +15,11 @@ export default tv({
       'transition-all',
       'ease-in-out',
       'duration-150',
+      'outline-none',
       'active:shadow-none',
       'focus:ring-2',
       'focus:outline-none',
+      'focus-visible:outline-none',
       'dark:shadow-dark-5'
     ],
     spinnerContainer: [
