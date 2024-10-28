@@ -21,6 +21,7 @@ const menuItems: MenuItem[] = [
   { key: 'modal', group: 'Layout', text: 'Modal' },
   { key: 'button', group: 'Forms', text: 'Button' },
   { key: 'checkbox', group: 'Forms', text: 'Checkbox' },
+  { key: 'Datepicker', group: 'Forms', text: 'Datepicker' },
   { key: 'input', group: 'Forms',  text: 'Input' },
   { key: 'radio', group: 'Forms', text: 'Radio' },
   { key: 'range', group: 'Forms', text: 'Range' },

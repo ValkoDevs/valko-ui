@@ -14,7 +14,6 @@ const props = withDefaults(defineProps<SelectProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  label: 'Select an option',
   options: () => [],
   allowClear: false
 })

@@ -36,6 +36,10 @@ const routes = [
         component: lazyLoad('forms', 'CheckboxPage')
       },
       {
+        path: 'Datepicker',
+        component: lazyLoad('forms', 'DatepickerPage')
+      },
+      {
         path: 'input',
         component: lazyLoad('forms', 'InputPage')
       },
