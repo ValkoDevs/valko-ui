@@ -1,6 +1,5 @@
 import { type Ref, computed, ref, toValue } from 'vue'
-import type { CalendarProps, DayOfWeek, AdapterResult } from '#valkoui/types/Calendar'
-type AdapterProps = Pick<CalendarProps, 'minDate' | 'maxDate' | 'format' | 'disabledDates' | 'locale'>
+import type { AdapterProps, DayOfWeek, AdapterResult } from '#valkoui/types/Calendar'
 
 const useDateAdapter = (props: AdapterProps | Ref<AdapterProps>): AdapterResult => {
   const tempDate = ref<Date | null>(null)

@@ -4,6 +4,7 @@ import type { DefaultComponent } from './common'
 export type DisplayView = 'days' | 'months' | 'years'
 export type SelectionType = 'full' | 'month-only' | 'year-only' | 'day-month' | 'month-year'
 export type DayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6
+export type AdapterProps = Pick<CalendarProps, 'minDate' | 'maxDate' | 'format' | 'disabledDates' | 'locale'>
 export type AdapterResult = [
   Ref<EpochTimeStamp>,
   ComputedRef<string>,
