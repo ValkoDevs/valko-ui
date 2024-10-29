@@ -4,6 +4,22 @@
 @tailwind utilities;
 
 @layer components {
+  ::-webkit-scrollbar {
+    width: 0.35rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.light.4');
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.light.5');
+  }
+
   .toastify {
     display: inline-block;
     position: fixed;

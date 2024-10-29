@@ -30,6 +30,7 @@ const menuItems: MenuItem[] = [
   { key: 'ui/progressbar', group: 'Ui', text: 'Progressbar' },
   { key: 'ui/spinner', group: 'Ui', text: 'Spinner' },
   { key: 'ui/tag', group: 'Ui', text: 'Tag' },
+  { key: 'ui/time', group: 'Ui', text: 'Time' },
   { key: 'ui/tooltip', group: 'Ui', text: 'Tooltip' },
   { key: 'data/collapse', group: 'Data', text: 'Collapse' },
   { key: 'data/datatable', group: 'Data', text: 'DataTable' },
