@@ -13,8 +13,8 @@ const isDarkTheme = computed({
 const menuItems: MenuItem[] = [
   { key: 'get-started', group: 'General', text: 'Get Started' },
   { key: 'layout/divider', group: 'Layout', text: 'Divider' },
-  { key: 'layout/modal', group: 'Layout', text: 'Modal' },
   { key: 'layout/drawer', group: 'Layout', text: 'Drawer' },
+  { key: 'layout/modal', group: 'Layout', text: 'Modal' },
   { key: 'forms/button', group: 'Forms', text: 'Button' },
   { key: 'forms/checkbox', group: 'Forms', text: 'Checkbox' },
   { key: 'forms/datepicker', group: 'Forms', text: 'Datepicker' },
@@ -60,7 +60,6 @@ onMounted(() => {
   const activeItemKey = router.currentRoute.value.path.replace('/docs/', '')
   if (activeItemKey === '') {
     activeItem.value = 'get-started'
-    router.push('/docs/get-started')
   } else activeItem.value = activeItemKey
 })
 

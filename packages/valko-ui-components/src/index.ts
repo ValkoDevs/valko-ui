@@ -16,7 +16,6 @@ export { default as useClientSideSort } from '#valkoui/composables/useClientSide
 export { default as useClientSideFilter } from '#valkoui/composables/useClientSideFilter.ts'
 export { default as useClientSideDragAndDrop } from '#valkoui/composables/useClientSideDragAndDrop.ts'
 export { default as useClientSideDataTable } from '#valkoui/composables/useClientSideDataTable.ts'
-export { default as useImage } from '#valkoui/composables/useImage.ts'
 export { default as useDateAdapter } from '#valkoui/composables/useDateAdapter.ts'
 
 ///////////////////

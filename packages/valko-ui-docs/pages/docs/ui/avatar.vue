@@ -16,58 +16,6 @@ const extraForm = ref({
   user: ''
 })
 
-interface Avatar {
-  name: string;
-  src: string;
-}
-
-const urls: Avatar[] = [
-  {
-    name: 'Brandon Cooper',
-    src: 'https://randomuser.me/api/portraits/men/33.jpg'
-  },
-  {
-    name: 'Jones Guillaume',
-    src: 'https://randomuser.me/api/portraits/men/25.jpg'
-  },
-  {
-    name: 'Aleksej Marius',
-    src: 'https://randomuser.me/api/portraits/men/56.jpg'
-  },
-  {
-    name: 'Edgardo Peretz',
-    src: 'https://randomuser.me/api/portraits/men/55.jpg'
-  },
-  {
-    name: 'Atlas Costantino',
-    src: 'https://randomuser.me/api/portraits/men/90.jpg'
-  },
-  {
-    name: 'Gisela Hana',
-    src: 'https://randomuser.me/api/portraits/women/50.jpg'
-  },
-  {
-    name: 'Fernanda Filippa',
-    src: 'https://randomuser.me/api/portraits/women/44.jpg'
-  },
-  {
-    name: 'Paula Edina',
-    src: 'https://randomuser.me/api/portraits/women/9.jpg'
-  },
-  {
-    name: 'Caroline Parvin',
-    src: 'https://randomuser.me/api/portraits/women/93.jpg'
-  },
-  {
-    name: 'Liwen Fariba',
-    src: 'https://randomuser.me/api/portraits/women/66.jpg'
-  },
-  {
-    name: 'Matylda Gerda',
-    src: 'https://randomuser.me/api/portraits/women/30.jpg'
-  }
-]
-
 const avatarProps: TableItem[] = [
   {
     key: 'colorProp',
@@ -127,14 +75,8 @@ const avatarProps: TableItem[] = [
   }
 ]
 
-const randomAvatar = (urls: Avatar[]): Avatar => {
-  const randomIndex = Math.floor(Math.random() * urls.length)
-  return urls[randomIndex]
-}
-
-const randomUser = randomAvatar(urls)
-form.value.name = randomUser.name
-form.value.src = randomUser.src
+form.value.name = 'Louise Barnett'
+form.value.src = '/assets/avatar.jpg'
 
 const avatarSrc = computed(() => { return extraForm.value.avatar ? '###' : form.value.src })
 </script>
@@ -203,7 +145,6 @@ const avatarSrc = computed(() => { return extraForm.value.avatar ? '###' : form.
         >
           <span class="mb-1">{{ color.label }}</span>
           <vk-avatar
-            :src="'example.url'"
             :color="color.value"
           />
         </div>
@@ -220,7 +161,6 @@ const avatarSrc = computed(() => { return extraForm.value.avatar ? '###' : form.
         >
           <span class="mb-1">{{ color.label }}</span>
           <vk-avatar
-            :src="'example.url'"
             :name="form.name"
             :color="color.value"
           />
@@ -238,7 +178,6 @@ const avatarSrc = computed(() => { return extraForm.value.avatar ? '###' : form.
         >
           <span class="mb-1">{{ variant.label }}</span>
           <vk-avatar
-            :src="'example.url'"
             :variant="variant.value"
           />
         </div>
@@ -272,7 +211,6 @@ const avatarSrc = computed(() => { return extraForm.value.avatar ? '###' : form.
         >
           <span class="mb-1">{{ shape.label }}</span>
           <vk-avatar
-            :src="'example.url'"
             :shape="shape.value"
           />
         </div>
@@ -289,7 +227,6 @@ const avatarSrc = computed(() => { return extraForm.value.avatar ? '###' : form.
         >
           <span class="mb-1">{{ size.label }}</span>
           <vk-avatar
-            :src="'example.url'"
             :size="size.value"
           />
         </div>
@@ -299,7 +236,6 @@ const avatarSrc = computed(() => { return extraForm.value.avatar ? '###' : form.
         title="Flat"
       >
         <vk-avatar
-          :src="'example.url'"
           flat
         />
       </example-section>

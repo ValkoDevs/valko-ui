@@ -162,7 +162,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
           </vk-card-header>
           <vk-card-image
             v-if="cardComponents.image"
-            src="https://picsum.photos/id/152/1080"
+            src="/assets/flower-m.jpg"
             class="text-white w-1/2"
           />
 
@@ -260,7 +260,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
           :variant="variant.value"
         >
           <vk-card-image
-            src="https://picsum.photos/id/152/1080"
+            src="/assets/flower-m.jpg"
             class="text-white"
             height="15rem"
           />
@@ -287,7 +287,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
           :shape="shape.value"
         >
           <vk-card-image
-            src="https://picsum.photos/id/152/1080"
+            src="/assets/flower-m.jpg"
             class="text-white"
           />
           <vk-card-header>
@@ -315,7 +315,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
           :layout="layout.value"
         >
           <vk-card-image
-            src="https://picsum.photos/id/152/1080"
+            src="/assets/flower-m.jpg"
             class="text-white"
           />
           <vk-card-header>
@@ -344,7 +344,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
           :layout="size.value === 'full' ? 'horizontal' : 'vertical'"
         >
           <vk-card-image
-            src="https://picsum.photos/id/152/1080"
+            src="/assets/flower-m.jpg"
             class="text-white"
           />
           <vk-card-header>
@@ -369,7 +369,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
           @click="onClick"
         >
           <vk-card-image
-            src="https://picsum.photos/id/152/1080"
+            src="/assets/flower-m.jpg"
             class="text-white"
           />
           <vk-card-header>
@@ -393,7 +393,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
           flat
         >
           <vk-card-image
-            src="https://picsum.photos/id/152/1080"
+            src="/assets/flower-m.jpg"
             class="text-white"
           />
           <vk-card-header>

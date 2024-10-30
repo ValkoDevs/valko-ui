@@ -298,7 +298,7 @@ describe('Menu component', () => {
         }
       })
 
-      const firstMenuItem = wrapper.find('a')
+      const firstMenuItem = wrapper.find('button')
       await firstMenuItem.trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('itemClick')

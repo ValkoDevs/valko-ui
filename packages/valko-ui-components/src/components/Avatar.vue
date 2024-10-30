@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { AvatarProps } from '#valkoui/types/Avatar'
 import type { SlotStyles } from '#valkoui/types/common'
-import useImage from '#valkoui/composables/useImage.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import styles from '#valkoui/styles/Avatar.styles.ts'
 import VkIcon from './Icon.vue'
@@ -32,8 +31,6 @@ const getInitials = (name: string) => {
 
   return initials
 }
-
-const { verifiedSrc } = useImage(props.src)
 </script>
 
 <template>
@@ -42,8 +39,8 @@ const { verifiedSrc } = useImage(props.src)
     :title="name"
   >
     <img
-      v-if="verifiedSrc"
-      :src="verifiedSrc"
+      v-if="src"
+      :src="src"
       :alt="name"
       :class="classes.img"
     >

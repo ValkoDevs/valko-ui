@@ -21,7 +21,7 @@ const placementOptions: SelectOption<Corner>[] = [
   { value: 'bottom-left', label: 'Bottom Left' }
 ]
 
-const src = 'https://randomuser.me/api/portraits/women/12.jpg'
+const src = '/assets/badge.jpg'
 
 const badgeProps: TableItem[] = [
   {
