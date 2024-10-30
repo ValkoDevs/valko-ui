@@ -1,5 +1,14 @@
 # @valko-ui/docs
 
+## 0.1.2
+
+### Patch Changes
+
+- 9455993: Small bug fixes:
+
+  - Card component documentation not reacting to playground changes
+  - Avatar component documentation hide avatar checkbox not working as intended
+
 ## 0.1.1
 
 ### Minor Changes
@@ -47,4 +56,3 @@
   The documentation page is still in a very raw state, with minimal docs for components but missing install instructions and other things, but has a very descriptive page for each component.
 
   The ESLint Config package contains a set of rules we like to use while creating the library
-
