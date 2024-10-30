@@ -5,13 +5,6 @@ import VkAvatar from '#valkoui/components/Avatar.vue'
 describe('Avatar component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
-    beforeAll(() => {
-      Image.prototype.decode = async () => this
-    })
-    afterAll(() => {
-      Image.prototype.decode = undefined
-    })
-
     describe('With default props', () => {
       beforeEach(async () => {
         wrapper = mount(VkAvatar, {
@@ -266,13 +259,6 @@ describe('Avatar component', () => {
     })
 
     describe('When prop src is invalid', () => {
-      beforeAll(() => {
-        Image.prototype.decode = async () => { throw new Error('Invalid source') }
-      })
-      afterAll(() => {
-        Image.prototype.decode = undefined
-      })
-
       it('should display a user icon if there is no src or name given', () => {
         wrapper = mount(VkAvatar, {})
 

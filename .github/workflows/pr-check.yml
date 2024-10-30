@@ -28,10 +28,10 @@ jobs:
         run: npm run build --workspace=@valko-ui/components
 
       - name: Install dependencies for docs
-        run: npm ci --workspace=@valko-ui/docs-v2
+        run: npm ci --workspace=@valko-ui/docs
 
       - name: Lint docs
-        run: npm run lint --workspace=@valko-ui/docs-v2
+        run: npm run lint --workspace=@valko-ui/docs
 
       - name: Build docs
-        run: npm run build --workspace=@valko-ui/docs-v2
+        run: npm run build --workspace=@valko-ui/docs

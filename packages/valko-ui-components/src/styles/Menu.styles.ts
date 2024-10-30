@@ -16,6 +16,7 @@ export default tv({
     ],
     content: [
       'vk-menu__content',
+      'w-full',
       'flex',
       'py-2.5',
       'px-4',

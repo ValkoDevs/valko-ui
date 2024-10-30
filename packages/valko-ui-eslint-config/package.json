@@ -1,9 +1,8 @@
 {
   "name": "@valko-ui/eslint-config",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "index.mjs",
   "type": "module",
-  "private": true,
   "license": "MIT",
   "devDependencies": {
     "@eslint/eslintrc": "^3.1.0",

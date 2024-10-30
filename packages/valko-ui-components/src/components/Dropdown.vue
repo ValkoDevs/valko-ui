@@ -72,7 +72,6 @@ const onItemClick = (item: Item) => {
             :key="item.key"
           >
             <button
-              href="!#"
               @click.prevent="onItemClick(item)"
               :class="classes.itemsButton"
               :data-active="active"

@@ -1,30 +1,27 @@
 {
   "name": "@valko-ui/docs",
+  "version": "0.1.0",
   "private": true,
-  "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview",
+    "build": "nuxt build",
+    "dev": "nuxi cleanup && nuxi prepare && nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "clean": "nuxi cleanup",
+    "prepare": "nuxi prepare",
+    "postinstall": "nuxt prepare",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ./src"
+    "lint:fix": "eslint --fix ."
   },
   "dependencies": {
-    "@vueuse/core": "10.9.0",
-    "vue": "3.4.27",
-    "vue-router": "4.3.2"
-  },
-  "devDependencies": {
+    "@nuxt/eslint": "^0.5.5",
+    "@nuxtjs/tailwindcss": "^6.12.0",
     "@valko-ui/components": "*",
     "@valko-ui/eslint-config": "*",
-    "@vitejs/plugin-vue": "5.0.4",
-    "autoprefixer": "^10.4.14",
-    "postcss": "^8.4.24",
-    "tailwind-variants": "^0.1.13",
-    "tailwindcss": "^3.3.2",
-    "typescript": "5.6.2",
-    "vite": "5.4.7",
-    "vue-tsc": "2.1.6"
+    "@vueuse/core": "^11.1.0",
+    "nuxt": "3.13.2",
+    "vue": "3.5.8",
+    "vue-router": "^4.3.2"
   }
 }

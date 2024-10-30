@@ -50,13 +50,14 @@ const onItemClick = (item: MenuItem) => {
             name="item"
             :item="item"
           >
-            <a
-              href="!#"
+            <button
               @click.prevent="onItemClick(item)"
               :class="classes.content"
               :data-active="item.key === props.active"
               :data-disabled="item.disabled"
-            >{{ item.text }}</a>
+            >
+              {{ item.text }}
+            </button>
           </slot>
         </li>
       </ul>
