@@ -1,8 +1,12 @@
 import valkoUiConfig from '@valko-ui/eslint-config'
+import withNuxt from './.nuxt/eslint.config.mjs'
 
-export default [
+export default withNuxt(
   ...valkoUiConfig,
   {
-    ignores: ['**/node_modules', '**/dist', '**/.vscode', '**/img']
+    files: ['pages/**/*.vue', 'layouts/**/*.vue'],
+    rules: {
+      'vue/multi-word-component-names': 'off'
+    }
   }
-]
+)
