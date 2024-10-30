@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 20
+
+      - name: Install dependencies for components
+        run: npm ci --workspace=@valko-ui/components
+
+      - name: Build components
+        run: npm run build --workspace=@valko-ui/components
+
+      - name: Install dependencies for docs
+        run: npm ci --workspace=@valko-ui/docs
+
+      - name: Build docs
+        run: npm run generate --workspace=@valko-ui/docs
+
+      - name: Publish packages
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          publish: npm run publish-packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Deploy docs to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: './packages/valko-ui-docs/.output/public'
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: false
+          enable-commit-comment: false
+          overwrites-pull-request-comment: false
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1

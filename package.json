@@ -4,10 +4,11 @@
   "scripts": {
     "dev": "nodemon",
     "build": "turbo run build",
+    "generate": "turbo run generate --filter=@valko-ui/docs",
     "test": "turbo run test",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint:fix",
-    "publish": "turbo run publish"
+    "publish-packages": "changeset publish"
   },
   "packageManager": "npm@10.5.0",
   "workspaces": [
