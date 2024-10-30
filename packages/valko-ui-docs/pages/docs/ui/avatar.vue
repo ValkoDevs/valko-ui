@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import type { AvatarProps, TableItem } from '#valkoui'
 
-const form = ref<AvatarProps>({
+const form = reactive<AvatarProps>({
   color: 'primary',
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  name: 'Brand Copper',
+  name: 'Louise Barnett',
   flat: false,
-  src: ''
+  src: '/assets/avatar.jpg'
 })
 
-const extraForm = ref({
+const extraForm = reactive({
   avatar: false,
   user: ''
 })
@@ -75,10 +75,7 @@ const avatarProps: TableItem[] = [
   }
 ]
 
-form.value.name = 'Louise Barnett'
-form.value.src = '/assets/avatar.jpg'
-
-const avatarSrc = computed(() => { return extraForm.value.avatar ? '###' : form.value.src })
+const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
 </script>
 
 <template>

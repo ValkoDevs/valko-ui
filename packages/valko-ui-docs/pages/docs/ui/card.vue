@@ -11,12 +11,12 @@ const form = ref<CardProps>({
   flat: false
 })
 
-const cardComponents = {
+const cardComponents = reactive({
   body: true,
   footer: true,
   header: true,
   image: true
-}
+})
 
 const layoutOptions: SelectOption<Layout>[] = [
   { value: 'vertical', label: 'Vertical' },
