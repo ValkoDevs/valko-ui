@@ -24,8 +24,8 @@ jobs:
       - name: Build components
         run: npm run build --workspace=@valko-ui/components
 
-      - name: Install dependencies for docs
-        run: npm ci --workspace=@valko-ui/docs
+      - name: Install dependencies for docs and build
+        run: npm ci
 
       - name: Build docs
         run: npm run generate --workspace=@valko-ui/docs
@@ -37,7 +37,7 @@ jobs:
           publish: npm run publish-packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION_TOKEN }}
 
       - name: Deploy docs to Netlify
         uses: nwtgck/actions-netlify@v3.0

@@ -1,6 +1,6 @@
 # @valko-ui/docs
 
-## 0.1.0
+## 0.1.1
 
 ### Minor Changes
 
@@ -48,8 +48,3 @@
 
   The ESLint Config package contains a set of rules we like to use while creating the library
 
-### Patch Changes
-
-- Updated dependencies [c737a29]
-  - @valko-ui/eslint-config@0.1.0
-  - @valko-ui/components@0.1.0
