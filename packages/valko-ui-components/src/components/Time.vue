@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, toValue } from 'vue'
 import type { TimeProps } from '#valkoui/types/Time'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Time.styles.ts'
@@ -13,7 +13,9 @@ const props = withDefaults(defineProps<TimeProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  format: 'HH:mm:ss'
+  format: 'HH:mm:ss',
+  minuteStep: 1,
+  okButtonLabel: 'OK'
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -26,33 +28,13 @@ const hasHours = computed(() => /[Hh]/.test(props.format))
 const hasMinutes = computed(() => /[m]/.test(props.format))
 const hasSeconds = computed(() => /[s]/.test(props.format))
 const hasAMPM = computed(() => /[Aa]/.test(props.format))
-const selectedTime = computed(() => props.adapter.formattedTime.value.selected)
+const selectedTime = computed(() => {
+  const dates = toValue(props.adapter.formattedTime)
+  if (dates.display) return dates.display
+  else return dates.selected
+})
 
-const isSelectedHour = (hour: number) => selectedTime.value.hours === hour
-const isSelectedMinute = (minute: number) => selectedTime.value.minutes === minute
-const isSelectedSecond = (second: number) => selectedTime.value.seconds === second
 const isSelectedAMPM = (period: 'AM' | 'PM') => props.adapter.period.value === period
-
-const isHourDisabled = (hour: number) => {
-  const { minTime: min, maxTime: max, disabledTimes: disabled } = props
-
-  return ((min && hour < min) || (max && hour > max) || (disabled && disabled.includes(hour)))
-}
-
-const selectHour = (hour: number) => {
-  const result = props.adapter.onSelectHour(hour)
-  emit('update:modelValue', result)
-}
-
-const selectMinute = (minute: number) => {
-  const result = props.adapter.onSelectMinute(minute)
-  emit('update:modelValue', result)
-}
-
-const selectSecond = (second: number) => {
-  const result = props.adapter.onSelectSecond(second)
-  emit('update:modelValue', result)
-}
 
 const selectAMPM = (period: 'AM' | 'PM') => {
   const result = props.adapter.onSelectAMPM(period)
@@ -62,94 +44,106 @@ const selectAMPM = (period: 'AM' | 'PM') => {
 
 <template>
   <div :class="classes.container">
-    <div
-      v-if="hasHours"
-      :class="classes.viewContainer"
-    >
-      <vk-button
-        v-for="(h, H) in hsColItems"
-        :key="`hours-button-${H}`"
-        condensed
-        flat
-        :size="size"
-        :shape="shape"
-        :disabled="isHourDisabled(H)"
-        :variant="isSelectedHour(hsColItems === 12 ? h : H) ? variant : 'link'"
-        :color="isSelectedHour(hsColItems === 12 ? h : H) ? color : 'neutral'"
-        :class="classes.gridButton"
-        @click="selectHour(hsColItems === 12 ? h : H)"
+    <div :class="classes.grid">
+      <div
+        v-if="hasHours"
+        :class="classes.unitContainer"
       >
-        {{ `${hsColItems === 12 ? h : H}`.padStart(2, '0') }}
-      </vk-button>
+        <vk-button
+          v-for="(h, H) in hsColItems"
+          :key="`hours-button-${H}`"
+          condensed
+          flat
+          :size="size"
+          :shape="shape"
+          :disabled="adapter.isTimeDisabled(H)"
+          :variant="selectedTime.hours === (hsColItems === 12 ? h : H) ? variant : 'link'"
+          :color="selectedTime.hours === (hsColItems === 12 ? h : H) ? color : 'neutral'"
+          :class="classes.unitButton"
+          @click="adapter.setDisplayUnit('h', hsColItems === 12 ? h : H)"
+        >
+          {{ `${hsColItems === 12 ? h : H}`.padStart(2, '0') }}
+        </vk-button>
+      </div>
+      <div
+        v-if="hasMinutes"
+        :class="classes.unitContainer"
+      >
+        <vk-button
+          v-for="m in 60 / minuteStep"
+          :key="`minutes-button-${m-1}`"
+          condensed
+          flat
+          :size="size"
+          :shape="shape"
+          :disabled="adapter.isTimeDisabled(selectedTime.hours, m - 1)"
+          :variant="selectedTime.minutes === (m - 1) ? variant : 'link'"
+          :color="selectedTime.minutes === (m - 1) ? color : 'neutral'"
+          :class="classes.unitButton"
+          @click="adapter.setDisplayUnit('m', m-1)"
+        >
+          {{ `${(m - 1) * minuteStep}`.padStart(2, '0') }}
+        </vk-button>
+      </div>
+      <div
+        v-if="hasSeconds && minuteStep === 1"
+        :class="classes.unitContainer"
+      >
+        <vk-button
+          v-for="s in 60"
+          :key="`seconds-button-${s-1}`"
+          condensed
+          flat
+          :size="size"
+          :shape="shape"
+          :variant="selectedTime.seconds === (s - 1) ? variant : 'link'"
+          :color="selectedTime.seconds === (s - 1) ? color : 'neutral'"
+          :class="classes.unitButton"
+          @click="adapter.setDisplayUnit('s', s-1)"
+        >
+          {{ `${s-1}`.padStart(2, '0') }}
+        </vk-button>
+      </div>
     </div>
-    <div
-      v-if="hasMinutes"
-      :class="classes.viewContainer"
-    >
+    <div :class="classes.footer">
       <vk-button
-        v-for="m in 60"
-        :key="`minutes-button-${m-1}`"
-        condensed
         flat
-        :size="size"
+        size="xs"
         :shape="shape"
-        :variant="isSelectedMinute(m - 1) ? variant : 'link'"
-        :color="isSelectedMinute(m - 1) ? color : 'neutral'"
-        :class="classes.gridButton"
-        @click="selectMinute(m-1)"
+        :variant="variant"
+        :color="color"
+        :class="classes.okButton"
+        @click="adapter.onSelectTime"
       >
-        {{ `${m-1}`.padStart(2, '0') }}
+        {{ okButtonLabel }}
       </vk-button>
-    </div>
-    <div
-      v-if="hasSeconds"
-      :class="classes.viewContainer"
-    >
-      <vk-button
-        v-for="s in 60"
-        :key="`seconds-button-${s-1}`"
-        condensed
-        flat
-        :size="size"
-        :shape="shape"
-        :variant="isSelectedSecond(s - 1) ? variant : 'link'"
-        :color="isSelectedSecond(s - 1) ? color : 'neutral'"
-        :class="classes.gridButton"
-        @click="selectSecond(s-1)"
+      <div
+        v-if="hasAMPM"
+        :class="classes.periodContainer"
       >
-        {{ `${s-1}`.padStart(2, '0') }}
-      </vk-button>
-    </div>
-    <div
-      v-if="hasAMPM"
-      :class="classes.viewContainer"
-    >
-      <vk-button
-        :key="'AM-button'"
-        condensed
-        flat
-        :size="size"
-        :shape="shape"
-        :variant="isSelectedAMPM('AM') ? variant : 'link'"
-        :color="isSelectedAMPM('AM') ? color : 'neutral'"
-        :class="classes.periodButton"
-        @click="selectAMPM('AM')"
-      >
-        AM
-      </vk-button>
-      <vk-button
-        :key="'PM-button'"
-        condensed
-        flat
-        :size="size"
-        :shape="shape"
-        :variant="isSelectedAMPM('PM') ? variant : 'link'"
-        :color="isSelectedAMPM('PM') ? color : 'neutral'"
-        :class="classes.periodButton"
-        @click="selectAMPM('PM')"
-      >
-        PM
-      </vk-button>
+        <vk-button
+          flat
+          size="xs"
+          :shape="shape"
+          :variant="isSelectedAMPM('AM') ? variant : 'link'"
+          :color="isSelectedAMPM('AM') ? color : 'neutral'"
+          :class="classes.periodButton"
+          @click="selectAMPM('AM')"
+        >
+          AM
+        </vk-button>
+        <vk-button
+          flat
+          size="xs"
+          :shape="shape"
+          :variant="isSelectedAMPM('PM') ? variant : 'link'"
+          :color="isSelectedAMPM('PM') ? color : 'neutral'"
+          :class="classes.periodButton"
+          @click="selectAMPM('PM')"
+        >
+          PM
+        </vk-button>
+      </div>
     </div>
   </div>
 </template>

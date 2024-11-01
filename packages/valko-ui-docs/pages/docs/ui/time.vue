@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TimeProps, TableItem } from '#valkoui'
+import type { TimeProps, TableItem, SelectOption } from '#valkoui'
 
 const form = ref<Partial<TimeProps>>({
   color: 'primary',
@@ -7,12 +7,23 @@ const form = ref<Partial<TimeProps>>({
   shape: 'soft',
   size: 'md',
   format: 'HH:mm:ss',
-  minTime: 9,
-  maxTime: 17,
-  disabledTimes: [12, 13]
+  minTime: undefined,
+  maxTime: 1730482236,
+  disabledTimes: [],
+  minuteStep: 1,
+  okButtonLabel: 'OK'
 })
 
 const disabledTimes = ref(false)
+
+const steps: SelectOption[] = [
+  { value: 1, label: '1' },
+  { value: 5, label: '5' },
+  { value: 10, label: '10' },
+  { value: 15, label: '15' },
+  { value: 20, label: '20' },
+  { value: 30, label: '30' }
+]
 
 const timeProps: TableItem[] = [
   {
@@ -358,9 +369,11 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
           :variant="form.variant"
           :color="form.color"
           :shape="form.shape"
-          :min-time="form.minTime"
-          :max-time="form.maxTime"
+          :min-time="1730482236"
+          :max-time="1730482236"
           :disabled-times="disabledTimes ? form.disabledTimes : undefined"
+          :minute-step="form.minuteStep"
+          :ok-button-label="form.okButtonLabel"
         />
       </div>
     </template>
@@ -369,6 +382,11 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         v-model="form.format"
         size="sm"
         label="Format"
+      />
+      <vk-input
+        v-model="form.okButtonLabel"
+        size="sm"
+        label="Ok button label"
       />
       <vk-input
         v-model="form.minTime"
@@ -381,6 +399,12 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         size="sm"
         type="number"
         label="Max"
+      />
+      <vk-select
+        v-model="form.minuteStep"
+        label="Steps in minutes"
+        size="sm"
+        :options="steps"
       />
       <vk-select
         v-model="form.color"

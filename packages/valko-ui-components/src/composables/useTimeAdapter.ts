@@ -46,18 +46,19 @@ const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAd
       .replace('a', period.value.toLowerCase())
   })
 
-  const onSelectTimeUnit = (unit: 'hours' | 'minutes' | 'seconds', value: number) => {
-    const { minTime: min, maxTime: max, disabledTimes: disabled } = toValue(props)
+  const isTimeDisabled = (hours: number, minutes = 0) => {
+    const { minTime, maxTime } = toValue(props)
 
-    if ( unit === 'hours' && ((min && value < min) || (max && value > max) || (disabled?.includes(value)))) {
-      return model.value
-    }
+    const minDate = minTime ? new Date(+minTime * 1000) : null
+    const maxDate = maxTime ? new Date(+maxTime * 1000) : null
 
-    const date = new Date(model.value)
-    date[`set${unit.charAt(0).toUpperCase() + unit.slice(1)}` as 'setHours' | 'setMinutes' | 'setSeconds'](value)
-    model.value = date.getTime()
+    const formatTimeNumber = (h: number, m: number) => +(`${h}` + `${m}`.padStart(2, '0'))
 
-    return model.value
+    const minNumber = minDate ? formatTimeNumber(minDate.getUTCHours(), minDate.getMinutes()) : -1
+    const maxNumber = maxDate ? formatTimeNumber(maxDate.getUTCHours(), maxDate.getMinutes()) : Infinity
+    const currentNumber = formatTimeNumber(hours, minutes)
+
+    return minNumber > currentNumber || maxNumber < currentNumber
   }
 
   const onSelectAMPM = (selectedPeriod: 'AM' | 'PM') => {
@@ -65,15 +66,39 @@ const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAd
     return model.value
   }
 
+  const setDisplayUnit = (unit: 'h' | 'm' | 's', value: number) => {
+    const unitMap: Record<string, keyof Pick<Date, 'setHours' | 'setMinutes' | 'setSeconds'>> = {
+      h: 'setHours',
+      m: 'setMinutes',
+      s: 'setSeconds'
+    }
+
+    const helperDate = new Date(
+      tempTime.value
+        ? tempTime.value
+        : model.value
+          ? model.value
+          : 0
+    )
+    helperDate[unitMap[unit]](value)
+
+    tempTime.value = helperDate
+  }
+
+  const onSelectTime = () => {
+    if (tempTime.value) model.value = +tempTime.value
+    tempTime.value = null
+  }
+
   return [
     model,
     parsedModel,
     {
       formattedTime,
-      onSelectHour: (hour: number) => onSelectTimeUnit('hours', hour),
-      onSelectMinute: (minute: number) => onSelectTimeUnit('minutes', minute),
-      onSelectSecond: (second: number) => onSelectTimeUnit('seconds', second),
+      setDisplayUnit,
       onSelectAMPM,
+      onSelectTime,
+      isTimeDisabled,
       period
     }
   ]

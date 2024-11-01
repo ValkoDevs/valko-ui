@@ -8,10 +8,10 @@ export type TimeAdapterInterface = {
     selected: FormattedTime,
     display: FormattedTime
   }>,
-  onSelectHour: (hour: number) => void,
-  onSelectMinute: (minute: number) => void,
-  onSelectSecond: (second: number) => void,
+  setDisplayUnit: (unit: 'h' | 'm' | 's', value: number) => void,
   onSelectAMPM: (period: 'AM' | 'PM') => void,
+  onSelectTime: () => void,
+  isTimeDisabled: (hours: number, minutes?: number) => boolean | undefined,
   period: Ref<'AM' | 'PM'>
 }
 
@@ -31,9 +31,11 @@ export type TimeAdapterResult = [
 export interface TimeProps extends DefaultComponent {
   adapter: TimeAdapterInterface;
   modelValue?: EpochTimeStamp;
+  okButtonLabel?: string;
   format?: string;
   locale?: string;
-  minTime?: number;
-  maxTime?: number;
-  disabledTimes?: number[];
+  minTime?: EpochTimeStamp;
+  maxTime?: EpochTimeStamp;
+  disabledTimes?: EpochTimeStamp[];
+  minuteStep?: 1 | 5 | 10 | 15 | 20 | 30;
 }

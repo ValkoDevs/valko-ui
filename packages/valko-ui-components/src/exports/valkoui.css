@@ -13,11 +13,11 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: theme('colors.light.4');
+    background: theme('colors.light.5');
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: theme('colors.light.5');
+    background: theme('colors.light.4');
   }
 
   .toastify {

@@ -56,6 +56,7 @@ export * from '#valkoui/types/Tabs'
 export * from '#valkoui/types/Tag'
 export * from '#valkoui/types/Textarea'
 export * from '#valkoui/types/Time'
+export * from '#valkoui/types/Timepicker'
 export * from '#valkoui/types/Tooltip'
 
 /////////////////////
