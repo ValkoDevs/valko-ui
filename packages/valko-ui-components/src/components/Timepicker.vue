@@ -15,10 +15,10 @@ const props = withDefaults(defineProps<TimepickerProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  format: 'YYYY-MM-DD'
+  format: 'HH:mm:ss'
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['onSelect'])
 
 const classes = useStyle<TimepickerProps, SlotStyles>(props, styles)
 
@@ -45,6 +45,7 @@ onBeforeUnmount(() => document.removeEventListener('click', handleClickOutside))
       v-bind="props"
       :model-value="parsedModel"
       :label="label"
+      :class="classes.input"
       readonly
       @focus="togglePopover"
       @right-icon-click="togglePopover"
@@ -74,8 +75,8 @@ onBeforeUnmount(() => document.removeEventListener('click', handleClickOutside))
           :min-time="minTime"
           :max-time="maxTime"
           :disabled-times="disabledTimes"
-          @update:model-value="(value) => {
-            emit('update:modelValue', value)
+          @on-select="() => {
+            emit('onSelect')
             isOpen = false
           }"
         />

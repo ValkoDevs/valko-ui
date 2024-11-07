@@ -6,6 +6,9 @@ export default tv({
       'vk-timepicker',
       'relative'
     ],
+    input: [
+      'vk-timepicker__input'
+    ],
     content: [
       'vk-timepicker__content',
       'p-4',

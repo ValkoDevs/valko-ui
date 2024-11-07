@@ -1,120 +1,110 @@
 <script setup lang="ts">
 import type { TableItem, TimepickerProps, SelectOption } from '#valkoui'
 
-const form = ref<Partial<TimepickerProps>>({
+const form = reactive<Partial<TimepickerProps>>({
   color: 'primary',
   variant: 'filled',
   shape: 'soft',
   size: 'md',
   format: 'HH:mm:ss',
-  modelValue: 1728076036007,
-  disabledTimes: [
-    1705320000000,
-    1710936000000,
-    1717545600000,
-    1723420800000,
-    1736953200000,
-    1900249200000,
-    2215004400000
-  ],
+  minTime: 1730710858,
+  maxTime: 1730739658,
+  disabledTimes: undefined,
+  minuteStep: 1,
+  okButtonLabel: 'OK',
   label: 'Time'
 })
 
-const formats: TableItem[] = [
+const disabledRef = ref(false)
+
+const steps: SelectOption[] = [
+  { value: 1, label: '1' },
+  { value: 5, label: '5' },
+  { value: 10, label: '10' },
+  { value: 15, label: '15' },
+  { value: 20, label: '20' },
+  { value: 30, label: '30' }
+]
+
+const timeFormats: TableItem[] = [
   {
-    key: 'YY',
-    prop: 'YY',
-    required: false,
-    description: 'Two-digit year (e.g., 18 for 2018)',
-    values: '18',
+    key: 'HH',
+    prop: 'HH',
+    required: true,
+    description: 'Hour in 24-hour format, padded with leading zero (00 to 23).',
+    values: 'string',
     default: ''
   },
   {
-    key: 'YYYY',
-    prop: 'YYYY',
-    required: false,
-    description: 'Four-digit year (e.g., 2018)',
-    values: '2018',
+    key: 'H',
+    prop: 'H',
+    required: true,
+    description: 'Hour in 24-hour format without padding (0 to 23).',
+    values: 'number',
     default: ''
   },
   {
-    key: 'M',
-    prop: 'M',
-    required: false,
-    description: 'The month, beginning at 1 (1 = January)',
-    values: '1-12',
+    key: 'hh',
+    prop: 'hh',
+    required: true,
+    description: 'Hour in 12-hour format, padded with leading zero (01 to 12).',
+    values: 'string',
     default: ''
   },
   {
-    key: 'MM',
-    prop: 'MM',
-    required: false,
-    description: 'The month, 2-digits (e.g., 01 for January)',
-    values: '01-12',
+    key: 'h',
+    prop: 'h',
+    required: true,
+    description: 'Hour in 12-hour format without padding (1 to 12).',
+    values: 'number',
     default: ''
   },
   {
-    key: 'MMM',
-    prop: 'MMM',
-    required: false,
-    description: 'Abbreviated month name (e.g., Jan for January)',
-    values: 'Jan-Dec',
+    key: 'mm',
+    prop: 'mm',
+    required: true,
+    description: 'Minutes, padded with leading zero (00 to 59).',
+    values: 'string',
     default: ''
   },
   {
-    key: 'MMMM',
-    prop: 'MMMM',
-    required: false,
-    description: 'Full month name (e.g., January)',
-    values: 'January-December',
+    key: 'm',
+    prop: 'm',
+    required: true,
+    description: 'Minutes without padding (0 to 59).',
+    values: 'number',
     default: ''
   },
   {
-    key: 'D',
-    prop: 'D',
-    required: false,
-    description: 'Day of the month (1-31)',
-    values: '1-31',
+    key: 'ss',
+    prop: 'ss',
+    required: true,
+    description: 'Seconds, padded with leading zero (00 to 59).',
+    values: 'string',
     default: ''
   },
   {
-    key: 'DD',
-    prop: 'DD',
-    required: false,
-    description: 'Day of the month, 2-digits (e.g., 01 for the 1st)',
-    values: '01-31',
+    key: 's',
+    prop: 's',
+    required: true,
+    description: 'Seconds without padding (0 to 59).',
+    values: 'number',
     default: ''
   },
   {
-    key: 'd',
-    prop: 'd',
-    required: false,
-    description: 'Day of the week, with Sunday as 0 (0-6)',
-    values: '0-6',
+    key: 'A',
+    prop: 'A',
+    required: true,
+    description: 'Uppercase AM or PM based on the time.',
+    values: 'AM | PM',
     default: ''
   },
   {
-    key: 'dd',
-    prop: 'dd',
-    required: false,
-    description: 'Minimum name of the day of the week (e.g., Su for Sunday)',
-    values: 'Su-Sa',
-    default: ''
-  },
-  {
-    key: 'ddd',
-    prop: 'ddd',
-    required: false,
-    description: 'Short name of the day of the week (e.g., Sun for Sunday)',
-    values: 'Sun-Sat',
-    default: ''
-  },
-  {
-    key: 'dddd',
-    prop: 'dddd',
-    required: false,
-    description: 'Full name of the day of the week (e.g., Sunday)',
-    values: 'Sunday-Saturday',
+    key: 'a',
+    prop: 'a',
+    required: true,
+    description: 'Lowercase am or pm based on the time.',
+    values: 'am | pm',
     default: ''
   }
 ]
@@ -124,7 +114,7 @@ const timepickerProps: TableItem[] = [
     key: 'colorProp',
     prop: 'color',
     required: false,
-    description: 'The color theme of the Calendar.',
+    description: 'The color theme of the Time.',
     values: 'primary, neutral, error, warning, info, success',
     default: 'primary'
   },
@@ -132,7 +122,7 @@ const timepickerProps: TableItem[] = [
     key: 'variantProp',
     prop: 'variant',
     required: false,
-    description: 'The variant of the Calendar.',
+    description: 'The variant of the Time.',
     values: 'filled, outlined, ghost',
     default: 'filled'
   },
@@ -140,7 +130,7 @@ const timepickerProps: TableItem[] = [
     key: 'shapeProp',
     prop: 'shape',
     required: false,
-    description: 'The shape of the Calendar.',
+    description: 'The shape of the Time.',
     values: 'rounded, square, soft',
     default: 'soft'
   },
@@ -148,242 +138,241 @@ const timepickerProps: TableItem[] = [
     key: 'sizeProp',
     prop: 'size',
     required: false,
-    description: 'The size of the Calendar.',
+    description: 'The size of the Time.',
     values: 'xs, sm, md, lg',
     default: 'md'
   },
   {
-    key: 'adapterProp',
-    prop: 'adapter',
-    required: true,
-    description: 'As default we provide an adapter composable that uses native JS Date to provide the dates for the calendar.',
-    values: 'CalendarAdapter',
-    default: ''
-  },
-  {
-    key: 'modelValueProp',
-    prop: 'modelValue',
-    required: true,
-    description: 'The currently selected date, represented as an Epoch timestamp.',
-    values: 'EpochTimeStamp',
-    default: ''
-  },
-  {
-    key: 'localeProp',
-    prop: 'locale',
+    key: 'labelProp',
+    prop: 'label',
     required: false,
-    description: 'Defines the language and regional format to use in the calendar, affecting the display of weekdays, month names, etc.',
+    description: 'The label for the input.',
     values: 'string',
-    default: 'en-US'
+    default: ''
+  },
+  {
+    key: 'parsedModelProp',
+    prop: 'parsedModel',
+    required: false,
+    description: 'The display model for the input.',
+    values: 'string',
+    default: ''
   },
   {
     key: 'formatProp',
     prop: 'format',
     required: false,
-    description: 'The format of the selected date, following day-month-year, etc.',
+    description: 'The format of the time to be displayed.',
     values: 'string',
-    default: 'YYYY-MM-DD'
+    default: 'HH:mm:ss'
   },
   {
-    key: 'disabledDatesProp',
-    prop: 'disabledDates',
+    key: 'okButtonLabelProp',
+    prop: 'okButtonLabel',
     required: false,
-    description: 'An array of specific dates to disable.',
-    values: 'EpochTimeStamp[]',
-    default: '[]'
+    description: 'The label of the default OK button on the time selector.',
+    values: 'string',
+    default: 'OK'
   },
   {
-    key: 'disableWeekendsProp',
-    prop: 'disableWeekends',
+    key: 'minuteStepProp',
+    prop: 'minuteStep',
     required: false,
-    description: 'Allows to disable all weekends (sunday, saturday).',
-    values: 'true, false',
-    default: 'false'
+    description: 'The steps for the minutes.',
+    values: '1 | 5 | 10 | 15 | 20 | 30',
+    default: '1'
   },
   {
-    key: 'minDateProp',
-    prop: 'minDate',
+    key: 'localeProp',
+    prop: 'locale',
     required: false,
-    description: 'The minimum selectable date as an Epoch timestamp.',
+    description: 'Defines the language and regional format to use in the time picker, affecting the display of time formats.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'minTimeProp',
+    prop: 'minTime',
+    required: false,
+    description: 'The minimum selectable time.',
+    values: 'number',
+    default: ''
+  },
+  {
+    key: 'maxTimeProp',
+    prop: 'maxTime',
+    required: false,
+    description: 'The maximum selectable time.',
+    values: 'number',
+    default: ''
+  },
+  {
+    key: 'disabledTimesProp',
+    prop: 'disabledTimes',
+    required: false,
+    description: 'An array of specific times to disable.',
+    values: 'number[]',
+    default: ''
+  },
+  {
+    key: 'modelValueProp',
+    prop: 'modelValue',
+    required: false,
+    description: 'The currently selected time as a Unix timestamp.',
     values: 'EpochTimeStamp',
-    default: '[]'
-  },
-  {
-    key: 'maxDateProp',
-    prop: 'maxDate',
-    required: false,
-    description: 'The maximum selectable date as an Epoch timestamp.',
-    values: 'EpochTimeStamp',
-    default: '[]'
-  }
-]
-
-const calendarAdapterProps: TableItem[] = [
-  {
-    key: 'formattedDatesProp',
-    prop: 'formattedDates',
-    required: true,
-    description: 'Provides the currently selected, displayed, minimum, and maximum dates in a formatted structure.',
-    values: 'ComputedRef<{ selected: FormattedDate, display: FormattedDate, min?: FormattedDate, max?: FormattedDate }>',
     default: ''
   },
   {
-    key: 'disabledDatesProp',
-    prop: 'disabledDates',
+    key: 'adapterProp',
+    prop: 'adapter',
     required: true,
-    description: 'An array of disabled dates represented as timestamps.',
-    values: 'ComputedRef<number[]>',
-    default: '[]'
-  },
-  {
-    key: 'onSelectDayProp',
-    prop: 'onSelectDay',
-    required: true,
-    description: 'Function to handle day selection. Receives the selected day as a parameter and returns the updated timestamp.',
-    values: '(day: number) => number',
-    default: ''
-  },
-  {
-    key: 'onSelectMonthProp',
-    prop: 'onSelectMonth',
-    required: true,
-    description: 'Function to handle month selection. Receives the selected month as a parameter and returns the updated timestamp.',
-    values: '(month: number) => number',
-    default: ''
-  },
-  {
-    key: 'onSelectYearProp',
-    prop: 'onSelectYear',
-    required: true,
-    description: 'Function to handle year selection. Receives the selected year as a parameter and returns the updated timestamp.',
-    values: '(year: number) => number',
-    default: ''
-  },
-  {
-    key: 'getWeekdaysMethod',
-    prop: 'getWeekdays',
-    required: true,
-    description: 'Returns an array of localized names for the weekdays based on the current locale.',
-    values: '() => string[]',
-    default: ''
-  },
-  {
-    key: 'getMonthsMethod',
-    prop: 'getMonths',
-    required: true,
-    description: 'Returns an array of localized names for the months based on the current locale.',
-    values: '() => string[]',
+    description: 'A composable that provides methods and computed properties for managing time selection and formatting. We provide a useTimeAdapter for the component.',
+    values: 'TimeAdapterInterface',
     default: ''
   }
 ]
 
-const adapterResultProps: TableItem[] = [
+const timeAdapterInterface: TableItem[] = [
   {
-    key: 'adapterResult',
-    prop: 'AdapterResult',
+    key: 'formattedTimeProp',
+    prop: 'formattedTime',
     required: true,
-    description: 'The return type result of the Adapter containing the model, parsed model, and adapter methods.',
-    values: '[Ref<EpochTimeStamp>, ComputedRef<string>, CalendarAdapter]',
+    description: 'The selected and displayed time as formatted objects.',
+    values: 'ComputedRef<{ selected: FormattedTime, display: FormattedTime }>',
+    default: ''
+  },
+  {
+    key: 'setDisplayUnitProp',
+    prop: 'setDisplayUnit',
+    required: true,
+    description: 'Sets a specific time unit (hours, minutes, seconds) for display.',
+    values: '(unit: "h" | "m" | "s", value: number) => void',
+    default: ''
+  },
+  {
+    key: 'onSelectAMPMProp',
+    prop: 'onSelectAMPM',
+    required: true,
+    description: 'Handles AM/PM selection.',
+    values: '(period: "AM" | "PM") => void',
+    default: ''
+  },
+  {
+    key: 'onSelectTimeProp',
+    prop: 'onSelectTime',
+    required: true,
+    description: 'Sets the selected time and confirms selection.',
+    values: '() => void',
+    default: ''
+  },
+  {
+    key: 'isTimeDisabledProp',
+    prop: 'isTimeDisabled',
+    required: true,
+    description: 'Checks if a time (hours and optional minutes) is disabled based on `minTime`, `maxTime`, or `disabledTimes`.',
+    values: '(hours: number, minutes?: number) => boolean | undefined',
+    default: ''
+  },
+  {
+    key: 'periodProp',
+    prop: 'period',
+    required: true,
+    description: 'Current time period, either AM or PM.',
+    values: 'Ref<"AM" | "PM">',
     default: ''
   }
 ]
 
-const formattedDatesProps: TableItem[] = [
+const timeAdapterResult: TableItem[] = [
   {
-    key: 'selectedProp',
-    prop: 'selected',
+    key: 'timeAdapterResult',
+    prop: 'TimeAdapterResult',
     required: true,
-    description: 'The currently selected date, formatted as a `FormattedDate` object.',
-    values: 'FormattedDate',
-    default: ''
-  },
-  {
-    key: 'displayProp',
-    prop: 'display',
-    required: true,
-    description: 'The date that is currently being displayed on the calendar, formatted as a `FormattedDate` object.',
-    values: 'FormattedDate',
-    default: ''
-  },
-  {
-    key: 'minProp',
-    prop: 'min',
-    required: false,
-    description: 'The minimum date allowed for selection, formatted as a `FormattedDate` object.',
-    values: 'FormattedDate',
-    default: ''
-  },
-  {
-    key: 'maxProp',
-    prop: 'max',
-    required: false,
-    description: 'The maximum date allowed for selection, formatted as a `FormattedDate` object.',
-    values: 'FormattedDate',
+    description: 'The return type result of the Time Adapter containing the model, parsed model, and an object with the methods, properties required.',
+    values: '[Ref<EpochTimeStamp>, ComputedRef<string>, TimeAdapterInterface]',
     default: ''
   }
 ]
 
-const formattedDateProps: TableItem[] = [
+const formattedTimeProps: TableItem[] = [
   {
-    key: 'dayProp',
-    prop: 'day',
+    key: 'hoursProp',
+    prop: 'hours',
     required: true,
-    description: 'The day of the month (1-31 depending on the month).',
+    description: 'Hour part of the formatted time.',
     values: 'number',
-    default: ''
+    default: '0'
   },
   {
-    key: 'monthProp',
-    prop: 'month',
+    key: 'minutesProp',
+    prop: 'minutes',
     required: true,
-    description: 'The month of the year. (0-based index, 0 = January).',
+    description: 'Minute part of the formatted time.',
     values: 'number',
-    default: ''
+    default: '0'
   },
   {
-    key: 'yearProp',
-    prop: 'year',
+    key: 'secondsProp',
+    prop: 'seconds',
     required: true,
-    description: 'The year in full (e.g., 2024).',
+    description: 'Second part of the formatted time.',
     values: 'number',
-    default: ''
-  },
-  {
-    key: 'lastDayOfMonthProp',
-    prop: 'lastDayOfMonth',
-    required: true,
-    description: 'The last day of the month (28-31 depending on the month).',
-    values: 'number',
-    default: ''
-  },
-  {
-    key: 'firstWeekDayProp',
-    prop: 'firstWeekDay',
-    required: true,
-    description: 'The day of the week the month starts on (0-based index, 0 = Sunday, 6 = Saturday).',
-    values: 'DayOfWeek',
-    default: ''
+    default: '0'
   },
   {
     key: 'objProp',
     prop: 'obj',
     required: true,
-    description: 'The raw JavaScript Date object.',
-    values: 'T (defaults to any).',
+    description: 'Date object representing the formatted time.',
+    values: 'Date',
+    default: 'new Date()'
+  }
+]
+
+const timeAdapterProps: TableItem[] = [
+  {
+    key: 'formatProp',
+    prop: 'format',
+    required: false,
+    description: 'The format of the selected time, following hour-minute-second format.',
+    values: 'string',
+    default: 'HH:mm:ss'
+  },
+  {
+    key: 'localeProp',
+    prop: 'locale',
+    required: false,
+    description: 'Defines the language and regional format to use in the time display.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'minTimeProp',
+    prop: 'minTime',
+    required: false,
+    description: 'The minimum selectable time represented as a timestamp or Date object.',
+    values: 'number',
+    default: ''
+  },
+  {
+    key: 'maxTimeProp',
+    prop: 'maxTime',
+    required: false,
+    description: 'The maximum selectable time represented as a timestamp or Date object.',
+    values: 'number',
+    default: ''
+  },
+  {
+    key: 'disabledTimesProp',
+    prop: 'disabledTimes',
+    required: false,
+    description: 'An array of specific times to disable, represented as timestamps or Date objects.',
+    values: 'number[]',
     default: ''
   }
 ]
 
-const dayOfWeekProp: TableItem[] = [
-  {
-    key: 'dayOfWeekProp',
-    prop: 'DayOfWeek',
-    required: true,
-    description: 'Represents the day of the week as a number. 0 for Sunday, 1 for Monday, and so on until 6 for Saturday.',
-    values: '0 | 1 | 2 | 3 | 4 | 5 | 6',
-    default: ''
-  }
-]
+watch(disabledRef, (newVal) => form.disabledTimes = newVal ? [1730721658, 1730725258] : undefined)
 
 const [ model, parsedModel, adapter ] = useTimeAdapter(form)
 </script>
@@ -391,7 +380,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
 <template>
   <doc-section
     title="Timepicker"
-    description="The timepicker component is a customizable and versatile date picker that allows users to select dates within a specific range. It provides options to customize the appearance with different themes, shapes, and sizes. The component also supports disabled dates, minimum and maximum selectable dates, and custom date formatting. With the ability to adapt to different locales using custom labels for weekdays and months, Calendar is a flexible tool for handling date selection in any application. It seamlessly integrates with CalendarAdapter for dynamic date management and offers full control over its behavior."
+    description="A user-friendly and customizable time picker component designed for easy time selection within user interfaces. It offers a clean input experience, allowing users to choose times in both 12-hour and 24-hour formats. The component supports various constraints, including minimum and maximum time limits, as well as the ability to disable specific times, ensuring users can make precise selections according to their needs. Its flexible design and integration capabilities make it ideal for a variety of applications, providing a seamless and intuitive time input solution."
   >
     <template #playground-view>
       <vk-timepicker
@@ -406,6 +395,8 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         :format="form.format"
         :max-time="form.maxTime"
         :min-time="form.minTime"
+        :disabled-times="disabledRef ? form.disabledTimes : undefined"
+        :minute-step="form.minuteStep"
       />
     </template>
     <template #playground-options>
@@ -417,6 +408,29 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         v-model="form.format"
         size="sm"
         label="Format"
+      />
+      <vk-input
+        v-model="form.okButtonLabel"
+        size="sm"
+        label="Ok button label"
+      />
+      <vk-input
+        v-model="form.minTime"
+        size="sm"
+        type="number"
+        label="Min"
+      />
+      <vk-input
+        v-model="form.maxTime"
+        size="sm"
+        type="number"
+        label="Max"
+      />
+      <vk-select
+        v-model="form.minuteStep"
+        label="Steps in minutes"
+        size="sm"
+        :options="steps"
       />
       <vk-select
         v-model="form.color"
@@ -442,6 +456,10 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         size="sm"
         :options="sizeOptions.general"
       />
+      <vk-checkbox
+        v-model="disabledRef"
+        label="Disabled Times"
+      />
     </template>
 
     <template #examples>
@@ -454,15 +472,13 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         <div
           v-for="color in colorOptions"
           :key="color.value"
-          class="w-1/3"
+          class="w-1/4 flex flex-col gap-4"
         >
           <span>{{ color.label }}</span>
           <vk-timepicker
-            v-model="model"
-            class="mt-2"
             :adapter="adapter"
-            :color="color.value"
             :parsed-model="parsedModel"
+            :color="color.value"
           />
         </div>
       </example-section>
@@ -476,14 +492,13 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         <div
           v-for="variant in variantOptions.general"
           :key="variant.value"
+          class="flex flex-col gap-4"
         >
           <span>{{ variant.label }}</span>
           <vk-timepicker
-            v-model="model"
-            class="mt-2"
             :adapter="adapter"
-            :variant="variant.value"
             :parsed-model="parsedModel"
+            :variant="variant.value"
           />
         </div>
       </example-section>
@@ -497,14 +512,13 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
+          class="flex flex-col gap-4"
         >
           <span>{{ shape.label }}</span>
           <vk-timepicker
-            v-model="model"
-            class="mt-2"
             :adapter="adapter"
-            :shape="shape.value"
             :parsed-model="parsedModel"
+            :shape="shape.value"
           />
         </div>
       </example-section>
@@ -518,30 +532,46 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
-          class="w-1/3"
+          class="flex flex-col gap-4"
         >
           <span>{{ size.label }}</span>
           <vk-timepicker
-            v-model="model"
-            class="mt-2"
             :adapter="adapter"
-            :size="size.value"
             :parsed-model="parsedModel"
+            :size="size.value"
           />
         </div>
       </example-section>
 
       <example-section
-        title="Disable Weekends"
-        justify="start"
-        wrap
+        title="Min & Max Times"
         gap
       >
+        <div class="flex flex-col gap-4">
+          <span>Min</span>
+          <vk-timepicker
+            :adapter="adapter"
+            :parsed-model="parsedModel"
+            :min-time="1730710858"
+          />
+        </div>
+        <div class="flex flex-col gap-4">
+          <span>Max</span>
+          <vk-timepicker
+            :adapter="adapter"
+            :parsed-model="parsedModel"
+            :max-time="1730739658"
+          />
+        </div>
+      </example-section>
+
+      <example-section
+        title="Disabled Times"
+      >
         <vk-timepicker
-          v-model="model"
           :adapter="adapter"
           :parsed-model="parsedModel"
-          disable-weekends
+          :disabled-times="form.disabledTimes"
         />
       </example-section>
     </template>
@@ -549,7 +579,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
     <template #api>
       <div class="w-full flex flex-col">
         <example-section
-          title="timepicker Props"
+          title="Timepicker Props"
           gap
         >
           <vk-table
@@ -559,12 +589,12 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         </example-section>
 
         <example-section
-          title="Calendar Adapter Interface"
+          title="Time Adapter Interface"
           gap
         >
           <vk-table
             :headers="propHeaders"
-            :data="calendarAdapterProps"
+            :data="timeAdapterInterface"
           />
         </example-section>
 
@@ -574,37 +604,27 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         >
           <vk-table
             :headers="propHeaders"
-            :data="adapterResultProps"
+            :data="timeAdapterResult"
           />
         </example-section>
 
         <example-section
-          title="FormattedDates Interface"
+          title="Formatted Time Interface"
           gap
         >
           <vk-table
             :headers="propHeaders"
-            :data="formattedDatesProps"
+            :data="formattedTimeProps"
           />
         </example-section>
 
         <example-section
-          title="FormattedDate Type"
+          title="Time Adapter Props"
           gap
         >
           <vk-table
             :headers="propHeaders"
-            :data="formattedDateProps"
-          />
-        </example-section>
-
-        <example-section
-          title="DayOfWeek Type"
-          gap
-        >
-          <vk-table
-            :headers="propHeaders"
-            :data="dayOfWeekProp"
+            :data="timeAdapterProps"
           />
         </example-section>
 
@@ -614,7 +634,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         >
           <vk-table
             :headers="propHeaders"
-            :data="formats"
+            :data="timeFormats"
           />
         </example-section>
       </div>

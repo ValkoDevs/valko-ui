@@ -47,7 +47,14 @@ const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAd
   })
 
   const isTimeDisabled = (hours: number, minutes = 0) => {
-    const { minTime, maxTime } = toValue(props)
+    const { minTime, maxTime, disabledTimes, format } = toValue(props)
+
+    const is12HourFormat = /[h]/.test(format || '') || /[A|a]/.test(format || '')
+
+    const convertTo24Hour = (h: number, period: 'AM' | 'PM') => {
+      if (h === 12) return period === 'AM' ? 0 : 12
+      return period === 'PM' ? h + 12 : h
+    }
 
     const minDate = minTime ? new Date(+minTime * 1000) : null
     const maxDate = maxTime ? new Date(+maxTime * 1000) : null
@@ -56,14 +63,25 @@ const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAd
 
     const minNumber = minDate ? formatTimeNumber(minDate.getUTCHours(), minDate.getMinutes()) : -1
     const maxNumber = maxDate ? formatTimeNumber(maxDate.getUTCHours(), maxDate.getMinutes()) : Infinity
-    const currentNumber = formatTimeNumber(hours, minutes)
+    const currentNumber = formatTimeNumber(is12HourFormat ? convertTo24Hour(hours, period.value) : hours, minutes)
 
-    return minNumber > currentNumber || maxNumber < currentNumber
+    const isSpecificallyDisabled = disabledTimes
+      ? disabledTimes.some(disabledTime => {
+        const disabledDate = new Date(disabledTime * 1000)
+        const disabledHour = is12HourFormat
+          ? convertTo24Hour(disabledDate.getUTCHours() % 12 || 12, disabledDate.getUTCHours() >= 12 ? 'PM' : 'AM')
+          : disabledDate.getUTCHours()
+        const disabledNumber = formatTimeNumber(disabledHour, disabledDate.getMinutes())
+        return disabledNumber === currentNumber
+      })
+      : false
+
+    return minNumber > currentNumber || maxNumber < currentNumber || isSpecificallyDisabled
   }
 
   const onSelectAMPM = (selectedPeriod: 'AM' | 'PM') => {
     period.value = selectedPeriod
-    return model.value
+    return tempTime.value
   }
 
   const setDisplayUnit = (unit: 'h' | 'm' | 's', value: number) => {

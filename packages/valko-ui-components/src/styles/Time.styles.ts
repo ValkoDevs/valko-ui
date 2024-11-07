@@ -32,7 +32,7 @@ export default tv({
       'overflow-y-auto'
     ],
     unitButton: [
-      'vk-time__grid-button',
+      'vk-time__unit-button',
       'truncate',
       'font-normal'
     ],
@@ -44,7 +44,9 @@ export default tv({
       'truncate',
       'font-normal'
     ],
-    okButton: []
+    okButton: [
+      'vk-time__ok-button'
+    ]
   },
   variants: {
     size: {

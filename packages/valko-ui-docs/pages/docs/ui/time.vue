@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import type { TimeProps, TableItem, SelectOption } from '#valkoui'
 
-const form = ref<Partial<TimeProps>>({
+const form = reactive<Partial<TimeProps>>({
   color: 'primary',
   variant: 'filled',
   shape: 'soft',
   size: 'md',
   format: 'HH:mm:ss',
-  minTime: undefined,
-  maxTime: 1730482236,
-  disabledTimes: [],
+  minTime: 1730710858,
+  maxTime: 1730739658,
+  disabledTimes: undefined,
   minuteStep: 1,
   okButtonLabel: 'OK'
 })
 
-const disabledTimes = ref(false)
+const disabledRef = ref(false)
 
 const steps: SelectOption[] = [
   { value: 1, label: '1' },
@@ -67,6 +67,22 @@ const timeProps: TableItem[] = [
     default: 'HH:mm:ss'
   },
   {
+    key: 'okButtonLabelProp',
+    prop: 'okButtonLabel',
+    required: false,
+    description: 'The label of the default OK button on the time selector.',
+    values: 'string',
+    default: 'OK'
+  },
+  {
+    key: 'minuteStepProp',
+    prop: 'minuteStep',
+    required: false,
+    description: 'The steps for the minutes.',
+    values: '1 | 5 | 10 | 15 | 20 | 30',
+    default: '1'
+  },
+  {
     key: 'localeProp',
     prop: 'locale',
     required: false,
@@ -102,8 +118,8 @@ const timeProps: TableItem[] = [
     key: 'modelValueProp',
     prop: 'modelValue',
     required: false,
-    description: 'The currently selected time.',
-    values: 'number',
+    description: 'The currently selected time as a Unix timestamp.',
+    values: 'EpochTimeStamp',
     default: ''
   },
   {
@@ -116,62 +132,52 @@ const timeProps: TableItem[] = [
   }
 ]
 
-const timeEmits: TableItem[] = [
-  {
-    key: 'updateModelValueEmit',
-    event: 'update:modelValue',
-    description: 'Emitted when a time is selected.',
-    values: 'EpochTimeStamp',
-    type: '(timeUnit: number) => void'
-  }
-]
-
 const timeAdapterInterface: TableItem[] = [
   {
     key: 'formattedTimeProp',
     prop: 'formattedTime',
     required: true,
-    description: 'Provides the currently selected and displayed time in a formatted structure.',
+    description: 'The selected and displayed time as formatted objects.',
     values: 'ComputedRef<{ selected: FormattedTime, display: FormattedTime }>',
     default: ''
   },
   {
-    key: 'onSelectHourProp',
-    prop: 'onSelectHour',
+    key: 'setDisplayUnitProp',
+    prop: 'setDisplayUnit',
     required: true,
-    description: 'Function to handle hour selection. Receives the selected hour as a parameter.',
-    values: '(hour: number) => void',
-    default: ''
-  },
-  {
-    key: 'onSelectMinuteProp',
-    prop: 'onSelectMinute',
-    required: true,
-    description: 'Function to handle minute selection. Receives the selected minute as a parameter.',
-    values: '(minute: number) => void',
-    default: ''
-  },
-  {
-    key: 'onSelectSecondProp',
-    prop: 'onSelectSecond',
-    required: true,
-    description: 'Function to handle second selection. Receives the selected second as a parameter.',
-    values: '(second: number) => void',
+    description: 'Sets a specific time unit (hours, minutes, seconds) for display.',
+    values: '(unit: "h" | "m" | "s", value: number) => void',
     default: ''
   },
   {
     key: 'onSelectAMPMProp',
     prop: 'onSelectAMPM',
     required: true,
-    description: 'Function to handle AM/PM selection. Receives the selected period as a parameter.',
+    description: 'Handles AM/PM selection.',
     values: '(period: "AM" | "PM") => void',
+    default: ''
+  },
+  {
+    key: 'onSelectTimeProp',
+    prop: 'onSelectTime',
+    required: true,
+    description: 'Sets the selected time and confirms selection.',
+    values: '() => void',
+    default: ''
+  },
+  {
+    key: 'isTimeDisabledProp',
+    prop: 'isTimeDisabled',
+    required: true,
+    description: 'Checks if a time (hours and optional minutes) is disabled based on `minTime`, `maxTime`, or `disabledTimes`.',
+    values: '(hours: number, minutes?: number) => boolean | undefined',
     default: ''
   },
   {
     key: 'periodProp',
     prop: 'period',
     required: true,
-    description: 'The current period, either AM or PM.',
+    description: 'Current time period, either AM or PM.',
     values: 'Ref<"AM" | "PM">',
     default: ''
   }
@@ -193,7 +199,7 @@ const formattedTimeProps: TableItem[] = [
     key: 'hoursProp',
     prop: 'hours',
     required: true,
-    description: 'The hour component of the formatted time, represented as a number.',
+    description: 'Hour part of the formatted time.',
     values: 'number',
     default: '0'
   },
@@ -201,7 +207,7 @@ const formattedTimeProps: TableItem[] = [
     key: 'minutesProp',
     prop: 'minutes',
     required: true,
-    description: 'The minute component of the formatted time, represented as a number.',
+    description: 'Minute part of the formatted time.',
     values: 'number',
     default: '0'
   },
@@ -209,7 +215,7 @@ const formattedTimeProps: TableItem[] = [
     key: 'secondsProp',
     prop: 'seconds',
     required: true,
-    description: 'The second component of the formatted time, represented as a number.',
+    description: 'Second part of the formatted time.',
     values: 'number',
     default: '0'
   },
@@ -217,7 +223,7 @@ const formattedTimeProps: TableItem[] = [
     key: 'objProp',
     prop: 'obj',
     required: true,
-    description: 'A Date object representing the full time value.',
+    description: 'Date object representing the formatted time.',
     values: 'Date',
     default: 'new Date()'
   }
@@ -349,6 +355,7 @@ const timeFormats: TableItem[] = [
   }
 ]
 
+watch(disabledRef, (newVal) => form.disabledTimes = newVal ? [1730721658, 1730725258] : undefined)
 
 const [ model, parsedModel, adapter ] = useTimeAdapter(form)
 </script>
@@ -369,9 +376,9 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
           :variant="form.variant"
           :color="form.color"
           :shape="form.shape"
-          :min-time="1730482236"
-          :max-time="1730482236"
-          :disabled-times="disabledTimes ? form.disabledTimes : undefined"
+          :min-time="form.minTime"
+          :max-time="form.maxTime"
+          :disabled-times="disabledRef ? form.disabledTimes : undefined"
           :minute-step="form.minuteStep"
           :ok-button-label="form.okButtonLabel"
         />
@@ -431,7 +438,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         :options="sizeOptions.general"
       />
       <vk-checkbox
-        v-model="disabledTimes"
+        v-model="disabledRef"
         label="Disabled Times"
       />
     </template>
@@ -521,14 +528,14 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
           <span>Min</span>
           <vk-time
             :adapter="adapter"
-            :min-time="9"
+            :min-time="1730710858"
           />
         </div>
         <div class="flex flex-col gap-4">
           <span>Max</span>
           <vk-time
             :adapter="adapter"
-            :max-time="17"
+            :max-time="1730739658"
           />
         </div>
       </example-section>
@@ -552,16 +559,6 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
           <vk-table
             :headers="propHeaders"
             :data="timeProps"
-          />
-        </example-section>
-
-        <example-section
-          title="Time Emits"
-          gap
-        >
-          <vk-table
-            :headers="emitHeaders"
-            :data="timeEmits"
           />
         </example-section>
 
