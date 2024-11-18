@@ -19,13 +19,14 @@ const props = withDefaults(defineProps<InputProps>(), {
   clearable: false
 })
 
-const emit = defineEmits(['update:modelValue', 'focus', 'leftIconClick', 'rightIconClick'])
+const emit = defineEmits(['update:modelValue', 'focus', 'clear', 'leftIconClick', 'rightIconClick'])
 
 const classes = useStyle<InputProps, SlotStyles>(props, styles)
 
 const inputId = useId()
 const isFilled = ref(false)
 const inputValue = ref(props.modelValue || '')
+const inputRef = ref<HTMLInputElement | null>(null)
 
 const updateValue = (e: Event) => {
   const value = (e.target as HTMLInputElement).value
@@ -44,7 +45,13 @@ const onFocus = (event: Event) => {
 const clearInput = () => {
   inputValue.value = ''
   emit('update:modelValue', '')
+  emit('clear')
   isFilled.value = false
+}
+
+const handleIconClick = (icon: 'left' | 'right') => {
+  emit(`${icon}IconClick`)
+  inputRef.value?.focus()
 }
 
 watch(() => props.modelValue, (newValue) => {
@@ -57,6 +64,7 @@ watch(() => props.modelValue, (newValue) => {
   <div :class="classes.container">
     <div :class="classes.field">
       <input
+        ref="inputRef"
         :data-leftIcon="!!$slots.leftIcon"
         :data-rightIcon="!!$slots.rightIcon"
         :class="classes.input"
@@ -86,14 +94,14 @@ watch(() => props.modelValue, (newValue) => {
       <span
         v-if="$slots.leftIcon"
         :class="[classes.icon, classes.iconLeft]"
-        @click="$emit('leftIconClick')"
+        @click="handleIconClick('left')"
       >
         <slot name="leftIcon" />
       </span>
       <span
         v-if="$slots.rightIcon"
         :class="[classes.icon, classes.iconRight]"
-        @click="$emit('rightIconClick')"
+        @click="handleIconClick('right')"
       >
         <slot name="rightIcon" />
       </span>

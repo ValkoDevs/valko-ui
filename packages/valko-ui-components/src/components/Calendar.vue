@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<CalendarProps>(), {
   format: 'YYYY-MM-DD'
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'finalizeSelection'])
 
 const classes = useStyle<CalendarProps, SlotStyles>(props, styles)
 
@@ -60,19 +60,26 @@ const onViewChange = (view: DisplayView) => {
 
 const onSelectYear = (year: number) => {
   const result = props.adapter.onSelectYear(year)
-  if (selectionType.value === 'year-only') emit('update:modelValue', result)
+  if (selectionType.value === 'year-only') {
+    emit('update:modelValue', result)
+    emit('finalizeSelection')
+  }
   else currentView.value = 'months'
 }
 
 const onSelectMonth = (month: number) => {
   const result = props.adapter.onSelectMonth(month)
-  if (['month-only', 'month-year'].includes(selectionType.value)) emit('update:modelValue', result)
+  if (['month-only', 'month-year'].includes(selectionType.value)) {
+    emit('update:modelValue', result)
+    emit('finalizeSelection')
+  }
   else currentView.value = 'days'
 }
 
 const onSelectDay = (day: number) => {
   const result = props.adapter.onSelectDay(day)
   emit('update:modelValue', result)
+  emit('finalizeSelection')
 }
 
 const onChangeMonth = (month: number) => {

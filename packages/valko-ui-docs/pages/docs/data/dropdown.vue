@@ -7,7 +7,8 @@ const form = ref<Partial<DropdownProps>>({
   shape: 'soft',
   size: 'md',
   flat: false,
-  disabled: false
+  disabled: false,
+  label: 'Dropdown Menu'
 })
 
 const items: Item[] = [
@@ -68,18 +69,18 @@ const dropdownProps: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'titleProp',
-    prop: 'title',
+    key: 'labelProp',
+    prop: 'label',
     required: false,
-    description: 'The Dropdown title.',
+    description: 'The default slot button label.',
     values: 'string',
-    default: 'Dropdown'
+    default: ''
   },
   {
     key: 'iconProp',
     prop: 'icon',
     required: false,
-    description: 'The dropdown icon.',
+    description: 'The default slot button icon.',
     values: 'string',
     default: 'chevron-down'
   },
@@ -145,6 +146,15 @@ const dropdownEmits: TableItem[] = [
     type: '(item: Item) => void'
   }
 ]
+
+const dropdownSlots: TableItem[] = [
+  {
+    key: 'dropdownTriggerSlot',
+    name: 'dropdown-trigger',
+    description: 'The dropdown-trigger slot for the Dropdown. By default, it renders a `VkButton`. If you use a custom component within this slot, you can access the `props` for binding attributes like color, variant, and size, as well as an `open` prop indicating the dropdown’s current state. This allows you to integrate any custom component as the dropdown trigger, while retaining full control over its appearance and behavior.',
+    example: '<template #dropdown-trigger>\n  <!-- Your custom dropdown trigger component here -->\n</template>'
+  }
+]
 </script>
 
 <template>
@@ -161,12 +171,18 @@ const dropdownEmits: TableItem[] = [
           :shape="form.shape"
           :disabled="form.disabled"
           :flat="form.flat"
+          :label="form.label"
           :items="items"
         />
       </div>
     </template>
 
     <template #playground-options>
+      <vk-input
+        v-model="form.label"
+        size="sm"
+        label="Label"
+      />
       <vk-select
         v-model="form.color"
         label="Color"
@@ -212,6 +228,7 @@ const dropdownEmits: TableItem[] = [
           :color="color.value"
           :title="color.label"
           :items="items"
+          label="Dropdown Menu"
         />
       </example-section>
 
@@ -225,6 +242,7 @@ const dropdownEmits: TableItem[] = [
           :variant="variant.value"
           :title="variant.label"
           :items="items"
+          label="Dropdown Menu"
         />
       </example-section>
 
@@ -238,6 +256,7 @@ const dropdownEmits: TableItem[] = [
           :shape="shape.value"
           :title="shape.label"
           :items="items"
+          label="Dropdown Menu"
         />
       </example-section>
 
@@ -251,6 +270,7 @@ const dropdownEmits: TableItem[] = [
           :size="size.value"
           :title="size.label"
           :items="items"
+          label="Dropdown Menu"
         />
       </example-section>
 
@@ -261,6 +281,7 @@ const dropdownEmits: TableItem[] = [
         <vk-dropdown
           title="Flat"
           :items="items"
+          label="Dropdown Menu"
         />
       </example-section>
 
@@ -272,6 +293,7 @@ const dropdownEmits: TableItem[] = [
           title="Disabled"
           disabled
           :items="items"
+          label="Dropdown Menu"
         />
       </example-section>
     </template>
@@ -305,6 +327,16 @@ const dropdownEmits: TableItem[] = [
           <vk-table
             :headers="emitHeaders"
             :data="dropdownEmits"
+          />
+        </example-section>
+
+        <example-section
+          title="Dropdown Slots"
+          gap
+        >
+          <vk-table
+            :headers="slotHeaders"
+            :data="dropdownSlots"
           />
         </example-section>
       </div>

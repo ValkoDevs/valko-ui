@@ -21,7 +21,7 @@ export default tv({
     dropdown: [
       'absolute',
       'w-full',
-      'z-10',
+      'z-40',
       'mt-1',
       'p-2',
       'bg-white',

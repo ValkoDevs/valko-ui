@@ -1,14 +1,7 @@
 <script setup lang="ts">
 import type { MenuItem } from '@valko-ui/components'
-import { useLocalStorage } from '@vueuse/core'
 
 const router = useRouter()
-const theme = useLocalStorage('theme', 'dark')
-
-const isDarkTheme = computed({
-  get: () => theme.value === 'dark',
-  set: (value: boolean) => theme.value = value ? 'dark' : 'light'
-})
 
 const menuItems: MenuItem[] = [
   { key: 'get-started', group: 'General', text: 'Get Started' },
@@ -46,9 +39,7 @@ const menuItems: MenuItem[] = [
   { key: 'data/tabs', group: 'Data', text: 'Tabs' }
 ]
 
-
 const activeItem = ref<MenuItem['key'] | null>(null)
-let htmlElement: HTMLElement | null = null
 
 const onItemClick = (item: MenuItem) => {
   activeItem.value = item.key
@@ -56,16 +47,10 @@ const onItemClick = (item: MenuItem) => {
 }
 
 onMounted(() => {
-  htmlElement = document.querySelector('html')
   const activeItemKey = router.currentRoute.value.path.replace('/docs/', '')
   if (activeItemKey === '') {
     activeItem.value = 'get-started'
   } else activeItem.value = activeItemKey
-})
-
-watchEffect(() => {
-  if (theme.value === 'dark') htmlElement?.classList.add('dark')
-  else htmlElement?.classList.remove('dark')
 })
 </script>
 
@@ -78,12 +63,32 @@ watchEffect(() => {
       shape="square"
       flat
       fixed
+      class="flex justify-between"
     >
-      <vk-switch
-        v-model="isDarkTheme"
-        :position="true"
-        label="Dark Mode"
-      />
+      <h2 class="text-primary-600 dark:text-primary-400 text-3xl font-serif tracking-wider">
+        ValkoUI
+      </h2>
+      <div class="flex gap-1">
+        <theme-switch />
+        <a
+          href="https://github.com/ValkoDevs/valko-ui"
+          target="_blank"
+        >
+          <vk-button
+            variant="link"
+            shape="rounded"
+            color="neutral"
+            condensed
+            size="lg"
+            class="size-10"
+          >
+            <vk-icon
+              name="brand-github"
+              class="text-2xl"
+            />
+          </vk-button>
+        </a>
+      </div>
     </vk-navbar>
 
     <div class="w-full flex">

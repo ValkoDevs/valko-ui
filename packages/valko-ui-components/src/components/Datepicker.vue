@@ -15,25 +15,25 @@ const props = withDefaults(defineProps<DatepickerProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  format: 'YYYY-MM-DD'
+  format: 'YYYY-MM-DD',
+  isOpen: false
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'open', 'close'])
 
 const classes = useStyle<DatepickerProps, SlotStyles>(props, styles)
 
-const isOpen = ref(false)
 const rootRef = ref<HTMLElement | null>(null)
-const togglePopover = () => isOpen.value = !isOpen.value
+
 
 const handleClickOutside = (event: MouseEvent) => {
   const target = event.target as HTMLElement
 
-  if (rootRef.value && !rootRef.value.contains(target)) isOpen.value = false
+  if (rootRef.value && !rootRef.value.contains(target) && !target.closest('.vk-datepicker__content')) emit('close')
 }
 
-onMounted(() => nextTick(() => document.addEventListener('click', handleClickOutside)))
-onBeforeUnmount(() => document.removeEventListener('click', handleClickOutside))
+onMounted(() => nextTick(() => document.addEventListener('mousedown', handleClickOutside, true)))
+onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside, true))
 </script>
 
 <template>
@@ -46,8 +46,9 @@ onBeforeUnmount(() => document.removeEventListener('click', handleClickOutside))
       :model-value="parsedModel"
       :label="label"
       readonly
-      @focus="togglePopover"
-      @right-icon-click="togglePopover"
+      cursor="pointer"
+      @focus="emit('open')"
+      @right-icon-click="emit('open')"
     >
       <template #rightIcon>
         <vk-icon name="calendar" />
@@ -63,7 +64,7 @@ onBeforeUnmount(() => document.removeEventListener('click', handleClickOutside))
       leave-to-class="opacity-0"
     >
       <div
-        v-if="isOpen"
+        v-show="isOpen"
         :class="classes.content"
       >
         <vk-calendar
@@ -75,10 +76,8 @@ onBeforeUnmount(() => document.removeEventListener('click', handleClickOutside))
           :min-date="minDate"
           :max-date="maxDate"
           :disable-weekends="disableWeekends"
-          @update:model-value="(value) => {
-            emit('update:modelValue', value)
-            isOpen = false
-          }"
+          @update:model-value="(value) => emit('update:modelValue', value)"
+          @finalize-selection="emit('close')"
         />
       </div>
     </transition>

@@ -66,6 +66,7 @@ export default tv({
       'scale-[.8]'
     ],
     icon: [
+      'cursor-pointer',
       'opacity-80',
       'absolute',
       'transition-all',

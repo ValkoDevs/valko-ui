@@ -7,6 +7,7 @@ const form = ref<Partial<DataTableProps>>({
   variant: 'filled',
   shape: 'soft',
   size: 'md',
+  label: 'Page Size',
   striped: false
 })
 
@@ -67,6 +68,14 @@ const tableProps: TableItem[] = [
     description: 'The size of the table.',
     values: 'xs, sm, md, lg',
     default: 'md'
+  },
+  {
+    key: 'labelProp',
+    prop: 'labelProp',
+    required: false,
+    description: 'The label for the select size.',
+    values: 'string',
+    default: ''
   },
   {
     key: 'striped',
@@ -427,6 +436,7 @@ watch(() => draggableRef, (newValue) => {
           :shape="form.shape"
           :size="form.size"
           :striped="form.striped"
+          :label="form.label"
           @on-sort="dataTable.onSort"
           @on-filter="dataTable.onFilter"
           @on-page-change="dataTable.onPageChange"
@@ -437,6 +447,11 @@ watch(() => draggableRef, (newValue) => {
       </div>
     </template>
     <template #playground-options>
+      <vk-input
+        v-model="form.label"
+        label="Label"
+        size="sm"
+      />
       <vk-select
         v-model="form.color"
         label="Color"

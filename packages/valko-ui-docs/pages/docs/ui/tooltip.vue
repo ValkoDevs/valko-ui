@@ -6,7 +6,7 @@ const form = ref<TooltipProps>({
   size: 'md',
   placement: 'top',
   content: 'Tooltip Content',
-  flat: false
+  flat: true
 })
 
 const placementOptions: SelectOption<Placement>[] = [
@@ -55,7 +55,7 @@ const tooltipProps: TableItem[] = [
     required: false,
     description: 'Determines whether to display a shadow for the Tooltip.',
     values: 'true, false',
-    default: 'false'
+    default: 'true'
   }
 ]
 

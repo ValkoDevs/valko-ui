@@ -7,6 +7,8 @@ export default tv({
     'pt-4',
     'mb-4',
     'min-h-10',
+    'h-fit',
+    'self-start',
     'border-light-4',
     'font-bold',
     'text-lg',

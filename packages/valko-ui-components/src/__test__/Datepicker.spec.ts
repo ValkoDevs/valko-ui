@@ -59,6 +59,7 @@ describe('Datepicker component', () => {
       beforeEach(() => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             modelValue,
             parsedModel,
             adapter
@@ -100,6 +101,7 @@ describe('Datepicker component', () => {
       it('should be color primary when props.color is primary', async () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             color: 'primary',
             parsedModel,
             modelValue,
@@ -115,6 +117,7 @@ describe('Datepicker component', () => {
       it('should be color neutral when props.color is neutral', () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             color: 'neutral',
             parsedModel,
             modelValue,
@@ -130,6 +133,7 @@ describe('Datepicker component', () => {
       it('should be color success when props.color is success', () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             color: 'success',
             parsedModel,
             modelValue,
@@ -145,6 +149,7 @@ describe('Datepicker component', () => {
       it('should be color info when props.color is info', () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             color: 'info',
             parsedModel,
             modelValue,
@@ -160,6 +165,7 @@ describe('Datepicker component', () => {
       it('should be color warning when props.color is warning', () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             color: 'warning',
             parsedModel,
             modelValue,
@@ -175,6 +181,7 @@ describe('Datepicker component', () => {
       it('should be color error when props.color is error', () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             color: 'error',
             parsedModel,
             modelValue,
@@ -192,6 +199,7 @@ describe('Datepicker component', () => {
       it('should be rounded when props.shape is rounded', async () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             shape: 'rounded',
             parsedModel,
             modelValue,
@@ -208,6 +216,7 @@ describe('Datepicker component', () => {
       it('should be soft when props.shape is soft', async () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             shape: 'soft',
             parsedModel,
             modelValue,
@@ -224,6 +233,7 @@ describe('Datepicker component', () => {
       it('should be square when props.shape is square', async () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             shape: 'square',
             parsedModel,
             modelValue,
@@ -242,6 +252,7 @@ describe('Datepicker component', () => {
       it('should be xs when props.size is xs', () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             size: 'xs',
             parsedModel,
             modelValue,
@@ -257,6 +268,7 @@ describe('Datepicker component', () => {
       it('should be sm when props.size is sm', () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             size: 'sm',
             parsedModel,
             modelValue,
@@ -272,6 +284,7 @@ describe('Datepicker component', () => {
       it('should be md when props.size is md', () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             size: 'md',
             parsedModel,
             modelValue,
@@ -287,6 +300,7 @@ describe('Datepicker component', () => {
       it('should be lg when props.size is lg', () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             size: 'lg',
             parsedModel,
             modelValue,
@@ -304,6 +318,7 @@ describe('Datepicker component', () => {
       it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             variant: 'filled',
             parsedModel,
             modelValue,
@@ -319,6 +334,7 @@ describe('Datepicker component', () => {
       it('should be outlined when props.variant is outlined', () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             variant: 'outlined',
             parsedModel,
             modelValue,
@@ -334,6 +350,7 @@ describe('Datepicker component', () => {
       it('should be ghost when props.variant is ghost', () => {
         wrapper = mount(VkDatepicker, {
           props: {
+            isOpen: true,
             variant: 'ghost',
             parsedModel,
             modelValue,
@@ -348,45 +365,11 @@ describe('Datepicker component', () => {
     })
   })
 
-  describe('isOpen', () => {
-    it('should open when the input is focused', async () => {
-      const wrapper = mount(VkDatepicker, {
-        props: {
-          modelValue,
-          parsedModel,
-          adapter
-        }
-      })
-
-      const input = wrapper.findAll('.vk-input__input')[0]
-      await input.trigger('focus')
-
-      expect(wrapper.find('.vk-datepicker__content').exists()).toBe(true)
-    })
-
-    it('should close when a click occurs outside the root component', async () => {
-      const wrapper = mount(VkDatepicker, {
-        props: {
-          modelValue,
-          parsedModel,
-          adapter
-        }
-      })
-
-      const input = wrapper.findAll('.vk-input__input')[0]
-      await input.trigger('focus')
-
-      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
-      await nextTick()
-
-      expect(wrapper.find('.vk-datepicker__content').exists()).toBe(false)
-    })
-  })
-
   describe('Emits', () => {
     it('should emit update:modelValue event', async () => {
       const wrapper = mount(VkDatepicker, {
         props: {
+          isOpen: true,
           modelValue,
           parsedModel,
           adapter
@@ -400,6 +383,41 @@ describe('Datepicker component', () => {
       await button.trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('update:modelValue')
+    })
+
+    it('should emit open when the input is focused', async () => {
+      const wrapper = mount(VkDatepicker, {
+        props: {
+          isOpen: true,
+          modelValue,
+          parsedModel,
+          adapter
+        }
+      })
+
+      const input = wrapper.findAll('.vk-input__input')[0]
+      await input.trigger('focus')
+
+      expect(wrapper.emitted()).toHaveProperty('open')
+    })
+
+    it('should emit close when a click occurs outside the root component', async () => {
+      const wrapper = mount(VkDatepicker, {
+        props: {
+          isOpen: true,
+          modelValue,
+          parsedModel,
+          adapter
+        }
+      })
+
+      const input = wrapper.findAll('.vk-input__input')[0]
+      await input.trigger('focus')
+
+      document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('close')
     })
   })
 })

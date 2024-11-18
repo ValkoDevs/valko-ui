@@ -1,5 +1,13 @@
+<script setup lang="ts">
+import '~/assets/styles.css'
+
+const theme = useCookie('theme', {
+  default: () => 'dark'
+})
+</script>
+
 <template>
-  <Html class="dark">
+  <Html :class="theme">
     <Head>
       <Title>ValkoUI Components</Title>
     </Head>

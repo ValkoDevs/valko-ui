@@ -12,7 +12,7 @@ export interface DropdownProps extends Colors, Sizes, Shapes {
   variant?: VariantWithGradientAndLink;
   items: Item[];
   icon?: string;
-  title?: string;
+  label?: string;
   flat?: boolean;
   disabled?: boolean;
 }

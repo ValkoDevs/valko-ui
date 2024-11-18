@@ -399,6 +399,23 @@ const dayOfWeekProp: TableItem[] = [
   }
 ]
 
+const calendarEmits: TableItem[] = [
+  {
+    key: 'updateModelValueEmit',
+    event: 'update:modelValue',
+    description: 'Emitted when a date is selected or changed, usually to update the model with the selected date.',
+    values: 'string | Date',
+    type: '(value: string | Date) => void'
+  },
+  {
+    key: 'finalizeSelectionEmit',
+    event: 'finalizeSelection',
+    description: 'Emitted when the final selection of a date is confirmed, completing the date selection process.',
+    values: '',
+    type: '() => void'
+  }
+]
+
 const [ model, parsedModel, adapter ] = useDateAdapter(form)
 </script>
 
@@ -587,6 +604,16 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
           <vk-table
             :headers="propHeaders"
             :data="calendarProp"
+          />
+        </example-section>
+
+        <example-section
+          title="Calendar Emits"
+          gap
+        >
+          <vk-table
+            :headers="emitHeaders"
+            :data="calendarEmits"
           />
         </example-section>
 

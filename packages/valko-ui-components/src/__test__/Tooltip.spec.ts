@@ -31,8 +31,8 @@ describe('Tooltip component', () => {
         expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('rounded-lg')
       })
 
-      it('should not be flat', () => {
-        expect(wrapper.find('.vk-tooltip_tip').classes()).not.toContain('shadow-none')
+      it('should be flat', () => {
+        expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('shadow-none')
       })
     })
 

@@ -35,11 +35,13 @@ const thumbRefMap = {
   max: ref(Array.isArray(props.modelValue) ? props.modelValue[1] : props.modelValue)
 }
 
-const getNewThumbPosition = (event: MouseEvent): number => {
+const getNewThumbPosition = (clientX: number): number => {
   if (!sliderRef.value) return 0
   const sliderRect = sliderRef.value.getBoundingClientRect()
-  let newPosition = ((event.clientX - sliderRect.left) / sliderRect.width) * (props.max - props.min) + props.min
+
+  let newPosition = ((clientX - sliderRect.left) / sliderRect.width) * (props.max - props.min) + props.min
   newPosition = Math.round(newPosition / props.step) * props.step
+
   return Math.min(props.max, Math.max(props.min, newPosition))
 }
 
@@ -61,12 +63,17 @@ const updateThumbPosition = (newPosition: number, thumb: 'min' | 'max') => {
   }
 }
 
-const onMouseDown = (event: MouseEvent, thumb: 'min' | 'max') => {
+const onStart = (event: MouseEvent | TouchEvent, thumb: 'min' | 'max') => {
   isDragging.value = true
   draggingThumb.value = thumb
-  document.addEventListener('mousemove', onMouseMove)
-  document.addEventListener('mouseup', onMouseUp)
-  updateThumbPosition(getNewThumbPosition(event), thumb)
+
+  const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX
+  updateThumbPosition(getNewThumbPosition(clientX), thumb)
+
+  document.addEventListener('mousemove', onMove)
+  document.addEventListener('touchmove', onMove)
+  document.addEventListener('mouseup', onEnd)
+  document.addEventListener('touchend', onEnd)
 }
 
 const handleSingleThumb = (newPosition: number) => {
@@ -76,38 +83,43 @@ const handleSingleThumb = (newPosition: number) => {
 }
 
 const handleMultipleThumbs = (newPosition: number) => {
-  const minThumb = Math.abs(newPosition - thumbRefMap.min.value)
-  const maxThumb = Math.abs(newPosition - thumbRefMap.max.value)
-  const selectedThumb = minThumb < maxThumb ? 'min' : 'max'
+  const middlePoint = (thumbRefMap.min.value + thumbRefMap.max.value) / 2
+  const selectedThumb = newPosition <= middlePoint ? 'min' : 'max'
 
   updateThumbPosition(newPosition, selectedThumb)
   draggingThumb.value = selectedThumb
-
   isDragging.value = true
 }
 
-const onSliderClick = (event: MouseEvent) => {
-  const newPosition = getNewThumbPosition(event)
+const onSliderClick = (event: MouseEvent | TouchEvent) => {
+  const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX
+  const newPosition = getNewThumbPosition(clientX)
 
   if (!props.isDouble) handleSingleThumb(newPosition)
   else handleMultipleThumbs(newPosition)
 
-  document.addEventListener('mousemove', onMouseMove)
-  document.addEventListener('mouseup', onMouseUp)
+  document.addEventListener('mousemove', onMove)
+  document.addEventListener('touchmove', onMove)
+  document.addEventListener('mouseup', onEnd)
+  document.addEventListener('touchend', onEnd)
 }
 
-const onMouseMove = (event: MouseEvent) => {
+const onMove = (event: MouseEvent | TouchEvent) => {
   if (!isDragging.value) return
 
+  const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX
   requestAnimationFrame(() => {
-    updateThumbPosition(getNewThumbPosition(event), draggingThumb.value)
+    updateThumbPosition(getNewThumbPosition(clientX), draggingThumb.value)
   })
 }
 
-const onMouseUp = () => {
+const onEnd = () => {
   isDragging.value = false
-  document.removeEventListener('mousemove', onMouseMove)
-  document.removeEventListener('mouseup', onMouseUp)
+
+  document.removeEventListener('mousemove', onMove)
+  document.removeEventListener('touchmove', onMove)
+  document.removeEventListener('mouseup', onEnd)
+  document.removeEventListener('touchend', onEnd)
 }
 
 const inlineStyles = computed(() => {
@@ -121,7 +133,7 @@ const inlineStyles = computed(() => {
   const range = props.max - props.min
   const center = ((0 - props.min) / range) * 100
   const start = props.isDouble ? ((thumbRefMap.min.value - props.min) / range) * 100 : center
-  const end = props.isDouble ? ((thumbRefMap.max.value - props.min) / range) * 100 : ((thumbRefMap.max.value - props.min) / range) * 100
+  const end = ((thumbRefMap.max.value - props.min) / range) * 100
 
   const left = Math.min(start, end)
   const width = Math.abs(end - start)
@@ -132,7 +144,7 @@ const inlineStyles = computed(() => {
     styles += `background-image: url("${diagonalStripes}"); background-size: ${sizeMap[props.size]};`
   }
 
-  return styles.trimStart()
+  return styles.trim()
 })
 
 const thumbStyles = computed(() => {
@@ -197,12 +209,14 @@ onMounted(() => {
         v-if="isDouble"
         :class="classes.thumb"
         :style="thumbStyles.start"
-        @mousedown="(event) => onMouseDown(event, 'min')"
+        @mousedown="(event) => onStart(event, 'min')"
+        @touchstart="(event) => onStart(event, 'min')"
       />
       <div
         :class="classes.thumb"
         :style="thumbStyles.end"
-        @mousedown="(event) => onMouseDown(event, 'max')"
+        @mousedown="(event) => onStart(event, 'max')"
+        @touchstart="(event) => onStart(event, 'max')"
       />
     </div>
     <div

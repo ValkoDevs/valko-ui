@@ -278,7 +278,7 @@ onBeforeUnmount(() => {
 
       <div>
         <vk-select
-          placeholder="Page Size"
+          :label="label"
           :options="selectSize"
           :color="color"
           :variant="variant"
