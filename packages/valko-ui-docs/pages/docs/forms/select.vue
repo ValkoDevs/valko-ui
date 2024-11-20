@@ -19,7 +19,8 @@ const form = ref<SelectProps>({
   disabled: false,
   readonly: false,
   multiple: false,
-  allowClear: true
+  allowClear: true,
+  clearable: false
 })
 
 const exampleSectionForm = ref<Record<string, string | number>>({
@@ -157,7 +158,15 @@ const apiData: TableItem[] = [
     key: 'allowClearProp',
     prop: 'allowClear',
     required: false,
-    description: 'Indicates whether the Select can be cleared.',
+    description: 'Allows to leave the selection empty.',
+    values: 'true, false',
+    default: 'true'
+  },
+  {
+    key: 'clearableProp',
+    prop: 'clearable',
+    required: false,
+    description: 'Displays an icon that clears the selection when clicked only if allowClear is true.',
     values: 'true, false',
     default: 'true'
   }
@@ -194,6 +203,7 @@ const emitData: TableItem[] = [
           :size="form.size"
           :multiple="form.multiple"
           :allow-clear="form.allowClear"
+          :clearable="form.clearable"
         />
       </div>
     </template>
@@ -248,6 +258,10 @@ const emitData: TableItem[] = [
       <vk-checkbox
         v-model="form.allowClear"
         label="Allow Clear"
+      />
+      <vk-checkbox
+        v-model="form.clearable"
+        label="Clearable"
       />
     </template>
 

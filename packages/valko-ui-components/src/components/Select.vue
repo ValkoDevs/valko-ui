@@ -15,7 +15,8 @@ const props = withDefaults(defineProps<SelectProps>(), {
   size: 'md',
   shape: 'soft',
   options: () => [],
-  allowClear: false
+  allowClear: false,
+  clearable: false
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -44,16 +45,15 @@ const updateValue = (value: SelectProps['modelValue']) => {
   }
 }
 
-const selectItem = (value: string | number ) => {
+const selectItem = (value: string | number) => {
   if (props.multiple) {
     const selectedValues = Array.isArray(props.modelValue) ? [...props.modelValue] : []
     const index = selectedValues.indexOf(value)
 
-    if (index === -1) {
-      selectedValues.push(value)
-    } else {
-      selectedValues.splice(index, 1)
-    }
+    if (index === -1) selectedValues.push(value)
+    else selectedValues.splice(index, 1)
+
+    if (!props.allowClear && selectedValues.length === 0) return
 
     updateValue(selectedValues)
   } else {
@@ -82,6 +82,13 @@ const closeDropdownOnOutsideClick = (event: MouseEvent) => {
 
 const toggleDropdown = (onFocus: boolean) => {
   isOpen.value = onFocus && !props.disabled && !props.readonly
+}
+
+const clearSelection = () => {
+  if (!props.allowClear) return
+  if (!props.multiple) updateValue(undefined)
+  else updateValue([])
+  toggleDropdown(false)
 }
 
 onMounted(() => {
@@ -125,15 +132,17 @@ onUnmounted(() => {
         :size="size"
         :shape="shape"
         :model-value="showValue"
+        :clearable="clearable && allowClear"
         cursor="pointer"
         @focus="() => toggleDropdown(true)"
+        @clear="clearSelection"
       >
         <template #rightIcon>
           <vk-icon
             name="chevron-down"
             :data-open="isOpen"
             :class="classes.icon"
-            @click="() => toggleDropdown(true)"
+            @click.stop="() => toggleDropdown(!isOpen)"
           />
         </template>
       </vk-input>

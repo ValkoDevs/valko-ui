@@ -12,7 +12,7 @@ export default tv({
       'bg-light-3',
       'shadow-md',
       'absolute',
-      'z-10',
+      'z-40',
       'origin-center',
       'data-[text=true]:max-w-xs',
       'data-[text=true]:w-fit',

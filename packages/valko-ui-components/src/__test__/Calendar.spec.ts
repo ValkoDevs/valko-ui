@@ -119,7 +119,7 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-light-4')
+        expect(button.classes()).toContain('bg-dark-4')
       })
 
       it('should be color success when props.color is success', async () => {

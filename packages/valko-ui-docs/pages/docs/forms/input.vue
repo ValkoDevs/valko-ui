@@ -53,6 +53,14 @@ const apiData: TableItem[] = [
     default: 'text'
   },
   {
+    key: 'cursorProp',
+    prop: 'cursor',
+    required: false,
+    description: 'The displayed cursor type when hovering the input.',
+    values: 'cursor | text',
+    default: 'text'
+  },
+  {
     key: 'sizeProp',
     prop: 'size',
     required: false,
@@ -148,6 +156,13 @@ const emitData: TableItem[] = [
     description: 'Emitted when the input is focused.',
     values: '',
     type: '(event: FocusEvent) => void'
+  },
+  {
+    key: 'clearEmit',
+    event: 'clear',
+    description: 'Emitted when the input is cleared using the clearable icon.',
+    values: '',
+    type: '() => void'
   },
   {
     key: 'leftIconClickEmit',

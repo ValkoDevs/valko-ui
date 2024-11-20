@@ -134,6 +134,15 @@ const modalSlots = [
         <template #default>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+
+          <vk-button
+            color="primary"
+            size="sm"
+            class="self-end"
+            @click="() => {form.isOpen = false}"
+          >
+            Accept & close
+          </vk-button>
         </template>
       </vk-modal>
     </template>

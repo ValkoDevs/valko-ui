@@ -14,4 +14,5 @@ export interface SelectProps extends DefaultComponent {
   disabled?: boolean;
   readonly?: boolean;
   allowClear?: boolean;
+  clearable?: boolean;
 }

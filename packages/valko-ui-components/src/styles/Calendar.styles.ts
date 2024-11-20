@@ -34,11 +34,8 @@ export default tv({
     ],
     panel: [
       'vk-calendar__panel',
-      'w-fit',
       'grid',
       'gap-2',
-      'justify-center',
-      'items-center',
       'group-data-[current-view=days]:grid-cols-7',
       'group-data-[current-view=days]:grid-rows-7',
       'group-data-[current-view=months]:grid-cols-9',
@@ -49,7 +46,7 @@ export default tv({
     gridButton: [
       'vk-calendar__grid-button',
       'truncate',
-      'font-normal',
+      'mx-auto',
       'group-data-[current-view=days]:col-span-1',
       'group-data-[current-view=months]:col-span-3',
       'group-data-[current-view=years]:col-span-1'

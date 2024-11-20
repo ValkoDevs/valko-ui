@@ -62,33 +62,40 @@ export default tv({
     color: {
       primary: {
         a: [
-          'text-primary-500'
+          'text-primary-500',
+          'hover:text-primary-600'
         ]
       },
       neutral: {
         a: [
           'text-dark-1',
-          'dark:text-light-3'
+          'hover:text-dark-3',
+          'dark:text-light-3',
+          'dark:hover:text-light-5'
         ]
       },
       success: {
         a: [
-          'text-success-500'
+          'text-success-500',
+          'hover:text-success-600'
         ]
       },
       info: {
         a: [
-          'text-info-500'
+          'text-info-500',
+          'hover:text-info-600'
         ]
       },
       warning: {
         a: [
-          'text-warning-500'
+          'text-warning-500',
+          'hover:text-warning-600'
         ]
       },
       error: {
         a: [
-          'text-error-500'
+          'text-error-500',
+          'hover:text-error-600'
         ]
       }
     },

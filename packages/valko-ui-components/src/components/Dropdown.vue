@@ -14,7 +14,6 @@ const props = withDefaults(defineProps<DropdownProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  title: 'Dropdown',
   icon: 'chevron-down',
   flat: false,
   disabled: false,
@@ -41,17 +40,23 @@ const onItemClick = (item: Item) => {
     >
       <div>
         <menu-button>
-          <vk-button
-            :class="classes.button"
-            v-bind="props"
+          <slot
+            name="dropdown-trigger"
+            :v-bind="props"
+            :open="open"
           >
-            {{ title }}
-            <vk-icon
-              :class="classes.icon"
-              :name="icon"
-              :data-open="open"
-            />
-          </vk-button>
+            <vk-button
+              :class="classes.button"
+              v-bind="props"
+            >
+              {{ label }}
+              <vk-icon
+                :class="classes.icon"
+                :name="icon"
+                :data-open="open"
+              />
+            </vk-button>
+          </slot>
         </menu-button>
       </div>
 

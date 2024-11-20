@@ -34,12 +34,13 @@ const closeModal = () => { if (props.closable) emit('close') }
     as="template"
   >
     <Dialog
-      @close="closeModal"
       :class="classes.dialog"
       :initial-focus="containerRef"
+      @close="closeModal"
     >
       <transition-child
         as="template"
+        class="opacity-0"
         enter="duration-300 ease-out"
         enter-from="opacity-0"
         enter-to="opacity-100"
@@ -47,20 +48,17 @@ const closeModal = () => { if (props.closable) emit('close') }
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <div
-          :class="classes.backdrop"
-        />
+        <div :class="classes.backdrop" />
       </transition-child>
 
       <div
         :class="classes.container"
         ref="containerRef"
       >
-        <div
-          :class="classes.content"
-        >
+        <div :class="classes.content">
           <transition-child
             as="template"
+            class="opacity-0"
             enter="duration-300 ease-out"
             enter-from="opacity-0 scale-95"
             enter-to="opacity-100 scale-100"
@@ -68,16 +66,12 @@ const closeModal = () => { if (props.closable) emit('close') }
             leave-from="opacity-100 scale-100"
             leave-to="opacity-0 scale-95"
           >
-            <dialog-panel
-              :class="classes.panel"
-            >
+            <dialog-panel :class="classes.panel">
               <div
                 v-if="title || closable"
                 :class="classes.panelChild"
               >
-                <dialog-title
-                  :class="classes.title"
-                >
+                <dialog-title :class="classes.title">
                   {{ title }}
                 </dialog-title>
                 <vk-button

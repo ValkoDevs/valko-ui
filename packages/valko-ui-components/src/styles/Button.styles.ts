@@ -187,16 +187,16 @@ export default tv({
       class: {
         button: [
           [
-            'bg-light-4',
-            'focus:ring-light-4',
-            'hover:bg-light-3',
-            'active:bg-light-3',
-            'text-dark-1',
-            'dark:bg-dark-2',
-            'dark:focus:ring-dark-2',
-            'dark:hover:bg-dark-1',
-            'dark:active:bg-dark-3',
-            'dark:text-light-3'
+            'bg-dark-4',
+            'focus:ring-dark-4',
+            'hover:bg-dark-2',
+            'active:bg-dark-3',
+            'text-light-3',
+            'dark:bg-light-2',
+            'dark:focus:ring-light-3',
+            'dark:hover:bg-light-3',
+            'dark:active:bg-light-2',
+            'dark:text-dark-5'
           ]
         ]
       }
@@ -275,15 +275,15 @@ export default tv({
       class: {
         button: [
           'text-dark-1',
-          'bg-light-5/[.15]',
-          'focus:ring-light-5/[.30]',
-          'hover:bg-light-5/[.25]',
-          'active:bg-light-5/[.30]',
+          'bg-dark-3/[.15]',
+          'focus:ring-dark-3/[.30]',
+          'hover:bg-dark-3/[.25]',
+          'active:bg-dark-3/[.30]',
           'dark:text-light-3',
-          'dark:bg-dark-4/[.15]',
-          'dark:focus:ring-dark-5/[.30]',
-          'dark:hover:bg-dark-3/[.25]',
-          'dark:active:bg-dark-5/[.30]'
+          'dark:bg-light-4/[.15]',
+          'dark:focus:ring-light-5/[.30]',
+          'dark:hover:bg-light-3/[.25]',
+          'dark:active:bg-light-5/[.30]'
         ]
       }
     },
@@ -447,16 +447,16 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-dark-1',
-          'focus:ring-light-4/20',
-          'hover:bg-light-5/20',
-          'active:bg-light-4/20',
-          'border-light-4',
+          'text-dark-3',
+          'focus:ring-dark-4/20',
+          'hover:bg-dark-5/20',
+          'active:bg-dark-4/20',
+          'border-dark-4',
           'dark:text-light-3',
-          'dark:focus:ring-dark-4/20',
-          'dark:hover:bg-dark-5/20',
-          'dark:active:bg-dark-4/20',
-          'dark:border-dark-3'
+          'dark:focus:ring-light-4/20',
+          'dark:hover:bg-light-5/20',
+          'dark:active:bg-light-4/20',
+          'dark:border-light-3'
         ]
       }
     },
@@ -536,18 +536,20 @@ export default tv({
       color: 'neutral',
       class: {
         button: [
-          'from-light-4',
-          'to-light-5',
-          'focus:ring-light-5',
-          'hover:from-light-5',
-          'active:from-light-5',
-          'active:to-light-4',
-          'dark:from-dark-1',
-          'dark:to-dark-5',
-          'dark:focus:ring-dark-3',
-          'dark:hover:to-dark-3',
-          'dark:active:from-dark-2',
-          'dark:active:to-dark-4'
+          'from-dark-1',
+          'to-dark-5',
+          'focus:ring-dark-5',
+          'hover:to-dark-3',
+          'active:from-dark-5',
+          'active:to-dark-1',
+          'text-light-3',
+          'dark:text-dark-5',
+          'dark:from-light-3',
+          'dark:to-light-5',
+          'dark:focus:ring-light-5',
+          'dark:hover:to-light-5',
+          'dark:active:from-light-5',
+          'dark:active:to-light-3'
         ]
       }
     },
@@ -637,6 +639,16 @@ export default tv({
           'border-gray-600',
           'hover:bg-transparent',
           'active:bg-transparent'
+        ]
+      }
+    },
+    // disabled & flat
+    {
+      disabled: true,
+      flat: true,
+      class: {
+        button: [
+          'active:shadow-none'
         ]
       }
     },

@@ -45,6 +45,7 @@ export interface DataTableProps extends TableProps {
   selectionMode?: SelectionMode;
   page?: number;
   pageSizeOptions?: number[];
+  label?: string;
 }
 
 export interface ClientSideDataTable<T extends TableItem> {

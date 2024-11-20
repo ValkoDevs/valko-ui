@@ -50,6 +50,7 @@ onMounted(() => {
         :color="selected.year === year ? color : 'neutral'"
         :variant="selected.year === year ? variant : 'link'"
         :shape="shape"
+        condensed
         flat
         @click="onSelectYear(year)"
       >

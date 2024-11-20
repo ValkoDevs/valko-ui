@@ -13,7 +13,8 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  placement: 'top'
+  placement: 'top',
+  flat: true
 })
 
 const classes = useStyle<TooltipProps, SlotStyles>(props, styles)

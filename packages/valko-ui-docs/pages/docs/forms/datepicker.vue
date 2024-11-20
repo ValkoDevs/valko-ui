@@ -19,7 +19,8 @@ const form = ref<Partial<DatepickerProps>>({
   ],
   disableWeekends: false,
   locale: 'en-US',
-  label: 'Date'
+  label: 'Date',
+  isOpen: false
 })
 
 const locales: SelectOption[] = [
@@ -233,6 +234,30 @@ const datepickerProps: TableItem[] = [
   }
 ]
 
+const datepickerEmits: TableItem[] = [
+  {
+    key: 'updateModelValueEmit',
+    event: 'update:modelValue',
+    description: 'Emitted when the value of the input is updated, typically when the user selects a date.',
+    values: 'string | Date',
+    type: '(value: string | Date) => void'
+  },
+  {
+    key: 'openEmit',
+    event: 'open',
+    description: 'Emitted when the input is clicked or focused, indicating that the datepicker should open.',
+    values: '',
+    type: '() => void'
+  },
+  {
+    key: 'closeEmit',
+    event: 'close',
+    description: 'Emitted when a click outside the root component is detected, or when the user closes the datepicker.',
+    values: '',
+    type: '() => void'
+  }
+]
+
 const calendarAdapterProps: TableItem[] = [
   {
     key: 'formattedDatesProp',
@@ -401,12 +426,20 @@ const dayOfWeekProp: TableItem[] = [
 ]
 
 const [ model, parsedModel, adapter ] = useDateAdapter(form)
+
+const datePickerStates = reactive({
+  colors: Array(colorOptions.length).fill(false),
+  variants: Array(variantOptions.general.length).fill(false),
+  shapes: Array(shapeOptions.general.length).fill(false),
+  sizes: Array(sizeOptions.general.length).fill(false),
+  disableWeekends: false
+})
 </script>
 
 <template>
   <doc-section
     title="Datepicker"
-    description="The Datepicker component is a customizable and versatile date picker that allows users to select dates within a specific range. It provides options to customize the appearance with different themes, shapes, and sizes. The component also supports disabled dates, minimum and maximum selectable dates, and custom date formatting. With the ability to adapt to different locales using custom labels for weekdays and months, Calendar is a flexible tool for handling date selection in any application. It seamlessly integrates with CalendarAdapter for dynamic date management and offers full control over its behavior."
+    description="The Datepicker component is a customizable and versatile component. It provides options to customize the appearance with different themes, shapes, and sizes. The component also supports disabled dates, minimum and maximum selectable dates, and custom date formatting. With the ability to adapt to different locales using custom labels for weekdays and months."
   >
     <template #playground-view>
       <vk-datepicker
@@ -422,6 +455,9 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
         :max-date="form.maxDate"
         :min-date="form.minDate"
         :disable-weekends="form.disableWeekends"
+        :is-open="form.isOpen!"
+        @open="() => form.isOpen = true"
+        @close="() => form.isOpen = false"
       />
     </template>
     <template #playground-options>
@@ -478,7 +514,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
         gap
       >
         <div
-          v-for="color in colorOptions"
+          v-for="(color, index) in colorOptions"
           :key="color.value"
           class="w-1/3"
         >
@@ -489,6 +525,9 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
             :adapter="adapter"
             :color="color.value"
             :parsed-model="parsedModel"
+            :is-open="datePickerStates['colors'][index]"
+            @open="() => datePickerStates['colors'][index] = true"
+            @close="() => datePickerStates['colors'][index] = false"
           />
         </div>
       </example-section>
@@ -500,7 +539,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
         gap
       >
         <div
-          v-for="variant in variantOptions.general"
+          v-for="(variant, index) in variantOptions.general"
           :key="variant.value"
         >
           <span>{{ variant.label }}</span>
@@ -510,6 +549,9 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
             :adapter="adapter"
             :variant="variant.value"
             :parsed-model="parsedModel"
+            :is-open="datePickerStates['variants'][index]"
+            @open="() => datePickerStates['variants'][index] = true"
+            @close="() => datePickerStates['variants'][index] = false"
           />
         </div>
       </example-section>
@@ -521,7 +563,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
         gap
       >
         <div
-          v-for="shape in shapeOptions.general"
+          v-for="(shape, index) in shapeOptions.general"
           :key="shape.value"
         >
           <span>{{ shape.label }}</span>
@@ -531,6 +573,9 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
             :adapter="adapter"
             :shape="shape.value"
             :parsed-model="parsedModel"
+            :is-open="datePickerStates['shapes'][index]"
+            @open="() => datePickerStates['shapes'][index] = true"
+            @close="() => datePickerStates['shapes'][index] = false"
           />
         </div>
       </example-section>
@@ -542,7 +587,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
         gap
       >
         <div
-          v-for="size in sizeOptions.general"
+          v-for="(size, index) in sizeOptions.general"
           :key="size.value"
           class="w-1/3"
         >
@@ -553,6 +598,9 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
             :adapter="adapter"
             :size="size.value"
             :parsed-model="parsedModel"
+            :is-open="datePickerStates['sizes'][index]"
+            @open="() => datePickerStates['sizes'][index] = true"
+            @close="() => datePickerStates['sizes'][index] = false"
           />
         </div>
       </example-section>
@@ -568,6 +616,9 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
           :adapter="adapter"
           :parsed-model="parsedModel"
           disable-weekends
+          :is-open="datePickerStates['disableWeekends']"
+          @open="() => datePickerStates['disableWeekends'] = true"
+          @close="() => datePickerStates['disableWeekends'] = false"
         />
       </example-section>
     </template>
@@ -581,6 +632,16 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
           <vk-table
             :headers="propHeaders"
             :data="datepickerProps"
+          />
+        </example-section>
+
+        <example-section
+          title="Datepicker Emits"
+          gap
+        >
+          <vk-table
+            :headers="emitHeaders"
+            :data="datepickerEmits"
           />
         </example-section>
 
