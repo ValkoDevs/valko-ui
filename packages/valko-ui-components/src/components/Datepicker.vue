@@ -25,7 +25,6 @@ const classes = useStyle<DatepickerProps, SlotStyles>(props, styles)
 
 const rootRef = ref<HTMLElement | null>(null)
 
-
 const handleClickOutside = (event: MouseEvent) => {
   const target = event.target as HTMLElement
 

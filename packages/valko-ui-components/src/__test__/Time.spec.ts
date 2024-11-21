@@ -95,7 +95,7 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-light-4')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-dark-4')
       })
 
       it('should be color success when props.color is success', () => {

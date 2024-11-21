@@ -24,6 +24,7 @@ export default tv({
       'data-[rightIcon=true]:pr-8'
     ],
     label: [
+      'vk-input__label',
       'opacity-80',
       'text-left',
       'font-bold',

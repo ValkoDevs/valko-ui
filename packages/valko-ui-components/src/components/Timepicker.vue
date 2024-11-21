@@ -15,25 +15,24 @@ const props = withDefaults(defineProps<TimepickerProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  format: 'HH:mm:ss'
+  format: 'HH:mm:ss',
+  okButtonLabel: 'OK'
 })
 
-const emit = defineEmits(['onSelect'])
+const emit = defineEmits(['onSelect', 'open', 'close'])
 
 const classes = useStyle<TimepickerProps, SlotStyles>(props, styles)
 
-const isOpen = ref(false)
 const rootRef = ref<HTMLElement | null>(null)
-const togglePopover = () => isOpen.value = !isOpen.value
 
 const handleClickOutside = (event: MouseEvent) => {
   const target = event.target as HTMLElement
 
-  if (rootRef.value && !rootRef.value.contains(target)) isOpen.value = false
+  if (rootRef.value && !rootRef.value.contains(target) && !target.closest('.vk-timepicker__content')) emit('close')
 }
 
-onMounted(() => nextTick(() => document.addEventListener('click', handleClickOutside)))
-onBeforeUnmount(() => document.removeEventListener('click', handleClickOutside))
+onMounted(() => nextTick(() => document.addEventListener('mousedown', handleClickOutside, true)))
+onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside, true))
 </script>
 
 <template>
@@ -47,8 +46,8 @@ onBeforeUnmount(() => document.removeEventListener('click', handleClickOutside))
       :label="label"
       :class="classes.input"
       readonly
-      @focus="togglePopover"
-      @right-icon-click="togglePopover"
+      @focus="emit('open')"
+      @right-icon-click="emit('open')"
     >
       <template #rightIcon>
         <vk-icon name="clock-2" />
@@ -75,9 +74,10 @@ onBeforeUnmount(() => document.removeEventListener('click', handleClickOutside))
           :min-time="minTime"
           :max-time="maxTime"
           :disabled-times="disabledTimes"
+          :ok-button-label="okButtonLabel"
           @on-select="() => {
             emit('onSelect')
-            isOpen = false
+            emit('close')
           }"
         />
       </div>

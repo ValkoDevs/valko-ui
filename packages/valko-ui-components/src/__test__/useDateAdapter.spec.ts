@@ -1,4 +1,3 @@
-import { describe, it, expect, vi } from 'vitest'
 import useDateAdapter from '#valkoui/composables/useDateAdapter'
 
 describe('useDateAdapter composable', () => {

@@ -12,7 +12,8 @@ const form = reactive<Partial<TimepickerProps>>({
   disabledTimes: undefined,
   minuteStep: 1,
   okButtonLabel: 'OK',
-  label: 'Time'
+  label: 'Time',
+  isOpen: false
 })
 
 const disabledRef = ref(false)
@@ -151,6 +152,14 @@ const timepickerProps: TableItem[] = [
     default: ''
   },
   {
+    key: 'okButtonLabelProp',
+    prop: 'okButtonLabel',
+    required: false,
+    description: 'The text displayed in the OK button.',
+    values: 'string',
+    default: 'OK'
+  },
+  {
     key: 'parsedModelProp',
     prop: 'parsedModel',
     required: false,
@@ -229,6 +238,30 @@ const timepickerProps: TableItem[] = [
     description: 'A composable that provides methods and computed properties for managing time selection and formatting. We provide a useTimeAdapter for the component.',
     values: 'TimeAdapterInterface',
     default: ''
+  }
+]
+
+const timepickerEmits: TableItem[] = [
+  {
+    key: 'onSelectEmit',
+    event: 'onSelect',
+    description: 'Emitted when the OK button is clicked.',
+    values: 'string | Date',
+    type: '(value: string | Date) => void'
+  },
+  {
+    key: 'openEmit',
+    event: 'open',
+    description: 'Emitted when the input is clicked or focused, indicating that the timepicker should open.',
+    values: '',
+    type: '() => void'
+  },
+  {
+    key: 'closeEmit',
+    event: 'close',
+    description: 'Emitted when a click outside the root component is detected, or when the OK button is clicked.',
+    values: '',
+    type: '() => void'
   }
 ]
 
@@ -375,6 +408,16 @@ const timeAdapterProps: TableItem[] = [
 watch(disabledRef, (newVal) => form.disabledTimes = newVal ? [1730721658, 1730725258] : undefined)
 
 const [ model, parsedModel, adapter ] = useTimeAdapter(form)
+
+const timepickerStates = reactive({
+  colors: Array(colorOptions.length).fill(false),
+  variants: Array(variantOptions.general.length).fill(false),
+  shapes: Array(shapeOptions.general.length).fill(false),
+  sizes: Array(sizeOptions.general.length).fill(false),
+  min: false,
+  max: false,
+  disabledTimes: false
+})
 </script>
 
 <template>
@@ -397,6 +440,9 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         :min-time="form.minTime"
         :disabled-times="disabledRef ? form.disabledTimes : undefined"
         :minute-step="form.minuteStep"
+        :is-open="form.isOpen!"
+        @open="() => form.isOpen = true"
+        @close="() => form.isOpen = false"
       />
     </template>
     <template #playground-options>
@@ -470,7 +516,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         gap
       >
         <div
-          v-for="color in colorOptions"
+          v-for="(color, index) in colorOptions"
           :key="color.value"
           class="w-1/4 flex flex-col gap-4"
         >
@@ -479,6 +525,9 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :adapter="adapter"
             :parsed-model="parsedModel"
             :color="color.value"
+            :is-open="timepickerStates['colors'][index]"
+            @open="() => timepickerStates['colors'][index] = true"
+            @close="() => timepickerStates['colors'][index] = false"
           />
         </div>
       </example-section>
@@ -490,7 +539,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         gap
       >
         <div
-          v-for="variant in variantOptions.general"
+          v-for="(variant, index) in variantOptions.general"
           :key="variant.value"
           class="flex flex-col gap-4"
         >
@@ -499,6 +548,9 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :adapter="adapter"
             :parsed-model="parsedModel"
             :variant="variant.value"
+            :is-open="timepickerStates['variants'][index]"
+            @open="() => timepickerStates['variants'][index] = true"
+            @close="() => timepickerStates['variants'][index] = false"
           />
         </div>
       </example-section>
@@ -510,7 +562,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         gap
       >
         <div
-          v-for="shape in shapeOptions.general"
+          v-for="(shape, index) in shapeOptions.general"
           :key="shape.value"
           class="flex flex-col gap-4"
         >
@@ -519,6 +571,9 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :adapter="adapter"
             :parsed-model="parsedModel"
             :shape="shape.value"
+            :is-open="timepickerStates['shapes'][index]"
+            @open="() => timepickerStates['shapes'][index] = true"
+            @close="() => timepickerStates['shapes'][index] = false"
           />
         </div>
       </example-section>
@@ -530,7 +585,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         gap
       >
         <div
-          v-for="size in sizeOptions.general"
+          v-for="(size, index) in sizeOptions.general"
           :key="size.value"
           class="flex flex-col gap-4"
         >
@@ -539,6 +594,9 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :adapter="adapter"
             :parsed-model="parsedModel"
             :size="size.value"
+            :is-open="timepickerStates['sizes'][index]"
+            @open="() => timepickerStates['sizes'][index] = true"
+            @close="() => timepickerStates['sizes'][index] = false"
           />
         </div>
       </example-section>
@@ -553,6 +611,9 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :adapter="adapter"
             :parsed-model="parsedModel"
             :min-time="1730710858"
+            :is-open="timepickerStates['min']"
+            @open="() => timepickerStates['min'] = true"
+            @close="() => timepickerStates['min'] = false"
           />
         </div>
         <div class="flex flex-col gap-4">
@@ -561,6 +622,9 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :adapter="adapter"
             :parsed-model="parsedModel"
             :max-time="1730739658"
+            :is-open="timepickerStates['max']"
+            @open="() => timepickerStates['max'] = true"
+            @close="() => timepickerStates['max'] = false"
           />
         </div>
       </example-section>
@@ -572,6 +636,9 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
           :adapter="adapter"
           :parsed-model="parsedModel"
           :disabled-times="form.disabledTimes"
+          :is-open="timepickerStates['disabledTimes']"
+          @open="() => timepickerStates['disabledTimes'] = true"
+          @close="() => timepickerStates['disabledTimes'] = false"
         />
       </example-section>
     </template>
@@ -585,6 +652,16 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
           <vk-table
             :headers="propHeaders"
             :data="timepickerProps"
+          />
+        </example-section>
+
+        <example-section
+          title="Timepicker Emits"
+          gap
+        >
+          <vk-table
+            :headers="emitHeaders"
+            :data="timepickerEmits"
           />
         </example-section>
 

@@ -1,4 +1,4 @@
-import { ref, computed, toValue } from 'vue'
+import { ref, computed, toValue, nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkTimepicker from '#valkoui/components/Timepicker.vue'
 import type { TimeAdapterResult } from '#valkoui/types/Time'
@@ -48,6 +48,7 @@ describe('Time component', () => {
         wrapper = mount(VkTimepicker, {
           props: {
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
@@ -59,15 +60,15 @@ describe('Time component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('text-dark-2')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('peer-focus:text-primary-500')
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('text-base')
+        expect(wrapper.find('.vk-input__input').classes()).toContain('text-base')
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('bg-light-3')
+        expect(wrapper.find('.vk-input__input').classes()).toContain('bg-light-3')
       })
 
       it('should be shape soft', () => {
@@ -81,12 +82,13 @@ describe('Time component', () => {
           props: {
             color: 'primary',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('text-dark-2')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('peer-focus:text-primary-500')
       })
 
       it('should be color neutral when props.color is neutral', () => {
@@ -94,12 +96,13 @@ describe('Time component', () => {
           props: {
             color: 'neutral',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('text-dark-1')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('peer-focus:text-dark-3')
       })
 
       it('should be color success when props.color is success', () => {
@@ -107,12 +110,13 @@ describe('Time component', () => {
           props: {
             color: 'success',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('text-success-500')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('text-success-500')
       })
 
       it('should be color info when props.color is info', () => {
@@ -120,12 +124,13 @@ describe('Time component', () => {
           props: {
             color: 'info',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('text-info-500')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('text-info-500')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -133,12 +138,13 @@ describe('Time component', () => {
           props: {
             color: 'warning',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('text-warning-500')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('text-warning-500')
       })
 
       it('should be color error when props.color is error', () => {
@@ -146,12 +152,13 @@ describe('Time component', () => {
           props: {
             color: 'error',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('text-error-500')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('text-error-500')
       })
     })
 
@@ -161,6 +168,7 @@ describe('Time component', () => {
           props: {
             shape: 'rounded',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
@@ -174,11 +182,14 @@ describe('Time component', () => {
           props: {
             shape: 'soft',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
+        const input = wrapper.find('.vk-timepicker__input')
+        input.trigger('focus')
         expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-lg')
       })
 
@@ -187,11 +198,14 @@ describe('Time component', () => {
           props: {
             shape: 'square',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
+        const input = wrapper.find('.vk-timepicker__input')
+        input.trigger('focus')
         expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-none')
       })
     })
@@ -202,12 +216,13 @@ describe('Time component', () => {
           props: {
             size: 'xs',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('text-xs')
+        expect(wrapper.find('.vk-input__input').classes()).toContain('text-xs')
       })
 
       it('should be sm when props.size is sm', () => {
@@ -215,12 +230,13 @@ describe('Time component', () => {
           props: {
             size: 'sm',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('text-sm')
+        expect(wrapper.find('.vk-input__input').classes()).toContain('text-sm')
       })
 
       it('should be md when props.size is md', () => {
@@ -228,12 +244,13 @@ describe('Time component', () => {
           props: {
             size: 'md',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('text-base')
+        expect(wrapper.find('.vk-input__input').classes()).toContain('text-base')
       })
 
       it('should be lg when props.size is lg', () => {
@@ -241,12 +258,13 @@ describe('Time component', () => {
           props: {
             size: 'lg',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('text-lg')
+        expect(wrapper.find('.vk-input__input').classes()).toContain('text-lg')
       })
     })
 
@@ -256,12 +274,13 @@ describe('Time component', () => {
           props: {
             variant: 'filled',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('border-b-2')
+        expect(wrapper.find('.vk-input__input').classes()).toContain('border-b-2')
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -269,12 +288,13 @@ describe('Time component', () => {
           props: {
             variant: 'outlined',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__input').classes()).toContain('border-2')
+        expect(wrapper.find('.vk-input__input').classes()).toContain('border-2')
       })
 
       it('should be ghost when props.variant is ghost', () => {
@@ -282,32 +302,83 @@ describe('Time component', () => {
           props: {
             variant: 'ghost',
             modelValue,
+            isOpen: true,
             parsedModel,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-inherit')
+        expect(wrapper.find('.vk-input__input').classes()).toContain('bg-inherit')
       })
     })
   })
 
   describe('Emits', () => {
+    it('should emit open event', async () => {
+      const wrapper = mount(VkTimepicker, {
+        props: {
+          modelValue,
+          isOpen: true,
+          parsedModel,
+          adapter
+        }
+      })
+
+      const input = wrapper.findAll('.vk-input__input')[0]
+      await input.trigger('focus')
+
+      expect(wrapper.emitted()).toHaveProperty('open')
+    })
+
     it('should emit onSelect event', async () => {
       const wrapper = mount(VkTimepicker, {
         props: {
+          modelValue,
+          isOpen: true,
+          parsedModel,
+          adapter
+        }
+      })
+
+      const button = wrapper.find('.vk-time__ok-button')
+      await button.trigger('click')
+
+      expect(wrapper.emitted()).toHaveProperty('onSelect')
+    })
+
+    it('should emit close event', async () => {
+      const wrapper = mount(VkTimepicker, {
+        props: {
+          modelValue,
+          isOpen: true,
+          parsedModel,
+          adapter
+        }
+      })
+
+      const button = wrapper.find('.vk-time__ok-button')
+      await button.trigger('click')
+
+      expect(wrapper.emitted()).toHaveProperty('close')
+    })
+
+    it('should emit close when a click occurs outside the root component', async () => {
+      const wrapper = mount(VkTimepicker, {
+        props: {
+          isOpen: true,
           modelValue,
           parsedModel,
           adapter
         }
       })
 
-      const input = wrapper.find('.vk-timepicker__input')
-      await input.trigger('click')
-      const button = wrapper.find('.vk-time__ok-button')
-      await button.trigger('click')
+      const input = wrapper.findAll('.vk-input__input')[0]
+      await input.trigger('focus')
 
-      expect(wrapper.emitted()).toHaveProperty('onSelect')
+      document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('close')
     })
   })
 })
