@@ -441,6 +441,7 @@ const timepickerStates = reactive({
         :disabled-times="disabledRef ? form.disabledTimes : undefined"
         :minute-step="form.minuteStep"
         :is-open="form.isOpen!"
+        :ok-button-label="form.okButtonLabel"
         @open="() => form.isOpen = true"
         @close="() => form.isOpen = false"
       />
@@ -509,130 +510,86 @@ const timepickerStates = reactive({
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Colors">
+        <vk-timepicker
           v-for="(color, index) in colorOptions"
           :key="color.value"
-          class="w-1/4 flex flex-col gap-4"
-        >
-          <span>{{ color.label }}</span>
-          <vk-timepicker
-            :adapter="adapter"
-            :parsed-model="parsedModel"
-            :color="color.value"
-            :is-open="timepickerStates['colors'][index]"
-            @open="() => timepickerStates['colors'][index] = true"
-            @close="() => timepickerStates['colors'][index] = false"
-          />
-        </div>
+          :label="color.label"
+          :adapter="adapter"
+          :parsed-model="parsedModel"
+          :color="color.value"
+          :is-open="timepickerStates['colors'][index]"
+          @open="() => timepickerStates['colors'][index] = true"
+          @close="() => timepickerStates['colors'][index] = false"
+        />
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Variants">
+        <vk-timepicker
           v-for="(variant, index) in variantOptions.general"
           :key="variant.value"
-          class="flex flex-col gap-4"
-        >
-          <span>{{ variant.label }}</span>
-          <vk-timepicker
-            :adapter="adapter"
-            :parsed-model="parsedModel"
-            :variant="variant.value"
-            :is-open="timepickerStates['variants'][index]"
-            @open="() => timepickerStates['variants'][index] = true"
-            @close="() => timepickerStates['variants'][index] = false"
-          />
-        </div>
+          :adapter="adapter"
+          :parsed-model="parsedModel"
+          :variant="variant.value"
+          :is-open="timepickerStates['variants'][index]"
+          :label="variant.label"
+          @open="() => timepickerStates['variants'][index] = true"
+          @close="() => timepickerStates['variants'][index] = false"
+        />
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Shapes">
+        <vk-timepicker
           v-for="(shape, index) in shapeOptions.general"
           :key="shape.value"
-          class="flex flex-col gap-4"
-        >
-          <span>{{ shape.label }}</span>
-          <vk-timepicker
-            :adapter="adapter"
-            :parsed-model="parsedModel"
-            :shape="shape.value"
-            :is-open="timepickerStates['shapes'][index]"
-            @open="() => timepickerStates['shapes'][index] = true"
-            @close="() => timepickerStates['shapes'][index] = false"
-          />
-        </div>
+          :label="shape.label"
+          :adapter="adapter"
+          :parsed-model="parsedModel"
+          :shape="shape.value"
+          :is-open="timepickerStates['shapes'][index]"
+          @open="() => timepickerStates['shapes'][index] = true"
+          @close="() => timepickerStates['shapes'][index] = false"
+        />
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Sizes">
+        <vk-timepicker
           v-for="(size, index) in sizeOptions.general"
           :key="size.value"
-          class="flex flex-col gap-4"
-        >
-          <span>{{ size.label }}</span>
-          <vk-timepicker
-            :adapter="adapter"
-            :parsed-model="parsedModel"
-            :size="size.value"
-            :is-open="timepickerStates['sizes'][index]"
-            @open="() => timepickerStates['sizes'][index] = true"
-            @close="() => timepickerStates['sizes'][index] = false"
-          />
-        </div>
+          :label="size.label"
+          :adapter="adapter"
+          :parsed-model="parsedModel"
+          :size="size.value"
+          :is-open="timepickerStates['sizes'][index]"
+          @open="() => timepickerStates['sizes'][index] = true"
+          @close="() => timepickerStates['sizes'][index] = false"
+        />
       </example-section>
 
-      <example-section
-        title="Min & Max Times"
-        gap
-      >
-        <div class="flex flex-col gap-4">
-          <span>Min</span>
-          <vk-timepicker
-            :adapter="adapter"
-            :parsed-model="parsedModel"
-            :min-time="1730710858"
-            :is-open="timepickerStates['min']"
-            @open="() => timepickerStates['min'] = true"
-            @close="() => timepickerStates['min'] = false"
-          />
-        </div>
-        <div class="flex flex-col gap-4">
-          <span>Max</span>
-          <vk-timepicker
-            :adapter="adapter"
-            :parsed-model="parsedModel"
-            :max-time="1730739658"
-            :is-open="timepickerStates['max']"
-            @open="() => timepickerStates['max'] = true"
-            @close="() => timepickerStates['max'] = false"
-          />
-        </div>
-      </example-section>
-
-      <example-section
-        title="Disabled Times"
-      >
+      <example-section title="Min & Max Times">
         <vk-timepicker
+          label="Min"
+          :adapter="adapter"
+          :parsed-model="parsedModel"
+          :min-time="1730710858"
+          :is-open="timepickerStates['min']"
+          @open="() => timepickerStates['min'] = true"
+          @close="() => timepickerStates['min'] = false"
+        />
+        <vk-timepicker
+          label="Max"
+          :adapter="adapter"
+          :parsed-model="parsedModel"
+          :max-time="1730739658"
+          :is-open="timepickerStates['max']"
+          @open="() => timepickerStates['max'] = true"
+          @close="() => timepickerStates['max'] = false"
+        />
+      </example-section>
+
+      <example-section title="Disabled Times">
+        <vk-timepicker
+          label="Disabled Times"
           :adapter="adapter"
           :parsed-model="parsedModel"
           :disabled-times="form.disabledTimes"
@@ -645,70 +602,49 @@ const timepickerStates = reactive({
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Timepicker Props"
-          gap
-        >
+        <example-section title="Timepicker Props">
           <vk-table
             :headers="propHeaders"
             :data="timepickerProps"
           />
         </example-section>
 
-        <example-section
-          title="Timepicker Emits"
-          gap
-        >
+        <example-section title="Timepicker Emits">
           <vk-table
             :headers="emitHeaders"
             :data="timepickerEmits"
           />
         </example-section>
 
-        <example-section
-          title="Time Adapter Interface"
-          gap
-        >
+        <example-section title="Time Adapter Interface">
           <vk-table
             :headers="propHeaders"
             :data="timeAdapterInterface"
           />
         </example-section>
 
-        <example-section
-          title="Adapter Result Type"
-          gap
-        >
+        <example-section title="Adapter Result Type">
           <vk-table
             :headers="propHeaders"
             :data="timeAdapterResult"
           />
         </example-section>
 
-        <example-section
-          title="Formatted Time Interface"
-          gap
-        >
+        <example-section title="Formatted Time Interface">
           <vk-table
             :headers="propHeaders"
             :data="formattedTimeProps"
           />
         </example-section>
 
-        <example-section
-          title="Time Adapter Props"
-          gap
-        >
+        <example-section title="Time Adapter Props">
           <vk-table
             :headers="propHeaders"
             :data="timeAdapterProps"
           />
         </example-section>
 
-        <example-section
-          title="Available Formats"
-          gap
-        >
+        <example-section title="Available Formats">
           <vk-table
             :headers="propHeaders"
             :data="timeFormats"

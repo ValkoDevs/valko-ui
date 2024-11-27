@@ -225,10 +225,7 @@ const breadcrumbsEmits: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        gap
-      >
+      <example-section title="Colors">
         <div class="flex flex-wrap gap-4">
           <div
             v-for="color in colorOptions"
@@ -244,10 +241,7 @@ const breadcrumbsEmits: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Variants"
-        gap
-      >
+      <example-section title="Variants">
         <div class="grid grid-cols-2 gap-4">
           <div
             v-for="variant in variantOptions.withLink"
@@ -263,10 +257,7 @@ const breadcrumbsEmits: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        gap
-      >
+      <example-section title="Shapes">
         <div class="flex flex-wrap gap-4">
           <div
             v-for="shape in shapeOptions.general"
@@ -282,10 +273,7 @@ const breadcrumbsEmits: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        gap
-      >
+      <example-section title="Sizes">
         <div class="grid grid-cols-2 gap-4">
           <div
             v-for="size in sizeOptions.general"
@@ -301,26 +289,20 @@ const breadcrumbsEmits: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Flat"
-      >
+      <example-section title="Flat">
         <vk-breadcrumbs
           flat
           :crumbs="crumbs"
         />
       </example-section>
 
-      <example-section
-        title="Disabled Crumbs"
-      >
+      <example-section title="Disabled Crumbs">
         <vk-breadcrumbs
           :crumbs="crumbsDisabled"
         />
       </example-section>
 
-      <example-section
-        title="Crumbs with icons"
-      >
+      <example-section title="Crumbs with icons">
         <vk-breadcrumbs
           :crumbs="crumbsIcons"
         />
@@ -329,31 +311,21 @@ const breadcrumbsEmits: TableItem[] = [
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Breadcrumbs Props"
-          gap
-          wrap
-        >
+        <example-section title="Breadcrumbs Props">
           <vk-table
             :headers="propHeaders"
             :data="breadcrumbsProps"
           />
         </example-section>
 
-        <example-section
-          title="Crumb Interface"
-          gap
-        >
+        <example-section title="Crumb Interface">
           <vk-table
             :headers="propHeaders"
             :data="crumbInterface"
           />
         </example-section>
 
-        <example-section
-          title="Breadcrumbs Emits"
-          gap
-        >
+        <example-section title="Breadcrumbs Emits">
           <vk-table
             :headers="emitHeaders"
             :data="breadcrumbsEmits"

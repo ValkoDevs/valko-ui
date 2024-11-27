@@ -164,7 +164,6 @@ const createNotification = (props: NotificationProps) => {
 }
 </script>
 
-
 <template>
   <doc-section
     title="Notification"
@@ -253,194 +252,115 @@ const createNotification = (props: NotificationProps) => {
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Colors">
+        <vk-button
           v-for="color in colorOptions"
           :key="color.value"
-          class="flex flex-col"
+          :color="color.value"
+          class="mt-4"
+          @click="createNotification({ text: color.label, color: color.value })"
         >
-          <span>{{ color.label }}</span>
-          <vk-button
-            :color="color.value"
-            class="mt-4"
-            @click="createNotification({ text: color.label, color: color.value })"
-          >
-            Click Me
-          </vk-button>
-        </div>
+          {{ color.label }}
+        </vk-button>
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Variants">
+        <vk-button
           v-for="variant in variantOptions.withGradientAndLine"
           :key="variant.value"
-          class="flex flex-col"
+          class="mt-4"
+          @click="createNotification({ text: variant.label, variant: variant.value })"
         >
-          <span>{{ variant.label }}</span>
-          <vk-button
-            class="mt-4"
-            @click="createNotification({ text: variant.label, variant: variant.value })"
-          >
-            Click Me
-          </vk-button>
-        </div>
+          {{ variant.label }}
+        </vk-button>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Shapes">
+        <vk-button
           v-for="shape in shapeOptions.general"
           :key="shape.value"
-          class="flex flex-col"
+          :shape="shape.value"
+          class="mt-4"
+          @click="createNotification({ text: shape.label, shape: shape.value })"
         >
-          <span>{{ shape.label }}</span>
-          <vk-button
-            :shape="shape.value"
-            class="mt-4"
-            @click="createNotification({ text: shape.label, shape: shape.value })"
-          >
-            Click Me
-          </vk-button>
-        </div>
+          {{ shape.label }}
+        </vk-button>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Sizes">
+        <vk-button
           v-for="size in sizeOptions.general"
           :key="size.value"
-          class="flex flex-col"
+          :size="size.value"
+          class="mt-4"
+          @click="createNotification({ text: size.label, size: size.value })"
         >
-          <span>{{ size.label }}</span>
-          <vk-button
-            :size="size.value"
-            class="mt-4"
-            @click="createNotification({ text: size.label, size: size.value })"
-          >
-            Click Me
-          </vk-button>
-        </div>
+          {{ size.label }}
+        </vk-button>
       </example-section>
 
-      <example-section
-        title="Gravity"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Gravity">
+        <vk-button
           v-for="gravity in gravityOptions"
           :key="gravity.value"
-          class="flex flex-col"
+          :gravity="gravity.value"
+          class="mt-4"
+          @click="createNotification({ text: gravity.label, gravity: gravity.value })"
         >
-          <span>{{ gravity.label }}</span>
-          <vk-button
-            :gravity="gravity.value"
-            class="mt-4"
-            @click="createNotification({ text: gravity.label, gravity: gravity.value })"
-          >
-            Click Me
-          </vk-button>
-        </div>
+          {{ gravity.label }}
+        </vk-button>
       </example-section>
 
-      <example-section
-        title="Position"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Position">
+        <vk-button
           v-for="position in positionOptions"
           :key="position.value"
-          class="flex flex-col"
+          :position="position.value"
+          class="mt-4"
+          @click="createNotification({ text: position.label, position: position.value })"
         >
-          <span>{{ position.label }}</span>
-          <vk-button
-            :position="position.value"
-            class="mt-4"
-            @click="createNotification({ text: position.label, position: position.value })"
-          >
-            Click Me
-          </vk-button>
-        </div>
+          {{ position.label }}
+        </vk-button>
       </example-section>
 
-      <example-section
-        title="Flat"
-        justify="start"
-        wrap
-        gap
-      >
+      <example-section title="Flat">
         <vk-button
           flat
           class="mt-4"
           @click="createNotification({ text: 'Flat', flat: true })"
         >
-          Click Me
+          Flat
         </vk-button>
       </example-section>
 
-      <example-section
-        title="Close"
-        justify="start"
-        wrap
-        gap
-      >
+      <example-section title="Close">
         <vk-button
           close
           class="mt-4"
           @click="createNotification({ text: 'Close', close: true })"
         >
-          Click Me
+          Close
         </vk-button>
       </example-section>
 
-      <example-section
-        title="Stop on Focus"
-        justify="start"
-        wrap
-        gap
-      >
+      <example-section title="Stop on Focus">
         <vk-button
           close
           class="mt-4"
           @click="createNotification({ text: 'Stop on Focus', stopOnFocus: true })"
         >
-          Click Me
+          Stop on Focus
         </vk-button>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section
-          title="Notification Props"
-        >
-          <vk-table
-            :headers="propHeaders"
-            :data="notificationProps"
-          />
-        </example-section>
-      </div>
+      <example-section title="Notification Props">
+        <vk-table
+          :headers="propHeaders"
+          :data="notificationProps"
+        />
+      </example-section>
     </template>
   </doc-section>
 </template>

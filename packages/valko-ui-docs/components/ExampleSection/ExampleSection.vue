@@ -7,14 +7,10 @@ defineOptions({ name: 'ExampleSection' })
 
 const props = withDefaults(defineProps<ExampleSectionProps>(), {
   title: 'Title',
-  direction: 'row',
-  justify: 'normal',
-  align: 'center',
-  gap: false,
-  wrap: false
+  classes: ''
 })
 
-const classes = useStyle<ExampleSectionProps>(props, styles)
+const parsedStyles = useStyle<ExampleSectionProps>(props, styles)
 </script>
 
 <template>
@@ -22,7 +18,7 @@ const classes = useStyle<ExampleSectionProps>(props, styles)
     <h3 class="text-xl mb-4">
       {{ props.title }}
     </h3>
-    <div :class="classes">
+    <div :class="classes + ' ' + parsedStyles">
       <slot />
     </div>
   </section>

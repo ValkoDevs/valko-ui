@@ -107,21 +107,20 @@ const togglePopover = (category: keyof Record<'placements' | 'shapes', boolean>,
     description="A versatile UI element designed to display additional content upon user interaction. It can be used for tooltips, dropdowns, or any contextual information that needs to be shown when a user interacts with a specific element on the page."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center p-4">
-        <vk-popover
-          :shape="form.shape"
-          :is-open="form.isOpen"
-          :flat="form.flat"
-          :placement="form.placement"
-          text="Popover Content"
-          @close="form.isOpen = false"
-        >
-          <vk-button @click="() => { form.isOpen = !form.isOpen }">
-            Click Me
-          </vk-button>
-        </vk-popover>
-      </div>
+      <vk-popover
+        :shape="form.shape"
+        :is-open="form.isOpen"
+        :flat="form.flat"
+        :placement="form.placement"
+        text="Popover Content"
+        @close="form.isOpen = false"
+      >
+        <vk-button @click="() => { form.isOpen = !form.isOpen }">
+          Click Me
+        </vk-button>
+      </vk-popover>
     </template>
+
     <template #playground-options>
       <vk-select
         v-model="form.shape"
@@ -142,11 +141,7 @@ const togglePopover = (category: keyof Record<'placements' | 'shapes', boolean>,
     </template>
 
     <template #examples>
-      <example-section
-        title="Shapes"
-        justify="start"
-        gap
-      >
+      <example-section title="Shapes">
         <vk-popover
           v-for="(shape, index) in shapeOptions.general"
           :key="shape.value"
@@ -161,11 +156,7 @@ const togglePopover = (category: keyof Record<'placements' | 'shapes', boolean>,
         </vk-popover>
       </example-section>
 
-      <example-section
-        title="Placement"
-        justify="start"
-        gap
-      >
+      <example-section title="Placement">
         <vk-popover
           v-for="(placement, index) in placementOptions"
           :key="placement.value"
@@ -183,30 +174,21 @@ const togglePopover = (category: keyof Record<'placements' | 'shapes', boolean>,
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Popover Props"
-          gap
-        >
+        <example-section title="Popover Props">
           <vk-table
             :headers="propHeaders"
             :data="popoverProps"
           />
         </example-section>
 
-        <example-section
-          title="Popover Emits"
-          gap
-        >
+        <example-section title="Popover Emits">
           <vk-table
             :headers="emitHeaders"
             :data="popoverEmits"
           />
         </example-section>
 
-        <example-section
-          title="Popover Slots"
-          gap
-        >
+        <example-section title="Popover Slots">
           <vk-table
             :headers="slotHeaders"
             :data="popoverSlots"

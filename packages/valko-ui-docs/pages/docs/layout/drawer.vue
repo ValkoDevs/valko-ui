@@ -183,11 +183,7 @@ const toggleDrawer = (drawerId: string) => {
     </template>
 
     <template #examples>
-      <example-section
-        title="Placement"
-        justify="start"
-        gap
-      >
+      <example-section title="Placement">
         <div
           v-for="placement in placementOptions"
           :key="placement.value"
@@ -209,11 +205,7 @@ const toggleDrawer = (drawerId: string) => {
         </div>
       </example-section>
 
-      <example-section
-        title="Shape"
-        justify="start"
-        gap
-      >
+      <example-section title="Shape">
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -235,11 +227,7 @@ const toggleDrawer = (drawerId: string) => {
         </div>
       </example-section>
 
-      <example-section
-        title="Size"
-        justify="start"
-        gap
-      >
+      <example-section title="Size">
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -261,11 +249,7 @@ const toggleDrawer = (drawerId: string) => {
         </div>
       </example-section>
 
-      <example-section
-        title="Backdrop"
-        justify="start"
-        gap
-      >
+      <example-section title="Backdrop">
         <div
           v-for="backdrop in backdropOptions"
           :key="backdrop.value"
@@ -287,10 +271,7 @@ const toggleDrawer = (drawerId: string) => {
         </div>
       </example-section>
 
-      <example-section
-        title="Closable"
-        justify="start"
-      >
+      <example-section title="Closable">
         <vk-button @click="toggleDrawer('closable')">
           Open Closable
         </vk-button>
@@ -310,30 +291,21 @@ const toggleDrawer = (drawerId: string) => {
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Drawer Props"
-          gap
-        >
+        <example-section title="Drawer Props">
           <vk-table
             :headers="propHeaders"
             :data="drawerProps"
           />
         </example-section>
 
-        <example-section
-          title="Drawer Emits"
-          gap
-        >
+        <example-section title="Drawer Emits">
           <vk-table
             :headers="emitHeaders"
             :data="drawerEmits"
           />
         </example-section>
 
-        <example-section
-          title="Drawer Slots"
-          gap
-        >
+        <example-section title="Drawer Slots">
           <vk-table
             :headers="slotHeaders"
             :data="drawerSlots"

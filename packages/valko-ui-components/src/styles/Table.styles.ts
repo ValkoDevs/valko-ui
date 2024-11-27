@@ -2,6 +2,10 @@ import { tv, type TV } from 'tailwind-variants'
 
 export default tv({
   slots: {
+    container: [
+      'w-full',
+      'overflow-x-auto'
+    ],
     table: [
       'vk-table',
       'w-full',

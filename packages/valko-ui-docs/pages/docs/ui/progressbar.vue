@@ -97,21 +97,20 @@ const progressbarSlots: TableItem[] = [
     description="Visual indicator that shows the progress or status of a task. Progress bars are used to convey information about the completion status of an operation, such as file uploads, form submissions, or loading processes."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center p-4">
-        <vk-progressbar
-          :shape="form.shape"
-          :variant="form.variant"
-          :progress="form.progress"
-          :color="form.color"
-          :size="form.size"
-          :striped="form.striped"
-          :indeterminate="form.indeterminate"
-          :buffer="form.buffer"
-        >
-          {{ slotText }}
-        </vk-progressbar>
-      </div>
+      <vk-progressbar
+        :shape="form.shape"
+        :variant="form.variant"
+        :progress="form.progress"
+        :color="form.color"
+        :size="form.size"
+        :striped="form.striped"
+        :indeterminate="form.indeterminate"
+        :buffer="form.buffer"
+      >
+        {{ slotText }}
+      </vk-progressbar>
     </template>
+
     <template #playground-options>
       <vk-select
         v-model="form.color"
@@ -161,11 +160,7 @@ const progressbarSlots: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="evenly"
-        gap
-      >
+      <example-section title="Colors">
         <div class="grow gap-4 grid grid-cols-3">
           <vk-progressbar
             v-for="color in colorOptions"
@@ -178,11 +173,7 @@ const progressbarSlots: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="evenly"
-        gap
-      >
+      <example-section title="Variants">
         <div class="grow gap-4 grid grid-cols-3">
           <vk-progressbar
             v-for="variant in variantOptions.withGradient"
@@ -195,11 +186,7 @@ const progressbarSlots: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="evenly"
-        gap
-      >
+      <example-section title="Shapes">
         <div class="grow gap-4 grid grid-cols-2">
           <vk-progressbar
             v-for="shape in shapeOptions.withLine"
@@ -212,11 +199,7 @@ const progressbarSlots: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="evenly"
-        gap
-      >
+      <example-section title="Sizes">
         <div class="grow gap-4 grid grid-cols-2">
           <vk-progressbar
             v-for="size in sizeOptions.general"
@@ -229,17 +212,13 @@ const progressbarSlots: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Indeterminate"
-      >
+      <example-section title="Indeterminate">
         <vk-progressbar indeterminate>
           Indeterminate
         </vk-progressbar>
       </example-section>
 
-      <example-section
-        title="Stripped"
-      >
+      <example-section title="Stripped">
         <vk-progressbar
           striped
           :progress="25"
@@ -248,9 +227,7 @@ const progressbarSlots: TableItem[] = [
         </vk-progressbar>
       </example-section>
 
-      <example-section
-        title="Striped & Indeterminate"
-      >
+      <example-section title="Striped & Indeterminate">
         <vk-progressbar
           indeterminate
           striped
@@ -259,9 +236,7 @@ const progressbarSlots: TableItem[] = [
         </vk-progressbar>
       </example-section>
 
-      <example-section
-        title="Buffer"
-      >
+      <example-section title="Buffer">
         <vk-progressbar
           :buffer="50"
           :progress="25"
@@ -273,20 +248,14 @@ const progressbarSlots: TableItem[] = [
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Progressbar Props"
-          gap
-        >
+        <example-section title="Progressbar Props">
           <vk-table
             :headers="propHeaders"
             :data="progressbarProps"
           />
         </example-section>
 
-        <example-section
-          title="Progressbar Slots"
-          gap
-        >
+        <example-section title="Progressbar Slots">
           <vk-table
             :headers="slotHeaders"
             :data="progressbarSlots"

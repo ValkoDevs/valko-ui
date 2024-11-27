@@ -41,7 +41,7 @@ describe('Drawer component', () => {
       })
 
       it('should be size md', () => {
-        expect(drawer.classes()).toContain('max-w-xl')
+        expect(drawer.classes()).toContain('md:max-w-xl')
       })
 
       it('should be closable', () => {
@@ -168,7 +168,7 @@ describe('Drawer component', () => {
         })
         await nextTick()
         drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
-        expect(drawer.classes()).toContain('max-w-xs')
+        expect(drawer.classes()).toContain('md:max-w-xs')
       })
 
       it('should be sm when props.size is sm', async () => {
@@ -183,7 +183,7 @@ describe('Drawer component', () => {
         })
         await nextTick()
         drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
-        expect(drawer.classes()).toContain('max-w-lg')
+        expect(drawer.classes()).toContain('md:max-w-lg')
       })
 
       it('should be md when props.size is md', async () => {
@@ -198,7 +198,7 @@ describe('Drawer component', () => {
         })
         await nextTick()
         drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
-        expect(drawer.classes()).toContain('max-w-xl')
+        expect(drawer.classes()).toContain('md:max-w-xl')
       })
 
       it('should be lg when props.size is lg', async () => {
@@ -213,7 +213,7 @@ describe('Drawer component', () => {
         })
         await nextTick()
         drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
-        expect(drawer.classes()).toContain('max-w-2xl')
+        expect(drawer.classes()).toContain('md:max-w-2xl')
       })
     })
 

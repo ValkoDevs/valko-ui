@@ -507,112 +507,74 @@ const datePickerStates = reactive({
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Colors">
+        <vk-datepicker
           v-for="(color, index) in colorOptions"
           :key="color.value"
-          class="w-1/3"
-        >
-          <span>{{ color.label }}</span>
-          <vk-datepicker
-            v-model="model"
-            class="mt-2"
-            :adapter="adapter"
-            :color="color.value"
-            :parsed-model="parsedModel"
-            :is-open="datePickerStates['colors'][index]"
-            @open="() => datePickerStates['colors'][index] = true"
-            @close="() => datePickerStates['colors'][index] = false"
-          />
-        </div>
+          v-model="model"
+          :label="color.label"
+          class="mt-2"
+          :adapter="adapter"
+          :color="color.value"
+          :parsed-model="parsedModel"
+          :is-open="datePickerStates['colors'][index]"
+          @open="() => datePickerStates['colors'][index] = true"
+          @close="() => datePickerStates['colors'][index] = false"
+        />
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Variants">
+        <vk-datepicker
           v-for="(variant, index) in variantOptions.general"
           :key="variant.value"
-        >
-          <span>{{ variant.label }}</span>
-          <vk-datepicker
-            v-model="model"
-            class="mt-2"
-            :adapter="adapter"
-            :variant="variant.value"
-            :parsed-model="parsedModel"
-            :is-open="datePickerStates['variants'][index]"
-            @open="() => datePickerStates['variants'][index] = true"
-            @close="() => datePickerStates['variants'][index] = false"
-          />
-        </div>
+          v-model="model"
+          :label="variant.label"
+          class="mt-2"
+          :adapter="adapter"
+          :variant="variant.value"
+          :parsed-model="parsedModel"
+          :is-open="datePickerStates['variants'][index]"
+          @open="() => datePickerStates['variants'][index] = true"
+          @close="() => datePickerStates['variants'][index] = false"
+        />
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Shapes">
+        <vk-datepicker
           v-for="(shape, index) in shapeOptions.general"
           :key="shape.value"
-        >
-          <span>{{ shape.label }}</span>
-          <vk-datepicker
-            v-model="model"
-            class="mt-2"
-            :adapter="adapter"
-            :shape="shape.value"
-            :parsed-model="parsedModel"
-            :is-open="datePickerStates['shapes'][index]"
-            @open="() => datePickerStates['shapes'][index] = true"
-            @close="() => datePickerStates['shapes'][index] = false"
-          />
-        </div>
+          v-model="model"
+          :label="shape.label"
+          class="mt-2"
+          :adapter="adapter"
+          :shape="shape.value"
+          :parsed-model="parsedModel"
+          :is-open="datePickerStates['shapes'][index]"
+          @open="() => datePickerStates['shapes'][index] = true"
+          @close="() => datePickerStates['shapes'][index] = false"
+        />
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Sizes">
+        <vk-datepicker
           v-for="(size, index) in sizeOptions.general"
           :key="size.value"
-          class="w-1/3"
-        >
-          <span>{{ size.label }}</span>
-          <vk-datepicker
-            v-model="model"
-            class="mt-2"
-            :adapter="adapter"
-            :size="size.value"
-            :parsed-model="parsedModel"
-            :is-open="datePickerStates['sizes'][index]"
-            @open="() => datePickerStates['sizes'][index] = true"
-            @close="() => datePickerStates['sizes'][index] = false"
-          />
-        </div>
+          v-model="model"
+          :label="size.label"
+          class="mt-2"
+          :adapter="adapter"
+          :size="size.value"
+          :parsed-model="parsedModel"
+          :is-open="datePickerStates['sizes'][index]"
+          @open="() => datePickerStates['sizes'][index] = true"
+          @close="() => datePickerStates['sizes'][index] = false"
+        />
       </example-section>
 
-      <example-section
-        title="Disable Weekends"
-        justify="start"
-        wrap
-        gap
-      >
+      <example-section title="Disable Weekends">
         <vk-datepicker
           v-model="model"
+          label="Disabled Weekends"
           :adapter="adapter"
           :parsed-model="parsedModel"
           disable-weekends
@@ -625,80 +587,56 @@ const datePickerStates = reactive({
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Datepicker Props"
-          gap
-        >
+        <example-section title="Datepicker Props">
           <vk-table
             :headers="propHeaders"
             :data="datepickerProps"
           />
         </example-section>
 
-        <example-section
-          title="Datepicker Emits"
-          gap
-        >
+        <example-section title="Datepicker Emits">
           <vk-table
             :headers="emitHeaders"
             :data="datepickerEmits"
           />
         </example-section>
 
-        <example-section
-          title="Calendar Adapter Interface"
-          gap
-        >
+        <example-section title="Calendar Adapter Interface">
           <vk-table
             :headers="propHeaders"
             :data="calendarAdapterProps"
           />
         </example-section>
 
-        <example-section
-          title="Adapter Result Type"
-          gap
-        >
+        <example-section title="Adapter Result Type">
           <vk-table
             :headers="propHeaders"
             :data="adapterResultProps"
           />
         </example-section>
 
-        <example-section
-          title="FormattedDates Interface"
-          gap
-        >
+        <example-section title="FormattedDates Interface">
           <vk-table
             :headers="propHeaders"
             :data="formattedDatesProps"
           />
         </example-section>
 
-        <example-section
-          title="FormattedDate Type"
-          gap
-        >
+        <example-section title="FormattedDate Type">
           <vk-table
             :headers="propHeaders"
             :data="formattedDateProps"
           />
         </example-section>
 
-        <example-section
-          title="DayOfWeek Type"
-          gap
-        >
+        <example-section title="DayOfWeek Type">
           <vk-table
             :headers="propHeaders"
             :data="dayOfWeekProp"
           />
         </example-section>
 
-        <example-section
-          title="Available Formats"
-          gap
-        >
+        <example-section title="Available Formats">
           <vk-table
             :headers="propHeaders"
             :data="formats"

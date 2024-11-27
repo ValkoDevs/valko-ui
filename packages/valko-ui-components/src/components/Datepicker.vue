@@ -67,6 +67,7 @@ onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside,
         :class="classes.content"
       >
         <vk-calendar
+          v-if="isOpen"
           v-bind="props"
           :adapter="adapter"
           :disabled-dates="disabledDates"

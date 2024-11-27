@@ -4,7 +4,7 @@ export default tv({
   slots: {
     container: [
       'vk-switch__container',
-      'w-full',
+      'w-fit',
       'flex',
       'justify-start',
       'items-center'

@@ -61,12 +61,12 @@ describe('useTimeAdapter composable', () => {
 
     it('should format period as A (uppercase AM/PM)', () => {
       const [ , parsedModel ] = useTimeAdapter({ format: 'A' })
-      expect(parsedModel.value).toBe('AM')
+      expect(parsedModel.value).toBe('PM')
     })
 
     it('should format period as a (lowercase am/pm)', () => {
       const [ , parsedModel ] = useTimeAdapter({ format: 'a' })
-      expect(parsedModel.value).toBe('am')
+      expect(parsedModel.value).toBe('pm')
     })
   })
 

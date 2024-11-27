@@ -252,34 +252,12 @@ describe('Select component', () => {
       })
     })
 
-    describe('When allowClear prop changes', () => {
-      // it('should allow value to be undefined when prop.allowClear is true', async () => {
-      //   wrapper = mount(VkSelect, {
-      //     props: {
-      //       options,
-      //       allowClear: true,
-      //       modelValue: ''
-      //     }
-      //   })
-
-      //   wrapper.find('.vk-input__input').trigger('focus')
-      //   await nextTick()
-      //   wrapper.find('.vk-select__item:first-child').trigger('click')
-      //   await nextTick()
-
-      //   wrapper.find('.vk-input__input').trigger('focus')
-      //   await nextTick()
-      //   wrapper.find('.vk-select__item:first-child').trigger('click')
-      //   await nextTick()
-
-      //   expect(wrapper.emitted('update:modelValue')?.[1]).toEqual([undefined])
-      // })
-
-      it('should not allow value to be undefined when prop.allowClear is false', async () => {
+    describe('When clearable prop changes', () => {
+      it('should not allow value to be undefined when clearable is false', async () => {
         wrapper = mount(VkSelect, {
           props: {
             options,
-            allowClear: false,
+            clearable: false,
             modelValue: ''
           }
         })
@@ -391,12 +369,12 @@ describe('Select component', () => {
       expect(wrapper.emitted('update:modelValue')).toEqual([[[1]], [[2]]])
     })
 
-    it('should not clear value if allowClear is false', async () => {
+    it('should not clear value if clearable is false', async () => {
       wrapper = mount(VkSelect, {
         props: {
           options,
           modelValue: 1,
-          allowClear: false
+          clearable: false
         }
       })
 
@@ -408,12 +386,12 @@ describe('Select component', () => {
       expect(wrapper.emitted('update:modelValue')).toEqual(undefined)
     })
 
-    it('should clear value if allowClear is true', async () => {
+    it('should clear value if clearable is true', async () => {
       wrapper = mount(VkSelect, {
         props: {
           options,
           modelValue: 1,
-          allowClear: true
+          clearable: true
         }
       })
 

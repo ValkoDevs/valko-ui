@@ -46,8 +46,8 @@ const onItemClick = (item: Item) => {
             :open="open"
           >
             <vk-button
-              :class="classes.button"
               v-bind="props"
+              :class="classes.triggerButton"
             >
               {{ label }}
               <vk-icon

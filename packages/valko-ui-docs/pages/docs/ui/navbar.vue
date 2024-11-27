@@ -86,23 +86,22 @@ const navbarSlots: TableItem[] = [
     description="A visual navigation component that provides links and other navigation-related information to the user."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center p-4">
-        <vk-navbar
-          :color="form.color"
-          :variant="form.variant"
-          :shape="form.shape"
+      <vk-navbar
+        :color="form.color"
+        :variant="form.variant"
+        :shape="form.shape"
+        :size="form.size"
+        :floating="form.floating"
+        :fixed="form.fixed"
+        :flat="form.flat"
+      >
+        <vk-icon
+          name="brand-vite"
           :size="form.size"
-          :floating="form.floating"
-          :fixed="form.fixed"
-          :flat="form.flat"
-        >
-          <vk-icon
-            name="brand-vite"
-            :size="form.size"
-          />
-        </vk-navbar>
-      </div>
+        />
+      </vk-navbar>
     </template>
+
     <template #playground-options>
       <vk-select
         v-model="form.color"
@@ -143,148 +142,91 @@ const navbarSlots: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="start"
-        wrap
-        gap
-      >
-        <div class="w-full grid grid-cols-3 gap-4">
-          <div
-            v-for="color in colorOptions"
-            :key="color.value"
-            class="w-full"
-          >
-            <vk-navbar
-              :color="color.value"
-            >
-              <vk-icon
-                name="brand-vite"
-                size="md"
-              />
-              <span class="font-semibold ml-4">{{ color.label }}</span>
-            </vk-navbar>
-          </div>
-        </div>
+      <example-section title="Colors">
+        <vk-navbar
+          v-for="color in colorOptions"
+          :key="color.value"
+          :color="color.value"
+        >
+          <vk-icon
+            name="brand-vite"
+            size="md"
+          />
+          <span class="font-semibold ml-4">{{ color.label }}</span>
+        </vk-navbar>
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Variants">
+        <vk-navbar
           v-for="variant in variantOptions.withGradient"
           :key="variant.value"
-          class="w-full"
+          :variant="variant.value"
         >
-          <vk-navbar
-            :variant="variant.value"
-          >
-            <vk-icon
-              name="brand-vite"
-              size="md"
-            />
-            <span class="font-semibold ml-4">{{ variant.label }}</span>
-          </vk-navbar>
-        </div>
+          <vk-icon
+            name="brand-vite"
+            size="md"
+          />
+          <span class="font-semibold ml-4">{{ variant.label }}</span>
+        </vk-navbar>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        wrap
-        gap
-      >
-        <div
+      <example-section title="Shapes">
+        <vk-navbar
           v-for="shape in shapeOptions.general"
           :key="shape.value"
-          class="w-full"
+          :shape="shape.value"
         >
-          <vk-navbar
-            :shape="shape.value"
-          >
-            <vk-icon
-              name="brand-vite"
-              size="md"
-              class="text-white"
-            />
-            <span class="font-semibold ml-4">{{ shape.label }}</span>
-          </vk-navbar>
-        </div>
+          <vk-icon
+            name="brand-vite"
+            size="md"
+            class="text-white"
+          />
+          <span class="font-semibold ml-4">{{ shape.label }}</span>
+        </vk-navbar>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        gap
-      >
-        <div class="w-full grid grid-cols-2 gap-4">
-          <div
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-          >
-            <vk-navbar
-              :size="size.value"
-            >
-              <vk-icon
-                name="brand-vite"
-                size="md"
-                class="text-white"
-              />
-              <span class="font-semibold ml-4">{{ size.label }}</span>
-            </vk-navbar>
-          </div>
-        </div>
+      <example-section title="Sizes">
+        <vk-navbar
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+          :size="size.value"
+        >
+          <vk-icon
+            name="brand-vite"
+            size="md"
+            class="text-white"
+          />
+          <span class="font-semibold ml-4">{{ size.label }}</span>
+        </vk-navbar>
       </example-section>
 
-      <example-section
-        title="Floating"
-        justify="start"
-        wrap
-        gap
-      >
-        <div class="w-full">
-          <vk-navbar
-            floating
-          >
-            <vk-icon
-              name="brand-vite"
-              size="md"
-              class="text-white"
-            />
-            <span class="font-semibold ml-4">Floating</span>
-          </vk-navbar>
-        </div>
+      <example-section title="Floating">
+        <vk-navbar
+          floating
+        >
+          <vk-icon
+            name="brand-vite"
+            size="md"
+            class="text-white"
+          />
+          <span class="font-semibold ml-4">Floating</span>
+        </vk-navbar>
       </example-section>
 
-      <example-section
-        title="Flat"
-        justify="start"
-        wrap
-        gap
-      >
-        <div class="w-full">
-          <vk-navbar
-            flat
-          >
-            <vk-icon
-              name="brand-vite"
-              size="md"
-              class="text-white"
-            />
-            <span class="font-semibold ml-4">Flat</span>
-          </vk-navbar>
-        </div>
+      <example-section title="Flat">
+        <vk-navbar
+          flat
+        >
+          <vk-icon
+            name="brand-vite"
+            size="md"
+            class="text-white"
+          />
+          <span class="font-semibold ml-4">Flat</span>
+        </vk-navbar>
       </example-section>
 
-      <example-section
-        title="Fixed"
-        justify="start"
-        wrap
-        gap
-      >
+      <example-section title="Fixed">
         <div class="w-full z-20">
           <vk-navbar
             fixed
@@ -302,20 +244,14 @@ const navbarSlots: TableItem[] = [
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Navbar Props"
-          gap
-        >
+        <example-section title="Navbar Props">
           <vk-table
             :headers="propHeaders"
             :data="navbarProps"
           />
         </example-section>
 
-        <example-section
-          title="Navbar Slots"
-          gap
-        >
+        <example-section title="Navbar Slots">
           <vk-table
             :headers="slotHeaders"
             :data="navbarSlots"

@@ -11,27 +11,19 @@ const form = ref<ModalProps>({
   isOpen: false
 })
 
-const exampleSectionForm = ref<Record<string, boolean>>({
-  rounded: false,
-  soft: false,
-  square: false,
-  xs: false,
-  sm: false,
-  md: false,
-  lg: false,
-  full: false,
-  opaque: false,
-  blur: false,
-  transparent: false,
-  flatExample: false,
-  closableExample: false
-})
-
 const backdropOptions: SelectOption<Backdrop>[] = [
   { value: 'opaque', label: 'Opaque' },
   { value: 'blur', label: 'Blur' },
   { value: 'transparent', label: 'Transparent' }
 ]
+
+const exampleSectionForm = reactive({
+  shapes: Array(shapeOptions.general.length).fill(false),
+  sizes: Array(sizeOptions.withFull.length).fill(false),
+  backdrop: Array(backdropOptions.length).fill(false),
+  flat: false,
+  closable: false
+})
 
 const modalProps: TableItem[] = [
   {
@@ -181,22 +173,19 @@ const modalSlots = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Shapes"
-        gap
-      >
+      <example-section title="Shapes">
         <div
-          v-for="shape in shapeOptions.general"
+          v-for="(shape, index) in shapeOptions.general"
           :key="shape.value"
         >
-          <vk-button @click="() => {exampleSectionForm[shape.value] = true}">
+          <vk-button @click="() => {exampleSectionForm['shapes'][index] = true}">
             Open {{ shape.label }}
           </vk-button>
           <vk-modal
             :shape="shape.value"
-            :is-open="exampleSectionForm[shape.value]"
+            :is-open="exampleSectionForm['shapes'][index]"
             :title="shape.label"
-            @close="() => {exampleSectionForm[shape.value] = false}"
+            @close="() => {exampleSectionForm['shapes'][index] = false}"
           >
             <template #default>
               {{ shape.label }} Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
@@ -206,22 +195,19 @@ const modalSlots = [
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        gap
-      >
+      <example-section title="Sizes">
         <div
-          v-for="size in sizeOptions.withFull"
+          v-for="(size, index) in sizeOptions.withFull"
           :key="size.value"
         >
-          <vk-button @click="() => {exampleSectionForm[size.value] = true}">
+          <vk-button @click="() => {exampleSectionForm['sizes'][index] = true}">
             Open {{ size.label }}
           </vk-button>
           <vk-modal
             :size="size.value"
-            :is-open="exampleSectionForm[size.value]"
+            :is-open="exampleSectionForm['sizes'][index]"
             :title="size.label"
-            @close="() => {exampleSectionForm[size.value] = false}"
+            @close="() => {exampleSectionForm['sizes'][index] = false}"
           >
             <template #default>
               {{ size.label }} Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
@@ -236,17 +222,17 @@ const modalSlots = [
         gap
       >
         <div
-          v-for="backdrop in backdropOptions"
+          v-for="(backdrop, index) in backdropOptions"
           :key="backdrop.value"
         >
-          <vk-button @click="() => {exampleSectionForm[backdrop.value] = true}">
+          <vk-button @click="() => {exampleSectionForm['backdrop'][index] = true}">
             Open {{ backdrop.label }}
           </vk-button>
           <vk-modal
             :backdrop="backdrop.value"
-            :is-open="exampleSectionForm[backdrop.value]"
+            :is-open="exampleSectionForm['backdrop'][index]"
             :title="backdrop.label"
-            @close="() => {exampleSectionForm[backdrop.value] = false}"
+            @close="() => {exampleSectionForm['backdrop'][index] = false}"
           >
             <template #default>
               {{ backdrop.label }} Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
@@ -259,13 +245,13 @@ const modalSlots = [
       <example-section
         title="Flat"
       >
-        <vk-button @click="() => {exampleSectionForm.flatExample = true}">
+        <vk-button @click="() => {exampleSectionForm['flat'] = true}">
           Flat
         </vk-button>
         <vk-modal
-          :is-open="exampleSectionForm.flatExample"
+          :is-open="exampleSectionForm['flat']"
           title="Flat"
-          @close="() => {exampleSectionForm.flatExample = false}"
+          @close="() => {exampleSectionForm['flat'] = false}"
         >
           <template #default>
             Flat Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
@@ -277,18 +263,27 @@ const modalSlots = [
       <example-section
         title="Closable"
       >
-        <vk-button @click="() => {exampleSectionForm.closableExample = true}">
+        <vk-button @click="() => {exampleSectionForm['closable'] = true}">
           Closable
         </vk-button>
         <vk-modal
-          :is-open="exampleSectionForm.closableExample"
+          :is-open="exampleSectionForm['closable']"
           title="Closable"
-          :closable="false"
-          @close="() => {exampleSectionForm.closableExample = false}"
+          closable
+          @close="() => {exampleSectionForm['closable'] = false}"
         >
           <template #default>
             Closable Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+
+            <vk-button
+              color="primary"
+              size="sm"
+              class="self-end"
+              @click="() => {exampleSectionForm['closable'] = false}"
+            >
+              Accept & close
+            </vk-button>
           </template>
         </vk-modal>
       </example-section>
@@ -296,30 +291,21 @@ const modalSlots = [
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Modal Props"
-          gap
-        >
+        <example-section title="Modal Props">
           <vk-table
             :headers="propHeaders"
             :data="modalProps"
           />
         </example-section>
 
-        <example-section
-          title="Modal Emits"
-          gap
-        >
+        <example-section title="Modal Emits">
           <vk-table
             :headers="emitHeaders"
             :data="modalEmits"
           />
         </example-section>
 
-        <example-section
-          title="Modal Slots"
-          gap
-        >
+        <example-section title="Modal Slots">
           <vk-table
             :headers="slotHeaders"
             :data="modalSlots"

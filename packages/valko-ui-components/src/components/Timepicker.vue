@@ -67,6 +67,7 @@ onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside,
         :class="classes.content"
       >
         <vk-time
+          v-if="isOpen"
           v-bind="props"
           :adapter="adapter"
           :locale="locale"

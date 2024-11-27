@@ -145,57 +145,55 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
       CardImage: An special component who allows to display a background image in the card."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center p-4">
-        <vk-card
-          :is-pressable="form.isPressable"
-          :variant="form.variant"
-          :shape="form.shape"
-          :size="form.size"
-          :layout="form.layout"
-          :flat="form.flat"
-          @click="onClick"
+      <vk-card
+        :is-pressable="form.isPressable"
+        :variant="form.variant"
+        :shape="form.shape"
+        :size="form.size"
+        :layout="form.layout"
+        :flat="form.flat"
+        @click="onClick"
+      >
+        <vk-card-header
+          v-if="cardComponents.header"
         >
-          <vk-card-header
-            v-if="cardComponents.header"
-          >
-            Best nature pics 2024!
-          </vk-card-header>
-          <vk-card-image
-            v-if="cardComponents.image"
-            src="/assets/flower-m.jpg"
-            class="text-white w-1/2"
-          />
+          Best nature pics 2024!
+        </vk-card-header>
+        <vk-card-image
+          v-if="cardComponents.image"
+          src="/assets/flower-m.jpg"
+          class="text-white w-1/2"
+        />
 
-          <vk-card-body
-            v-if="cardComponents.body"
+        <vk-card-body
+          v-if="cardComponents.body"
+        >
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
+        </vk-card-body>
+        <vk-card-footer
+          v-if="cardComponents.footer"
+          class="flex justify-between"
+        >
+          <vk-button
+            color="neutral"
+            size="sm"
+            :variant="form.variant"
+            flat
+            @click="randomImage"
           >
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
-          </vk-card-body>
-          <vk-card-footer
-            v-if="cardComponents.footer"
-            class="flex justify-between"
+            Random
+          </vk-button>
+          <vk-button
+            color="primary"
+            size="sm"
+            :variant="form.variant"
+            flat
+            @click="nextImage"
           >
-            <vk-button
-              color="neutral"
-              size="sm"
-              :variant="form.variant"
-              flat
-              @click="randomImage"
-            >
-              Random
-            </vk-button>
-            <vk-button
-              color="primary"
-              size="sm"
-              :variant="form.variant"
-              flat
-              @click="nextImage"
-            >
-              See next
-            </vk-button>
-          </vk-card-footer>
-        </vk-card>
-      </div>
+            See next
+          </vk-button>
+        </vk-card-footer>
+      </vk-card>
     </template>
     <template #playground-options>
       <vk-select
@@ -249,11 +247,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
     </template>
 
     <template #examples>
-      <example-section
-        title="Variants"
-        justify="start"
-        gap
-      >
+      <example-section title="Variants">
         <vk-card
           v-for="variant in variantOptions.general"
           :key="variant.value"
@@ -276,11 +270,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
         </vk-card>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        gap
-      >
+      <example-section title="Shapes">
         <vk-card
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -302,13 +292,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
         </vk-card>
       </example-section>
 
-      <example-section
-        title="Layout"
-        justify="start"
-        align="stretch"
-        gap
-        wrap
-      >
+      <example-section title="Layout">
         <vk-card
           v-for="layout in layoutOptions"
           :key="layout.value"
@@ -330,13 +314,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
         </vk-card>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        align="stretch"
-        wrap
-        gap
-      >
+      <example-section title="Sizes">
         <vk-card
           v-for="size in sizeOptions.withFull"
           :key="size.value"
@@ -359,11 +337,7 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
         </vk-card>
       </example-section>
 
-      <example-section
-        title="Pressable"
-        justify="start"
-        gap
-      >
+      <example-section title="Pressable">
         <vk-card
           is-pressable
           @click="onClick"
@@ -384,14 +358,8 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
         </vk-card>
       </example-section>
 
-      <example-section
-        title="Flat"
-        justify="start"
-        gap
-      >
-        <vk-card
-          flat
-        >
+      <example-section title="Flat">
+        <vk-card flat>
           <vk-card-image
             src="/assets/flower-m.jpg"
             class="text-white"
@@ -411,40 +379,28 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Card Props"
-          gap
-        >
+        <example-section title="Card Props">
           <vk-table
             :headers="propHeaders"
             :data="cardProps"
           />
         </example-section>
 
-        <example-section
-          title="Card Emits"
-          gap
-        >
+        <example-section title="Card Emits">
           <vk-table
             :headers="emitHeaders"
             :data="cardEmits"
           />
         </example-section>
 
-        <example-section
-          title="Card Slots"
-          gap
-        >
+        <example-section title="Card Slots">
           <vk-table
             :headers="slotHeaders"
             :data="cardSlots"
           />
         </example-section>
 
-        <example-section
-          title="Card Image Props"
-          gap
-        >
+        <example-section title="Card Image Props">
           <vk-table
             :headers="propHeaders"
             :data="cardImageProps"

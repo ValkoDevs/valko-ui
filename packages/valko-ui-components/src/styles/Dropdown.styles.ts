@@ -9,12 +9,6 @@ export default tv({
       'w-full',
       'relative'
     ],
-    button: [
-      'vk-dropdown__button',
-      'w-full',
-      'flex',
-      'items-center'
-    ],
     icon: [
       'ml-2',
       'block',
@@ -35,6 +29,9 @@ export default tv({
       'origin-top-right',
       'dark:bg-dark-3',
       'dark:shadow-dark-3'
+    ],
+    triggerButton: [
+      'vk-dropdown__trigger-button'
     ],
     itemsButton: [
       'vk-dropdown__item-button',
@@ -101,9 +98,6 @@ export default tv({
     },
     variant: {
       filled: {
-        button: [
-          'text-light-1'
-        ],
         itemsButton: [
           'data-[active=true]:text-light-1'
         ]
@@ -126,9 +120,6 @@ export default tv({
         ]
       },
       gradient: {
-        button: [
-          'text-light-1'
-        ],
         itemsButton: [
           'bg-gradient-to-br',
           'data-[active=true]:text-light-1'
@@ -181,10 +172,6 @@ export default tv({
           'data-[active=true]:text-dark-1',
           'data-[active=true]:dark:bg-dark-2',
           'data-[active=true]:dark:text-light-3'
-        ],
-        button: [
-          'text-dark-1',
-          'dark:text-light-3'
         ]
       }
     },
@@ -437,10 +424,6 @@ export default tv({
           'data-[active=true]:dark:from-dark-1',
           'data-[active=true]:dark:to-dark-5',
           'data-[active=true]:dark:text-light-3'
-        ],
-        button: [
-          'text-dark-1',
-          'dark:text-light-3'
         ]
       }
     },

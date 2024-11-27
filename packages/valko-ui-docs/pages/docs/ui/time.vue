@@ -444,12 +444,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="start"
-        wrap
-        gap
-      >
+      <example-section title="Colors">
         <div
           v-for="color in colorOptions"
           :key="color.value"
@@ -463,12 +458,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         </div>
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        wrap
-        gap
-      >
+      <example-section title="Variants">
         <div
           v-for="variant in variantOptions.general"
           :key="variant.value"
@@ -482,12 +472,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         </div>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        wrap
-        gap
-      >
+      <example-section title="Shapes">
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -501,12 +486,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        wrap
-        gap
-      >
+      <example-section title="Sizes">
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -520,10 +500,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         </div>
       </example-section>
 
-      <example-section
-        title="Min & Max Times"
-        gap
-      >
+      <example-section title="Min & Max Times">
         <div class="flex flex-col gap-4">
           <span>Min</span>
           <vk-time
@@ -540,9 +517,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         </div>
       </example-section>
 
-      <example-section
-        title="Disabled Times"
-      >
+      <example-section title="Disabled Times">
         <vk-time
           :adapter="adapter"
           :disabled-times="form.disabledTimes"
@@ -552,60 +527,42 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Time Props"
-          gap
-        >
+        <example-section title="Time Props">
           <vk-table
             :headers="propHeaders"
             :data="timeProps"
           />
         </example-section>
 
-        <example-section
-          title="Time Adapter Props"
-          gap
-        >
+        <example-section title="Time Adapter Props">
           <vk-table
             :headers="propHeaders"
             :data="timeAdapterProps"
           />
         </example-section>
 
-        <example-section
-          title="Time Adapter Interface"
-          gap
-        >
+        <example-section title="Time Adapter Interface">
           <vk-table
             :headers="propHeaders"
             :data="timeAdapterInterface"
           />
         </example-section>
 
-        <example-section
-          title="Time Adapter Result Type"
-          gap
-        >
+        <example-section title="Time Adapter Result Type">
           <vk-table
             :headers="propHeaders"
             :data="timeAdapterResult"
           />
         </example-section>
 
-        <example-section
-          title="FormattedTime Interface"
-          gap
-        >
+        <example-section title="FormattedTime Interface">
           <vk-table
             :headers="propHeaders"
             :data="formattedTimeProps"
           />
         </example-section>
 
-        <example-section
-          title="Available Time Formats"
-          gap
-        >
+        <example-section title="Available Time Formats">
           <vk-table
             :headers="propHeaders"
             :data="timeFormats"

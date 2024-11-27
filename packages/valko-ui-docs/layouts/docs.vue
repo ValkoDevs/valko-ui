@@ -42,11 +42,15 @@ const menuItems: MenuItem[] = [
 ]
 
 const activeItem = ref<MenuItem['key'] | null>(null)
+const menuOpen = ref(false)
 
 const onItemClick = (item: MenuItem) => {
   activeItem.value = item.key
   router.push(`/docs/${item.key}`)
+  menuOpen.value = false
 }
+
+const toggleMenu = () => menuOpen.value = !menuOpen.value
 
 onMounted(() => {
   const activeItemKey = router.currentRoute.value.path.replace('/docs/', '')
@@ -65,8 +69,22 @@ onMounted(() => {
       shape="square"
       flat
       fixed
-      class="flex justify-between"
+      class="flex justify-between !bg-light-2 dark:!bg-dark-3"
     >
+      <vk-button
+        variant="link"
+        shape="rounded"
+        color="neutral"
+        condensed
+        size="lg"
+        class="size-10 md:hidden"
+        @click="toggleMenu"
+      >
+        <vk-icon
+          name="paw"
+          class="text-2xl"
+        />
+      </vk-button>
       <h2 class="text-primary-600 dark:text-primary-400 text-3xl font-serif tracking-wider">
         ValkoUI
       </h2>
@@ -94,19 +112,38 @@ onMounted(() => {
     </vk-navbar>
 
     <div class="w-full flex">
-      <aside class="hidden md:block md:w-40 lg:w-52 xl:w-60 shrink-0 overflow-y-auto border-r border-light-4 dark:border-dark-2 max-h-[calc(100vh_-_3.5rem)] h-screen sticky top-14">
+      <vk-drawer
+        :is-open="menuOpen"
+        shape="soft"
+        placement="left"
+        class="w-4/5"
+        @close="toggleMenu"
+      >
         <vk-menu
           :items="menuItems"
           :active="activeItem"
           color="primary"
           size="md"
           variant="ghost"
-          shape="square"
+          shape="soft"
+          floating
+          @item-click="onItemClick"
+        />
+      </vk-drawer>
+      <aside class="hidden md:block md:w-40 lg:w-52 bg-light-2 dark:bg-dark-3 shrink-0 overflow-y-auto border-r border-light-4 dark:border-dark-2 max-h-[calc(100vh_-_3.5rem)] h-screen sticky top-14">
+        <vk-menu
+          :items="menuItems"
+          :active="activeItem"
+          color="primary"
+          size="md"
+          variant="ghost"
+          shape="soft"
+          floating
           @item-click="onItemClick"
         />
       </aside>
-      <div class="grow flex flex-col justify-between items-center">
-        <main class="w-full max-w-7xl px-4 mx-auto">
+      <div class="flex flex-col grow items-center max-w-screen-xl w-full px-4 mx-auto">
+        <main class="w-full">
           <NuxtPage />
         </main>
         <footer class="w-full px-2 py-1 text-sm bg-light-3 dark:bg-dark-5">

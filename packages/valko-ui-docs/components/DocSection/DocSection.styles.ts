@@ -21,8 +21,8 @@ export default tv({
       'mb-16'
     ],
     container: [
-      'flex',
       'w-full',
+      'flex',
       'flex-col',
       'justify-start',
       'items-start',
@@ -36,8 +36,9 @@ export default tv({
       'items-stretch'
     ],
     playgroundView: [
-      'flex',
       'w-full',
+      'p-8',
+      'flex',
       'md:w-auto',
       'md:grow',
       'justify-center',

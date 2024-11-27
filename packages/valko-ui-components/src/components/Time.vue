@@ -42,6 +42,12 @@ const selectedTime = computed(() => {
   const dates = toValue(props.adapter.formattedTime)
   return dates.display || dates.selected
 })
+
+const formatHour = (hour: number): number => {
+  const is12HourFormat = formatMap.value.hsColItems === 12
+  if (is12HourFormat) return hour === 0 ? 12 : hour
+  return hour
+}
 </script>
 
 <template>
@@ -59,12 +65,12 @@ const selectedTime = computed(() => {
           :size="size"
           :shape="shape"
           :disabled="adapter.isTimeDisabled(H)"
-          :variant="selectedTime.hours === (formatMap.hsColItems === 12 ? H === 0 ? 12 : H : H) ? variant : 'link'"
-          :color="selectedTime.hours === (formatMap.hsColItems === 12 ? H === 0 ? 12 : H : H) ? color : 'neutral'"
+          :variant="selectedTime.hours === formatHour(H) ? variant : 'link'"
+          :color="selectedTime.hours === formatHour(H) ? color : 'neutral'"
           :class="classes.unitButton"
-          @click="adapter.setDisplayUnit('h', formatMap.hsColItems === 12 ? H === 0 ? 12 : H : H)"
+          @click="adapter.setDisplayUnit('h', formatHour(H))"
         >
-          {{ `${formatMap.hsColItems === 12 ? H === 0 ? 12 : H : H}`.padStart(2, '0') }}
+          {{ `${formatHour(H)}`.padStart(2, '0') }}
         </vk-button>
       </div>
       <div

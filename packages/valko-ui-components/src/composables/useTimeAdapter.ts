@@ -4,7 +4,6 @@ import type { TimeAdapterProps, TimeAdapterResult } from '#valkoui/types/Time'
 const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAdapterResult => {
   const model = ref<EpochTimeStamp>(+new Date())
   const tempTime = ref<Date | null>(null)
-  const period = ref<'AM' | 'PM'>('AM')
 
   const formatTime = (epoch: number) => {
     const date = new Date(epoch)
@@ -16,20 +15,32 @@ const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAd
     }
   }
 
+  const parsedPeriod = computed<'AM' | 'PM'>(() => {
+    const hours = formatTime(model.value).hours
+    return hours >= 12 ? 'PM' : 'AM'
+  })
+
+  const userPeriod = ref<'AM' | 'PM'>(parsedPeriod.value)
+
   const formattedTime = computed(() => {
+    const { format } = toValue(props)
     const selected = formatTime(model.value)
     const display = tempTime.value ? formatTime(tempTime.value.getTime()) : selected
 
+    const is12HourFormat = /[h]/.test(format || '')
+
     return {
       selected,
-      display
+      display: {
+        ...display,
+        hours: is12HourFormat ? display.hours % 12 || 12 : display.hours
+      }
     }
   })
 
   const parsedModel = computed(() => {
     const { format } = toValue(props)
     const time = formattedTime.value.selected
-
     const formatted = format || 'HH:mm:ss'
     const hours12 = time.hours % 12 || 12
 
@@ -42,8 +53,8 @@ const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAd
       .replace('m', String(time.minutes))
       .replace('ss', String(time.seconds).padStart(2, '0'))
       .replace('s', String(time.seconds))
-      .replace('A', period.value)
-      .replace('a', period.value.toLowerCase())
+      .replace('A', parsedPeriod.value)
+      .replace('a', parsedPeriod.value.toLowerCase())
   })
 
   const isTimeDisabled = (hours: number, minutes = 0) => {
@@ -63,7 +74,7 @@ const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAd
 
     const minNumber = minDate ? formatTimeNumber(minDate.getUTCHours(), minDate.getMinutes()) : -1
     const maxNumber = maxDate ? formatTimeNumber(maxDate.getUTCHours(), maxDate.getMinutes()) : Infinity
-    const currentNumber = formatTimeNumber(is12HourFormat ? convertTo24Hour(hours, period.value) : hours, minutes)
+    const currentNumber = formatTimeNumber(is12HourFormat ? convertTo24Hour(hours, userPeriod.value) : hours, minutes)
 
     const isSpecificallyDisabled = disabledTimes
       ? disabledTimes.some(disabledTime => {
@@ -80,8 +91,20 @@ const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAd
   }
 
   const onSelectAMPM = (selectedPeriod: 'AM' | 'PM') => {
-    period.value = selectedPeriod
-    return tempTime.value
+    userPeriod.value = selectedPeriod
+
+    const hours = tempTime.value
+      ? tempTime.value.getHours()
+      : formatTime(model.value).hours
+
+    const adjustedHours = selectedPeriod === 'AM' ? hours % 12 : (hours % 12) + 12
+
+    if (tempTime.value) {
+      tempTime.value.setHours(adjustedHours)
+    } else {
+      tempTime.value = new Date(model.value)
+      tempTime.value.setHours(adjustedHours)
+    }
   }
 
   const setDisplayUnit = (unit: 'h' | 'm' | 's', value: number) => {
@@ -117,7 +140,7 @@ const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAd
       onSelectAMPM,
       onSelectTime,
       isTimeDisabled,
-      period
+      period: userPeriod
     }
   ]
 }
