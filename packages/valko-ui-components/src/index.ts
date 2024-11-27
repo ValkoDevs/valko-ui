@@ -17,6 +17,7 @@ export { default as useClientSideFilter } from '#valkoui/composables/useClientSi
 export { default as useClientSideDragAndDrop } from '#valkoui/composables/useClientSideDragAndDrop.ts'
 export { default as useClientSideDataTable } from '#valkoui/composables/useClientSideDataTable.ts'
 export { default as useDateAdapter } from '#valkoui/composables/useDateAdapter.ts'
+export { default as useTimeAdapter } from '#valkoui/composables/useTimeAdapter.ts'
 
 ///////////////////
 ////// TYPES //////
@@ -54,6 +55,8 @@ export * from '#valkoui/types/Table'
 export * from '#valkoui/types/Tabs'
 export * from '#valkoui/types/Tag'
 export * from '#valkoui/types/Textarea'
+export * from '#valkoui/types/Time'
+export * from '#valkoui/types/Timepicker'
 export * from '#valkoui/types/Tooltip'
 
 /////////////////////

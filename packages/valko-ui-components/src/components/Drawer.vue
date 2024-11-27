@@ -93,6 +93,7 @@ const transitionClasses = computed(() => {
     >
       <transition-child
         as="template"
+        class="opacity-0"
         enter="duration-300 ease-out"
         enter-from="opacity-0"
         enter-to="opacity-100"
@@ -114,6 +115,7 @@ const transitionClasses = computed(() => {
         >
           <transition-child
             as="template"
+            :class="transitionClasses.enterFrom"
             :enter="transitionClasses.enter"
             :enter-from="transitionClasses.enterFrom"
             :enter-to="transitionClasses.enterTo"

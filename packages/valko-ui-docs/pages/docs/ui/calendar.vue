@@ -425,7 +425,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
     description="The Calendar component is a customizable and versatile date picker that allows users to select dates within a specific range. It provides options to customize the appearance with different themes, shapes, and sizes. The component also supports disabled dates, minimum and maximum selectable dates, and custom date formatting. With the ability to adapt to different locales using custom labels for weekdays and months, Calendar is a flexible tool for handling date selection in any application. It seamlessly integrates with CalendarAdapter for dynamic date management and offers full control over its behavior."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center items-center flex-col p-4">
+      <div class="w-full flex justify-center items-center gap-4 flex-col">
         <strong>Selected Date: {{ parsedModel }}</strong>
         <vk-calendar
           v-model="model"
@@ -484,12 +484,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="start"
-        wrap
-        gap
-      >
+      <example-section title="Colors">
         <div
           v-for="color in colorOptions"
           :key="color.value"
@@ -503,12 +498,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
         </div>
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        wrap
-        gap
-      >
+      <example-section title="Variants">
         <div
           v-for="variant in variantOptions.general"
           :key="variant.value"
@@ -522,12 +512,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
         </div>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        wrap
-        gap
-      >
+      <example-section title="Shapes">
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -541,12 +526,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        wrap
-        gap
-      >
+      <example-section title="Sizes">
         <div class="grid grid-cols-2">
           <div
             v-for="size in sizeOptions.general"
@@ -562,9 +542,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
         </div>
       </example-section>
 
-      <example-section
-        title="Disable Weekends"
-      >
+      <example-section title="Disable Weekends">
         <vk-calendar
           v-model="model"
           :adapter="adapter"
@@ -572,9 +550,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
         />
       </example-section>
 
-      <example-section
-        title="Disabled Dates"
-      >
+      <example-section title="Disabled Dates">
         <vk-calendar
           v-model="model"
           :adapter="adapter"
@@ -597,80 +573,56 @@ const [ model, parsedModel, adapter ] = useDateAdapter(form)
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Calendar Props"
-          gap
-        >
+        <example-section title="Calendar Props">
           <vk-table
             :headers="propHeaders"
             :data="calendarProp"
           />
         </example-section>
 
-        <example-section
-          title="Calendar Emits"
-          gap
-        >
+        <example-section title="Calendar Emits">
           <vk-table
             :headers="emitHeaders"
             :data="calendarEmits"
           />
         </example-section>
 
-        <example-section
-          title="Calendar Adapter Interface"
-          gap
-        >
+        <example-section title="Calendar Adapter Interface">
           <vk-table
             :headers="propHeaders"
             :data="calendarAdapterProps"
           />
         </example-section>
 
-        <example-section
-          title="Adapter Result Type"
-          gap
-        >
+        <example-section title="Adapter Result Type">
           <vk-table
             :headers="propHeaders"
             :data="adapterResultProps"
           />
         </example-section>
 
-        <example-section
-          title="FormattedDates Interface"
-          gap
-        >
+        <example-section title="FormattedDates Interface">
           <vk-table
             :headers="propHeaders"
             :data="formattedDatesProps"
           />
         </example-section>
 
-        <example-section
-          title="FormattedDate Type"
-          gap
-        >
+        <example-section title="FormattedDate Type">
           <vk-table
             :headers="propHeaders"
             :data="formattedDateProps"
           />
         </example-section>
 
-        <example-section
-          title="DayOfWeek Type"
-          gap
-        >
+        <example-section title="DayOfWeek Type">
           <vk-table
             :headers="propHeaders"
             :data="dayOfWeekProp"
           />
         </example-section>
 
-        <example-section
-          title="Available Formats"
-          gap
-        >
+        <example-section title="Available Formats">
           <vk-table
             :headers="propHeaders"
             :data="formats"

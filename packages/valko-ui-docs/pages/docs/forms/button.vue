@@ -172,10 +172,7 @@ const onClick = () => useNotification({ text: 'Clicked' })
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        gap
-      >
+      <example-section title="Colors">
         <vk-button
           v-for="color in colorOptions"
           :key="color.value"
@@ -185,11 +182,7 @@ const onClick = () => useNotification({ text: 'Clicked' })
         </vk-button>
       </example-section>
 
-      <example-section
-        title="Variants"
-        gap
-        wrap
-      >
+      <example-section title="Variants">
         <vk-button
           v-for="variant in variantOptions.withGradientAndLink"
           :key="variant.value"
@@ -199,10 +192,7 @@ const onClick = () => useNotification({ text: 'Clicked' })
         </vk-button>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        gap
-      >
+      <example-section title="Shapes">
         <vk-button
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -212,10 +202,7 @@ const onClick = () => useNotification({ text: 'Clicked' })
         </vk-button>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        gap
-      >
+      <example-section title="Sizes">
         <vk-button
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -225,45 +212,31 @@ const onClick = () => useNotification({ text: 'Clicked' })
         </vk-button>
       </example-section>
 
-      <example-section
-        title="Flat"
-      >
+      <example-section title="Flat">
         <vk-button flat>
           Flat
         </vk-button>
       </example-section>
 
-      <example-section
-        title="Disabled"
-      >
+      <example-section title="Disabled">
         <vk-button disabled>
           Disabled
         </vk-button>
       </example-section>
 
-      <example-section
-        title="Condensed"
-      >
+      <example-section title="Condensed">
         <vk-button condensed>
           Condensed
         </vk-button>
       </example-section>
 
-      <example-section
-        title="Block"
-        gap
-        wrap
-      >
+      <example-section title="Block">
         <vk-button block>
           Block
         </vk-button>
       </example-section>
 
-      <example-section
-        title="Loading"
-        gap
-        wrap
-      >
+      <example-section title="Loading">
         <vk-button loading>
           Loading
         </vk-button>
@@ -272,30 +245,21 @@ const onClick = () => useNotification({ text: 'Clicked' })
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Button Props"
-          gap
-        >
+        <example-section title="Button Props">
           <vk-table
             :headers="propHeaders"
             :data="apiData"
           />
         </example-section>
 
-        <example-section
-          title="Button Emits"
-          gap
-        >
+        <example-section title="Button Emits">
           <vk-table
             :headers="emitHeaders"
             :data="emitData"
           />
         </example-section>
 
-        <example-section
-          title="Button Slots"
-          gap
-        >
+        <example-section title="Button Slots">
           <vk-table
             :headers="slotHeaders"
             :data="slotData"

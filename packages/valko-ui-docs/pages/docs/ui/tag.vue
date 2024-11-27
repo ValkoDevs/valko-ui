@@ -133,33 +133,32 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
     description="Provides a visually distinctive way to represent labels or categories in a user interface. Tags are useful for highlighting or classifying items such as articles, products, or topics."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center p-4">
-        <transition
-          enter-active-class="transition ease-out durantion-200"
-          enter-from-class="opacity-0 scale-90"
-          enter-to-class="opactiy-1 scale-100"
-          leave-active-class="transition ease-out durantion-200"
-          leave-from-class="opactiy-1 scale-100"
-          leave-to-class="opacity-0 scale-90"
-        >
-          <vk-tag
-            v-if="isShown"
-            :color="form.color"
-            :variant="form.variant"
-            :shape="form.shape"
-            :size="form.size"
-            :text="form.text"
-            :icon-left="form.iconLeft ? 'tag' : ''"
-            :icon-right="form.iconRight ? 'tag' : ''"
-            :closable="form.closable"
-            :is-pressable="form.isPressable"
-            :disabled="form.disabled"
-            @click="onClick"
-            @close="closeTag"
-          />
-        </transition>
-      </div>
+      <transition
+        enter-active-class="transition ease-out durantion-200"
+        enter-from-class="opacity-0 scale-90"
+        enter-to-class="opactiy-1 scale-100"
+        leave-active-class="transition ease-out durantion-200"
+        leave-from-class="opactiy-1 scale-100"
+        leave-to-class="opacity-0 scale-90"
+      >
+        <vk-tag
+          v-if="isShown"
+          :color="form.color"
+          :variant="form.variant"
+          :shape="form.shape"
+          :size="form.size"
+          :text="form.text"
+          :icon-left="form.iconLeft ? 'tag' : ''"
+          :icon-right="form.iconRight ? 'tag' : ''"
+          :closable="form.closable"
+          :is-pressable="form.isPressable"
+          :disabled="form.disabled"
+          @click="onClick"
+          @close="closeTag"
+        />
+      </transition>
     </template>
+
     <template #playground-options>
       <vk-select
         v-model="form.color"
@@ -213,11 +212,7 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="start"
-        gap
-      >
+      <example-section title="Colors">
         <vk-tag
           v-for="color in colorOptions"
           :key="color.value"
@@ -226,11 +221,7 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
         />
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        gap
-      >
+      <example-section title="Variants">
         <vk-tag
           v-for="variant in variantOptions.withGradient"
           :key="variant.value"
@@ -239,11 +230,7 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
         />
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        gap
-      >
+      <example-section title="Shapes">
         <vk-tag
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -252,11 +239,7 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
         />
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        gap
-      >
+      <example-section title="Sizes">
         <vk-tag
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -265,11 +248,7 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
         />
       </example-section>
 
-      <example-section
-        title="Icons"
-        justify="start"
-        gap
-      >
+      <example-section title="Icons">
         <vk-tag
           text="Without Icons"
         />
@@ -288,11 +267,7 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
         />
       </example-section>
 
-      <example-section
-        title="Closable"
-        justify="start"
-        gap
-      >
+      <example-section title="Closable">
         <transition
           enter-active-class="transition ease-out durantion-200"
           enter-from-class="opacity-0 scale-90"
@@ -310,9 +285,7 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
         </transition>
       </example-section>
 
-      <example-section
-        title="Pressable"
-      >
+      <example-section title="Pressable">
         <vk-tag
           text="Pressable"
           is-pressable
@@ -320,9 +293,7 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
         />
       </example-section>
 
-      <example-section
-        title="Disabled"
-      >
+      <example-section title="Disabled">
         <vk-tag
           text="Disabled"
           disabled
@@ -332,20 +303,14 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Tag Props"
-          gap
-        >
+        <example-section title="Tag Props">
           <vk-table
             :headers="propHeaders"
             :data="tagProps"
           />
         </example-section>
 
-        <example-section
-          title="Tag Emits"
-          gap
-        >
+        <example-section title="Tag Emits">
           <vk-table
             :headers="emitHeaders"
             :data="tagEmits"

@@ -428,24 +428,23 @@ watch(() => draggableRef, (newValue) => {
     description="A more complex Table component that allows to sort, filter & edit the data that contains."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center p-4">
-        <vk-data-table
-          v-bind="dataTable"
-          :color="form.color"
-          :variant="form.variant"
-          :shape="form.shape"
-          :size="form.size"
-          :striped="form.striped"
-          :label="form.label"
-          @on-sort="dataTable.onSort"
-          @on-filter="dataTable.onFilter"
-          @on-page-change="dataTable.onPageChange"
-          @on-limit-change="dataTable.onLimitChange"
-          @on-select="dataTable.onSelect"
-          @on-select-all="dataTable.onSelectAll"
-        />
-      </div>
+      <vk-data-table
+        v-bind="dataTable"
+        :color="form.color"
+        :variant="form.variant"
+        :shape="form.shape"
+        :size="form.size"
+        :striped="form.striped"
+        :label="form.label"
+        @on-sort="dataTable.onSort"
+        @on-filter="dataTable.onFilter"
+        @on-page-change="dataTable.onPageChange"
+        @on-limit-change="dataTable.onLimitChange"
+        @on-select="dataTable.onSelect"
+        @on-select-all="dataTable.onSelectAll"
+      />
     </template>
+
     <template #playground-options>
       <vk-input
         v-model="form.label"
@@ -495,21 +494,19 @@ watch(() => draggableRef, (newValue) => {
     <template #examples>
       <example-section
         title="Colors"
-        justify="start"
-        wrap
+        classes="md:flex-col"
       >
         <div
           v-for="color in colorOptions"
           :key="color.value"
-          class="w-full"
         >
-          <span>
-            {{ color.label }}
-          </span>
+          <span>{{ color.label }}</span>
           <vk-data-table
+
             :color="color.value"
             :headers="propHeaders"
             :data="tableHeaderInterface"
+            label="Page Size"
             class="mt-4"
           />
         </div>
@@ -517,13 +514,12 @@ watch(() => draggableRef, (newValue) => {
 
       <example-section
         title="Variants"
-        justify="start"
-        wrap
+        classes="md:flex-col"
       >
         <div
           v-for="variant in variantOptions.general"
           :key="variant.value"
-          class="w-full"
+          class="flex flex-col"
         >
           <span>
             {{ variant.label }}
@@ -532,6 +528,7 @@ watch(() => draggableRef, (newValue) => {
             :variant="variant.value"
             :headers="propHeaders"
             :data="tableHeaderInterface"
+            label="Page Size"
             class="mt-4"
           />
         </div>
@@ -539,13 +536,12 @@ watch(() => draggableRef, (newValue) => {
 
       <example-section
         title="Shapes"
-        justify="start"
-        wrap
+        classes="md:flex-col"
       >
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
-          class="w-full"
+          class="flex flex-col"
         >
           <span>
             {{ shape.label }}
@@ -554,6 +550,7 @@ watch(() => draggableRef, (newValue) => {
             :shape="shape.value"
             :headers="propHeaders"
             :data="tableHeaderInterface"
+            label="Page Size"
             class="mt-4"
           />
         </div>
@@ -561,13 +558,12 @@ watch(() => draggableRef, (newValue) => {
 
       <example-section
         title="Sizes"
-        justify="start"
-        wrap
+        classes="md:flex-col"
       >
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
-          class="w-full"
+          class="flex flex-col"
         >
           <span>
             {{ size.label }}
@@ -576,20 +572,18 @@ watch(() => draggableRef, (newValue) => {
             :size="size.value"
             :headers="propHeaders"
             :data="tableHeaderInterface"
+            label="Page Size"
             class="mt-4"
           />
         </div>
       </example-section>
 
-      <example-section
-        title="Striped"
-        justify="start"
-        wrap
-      >
+      <example-section title="Striped">
         <vk-data-table
           striped
           :headers="propHeaders"
           :data="tableHeaderInterface"
+          label="Page Size"
           class="mt-4"
         />
       </example-section>
@@ -597,90 +591,63 @@ watch(() => draggableRef, (newValue) => {
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Table Props"
-          gap
-        >
+        <example-section title="Table Props">
           <vk-table
             :headers="propHeaders"
             :data="tableProps"
           />
         </example-section>
 
-        <example-section
-          title="Table Slots"
-          gap
-        >
+        <example-section title="Table Slots">
           <vk-table
             :headers="slotHeaders"
             :data="tableSlots"
           />
         </example-section>
 
-        <example-section
-          title="Table Emits"
-          gap
-        >
+        <example-section title="Table Emits">
           <vk-table
             :headers="emitHeaders"
             :data="tableEmits"
           />
         </example-section>
 
-        <example-section
-          title="Table Item Interface"
-          gap
-        >
+        <example-section title="Table Item Interface">
           <vk-table
             :headers="propHeaders"
             :data="tableItemInterface"
           />
         </example-section>
 
-        <example-section
-          title="Table Header Interface"
-          gap
-        >
+        <example-section title="Table Header Interface">
           <vk-table
             :headers="propHeaders"
             :data="tableHeaderInterface"
           />
         </example-section>
 
-        <example-section
-          title="Table Sort Interface"
-          gap
-        >
+        <example-section title="Table Sort Interface">
           <vk-table
             :headers="propHeaders"
             :data="sortInterface"
           />
         </example-section>
 
-        <example-section
-          title="Table Pagination Interface"
-          gap
-        >
+        <example-section title="Table Pagination Interface">
           <vk-table
             :headers="propHeaders"
             :data="paginationInterface"
           />
         </example-section>
 
-        <example-section
-          title="Table Filter Interface"
-          gap
-        >
+        <example-section title="Table Filter Interface">
           <vk-table
             :headers="propHeaders"
             :data="filterInterface"
           />
         </example-section>
 
-        <example-section
-          title="Composable Client Side Props"
-          gap
-        >
+        <example-section title="Composable Client Side Props">
           <vk-table
             :headers="propHeaders"
             :data="clientSideDataTableProps"

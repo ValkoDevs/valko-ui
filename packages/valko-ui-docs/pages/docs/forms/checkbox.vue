@@ -153,23 +153,22 @@ watchEffect(() => {
     description="Selection element that allows the user to choose between two states, checked or unchecked. Checkboxes are commonly used in forms and settings to enable users to select multiple options."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center p-4">
-        <vk-checkbox
-          v-model="extendedForm.checked"
-          :color="form.color"
-          :variant="form.variant"
-          :size="form.size"
-          :helpertext="form.helpertext"
-          :disabled="form.disabled"
-          :flat="form.flat"
-          :shape="form.shape"
-          :label-position="form.labelPosition"
-          :readonly="form.readonly"
-          :indeterminate="extendedForm.indeterminate"
-          :label="form.label"
-        />
-      </div>
+      <vk-checkbox
+        v-model="extendedForm.checked"
+        :color="form.color"
+        :variant="form.variant"
+        :size="form.size"
+        :helpertext="form.helpertext"
+        :disabled="form.disabled"
+        :flat="form.flat"
+        :shape="form.shape"
+        :label-position="form.labelPosition"
+        :readonly="form.readonly"
+        :indeterminate="extendedForm.indeterminate"
+        :label="form.label"
+      />
     </template>
+
     <template #playground-options>
       <vk-input
         v-model="form.label"
@@ -230,73 +229,47 @@ watchEffect(() => {
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="start"
-        gap
-      >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
-          <vk-checkbox
-            v-for="color in colorOptions"
-            :key="color.value"
-            :color="color.value"
-            :label="color.label"
-            :model-value="extendedForm.exampleChecked"
-          />
-        </div>
+      <example-section title="Colors">
+        <vk-checkbox
+          v-for="color in colorOptions"
+          :key="color.value"
+          :color="color.value"
+          :label="color.label"
+          :model-value="extendedForm.exampleChecked"
+        />
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        gap
-      >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
-          <vk-checkbox
-            v-for="variant in variantOptions.general"
-            :key="variant.value"
-            :variant="variant.value"
-            :label="variant.label"
-            :model-value="extendedForm.exampleChecked"
-          />
-        </div>
+      <example-section title="Variants">
+        <vk-checkbox
+          v-for="variant in variantOptions.general"
+          :key="variant.value"
+          :variant="variant.value"
+          :label="variant.label"
+          :model-value="extendedForm.exampleChecked"
+        />
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        gap
-      >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
-          <vk-checkbox
-            v-for="shape in shapeOptions.general"
-            :key="shape.value"
-            :shape="shape.value"
-            :label="shape.label"
-            :model-value="extendedForm.exampleChecked"
-          />
-        </div>
+      <example-section title="Shapes">
+        <vk-checkbox
+          v-for="shape in shapeOptions.general"
+          :key="shape.value"
+          :shape="shape.value"
+          :label="shape.label"
+          :model-value="extendedForm.exampleChecked"
+        />
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        gap
-      >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-2">
-          <vk-checkbox
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-            :size="size.value"
-            :label="size.label"
-            :model-value="extendedForm.exampleChecked"
-          />
-        </div>
+      <example-section title="Sizes">
+        <vk-checkbox
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+          :size="size.value"
+          :label="size.label"
+          :model-value="extendedForm.exampleChecked"
+        />
       </example-section>
 
-      <example-section
-        title="Disabled"
-      >
+      <example-section title="Disabled">
         <vk-checkbox
           label="Disabled"
           disabled
@@ -304,9 +277,7 @@ watchEffect(() => {
         />
       </example-section>
 
-      <example-section
-        title="Flat"
-      >
+      <example-section title="Flat">
         <vk-checkbox
           label="Flat"
           flat
@@ -314,9 +285,7 @@ watchEffect(() => {
         />
       </example-section>
 
-      <example-section
-        title="Readonly"
-      >
+      <example-section title="Readonly">
         <vk-checkbox
           label="Readonly"
           read-only
@@ -324,9 +293,7 @@ watchEffect(() => {
         />
       </example-section>
 
-      <example-section
-        title="Indeterminate"
-      >
+      <example-section title="Indeterminate">
         <vk-checkbox
           v-model="extendedForm.exampleIndeterminate"
           label="Inderterminate"
@@ -334,10 +301,7 @@ watchEffect(() => {
         />
       </example-section>
 
-      <example-section
-        title="Label Position"
-        gap
-      >
+      <example-section title="Label Position">
         <vk-checkbox
           v-for="pos in position"
           :key="pos.value"
@@ -350,20 +314,14 @@ watchEffect(() => {
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Checkbox Props"
-          gap
-        >
+        <example-section title="Checkbox Props">
           <vk-table
             :headers="propHeaders"
             :data="apiData"
           />
         </example-section>
 
-        <example-section
-          title="Checkbox Emits"
-          gap
-        >
+        <example-section title="Checkbox Emits">
           <vk-table
             :headers="emitHeaders"
             :data="emitData"

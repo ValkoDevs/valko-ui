@@ -38,6 +38,7 @@ export default tv({
       'shadow-lg',
       'text-left',
       'overflow-hidden',
+      'overflow-y-auto',
       'absolute',
       'flex',
       'flex-col',
@@ -140,7 +141,8 @@ export default tv({
       size: 'xs',
       class: {
         panel: [
-          'max-h-[14rem]'
+          'max-h-[10rem]',
+          'md:max-h-[14rem]'
         ]
       }
     },
@@ -149,7 +151,8 @@ export default tv({
       size: 'sm',
       class: {
         panel: [
-          'max-h-[18rem]'
+          'max-h-[12rem]',
+          'md:max-h-[18rem]'
         ]
       }
     },
@@ -158,7 +161,8 @@ export default tv({
       size: 'md',
       class: {
         panel: [
-          'max-h-[22rem]'
+          'max-h-[14rem]',
+          'md:max-h-[22rem]'
         ]
       }
     },
@@ -167,7 +171,8 @@ export default tv({
       size: 'lg',
       class: {
         panel: [
-          'max-h-[26rem]'
+          'max-h-[16rem]',
+          'md:max-h-[26rem]'
         ]
       }
     },
@@ -176,7 +181,8 @@ export default tv({
       size: 'xs',
       class: {
         panel: [
-          'max-w-xs'
+          'max-w-[12rem]',
+          'md:max-w-xs'
         ]
       }
     },
@@ -185,7 +191,8 @@ export default tv({
       size: 'sm',
       class: {
         panel: [
-          'max-w-lg'
+          'max-w-[14rem]',
+          'md:max-w-lg'
         ]
       }
     },
@@ -194,7 +201,8 @@ export default tv({
       size: 'md',
       class: {
         panel: [
-          'max-w-xl'
+          'max-w-[16rem]',
+          'md:max-w-xl'
         ]
       }
     },
@@ -203,7 +211,8 @@ export default tv({
       size: 'lg',
       class: {
         panel: [
-          'max-w-2xl'
+          'max-w-[18rem]',
+          'md:max-w-2xl'
         ]
       }
     },

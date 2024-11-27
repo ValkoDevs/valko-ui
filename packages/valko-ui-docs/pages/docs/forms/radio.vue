@@ -127,6 +127,12 @@ const emitData: TableItem[] = [
     type: '(value: any) => void'
   }
 ]
+
+const radios = [
+  { label: 'Radio-1', value: 'radio-1' },
+  { label: 'Radio-2', value: 'radio-2' },
+  { label: 'Radio-3', value: 'radio-3' }
+]
 </script>
 
 <template>
@@ -135,8 +141,10 @@ const emitData: TableItem[] = [
     description="Selection element that allows the user to choose an exclusive option among several. Radio buttons are used when users need to select only one option from a predefined list of choices."
   >
     <template #playground-view>
-      <div class="w-full flex flex-col justify-center items-center p-4">
+      <div class="flex flex-col gap-2">
         <vk-radio
+          v-for="radio in radios"
+          :key="radio.value"
           v-model="form.value"
           :variant="form.variant"
           :color="form.color"
@@ -147,34 +155,8 @@ const emitData: TableItem[] = [
           :label-position="form.labelPosition"
           :shape="form.shape"
           :helpertext="form.helpertext"
-          label="Radio-1"
-          value="Radio-1"
-        />
-        <vk-radio
-          v-model="form.value"
-          :variant="form.variant"
-          :color="form.color"
-          :size="form.size"
-          :name="form.name"
-          :disabled="form.disabled"
-          :readonly="form.readonly"
-          :label-position="form.labelPosition"
-          :shape="form.shape"
-          label="Radio-2"
-          value="Radio-2"
-        />
-        <vk-radio
-          v-model="form.value"
-          :variant="form.variant"
-          :color="form.color"
-          :size="form.size"
-          :name="form.name"
-          :disabled="form.disabled"
-          :readonly="form.readonly"
-          :label-position="form.labelPosition"
-          :shape="form.shape"
-          label="Radio-3"
-          value="Radio-3"
+          :label="radio.label"
+          :value="radio.value"
         />
       </div>
     </template>
@@ -226,108 +208,73 @@ const emitData: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="start"
-        gap
-      >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
-          <vk-radio
-            v-for="color in colorOptions"
-            :key="color.value"
-            v-model="color.value"
-            :name="color.value"
-            :color="color.value"
-            :label="color.label"
-            :value="color.value"
-          />
-        </div>
+      <example-section title="Colors">
+        <vk-radio
+          v-for="color in colorOptions"
+          :key="color.value"
+          v-model="color.value"
+          :name="color.value"
+          :color="color.value"
+          :label="color.label"
+          :value="color.value"
+        />
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        gap
-      >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
-          <vk-radio
-            v-for="variant in variantOptions.general"
-            :key="variant.value"
-            v-model="variant.value"
-            :name="variant.value"
-            :variant="variant.value"
-            :label="variant.label"
-            :value="variant.value"
-          />
-        </div>
+      <example-section title="Variants">
+        <vk-radio
+          v-for="variant in variantOptions.general"
+          :key="variant.value"
+          v-model="variant.value"
+          :name="variant.value"
+          :variant="variant.value"
+          :label="variant.label"
+          :value="variant.value"
+        />
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        gap
-      >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
-          <vk-radio
-            v-for="shape in shapeOptions.general"
-            :key="shape.value"
-            v-model="shape.value"
-            :name="shape.value"
-            :shape="shape.value"
-            :label="shape.label"
-            :value="shape.value"
-          />
-        </div>
+      <example-section title="Shapes">
+        <vk-radio
+          v-for="shape in shapeOptions.general"
+          :key="shape.value"
+          v-model="shape.value"
+          :name="shape.value"
+          :shape="shape.value"
+          :label="shape.label"
+          :value="shape.value"
+        />
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        align="start"
-        gap
-      >
-        <div class="gap-x-12 gap-y-4 grid grid-cols-2">
-          <vk-radio
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-            v-model="size.value"
-            :name="size.value"
-            :size="size.value"
-            :label="size.label"
-            :value="size.value"
-          />
-        </div>
+      <example-section title="Sizes">
+        <vk-radio
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+          v-model="size.value"
+          :name="size.value"
+          :size="size.value"
+          :label="size.label"
+          :value="size.value"
+        />
       </example-section>
 
-      <example-section
-        title="Disabled"
-      >
+      <example-section title="Disabled">
         <vk-radio disabled />
       </example-section>
 
-      <example-section
-        title="Readonly"
-      >
+      <example-section title="Readonly">
         <vk-radio readonly />
       </example-section>
     </template>
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Radio Props"
-          gap
-        >
+        <example-section title="Radio Props">
           <vk-table
             :headers="propHeaders"
             :data="apiData"
           />
         </example-section>
 
-        <example-section
-          title="Radio Emits"
-          gap
-        >
+        <example-section title="Radio Emits">
           <vk-table
             :headers="emitHeaders"
             :data="emitData"

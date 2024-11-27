@@ -19,7 +19,7 @@ describe('Dropdown component', () => {
             items: items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         await flushPromises()
       })
@@ -61,7 +61,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-primary-500')
       })
@@ -72,7 +72,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-light-4')
       })
@@ -84,7 +84,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-success-500')
       })
@@ -96,7 +96,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-info-500')
       })
@@ -108,7 +108,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-warning-500')
       })
@@ -120,7 +120,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-error-500')
       })
@@ -134,7 +134,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[shape=rounded]:rounded-full')
       })
@@ -146,7 +146,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[shape=soft]:rounded-lg')
       })
@@ -158,7 +158,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[shape=square]:rounded-none')
       })
@@ -172,7 +172,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('text-xs')
       })
@@ -184,7 +184,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('text-sm')
       })
@@ -196,7 +196,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('text-base')
       })
@@ -208,7 +208,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('text-lg')
       })
@@ -222,7 +222,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:text-light-1')
       })
@@ -234,7 +234,7 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__button').trigger('click')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await nextTick()
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('border-2')
       })
@@ -281,7 +281,7 @@ describe('Dropdown component', () => {
           items
         }
       })
-      wrapper.find('.vk-dropdown__button').trigger('click')
+      wrapper.find('.vk-dropdown__trigger-button').trigger('click')
       await nextTick()
       wrapper.find('.vk-dropdown__item-button').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('itemClick')

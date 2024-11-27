@@ -119,32 +119,31 @@ watch(isShown, () => {
     description="Visual notification that informs the user about an important state or action. Alerts are commonly used to communicate success messages, warnings, or errors to the user."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center p-4">
-        <transition
-          enter-active-class="transition ease-out duration-200"
-          enter-from-class="opacity-0 scale-90"
-          enter-to-class="opacity-100 scale-100"
-          leave-active-class="transition ease-out duration-200"
-          leave-from-class="opacity-100 scale-100"
-          leave-to-class="opacity-0 scale-90"
+      <transition
+        enter-active-class="transition ease-out duration-200"
+        enter-from-class="opacity-0 scale-90"
+        enter-to-class="opacity-100 scale-100"
+        leave-active-class="transition ease-out duration-200"
+        leave-from-class="opacity-100 scale-100"
+        leave-to-class="opacity-0 scale-90"
+      >
+        <vk-alert
+          v-if="isShown"
+          :title="form.title"
+          :size="form.size"
+          :variant="form.variant"
+          :shape="form.shape"
+          :color="form.color"
+          :closable="form.closable"
+          :flat="form.flat"
+          :icon="iconsForm.noIcon ? null : iconsForm.customIcon ? 'brand-vue' : ''"
+          @close="closeAlert()"
         >
-          <vk-alert
-            v-if="isShown"
-            :title="form.title"
-            :size="form.size"
-            :variant="form.variant"
-            :shape="form.shape"
-            :color="form.color"
-            :closable="form.closable"
-            :flat="form.flat"
-            :icon="iconsForm.noIcon ? null : iconsForm.customIcon ? 'brand-vue' : ''"
-            @close="closeAlert()"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
-          </vk-alert>
-        </transition>
-      </div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+        </vk-alert>
+      </transition>
     </template>
+
     <template #playground-options>
       <vk-select
         v-model="form.color"
@@ -194,11 +193,7 @@ watch(isShown, () => {
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="around"
-        gap
-      >
+      <example-section title="Colors">
         <div class="grow gap-4 grid grid-cols-2">
           <vk-alert
             v-for="color in colorOptions"
@@ -211,12 +206,7 @@ watch(isShown, () => {
         </div>
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        align="start"
-        gap
-      >
+      <example-section title="Variants">
         <div class="grow gap-4 grid grid-cols-2">
           <vk-alert
             v-for="variant in variantOptions.withGradient"
@@ -229,12 +219,7 @@ watch(isShown, () => {
         </div>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        align="start"
-        gap
-      >
+      <example-section title="Shapes">
         <div class="grow gap-4 grid grid-cols-2 items-start">
           <vk-alert
             v-for="shape in shapeOptions.general"
@@ -247,12 +232,7 @@ watch(isShown, () => {
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        align="start"
-        gap
-      >
+      <example-section title="Sizes">
         <div class="grow gap-4 grid grid-cols-2 items-start">
           <vk-alert
             v-for="size in sizeOptions.general"
@@ -265,12 +245,7 @@ watch(isShown, () => {
         </div>
       </example-section>
 
-      <example-section
-        title="Icons"
-        justify="start"
-        align="start"
-        gap
-      >
+      <example-section title="Icons">
         <div class="grow gap-4 grid grid-cols-3">
           <vk-alert
             title="Default Icon"
@@ -289,9 +264,7 @@ watch(isShown, () => {
         </div>
       </example-section>
 
-      <example-section
-        title="Flat"
-      >
+      <example-section title="Flat">
         <vk-alert
           title="Flat"
           flat
@@ -300,9 +273,7 @@ watch(isShown, () => {
         </vk-alert>
       </example-section>
 
-      <example-section
-        title="Closable"
-      >
+      <example-section title="Closable">
         <transition
           enter-active-class="transition ease-out duration-200"
           enter-from-class="opacity-0 scale-90"
@@ -325,30 +296,21 @@ watch(isShown, () => {
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Alert Props"
-          gap
-        >
+        <example-section title="Alert Props">
           <vk-table
             :headers="propHeaders"
             :data="alertProps"
           />
         </example-section>
 
-        <example-section
-          title="Alert Emits"
-          gap
-        >
+        <example-section title="Alert Emits">
           <vk-table
             :headers="emitHeaders"
             :data="alertEmits"
           />
         </example-section>
 
-        <example-section
-          title="Alert Slots"
-          gap
-        >
+        <example-section title="Alert Slots">
           <vk-table
             :headers="slotHeaders"
             :data="alertSlots"

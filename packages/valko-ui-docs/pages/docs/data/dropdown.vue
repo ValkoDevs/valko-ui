@@ -163,18 +163,16 @@ const dropdownSlots: TableItem[] = [
     description="List of options that expands when the user interacts with a trigger element. Dropdowns provide a compact way to display a list of choices and are commonly used in forms and navigation menus."
   >
     <template #playground-view>
-      <div class="w-full flex px-2 justify-center">
-        <vk-dropdown
-          :color="form.color"
-          :size="form.size"
-          :variant="form.variant"
-          :shape="form.shape"
-          :disabled="form.disabled"
-          :flat="form.flat"
-          :label="form.label"
-          :items="items"
-        />
-      </div>
+      <vk-dropdown
+        :color="form.color"
+        :size="form.size"
+        :variant="form.variant"
+        :shape="form.shape"
+        :disabled="form.disabled"
+        :flat="form.flat"
+        :label="form.label"
+        :items="items"
+      />
     </template>
 
     <template #playground-options>
@@ -218,122 +216,92 @@ const dropdownSlots: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        gap
-      >
+      <example-section title="Colors">
         <vk-dropdown
           v-for="color in colorOptions"
           :key="color.value"
           :color="color.value"
           :title="color.label"
           :items="items"
-          label="Dropdown Menu"
+          :label="color.label"
         />
       </example-section>
 
-      <example-section
-        title="Variants"
-        gap
-      >
+      <example-section title="Variants">
         <vk-dropdown
           v-for="variant in variantOptions.withGradientAndLink"
           :key="variant.value"
           :variant="variant.value"
           :title="variant.label"
           :items="items"
-          label="Dropdown Menu"
+          :label="variant.label"
         />
       </example-section>
 
-      <example-section
-        title="Shapes"
-        gap
-      >
+      <example-section title="Shapes">
         <vk-dropdown
           v-for="shape in shapeOptions.general"
           :key="shape.value"
           :shape="shape.value"
           :title="shape.label"
           :items="items"
-          label="Dropdown Menu"
+          :label="shape.label"
         />
       </example-section>
 
-      <example-section
-        title="Sizes"
-        gap
-      >
+      <example-section title="Sizes">
         <vk-dropdown
           v-for="size in sizeOptions.general"
           :key="size.value"
           :size="size.value"
           :title="size.label"
           :items="items"
-          label="Dropdown Menu"
+          :label="size.label"
         />
       </example-section>
 
-      <example-section
-        title="Flat"
-        gap
-      >
+      <example-section title="Flat">
         <vk-dropdown
           title="Flat"
           :items="items"
-          label="Dropdown Menu"
+          label="Flat"
         />
       </example-section>
 
-      <example-section
-        title="Disabled"
-        gap
-      >
+      <example-section title="Disabled">
         <vk-dropdown
           title="Disabled"
           disabled
           :items="items"
-          label="Dropdown Menu"
+          label="Disabled"
         />
       </example-section>
     </template>
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Dropdown Props"
-          gap
-        >
+        <example-section title="Dropdown Props">
           <vk-table
             :headers="propHeaders"
             :data="dropdownProps"
           />
         </example-section>
 
-        <example-section
-          title="Item interface"
-          gap
-        >
+        <example-section title="Item interface">
           <vk-table
             :headers="propHeaders"
             :data="itemInterface"
           />
         </example-section>
 
-        <example-section
-          title="Dropdown Emits"
-          gap
-        >
+        <example-section title="Dropdown Emits">
           <vk-table
             :headers="emitHeaders"
             :data="dropdownEmits"
           />
         </example-section>
 
-        <example-section
-          title="Dropdown Slots"
-          gap
-        >
+        <example-section title="Dropdown Slots">
           <vk-table
             :headers="slotHeaders"
             :data="dropdownSlots"

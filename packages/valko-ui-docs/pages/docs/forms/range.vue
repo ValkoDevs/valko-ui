@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { RangeProps, TableItem, Label } from '#valkoui'
 
-const form = ref<RangeProps>({
+const form = reactive<RangeProps>({
   color: 'primary',
   variant: 'filled',
   shape: 'soft',
@@ -22,9 +22,9 @@ const extraForm = ref({
 
 const generateLabels = () => {
   const labels: Label[] = []
-  const min = form.value.min ?? 0
-  const max = form.value.max ?? 100
-  const step = form.value.step ?? 10
+  const min = form.min ?? 0
+  const max = form.max ?? 100
+  const step = form.step ?? 10
 
   if (step <= 0 || min >= max) return labels
 
@@ -173,11 +173,11 @@ const labelsInterface: TableItem[] = [
   }
 ]
 
-watch([() => form.value.min, () => form.value.max, () => form.value.step], () => {
-  form.value.labels = generateLabels()
+watch([() => form.min, () => form.max, () => form.step], () => {
+  form.labels = generateLabels()
 })
 
-form.value.labels = generateLabels()
+form.labels = generateLabels()
 </script>
 
 <template>
@@ -186,10 +186,10 @@ form.value.labels = generateLabels()
     description="A versatile slider interface for selecting a single value or a range of values within specified bounds. Features include optional step marks, striped backgrounds, and the ability to display two thumbs for selecting a range (isDouble mode). The component offers precise control over minimum (min) and maximum (max) values, step intervals, and visual styling options such as color, variant, shape, and size. Ideal for scenarios where precise value selection and visual feedback are crucial."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center p-4 flex-col">
-        <div class="flex justify-between py-2">
+      <div class="flex flex-col items-center gap-2 w-full">
+        <span>
           Value: {{ form.modelValue }}
-        </div>
+        </span>
         <vk-range
           v-model="form.modelValue"
           :color="form.color"
@@ -270,30 +270,27 @@ form.value.labels = generateLabels()
     <template #examples>
       <example-section
         title="Colors"
-        justify="start"
-        gap
-        wrap
+        classes="md:flex-col"
       >
         <div
           v-for="color in colorOptions"
           :key="color.value"
-          class="w-1/4 mr-2"
         >
           <span>{{ color.label }}</span>
-          <vk-range :color="color.value" />
+          <vk-range
+            :color="color.value"
+            class="mt-2"
+          />
         </div>
       </example-section>
 
       <example-section
         title="Variants"
-        justify="start"
-        gap
-        wrap
+        classes="md:flex-col"
       >
         <div
           v-for="variant in variantOptions.withGradient"
           :key="variant.value"
-          class="w-1/3 mr-2"
         >
           <span>{{ variant.label }}</span>
           <vk-range :variant="variant.value" />
@@ -302,13 +299,11 @@ form.value.labels = generateLabels()
 
       <example-section
         title="Shapes"
-        justify="start"
-        gap
+        classes="md:flex-col"
       >
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
-          class="w-full mr-2"
         >
           <span>{{ shape.label }}</span>
           <vk-range :shape="shape.value" />
@@ -317,53 +312,37 @@ form.value.labels = generateLabels()
 
       <example-section
         title="Sizes"
-        justify="start"
-        gap
-        wrap
+        classes="md:flex-col"
       >
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
-          class="w-1/3 mr-2"
         >
           <span>{{ size.label }}</span>
           <vk-range :size="size.value" />
         </div>
       </example-section>
 
-      <example-section
-        title="Double"
-        justify="start"
-        gap
-      >
+      <example-section title="Double">
         <vk-range
           :is-double="true"
-          class="w-1/3"
         />
       </example-section>
 
-      <example-section
-        title="Show Steps"
-        justify="start"
-        gap
-      >
+      <example-section title="Show Steps">
         <vk-range
           show-steps
           :step="10"
-          class="w-1/3"
         />
       </example-section>
 
       <example-section
         title="Striped"
-        justify="start"
-        gap
-        wrap
+        classes="md:flex-col"
       >
         <div
           v-for="color in colorOptions"
           :key="color.value"
-          class="w-1/3 mr-2"
         >
           <span>{{ color.label }}</span>
           <vk-range
@@ -376,30 +355,21 @@ form.value.labels = generateLabels()
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Range Props"
-          gap
-        >
+        <example-section title="Range Props">
           <vk-table
             :headers="propHeaders"
             :data="rangeProps"
           />
         </example-section>
 
-        <example-section
-          title="Label Interface"
-          gap
-        >
+        <example-section title="Label Interface">
           <vk-table
             :headers="propHeaders"
             :data="labelsInterface"
           />
         </example-section>
 
-        <example-section
-          title="Range Emits"
-          gap
-        >
+        <example-section title="Range Emits">
           <vk-table
             :headers="emitHeaders"
             :data="rangeEmits"

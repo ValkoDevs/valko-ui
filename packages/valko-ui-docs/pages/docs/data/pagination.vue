@@ -80,18 +80,16 @@ const paginationEmits: TableItem[] = [
     description="Navigation that divides content into pages for easier viewing. Pagination is used to break up large amounts of content into manageable sections and provides users with controls to navigate between pages."
   >
     <template #playground-view>
-      <div class="w-full flex px-2 justify-center">
-        <vk-pagination
-          v-model="form.modelValue"
-          :color="form.color"
-          :size="form.size"
-          :variant="form.variant"
-          :pages="form.pages"
-          :flat="form.flat"
-          :shape="form.shape"
-          :disabled="form.disabled"
-        />
-      </div>
+      <vk-pagination
+        v-model="form.modelValue"
+        :color="form.color"
+        :size="form.size"
+        :variant="form.variant"
+        :pages="form.pages"
+        :flat="form.flat"
+        :shape="form.shape"
+        :disabled="form.disabled"
+      />
     </template>
 
     <template #playground-options>
@@ -142,10 +140,7 @@ const paginationEmits: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        gap
-      >
+      <example-section title="Colors">
         <div class="gap-4 grid grid-cols-3">
           <div
             v-for="color in colorOptions"
@@ -162,10 +157,7 @@ const paginationEmits: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Variants"
-        gap
-      >
+      <example-section title="Variants">
         <div class="gap-4 grid grid-cols-3">
           <div
             v-for="variant in variantOptions.general"
@@ -182,10 +174,7 @@ const paginationEmits: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        gap
-      >
+      <example-section title="Shapes">
         <div class="gap-4 grid grid-cols-3">
           <div
             v-for="shape in shapeOptions.general"
@@ -202,10 +191,7 @@ const paginationEmits: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        gap
-      >
+      <example-section title="Sizes">
         <div class="gap-4 grid grid-cols-2">
           <div
             v-for="size in sizeOptions.general"
@@ -221,9 +207,7 @@ const paginationEmits: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Flat"
-      >
+      <example-section title="Flat">
         <vk-pagination
           v-model="form.modelValue"
           flat
@@ -231,9 +215,7 @@ const paginationEmits: TableItem[] = [
         />
       </example-section>
 
-      <example-section
-        title="Disabled"
-      >
+      <example-section title="Disabled">
         <vk-pagination
           v-model="form.modelValue"
           disabled
@@ -244,20 +226,14 @@ const paginationEmits: TableItem[] = [
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Pagination Props"
-          gap
-        >
+        <example-section title="Pagination Props">
           <vk-table
             :headers="propHeaders"
             :data="paginationProps"
           />
         </example-section>
 
-        <example-section
-          title="Pagination Emits"
-          gap
-        >
+        <example-section title="Pagination Emits">
           <vk-table
             :headers="emitHeaders"
             :data="paginationEmits"

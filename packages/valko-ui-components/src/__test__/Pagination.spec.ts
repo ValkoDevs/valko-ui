@@ -19,7 +19,7 @@ describe('Pagination component', () => {
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('.h-9').exists()).toBe(true)
+        expect(wrapper.find('.size-9').exists()).toBe(true)
       })
 
       it('should be variant filled', () => {
@@ -137,7 +137,7 @@ describe('Pagination component', () => {
           }
         })
 
-        expect(wrapper.find('.h-6').exists()).toBe(true)
+        expect(wrapper.find('.size-6').exists()).toBe(true)
       })
 
       it('should be sm when props.size is sm', () => {
@@ -147,7 +147,7 @@ describe('Pagination component', () => {
           }
         })
 
-        expect(wrapper.find('.h-7').exists()).toBe(true)
+        expect(wrapper.find('.size-7').exists()).toBe(true)
       })
 
       it('should be md when props.size is md', () => {
@@ -157,7 +157,7 @@ describe('Pagination component', () => {
           }
         })
 
-        expect(wrapper.find('.h-9').exists()).toBe(true)
+        expect(wrapper.find('.size-9').exists()).toBe(true)
       })
 
       it('should be lg when props.size is lg', () => {
@@ -167,7 +167,7 @@ describe('Pagination component', () => {
           }
         })
 
-        expect(wrapper.find('.h-11').exists()).toBe(true)
+        expect(wrapper.find('.size-11').exists()).toBe(true)
       })
     })
 

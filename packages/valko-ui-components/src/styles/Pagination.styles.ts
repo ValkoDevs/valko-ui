@@ -61,49 +61,10 @@ export default tv({
       square: {}
     },
     size: {
-      xs: {
-        button: [
-          'w-6',
-          'h-6'
-        ],
-        arrows: [
-          'w-6',
-          'h-6'
-        ]
-      },
-      sm: {
-        button: [
-          'w-7',
-          'h-7'
-        ],
-        arrows: [
-          'w-7',
-          'h-7',
-          'p-0.5'
-        ]
-      },
-      md: {
-        button: [
-          'w-9',
-          'h-9'
-        ],
-        arrows: [
-          'w-9',
-          'h-9',
-          'p-1'
-        ]
-      },
-      lg: {
-        button: [
-          'w-11',
-          'h-11'
-        ],
-        arrows: [
-          'w-11',
-          'h-11',
-          'p-1.5'
-        ]
-      }
+      xs: {},
+      sm: {},
+      md: {},
+      lg: {}
     },
     flat: {
       true: {
@@ -112,5 +73,107 @@ export default tv({
         ]
       }
     }
-  }
+  },
+  compoundVariants: [
+    {
+      variant: ['filled', 'ghost'],
+      size: 'xs',
+      class: {
+        button: [
+          'size-6'
+        ],
+        arrows: [
+          'size-6'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'ghost'],
+      size: 'sm',
+      class: {
+        button: [
+          'size-7'
+        ],
+        arrows: [
+          'size-7',
+          'p-0.5'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'ghost'],
+      size: 'md',
+      class: {
+        button: [
+          'size-9'
+        ],
+        arrows: [
+          'size-9',
+          'p-1'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'ghost'],
+      size: 'lg',
+      class: {
+        button: [
+          'size-11'
+        ],
+        arrows: [
+          'size-11',
+          'p-1.5'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: 'xs',
+      class: {
+        button: [
+          'size-5'
+        ],
+        arrows: [
+          'size-5'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: 'sm',
+      class: {
+        button: [
+          'size-6'
+        ],
+        arrows: [
+          'size-6'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: 'md',
+      class: {
+        button: [
+          'size-8'
+        ],
+        arrows: [
+          'size-8',
+          'p-1'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: 'lg',
+      class: {
+        button: [
+          'size-10'
+        ],
+        arrows: [
+          'size-10'
+        ]
+      }
+    }
+  ]
 }) as unknown as ReturnType<TV>

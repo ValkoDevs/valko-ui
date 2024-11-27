@@ -19,24 +19,13 @@ const position: SelectOption<LabelPosition>[] = [
   { value: 'left', label: 'Left' }
 ]
 
-const exampleSectionForm = ref<Record<string, boolean>>({
-  primary: false,
-  secondary: false,
-  error: false,
-  success: false,
-  warning: false,
-  info: false,
-  filled: false,
-  outlined: false,
-  ghost: false,
-  shape: false,
-  xs: false,
-  sm: false,
-  md: false,
-  lg: false,
-  left: false,
-  right: false,
-  readonly: true
+const exampleSectionForm = reactive({
+  colors: Array(colorOptions.length).fill(false),
+  variants: Array(variantOptions.general.length).fill(false),
+  shapes: Array(shapeOptions.general.length).fill(false),
+  sizes: Array(sizeOptions.general.length).fill(false),
+  position: [false, false],
+  readonly: false
 })
 
 const apiData: TableItem[] = [
@@ -131,20 +120,18 @@ const emitData: TableItem[] = [
     description="Toggle control that allows the user to switch between two states. Switches are used to enable or disable a particular setting or feature and provide a visual indication of the current state."
   >
     <template #playground-view>
-      <div class="flex justify-center items-center p-4">
-        <vk-switch
-          v-model="form.modelValue"
-          :color="form.color"
-          :variant="form.variant"
-          :shape="form.shape"
-          :size="form.size"
-          :label="form.label"
-          :disabled="form.disabled"
-          :readonly="form.readonly"
-          :label-position="form.labelPosition"
-          :flat="form.flat"
-        />
-      </div>
+      <vk-switch
+        v-model="form.modelValue"
+        :color="form.color"
+        :variant="form.variant"
+        :shape="form.shape"
+        :size="form.size"
+        :label="form.label"
+        :disabled="form.disabled"
+        :readonly="form.readonly"
+        :label-position="form.labelPosition"
+        :flat="form.flat"
+      />
     </template>
 
     <template #playground-options>
@@ -198,112 +185,78 @@ const emitData: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        gap
-      >
-        <div class="grid grid-cols-3 gap-4">
-          <vk-switch
-            v-for="color in colorOptions"
-            :key="color.value"
-            v-model="exampleSectionForm[color.value]"
-            :color="color.value"
-            :label="color.label"
-          />
-        </div>
+      <example-section title="Colors">
+        <vk-switch
+          v-for="(color, index) in colorOptions"
+          :key="color.value"
+          v-model="exampleSectionForm['colors'][index]"
+          :color="color.value"
+          :label="color.label"
+        />
       </example-section>
 
-      <example-section
-        title="Variants"
-        gap
-      >
-        <div class="gap-4 grid grid-cols-3">
-          <vk-switch
-            v-for="variant in variantOptions.general"
-            :key="variant.value"
-            v-model="exampleSectionForm[variant.value]"
-            :variant="variant.value"
-            :label="variant.label"
-          />
-        </div>
+      <example-section title="Variants">
+        <vk-switch
+          v-for="(variant, index) in variantOptions.general"
+          :key="variant.value"
+          v-model="exampleSectionForm['variants'][index]"
+          :variant="variant.value"
+          :label="variant.label"
+        />
       </example-section>
 
-      <example-section
-        title="Shape"
-        gap
-      >
-        <div class="gap-4 grid grid-cols-3">
-          <vk-switch
-            v-for="shape in shapeOptions.general"
-            :key="shape.value"
-            v-model="exampleSectionForm[shape.value]"
-            :shape="shape.value"
-            :label="shape.label"
-          />
-        </div>
+      <example-section title="Shape">
+        <vk-switch
+          v-for="(shape, index) in shapeOptions.general"
+          :key="shape.value"
+          v-model="exampleSectionForm['shapes'][index]"
+          :shape="shape.value"
+          :label="shape.label"
+        />
       </example-section>
 
-      <example-section
-        title="Size"
-        gap
-      >
-        <div class="gap-4 grid grid-cols-2">
-          <vk-switch
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-            v-model="exampleSectionForm[size.value]"
-            :size="size.value"
-            :label="size.label"
-          />
-        </div>
+      <example-section title="Size">
+        <vk-switch
+          v-for="(size, index) in sizeOptions.general"
+          :key="size.value"
+          v-model="exampleSectionForm['sizes'][index]"
+          :size="size.value"
+          :label="size.label"
+        />
       </example-section>
 
-      <example-section
-        title="Disabled"
-      >
+      <example-section title="Disabled">
         <vk-switch disabled />
       </example-section>
 
-      <example-section
-        title="Readonly"
-      >
+      <example-section title="Readonly">
         <vk-switch
           v-model="exampleSectionForm['readonly']"
           readonly
         />
       </example-section>
 
-      <example-section
-        title="Position"
-      >
-        <div class="flex gap-4">
-          <vk-switch
-            v-for="pos in position"
-            :key="pos.value"
-            v-model="exampleSectionForm[pos.value]"
-            :label-position="pos.value"
-            :label="pos.label"
-          />
-        </div>
+      <example-section title="Position">
+        <vk-switch
+          v-for="(pos, index) in position"
+          :key="pos.value"
+          v-model="exampleSectionForm['position'][index]"
+          :label-position="pos.value"
+          :label="pos.label"
+        />
       </example-section>
     </template>
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Switch Props"
-          gap
-        >
+        <example-section title="Switch Props">
           <vk-table
             :headers="propHeaders"
             :data="apiData"
           />
         </example-section>
 
-        <example-section
-          title="Switch Emits"
-          gap
-        >
+        <example-section title="Switch Emits">
           <vk-table
             :headers="emitHeaders"
             :data="emitData"

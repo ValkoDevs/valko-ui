@@ -233,8 +233,6 @@ onMounted(() => {
     firstPlaygroundItem.active = true
   }
 })
-
-
 </script>
 
 <template>
@@ -286,11 +284,7 @@ onMounted(() => {
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="start"
-        gap
-      >
+      <example-section title="Colors">
         <vk-menu
           v-for="(color, index) in colorOptions"
           :key="`color-menu-${index}`"
@@ -301,11 +295,7 @@ onMounted(() => {
         />
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        gap
-      >
+      <example-section title="Variants">
         <vk-menu
           v-for="(variant, index) in variantOptions.withGradientLinkAndLine"
           :key="`variant-menu-${index}`"
@@ -316,11 +306,7 @@ onMounted(() => {
         />
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        gap
-      >
+      <example-section title="Shapes">
         <vk-menu
           v-for="(shape, index) in shapeOptions.general"
           :key="`shape-menu-${index}`"
@@ -331,11 +317,7 @@ onMounted(() => {
         />
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        gap
-      >
+      <example-section title="Sizes">
         <vk-menu
           v-for="(size, index) in sizeOptions.general"
           :key="`size-menu-${index}`"
@@ -346,11 +328,7 @@ onMounted(() => {
         />
       </example-section>
 
-      <example-section
-        title="Floating"
-        justify="start"
-        gap
-      >
+      <example-section title="Floating">
         <vk-menu
           :items="menuItems"
           :active="activeItem"
@@ -362,40 +340,28 @@ onMounted(() => {
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Menu Props"
-          gap
-        >
+        <example-section title="Menu Props">
           <vk-table
             :headers="propHeaders"
             :data="menuProps"
           />
         </example-section>
 
-        <example-section
-          title="Menu Items Interface"
-          gap
-        >
+        <example-section title="Menu Items Interface">
           <vk-table
             :headers="propHeaders"
             :data="menuItemsInterface"
           />
         </example-section>
 
-        <example-section
-          title="Menu Emits"
-          gap
-        >
+        <example-section title="Menu Emits">
           <vk-table
             :headers="emitHeaders"
             :data="menuEmits"
           />
         </example-section>
 
-        <example-section
-          title="Menu Slots"
-          gap
-        >
+        <example-section title="Menu Slots">
           <vk-table
             :headers="slotHeaders"
             :data="menuSlots"

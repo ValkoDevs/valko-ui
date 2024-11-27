@@ -131,10 +131,7 @@ const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        gap
-      >
+      <example-section title="Colors">
         <div
           v-for="color in colorOptions"
           :key="color.value"
@@ -147,10 +144,7 @@ const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
         </div>
       </example-section>
 
-      <example-section
-        title="Colors with Initials"
-        gap
-      >
+      <example-section title="Colors with Initials">
         <div
           v-for="color in colorOptions"
           :key="color.value"
@@ -164,10 +158,7 @@ const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
         </div>
       </example-section>
 
-      <example-section
-        title="Variants"
-        gap
-      >
+      <example-section title="Variants">
         <div
           v-for="variant in variantOptions.withGradient"
           :key="variant.value"
@@ -180,10 +171,7 @@ const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
         </div>
       </example-section>
 
-      <example-section
-        title="Variants with Avatars"
-        gap
-      >
+      <example-section title="Variants with Avatars">
         <div
           v-for="variant in variantOptions.withGradient"
           :key="variant.value"
@@ -197,10 +185,7 @@ const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
         </div>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        gap
-      >
+      <example-section title="Shapes">
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -213,10 +198,7 @@ const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        gap
-      >
+      <example-section title="Sizes">
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -229,9 +211,7 @@ const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
         </div>
       </example-section>
 
-      <example-section
-        title="Flat"
-      >
+      <example-section title="Flat">
         <vk-avatar
           flat
         />
@@ -240,10 +220,7 @@ const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Avatar Props"
-          gap
-        >
+        <example-section title="Avatar Props">
           <vk-table
             :headers="propHeaders"
             :data="avatarProps"

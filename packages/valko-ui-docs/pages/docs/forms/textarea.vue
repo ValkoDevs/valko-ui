@@ -106,20 +106,18 @@ const emitData: TableItem [] = [
     description="Input field that allows the user to enter and edit extensive text. Textareas are used for capturing longer-form textual input from users, such as comments, messages, or descriptions."
   >
     <template #playground-view>
-      <div class="w-full p-4">
-        <vk-textarea
-          v-model="form.modelValue"
-          :variant="form.variant"
-          :size="form.size"
-          :disabled="form.disabled"
-          :readonly="form.readonly"
-          :color="form.color"
-          :shape="form.shape"
-          :label="form.label"
-          :maxlength="form.maxlength"
-          :helpertext="form.helpertext"
-        />
-      </div>
+      <vk-textarea
+        v-model="form.modelValue"
+        :variant="form.variant"
+        :size="form.size"
+        :disabled="form.disabled"
+        :readonly="form.readonly"
+        :color="form.color"
+        :shape="form.shape"
+        :label="form.label"
+        :maxlength="form.maxlength"
+        :helpertext="form.helpertext"
+      />
     </template>
 
     <template #playground-options>
@@ -176,79 +174,51 @@ const emitData: TableItem [] = [
     <template #examples>
       <example-section
         title="Colors"
-        justify="around"
-        gap
+        classes="md:flex-col"
       >
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-textarea
-            v-for="color in colorOptions"
-            :key="color.value"
-            :color="color.value"
-            :label="color.label"
-          />
-        </div>
+        <vk-textarea
+          v-for="color in colorOptions"
+          :key="color.value"
+          :color="color.value"
+          :label="color.label"
+        />
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        align="start"
-        gap
-      >
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-textarea
-            v-for="variant in variantOptions.general"
-            :key="variant.value"
-            :variant="variant.value"
-            :label="variant.label"
-          />
-        </div>
+      <example-section title="Variants">
+        <vk-textarea
+          v-for="variant in variantOptions.general"
+          :key="variant.value"
+          :variant="variant.value"
+          :label="variant.label"
+        />
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        align="start"
-        gap
-      >
-        <div class="w-full grid grid-cols-2 gap-4 items-start">
-          <vk-textarea
-            v-for="shape in shapeOptions.general"
-            :key="shape.value"
-            :shape="shape.value"
-            :label="shape.label"
-          />
-        </div>
+      <example-section title="Shapes">
+        <vk-textarea
+          v-for="shape in shapeOptions.general"
+          :key="shape.value"
+          :shape="shape.value"
+          :label="shape.label"
+        />
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        align="start"
-        gap
-      >
-        <div class="w-full grid grid-cols-2 gap-4 items-start">
-          <vk-textarea
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-            :size="size.value"
-            :label="size.label"
-          />
-        </div>
+      <example-section title="Sizes">
+        <vk-textarea
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+          :size="size.value"
+          :label="size.label"
+        />
       </example-section>
 
-      <example-section
-        title="Disabled"
-      >
+      <example-section title="Disabled">
         <vk-textarea
           disabled
           label="Disabled"
         />
       </example-section>
 
-      <example-section
-        title="Readonly"
-      >
+      <example-section title="Readonly">
         <vk-textarea
           readonly
           label="Readonly"
@@ -259,20 +229,14 @@ const emitData: TableItem [] = [
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Textarea Props"
-          gap
-        >
+        <example-section title="Textarea Props">
           <vk-table
             :headers="propHeaders"
             :data="apiData"
           />
         </example-section>
 
-        <example-section
-          title="Textarea Emits"
-          gap
-        >
+        <example-section title="Textarea Emits">
           <vk-table
             :headers="emitHeaders"
             :data="emitData"

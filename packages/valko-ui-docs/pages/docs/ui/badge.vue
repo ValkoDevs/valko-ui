@@ -185,10 +185,7 @@ const badgeSlots: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        gap
-      >
+      <example-section title="Colors">
         <div
           v-for="color in colorOptions"
           :key="color.value"
@@ -207,10 +204,7 @@ const badgeSlots: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        gap
-      >
+      <example-section title="Shapes">
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -229,10 +223,7 @@ const badgeSlots: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        gap
-      >
+      <example-section title="Sizes">
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -251,10 +242,7 @@ const badgeSlots: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Placements"
-        gap
-      >
+      <example-section title="Placements">
         <div
           v-for="placement in placementOptions"
           :key="placement.value"
@@ -273,9 +261,7 @@ const badgeSlots: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Flat"
-      >
+      <example-section title="Flat">
         <vk-badge
           flat
           content="new"
@@ -287,9 +273,7 @@ const badgeSlots: TableItem[] = [
         </vk-badge>
       </example-section>
 
-      <example-section
-        title="Outlined"
-      >
+      <example-section title="Outlined">
         <vk-badge
           outlined
           content="new"
@@ -301,10 +285,7 @@ const badgeSlots: TableItem[] = [
         </vk-badge>
       </example-section>
 
-      <example-section
-        title="Dot"
-        gap
-      >
+      <example-section title="Dot">
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -323,9 +304,7 @@ const badgeSlots: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Hidden"
-      >
+      <example-section title="Hidden">
         <vk-badge
           hidden
         >
@@ -339,20 +318,14 @@ const badgeSlots: TableItem[] = [
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Badge Props"
-          gap
-        >
+        <example-section title="Badge Props">
           <vk-table
             :headers="propHeaders"
             :data="badgeProps"
           />
         </example-section>
 
-        <example-section
-          title="Badge Slots"
-          gap
-        >
+        <example-section title="Badge Slots">
           <vk-table
             :headers="slotHeaders"
             :data="badgeSlots"

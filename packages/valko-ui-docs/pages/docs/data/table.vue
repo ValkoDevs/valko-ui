@@ -151,19 +151,17 @@ const slotData: TableItem[] = [
 <template>
   <doc-section
     title="Table"
-    description=""
+    description="A versatile and customizable table component designed to display data in a structured format."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center p-4">
-        <vk-table
-          :variant="form.variant"
-          :shape="form.shape"
-          :size="form.size"
-          :striped="form.striped"
-          :data="tableHeader"
-          :headers="propHeaders"
-        />
-      </div>
+      <vk-table
+        :variant="form.variant"
+        :shape="form.shape"
+        :size="form.size"
+        :striped="form.striped"
+        :data="tableHeader"
+        :headers="propHeaders"
+      />
     </template>
     <template #playground-options>
       <vk-select
@@ -191,12 +189,7 @@ const slotData: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Variants"
-        justify="start"
-        gap
-        wrap
-      >
+      <example-section title="Variants">
         <div class="grid grid-cols-2 gap-4">
           <div
             v-for="variant in variantOptions.general"
@@ -215,12 +208,7 @@ const slotData: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        gap
-        wrap
-      >
+      <example-section title="Shapes">
         <div class="grid grid-cols-2 gap-4">
           <div
             v-for="shape in shapeOptions.general"
@@ -239,12 +227,7 @@ const slotData: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        gap
-        wrap
-      >
+      <example-section title="Sizes">
         <div class="grid grid-cols-2 gap-4">
           <div
             v-for="size in sizeOptions.general"
@@ -266,50 +249,35 @@ const slotData: TableItem[] = [
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Table Props"
-          gap
-        >
+        <example-section title="Table Props">
           <vk-table
             :headers="propHeaders"
             :data="tableProps"
           />
         </example-section>
 
-        <example-section
-          title="Table Item Props"
-          gap
-        >
+        <example-section title="Table Item Props">
           <vk-table
             :headers="propHeaders"
             :data="tableItem"
           />
         </example-section>
 
-        <example-section
-          title="Table Header Props"
-          gap
-        >
+        <example-section title="Table Header Props">
           <vk-table
             :headers="propHeaders"
             :data="tableHeader"
           />
         </example-section>
 
-        <example-section
-          title="Table Emits"
-          gap
-        >
+        <example-section title="Table Emits">
           <vk-table
             :headers="emitHeaders"
             :data="emitData"
           />
         </example-section>
 
-        <example-section
-          title="Table Slots"
-          gap
-        >
+        <example-section title="Table Slots">
           <vk-table
             :headers="slotHeaders"
             :data="slotData"

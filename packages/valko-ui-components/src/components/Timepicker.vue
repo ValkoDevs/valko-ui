@@ -1,34 +1,34 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
-import type { DatepickerProps } from '#valkoui/types/Datepicker'
+import type { TimepickerProps } from '#valkoui/types/Timepicker'
 import type { SlotStyles } from '#valkoui/types/common'
-import styles from '#valkoui/styles/Datepicker.styles.ts'
+import styles from '#valkoui/styles/Timepicker.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import VkInput from './Input.vue'
-import VkCalendar from './Calendar.vue'
+import VkTime from './Time.vue'
 import VkIcon from './Icon.vue'
 
-defineOptions({ name: 'VkDatepicker' })
+defineOptions({ name: 'VkTimepicker' })
 
-const props = withDefaults(defineProps<DatepickerProps>(), {
+const props = withDefaults(defineProps<TimepickerProps>(), {
   color: 'primary',
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  format: 'YYYY-MM-DD',
-  isOpen: false
+  format: 'HH:mm:ss',
+  okButtonLabel: 'OK'
 })
 
-const emit = defineEmits(['update:modelValue', 'open', 'close'])
+const emit = defineEmits(['onSelect', 'open', 'close'])
 
-const classes = useStyle<DatepickerProps, SlotStyles>(props, styles)
+const classes = useStyle<TimepickerProps, SlotStyles>(props, styles)
 
 const rootRef = ref<HTMLElement | null>(null)
 
 const handleClickOutside = (event: MouseEvent) => {
   const target = event.target as HTMLElement
 
-  if (rootRef.value && !rootRef.value.contains(target) && !target.closest('.vk-datepicker__content')) emit('close')
+  if (rootRef.value && !rootRef.value.contains(target) && !target.closest('.vk-timepicker__content')) emit('close')
 }
 
 onMounted(() => nextTick(() => document.addEventListener('mousedown', handleClickOutside, true)))
@@ -44,13 +44,13 @@ onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside,
       v-bind="props"
       :model-value="parsedModel"
       :label="label"
+      :class="classes.input"
       readonly
-      cursor="pointer"
       @focus="emit('open')"
       @right-icon-click="emit('open')"
     >
       <template #rightIcon>
-        <vk-icon name="calendar" />
+        <vk-icon name="clock-2" />
       </template>
     </vk-input>
 
@@ -63,21 +63,23 @@ onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside,
       leave-to-class="opacity-0"
     >
       <div
-        v-show="isOpen"
+        v-if="isOpen"
         :class="classes.content"
       >
-        <vk-calendar
+        <vk-time
           v-if="isOpen"
           v-bind="props"
           :adapter="adapter"
-          :disabled-dates="disabledDates"
           :locale="locale"
           :format="format"
-          :min-date="minDate"
-          :max-date="maxDate"
-          :disable-weekends="disableWeekends"
-          @update:model-value="(value) => emit('update:modelValue', value)"
-          @finalize-selection="emit('close')"
+          :min-time="minTime"
+          :max-time="maxTime"
+          :disabled-times="disabledTimes"
+          :ok-button-label="okButtonLabel"
+          @on-select="() => {
+            emit('onSelect')
+            emit('close')
+          }"
         />
       </div>
     </transition>

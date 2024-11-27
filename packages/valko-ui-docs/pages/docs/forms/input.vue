@@ -202,34 +202,32 @@ const slotData: TableItem[] = [
     description="Area where the user can enter text or other data. Inputs allow users to provide information such as text, numbers, or selections, and are commonly used in forms and search fields."
   >
     <template #playground-view>
-      <div class="w-full flex px-2">
-        <vk-input
-          v-model="form.modelValue"
-          :variant="form.variant"
-          :color="form.color"
-          :size="form.size"
-          :disabled="form.disabled"
-          :readonly="form.readonly"
-          :shape="form.shape"
-          :type="form.type"
-          :label="form.label"
-          :helpertext="form.helpertext"
-          :clearable="form.clearable"
+      <vk-input
+        v-model="form.modelValue"
+        :variant="form.variant"
+        :color="form.color"
+        :size="form.size"
+        :disabled="form.disabled"
+        :readonly="form.readonly"
+        :shape="form.shape"
+        :type="form.type"
+        :label="form.label"
+        :helpertext="form.helpertext"
+        :clearable="form.clearable"
+      >
+        <template
+          v-if="iconsInForm.left"
+          #leftIcon
         >
-          <template
-            v-if="iconsInForm.left"
-            #leftIcon
-          >
-            <vk-icon name="home" />
-          </template>
-          <template
-            v-if="iconsInForm.right"
-            #rightIcon
-          >
-            <vk-icon name="home" />
-          </template>
-        </vk-input>
-      </div>
+          <vk-icon name="home" />
+        </template>
+        <template
+          v-if="iconsInForm.right"
+          #rightIcon
+        >
+          <vk-icon name="home" />
+        </template>
+      </vk-input>
     </template>
 
     <template #playground-options>
@@ -296,11 +294,7 @@ const slotData: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="around"
-        gap
-      >
+      <example-section title="Colors">
         <div class="grow gap-4 grid grid-cols-2">
           <vk-input
             v-for="color in colorOptions"
@@ -311,12 +305,7 @@ const slotData: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        align="start"
-        gap
-      >
+      <example-section title="Variants">
         <div class="grow gap-4 grid grid-cols-2">
           <vk-input
             v-for="variant in variantOptions.general"
@@ -327,12 +316,7 @@ const slotData: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        align="start"
-        gap
-      >
+      <example-section title="Shapes">
         <div class="grow gap-4 grid grid-cols-2">
           <vk-input
             v-for="shape in shapeOptions.general"
@@ -343,12 +327,7 @@ const slotData: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        align="start"
-        gap
-      >
+      <example-section title="Sizes">
         <div class="grow gap-4 grid grid-cols-2 items-end">
           <vk-input
             v-for="size in sizeOptions.general"
@@ -359,12 +338,7 @@ const slotData: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Types"
-        justify="start"
-        align="start"
-        gap
-      >
+      <example-section title="Types">
         <div class="grow gap-4 grid grid-cols-2">
           <vk-input
             v-for="type in typeOptions"
@@ -375,18 +349,14 @@ const slotData: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Disabled"
-      >
+      <example-section title="Disabled">
         <vk-input
           disabled
           label="Disabled"
         />
       </example-section>
 
-      <example-section
-        title="Readonly"
-      >
+      <example-section title="Readonly">
         <vk-input
           readonly
           label="Readonly"
@@ -396,30 +366,21 @@ const slotData: TableItem[] = [
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Input Props"
-          gap
-        >
+        <example-section title="Input Props">
           <vk-table
             :headers="propHeaders"
             :data="apiData"
           />
         </example-section>
 
-        <example-section
-          title="Input Emits"
-          gap
-        >
+        <example-section title="Input Emits">
           <vk-table
             :headers="emitHeaders"
             :data="emitData"
           />
         </example-section>
 
-        <example-section
-          title="Input Slots"
-          gap
-        >
+        <example-section title="Input Slots">
           <vk-table
             :headers="slotHeaders"
             :data="slotData"

@@ -89,11 +89,7 @@ const spinnerProps: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="start"
-        gap
-      >
+      <example-section title="Colors">
         <div class="gap-x-12 gap-y-4 grid grid-cols-3">
           <div
             v-for="color in colorOptions"
@@ -108,11 +104,7 @@ const spinnerProps: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Names"
-        justify="start"
-        gap
-      >
+      <example-section title="Names">
         <div class="gap-x-12 gap-y-4 grid grid-cols-3">
           <div
             v-for="name in names"
@@ -121,17 +113,13 @@ const spinnerProps: TableItem[] = [
           >
             <vk-spinner
               :name="name.value"
-            /> {{ name.label }}
+            />
+            {{ name.label }}
           </div>
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        align="start"
-        gap
-      >
+      <example-section title="Sizes">
         <div class="gap-x-12 gap-y-4 grid grid-cols-2">
           <div
             v-for="size in sizeOptions.general"
@@ -140,24 +128,20 @@ const spinnerProps: TableItem[] = [
           >
             <vk-spinner
               :size="size.value"
-            /> {{ size.label }}
+            />
+            {{ size.label }}
           </div>
         </div>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section
-          title="Spinner Props"
-          gap
-        >
-          <vk-table
-            :headers="propHeaders"
-            :data="spinnerProps"
-          />
-        </example-section>
-      </div>
+      <example-section title="Spinner Props">
+        <vk-table
+          :headers="propHeaders"
+          :data="spinnerProps"
+        />
+      </example-section>
     </template>
   </doc-section>
 </template>

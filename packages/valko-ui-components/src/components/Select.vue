@@ -15,7 +15,6 @@ const props = withDefaults(defineProps<SelectProps>(), {
   size: 'md',
   shape: 'soft',
   options: () => [],
-  allowClear: false,
   clearable: false
 })
 
@@ -53,13 +52,13 @@ const selectItem = (value: string | number) => {
     if (index === -1) selectedValues.push(value)
     else selectedValues.splice(index, 1)
 
-    if (!props.allowClear && selectedValues.length === 0) return
+    if (!props.clearable && selectedValues.length === 0) return
 
     updateValue(selectedValues)
   } else {
     const newValue = isSelected(value) ? undefined : value
 
-    if (!props.allowClear && newValue === undefined) return
+    if (!props.clearable && newValue === undefined) return
 
     updateValue(newValue)
     toggleDropdown(false)
@@ -85,7 +84,7 @@ const toggleDropdown = (onFocus: boolean) => {
 }
 
 const clearSelection = () => {
-  if (!props.allowClear) return
+  if (!props.clearable) return
   if (!props.multiple) updateValue(undefined)
   else updateValue([])
   toggleDropdown(false)
@@ -132,7 +131,7 @@ onUnmounted(() => {
         :size="size"
         :shape="shape"
         :model-value="showValue"
-        :clearable="clearable && allowClear"
+        :clearable="clearable"
         cursor="pointer"
         @focus="() => toggleDropdown(true)"
         @clear="clearSelection"

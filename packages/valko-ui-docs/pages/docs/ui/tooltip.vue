@@ -124,10 +124,7 @@ const tooltipSlots: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Shapes"
-        gap
-      >
+      <example-section title="Shapes">
         <vk-tooltip
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -140,10 +137,7 @@ const tooltipSlots: TableItem[] = [
         </vk-tooltip>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        gap
-      >
+      <example-section title="Sizes">
         <vk-tooltip
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -156,10 +150,7 @@ const tooltipSlots: TableItem[] = [
         </vk-tooltip>
       </example-section>
 
-      <example-section
-        title="Placements"
-        gap
-      >
+      <example-section title="Placements">
         <vk-tooltip
           v-for="placement in placementOptions"
           :key="placement.value"
@@ -172,9 +163,7 @@ const tooltipSlots: TableItem[] = [
         </vk-tooltip>
       </example-section>
 
-      <example-section
-        title="Flat"
-      >
+      <example-section title="Flat">
         <vk-tooltip
           flat
           content="Flat"
@@ -188,20 +177,14 @@ const tooltipSlots: TableItem[] = [
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Tooltip Props"
-          gap
-        >
+        <example-section title="Tooltip Props">
           <vk-table
             :headers="propHeaders"
             :data="tooltipProps"
           />
         </example-section>
 
-        <example-section
-          title="Tooltip Slots"
-          gap
-        >
+        <example-section title="Tooltip Slots">
           <vk-table
             :headers="slotHeaders"
             :data="tooltipSlots"

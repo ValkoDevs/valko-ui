@@ -162,17 +162,15 @@ const tabsSlots: TableItem[] = [
     description=" Organization of content into tabs for easier navigation. Tabs allow users to switch between different sections of content within the same page or interface, improving the organization and usability of the interface."
   >
     <template #playground-view>
-      <div class="w-full flex justify-center items-center px-2">
-        <vk-tabs
-          :color="form.color"
-          :shape="form.shape"
-          :variant="form.variant"
-          :size="form.size"
-          :tabs="icons ? tabWithIcon : tabs"
-          :grow="form.grow"
-          :vertical="form.vertical"
-        />
-      </div>
+      <vk-tabs
+        :color="form.color"
+        :shape="form.shape"
+        :variant="form.variant"
+        :size="form.size"
+        :tabs="icons ? tabWithIcon : tabs"
+        :grow="form.grow"
+        :vertical="form.vertical"
+      />
     </template>
 
     <template #playground-options>
@@ -219,10 +217,7 @@ const tabsSlots: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        gap
-      >
+      <example-section title="Colors">
         <div class="grow gap-4 grid grid-cols-2">
           <div
             v-for="color in colorOptions"
@@ -237,10 +232,7 @@ const tabsSlots: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Variants"
-        gap
-      >
+      <example-section title="Variants">
         <div class="grow gap-4 grid grid-cols-2">
           <div
             v-for="variant in variantOptions.withGradient"
@@ -255,10 +247,7 @@ const tabsSlots: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        gap
-      >
+      <example-section title="Shapes">
         <div class="grow gap-4 grid grid-cols-2">
           <div
             v-for="shape in shapeOptions.withLine"
@@ -274,10 +263,7 @@ const tabsSlots: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        gap
-      >
+      <example-section title="Sizes">
         <div class="grow gap-4 grid grid-cols-2">
           <div
             v-for="size in sizeOptions.general"
@@ -292,26 +278,20 @@ const tabsSlots: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Grow"
-      >
+      <example-section title="Grow">
         <vk-tabs
           grow
           :tabs="tabs"
         />
       </example-section>
 
-      <example-section
-        title="With Icons"
-      >
+      <example-section title="With Icons">
         <vk-tabs
           :tabs="tabWithIcon"
         />
       </example-section>
 
-      <example-section
-        title="Disabled"
-      >
+      <example-section title="Disabled">
         <vk-tabs
           :tabs="tabDisabled"
         />
@@ -320,30 +300,21 @@ const tabsSlots: TableItem[] = [
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Tabs Props"
-          gap
-        >
+        <example-section title="Tabs Props">
           <vk-table
             :headers="propHeaders"
             :data="tabsProps"
           />
         </example-section>
 
-        <example-section
-          title="Tabs Slots"
-          gap
-        >
+        <example-section title="Tabs Slots">
           <vk-table
             :headers="slotHeaders"
             :data="tabsSlots"
           />
         </example-section>
 
-        <example-section
-          title="Tab Interface"
-          gap
-        >
+        <example-section title="Tab Interface">
           <vk-table
             :headers="propHeaders"
             :data="tabInterface"

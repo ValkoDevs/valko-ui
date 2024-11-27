@@ -118,11 +118,7 @@ const dividerProps: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="start"
-        gap
-      >
+      <example-section title="Colors">
         <div class="w-full grid grid-cols-3 gap-4">
           <div
             v-for="color in colorOptions"
@@ -140,11 +136,7 @@ const dividerProps: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        gap
-      >
+      <example-section title="Variants">
         <div class="w-full grid grid-cols-3 gap-4">
           <div
             v-for="variant in variantOptions.general"
@@ -162,11 +154,7 @@ const dividerProps: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        gap
-      >
+      <example-section title="Shapes">
         <div class="w-full grid grid-cols-3 gap-4">
           <div
             v-for="shape in shapeOptions.general"
@@ -184,11 +172,7 @@ const dividerProps: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        gap
-      >
+      <example-section title="Sizes">
         <div class="w-full grid grid-cols-2 gap-4">
           <div
             v-for="size in sizeOptions.general"
@@ -206,11 +190,7 @@ const dividerProps: TableItem[] = [
         </div>
       </example-section>
 
-      <example-section
-        title="Direction"
-        justify="start"
-        gap
-      >
+      <example-section title="Direction">
         <div class="w-full">
           <span class="font-semibold">Horizontal</span>
           <div class="mt-4">
@@ -236,10 +216,7 @@ const dividerProps: TableItem[] = [
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Divider Props"
-          gap
-        >
+        <example-section title="Divider Props">
           <vk-table
             :headers="propHeaders"
             :data="dividerProps"

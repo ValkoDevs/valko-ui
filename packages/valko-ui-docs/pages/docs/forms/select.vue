@@ -19,26 +19,15 @@ const form = ref<SelectProps>({
   disabled: false,
   readonly: false,
   multiple: false,
-  allowClear: true,
   clearable: false
 })
 
-const exampleSectionForm = ref<Record<string, string | number>>({
-  primary: '',
-  secondary: '',
-  error: '',
-  success: '',
-  warning: '',
-  info: '',
-  filled: '',
-  outlined: '',
-  ghost: '',
-  shape: '',
-  xs: '',
-  sm: '',
-  md: '',
-  lg: '',
-  exampleReadonly: 1
+const exampleSectionForm = reactive({
+  colors: Array(colorOptions.length).fill(''),
+  variants: Array(variantOptions.general.length).fill(''),
+  shapes: Array(shapeOptions.general.length).fill(''),
+  sizes: Array(sizeOptions.general.length).fill(''),
+  readonly: 1
 })
 
 const apiData: TableItem[] = [
@@ -155,20 +144,12 @@ const apiData: TableItem[] = [
     default: 'soft'
   },
   {
-    key: 'allowClearProp',
-    prop: 'allowClear',
-    required: false,
-    description: 'Allows to leave the selection empty.',
-    values: 'true, false',
-    default: 'true'
-  },
-  {
     key: 'clearableProp',
     prop: 'clearable',
     required: false,
-    description: 'Displays an icon that clears the selection when clicked only if allowClear is true.',
+    description: 'Allows to leave the selection empty and displays an icon that clears the selection when clicked.',
     values: 'true, false',
-    default: 'true'
+    default: 'false'
   }
 ]
 
@@ -189,23 +170,20 @@ const emitData: TableItem[] = [
     description="Dropdown list that allows the user to choose an option among several. Selects provide users with a convenient way to select from a predefined set of options and are commonly used in forms and settings."
   >
     <template #playground-view>
-      <div class="w-full flex px-2">
-        <vk-select
-          v-model="form.modelValue"
-          :label="form.label"
-          :helpertext="form.helpertext"
-          :options="people"
-          :color="form.color"
-          :variant="form.variant"
-          :readonly="form.readonly"
-          :shape="form.shape"
-          :disabled="form.disabled"
-          :size="form.size"
-          :multiple="form.multiple"
-          :allow-clear="form.allowClear"
-          :clearable="form.clearable"
-        />
-      </div>
+      <vk-select
+        v-model="form.modelValue"
+        :label="form.label"
+        :helpertext="form.helpertext"
+        :options="people"
+        :color="form.color"
+        :variant="form.variant"
+        :readonly="form.readonly"
+        :shape="form.shape"
+        :disabled="form.disabled"
+        :size="form.size"
+        :multiple="form.multiple"
+        :clearable="form.clearable"
+      />
     </template>
 
     <template #playground-options>
@@ -256,101 +234,66 @@ const emitData: TableItem[] = [
         label="Readonly"
       />
       <vk-checkbox
-        v-model="form.allowClear"
-        label="Allow Clear"
-      />
-      <vk-checkbox
         v-model="form.clearable"
         label="Clearable"
       />
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        justify="around"
-        gap
-      >
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-select
-            v-for="color in colorOptions"
-            :key="color.value"
-            v-model="exampleSectionForm[color.value]"
-            :color="color.value"
-            :label="color.label"
-            :options="people"
-          />
-        </div>
+      <example-section title="Colors">
+        <vk-select
+          v-for="(color, index) in colorOptions"
+          :key="color.value"
+          v-model="exampleSectionForm['colors'][index]"
+          :color="color.value"
+          :label="color.label"
+          :options="people"
+        />
       </example-section>
 
-      <example-section
-        title="Variants"
-        justify="start"
-        align="start"
-        gap
-      >
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-select
-            v-for="variant in variantOptions.general"
-            :key="variant.value"
-            v-model="exampleSectionForm[variant.value]"
-            :variant="variant.value"
-            :label="variant.label"
-            :options="people"
-          />
-        </div>
+      <example-section title="Variants">
+        <vk-select
+          v-for="(variant, index) in variantOptions.general"
+          :key="variant.value"
+          v-model="exampleSectionForm['variants'][index]"
+          :variant="variant.value"
+          :label="variant.label"
+          :options="people"
+        />
       </example-section>
 
-      <example-section
-        title="Shapes"
-        justify="start"
-        align="start"
-        gap
-      >
-        <div class="grow gap-4 grid grid-cols-2 items-end">
-          <vk-select
-            v-for="shape in shapeOptions.general"
-            :key="shape.value"
-            v-model="exampleSectionForm[shape.value]"
-            :shape="shape.value"
-            :label="shape.label"
-            :options="people"
-          />
-        </div>
+      <example-section title="Shapes">
+        <vk-select
+          v-for="(shape, index) in shapeOptions.general"
+          :key="shape.value"
+          v-model="exampleSectionForm['shapes'][index]"
+          :shape="shape.value"
+          :label="shape.label"
+          :options="people"
+        />
       </example-section>
 
-      <example-section
-        title="Sizes"
-        justify="start"
-        align="start"
-        gap
-      >
-        <div class="grow gap-4 grid grid-cols-2 items-end">
-          <vk-select
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-            v-model="exampleSectionForm[size.value]"
-            :size="size.value"
-            :label="size.label"
-            :options="people"
-          />
-        </div>
+      <example-section title="Sizes">
+        <vk-select
+          v-for="(size, index) in sizeOptions.general"
+          :key="size.value"
+          v-model="exampleSectionForm['sizes'][index]"
+          :size="size.value"
+          :label="size.label"
+          :options="people"
+        />
       </example-section>
 
-      <example-section
-        title="Disabled"
-      >
+      <example-section title="Disabled">
         <vk-select
           disabled
           label="Disabled"
         />
       </example-section>
 
-      <example-section
-        title="Readonly"
-      >
+      <example-section title="Readonly">
         <vk-select
-          v-model="exampleSectionForm.exampleReadonly"
+          v-model="exampleSectionForm['readonly']"
           readonly
           :options="people"
           label="Readonly"
@@ -360,20 +303,14 @@ const emitData: TableItem[] = [
 
     <template #api>
       <div class="w-full flex flex-col">
-        <example-section
-          title="Select Props"
-          gap
-        >
+        <example-section title="Select Props">
           <vk-table
             :headers="propHeaders"
             :data="apiData"
           />
         </example-section>
 
-        <example-section
-          title="Select Emits"
-          gap
-        >
+        <example-section title="Select Emits">
           <vk-table
             :headers="emitHeaders"
             :data="emitData"
