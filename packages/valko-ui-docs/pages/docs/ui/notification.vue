@@ -162,6 +162,8 @@ const createNotification = (props: NotificationProps) => {
     onClick: props.onClick
   })
 }
+
+const { notificationCode } = useCodeBlock('vk-notification')
 </script>
 
 <template>
@@ -252,7 +254,10 @@ const createNotification = (props: NotificationProps) => {
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <vk-button
           v-for="color in colorOptions"
           :key="color.value"
@@ -262,9 +267,16 @@ const createNotification = (props: NotificationProps) => {
         >
           {{ color.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="notificationCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+      >
         <vk-button
           v-for="variant in variantOptions.withGradientAndLine"
           :key="variant.value"
@@ -273,9 +285,16 @@ const createNotification = (props: NotificationProps) => {
         >
           {{ variant.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="notificationCode('variant', variantOptions.withGradientAndLine)" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-button
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -285,9 +304,16 @@ const createNotification = (props: NotificationProps) => {
         >
           {{ shape.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="notificationCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-button
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -297,9 +323,16 @@ const createNotification = (props: NotificationProps) => {
         >
           {{ size.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="notificationCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Gravity">
+      <example-section
+        title="Gravity"
+        classes="grid-cols-2"
+      >
         <vk-button
           v-for="gravity in gravityOptions"
           :key="gravity.value"
@@ -309,9 +342,16 @@ const createNotification = (props: NotificationProps) => {
         >
           {{ gravity.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="notificationCode('gravity', gravityOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Position">
+      <example-section
+        title="Position"
+        classes="grid-cols-2"
+      >
         <vk-button
           v-for="position in positionOptions"
           :key="position.value"
@@ -321,6 +361,10 @@ const createNotification = (props: NotificationProps) => {
         >
           {{ position.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="notificationCode('position', positionOptions)" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
@@ -331,6 +375,10 @@ const createNotification = (props: NotificationProps) => {
         >
           Flat
         </vk-button>
+
+        <template #code>
+          <code-block :code="notificationCode('flat', [{ label: 'Flat', value: 'true' }])" />
+        </template>
       </example-section>
 
       <example-section title="Close">
@@ -341,6 +389,10 @@ const createNotification = (props: NotificationProps) => {
         >
           Close
         </vk-button>
+
+        <template #code>
+          <code-block :code="notificationCode('close', [{ label: 'Close', value: 'true' }])" />
+        </template>
       </example-section>
 
       <example-section title="Stop on Focus">
@@ -351,16 +403,19 @@ const createNotification = (props: NotificationProps) => {
         >
           Stop on Focus
         </vk-button>
+
+        <template #code>
+          <code-block :code="notificationCode('stopOnFocus', [{ label: 'Stop On Focus', value: 'true' }])" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <example-section title="Notification Props">
-        <vk-table
-          :headers="propHeaders"
-          :data="notificationProps"
-        />
-      </example-section>
+      <h3>Notification Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="notificationProps"
+      />
     </template>
   </doc-section>
 </template>

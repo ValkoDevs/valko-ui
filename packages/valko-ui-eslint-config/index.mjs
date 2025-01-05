@@ -38,7 +38,8 @@ export default ts.config(
       '@stylistic/type-annotation-spacing': ['error'],
       '@stylistic/comma-spacing': ['error'],
       '@stylistic/comma-dangle': ['error'],
-      'prefer-const': ['error']
+      'prefer-const': ['error'],
+      'vue/no-multiple-template-root': 'off'
     }
   }
 )

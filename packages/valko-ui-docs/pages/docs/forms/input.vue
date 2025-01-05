@@ -4,8 +4,7 @@ import type { SelectOption, InputProps, TableItem, InputType } from '#valkoui'
 const typeOptions: SelectOption<InputType>[] = [
   { value:'text', label:'Text' },
   { value:'email', label:'Email' },
-  { value:'password', label:'Password' },
-  { value:'date', label:'Date' }
+  { value:'password', label:'Password' }
 ]
 
 const form = ref<InputProps>({
@@ -49,7 +48,7 @@ const apiData: TableItem[] = [
     prop: 'type',
     required: false,
     description: 'The type of the Input.',
-    values: 'text, email, password, date',
+    values: 'text, email, password',
     default: 'text'
   },
   {
@@ -194,6 +193,8 @@ const slotData: TableItem[] = [
     example: '<template #rightIcon>\n  <!-- Your icon component goes here -->\n</template>'
   }
 ]
+
+const { generalCode, templateCode } = useCodeBlock('vk-input')
 </script>
 
 <template>
@@ -294,59 +295,84 @@ const slotData: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section title="Colors">
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-input
-            v-for="color in colorOptions"
-            :key="color.value"
-            :color="color.value"
-            :label="color.label"
-          />
-        </div>
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
+        <vk-input
+          v-for="color in colorOptions"
+          :key="color.value"
+          :color="color.value"
+          :label="color.label"
+        />
+
+        <template #code>
+          <code-block :code="generalCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-input
-            v-for="variant in variantOptions.general"
-            :key="variant.value"
-            :variant="variant.value"
-            :label="variant.label"
-          />
-        </div>
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
+        <vk-input
+          v-for="variant in variantOptions.general"
+          :key="variant.value"
+          :variant="variant.value"
+          :label="variant.label"
+        />
+
+        <template #code>
+          <code-block :code="generalCode('variant', variantOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-input
-            v-for="shape in shapeOptions.general"
-            :key="shape.value"
-            :shape="shape.value"
-            :label="shape.label"
-          />
-        </div>
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
+        <vk-input
+          v-for="shape in shapeOptions.general"
+          :key="shape.value"
+          :shape="shape.value"
+          :label="shape.label"
+        />
+
+        <template #code>
+          <code-block :code="generalCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
-        <div class="grow gap-4 grid grid-cols-2 items-end">
-          <vk-input
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-            :size="size.value"
-            :label="size.label"
-          />
-        </div>
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <vk-input
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+          :size="size.value"
+          :label="size.label"
+        />
+
+        <template #code>
+          <code-block :code="generalCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Types">
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-input
-            v-for="type in typeOptions"
-            :key="type.value"
-            :type="type.value"
-            :label="type.label"
-          />
-        </div>
+      <example-section
+        title="Types"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
+        <vk-input
+          v-for="type in typeOptions"
+          :key="type.value"
+          :type="type.value"
+          :label="type.label"
+        />
+
+        <template #code>
+          <code-block :code="generalCode('type', typeOptions)" />
+        </template>
       </example-section>
 
       <example-section title="Disabled">
@@ -354,6 +380,10 @@ const slotData: TableItem[] = [
           disabled
           label="Disabled"
         />
+
+        <template #code>
+          <code-block code="<vk-input disabled></vk-input>" />
+        </template>
       </example-section>
 
       <example-section title="Readonly">
@@ -361,32 +391,67 @@ const slotData: TableItem[] = [
           readonly
           label="Readonly"
         />
+
+        <template #code>
+          <code-block code="<vk-input readonly></vk-input>" />
+        </template>
+      </example-section>
+
+      <example-section title="Clearable">
+        <vk-input
+          clearable
+          label="Clearable"
+        />
+
+        <template #code>
+          <code-block code="<vk-input clearable></vk-input>" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Icons"
+        classes="sm:grid-cols-2"
+      >
+        <vk-input
+          label="Left Icon"
+        >
+          <template #leftIcon>
+            <vk-icon name="home" />
+          </template>
+        </vk-input>
+
+        <vk-input
+          label="Right Icon"
+        >
+          <template #rightIcon>
+            <vk-icon name="home" />
+          </template>
+        </vk-input>
+
+        <template #code>
+          <code-block :code="templateCode([{ hash: 'leftIcon', content: `<vk-icon name='home'>` }, { hash: 'rightIcon', content: `<vk-icon name='home'>` }])" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Input Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="apiData"
-          />
-        </example-section>
+      <h3>Input Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="apiData"
+      />
 
-        <example-section title="Input Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="emitData"
-          />
-        </example-section>
+      <h3>Input Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="emitData"
+      />
 
-        <example-section title="Input Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="slotData"
-          />
-        </example-section>
-      </div>
+      <h3>Input Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="slotData"
+      />
     </template>
   </doc-section>
 </template>

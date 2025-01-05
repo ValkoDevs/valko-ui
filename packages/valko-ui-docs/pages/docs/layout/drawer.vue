@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { DrawerProps, SelectOption, TableItem, Backdrop, Placement } from '#valkoui'
 
@@ -115,6 +116,138 @@ const drawerStates = reactive<Record<string, boolean>>({})
 const toggleDrawer = (drawerId: string) => {
   drawerStates[drawerId] = !drawerStates[drawerId]
 }
+
+const scriptCode = `
+<script setup lang="ts">
+const drawerStates = reactive<Record<string, boolean>>({})
+
+const toggleDrawer = (drawerId: string) => drawerStates[drawerId] = !drawerStates[drawerId]
+<\/script>
+`
+
+const placementCode = `
+${scriptCode}
+<template>
+${placementOptions.map(pos => `
+  <vk-button @click="toggleDrawer('${pos.value}')">
+    ${pos.label}
+  </vk-button>
+
+  <vk-drawer
+    is-open="drawerStates['${pos.value}']"
+    placement="${pos.value}"
+    @close="toggleDrawer('${pos.value}')"
+  >
+    Content goes here.
+  </vk-drawer>`).join('\n')}
+
+</template>
+`
+
+const shapeCode = `
+${scriptCode}
+<template>
+${shapeOptions.general.map(shape => `
+  <vk-button @click="toggleDrawer('${shape.value}')">
+    ${shape.label}
+  </vk-button>
+
+  <vk-drawer
+    is-open="drawerStates['${shape.value}']"
+    shape="${shape.value}"
+    @close="toggleDrawer('${shape.value}')"
+  >
+    Content goes here.
+  </vk-drawer>`).join('\n')}
+
+</template>
+`
+
+const sizeCode = `
+${scriptCode}
+<template>
+${sizeOptions.general.map(size => `
+  <vk-button @click="toggleDrawer('${size.value}')">
+    ${size.label}
+  </vk-button>
+
+  <vk-drawer
+    is-open="drawerStates['${size.value}']"
+    size="${size.value}"
+    @close="toggleDrawer('${size.value}')"
+  >
+    Content goes here.
+  </vk-drawer>`).join('\n')}
+
+</template>
+`
+
+const backdropCode = `
+${scriptCode}
+<template>
+${backdropOptions.map(backdrop => `
+  <vk-button @click="toggleDrawer('${backdrop.value}')">
+    ${backdrop.label}
+  </vk-button>
+
+  <vk-drawer
+    is-open="drawerStates['${backdrop.value}']"
+    backdrop="${backdrop.value}"
+    @close="toggleDrawer('${backdrop.value}')"
+  >
+    Content goes here.
+  </vk-drawer>`).join('\n')}
+
+</template>
+`
+
+const closableCode = `
+<script setup lang="ts">
+const isOpen = ref(false)
+
+const toggleDrawer = () => isOpen = !isOpen
+<\/script>
+
+<template>
+
+  <vk-button @click="toggleDrawer">
+    Closable
+  </vk-button>
+
+  <vk-drawer
+    is-open="isOpen"
+    closable
+    @close="toggleDrawer"
+  >
+    Content goes here.
+  </vk-drawer>
+
+</template>
+`
+
+const flatCode = `
+<script setup lang="ts">
+const isOpen = ref(false)
+
+const toggleDrawer = () => isOpen = !isOpen
+<\/script>
+
+<template>
+
+  <vk-button @click="toggleDrawer">
+    Flat
+  </vk-button>
+
+  <vk-drawer
+    is-open="isOpen"
+    flat
+    @close="toggleDrawer"
+  >
+    Content goes here.
+  </vk-drawer>
+
+</template>
+`
 </script>
 
 <template>
@@ -183,13 +316,16 @@ const toggleDrawer = (drawerId: string) => {
     </template>
 
     <template #examples>
-      <example-section title="Placement">
+      <example-section
+        title="Placement"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <div
           v-for="placement in placementOptions"
           :key="placement.value"
         >
           <vk-button @click="toggleDrawer(placement.value)">
-            Open {{ placement.label }}
+            {{ placement.label }}
           </vk-button>
           <vk-drawer
             :is-open="drawerStates[placement.value]"
@@ -203,15 +339,22 @@ const toggleDrawer = (drawerId: string) => {
             </template>
           </vk-drawer>
         </div>
+
+        <template #code>
+          <code-block :code="placementCode" />
+        </template>
       </example-section>
 
-      <example-section title="Shape">
+      <example-section
+        title="Shape"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
         >
           <vk-button @click="toggleDrawer(shape.value)">
-            Open {{ shape.label }}
+            {{ shape.label }}
           </vk-button>
           <vk-drawer
             :is-open="drawerStates[shape.value]"
@@ -225,15 +368,22 @@ const toggleDrawer = (drawerId: string) => {
             </template>
           </vk-drawer>
         </div>
+
+        <template #code>
+          <code-block :code="shapeCode" />
+        </template>
       </example-section>
 
-      <example-section title="Size">
+      <example-section
+        title="Size"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
         >
           <vk-button @click="toggleDrawer(size.value)">
-            Open {{ size.label }}
+            {{ size.label }}
           </vk-button>
           <vk-drawer
             :is-open="drawerStates[size.value]"
@@ -247,15 +397,22 @@ const toggleDrawer = (drawerId: string) => {
             </template>
           </vk-drawer>
         </div>
+
+        <template #code>
+          <code-block :code="sizeCode" />
+        </template>
       </example-section>
 
-      <example-section title="Backdrop">
+      <example-section
+        title="Backdrop"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <div
           v-for="backdrop in backdropOptions"
           :key="backdrop.value"
         >
           <vk-button @click="toggleDrawer(backdrop.value)">
-            Open {{ backdrop.label }}
+            {{ backdrop.label }}
           </vk-button>
           <vk-drawer
             :is-open="drawerStates[backdrop.value]"
@@ -269,11 +426,15 @@ const toggleDrawer = (drawerId: string) => {
             </template>
           </vk-drawer>
         </div>
+
+        <template #code>
+          <code-block :code="backdropCode" />
+        </template>
       </example-section>
 
       <example-section title="Closable">
         <vk-button @click="toggleDrawer('closable')">
-          Open Closable
+          Closable
         </vk-button>
         <vk-drawer
           :is-open="drawerStates['closable']"
@@ -286,32 +447,52 @@ const toggleDrawer = (drawerId: string) => {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
           </template>
         </vk-drawer>
+
+        <template #code>
+          <code-block :code="closableCode" />
+        </template>
+      </example-section>
+
+      <example-section title="Flat">
+        <vk-button @click="toggleDrawer('flat')">
+          Flat
+        </vk-button>
+        <vk-drawer
+          :is-open="drawerStates['flat']"
+          title="Flat"
+          flat
+          @close="toggleDrawer('flat')"
+        >
+          <template #default>
+            Closable Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+          </template>
+        </vk-drawer>
+
+        <template #code>
+          <code-block :code="flatCode" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Drawer Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="drawerProps"
-          />
-        </example-section>
+      <h3>Drawer Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="drawerProps"
+      />
 
-        <example-section title="Drawer Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="drawerEmits"
-          />
-        </example-section>
+      <h3>Drawer Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="drawerEmits"
+      />
 
-        <example-section title="Drawer Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="drawerSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Drawer Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="drawerSlots"
+      />
     </template>
   </doc-section>
 </template>

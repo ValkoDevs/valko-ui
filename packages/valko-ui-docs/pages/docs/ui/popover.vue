@@ -99,6 +99,8 @@ const popoverStates = reactive({
 const togglePopover = (category: keyof Record<'placements' | 'shapes', boolean>, index: number) => {
   popoverStates[category][index] = !popoverStates[category][index]
 }
+
+const { generalCode } = useCodeBlock('vk-popover')
 </script>
 
 <template>
@@ -141,7 +143,10 @@ const togglePopover = (category: keyof Record<'placements' | 'shapes', boolean>,
     </template>
 
     <template #examples>
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-popover
           v-for="(shape, index) in shapeOptions.general"
           :key="shape.value"
@@ -154,9 +159,16 @@ const togglePopover = (category: keyof Record<'placements' | 'shapes', boolean>,
             {{ shape.label }}
           </vk-button>
         </vk-popover>
+
+        <template #code>
+          <code-block :code="generalCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Placement">
+      <example-section
+        title="Placement"
+        classes="grid-cols-2 md:grid-cols-4"
+      >
         <vk-popover
           v-for="(placement, index) in placementOptions"
           :key="placement.value"
@@ -169,32 +181,31 @@ const togglePopover = (category: keyof Record<'placements' | 'shapes', boolean>,
             {{ placement.label }}
           </vk-button>
         </vk-popover>
+
+        <template #code>
+          <code-block :code="generalCode('placement', placementOptions)" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Popover Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="popoverProps"
-          />
-        </example-section>
+      <h3>Popover Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="popoverProps"
+      />
 
-        <example-section title="Popover Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="popoverEmits"
-          />
-        </example-section>
+      <h3>Popover Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="popoverEmits"
+      />
 
-        <example-section title="Popover Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="popoverSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Popover Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="popoverSlots"
+      />
     </template>
   </doc-section>
 </template>

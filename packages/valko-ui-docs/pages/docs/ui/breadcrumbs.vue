@@ -170,6 +170,8 @@ const breadcrumbsEmits: TableItem[] = [
     type: 'Crumb => void'
   }
 ]
+
+const { generalCode } = useCodeBlock('vk-breadcrumbs')
 </script>
 
 <template>
@@ -225,68 +227,88 @@ const breadcrumbsEmits: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section title="Colors">
-        <div class="flex flex-wrap gap-4">
-          <div
-            v-for="color in colorOptions"
-            :key="color.value"
-            class="flex flex-col gap-1"
-          >
-            <span>{{ color.label }}</span>
-            <vk-breadcrumbs
-              :color="color.value"
-              :crumbs="crumbs"
-            />
-          </div>
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
+        <div
+          v-for="color in colorOptions"
+          :key="color.value"
+          class="flex flex-col gap-2 items-center justify-center"
+        >
+          <span>{{ color.label }}</span>
+          <vk-breadcrumbs
+            :color="color.value"
+            :crumbs="crumbs"
+          />
         </div>
+
+        <template #code>
+          <code-block :code="generalCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
-        <div class="grid grid-cols-2 gap-4">
-          <div
-            v-for="variant in variantOptions.withLink"
-            :key="variant.value"
-            class="flex flex-col gap-1"
-          >
-            <span>{{ variant.label }}</span>
-            <vk-breadcrumbs
-              :variant="variant.value"
-              :crumbs="crumbs"
-            />
-          </div>
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <div
+          v-for="variant in variantOptions.withLink"
+          :key="variant.value"
+          class="flex flex-col gap-2 items-center justify-center"
+        >
+          <span>{{ variant.label }}</span>
+          <vk-breadcrumbs
+            :variant="variant.value"
+            :crumbs="crumbs"
+          />
         </div>
+
+        <template #code>
+          <code-block :code="generalCode('variant', variantOptions.withLink)" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
-        <div class="flex flex-wrap gap-4">
-          <div
-            v-for="shape in shapeOptions.general"
-            :key="shape.value"
-            class="flex flex-col gap-1"
-          >
-            <span>{{ shape.label }}</span>
-            <vk-breadcrumbs
-              :shape="shape.value"
-              :crumbs="crumbs"
-            />
-          </div>
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
+        <div
+          v-for="shape in shapeOptions.general"
+          :key="shape.value"
+          class="flex flex-col gap-2 items-center justify-center"
+        >
+          <span>{{ shape.label }}</span>
+          <vk-breadcrumbs
+            :shape="shape.value"
+            :crumbs="crumbs"
+          />
         </div>
+
+        <template #code>
+          <code-block :code="generalCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
-        <div class="grid grid-cols-2 gap-4">
-          <div
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-            class="flex flex-col gap-1"
-          >
-            <span>{{ size.label }}</span>
-            <vk-breadcrumbs
-              :size="size.value"
-              :crumbs="crumbs"
-            />
-          </div>
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <div
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+          class="flex flex-col gap-2 items-center justify-center"
+        >
+          <span>{{ size.label }}</span>
+          <vk-breadcrumbs
+            :size="size.value"
+            :crumbs="crumbs"
+          />
         </div>
+
+        <template #code>
+          <code-block :code="generalCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
@@ -294,44 +316,47 @@ const breadcrumbsEmits: TableItem[] = [
           flat
           :crumbs="crumbs"
         />
+
+        <template #code>
+          <code-block code="<vk-breadcrumbs flat></vk-breadcrumbs>" />
+        </template>
       </example-section>
 
       <example-section title="Disabled Crumbs">
-        <vk-breadcrumbs
-          :crumbs="crumbsDisabled"
-        />
+        <vk-breadcrumbs :crumbs="crumbsDisabled" />
+
+        <template #code>
+          <code-block code="<vk-breadcrumbs crumbs=[{ key: 'home', title: 'Home', disabled: true  }]></vk-breadcrumbs>" />
+        </template>
       </example-section>
 
       <example-section title="Crumbs with icons">
-        <vk-breadcrumbs
-          :crumbs="crumbsIcons"
-        />
+        <vk-breadcrumbs :crumbs="crumbsIcons" />
+
+        <template #code>
+          <code-block code="<vk-breadcrumbs crumbs=[{ key: 'home', title: 'Home', leftIcon: 'home' }, { key: 'music', title: 'Music', rightIcon: 'file-music' }]></vk-breadcrumbs>" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Breadcrumbs Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="breadcrumbsProps"
-          />
-        </example-section>
+      <h3>Breadcrumbs Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="breadcrumbsProps"
+      />
 
-        <example-section title="Crumb Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="crumbInterface"
-          />
-        </example-section>
+      <h3>Crumb Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="crumbInterface"
+      />
 
-        <example-section title="Breadcrumbs Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="breadcrumbsEmits"
-          />
-        </example-section>
-      </div>
+      <h3>Breadcrumbs Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="breadcrumbsEmits"
+      />
     </template>
   </doc-section>
 </template>

@@ -162,6 +162,8 @@ const emitData: TableItem[] = [
     type: '(value: any) => void'
   }
 ]
+
+const { generalCode } = useCodeBlock('vk-select')
 </script>
 
 <template>
@@ -240,7 +242,10 @@ const emitData: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-select
           v-for="(color, index) in colorOptions"
           :key="color.value"
@@ -249,9 +254,16 @@ const emitData: TableItem[] = [
           :label="color.label"
           :options="people"
         />
+
+        <template #code>
+          <code-block :code="generalCode('color', colorOptions)"/>
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-select
           v-for="(variant, index) in variantOptions.general"
           :key="variant.value"
@@ -260,9 +272,16 @@ const emitData: TableItem[] = [
           :label="variant.label"
           :options="people"
         />
+
+        <template #code>
+          <code-block :code="generalCode('variant', variantOptions.general)"/>
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-select
           v-for="(shape, index) in shapeOptions.general"
           :key="shape.value"
@@ -271,9 +290,16 @@ const emitData: TableItem[] = [
           :label="shape.label"
           :options="people"
         />
+
+        <template #code>
+          <code-block :code="generalCode('shape', shapeOptions.general)"/>
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-select
           v-for="(size, index) in sizeOptions.general"
           :key="size.value"
@@ -282,6 +308,10 @@ const emitData: TableItem[] = [
           :label="size.label"
           :options="people"
         />
+
+        <template #code>
+          <code-block :code="generalCode('size', sizeOptions.general)"/>
+        </template>
       </example-section>
 
       <example-section title="Disabled">
@@ -289,6 +319,10 @@ const emitData: TableItem[] = [
           disabled
           label="Disabled"
         />
+
+        <template #code>
+          <code-block code="<vk-select disabled></vk-select>"/>
+        </template>
       </example-section>
 
       <example-section title="Readonly">
@@ -298,25 +332,25 @@ const emitData: TableItem[] = [
           :options="people"
           label="Readonly"
         />
+
+        <template #code>
+          <code-block code="<vk-select readonly></vk-select>"/>
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Select Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="apiData"
-          />
-        </example-section>
+      <h3>Select Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="apiData"
+      />
 
-        <example-section title="Select Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="emitData"
-          />
-        </example-section>
-      </div>
+      <h3>Select Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="emitData"
+      />
     </template>
   </doc-section>
 </template>

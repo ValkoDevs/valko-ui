@@ -125,6 +125,15 @@ const closeTag = () => isShown.value = false
 const onClick = () => useNotification({ text: 'Clickled' })
 
 watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true, 1000) })
+
+const { generalCode } = useCodeBlock('vk-tag')
+
+const iconsCode = `
+<vk-tag text="Without Icons"></vk-tag>
+<vk-tag text="Icon Left" icon-left="tag"></vk-tag>
+<vk-tag text="Icon Right" icon-right="tag"></vk-tag>
+<vk-tag text="Icons" icon-left="tag" icon-right="tag"></vk-tag>
+`
 </script>
 
 <template>
@@ -148,8 +157,8 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
           :shape="form.shape"
           :size="form.size"
           :text="form.text"
-          :icon-left="form.iconLeft ? 'tag' : ''"
-          :icon-right="form.iconRight ? 'tag' : ''"
+          :icon-left="iconsForm.left ? 'tag' : ''"
+          :icon-right="iconsForm.right ? 'tag' : ''"
           :closable="form.closable"
           :is-pressable="form.isPressable"
           :disabled="form.disabled"
@@ -212,43 +221,74 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <vk-tag
           v-for="color in colorOptions"
           :key="color.value"
           :color="color.value"
           :text="color.label"
         />
+
+        <template #code>
+          <code-block :code="generalCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-tag
           v-for="variant in variantOptions.withGradient"
           :key="variant.value"
           :variant="variant.value"
           :text="variant.label"
         />
+
+        <template #code>
+          <code-block :code="generalCode('variant', variantOptions.withGradient)" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-tag
           v-for="shape in shapeOptions.general"
           :key="shape.value"
           :shape="shape.value"
           :text="shape.label"
         />
+
+        <template #code>
+          <code-block :code="generalCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-tag
           v-for="size in sizeOptions.general"
           :key="size.value"
           :size="size.value"
           :text="size.label"
         />
+
+        <template #code>
+          <code-block :code="generalCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Icons">
+      <example-section
+        title="Icons"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-tag
           text="Without Icons"
         />
@@ -265,6 +305,10 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
           icon-left="tag"
           icon-right="tag"
         />
+
+        <template #code>
+          <code-block :code="iconsCode" />
+        </template>
       </example-section>
 
       <example-section title="Closable">
@@ -283,6 +327,10 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
             @close="closeTag"
           />
         </transition>
+
+        <template #code>
+          <code-block code="<vk-tag closable></vk-tag>" />
+        </template>
       </example-section>
 
       <example-section title="Pressable">
@@ -291,6 +339,10 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
           is-pressable
           @click="onClick"
         />
+
+        <template #code>
+          <code-block code="<vk-tag pressable @click=&quot;onClick&quot;></vk-tag>" />
+        </template>
       </example-section>
 
       <example-section title="Disabled">
@@ -298,25 +350,25 @@ watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true
           text="Disabled"
           disabled
         />
+
+        <template #code>
+          <code-block code="<vk-tag disabled></vk-tag>" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Tag Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="tagProps"
-          />
-        </example-section>
+      <h3>Tag Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="tagProps"
+      />
 
-        <example-section title="Tag Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="tagEmits"
-          />
-        </example-section>
-      </div>
+      <h3>Tag Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="tagEmits"
+      />
     </template>
   </doc-section>
 </template>

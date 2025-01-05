@@ -176,6 +176,8 @@ const onClick = (item: MenuItem) => {
   activeItem.value = item.key
 }
 
+const { generalCode } = useCodeBlock('vk-menu')
+
 onMounted(() => {
   // Initialize every menu with the first item active
   colorOptions.forEach((_, index) => {
@@ -284,7 +286,10 @@ onMounted(() => {
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-menu
           v-for="(color, index) in colorOptions"
           :key="`color-menu-${index}`"
@@ -293,9 +298,16 @@ onMounted(() => {
           :active="activeItemsList[`color-menu-${index}`]"
           @item-click="(item: MenuItem) => onItemClick(item, `color-menu-${index}`)"
         />
+
+        <template #code>
+          <code-block :code="generalCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-menu
           v-for="(variant, index) in variantOptions.withGradientLinkAndLine"
           :key="`variant-menu-${index}`"
@@ -304,9 +316,16 @@ onMounted(() => {
           :active="activeItemsList[`variant-menu-${index}`]"
           @item-click="(item: MenuItem) => onItemClick(item, `variant-menu-${index}`)"
         />
+
+        <template #code>
+          <code-block :code="generalCode('variant', variantOptions.withGradientLinkAndLine)" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-menu
           v-for="(shape, index) in shapeOptions.general"
           :key="`shape-menu-${index}`"
@@ -315,9 +334,16 @@ onMounted(() => {
           :active="activeItemsList[`shape-menu-${index}`]"
           @item-click="(item: MenuItem) => onItemClick(item, `shape-menu-${index}`)"
         />
+
+        <template #code>
+          <code-block :code="generalCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-menu
           v-for="(size, index) in sizeOptions.general"
           :key="`size-menu-${index}`"
@@ -326,6 +352,10 @@ onMounted(() => {
           :active="activeItemsList[`size-menu-${index}`]"
           @item-click="(item: MenuItem) => onItemClick(item, `size-menu-${index}`)"
         />
+
+        <template #code>
+          <code-block :code="generalCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
       <example-section title="Floating">
@@ -335,39 +365,37 @@ onMounted(() => {
           floating
           @item-click="onClick"
         />
+
+        <template #code>
+          <code-block code="<vk-menu floating></vk-menu>" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Menu Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="menuProps"
-          />
-        </example-section>
+      <h3>Menu Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="menuProps"
+      />
 
-        <example-section title="Menu Items Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="menuItemsInterface"
-          />
-        </example-section>
+      <h3>Menu Items Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="menuItemsInterface"
+      />
 
-        <example-section title="Menu Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="menuEmits"
-          />
-        </example-section>
+      <h3>Menu Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="menuEmits"
+      />
 
-        <example-section title="Menu Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="menuSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Menu Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="menuSlots"
+      />
     </template>
   </doc-section>
 </template>

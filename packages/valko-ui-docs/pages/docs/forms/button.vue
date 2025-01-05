@@ -100,6 +100,8 @@ const slotData: TableItem[] = [
 ]
 
 const onClick = () => useNotification({ text: 'Clicked' })
+
+const { slotCode } = useCodeBlock('vk-button')
 </script>
 
 <template>
@@ -172,7 +174,10 @@ const onClick = () => useNotification({ text: 'Clicked' })
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <vk-button
           v-for="color in colorOptions"
           :key="color.value"
@@ -180,9 +185,16 @@ const onClick = () => useNotification({ text: 'Clicked' })
         >
           {{ color.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="slotCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+      >
         <vk-button
           v-for="variant in variantOptions.withGradientAndLink"
           :key="variant.value"
@@ -190,9 +202,16 @@ const onClick = () => useNotification({ text: 'Clicked' })
         >
           {{ variant.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="slotCode('variant', variantOptions.withGradientAndLink)" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+      >
         <vk-button
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -200,9 +219,16 @@ const onClick = () => useNotification({ text: 'Clicked' })
         >
           {{ shape.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="slotCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-button
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -210,62 +236,81 @@ const onClick = () => useNotification({ text: 'Clicked' })
         >
           {{ size.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="slotCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
         <vk-button flat>
           Flat
         </vk-button>
+
+        <template #code>
+          <code-block code="<vk-button flat>Flat</vk-button>" />
+        </template>
       </example-section>
 
       <example-section title="Disabled">
         <vk-button disabled>
           Disabled
         </vk-button>
+
+        <template #code>
+          <code-block code="<vk-button disabled>Disabled</vk-button>" />
+        </template>
       </example-section>
 
       <example-section title="Condensed">
         <vk-button condensed>
           Condensed
         </vk-button>
+
+        <template #code>
+          <code-block code="<vk-button condensed>Condensed</vk-button>" />
+        </template>
       </example-section>
 
       <example-section title="Block">
         <vk-button block>
           Block
         </vk-button>
+
+        <template #code>
+          <code-block code="<vk-button block>Block</vk-button>" />
+        </template>
       </example-section>
 
       <example-section title="Loading">
         <vk-button loading>
           Loading
         </vk-button>
+
+        <template #code>
+          <code-block code="<vk-button loading>Loading</vk-button>" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Button Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="apiData"
-          />
-        </example-section>
+      <h3>Button Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="apiData"
+      />
 
-        <example-section title="Button Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="emitData"
-          />
-        </example-section>
+      <h3>Button Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="emitData"
+      />
 
-        <example-section title="Button Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="slotData"
-          />
-        </example-section>
-      </div>
+      <h3>Button Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="slotData"
+      />
     </template>
   </doc-section>
 </template>

@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { ModalProps, SelectOption, Backdrop, TableItem } from '#valkoui'
 
@@ -102,6 +103,119 @@ const modalSlots = [
     example: '<template #default>\n  <!-- Your main content goes here -->\n</template>'
   }
 ]
+
+const scriptCode = `
+<script setup lang="ts">
+const modalStates = reactive<Record<string, boolean>>({})
+
+const toggleModal = (modalId: string) => modalStates[modalId] = !modalStates[modalId]
+<\/script>
+`
+
+const shapeCode = `
+${scriptCode}
+<template>
+${shapeOptions.general.map(shape => `
+  <vk-button @click="toggleModal('${shape.value}')">
+    ${shape.label}
+  </vk-button>
+
+  <vk-modal
+    is-open="modalStates['${shape.value}']"
+    shape="${shape.value}"
+    @close="toggleModal('${shape.value}')"
+  >
+    Content goes here.
+  </vk-modal>`).join('\n')}
+
+</template>
+`
+
+const sizeCode = `
+${scriptCode}
+<template>
+${sizeOptions.general.map(size => `
+  <vk-button @click="toggleModal('${size.value}')">
+    ${size.label}
+  </vk-button>
+
+  <vk-modal
+    is-open="modalStates['${size.value}']"
+    size="${size.value}"
+    @close="toggleModal('${size.value}')"
+  >
+    Content goes here.
+  </vk-modal>`).join('\n')}
+
+</template>
+`
+
+const backdropCode = `
+${scriptCode}
+<template>
+${backdropOptions.map(backdrop => `
+  <vk-button @click="toggleModal('${backdrop.value}')">
+    ${backdrop.label}
+  </vk-button>
+
+  <vk-modal
+    is-open="modalStates['${backdrop.value}']"
+    backdrop="${backdrop.value}"
+    @close="toggleModal('${backdrop.value}')"
+  >
+    Content goes here.
+  </vk-modal>`).join('\n')}
+
+</template>
+`
+
+const closableCode = `
+<script setup lang="ts">
+const isOpen = ref(false)
+
+const toggleModal = () => isOpen = !isOpen
+<\/script>
+
+<template>
+
+  <vk-button @click="toggleModal">
+    Closable
+  </vk-button>
+
+  <vk-modal
+    is-open="isOpen"
+    closable
+    @close="toggleModal"
+  >
+    Content goes here.
+  </vk-modal>
+
+</template>
+`
+
+const flatCode = `
+<script setup lang="ts">
+const isOpen = ref(false)
+
+const toggleModal = () => isOpen = !isOpen
+<\/script>
+
+<template>
+
+  <vk-button @click="toggleModal">
+    Flat
+  </vk-button>
+
+  <vk-modal
+    is-open="isOpen"
+    Flat
+    @close="toggleModal"
+  >
+    Content goes here.
+  </vk-modal>
+
+</template>
+`
 </script>
 
 <template>
@@ -173,13 +287,16 @@ const modalSlots = [
     </template>
 
     <template #examples>
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <div
           v-for="(shape, index) in shapeOptions.general"
           :key="shape.value"
         >
           <vk-button @click="() => {exampleSectionForm['shapes'][index] = true}">
-            Open {{ shape.label }}
+            {{ shape.label }}
           </vk-button>
           <vk-modal
             :shape="shape.value"
@@ -193,15 +310,22 @@ const modalSlots = [
             </template>
           </vk-modal>
         </div>
+
+        <template #code>
+          <code-block :code="shapeCode" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <div
           v-for="(size, index) in sizeOptions.withFull"
           :key="size.value"
         >
           <vk-button @click="() => {exampleSectionForm['sizes'][index] = true}">
-            Open {{ size.label }}
+            {{ size.label }}
           </vk-button>
           <vk-modal
             :size="size.value"
@@ -215,18 +339,22 @@ const modalSlots = [
             </template>
           </vk-modal>
         </div>
+
+        <template #code>
+          <code-block :code="sizeCode" />
+        </template>
       </example-section>
 
       <example-section
         title="Backdrops"
-        gap
+        classes="grid-cols-2 md:grid-cols-3"
       >
         <div
           v-for="(backdrop, index) in backdropOptions"
           :key="backdrop.value"
         >
           <vk-button @click="() => {exampleSectionForm['backdrop'][index] = true}">
-            Open {{ backdrop.label }}
+            {{ backdrop.label }}
           </vk-button>
           <vk-modal
             :backdrop="backdrop.value"
@@ -240,11 +368,13 @@ const modalSlots = [
             </template>
           </vk-modal>
         </div>
+
+        <template #code>
+          <code-block :code="backdropCode" />
+        </template>
       </example-section>
 
-      <example-section
-        title="Flat"
-      >
+      <example-section title="Flat">
         <vk-button @click="() => {exampleSectionForm['flat'] = true}">
           Flat
         </vk-button>
@@ -258,11 +388,13 @@ const modalSlots = [
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
           </template>
         </vk-modal>
+
+        <template #code>
+          <code-block :code="flatCode" />
+        </template>
       </example-section>
 
-      <example-section
-        title="Closable"
-      >
+      <example-section title="Closable">
         <vk-button @click="() => {exampleSectionForm['closable'] = true}">
           Closable
         </vk-button>
@@ -286,32 +418,31 @@ const modalSlots = [
             </vk-button>
           </template>
         </vk-modal>
+
+        <template #code>
+          <code-block :code="closableCode" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Modal Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="modalProps"
-          />
-        </example-section>
+      <h3>Modal Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="modalProps"
+      />
 
-        <example-section title="Modal Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="modalEmits"
-          />
-        </example-section>
+      <h3>Modal Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="modalEmits"
+      />
 
-        <example-section title="Modal Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="modalSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Modal Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="modalSlots"
+      />
     </template>
   </doc-section>
 </template>

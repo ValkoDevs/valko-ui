@@ -76,6 +76,8 @@ const avatarProps: TableItem[] = [
 ]
 
 const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
+
+const { generalCode, twoPropsCode } = useCodeBlock('vk-avatar')
 </script>
 
 <template>
@@ -131,102 +133,145 @@ const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <div
           v-for="color in colorOptions"
           :key="color.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 justify-center items-center md:items-start md:justify-start"
         >
-          <span class="mb-1">{{ color.label }}</span>
+          <span>{{ color.label }}</span>
           <vk-avatar
             :color="color.value"
           />
         </div>
+
+        <template #code>
+          <code-block :code="generalCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Colors with Initials">
+      <example-section
+        title="Colors with Initials"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <div
           v-for="color in colorOptions"
           :key="color.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 justify-center items-center md:items-start md:justify-start"
         >
-          <span class="mb-1">{{ color.label }}</span>
+          <span>{{ color.label }}</span>
           <vk-avatar
             :name="form.name"
             :color="color.value"
           />
         </div>
+
+        <template #code>
+          <code-block :code="twoPropsCode('color', colorOptions, `name=&quot;Name Here&quot;`)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <div
           v-for="variant in variantOptions.withGradient"
           :key="variant.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 justify-center items-center md:items-start md:justify-start"
         >
-          <span class="mb-1">{{ variant.label }}</span>
+          <span>{{ variant.label }}</span>
           <vk-avatar
             :variant="variant.value"
           />
         </div>
+
+        <template #code>
+          <code-block :code="generalCode('variant', variantOptions.withGradient)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants with Avatars">
+      <example-section
+        title="Variants with Avatars"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <div
           v-for="variant in variantOptions.withGradient"
           :key="variant.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 justify-center items-center md:items-start md:justify-start"
         >
-          <span class="mb-1">{{ variant.label }}</span>
+          <span>{{ variant.label }}</span>
           <vk-avatar
             :src="avatarSrc"
             :variant="variant.value"
           />
         </div>
+
+        <template #code>
+          <code-block :code="twoPropsCode('variant', variantOptions.withGradient, `src=&quot;Img source&quot;`)" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 justify-center items-center md:items-start md:justify-start"
         >
-          <span class="mb-1">{{ shape.label }}</span>
+          <span>{{ shape.label }}</span>
           <vk-avatar
             :shape="shape.value"
           />
         </div>
+
+        <template #code>
+          <code-block :code="generalCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 justify-center items-center md:items-start md:justify-start"
         >
-          <span class="mb-1">{{ size.label }}</span>
+          <span>{{ size.label }}</span>
           <vk-avatar
             :size="size.value"
           />
         </div>
+
+        <template #code>
+          <code-block :code="generalCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
         <vk-avatar
           flat
         />
+
+        <template #code>
+          <code-block code="<vk-avatar flat></vk-avatar>" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Avatar Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="avatarProps"
-          />
-        </example-section>
-      </div>
+      <h3>Avatar Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="avatarProps"
+      />
     </template>
   </doc-section>
 </template>

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useStyle } from '@valko-ui/components'
 import type { ExampleSectionProps } from './interfaces'
+import type { Tab } from '#valkoui'
 import styles from './ExampleSection.styles'
 
 defineOptions({ name: 'ExampleSection' })
@@ -10,16 +11,35 @@ const props = withDefaults(defineProps<ExampleSectionProps>(), {
   classes: ''
 })
 
+const tabs: Tab[] = [
+  { key: 'examples', title: 'Examples' },
+  { key: 'code', title: 'Code' }
+]
+
 const parsedStyles = useStyle<ExampleSectionProps>(props, styles)
 </script>
 
 <template>
   <section class="w-full mt-10">
-    <h3 class="text-xl mb-4">
+    <h3 class="text-xl pl-3 pt-3 bg-light-3 dark:bg-dark-3 rounded-t-lg">
       {{ props.title }}
     </h3>
-    <div :class="classes + ' ' + parsedStyles">
-      <slot />
-    </div>
+    <vk-tabs
+      :tabs="tabs"
+      shape="line"
+      grow
+    >
+      <template #examples>
+        <div :class="`${parsedStyles} ${classes}`">
+          <slot />
+        </div>
+      </template>
+
+      <template #code>
+        <div class="p-4 bg-light-4 dark:bg-dark-5/[.5] rounded-b-lg">
+          <slot name="code" />
+        </div>
+      </template>
+    </vk-tabs>
   </section>
 </template>

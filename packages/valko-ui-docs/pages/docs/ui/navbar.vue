@@ -8,7 +8,8 @@ const form = ref<NavbarProps>({
   size: 'md',
   floating: false,
   fixed: false,
-  flat: false
+  flat: false,
+  vertical: false
 })
 
 const navbarProps: TableItem[] = [
@@ -67,6 +68,14 @@ const navbarProps: TableItem[] = [
     description: 'Determines if the Navbar is floating.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'verticalProp',
+    prop: 'vertical',
+    required: false,
+    description: 'Determines if the Navbar is vertical or not.',
+    values: 'true, false',
+    default: 'false'
   }
 ]
 
@@ -78,6 +87,8 @@ const navbarSlots: TableItem[] = [
     example: '<template #default>\n  <p>This is the main content of the Navbar.</p>\n</template>'
   }
 ]
+
+const { generalCode } = useCodeBlock('vk-navbar')
 </script>
 
 <template>
@@ -94,6 +105,7 @@ const navbarSlots: TableItem[] = [
         :floating="form.floating"
         :fixed="form.fixed"
         :flat="form.flat"
+        :vertical="form.vertical"
       >
         <vk-icon
           name="brand-vite"
@@ -139,10 +151,17 @@ const navbarSlots: TableItem[] = [
         v-model="form.flat"
         label="Flat"
       />
+      <vk-checkbox
+        v-model="form.vertical"
+        label="Vertical"
+      />
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-navbar
           v-for="color in colorOptions"
           :key="color.value"
@@ -154,9 +173,16 @@ const navbarSlots: TableItem[] = [
           />
           <span class="font-semibold ml-4">{{ color.label }}</span>
         </vk-navbar>
+
+        <template #code>
+          <code-block :code="generalCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2"
+      >
         <vk-navbar
           v-for="variant in variantOptions.withGradient"
           :key="variant.value"
@@ -168,9 +194,16 @@ const navbarSlots: TableItem[] = [
           />
           <span class="font-semibold ml-4">{{ variant.label }}</span>
         </vk-navbar>
+
+        <template #code>
+          <code-block :code="generalCode('variant', variantOptions.withGradient)" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-navbar
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -183,9 +216,16 @@ const navbarSlots: TableItem[] = [
           />
           <span class="font-semibold ml-4">{{ shape.label }}</span>
         </vk-navbar>
+
+        <template #code>
+          <code-block :code="generalCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2"
+      >
         <vk-navbar
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -198,6 +238,10 @@ const navbarSlots: TableItem[] = [
           />
           <span class="font-semibold ml-4">{{ size.label }}</span>
         </vk-navbar>
+
+        <template #code>
+          <code-block :code="generalCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
       <example-section title="Floating">
@@ -211,6 +255,10 @@ const navbarSlots: TableItem[] = [
           />
           <span class="font-semibold ml-4">Floating</span>
         </vk-navbar>
+
+        <template #code>
+          <code-block code="<vk-navbar floating></vk-navbar>" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
@@ -224,6 +272,10 @@ const navbarSlots: TableItem[] = [
           />
           <span class="font-semibold ml-4">Flat</span>
         </vk-navbar>
+
+        <template #code>
+          <code-block code="<vk-navbar flat></vk-navbar>" />
+        </template>
       </example-section>
 
       <example-section title="Fixed">
@@ -239,25 +291,44 @@ const navbarSlots: TableItem[] = [
             <span class="font-semibold ml-4">Fixed</span>
           </vk-navbar>
         </div>
+
+        <template #code>
+          <code-block code="<vk-navbar fixed></vk-navbar>" />
+        </template>
+      </example-section>
+
+      <example-section title="Vertical">
+        <div class="h-56">
+          <vk-navbar
+            vertical
+          >
+            <vk-icon
+              name="brand-vite"
+              size="md"
+              class="text-white"
+            />
+            <span class="font-semibold ml-4">Vertical</span>
+          </vk-navbar>
+        </div>
+
+        <template #code>
+          <code-block code="<vk-navbar vertical></vk-navbar>" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Navbar Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="navbarProps"
-          />
-        </example-section>
+      <h3>Navbar Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="navbarProps"
+      />
 
-        <example-section title="Navbar Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="navbarSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Navbar Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="navbarSlots"
+      />
     </template>
   </doc-section>
 </template>

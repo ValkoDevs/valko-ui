@@ -106,6 +106,8 @@ const badgeSlots: TableItem[] = [
     example: '<template #default>\n  <!-- Your custom content goes here -->\n</template>'
   }
 ]
+
+const { generalCode, twoPropsCode } = useCodeBlock('vk-badge')
 </script>
 
 <template>
@@ -185,13 +187,16 @@ const badgeSlots: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <div
           v-for="color in colorOptions"
           :key="color.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
-          <span class="mb-2">{{ color.label }}</span>
+          <span>{{ color.label }}</span>
           <vk-badge
             :color="color.value"
             content="new"
@@ -202,15 +207,22 @@ const badgeSlots: TableItem[] = [
             />
           </vk-badge>
         </div>
+
+        <template #code>
+          <code-block :code="generalCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
-          <span class="mb-2">{{ shape.label }}</span>
+          <span>{{ shape.label }}</span>
           <vk-badge
             :shape="shape.value"
             content="new"
@@ -221,15 +233,22 @@ const badgeSlots: TableItem[] = [
             />
           </vk-badge>
         </div>
+
+        <template #code>
+          <code-block :code="generalCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
-          <span class="mb-2">{{ size.label }}</span>
+          <span>{{ size.label }}</span>
           <vk-badge
             :size="size.value"
             content="new"
@@ -240,15 +259,22 @@ const badgeSlots: TableItem[] = [
             />
           </vk-badge>
         </div>
+
+        <template #code>
+          <code-block :code="generalCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Placements">
+      <example-section
+        title="Placements"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <div
           v-for="placement in placementOptions"
           :key="placement.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
-          <span class="mb-2">{{ placement.label }}</span>
+          <span>{{ placement.label }}</span>
           <vk-badge
             :placement="placement.value"
             content="new"
@@ -259,6 +285,10 @@ const badgeSlots: TableItem[] = [
             />
           </vk-badge>
         </div>
+
+        <template #code>
+          <code-block :code="generalCode('placement', placementOptions)" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
@@ -271,6 +301,10 @@ const badgeSlots: TableItem[] = [
             color="neutral"
           />
         </vk-badge>
+
+        <template #code>
+          <code-block code="<vk-badge flat></vk-badge>" />
+        </template>
       </example-section>
 
       <example-section title="Outlined">
@@ -283,15 +317,22 @@ const badgeSlots: TableItem[] = [
             color="neutral"
           />
         </vk-badge>
+
+        <template #code>
+          <code-block code="<vk-badge outlined></vk-badge>" />
+        </template>
       </example-section>
 
-      <example-section title="Dot">
+      <example-section
+        title="Dot"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
-          <span class="mb-2">{{ size.label }}</span>
+          <span>{{ size.label }}</span>
           <vk-badge
             :size="size.value"
             dot
@@ -302,6 +343,10 @@ const badgeSlots: TableItem[] = [
             />
           </vk-badge>
         </div>
+
+        <template #code>
+          <code-block :code="twoPropsCode('size', sizeOptions.general, 'dot')" />
+        </template>
       </example-section>
 
       <example-section title="Hidden">
@@ -313,25 +358,25 @@ const badgeSlots: TableItem[] = [
             color="neutral"
           />
         </vk-badge>
+
+        <template #code>
+          <code-block code="<vk-badge hidden></vk-badge>" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Badge Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="badgeProps"
-          />
-        </example-section>
+      <h3>Badge Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="badgeProps"
+      />
 
-        <example-section title="Badge Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="badgeSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Badge Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="badgeSlots"
+      />
     </template>
   </doc-section>
 </template>

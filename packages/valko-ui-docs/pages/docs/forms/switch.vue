@@ -112,6 +112,8 @@ const emitData: TableItem[] = [
     type: '(value: boolean) => void'
   }
 ]
+
+const { generalCode } = useCodeBlock('vk-switch')
 </script>
 
 <template>
@@ -185,7 +187,10 @@ const emitData: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <vk-switch
           v-for="(color, index) in colorOptions"
           :key="color.value"
@@ -193,9 +198,16 @@ const emitData: TableItem[] = [
           :color="color.value"
           :label="color.label"
         />
+
+        <template #code>
+          <code-block :code="generalCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-switch
           v-for="(variant, index) in variantOptions.general"
           :key="variant.value"
@@ -203,9 +215,16 @@ const emitData: TableItem[] = [
           :variant="variant.value"
           :label="variant.label"
         />
+
+        <template #code>
+          <code-block :code="generalCode('variant', variantOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Shape">
+      <example-section
+        title="Shape"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-switch
           v-for="(shape, index) in shapeOptions.general"
           :key="shape.value"
@@ -213,9 +232,16 @@ const emitData: TableItem[] = [
           :shape="shape.value"
           :label="shape.label"
         />
+
+        <template #code>
+          <code-block :code="generalCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Size">
+      <example-section
+        title="Size"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-switch
           v-for="(size, index) in sizeOptions.general"
           :key="size.value"
@@ -223,10 +249,18 @@ const emitData: TableItem[] = [
           :size="size.value"
           :label="size.label"
         />
+
+        <template #code>
+          <code-block :code="generalCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
       <example-section title="Disabled">
         <vk-switch disabled />
+
+        <template #code>
+          <code-block code="<vk-switch disabled></vk-switch>" />
+        </template>
       </example-section>
 
       <example-section title="Readonly">
@@ -234,9 +268,16 @@ const emitData: TableItem[] = [
           v-model="exampleSectionForm['readonly']"
           readonly
         />
+
+        <template #code>
+          <code-block code="<vk-switch readonly></vk-switch>" />
+        </template>
       </example-section>
 
-      <example-section title="Position">
+      <example-section
+        title="Position"
+        classes="grid-cols-2"
+      >
         <vk-switch
           v-for="(pos, index) in position"
           :key="pos.value"
@@ -244,25 +285,25 @@ const emitData: TableItem[] = [
           :label-position="pos.value"
           :label="pos.label"
         />
+
+        <template #code>
+          <code-block :code="generalCode('label-position', position)" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Switch Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="apiData"
-          />
-        </example-section>
+      <h3>Switch Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="apiData"
+      />
 
-        <example-section title="Switch Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="emitData"
-          />
-        </example-section>
-      </div>
+      <h3>Switch Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="emitData"
+      />
     </template>
   </doc-section>
 </template>

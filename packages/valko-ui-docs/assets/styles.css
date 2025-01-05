@@ -1,2 +1,160 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+code.hljs {
+  padding: 3px 5px
+}
+.hljs {
+  background: #fff;
+  color: #000
+}
+.language-xml .hljs-meta,
+.language-xml .hljs-meta-string {
+  font-weight: bold;
+  font-style: italic;
+  color: #48b
+}
+.hljs-comment,
+.hljs-quote {
+  font-style: italic;
+  color: #070
+}
+.hljs-name,
+.hljs-keyword,
+.hljs-built_in {
+  color: theme('colors.primary.700')
+}
+.hljs-name {
+  font-weight: bold
+}
+.hljs-string {
+  font-weight: normal
+}
+.hljs-code,
+.hljs-string,
+.hljs-meta .hljs-string,
+.hljs-number,
+.hljs-regexp,
+.hljs-link {
+  color: theme('colors.info.900')
+}
+.hljs-title,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-variable,
+.hljs-template-variable {
+  color: #f40
+}
+.hljs-title.class_,
+.hljs-class .hljs-title,
+.hljs-type {
+  font-weight: bold;
+  color: #639
+}
+.hljs-title.function_,
+.hljs-function .hljs-title,
+.hljs-attr,
+.hljs-subst,
+.hljs-tag {
+  color: theme('colors.error.700')
+}
+.hljs-formula {
+  background-color: #eee;
+  font-style: italic
+}
+.hljs-addition {
+  background-color: #beb
+}
+.hljs-deletion {
+  background-color: #fbb
+}
+.hljs-meta {
+  color: #269
+}
+.hljs-section,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-selector-pseudo,
+.hljs-selector-tag {
+  font-weight: bold;
+  color: #48b
+}
+.hljs-selector-pseudo {
+  font-style: italic
+}
+.hljs-doctag,
+.hljs-strong {
+  font-weight: bold
+}
+.hljs-emphasis {
+  font-style: italic
+}
+html.dark .hljs {
+  background: #333;
+  color: #fff
+}
+html.dark .language-xml .hljs-meta,
+.language-xml .hljs-meta-string {
+  color: #69f
+}
+html.dark .hljs-comment,
+html.dark .hljs-quote {
+  color: #9c6
+}
+html.dark .hljs-name,
+html.dark .hljs-keyword,
+html.dark .hljs-built_in {
+  color: theme('colors.primary.500')
+}
+
+html.dark .hljs-code,
+html.dark .hljs-string,
+html.dark .hljs-meta .hljs-string,
+html.dark .hljs-number,
+html.dark .hljs-regexp,
+html.dark .hljs-link {
+  color: theme('colors.info.400')
+}
+html.dark .hljs-title,
+html.dark .hljs-symbol,
+html.dark .hljs-bullet,
+html.dark .hljs-variable,
+html.dark .hljs-template-variable {
+  color: #d40
+}
+html.dark .hljs-title.class_,
+html.dark .hljs-class .hljs-title,
+html.dark .hljs-type {
+  color: #96c
+}
+html.dark .hljs-title.function_,
+html.dark .hljs-function .hljs-title,
+html.dark .hljs-attr,
+html.dark .hljs-subst,
+html.dark .hljs-tag {
+  color: theme('colors.error.400')
+}
+html.dark .hljs-formula {
+  background-color: #eee;
+}
+html.dark .hljs-addition {
+  background-color: #797
+}
+html.dark .hljs-deletion {
+  background-color: #c99
+}
+html.dark .hljs-meta {
+  color: #69f
+}
+html.dark .hljs-section,
+html.dark .hljs-selector-id,
+html.dark .hljs-selector-class,
+html.dark .hljs-selector-pseudo,
+html.dark .hljs-selector-tag {
+  color: #69f
+}

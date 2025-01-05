@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TableItem, DatepickerProps, SelectOption } from '#valkoui'
 
@@ -434,6 +435,14 @@ const datePickerStates = reactive({
   sizes: Array(sizeOptions.general.length).fill(false),
   disableWeekends: false
 })
+
+const { pickersCode } = useCodeBlock('vk-datepicker')
+
+const scriptCode = `
+<script setup lang="ts">
+const [ model, parsedModel, adapter ] = useDateAdapter({ format: YYYY-MM-DD })
+<\/script>
+`
 </script>
 
 <template>
@@ -507,7 +516,10 @@ const datePickerStates = reactive({
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <vk-datepicker
           v-for="(color, index) in colorOptions"
           :key="color.value"
@@ -521,9 +533,18 @@ const datePickerStates = reactive({
           @open="() => datePickerStates['colors'][index] = true"
           @close="() => datePickerStates['colors'][index] = false"
         />
+
+        <template #code>
+          <code-block
+            :code="`${scriptCode}\n${pickersCode('color', colorOptions)}`"
+          />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-datepicker
           v-for="(variant, index) in variantOptions.general"
           :key="variant.value"
@@ -537,9 +558,18 @@ const datePickerStates = reactive({
           @open="() => datePickerStates['variants'][index] = true"
           @close="() => datePickerStates['variants'][index] = false"
         />
+
+        <template #code>
+          <code-block
+            :code="`${scriptCode}\n${pickersCode('variant', variantOptions.general)}`"
+          />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-datepicker
           v-for="(shape, index) in shapeOptions.general"
           :key="shape.value"
@@ -553,9 +583,18 @@ const datePickerStates = reactive({
           @open="() => datePickerStates['shapes'][index] = true"
           @close="() => datePickerStates['shapes'][index] = false"
         />
+
+        <template #code>
+          <code-block
+            :code="`${scriptCode}\n${pickersCode('shape', shapeOptions.general)}`"
+          />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-datepicker
           v-for="(size, index) in sizeOptions.general"
           :key="size.value"
@@ -569,12 +608,18 @@ const datePickerStates = reactive({
           @open="() => datePickerStates['sizes'][index] = true"
           @close="() => datePickerStates['sizes'][index] = false"
         />
+
+        <template #code>
+          <code-block
+            :code="`${scriptCode}\n${pickersCode('size', sizeOptions.general)}`"
+          />
+        </template>
       </example-section>
 
       <example-section title="Disable Weekends">
         <vk-datepicker
           v-model="model"
-          label="Disabled Weekends"
+          label="Disable Weekends"
           :adapter="adapter"
           :parsed-model="parsedModel"
           disable-weekends
@@ -582,67 +627,63 @@ const datePickerStates = reactive({
           @open="() => datePickerStates['disableWeekends'] = true"
           @close="() => datePickerStates['disableWeekends'] = false"
         />
+
+        <template #code>
+          <code-block
+            :code="`${scriptCode}\n<vk-datepicker v-model=&quot;model&quot; :adapter=&quot;adapter&quot; :parsedModel=&quot;parsedModel&quot; disable-weekends>`"
+          />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Datepicker Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="datepickerProps"
-          />
-        </example-section>
+      <h3>Datepicker Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="datepickerProps"
+      />
 
-        <example-section title="Datepicker Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="datepickerEmits"
-          />
-        </example-section>
+      <h3>Datepicker Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="datepickerEmits"
+      />
 
-        <example-section title="Calendar Adapter Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="calendarAdapterProps"
-          />
-        </example-section>
+      <h3>Calendar Adapter Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="calendarAdapterProps"
+      />
 
-        <example-section title="Adapter Result Type">
-          <vk-table
-            :headers="propHeaders"
-            :data="adapterResultProps"
-          />
-        </example-section>
+      <h3>Adapter Result Type</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="adapterResultProps"
+      />
 
-        <example-section title="FormattedDates Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="formattedDatesProps"
-          />
-        </example-section>
+      <h3>FormattedDates Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="formattedDatesProps"
+      />
 
-        <example-section title="FormattedDate Type">
-          <vk-table
-            :headers="propHeaders"
-            :data="formattedDateProps"
-          />
-        </example-section>
+      <h3>FormattedDate Type</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="formattedDateProps"
+      />
 
-        <example-section title="DayOfWeek Type">
-          <vk-table
-            :headers="propHeaders"
-            :data="dayOfWeekProp"
-          />
-        </example-section>
+      <h3>DayOfWeek Type</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="dayOfWeekProp"
+      />
 
-        <example-section title="Available Formats">
-          <vk-table
-            :headers="propHeaders"
-            :data="formats"
-          />
-        </example-section>
-      </div>
+      <h3>Available Formats</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="formats"
+      />
     </template>
   </doc-section>
 </template>

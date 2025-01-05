@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TableItem, TableProps } from '#valkoui'
 
@@ -115,7 +116,6 @@ const tableHeader: TableItem[] = [
   }
 ]
 
-
 const emitData: TableItem[] = [
   {
     key: 'onRowClickEmit',
@@ -135,7 +135,7 @@ const slotData: TableItem[] = [
   },
   {
     key: 'cellSlot',
-    name: 'cell-${field}-${item.key}',
+    name: 'cell-${field}',
     description: 'Slot that displays by default the item field value.',
     example: '<template #cell-prop-propKey>\n  <p>Data</p>\n</template>'
   },
@@ -146,6 +146,89 @@ const slotData: TableItem[] = [
     example: '<template #no-data-message>\n  <p>No items found.</p>\n</template>'
   }
 ]
+
+const scriptCode = `
+<script setup lang="ts">
+import type { TableItem, TableHeader } from '#valkoui'
+
+const headers: TableHeader[] = [
+  {
+    key: 'prop',
+    field: 'prop',
+    label: 'Property'
+  },
+  {
+    key: 'required',
+    field: 'required',
+    label: 'Required'
+  },
+  {
+    key: 'description',
+    field: 'description',
+    label: 'Description'
+  },
+  {
+    key: 'values',
+    field: 'values',
+    label: 'Values'
+  },
+  {
+    key: 'default',
+    field: 'default',
+    label: 'Default'
+  }
+]
+
+const data: TableItem[] = [
+  {
+    key: 'headerKey',
+    prop: 'key',
+    required: true,
+    description: 'The unique identifier for the column.',
+    values: 'string'
+  },
+  {
+    key: 'headerLabel',
+    prop: 'label',
+    required: true,
+    description: 'The label to display for the column header.',
+    values: 'string'
+  },
+  {
+    key: 'headerField',
+    prop: 'field',
+    required: true,
+    description: 'The property of TableItem that this column should display.',
+    values: 'keyof TableItem'
+  },
+  {
+    key: 'headerSort',
+    prop: 'sortable',
+    required: false,
+    description: 'Specifies whether the column is sortable.',
+    values: 'false, true',
+    default: 'false'
+  },
+  {
+    key: 'headerFilter',
+    prop: 'filterable',
+    required: false,
+    description: 'Specifies whether the column is filterable.',
+    values: 'false, true',
+    default: 'false'
+  },
+  {
+    key: 'headerClass',
+    prop: 'class',
+    required: false,
+    description: 'Additional classes for the column.',
+    values: 'string'
+  }
+]
+<\/script>
+`
+
+const { twoPropsCode } = useCodeBlock('vk-table')
 </script>
 
 <template>
@@ -190,100 +273,111 @@ const slotData: TableItem[] = [
 
     <template #examples>
       <example-section title="Variants">
-        <div class="grid grid-cols-2 gap-4">
-          <div
-            v-for="variant in variantOptions.general"
-            :key="variant.value"
-          >
-            <span>
-              {{ variant.label }}
-            </span>
-            <vk-table
-              :variant="variant.value"
-              :headers="propHeaders"
-              :data="tableHeader"
-              class="mt-4"
-            />
-          </div>
+        <div
+          v-for="variant in variantOptions.general"
+          :key="variant.value"
+        >
+          <span>
+            {{ variant.label }}
+          </span>
+          <vk-table
+            :variant="variant.value"
+            :headers="propHeaders"
+            :data="tableHeader"
+            class="mt-4"
+          />
         </div>
+
+        <template #code>
+          <code-block
+            :code="scriptCode"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n${twoPropsCode('variant', variantOptions.general, ':headers=&quot;headers&quot; :data=&quot;data&quot;')}\n</template>`" />
+        </template>
       </example-section>
 
       <example-section title="Shapes">
-        <div class="grid grid-cols-2 gap-4">
-          <div
-            v-for="shape in shapeOptions.general"
-            :key="shape.value"
-          >
-            <span>
-              {{ shape.label }}
-            </span>
-            <vk-table
-              :shape="shape.value"
-              :headers="propHeaders"
-              :data="tableHeader"
-              class="mt-4"
-            />
-          </div>
+        <div
+          v-for="shape in shapeOptions.general"
+          :key="shape.value"
+        >
+          <span>
+            {{ shape.label }}
+          </span>
+          <vk-table
+            :shape="shape.value"
+            :headers="propHeaders"
+            :data="tableHeader"
+            class="mt-4"
+          />
         </div>
+
+        <template #code>
+          <code-block
+            :code="scriptCode"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n${twoPropsCode('shape', shapeOptions.general, ':headers=&quot;headers&quot; :data=&quot;data&quot;')}\n</template>`" />
+        </template>
       </example-section>
 
       <example-section title="Sizes">
-        <div class="grid grid-cols-2 gap-4">
-          <div
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-          >
-            <span>
-              {{ size.label }}
-            </span>
-            <vk-table
-              :size="size.value"
-              :headers="propHeaders"
-              :data="tableHeader"
-              class="mt-4"
-            />
-          </div>
+        <div
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+        >
+          <span>
+            {{ size.label }}
+          </span>
+          <vk-table
+            :size="size.value"
+            :headers="propHeaders"
+            :data="tableHeader"
+            class="mt-4"
+          />
         </div>
+
+        <template #code>
+          <code-block
+            :code="scriptCode"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n${twoPropsCode('size', sizeOptions.general, ':headers=&quot;headers&quot; :data=&quot;data&quot;')}\n</template>`" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Table Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="tableProps"
-          />
-        </example-section>
+      <h3>Table Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="tableProps"
+      />
 
-        <example-section title="Table Item Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="tableItem"
-          />
-        </example-section>
+      <h3>Table Item Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="tableItem"
+      />
 
-        <example-section title="Table Header Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="tableHeader"
-          />
-        </example-section>
+      <h3>Table Header Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="tableHeader"
+      />
 
-        <example-section title="Table Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="emitData"
-          />
-        </example-section>
+      <h3>Table Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="emitData"
+      />
 
-        <example-section title="Table Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="slotData"
-          />
-        </example-section>
-      </div>
+      <h3>Table Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="slotData"
+      />
     </template>
   </doc-section>
 </template>

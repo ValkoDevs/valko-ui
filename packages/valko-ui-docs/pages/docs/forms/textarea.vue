@@ -98,6 +98,8 @@ const emitData: TableItem [] = [
     type: '(value: string) => void'
   }
 ]
+
+const { generalCode } = useCodeBlock('vk-textarea')
 </script>
 
 <template>
@@ -174,7 +176,7 @@ const emitData: TableItem [] = [
     <template #examples>
       <example-section
         title="Colors"
-        classes="md:flex-col"
+        classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-textarea
           v-for="color in colorOptions"
@@ -182,33 +184,58 @@ const emitData: TableItem [] = [
           :color="color.value"
           :label="color.label"
         />
+
+        <template #code>
+          <code-block :code="generalCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-textarea
           v-for="variant in variantOptions.general"
           :key="variant.value"
           :variant="variant.value"
           :label="variant.label"
         />
+
+        <template #code>
+          <code-block :code="generalCode('variant', variantOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-textarea
           v-for="shape in shapeOptions.general"
           :key="shape.value"
           :shape="shape.value"
           :label="shape.label"
         />
+
+        <template #code>
+          <code-block :code="generalCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-textarea
           v-for="size in sizeOptions.general"
           :key="size.value"
           :size="size.value"
           :label="size.label"
         />
+
+        <template #code>
+          <code-block :code="generalCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
       <example-section title="Disabled">
@@ -216,6 +243,10 @@ const emitData: TableItem [] = [
           disabled
           label="Disabled"
         />
+
+        <template #code>
+          <code-block code="<vk-textarea disabled></vk-textarea>" />
+        </template>
       </example-section>
 
       <example-section title="Readonly">
@@ -224,25 +255,25 @@ const emitData: TableItem [] = [
           label="Readonly"
           model-value="Readonly Example"
         />
+
+        <template #code>
+          <code-block code="<vk-textarea readonly></vk-textarea>" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Textarea Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="apiData"
-          />
-        </example-section>
+      <h3>Textarea Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="apiData"
+      />
 
-        <example-section title="Textarea Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="emitData"
-          />
-        </example-section>
-      </div>
+      <h3>Textarea Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="emitData"
+      />
     </template>
   </doc-section>
 </template>

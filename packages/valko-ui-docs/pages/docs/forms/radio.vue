@@ -133,6 +133,8 @@ const radios = [
   { label: 'Radio-2', value: 'radio-2' },
   { label: 'Radio-3', value: 'radio-3' }
 ]
+
+const { generalCode } = useCodeBlock('vk-radio')
 </script>
 
 <template>
@@ -208,7 +210,10 @@ const radios = [
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <vk-radio
           v-for="color in colorOptions"
           :key="color.value"
@@ -218,9 +223,16 @@ const radios = [
           :label="color.label"
           :value="color.value"
         />
+
+        <template #code>
+          <code-block :code="generalCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-radio
           v-for="variant in variantOptions.general"
           :key="variant.value"
@@ -230,9 +242,16 @@ const radios = [
           :label="variant.label"
           :value="variant.value"
         />
+
+        <template #code>
+          <code-block :code="generalCode('variant', variantOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-radio
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -242,9 +261,16 @@ const radios = [
           :label="shape.label"
           :value="shape.value"
         />
+
+        <template #code>
+          <code-block :code="generalCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-radio
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -254,33 +280,47 @@ const radios = [
           :label="size.label"
           :value="size.value"
         />
+
+        <template #code>
+          <code-block :code="generalCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
       <example-section title="Disabled">
-        <vk-radio disabled />
+        <vk-radio
+          disabled
+          label="Disabled"
+        />
+
+        <template #code>
+          <code-block code="<vk-radio disabled></vk-radio>" />
+        </template>
       </example-section>
 
       <example-section title="Readonly">
-        <vk-radio readonly />
+        <vk-radio
+          readonly
+          label="Readonly"
+        />
+
+        <template #code>
+          <code-block code="<vk-radio readonly></vk-radio>" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Radio Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="apiData"
-          />
-        </example-section>
+      <h3>Radio Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="apiData"
+      />
 
-        <example-section title="Radio Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="emitData"
-          />
-        </example-section>
-      </div>
+      <h3>Radio Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="emitData"
+      />
     </template>
   </doc-section>
 </template>

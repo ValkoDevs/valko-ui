@@ -89,6 +89,8 @@ const progressbarSlots: TableItem[] = [
     example: '<template #default>\n  <!-- Your custom content goes here -->\n</template>'
   }
 ]
+
+const { slotCode, twoPropsCode } = useCodeBlock('vk-progressbar')
 </script>
 
 <template>
@@ -160,71 +162,105 @@ const progressbarSlots: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section title="Colors">
-        <div class="grow gap-4 grid grid-cols-3">
-          <vk-progressbar
-            v-for="color in colorOptions"
-            :key="color.value"
-            :color="color.value"
-            :progress="25"
-          >
-            {{ color.label }}
-          </vk-progressbar>
-        </div>
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
+        <vk-progressbar
+          v-for="color in colorOptions"
+          :key="color.value"
+          :color="color.value"
+          :progress="25"
+        >
+          {{ color.label }}
+        </vk-progressbar>
+
+        <template #code>
+          <code-block :code="slotCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
-        <div class="grow gap-4 grid grid-cols-3">
-          <vk-progressbar
-            v-for="variant in variantOptions.withGradient"
-            :key="variant.value"
-            :variant="variant.value"
-            :progress="25"
-          >
-            {{ variant.label }}
-          </vk-progressbar>
-        </div>
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <vk-progressbar
+          v-for="variant in variantOptions.withGradient"
+          :key="variant.value"
+          :variant="variant.value"
+          :progress="25"
+        >
+          {{ variant.label }}
+        </vk-progressbar>
+
+        <template #code>
+          <code-block :code="slotCode('variant', variantOptions.withGradient)" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-progressbar
-            v-for="shape in shapeOptions.withLine"
-            :key="shape.value"
-            :shape="shape.value"
-            :progress="25"
-          >
-            {{ shape.label }}
-          </vk-progressbar>
-        </div>
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <vk-progressbar
+          v-for="shape in shapeOptions.withLine"
+          :key="shape.value"
+          :shape="shape.value"
+          :progress="25"
+        >
+          {{ shape.label }}
+        </vk-progressbar>
+
+        <template #code>
+          <code-block :code="slotCode('shape', shapeOptions.withLine)" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-progressbar
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-            :size="size.value"
-            :progress="25"
-          >
-            {{ size.label }}
-          </vk-progressbar>
-        </div>
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <vk-progressbar
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+          :size="size.value"
+          :progress="25"
+        >
+          {{ size.label }}
+        </vk-progressbar>
+
+        <template #code>
+          <code-block :code="slotCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
       <example-section title="Indeterminate">
         <vk-progressbar indeterminate>
           Indeterminate
         </vk-progressbar>
+
+        <template #code>
+          <code-block code="<vk-progressbar indeterminate>Indeterminate</vk-progressbar>" />
+        </template>
       </example-section>
 
-      <example-section title="Stripped">
+      <example-section
+        title="Stripped"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-progressbar
-          striped
+          v-for="color in colorOptions"
+          :key="color.value"
+          :color="color.value"
           :progress="25"
+          striped
         >
-          Striped
+          Striped {{ color.label }}
         </vk-progressbar>
+
+        <template #code>
+          <code-block :code="twoPropsCode('color', colorOptions, 'striped')" />
+        </template>
       </example-section>
 
       <example-section title="Striped & Indeterminate">
@@ -234,6 +270,10 @@ const progressbarSlots: TableItem[] = [
         >
           {{ `Indeterminate & Striped` }}
         </vk-progressbar>
+
+        <template #code>
+          <code-block code="<vk-progressbar indeterminate striped>Indeterminate & Striped</vk-progressbar>" />
+        </template>
       </example-section>
 
       <example-section title="Buffer">
@@ -243,25 +283,25 @@ const progressbarSlots: TableItem[] = [
         >
           Buffer
         </vk-progressbar>
+
+        <template #code>
+          <code-block code="<vk-progressbar :buffer=&quot;50&quot; :progress=&quot;25&quot;>Buffer</vk-progressbar>" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Progressbar Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="progressbarProps"
-          />
-        </example-section>
+      <h3>Progressbar Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="progressbarProps"
+      />
 
-        <example-section title="Progressbar Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="progressbarSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Progressbar Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="progressbarSlots"
+      />
     </template>
   </doc-section>
 </template>

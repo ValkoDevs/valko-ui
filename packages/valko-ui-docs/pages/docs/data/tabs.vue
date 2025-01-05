@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TabsProps, TableItem, Tab } from '#valkoui'
 
@@ -154,6 +155,50 @@ const tabsSlots: TableItem[] = [
     example: '<template #tab1>\n  <!-- Content for tab 1 -->\n</template>\n<template #tab2>\n  <!-- Content for tab 2 -->\n</template>\n<!-- Add more templates for additional tabs as needed -->'
   }
 ]
+
+const scriptNoIcons = `
+<script setup lang="ts">
+import type { Tab } from '#valkoui'
+
+const tabs: Tab[] = [
+  { key: 'photos', title: 'Photos' },
+  { key: 'videos', title: 'Videos' },
+  { key: 'favorite', title: 'Favorite' },
+  { key: 'trending', title: 'Trending' },
+  { key: 'friends', title: 'Friends' }
+]
+<\/script>
+`
+
+const scriptIcons = `
+<script setup lang="ts">
+import type { Tab } from '#valkoui'
+
+const tabs: Tab[] = [
+  { key: 'withIconPhotos', title: 'Photos', leftIcon: 'photo' },
+  { key: 'withIconVideos', title: 'Videos', rightIcon: 'movie' },
+  { key: 'withIconFavorite', title: 'Favorite', leftIcon: 'heart' },
+  { key: 'withIconTrending', title: 'Trending', leftIcon: 'flame', rightIcon: 'flame' },
+  { key: 'withIconFriends', title: 'Friends', rightIcon: 'friends' }
+]
+<\/script>
+`
+
+const scriptDisabled = `
+<script setup lang="ts">
+import type { Tab } from '#valkoui'
+
+const tabs: Tab[] = [
+  { key: 'withDisabledPhotos', title: 'Photos', disabled: true },
+  { key: 'withDisabledVideos', title: 'Videos' },
+  { key: 'withDisabledFavorite', title: 'Favorite', disabled: true },
+  { key: 'withDisabledTrending', title: 'Trending' },
+  { key: 'withDisabledFriends', title: 'Friends' }
+]
+<\/script>
+`
+
+const { twoPropsCode } = useCodeBlock('vk-tabs')
 </script>
 
 <template>
@@ -217,65 +262,101 @@ const tabsSlots: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section title="Colors">
-        <div class="grow gap-4 grid grid-cols-2">
-          <div
-            v-for="color in colorOptions"
-            :key="color.value"
-          >
-            <span> {{ color.label }} </span>
-            <vk-tabs
-              :color="color.value"
-              :tabs="tabs"
-            />
-          </div>
+      <example-section
+        title="Colors"
+        classes="md:grid-cols-2"
+      >
+        <div
+          v-for="color in colorOptions"
+          :key="color.value"
+        >
+          <span> {{ color.label }} </span>
+          <vk-tabs
+            :color="color.value"
+            :tabs="tabs"
+          />
         </div>
+
+        <template #code>
+          <code-block
+            :code="scriptNoIcons"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n${twoPropsCode('color', colorOptions, ':tabs=&quot;tabs&quot;')}\n</template>`" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
-        <div class="grow gap-4 grid grid-cols-2">
-          <div
-            v-for="variant in variantOptions.withGradient"
-            :key="variant.value"
-          >
-            <span> {{ variant.label }} </span>
-            <vk-tabs
-              :variant="variant.value"
-              :tabs="tabs"
-            />
-          </div>
+      <example-section
+        title="Variants"
+        classes="md:grid-cols-2"
+      >
+        <div
+          v-for="variant in variantOptions.withGradient"
+          :key="variant.value"
+        >
+          <span> {{ variant.label }} </span>
+          <vk-tabs
+            :variant="variant.value"
+            :tabs="tabs"
+          />
         </div>
+
+        <template #code>
+          <code-block
+            :code="scriptNoIcons"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n${twoPropsCode('variant', variantOptions.withGradient, ':tabs=&quot;tabs&quot;')}\n</template>`" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
-        <div class="grow gap-4 grid grid-cols-2">
-          <div
-            v-for="shape in shapeOptions.withLine"
-            :key="shape.value"
-            class="flex flex-col items-around"
-          >
-            <span> {{ shape.label }} </span>
-            <vk-tabs
-              :shape="shape.value"
-              :tabs="tabs"
-            />
-          </div>
+      <example-section
+        title="Shapes"
+        classes="md:grid-cols-2"
+      >
+        <div
+          v-for="shape in shapeOptions.withLine"
+          :key="shape.value"
+          class="flex flex-col items-around"
+        >
+          <span> {{ shape.label }} </span>
+          <vk-tabs
+            :shape="shape.value"
+            :tabs="tabs"
+          />
         </div>
+
+        <template #code>
+          <code-block
+            :code="scriptNoIcons"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n${twoPropsCode('shape', shapeOptions.withLine, ':tabs=&quot;tabs&quot;')}\n</template>`" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
-        <div class="grow gap-4 grid grid-cols-2">
-          <div
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-          >
-            <span> {{ size.label }} </span>
-            <vk-tabs
-              :size="size.value"
-              :tabs="tabs"
-            />
-          </div>
+      <example-section
+        title="Sizes"
+        classes="md:grid-cols-2"
+      >
+        <div
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+        >
+          <span> {{ size.label }} </span>
+          <vk-tabs
+            :size="size.value"
+            :tabs="tabs"
+          />
         </div>
+
+        <template #code>
+          <code-block
+            :code="scriptNoIcons"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n${twoPropsCode('size', sizeOptions.general, ':tabs=&quot;tabs&quot;')}\n</template>`" />
+        </template>
       </example-section>
 
       <example-section title="Grow">
@@ -283,44 +364,63 @@ const tabsSlots: TableItem[] = [
           grow
           :tabs="tabs"
         />
+
+        <template #code>
+          <code-block
+            :code="scriptNoIcons"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n<vk-tabs :tabs=&quot;tabs&quot; grow></vk-tabs>\n</template>`" />
+        </template>
       </example-section>
 
       <example-section title="With Icons">
         <vk-tabs
           :tabs="tabWithIcon"
         />
+
+        <template #code>
+          <code-block
+            :code="scriptIcons"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n<vk-tabs :tabs=&quot;tabs&quot;></vk-tabs>\n</template>`" />
+        </template>
       </example-section>
 
       <example-section title="Disabled">
         <vk-tabs
           :tabs="tabDisabled"
         />
+
+        <template #code>
+          <code-block
+            :code="scriptDisabled"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n<vk-tabs :tabs=&quot;tabs&quot;></vk-tabs>\n</template>`" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Tabs Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="tabsProps"
-          />
-        </example-section>
+      <h3>Tabs Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="tabsProps"
+      />
 
-        <example-section title="Tabs Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="tabsSlots"
-          />
-        </example-section>
+      <h3>Tabs Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="tabsSlots"
+      />
 
-        <example-section title="Tab Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="tabInterface"
-          />
-        </example-section>
-      </div>
+      <h3>Tab Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="tabInterface"
+      />
     </template>
   </doc-section>
 </template>

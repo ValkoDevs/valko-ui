@@ -111,6 +111,8 @@ watch(isShown, () => {
     setTimeout(() => isShown.value = true, 1000)
   }
 })
+
+const { generalCode } = useCodeBlock('vk-alert')
 </script>
 
 <template>
@@ -193,75 +195,100 @@ watch(isShown, () => {
     </template>
 
     <template #examples>
-      <example-section title="Colors">
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-alert
-            v-for="color in colorOptions"
-            :key="color.value"
-            :color="color.value"
-            :title="color.label"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
-          </vk-alert>
-        </div>
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
+        <vk-alert
+          v-for="color in colorOptions"
+          :key="color.value"
+          :color="color.value"
+          :title="color.label"
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+        </vk-alert>
+
+        <template #code>
+          <code-block :code="generalCode('color', colorOptions)" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
-        <div class="grow gap-4 grid grid-cols-2">
-          <vk-alert
-            v-for="variant in variantOptions.withGradient"
-            :key="variant.value"
-            :variant="variant.value"
-            :title="variant.label"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
-          </vk-alert>
-        </div>
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <vk-alert
+          v-for="variant in variantOptions.withGradient"
+          :key="variant.value"
+          :variant="variant.value"
+          :title="variant.label"
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+        </vk-alert>
+
+        <template #code>
+          <code-block :code="generalCode('variant', variantOptions.withGradient)" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
-        <div class="grow gap-4 grid grid-cols-2 items-start">
-          <vk-alert
-            v-for="shape in shapeOptions.general"
-            :key="shape.value"
-            :shape="shape.value"
-            :title="shape.label"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
-          </vk-alert>
-        </div>
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
+        <vk-alert
+          v-for="shape in shapeOptions.general"
+          :key="shape.value"
+          :shape="shape.value"
+          :title="shape.label"
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+        </vk-alert>
+
+        <template #code>
+          <code-block :code="generalCode('shape', shapeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
-        <div class="grow gap-4 grid grid-cols-2 items-start">
-          <vk-alert
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-            :size="size.value"
-            :title="size.label"
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
-          </vk-alert>
-        </div>
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <vk-alert
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+          :size="size.value"
+          :title="size.label"
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+        </vk-alert>
+
+        <template #code>
+          <code-block :code="generalCode('size', sizeOptions.general)" />
+        </template>
       </example-section>
 
-      <example-section title="Icons">
-        <div class="grow gap-4 grid grid-cols-3">
-          <vk-alert
-            title="Default Icon"
-            color="success"
-          />
-          <vk-alert
-            title="Custom Icon"
-            color="info"
-            icon="home"
-          />
-          <vk-alert
-            title="Without Icon"
-            color="primary"
-            :icon="null"
-          />
-        </div>
+      <example-section
+        title="Icons"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
+        <vk-alert
+          title="Default Icon"
+          color="success"
+        />
+        <vk-alert
+          title="Custom Icon"
+          color="info"
+          icon="home"
+        />
+        <vk-alert
+          title="Without Icon"
+          color="primary"
+          :icon="null"
+        />
+
+        <template #code>
+          <code-block :code="`<vk-alert></vk-alert>\n\<vk-alert icon=&quot;home&quot;></vk-alert>\n\<vk-alert :icon=&quot;null&quot;></vk-alert>`" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
@@ -271,6 +298,10 @@ watch(isShown, () => {
         >
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem aut recusandae obcaecati qui neque? Magni aperiam odio aliquid ratione. Aliquam atque voluptates velit praesentium a sequi unde maiores tempora fugit!
         </vk-alert>
+
+        <template #code>
+          <code-block code="<vk-alert flat></vk-alert>" />
+        </template>
       </example-section>
 
       <example-section title="Closable">
@@ -291,32 +322,31 @@ watch(isShown, () => {
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem quo ad, voluptates necessitatibus quis ipsum recusandae, quia laborum accusantium earum distinctio velit blanditiis quidem enim commodi accusamus fuga eveniet incidunt.
           </vk-alert>
         </transition>
+
+        <template #code>
+          <code-block code="<vk-alert closable></vk-alert>" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Alert Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="alertProps"
-          />
-        </example-section>
+      <h3>Alert Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="alertProps"
+      />
 
-        <example-section title="Alert Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="alertEmits"
-          />
-        </example-section>
+      <h3>Alert Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="alertEmits"
+      />
 
-        <example-section title="Alert Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="alertSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Alert Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="alertSlots"
+      />
     </template>
   </doc-section>
 </template>

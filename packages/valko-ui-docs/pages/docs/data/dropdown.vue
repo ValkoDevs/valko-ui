@@ -1,5 +1,7 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { DropdownProps, TableItem, Item } from '#valkoui'
+import CodeBlock from '~/components/CodeBlock/CodeBlock.vue'
 
 const form = ref<Partial<DropdownProps>>({
   color: 'primary',
@@ -155,6 +157,22 @@ const dropdownSlots: TableItem[] = [
     example: '<template #dropdown-trigger>\n  <!-- Your custom dropdown trigger component here -->\n</template>'
   }
 ]
+
+const scriptCode = `
+<script setup lang="ts">
+import type { Item } from '#valkoui'
+
+const items: Item[] = [
+  { key: 'image', title: 'Upload Image', icon: 'photo' },
+  { key: 'edit', title: 'Edit', icon: 'edit' },
+  { key: 'disabled', title: 'Disabled', icon: 'error-404', disabled: true },
+  { key: 'video', title: 'Upload Video', icon: 'video' },
+  { key: 'delete', title: 'Delete', icon: 'trash' }
+]
+<\/script>
+`
+
+const { twoPropsCode } = useCodeBlock('vk-dropdown')
 </script>
 
 <template>
@@ -216,7 +234,10 @@ const dropdownSlots: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <vk-dropdown
           v-for="color in colorOptions"
           :key="color.value"
@@ -225,9 +246,20 @@ const dropdownSlots: TableItem[] = [
           :items="items"
           :label="color.label"
         />
+
+        <template #code>
+          <code-block
+            :code="scriptCode"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n${twoPropsCode('color', colorOptions, 'items=&quot;items&quot;')}\n</template>`" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+      >
         <vk-dropdown
           v-for="variant in variantOptions.withGradientAndLink"
           :key="variant.value"
@@ -236,9 +268,20 @@ const dropdownSlots: TableItem[] = [
           :items="items"
           :label="variant.label"
         />
+
+        <template #code>
+          <code-block
+            :code="scriptCode"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n${twoPropsCode('variant', variantOptions.withGradientAndLink, 'items=&quot;items&quot;')}\n</template>`" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-dropdown
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -247,9 +290,20 @@ const dropdownSlots: TableItem[] = [
           :items="items"
           :label="shape.label"
         />
+
+        <template #code>
+          <code-block
+            :code="scriptCode"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n${twoPropsCode('shape', shapeOptions.general, 'items=&quot;items&quot;')}\n</template>`" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-dropdown
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -258,6 +312,14 @@ const dropdownSlots: TableItem[] = [
           :items="items"
           :label="size.label"
         />
+
+        <template #code>
+          <code-block
+            :code="scriptCode"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n${twoPropsCode('size', sizeOptions.general, 'items=&quot;items&quot;')}\n</template>`" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
@@ -266,6 +328,14 @@ const dropdownSlots: TableItem[] = [
           :items="items"
           label="Flat"
         />
+
+        <template #code>
+          <code-block
+            :code="scriptCode"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n<vk-dropdown items=&quot;items&quot; flat></vk-dropdown>\n</template>`" />
+        </template>
       </example-section>
 
       <example-section title="Disabled">
@@ -275,39 +345,41 @@ const dropdownSlots: TableItem[] = [
           :items="items"
           label="Disabled"
         />
+
+        <template #code>
+          <code-block
+            :code="scriptCode"
+            language="js"
+          />
+          <code-block :code="`\n<template>\n<vk-dropdown items=&quot;items&quot; disabled></vk-dropdown>\n</template>`" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Dropdown Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="dropdownProps"
-          />
-        </example-section>
+      <h3>Dropdown Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="dropdownProps"
+      />
 
-        <example-section title="Item interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="itemInterface"
-          />
-        </example-section>
+      <h3>Item interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="itemInterface"
+      />
 
-        <example-section title="Dropdown Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="dropdownEmits"
-          />
-        </example-section>
+      <h3>Dropdown Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="dropdownEmits"
+      />
 
-        <example-section title="Dropdown Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="dropdownSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Dropdown Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="dropdownSlots"
+      />
     </template>
   </doc-section>
 </template>

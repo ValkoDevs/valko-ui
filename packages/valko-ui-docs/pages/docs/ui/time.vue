@@ -444,11 +444,14 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <div
           v-for="color in colorOptions"
           :key="color.value"
-          class="w-1/4 flex flex-col gap-4"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
           <span>{{ color.label }}</span>
           <vk-time
@@ -458,11 +461,14 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         </div>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <div
           v-for="variant in variantOptions.general"
           :key="variant.value"
-          class="flex flex-col gap-4"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
           <span>{{ variant.label }}</span>
           <vk-time
@@ -472,11 +478,14 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         </div>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
-          class="flex flex-col gap-4"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
           <span>{{ shape.label }}</span>
           <vk-time
@@ -486,11 +495,14 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         </div>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
-          class="flex flex-col gap-4"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
           <span>{{ size.label }}</span>
           <vk-time
@@ -500,15 +512,18 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
         </div>
       </example-section>
 
-      <example-section title="Min & Max Times">
-        <div class="flex flex-col gap-4">
+      <example-section
+        title="Min & Max Times"
+        classes="sm:grid-cols-2"
+      >
+        <div class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start">
           <span>Min</span>
           <vk-time
             :adapter="adapter"
             :min-time="1730710858"
           />
         </div>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start">
           <span>Max</span>
           <vk-time
             :adapter="adapter"
@@ -526,49 +541,41 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Time Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeProps"
-          />
-        </example-section>
+      <h3>Time Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeProps"
+      />
 
-        <example-section title="Time Adapter Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeAdapterProps"
-          />
-        </example-section>
+      <h3>Time Adapter Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeAdapterProps"
+      />
 
-        <example-section title="Time Adapter Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeAdapterInterface"
-          />
-        </example-section>
+      <h3>Time Adapter Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeAdapterInterface"
+      />
 
-        <example-section title="Time Adapter Result Type">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeAdapterResult"
-          />
-        </example-section>
+      <h3>Time Adapter Result Type</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeAdapterResult"
+      />
 
-        <example-section title="FormattedTime Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="formattedTimeProps"
-          />
-        </example-section>
+      <h3>FormattedTime Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="formattedTimeProps"
+      />
 
-        <example-section title="Available Time Formats">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeFormats"
-          />
-        </example-section>
-      </div>
+      <h3>Available Time Formats</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeFormats"
+      />
     </template>
   </doc-section>
 </template>

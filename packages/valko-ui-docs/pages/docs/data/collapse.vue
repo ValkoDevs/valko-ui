@@ -298,28 +298,27 @@ const itemSlots: TableItem[] = [
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Collapse Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="collapseProps"
-          />
-        </example-section>
+      <h3>Collapse Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="collapseProps"
+      />
 
-        <example-section title="Collapse Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="collapseSlots"
-          />
-        </example-section>
+      <h3 title="">
+        Collapse Slots
+      </h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="collapseSlots"
+      />
 
-        <example-section title="Collapse Items Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="itemSlots"
-          />
-        </example-section>
-      </div>
+      <h3 title="">
+        Collapse Items Slots
+      </h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="itemSlots"
+      />
     </template>
   </doc-section>
 </template>
