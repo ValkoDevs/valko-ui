@@ -1,5 +1,7 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { DropdownProps, TableItem, Item } from '#valkoui'
+import CodeBlock from '~/components/CodeBlock/CodeBlock.vue'
 
 const form = ref<Partial<DropdownProps>>({
   color: 'primary',

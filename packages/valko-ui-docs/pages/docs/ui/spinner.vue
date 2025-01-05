@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import type { SpinnerProps, TableItem } from '#valkoui'
+import type { SelectOption, SpinnerProps, TableItem } from '#valkoui'
 
 const names = [
   { value: 'loader', label: 'Loader' },
   { value: 'loader-2', label: 'Loader-2' }
+]
+
+const colors: SelectOption[] = [
+  ...colorOptions,
+  { value: 'black', label: 'Black' },
+  { value: 'white', label: 'White' }
 ]
 
 const form = ref<SpinnerProps>({
@@ -70,7 +76,7 @@ const generateSnippet = snippetGeneratorFactory('vk-spinner')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colors"
       />
       <vk-select
         v-model="form.name"

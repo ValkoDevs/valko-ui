@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { type Tab, useStyle } from '#valkoui'
 import type { ExampleSectionProps } from './interfaces'
+import type { Tab } from '#valkoui'
 import styles from './ExampleSection.styles'
 
 defineOptions({ name: 'ExampleSection' })

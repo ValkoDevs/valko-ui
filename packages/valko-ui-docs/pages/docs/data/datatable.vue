@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { DataTableProps, SelectionMode, SelectOption, TableItem } from '#valkoui'
 import { useClientSideDataTable } from '#valkoui'
