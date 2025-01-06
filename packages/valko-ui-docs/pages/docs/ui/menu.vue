@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { MenuItem, TableItem, MenuProps } from '#valkoui'
 

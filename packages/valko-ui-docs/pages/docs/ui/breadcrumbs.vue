@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TableItem, Crumb, BreadcrumbsProps } from '#valkoui'
 import { useNotification } from '#valkoui'
