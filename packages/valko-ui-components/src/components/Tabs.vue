@@ -19,11 +19,14 @@ const props = withDefaults(defineProps<TabsProps>(), {
   tabs: () => []
 })
 
+const emit = defineEmits(['tabClick'])
+
 const classes = useStyle<TabsProps, SlotStyles>(props, styles)
 
 const cursor: Ref<HTMLElement | null> = ref(null)
 
-const onChange = async () => {
+const onChange = async (index: number) => {
+  emit('tabClick', index)
   await nextTick()
   await nextTick()
   if (cursor.value) {

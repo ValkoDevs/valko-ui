@@ -16,7 +16,7 @@ describe('CardHeader component', () => {
     })
 
     it('should render', () => {
-      expect(childWrapper.find('.vk-cardheader').exists()).toBe(true)
+      expect(childWrapper.find('.vk-card__header').exists()).toBe(true)
     })
   })
 })

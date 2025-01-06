@@ -2,14 +2,13 @@ import { tv, type TV } from 'tailwind-variants'
 
 export default tv({
   base: [
-    'vk-cardheader',
-    'px-4',
-    'pt-4',
-    'mb-4',
-    'min-h-10',
+    'vk-card__header',
     'h-fit',
-    'self-start',
-    'border-light-4',
+    'px-4',
+    'py-2',
+    'min-h-10',
+    'flex',
+    'items-center',
     'font-bold',
     'text-lg',
     'text-left',
@@ -17,7 +16,6 @@ export default tv({
     'group-data-[layout=vertical]:order-1',
     'group-data-[layout=horizontal]:order-2',
     'group-data-[layout=horizontal]:[grid-column:_2]',
-    'group-data-[layout=cover]:order-1',
-    'dark:border-dark-1'
+    'group-data-[layout=cover]:order-1'
   ]
 }) as unknown as ReturnType<TV>

@@ -4,6 +4,7 @@ import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Button.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import VkSpinner from './Spinner.vue'
+import useDarkMode from '#valkoui/composables/useDarkMode.ts'
 
 defineOptions({ name: 'VkButton' })
 
@@ -22,6 +23,8 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 const emit = defineEmits(['click'])
 
 const classes = useStyle<ButtonProps, SlotStyles>(props, styles)
+
+const isDarkMode = useDarkMode()
 
 const onClick = () => {
   if (!props.disabled && !props.loading) {
@@ -52,9 +55,8 @@ const onClick = () => {
       >
         <vk-spinner
           v-if="loading"
-          variant="loader"
-          :color="color"
           condensed
+          :color="(color === 'neutral' && isDarkMode) ? 'black' : 'white'"
           :size="size"
         />
       </transition>

@@ -2,7 +2,7 @@ import { tv, type TV } from 'tailwind-variants'
 
 export default tv({
   base: [
-    'vk-cardbody',
+    'vk-card__body',
     'px-4',
     'my-4',
     'overflow-y-auto',

@@ -4,16 +4,17 @@ export default tv({
   slots: {
     container: [
       'vk-breadcrumbs',
-      'py-2',
-      'px-4',
-      'shadow-light-4',
+      'w-fit',
       'flex',
+      'flex-wrap',
+      'shadow-light-4',
+      'transition-colors',
+      'duration-200',
       'dark:shadow-dark-5'
     ],
     a: [
       'vk-breadcrumbs__a',
       'cursor-pointer',
-      'font-semibold',
       'flex',
       'justify-around',
       'items-center',
@@ -63,15 +64,18 @@ export default tv({
       primary: {
         a: [
           'text-primary-500',
-          'hover:text-primary-600'
+          'hover:text-primary-600',
+          'data-[active=true]:text-primary-600/[.5]'
         ]
       },
       neutral: {
         a: [
           'text-dark-1',
           'hover:text-dark-3',
+          'data-[active=true]:text-dark-4',
           'dark:text-light-3',
-          'dark:hover:text-light-5'
+          'dark:hover:text-light-5',
+          'dark:data-[active=true]:text-light-1'
         ]
       },
       success: {
@@ -140,6 +144,19 @@ export default tv({
     },
     flat: {
       true: {}
+    },
+    condensed: {
+      true: {
+        container: [
+          'p-0'
+        ]
+      },
+      false: {
+        container: [
+          'py-2',
+          'px-4'
+        ]
+      }
     }
   },
   compoundVariants: [

@@ -4,6 +4,7 @@ export default tv({
   slots: {
     container: [
       'vk-badge',
+      'w-fit',
       'flex',
       'relative'
     ],

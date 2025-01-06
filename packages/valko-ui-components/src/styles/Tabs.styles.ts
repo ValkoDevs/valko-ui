@@ -4,7 +4,6 @@ export default tv({
   slots: {
     container: [
       'vk-tabs__container',
-      'w-full',
       'flex',
       'overflow-x-auto'
     ],
@@ -46,7 +45,7 @@ export default tv({
       'dark:disabled:text-gray-500'
     ],
     content: [
-      'w-full'
+      'grow'
     ],
     cursor: [
       'shadow-lg',
@@ -198,6 +197,17 @@ export default tv({
           'w-auto',
           'h-auto',
           'grow'
+        ],
+        container: [
+          'h-auto',
+          'w-auto',
+          'grow'
+        ]
+      },
+      false: {
+        container: [
+          'h-fit',
+          'w-fit'
         ]
       }
     },

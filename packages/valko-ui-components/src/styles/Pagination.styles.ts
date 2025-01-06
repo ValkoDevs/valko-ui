@@ -8,6 +8,9 @@ export default tv({
       'inline-flex',
       '-space-x-px',
       'shadow-sm',
+      'w-fit',
+      'flex',
+      'flex-wrap',
       'shadow-light-4',
       'dark:shadow-dark-5'
     ],

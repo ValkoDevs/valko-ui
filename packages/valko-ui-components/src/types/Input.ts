@@ -1,6 +1,6 @@
 import type { DefaultComponent } from './common'
 
-export type InputType = 'text' | 'password' | 'email' | 'date' | 'number'
+export type InputType = 'text' | 'password' | 'email' | 'number'
 export type InputCursor = 'text' | 'pointer'
 
 export interface InputProps extends DefaultComponent {

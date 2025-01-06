@@ -222,26 +222,18 @@ onBeforeUnmount(() => {
         </div>
       </template>
 
-      <template
-        v-for="(item, index) in data"
-        #[`cell-draggable-${item.key}`]
-        :key="item.key"
-      >
+      <template #cell-draggable="{ rowIndex }">
         <vk-icon
           name="grip-vertical"
           draggable="true"
           :class="classes.dragIcon"
-          @dragstart="() => emit('onDragStart', index)"
+          @dragstart="() => emit('onDragStart', rowIndex)"
           @dragover="(event) => emit('onDragOver', event)"
-          @drop="(event) => emit('onDrop', event, index)"
+          @drop="(event) => emit('onDrop', event, rowIndex)"
         />
       </template>
 
-      <template
-        v-for="item in data"
-        #[`cell-selection-${item.key}`]
-        :key="item.key"
-      >
+      <template #cell-selection="{ item }">
         <vk-checkbox
           v-if="selectionMode === 'multiple'"
           :color="color"
@@ -264,7 +256,6 @@ onBeforeUnmount(() => {
     <div :class="classes.footer">
       <div>
         <vk-pagination
-          v-if="data.length < total"
           :color="color"
           :variant="variant"
           :shape="shape"

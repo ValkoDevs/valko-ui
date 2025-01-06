@@ -74,7 +74,8 @@ export default tv({
         'duration-200',
         'ease-in-out',
         'active:shadow-none',
-        'active:scale-95'
+        'active:scale-95',
+        'cursor-pointer'
       ]
     }
   },

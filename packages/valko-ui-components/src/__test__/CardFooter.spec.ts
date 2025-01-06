@@ -16,7 +16,7 @@ describe('CardFooter component', () => {
     })
 
     it('should render', () => {
-      expect(childWrapper.find('.vk-cardfooter').exists()).toBe(true)
+      expect(childWrapper.find('.vk-card__footer').exists()).toBe(true)
     })
   })
 })

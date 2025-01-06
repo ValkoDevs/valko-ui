@@ -19,7 +19,7 @@ describe('Tag component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-600').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
       })
 
       it('should be variant filled', () => {
@@ -56,7 +56,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-600').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
       })
 
       it('should be color neutral when props.color is neutral', () => {
@@ -78,7 +78,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-success-600').exists()).toBe(true)
+        expect(wrapper.find('.bg-success-500').exists()).toBe(true)
       })
 
       it('should be color info when props.color is info', () => {
@@ -89,7 +89,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-info-600').exists()).toBe(true)
+        expect(wrapper.find('.bg-info-500').exists()).toBe(true)
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -100,7 +100,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-warning-600').exists()).toBe(true)
+        expect(wrapper.find('.bg-warning-500').exists()).toBe(true)
       })
 
       it('should be color error when props.color is error', () => {
@@ -111,7 +111,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-error-600').exists()).toBe(true)
+        expect(wrapper.find('.bg-error-500').exists()).toBe(true)
       })
     })
 
@@ -288,7 +288,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-tag__closable').classes()).toContain('text-primary-600')
+        expect(wrapper.find('.vk-tag__closable').classes()).toContain('text-primary-500')
       })
     })
   })
