@@ -13,7 +13,9 @@ const props = withDefaults(defineProps<BreadcrumbsProps>(), {
   size: 'md',
   shape: 'soft',
   separator: '>',
-  crumbs: () => []
+  crumbs: () => [],
+  flat: false,
+  condensed: false
 })
 
 const emit = defineEmits(['crumbClick'])
@@ -38,6 +40,7 @@ const useIcon = (separator: string) => separator.length > 2
       :key="crumb.key"
       :class="classes.a"
       :data-disabled="crumb.disabled"
+      :data-active="crumb.active"
       @click="onCrumbClick(crumb)"
     >
       <vk-icon

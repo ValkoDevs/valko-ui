@@ -14,7 +14,7 @@ describe('CardImage component', () => {
 
   describe('Default props', () => {
     it('should render', () => {
-      expect(wrapper.find('.vk-cardimage').exists()).toBe(true)
+      expect(wrapper.find('.vk-card__image').exists()).toBe(true)
     })
 
     it('should be height auto & width 100%', () => {

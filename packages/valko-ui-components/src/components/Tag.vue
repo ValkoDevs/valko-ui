@@ -39,7 +39,7 @@ const onClose = () => {
     :class="classes.container"
     @click="onClick"
   >
-    <div>
+    <div :class="classes.contentContainer">
       <vk-icon
         v-if="iconLeft"
         :name="iconLeft"

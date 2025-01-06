@@ -70,8 +70,9 @@ const headers = computed(() => props.headers)
             :class="[classes.td, index === items.length - 1 ? classes.shape : '']"
           >
             <slot
-              :name="`cell-${field}-${item.key}`"
+              :name="`cell-${field}`"
               :item="item"
+              :row-index="index"
               :key="item.key"
             >
               {{ item[field] }}

@@ -4,6 +4,7 @@ export default tv({
   slots: {
     container: [
       'vk-tag',
+      'w-fit',
       'flex',
       'justify-between',
       'items-center'
@@ -20,6 +21,13 @@ export default tv({
       'vk-tag__closable',
       'ml-1',
       'flex',
+      'items-center'
+    ],
+    contentContainer: [
+      'w-full',
+      'flex',
+      'gap-1',
+      'justify-center',
       'items-center'
     ]
   },
@@ -121,7 +129,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-primary-600'
+          'bg-primary-500'
         ]
       }
     },
@@ -144,7 +152,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-success-600'
+          'bg-success-500'
         ]
       }
     },
@@ -154,7 +162,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-info-600'
+          'bg-info-500'
         ]
       }
     },
@@ -164,7 +172,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-warning-600'
+          'bg-warning-500'
         ]
       }
     },
@@ -174,7 +182,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-error-600'
+          'bg-error-500'
         ]
       }
     },
@@ -185,7 +193,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-primary-600',
+          'text-primary-500',
           'bg-primary-500/[.15]'
         ]
       }
@@ -207,7 +215,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-success-600',
+          'text-success-500',
           'bg-success-500/[.15]'
         ]
       }
@@ -218,7 +226,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-info-600',
+          'text-info-500',
           'bg-info-500/[.15]'
         ]
       }
@@ -229,7 +237,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-warning-600',
+          'text-warning-500',
           'bg-warning-500/[.15]'
         ]
       }
@@ -240,7 +248,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-error-600',
+          'text-error-500',
           'bg-error-500/[.15]'
         ]
       }
@@ -252,8 +260,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-primary-600',
-          'border-primary-600'
+          'text-primary-500',
+          'border-primary-500'
         ]
       }
     },
@@ -263,8 +271,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'border-light-4',
-          'dark:border-dark-3'
+          'border-dark-3',
+          'dark:border-light-4'
         ]
       }
     },
@@ -274,8 +282,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-success-600',
-          'border-success-600'
+          'text-success-500',
+          'border-success-500'
         ]
       }
     },
@@ -285,8 +293,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-info-600',
-          'border-info-600'
+          'text-info-500',
+          'border-info-500'
         ]
       }
     },
@@ -296,8 +304,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-warning-600',
-          'border-warning-600'
+          'text-warning-500',
+          'border-warning-500'
         ]
       }
     },
@@ -307,8 +315,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-error-600',
-          'border-error-600'
+          'text-error-500',
+          'border-error-500'
         ]
       }
     },
