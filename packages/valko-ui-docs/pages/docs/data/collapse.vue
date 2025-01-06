@@ -84,6 +84,78 @@ const itemSlots: TableItem[] = [
     example: '<template #default>\n  <!-- Your main content goes here -->\n</template>'
   }
 ]
+
+const variantSnippet = `
+<template>
+ ${variantOptions.general.map(variant => `
+ <vk-collapse variant="${variant.value}">
+  <vk-collapse-item title="${variant.label}-example-item">
+    Lorem.
+  </vk-collapse-item>
+ </vk-collapse>
+ `).join('')}
+</template>
+`
+
+const shapeSnippet = `
+<template>
+ ${shapeOptions.general.map(shape => `
+ <vk-collapse shape="${shape.value}">
+  <vk-collapse-item title="${shape.label}-example-item">
+    Lorem.
+  </vk-collapse-item>
+ </vk-collapse>
+ `).join('')}
+</template>
+`
+
+const sizeSnippet = `
+<template>
+ ${sizeOptions.general.map(size => `
+ <vk-collapse size="${size.value}">
+  <vk-collapse-item title="${size.label}-example-item">
+    Lorem.
+  </vk-collapse-item>
+ </vk-collapse>
+ `).join('')}
+</template>
+`
+
+const separatorSnippet = `
+<template>
+ ${separatorOptions.map(separator => `
+ <vk-collapse separator="${separator.value}">
+  <vk-collapse-item title="${separator.label}-example-item">
+    Lorem.
+  </vk-collapse-item>
+ </vk-collapse>
+ `).join('')}
+</template>
+`
+
+const multipleSnippet = `
+<template>
+
+ <vk-collapse multiple>
+  <vk-collapse-item title="Multiple-example-item">
+    Lorem.
+  </vk-collapse-item>
+ </vk-collapse>
+
+</template>
+`
+
+const compactSnippet = `
+<template>
+
+ <vk-collapse compact>
+  <vk-collapse-item title="Compact-example-item">
+    Lorem.
+  </vk-collapse-item>
+ </vk-collapse>
+
+</template>
+`
 </script>
 
 <template>
@@ -177,6 +249,13 @@ const itemSlots: TableItem[] = [
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </vk-collapse-item>
         </vk-collapse>
+
+        <template #code>
+          <code-block
+            :code="variantSnippet"
+            :copy="variantSnippet"
+          />
+        </template>
       </example-section>
 
       <example-section title="Shapes">
@@ -201,6 +280,13 @@ const itemSlots: TableItem[] = [
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </vk-collapse-item>
         </vk-collapse>
+
+        <template #code>
+          <code-block
+            :code="shapeSnippet"
+            :copy="shapeSnippet"
+          />
+        </template>
       </example-section>
 
       <example-section title="Sizes">
@@ -225,6 +311,13 @@ const itemSlots: TableItem[] = [
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </vk-collapse-item>
         </vk-collapse>
+
+        <template #code>
+          <code-block
+            :code="sizeSnippet"
+            :copy="sizeSnippet"
+          />
+        </template>
       </example-section>
 
       <example-section title="Separators">
@@ -249,12 +342,17 @@ const itemSlots: TableItem[] = [
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </vk-collapse-item>
         </vk-collapse>
+
+        <template #code>
+          <code-block
+            :code="separatorSnippet"
+            :copy="separatorSnippet"
+          />
+        </template>
       </example-section>
 
       <example-section title="Multiple">
-        <vk-collapse
-          :multiple="true"
-        >
+        <vk-collapse multiple>
           <vk-collapse-item
             left-icon="user-circle"
             title="Multiple-Example Item 1"
@@ -272,12 +370,17 @@ const itemSlots: TableItem[] = [
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </vk-collapse-item>
         </vk-collapse>
+
+        <template #code>
+          <code-block
+            :code="multipleSnippet"
+            :copy="multipleSnippet"
+          />
+        </template>
       </example-section>
 
       <example-section title="Compact">
-        <vk-collapse
-          :compact="true"
-        >
+        <vk-collapse compact>
           <vk-collapse-item
             title="Compact-Example Item 1"
           >
@@ -294,6 +397,13 @@ const itemSlots: TableItem[] = [
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </vk-collapse-item>
         </vk-collapse>
+
+        <template #code>
+          <code-block
+            :code="compactSnippet"
+            :copy="compactSnippet"
+          />
+        </template>
       </example-section>
     </template>
 

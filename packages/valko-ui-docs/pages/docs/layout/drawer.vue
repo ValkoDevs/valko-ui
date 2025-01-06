@@ -125,7 +125,7 @@ const toggleDrawer = (drawerId: string) => drawerStates[drawerId] = !drawerState
 <\/script>
 `
 
-const placementCode = `
+const placementSnippet = `
 ${scriptCode}
 <template>
 ${placementOptions.map(pos => `
@@ -134,7 +134,7 @@ ${placementOptions.map(pos => `
   </vk-button>
 
   <vk-drawer
-    is-open="drawerStates['${pos.value}']"
+    :is-open="drawerStates['${pos.value}']"
     placement="${pos.value}"
     @close="toggleDrawer('${pos.value}')"
   >
@@ -144,7 +144,7 @@ ${placementOptions.map(pos => `
 </template>
 `
 
-const shapeCode = `
+const shapeSnippet = `
 ${scriptCode}
 <template>
 ${shapeOptions.general.map(shape => `
@@ -153,7 +153,7 @@ ${shapeOptions.general.map(shape => `
   </vk-button>
 
   <vk-drawer
-    is-open="drawerStates['${shape.value}']"
+    :is-open="drawerStates['${shape.value}']"
     shape="${shape.value}"
     @close="toggleDrawer('${shape.value}')"
   >
@@ -163,7 +163,7 @@ ${shapeOptions.general.map(shape => `
 </template>
 `
 
-const sizeCode = `
+const sizeSnippet = `
 ${scriptCode}
 <template>
 ${sizeOptions.general.map(size => `
@@ -172,7 +172,7 @@ ${sizeOptions.general.map(size => `
   </vk-button>
 
   <vk-drawer
-    is-open="drawerStates['${size.value}']"
+    :is-open="drawerStates['${size.value}']"
     size="${size.value}"
     @close="toggleDrawer('${size.value}')"
   >
@@ -182,7 +182,7 @@ ${sizeOptions.general.map(size => `
 </template>
 `
 
-const backdropCode = `
+const backdropSnippet = `
 ${scriptCode}
 <template>
 ${backdropOptions.map(backdrop => `
@@ -191,7 +191,7 @@ ${backdropOptions.map(backdrop => `
   </vk-button>
 
   <vk-drawer
-    is-open="drawerStates['${backdrop.value}']"
+    :is-open="drawerStates['${backdrop.value}']"
     backdrop="${backdrop.value}"
     @close="toggleDrawer('${backdrop.value}')"
   >
@@ -201,7 +201,7 @@ ${backdropOptions.map(backdrop => `
 </template>
 `
 
-const closableCode = `
+const closableSnippet = `
 <script setup lang="ts">
 const isOpen = ref(false)
 
@@ -215,7 +215,7 @@ const toggleDrawer = () => isOpen = !isOpen
   </vk-button>
 
   <vk-drawer
-    is-open="isOpen"
+    :is-open="isOpen"
     closable
     @close="toggleDrawer"
   >
@@ -225,7 +225,7 @@ const toggleDrawer = () => isOpen = !isOpen
 </template>
 `
 
-const flatCode = `
+const flatSnippet = `
 <script setup lang="ts">
 const isOpen = ref(false)
 
@@ -239,7 +239,7 @@ const toggleDrawer = () => isOpen = !isOpen
   </vk-button>
 
   <vk-drawer
-    is-open="isOpen"
+    :is-open="isOpen"
     flat
     @close="toggleDrawer"
   >
@@ -341,7 +341,10 @@ const toggleDrawer = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block :code="placementCode" />
+          <code-block
+            :code="placementSnippet"
+            :copy="placementSnippet"
+          />
         </template>
       </example-section>
 
@@ -370,7 +373,10 @@ const toggleDrawer = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block :code="shapeCode" />
+          <code-block
+            :code="shapeSnippet"
+            :copy="shapeSnippet"
+          />
         </template>
       </example-section>
 
@@ -399,7 +405,10 @@ const toggleDrawer = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block :code="sizeCode" />
+          <code-block
+            :code="sizeSnippet"
+            :copy="sizeSnippet"
+          />
         </template>
       </example-section>
 
@@ -428,7 +437,10 @@ const toggleDrawer = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block :code="backdropCode" />
+          <code-block
+            :code="backdropSnippet"
+            :copy="backdropSnippet"
+          />
         </template>
       </example-section>
 
@@ -449,7 +461,10 @@ const toggleDrawer = () => isOpen = !isOpen
         </vk-drawer>
 
         <template #code>
-          <code-block :code="closableCode" />
+          <code-block
+            :code="closableSnippet"
+            :copy="closableSnippet"
+          />
         </template>
       </example-section>
 
@@ -470,7 +485,10 @@ const toggleDrawer = () => isOpen = !isOpen
         </vk-drawer>
 
         <template #code>
-          <code-block :code="flatCode" />
+          <code-block
+            :code="flatSnippet"
+            :copy="flatSnippet"
+          />
         </template>
       </example-section>
     </template>

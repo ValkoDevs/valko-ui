@@ -107,7 +107,7 @@ const badgeSlots: TableItem[] = [
   }
 ]
 
-const { generalCode, twoPropsCode } = useCodeBlock('vk-badge')
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-badge')
 </script>
 
 <template>
@@ -209,7 +209,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-badge')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block
+            :code="defaultSnippet('color', colorOptions)"
+            :copy="defaultSnippet('color', colorOptions)"
+          />
         </template>
       </example-section>
 
@@ -235,7 +238,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-badge')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('shape', shapeOptions.general)"
+            :copy="defaultSnippet('shape', shapeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -261,7 +267,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-badge')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('size', sizeOptions.general)"
+            :copy="defaultSnippet('size', sizeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -287,7 +296,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-badge')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('placement', placementOptions)" />
+          <code-block
+            :code="defaultSnippet('placement', placementOptions)"
+            :copy="defaultSnippet('placement', placementOptions)"
+          />
         </template>
       </example-section>
 
@@ -303,7 +315,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-badge')
         </vk-badge>
 
         <template #code>
-          <code-block code="<vk-badge flat></vk-badge>" />
+          <code-block
+            :code="booleanSnippet('flat')"
+            :copy="booleanSnippet('flat')"
+          />
         </template>
       </example-section>
 
@@ -319,7 +334,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-badge')
         </vk-badge>
 
         <template #code>
-          <code-block code="<vk-badge outlined></vk-badge>" />
+          <code-block
+            :code="booleanSnippet('outlined')"
+            :copy="booleanSnippet('outlined')"
+          />
         </template>
       </example-section>
 
@@ -345,7 +363,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-badge')
         </div>
 
         <template #code>
-          <code-block :code="twoPropsCode('size', sizeOptions.general, 'dot')" />
+          <code-block
+            :code="defaultSnippet('size', sizeOptions.general, 'dot')"
+            :copy="defaultSnippet('size', sizeOptions.general, 'dot')"
+          />
         </template>
       </example-section>
 
@@ -360,7 +381,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-badge')
         </vk-badge>
 
         <template #code>
-          <code-block code="<vk-badge hidden></vk-badge>" />
+          <code-block
+            :code="booleanSnippet('hidden')"
+            :copy="booleanSnippet('hidden')"
+          />
         </template>
       </example-section>
     </template>

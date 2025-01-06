@@ -126,13 +126,15 @@ const onClick = () => useNotification({ text: 'Clickled' })
 
 watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true, 1000) })
 
-const { generalCode } = useCodeBlock('vk-tag')
+const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-tag')
 
-const iconsCode = `
-<vk-tag text="Without Icons"></vk-tag>
-<vk-tag text="Icon Left" icon-left="tag"></vk-tag>
-<vk-tag text="Icon Right" icon-right="tag"></vk-tag>
-<vk-tag text="Icons" icon-left="tag" icon-right="tag"></vk-tag>
+const iconSnippet = `
+<template>
+  <vk-tag text="Without Icons">Slot Content</vk-tag>
+  <vk-tag text="Icon Left" icon-left="tag">Slot Content</vk-tag>
+  <vk-tag text="Icon Right" icon-right="tag">Slot Content</vk-tag>
+  <vk-tag text="Icons" icon-left="tag" icon-right="tag">Slot Content</vk-tag>
+</template>
 `
 </script>
 
@@ -233,7 +235,10 @@ const iconsCode = `
         />
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block
+            :code="slotSnippet('color', colorOptions)"
+            :copy="slotSnippet('color', colorOptions)"
+          />
         </template>
       </example-section>
 
@@ -249,7 +254,10 @@ const iconsCode = `
         />
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.withGradient)" />
+          <code-block
+            :code="slotSnippet('variant', variantOptions.withGradient)"
+            :copy="slotSnippet('variant', variantOptions.withGradient)"
+          />
         </template>
       </example-section>
 
@@ -265,7 +273,10 @@ const iconsCode = `
         />
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="slotSnippet('shape', shapeOptions.general)"
+            :copy="slotSnippet('shape', shapeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -281,7 +292,10 @@ const iconsCode = `
         />
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="slotSnippet('size', sizeOptions.general)"
+            :copy="slotSnippet('size', sizeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -307,7 +321,10 @@ const iconsCode = `
         />
 
         <template #code>
-          <code-block :code="iconsCode" />
+          <code-block
+            :code="iconSnippet"
+            :copy="iconSnippet"
+          />
         </template>
       </example-section>
 
@@ -329,7 +346,10 @@ const iconsCode = `
         </transition>
 
         <template #code>
-          <code-block code="<vk-tag closable></vk-tag>" />
+          <code-block
+            :code="booleanSnippet('closable', '', true)"
+            :copy="booleanSnippet('closable', '', true)"
+          />
         </template>
       </example-section>
 
@@ -341,7 +361,10 @@ const iconsCode = `
         />
 
         <template #code>
-          <code-block code="<vk-tag pressable @click=&quot;onClick&quot;></vk-tag>" />
+          <code-block
+            :code="booleanSnippet('pressable', '', true)"
+            :copy="booleanSnippet('pressable', '', true)"
+          />
         </template>
       </example-section>
 
@@ -352,7 +375,10 @@ const iconsCode = `
         />
 
         <template #code>
-          <code-block code="<vk-tag disabled></vk-tag>" />
+          <code-block
+            :code="booleanSnippet('disabled', '', true)"
+            :copy="booleanSnippet('disabled', '', true)"
+          />
         </template>
       </example-section>
     </template>

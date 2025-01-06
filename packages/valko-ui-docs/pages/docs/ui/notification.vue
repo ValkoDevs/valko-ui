@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { NotificationProps, TableItem, VerticalAlign, HorizontalAlign, SelectOption } from '#valkoui'
 import { useNotification } from '#valkoui'
@@ -163,7 +164,86 @@ const createNotification = (props: NotificationProps) => {
   })
 }
 
-const { notificationCode } = useCodeBlock('vk-notification')
+const scriptCode = `
+<script setup lang="ts">
+import type { NotificationProps } from '#valkoui'
+import { useNotification } from '#valkoui'
+
+const createNotification = (props: NotificationProps) => useNotification(props)
+<\/script>
+`
+
+const colorSnippet = `
+<template>
+  ${colorOptions.map(color => `
+  <vk-button @click="() => createNotification({ text: ${color.label}, color: ${color.value} })">${color.label}</vk-button>
+  `).join('')}
+</template>
+`
+
+const variantSnippet = `
+<template>
+  ${variantOptions.withGradientAndLine.map(variant => `
+  <vk-button @click="() => createNotification({ text: ${variant.label}, variant: ${variant.value} })">${variant.label}</vk-button>
+  `).join('')}
+</template>
+`
+
+const shapeSnippet = `
+<template>
+  ${shapeOptions.general.map(shape => `
+  <vk-button @click="() => createNotification({ text: ${shape.label}, shape: ${shape.value} })">${shape.label}</vk-button>
+  `).join('')}
+</template>
+`
+
+const sizeSnippet = `
+<template>
+  ${sizeOptions.general.map(size => `
+  <vk-button @click="() => createNotification({ text: ${size.label}, size: ${size.value} })">${size.label}</vk-button>
+  `).join('')}
+</template>
+`
+
+const gravitySnippet = `
+<template>
+  ${gravityOptions.map(gravity => `
+  <vk-button @click="() => createNotification({ text: ${gravity.label}, gravity: ${gravity.value} })">${gravity.label}</vk-button>
+  `).join('')}
+</template>
+`
+
+const positionSnippet = `
+<template>
+  ${positionOptions.map(position => `
+  <vk-button @click="() => createNotification({ text: ${position.label}, position: ${position.value} })">${position.label}</vk-button>
+  `).join('')}
+</template>
+`
+
+const flatSnippet = `
+<template>
+
+  <vk-button @click="() => createNotification({ text: Flat, flat: true })">Flat</vk-button>
+
+</template>
+`
+
+const closeSnippet = `
+<template>
+
+  <vk-button @click="() => createNotification({ text: Close, close: true })">Close</vk-button>
+
+</template>
+`
+
+const stopOnFocusSnippet = `
+<template>
+
+  <vk-button @click="() => createNotification({ text: Stop On Focus, stopOnFocus: true })">Stop On Focus</vk-button>
+
+</template>
+`
 </script>
 
 <template>
@@ -269,7 +349,10 @@ const { notificationCode } = useCodeBlock('vk-notification')
         </vk-button>
 
         <template #code>
-          <code-block :code="notificationCode('color', colorOptions)" />
+          <code-block
+            :code="`${scriptCode}${colorSnippet}`"
+            :copy="`${scriptCode}${colorSnippet}`"
+          />
         </template>
       </example-section>
 
@@ -287,7 +370,10 @@ const { notificationCode } = useCodeBlock('vk-notification')
         </vk-button>
 
         <template #code>
-          <code-block :code="notificationCode('variant', variantOptions.withGradientAndLine)" />
+          <code-block
+            :code="`${scriptCode}${variantSnippet}`"
+            :copy="`${scriptCode}${variantSnippet}`"
+          />
         </template>
       </example-section>
 
@@ -306,7 +392,10 @@ const { notificationCode } = useCodeBlock('vk-notification')
         </vk-button>
 
         <template #code>
-          <code-block :code="notificationCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="`${scriptCode}${shapeSnippet}`"
+            :copy="`${scriptCode}${shapeSnippet}`"
+          />
         </template>
       </example-section>
 
@@ -325,7 +414,10 @@ const { notificationCode } = useCodeBlock('vk-notification')
         </vk-button>
 
         <template #code>
-          <code-block :code="notificationCode('size', sizeOptions.general)" />
+          <code-block
+            :code="`${scriptCode}${sizeSnippet}`"
+            :copy="`${scriptCode}${sizeSnippet}`"
+          />
         </template>
       </example-section>
 
@@ -344,7 +436,10 @@ const { notificationCode } = useCodeBlock('vk-notification')
         </vk-button>
 
         <template #code>
-          <code-block :code="notificationCode('gravity', gravityOptions)" />
+          <code-block
+            :code="`${scriptCode}${gravitySnippet}`"
+            :copy="`${scriptCode}${gravitySnippet}`"
+          />
         </template>
       </example-section>
 
@@ -363,7 +458,10 @@ const { notificationCode } = useCodeBlock('vk-notification')
         </vk-button>
 
         <template #code>
-          <code-block :code="notificationCode('position', positionOptions)" />
+          <code-block
+            :code="`${scriptCode}${positionSnippet}`"
+            :copy="`${scriptCode}${positionSnippet}`"
+          />
         </template>
       </example-section>
 
@@ -377,7 +475,10 @@ const { notificationCode } = useCodeBlock('vk-notification')
         </vk-button>
 
         <template #code>
-          <code-block :code="notificationCode('flat', [{ label: 'Flat', value: 'true' }])" />
+          <code-block
+            :code="`${scriptCode}${flatSnippet}`"
+            :copy="`${scriptCode}${flatSnippet}`"
+          />
         </template>
       </example-section>
 
@@ -391,7 +492,10 @@ const { notificationCode } = useCodeBlock('vk-notification')
         </vk-button>
 
         <template #code>
-          <code-block :code="notificationCode('close', [{ label: 'Close', value: 'true' }])" />
+          <code-block
+            :code="`${scriptCode}${closeSnippet}`"
+            :copy="`${scriptCode}${closeSnippet}`"
+          />
         </template>
       </example-section>
 
@@ -405,7 +509,10 @@ const { notificationCode } = useCodeBlock('vk-notification')
         </vk-button>
 
         <template #code>
-          <code-block :code="notificationCode('stopOnFocus', [{ label: 'Stop On Focus', value: 'true' }])" />
+          <code-block
+            :code="`${scriptCode}${stopOnFocusSnippet}`"
+            :copy="`${scriptCode}${stopOnFocusSnippet}`"
+          />
         </template>
       </example-section>
     </template>

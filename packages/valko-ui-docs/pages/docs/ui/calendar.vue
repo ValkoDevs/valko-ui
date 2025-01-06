@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TableItem, CalendarProps, SelectOption } from '#valkoui'
 
@@ -418,7 +419,15 @@ const calendarEmits: TableItem[] = [
 
 const [ model, parsedModel, adapter ] = useDateAdapter(form)
 
-const { generalCode } = useCodeBlock('vk-calendar')
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-calendar')
+
+const scriptCode = `
+<script setup lang="ts">
+const [ model, _, adapter ] = useDateAdapter({ format: 'YYYY-MM-DD' })
+<\/script>
+`
+
+const snippetProps = ' v-model="model" :adapter="adapter"'
 </script>
 
 <template>
@@ -504,7 +513,10 @@ const { generalCode } = useCodeBlock('vk-calendar')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
+          />
         </template>
       </example-section>
 
@@ -526,7 +538,10 @@ const { generalCode } = useCodeBlock('vk-calendar')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.general)" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
+          />
         </template>
       </example-section>
 
@@ -548,7 +563,10 @@ const { generalCode } = useCodeBlock('vk-calendar')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
+          />
         </template>
       </example-section>
 
@@ -570,7 +588,10 @@ const { generalCode } = useCodeBlock('vk-calendar')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
+          />
         </template>
       </example-section>
 
@@ -582,7 +603,10 @@ const { generalCode } = useCodeBlock('vk-calendar')
         />
 
         <template #code>
-          <code-block code="<vk-calendar disable-weekends></vk-calendar>" />
+          <code-block
+            :code="`${scriptCode}\n${booleanSnippet('disable-weekends', snippetProps)}`"
+            :copy="`${scriptCode}\n${booleanSnippet('disable-weekends', snippetProps)}`"
+          />
         </template>
       </example-section>
 
@@ -609,7 +633,10 @@ const { generalCode } = useCodeBlock('vk-calendar')
         </div>
 
         <template #code>
-          <code-block code="<vk-calendar disabled-dates=&quot;[1705320000000, 1710936000000]&quot;></vk-calendar>" />
+          <code-block
+            :code="`${scriptCode}\n${booleanSnippet(':disabled-dates=&quot;[1705320000000, 1710936000000]&quot;', snippetProps)}`"
+            :copy="`${scriptCode}\n${booleanSnippet(':disabled-dates=&quot;[1705320000000, 1710936000000]&quot;', snippetProps)}`"
+          />
         </template>
       </example-section>
     </template>

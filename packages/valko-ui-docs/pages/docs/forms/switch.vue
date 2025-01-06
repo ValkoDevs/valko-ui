@@ -113,7 +113,7 @@ const emitData: TableItem[] = [
   }
 ]
 
-const { generalCode } = useCodeBlock('vk-switch')
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-switch')
 </script>
 
 <template>
@@ -200,7 +200,10 @@ const { generalCode } = useCodeBlock('vk-switch')
         />
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block
+            :code="defaultSnippet('color', colorOptions)"
+            :copy="defaultSnippet('color', colorOptions)"
+          />
         </template>
       </example-section>
 
@@ -217,7 +220,10 @@ const { generalCode } = useCodeBlock('vk-switch')
         />
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.general)" />
+          <code-block
+            :code="defaultSnippet('variant', variantOptions.general)"
+            :copy="defaultSnippet('variant', variantOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -234,7 +240,10 @@ const { generalCode } = useCodeBlock('vk-switch')
         />
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('shape', shapeOptions.general)"
+            :copy="defaultSnippet('shape', shapeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -251,7 +260,10 @@ const { generalCode } = useCodeBlock('vk-switch')
         />
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('size', sizeOptions.general)"
+            :copy="defaultSnippet('size', sizeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -259,7 +271,10 @@ const { generalCode } = useCodeBlock('vk-switch')
         <vk-switch disabled />
 
         <template #code>
-          <code-block code="<vk-switch disabled></vk-switch>" />
+          <code-block
+            :code="booleanSnippet('disabled')"
+            :copy="booleanSnippet('disabled')"
+          />
         </template>
       </example-section>
 
@@ -270,7 +285,10 @@ const { generalCode } = useCodeBlock('vk-switch')
         />
 
         <template #code>
-          <code-block code="<vk-switch readonly></vk-switch>" />
+          <code-block
+            :code="booleanSnippet('readonly')"
+            :copy="booleanSnippet('readonly')"
+          />
         </template>
       </example-section>
 
@@ -287,7 +305,10 @@ const { generalCode } = useCodeBlock('vk-switch')
         />
 
         <template #code>
-          <code-block :code="generalCode('label-position', position)" />
+          <code-block
+            :code="defaultSnippet('label-position', position)"
+            :copy="defaultSnippet('label-position', position)"
+          />
         </template>
       </example-section>
     </template>

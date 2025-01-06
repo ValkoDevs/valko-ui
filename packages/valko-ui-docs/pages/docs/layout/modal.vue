@@ -18,14 +18,6 @@ const backdropOptions: SelectOption<Backdrop>[] = [
   { value: 'transparent', label: 'Transparent' }
 ]
 
-const exampleSectionForm = reactive({
-  shapes: Array(shapeOptions.general.length).fill(false),
-  sizes: Array(sizeOptions.withFull.length).fill(false),
-  backdrop: Array(backdropOptions.length).fill(false),
-  flat: false,
-  closable: false
-})
-
 const modalProps: TableItem[] = [
   {
     key: 'shapeProp',
@@ -104,6 +96,10 @@ const modalSlots = [
   }
 ]
 
+const modalStates = reactive<Record<string, boolean>>({})
+
+const toggleModal = (modalId: string) => modalStates[modalId] = !modalStates[modalId]
+
 const scriptCode = `
 <script setup lang="ts">
 const modalStates = reactive<Record<string, boolean>>({})
@@ -112,7 +108,7 @@ const toggleModal = (modalId: string) => modalStates[modalId] = !modalStates[mod
 <\/script>
 `
 
-const shapeCode = `
+const shapeSnippet = `
 ${scriptCode}
 <template>
 ${shapeOptions.general.map(shape => `
@@ -121,7 +117,7 @@ ${shapeOptions.general.map(shape => `
   </vk-button>
 
   <vk-modal
-    is-open="modalStates['${shape.value}']"
+    :is-open="modalStates['${shape.value}']"
     shape="${shape.value}"
     @close="toggleModal('${shape.value}')"
   >
@@ -131,7 +127,7 @@ ${shapeOptions.general.map(shape => `
 </template>
 `
 
-const sizeCode = `
+const sizeSnippet = `
 ${scriptCode}
 <template>
 ${sizeOptions.general.map(size => `
@@ -140,7 +136,7 @@ ${sizeOptions.general.map(size => `
   </vk-button>
 
   <vk-modal
-    is-open="modalStates['${size.value}']"
+    :is-open="modalStates['${size.value}']"
     size="${size.value}"
     @close="toggleModal('${size.value}')"
   >
@@ -150,7 +146,7 @@ ${sizeOptions.general.map(size => `
 </template>
 `
 
-const backdropCode = `
+const backdropSnippet = `
 ${scriptCode}
 <template>
 ${backdropOptions.map(backdrop => `
@@ -159,7 +155,7 @@ ${backdropOptions.map(backdrop => `
   </vk-button>
 
   <vk-modal
-    is-open="modalStates['${backdrop.value}']"
+    :is-open="modalStates['${backdrop.value}']"
     backdrop="${backdrop.value}"
     @close="toggleModal('${backdrop.value}')"
   >
@@ -169,7 +165,7 @@ ${backdropOptions.map(backdrop => `
 </template>
 `
 
-const closableCode = `
+const closableSnippet = `
 <script setup lang="ts">
 const isOpen = ref(false)
 
@@ -183,7 +179,7 @@ const toggleModal = () => isOpen = !isOpen
   </vk-button>
 
   <vk-modal
-    is-open="isOpen"
+    :is-open="isOpen"
     closable
     @close="toggleModal"
   >
@@ -193,7 +189,7 @@ const toggleModal = () => isOpen = !isOpen
 </template>
 `
 
-const flatCode = `
+const flatSnippet = `
 <script setup lang="ts">
 const isOpen = ref(false)
 
@@ -207,7 +203,7 @@ const toggleModal = () => isOpen = !isOpen
   </vk-button>
 
   <vk-modal
-    is-open="isOpen"
+    :is-open="isOpen"
     Flat
     @close="toggleModal"
   >
@@ -292,17 +288,17 @@ const toggleModal = () => isOpen = !isOpen
         classes="grid-cols-2 md:grid-cols-3"
       >
         <div
-          v-for="(shape, index) in shapeOptions.general"
+          v-for="shape in shapeOptions.general"
           :key="shape.value"
         >
-          <vk-button @click="() => {exampleSectionForm['shapes'][index] = true}">
+          <vk-button @click="toggleModal(shape.value)">
             {{ shape.label }}
           </vk-button>
           <vk-modal
             :shape="shape.value"
-            :is-open="exampleSectionForm['shapes'][index]"
+            :is-open="modalStates[shape.value]"
             :title="shape.label"
-            @close="() => {exampleSectionForm['shapes'][index] = false}"
+            @close="toggleModal(shape.value)"
           >
             <template #default>
               {{ shape.label }} Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
@@ -312,7 +308,10 @@ const toggleModal = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block :code="shapeCode" />
+          <code-block
+            :code="shapeSnippet"
+            :copy="shapeSnippet"
+          />
         </template>
       </example-section>
 
@@ -321,17 +320,17 @@ const toggleModal = () => isOpen = !isOpen
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <div
-          v-for="(size, index) in sizeOptions.withFull"
+          v-for="size in sizeOptions.withFull"
           :key="size.value"
         >
-          <vk-button @click="() => {exampleSectionForm['sizes'][index] = true}">
+          <vk-button @click="toggleModal(size.value)">
             {{ size.label }}
           </vk-button>
           <vk-modal
             :size="size.value"
-            :is-open="exampleSectionForm['sizes'][index]"
+            :is-open="modalStates[size.value]"
             :title="size.label"
-            @close="() => {exampleSectionForm['sizes'][index] = false}"
+            @close="toggleModal(size.value)"
           >
             <template #default>
               {{ size.label }} Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
@@ -341,7 +340,10 @@ const toggleModal = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block :code="sizeCode" />
+          <code-block
+            :code="sizeSnippet"
+            :copy="sizeSnippet"
+          />
         </template>
       </example-section>
 
@@ -350,17 +352,17 @@ const toggleModal = () => isOpen = !isOpen
         classes="grid-cols-2 md:grid-cols-3"
       >
         <div
-          v-for="(backdrop, index) in backdropOptions"
+          v-for="backdrop in backdropOptions"
           :key="backdrop.value"
         >
-          <vk-button @click="() => {exampleSectionForm['backdrop'][index] = true}">
+          <vk-button @click="toggleModal(backdrop.value)">
             {{ backdrop.label }}
           </vk-button>
           <vk-modal
             :backdrop="backdrop.value"
-            :is-open="exampleSectionForm['backdrop'][index]"
+            :is-open="modalStates[backdrop.value]"
             :title="backdrop.label"
-            @close="() => {exampleSectionForm['backdrop'][index] = false}"
+            @close="toggleModal(backdrop.value)"
           >
             <template #default>
               {{ backdrop.label }} Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
@@ -370,18 +372,21 @@ const toggleModal = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block :code="backdropCode" />
+          <code-block
+            :code="backdropSnippet"
+            :copy="backdropSnippet"
+          />
         </template>
       </example-section>
 
       <example-section title="Flat">
-        <vk-button @click="() => {exampleSectionForm['flat'] = true}">
+        <vk-button @click="toggleModal('flat')">
           Flat
         </vk-button>
         <vk-modal
-          :is-open="exampleSectionForm['flat']"
+          :is-open="modalStates['flat']"
           title="Flat"
-          @close="() => {exampleSectionForm['flat'] = false}"
+          @close="toggleModal('flat')"
         >
           <template #default>
             Flat Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
@@ -390,19 +395,22 @@ const toggleModal = () => isOpen = !isOpen
         </vk-modal>
 
         <template #code>
-          <code-block :code="flatCode" />
+          <code-block
+            :code="flatSnippet"
+            :copy="flatSnippet"
+          />
         </template>
       </example-section>
 
       <example-section title="Closable">
-        <vk-button @click="() => {exampleSectionForm['closable'] = true}">
+        <vk-button @click="toggleModal('closable')">
           Closable
         </vk-button>
         <vk-modal
-          :is-open="exampleSectionForm['closable']"
+          :is-open="modalStates['closable']"
           title="Closable"
           closable
-          @close="() => {exampleSectionForm['closable'] = false}"
+          @close="toggleModal('closable')"
         >
           <template #default>
             Closable Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
@@ -412,7 +420,7 @@ const toggleModal = () => isOpen = !isOpen
               color="primary"
               size="sm"
               class="self-end"
-              @click="() => {exampleSectionForm['closable'] = false}"
+              @click="toggleModal('closable')"
             >
               Accept & close
             </vk-button>
@@ -420,7 +428,10 @@ const toggleModal = () => isOpen = !isOpen
         </vk-modal>
 
         <template #code>
-          <code-block :code="closableCode" />
+          <code-block
+            :code="closableSnippet"
+            :copy="closableSnippet"
+          />
         </template>
       </example-section>
     </template>

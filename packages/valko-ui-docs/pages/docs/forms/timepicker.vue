@@ -420,12 +420,30 @@ const timepickerStates = reactive({
   disabledTimes: false
 })
 
-const { pickersCode } = useCodeBlock('vk-timepicker')
+const { defaultSnippet } = useCodeSnippet('vk-timepicker')
 
 const scriptCode = `
 <script setup lang="ts">
 const [ model, parsedModel, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
 <\/script>
+`
+const snippetProps = ' v-model="model" :parsed-model="parsedModel" :adapter="adapter"'
+
+const minmaxSnippet = `
+${scriptCode}
+
+<template>
+  <vk-timepicker min-time="1730710858"${snippetProps}></vk-timepicker>
+  <vk-timepicker max-time="1730739658"${snippetProps}></vk-timepicker>
+</template>
+`
+
+const disabledTimesSnippet = `
+${scriptCode}
+
+<template>
+  <vk-timepicker "disabled-times="[1730721658, 1730725258]"${snippetProps}></vk-timepicker>
+</template>
 `
 </script>
 
@@ -536,7 +554,10 @@ const [ model, parsedModel, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${pickersCode('color', colorOptions)}`" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
+          />
         </template>
       </example-section>
 
@@ -557,7 +578,10 @@ const [ model, parsedModel, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${pickersCode('variant', variantOptions.general)}`" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
+          />
         </template>
       </example-section>
 
@@ -578,7 +602,10 @@ const [ model, parsedModel, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${pickersCode('shape', shapeOptions.general)}`" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
+          />
         </template>
       </example-section>
 
@@ -599,7 +626,10 @@ const [ model, parsedModel, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${pickersCode('size', sizeOptions.general)}`" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
+          />
         </template>
       </example-section>
 
@@ -627,7 +657,10 @@ const [ model, parsedModel, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n<vk-timepicker v-model=&quot;model&quot; :adapter=&quot;adapter&quot; parsed-model=&quot;parsedModel&quot; min-time=&quot;1730710858&quot;></vk-timepicker>\n\<vk-timepicker v-model=&quot;model&quot; :adapter=&quot;adapter&quot; parsed-model=&quot;parsedModel&quot; max-time=&quot;1730739658&quot;></vk-timepicker>`" />
+          <code-block
+            :code="minmaxSnippet"
+            :copy="minmaxSnippet"
+          />
         </template>
       </example-section>
 
@@ -643,7 +676,10 @@ const [ model, parsedModel, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n<vk-timepicker v-model=&quot;model&quot; :adapter=&quot;adapter&quot; parsed-model=&quot;parsedModel&quot; disabled-times=&quot;[1730721658, 1730725258]&quot;></vk-timepicker>`" />
+          <code-block
+            :code="disabledTimesSnippet"
+            :copy="disabledTimesSnippet"
+          />
         </template>
       </example-section>
     </template>

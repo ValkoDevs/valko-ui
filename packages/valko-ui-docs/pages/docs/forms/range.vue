@@ -178,7 +178,13 @@ watch([() => form.min, () => form.max, () => form.step], () => {
 })
 
 form.labels = generateLabels()
-const { generalCode } = useCodeBlock('vk-range')
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-range')
+
+const isDoubleSnippet = `
+<template>
+  <vk-range :is-double="true" />
+</template>
+`
 </script>
 
 <template>
@@ -285,7 +291,10 @@ const { generalCode } = useCodeBlock('vk-range')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block
+            :code="defaultSnippet('color', colorOptions)"
+            :copy="defaultSnippet('color', colorOptions)"
+          />
         </template>
       </example-section>
 
@@ -302,7 +311,10 @@ const { generalCode } = useCodeBlock('vk-range')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.withGradient)" />
+          <code-block
+            :code="defaultSnippet('variant', variantOptions.withGradient)"
+            :copy="defaultSnippet('variant', variantOptions.withGradient)"
+          />
         </template>
       </example-section>
 
@@ -319,7 +331,10 @@ const { generalCode } = useCodeBlock('vk-range')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('shape', shapeOptions.general)"
+            :copy="defaultSnippet('shape', shapeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -336,17 +351,21 @@ const { generalCode } = useCodeBlock('vk-range')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('size', sizeOptions.general)"
+            :copy="defaultSnippet('size', sizeOptions.general)"
+          />
         </template>
       </example-section>
 
       <example-section title="Double">
-        <vk-range
-          :is-double="true"
-        />
+        <vk-range is-double />
 
         <template #code>
-          <code-block code="<vk-range :is-double='true'></vk-range>" />
+          <code-block
+            :code="isDoubleSnippet"
+            :copy="isDoubleSnippet"
+          />
         </template>
       </example-section>
 
@@ -357,7 +376,10 @@ const { generalCode } = useCodeBlock('vk-range')
         />
 
         <template #code>
-          <code-block code="<vk-range show-steps></vk-range>" />
+          <code-block
+            :code="booleanSnippet('show-steps')"
+            :copy="booleanSnippet('show-steps')"
+          />
         </template>
       </example-section>
 
@@ -377,7 +399,10 @@ const { generalCode } = useCodeBlock('vk-range')
         </div>
 
         <template #code>
-          <code-block code="<vk-range striped></vk-range>" />
+          <code-block
+            :code="defaultSnippet('color', colorOptions, ' striped')"
+            :copy="defaultSnippet('color', colorOptions, ' striped')"
+          />
         </template>
       </example-section>
     </template>

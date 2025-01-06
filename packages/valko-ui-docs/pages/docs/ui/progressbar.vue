@@ -90,7 +90,7 @@ const progressbarSlots: TableItem[] = [
   }
 ]
 
-const { slotCode, twoPropsCode } = useCodeBlock('vk-progressbar')
+const { slotSnippet, defaultSnippet, booleanSnippet } = useCodeSnippet('vk-progressbar')
 </script>
 
 <template>
@@ -176,7 +176,10 @@ const { slotCode, twoPropsCode } = useCodeBlock('vk-progressbar')
         </vk-progressbar>
 
         <template #code>
-          <code-block :code="slotCode('color', colorOptions)" />
+          <code-block
+            :code="slotSnippet('color', colorOptions)"
+            :copy="slotSnippet('color', colorOptions)"
+          />
         </template>
       </example-section>
 
@@ -194,7 +197,10 @@ const { slotCode, twoPropsCode } = useCodeBlock('vk-progressbar')
         </vk-progressbar>
 
         <template #code>
-          <code-block :code="slotCode('variant', variantOptions.withGradient)" />
+          <code-block
+            :code="slotSnippet('variant', variantOptions.withGradient)"
+            :copy="slotSnippet('variant', variantOptions.withGradient)"
+          />
         </template>
       </example-section>
 
@@ -212,7 +218,10 @@ const { slotCode, twoPropsCode } = useCodeBlock('vk-progressbar')
         </vk-progressbar>
 
         <template #code>
-          <code-block :code="slotCode('shape', shapeOptions.withLine)" />
+          <code-block
+            :code="slotSnippet('shape', shapeOptions.withLine)"
+            :copy="slotSnippet('shape', shapeOptions.withLine)"
+          />
         </template>
       </example-section>
 
@@ -230,7 +239,10 @@ const { slotCode, twoPropsCode } = useCodeBlock('vk-progressbar')
         </vk-progressbar>
 
         <template #code>
-          <code-block :code="slotCode('size', sizeOptions.general)" />
+          <code-block
+            :code="slotSnippet('size', sizeOptions.general)"
+            :copy="slotSnippet('size', sizeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -240,7 +252,10 @@ const { slotCode, twoPropsCode } = useCodeBlock('vk-progressbar')
         </vk-progressbar>
 
         <template #code>
-          <code-block code="<vk-progressbar indeterminate>Indeterminate</vk-progressbar>" />
+          <code-block
+            :code="booleanSnippet('indeterminate', '', true)"
+            :copy="booleanSnippet('indeterminate', '', true)"
+          />
         </template>
       </example-section>
 
@@ -259,7 +274,10 @@ const { slotCode, twoPropsCode } = useCodeBlock('vk-progressbar')
         </vk-progressbar>
 
         <template #code>
-          <code-block :code="twoPropsCode('color', colorOptions, 'striped')" />
+          <code-block
+            :code="defaultSnippet('color', colorOptions, ' striped')"
+            :copy="defaultSnippet('color', colorOptions, ' striped')"
+          />
         </template>
       </example-section>
 
@@ -272,7 +290,10 @@ const { slotCode, twoPropsCode } = useCodeBlock('vk-progressbar')
         </vk-progressbar>
 
         <template #code>
-          <code-block code="<vk-progressbar indeterminate striped>Indeterminate & Striped</vk-progressbar>" />
+          <code-block
+            :code="booleanSnippet('indeterminate striped', '', true)"
+            :copy="booleanSnippet('indeterminate striped', '', true)"
+          />
         </template>
       </example-section>
 
@@ -285,7 +306,10 @@ const { slotCode, twoPropsCode } = useCodeBlock('vk-progressbar')
         </vk-progressbar>
 
         <template #code>
-          <code-block code="<vk-progressbar :buffer=&quot;50&quot; :progress=&quot;25&quot;>Buffer</vk-progressbar>" />
+          <code-block
+            :code="booleanSnippet(':buffer=&quot;50&quot; :progress=&quot;25&quot;', '', true)"
+            :copy="booleanSnippet(':buffer=&quot;50&quot; :progress=&quot;25&quot;', '', true)"
+          />
         </template>
       </example-section>
     </template>

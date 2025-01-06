@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TimeProps, TableItem, SelectOption } from '#valkoui'
 
@@ -358,6 +359,33 @@ const timeFormats: TableItem[] = [
 watch(disabledRef, (newVal) => form.disabledTimes = newVal ? [1730721658, 1730725258] : undefined)
 
 const [ model, parsedModel, adapter ] = useTimeAdapter(form)
+
+const { defaultSnippet } = useCodeSnippet('vk-time')
+
+const scriptCode = `
+<script setup lang="ts">
+const [ model, _, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
+<\/script>
+`
+
+const snippetProps = ' v-model="model" :adapter="adapter"'
+
+const minmaxSnippet = `
+${scriptCode}
+
+<template>
+  <vk-time min-time="1730710858"${snippetProps}></vk-time>
+  <vk-time max-time="1730739658"${snippetProps}></vk-time>
+</template>
+`
+
+const disabledTimesSnippet = `
+${scriptCode}
+
+<template>
+  <vk-time "disabled-times="[1730721658, 1730725258]"${snippetProps}></vk-time>
+</template>
+`
 </script>
 
 <template>
@@ -459,6 +487,13 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :color="color.value"
           />
         </div>
+
+        <template #code>
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
+          />
+        </template>
       </example-section>
 
       <example-section
@@ -476,6 +511,13 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :variant="variant.value"
           />
         </div>
+
+        <template #code>
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
+          />
+        </template>
       </example-section>
 
       <example-section
@@ -493,6 +535,13 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :shape="shape.value"
           />
         </div>
+
+        <template #code>
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
+          />
+        </template>
       </example-section>
 
       <example-section
@@ -510,6 +559,13 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :size="size.value"
           />
         </div>
+
+        <template #code>
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
+          />
+        </template>
       </example-section>
 
       <example-section
@@ -530,6 +586,13 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :max-time="1730739658"
           />
         </div>
+
+        <template #code>
+          <code-block
+            :code="minmaxSnippet"
+            :copy="minmaxSnippet"
+          />
+        </template>
       </example-section>
 
       <example-section title="Disabled Times">
@@ -537,6 +600,13 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
           :adapter="adapter"
           :disabled-times="form.disabledTimes"
         />
+
+        <template #code>
+          <code-block
+            :code="disabledTimesSnippet"
+            :copy="disabledTimesSnippet"
+          />
+        </template>
       </example-section>
     </template>
 

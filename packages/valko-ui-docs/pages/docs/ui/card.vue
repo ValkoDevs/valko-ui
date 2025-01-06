@@ -133,7 +133,119 @@ const onClick = () => useNotification({ text: 'Pressed' })
 const nextImage = () => useNotification({ text: 'Loading next image...' })
 const randomImage = () => useNotification({ text: 'Loading random image...' })
 
-const { generalCode } = useCodeBlock('vk-card')
+const variantSnippet = `
+<template>
+${variantOptions.general.map(variant => `
+  <vk-card variant="${variant.value}">
+    <vk-card-image src="imgSrc" />
+    <vk-card-header>
+      ${variant.label}
+    </vk-card-header>
+    <vk-card-body>
+      <h3 class="font-semibold">
+        Best nature pics 2024!
+      </h3>
+      <p>Lorem</p>
+    </vk-card-body>
+  </vk-card>`).join('\n')}
+
+</template>
+`
+
+const sizeSnippet = `
+<template>
+${sizeOptions.withFull.map(size => `
+  <vk-card size="${size.value}">
+    <vk-card-image src="imgSrc" />
+    <vk-card-header>
+      ${size.label}
+    </vk-card-header>
+    <vk-card-body>
+      <h3 class="font-semibold">
+        Best nature pics 2024!
+      </h3>
+      <p>Lorem</p>
+    </vk-card-body>
+  </vk-card>`).join('\n')}
+
+</template>
+`
+
+const layoutSnippet = `
+<template>
+${layoutOptions.map(layout => `
+  <vk-card layout="${layout.value}">
+    <vk-card-image src="imgSrc" />
+    <vk-card-header>
+      ${layout.label}
+    </vk-card-header>
+    <vk-card-body>
+      <h3 class="font-semibold">
+        Best nature pics 2024!
+      </h3>
+      <p>Lorem</p>
+    </vk-card-body>
+  </vk-card>`).join('\n')}
+
+</template>
+`
+
+const shapeSnippet = `
+<template>
+${shapeOptions.general.map(shape => `
+  <vk-card shape="${shape.value}">
+    <vk-card-image src="imgSrc" />
+    <vk-card-header>
+      ${shape.label}
+    </vk-card-header>
+    <vk-card-body>
+      <h3 class="font-semibold">
+        Best nature pics 2024!
+      </h3>
+      <p>Lorem</p>
+    </vk-card-body>
+  </vk-card>`).join('\n')}
+
+</template>
+`
+
+const flatSnippet = `
+<template>
+
+  <vk-card flat>
+    <vk-card-image src="imgSrc" />
+    <vk-card-header>
+      Flat
+    </vk-card-header>
+    <vk-card-body>
+      <h3 class="font-semibold">
+        Best nature pics 2024!
+      </h3>
+      <p>Lorem</p>
+    </vk-card-body>
+  </vk-card>
+
+</template>
+`
+
+const pressableSnippet = `
+<template>
+
+  <vk-card is-pressable>
+    <vk-card-image src="imgSrc" />
+    <vk-card-header>
+      Pressable
+    </vk-card-header>
+    <vk-card-body>
+      <h3 class="font-semibold">
+        Best nature pics 2024!
+      </h3>
+      <p>Lorem</p>
+    </vk-card-body>
+  </vk-card>
+
+</template>
+`
 </script>
 
 <template>
@@ -275,7 +387,10 @@ const { generalCode } = useCodeBlock('vk-card')
         </vk-card>
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.general)" />
+          <code-block
+            :code="variantSnippet"
+            :copy="variantSnippet"
+          />
         </template>
       </example-section>
 
@@ -304,7 +419,10 @@ const { generalCode } = useCodeBlock('vk-card')
         </vk-card>
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="shapeSnippet"
+            :copy="shapeSnippet"
+          />
         </template>
       </example-section>
 
@@ -333,7 +451,10 @@ const { generalCode } = useCodeBlock('vk-card')
         </vk-card>
 
         <template #code>
-          <code-block :code="generalCode('layout', layoutOptions)" />
+          <code-block
+            :code="layoutSnippet"
+            :copy="layoutSnippet"
+          />
         </template>
       </example-section>
 
@@ -363,7 +484,10 @@ const { generalCode } = useCodeBlock('vk-card')
         </vk-card>
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.withFull)" />
+          <code-block
+            :code="sizeSnippet"
+            :copy="sizeSnippet"
+          />
         </template>
       </example-section>
 
@@ -388,7 +512,10 @@ const { generalCode } = useCodeBlock('vk-card')
         </vk-card>
 
         <template #code>
-          <code-block code="<vk-card is-pressable></vk-card>" />
+          <code-block
+            :code="pressableSnippet"
+            :copy="pressableSnippet"
+          />
         </template>
       </example-section>
 
@@ -410,7 +537,10 @@ const { generalCode } = useCodeBlock('vk-card')
         </vk-card>
 
         <template #code>
-          <code-block code="<vk-card flat></vk-card>" />
+          <code-block
+            :code="flatSnippet"
+            :copy="flatSnippet"
+          />
         </template>
       </example-section>
     </template>

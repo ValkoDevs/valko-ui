@@ -135,7 +135,7 @@ const emitData: TableItem[] = [
   }
 ]
 
-const { generalCode } = useCodeBlock('vk-checkbox')
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-checkbox')
 
 /*
 * This watch function controls the indeterminate checkbox
@@ -244,7 +244,10 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block
+            :code="defaultSnippet('color', colorOptions)"
+            :copy="defaultSnippet('color', colorOptions)"
+          />
         </template>
       </example-section>
 
@@ -261,7 +264,10 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.general)" />
+          <code-block
+            :code="defaultSnippet('variant', variantOptions.general)"
+            :copy="defaultSnippet('variant', variantOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -278,7 +284,10 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('shape', shapeOptions.general)"
+            :copy="defaultSnippet('shape', shapeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -295,7 +304,10 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('size', sizeOptions.general)"
+            :copy="defaultSnippet('size', sizeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -307,7 +319,10 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block code="<vk-checkbox disabled></vk-checkbox>" />
+          <code-block
+            :code="booleanSnippet('disabled')"
+            :copy="booleanSnippet('disabled')"
+          />
         </template>
       </example-section>
 
@@ -319,7 +334,10 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block code="<vk-checkbox flat></vk-checkbox>" />
+          <code-block
+            :code="booleanSnippet('flat')"
+            :copy="booleanSnippet('flat')"
+          />
         </template>
       </example-section>
 
@@ -331,7 +349,10 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block code="<vk-checkbox readonly></vk-checkbox>" />
+          <code-block
+            :code="booleanSnippet('readonly')"
+            :copy="booleanSnippet('readonly')"
+          />
         </template>
       </example-section>
 
@@ -343,7 +364,10 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block code="<vk-checkbox indeterminate></vk-checkbox>" />
+          <code-block
+            :code="booleanSnippet('indeterminate')"
+            :copy="booleanSnippet('indeterminate')"
+          />
         </template>
       </example-section>
 
@@ -360,7 +384,10 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block :code="generalCode('label-position', position)" />
+          <code-block
+            :code="defaultSnippet('label-position', position)"
+            :copy="defaultSnippet('label-position', position)"
+          />
         </template>
       </example-section>
     </template>

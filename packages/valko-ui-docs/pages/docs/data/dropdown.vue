@@ -172,7 +172,9 @@ const items: Item[] = [
 <\/script>
 `
 
-const { twoPropsCode } = useCodeBlock('vk-dropdown')
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-dropdown')
+
+const snippetProps = ' :items="items"'
 </script>
 
 <template>
@@ -249,10 +251,9 @@ const { twoPropsCode } = useCodeBlock('vk-dropdown')
 
         <template #code>
           <code-block
-            :code="scriptCode"
-            language="js"
+            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n${twoPropsCode('color', colorOptions, 'items=&quot;items&quot;')}\n</template>`" />
         </template>
       </example-section>
 
@@ -271,10 +272,9 @@ const { twoPropsCode } = useCodeBlock('vk-dropdown')
 
         <template #code>
           <code-block
-            :code="scriptCode"
-            language="js"
+            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.withGradientAndLink, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.withGradientAndLink, snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n${twoPropsCode('variant', variantOptions.withGradientAndLink, 'items=&quot;items&quot;')}\n</template>`" />
         </template>
       </example-section>
 
@@ -293,10 +293,9 @@ const { twoPropsCode } = useCodeBlock('vk-dropdown')
 
         <template #code>
           <code-block
-            :code="scriptCode"
-            language="js"
+            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n${twoPropsCode('shape', shapeOptions.general, 'items=&quot;items&quot;')}\n</template>`" />
         </template>
       </example-section>
 
@@ -315,10 +314,9 @@ const { twoPropsCode } = useCodeBlock('vk-dropdown')
 
         <template #code>
           <code-block
-            :code="scriptCode"
-            language="js"
+            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n${twoPropsCode('size', sizeOptions.general, 'items=&quot;items&quot;')}\n</template>`" />
         </template>
       </example-section>
 
@@ -331,10 +329,9 @@ const { twoPropsCode } = useCodeBlock('vk-dropdown')
 
         <template #code>
           <code-block
-            :code="scriptCode"
-            language="js"
+            :code="`${scriptCode}\n${booleanSnippet('flat', snippetProps)}`"
+            :copy="`${scriptCode}\n${booleanSnippet('flat', snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n<vk-dropdown items=&quot;items&quot; flat></vk-dropdown>\n</template>`" />
         </template>
       </example-section>
 
@@ -348,10 +345,9 @@ const { twoPropsCode } = useCodeBlock('vk-dropdown')
 
         <template #code>
           <code-block
-            :code="scriptCode"
-            language="js"
+            :code="`${scriptCode}\n${booleanSnippet('disabled', snippetProps)}`"
+            :copy="`${scriptCode}\n${booleanSnippet('disabled', snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n<vk-dropdown items=&quot;items&quot; disabled></vk-dropdown>\n</template>`" />
         </template>
       </example-section>
     </template>

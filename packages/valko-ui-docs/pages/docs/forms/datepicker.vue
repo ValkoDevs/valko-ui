@@ -436,13 +436,15 @@ const datePickerStates = reactive({
   disableWeekends: false
 })
 
-const { pickersCode } = useCodeBlock('vk-datepicker')
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-datepicker')
 
 const scriptCode = `
 <script setup lang="ts">
-const [ model, parsedModel, adapter ] = useDateAdapter({ format: YYYY-MM-DD })
+const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM-DD' })
 <\/script>
 `
+
+const snippetProps = ' v-model="model" :parsed-model="parsedModel" :adapter="adapter"'
 </script>
 
 <template>
@@ -536,7 +538,8 @@ const [ model, parsedModel, adapter ] = useDateAdapter({ format: YYYY-MM-DD })
 
         <template #code>
           <code-block
-            :code="`${scriptCode}\n${pickersCode('color', colorOptions)}`"
+            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
           />
         </template>
       </example-section>
@@ -561,7 +564,8 @@ const [ model, parsedModel, adapter ] = useDateAdapter({ format: YYYY-MM-DD })
 
         <template #code>
           <code-block
-            :code="`${scriptCode}\n${pickersCode('variant', variantOptions.general)}`"
+            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
           />
         </template>
       </example-section>
@@ -586,7 +590,8 @@ const [ model, parsedModel, adapter ] = useDateAdapter({ format: YYYY-MM-DD })
 
         <template #code>
           <code-block
-            :code="`${scriptCode}\n${pickersCode('shape', shapeOptions.general)}`"
+            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
           />
         </template>
       </example-section>
@@ -611,7 +616,8 @@ const [ model, parsedModel, adapter ] = useDateAdapter({ format: YYYY-MM-DD })
 
         <template #code>
           <code-block
-            :code="`${scriptCode}\n${pickersCode('size', sizeOptions.general)}`"
+            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
           />
         </template>
       </example-section>
@@ -630,7 +636,8 @@ const [ model, parsedModel, adapter ] = useDateAdapter({ format: YYYY-MM-DD })
 
         <template #code>
           <code-block
-            :code="`${scriptCode}\n<vk-datepicker v-model=&quot;model&quot; :adapter=&quot;adapter&quot; :parsedModel=&quot;parsedModel&quot; disable-weekends>`"
+            :code="`${scriptCode}\n${booleanSnippet('disable-weekends', snippetProps)}`"
+            :copy="`${scriptCode}\n${booleanSnippet('disable-weekends', snippetProps)}`"
           />
         </template>
       </example-section>

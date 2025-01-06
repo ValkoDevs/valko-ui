@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TableItem, Crumb, BreadcrumbsProps } from '#valkoui'
 import { useNotification } from '#valkoui'
@@ -171,7 +172,49 @@ const breadcrumbsEmits: TableItem[] = [
   }
 ]
 
-const { generalCode } = useCodeBlock('vk-breadcrumbs')
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-breadcrumbs')
+
+const scriptCode = `
+<script setup lang="ts">
+import type { Crumb } from '#valkoui'
+
+const crumbs: Crumb[] = [
+  { key: 'home', title: 'Home' },
+  { key: 'music', title: 'Music' },
+  { key: 'artist', title: 'Artist' },
+  { key: 'album', title: 'Album' },
+  { key: 'song', title: 'Song' }
+]
+<\/script>
+`
+
+const disabledScript = `
+<script setup lang="ts">
+import type { Crumb } from '#valkoui'
+
+const crumbs: Crumb[] = [
+  { key: 'home', title: 'Home', disabled: true },
+  { key: 'music', title: 'Music' },
+  { key: 'artist', title: 'Artist', disabled: true },
+  { key: 'album', title: 'Album' },
+  { key: 'song', title: 'Song', disabled: true }
+]
+<\/script>
+`
+
+const iconScript = `
+<script setup lang="ts">
+import type { Crumb } from '#valkoui'
+
+const crumbs: Crumb[] = [
+  { key: 'home', title: 'Home', leftIcon: 'home' },
+  { key: 'music', title: 'Music', rightIcon: 'file-music' },
+  { key: 'artist', title: 'Artist', leftIcon: 'user' },
+  { key: 'album', title: 'Album', rightIcon: 'playlist' },
+  { key: 'song', title: 'Song', leftIcon: 'music' }
+]
+<\/script>
+`
 </script>
 
 <template>
@@ -244,7 +287,10 @@ const { generalCode } = useCodeBlock('vk-breadcrumbs')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, ' :crumbs=&quot;crumbs&quot;')}`"
+            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, ' :crumbs=&quot;crumbs&quot;')}`"
+          />
         </template>
       </example-section>
 
@@ -265,7 +311,10 @@ const { generalCode } = useCodeBlock('vk-breadcrumbs')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.withLink)" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.withLink, ' :crumbs=&quot;crumbs&quot;')}`"
+            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.withLink, ' :crumbs=&quot;crumbs&quot;')}`"
+          />
         </template>
       </example-section>
 
@@ -286,7 +335,10 @@ const { generalCode } = useCodeBlock('vk-breadcrumbs')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, ' :crumbs=&quot;crumbs&quot;')}`"
+            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, ' :crumbs=&quot;crumbs&quot;')}`"
+          />
         </template>
       </example-section>
 
@@ -307,7 +359,10 @@ const { generalCode } = useCodeBlock('vk-breadcrumbs')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, ' :crumbs=&quot;crumbs&quot;')}`"
+            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, ' :crumbs=&quot;crumbs&quot;')}`"
+          />
         </template>
       </example-section>
 
@@ -318,7 +373,10 @@ const { generalCode } = useCodeBlock('vk-breadcrumbs')
         />
 
         <template #code>
-          <code-block code="<vk-breadcrumbs flat></vk-breadcrumbs>" />
+          <code-block
+            :code="`${scriptCode}${booleanSnippet('flat', ' :crumbs=&quot;crumbs&quot;')}`"
+            :copy="`${scriptCode}${booleanSnippet('flat', ' :crumbs=&quot;crumbs&quot;')}`"
+          />
         </template>
       </example-section>
 
@@ -326,7 +384,10 @@ const { generalCode } = useCodeBlock('vk-breadcrumbs')
         <vk-breadcrumbs :crumbs="crumbsDisabled" />
 
         <template #code>
-          <code-block code="<vk-breadcrumbs crumbs=[{ key: 'home', title: 'Home', disabled: true  }]></vk-breadcrumbs>" />
+          <code-block
+            :code="`${disabledScript}${booleanSnippet(':crumbs=&quot;crumbs&quot;')}`"
+            :copy="`${disabledScript}${booleanSnippet(':crumbs=&quot;crumbs&quot;')}`"
+          />
         </template>
       </example-section>
 
@@ -334,7 +395,10 @@ const { generalCode } = useCodeBlock('vk-breadcrumbs')
         <vk-breadcrumbs :crumbs="crumbsIcons" />
 
         <template #code>
-          <code-block code="<vk-breadcrumbs crumbs=[{ key: 'home', title: 'Home', leftIcon: 'home' }, { key: 'music', title: 'Music', rightIcon: 'file-music' }]></vk-breadcrumbs>" />
+          <code-block
+            :code="`${iconScript}${booleanSnippet(':crumbs=&quot;crumbs&quot;')}`"
+            :copy="`${iconScript}${booleanSnippet(':crumbs=&quot;crumbs&quot;')}`"
+          />
         </template>
       </example-section>
     </template>

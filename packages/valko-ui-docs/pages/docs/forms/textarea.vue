@@ -99,7 +99,7 @@ const emitData: TableItem [] = [
   }
 ]
 
-const { generalCode } = useCodeBlock('vk-textarea')
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-textarea')
 </script>
 
 <template>
@@ -186,7 +186,10 @@ const { generalCode } = useCodeBlock('vk-textarea')
         />
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block
+            :code="defaultSnippet('color', colorOptions)"
+            :copy="defaultSnippet('color', colorOptions)"
+          />
         </template>
       </example-section>
 
@@ -202,7 +205,10 @@ const { generalCode } = useCodeBlock('vk-textarea')
         />
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.general)" />
+          <code-block
+            :code="defaultSnippet('variant', variantOptions.general)"
+            :copy="defaultSnippet('variant', variantOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -218,7 +224,10 @@ const { generalCode } = useCodeBlock('vk-textarea')
         />
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('shape', shapeOptions.general)"
+            :copy="defaultSnippet('shape', shapeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -234,7 +243,10 @@ const { generalCode } = useCodeBlock('vk-textarea')
         />
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('size', sizeOptions.general)"
+            :copy="defaultSnippet('size', sizeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -245,7 +257,10 @@ const { generalCode } = useCodeBlock('vk-textarea')
         />
 
         <template #code>
-          <code-block code="<vk-textarea disabled></vk-textarea>" />
+          <code-block
+            :code="booleanSnippet('disabled')"
+            :copy="booleanSnippet('disabled')"
+          />
         </template>
       </example-section>
 
@@ -257,7 +272,10 @@ const { generalCode } = useCodeBlock('vk-textarea')
         />
 
         <template #code>
-          <code-block code="<vk-textarea readonly></vk-textarea>" />
+          <code-block
+            :code="booleanSnippet('readonly')"
+            :copy="booleanSnippet('readonly')"
+          />
         </template>
       </example-section>
     </template>

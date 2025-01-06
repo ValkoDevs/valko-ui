@@ -518,7 +518,9 @@ const dataTable = useClientSideDataTable({
 <\/script>
 `
 
-const { twoPropsCode } = useCodeBlock('vk-data-table')
+const snippetProps = ' v-bind="dataTable" @on-sort="dataTable.onSort" @on-filter="dataTable.onFilter" @on-page-change="dataTable.onPageChange" @on-limit-change="dataTable.onLimitChange" @on-select="dataTable.onSelect" @on-select-all="dataTable.onSelectAll"'
+
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-data-table')
 </script>
 
 <template>
@@ -609,10 +611,9 @@ const { twoPropsCode } = useCodeBlock('vk-data-table')
 
         <template #code>
           <code-block
-            :code="scriptCode"
-            language="js"
+            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n${twoPropsCode('color', colorOptions, ':headers=&quot;propHeaders&quot; :data=&quot;propData&quot;')}\n</template>`" />
         </template>
       </example-section>
 
@@ -633,6 +634,13 @@ const { twoPropsCode } = useCodeBlock('vk-data-table')
             class="mt-4"
           />
         </div>
+
+        <template #code>
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
+          />
+        </template>
       </example-section>
 
       <example-section title="Shapes">
@@ -652,6 +660,13 @@ const { twoPropsCode } = useCodeBlock('vk-data-table')
             class="mt-4"
           />
         </div>
+
+        <template #code>
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
+          />
+        </template>
       </example-section>
 
       <example-section title="Sizes">
@@ -671,6 +686,13 @@ const { twoPropsCode } = useCodeBlock('vk-data-table')
             class="mt-4"
           />
         </div>
+
+        <template #code>
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
+          />
+        </template>
       </example-section>
 
       <example-section title="Striped">
@@ -681,6 +703,13 @@ const { twoPropsCode } = useCodeBlock('vk-data-table')
           label="Page Size"
           class="mt-4"
         />
+
+        <template #code>
+          <code-block
+            :code="`${scriptCode}\n${booleanSnippet('striped', snippetProps)}`"
+            :copy="`${scriptCode}\n${booleanSnippet('striped', snippetProps)}`"
+          />
+        </template>
       </example-section>
     </template>
 

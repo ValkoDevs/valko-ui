@@ -228,7 +228,9 @@ const data: TableItem[] = [
 <\/script>
 `
 
-const { twoPropsCode } = useCodeBlock('vk-table')
+const snippetProps = ' :headers="headers" :data="data"'
+
+const { defaultSnippet } = useCodeSnippet('vk-table')
 </script>
 
 <template>
@@ -290,10 +292,9 @@ const { twoPropsCode } = useCodeBlock('vk-table')
 
         <template #code>
           <code-block
-            :code="scriptCode"
-            language="js"
+            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n${twoPropsCode('variant', variantOptions.general, ':headers=&quot;headers&quot; :data=&quot;data&quot;')}\n</template>`" />
         </template>
       </example-section>
 
@@ -315,10 +316,9 @@ const { twoPropsCode } = useCodeBlock('vk-table')
 
         <template #code>
           <code-block
-            :code="scriptCode"
-            language="js"
+            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n${twoPropsCode('shape', shapeOptions.general, ':headers=&quot;headers&quot; :data=&quot;data&quot;')}\n</template>`" />
         </template>
       </example-section>
 
@@ -340,10 +340,9 @@ const { twoPropsCode } = useCodeBlock('vk-table')
 
         <template #code>
           <code-block
-            :code="scriptCode"
-            language="js"
+            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
+            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n${twoPropsCode('size', sizeOptions.general, ':headers=&quot;headers&quot; :data=&quot;data&quot;')}\n</template>`" />
         </template>
       </example-section>
     </template>

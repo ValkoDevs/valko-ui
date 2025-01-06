@@ -1,15 +1,9 @@
 <script setup lang="ts">
-import type { SelectOption, SpinnerProps, TableItem } from '#valkoui'
+import type { SpinnerProps, TableItem } from '#valkoui'
 
 const names = [
   { value: 'loader', label: 'Loader' },
   { value: 'loader-2', label: 'Loader-2' }
-]
-
-const colors: SelectOption[] = [
-  ...colorOptions,
-  { value: 'black', label: 'Black' },
-  { value: 'white', label: 'White' }
 ]
 
 const form = ref<SpinnerProps>({
@@ -54,7 +48,7 @@ const spinnerProps: TableItem[] = [
   }
 ]
 
-const { generalCode } = useCodeBlock('vk-spinner')
+const { defaultSnippet } = useCodeSnippet('vk-spinner')
 </script>
 
 <template>
@@ -76,7 +70,7 @@ const { generalCode } = useCodeBlock('vk-spinner')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colors"
+        :options="colorOptions"
       />
       <vk-select
         v-model="form.name"
@@ -102,7 +96,7 @@ const { generalCode } = useCodeBlock('vk-spinner')
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <div
-          v-for="color in colors"
+          v-for="color in colorOptions"
           :key="color.value"
           class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
@@ -113,7 +107,10 @@ const { generalCode } = useCodeBlock('vk-spinner')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('color', colors)" />
+          <code-block
+            :code="defaultSnippet('color', colorOptions)"
+            :copy="defaultSnippet('color', colorOptions)"
+          />
         </template>
       </example-section>
 
@@ -133,7 +130,10 @@ const { generalCode } = useCodeBlock('vk-spinner')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('name', names)" />
+          <code-block
+            :code="defaultSnippet('name', names)"
+            :copy="defaultSnippet('name', names)"
+          />
         </template>
       </example-section>
 
@@ -153,7 +153,10 @@ const { generalCode } = useCodeBlock('vk-spinner')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('size', sizeOptions.general)"
+            :copy="defaultSnippet('size', sizeOptions.general)"
+          />
         </template>
       </example-section>
     </template>

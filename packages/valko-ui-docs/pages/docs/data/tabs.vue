@@ -175,11 +175,11 @@ const scriptIcons = `
 import type { Tab } from '#valkoui'
 
 const tabs: Tab[] = [
-  { key: 'withIconPhotos', title: 'Photos', leftIcon: 'photo' },
-  { key: 'withIconVideos', title: 'Videos', rightIcon: 'movie' },
-  { key: 'withIconFavorite', title: 'Favorite', leftIcon: 'heart' },
-  { key: 'withIconTrending', title: 'Trending', leftIcon: 'flame', rightIcon: 'flame' },
-  { key: 'withIconFriends', title: 'Friends', rightIcon: 'friends' }
+  { key: 'photos', title: 'Photos', leftIcon: 'photo' },
+  { key: 'videos', title: 'Videos', rightIcon: 'movie' },
+  { key: 'favorite', title: 'Favorite', leftIcon: 'heart' },
+  { key: 'trending', title: 'Trending', leftIcon: 'flame', rightIcon: 'flame' },
+  { key: 'friends', title: 'Friends', rightIcon: 'friends' }
 ]
 <\/script>
 `
@@ -189,16 +189,18 @@ const scriptDisabled = `
 import type { Tab } from '#valkoui'
 
 const tabs: Tab[] = [
-  { key: 'withDisabledPhotos', title: 'Photos', disabled: true },
-  { key: 'withDisabledVideos', title: 'Videos' },
-  { key: 'withDisabledFavorite', title: 'Favorite', disabled: true },
-  { key: 'withDisabledTrending', title: 'Trending' },
-  { key: 'withDisabledFriends', title: 'Friends' }
+  { key: 'photos', title: 'Photos', disabled: true },
+  { key: 'videos', title: 'Videos' },
+  { key: 'favorite', title: 'Favorite', disabled: true },
+  { key: 'trending', title: 'Trending' },
+  { key: 'friends', title: 'Friends' }
 ]
 <\/script>
 `
 
-const { twoPropsCode } = useCodeBlock('vk-tabs')
+const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-tabs')
+
+const snippetProps = ' :tabs="tabs"'
 </script>
 
 <template>
@@ -279,10 +281,9 @@ const { twoPropsCode } = useCodeBlock('vk-tabs')
 
         <template #code>
           <code-block
-            :code="scriptNoIcons"
-            language="js"
+            :code="`${scriptNoIcons}\n${slotSnippet('color', colorOptions, snippetProps)}`"
+            :copy="`${scriptNoIcons}\n${slotSnippet('color', colorOptions, snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n${twoPropsCode('color', colorOptions, ':tabs=&quot;tabs&quot;')}\n</template>`" />
         </template>
       </example-section>
 
@@ -303,10 +304,9 @@ const { twoPropsCode } = useCodeBlock('vk-tabs')
 
         <template #code>
           <code-block
-            :code="scriptNoIcons"
-            language="js"
+            :code="`${scriptNoIcons}\n${slotSnippet('variant', variantOptions.withGradient, snippetProps)}`"
+            :copy="`${scriptNoIcons}\n${slotSnippet('variant', variantOptions.withGradient, snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n${twoPropsCode('variant', variantOptions.withGradient, ':tabs=&quot;tabs&quot;')}\n</template>`" />
         </template>
       </example-section>
 
@@ -328,10 +328,9 @@ const { twoPropsCode } = useCodeBlock('vk-tabs')
 
         <template #code>
           <code-block
-            :code="scriptNoIcons"
-            language="js"
+            :code="`${scriptNoIcons}\n${slotSnippet('shape', shapeOptions.withLine, snippetProps)}`"
+            :copy="`${scriptNoIcons}\n${slotSnippet('shape', shapeOptions.withLine, snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n${twoPropsCode('shape', shapeOptions.withLine, ':tabs=&quot;tabs&quot;')}\n</template>`" />
         </template>
       </example-section>
 
@@ -352,10 +351,9 @@ const { twoPropsCode } = useCodeBlock('vk-tabs')
 
         <template #code>
           <code-block
-            :code="scriptNoIcons"
-            language="js"
+            :code="`${scriptNoIcons}\n${slotSnippet('size', sizeOptions.general, snippetProps)}`"
+            :copy="`${scriptNoIcons}\n${slotSnippet('size', sizeOptions.general, snippetProps)}`"
           />
-          <code-block :code="`\n<template>\n${twoPropsCode('size', sizeOptions.general, ':tabs=&quot;tabs&quot;')}\n</template>`" />
         </template>
       </example-section>
 
@@ -367,10 +365,9 @@ const { twoPropsCode } = useCodeBlock('vk-tabs')
 
         <template #code>
           <code-block
-            :code="scriptNoIcons"
-            language="js"
+            :code="`${scriptNoIcons}\n${booleanSnippet('grow', snippetProps, true)}`"
+            :copy="`${scriptNoIcons}\n${booleanSnippet('grow', snippetProps, true)}`"
           />
-          <code-block :code="`\n<template>\n<vk-tabs :tabs=&quot;tabs&quot; grow></vk-tabs>\n</template>`" />
         </template>
       </example-section>
 
@@ -381,10 +378,9 @@ const { twoPropsCode } = useCodeBlock('vk-tabs')
 
         <template #code>
           <code-block
-            :code="scriptIcons"
-            language="js"
+            :code="`${scriptIcons}\n${booleanSnippet('', snippetProps, true)}`"
+            :copy="`${scriptIcons}\n${booleanSnippet('', snippetProps, true)}`"
           />
-          <code-block :code="`\n<template>\n<vk-tabs :tabs=&quot;tabs&quot;></vk-tabs>\n</template>`" />
         </template>
       </example-section>
 
@@ -395,10 +391,9 @@ const { twoPropsCode } = useCodeBlock('vk-tabs')
 
         <template #code>
           <code-block
-            :code="scriptDisabled"
-            language="js"
+            :code="`${scriptDisabled}\n${booleanSnippet('', snippetProps, true)}`"
+            :copy="`${scriptDisabled}\n${booleanSnippet('', snippetProps, true)}`"
           />
-          <code-block :code="`\n<template>\n<vk-tabs :tabs=&quot;tabs&quot;></vk-tabs>\n</template>`" />
         </template>
       </example-section>
     </template>

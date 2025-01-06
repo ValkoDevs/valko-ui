@@ -77,7 +77,7 @@ const avatarProps: TableItem[] = [
 
 const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
 
-const { generalCode, twoPropsCode } = useCodeBlock('vk-avatar')
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-avatar')
 </script>
 
 <template>
@@ -149,7 +149,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-avatar')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block
+            :code="defaultSnippet('color', colorOptions)"
+            :copy="defaultSnippet('color', colorOptions)"
+          />
         </template>
       </example-section>
 
@@ -170,7 +173,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-avatar')
         </div>
 
         <template #code>
-          <code-block :code="twoPropsCode('color', colorOptions, `name=&quot;Name Here&quot;`)" />
+          <code-block
+            :code="defaultSnippet('color', colorOptions, ' name=&quot;Name Here&quot;')"
+            :copy="defaultSnippet('color', colorOptions, ' name=&quot;Name Here&quot;')"
+          />
         </template>
       </example-section>
 
@@ -190,7 +196,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-avatar')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.withGradient)" />
+          <code-block
+            :code="defaultSnippet('variant', variantOptions.withGradient)"
+            :copy="defaultSnippet('variant', variantOptions.withGradient)"
+          />
         </template>
       </example-section>
 
@@ -211,7 +220,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-avatar')
         </div>
 
         <template #code>
-          <code-block :code="twoPropsCode('variant', variantOptions.withGradient, `src=&quot;Img source&quot;`)" />
+          <code-block
+            :code="defaultSnippet('variant', variantOptions.withGradient, ` src=&quot;Img source&quot;`)"
+            :copy="defaultSnippet('variant', variantOptions.withGradient, ` src=&quot;Img source&quot;`)"
+          />
         </template>
       </example-section>
 
@@ -231,7 +243,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-avatar')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('shape', shapeOptions.general)"
+            :copy="defaultSnippet('shape', shapeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -251,7 +266,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-avatar')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('size', sizeOptions.general)"
+            :copy="defaultSnippet('size', sizeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -261,7 +279,10 @@ const { generalCode, twoPropsCode } = useCodeBlock('vk-avatar')
         />
 
         <template #code>
-          <code-block code="<vk-avatar flat></vk-avatar>" />
+          <code-block
+            :code="booleanSnippet('flat')"
+            :copy="booleanSnippet('flat')"
+          />
         </template>
       </example-section>
     </template>

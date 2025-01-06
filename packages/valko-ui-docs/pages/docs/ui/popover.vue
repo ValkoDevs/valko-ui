@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { PopoverProps, TableItem, Placement, SelectOption } from '#valkoui'
 
@@ -91,16 +92,41 @@ const popoverSlots: TableItem[] = [
   }
 ]
 
-const popoverStates = reactive({
-  placements: Array(placementOptions.length).fill(false),
-  shapes: Array(shapeOptions.general.length).fill(false)
-})
+const popoverStates = reactive<Record<string, boolean>>({})
 
-const togglePopover = (category: keyof Record<'placements' | 'shapes', boolean>, index: number) => {
-  popoverStates[category][index] = !popoverStates[category][index]
-}
+const togglePopover = (popoverId: string) => popoverStates[popoverId] = !popoverStates[popoverId]
 
-const { generalCode } = useCodeBlock('vk-popover')
+const handleClose = (popoverId: string) => popoverStates[popoverId] = false
+
+const scriptCode = `
+<script setup lang="ts">
+const popoverStates = reactive<Record<string, boolean>>({})
+
+const togglePopover = (popoverId: string) => popoverStates[popoverId] = !popoverStates[popoverId]
+
+const handleClose = (popoverId: string) => popoverStates[popoverId] = false
+<\/script>
+`
+
+const colorSnippet = `
+<template>
+  ${colorOptions.map(color => `
+  <vk-popover color="${color.value}" :is-open="popoverStates['${color.value}']" @close="handleClose('${color.value}')">
+    <vk-button @click="togglePopover('${color.value}')">${color.label}</vk-button>
+  </vk-popover>
+  `).join('')}
+</template>
+`
+
+const placementSnippet = `
+<template>
+  ${placementOptions.map(placement => `
+  <vk-popover placement="${placement.value}" :is-open="popoverStates['${placement.value}']" @close="handleClose('${placement.value}')">
+    <vk-button @click="togglePopover('${placement.value}')">${placement.label}</vk-button>
+  </vk-popover>
+  `).join('')}
+</template>
+`
 </script>
 
 <template>
@@ -148,20 +174,23 @@ const { generalCode } = useCodeBlock('vk-popover')
         classes="grid-cols-2 md:grid-cols-3"
       >
         <vk-popover
-          v-for="(shape, index) in shapeOptions.general"
+          v-for="shape in shapeOptions.general"
           :key="shape.value"
           :shape="shape.value"
-          :is-open="popoverStates['shapes'][index]"
+          :is-open="popoverStates[shape.value]"
           :text="shape.label"
-          @close="() => popoverStates['shapes'][index] = false"
+          @close="handleClose(shape.value)"
         >
-          <vk-button @click="() => togglePopover('shapes', index)">
+          <vk-button @click="togglePopover(shape.value)">
             {{ shape.label }}
           </vk-button>
         </vk-popover>
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="`${scriptCode}${colorSnippet}`"
+            :copy="`${scriptCode}${colorSnippet}`"
+          />
         </template>
       </example-section>
 
@@ -170,20 +199,23 @@ const { generalCode } = useCodeBlock('vk-popover')
         classes="grid-cols-2 md:grid-cols-4"
       >
         <vk-popover
-          v-for="(placement, index) in placementOptions"
+          v-for="placement in placementOptions"
           :key="placement.value"
           :placement="placement.value"
-          :is-open="popoverStates['placements'][index]"
+          :is-open="popoverStates[placement.value]"
           :text="placement.label"
-          @close="() => popoverStates['placements'][index] = false"
+          @close="handleClose(placement.value)"
         >
-          <vk-button @click="() => togglePopover('placements', index)">
+          <vk-button @click="togglePopover(placement.value)">
             {{ placement.label }}
           </vk-button>
         </vk-popover>
 
         <template #code>
-          <code-block :code="generalCode('placement', placementOptions)" />
+          <code-block
+            :code="`${scriptCode}${placementSnippet}`"
+            :copy="`${scriptCode}${placementSnippet}`"
+          />
         </template>
       </example-section>
     </template>

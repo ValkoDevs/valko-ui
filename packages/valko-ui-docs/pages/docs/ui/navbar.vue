@@ -88,7 +88,93 @@ const navbarSlots: TableItem[] = [
   }
 ]
 
-const { generalCode } = useCodeBlock('vk-navbar')
+const colorSnippet = `
+<template>
+  ${colorOptions.map(color => `
+  <vk-navbar color="${color.value}">
+    <vk-icon name="brand-vue" />
+    <span class="font-semibold ml-4">${color.label}</span>
+  </vk-navbar>
+  `).join('')}
+</template>
+`
+
+const variantSnippet = `
+<template>
+  ${variantOptions.withGradient.map(variant => `
+  <vk-navbar variant="${variant.value}">
+    <vk-icon name="brand-vue" />
+    <span class="font-semibold ml-4">${variant.label}</span>
+  </vk-navbar>
+  `).join('')}
+</template>
+`
+
+const sizeSnippet = `
+<template>
+  ${sizeOptions.general.map(size => `
+  <vk-navbar size="${size.value}">
+    <vk-icon name="brand-vue" />
+    <span class="font-semibold ml-4">${size.label}</span>
+  </vk-navbar>
+  `).join('')}
+</template>
+`
+
+const shapeSnippet = `
+<template>
+  ${shapeOptions.general.map(shape => `
+  <vk-navbar shape="${shape.value}">
+    <vk-icon name="brand-vue" />
+    <span class="font-semibold ml-4">${shape.label}</span>
+  </vk-navbar>
+  `).join('')}
+</template>
+`
+
+const floatingSnippet = `
+<template>
+
+  <vk-navbar floating>
+    <vk-icon name="brand-vue" />
+    <span class="font-semibold ml-4">Floating</span>
+  </vk-navbar>
+
+</template>
+`
+
+const flatSnippet = `
+<template>
+
+  <vk-navbar flat>
+    <vk-icon name="brand-vue" />
+    <span class="font-semibold ml-4">Flat</span>
+  </vk-navbar>
+
+</template>
+`
+
+const fixedSnippet = `
+<template>
+
+  <vk-navbar fixed>
+    <vk-icon name="brand-vue" />
+    <span class="font-semibold ml-4">Fixed</span>
+  </vk-navbar>
+
+</template>
+`
+
+const verticalSnippet = `
+<template>
+
+  <vk-navbar vertical>
+    <vk-icon name="brand-vue" />
+    <span class="font-semibold ml-4">Vertical</span>
+  </vk-navbar>
+
+</template>
+`
 </script>
 
 <template>
@@ -108,7 +194,7 @@ const { generalCode } = useCodeBlock('vk-navbar')
         :vertical="form.vertical"
       >
         <vk-icon
-          name="brand-vite"
+          name="brand-vue"
           :size="form.size"
         />
       </vk-navbar>
@@ -168,14 +254,17 @@ const { generalCode } = useCodeBlock('vk-navbar')
           :color="color.value"
         >
           <vk-icon
-            name="brand-vite"
+            name="brand-vue"
             size="md"
           />
           <span class="font-semibold ml-4">{{ color.label }}</span>
         </vk-navbar>
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block
+            :code="colorSnippet"
+            :copy="colorSnippet"
+          />
         </template>
       </example-section>
 
@@ -189,14 +278,17 @@ const { generalCode } = useCodeBlock('vk-navbar')
           :variant="variant.value"
         >
           <vk-icon
-            name="brand-vite"
+            name="brand-vue"
             size="md"
           />
           <span class="font-semibold ml-4">{{ variant.label }}</span>
         </vk-navbar>
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.withGradient)" />
+          <code-block
+            :code="variantSnippet"
+            :copy="variantSnippet"
+          />
         </template>
       </example-section>
 
@@ -210,7 +302,7 @@ const { generalCode } = useCodeBlock('vk-navbar')
           :shape="shape.value"
         >
           <vk-icon
-            name="brand-vite"
+            name="brand-vue"
             size="md"
             class="text-white"
           />
@@ -218,7 +310,10 @@ const { generalCode } = useCodeBlock('vk-navbar')
         </vk-navbar>
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="shapeSnippet"
+            :copy="shapeSnippet"
+          />
         </template>
       </example-section>
 
@@ -232,7 +327,7 @@ const { generalCode } = useCodeBlock('vk-navbar')
           :size="size.value"
         >
           <vk-icon
-            name="brand-vite"
+            name="brand-vue"
             size="md"
             class="text-white"
           />
@@ -240,7 +335,10 @@ const { generalCode } = useCodeBlock('vk-navbar')
         </vk-navbar>
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="sizeSnippet"
+            :copy="sizeSnippet"
+          />
         </template>
       </example-section>
 
@@ -249,7 +347,7 @@ const { generalCode } = useCodeBlock('vk-navbar')
           floating
         >
           <vk-icon
-            name="brand-vite"
+            name="brand-vue"
             size="md"
             class="text-white"
           />
@@ -257,7 +355,10 @@ const { generalCode } = useCodeBlock('vk-navbar')
         </vk-navbar>
 
         <template #code>
-          <code-block code="<vk-navbar floating></vk-navbar>" />
+          <code-block
+            :code="floatingSnippet"
+            :copy="floatingSnippet"
+          />
         </template>
       </example-section>
 
@@ -266,7 +367,7 @@ const { generalCode } = useCodeBlock('vk-navbar')
           flat
         >
           <vk-icon
-            name="brand-vite"
+            name="brand-vue"
             size="md"
             class="text-white"
           />
@@ -274,7 +375,10 @@ const { generalCode } = useCodeBlock('vk-navbar')
         </vk-navbar>
 
         <template #code>
-          <code-block code="<vk-navbar flat></vk-navbar>" />
+          <code-block
+            :code="flatSnippet"
+            :copy="flatSnippet"
+          />
         </template>
       </example-section>
 
@@ -284,7 +388,7 @@ const { generalCode } = useCodeBlock('vk-navbar')
             fixed
           >
             <vk-icon
-              name="brand-vite"
+              name="brand-vue"
               size="md"
               class="text-white"
             />
@@ -293,7 +397,10 @@ const { generalCode } = useCodeBlock('vk-navbar')
         </div>
 
         <template #code>
-          <code-block code="<vk-navbar fixed></vk-navbar>" />
+          <code-block
+            :code="fixedSnippet"
+            :copy="fixedSnippet"
+          />
         </template>
       </example-section>
 
@@ -303,7 +410,7 @@ const { generalCode } = useCodeBlock('vk-navbar')
             vertical
           >
             <vk-icon
-              name="brand-vite"
+              name="brand-vue"
               size="md"
               class="text-white"
             />
@@ -312,7 +419,10 @@ const { generalCode } = useCodeBlock('vk-navbar')
         </div>
 
         <template #code>
-          <code-block code="<vk-navbar vertical></vk-navbar>" />
+          <code-block
+            :code="verticalSnippet"
+            :copy="verticalSnippet"
+          />
         </template>
       </example-section>
     </template>

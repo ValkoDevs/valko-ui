@@ -101,7 +101,7 @@ const slotData: TableItem[] = [
 
 const onClick = () => useNotification({ text: 'Clicked' })
 
-const { slotCode } = useCodeBlock('vk-button')
+const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-button')
 </script>
 
 <template>
@@ -187,7 +187,10 @@ const { slotCode } = useCodeBlock('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block :code="slotCode('color', colorOptions)" />
+          <code-block
+            :code="slotSnippet('color', colorOptions)"
+            :copy="slotSnippet('color', colorOptions)"
+          />
         </template>
       </example-section>
 
@@ -204,7 +207,10 @@ const { slotCode } = useCodeBlock('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block :code="slotCode('variant', variantOptions.withGradientAndLink)" />
+          <code-block
+            :code="slotSnippet('variant', variantOptions.withGradientAndLink)"
+            :copy="slotSnippet('variant', variantOptions.withGradientAndLink)"
+          />
         </template>
       </example-section>
 
@@ -221,7 +227,10 @@ const { slotCode } = useCodeBlock('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block :code="slotCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="slotSnippet('shape', shapeOptions.general)"
+            :copy="slotSnippet('shape', shapeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -238,7 +247,10 @@ const { slotCode } = useCodeBlock('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block :code="slotCode('size', sizeOptions.general)" />
+          <code-block
+            :code="slotSnippet('size', sizeOptions.general)"
+            :copy="slotSnippet('size', sizeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -248,7 +260,10 @@ const { slotCode } = useCodeBlock('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block code="<vk-button flat>Flat</vk-button>" />
+          <code-block
+            :code="booleanSnippet('flat', '', true)"
+            :copy="booleanSnippet('flat', '', true)"
+          />
         </template>
       </example-section>
 
@@ -258,7 +273,10 @@ const { slotCode } = useCodeBlock('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block code="<vk-button disabled>Disabled</vk-button>" />
+          <code-block
+            :code="booleanSnippet('disabled', '', true)"
+            :copy="booleanSnippet('disabled', '', true)"
+          />
         </template>
       </example-section>
 
@@ -268,7 +286,10 @@ const { slotCode } = useCodeBlock('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block code="<vk-button condensed>Condensed</vk-button>" />
+          <code-block
+            :code="booleanSnippet('condensed', '', true)"
+            :copy="booleanSnippet('condensed', '', true)"
+          />
         </template>
       </example-section>
 
@@ -278,7 +299,10 @@ const { slotCode } = useCodeBlock('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block code="<vk-button block>Block</vk-button>" />
+          <code-block
+            :code="booleanSnippet('block', '', true)"
+            :copy="booleanSnippet('block', '', true)"
+          />
         </template>
       </example-section>
 
@@ -288,7 +312,10 @@ const { slotCode } = useCodeBlock('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block code="<vk-button loading>Loading</vk-button>" />
+          <code-block
+            :code="booleanSnippet('loading', '', true)"
+            :copy="booleanSnippet('loading', '', true)"
+          />
         </template>
       </example-section>
     </template>

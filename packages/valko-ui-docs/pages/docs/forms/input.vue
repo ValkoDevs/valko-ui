@@ -194,7 +194,23 @@ const slotData: TableItem[] = [
   }
 ]
 
-const { generalCode, templateCode } = useCodeBlock('vk-input')
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-input')
+
+const iconSnippet = `
+<template>
+  <vk-input>
+    <template #leftIcon>
+      <vk-icon name="home" />
+    </template>
+  </vk-input>
+
+  <vk-input>
+    <template #rightIcon>
+      <vk-icon name="home" />
+    </template>
+  </vk-input>
+</template>
+`
 </script>
 
 <template>
@@ -307,7 +323,10 @@ const { generalCode, templateCode } = useCodeBlock('vk-input')
         />
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block
+            :code="defaultSnippet('color', colorOptions)"
+            :copy="defaultSnippet('color', colorOptions)"
+          />
         </template>
       </example-section>
 
@@ -323,7 +342,10 @@ const { generalCode, templateCode } = useCodeBlock('vk-input')
         />
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.general)" />
+          <code-block
+            :code="defaultSnippet('variant', variantOptions.general)"
+            :copy="defaultSnippet('variant', variantOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -339,7 +361,10 @@ const { generalCode, templateCode } = useCodeBlock('vk-input')
         />
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('shape', shapeOptions.general)"
+            :copy="defaultSnippet('shape', shapeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -355,7 +380,10 @@ const { generalCode, templateCode } = useCodeBlock('vk-input')
         />
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('size', sizeOptions.general)"
+            :copy="defaultSnippet('size', sizeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -371,7 +399,10 @@ const { generalCode, templateCode } = useCodeBlock('vk-input')
         />
 
         <template #code>
-          <code-block :code="generalCode('type', typeOptions)" />
+          <code-block
+            :code="defaultSnippet('type', typeOptions)"
+            :copy="defaultSnippet('type', typeOptions)"
+          />
         </template>
       </example-section>
 
@@ -382,7 +413,10 @@ const { generalCode, templateCode } = useCodeBlock('vk-input')
         />
 
         <template #code>
-          <code-block code="<vk-input disabled></vk-input>" />
+          <code-block
+            :code="booleanSnippet('disabled')"
+            :copy="booleanSnippet('disabled')"
+          />
         </template>
       </example-section>
 
@@ -393,7 +427,10 @@ const { generalCode, templateCode } = useCodeBlock('vk-input')
         />
 
         <template #code>
-          <code-block code="<vk-input readonly></vk-input>" />
+          <code-block
+            :code="booleanSnippet('readonly')"
+            :copy="booleanSnippet('readonly')"
+          />
         </template>
       </example-section>
 
@@ -404,7 +441,10 @@ const { generalCode, templateCode } = useCodeBlock('vk-input')
         />
 
         <template #code>
-          <code-block code="<vk-input clearable></vk-input>" />
+          <code-block
+            :code="booleanSnippet('clearable')"
+            :copy="booleanSnippet('clearable')"
+          />
         </template>
       </example-section>
 
@@ -429,7 +469,10 @@ const { generalCode, templateCode } = useCodeBlock('vk-input')
         </vk-input>
 
         <template #code>
-          <code-block :code="templateCode([{ hash: 'leftIcon', content: `<vk-icon name='home'>` }, { hash: 'rightIcon', content: `<vk-icon name='home'>` }])" />
+          <code-block
+            :code="iconSnippet"
+            :copy="iconSnippet"
+          />
         </template>
       </example-section>
     </template>

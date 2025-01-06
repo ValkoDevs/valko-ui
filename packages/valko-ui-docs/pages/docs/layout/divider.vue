@@ -57,7 +57,7 @@ const dividerProps: TableItem[] = [
   }
 ]
 
-const { generalCode } = useCodeBlock('vk-divider')
+const { defaultSnippet } = useCodeSnippet('vk-divider')
 </script>
 
 <template>
@@ -139,7 +139,7 @@ const { generalCode } = useCodeBlock('vk-divider')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block :code="defaultSnippet('color', colorOptions)" />
         </template>
       </example-section>
 
@@ -162,7 +162,7 @@ const { generalCode } = useCodeBlock('vk-divider')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.general)" />
+          <code-block :code="defaultSnippet('variant', variantOptions.general)" />
         </template>
       </example-section>
 
@@ -185,7 +185,7 @@ const { generalCode } = useCodeBlock('vk-divider')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block :code="defaultSnippet('shape', shapeOptions.general)" />
         </template>
       </example-section>
 
@@ -208,7 +208,7 @@ const { generalCode } = useCodeBlock('vk-divider')
         </div>
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block :code="defaultSnippet('size', sizeOptions.general)" />
         </template>
       </example-section>
 
@@ -239,7 +239,7 @@ const { generalCode } = useCodeBlock('vk-divider')
         </div>
 
         <template #code>
-          <code-block :code="`<vk-divider direction=&quot;horizontal&quot;></vk-divider>\n\<vk-divider direction=&quot;vertical&quot;></vk-divider>`" />
+          <code-block :code="defaultSnippet('direction', directionOptions)" />
         </template>
       </example-section>
     </template>

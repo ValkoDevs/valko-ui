@@ -13,7 +13,8 @@ const props = withDefaults(defineProps<NavbarProps>(), {
   shape: 'soft',
   fixed: false,
   flat: false,
-  floating: false
+  floating: false,
+  vertical: false
 })
 
 const classes = useStyle<NavbarProps, SlotStyles>(props, styles)

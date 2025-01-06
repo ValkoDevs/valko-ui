@@ -134,7 +134,7 @@ const radios = [
   { label: 'Radio-3', value: 'radio-3' }
 ]
 
-const { generalCode } = useCodeBlock('vk-radio')
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-radio')
 </script>
 
 <template>
@@ -225,7 +225,10 @@ const { generalCode } = useCodeBlock('vk-radio')
         />
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block
+            :code="defaultSnippet('color', colorOptions)"
+            :copy="defaultSnippet('color', colorOptions)"
+          />
         </template>
       </example-section>
 
@@ -244,7 +247,10 @@ const { generalCode } = useCodeBlock('vk-radio')
         />
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.general)" />
+          <code-block
+            :code="defaultSnippet('variant', variantOptions.general)"
+            :copy="defaultSnippet('variant', variantOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -263,7 +269,10 @@ const { generalCode } = useCodeBlock('vk-radio')
         />
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('shape', shapeOptions.general)"
+            :copy="defaultSnippet('shape', shapeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -282,7 +291,10 @@ const { generalCode } = useCodeBlock('vk-radio')
         />
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="defaultSnippet('size', sizeOptions.general)"
+            :copy="defaultSnippet('size', sizeOptions.general)"
+          />
         </template>
       </example-section>
 
@@ -293,7 +305,10 @@ const { generalCode } = useCodeBlock('vk-radio')
         />
 
         <template #code>
-          <code-block code="<vk-radio disabled></vk-radio>" />
+          <code-block
+            :code="booleanSnippet('disabled')"
+            :copy="booleanSnippet('disabled')"
+          />
         </template>
       </example-section>
 
@@ -304,7 +319,10 @@ const { generalCode } = useCodeBlock('vk-radio')
         />
 
         <template #code>
-          <code-block code="<vk-radio readonly></vk-radio>" />
+          <code-block
+            :code="booleanSnippet('readonly')"
+            :copy="booleanSnippet('readonly')"
+          />
         </template>
       </example-section>
     </template>

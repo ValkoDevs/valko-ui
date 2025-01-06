@@ -74,7 +74,45 @@ const tooltipSlots: TableItem[] = [
   }
 ]
 
-const { generalCode } = useCodeBlock('vk-tooltip')
+const shapeSnippet = `
+<template>
+  ${shapeOptions.general.map(shape => `
+  <vk-tooltip shape="${shape.value}">
+    <vk-button>${shape.label}</vk-button>
+  </vk-tooltip>
+  `).join('')}
+</template>
+`
+
+const sizeSnippet = `
+<template>
+  ${sizeOptions.general.map(size => `
+  <vk-tooltip size="${size.value}">
+    <vk-button>${size.label}</vk-button>
+  </vk-tooltip>
+  `).join('')}
+</template>
+`
+
+const placementSnippet = `
+<template>
+  ${placementOptions.map(placement => `
+  <vk-tooltip placement="${placement.value}">
+    <vk-button>${placement.label}</vk-button>
+  </vk-tooltip>
+  `).join('')}
+</template>
+`
+
+const flatSnippet = `
+<template>
+
+  <vk-tooltip flat>
+    <vk-button>Flat</vk-button>
+  </vk-tooltip>
+
+</template>
+`
 </script>
 
 <template>
@@ -142,7 +180,10 @@ const { generalCode } = useCodeBlock('vk-tooltip')
         </vk-tooltip>
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="shapeSnippet"
+            :copy="shapeSnippet"
+          />
         </template>
       </example-section>
 
@@ -162,7 +203,10 @@ const { generalCode } = useCodeBlock('vk-tooltip')
         </vk-tooltip>
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="sizeSnippet"
+            :copy="sizeSnippet"
+          />
         </template>
       </example-section>
 
@@ -182,7 +226,10 @@ const { generalCode } = useCodeBlock('vk-tooltip')
         </vk-tooltip>
 
         <template #code>
-          <code-block :code="generalCode('placement', placementOptions)" />
+          <code-block
+            :code="placementSnippet"
+            :copy="placementSnippet"
+          />
         </template>
       </example-section>
 
@@ -197,7 +244,10 @@ const { generalCode } = useCodeBlock('vk-tooltip')
         </vk-tooltip>
 
         <template #code>
-          <code-block code="<vk-tooltip flat></vk-tooltip>" />
+          <code-block
+            :code="flatSnippet"
+            :copy="flatSnippet"
+          />
         </template>
       </example-section>
     </template>

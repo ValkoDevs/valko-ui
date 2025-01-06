@@ -1,3 +1,4 @@
+<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { MenuItem, TableItem, MenuProps } from '#valkoui'
 
@@ -176,7 +177,19 @@ const onClick = (item: MenuItem) => {
   activeItem.value = item.key
 }
 
-const { generalCode } = useCodeBlock('vk-menu')
+const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-menu')
+
+const scriptCode = `
+<script setup lang="ts">
+import type { MenuItem } from '#valkoui'
+
+const menuItems: MenuItem[] = [
+  { key: 'button', group: 'Forms', text: 'Button' },
+  { key: 'input', group: 'Forms',  text:'Input' },
+  { key: 'checkbox', group: 'Forms', text: 'Checkbox' }
+]
+<\/script>
+`
 
 onMounted(() => {
   // Initialize every menu with the first item active
@@ -300,7 +313,10 @@ onMounted(() => {
         />
 
         <template #code>
-          <code-block :code="generalCode('color', colorOptions)" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, ' :items=&quot;menuItems&quot;')}`"
+            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, ' :items=&quot;menuItems&quot;')}`"
+          />
         </template>
       </example-section>
 
@@ -318,7 +334,10 @@ onMounted(() => {
         />
 
         <template #code>
-          <code-block :code="generalCode('variant', variantOptions.withGradientLinkAndLine)" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.withGradientLinkAndLine, ' :items=&quot;menuItems&quot;')}`"
+            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.withGradientLinkAndLine, ' :items=&quot;menuItems&quot;')}`"
+          />
         </template>
       </example-section>
 
@@ -336,7 +355,10 @@ onMounted(() => {
         />
 
         <template #code>
-          <code-block :code="generalCode('shape', shapeOptions.general)" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, ' :items=&quot;menuItems&quot;')}`"
+            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, ' :items=&quot;menuItems&quot;')}`"
+          />
         </template>
       </example-section>
 
@@ -354,7 +376,10 @@ onMounted(() => {
         />
 
         <template #code>
-          <code-block :code="generalCode('size', sizeOptions.general)" />
+          <code-block
+            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, ' :items=&quot;menuItems&quot;')}`"
+            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, ' :items=&quot;menuItems&quot;')}`"
+          />
         </template>
       </example-section>
 
@@ -367,7 +392,10 @@ onMounted(() => {
         />
 
         <template #code>
-          <code-block code="<vk-menu floating></vk-menu>" />
+          <code-block
+            :code="`${scriptCode}\n${booleanSnippet('floating', ' :items=&quot;menuItems&quot;')}`"
+            :copy="`${scriptCode}\n${booleanSnippet('floating', ' :items=&quot;menuItems&quot;')}`"
+          />
         </template>
       </example-section>
     </template>
