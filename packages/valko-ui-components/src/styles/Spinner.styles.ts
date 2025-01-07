@@ -65,16 +65,6 @@ export default tv({
         icon: [
           'text-error-500'
         ]
-      },
-      black: {
-        icon: [
-          'text-black'
-        ]
-      },
-      white: {
-        icon: [
-          'text-white'
-        ]
       }
     },
     condensed: {

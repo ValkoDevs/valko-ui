@@ -1,8 +1,8 @@
-import type { Sizes, Color } from './common'
+import type { Sizes, Colors } from './common'
 
-export interface SpinnerProps extends Sizes {
-  color?: Color | 'black' | 'white',
+export interface SpinnerProps extends Sizes, Colors {
   name?: string;
   loading?: boolean;
   condensed?: boolean;
+  className?: string;
 }

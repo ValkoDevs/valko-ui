@@ -56,7 +56,7 @@ const onClick = () => {
         <vk-spinner
           v-if="loading"
           condensed
-          :color="(color === 'neutral' && isDarkMode) ? 'black' : 'white'"
+          :class-name="(color === 'neutral' && isDarkMode) ? '!text-black' : '!text-white'"
           :size="size"
         />
       </transition>
