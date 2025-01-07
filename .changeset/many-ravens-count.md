@@ -2,6 +2,19 @@
 "@valko-ui/docs": minor
 ---
 
+### Components:
+
+- **Navbar:** Added a `vertical` prop to allow the navbar to be displayed vertically.
+- **Modal:** Added default value (false) to the `isOpen` prop.
+
+## Styles:
+
+- Updated the `navbar` styles to match the new prop.
+
+## Interfaces:
+
+- Updated the `navbar` interface to match the new prop.
+
 ### Docs:
 
 - **Assets:** Added new styles for code highlighting to improve readability and visual consistency across documentation.
