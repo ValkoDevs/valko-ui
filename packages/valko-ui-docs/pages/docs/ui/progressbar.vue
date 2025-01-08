@@ -90,7 +90,7 @@ const progressbarSlots: TableItem[] = [
   }
 ]
 
-const { slotSnippet, defaultSnippet, booleanSnippet } = useCodeSnippet('vk-progressbar')
+const generateSnippet = snippetGeneratorFactory('vk-progressbar')
 </script>
 
 <template>
@@ -176,10 +176,7 @@ const { slotSnippet, defaultSnippet, booleanSnippet } = useCodeSnippet('vk-progr
         </vk-progressbar>
 
         <template #code>
-          <code-block
-            :code="slotSnippet('color', colorOptions)"
-            :copy="slotSnippet('color', colorOptions)"
-          />
+          <code-block :code="generateSnippet<string>('color', {values: colorOptions.map(o => o.value), hasSlot: true})" />
         </template>
       </example-section>
 
@@ -197,10 +194,7 @@ const { slotSnippet, defaultSnippet, booleanSnippet } = useCodeSnippet('vk-progr
         </vk-progressbar>
 
         <template #code>
-          <code-block
-            :code="slotSnippet('variant', variantOptions.withGradient)"
-            :copy="slotSnippet('variant', variantOptions.withGradient)"
-          />
+          <code-block :code="generateSnippet<string>('variant', {values: variantOptions.withGradient.map(o => o.value), hasSlot: true})" />
         </template>
       </example-section>
 
@@ -218,10 +212,7 @@ const { slotSnippet, defaultSnippet, booleanSnippet } = useCodeSnippet('vk-progr
         </vk-progressbar>
 
         <template #code>
-          <code-block
-            :code="slotSnippet('shape', shapeOptions.withLine)"
-            :copy="slotSnippet('shape', shapeOptions.withLine)"
-          />
+          <code-block :code="generateSnippet<string>('shape', {values: shapeOptions.withLine.map(o => o.value), hasSlot: true})" />
         </template>
       </example-section>
 
@@ -239,10 +230,7 @@ const { slotSnippet, defaultSnippet, booleanSnippet } = useCodeSnippet('vk-progr
         </vk-progressbar>
 
         <template #code>
-          <code-block
-            :code="slotSnippet('size', sizeOptions.general)"
-            :copy="slotSnippet('size', sizeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('size', {values: sizeOptions.general.map(o => o.value), hasSlot: true})" />
         </template>
       </example-section>
 
@@ -252,10 +240,7 @@ const { slotSnippet, defaultSnippet, booleanSnippet } = useCodeSnippet('vk-progr
         </vk-progressbar>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('indeterminate', '', true)"
-            :copy="booleanSnippet('indeterminate', '', true)"
-          />
+          <code-block :code="generateSnippet<boolean>('indeterminate', {values: [true], hasSlot: true})" />
         </template>
       </example-section>
 
@@ -274,10 +259,7 @@ const { slotSnippet, defaultSnippet, booleanSnippet } = useCodeSnippet('vk-progr
         </vk-progressbar>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('color', colorOptions, ' striped')"
-            :copy="defaultSnippet('color', colorOptions, ' striped')"
-          />
+          <code-block :code="generateSnippet<string>('color', {values: colorOptions.map(o => o.value), hasSlot: true, extraProps: 'striped'})" />
         </template>
       </example-section>
 
@@ -290,10 +272,7 @@ const { slotSnippet, defaultSnippet, booleanSnippet } = useCodeSnippet('vk-progr
         </vk-progressbar>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('indeterminate striped', '', true)"
-            :copy="booleanSnippet('indeterminate striped', '', true)"
-          />
+          <code-block :code="generateSnippet<boolean>('indeterminate', {values: [true], hasSlot: true, extraProps: 'striped'})" />
         </template>
       </example-section>
 
@@ -306,10 +285,7 @@ const { slotSnippet, defaultSnippet, booleanSnippet } = useCodeSnippet('vk-progr
         </vk-progressbar>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet(':buffer=&quot;50&quot; :progress=&quot;25&quot;', '', true)"
-            :copy="booleanSnippet(':buffer=&quot;50&quot; :progress=&quot;25&quot;', '', true)"
-          />
+          <code-block :code="generateSnippet<number>(':buffer', {values: [50], hasSlot: true, extraProps: ':progress=&quot;25&quot;'})" />
         </template>
       </example-section>
     </template>

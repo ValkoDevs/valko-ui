@@ -99,7 +99,7 @@ const emitData: TableItem [] = [
   }
 ]
 
-const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-textarea')
+const generateSnippet = snippetGeneratorFactory('vk-textarea')
 </script>
 
 <template>
@@ -186,10 +186,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-textarea')
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('color', colorOptions)"
-            :copy="defaultSnippet('color', colorOptions)"
-          />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -205,10 +202,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-textarea')
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('variant', variantOptions.general)"
-            :copy="defaultSnippet('variant', variantOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -224,10 +218,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-textarea')
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('shape', shapeOptions.general)"
-            :copy="defaultSnippet('shape', shapeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -243,10 +234,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-textarea')
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('size', sizeOptions.general)"
-            :copy="defaultSnippet('size', sizeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -257,10 +245,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-textarea')
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('disabled')"
-            :copy="booleanSnippet('disabled')"
-          />
+          <code-block :code="generateSnippet<boolean>('disabled', { values: [true] })" />
         </template>
       </example-section>
 
@@ -272,10 +257,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-textarea')
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('readonly')"
-            :copy="booleanSnippet('readonly')"
-          />
+          <code-block :code="generateSnippet<boolean>('readonly', { values: [true] })" />
         </template>
       </example-section>
     </template>

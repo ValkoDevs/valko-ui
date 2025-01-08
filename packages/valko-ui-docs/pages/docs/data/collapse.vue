@@ -85,77 +85,9 @@ const itemSlots: TableItem[] = [
   }
 ]
 
-const variantSnippet = `
-<template>
- ${variantOptions.general.map(variant => `
- <vk-collapse variant="${variant.value}">
-  <vk-collapse-item title="${variant.label}-example-item">
-    Lorem.
-  </vk-collapse-item>
- </vk-collapse>
- `).join('')}
-</template>
-`
+const generateSnippet = snippetGeneratorFactory('vk-collapse')
 
-const shapeSnippet = `
-<template>
- ${shapeOptions.general.map(shape => `
- <vk-collapse shape="${shape.value}">
-  <vk-collapse-item title="${shape.label}-example-item">
-    Lorem.
-  </vk-collapse-item>
- </vk-collapse>
- `).join('')}
-</template>
-`
-
-const sizeSnippet = `
-<template>
- ${sizeOptions.general.map(size => `
- <vk-collapse size="${size.value}">
-  <vk-collapse-item title="${size.label}-example-item">
-    Lorem.
-  </vk-collapse-item>
- </vk-collapse>
- `).join('')}
-</template>
-`
-
-const separatorSnippet = `
-<template>
- ${separatorOptions.map(separator => `
- <vk-collapse separator="${separator.value}">
-  <vk-collapse-item title="${separator.label}-example-item">
-    Lorem.
-  </vk-collapse-item>
- </vk-collapse>
- `).join('')}
-</template>
-`
-
-const multipleSnippet = `
-<template>
-
- <vk-collapse multiple>
-  <vk-collapse-item title="Multiple-example-item">
-    Lorem.
-  </vk-collapse-item>
- </vk-collapse>
-
-</template>
-`
-
-const compactSnippet = `
-<template>
-
- <vk-collapse compact>
-  <vk-collapse-item title="Compact-example-item">
-    Lorem.
-  </vk-collapse-item>
- </vk-collapse>
-
-</template>
-`
+const customSlot = '<vk-collapse-item title="example-item">\n      Lorem.\n    </vk-collapse-item>'
 </script>
 
 <template>
@@ -251,10 +183,7 @@ const compactSnippet = `
         </vk-collapse>
 
         <template #code>
-          <code-block
-            :code="variantSnippet"
-            :copy="variantSnippet"
-          />
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value), customSlot })" />
         </template>
       </example-section>
 
@@ -282,10 +211,7 @@ const compactSnippet = `
         </vk-collapse>
 
         <template #code>
-          <code-block
-            :code="shapeSnippet"
-            :copy="shapeSnippet"
-          />
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), customSlot })" />
         </template>
       </example-section>
 
@@ -313,10 +239,7 @@ const compactSnippet = `
         </vk-collapse>
 
         <template #code>
-          <code-block
-            :code="sizeSnippet"
-            :copy="sizeSnippet"
-          />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), customSlot })" />
         </template>
       </example-section>
 
@@ -344,10 +267,7 @@ const compactSnippet = `
         </vk-collapse>
 
         <template #code>
-          <code-block
-            :code="separatorSnippet"
-            :copy="separatorSnippet"
-          />
+          <code-block :code="generateSnippet<string>('separator', { values: separatorOptions.map(o => o.value), customSlot })" />
         </template>
       </example-section>
 
@@ -372,10 +292,7 @@ const compactSnippet = `
         </vk-collapse>
 
         <template #code>
-          <code-block
-            :code="multipleSnippet"
-            :copy="multipleSnippet"
-          />
+          <code-block :code="generateSnippet<boolean>('multiple', { values: [true], customSlot })" />
         </template>
       </example-section>
 
@@ -399,10 +316,7 @@ const compactSnippet = `
         </vk-collapse>
 
         <template #code>
-          <code-block
-            :code="compactSnippet"
-            :copy="compactSnippet"
-          />
+          <code-block :code="generateSnippet<boolean>('compact', { values: [true], customSlot })" />
         </template>
       </example-section>
     </template>

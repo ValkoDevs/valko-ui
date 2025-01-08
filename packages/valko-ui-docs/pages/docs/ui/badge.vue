@@ -107,7 +107,13 @@ const badgeSlots: TableItem[] = [
   }
 ]
 
-const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-badge')
+const generateSnippet = snippetGeneratorFactory('vk-badge')
+
+const customSlot = '<vk-avatar\n      :src="src"\n      color="neutral"\n    />'
+const extraProps = {
+  content: 'content="new"',
+  dot: 'dot'
+}
 </script>
 
 <template>
@@ -209,10 +215,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-badge')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('color', colorOptions)"
-            :copy="defaultSnippet('color', colorOptions)"
-          />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), customSlot, extraProps: extraProps.content })" />
         </template>
       </example-section>
 
@@ -238,10 +241,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-badge')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('shape', shapeOptions.general)"
-            :copy="defaultSnippet('shape', shapeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), customSlot, extraProps: extraProps.content })" />
         </template>
       </example-section>
 
@@ -267,10 +267,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-badge')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('size', sizeOptions.general)"
-            :copy="defaultSnippet('size', sizeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), customSlot, extraProps: extraProps.content })" />
         </template>
       </example-section>
 
@@ -296,10 +293,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-badge')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('placement', placementOptions)"
-            :copy="defaultSnippet('placement', placementOptions)"
-          />
+          <code-block :code="generateSnippet<string>('placement', { values: placementOptions.map(o => o.value), customSlot, extraProps: extraProps.content })" />
         </template>
       </example-section>
 
@@ -315,10 +309,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-badge')
         </vk-badge>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('flat')"
-            :copy="booleanSnippet('flat')"
-          />
+          <code-block :code="generateSnippet<boolean>('flat', { values: [true], customSlot, extraProps: extraProps.content })" />
         </template>
       </example-section>
 
@@ -334,10 +325,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-badge')
         </vk-badge>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('outlined')"
-            :copy="booleanSnippet('outlined')"
-          />
+          <code-block :code="generateSnippet<boolean>('outlined', { values: [true], customSlot, extraProps: extraProps.content })" />
         </template>
       </example-section>
 
@@ -363,10 +351,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-badge')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('size', sizeOptions.general, 'dot')"
-            :copy="defaultSnippet('size', sizeOptions.general, 'dot')"
-          />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), customSlot, extraProps: extraProps.dot })" />
         </template>
       </example-section>
 
@@ -381,10 +366,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-badge')
         </vk-badge>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('hidden')"
-            :copy="booleanSnippet('hidden')"
-          />
+          <code-block :code="generateSnippet<boolean>('hidden', { values: [true], customSlot })" />
         </template>
       </example-section>
     </template>

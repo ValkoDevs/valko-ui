@@ -410,31 +410,33 @@ watch(disabledRef, (newVal) => form.disabledTimes = newVal ? [1730721658, 173072
 
 const [ model, parsedModel, adapter ] = useTimeAdapter(form)
 
-const timepickerStates = reactive({
-  colors: Array(colorOptions.length).fill(false),
-  variants: Array(variantOptions.general.length).fill(false),
-  shapes: Array(shapeOptions.general.length).fill(false),
-  sizes: Array(sizeOptions.general.length).fill(false),
-  min: false,
-  max: false,
-  disabledTimes: false
-})
+const timepickerStates = reactive<Record<string, boolean>>({})
 
-const { defaultSnippet } = useCodeSnippet('vk-timepicker')
+const generateSnippet = snippetGeneratorFactory('vk-timepicker')
 
 const scriptCode = `
 <script setup lang="ts">
+import useTimeAdapter from '#valkoui'
+
 const [ model, parsedModel, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
 <\/script>
 `
-const snippetProps = ' v-model="model" :parsed-model="parsedModel" :adapter="adapter"'
+
+const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapter"'
 
 const minmaxSnippet = `
 ${scriptCode}
 
 <template>
-  <vk-timepicker min-time="1730710858"${snippetProps}></vk-timepicker>
-  <vk-timepicker max-time="1730739658"${snippetProps}></vk-timepicker>
+  <vk-timepicker
+    min-time="1730710858"
+    ${extraProps.split(' ').join('\n    ')}
+  />
+
+  <vk-timepicker
+    max-time="1730739658"
+    ${extraProps.split(' ').join('\n    ')}
+  />
 </template>
 `
 
@@ -442,7 +444,10 @@ const disabledTimesSnippet = `
 ${scriptCode}
 
 <template>
-  <vk-timepicker "disabled-times="[1730721658, 1730725258]"${snippetProps}></vk-timepicker>
+  <vk-timepicker
+    "disabled-times="[1730721658, 1730725258]"
+    ${extraProps.split(' ').join('\n    ')}
+  />
 </template>
 `
 </script>
@@ -542,22 +547,19 @@ ${scriptCode}
         classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <vk-timepicker
-          v-for="(color, index) in colorOptions"
+          v-for="color in colorOptions"
           :key="color.value"
           :label="color.label"
           :adapter="adapter"
           :parsed-model="parsedModel"
           :color="color.value"
-          :is-open="timepickerStates['colors'][index]"
-          @open="() => timepickerStates['colors'][index] = true"
-          @close="() => timepickerStates['colors'][index] = false"
+          :is-open="timepickerStates[color.value]"
+          @open="() => timepickerStates[color.value] = true"
+          @close="() => timepickerStates[color.value] = false"
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
@@ -566,22 +568,19 @@ ${scriptCode}
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-timepicker
-          v-for="(variant, index) in variantOptions.general"
+          v-for="variant in variantOptions.general"
           :key="variant.value"
           :adapter="adapter"
           :parsed-model="parsedModel"
           :variant="variant.value"
-          :is-open="timepickerStates['variants'][index]"
+          :is-open="timepickerStates[variant.value]"
           :label="variant.label"
-          @open="() => timepickerStates['variants'][index] = true"
-          @close="() => timepickerStates['variants'][index] = false"
+          @open="() => timepickerStates[variant.value] = true"
+          @close="() => timepickerStates[variant.value] = false"
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
@@ -590,22 +589,19 @@ ${scriptCode}
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-timepicker
-          v-for="(shape, index) in shapeOptions.general"
+          v-for="shape in shapeOptions.general"
           :key="shape.value"
           :label="shape.label"
           :adapter="adapter"
           :parsed-model="parsedModel"
           :shape="shape.value"
-          :is-open="timepickerStates['shapes'][index]"
-          @open="() => timepickerStates['shapes'][index] = true"
-          @close="() => timepickerStates['shapes'][index] = false"
+          :is-open="timepickerStates[shape.value]"
+          @open="() => timepickerStates[shape.value] = true"
+          @close="() => timepickerStates[shape.value] = false"
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
@@ -614,22 +610,19 @@ ${scriptCode}
         classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         <vk-timepicker
-          v-for="(size, index) in sizeOptions.general"
+          v-for="size in sizeOptions.general"
           :key="size.value"
           :label="size.label"
           :adapter="adapter"
           :parsed-model="parsedModel"
           :size="size.value"
-          :is-open="timepickerStates['sizes'][index]"
-          @open="() => timepickerStates['sizes'][index] = true"
-          @close="() => timepickerStates['sizes'][index] = false"
+          :is-open="timepickerStates[size.value]"
+          @open="() => timepickerStates[size.value] = true"
+          @close="() => timepickerStates[size.value] = false"
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
@@ -657,10 +650,7 @@ ${scriptCode}
         />
 
         <template #code>
-          <code-block
-            :code="minmaxSnippet"
-            :copy="minmaxSnippet"
-          />
+          <code-block :code="minmaxSnippet" />
         </template>
       </example-section>
 
@@ -676,10 +666,7 @@ ${scriptCode}
         />
 
         <template #code>
-          <code-block
-            :code="disabledTimesSnippet"
-            :copy="disabledTimesSnippet"
-          />
+          <code-block :code="disabledTimesSnippet" />
         </template>
       </example-section>
     </template>

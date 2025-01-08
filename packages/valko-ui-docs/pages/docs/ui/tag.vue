@@ -126,16 +126,32 @@ const onClick = () => useNotification({ text: 'Clickled' })
 
 watch(isShown, () => { if (!isShown.value) setTimeout(() => isShown.value = true, 1000) })
 
-const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-tag')
+const generateSnippet = snippetGeneratorFactory('vk-tag')
 
-const iconSnippet = `
-<template>
-  <vk-tag text="Without Icons">Slot Content</vk-tag>
-  <vk-tag text="Icon Left" icon-left="tag">Slot Content</vk-tag>
-  <vk-tag text="Icon Right" icon-right="tag">Slot Content</vk-tag>
-  <vk-tag text="Icons" icon-left="tag" icon-right="tag">Slot Content</vk-tag>
+const iconSnippet = `<template>
+  <vk-tag
+    text="Without Icons"
+  />
+
+  <vk-tag
+    icon-left="tag"
+    text="Icon Left"
+  />
+
+  <vk-tag
+    icon-right="tag"
+    text="Icon Right"
+  />
+
+  <vk-tag
+    text="Icons"
+    icon-left="tag"
+    icon-right="tag"
+  />
 </template>
 `
+
+const extraProps = 'text="Content"'
 </script>
 
 <template>
@@ -235,10 +251,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="slotSnippet('color', colorOptions)"
-            :copy="slotSnippet('color', colorOptions)"
-          />
+          <code-block :code="generateSnippet<string>('color', {values: colorOptions.map(o => o.value), extraProps})" />
         </template>
       </example-section>
 
@@ -254,10 +267,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="slotSnippet('variant', variantOptions.withGradient)"
-            :copy="slotSnippet('variant', variantOptions.withGradient)"
-          />
+          <code-block :code="generateSnippet<string>('variant', {values: variantOptions.withGradient.map(o => o.value), extraProps})" />
         </template>
       </example-section>
 
@@ -273,10 +283,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="slotSnippet('shape', shapeOptions.general)"
-            :copy="slotSnippet('shape', shapeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('shape', {values: shapeOptions.general.map(o => o.value), extraProps})" />
         </template>
       </example-section>
 
@@ -292,10 +299,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="slotSnippet('size', sizeOptions.general)"
-            :copy="slotSnippet('size', sizeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('size', {values: sizeOptions.general.map(o => o.value), extraProps})" />
         </template>
       </example-section>
 
@@ -321,10 +325,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="iconSnippet"
-            :copy="iconSnippet"
-          />
+          <code-block :code="iconSnippet" />
         </template>
       </example-section>
 
@@ -346,10 +347,7 @@ const iconSnippet = `
         </transition>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('closable', '', true)"
-            :copy="booleanSnippet('closable', '', true)"
-          />
+          <code-block :code="generateSnippet<boolean>('closable', {values: [true], extraProps})" />
         </template>
       </example-section>
 
@@ -361,10 +359,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('pressable', '', true)"
-            :copy="booleanSnippet('pressable', '', true)"
-          />
+          <code-block :code="generateSnippet<boolean>('pressable', {values: [true], extraProps})" />
         </template>
       </example-section>
 
@@ -375,10 +370,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('disabled', '', true)"
-            :copy="booleanSnippet('disabled', '', true)"
-          />
+          <code-block :code="generateSnippet<boolean>('disabled', {values: [true], extraProps})" />
         </template>
       </example-section>
     </template>

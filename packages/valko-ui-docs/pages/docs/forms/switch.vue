@@ -19,14 +19,7 @@ const position: SelectOption<LabelPosition>[] = [
   { value: 'left', label: 'Left' }
 ]
 
-const exampleSectionForm = reactive({
-  colors: Array(colorOptions.length).fill(false),
-  variants: Array(variantOptions.general.length).fill(false),
-  shapes: Array(shapeOptions.general.length).fill(false),
-  sizes: Array(sizeOptions.general.length).fill(false),
-  position: [false, false],
-  readonly: false
-})
+const exampleSectionModel = reactive<Record<string, boolean>>({ readonly: true })
 
 const apiData: TableItem[] = [
   {
@@ -113,7 +106,7 @@ const emitData: TableItem[] = [
   }
 ]
 
-const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-switch')
+const generateSnippet = snippetGeneratorFactory('vk-switch')
 </script>
 
 <template>
@@ -192,18 +185,15 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-switch')
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <vk-switch
-          v-for="(color, index) in colorOptions"
+          v-for="color in colorOptions"
           :key="color.value"
-          v-model="exampleSectionForm['colors'][index]"
+          v-model="exampleSectionModel[color.value]"
           :color="color.value"
           :label="color.label"
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('color', colorOptions)"
-            :copy="defaultSnippet('color', colorOptions)"
-          />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -212,18 +202,15 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-switch')
         classes="grid-cols-2 md:grid-cols-3"
       >
         <vk-switch
-          v-for="(variant, index) in variantOptions.general"
+          v-for="variant in variantOptions.general"
           :key="variant.value"
-          v-model="exampleSectionForm['variants'][index]"
+          v-model="exampleSectionModel[variant.value]"
           :variant="variant.value"
           :label="variant.label"
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('variant', variantOptions.general)"
-            :copy="defaultSnippet('variant', variantOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -232,18 +219,15 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-switch')
         classes="grid-cols-2 md:grid-cols-3"
       >
         <vk-switch
-          v-for="(shape, index) in shapeOptions.general"
+          v-for="shape in shapeOptions.general"
           :key="shape.value"
-          v-model="exampleSectionForm['shapes'][index]"
+          v-model="exampleSectionModel[shape.value]"
           :shape="shape.value"
           :label="shape.label"
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('shape', shapeOptions.general)"
-            :copy="defaultSnippet('shape', shapeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -252,18 +236,15 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-switch')
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         <vk-switch
-          v-for="(size, index) in sizeOptions.general"
+          v-for="size in sizeOptions.general"
           :key="size.value"
-          v-model="exampleSectionForm['sizes'][index]"
+          v-model="exampleSectionModel[size.value]"
           :size="size.value"
           :label="size.label"
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('size', sizeOptions.general)"
-            :copy="defaultSnippet('size', sizeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -271,44 +252,35 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-switch')
         <vk-switch disabled />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('disabled')"
-            :copy="booleanSnippet('disabled')"
-          />
+          <code-block :code="generateSnippet<boolean>('disabled', { values: [true] })" />
         </template>
       </example-section>
 
       <example-section title="Readonly">
         <vk-switch
-          v-model="exampleSectionForm['readonly']"
+          v-model="exampleSectionModel['readonly']"
           readonly
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('readonly')"
-            :copy="booleanSnippet('readonly')"
-          />
+          <code-block :code="generateSnippet<boolean>('readonly', { values: [true] })" />
         </template>
       </example-section>
 
       <example-section
-        title="Position"
+        title="Label Position"
         classes="grid-cols-2"
       >
         <vk-switch
-          v-for="(pos, index) in position"
+          v-for="pos in position"
           :key="pos.value"
-          v-model="exampleSectionForm['position'][index]"
+          v-model="exampleSectionModel[pos.value]"
           :label-position="pos.value"
           :label="pos.label"
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('label-position', position)"
-            :copy="defaultSnippet('label-position', position)"
-          />
+          <code-block :code="generateSnippet<string>('label-position', { values: position.map(o => o.value) })" />
         </template>
       </example-section>
     </template>

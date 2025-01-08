@@ -360,30 +360,28 @@ watch(disabledRef, (newVal) => form.disabledTimes = newVal ? [1730721658, 173072
 
 const [ model, parsedModel, adapter ] = useTimeAdapter(form)
 
-const { defaultSnippet } = useCodeSnippet('vk-time')
+const generateSnippet = snippetGeneratorFactory('vk-time')
 
-const scriptCode = `
-<script setup lang="ts">
+const scriptCode = `<script setup lang="ts">
+import useTimeAdapter from '#valkoui'
+
 const [ model, _, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
 <\/script>
 `
 
-const snippetProps = ' v-model="model" :adapter="adapter"'
+const extraProps = 'v-model="model" :adapter="adapter"'
 
-const minmaxSnippet = `
-${scriptCode}
-
+const minmaxSnippet = `${scriptCode}
 <template>
-  <vk-time min-time="1730710858"${snippetProps}></vk-time>
-  <vk-time max-time="1730739658"${snippetProps}></vk-time>
-</template>
-`
+  <vk-time
+    min-time="1730710858"
+    ${extraProps.split(' ').join('\n    ')}
+  />
 
-const disabledTimesSnippet = `
-${scriptCode}
-
-<template>
-  <vk-time "disabled-times="[1730721658, 1730725258]"${snippetProps}></vk-time>
+  <vk-time
+    max-time="1730739658"
+    ${extraProps.split(' ').join('\n    ')}
+  />
 </template>
 `
 </script>
@@ -489,10 +487,7 @@ ${scriptCode}
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', {values: colorOptions.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
@@ -513,10 +508,7 @@ ${scriptCode}
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('variant', {values: variantOptions.general.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
@@ -537,10 +529,7 @@ ${scriptCode}
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', {values: shapeOptions.general.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
@@ -561,10 +550,7 @@ ${scriptCode}
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', {values: sizeOptions.general.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
@@ -588,10 +574,7 @@ ${scriptCode}
         </div>
 
         <template #code>
-          <code-block
-            :code="minmaxSnippet"
-            :copy="minmaxSnippet"
-          />
+          <code-block :code="minmaxSnippet" />
         </template>
       </example-section>
 
@@ -602,10 +585,7 @@ ${scriptCode}
         />
 
         <template #code>
-          <code-block
-            :code="disabledTimesSnippet"
-            :copy="disabledTimesSnippet"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>(':disabled-times', {values: ['[1730721658, 1730725258]'], extraProps})}`" />
         </template>
       </example-section>
     </template>

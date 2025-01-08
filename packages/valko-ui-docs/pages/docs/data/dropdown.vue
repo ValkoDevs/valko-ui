@@ -172,9 +172,9 @@ const items: Item[] = [
 <\/script>
 `
 
-const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-dropdown')
+const generateSnippet = snippetGeneratorFactory('vk-dropdown')
 
-const snippetProps = ' :items="items"'
+const extraProps = ':items="items"'
 </script>
 
 <template>
@@ -250,10 +250,7 @@ const snippetProps = ' :items="items"'
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -271,10 +268,7 @@ const snippetProps = ' :items="items"'
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.withGradientAndLink, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.withGradientAndLink, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('variant', { values: variantOptions.withGradientAndLink.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -292,10 +286,7 @@ const snippetProps = ' :items="items"'
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -313,10 +304,7 @@ const snippetProps = ' :items="items"'
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -328,10 +316,7 @@ const snippetProps = ' :items="items"'
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${booleanSnippet('flat', snippetProps)}`"
-            :copy="`${scriptCode}\n${booleanSnippet('flat', snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('flat', { values: [true], extraProps })}`" />
         </template>
       </example-section>
 
@@ -344,10 +329,7 @@ const snippetProps = ' :items="items"'
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${booleanSnippet('disabled', snippetProps)}`"
-            :copy="`${scriptCode}\n${booleanSnippet('disabled', snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('disabled', { values: [true], extraProps })}`" />
         </template>
       </example-section>
     </template>

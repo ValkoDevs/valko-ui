@@ -7,16 +7,12 @@ const form = ref<AlertProps>({
   color: 'primary',
   variant: 'filled',
   size: 'md',
-  title: '',
+  title: 'Title',
   shape: 'soft',
   flat: false
 })
 
-const iconsForm = ref<Record<string, boolean>>({
-  noIcon: false,
-  closable: false,
-  customIcon: false
-})
+const iconsForm = ref<Record<string, boolean>>({})
 
 const alertProps: TableItem[] = [
   {
@@ -112,13 +108,19 @@ watch(isShown, () => {
   }
 })
 
-const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-alert')
+const generateSnippet = snippetGeneratorFactory('vk-alert')
 
 const iconSnippet = `
 <template>
-  <vk-alert></vk-alert>
-  <vk-alert icon="home"></vk-alert>
-  <vk-alert :icon="null"></vk-alert>
+  <vk-alert/>
+
+  <vk-alert
+    icon="home"
+  />
+
+  <vk-alert
+    :icon="null"
+  />
 </template>
 `
 </script>
@@ -217,10 +219,7 @@ const iconSnippet = `
         </vk-alert>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('color', colorOptions)"
-            :copy="defaultSnippet('color', colorOptions)"
-          />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), hasSlot: true })" />
         </template>
       </example-section>
 
@@ -238,10 +237,7 @@ const iconSnippet = `
         </vk-alert>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('variant', variantOptions.withGradient)"
-            :copy="defaultSnippet('variant', variantOptions.withGradient)"
-          />
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.withGradient.map(o => o.value), hasSlot: true })" />
         </template>
       </example-section>
 
@@ -259,10 +255,7 @@ const iconSnippet = `
         </vk-alert>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('shape', shapeOptions.general)"
-            :copy="defaultSnippet('shape', shapeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), hasSlot: true })" />
         </template>
       </example-section>
 
@@ -280,10 +273,7 @@ const iconSnippet = `
         </vk-alert>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('size', sizeOptions.general)"
-            :copy="defaultSnippet('size', sizeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), hasSlot: true })" />
         </template>
       </example-section>
 
@@ -307,10 +297,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="iconSnippet"
-            :copy="iconSnippet"
-          />
+          <code-block :code="iconSnippet" />
         </template>
       </example-section>
 
@@ -323,10 +310,7 @@ const iconSnippet = `
         </vk-alert>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('flat')"
-            :copy="booleanSnippet('flat')"
-          />
+          <code-block :code="generateSnippet<boolean>('flat', { values: [true], hasSlot: true })" />
         </template>
       </example-section>
 
@@ -350,10 +334,7 @@ const iconSnippet = `
         </transition>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('closable')"
-            :copy="booleanSnippet('closable')"
-          />
+          <code-block :code="generateSnippet<boolean>('closable', { values: [true], hasSlot: true })" />
         </template>
       </example-section>
     </template>

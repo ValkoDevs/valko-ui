@@ -518,9 +518,9 @@ const dataTable = useClientSideDataTable({
 <\/script>
 `
 
-const snippetProps = ' v-bind="dataTable" @on-sort="dataTable.onSort" @on-filter="dataTable.onFilter" @on-page-change="dataTable.onPageChange" @on-limit-change="dataTable.onLimitChange" @on-select="dataTable.onSelect" @on-select-all="dataTable.onSelectAll"'
+const extraProps = 'v-bind="dataTable" @on-sort="dataTable.onSort" @on-filter="dataTable.onFilter" @on-page-change="dataTable.onPageChange" @on-limit-change="dataTable.onLimitChange" @on-select="dataTable.onSelect" @on-select-all="dataTable.onSelectAll"'
 
-const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-data-table')
+const generateSnippet = snippetGeneratorFactory('vk-data-table')
 </script>
 
 <template>
@@ -610,10 +610,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-data-table')
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -636,10 +633,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-data-table')
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -662,10 +656,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-data-table')
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -688,10 +679,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-data-table')
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -705,10 +693,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-data-table')
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${booleanSnippet('striped', snippetProps)}`"
-            :copy="`${scriptCode}\n${booleanSnippet('striped', snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('striped', { values: [true], extraProps })}`" />
         </template>
       </example-section>
     </template>

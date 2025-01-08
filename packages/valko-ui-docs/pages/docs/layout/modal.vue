@@ -100,118 +100,53 @@ const modalStates = reactive<Record<string, boolean>>({})
 
 const toggleModal = (modalId: string) => modalStates[modalId] = !modalStates[modalId]
 
-const scriptCode = `
-<script setup lang="ts">
+const scriptCode = `<script setup lang="ts">
 const modalStates = reactive<Record<string, boolean>>({})
 
 const toggleModal = (modalId: string) => modalStates[modalId] = !modalStates[modalId]
 <\/script>
 `
 
-const shapeSnippet = `
-${scriptCode}
-<template>
-${shapeOptions.general.map(shape => `
-  <vk-button @click="toggleModal('${shape.value}')">
-    ${shape.label}
-  </vk-button>
+const generateSnippet = snippetGeneratorFactory('vk-modal')
 
-  <vk-modal
-    :is-open="modalStates['${shape.value}']"
-    shape="${shape.value}"
-    @close="toggleModal('${shape.value}')"
-  >
-    Content goes here.
-  </vk-modal>`).join('\n')}
+const triggerSnippet = '<vk-button\n    @click="toggleModal(\'modalId\')"\n  >\n    Slot Content\n  </vk-button>\n\n  <vk-modal'
 
-</template>
-`
+const extraProps = ':is-open="modalStates[\'modalId\']" @close="toggleModal(\'modalId\')"'
 
-const sizeSnippet = `
-${scriptCode}
-<template>
-${sizeOptions.general.map(size => `
-  <vk-button @click="toggleModal('${size.value}')">
-    ${size.label}
-  </vk-button>
+const shapeSnippet = `${scriptCode}\n${generateSnippet<string>('shape',
+  {
+    values: shapeOptions.general.map(o => o.value),
+    hasSlot: true, extraProps
+  }).replace(/<vk-modal/g, `${triggerSnippet}`)
+}`
 
-  <vk-modal
-    :is-open="modalStates['${size.value}']"
-    size="${size.value}"
-    @close="toggleModal('${size.value}')"
-  >
-    Content goes here.
-  </vk-modal>`).join('\n')}
+const sizeSnippet = `${scriptCode}\n${generateSnippet<string>('size',
+  {
+    values: sizeOptions.general.map(o => o.value),
+    hasSlot: true, extraProps
+  }).replace(/<vk-modal/g, `${triggerSnippet}`)
+}`
 
-</template>
-`
+const backdropSnippet = `${scriptCode}\n${generateSnippet<string>('backdrop',
+  {
+    values: backdropOptions.map(o => o.value),
+    hasSlot: true, extraProps
+  }).replace(/<vk-modal/g, `${triggerSnippet}`)
+}`
 
-const backdropSnippet = `
-${scriptCode}
-<template>
-${backdropOptions.map(backdrop => `
-  <vk-button @click="toggleModal('${backdrop.value}')">
-    ${backdrop.label}
-  </vk-button>
+const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
+  {
+    values: [true],
+    hasSlot: true, extraProps
+  }).replace(/<vk-modal/g, `${triggerSnippet}`)
+}`
 
-  <vk-modal
-    :is-open="modalStates['${backdrop.value}']"
-    backdrop="${backdrop.value}"
-    @close="toggleModal('${backdrop.value}')"
-  >
-    Content goes here.
-  </vk-modal>`).join('\n')}
-
-</template>
-`
-
-const closableSnippet = `
-<script setup lang="ts">
-const isOpen = ref(false)
-
-const toggleModal = () => isOpen = !isOpen
-<\/script>
-
-<template>
-
-  <vk-button @click="toggleModal">
-    Closable
-  </vk-button>
-
-  <vk-modal
-    :is-open="isOpen"
-    closable
-    @close="toggleModal"
-  >
-    Content goes here.
-  </vk-modal>
-
-</template>
-`
-
-const flatSnippet = `
-<script setup lang="ts">
-const isOpen = ref(false)
-
-const toggleModal = () => isOpen = !isOpen
-<\/script>
-
-<template>
-
-  <vk-button @click="toggleModal">
-    Flat
-  </vk-button>
-
-  <vk-modal
-    :is-open="isOpen"
-    Flat
-    @close="toggleModal"
-  >
-    Content goes here.
-  </vk-modal>
-
-</template>
-`
+const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>('closable',
+  {
+    values: [true],
+    hasSlot: true, extraProps
+  }).replace(/<vk-modal/g, `${triggerSnippet}`)
+}`
 </script>
 
 <template>
@@ -308,10 +243,7 @@ const toggleModal = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block
-            :code="shapeSnippet"
-            :copy="shapeSnippet"
-          />
+          <code-block :code="shapeSnippet" />
         </template>
       </example-section>
 
@@ -340,10 +272,7 @@ const toggleModal = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block
-            :code="sizeSnippet"
-            :copy="sizeSnippet"
-          />
+          <code-block :code="sizeSnippet" />
         </template>
       </example-section>
 
@@ -372,10 +301,7 @@ const toggleModal = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block
-            :code="backdropSnippet"
-            :copy="backdropSnippet"
-          />
+          <code-block :code="backdropSnippet" />
         </template>
       </example-section>
 
@@ -395,10 +321,7 @@ const toggleModal = () => isOpen = !isOpen
         </vk-modal>
 
         <template #code>
-          <code-block
-            :code="flatSnippet"
-            :copy="flatSnippet"
-          />
+          <code-block :code="flatSnippet" />
         </template>
       </example-section>
 
@@ -428,10 +351,7 @@ const toggleModal = () => isOpen = !isOpen
         </vk-modal>
 
         <template #code>
-          <code-block
-            :code="closableSnippet"
-            :copy="closableSnippet"
-          />
+          <code-block :code="closableSnippet" />
         </template>
       </example-section>
     </template>

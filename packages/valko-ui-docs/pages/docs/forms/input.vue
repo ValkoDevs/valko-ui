@@ -194,7 +194,7 @@ const slotData: TableItem[] = [
   }
 ]
 
-const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-input')
+const generateSnippet = snippetGeneratorFactory('vk-input')
 
 const iconSnippet = `
 <template>
@@ -323,10 +323,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('color', colorOptions)"
-            :copy="defaultSnippet('color', colorOptions)"
-          />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -342,10 +339,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('variant', variantOptions.general)"
-            :copy="defaultSnippet('variant', variantOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -361,10 +355,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('shape', shapeOptions.general)"
-            :copy="defaultSnippet('shape', shapeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -380,10 +371,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('size', sizeOptions.general)"
-            :copy="defaultSnippet('size', sizeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -399,10 +387,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('type', typeOptions)"
-            :copy="defaultSnippet('type', typeOptions)"
-          />
+          <code-block :code="generateSnippet<string>('type', { values: typeOptions.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -413,10 +398,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('disabled')"
-            :copy="booleanSnippet('disabled')"
-          />
+          <code-block :code="generateSnippet<boolean>('disabled', { values: [true] })" />
         </template>
       </example-section>
 
@@ -427,10 +409,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('readonly')"
-            :copy="booleanSnippet('readonly')"
-          />
+          <code-block :code="generateSnippet<boolean>('readonly', { values: [true] })" />
         </template>
       </example-section>
 
@@ -441,10 +420,7 @@ const iconSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('clearable')"
-            :copy="booleanSnippet('clearable')"
-          />
+          <code-block :code="generateSnippet<boolean>('clearable', { values: [true] })" />
         </template>
       </example-section>
 
@@ -469,10 +445,7 @@ const iconSnippet = `
         </vk-input>
 
         <template #code>
-          <code-block
-            :code="iconSnippet"
-            :copy="iconSnippet"
-          />
+          <code-block :code="iconSnippet" />
         </template>
       </example-section>
     </template>

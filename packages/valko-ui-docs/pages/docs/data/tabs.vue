@@ -198,9 +198,9 @@ const tabs: Tab[] = [
 <\/script>
 `
 
-const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-tabs')
+const generateSnippet = snippetGeneratorFactory('vk-tabs')
 
-const snippetProps = ' :tabs="tabs"'
+const extraProps = ':tabs="tabs"'
 </script>
 
 <template>
@@ -280,10 +280,7 @@ const snippetProps = ' :tabs="tabs"'
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptNoIcons}\n${slotSnippet('color', colorOptions, snippetProps)}`"
-            :copy="`${scriptNoIcons}\n${slotSnippet('color', colorOptions, snippetProps)}`"
-          />
+          <code-block :code="`${scriptNoIcons}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -303,10 +300,7 @@ const snippetProps = ' :tabs="tabs"'
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptNoIcons}\n${slotSnippet('variant', variantOptions.withGradient, snippetProps)}`"
-            :copy="`${scriptNoIcons}\n${slotSnippet('variant', variantOptions.withGradient, snippetProps)}`"
-          />
+          <code-block :code="`${scriptNoIcons}\n${generateSnippet<string>('variant', { values: variantOptions.withGradient.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -327,10 +321,7 @@ const snippetProps = ' :tabs="tabs"'
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptNoIcons}\n${slotSnippet('shape', shapeOptions.withLine, snippetProps)}`"
-            :copy="`${scriptNoIcons}\n${slotSnippet('shape', shapeOptions.withLine, snippetProps)}`"
-          />
+          <code-block :code="`${scriptNoIcons}\n${generateSnippet<string>('shape', { values: shapeOptions.withLine.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -350,10 +341,7 @@ const snippetProps = ' :tabs="tabs"'
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptNoIcons}\n${slotSnippet('size', sizeOptions.general, snippetProps)}`"
-            :copy="`${scriptNoIcons}\n${slotSnippet('size', sizeOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptNoIcons}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -364,10 +352,7 @@ const snippetProps = ' :tabs="tabs"'
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptNoIcons}\n${booleanSnippet('grow', snippetProps, true)}`"
-            :copy="`${scriptNoIcons}\n${booleanSnippet('grow', snippetProps, true)}`"
-          />
+          <code-block :code="`${scriptNoIcons}\n${generateSnippet<boolean>('grow', { values: [true], extraProps })}`" />
         </template>
       </example-section>
 
@@ -377,10 +362,7 @@ const snippetProps = ' :tabs="tabs"'
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptIcons}\n${booleanSnippet('', snippetProps, true)}`"
-            :copy="`${scriptIcons}\n${booleanSnippet('', snippetProps, true)}`"
-          />
+          <code-block :code="`${scriptIcons}\n${generateSnippet<string>(':tabs', { values: ['tabs'] })}`" />
         </template>
       </example-section>
 
@@ -390,10 +372,7 @@ const snippetProps = ' :tabs="tabs"'
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptDisabled}\n${booleanSnippet('', snippetProps, true)}`"
-            :copy="`${scriptDisabled}\n${booleanSnippet('', snippetProps, true)}`"
-          />
+          <code-block :code="`${scriptDisabled}\n${generateSnippet<string>(':tabs', { values: ['tabs'] })}`" />
         </template>
       </example-section>
     </template>

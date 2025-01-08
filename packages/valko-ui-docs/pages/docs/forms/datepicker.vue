@@ -436,15 +436,17 @@ const datePickerStates = reactive({
   disableWeekends: false
 })
 
-const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-datepicker')
+const generateSnippet = snippetGeneratorFactory('vk-datepicker')
 
 const scriptCode = `
 <script setup lang="ts">
+import useDateAdapter from '#valkoui'
+
 const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM-DD' })
 <\/script>
 `
 
-const snippetProps = ' v-model="model" :parsed-model="parsedModel" :adapter="adapter"'
+const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapter"'
 </script>
 
 <template>
@@ -537,10 +539,7 @@ const snippetProps = ' v-model="model" :parsed-model="parsedModel" :adapter="ada
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
@@ -563,10 +562,7 @@ const snippetProps = ' v-model="model" :parsed-model="parsedModel" :adapter="ada
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
@@ -589,10 +585,7 @@ const snippetProps = ' v-model="model" :parsed-model="parsedModel" :adapter="ada
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
@@ -615,10 +608,7 @@ const snippetProps = ' v-model="model" :parsed-model="parsedModel" :adapter="ada
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
@@ -635,10 +625,7 @@ const snippetProps = ' v-model="model" :parsed-model="parsedModel" :adapter="ada
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${booleanSnippet('disable-weekends', snippetProps)}`"
-            :copy="`${scriptCode}\n${booleanSnippet('disable-weekends', snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('disable-weends', { values: [true], extraProps})}`" />
         </template>
       </example-section>
     </template>

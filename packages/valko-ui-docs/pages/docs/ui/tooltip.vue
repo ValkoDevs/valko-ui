@@ -74,45 +74,9 @@ const tooltipSlots: TableItem[] = [
   }
 ]
 
-const shapeSnippet = `
-<template>
-  ${shapeOptions.general.map(shape => `
-  <vk-tooltip shape="${shape.value}">
-    <vk-button>${shape.label}</vk-button>
-  </vk-tooltip>
-  `).join('')}
-</template>
-`
+const generateSnippet = snippetGeneratorFactory('vk-tooltip')
 
-const sizeSnippet = `
-<template>
-  ${sizeOptions.general.map(size => `
-  <vk-tooltip size="${size.value}">
-    <vk-button>${size.label}</vk-button>
-  </vk-tooltip>
-  `).join('')}
-</template>
-`
-
-const placementSnippet = `
-<template>
-  ${placementOptions.map(placement => `
-  <vk-tooltip placement="${placement.value}">
-    <vk-button>${placement.label}</vk-button>
-  </vk-tooltip>
-  `).join('')}
-</template>
-`
-
-const flatSnippet = `
-<template>
-
-  <vk-tooltip flat>
-    <vk-button>Flat</vk-button>
-  </vk-tooltip>
-
-</template>
-`
+const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
 </script>
 
 <template>
@@ -180,10 +144,7 @@ const flatSnippet = `
         </vk-tooltip>
 
         <template #code>
-          <code-block
-            :code="shapeSnippet"
-            :copy="shapeSnippet"
-          />
+          <code-block :code="generateSnippet<string>('shape', {values: shapeOptions.general.map(o => o.value), customSlot})" />
         </template>
       </example-section>
 
@@ -203,10 +164,7 @@ const flatSnippet = `
         </vk-tooltip>
 
         <template #code>
-          <code-block
-            :code="sizeSnippet"
-            :copy="sizeSnippet"
-          />
+          <code-block :code="generateSnippet<string>('size', {values: sizeOptions.general.map(o => o.value), customSlot})" />
         </template>
       </example-section>
 
@@ -226,10 +184,7 @@ const flatSnippet = `
         </vk-tooltip>
 
         <template #code>
-          <code-block
-            :code="placementSnippet"
-            :copy="placementSnippet"
-          />
+          <code-block :code="generateSnippet<string>('placement', {values: placementOptions.map(o => o.value), customSlot})" />
         </template>
       </example-section>
 
@@ -244,10 +199,7 @@ const flatSnippet = `
         </vk-tooltip>
 
         <template #code>
-          <code-block
-            :code="flatSnippet"
-            :copy="flatSnippet"
-          />
+          <code-block :code="generateSnippet<boolean>('flat', {values: [true], customSlot})" />
         </template>
       </example-section>
     </template>

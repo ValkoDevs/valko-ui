@@ -135,7 +135,7 @@ const emitData: TableItem[] = [
   }
 ]
 
-const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-checkbox')
+const generateSnippet = snippetGeneratorFactory('vk-checkbox')
 
 /*
 * This watch function controls the indeterminate checkbox
@@ -244,10 +244,7 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('color', colorOptions)"
-            :copy="defaultSnippet('color', colorOptions)"
-          />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -264,10 +261,7 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('variant', variantOptions.general)"
-            :copy="defaultSnippet('variant', variantOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -284,10 +278,7 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('shape', shapeOptions.general)"
-            :copy="defaultSnippet('shape', shapeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -304,10 +295,7 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('size', sizeOptions.general)"
-            :copy="defaultSnippet('size', sizeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -319,10 +307,7 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('disabled')"
-            :copy="booleanSnippet('disabled')"
-          />
+          <code-block :code="generateSnippet<boolean>('disabled', { values: [true] })" />
         </template>
       </example-section>
 
@@ -334,10 +319,7 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('flat')"
-            :copy="booleanSnippet('flat')"
-          />
+          <code-block :code="generateSnippet<boolean>('flat', { values: [true] })" />
         </template>
       </example-section>
 
@@ -349,10 +331,7 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('readonly')"
-            :copy="booleanSnippet('readonly')"
-          />
+          <code-block :code="generateSnippet<boolean>('readonly', { values: [true] })" />
         </template>
       </example-section>
 
@@ -364,10 +343,7 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('indeterminate')"
-            :copy="booleanSnippet('indeterminate')"
-          />
+          <code-block :code="generateSnippet<boolean>('indeterminate', { values: [true] })" />
         </template>
       </example-section>
 
@@ -384,10 +360,7 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('label-position', position)"
-            :copy="defaultSnippet('label-position', position)"
-          />
+          <code-block :code="generateSnippet<string>('label-position', { values: position.map(o => o.value) })" />
         </template>
       </example-section>
     </template>

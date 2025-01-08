@@ -1,5 +1,4 @@
 export interface CodeBlockProps {
-  language?: 'js' | 'html';
+  language?: 'ts' | 'html' | 'vue';
   code: string;
-  copy?: string;
 }

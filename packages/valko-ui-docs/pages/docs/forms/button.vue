@@ -101,7 +101,7 @@ const slotData: TableItem[] = [
 
 const onClick = () => useNotification({ text: 'Clicked' })
 
-const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-button')
+const generateSnippet = snippetGeneratorFactory('vk-button')
 </script>
 
 <template>
@@ -187,10 +187,7 @@ const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block
-            :code="slotSnippet('color', colorOptions)"
-            :copy="slotSnippet('color', colorOptions)"
-          />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), hasSlot: true })" />
         </template>
       </example-section>
 
@@ -207,10 +204,7 @@ const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block
-            :code="slotSnippet('variant', variantOptions.withGradientAndLink)"
-            :copy="slotSnippet('variant', variantOptions.withGradientAndLink)"
-          />
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.withGradientAndLink.map(o => o.value), hasSlot: true })" />
         </template>
       </example-section>
 
@@ -227,10 +221,7 @@ const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block
-            :code="slotSnippet('shape', shapeOptions.general)"
-            :copy="slotSnippet('shape', shapeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), hasSlot: true })" />
         </template>
       </example-section>
 
@@ -247,10 +238,7 @@ const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block
-            :code="slotSnippet('size', sizeOptions.general)"
-            :copy="slotSnippet('size', sizeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), hasSlot: true })" />
         </template>
       </example-section>
 
@@ -260,10 +248,7 @@ const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('flat', '', true)"
-            :copy="booleanSnippet('flat', '', true)"
-          />
+          <code-block :code="generateSnippet<boolean>('flat', { values: [true], hasSlot: true })" />
         </template>
       </example-section>
 
@@ -273,10 +258,7 @@ const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('disabled', '', true)"
-            :copy="booleanSnippet('disabled', '', true)"
-          />
+          <code-block :code="generateSnippet<boolean>('disabled', { values: [true], hasSlot: true })" />
         </template>
       </example-section>
 
@@ -286,10 +268,7 @@ const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('condensed', '', true)"
-            :copy="booleanSnippet('condensed', '', true)"
-          />
+          <code-block :code="generateSnippet<boolean>('condensed', { values: [true], hasSlot: true })" />
         </template>
       </example-section>
 
@@ -299,10 +278,7 @@ const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('block', '', true)"
-            :copy="booleanSnippet('block', '', true)"
-          />
+          <code-block :code="generateSnippet<boolean>('block', { values: [true], hasSlot: true })" />
         </template>
       </example-section>
 
@@ -312,10 +288,7 @@ const { slotSnippet, booleanSnippet } = useCodeSnippet('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('loading', '', true)"
-            :copy="booleanSnippet('loading', '', true)"
-          />
+          <code-block :code="generateSnippet<boolean>('loading', { values: [true], hasSlot: true })" />
         </template>
       </example-section>
     </template>

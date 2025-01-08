@@ -88,93 +88,9 @@ const navbarSlots: TableItem[] = [
   }
 ]
 
-const colorSnippet = `
-<template>
-  ${colorOptions.map(color => `
-  <vk-navbar color="${color.value}">
-    <vk-icon name="brand-vue" />
-    <span class="font-semibold ml-4">${color.label}</span>
-  </vk-navbar>
-  `).join('')}
-</template>
-`
+const generateSnippet = snippetGeneratorFactory('vk-navbar')
 
-const variantSnippet = `
-<template>
-  ${variantOptions.withGradient.map(variant => `
-  <vk-navbar variant="${variant.value}">
-    <vk-icon name="brand-vue" />
-    <span class="font-semibold ml-4">${variant.label}</span>
-  </vk-navbar>
-  `).join('')}
-</template>
-`
-
-const sizeSnippet = `
-<template>
-  ${sizeOptions.general.map(size => `
-  <vk-navbar size="${size.value}">
-    <vk-icon name="brand-vue" />
-    <span class="font-semibold ml-4">${size.label}</span>
-  </vk-navbar>
-  `).join('')}
-</template>
-`
-
-const shapeSnippet = `
-<template>
-  ${shapeOptions.general.map(shape => `
-  <vk-navbar shape="${shape.value}">
-    <vk-icon name="brand-vue" />
-    <span class="font-semibold ml-4">${shape.label}</span>
-  </vk-navbar>
-  `).join('')}
-</template>
-`
-
-const floatingSnippet = `
-<template>
-
-  <vk-navbar floating>
-    <vk-icon name="brand-vue" />
-    <span class="font-semibold ml-4">Floating</span>
-  </vk-navbar>
-
-</template>
-`
-
-const flatSnippet = `
-<template>
-
-  <vk-navbar flat>
-    <vk-icon name="brand-vue" />
-    <span class="font-semibold ml-4">Flat</span>
-  </vk-navbar>
-
-</template>
-`
-
-const fixedSnippet = `
-<template>
-
-  <vk-navbar fixed>
-    <vk-icon name="brand-vue" />
-    <span class="font-semibold ml-4">Fixed</span>
-  </vk-navbar>
-
-</template>
-`
-
-const verticalSnippet = `
-<template>
-
-  <vk-navbar vertical>
-    <vk-icon name="brand-vue" />
-    <span class="font-semibold ml-4">Vertical</span>
-  </vk-navbar>
-
-</template>
-`
+const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold ml-4">Title</span>'
 </script>
 
 <template>
@@ -261,10 +177,7 @@ const verticalSnippet = `
         </vk-navbar>
 
         <template #code>
-          <code-block
-            :code="colorSnippet"
-            :copy="colorSnippet"
-          />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), customSlot })" />
         </template>
       </example-section>
 
@@ -285,10 +198,7 @@ const verticalSnippet = `
         </vk-navbar>
 
         <template #code>
-          <code-block
-            :code="variantSnippet"
-            :copy="variantSnippet"
-          />
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.withGradient.map(o => o.value), customSlot })" />
         </template>
       </example-section>
 
@@ -310,10 +220,7 @@ const verticalSnippet = `
         </vk-navbar>
 
         <template #code>
-          <code-block
-            :code="shapeSnippet"
-            :copy="shapeSnippet"
-          />
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), customSlot })" />
         </template>
       </example-section>
 
@@ -335,10 +242,7 @@ const verticalSnippet = `
         </vk-navbar>
 
         <template #code>
-          <code-block
-            :code="sizeSnippet"
-            :copy="sizeSnippet"
-          />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), customSlot })" />
         </template>
       </example-section>
 
@@ -355,10 +259,7 @@ const verticalSnippet = `
         </vk-navbar>
 
         <template #code>
-          <code-block
-            :code="floatingSnippet"
-            :copy="floatingSnippet"
-          />
+          <code-block :code="generateSnippet<boolean>('floating', { values: [true], customSlot })" />
         </template>
       </example-section>
 
@@ -375,10 +276,7 @@ const verticalSnippet = `
         </vk-navbar>
 
         <template #code>
-          <code-block
-            :code="flatSnippet"
-            :copy="flatSnippet"
-          />
+          <code-block :code="generateSnippet<boolean>('flat', { values: [true], customSlot })" />
         </template>
       </example-section>
 
@@ -397,10 +295,7 @@ const verticalSnippet = `
         </div>
 
         <template #code>
-          <code-block
-            :code="fixedSnippet"
-            :copy="fixedSnippet"
-          />
+          <code-block :code="generateSnippet<boolean>('fixed', { values: [true], customSlot })" />
         </template>
       </example-section>
 
@@ -419,10 +314,7 @@ const verticalSnippet = `
         </div>
 
         <template #code>
-          <code-block
-            :code="verticalSnippet"
-            :copy="verticalSnippet"
-          />
+          <code-block :code="generateSnippet<boolean>('vertical', { values: [true], customSlot })" />
         </template>
       </example-section>
     </template>

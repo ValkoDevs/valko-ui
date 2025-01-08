@@ -228,9 +228,9 @@ const data: TableItem[] = [
 <\/script>
 `
 
-const snippetProps = ' :headers="headers" :data="data"'
+const extraProps = ':headers="headers" :data="data"'
 
-const { defaultSnippet } = useCodeSnippet('vk-table')
+const generateSnippet = snippetGeneratorFactory('vk-table')
 </script>
 
 <template>
@@ -291,10 +291,7 @@ const { defaultSnippet } = useCodeSnippet('vk-table')
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -315,10 +312,7 @@ const { defaultSnippet } = useCodeSnippet('vk-table')
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -339,10 +333,7 @@ const { defaultSnippet } = useCodeSnippet('vk-table')
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
-            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, snippetProps)}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
     </template>

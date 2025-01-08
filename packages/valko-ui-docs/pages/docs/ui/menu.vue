@@ -153,8 +153,6 @@ const menuSlots: TableItem[] = [
   }
 ]
 
-// active, onClick & menu generation for example-section
-
 const generateMenuItems = (items: { value: string; label: string }[], groupName: string) => {
   return items.map(item => ({
     key: item.value,
@@ -169,18 +167,15 @@ const onItemClick = (item: MenuItem, menuKey: string) => {
   activeItemsList.value[menuKey] = item.key
 }
 
-// active & onClick for playground menu
-
 const activeItem = ref<MenuItem['key'] | null>(null)
 
 const onClick = (item: MenuItem) => {
   activeItem.value = item.key
 }
 
-const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-menu')
+const generateSnippet = snippetGeneratorFactory('vk-menu')
 
-const scriptCode = `
-<script setup lang="ts">
+const scriptCode = `<script setup lang="ts">
 import type { MenuItem } from '#valkoui'
 
 const menuItems: MenuItem[] = [
@@ -191,20 +186,15 @@ const menuItems: MenuItem[] = [
 <\/script>
 `
 
+const extraProps = ':items="menuItems"'
+
 onMounted(() => {
-  // Initialize every menu with the first item active
   colorOptions.forEach((_, index) => {
-    // Get the key of the first element in the array
     const firstItemKey = colorOptions[0].value
-    // Create a unique menu key based on the index
     const menuKey = `color-menu-${index}`
-    // Set the value of the active item in the menu list to the key of the first item
     activeItemsList.value[menuKey] = firstItemKey
-    // Find the object of the first element in the menuItems array
     const menuItem = menuItems.find(item => item.key === firstItemKey)
-    // If the object of the first element is found
     if (menuItem) {
-      // Set the 'active' property to true
       menuItem.active = true
     }
   })
@@ -240,7 +230,6 @@ onMounted(() => {
     }
   })
 
-  // Initialize the playground menu with the first item active
   const firstPlaygroundItemKey = menuItems[0].key
   activeItem.value = firstPlaygroundItemKey
   const firstPlaygroundItem = menuItems.find(item => item.key === firstPlaygroundItemKey)
@@ -313,10 +302,7 @@ onMounted(() => {
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, ' :items=&quot;menuItems&quot;')}`"
-            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, ' :items=&quot;menuItems&quot;')}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -334,10 +320,7 @@ onMounted(() => {
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.withGradientLinkAndLine, ' :items=&quot;menuItems&quot;')}`"
-            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.withGradientLinkAndLine, ' :items=&quot;menuItems&quot;')}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('variant', { values: variantOptions.withGradientLinkAndLine.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -355,10 +338,7 @@ onMounted(() => {
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, ' :items=&quot;menuItems&quot;')}`"
-            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, ' :items=&quot;menuItems&quot;')}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -376,10 +356,7 @@ onMounted(() => {
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, ' :items=&quot;menuItems&quot;')}`"
-            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, ' :items=&quot;menuItems&quot;')}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -392,10 +369,7 @@ onMounted(() => {
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${booleanSnippet('floating', ' :items=&quot;menuItems&quot;')}`"
-            :copy="`${scriptCode}\n${booleanSnippet('floating', ' :items=&quot;menuItems&quot;')}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('floating', { values: [true], extraProps })}`" />
         </template>
       </example-section>
     </template>

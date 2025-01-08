@@ -98,8 +98,7 @@ const togglePopover = (popoverId: string) => popoverStates[popoverId] = !popover
 
 const handleClose = (popoverId: string) => popoverStates[popoverId] = false
 
-const scriptCode = `
-<script setup lang="ts">
+const scriptCode = `<script setup lang="ts">
 const popoverStates = reactive<Record<string, boolean>>({})
 
 const togglePopover = (popoverId: string) => popoverStates[popoverId] = !popoverStates[popoverId]
@@ -108,25 +107,11 @@ const handleClose = (popoverId: string) => popoverStates[popoverId] = false
 <\/script>
 `
 
-const colorSnippet = `
-<template>
-  ${colorOptions.map(color => `
-  <vk-popover color="${color.value}" :is-open="popoverStates['${color.value}']" @close="handleClose('${color.value}')">
-    <vk-button @click="togglePopover('${color.value}')">${color.label}</vk-button>
-  </vk-popover>
-  `).join('')}
-</template>
-`
+const generateSnippet = snippetGeneratorFactory('vk-popover')
 
-const placementSnippet = `
-<template>
-  ${placementOptions.map(placement => `
-  <vk-popover placement="${placement.value}" :is-open="popoverStates['${placement.value}']" @close="handleClose('${placement.value}')">
-    <vk-button @click="togglePopover('${placement.value}')">${placement.label}</vk-button>
-  </vk-popover>
-  `).join('')}
-</template>
-`
+const customSlot = '<vk-button\n      @click="togglePopover(\'popoverId\')"\n    >\n      Slot Content\n    </vk-button>'
+
+const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(\'popoverId\')"'
 </script>
 
 <template>
@@ -187,10 +172,7 @@ const placementSnippet = `
         </vk-popover>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}${colorSnippet}`"
-            :copy="`${scriptCode}${colorSnippet}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet('color', { values: colorOptions.map(o => o.value), customSlot, extraProps })}`" />
         </template>
       </example-section>
 
@@ -212,10 +194,7 @@ const placementSnippet = `
         </vk-popover>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}${placementSnippet}`"
-            :copy="`${scriptCode}${placementSnippet}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet('placement', { values: placementOptions.map(o => o.value), customSlot, extraProps })}`" />
         </template>
       </example-section>
     </template>

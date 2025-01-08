@@ -48,7 +48,7 @@ const spinnerProps: TableItem[] = [
   }
 ]
 
-const { defaultSnippet } = useCodeSnippet('vk-spinner')
+const generateSnippet = snippetGeneratorFactory('vk-spinner')
 </script>
 
 <template>
@@ -107,10 +107,7 @@ const { defaultSnippet } = useCodeSnippet('vk-spinner')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('color', colorOptions)"
-            :copy="defaultSnippet('color', colorOptions)"
-          />
+          <code-block :code="generateSnippet<string>('color', {values: colorOptions.map(o => o.value)})" />
         </template>
       </example-section>
 
@@ -130,10 +127,7 @@ const { defaultSnippet } = useCodeSnippet('vk-spinner')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('name', names)"
-            :copy="defaultSnippet('name', names)"
-          />
+          <code-block :code="generateSnippet<string>('name', {values: names.map(o => o.value)})" />
         </template>
       </example-section>
 
@@ -153,10 +147,7 @@ const { defaultSnippet } = useCodeSnippet('vk-spinner')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('size', sizeOptions.general)"
-            :copy="defaultSnippet('size', sizeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('size', {values: sizeOptions.general.map(o => o.value)})" />
         </template>
       </example-section>
     </template>

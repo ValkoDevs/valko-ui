@@ -164,8 +164,7 @@ const createNotification = (props: NotificationProps) => {
   })
 }
 
-const scriptCode = `
-<script setup lang="ts">
+const scriptCode = `<script setup lang="ts">
 import type { NotificationProps } from '#valkoui'
 import { useNotification } from '#valkoui'
 
@@ -175,73 +174,91 @@ const createNotification = (props: NotificationProps) => useNotification(props)
 
 const colorSnippet = `
 <template>
-  ${colorOptions.map(color => `
-  <vk-button @click="() => createNotification({ text: ${color.label}, color: ${color.value} })">${color.label}</vk-button>
-  `).join('')}
+  ${colorOptions.map(color => `<vk-button
+    @click="createNotification({ text: ${color.label}, color: ${color.value} })"
+  >
+    ${color.label}
+  </vk-button>`).join('\n\n  ')}
 </template>
 `
 
 const variantSnippet = `
 <template>
-  ${variantOptions.withGradientAndLine.map(variant => `
-  <vk-button @click="() => createNotification({ text: ${variant.label}, variant: ${variant.value} })">${variant.label}</vk-button>
-  `).join('')}
+  ${variantOptions.withGradientAndLine.map(variant => `<vk-button
+    @click="createNotification({ text: ${variant.label}, variant: ${variant.value} })"
+  >
+    ${variant.label}
+  </vk-button>`).join('\n\n  ')}
 </template>
 `
 
 const shapeSnippet = `
 <template>
-  ${shapeOptions.general.map(shape => `
-  <vk-button @click="() => createNotification({ text: ${shape.label}, shape: ${shape.value} })">${shape.label}</vk-button>
-  `).join('')}
+  ${shapeOptions.general.map(shape => `<vk-button
+    @click="createNotification({ text: ${shape.label}, shape: ${shape.value} })"
+  >
+    ${shape.label}
+  </vk-button>`).join('\n\n  ')}
 </template>
 `
 
 const sizeSnippet = `
 <template>
-  ${sizeOptions.general.map(size => `
-  <vk-button @click="() => createNotification({ text: ${size.label}, size: ${size.value} })">${size.label}</vk-button>
-  `).join('')}
+  ${sizeOptions.general.map(size => `<vk-button
+    @click="createNotification({ text: ${size.label}, size: ${size.value} })"
+  >
+    ${size.label}
+  </vk-button>`).join('\n\n  ')}
 </template>
 `
 
 const gravitySnippet = `
 <template>
-  ${gravityOptions.map(gravity => `
-  <vk-button @click="() => createNotification({ text: ${gravity.label}, gravity: ${gravity.value} })">${gravity.label}</vk-button>
-  `).join('')}
+  ${gravityOptions.map(gravity => `<vk-button
+    @click="createNotification({ text: ${gravity.label}, gravity: ${gravity.value} })"
+  >
+    ${gravity.label}
+  </vk-button>`).join('\n\n  ')}
 </template>
 `
 
 const positionSnippet = `
 <template>
-  ${positionOptions.map(position => `
-  <vk-button @click="() => createNotification({ text: ${position.label}, position: ${position.value} })">${position.label}</vk-button>
-  `).join('')}
+  ${positionOptions.map(position => `<vk-button
+    @click="createNotification({ text: ${position.label}, position: ${position.value} })"
+  >
+    ${position.label}
+  </vk-button>`).join('\n\n  ')}
 </template>
 `
 
 const flatSnippet = `
 <template>
-
-  <vk-button @click="() => createNotification({ text: Flat, flat: true })">Flat</vk-button>
-
+  <vk-button
+    @click="createNotification({ text: Flat, flat: true })"
+  >
+    Flat
+  </vk-button>
 </template>
 `
 
 const closeSnippet = `
 <template>
-
-  <vk-button @click="() => createNotification({ text: Close, close: true })">Close</vk-button>
-
+  <vk-button
+    @click="createNotification({ text: Close, close: true })"
+  >
+    Close
+  </vk-button>
 </template>
 `
 
 const stopOnFocusSnippet = `
 <template>
-
-  <vk-button @click="() => createNotification({ text: Stop On Focus, stopOnFocus: true })">Stop On Focus</vk-button>
-
+  <vk-button
+    @click="createNotification({ text: Stop On Focus, stopOnFocus: true })"
+  >
+    Stop On Focus
+  </vk-button>
 </template>
 `
 </script>

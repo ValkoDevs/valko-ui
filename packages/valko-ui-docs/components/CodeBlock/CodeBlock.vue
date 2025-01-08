@@ -1,16 +1,31 @@
 <script lang="ts" setup>
 import type { CodeBlockProps } from './interfaces'
 import hljs from 'highlight.js/lib/core'
-import javascript from 'highlight.js/lib/languages/javascript'
 import xml from 'highlight.js/lib/languages/xml'
+import typescript from 'highlight.js/lib/languages/typescript'
 
-hljs.registerLanguage('js', javascript)
+hljs.registerLanguage('ts', typescript)
 hljs.registerLanguage('html', xml)
+hljs.registerLanguage('vue', (hljs) => ({
+  subLanguage: 'html',
+  contains: [
+    hljs.COMMENT('<!--', '-->', {
+      relevance: 10
+    }),
+    {
+      begin: /^(\s*)(<script( setup)?( lang=["']ts["'])?>)/gm,
+      end: /^(\s*)(<\/script>)/gm,
+      subLanguage: 'ts',
+      excludeBegin: true,
+      excludeEnd: true
+    }
+  ]
+}))
 
 defineOptions({ name: 'CodeBlock' })
 
 const props = withDefaults(defineProps<CodeBlockProps>(), {
-  language: 'html'
+  language: 'vue'
 })
 
 const btnIcon = ref('copy')
@@ -28,7 +43,7 @@ const iconClass = computed(() => {
 
 const copyToClipboard = async () => {
   try {
-    if (props.copy) await navigator.clipboard.writeText(props.copy)
+    await navigator.clipboard.writeText(props.code)
     btnIcon.value = 'check'
     setTimeout(() => btnIcon.value = 'copy', 3000)
   } catch (error) {
@@ -41,7 +56,6 @@ const copyToClipboard = async () => {
 <template>
   <div class="relative group w-full">
     <vk-button
-      v-if="!!copy"
       variant="link"
       shape="rounded"
       color="neutral"

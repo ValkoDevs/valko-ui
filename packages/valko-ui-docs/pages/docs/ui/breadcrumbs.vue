@@ -172,10 +172,9 @@ const breadcrumbsEmits: TableItem[] = [
   }
 ]
 
-const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-breadcrumbs')
+const generateSnippet = snippetGeneratorFactory('vk-breadcrumbs')
 
-const scriptCode = `
-<script setup lang="ts">
+const scriptCode = `<script setup lang="ts">
 import type { Crumb } from '#valkoui'
 
 const crumbs: Crumb[] = [
@@ -188,8 +187,7 @@ const crumbs: Crumb[] = [
 <\/script>
 `
 
-const disabledScript = `
-<script setup lang="ts">
+const disabledScript = `<script setup lang="ts">
 import type { Crumb } from '#valkoui'
 
 const crumbs: Crumb[] = [
@@ -202,8 +200,7 @@ const crumbs: Crumb[] = [
 <\/script>
 `
 
-const iconScript = `
-<script setup lang="ts">
+const iconScript = `<script setup lang="ts">
 import type { Crumb } from '#valkoui'
 
 const crumbs: Crumb[] = [
@@ -215,6 +212,8 @@ const crumbs: Crumb[] = [
 ]
 <\/script>
 `
+
+const extraProps = ':crumbs="crumbs"'
 </script>
 
 <template>
@@ -287,10 +286,7 @@ const crumbs: Crumb[] = [
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('color', colorOptions, ' :crumbs=&quot;crumbs&quot;')}`"
-            :copy="`${scriptCode}\n${defaultSnippet('color', colorOptions, ' :crumbs=&quot;crumbs&quot;')}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -311,10 +307,7 @@ const crumbs: Crumb[] = [
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('variant', variantOptions.withLink, ' :crumbs=&quot;crumbs&quot;')}`"
-            :copy="`${scriptCode}\n${defaultSnippet('variant', variantOptions.withLink, ' :crumbs=&quot;crumbs&quot;')}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('variant', { values: variantOptions.withLink.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -335,10 +328,7 @@ const crumbs: Crumb[] = [
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, ' :crumbs=&quot;crumbs&quot;')}`"
-            :copy="`${scriptCode}\n${defaultSnippet('shape', shapeOptions.general, ' :crumbs=&quot;crumbs&quot;')}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -359,10 +349,7 @@ const crumbs: Crumb[] = [
         </div>
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, ' :crumbs=&quot;crumbs&quot;')}`"
-            :copy="`${scriptCode}\n${defaultSnippet('size', sizeOptions.general, ' :crumbs=&quot;crumbs&quot;')}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -373,10 +360,7 @@ const crumbs: Crumb[] = [
         />
 
         <template #code>
-          <code-block
-            :code="`${scriptCode}${booleanSnippet('flat', ' :crumbs=&quot;crumbs&quot;')}`"
-            :copy="`${scriptCode}${booleanSnippet('flat', ' :crumbs=&quot;crumbs&quot;')}`"
-          />
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('flat', { values: [true], extraProps })}`" />
         </template>
       </example-section>
 
@@ -384,10 +368,7 @@ const crumbs: Crumb[] = [
         <vk-breadcrumbs :crumbs="crumbsDisabled" />
 
         <template #code>
-          <code-block
-            :code="`${disabledScript}${booleanSnippet(':crumbs=&quot;crumbs&quot;')}`"
-            :copy="`${disabledScript}${booleanSnippet(':crumbs=&quot;crumbs&quot;')}`"
-          />
+          <code-block :code="`${disabledScript}\n${generateSnippet<string>(':crumbs', { values: ['crumbs'] })}`" />
         </template>
       </example-section>
 
@@ -395,10 +376,7 @@ const crumbs: Crumb[] = [
         <vk-breadcrumbs :crumbs="crumbsIcons" />
 
         <template #code>
-          <code-block
-            :code="`${iconScript}${booleanSnippet(':crumbs=&quot;crumbs&quot;')}`"
-            :copy="`${iconScript}${booleanSnippet(':crumbs=&quot;crumbs&quot;')}`"
-          />
+          <code-block :code="`${iconScript}\n${generateSnippet<string>(':crumbs', { values: ['crumbs'] })}`" />
         </template>
       </example-section>
     </template>

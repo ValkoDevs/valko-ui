@@ -77,7 +77,13 @@ const avatarProps: TableItem[] = [
 
 const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
 
-const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-avatar')
+const generateSnippet = snippetGeneratorFactory('vk-avatar')
+
+const extraProps = {
+  name: 'name="Le Blanc"',
+  src: ':src="avatarSrc"'
+}
+
 </script>
 
 <template>
@@ -149,10 +155,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-avatar')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('color', colorOptions)"
-            :copy="defaultSnippet('color', colorOptions)"
-          />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -173,10 +176,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-avatar')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('color', colorOptions, ' name=&quot;Name Here&quot;')"
-            :copy="defaultSnippet('color', colorOptions, ' name=&quot;Name Here&quot;')"
-          />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps: extraProps.name })" />
         </template>
       </example-section>
 
@@ -196,10 +196,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-avatar')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('variant', variantOptions.withGradient)"
-            :copy="defaultSnippet('variant', variantOptions.withGradient)"
-          />
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.withGradient.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -220,10 +217,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-avatar')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('variant', variantOptions.withGradient, ` src=&quot;Img source&quot;`)"
-            :copy="defaultSnippet('variant', variantOptions.withGradient, ` src=&quot;Img source&quot;`)"
-          />
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.withGradient.map(o => o.value), extraProps: extraProps.src })" />
         </template>
       </example-section>
 
@@ -243,10 +237,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-avatar')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('shape', shapeOptions.general)"
-            :copy="defaultSnippet('shape', shapeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -266,10 +257,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-avatar')
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('size', sizeOptions.general)"
-            :copy="defaultSnippet('size', sizeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -279,10 +267,7 @@ const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-avatar')
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('flat')"
-            :copy="booleanSnippet('flat')"
-          />
+          <code-block :code="generateSnippet<boolean>('flat', { values: [true] })" />
         </template>
       </example-section>
     </template>

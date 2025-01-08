@@ -178,13 +178,8 @@ watch([() => form.min, () => form.max, () => form.step], () => {
 })
 
 form.labels = generateLabels()
-const { defaultSnippet, booleanSnippet } = useCodeSnippet('vk-range')
 
-const isDoubleSnippet = `
-<template>
-  <vk-range :is-double="true" />
-</template>
-`
+const generateSnippet = snippetGeneratorFactory('vk-range')
 </script>
 
 <template>
@@ -291,10 +286,7 @@ const isDoubleSnippet = `
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('color', colorOptions)"
-            :copy="defaultSnippet('color', colorOptions)"
-          />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -311,10 +303,7 @@ const isDoubleSnippet = `
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('variant', variantOptions.withGradient)"
-            :copy="defaultSnippet('variant', variantOptions.withGradient)"
-          />
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.withGradient.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -331,10 +320,7 @@ const isDoubleSnippet = `
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('shape', shapeOptions.general)"
-            :copy="defaultSnippet('shape', shapeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -351,10 +337,7 @@ const isDoubleSnippet = `
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('size', sizeOptions.general)"
-            :copy="defaultSnippet('size', sizeOptions.general)"
-          />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -362,10 +345,7 @@ const isDoubleSnippet = `
         <vk-range is-double />
 
         <template #code>
-          <code-block
-            :code="isDoubleSnippet"
-            :copy="isDoubleSnippet"
-          />
+          <code-block :code="generateSnippet<string>(':is-double', { values: ['true'] })" />
         </template>
       </example-section>
 
@@ -376,10 +356,7 @@ const isDoubleSnippet = `
         />
 
         <template #code>
-          <code-block
-            :code="booleanSnippet('show-steps')"
-            :copy="booleanSnippet('show-steps')"
-          />
+          <code-block :code="generateSnippet<boolean>('show-steps', { values: [true] })" />
         </template>
       </example-section>
 
@@ -399,10 +376,7 @@ const isDoubleSnippet = `
         </div>
 
         <template #code>
-          <code-block
-            :code="defaultSnippet('color', colorOptions, ' striped')"
-            :copy="defaultSnippet('color', colorOptions, ' striped')"
-          />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps: 'striped' })" />
         </template>
       </example-section>
     </template>

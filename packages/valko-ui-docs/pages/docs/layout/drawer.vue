@@ -113,141 +113,62 @@ const drawerSlots: TableItem[] = [
 
 const drawerStates = reactive<Record<string, boolean>>({})
 
-const toggleDrawer = (drawerId: string) => {
-  drawerStates[drawerId] = !drawerStates[drawerId]
-}
+const toggleDrawer = (drawerId: string) => drawerStates[drawerId] = !drawerStates[drawerId]
 
-const scriptCode = `
-<script setup lang="ts">
+const scriptCode = `<script setup lang="ts">
 const drawerStates = reactive<Record<string, boolean>>({})
 
 const toggleDrawer = (drawerId: string) => drawerStates[drawerId] = !drawerStates[drawerId]
 <\/script>
 `
 
-const placementSnippet = `
-${scriptCode}
-<template>
-${placementOptions.map(pos => `
-  <vk-button @click="toggleDrawer('${pos.value}')">
-    ${pos.label}
-  </vk-button>
+const generateSnippet = snippetGeneratorFactory('vk-drawer')
 
-  <vk-drawer
-    :is-open="drawerStates['${pos.value}']"
-    placement="${pos.value}"
-    @close="toggleDrawer('${pos.value}')"
-  >
-    Content goes here.
-  </vk-drawer>`).join('\n')}
+const triggerSnippet = '<vk-button\n    @click="toggleDrawer(\'drawerId\')"\n  >\n    Slot Content\n  </vk-button>\n\n  <vk-drawer'
 
-</template>
-`
+const extraProps = ':is-open="drawerStates[\'drawerId\']" @close="toggleDrawer(\'drawerId\')"'
 
-const shapeSnippet = `
-${scriptCode}
-<template>
-${shapeOptions.general.map(shape => `
-  <vk-button @click="toggleDrawer('${shape.value}')">
-    ${shape.label}
-  </vk-button>
+const placementSnippet = `${scriptCode}\n${generateSnippet<string>('placement',
+  {
+    values: placementOptions.map(o => o.value),
+    hasSlot: true, extraProps
+  }).replace(/<vk-drawer/g, `${triggerSnippet}`)
+}`
 
-  <vk-drawer
-    :is-open="drawerStates['${shape.value}']"
-    shape="${shape.value}"
-    @close="toggleDrawer('${shape.value}')"
-  >
-    Content goes here.
-  </vk-drawer>`).join('\n')}
+const shapeSnippet = `${scriptCode}\n${generateSnippet<string>('shape',
+  {
+    values: shapeOptions.general.map(o => o.value),
+    hasSlot: true, extraProps
+  }).replace(/<vk-drawer/g, `${triggerSnippet}`)
+}`
 
-</template>
-`
+const sizeSnippet = `${scriptCode}\n${generateSnippet<string>('size',
+  {
+    values: sizeOptions.general.map(o => o.value),
+    hasSlot: true, extraProps
+  }).replace(/<vk-drawer/g, `${triggerSnippet}`)
+}`
 
-const sizeSnippet = `
-${scriptCode}
-<template>
-${sizeOptions.general.map(size => `
-  <vk-button @click="toggleDrawer('${size.value}')">
-    ${size.label}
-  </vk-button>
+const backdropSnippet = `${scriptCode}\n${generateSnippet<string>('backdrop',
+  {
+    values: backdropOptions.map(o => o.value),
+    hasSlot: true, extraProps
+  }).replace(/<vk-drawer/g, `${triggerSnippet}`)
+}`
 
-  <vk-drawer
-    :is-open="drawerStates['${size.value}']"
-    size="${size.value}"
-    @close="toggleDrawer('${size.value}')"
-  >
-    Content goes here.
-  </vk-drawer>`).join('\n')}
+const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>('closable',
+  {
+    values: [true],
+    hasSlot: true, extraProps
+  }).replace(/<vk-drawer/g, `${triggerSnippet}`)
+}`
 
-</template>
-`
-
-const backdropSnippet = `
-${scriptCode}
-<template>
-${backdropOptions.map(backdrop => `
-  <vk-button @click="toggleDrawer('${backdrop.value}')">
-    ${backdrop.label}
-  </vk-button>
-
-  <vk-drawer
-    :is-open="drawerStates['${backdrop.value}']"
-    backdrop="${backdrop.value}"
-    @close="toggleDrawer('${backdrop.value}')"
-  >
-    Content goes here.
-  </vk-drawer>`).join('\n')}
-
-</template>
-`
-
-const closableSnippet = `
-<script setup lang="ts">
-const isOpen = ref(false)
-
-const toggleDrawer = () => isOpen = !isOpen
-<\/script>
-
-<template>
-
-  <vk-button @click="toggleDrawer">
-    Closable
-  </vk-button>
-
-  <vk-drawer
-    :is-open="isOpen"
-    closable
-    @close="toggleDrawer"
-  >
-    Content goes here.
-  </vk-drawer>
-
-</template>
-`
-
-const flatSnippet = `
-<script setup lang="ts">
-const isOpen = ref(false)
-
-const toggleDrawer = () => isOpen = !isOpen
-<\/script>
-
-<template>
-
-  <vk-button @click="toggleDrawer">
-    Flat
-  </vk-button>
-
-  <vk-drawer
-    :is-open="isOpen"
-    flat
-    @close="toggleDrawer"
-  >
-    Content goes here.
-  </vk-drawer>
-
-</template>
-`
+const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
+  {
+    values: [true],
+    hasSlot: true, extraProps
+  }).replace(/<vk-drawer/g, `${triggerSnippet}`)
+}`
 </script>
 
 <template>
@@ -341,10 +262,7 @@ const toggleDrawer = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block
-            :code="placementSnippet"
-            :copy="placementSnippet"
-          />
+          <code-block :code="placementSnippet" />
         </template>
       </example-section>
 
@@ -373,10 +291,7 @@ const toggleDrawer = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block
-            :code="shapeSnippet"
-            :copy="shapeSnippet"
-          />
+          <code-block :code="shapeSnippet" />
         </template>
       </example-section>
 
@@ -405,10 +320,7 @@ const toggleDrawer = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block
-            :code="sizeSnippet"
-            :copy="sizeSnippet"
-          />
+          <code-block :code="sizeSnippet" />
         </template>
       </example-section>
 
@@ -437,10 +349,7 @@ const toggleDrawer = () => isOpen = !isOpen
         </div>
 
         <template #code>
-          <code-block
-            :code="backdropSnippet"
-            :copy="backdropSnippet"
-          />
+          <code-block :code="backdropSnippet" />
         </template>
       </example-section>
 
@@ -461,10 +370,7 @@ const toggleDrawer = () => isOpen = !isOpen
         </vk-drawer>
 
         <template #code>
-          <code-block
-            :code="closableSnippet"
-            :copy="closableSnippet"
-          />
+          <code-block :code="closableSnippet" />
         </template>
       </example-section>
 
@@ -485,10 +391,7 @@ const toggleDrawer = () => isOpen = !isOpen
         </vk-drawer>
 
         <template #code>
-          <code-block
-            :code="flatSnippet"
-            :copy="flatSnippet"
-          />
+          <code-block :code="flatSnippet" />
         </template>
       </example-section>
     </template>

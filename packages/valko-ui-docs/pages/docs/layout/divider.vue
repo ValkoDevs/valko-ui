@@ -57,7 +57,7 @@ const dividerProps: TableItem[] = [
   }
 ]
 
-const { defaultSnippet } = useCodeSnippet('vk-divider')
+const generateSnippet = snippetGeneratorFactory('vk-divider')
 </script>
 
 <template>
@@ -139,7 +139,7 @@ const { defaultSnippet } = useCodeSnippet('vk-divider')
         </div>
 
         <template #code>
-          <code-block :code="defaultSnippet('color', colorOptions)" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -162,7 +162,7 @@ const { defaultSnippet } = useCodeSnippet('vk-divider')
         </div>
 
         <template #code>
-          <code-block :code="defaultSnippet('variant', variantOptions.general)" />
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -185,7 +185,7 @@ const { defaultSnippet } = useCodeSnippet('vk-divider')
         </div>
 
         <template #code>
-          <code-block :code="defaultSnippet('shape', shapeOptions.general)" />
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -208,7 +208,7 @@ const { defaultSnippet } = useCodeSnippet('vk-divider')
         </div>
 
         <template #code>
-          <code-block :code="defaultSnippet('size', sizeOptions.general)" />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -239,7 +239,7 @@ const { defaultSnippet } = useCodeSnippet('vk-divider')
         </div>
 
         <template #code>
-          <code-block :code="defaultSnippet('direction', directionOptions)" />
+          <code-block :code="generateSnippet<string>('direction', { values: directionOptions.map(o => o.value) })" />
         </template>
       </example-section>
     </template>
