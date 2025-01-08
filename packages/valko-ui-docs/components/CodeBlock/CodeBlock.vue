@@ -13,8 +13,8 @@ hljs.registerLanguage('vue', (hljs) => ({
       relevance: 10
     }),
     {
-      begin: /^(\s*)(<(script|SCRIPT)( setup)?( lang=["']ts["'])?>)/gm,
-      end: /^(\s*)(<\/(script|SCRIPT)>)/gm,
+      begin: /^(\s*)(<([Ss][Cc][Rr][Ii][Pp][Tt])( setup)?( lang=["']ts["'])?>)/gm,
+      end: /^(\s*)(<\/[Ss][Cc][Rr][Ii][Pp][Tt]>)/gm,
       subLanguage: 'ts',
       excludeBegin: true,
       excludeEnd: true
