@@ -33,7 +33,41 @@ const activeItem = ref('account')
 
 const onItemClick = (item: MenuItem) => activeItem.value = `${item.key}`
 
-const templateCode = `
+const templateSnippet = `<script setup lang="ts">
+import { ref } from 'vue'
+import type { MenuItem } from '#valkoui'
+
+const form = reactive({
+  radio: 'theme-val',
+  checkboxs: {
+    sms: false,
+    push: false,
+    email: false,
+    profile: false,
+    search: false,
+    compact: false
+  }
+})
+
+const menuItems: MenuItem[] = [
+  { key: 'account', group: 'General', text: 'Account' },
+  { key: 'privacy', group: 'General', text: 'Privacy' },
+  { key: 'notifications', group: 'General', text: 'Notifications' },
+  { key: 'security', group: 'Security', text: 'Security' },
+  { key: 'billing', group: 'Account', text: 'Billing' },
+  { key: 'appearance', group: 'Preferences', text: 'Appearance' }
+]
+
+const radios = [
+  { label: 'Light Theme', value: 'light' },
+  { label: 'Dark Theme', value: 'dark' }
+]
+
+const activeItem = ref('account')
+
+const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
+<\/script>
+
 <template>
   <div class="max-w-screen-xl mx-auto mt-10 bg-light-4 dark:bg-dark-3/[.8] flex rounded-lg shadow">
     <aside class="w-1/5 border-r-2 border-light-4">
@@ -174,43 +208,6 @@ const templateCode = `
     </main>
   </div>
 </template>
-`
-
-const scriptCode = `
-<script setup lang="ts">
-import { ref } from 'vue'
-import type { MenuItem } from '#valkoui'
-
-const form = reactive({
-  radio: 'theme-val',
-  checkboxs: {
-    sms: false,
-    push: false,
-    email: false,
-    profile: false,
-    search: false,
-    compact: false
-  }
-})
-
-const menuItems: MenuItem[] = [
-  { key: 'account', group: 'General', text: 'Account' },
-  { key: 'privacy', group: 'General', text: 'Privacy' },
-  { key: 'notifications', group: 'General', text: 'Notifications' },
-  { key: 'security', group: 'Security', text: 'Security' },
-  { key: 'billing', group: 'Account', text: 'Billing' },
-  { key: 'appearance', group: 'Preferences', text: 'Appearance' }
-]
-
-const radios = [
-  { label: 'Light Theme', value: 'light' },
-  { label: 'Dark Theme', value: 'dark' }
-]
-
-const activeItem = ref('account')
-
-const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
-<\/script>
 `
 </script>
 
@@ -358,15 +355,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
     </template>
 
     <template #code>
-      <div class="px-4">
-        <code-block
-          :code="scriptCode"
-          :copy="`${scriptCode}${templateCode}`"
-          language="js"
-        />
-
-        <code-block :code="templateCode" />
-      </div>
+      <code-block :code="templateSnippet" />
     </template>
   </page-template>
 </template>

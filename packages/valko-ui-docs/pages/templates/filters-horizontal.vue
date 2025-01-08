@@ -19,7 +19,27 @@ const toggleRating = (selectedRating: number) => {
   else filters.rating = selectedRating
 }
 
-const templateCode = `
+const templateSnippet = `<script setup lang="ts">
+const filters = reactive({
+  price: [0, 10000],
+  categories: {
+    electronics: false,
+    'home-appliances': false,
+    gaming: false,
+    wearables: false,
+    audio: false
+  },
+  rating: ref(0),
+  availability: '',
+  currentPage: 1
+})
+
+const toggleRating = (selectedRating: number) => {
+  if (filters.rating === selectedRating) filters.rating = 0
+  else filters.rating = selectedRating
+}
+<\/script>
+
 <template>
   <aside class="flex gap-6 p-6 rounded-lg h-[15vh] items-start bg-light-2 dark:bg-dark-3/[.4]">
     <div class="flex flex-col gap-2 w-fit">
@@ -147,29 +167,6 @@ const templateCode = `
     </vk-button>
   </aside>
 </template>
-`
-
-const scriptCode = `
-<script setup lang="ts">
-const filters = reactive({
-  price: [0, 10000],
-  categories: {
-    electronics: false,
-    'home-appliances': false,
-    gaming: false,
-    wearables: false,
-    audio: false
-  },
-  rating: ref(0),
-  availability: '',
-  currentPage: 1
-})
-
-const toggleRating = (selectedRating: number) => {
-  if (filters.rating === selectedRating) filters.rating = 0
-  else filters.rating = selectedRating
-}
-<\/script>
 `
 </script>
 
@@ -304,15 +301,7 @@ const toggleRating = (selectedRating: number) => {
     </template>
 
     <template #code>
-      <div class="px-4">
-        <code-block
-          :code="scriptCode"
-          :copy="`${scriptCode}${templateCode}`"
-          language="js"
-        />
-
-        <code-block :code="templateCode" />
-      </div>
+      <code-block :code="templateSnippet" />
     </template>
   </page-template>
 </template>

@@ -72,7 +72,80 @@ const activeItem = ref('account')
 
 const onItemClick = (item: MenuItem) => activeItem.value = `${item.key}`
 
-const templateCode = `
+const templateSnippet = `<script setup lang="ts">
+import type { MenuItem, TableItem, TableHeader } from '#valkoui'
+
+const menuItems: MenuItem[] = [
+  { key: 'dashboard', group: 'Overview', text: 'Dashboard' },
+  { key: 'analytics', group: 'Overview', text: 'Analytics' },
+  { key: 'projects', group: 'Management', text: 'Projects' },
+  { key: 'tasks', group: 'Management', text: 'Tasks' },
+  { key: 'team', group: 'Users', text: 'Team' },
+  { key: 'settings', group: 'Preferences', text: 'Settings' }
+]
+
+const employeeHeaders: TableHeader[] = [
+  { key: 'name', field: 'name', label: 'Name' },
+  { key: 'email', field: 'email', label: 'Email' },
+  { key: 'sales', field: 'sales', label: 'Sales' },
+  { key: 'date', field: 'date', label: 'Date' },
+  { key: 'status', field: 'status', label: 'Status' },
+  { key: 'company', field: 'company', label: 'Company' }
+]
+
+const employeeData: TableItem[] = [
+  {
+    key: 'employee-01',
+    name: 'Alice Johnson',
+    email: 'alice.johnson@example.com',
+    sales: 120,
+    date: '2024-11-15',
+    status: 'active',
+    company: 'Tech Innovations Inc.'
+  },
+  {
+    key: 'employee-02',
+    name: 'John Doe',
+    email: 'john.doe@example.com',
+    sales: 85,
+    date: '2023-09-08',
+    status: 'inactive',
+    company: 'Global Solutions Ltd.'
+  },
+  {
+    key: 'employee-03',
+    name: 'Emily Davis',
+    email: 'emily.davis@example.com',
+    sales: 145,
+    date: '2024-06-23',
+    status: 'pending',
+    company: 'Creative Dynamics Co.'
+  },
+  {
+    key: 'employee-04',
+    name: 'Michael Brown',
+    email: 'michael.brown@example.com',
+    sales: 67,
+    date: '2023-10-30',
+    status: 'error',
+    company: 'Retail Masters Corp.'
+  },
+  {
+    key: 'employee-05',
+    name: 'Sophia Martinez',
+    email: 'sophia.martinez@example.com',
+    sales: 200,
+    date: '2024-01-12',
+    status: 'active',
+    company: 'Marketing Hub LLC'
+  }
+]
+
+const activeItem = ref('account')
+
+const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
+<\/script>
+
 <template>
   <div class="flex h-full">
     <aside class="w-[10vw] border-r border-light-4 dark:border-dark-2 bg-light-3 dark:bg-dark-3/[.8]">
@@ -152,82 +225,6 @@ const templateCode = `
     </div>
   </div>
 </template>
-`
-
-const scriptCode = `
-<script setup lang="ts">
-import type { MenuItem, TableItem, TableHeader } from '#valkoui'
-
-const menuItems: MenuItem[] = [
-  { key: 'dashboard', group: 'Overview', text: 'Dashboard' },
-  { key: 'analytics', group: 'Overview', text: 'Analytics' },
-  { key: 'projects', group: 'Management', text: 'Projects' },
-  { key: 'tasks', group: 'Management', text: 'Tasks' },
-  { key: 'team', group: 'Users', text: 'Team' },
-  { key: 'settings', group: 'Preferences', text: 'Settings' }
-]
-
-const employeeHeaders: TableHeader[] = [
-  { key: 'name', field: 'name', label: 'Name' },
-  { key: 'email', field: 'email', label: 'Email' },
-  { key: 'sales', field: 'sales', label: 'Sales' },
-  { key: 'date', field: 'date', label: 'Date' },
-  { key: 'status', field: 'status', label: 'Status' },
-  { key: 'company', field: 'company', label: 'Company' }
-]
-
-const employeeData: TableItem[] = [
-  {
-    key: 'employee-01',
-    name: 'Alice Johnson',
-    email: 'alice.johnson@example.com',
-    sales: 120,
-    date: '2024-11-15',
-    status: 'active',
-    company: 'Tech Innovations Inc.'
-  },
-  {
-    key: 'employee-02',
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    sales: 85,
-    date: '2023-09-08',
-    status: 'inactive',
-    company: 'Global Solutions Ltd.'
-  },
-  {
-    key: 'employee-03',
-    name: 'Emily Davis',
-    email: 'emily.davis@example.com',
-    sales: 145,
-    date: '2024-06-23',
-    status: 'pending',
-    company: 'Creative Dynamics Co.'
-  },
-  {
-    key: 'employee-04',
-    name: 'Michael Brown',
-    email: 'michael.brown@example.com',
-    sales: 67,
-    date: '2023-10-30',
-    status: 'error',
-    company: 'Retail Masters Corp.'
-  },
-  {
-    key: 'employee-05',
-    name: 'Sophia Martinez',
-    email: 'sophia.martinez@example.com',
-    sales: 200,
-    date: '2024-01-12',
-    status: 'active',
-    company: 'Marketing Hub LLC'
-  }
-]
-
-const activeItem = ref('account')
-
-const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
-<\/script>
 `
 </script>
 
@@ -314,15 +311,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
     </template>
 
     <template #code>
-      <div class="px-4">
-        <code-block
-          :code="scriptCode"
-          :copy="`${scriptCode}${templateCode}`"
-          language="js"
-        />
-
-        <code-block :code="templateCode" />
-      </div>
+      <code-block :code="templateSnippet" />
     </template>
   </page-template>
 </template>

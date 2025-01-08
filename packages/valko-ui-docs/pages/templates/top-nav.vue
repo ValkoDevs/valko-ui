@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const templateCode = `
-<template>
+const templateSnippet = `<template>
   <div class="m-4 bg-light-3 dark:bg-dark-3">
     <vk-navbar class="flex justify-between">
       Brand-Name
@@ -43,11 +42,7 @@ const templateCode = `
     </template>
 
     <template #code>
-      <code-block
-        :code="templateCode"
-        :copy="templateCode"
-        class="px-4"
-      />
+      <code-block :code="templateSnippet" />
     </template>
   </page-template>
 </template>

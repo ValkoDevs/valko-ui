@@ -13,7 +13,21 @@ const activeItem = ref('example-1')
 
 const onItemClick = (item: MenuItem) => activeItem.value = `${item.key}`
 
-const templateCode = `
+const templateSnippet = `<script setup lang="ts">
+import type { MenuItem } from '#valkoui'
+
+const menuItems: MenuItem[] = [
+  { key: 'example-1', group: 'General', text: 'Example Item 1' },
+  { key: 'example-2', group: 'General', text: 'Example Item 2' },
+  { key: 'example-3', group: 'General', text: 'Example Item 3' },
+  { key: 'example-4', group: 'General', text: 'Example Item 4' }
+]
+
+const activeItem = ref('example-1')
+
+const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
+<\/script>
+
 <template>
   <div class="m-4 bg-light-3 dark:bg-dark-3 flex">
     <aside class="bg-light-2 dark:bg-dark-3 border-r border-light-4 dark:border-dark-2 max-h-[70vh] h-screen w-56">
@@ -36,22 +50,6 @@ const templateCode = `
     </main>
   </div>
 </template>
-`
-
-const scriptCode = `
-import type { MenuItem } from '#valkoui'
-
-const menuItems: MenuItem[] = [
-  { key: 'example-1', group: 'General', text: 'Example Item 1' },
-  { key: 'example-2', group: 'General', text: 'Example Item 2' },
-  { key: 'example-3', group: 'General', text: 'Example Item 3' },
-  { key: 'example-4', group: 'General', text: 'Example Item 4' }
-]
-
-const activeItem = ref('example-1')
-
-const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
-<\/script>
 `
 </script>
 
@@ -81,15 +79,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
     </template>
 
     <template #code>
-      <div class="px-4">
-        <code-block
-          :code="scriptCode"
-          :copy="`${scriptCode}${templateCode}`"
-          language="js"
-        />
-
-        <code-block :code="templateCode" />
-      </div>
+      <code-block :code="templateSnippet" />
     </template>
   </page-template>
 </template>

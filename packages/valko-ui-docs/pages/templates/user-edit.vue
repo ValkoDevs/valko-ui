@@ -23,7 +23,31 @@ const user = ref({
   }
 })
 
-const templateCode = `
+const templateSnippet = `<script setup lang="ts">
+import type { Tab } from '#valkoui'
+
+const tabs: Tab[] = [
+  { key: 'user-info', title: 'User Info' },
+  { key: 'permissions', title: 'Permissions' }
+]
+
+const user = ref({
+  name: 'Alice Johnson',
+  email: 'alice.johnson@example.com',
+  company: 'Tech Innovations Inc.',
+  sales: 120,
+  'last-log': '24/05/10',
+  status: 'active',
+  permissions: {
+    contacts: 2,
+    dashboard: 1,
+    reports: 1,
+    settings: 0,
+    admin: 0
+  }
+})
+<\/script>
+
 <template>
   <div class="max-w-screen-xl mx-auto bg-light-2 dark:bg-dark-3/[.8] rounded-lg mt-10">
     <vk-tabs
@@ -113,33 +137,6 @@ const templateCode = `
     </div>
   </div>
 </template>
-`
-
-const scriptCode = `
-<script setup lang="ts">
-import type { Tab } from '#valkoui'
-
-const tabs: Tab[] = [
-  { key: 'user-info', title: 'User Info' },
-  { key: 'permissions', title: 'Permissions' }
-]
-
-const user = ref({
-  name: 'Alice Johnson',
-  email: 'alice.johnson@example.com',
-  company: 'Tech Innovations Inc.',
-  sales: 120,
-  'last-log': '24/05/10',
-  status: 'active',
-  permissions: {
-    contacts: 2,
-    dashboard: 1,
-    reports: 1,
-    settings: 0,
-    admin: 0
-  }
-})
-<\/script>
 `
 </script>
 
@@ -236,15 +233,7 @@ const user = ref({
     </template>
 
     <template #code>
-      <div class="px-4">
-        <code-block
-          :code="scriptCode"
-          :copy="`${scriptCode}${templateCode}`"
-          language="js"
-        />
-
-        <code-block :code="templateCode" />
-      </div>
+      <code-block :code="templateSnippet" />
     </template>
   </page-template>
 </template>

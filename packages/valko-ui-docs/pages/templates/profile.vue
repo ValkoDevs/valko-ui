@@ -16,7 +16,24 @@ const profileStats = [
   { label: 'Current Projects', value: 3 }
 ]
 
-const templateCode = `
+const templateSnippet = `<script setup lang="ts">
+import type { Tab } from '#valkoui'
+
+const tabs: Tab[] = [
+  { key: 'account-settings', title: 'Account Settings' },
+  { key: 'company-settings', title: 'Company Settings' },
+  { key: 'documents', title: 'Documents' },
+  { key: 'billing', title: 'Billing' },
+  { key: 'notifications', title: 'Notifications' }
+]
+
+const profileStats = [
+  { label: 'Applied Opportunities', value: 24 },
+  { label: 'Accepted Offers', value: 8 },
+  { label: 'Current Projects', value: 3 }
+]
+<\/script>
+
 <template>
   <div class="relative h-full max-w-screen-xl mx-auto w-full">
     <div class="flex flex-row gap-8 py-8">
@@ -148,26 +165,6 @@ const templateCode = `
     </div>
   </div>
 </template>
-`
-
-const scriptCode = `
-<script setup lang="ts">
-import type { Tab } from '#valkoui'
-
-const tabs: Tab[] = [
-  { key: 'account-settings', title: 'Account Settings' },
-  { key: 'company-settings', title: 'Company Settings' },
-  { key: 'documents', title: 'Documents' },
-  { key: 'billing', title: 'Billing' },
-  { key: 'notifications', title: 'Notifications' }
-]
-
-const profileStats = [
-  { label: 'Applied Opportunities', value: 24 },
-  { label: 'Accepted Offers', value: 8 },
-  { label: 'Current Projects', value: 3 }
-]
-<\/script>
 `
 </script>
 
@@ -306,15 +303,7 @@ const profileStats = [
     </template>
 
     <template #code>
-      <div class="px-4">
-        <code-block
-          :code="scriptCode"
-          :copy="`${scriptCode}${templateCode}`"
-          language="js"
-        />
-
-        <code-block :code="templateCode" />
-      </div>
+      <code-block :code="templateSnippet" />
     </template>
   </page-template>
 </template>

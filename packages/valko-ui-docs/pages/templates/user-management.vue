@@ -96,86 +96,7 @@ const employeeData = reactive<TableItem[]>([
   }
 ])
 
-const templateCode = `
-<template>
-  <div class="maw-w-screen-xl h-full mx-auto px-10 mt-5">
-    <vk-navbar
-      color="neutral"
-      shape="square"
-      flat
-      class="justify-between"
-    >
-      <h1 class="text-xl font-bold">
-        User Management
-      </h1>
-
-      <vk-button>
-        Add User
-      </vk-button>
-    </vk-navbar>
-    <vk-table
-      :headers="employeeHeaders"
-      :data="employeeData"
-      variant="outlined"
-      striped
-      class="mt-5"
-    >
-      <template #cell-status="{ item }">
-        <vk-tag
-          :text="\`\${item.status}\`"
-          :color="item.status === 'active' ? 'success' : 'error'"
-          variant="ghost"
-        />
-      </template>
-
-      <template #cell-actions="{ item }">
-        <div class="flex gap-2">
-          <vk-button
-            color="info"
-            variant="link"
-            condensed
-            class="size-6"
-          >
-            <vk-icon name="edit" />
-          </vk-button>
-
-          <vk-button
-            v-if="item.status === 'inactive'"
-            color="success"
-            variant="link"
-            condensed
-            class="size-6"
-          >
-            <vk-icon name="check" />
-          </vk-button>
-
-          <vk-button
-            v-if="item.status === 'active'"
-            color="warning"
-            variant="link"
-            condensed
-            class="size-6"
-          >
-            <vk-icon name="x" />
-          </vk-button>
-
-          <vk-button
-            color="error"
-            variant="link"
-            condensed
-            class="size-6"
-          >
-            <vk-icon name="trash" />
-          </vk-button>
-        </div>
-      </template>
-    </vk-table>
-  </div>
-</template>
-`
-
-const scriptCode = `
-<script setup lang="ts">
+const templateSnippet = `<script setup lang="ts">
 import type { TableHeader, TableItem } from '#valkoui'
 
 const employeeHeaders: TableHeader[] = [
@@ -272,6 +193,82 @@ const employeeData = reactive<TableItem[]>([
   }
 ])
 <\/script>
+
+<template>
+  <div class="maw-w-screen-xl h-full mx-auto px-10 mt-5">
+    <vk-navbar
+      color="neutral"
+      shape="square"
+      flat
+      class="justify-between"
+    >
+      <h1 class="text-xl font-bold">
+        User Management
+      </h1>
+
+      <vk-button>
+        Add User
+      </vk-button>
+    </vk-navbar>
+    <vk-table
+      :headers="employeeHeaders"
+      :data="employeeData"
+      variant="outlined"
+      striped
+      class="mt-5"
+    >
+      <template #cell-status="{ item }">
+        <vk-tag
+          :text="\`\${item.status}\`"
+          :color="item.status === 'active' ? 'success' : 'error'"
+          variant="ghost"
+        />
+      </template>
+
+      <template #cell-actions="{ item }">
+        <div class="flex gap-2">
+          <vk-button
+            color="info"
+            variant="link"
+            condensed
+            class="size-6"
+          >
+            <vk-icon name="edit" />
+          </vk-button>
+
+          <vk-button
+            v-if="item.status === 'inactive'"
+            color="success"
+            variant="link"
+            condensed
+            class="size-6"
+          >
+            <vk-icon name="check" />
+          </vk-button>
+
+          <vk-button
+            v-if="item.status === 'active'"
+            color="warning"
+            variant="link"
+            condensed
+            class="size-6"
+          >
+            <vk-icon name="x" />
+          </vk-button>
+
+          <vk-button
+            color="error"
+            variant="link"
+            condensed
+            class="size-6"
+          >
+            <vk-icon name="trash" />
+          </vk-button>
+        </div>
+      </template>
+    </vk-table>
+  </div>
+</template>
 `
 </script>
 
@@ -354,15 +351,7 @@ const employeeData = reactive<TableItem[]>([
     </template>
 
     <template #code>
-      <div class="px-4">
-        <code-block
-          :code="scriptCode"
-          :copy="`${scriptCode}${templateCode}`"
-          language="js"
-        />
-
-        <code-block :code="templateCode" />
-      </div>
+      <code-block :code="templateSnippet" />
     </template>
   </page-template>
 </template>

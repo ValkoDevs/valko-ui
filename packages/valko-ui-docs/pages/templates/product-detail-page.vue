@@ -37,7 +37,40 @@ Crafted for those who demand both style and functionality, the SmartSync 360 off
   ]
 })
 
-const templateCode = `
+const templateSnippet = `<script setup lang="ts">
+import type { TableHeader } from '#valkoui'
+
+const productHeaders: TableHeader[] = [
+  { key: 'feature', field: 'feature', label: 'Feature', filterable: true, sortable: true },
+  { key: 'detail', field: 'detail', label: 'Detail', filterable: true, sortable: true }
+]
+
+const product = reactive({
+  name: 'Wireless Headphones',
+  img: '/assets/product.jpg',
+  price: '99.99',
+  description: 'High-quality wireless headphones with noise cancellation.',
+  manufacturer: 'AudioTech',
+  shippingCost: 'Free Shipping',
+  specifications: [
+    { key: 'spec-01', feature: 'Battery Life', detail: '20 hours' },
+    { key: 'spec-02', feature: 'Bluetooth Version', detail: '5.0' },
+    { key: 'spec-03', feature: 'Weight', detail: '200g' },
+    { key: 'spec-04', feature: 'Color', detail: 'Black' },
+    { key: 'spec-05', feature: 'Warranty', detail: '1 year' }
+  ],
+  reviews: {
+    average: 4.5,
+    total: 123
+  },
+  relatedProducts: [
+    { name: 'Gaming Headset', price: '49.99', image: '/assets/product.jpg' },
+    { name: 'Portable Speaker', price: '59.99', image: '/assets/product.jpg' },
+    { name: 'Noise Cancelling Earbuds', price: '79.99', image: '/assets/product.jpg' }
+  ]
+})
+<\/script>
+
 <template>
   <div class="flex flex-col gap-8 max-w-screen-xl mx-auto my-10">
     <div>
@@ -146,42 +179,6 @@ const templateCode = `
     </div>
   </div>
 </template>
-`
-
-const scriptCode = `
-<script setup lang="ts">
-import type { TableHeader } from '#valkoui'
-
-const productHeaders: TableHeader[] = [
-  { key: 'feature', field: 'feature', label: 'Feature', filterable: true, sortable: true },
-  { key: 'detail', field: 'detail', label: 'Detail', filterable: true, sortable: true }
-]
-
-const product = reactive({
-  name: 'Wireless Headphones',
-  img: '/assets/product.jpg',
-  price: '99.99',
-  description: 'High-quality wireless headphones with noise cancellation.',
-  manufacturer: 'AudioTech',
-  shippingCost: 'Free Shipping',
-  specifications: [
-    { key: 'spec-01', feature: 'Battery Life', detail: '20 hours' },
-    { key: 'spec-02', feature: 'Bluetooth Version', detail: '5.0' },
-    { key: 'spec-03', feature: 'Weight', detail: '200g' },
-    { key: 'spec-04', feature: 'Color', detail: 'Black' },
-    { key: 'spec-05', feature: 'Warranty', detail: '1 year' }
-  ],
-  reviews: {
-    average: 4.5,
-    total: 123
-  },
-  relatedProducts: [
-    { name: 'Gaming Headset', price: '49.99', image: '/assets/product.jpg' },
-    { name: 'Portable Speaker', price: '59.99', image: '/assets/product.jpg' },
-    { name: 'Noise Cancelling Earbuds', price: '79.99', image: '/assets/product.jpg' }
-  ]
-})
-<\/script>
 `
 </script>
 
@@ -297,15 +294,10 @@ const product = reactive({
     </template>
 
     <template #code>
-      <div class="px-4">
-        <code-block
-          :code="scriptCode"
-          :copy="`${scriptCode}${templateCode}`"
-          language="js"
-        />
-
-        <code-block :code="templateCode" />
-      </div>
+      <code-block
+        :code="templateSnippet"
+        class="h-12 w-12"
+      />
     </template>
   </page-template>
 </template>

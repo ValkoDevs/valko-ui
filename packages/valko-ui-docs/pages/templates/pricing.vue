@@ -54,7 +54,62 @@ const data: TableItem[] = [
   }
 ]
 
-const templateCode = `
+const templateSnippet = `<script setup lang="ts">
+import type { TableItem, TableHeader } from '#valkoui'
+
+const headers: TableHeader[] = [
+  { key: 'props', field: 'props', label: '' },
+  { key: 'basic', field: 'basic', label: 'Basic' },
+  { key: 'pro', field: 'pro', label: 'Pro' },
+  { key: 'premium', field: 'premium', label: 'Premium' }
+]
+
+const data: TableItem[] = [
+  {
+    key: 'prop-01',
+    props: 'Public',
+    basic: '✓',
+    pro: '✓',
+    premium: '✓'
+  },
+  {
+    key: 'prop-02',
+    props: 'Private',
+    basic: '',
+    pro: '✓',
+    premium: '✓'
+  },
+  {
+    key: 'prop-03',
+    props: 'Permissions',
+    basic: '✓',
+    pro: '✓',
+    premium: '✓'
+  },
+  {
+    key: 'prop-04',
+    props: 'Sharing',
+    basic: '',
+    pro: '✓',
+    premium: '✓'
+  },
+  {
+    key: 'prop-05',
+    props: 'Unlimited members',
+    basic: '',
+    pro: '',
+    premium: '✓'
+  },
+  {
+    key: 'prop-06',
+    props: 'Extra security',
+    basic: '',
+    pro: '',
+    premium: '✓'
+  }
+]
+<\/script>
+
 <template>
   <div class="flex flex-col gap-4">
     <vk-navbar
@@ -193,64 +248,6 @@ const templateCode = `
     </div>
   </div>
 </template>
-`
-
-const scriptCode = `
-<script setup lang="ts">
-import type { TableItem, TableHeader } from '#valkoui'
-
-const headers: TableHeader[] = [
-  { key: 'props', field: 'props', label: '' },
-  { key: 'basic', field: 'basic', label: 'Basic' },
-  { key: 'pro', field: 'pro', label: 'Pro' },
-  { key: 'premium', field: 'premium', label: 'Premium' }
-]
-
-const data: TableItem[] = [
-  {
-    key: 'prop-01',
-    props: 'Public',
-    basic: '✓',
-    pro: '✓',
-    premium: '✓'
-  },
-  {
-    key: 'prop-02',
-    props: 'Private',
-    basic: '',
-    pro: '✓',
-    premium: '✓'
-  },
-  {
-    key: 'prop-03',
-    props: 'Permissions',
-    basic: '✓',
-    pro: '✓',
-    premium: '✓'
-  },
-  {
-    key: 'prop-04',
-    props: 'Sharing',
-    basic: '',
-    pro: '✓',
-    premium: '✓'
-  },
-  {
-    key: 'prop-05',
-    props: 'Unlimited members',
-    basic: '',
-    pro: '',
-    premium: '✓'
-  },
-  {
-    key: 'prop-06',
-    props: 'Extra security',
-    basic: '',
-    pro: '',
-    premium: '✓'
-  }
-]
-<\/script>
 `
 </script>
 
@@ -396,15 +393,7 @@ const data: TableItem[] = [
     </template>
 
     <template #code>
-      <div class="px-4">
-        <code-block
-          :code="scriptCode"
-          :copy="`${scriptCode}${templateCode}`"
-          language="js"
-        />
-
-        <code-block :code="templateCode" />
-      </div>
+      <code-block :code="templateSnippet" />
     </template>
   </page-template>
 </template>

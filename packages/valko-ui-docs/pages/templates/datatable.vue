@@ -124,67 +124,7 @@ const table = useClientSideDataTable({
   draggable: false
 })
 
-const templateCode = `
-<template>
-  <div class="mx-auto w-full h-full max-w-screen-xl pt-6 gap-4 flex flex-col justify-start">
-    <vk-breadcrumbs
-      :crumbs
-      variant="link"
-      condensed
-    />
-    <h1 class="text-2xl font-semibold">
-      Employee
-    </h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-    <div class="flex items-start justify-between gap-2">
-      <vk-tabs
-        :tabs
-        shape="line"
-        variant="ghost"
-      >
-        <template #employee-list>
-          <vk-data-table
-            class="mt-5"
-            striped
-            label="Display"
-            v-bind="table"
-            :page="1"
-            @on-sort="table.onSort"
-            @on-filter="table.onFilter"
-            @on-page-change="table.onPageChange"
-            @on-limit-change="table.onLimitChange"
-            @on-select="table.onSelect"
-            @on-select-all="table.onSelectAll"
-          />
-        </template>
-
-        <template #product>
-          <p class="mt-5 max-w-screen-md">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
-        </template>
-
-        <template #sales-result>
-          <p class="mt-5 max-w-screen-md ">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </p>
-        </template>
-      </vk-tabs>
-
-      <vk-button
-        variant="outlined"
-        flat
-      >
-        Add Tab
-      </vk-button>
-    </div>
-  </div>
-</template>
-`
-
-const scriptCode = `
-<script>
+const templateSnippet = `<script setup lang="ts">
 import type { Crumb, Tab, TableItem, TableHeader } from '#valkoui'
 
 const crumbs: Crumb[] = [
@@ -309,6 +249,63 @@ const table = useClientSideDataTable({
   draggable: false
 })
 <\/script>
+
+<template>
+  <div class="mx-auto w-full h-full max-w-screen-xl pt-6 gap-4 flex flex-col justify-start">
+    <vk-breadcrumbs
+      :crumbs
+      variant="link"
+      condensed
+    />
+    <h1 class="text-2xl font-semibold">
+      Employee
+    </h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+    <div class="flex items-start justify-between gap-2">
+      <vk-tabs
+        :tabs
+        shape="line"
+        variant="ghost"
+      >
+        <template #employee-list>
+          <vk-data-table
+            class="mt-5"
+            striped
+            label="Display"
+            v-bind="table"
+            :page="1"
+            @on-sort="table.onSort"
+            @on-filter="table.onFilter"
+            @on-page-change="table.onPageChange"
+            @on-limit-change="table.onLimitChange"
+            @on-select="table.onSelect"
+            @on-select-all="table.onSelectAll"
+          />
+        </template>
+
+        <template #product>
+          <p class="mt-5 max-w-screen-md">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </template>
+
+        <template #sales-result>
+          <p class="mt-5 max-w-screen-md ">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+        </template>
+      </vk-tabs>
+
+      <vk-button
+        variant="outlined"
+        flat
+      >
+        Add Tab
+      </vk-button>
+    </div>
+  </div>
+</template>
 `
 </script>
 
@@ -372,15 +369,7 @@ const table = useClientSideDataTable({
     </template>
 
     <template #code>
-      <div class="px-4">
-        <code-block
-          :code="scriptCode"
-          :copy="`${scriptCode}${templateCode}`"
-          language="js"
-        />
-
-        <code-block :code="templateCode" />
-      </div>
+      <code-block :code="templateSnippet" />
     </template>
   </page-template>
 </template>

@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const templateCode = `
- <template>
+const templateSnippet = `<template>
   <div class="w-full flex-flex-col gap-4 max-w-md mx-auto p-4 rounded-lg bg-light-4 dark:bg-dark-3/[.8] shadow mt-10">
     <h1 class="text-2xl font-semibold text-center mb-5">
       Login
@@ -81,10 +80,7 @@ const templateCode = `
     </template>
 
     <template #code>
-      <code-block
-        :code="templateCode"
-        class="px-4"
-      />
+      <code-block :code="templateSnippet" />
     </template>
   </page-template>
 </template>

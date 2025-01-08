@@ -1,7 +1,3 @@
-<script setup lang="ts">
-const installCommand = 'npm install @valko-ui/components'
-</script>
-
 <template>
   <vk-navbar
     color="neutral"
@@ -31,15 +27,17 @@ const installCommand = 'npm install @valko-ui/components'
 
     <div class="flex gap-2">
       <nuxt-link to="/docs">
-        <vk-button class="flex gap-4">
+        <vk-button
+          condensed
+          class="flex justify-between gap-2 py-2 w-40 px-4"
+        >
           Get Started  <vk-icon name="arrow-right" />
         </vk-button>
       </nuxt-link>
 
       <code-block
-        :code="installCommand"
-        :copy="installCommand"
-        class="bg-light-3 dark:bg-dark-3 rounded-lg flex justify-start items-center"
+        code="npm install @valko-ui/components"
+        class="bg-light-3 dark:bg-dark-3 rounded-lg flex justify-start items-center px-4 py-2"
       />
     </div>
   </div>

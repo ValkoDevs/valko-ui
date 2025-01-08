@@ -5,8 +5,13 @@ const isOpen = ref(false)
 
 const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM' })
 
-const templateCode = `
- <template>
+const templateSnippet = `<script setup lang="ts">
+const isOpen = ref(false)
+
+const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM' })
+<\/script>
+
+<template>
   <div class="w-full flex flex-col max-w-lg mx-auto gap-4 p-6 rounded-lg bg-light-4 dark:bg-dark-3/[.8] shadow mt-10">
     <div class="flex justify-between">
       <h1 class="text-xl font-semibold">
@@ -45,15 +50,6 @@ const templateCode = `
     </vk-button>
   </div>
 </template>
-`
-
-const scriptCode = `
-<script setup lang="ts">
-
-const isOpen = ref(false)
-
-const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM' })
-<\/script>
 `
 </script>
 
@@ -100,15 +96,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM' })
     </template>
 
     <template #code>
-      <div class="px-4">
-        <code-block
-          :code="scriptCode"
-          :copy="`${scriptCode}${templateCode}`"
-          language="js"
-        />
-
-        <code-block :code="templateCode" />
-      </div>
+      <code-block :code="templateSnippet" />
     </template>
   </page-template>
 </template>
