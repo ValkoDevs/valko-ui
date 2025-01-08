@@ -450,14 +450,22 @@ ${scriptCode}
   />
 </template>
 `
-const snippetProps = ' v-model="model" :parsed-model="parsedModel" :adapter="adapter"'
+
+const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapter"'
 
 const minmaxSnippet = `
 ${scriptCode}
 
 <template>
-  <vk-timepicker min-time="1730710858"${snippetProps}></vk-timepicker>
-  <vk-timepicker max-time="1730739658"${snippetProps}></vk-timepicker>
+  <vk-timepicker
+    min-time="1730710858"
+    ${extraProps.split(' ').join('\n    ')}
+  />
+
+  <vk-timepicker
+    max-time="1730739658"
+    ${extraProps.split(' ').join('\n    ')}
+  />
 </template>
 `
 
@@ -465,7 +473,10 @@ const disabledTimesSnippet = `
 ${scriptCode}
 
 <template>
-  <vk-timepicker "disabled-times="[1730721658, 1730725258]"${snippetProps}></vk-timepicker>
+  <vk-timepicker
+    "disabled-times="[1730721658, 1730725258]"
+    ${extraProps.split(' ').join('\n    ')}
+  />
 </template>
 `
 </script>
