@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { PopoverProps, TableItem, Placement, SelectOption } from '#valkoui'
 

@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TabsProps, TableItem, Tab } from '#valkoui'
 
