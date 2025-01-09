@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TableItem, TableHeader } from '#valkoui'
 
@@ -108,7 +107,7 @@ const data: TableItem[] = [
     premium: '✓'
   }
 ]
-<\/script>
+<\u002Fscript>
 
 <template>
   <div class="flex flex-col gap-4">

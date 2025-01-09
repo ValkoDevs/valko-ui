@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { Crumb, Tab, TableItem, TableHeader } from '#valkoui'
 
@@ -248,7 +247,7 @@ const table = useClientSideDataTable({
   pageSizeOptions: [2, 5, 10],
   draggable: false
 })
-<\/script>
+<\u002Fscript>
 
 <template>
   <div class="mx-auto w-full h-full max-w-screen-xl pt-6 gap-4 flex flex-col justify-start">

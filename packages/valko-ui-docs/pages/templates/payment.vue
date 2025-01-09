@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 
 const isOpen = ref(false)
@@ -9,7 +8,7 @@ const templateSnippet = `<script setup lang="ts">
 const isOpen = ref(false)
 
 const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM' })
-<\/script>
+<\u002Fscript>
 
 <template>
   <div class="w-full flex flex-col max-w-lg mx-auto gap-4 p-6 rounded-lg bg-light-4 dark:bg-dark-3/[.8] shadow mt-10">

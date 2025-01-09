@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { Tab } from '#valkoui'
 
@@ -32,7 +31,7 @@ const profileStats = [
   { label: 'Accepted Offers', value: 8 },
   { label: 'Current Projects', value: 3 }
 ]
-<\/script>
+<\u002Fscript>
 
 <template>
   <div class="relative h-full max-w-screen-xl mx-auto w-full">

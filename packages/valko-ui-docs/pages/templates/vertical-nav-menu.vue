@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { MenuItem } from '#valkoui'
 
@@ -26,7 +25,7 @@ const menuItems: MenuItem[] = [
 const activeItem = ref('example-1')
 
 const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
-<\/script>
+<\u002Fscript>
 
 <template>
   <div class="m-4 bg-light-3 dark:bg-dark-3 h-[70vh] flex">

@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { MenuItem, TableItem, TableHeader } from '#valkoui'
 
@@ -144,7 +143,7 @@ const employeeData: TableItem[] = [
 const activeItem = ref('account')
 
 const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
-<\/script>
+<\u002Fscript>
 
 <template>
   <div class="flex h-full">

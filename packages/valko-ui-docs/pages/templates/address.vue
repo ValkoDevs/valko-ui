@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { SelectOption } from '#valkoui'
 
@@ -64,7 +63,7 @@ const states: SelectOption[] = [
   { label: 'Ontario', value: 'on' },
   { label: 'Berlin', value: 'berlin' }
 ]
-<\/script>
+<\u002Fscript>
 
 <template>
   <div class="flex flex-col gap-4 w-full max-w-lg mx-auto p-6 rounded-lg bg-light-4 dark:bg-dark-3/[.8] shadow mt-5">

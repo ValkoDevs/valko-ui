@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TableHeader, TableItem } from '#valkoui'
 
@@ -192,7 +191,7 @@ const employeeData = reactive<TableItem[]>([
     status: 'inactive'
   }
 ])
-<\/script>
+<\u002Fscript>
 
 <template>
   <div class="maw-w-screen-xl h-full mx-auto px-10 mt-5">

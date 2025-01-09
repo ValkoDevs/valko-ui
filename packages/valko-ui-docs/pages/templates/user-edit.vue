@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { Tab } from '#valkoui'
 
@@ -46,7 +45,7 @@ const user = ref({
     admin: 0
   }
 })
-<\/script>
+<\u002Fscript>
 
 <template>
   <div class="max-w-screen-xl mx-auto bg-light-2 dark:bg-dark-3/[.8] rounded-lg mt-10">

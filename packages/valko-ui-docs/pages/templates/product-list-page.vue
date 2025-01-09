@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 const filtersOpen = ref(false)
 const isMd = ref(false)
@@ -254,7 +253,7 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('resize', updateIsMd)
 })
-<\/script>
+<\u002Fscript>
 
 <template>
   <div class="flex mt-10 mb-10 gap-5 px-10 lg:px-5 relative">

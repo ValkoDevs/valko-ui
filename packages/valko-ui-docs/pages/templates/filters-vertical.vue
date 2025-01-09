@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 const filters = reactive({
   price: [0, 10000],
@@ -38,7 +37,7 @@ const toggleRating = (selectedRating: number) => {
   if (filters.rating === selectedRating) filters.rating = 0
   else filters.rating = selectedRating
 }
-<\/script>
+<\u002Fscript>
 
 <template>
   <aside class="hidden lg:flex bg-light-2 dark:bg-dark-3/[.4] w-[25vw] flex-col gap-4 p-10 rounded-lg">

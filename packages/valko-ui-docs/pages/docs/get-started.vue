@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 const tabs = [
   { key: 'npm', title: 'npm' },
@@ -47,7 +46,7 @@ const example = `<script setup lang="ts">
 import { ref } from 'vue'
 
 const counter = ref(0)
-<\/script>
+<\u002Fscript>
 
 <template>
   <div class="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">

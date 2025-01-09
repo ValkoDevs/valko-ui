@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { MenuItem } from '#valkoui'
@@ -66,7 +65,7 @@ const radios = [
 const activeItem = ref('account')
 
 const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
-<\/script>
+<\u002Fscript>
 
 <template>
   <div class="max-w-screen-xl mx-auto mt-10 bg-light-4 dark:bg-dark-3/[.8] flex rounded-lg shadow">
