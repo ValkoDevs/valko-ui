@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TabsProps, TableItem, Tab } from '#valkoui'
 
@@ -167,7 +166,7 @@ const tabs: Tab[] = [
   { key: 'trending', title: 'Trending' },
   { key: 'friends', title: 'Friends' }
 ]
-<\/script>
+<\u002Fscript>
 `
 
 const scriptIcons = `
@@ -181,7 +180,7 @@ const tabs: Tab[] = [
   { key: 'trending', title: 'Trending', leftIcon: 'flame', rightIcon: 'flame' },
   { key: 'friends', title: 'Friends', rightIcon: 'friends' }
 ]
-<\/script>
+<\u002Fscript>
 `
 
 const scriptDisabled = `
@@ -195,7 +194,7 @@ const tabs: Tab[] = [
   { key: 'trending', title: 'Trending' },
   { key: 'friends', title: 'Friends' }
 ]
-<\/script>
+<\u002Fscript>
 `
 
 const generateSnippet = snippetGeneratorFactory('vk-tabs')

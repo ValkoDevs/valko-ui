@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { ModalProps, SelectOption, Backdrop, TableItem } from '#valkoui'
 
@@ -104,7 +103,7 @@ const scriptCode = `<script setup lang="ts">
 const modalStates = reactive<Record<string, boolean>>({})
 
 const toggleModal = (modalId: string) => modalStates[modalId] = !modalStates[modalId]
-<\/script>
+<\u002Fscript>
 `
 
 const generateSnippet = snippetGeneratorFactory('vk-modal')

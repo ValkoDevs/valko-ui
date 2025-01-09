@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { DataTableProps, SelectionMode, SelectOption, TableItem } from '#valkoui'
 import { useClientSideDataTable } from '#valkoui'
@@ -515,7 +514,7 @@ const dataTable = useClientSideDataTable({
   pageSizeOptions: [2, 5, 10, 20],
   draggable: false
 })
-<\/script>
+<\u002Fscript>
 `
 
 const extraProps = 'v-bind="dataTable" @on-sort="dataTable.onSort" @on-filter="dataTable.onFilter" @on-page-change="dataTable.onPageChange" @on-limit-change="dataTable.onLimitChange" @on-select="dataTable.onSelect" @on-select-all="dataTable.onSelectAll"'

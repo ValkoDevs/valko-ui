@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TableItem, Crumb, BreadcrumbsProps } from '#valkoui'
 import { useNotification } from '#valkoui'
@@ -184,7 +183,7 @@ const crumbs: Crumb[] = [
   { key: 'album', title: 'Album' },
   { key: 'song', title: 'Song' }
 ]
-<\/script>
+<\u002Fscript>
 `
 
 const disabledScript = `<script setup lang="ts">
@@ -197,7 +196,7 @@ const crumbs: Crumb[] = [
   { key: 'album', title: 'Album' },
   { key: 'song', title: 'Song', disabled: true }
 ]
-<\/script>
+<\u002Fscript>
 `
 
 const iconScript = `<script setup lang="ts">
@@ -210,7 +209,7 @@ const crumbs: Crumb[] = [
   { key: 'album', title: 'Album', rightIcon: 'playlist' },
   { key: 'song', title: 'Song', leftIcon: 'music' }
 ]
-<\/script>
+<\u002Fscript>
 `
 
 const extraProps = ':crumbs="crumbs"'

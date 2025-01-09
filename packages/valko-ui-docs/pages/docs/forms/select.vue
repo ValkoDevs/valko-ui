@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { SelectProps, TableItem, SelectOption } from '#valkoui'
 
@@ -172,7 +171,7 @@ const people: SelectOption[] = [
   { value: 3, label: 'Devon Webb' },
   { value: 4, label: 'Tom Cook' }
 ]
-<\/script>
+<\u002Fscript>
 `
 </script>
 

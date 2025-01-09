@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { PopoverProps, TableItem, Placement, SelectOption } from '#valkoui'
 
@@ -104,7 +103,7 @@ const popoverStates = reactive<Record<string, boolean>>({})
 const togglePopover = (popoverId: string) => popoverStates[popoverId] = !popoverStates[popoverId]
 
 const handleClose = (popoverId: string) => popoverStates[popoverId] = false
-<\/script>
+<\u002Fscript>
 `
 
 const generateSnippet = snippetGeneratorFactory('vk-popover')

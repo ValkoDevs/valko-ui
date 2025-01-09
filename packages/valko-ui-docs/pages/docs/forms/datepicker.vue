@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TableItem, DatepickerProps, SelectOption } from '#valkoui'
 
@@ -440,10 +439,10 @@ const generateSnippet = snippetGeneratorFactory('vk-datepicker')
 
 const scriptCode = `
 <script setup lang="ts">
-import useDateAdapter from '#valkoui'
+import { useDateAdapter } from '#valkoui'
 
 const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM-DD' })
-<\/script>
+<\u002Fscript>
 `
 
 const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapter"'

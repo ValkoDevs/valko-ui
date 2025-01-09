@@ -1,7 +1,5 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { DropdownProps, TableItem, Item } from '#valkoui'
-import CodeBlock from '~/components/CodeBlock/CodeBlock.vue'
 
 const form = ref<Partial<DropdownProps>>({
   color: 'primary',
@@ -169,7 +167,7 @@ const items: Item[] = [
   { key: 'video', title: 'Upload Video', icon: 'video' },
   { key: 'delete', title: 'Delete', icon: 'trash' }
 ]
-<\/script>
+<\u002Fscript>
 `
 
 const generateSnippet = snippetGeneratorFactory('vk-dropdown')

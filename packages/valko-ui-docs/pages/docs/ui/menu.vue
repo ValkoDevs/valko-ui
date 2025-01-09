@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { MenuItem, TableItem, MenuProps } from '#valkoui'
 
@@ -183,7 +182,7 @@ const menuItems: MenuItem[] = [
   { key: 'input', group: 'Forms',  text:'Input' },
   { key: 'checkbox', group: 'Forms', text: 'Checkbox' }
 ]
-<\/script>
+<\u002Fscript>
 `
 
 const extraProps = ':items="menuItems"'

@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TableItem, TableProps } from '#valkoui'
 
@@ -225,7 +224,7 @@ const data: TableItem[] = [
     values: 'string'
   }
 ]
-<\/script>
+<\u002Fscript>
 `
 
 const extraProps = ':headers="headers" :data="data"'

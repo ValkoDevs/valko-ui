@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { TableItem, TimepickerProps, SelectOption } from '#valkoui'
 
@@ -416,10 +415,10 @@ const generateSnippet = snippetGeneratorFactory('vk-timepicker')
 
 const scriptCode = `
 <script setup lang="ts">
-import useTimeAdapter from '#valkoui'
+import { useTimeAdapter } from '#valkoui'
 
 const [ model, parsedModel, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
-<\/script>
+<\u002Fscript>
 `
 
 const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapter"'

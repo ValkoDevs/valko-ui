@@ -1,4 +1,3 @@
-<!-- eslint-disable no-useless-escape -->
 <script setup lang="ts">
 import type { DrawerProps, SelectOption, TableItem, Backdrop, Placement } from '#valkoui'
 
@@ -119,7 +118,7 @@ const scriptCode = `<script setup lang="ts">
 const drawerStates = reactive<Record<string, boolean>>({})
 
 const toggleDrawer = (drawerId: string) => drawerStates[drawerId] = !drawerStates[drawerId]
-<\/script>
+<\u002Fscript>
 `
 
 const generateSnippet = snippetGeneratorFactory('vk-drawer')

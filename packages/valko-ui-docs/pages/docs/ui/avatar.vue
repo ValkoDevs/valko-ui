@@ -80,7 +80,7 @@ const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
 const generateSnippet = snippetGeneratorFactory('vk-avatar')
 
 const extraProps = {
-  name: 'name="Le Blanc"',
+  name: 'name="Jane Doe"',
   src: ':src="avatarSrc"'
 }
 
