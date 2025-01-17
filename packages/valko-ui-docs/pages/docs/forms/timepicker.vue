@@ -409,15 +409,46 @@ watch(disabledRef, (newVal) => form.disabledTimes = newVal ? [1730721658, 173072
 
 const [ model, parsedModel, adapter ] = useTimeAdapter(form)
 
-const timepickerStates = reactive({
-  colors: Array(colorOptions.length).fill(false),
-  variants: Array(variantOptions.general.length).fill(false),
-  shapes: Array(shapeOptions.general.length).fill(false),
-  sizes: Array(sizeOptions.general.length).fill(false),
-  min: false,
-  max: false,
-  disabledTimes: false
-})
+const timepickerStates = reactive<Record<string, boolean>>({})
+
+const generateSnippet = snippetGeneratorFactory('vk-timepicker')
+
+const scriptCode = `
+<script setup lang="ts">
+import { useTimeAdapter } from '#valkoui'
+
+const [ model, parsedModel, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
+<\u002Fscript>
+`
+
+const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapter"'
+
+const minmaxSnippet = `
+${scriptCode}
+
+<template>
+  <vk-timepicker
+    min-time="1730710858"
+    ${extraProps.split(' ').join('\n    ')}
+  />
+
+  <vk-timepicker
+    max-time="1730739658"
+    ${extraProps.split(' ').join('\n    ')}
+  />
+</template>
+`
+
+const disabledTimesSnippet = `
+${scriptCode}
+
+<template>
+  <vk-timepicker
+    "disabled-times="[1730721658, 1730725258]"
+    ${extraProps.split(' ').join('\n    ')}
+  />
+</template>
+`
 </script>
 
 <template>
@@ -510,63 +541,94 @@ const timepickerStates = reactive({
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <vk-timepicker
-          v-for="(color, index) in colorOptions"
+          v-for="color in colorOptions"
           :key="color.value"
           :label="color.label"
           :adapter="adapter"
           :parsed-model="parsedModel"
           :color="color.value"
-          :is-open="timepickerStates['colors'][index]"
-          @open="() => timepickerStates['colors'][index] = true"
-          @close="() => timepickerStates['colors'][index] = false"
+          :is-open="timepickerStates[color.value]"
+          @open="() => timepickerStates[color.value] = true"
+          @close="() => timepickerStates[color.value] = false"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps})}`" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-timepicker
-          v-for="(variant, index) in variantOptions.general"
+          v-for="variant in variantOptions.general"
           :key="variant.value"
           :adapter="adapter"
           :parsed-model="parsedModel"
           :variant="variant.value"
-          :is-open="timepickerStates['variants'][index]"
+          :is-open="timepickerStates[variant.value]"
           :label="variant.label"
-          @open="() => timepickerStates['variants'][index] = true"
-          @close="() => timepickerStates['variants'][index] = false"
+          @open="() => timepickerStates[variant.value] = true"
+          @close="() => timepickerStates[variant.value] = false"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value), extraProps})}`" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-timepicker
-          v-for="(shape, index) in shapeOptions.general"
+          v-for="shape in shapeOptions.general"
           :key="shape.value"
           :label="shape.label"
           :adapter="adapter"
           :parsed-model="parsedModel"
           :shape="shape.value"
-          :is-open="timepickerStates['shapes'][index]"
-          @open="() => timepickerStates['shapes'][index] = true"
-          @close="() => timepickerStates['shapes'][index] = false"
+          :is-open="timepickerStates[shape.value]"
+          @open="() => timepickerStates[shape.value] = true"
+          @close="() => timepickerStates[shape.value] = false"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), extraProps})}`" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-timepicker
-          v-for="(size, index) in sizeOptions.general"
+          v-for="size in sizeOptions.general"
           :key="size.value"
           :label="size.label"
           :adapter="adapter"
           :parsed-model="parsedModel"
           :size="size.value"
-          :is-open="timepickerStates['sizes'][index]"
-          @open="() => timepickerStates['sizes'][index] = true"
-          @close="() => timepickerStates['sizes'][index] = false"
+          :is-open="timepickerStates[size.value]"
+          @open="() => timepickerStates[size.value] = true"
+          @close="() => timepickerStates[size.value] = false"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps})}`" />
+        </template>
       </example-section>
 
-      <example-section title="Min & Max Times">
+      <example-section
+        title="Min & Max Times"
+        classes="sm:grid-cols-2"
+      >
         <vk-timepicker
           label="Min"
           :adapter="adapter"
@@ -585,6 +647,10 @@ const timepickerStates = reactive({
           @open="() => timepickerStates['max'] = true"
           @close="() => timepickerStates['max'] = false"
         />
+
+        <template #code>
+          <code-block :code="minmaxSnippet" />
+        </template>
       </example-section>
 
       <example-section title="Disabled Times">
@@ -597,60 +663,55 @@ const timepickerStates = reactive({
           @open="() => timepickerStates['disabledTimes'] = true"
           @close="() => timepickerStates['disabledTimes'] = false"
         />
+
+        <template #code>
+          <code-block :code="disabledTimesSnippet" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Timepicker Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="timepickerProps"
-          />
-        </example-section>
+      <h3>Timepicker Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timepickerProps"
+      />
 
-        <example-section title="Timepicker Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="timepickerEmits"
-          />
-        </example-section>
+      <h3>Timepicker Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="timepickerEmits"
+      />
 
-        <example-section title="Time Adapter Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeAdapterInterface"
-          />
-        </example-section>
+      <h3>Time Adapter Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeAdapterInterface"
+      />
 
-        <example-section title="Adapter Result Type">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeAdapterResult"
-          />
-        </example-section>
+      <h3>Adapter Result Type</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeAdapterResult"
+      />
 
-        <example-section title="Formatted Time Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="formattedTimeProps"
-          />
-        </example-section>
+      <h3>Formatted Time Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="formattedTimeProps"
+      />
 
-        <example-section title="Time Adapter Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeAdapterProps"
-          />
-        </example-section>
+      <h3>Time Adapter Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeAdapterProps"
+      />
 
-        <example-section title="Available Formats">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeFormats"
-          />
-        </example-section>
-      </div>
+      <h3>Available Formats</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeFormats"
+      />
     </template>
   </doc-section>
 </template>

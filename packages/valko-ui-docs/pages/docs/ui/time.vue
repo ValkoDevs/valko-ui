@@ -358,6 +358,31 @@ const timeFormats: TableItem[] = [
 watch(disabledRef, (newVal) => form.disabledTimes = newVal ? [1730721658, 1730725258] : undefined)
 
 const [ model, parsedModel, adapter ] = useTimeAdapter(form)
+
+const generateSnippet = snippetGeneratorFactory('vk-time')
+
+const scriptCode = `<script setup lang="ts">
+import { useTimeAdapter } from '#valkoui'
+
+const [ model, _, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
+<\u002Fscript>
+`
+
+const extraProps = 'v-model="model" :adapter="adapter"'
+
+const minmaxSnippet = `${scriptCode}
+<template>
+  <vk-time
+    min-time="1730710858"
+    ${extraProps.split(' ').join('\n    ')}
+  />
+
+  <vk-time
+    max-time="1730739658"
+    ${extraProps.split(' ').join('\n    ')}
+  />
+</template>
+`
 </script>
 
 <template>
@@ -444,11 +469,14 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <div
           v-for="color in colorOptions"
           :key="color.value"
-          class="w-1/4 flex flex-col gap-4"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
           <span>{{ color.label }}</span>
           <vk-time
@@ -456,13 +484,20 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :color="color.value"
           />
         </div>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', {values: colorOptions.map(o => o.value), extraProps})}`" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <div
           v-for="variant in variantOptions.general"
           :key="variant.value"
-          class="flex flex-col gap-4"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
           <span>{{ variant.label }}</span>
           <vk-time
@@ -470,13 +505,20 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :variant="variant.value"
           />
         </div>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('variant', {values: variantOptions.general.map(o => o.value), extraProps})}`" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
-          class="flex flex-col gap-4"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
           <span>{{ shape.label }}</span>
           <vk-time
@@ -484,13 +526,20 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :shape="shape.value"
           />
         </div>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', {values: shapeOptions.general.map(o => o.value), extraProps})}`" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
-          class="flex flex-col gap-4"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
           <span>{{ size.label }}</span>
           <vk-time
@@ -498,23 +547,34 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
             :size="size.value"
           />
         </div>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', {values: sizeOptions.general.map(o => o.value), extraProps})}`" />
+        </template>
       </example-section>
 
-      <example-section title="Min & Max Times">
-        <div class="flex flex-col gap-4">
+      <example-section
+        title="Min & Max Times"
+        classes="sm:grid-cols-2"
+      >
+        <div class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start">
           <span>Min</span>
           <vk-time
             :adapter="adapter"
             :min-time="1730710858"
           />
         </div>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start">
           <span>Max</span>
           <vk-time
             :adapter="adapter"
             :max-time="1730739658"
           />
         </div>
+
+        <template #code>
+          <code-block :code="minmaxSnippet" />
+        </template>
       </example-section>
 
       <example-section title="Disabled Times">
@@ -522,53 +582,49 @@ const [ model, parsedModel, adapter ] = useTimeAdapter(form)
           :adapter="adapter"
           :disabled-times="form.disabledTimes"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>(':disabled-times', {values: ['[1730721658, 1730725258]'], extraProps})}`" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Time Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeProps"
-          />
-        </example-section>
+      <h3>Time Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeProps"
+      />
 
-        <example-section title="Time Adapter Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeAdapterProps"
-          />
-        </example-section>
+      <h3>Time Adapter Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeAdapterProps"
+      />
 
-        <example-section title="Time Adapter Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeAdapterInterface"
-          />
-        </example-section>
+      <h3>Time Adapter Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeAdapterInterface"
+      />
 
-        <example-section title="Time Adapter Result Type">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeAdapterResult"
-          />
-        </example-section>
+      <h3>Time Adapter Result Type</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeAdapterResult"
+      />
 
-        <example-section title="FormattedTime Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="formattedTimeProps"
-          />
-        </example-section>
+      <h3>FormattedTime Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="formattedTimeProps"
+      />
 
-        <example-section title="Available Time Formats">
-          <vk-table
-            :headers="propHeaders"
-            :data="timeFormats"
-          />
-        </example-section>
-      </div>
+      <h3>Available Time Formats</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="timeFormats"
+      />
     </template>
   </doc-section>
 </template>

@@ -17,14 +17,6 @@ const backdropOptions: SelectOption<Backdrop>[] = [
   { value: 'transparent', label: 'Transparent' }
 ]
 
-const exampleSectionForm = reactive({
-  shapes: Array(shapeOptions.general.length).fill(false),
-  sizes: Array(sizeOptions.withFull.length).fill(false),
-  backdrop: Array(backdropOptions.length).fill(false),
-  flat: false,
-  closable: false
-})
-
 const modalProps: TableItem[] = [
   {
     key: 'shapeProp',
@@ -102,6 +94,58 @@ const modalSlots = [
     example: '<template #default>\n  <!-- Your main content goes here -->\n</template>'
   }
 ]
+
+const modalStates = reactive<Record<string, boolean>>({})
+
+const toggleModal = (modalId: string) => modalStates[modalId] = !modalStates[modalId]
+
+const scriptCode = `<script setup lang="ts">
+const modalStates = reactive<Record<string, boolean>>({})
+
+const toggleModal = (modalId: string) => modalStates[modalId] = !modalStates[modalId]
+<\u002Fscript>
+`
+
+const generateSnippet = snippetGeneratorFactory('vk-modal')
+
+const triggerSnippet = '<vk-button\n    @click="toggleModal(\'modalId\')"\n  >\n    Slot Content\n  </vk-button>\n\n  <vk-modal'
+
+const extraProps = ':is-open="modalStates[\'modalId\']" @close="toggleModal(\'modalId\')"'
+
+const shapeSnippet = `${scriptCode}\n${generateSnippet<string>('shape',
+  {
+    values: shapeOptions.general.map(o => o.value),
+    hasSlot: true, extraProps
+  }).replace(/<vk-modal/g, `${triggerSnippet}`)
+}`
+
+const sizeSnippet = `${scriptCode}\n${generateSnippet<string>('size',
+  {
+    values: sizeOptions.general.map(o => o.value),
+    hasSlot: true, extraProps
+  }).replace(/<vk-modal/g, `${triggerSnippet}`)
+}`
+
+const backdropSnippet = `${scriptCode}\n${generateSnippet<string>('backdrop',
+  {
+    values: backdropOptions.map(o => o.value),
+    hasSlot: true, extraProps
+  }).replace(/<vk-modal/g, `${triggerSnippet}`)
+}`
+
+const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
+  {
+    values: [true],
+    hasSlot: true, extraProps
+  }).replace(/<vk-modal/g, `${triggerSnippet}`)
+}`
+
+const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>('closable',
+  {
+    values: [true],
+    hasSlot: true, extraProps
+  }).replace(/<vk-modal/g, `${triggerSnippet}`)
+}`
 </script>
 
 <template>
@@ -173,19 +217,22 @@ const modalSlots = [
     </template>
 
     <template #examples>
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <div
-          v-for="(shape, index) in shapeOptions.general"
+          v-for="shape in shapeOptions.general"
           :key="shape.value"
         >
-          <vk-button @click="() => {exampleSectionForm['shapes'][index] = true}">
-            Open {{ shape.label }}
+          <vk-button @click="toggleModal(shape.value)">
+            {{ shape.label }}
           </vk-button>
           <vk-modal
             :shape="shape.value"
-            :is-open="exampleSectionForm['shapes'][index]"
+            :is-open="modalStates[shape.value]"
             :title="shape.label"
-            @close="() => {exampleSectionForm['shapes'][index] = false}"
+            @close="toggleModal(shape.value)"
           >
             <template #default>
               {{ shape.label }} Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
@@ -193,21 +240,28 @@ const modalSlots = [
             </template>
           </vk-modal>
         </div>
+
+        <template #code>
+          <code-block :code="shapeSnippet" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <div
-          v-for="(size, index) in sizeOptions.withFull"
+          v-for="size in sizeOptions.withFull"
           :key="size.value"
         >
-          <vk-button @click="() => {exampleSectionForm['sizes'][index] = true}">
-            Open {{ size.label }}
+          <vk-button @click="toggleModal(size.value)">
+            {{ size.label }}
           </vk-button>
           <vk-modal
             :size="size.value"
-            :is-open="exampleSectionForm['sizes'][index]"
+            :is-open="modalStates[size.value]"
             :title="size.label"
-            @close="() => {exampleSectionForm['sizes'][index] = false}"
+            @close="toggleModal(size.value)"
           >
             <template #default>
               {{ size.label }} Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
@@ -215,24 +269,28 @@ const modalSlots = [
             </template>
           </vk-modal>
         </div>
+
+        <template #code>
+          <code-block :code="sizeSnippet" />
+        </template>
       </example-section>
 
       <example-section
         title="Backdrops"
-        gap
+        classes="grid-cols-2 md:grid-cols-3"
       >
         <div
-          v-for="(backdrop, index) in backdropOptions"
+          v-for="backdrop in backdropOptions"
           :key="backdrop.value"
         >
-          <vk-button @click="() => {exampleSectionForm['backdrop'][index] = true}">
-            Open {{ backdrop.label }}
+          <vk-button @click="toggleModal(backdrop.value)">
+            {{ backdrop.label }}
           </vk-button>
           <vk-modal
             :backdrop="backdrop.value"
-            :is-open="exampleSectionForm['backdrop'][index]"
+            :is-open="modalStates[backdrop.value]"
             :title="backdrop.label"
-            @close="() => {exampleSectionForm['backdrop'][index] = false}"
+            @close="toggleModal(backdrop.value)"
           >
             <template #default>
               {{ backdrop.label }} Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
@@ -240,37 +298,41 @@ const modalSlots = [
             </template>
           </vk-modal>
         </div>
+
+        <template #code>
+          <code-block :code="backdropSnippet" />
+        </template>
       </example-section>
 
-      <example-section
-        title="Flat"
-      >
-        <vk-button @click="() => {exampleSectionForm['flat'] = true}">
+      <example-section title="Flat">
+        <vk-button @click="toggleModal('flat')">
           Flat
         </vk-button>
         <vk-modal
-          :is-open="exampleSectionForm['flat']"
+          :is-open="modalStates['flat']"
           title="Flat"
-          @close="() => {exampleSectionForm['flat'] = false}"
+          @close="toggleModal('flat')"
         >
           <template #default>
             Flat Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
           </template>
         </vk-modal>
+
+        <template #code>
+          <code-block :code="flatSnippet" />
+        </template>
       </example-section>
 
-      <example-section
-        title="Closable"
-      >
-        <vk-button @click="() => {exampleSectionForm['closable'] = true}">
+      <example-section title="Closable">
+        <vk-button @click="toggleModal('closable')">
           Closable
         </vk-button>
         <vk-modal
-          :is-open="exampleSectionForm['closable']"
+          :is-open="modalStates['closable']"
           title="Closable"
           closable
-          @close="() => {exampleSectionForm['closable'] = false}"
+          @close="toggleModal('closable')"
         >
           <template #default>
             Closable Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
@@ -280,38 +342,37 @@ const modalSlots = [
               color="primary"
               size="sm"
               class="self-end"
-              @click="() => {exampleSectionForm['closable'] = false}"
+              @click="toggleModal('closable')"
             >
               Accept & close
             </vk-button>
           </template>
         </vk-modal>
+
+        <template #code>
+          <code-block :code="closableSnippet" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Modal Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="modalProps"
-          />
-        </example-section>
+      <h3>Modal Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="modalProps"
+      />
 
-        <example-section title="Modal Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="modalEmits"
-          />
-        </example-section>
+      <h3>Modal Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="modalEmits"
+      />
 
-        <example-section title="Modal Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="modalSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Modal Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="modalSlots"
+      />
     </template>
   </doc-section>
 </template>

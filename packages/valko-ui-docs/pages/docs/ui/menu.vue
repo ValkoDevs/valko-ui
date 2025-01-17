@@ -152,8 +152,6 @@ const menuSlots: TableItem[] = [
   }
 ]
 
-// active, onClick & menu generation for example-section
-
 const generateMenuItems = (items: { value: string; label: string }[], groupName: string) => {
   return items.map(item => ({
     key: item.value,
@@ -168,28 +166,34 @@ const onItemClick = (item: MenuItem, menuKey: string) => {
   activeItemsList.value[menuKey] = item.key
 }
 
-// active & onClick for playground menu
-
 const activeItem = ref<MenuItem['key'] | null>(null)
 
 const onClick = (item: MenuItem) => {
   activeItem.value = item.key
 }
 
+const generateSnippet = snippetGeneratorFactory('vk-menu')
+
+const scriptCode = `<script setup lang="ts">
+import type { MenuItem } from '#valkoui'
+
+const menuItems: MenuItem[] = [
+  { key: 'button', group: 'Forms', text: 'Button' },
+  { key: 'input', group: 'Forms',  text:'Input' },
+  { key: 'checkbox', group: 'Forms', text: 'Checkbox' }
+]
+<\u002Fscript>
+`
+
+const extraProps = ':items="menuItems"'
+
 onMounted(() => {
-  // Initialize every menu with the first item active
   colorOptions.forEach((_, index) => {
-    // Get the key of the first element in the array
     const firstItemKey = colorOptions[0].value
-    // Create a unique menu key based on the index
     const menuKey = `color-menu-${index}`
-    // Set the value of the active item in the menu list to the key of the first item
     activeItemsList.value[menuKey] = firstItemKey
-    // Find the object of the first element in the menuItems array
     const menuItem = menuItems.find(item => item.key === firstItemKey)
-    // If the object of the first element is found
     if (menuItem) {
-      // Set the 'active' property to true
       menuItem.active = true
     }
   })
@@ -225,7 +229,6 @@ onMounted(() => {
     }
   })
 
-  // Initialize the playground menu with the first item active
   const firstPlaygroundItemKey = menuItems[0].key
   activeItem.value = firstPlaygroundItemKey
   const firstPlaygroundItem = menuItems.find(item => item.key === firstPlaygroundItemKey)
@@ -284,7 +287,10 @@ onMounted(() => {
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-menu
           v-for="(color, index) in colorOptions"
           :key="`color-menu-${index}`"
@@ -293,9 +299,16 @@ onMounted(() => {
           :active="activeItemsList[`color-menu-${index}`]"
           @item-click="(item: MenuItem) => onItemClick(item, `color-menu-${index}`)"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-menu
           v-for="(variant, index) in variantOptions.withGradientLinkAndLine"
           :key="`variant-menu-${index}`"
@@ -304,9 +317,16 @@ onMounted(() => {
           :active="activeItemsList[`variant-menu-${index}`]"
           @item-click="(item: MenuItem) => onItemClick(item, `variant-menu-${index}`)"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('variant', { values: variantOptions.withGradientLinkAndLine.map(o => o.value), extraProps })}`" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-menu
           v-for="(shape, index) in shapeOptions.general"
           :key="`shape-menu-${index}`"
@@ -315,9 +335,16 @@ onMounted(() => {
           :active="activeItemsList[`shape-menu-${index}`]"
           @item-click="(item: MenuItem) => onItemClick(item, `shape-menu-${index}`)"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), extraProps })}`" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-menu
           v-for="(size, index) in sizeOptions.general"
           :key="`size-menu-${index}`"
@@ -326,6 +353,10 @@ onMounted(() => {
           :active="activeItemsList[`size-menu-${index}`]"
           @item-click="(item: MenuItem) => onItemClick(item, `size-menu-${index}`)"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps })}`" />
+        </template>
       </example-section>
 
       <example-section title="Floating">
@@ -335,39 +366,37 @@ onMounted(() => {
           floating
           @item-click="onClick"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('floating', { values: [true], extraProps })}`" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Menu Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="menuProps"
-          />
-        </example-section>
+      <h3>Menu Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="menuProps"
+      />
 
-        <example-section title="Menu Items Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="menuItemsInterface"
-          />
-        </example-section>
+      <h3>Menu Items Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="menuItemsInterface"
+      />
 
-        <example-section title="Menu Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="menuEmits"
-          />
-        </example-section>
+      <h3>Menu Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="menuEmits"
+      />
 
-        <example-section title="Menu Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="menuSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Menu Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="menuSlots"
+      />
     </template>
   </doc-section>
 </template>

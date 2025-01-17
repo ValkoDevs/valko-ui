@@ -19,7 +19,7 @@ const spinnerProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Spinner.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, neutral, error, warning, info, success, black, white',
     default: 'primary'
   },
   {
@@ -47,6 +47,8 @@ const spinnerProps: TableItem[] = [
     default: 'false'
   }
 ]
+
+const generateSnippet = snippetGeneratorFactory('vk-spinner')
 </script>
 
 <template>
@@ -89,59 +91,73 @@ const spinnerProps: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section title="Colors">
-        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
-          <div
-            v-for="color in colorOptions"
-            :key="color.value"
-            class="flex items-center gap-2"
-          >
-            <vk-spinner
-              :color="color.value"
-            />
-            <span>{{ color.label }}</span>
-          </div>
+      <example-section
+        title="Colors"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
+        <div
+          v-for="color in colorOptions"
+          :key="color.value"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
+        >
+          <span>{{ color.label }}</span>
+          <vk-spinner
+            :color="color.value"
+          />
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('color', {values: colorOptions.map(o => o.value)})" />
+        </template>
       </example-section>
 
-      <example-section title="Names">
-        <div class="gap-x-12 gap-y-4 grid grid-cols-3">
-          <div
-            v-for="name in names"
-            :key="name.value"
-            class="flex gap-2 items-center"
-          >
-            <vk-spinner
-              :name="name.value"
-            />
-            {{ name.label }}
-          </div>
+      <example-section
+        title="Names"
+        classes="grid-cols-2"
+      >
+        <div
+          v-for="name in names"
+          :key="name.value"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
+        >
+          <span>{{ name.label }}</span>
+          <vk-spinner
+            :name="name.value"
+          />
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('name', {values: names.map(o => o.value)})" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
-        <div class="gap-x-12 gap-y-4 grid grid-cols-2">
-          <div
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-            class="flex gap-2 items-center"
-          >
-            <vk-spinner
-              :size="size.value"
-            />
-            {{ size.label }}
-          </div>
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <div
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
+        >
+          <span>{{ size.label }}</span>
+          <vk-spinner
+            :size="size.value"
+          />
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('size', {values: sizeOptions.general.map(o => o.value)})" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <example-section title="Spinner Props">
-        <vk-table
-          :headers="propHeaders"
-          :data="spinnerProps"
-        />
-      </example-section>
+      <h3>Spinner Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="spinnerProps"
+      />
     </template>
   </doc-section>
 </template>

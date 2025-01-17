@@ -91,14 +91,26 @@ const popoverSlots: TableItem[] = [
   }
 ]
 
-const popoverStates = reactive({
-  placements: Array(placementOptions.length).fill(false),
-  shapes: Array(shapeOptions.general.length).fill(false)
-})
+const popoverStates = reactive<Record<string, boolean>>({})
 
-const togglePopover = (category: keyof Record<'placements' | 'shapes', boolean>, index: number) => {
-  popoverStates[category][index] = !popoverStates[category][index]
-}
+const togglePopover = (popoverId: string) => popoverStates[popoverId] = !popoverStates[popoverId]
+
+const handleClose = (popoverId: string) => popoverStates[popoverId] = false
+
+const scriptCode = `<script setup lang="ts">
+const popoverStates = reactive<Record<string, boolean>>({})
+
+const togglePopover = (popoverId: string) => popoverStates[popoverId] = !popoverStates[popoverId]
+
+const handleClose = (popoverId: string) => popoverStates[popoverId] = false
+<\u002Fscript>
+`
+
+const generateSnippet = snippetGeneratorFactory('vk-popover')
+
+const customSlot = '<vk-button\n      @click="togglePopover(\'popoverId\')"\n    >\n      Slot Content\n    </vk-button>'
+
+const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(\'popoverId\')"'
 </script>
 
 <template>
@@ -141,60 +153,69 @@ const togglePopover = (category: keyof Record<'placements' | 'shapes', boolean>,
     </template>
 
     <template #examples>
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-popover
-          v-for="(shape, index) in shapeOptions.general"
+          v-for="shape in shapeOptions.general"
           :key="shape.value"
           :shape="shape.value"
-          :is-open="popoverStates['shapes'][index]"
+          :is-open="popoverStates[shape.value]"
           :text="shape.label"
-          @close="() => popoverStates['shapes'][index] = false"
+          @close="handleClose(shape.value)"
         >
-          <vk-button @click="() => togglePopover('shapes', index)">
+          <vk-button @click="togglePopover(shape.value)">
             {{ shape.label }}
           </vk-button>
         </vk-popover>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet('color', { values: colorOptions.map(o => o.value), customSlot, extraProps })}`" />
+        </template>
       </example-section>
 
-      <example-section title="Placement">
+      <example-section
+        title="Placement"
+        classes="grid-cols-2 md:grid-cols-4"
+      >
         <vk-popover
-          v-for="(placement, index) in placementOptions"
+          v-for="placement in placementOptions"
           :key="placement.value"
           :placement="placement.value"
-          :is-open="popoverStates['placements'][index]"
+          :is-open="popoverStates[placement.value]"
           :text="placement.label"
-          @close="() => popoverStates['placements'][index] = false"
+          @close="handleClose(placement.value)"
         >
-          <vk-button @click="() => togglePopover('placements', index)">
+          <vk-button @click="togglePopover(placement.value)">
             {{ placement.label }}
           </vk-button>
         </vk-popover>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet('placement', { values: placementOptions.map(o => o.value), customSlot, extraProps })}`" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Popover Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="popoverProps"
-          />
-        </example-section>
+      <h3>Popover Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="popoverProps"
+      />
 
-        <example-section title="Popover Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="popoverEmits"
-          />
-        </example-section>
+      <h3>Popover Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="popoverEmits"
+      />
 
-        <example-section title="Popover Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="popoverSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Popover Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="popoverSlots"
+      />
     </template>
   </doc-section>
 </template>

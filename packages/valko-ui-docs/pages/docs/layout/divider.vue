@@ -56,6 +56,8 @@ const dividerProps: TableItem[] = [
     default: 'horizontal'
   }
 ]
+
+const generateSnippet = snippetGeneratorFactory('vk-divider')
 </script>
 
 <template>
@@ -118,80 +120,103 @@ const dividerProps: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section title="Colors">
-        <div class="w-full grid grid-cols-3 gap-4">
-          <div
-            v-for="color in colorOptions"
-            :key="color.value"
-          >
-            <span class="font-semibold">{{ color.label }}</span>
-            <div class="mt-4 flex flex-col items-center">
-              Artist
-              <vk-divider :color="color.value" />
-              Album
-              <vk-divider :color="color.value" />
-              Song
-            </div>
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
+        <div
+          v-for="color in colorOptions"
+          :key="color.value"
+        >
+          <span class="font-semibold">{{ color.label }}</span>
+          <div class="mt-4 flex flex-col items-center">
+            Artist
+            <vk-divider :color="color.value" />
+            Album
+            <vk-divider :color="color.value" />
+            Song
           </div>
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
-        <div class="w-full grid grid-cols-3 gap-4">
-          <div
-            v-for="variant in variantOptions.general"
-            :key="variant.value"
-          >
-            <span class="font-semibold">{{ variant.label }}</span>
-            <div class="mt-4 flex flex-col items-center">
-              Artist
-              <vk-divider :variant="variant.value" />
-              Album
-              <vk-divider :variant="variant.value" />
-              Song
-            </div>
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
+        <div
+          v-for="variant in variantOptions.general"
+          :key="variant.value"
+        >
+          <span class="font-semibold">{{ variant.label }}</span>
+          <div class="mt-4 flex flex-col items-center">
+            Artist
+            <vk-divider :variant="variant.value" />
+            Album
+            <vk-divider :variant="variant.value" />
+            Song
           </div>
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value) })" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
-        <div class="w-full grid grid-cols-3 gap-4">
-          <div
-            v-for="shape in shapeOptions.general"
-            :key="shape.value"
-          >
-            <span class="font-semibold">{{ shape.label }}</span>
-            <div class="mt-4 flex flex-col items-center">
-              Artist
-              <vk-divider :shape="shape.value" />
-              Album
-              <vk-divider :shape="shape.value" />
-              Song
-            </div>
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
+        <div
+          v-for="shape in shapeOptions.general"
+          :key="shape.value"
+        >
+          <span class="font-semibold">{{ shape.label }}</span>
+          <div class="mt-4 flex flex-col items-center">
+            Artist
+            <vk-divider :shape="shape.value" />
+            Album
+            <vk-divider :shape="shape.value" />
+            Song
           </div>
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value) })" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
-        <div class="w-full grid grid-cols-2 gap-4">
-          <div
-            v-for="size in sizeOptions.general"
-            :key="size.value"
-          >
-            <span class="font-semibold">{{ size.label }}</span>
-            <div class="mt-4 flex flex-col items-center">
-              Artist
-              <vk-divider :size="size.value" />
-              Album
-              <vk-divider :size="size.value" />
-              Song
-            </div>
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <div
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+        >
+          <span class="font-semibold">{{ size.label }}</span>
+          <div class="mt-4 flex flex-col items-center">
+            Artist
+            <vk-divider :size="size.value" />
+            Album
+            <vk-divider :size="size.value" />
+            Song
           </div>
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value) })" />
+        </template>
       </example-section>
 
-      <example-section title="Direction">
-        <div class="w-full">
+      <example-section
+        title="Direction"
+        classes="sm:grid-cols-2"
+      >
+        <div>
           <span class="font-semibold">Horizontal</span>
           <div class="mt-4">
             Artist
@@ -201,7 +226,8 @@ const dividerProps: TableItem[] = [
             Song
           </div>
         </div>
-        <div class="w-full">
+
+        <div>
           <span class="font-semibold">Vertical</span>
           <div class="mt-4 flex flex-row h-20 items-center">
             Artist
@@ -211,18 +237,19 @@ const dividerProps: TableItem[] = [
             Song
           </div>
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('direction', { values: directionOptions.map(o => o.value) })" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Divider Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="dividerProps"
-          />
-        </example-section>
-      </div>
+      <h3>Divider</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="dividerProps"
+      />
     </template>
   </doc-section>
 </template>

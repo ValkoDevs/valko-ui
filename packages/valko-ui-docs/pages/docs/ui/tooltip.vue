@@ -73,6 +73,10 @@ const tooltipSlots: TableItem[] = [
     `
   }
 ]
+
+const generateSnippet = snippetGeneratorFactory('vk-tooltip')
+
+const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
 </script>
 
 <template>
@@ -124,7 +128,10 @@ const tooltipSlots: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-tooltip
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -135,9 +142,16 @@ const tooltipSlots: TableItem[] = [
             {{ shape.label }}
           </vk-button>
         </vk-tooltip>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('shape', {values: shapeOptions.general.map(o => o.value), customSlot})" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-tooltip
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -148,9 +162,16 @@ const tooltipSlots: TableItem[] = [
             {{ size.label }}
           </vk-button>
         </vk-tooltip>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('size', {values: sizeOptions.general.map(o => o.value), customSlot})" />
+        </template>
       </example-section>
 
-      <example-section title="Placements">
+      <example-section
+        title="Placements"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-tooltip
           v-for="placement in placementOptions"
           :key="placement.value"
@@ -161,6 +182,10 @@ const tooltipSlots: TableItem[] = [
             {{ placement.label }}
           </vk-button>
         </vk-tooltip>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('placement', {values: placementOptions.map(o => o.value), customSlot})" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
@@ -172,25 +197,25 @@ const tooltipSlots: TableItem[] = [
             Flat
           </vk-button>
         </vk-tooltip>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('flat', {values: [true], customSlot})" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Tooltip Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="tooltipProps"
-          />
-        </example-section>
+      <h3>Tooltip Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="tooltipProps"
+      />
 
-        <example-section title="Tooltip Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="tooltipSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Tooltip Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="tooltipSlots"
+      />
     </template>
   </doc-section>
 </template>

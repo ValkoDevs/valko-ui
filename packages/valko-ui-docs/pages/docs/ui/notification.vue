@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { NotificationProps, TableItem, VerticalAlign, HorizontalAlign, SelectOption } from '#valkoui'
-import { useNotification } from '#valkoui'
+import { useNotification, type NotificationProps, type TableItem, type VerticalAlign, type HorizontalAlign, type SelectOption } from '#valkoui'
 
 const form = ref<NotificationProps>({
   color: 'primary',
@@ -162,6 +161,104 @@ const createNotification = (props: NotificationProps) => {
     onClick: props.onClick
   })
 }
+
+const scriptCode = `<script setup lang="ts">
+import type { NotificationProps } from '#valkoui'
+import { useNotification } from '#valkoui'
+
+const createNotification = (props: NotificationProps) => useNotification(props)
+<\u002Fscript>
+`
+
+const colorSnippet = `
+<template>
+  ${colorOptions.map(color => `<vk-button
+    @click="createNotification({ text: ${color.label}, color: ${color.value} })"
+  >
+    ${color.label}
+  </vk-button>`).join('\n\n  ')}
+</template>
+`
+
+const variantSnippet = `
+<template>
+  ${variantOptions.withGradientAndLine.map(variant => `<vk-button
+    @click="createNotification({ text: ${variant.label}, variant: ${variant.value} })"
+  >
+    ${variant.label}
+  </vk-button>`).join('\n\n  ')}
+</template>
+`
+
+const shapeSnippet = `
+<template>
+  ${shapeOptions.general.map(shape => `<vk-button
+    @click="createNotification({ text: ${shape.label}, shape: ${shape.value} })"
+  >
+    ${shape.label}
+  </vk-button>`).join('\n\n  ')}
+</template>
+`
+
+const sizeSnippet = `
+<template>
+  ${sizeOptions.general.map(size => `<vk-button
+    @click="createNotification({ text: ${size.label}, size: ${size.value} })"
+  >
+    ${size.label}
+  </vk-button>`).join('\n\n  ')}
+</template>
+`
+
+const gravitySnippet = `
+<template>
+  ${gravityOptions.map(gravity => `<vk-button
+    @click="createNotification({ text: ${gravity.label}, gravity: ${gravity.value} })"
+  >
+    ${gravity.label}
+  </vk-button>`).join('\n\n  ')}
+</template>
+`
+
+const positionSnippet = `
+<template>
+  ${positionOptions.map(position => `<vk-button
+    @click="createNotification({ text: ${position.label}, position: ${position.value} })"
+  >
+    ${position.label}
+  </vk-button>`).join('\n\n  ')}
+</template>
+`
+
+const flatSnippet = `
+<template>
+  <vk-button
+    @click="createNotification({ text: Flat, flat: true })"
+  >
+    Flat
+  </vk-button>
+</template>
+`
+
+const closeSnippet = `
+<template>
+  <vk-button
+    @click="createNotification({ text: Close, close: true })"
+  >
+    Close
+  </vk-button>
+</template>
+`
+
+const stopOnFocusSnippet = `
+<template>
+  <vk-button
+    @click="createNotification({ text: Stop On Focus, stopOnFocus: true })"
+  >
+    Stop On Focus
+  </vk-button>
+</template>
+`
 </script>
 
 <template>
@@ -252,7 +349,10 @@ const createNotification = (props: NotificationProps) => {
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <vk-button
           v-for="color in colorOptions"
           :key="color.value"
@@ -262,9 +362,16 @@ const createNotification = (props: NotificationProps) => {
         >
           {{ color.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="`${scriptCode}${colorSnippet}`" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+      >
         <vk-button
           v-for="variant in variantOptions.withGradientAndLine"
           :key="variant.value"
@@ -273,9 +380,16 @@ const createNotification = (props: NotificationProps) => {
         >
           {{ variant.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="`${scriptCode}${variantSnippet}`" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-button
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -285,9 +399,16 @@ const createNotification = (props: NotificationProps) => {
         >
           {{ shape.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="`${scriptCode}${shapeSnippet}`" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-button
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -297,9 +418,16 @@ const createNotification = (props: NotificationProps) => {
         >
           {{ size.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="`${scriptCode}${sizeSnippet}`" />
+        </template>
       </example-section>
 
-      <example-section title="Gravity">
+      <example-section
+        title="Gravity"
+        classes="grid-cols-2"
+      >
         <vk-button
           v-for="gravity in gravityOptions"
           :key="gravity.value"
@@ -309,9 +437,16 @@ const createNotification = (props: NotificationProps) => {
         >
           {{ gravity.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="`${scriptCode}${gravitySnippet}`" />
+        </template>
       </example-section>
 
-      <example-section title="Position">
+      <example-section
+        title="Position"
+        classes="grid-cols-2"
+      >
         <vk-button
           v-for="position in positionOptions"
           :key="position.value"
@@ -321,6 +456,10 @@ const createNotification = (props: NotificationProps) => {
         >
           {{ position.label }}
         </vk-button>
+
+        <template #code>
+          <code-block :code="`${scriptCode}${positionSnippet}`" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
@@ -331,6 +470,10 @@ const createNotification = (props: NotificationProps) => {
         >
           Flat
         </vk-button>
+
+        <template #code>
+          <code-block :code="`${scriptCode}${flatSnippet}`" />
+        </template>
       </example-section>
 
       <example-section title="Close">
@@ -341,6 +484,10 @@ const createNotification = (props: NotificationProps) => {
         >
           Close
         </vk-button>
+
+        <template #code>
+          <code-block :code="`${scriptCode}${closeSnippet}`" />
+        </template>
       </example-section>
 
       <example-section title="Stop on Focus">
@@ -351,16 +498,19 @@ const createNotification = (props: NotificationProps) => {
         >
           Stop on Focus
         </vk-button>
+
+        <template #code>
+          <code-block :code="`${scriptCode}${stopOnFocusSnippet}`" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <example-section title="Notification Props">
-        <vk-table
-          :headers="propHeaders"
-          :data="notificationProps"
-        />
-      </example-section>
+      <h3>Notification Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="notificationProps"
+      />
     </template>
   </doc-section>
 </template>

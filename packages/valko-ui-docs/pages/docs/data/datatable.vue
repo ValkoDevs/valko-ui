@@ -420,6 +420,106 @@ const dataTable = useClientSideDataTable({
 watch(() => draggableRef, (newValue) => {
   draggableRef.value = newValue.value
 })
+
+const scriptCode = `
+<script setup lang="ts">
+import type { TableItem, TableHeader } from '#valkoui'
+import { useClientSideDataTable } from '#valkoui'
+
+const propHeaders: TableHeader[] = [
+  {
+    key: 'prop',
+    field: 'prop',
+    label: 'Property',
+    sortable: true,
+    filterable: true
+  },
+  {
+    key: 'required',
+    field: 'required',
+    label: 'Required',
+    sortable: true,
+    filterable: true
+  },
+  {
+    key: 'description',
+    field: 'description',
+    label: 'Description',
+    sortable: true,
+    filterable: true
+  },
+  {
+    key: 'values',
+    field: 'values',
+    label: 'Values',
+    sortable: true,
+    filterable: true
+  },
+  {
+    key: 'default',
+    field: 'default',
+    label: 'Default',
+    sortable: true,
+    filterable: true
+  }
+]
+
+const propData: TableItem[] = [
+  {
+    key: 'header',
+    prop: 'headers',
+    required: true,
+    description: 'An array of objects defining the headers of the table.',
+    values: 'TableHeader[]',
+    default: '[]'
+  },
+  {
+    key: 'data',
+    prop: 'data',
+    required: true,
+    description: 'An array of objects representing the data rows of the table.',
+    values: 'TableItem[]',
+    default: '[]'
+  },
+  {
+    key: 'color',
+    prop: 'color',
+    required: false,
+    description: 'The color theme of the table.',
+    values: 'primary, neutral, success, info, warning, error',
+    default: 'primary'
+  },
+  {
+    key: 'variant',
+    prop: 'variant',
+    required: false,
+    description: 'The variant of the table.',
+    values: 'filled, outlined, ghost',
+    default: 'filled'
+  },
+  {
+    key: 'shape',
+    prop: 'shape',
+    required: false,
+    description: 'The shape of the table.',
+    values: 'soft, rounded, square',
+    default: 'soft'
+  }
+]
+
+const dataTable = useClientSideDataTable({
+  headers: propHeaders,
+  data: propData,
+  selectionMode: none,
+  pageSizeOptions: [2, 5, 10, 20],
+  draggable: false
+})
+<\u002Fscript>
+`
+
+const extraProps = 'v-bind="dataTable" @on-sort="dataTable.onSort" @on-filter="dataTable.onFilter" @on-page-change="dataTable.onPageChange" @on-limit-change="dataTable.onLimitChange" @on-select="dataTable.onSelect" @on-select-all="dataTable.onSelectAll"'
+
+const generateSnippet = snippetGeneratorFactory('vk-data-table')
 </script>
 
 <template>
@@ -492,10 +592,7 @@ watch(() => draggableRef, (newValue) => {
     </template>
 
     <template #examples>
-      <example-section
-        title="Colors"
-        classes="md:flex-col"
-      >
+      <example-section title="Colors">
         <div
           v-for="color in colorOptions"
           :key="color.value"
@@ -510,12 +607,13 @@ watch(() => draggableRef, (newValue) => {
             class="mt-4"
           />
         </div>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
+        </template>
       </example-section>
 
-      <example-section
-        title="Variants"
-        classes="md:flex-col"
-      >
+      <example-section title="Variants">
         <div
           v-for="variant in variantOptions.general"
           :key="variant.value"
@@ -532,12 +630,13 @@ watch(() => draggableRef, (newValue) => {
             class="mt-4"
           />
         </div>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value), extraProps })}`" />
+        </template>
       </example-section>
 
-      <example-section
-        title="Shapes"
-        classes="md:flex-col"
-      >
+      <example-section title="Shapes">
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -554,12 +653,13 @@ watch(() => draggableRef, (newValue) => {
             class="mt-4"
           />
         </div>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), extraProps })}`" />
+        </template>
       </example-section>
 
-      <example-section
-        title="Sizes"
-        classes="md:flex-col"
-      >
+      <example-section title="Sizes">
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -576,6 +676,10 @@ watch(() => draggableRef, (newValue) => {
             class="mt-4"
           />
         </div>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps })}`" />
+        </template>
       </example-section>
 
       <example-section title="Striped">
@@ -586,74 +690,67 @@ watch(() => draggableRef, (newValue) => {
           label="Page Size"
           class="mt-4"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('striped', { values: [true], extraProps })}`" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Table Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="tableProps"
-          />
-        </example-section>
+      <h3>Table Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="tableProps"
+      />
 
-        <example-section title="Table Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="tableSlots"
-          />
-        </example-section>
+      <h3>Table Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="tableSlots"
+      />
 
-        <example-section title="Table Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="tableEmits"
-          />
-        </example-section>
+      <h3>Table Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="tableEmits"
+      />
 
-        <example-section title="Table Item Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="tableItemInterface"
-          />
-        </example-section>
+      <h3>Table Item Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="tableItemInterface"
+      />
 
-        <example-section title="Table Header Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="tableHeaderInterface"
-          />
-        </example-section>
+      <h3>Table Header Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="tableHeaderInterface"
+      />
 
-        <example-section title="Table Sort Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="sortInterface"
-          />
-        </example-section>
+      <h3>Table Sort Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="sortInterface"
+      />
 
-        <example-section title="Table Pagination Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="paginationInterface"
-          />
-        </example-section>
+      <h3>Table Pagination Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="paginationInterface"
+      />
 
-        <example-section title="Table Filter Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="filterInterface"
-          />
-        </example-section>
+      <h3>Table Filter Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="filterInterface"
+      />
 
-        <example-section title="Composable Client Side Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="clientSideDataTableProps"
-          />
-        </example-section>
-      </div>
+      <h3>Composable Client Side Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="clientSideDataTableProps"
+      />
     </template>
   </doc-section>
 </template>

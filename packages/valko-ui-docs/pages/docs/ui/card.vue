@@ -132,6 +132,20 @@ const cardSlots: TableItem[] = [
 const onClick = () => useNotification({ text: 'Pressed' })
 const nextImage = () => useNotification({ text: 'Loading next image...' })
 const randomImage = () => useNotification({ text: 'Loading random image...' })
+
+const generateSnippet = snippetGeneratorFactory('vk-card')
+
+const customSlot = `<vk-card-image :src="imgSrc" />
+    <vk-card-header>
+      Title
+    </vk-card-header>
+
+    <vk-card-body>
+      <h3 class="font-semibold">
+        Subtitle
+      </h3>
+      <p>Lorem</p>
+    </vk-card-body>`
 </script>
 
 <template>
@@ -247,7 +261,10 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
     </template>
 
     <template #examples>
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 lg:grid-cols-3"
+      >
         <vk-card
           v-for="variant in variantOptions.general"
           :key="variant.value"
@@ -268,9 +285,16 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
           </vk-card-body>
         </vk-card>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value), customSlot })" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 lg:grid-cols-3"
+      >
         <vk-card
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -290,9 +314,16 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
           </vk-card-body>
         </vk-card>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), customSlot })" />
+        </template>
       </example-section>
 
-      <example-section title="Layout">
+      <example-section
+        title="Layout"
+        classes="sm:grid-cols-2 lg:grid-cols-3"
+      >
         <vk-card
           v-for="layout in layoutOptions"
           :key="layout.value"
@@ -312,9 +343,16 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
           </vk-card-body>
         </vk-card>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('layout', { values: layoutOptions.map(o => o.value), customSlot })" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 lg:grid-cols-3"
+      >
         <vk-card
           v-for="size in sizeOptions.withFull"
           :key="size.value"
@@ -335,6 +373,10 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
           </vk-card-body>
         </vk-card>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.withFull.map(o => o.value), customSlot })" />
+        </template>
       </example-section>
 
       <example-section title="Pressable">
@@ -356,6 +398,10 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
           </vk-card-body>
         </vk-card>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('is-pressable', { values: [true], customSlot })" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
@@ -374,39 +420,37 @@ const randomImage = () => useNotification({ text: 'Loading random image...' })
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
           </vk-card-body>
         </vk-card>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('flat', { values: [true], customSlot })" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Card Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="cardProps"
-          />
-        </example-section>
+      <h3>Card Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="cardProps"
+      />
 
-        <example-section title="Card Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="cardEmits"
-          />
-        </example-section>
+      <h3>Card Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="cardEmits"
+      />
 
-        <example-section title="Card Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="cardSlots"
-          />
-        </example-section>
+      <h3>Card Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="cardSlots"
+      />
 
-        <example-section title="Card Image Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="cardImageProps"
-          />
-        </example-section>
-      </div>
+      <h3>Card Image Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="cardImageProps"
+      />
     </template>
   </doc-section>
 </template>

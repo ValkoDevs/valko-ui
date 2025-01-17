@@ -112,8 +112,8 @@ const apiData: TableItem[] = [
     prop: 'labelPosition',
     required: false,
     description: 'Moves the label of the Checkbox to left or right',
-    values: 'true, false',
-    default: 'false'
+    values: 'left, right',
+    default: 'right'
   },
   {
     key: 'shapeProp',
@@ -134,6 +134,8 @@ const emitData: TableItem[] = [
     type: '(value: boolean) => void'
   }
 ]
+
+const generateSnippet = snippetGeneratorFactory('vk-checkbox')
 
 /*
 * This watch function controls the indeterminate checkbox
@@ -229,7 +231,10 @@ watchEffect(() => {
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <vk-checkbox
           v-for="color in colorOptions"
           :key="color.value"
@@ -237,9 +242,16 @@ watchEffect(() => {
           :label="color.label"
           :model-value="extendedForm.exampleChecked"
         />
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-checkbox
           v-for="variant in variantOptions.general"
           :key="variant.value"
@@ -247,9 +259,16 @@ watchEffect(() => {
           :label="variant.label"
           :model-value="extendedForm.exampleChecked"
         />
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value) })" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <vk-checkbox
           v-for="shape in shapeOptions.general"
           :key="shape.value"
@@ -257,9 +276,16 @@ watchEffect(() => {
           :label="shape.label"
           :model-value="extendedForm.exampleChecked"
         />
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value) })" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-checkbox
           v-for="size in sizeOptions.general"
           :key="size.value"
@@ -267,6 +293,10 @@ watchEffect(() => {
           :label="size.label"
           :model-value="extendedForm.exampleChecked"
         />
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value) })" />
+        </template>
       </example-section>
 
       <example-section title="Disabled">
@@ -275,6 +305,10 @@ watchEffect(() => {
           disabled
           :model-value="extendedForm.exampleChecked"
         />
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('disabled', { values: [true] })" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
@@ -283,6 +317,10 @@ watchEffect(() => {
           flat
           :model-value="extendedForm.exampleChecked"
         />
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('flat', { values: [true] })" />
+        </template>
       </example-section>
 
       <example-section title="Readonly">
@@ -291,6 +329,10 @@ watchEffect(() => {
           read-only
           :model-value="extendedForm.exampleChecked"
         />
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('readonly', { values: [true] })" />
+        </template>
       </example-section>
 
       <example-section title="Indeterminate">
@@ -299,9 +341,16 @@ watchEffect(() => {
           label="Inderterminate"
           indeterminate
         />
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('indeterminate', { values: [true] })" />
+        </template>
       </example-section>
 
-      <example-section title="Label Position">
+      <example-section
+        title="Label Position"
+        classes="sm:grid-cols-2"
+      >
         <vk-checkbox
           v-for="pos in position"
           :key="pos.value"
@@ -309,25 +358,25 @@ watchEffect(() => {
           :label-position="pos.value"
           :model-value="extendedForm.exampleChecked"
         />
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('label-position', { values: position.map(o => o.value) })" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Checkbox Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="apiData"
-          />
-        </example-section>
+      <h3>Checkbox Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="apiData"
+      />
 
-        <example-section title="Checkbox Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="emitData"
-          />
-        </example-section>
-      </div>
+      <h3>Checkbox Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="emitData"
+      />
     </template>
   </doc-section>
 </template>

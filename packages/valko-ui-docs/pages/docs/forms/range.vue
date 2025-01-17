@@ -178,6 +178,8 @@ watch([() => form.min, () => form.max, () => form.step], () => {
 })
 
 form.labels = generateLabels()
+
+const generateSnippet = snippetGeneratorFactory('vk-range')
 </script>
 
 <template>
@@ -270,7 +272,7 @@ form.labels = generateLabels()
     <template #examples>
       <example-section
         title="Colors"
-        classes="md:flex-col"
+        classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <div
           v-for="color in colorOptions"
@@ -282,11 +284,15 @@ form.labels = generateLabels()
             class="mt-2"
           />
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+        </template>
       </example-section>
 
       <example-section
         title="Variants"
-        classes="md:flex-col"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         <div
           v-for="variant in variantOptions.withGradient"
@@ -295,11 +301,15 @@ form.labels = generateLabels()
           <span>{{ variant.label }}</span>
           <vk-range :variant="variant.value" />
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.withGradient.map(o => o.value) })" />
+        </template>
       </example-section>
 
       <example-section
         title="Shapes"
-        classes="md:flex-col"
+        classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -308,11 +318,15 @@ form.labels = generateLabels()
           <span>{{ shape.label }}</span>
           <vk-range :shape="shape.value" />
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value) })" />
+        </template>
       </example-section>
 
       <example-section
         title="Sizes"
-        classes="md:flex-col"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -321,12 +335,18 @@ form.labels = generateLabels()
           <span>{{ size.label }}</span>
           <vk-range :size="size.value" />
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value) })" />
+        </template>
       </example-section>
 
       <example-section title="Double">
-        <vk-range
-          :is-double="true"
-        />
+        <vk-range is-double />
+
+        <template #code>
+          <code-block :code="generateSnippet<string>(':is-double', { values: ['true'] })" />
+        </template>
       </example-section>
 
       <example-section title="Show Steps">
@@ -334,11 +354,15 @@ form.labels = generateLabels()
           show-steps
           :step="10"
         />
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('show-steps', { values: [true] })" />
+        </template>
       </example-section>
 
       <example-section
         title="Striped"
-        classes="md:flex-col"
+        classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <div
           v-for="color in colorOptions"
@@ -350,32 +374,31 @@ form.labels = generateLabels()
             striped
           />
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps: 'striped' })" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Range Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="rangeProps"
-          />
-        </example-section>
+      <h3>Range Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="rangeProps"
+      />
 
-        <example-section title="Label Interface">
-          <vk-table
-            :headers="propHeaders"
-            :data="labelsInterface"
-          />
-        </example-section>
+      <h3>Label Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="labelsInterface"
+      />
 
-        <example-section title="Range Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="rangeEmits"
-          />
-        </example-section>
-      </div>
+      <h3>Range Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="rangeEmits"
+      />
     </template>
   </doc-section>
 </template>

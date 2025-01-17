@@ -22,13 +22,7 @@ const form = ref<SelectProps>({
   clearable: false
 })
 
-const exampleSectionForm = reactive({
-  colors: Array(colorOptions.length).fill(''),
-  variants: Array(variantOptions.general.length).fill(''),
-  shapes: Array(shapeOptions.general.length).fill(''),
-  sizes: Array(sizeOptions.general.length).fill(''),
-  readonly: 1
-})
+const exampleSectionModel = reactive<Record<string, number>>({ readonly: 1 })
 
 const apiData: TableItem[] = [
   {
@@ -162,6 +156,23 @@ const emitData: TableItem[] = [
     type: '(value: any) => void'
   }
 ]
+
+const generateSnippet = snippetGeneratorFactory('vk-select')
+
+const extraProps = ':options="people"'
+
+const scriptCode = `
+<script>
+import type { SelectOption } from '#valkoui'
+
+const people: SelectOption[] = [
+  { value: 1, label: 'Wade Cooper' },
+  { value: 2, label: 'Arlene Mccoy' },
+  { value: 3, label: 'Devon Webb' },
+  { value: 4, label: 'Tom Cook' }
+]
+<\u002Fscript>
+`
 </script>
 
 <template>
@@ -240,48 +251,76 @@ const emitData: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-select
-          v-for="(color, index) in colorOptions"
+          v-for="color in colorOptions"
           :key="color.value"
-          v-model="exampleSectionForm['colors'][index]"
+          v-model="exampleSectionModel[color.value]"
           :color="color.value"
           :label="color.label"
           :options="people"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-select
-          v-for="(variant, index) in variantOptions.general"
+          v-for="variant in variantOptions.general"
           :key="variant.value"
-          v-model="exampleSectionForm['variants'][index]"
+          v-model="exampleSectionModel[variant.value]"
           :variant="variant.value"
           :label="variant.label"
           :options="people"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value), extraProps })}`" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-select
-          v-for="(shape, index) in shapeOptions.general"
+          v-for="shape in shapeOptions.general"
           :key="shape.value"
-          v-model="exampleSectionForm['shapes'][index]"
+          v-model="exampleSectionModel[shape.value]"
           :shape="shape.value"
           :label="shape.label"
           :options="people"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), extraProps })}`" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <vk-select
-          v-for="(size, index) in sizeOptions.general"
+          v-for="size in sizeOptions.general"
           :key="size.value"
-          v-model="exampleSectionForm['sizes'][index]"
+          v-model="exampleSectionModel[size.value]"
           :size="size.value"
           :label="size.label"
           :options="people"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps })}`" />
+        </template>
       </example-section>
 
       <example-section title="Disabled">
@@ -289,34 +328,38 @@ const emitData: TableItem[] = [
           disabled
           label="Disabled"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('disabled', { values: [true], extraProps })}`" />
+        </template>
       </example-section>
 
       <example-section title="Readonly">
         <vk-select
-          v-model="exampleSectionForm['readonly']"
+          v-model="exampleSectionModel['readonly']"
           readonly
           :options="people"
           label="Readonly"
         />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('readonly', { values: [true], extraProps })}`" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Select Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="apiData"
-          />
-        </example-section>
+      <h3>Select Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="apiData"
+      />
 
-        <example-section title="Select Emits">
-          <vk-table
-            :headers="emitHeaders"
-            :data="emitData"
-          />
-        </example-section>
-      </div>
+      <h3>Select Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="emitData"
+      />
     </template>
   </doc-section>
 </template>

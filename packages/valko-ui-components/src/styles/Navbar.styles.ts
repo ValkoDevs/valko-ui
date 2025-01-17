@@ -3,15 +3,12 @@ import { tv, type TV } from 'tailwind-variants'
 export default tv({
   base: [
     'vk-navbar',
-    'w-full',
-    'px-4',
     'flex',
     'justify-items-center',
     'items-center',
     'shadow-lg',
     'shadow-light-4',
-    'dark:shadow-dark-5',
-    'shrink-0'
+    'dark:shadow-dark-5'
   ],
   variants: {
     variant: {
@@ -45,29 +42,17 @@ export default tv({
       info: []
     },
     size: {
-      xs: [
-        'h-10'
-      ],
-      sm: [
-        'h-12'
-      ],
-      md: [
-        'h-14'
-      ],
-      lg: [
-        'h-16'
-      ]
+      xs: [],
+      sm: [],
+      md: [],
+      lg: []
     },
     shape: {
-      rounded: [
-        'rounded-b-2xl'
-      ],
+      rounded: [],
       square: [
         'rounded-none'
       ],
-      soft: [
-        'rounded-b-lg'
-      ]
+      soft: []
     },
     fixed: {
       true: [
@@ -87,6 +72,19 @@ export default tv({
     flat: {
       true: [
         'shadow-none'
+      ]
+    },
+    vertical: {
+      false: [
+        'w-full',
+        'shrink-0',
+        'px-4'
+      ],
+      true: [
+        'h-full',
+        'w-fit',
+        'flex-col',
+        'py-4'
       ]
     }
   },
@@ -301,6 +299,92 @@ export default tv({
       shape: 'soft',
       class: [
         'rounded-2xl'
+      ]
+    },
+    // size & vertical
+    {
+      vertical: true,
+      size: 'xs',
+      class: [
+        'min-w-10'
+      ]
+    },
+    {
+      vertical: true,
+      size: 'sm',
+      class: [
+        'min-w-12'
+      ]
+    },
+    {
+      vertical: true,
+      size: 'md',
+      class: [
+        'min-w-14'
+      ]
+    },
+    {
+      vertical: true,
+      size: 'lg',
+      class: [
+        'min-w-16'
+      ]
+    },
+    {
+      vertical: false,
+      size: 'xs',
+      class: [
+        'h-10'
+      ]
+    },
+    {
+      vertical: false,
+      size: 'sm',
+      class: [
+        'h-12'
+      ]
+    },
+    {
+      vertical: false,
+      size: 'md',
+      class: [
+        'h-14'
+      ]
+    },
+    {
+      vertical: false,
+      size: 'lg',
+      class: [
+        'h-16'
+      ]
+    },
+    // vertical & shape
+    {
+      vertical: false,
+      shape: 'rounded',
+      class: [
+        'rounded-b-2xl'
+      ]
+    },
+    {
+      vertical: false,
+      shape: 'soft',
+      class: [
+        'rounded-b-lg'
+      ]
+    },
+    {
+      vertical: true,
+      shape: 'rounded',
+      class: [
+        'rounded-r-2xl'
+      ]
+    },
+    {
+      vertical: true,
+      shape: 'soft',
+      class: [
+        'rounded-r-lg'
       ]
     }
   ]

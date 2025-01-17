@@ -8,7 +8,8 @@ const form = ref<NavbarProps>({
   size: 'md',
   floating: false,
   fixed: false,
-  flat: false
+  flat: false,
+  vertical: false
 })
 
 const navbarProps: TableItem[] = [
@@ -67,6 +68,14 @@ const navbarProps: TableItem[] = [
     description: 'Determines if the Navbar is floating.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'verticalProp',
+    prop: 'vertical',
+    required: false,
+    description: 'Determines if the Navbar is vertical or not.',
+    values: 'true, false',
+    default: 'false'
   }
 ]
 
@@ -78,6 +87,10 @@ const navbarSlots: TableItem[] = [
     example: '<template #default>\n  <p>This is the main content of the Navbar.</p>\n</template>'
   }
 ]
+
+const generateSnippet = snippetGeneratorFactory('vk-navbar')
+
+const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold ml-4">Title</span>'
 </script>
 
 <template>
@@ -94,9 +107,10 @@ const navbarSlots: TableItem[] = [
         :floating="form.floating"
         :fixed="form.fixed"
         :flat="form.flat"
+        :vertical="form.vertical"
       >
         <vk-icon
-          name="brand-vite"
+          name="brand-vue"
           :size="form.size"
         />
       </vk-navbar>
@@ -139,65 +153,97 @@ const navbarSlots: TableItem[] = [
         v-model="form.flat"
         label="Flat"
       />
+      <vk-checkbox
+        v-model="form.vertical"
+        label="Vertical"
+      />
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-navbar
           v-for="color in colorOptions"
           :key="color.value"
           :color="color.value"
         >
           <vk-icon
-            name="brand-vite"
+            name="brand-vue"
             size="md"
           />
           <span class="font-semibold ml-4">{{ color.label }}</span>
         </vk-navbar>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), customSlot })" />
+        </template>
       </example-section>
 
-      <example-section title="Variants">
+      <example-section
+        title="Variants"
+        classes="sm:grid-cols-2"
+      >
         <vk-navbar
           v-for="variant in variantOptions.withGradient"
           :key="variant.value"
           :variant="variant.value"
         >
           <vk-icon
-            name="brand-vite"
+            name="brand-vue"
             size="md"
           />
           <span class="font-semibold ml-4">{{ variant.label }}</span>
         </vk-navbar>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.withGradient.map(o => o.value), customSlot })" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="sm:grid-cols-2 md:grid-cols-3"
+      >
         <vk-navbar
           v-for="shape in shapeOptions.general"
           :key="shape.value"
           :shape="shape.value"
         >
           <vk-icon
-            name="brand-vite"
+            name="brand-vue"
             size="md"
             class="text-white"
           />
           <span class="font-semibold ml-4">{{ shape.label }}</span>
         </vk-navbar>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), customSlot })" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="sm:grid-cols-2"
+      >
         <vk-navbar
           v-for="size in sizeOptions.general"
           :key="size.value"
           :size="size.value"
         >
           <vk-icon
-            name="brand-vite"
+            name="brand-vue"
             size="md"
             class="text-white"
           />
           <span class="font-semibold ml-4">{{ size.label }}</span>
         </vk-navbar>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), customSlot })" />
+        </template>
       </example-section>
 
       <example-section title="Floating">
@@ -205,12 +251,16 @@ const navbarSlots: TableItem[] = [
           floating
         >
           <vk-icon
-            name="brand-vite"
+            name="brand-vue"
             size="md"
             class="text-white"
           />
           <span class="font-semibold ml-4">Floating</span>
         </vk-navbar>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('floating', { values: [true], customSlot })" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
@@ -218,12 +268,16 @@ const navbarSlots: TableItem[] = [
           flat
         >
           <vk-icon
-            name="brand-vite"
+            name="brand-vue"
             size="md"
             class="text-white"
           />
           <span class="font-semibold ml-4">Flat</span>
         </vk-navbar>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('flat', { values: [true], customSlot })" />
+        </template>
       </example-section>
 
       <example-section title="Fixed">
@@ -232,32 +286,51 @@ const navbarSlots: TableItem[] = [
             fixed
           >
             <vk-icon
-              name="brand-vite"
+              name="brand-vue"
               size="md"
               class="text-white"
             />
             <span class="font-semibold ml-4">Fixed</span>
           </vk-navbar>
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('fixed', { values: [true], customSlot })" />
+        </template>
+      </example-section>
+
+      <example-section title="Vertical">
+        <div class="h-56">
+          <vk-navbar
+            vertical
+          >
+            <vk-icon
+              name="brand-vue"
+              size="md"
+              class="text-white"
+            />
+            <span class="font-semibold ml-4">Vertical</span>
+          </vk-navbar>
+        </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('vertical', { values: [true], customSlot })" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Navbar Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="navbarProps"
-          />
-        </example-section>
+      <h3>Navbar Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="navbarProps"
+      />
 
-        <example-section title="Navbar Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="navbarSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Navbar Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="navbarSlots"
+      />
     </template>
   </doc-section>
 </template>

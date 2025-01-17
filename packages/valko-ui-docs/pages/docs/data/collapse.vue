@@ -84,6 +84,10 @@ const itemSlots: TableItem[] = [
     example: '<template #default>\n  <!-- Your main content goes here -->\n</template>'
   }
 ]
+
+const generateSnippet = snippetGeneratorFactory('vk-collapse')
+
+const customSlot = '<vk-collapse-item title="example-item">\n      Lorem.\n    </vk-collapse-item>'
 </script>
 
 <template>
@@ -177,6 +181,10 @@ const itemSlots: TableItem[] = [
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </vk-collapse-item>
         </vk-collapse>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.general.map(o => o.value), customSlot })" />
+        </template>
       </example-section>
 
       <example-section title="Shapes">
@@ -201,6 +209,10 @@ const itemSlots: TableItem[] = [
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </vk-collapse-item>
         </vk-collapse>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), customSlot })" />
+        </template>
       </example-section>
 
       <example-section title="Sizes">
@@ -225,6 +237,10 @@ const itemSlots: TableItem[] = [
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </vk-collapse-item>
         </vk-collapse>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), customSlot })" />
+        </template>
       </example-section>
 
       <example-section title="Separators">
@@ -249,12 +265,14 @@ const itemSlots: TableItem[] = [
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </vk-collapse-item>
         </vk-collapse>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('separator', { values: separatorOptions.map(o => o.value), customSlot })" />
+        </template>
       </example-section>
 
       <example-section title="Multiple">
-        <vk-collapse
-          :multiple="true"
-        >
+        <vk-collapse multiple>
           <vk-collapse-item
             left-icon="user-circle"
             title="Multiple-Example Item 1"
@@ -272,12 +290,14 @@ const itemSlots: TableItem[] = [
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </vk-collapse-item>
         </vk-collapse>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('multiple', { values: [true], customSlot })" />
+        </template>
       </example-section>
 
       <example-section title="Compact">
-        <vk-collapse
-          :compact="true"
-        >
+        <vk-collapse compact>
           <vk-collapse-item
             title="Compact-Example Item 1"
           >
@@ -294,32 +314,35 @@ const itemSlots: TableItem[] = [
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
           </vk-collapse-item>
         </vk-collapse>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('compact', { values: [true], customSlot })" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Collapse Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="collapseProps"
-          />
-        </example-section>
+      <h3>Collapse Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="collapseProps"
+      />
 
-        <example-section title="Collapse Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="collapseSlots"
-          />
-        </example-section>
+      <h3 title="">
+        Collapse Slots
+      </h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="collapseSlots"
+      />
 
-        <example-section title="Collapse Items Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="itemSlots"
-          />
-        </example-section>
-      </div>
+      <h3 title="">
+        Collapse Items Slots
+      </h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="itemSlots"
+      />
     </template>
   </doc-section>
 </template>

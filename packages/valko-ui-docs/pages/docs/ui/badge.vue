@@ -106,6 +106,14 @@ const badgeSlots: TableItem[] = [
     example: '<template #default>\n  <!-- Your custom content goes here -->\n</template>'
   }
 ]
+
+const generateSnippet = snippetGeneratorFactory('vk-badge')
+
+const customSlot = '<vk-avatar\n      :src="src"\n      color="neutral"\n    />'
+const extraProps = {
+  content: 'new',
+  dot: 'dot'
+}
 </script>
 
 <template>
@@ -185,13 +193,16 @@ const badgeSlots: TableItem[] = [
     </template>
 
     <template #examples>
-      <example-section title="Colors">
+      <example-section
+        title="Colors"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
         <div
           v-for="color in colorOptions"
           :key="color.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
-          <span class="mb-2">{{ color.label }}</span>
+          <span>{{ color.label }}</span>
           <vk-badge
             :color="color.value"
             content="new"
@@ -202,15 +213,22 @@ const badgeSlots: TableItem[] = [
             />
           </vk-badge>
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), customSlot, extraProps: extraProps.content })" />
+        </template>
       </example-section>
 
-      <example-section title="Shapes">
+      <example-section
+        title="Shapes"
+        classes="grid-cols-2 md:grid-cols-3"
+      >
         <div
           v-for="shape in shapeOptions.general"
           :key="shape.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
-          <span class="mb-2">{{ shape.label }}</span>
+          <span>{{ shape.label }}</span>
           <vk-badge
             :shape="shape.value"
             content="new"
@@ -221,15 +239,22 @@ const badgeSlots: TableItem[] = [
             />
           </vk-badge>
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), customSlot, extraProps: extraProps.content })" />
+        </template>
       </example-section>
 
-      <example-section title="Sizes">
+      <example-section
+        title="Sizes"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
-          <span class="mb-2">{{ size.label }}</span>
+          <span>{{ size.label }}</span>
           <vk-badge
             :size="size.value"
             content="new"
@@ -240,15 +265,22 @@ const badgeSlots: TableItem[] = [
             />
           </vk-badge>
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), customSlot, extraProps: extraProps.content })" />
+        </template>
       </example-section>
 
-      <example-section title="Placements">
+      <example-section
+        title="Placements"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <div
           v-for="placement in placementOptions"
           :key="placement.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
-          <span class="mb-2">{{ placement.label }}</span>
+          <span>{{ placement.label }}</span>
           <vk-badge
             :placement="placement.value"
             content="new"
@@ -259,6 +291,10 @@ const badgeSlots: TableItem[] = [
             />
           </vk-badge>
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('placement', { values: placementOptions.map(o => o.value), customSlot, extraProps: extraProps.content })" />
+        </template>
       </example-section>
 
       <example-section title="Flat">
@@ -271,6 +307,10 @@ const badgeSlots: TableItem[] = [
             color="neutral"
           />
         </vk-badge>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('flat', { values: [true], customSlot, extraProps: extraProps.content })" />
+        </template>
       </example-section>
 
       <example-section title="Outlined">
@@ -283,15 +323,22 @@ const badgeSlots: TableItem[] = [
             color="neutral"
           />
         </vk-badge>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('outlined', { values: [true], customSlot, extraProps: extraProps.content })" />
+        </template>
       </example-section>
 
-      <example-section title="Dot">
+      <example-section
+        title="Dot"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
         <div
           v-for="size in sizeOptions.general"
           :key="size.value"
-          class="flex flex-col items-center"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
-          <span class="mb-2">{{ size.label }}</span>
+          <span>{{ size.label }}</span>
           <vk-badge
             :size="size.value"
             dot
@@ -302,6 +349,10 @@ const badgeSlots: TableItem[] = [
             />
           </vk-badge>
         </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), customSlot, extraProps: extraProps.dot })" />
+        </template>
       </example-section>
 
       <example-section title="Hidden">
@@ -313,25 +364,25 @@ const badgeSlots: TableItem[] = [
             color="neutral"
           />
         </vk-badge>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('hidden', { values: [true], customSlot })" />
+        </template>
       </example-section>
     </template>
 
     <template #api>
-      <div class="w-full flex flex-col">
-        <example-section title="Badge Props">
-          <vk-table
-            :headers="propHeaders"
-            :data="badgeProps"
-          />
-        </example-section>
+      <h3>Badge Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="badgeProps"
+      />
 
-        <example-section title="Badge Slots">
-          <vk-table
-            :headers="slotHeaders"
-            :data="badgeSlots"
-          />
-        </example-section>
-      </div>
+      <h3>Badge Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="badgeSlots"
+      />
     </template>
   </doc-section>
 </template>
