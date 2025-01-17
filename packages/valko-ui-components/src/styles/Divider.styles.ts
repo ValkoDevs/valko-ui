@@ -49,8 +49,7 @@ export default tv({
       ],
       vertical: [
         'h-full',
-        'mx-2',
-        'rotate-180'
+        'mx-2'
       ]
     }
   },
@@ -68,7 +67,7 @@ export default tv({
       color: 'neutral',
       class: [
         'bg-light-4',
-        'dark:bg-dark-2'
+        'dark:bg-dark-1'
       ]
     },
     {

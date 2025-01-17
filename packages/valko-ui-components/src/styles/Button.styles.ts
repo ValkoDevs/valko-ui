@@ -19,7 +19,7 @@ export default tv({
       'focus:ring-2',
       'focus:outline-none',
       'focus-visible:outline-none',
-      'dark:shadow-dark-5'
+      'dark:shadow-dark-5/[.2]'
     ],
     spinnerContainer: [
       'w-0',
@@ -173,10 +173,10 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'bg-primary-600',
-          'focus:ring-primary-700',
-          'hover:bg-primary-500',
-          'active:bg-primary-700'
+          'bg-primary-500',
+          'focus:ring-primary-600',
+          'hover:bg-primary-500/[.8]',
+          'active:bg-primary-600'
         ]
       }
     },
@@ -207,10 +207,10 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'bg-success-600',
-          'focus:ring-success-700',
-          'hover:bg-success-500',
-          'active:bg-success-700'
+          'bg-success-500',
+          'focus:ring-success-600',
+          'hover:bg-success-500/[.8]',
+          'active:bg-success-600'
         ]
       }
     },
@@ -220,10 +220,10 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'bg-info-600',
-          'focus:ring-info-700',
-          'hover:bg-info-500',
-          'active:bg-info-700'
+          'bg-info-500',
+          'focus:ring-info-600',
+          'hover:bg-info-500/[.8]',
+          'active:bg-info-600'
         ]
       }
     },
@@ -233,10 +233,10 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'bg-warning-600',
-          'focus:ring-warning-700',
-          'hover:bg-warning-500',
-          'active:bg-warning-700'
+          'bg-warning-500',
+          'focus:ring-warning-600',
+          'hover:bg-warning-500/[.8]',
+          'active:bg-warning-600'
         ]
       }
     },
@@ -246,10 +246,10 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'bg-error-600',
-          'focus:ring-error-700',
-          'hover:bg-error-500',
-          'active:bg-error-700'
+          'bg-error-500',
+          'focus:ring-error-600',
+          'hover:bg-error-500/[.8]',
+          'active:bg-error-600'
         ]
       }
     },
@@ -260,11 +260,14 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-primary-600',
-          'bg-primary-500/[.15]',
+          'text-primary-500',
+          'bg-primary-500/[.3]',
           'focus:ring-primary-500/[.30]',
           'hover:bg-primary-500/[.25]',
-          'active:bg-primary-500/[.30]'
+          'active:bg-primary-500/[.30]',
+          'dark:bg-primary-500/[.15]',
+          'dark:hover:bg-primary-500/[.25]',
+          'dark:active:bg-primary-500/[.30]'
         ]
       }
     },
@@ -293,11 +296,14 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-success-600',
-          'bg-success-500/[.15]',
+          'text-success-500',
+          'bg-success-500/[.3]',
           'focus:ring-success-500/[.30]',
           'hover:bg-success-500/[.25]',
-          'active:bg-success-500/[.30]'
+          'active:bg-success-500/[.30]',
+          'dark:bg-success-500/[.15]',
+          'dark:hover:bg-success-500/[.25]',
+          'dark:active:bg-success-500/[.30]'
         ]
       }
     },
@@ -307,11 +313,14 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-info-600',
-          'bg-info-500/[.15]',
+          'text-info-500',
+          'bg-info-500/[.3]',
           'focus:ring-info-500/[.30]',
           'hover:bg-info-500/[.25]',
-          'active:bg-info-500/[.30]'
+          'active:bg-info-500/[.30]',
+          'dark:bg-info-500/[.15]',
+          'dark:hover:bg-info-500/[.25]',
+          'dark:active:bg-info-500/[.30]'
         ]
       }
     },
@@ -321,11 +330,14 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-warning-600',
-          'bg-warning-500/[.15]',
+          'text-warning-500',
+          'bg-warning-500/[.3]',
           'focus:ring-warning-500/[.30]',
           'hover:bg-warning-500/[.25]',
-          'active:bg-warning-500/[.30]'
+          'active:bg-warning-500/[.30]',
+          'dark:bg-warning-500/[.15]',
+          'dark:hover:bg-warning-500/[.25]',
+          'dark:active:bg-warning-500/[.30]'
         ]
       }
     },
@@ -335,11 +347,14 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-error-600',
-          'bg-error-500/[.15]',
+          'text-error-500',
+          'bg-error-500/[.3]',
           'focus:ring-error-500/[.30]',
           'hover:bg-error-500/[.25]',
-          'active:bg-error-500/[.30]'
+          'active:bg-error-500/[.30]',
+          'dark:bg-error-500/[.15]',
+          'dark:hover:bg-error-500/[.25]',
+          'dark:active:bg-error-500/[.30]'
         ]
       }
     },
@@ -350,7 +365,7 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-primary-600',
+          'text-primary-500',
           'focus:ring-primary-400/20',
           'hover:bg-primary-300/20',
           'active:bg-primary-400/20'
@@ -380,7 +395,7 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-success-600',
+          'text-success-500',
           'focus:ring-success-400/20',
           'hover:bg-success-300/20',
           'active:bg-success-400/20'
@@ -393,7 +408,7 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-info-600',
+          'text-info-500',
           'focus:ring-info-400/20',
           'hover:bg-info-300/20',
           'active:bg-info-400/20'
@@ -406,7 +421,7 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-warning-600',
+          'text-warning-500',
           'focus:ring-warning-400/20',
           'hover:bg-warning-300/20',
           'active:bg-warning-400/20'
@@ -419,7 +434,7 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-error-600',
+          'text-error-500',
           'focus:ring-error-400/20',
           'hover:bg-error-300/20',
           'active:bg-error-400/20'
@@ -433,11 +448,11 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-primary-600',
+          'text-primary-500',
           'focus:ring-primary-400/20',
           'hover:bg-primary-300/20',
           'active:bg-primary-400/20',
-          'border-primary-600'
+          'border-primary-500'
         ]
       }
     },
@@ -466,11 +481,11 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-success-600',
+          'text-success-500',
           'focus:ring-success-400/20',
           'hover:bg-success-300/20',
           'active:bg-success-400/20',
-          'border-success-600'
+          'border-success-500'
         ]
       }
     },
@@ -480,11 +495,11 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-info-600',
+          'text-info-500',
           'focus:ring-info-400/20',
           'hover:bg-info-300/20',
           'active:bg-info-400/20',
-          'border-info-600'
+          'border-info-500'
         ]
       }
     },
@@ -494,11 +509,11 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-warning-600',
+          'text-warning-500',
           'focus:ring-warning-400/20',
           'hover:bg-warning-300/20',
           'active:bg-warning-400/20',
-          'border-warning-600'
+          'border-warning-500'
         ]
       }
     },
@@ -508,11 +523,11 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-error-600',
+          'text-error-500',
           'focus:ring-error-400/20',
           'hover:bg-error-300/20',
           'active:bg-error-400/20',
-          'border-error-600'
+          'border-error-500'
         ]
       }
     },

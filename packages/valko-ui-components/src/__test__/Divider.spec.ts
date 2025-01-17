@@ -220,7 +220,7 @@ describe('Divider component', () => {
           }
         })
 
-        expect(wrapper.find('.rotate-180').exists()).toBe(true)
+        expect(wrapper.find('.h-full').exists()).toBe(true)
       })
     })
   })

@@ -73,7 +73,7 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-primary-600')
+        expect(button.classes()).toContain('bg-primary-500')
       })
 
       it('should be size md', () => {
@@ -83,7 +83,7 @@ describe('Calendar component', () => {
       it('should be variant filled', async () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
-        expect(button.classes()).toContain('bg-primary-600')
+        expect(button.classes()).toContain('bg-primary-500')
       })
 
       it('should be shape soft', () => {
@@ -104,7 +104,7 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-primary-600')
+        expect(button.classes()).toContain('bg-primary-500')
       })
 
       it('should be color neutral when props.color is neutral', async () => {
@@ -134,7 +134,7 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-success-600')
+        expect(button.classes()).toContain('bg-success-500')
       })
 
       it('should be color info when props.color is info', async () => {
@@ -149,7 +149,7 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-info-600')
+        expect(button.classes()).toContain('bg-info-500')
       })
 
       it('should be color warning when props.color is warning', async () => {
@@ -163,7 +163,7 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-warning-600')
+        expect(button.classes()).toContain('bg-warning-500')
       })
 
       it('should be color error when props.color is error', async () => {
@@ -178,7 +178,7 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-error-600')
+        expect(button.classes()).toContain('bg-error-500')
       })
     })
 

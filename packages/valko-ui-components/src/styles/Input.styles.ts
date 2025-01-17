@@ -478,9 +478,7 @@ export default tv({
           'hover:border-error-400',
           'focus:border-error-500',
           'dark:border-error-500',
-          'dark:focus:border-error-700',
-          'text-light-1',
-          'dark:text-light-1'
+          'dark:focus:border-error-700'
         ]
       }
     },

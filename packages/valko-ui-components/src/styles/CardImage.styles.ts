@@ -3,7 +3,7 @@ import { tv, type TV } from 'tailwind-variants'
 export default tv({
   slots: {
     container: [
-      'vk-cardimage',
+      'vk-card__image',
       'min-h-48',
       'min-w-48',
       'w-full',

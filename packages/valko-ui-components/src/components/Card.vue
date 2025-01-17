@@ -17,7 +17,7 @@ const emit = defineEmits(['click'])
 
 const classes = useStyle<CardProps>(props, styles)
 
-const element = computed(() => props.isPressable ? 'button' : 'div')
+const element = computed(() => props.isPressable ? 'html:button' : 'div')
 
 const onClick = () => {
   if (!props.disabled && props.isPressable) emit('click')

@@ -16,7 +16,7 @@ describe('CardBody component', () => {
     })
 
     it('should render', () => {
-      expect(childWrapper.find('.vk-cardbody').exists()).toBe(true)
+      expect(childWrapper.find('.vk-card__body').exists()).toBe(true)
     })
   })
 })

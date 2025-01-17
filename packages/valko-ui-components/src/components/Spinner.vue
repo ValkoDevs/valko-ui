@@ -20,7 +20,7 @@ const classes = useStyle<SpinnerProps, SlotStyles>(props, styles)
   <div :class="classes.container">
     <vk-icon
       :name="name"
-      :class="classes.icon"
+      :class="[classes.icon, className]"
     />
   </div>
 </template>

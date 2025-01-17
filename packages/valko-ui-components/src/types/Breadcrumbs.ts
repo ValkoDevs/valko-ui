@@ -6,6 +6,7 @@ export interface Crumb {
   leftIcon?: string;
   rightIcon?: string;
   disabled?: boolean;
+  active?: boolean;
   onClick?: () => void;
 }
 
@@ -14,4 +15,5 @@ export interface BreadcrumbsProps extends Shapes, Sizes, Colors {
   crumbs: Crumb[];
   separator?: string;
   flat?: boolean;
+  condensed?: boolean;
 }

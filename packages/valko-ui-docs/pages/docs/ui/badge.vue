@@ -111,7 +111,7 @@ const generateSnippet = snippetGeneratorFactory('vk-badge')
 
 const customSlot = '<vk-avatar\n      :src="src"\n      color="neutral"\n    />'
 const extraProps = {
-  content: 'new',
+  content: 'content="new"',
   dot: 'dot'
 }
 </script>
