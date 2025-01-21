@@ -9,11 +9,10 @@ defineOptions({ name: 'VkBadge' })
 const props = withDefaults(defineProps<BadgeProps>(), {
   content: '',
   color: 'primary',
+  variant: 'filled',
   size: 'md',
   shape: 'soft',
   placement: 'top-right',
-  gradient: false,
-  outlined: false,
   dot: false,
   hidden: false,
   flat: false
@@ -24,7 +23,7 @@ const classes = useStyle<BadgeProps, SlotStyles>(props, styles)
 
 <template>
   <div :class="classes.container">
-    <span :class="classes.content">{{ !dot ? content : '' }}</span>
+    <span :class="classes.badge">{{ !dot ? content : '' }}</span>
     <slot />
   </div>
 </template>

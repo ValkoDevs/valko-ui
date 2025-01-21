@@ -4,7 +4,9 @@ export default tv({
   slots: {
     container: [
       'vk-tooltip',
-      'relative'
+      'relative',
+      'w-fit',
+      'h-fit'
     ],
     tip: [
       'vk-tooltip_tip',

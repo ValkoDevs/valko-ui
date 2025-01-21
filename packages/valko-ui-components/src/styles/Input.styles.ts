@@ -7,7 +7,7 @@ export default tv({
       'w-full',
       'flex',
       'flex-col',
-      'justify-items-start'
+      'gap-1'
     ],
     input: [
       'vk-input__input',
@@ -56,15 +56,8 @@ export default tv({
     ],
     helper: [
       'vk-input__helper',
-      'w-full',
-      'mt-1',
-      'origin-top-left',
-      'transition-all',
-      'duration-200',
-      'break-words',
-      'break-before-all',
-      'inline-block',
-      'scale-[.8]'
+      'break-normal',
+      'text-gray-500'
     ],
     icon: [
       'cursor-pointer',
@@ -143,10 +136,6 @@ export default tv({
           'peer-focus:text-primary-500',
           'dark:text-light-2'
         ],
-        helper: [
-          'text-dark-1',
-          'dark:text-light-3'
-        ],
         icon: [
           'text-dark-2',
           'peer-focus:text-primary-500',
@@ -159,12 +148,6 @@ export default tv({
       },
       neutral: {
         label: [
-          'text-dark-1',
-          'peer-focus:text-dark-3',
-          'dark:text-light-3',
-          'dark:peer-focus:text-light-1'
-        ],
-        helper: [
           'text-dark-1',
           'peer-focus:text-dark-3',
           'dark:text-light-3',
@@ -293,7 +276,7 @@ export default tv({
           'peer-data-[leftIcon=true]:left-6'
         ],
         helper: [
-          'text-sm'
+          'text-xs'
         ],
         icon: [
           'text-[20px]'
@@ -311,7 +294,7 @@ export default tv({
           'peer-data-[leftIcon=true]:left-7'
         ],
         helper: [
-          'text-base'
+          'text-sm'
         ],
         icon: [
           'text-[24px]'
@@ -329,7 +312,7 @@ export default tv({
           'peer-data-[leftIcon=true]:left-8'
         ],
         helper: [
-          'text-lg'
+          'text-base'
         ],
         icon: [
           'text-[28px]'

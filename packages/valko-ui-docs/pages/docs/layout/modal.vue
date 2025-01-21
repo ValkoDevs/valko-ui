@@ -140,9 +140,9 @@ const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
   }).replace(/<vk-modal/g, `${triggerSnippet}`)
 }`
 
-const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>('closable',
+const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
   {
-    values: [true],
+    values: ['false'],
     hasSlot: true, extraProps
   }).replace(/<vk-modal/g, `${triggerSnippet}`)
 }`
@@ -172,7 +172,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>('closable',
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
 
           <vk-button
-            color="primary"
+            color="success"
             size="sm"
             class="self-end"
             @click="() => {form.isOpen = false}"
@@ -219,7 +219,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>('closable',
     <template #examples>
       <example-section
         title="Shapes"
-        classes="grid-cols-2 md:grid-cols-3"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -248,7 +248,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>('closable',
 
       <example-section
         title="Sizes"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(6,_minmax(0,_max-content))]"
       >
         <div
           v-for="size in sizeOptions.withFull"
@@ -277,7 +277,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>('closable',
 
       <example-section
         title="Backdrops"
-        classes="grid-cols-2 md:grid-cols-3"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
       >
         <div
           v-for="backdrop in backdropOptions"
@@ -311,6 +311,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>('closable',
         <vk-modal
           :is-open="modalStates['flat']"
           title="Flat"
+          flat
           @close="toggleModal('flat')"
         >
           <template #default>
@@ -331,7 +332,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>('closable',
         <vk-modal
           :is-open="modalStates['closable']"
           title="Closable"
-          closable
+          :closable="false"
           @close="toggleModal('closable')"
         >
           <template #default>
@@ -339,7 +340,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>('closable',
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
 
             <vk-button
-              color="primary"
+              color="success"
               size="sm"
               class="self-end"
               @click="toggleModal('closable')"

@@ -542,6 +542,9 @@ const generateSnippet = snippetGeneratorFactory('vk-data-table')
         @on-limit-change="dataTable.onLimitChange"
         @on-select="dataTable.onSelect"
         @on-select-all="dataTable.onSelectAll"
+        @on-drag-start="dataTable.onDragStart"
+        @on-drag-over="dataTable.onDragOver"
+        @on-drop="dataTable.onDrop"
       />
     </template>
 

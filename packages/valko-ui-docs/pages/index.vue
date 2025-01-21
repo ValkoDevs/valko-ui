@@ -1,3 +1,26 @@
+<script setup lang="ts">
+import type { MenuItem } from '@valko-ui/components'
+
+const router = useRouter()
+
+const menuItems: MenuItem[] = [
+  { key: '/', group: 'General', text: 'Home' },
+  { key: '/docs', group: 'General', text: 'Documentation' },
+  { key: '/templates', group: 'General', text: 'Templates' }
+]
+
+const activeItem = ref<MenuItem['key'] | null>('/')
+const menuOpen = ref(false)
+
+const onItemClick = (item: MenuItem) => {
+  activeItem.value = item.key
+  router.push(`${item.key}`)
+  menuOpen.value = false
+}
+
+const toggleMenu = () => menuOpen.value = !menuOpen.value
+</script>
+
 <template>
   <vk-navbar
     color="neutral"
@@ -8,13 +31,68 @@
     fixed
     class="flex justify-between !bg-light-2 dark:!bg-dark-3"
   >
+    <vk-button
+      variant="link"
+      shape="rounded"
+      color="neutral"
+      condensed
+      size="lg"
+      class="size-10 lg:hidden"
+      @click="toggleMenu"
+    >
+      <vk-icon
+        name="paw"
+        class="text-2xl"
+      />
+    </vk-button>
     <h2 class="text-primary-500 dark:text-primary-400 text-3xl font-serif tracking-wider">
       <nuxt-link to="/">
         ValkoUI
       </nuxt-link>
     </h2>
 
-    <site-links />
+    <site-links class="hidden lg:flex" />
+
+    <vk-drawer
+      :is-open="menuOpen"
+      shape="soft"
+      placement="left"
+      class="w-4/5"
+      @close="toggleMenu"
+    >
+      <vk-menu
+        :items="menuItems"
+        :active="activeItem"
+        color="primary"
+        size="md"
+        variant="ghost"
+        shape="soft"
+        floating
+        @item-click="onItemClick"
+      />
+
+      <div class="flex gap-2 px-4">
+        <theme-switch />
+        <a
+          href="https://github.com/ValkoDevs/valko-ui"
+          target="_blank"
+        >
+          <vk-button
+            variant="link"
+            shape="rounded"
+            color="neutral"
+            condensed
+            size="lg"
+            class="size-10"
+          >
+            <vk-icon
+              name="brand-github"
+              class="text-2xl"
+            />
+          </vk-button>
+        </a>
+      </div>
+    </vk-drawer>
   </vk-navbar>
 
   <div class="flex flex-col items-center justify-center p-6 h-[80vh]">

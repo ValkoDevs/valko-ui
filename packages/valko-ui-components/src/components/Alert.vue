@@ -27,13 +27,13 @@ const onClick = () => emit('close')
 
 const defaultIcon = computed(() => {
   switch (props.color) {
-    case 'primary': return 'bulb-filled'
-    case 'neutral': return 'bug-filled'
+    case 'primary': return 'alert-hexagon-filled'
+    case 'neutral': return 'alert-hexagon-filled'
     case 'success': return 'circle-check-filled'
     case 'info': return 'info-circle-filled'
     case 'warning': return 'alert-circle-filled'
     case 'error': return 'circle-x-filled'
-    default: return 'bulb-filled'
+    default: return 'alert-hexagon-filled'
   }
 })
 </script>
@@ -43,36 +43,37 @@ const defaultIcon = computed(() => {
     <vk-icon
       v-if="icon !== null"
       :name="icon ? icon : defaultIcon"
-      :class="classes.leftIcon"
+      :class="classes.mainIcon"
     />
-    <div :class="classes.content">
+
+    <div :class="classes.contentContainer">
       <h6
         :class="classes.title"
         v-if="title"
       >
         {{ title }}
       </h6>
-      <span :class="classes.span">
+
+      <p :class="classes.p">
         <slot />
-      </span>
+      </p>
     </div>
-    <div
-      :class="classes.button"
+
+    <vk-button
       v-if="closable"
+      variant="link"
+      color="neutral"
+      size="xs"
+      shape="rounded"
+      class="size-4"
+      flat
+      condensed
+      @click="onClick"
     >
-      <vk-button
-        variant="link"
-        color="neutral"
-        size="xs"
-        shape="rounded"
-        flat
-        @click="onClick"
-      >
-        <vk-icon
-          name="x"
-          :class="classes.rightIcon"
-        />
-      </vk-button>
-    </div>
+      <vk-icon
+        name="x"
+        :class="classes.closeIcon"
+      />
+    </vk-button>
   </div>
 </template>

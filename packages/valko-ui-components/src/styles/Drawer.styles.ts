@@ -33,25 +33,37 @@ export default tv({
       'vk-drawer__panel',
       'w-full',
       'h-full',
-      'p-6',
+      'p-2',
       'bg-white',
       'shadow-lg',
       'text-left',
-      'overflow-hidden',
       'overflow-y-auto',
       'absolute',
-      'flex',
-      'flex-col',
-      'justify-start',
-      'align-middle',
-      'gap-4',
+      'grid',
+      'data-[title=true]:grid-rows-[auto_1fr]',
+      'data-[title=false]:grid-cols-[1fr_auto]',
+      'gap-2',
+      'group',
       'dark:bg-dark-3'
     ],
     panelChild: [
       'flex',
       'w-full',
-      'justify-between',
-      'items-center'
+      'group-data-[title=true]:justify-between',
+      'group-data-[title=true]:items-center',
+      'group-data-[title=true]:row-start-1',
+      'group-data-[title=true]:col-span-1',
+      'group-data-[title=false]:items-start',
+      'group-data-[title=false]:col-start-2',
+      'group-data-[title=false]:row-span-1'
+    ],
+    slotContent:[
+      'w-full',
+      'group-data-[title=true]:row-start-2',
+      'group-data-[title=false]:row-start-1',
+      'group-data-[title=true]:col-span-1',
+      'group-data-[title=false]:col-start-1',
+      'group-data-[title=false]:col-span-1'
     ],
     title: [
       'vk-drawer__title',
@@ -213,43 +225,6 @@ export default tv({
         panel: [
           'max-w-[18rem]',
           'md:max-w-2xl'
-        ]
-      }
-    },
-    // shape soft & placement
-    {
-      placement: 'right',
-      shape: 'soft',
-      class: {
-        panel: [
-          'rounded-l-lg'
-        ]
-      }
-    },
-    {
-      placement: 'left',
-      shape: 'soft',
-      class: {
-        panel: [
-          'rounded-r-lg'
-        ]
-      }
-    },
-    {
-      placement: 'top',
-      shape: 'soft',
-      class: {
-        panel: [
-          'rounded-b-lg'
-        ]
-      }
-    },
-    {
-      placement: 'bottom',
-      shape: 'soft',
-      class: {
-        panel: [
-          'rounded-t-lg'
         ]
       }
     },

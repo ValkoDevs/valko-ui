@@ -176,7 +176,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(6,_minmax(0,_max-content))]"
       >
         <vk-button
           v-for="color in colorOptions"
@@ -193,7 +193,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(5,_minmax(0,_max-content))]"
       >
         <vk-button
           v-for="variant in variantOptions.withGradientAndLink"
@@ -210,7 +210,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+        classes="sm:grid-cols-[repeat(2,_minmax(0,_max-content))] lg:grid-cols-[repeat(3,_minmax(0,_max-content))]"
       >
         <vk-button
           v-for="shape in shapeOptions.general"
@@ -227,7 +227,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        classes="sm:grid-cols-[repeat(2,_minmax(0,_max-content))] lg:grid-cols-[repeat(4,_minmax(0,_max-content))]"
       >
         <vk-button
           v-for="size in sizeOptions.general"

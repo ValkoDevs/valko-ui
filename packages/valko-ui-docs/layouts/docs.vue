@@ -3,60 +3,66 @@ import type { MenuItem } from '@valko-ui/components'
 
 const router = useRouter()
 
-const menuItems: MenuItem[] = [
-  { key: 'get-started', group: 'General', text: 'Get Started' },
-  { key: 'layout/divider', group: 'Layout', text: 'Divider' },
-  { key: 'layout/drawer', group: 'Layout', text: 'Drawer' },
-  { key: 'layout/modal', group: 'Layout', text: 'Modal' },
-  { key: 'forms/button', group: 'Forms', text: 'Button' },
-  { key: 'forms/checkbox', group: 'Forms', text: 'Checkbox' },
-  { key: 'forms/datepicker', group: 'Forms', text: 'Datepicker' },
-  { key: 'forms/input', group: 'Forms',  text: 'Input' },
-  { key: 'forms/radio', group: 'Forms', text: 'Radio' },
-  { key: 'forms/range', group: 'Forms', text: 'Range' },
-  { key: 'forms/select', group: 'Forms', text: 'Select' },
-  { key: 'forms/switch', group: 'Forms', text: 'Switch' },
-  { key: 'forms/textarea', group: 'Forms', text: 'Textarea' },
-  { key: 'forms/timepicker', group: 'Forms', text: 'Timepicker' },
-  { key: 'ui/alert', group: 'Ui', text: 'Alert' },
-  { key: 'ui/avatar', group: 'Ui', text: 'Avatar' },
-  { key: 'ui/badge', group: 'Ui', text: 'Badge' },
-  { key: 'ui/breadcrumbs', group: 'Ui', text: 'Breadcrumbs' },
-  { key: 'ui/calendar', group: 'Ui', text: 'Calendar' },
-  { key: 'ui/card', group: 'Ui', text: 'Card' },
-  { key: 'ui/menu', group: 'Ui', text: 'Menu' },
-  { key: 'ui/navbar', group: 'Ui', text: 'Navbar' },
-  { key: 'ui/notification', group: 'Ui', text: 'Notification' },
-  { key: 'ui/popover', group: 'Ui', text: 'Popover' },
-  { key: 'ui/progressbar', group: 'Ui', text: 'Progressbar' },
-  { key: 'ui/spinner', group: 'Ui', text: 'Spinner' },
-  { key: 'ui/tag', group: 'Ui', text: 'Tag' },
-  { key: 'ui/time', group: 'Ui', text: 'Time' },
-  { key: 'ui/tooltip', group: 'Ui', text: 'Tooltip' },
-  { key: 'data/collapse', group: 'Data', text: 'Collapse' },
-  { key: 'data/datatable', group: 'Data', text: 'DataTable' },
-  { key: 'data/dropdown', group: 'Data', text: 'Dropdown' },
-  { key: 'data/pagination', group: 'Data', text: 'Pagination' },
-  { key: 'data/table', group: 'Data', text: 'Table' },
-  { key: 'data/tabs', group: 'Data', text: 'Tabs' }
+const baseMenuItems: MenuItem[] = [
+  { key: '/docs/get-started', group: 'General', text: 'Get Started' },
+  { key: '/docs/layout/divider', group: 'Layout', text: 'Divider' },
+  { key: '/docs/layout/drawer', group: 'Layout', text: 'Drawer' },
+  { key: '/docs/layout/modal', group: 'Layout', text: 'Modal' },
+  { key: '/docs/forms/button', group: 'Forms', text: 'Button' },
+  { key: '/docs/forms/checkbox', group: 'Forms', text: 'Checkbox' },
+  { key: '/docs/forms/datepicker', group: 'Forms', text: 'Datepicker' },
+  { key: '/docs/forms/input', group: 'Forms',  text: 'Input' },
+  { key: '/docs/forms/radio', group: 'Forms', text: 'Radio' },
+  { key: '/docs/forms/range', group: 'Forms', text: 'Range' },
+  { key: '/docs/forms/select', group: 'Forms', text: 'Select' },
+  { key: '/docs/forms/switch', group: 'Forms', text: 'Switch' },
+  { key: '/docs/forms/textarea', group: 'Forms', text: 'Textarea' },
+  { key: '/docs/forms/timepicker', group: 'Forms', text: 'Timepicker' },
+  { key: '/docs/ui/alert', group: 'Ui', text: 'Alert' },
+  { key: '/docs/ui/avatar', group: 'Ui', text: 'Avatar' },
+  { key: '/docs/ui/badge', group: 'Ui', text: 'Badge' },
+  { key: '/docs/ui/breadcrumbs', group: 'Ui', text: 'Breadcrumbs' },
+  { key: '/docs/ui/calendar', group: 'Ui', text: 'Calendar' },
+  { key: '/docs/ui/card', group: 'Ui', text: 'Card' },
+  { key: '/docs/ui/menu', group: 'Ui', text: 'Menu' },
+  { key: '/docs/ui/navbar', group: 'Ui', text: 'Navbar' },
+  { key: '/docs/ui/notification', group: 'Ui', text: 'Notification' },
+  { key: '/docs/ui/popover', group: 'Ui', text: 'Popover' },
+  { key: '/docs/ui/progressbar', group: 'Ui', text: 'Progressbar' },
+  { key: '/docs/ui/spinner', group: 'Ui', text: 'Spinner' },
+  { key: '/docs/ui/tag', group: 'Ui', text: 'Tag' },
+  { key: '/docs/ui/time', group: 'Ui', text: 'Time' },
+  { key: '/docs/ui/tooltip', group: 'Ui', text: 'Tooltip' },
+  { key: '/docs/data/collapse', group: 'Data', text: 'Collapse' },
+  { key: '/docs/data/datatable', group: 'Data', text: 'DataTable' },
+  { key: '/docs/data/dropdown', group: 'Data', text: 'Dropdown' },
+  { key: '/docs/data/pagination', group: 'Data', text: 'Pagination' },
+  { key: '/docs/data/table', group: 'Data', text: 'Table' },
+  { key: '/docs/data/tabs', group: 'Data', text: 'Tabs' }
 ]
+
+const extraMenuItems: MenuItem[] = [
+  { key: '/', group: 'General', text: 'Home' },
+  { key: '/templates', group: 'General', text: 'Templates' }
+]
+
+const menuItems = computed(() => menuOpen.value ? [...extraMenuItems, ...baseMenuItems] : baseMenuItems)
 
 const activeItem = ref<MenuItem['key'] | null>(null)
 const menuOpen = ref(false)
 
 const onItemClick = (item: MenuItem) => {
   activeItem.value = item.key
-  router.push(`/docs/${item.key}`)
+  router.push(`${item.key}`)
   menuOpen.value = false
 }
 
 const toggleMenu = () => menuOpen.value = !menuOpen.value
 
 onMounted(() => {
-  const activeItemKey = router.currentRoute.value.path.replace('/docs/', '')
-  if (activeItemKey === '') {
-    activeItem.value = 'get-started'
-  } else activeItem.value = activeItemKey
+  const routePath = router.currentRoute.value.path
+  if (routePath === '/docs') activeItem.value = '/docs/get-started'
+  else activeItem.value = routePath
 })
 </script>
 
@@ -90,7 +96,7 @@ onMounted(() => {
           ValkoUI
         </nuxt-link>
       </h2>
-      <site-links />
+      <site-links class="hidden lg:flex" />
     </vk-navbar>
 
     <div class="w-full flex">
@@ -98,9 +104,31 @@ onMounted(() => {
         :is-open="menuOpen"
         shape="soft"
         placement="left"
-        class="w-4/5"
+        class="w-[10vw]"
         @close="toggleMenu"
       >
+        <div class="flex gap-2 px-4">
+          <theme-switch />
+          <a
+            href="https://github.com/ValkoDevs/valko-ui"
+            target="_blank"
+          >
+            <vk-button
+              variant="link"
+              shape="rounded"
+              color="neutral"
+              condensed
+              size="lg"
+              class="size-10"
+            >
+              <vk-icon
+                name="brand-github"
+                class="text-2xl"
+              />
+            </vk-button>
+          </a>
+        </div>
+
         <vk-menu
           :items="menuItems"
           :active="activeItem"

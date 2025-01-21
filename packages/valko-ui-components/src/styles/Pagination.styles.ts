@@ -10,7 +10,6 @@ export default tv({
       'shadow-sm',
       'w-fit',
       'flex',
-      'flex-wrap',
       'shadow-light-4',
       'dark:shadow-dark-5'
     ],

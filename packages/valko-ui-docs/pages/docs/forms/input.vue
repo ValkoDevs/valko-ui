@@ -26,6 +26,10 @@ const iconsInForm = ref({
   right: false
 })
 
+const inputStates = reactive<Record<string, string>>({
+  readonly: 'Example readonly.'
+})
+
 const apiData: TableItem[] = [
   {
     key: 'colorProp',
@@ -404,6 +408,7 @@ const iconSnippet = `
 
       <example-section title="Readonly">
         <vk-input
+          v-model="inputStates['readonly']"
           readonly
           label="Readonly"
         />

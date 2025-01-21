@@ -7,16 +7,10 @@ const form = ref<Partial<DatepickerProps>>({
   shape: 'soft',
   size: 'md',
   format: 'YYYY-MM-DD',
-  modelValue: 1728076036007,
-  disabledDates: [
-    1705320000000,
-    1710936000000,
-    1717545600000,
-    1723420800000,
-    1736953200000,
-    1900249200000,
-    2215004400000
-  ],
+  modelValue: 0,
+  disabledDates: undefined,
+  minDate: undefined,
+  maxDate: undefined,
   disableWeekends: false,
   locale: 'en-US',
   label: 'Date',
@@ -425,15 +419,20 @@ const dayOfWeekProp: TableItem[] = [
   }
 ]
 
+const [ minModel, minParsedModel, minAdapter ] = useDateAdapter({ minDate: 1736953200000 })
+const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 1736953200000 })
+const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({ disabledDates: [
+  1705320000000,
+  1710936000000,
+  1717545600000,
+  1723420800000,
+  1736953200000,
+  1900249200000,
+  2215004400000
+] })
 const [ model, parsedModel, adapter ] = useDateAdapter(form)
 
-const datePickerStates = reactive({
-  colors: Array(colorOptions.length).fill(false),
-  variants: Array(variantOptions.general.length).fill(false),
-  shapes: Array(shapeOptions.general.length).fill(false),
-  sizes: Array(sizeOptions.general.length).fill(false),
-  disableWeekends: false
-})
+const datePickerStates = reactive<Record<string, boolean>>({})
 
 const generateSnippet = snippetGeneratorFactory('vk-datepicker')
 
@@ -441,11 +440,80 @@ const scriptCode = `
 <script setup lang="ts">
 import { useDateAdapter } from '#valkoui'
 
+const datePickerStates = reactive<Record<string, boolean>>({})
+
 const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM-DD' })
 <\u002Fscript>
 `
 
-const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapter"'
+const extraProps = `v-model="model"
+:parsed-model="parsedModel"
+:adapter="adapter"
+:is-open="datePickerStates['datepickerId']"
+@open="() => datePickerStates['datepickerId'] = true"
+@close="() => datePickerStates['datepickerId'] = false"
+`
+
+const minmaxSnippet = `<script setup lang="ts">
+import { useDateAdapter } from '#valkoui'
+
+const datePickerStates = reactive<Record<string, boolean>>({})
+
+const [ minModel, minParsedModel, minAdapter ] = useDateAdapter({ minDate: 1736953200000 })
+const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 1736953200000 })
+<\u002Fscript>
+
+<template>
+  <vk-datepicker
+    v-model="minModel"
+    label="Min Date"
+    :adapter="minAdapter"
+    :parsed-model="minParsedModel"
+    :is-open="datePickerStates['minDate']"
+    @open="() => datePickerStates['minDate'] = true"
+    @close="() => datePickerStates['minDate'] = false"
+  />
+
+  <vk-datepicker
+    v-model="maxModel"
+    label="Max Date"
+    :adapter="maxAdapter"
+    :parsed-model="maxParsedModel"
+    :is-open="datePickerStates['maxDate']"
+    @open="() => datePickerStates['maxDate'] = true"
+    @close="() => datePickerStates['maxDate'] = false"
+  />
+</template>
+`
+
+const disabledSnippet = `<script setup lang="ts">
+import { useDateAdapter } from '#valkoui'
+
+const isOpen = ref(false)
+
+const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({ disabledDates: [
+  1705320000000,
+  1710936000000,
+  1717545600000,
+  1723420800000,
+  1736953200000,
+  1900249200000,
+  2215004400000
+] })
+<\u002Fscript>
+
+<template>
+  <vk-datepicker
+    v-model="disabledModel"
+    label="Disabled Dates"
+    :adapter="disabledAdapter"
+    :parsed-model="disabledParsedModel"
+    :is-open="isOpen"
+    @open="() => isOpen = true"
+    @close="() => isOpen = false"
+  />
+</template>
+`
 </script>
 
 <template>
@@ -464,8 +532,6 @@ const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapte
         :size="form.size"
         :shape="form.shape"
         :format="form.format"
-        :max-date="form.maxDate"
-        :min-date="form.minDate"
         :disable-weekends="form.disableWeekends"
         :is-open="form.isOpen!"
         @open="() => form.isOpen = true"
@@ -512,6 +578,18 @@ const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapte
         size="sm"
         :options="sizeOptions.general"
       />
+      <vk-input
+        v-model="form.minDate"
+        type="number"
+        size="sm"
+        label="Min Date"
+      />
+      <vk-input
+        v-model="form.maxDate"
+        type="number"
+        size="sm"
+        label="Max Date"
+      />
       <vk-checkbox
         v-model="form.disableWeekends"
         label="Disable Weekends"
@@ -524,7 +602,7 @@ const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapte
         classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <vk-datepicker
-          v-for="(color, index) in colorOptions"
+          v-for="color in colorOptions"
           :key="color.value"
           v-model="model"
           :label="color.label"
@@ -532,9 +610,9 @@ const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapte
           :adapter="adapter"
           :color="color.value"
           :parsed-model="parsedModel"
-          :is-open="datePickerStates['colors'][index]"
-          @open="() => datePickerStates['colors'][index] = true"
-          @close="() => datePickerStates['colors'][index] = false"
+          :is-open="datePickerStates[color.value]"
+          @open="() => datePickerStates[color.value] = true"
+          @close="() => datePickerStates[color.value] = false"
         />
 
         <template #code>
@@ -547,7 +625,7 @@ const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapte
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-datepicker
-          v-for="(variant, index) in variantOptions.general"
+          v-for="variant in variantOptions.general"
           :key="variant.value"
           v-model="model"
           :label="variant.label"
@@ -555,9 +633,9 @@ const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapte
           :adapter="adapter"
           :variant="variant.value"
           :parsed-model="parsedModel"
-          :is-open="datePickerStates['variants'][index]"
-          @open="() => datePickerStates['variants'][index] = true"
-          @close="() => datePickerStates['variants'][index] = false"
+          :is-open="datePickerStates[variant.value]"
+          @open="() => datePickerStates[variant.value] = true"
+          @close="() => datePickerStates[variant.value] = false"
         />
 
         <template #code>
@@ -570,7 +648,7 @@ const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapte
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-datepicker
-          v-for="(shape, index) in shapeOptions.general"
+          v-for="shape in shapeOptions.general"
           :key="shape.value"
           v-model="model"
           :label="shape.label"
@@ -578,9 +656,9 @@ const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapte
           :adapter="adapter"
           :shape="shape.value"
           :parsed-model="parsedModel"
-          :is-open="datePickerStates['shapes'][index]"
-          @open="() => datePickerStates['shapes'][index] = true"
-          @close="() => datePickerStates['shapes'][index] = false"
+          :is-open="datePickerStates[shape.value]"
+          @open="() => datePickerStates[shape.value] = true"
+          @close="() => datePickerStates[shape.value] = false"
         />
 
         <template #code>
@@ -593,7 +671,7 @@ const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapte
         classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         <vk-datepicker
-          v-for="(size, index) in sizeOptions.general"
+          v-for="size in sizeOptions.general"
           :key="size.value"
           v-model="model"
           :label="size.label"
@@ -601,13 +679,39 @@ const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapte
           :adapter="adapter"
           :size="size.value"
           :parsed-model="parsedModel"
-          :is-open="datePickerStates['sizes'][index]"
-          @open="() => datePickerStates['sizes'][index] = true"
-          @close="() => datePickerStates['sizes'][index] = false"
+          :is-open="datePickerStates[size.value]"
+          @open="() => datePickerStates[size.value] = true"
+          @close="() => datePickerStates[size.value] = false"
         />
 
         <template #code>
           <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps})}`" />
+        </template>
+      </example-section>
+
+      <example-section title="MinMax Dates">
+        <vk-datepicker
+          v-model="minModel"
+          label="Min Date"
+          :adapter="minAdapter"
+          :parsed-model="minParsedModel"
+          :is-open="datePickerStates['minDate']"
+          @open="() => datePickerStates['minDate'] = true"
+          @close="() => datePickerStates['minDate'] = false"
+        />
+
+        <vk-datepicker
+          v-model="maxModel"
+          label="Max Date"
+          :adapter="maxAdapter"
+          :parsed-model="maxParsedModel"
+          :is-open="datePickerStates['maxDate']"
+          @open="() => datePickerStates['maxDate'] = true"
+          @close="() => datePickerStates['maxDate'] = false"
+        />
+
+        <template #code>
+          <code-block :code="minmaxSnippet" />
         </template>
       </example-section>
 
@@ -618,13 +722,45 @@ const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapte
           :adapter="adapter"
           :parsed-model="parsedModel"
           disable-weekends
-          :is-open="datePickerStates['disableWeekends']"
-          @open="() => datePickerStates['disableWeekends'] = true"
-          @close="() => datePickerStates['disableWeekends'] = false"
+          :is-open="datePickerStates['disable-weekends']"
+          @open="() => datePickerStates['disable-weekends'] = true"
+          @close="() => datePickerStates['disable-weekends'] = false"
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('disable-weends', { values: [true], extraProps})}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('disable-weekends', { values: [true], extraProps})}`" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Disabled Dates"
+        classes="md:grid-cols-2"
+      >
+        <vk-datepicker
+          v-model="disabledModel"
+          label="Disabled Dates"
+          :adapter="disabledAdapter"
+          :parsed-model="disabledParsedModel"
+          :is-open="datePickerStates['disabled']"
+          @open="() => datePickerStates['disabled'] = true"
+          @close="() => datePickerStates['disabled'] = false"
+        />
+
+        <div class="flex flex-col">
+          <strong class="break-words">The following dates are disabled in this example:</strong>
+          <ul class="list-disc list-inside mb-4">
+            <li>2024-01-15</li>
+            <li>2024-03-20</li>
+            <li>2024-06-05</li>
+            <li>2024-08-12</li>
+            <li>2025-01-15</li>
+            <li>2030-03-20</li>
+            <li>2040-03-10</li>
+          </ul>
+        </div>
+
+        <template #code>
+          <code-block :code="disabledSnippet" />
         </template>
       </example-section>
     </template>

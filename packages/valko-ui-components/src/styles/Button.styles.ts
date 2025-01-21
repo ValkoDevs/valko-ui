@@ -28,6 +28,18 @@ export default tv({
       'transition-all',
       'linear',
       'duration-150'
+    ],
+    loader: [
+      'data-[variant=filled]:data-[color=neutral]:text-white',
+      'data-[variant=gradient]:data-[color=neutral]:text-white',
+      'data-[variant=ghost]:data-[color=neutral]:text-black',
+      'data-[variant=outlined]:data-[color=neutral]:text-black',
+      'data-[variant=link]:data-[color=neutral]:text-black',
+      'dark:data-[variant=filled]:data-[color=neutral]:text-black',
+      'dark:data-[variant=gradient]:data-[color=neutral]:text-black',
+      'dark:data-[variant=ghost]:data-[color=neutral]:text-white',
+      'dark:data-[variant=outlined]:data-[color=neutral]:text-white',
+      'dark:data-[variant=link]:data-[color=neutral]:text-white'
     ]
   },
   variants: {
@@ -102,6 +114,11 @@ export default tv({
       true: {
         button: [
           'w-full'
+        ]
+      },
+      false: {
+        button: [
+          'w-fit'
         ]
       }
     },
@@ -535,6 +552,7 @@ export default tv({
     {
       variant: 'gradient',
       color: 'primary',
+      disabled: false,
       class: {
         button: [
           'from-primary-500',
@@ -549,6 +567,7 @@ export default tv({
     {
       variant: 'gradient',
       color: 'neutral',
+      disabled: false,
       class: {
         button: [
           'from-dark-1',
@@ -571,6 +590,7 @@ export default tv({
     {
       variant: 'gradient',
       color: 'success',
+      disabled: false,
       class: {
         button: [
           'from-success-500',
@@ -585,6 +605,7 @@ export default tv({
     {
       variant: 'gradient',
       color: 'info',
+      disabled: false,
       class: {
         button: [
           'from-info-500',
@@ -599,6 +620,7 @@ export default tv({
     {
       variant: 'gradient',
       color: 'warning',
+      disabled: false,
       class: {
         button: [
           'from-warning-500',
@@ -613,6 +635,7 @@ export default tv({
     {
       variant: 'gradient',
       color: 'error',
+      disabled: false,
       class: {
         button: [
           'from-error-500',
@@ -635,18 +658,17 @@ export default tv({
       }
     },
     {
-      variant: 'ghost',
+      variant: 'gradient',
       disabled: true,
       class: {
         button: [
-          'text-gray-600',
-          'hover:bg-transparent',
-          'active:bg-transparent'
+          'from-gray-600',
+          'to-gray-900'
         ]
       }
     },
     {
-      variant: 'outlined',
+      variant: ['ghost', 'outlined'],
       disabled: true,
       class: {
         button: [

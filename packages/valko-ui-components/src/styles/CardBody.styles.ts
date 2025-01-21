@@ -9,7 +9,7 @@ export default tv({
     'text-left',
     'z-30',
     'grow',
-    'order-3',
-    'group-data-[layout=horizontal]:[grid-column:_2]'
+    'group-data-[card-image=true]:order-3',
+    'group-data-[card-image=false]:order-2'
   ]
 }) as unknown as ReturnType<TV>

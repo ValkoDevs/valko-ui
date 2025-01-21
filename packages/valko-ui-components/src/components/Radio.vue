@@ -26,9 +26,9 @@ const onClick = () => {
 </script>
 
 <template>
-  <div>
+  <div :class="classes.container">
     <div
-      :class="classes.container"
+      :class="classes.radioContainer"
       @click="onClick"
     >
       <div

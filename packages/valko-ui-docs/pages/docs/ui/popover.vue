@@ -155,7 +155,7 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
     <template #examples>
       <example-section
         title="Shapes"
-        classes="grid-cols-2 md:grid-cols-3"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
       >
         <vk-popover
           v-for="shape in shapeOptions.general"
@@ -177,7 +177,7 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
 
       <example-section
         title="Placement"
-        classes="grid-cols-2 md:grid-cols-4"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
       >
         <vk-popover
           v-for="placement in placementOptions"
