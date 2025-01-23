@@ -10,6 +10,7 @@ export default tv({
       'gap-1'
     ],
     radioContainer: [
+      'vk-radio__radio-container',
       'w-fit',
       'flex',
       'justify-center',
@@ -34,6 +35,7 @@ export default tv({
       'hidden'
     ],
     helpertext: [
+      'vk-radio__helpertext',
       'break-normal',
       'text-gray-500'
     ],

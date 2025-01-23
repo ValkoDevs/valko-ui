@@ -18,7 +18,7 @@ describe('Avatar component', () => {
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-sm')
+        expect(wrapper.find('.vk-badge__badge').classes()).toContain('text-sm')
       })
 
       it('should be shape soft', () => {
@@ -34,7 +34,7 @@ describe('Avatar component', () => {
       })
 
       it('should not be dot', () => {
-        expect(wrapper.find('.vk-badge__content').classes()).not.toContain('size-4')
+        expect(wrapper.find('.vk-badge__badge').classes()).not.toContain('size-4')
       })
     })
 
@@ -140,7 +140,7 @@ describe('Avatar component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-[0.6321875rem]')
+        expect(wrapper.find('.vk-badge__badge').classes()).toContain('text-[0.6321875rem]')
       })
 
       it('should be sm when props.size is sm', () => {
@@ -150,7 +150,7 @@ describe('Avatar component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-[0.74375rem]')
+        expect(wrapper.find('.vk-badge__badge').classes()).toContain('text-[0.74375rem]')
       })
 
       it('should be md when props.size is md', () => {
@@ -160,7 +160,7 @@ describe('Avatar component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-sm')
+        expect(wrapper.find('.vk-badge__badge').classes()).toContain('text-sm')
       })
 
       it('should be lg when props.size is lg', () => {
@@ -170,7 +170,7 @@ describe('Avatar component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-badge__content').classes()).toContain('text-[1.00625rem]')
+        expect(wrapper.find('.vk-badge__badge').classes()).toContain('text-[1.00625rem]')
       })
     })
 
@@ -182,19 +182,49 @@ describe('Avatar component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-badge__content').classes()).toContain('size-4')
+        expect(wrapper.find('.vk-badge__badge').classes()).toContain('size-4')
       })
     })
 
-    describe('When prop gradient changes', () => {
-      it('should be gradient when is true', () => {
+    describe('When variant prop changes', () => {
+      it('should be filled when props.variant is filled', () => {
         wrapper = mount(VkBadge, {
           props: {
-            gradient: true
+            variant: 'filled'
           }
         })
 
-        expect(wrapper.find('.vk-badge__content').classes()).toContain('bg-gradient-to-br')
+        expect(wrapper.find('.vk-badge__badge').classes()).toContain('bg-primary-500')
+      })
+
+      it('should be outlined when props.variant is outlined', () => {
+        wrapper = mount(VkBadge, {
+          props: {
+            variant: 'outlined'
+          }
+        })
+
+        expect(wrapper.find('.vk-badge__badge').classes()).toContain('border-2')
+      })
+
+      it('should be ghost when props.variant is ghost', () => {
+        wrapper = mount(VkBadge, {
+          props: {
+            variant: 'ghost'
+          }
+        })
+
+        expect(wrapper.find('.vk-badge__badge').classes()).toContain('bg-primary-500/[.7]')
+      })
+
+      it('should be gradient when props.variant is gradient', () => {
+        wrapper = mount(VkBadge, {
+          props: {
+            variant: 'gradient'
+          }
+        })
+
+        expect(wrapper.find('.vk-badge__badge').classes()).toContain('bg-gradient-to-br')
       })
     })
   })

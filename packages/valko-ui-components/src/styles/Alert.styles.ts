@@ -22,6 +22,7 @@ export default tv({
       'font-bold'
     ],
     p: [
+      'vk-alert__p',
       'font-medium',
       'break-normal'
     ],

@@ -3,7 +3,7 @@ import { tv, type TV } from 'tailwind-variants'
 export default tv({
   slots: {
     container: [
-      'vk-checkbox__container',
+      'vk-checkbox',
       'w-fit',
       'flex',
       'flex-col',
@@ -23,6 +23,7 @@ export default tv({
       'dark:shadow-dark-5'
     ],
     checkboxContainer: [
+      'vk-checkbox__container',
       'w-fit',
       'flex',
       'justify-center',
@@ -34,6 +35,7 @@ export default tv({
       'hidden'
     ],
     helpertext: [
+      'vk-checkbox__helpertext',
       'break-normal',
       'text-gray-500'
     ],

@@ -27,7 +27,7 @@ describe('Breadcrumbs component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('text-primary-500')
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-primary-600')
       })
 
       it('should be size md', () => {
@@ -56,7 +56,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.text-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-primary-600')
       })
 
       it('should be color neutral when props.color is neutral', () => {
@@ -67,7 +67,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.text-dark-1').exists()).toBe(true)
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-dark-5')
       })
 
       it('should be color success when props.color is success', () => {
@@ -78,7 +78,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.text-success-500').exists()).toBe(true)
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-success-600')
       })
 
       it('should be color info when props.color is info', () => {
@@ -89,7 +89,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.text-info-500').exists()).toBe(true)
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-info-600')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -100,7 +100,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.text-warning-500').exists()).toBe(true)
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-warning-600')
       })
 
       it('should be color error when props.color is error', () => {
@@ -111,7 +111,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.text-error-500').exists()).toBe(true)
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-error-600')
       })
     })
 
