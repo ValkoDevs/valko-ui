@@ -19,70 +19,70 @@ const filters = reactive({
 const products = [
   {
     name: 'Wireless Headphones',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '99.99',
     description: 'High-quality wireless headphones with noise cancellation.',
     features: ['Bluetooth 5.0', '20 hours battery life', 'Built-in microphone']
   },
   {
     name: 'Smartwatch',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '199.99',
     description: 'Stay connected and track your fitness with this sleek smartwatch.',
     features: ['Heart rate monitor', 'GPS tracking', 'Water-resistant']
   },
   {
     name: 'Gaming Laptop',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '1499.99',
     description: 'High-performance gaming laptop with the latest GPU and CPU.',
     features: ['16GB RAM', '512GB SSD', 'RTX 3080 graphics']
   },
   {
     name: 'Portable Speaker',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '59.99',
     description: 'Compact and powerful portable speaker for outdoor use.',
     features: ['Water-resistant', '10 hours battery life', 'Bluetooth connectivity']
   },
   {
     name: '4K TV',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '799.99',
     description: 'Ultra-high-definition 4K TV with smart features and voice control.',
     features: ['HDR support', 'Voice assistant', 'Wi-Fi enabled']
   },
   {
     name: 'Smartphone',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '899.99',
     description: 'Latest smartphone with a high-resolution camera and fast processor.',
     features: ['108MP camera', '5G connectivity', '6.5-inch OLED display']
   },
   {
     name: 'Electric Toothbrush',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '49.99',
     description: 'Advanced electric toothbrush with 3 modes and long battery life.',
     features: ['3 brushing modes', 'Waterproof', '2-week battery life']
   },
   {
     name: 'VR Headset',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '299.99',
     description: 'Immerse yourself in virtual reality with this high-quality headset.',
     features: ['1080p resolution', 'Comfortable fit', 'Wide field of view']
   },
   {
     name: 'Bluetooth Earbuds',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '59.99',
     description: 'Compact and comfortable wireless earbuds for everyday use.',
     features: ['Noise-cancellation', '4 hours battery life', 'Sweat-resistant']
   },
   {
     name: 'Action Camera',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '129.99',
     description: 'Capture your adventures with this waterproof action camera.',
     features: ['4K video recording', 'Waterproof up to 10m', 'Wide-angle lens']
@@ -92,12 +92,12 @@ const products = [
 const exploreCategories = [
   {
     title: 'Explore Gaming Accessories',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     buttonText: 'View Gaming Accessories'
   },
   {
     title: 'Discover Home Appliances',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     buttonText: 'Explore Appliances'
   }
 ]
@@ -143,70 +143,70 @@ const filters = reactive({
 const products = [
   {
     name: 'Wireless Headphones',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '99.99',
     description: 'High-quality wireless headphones with noise cancellation.',
     features: ['Bluetooth 5.0', '20 hours battery life', 'Built-in microphone']
   },
   {
     name: 'Smartwatch',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '199.99',
     description: 'Stay connected and track your fitness with this sleek smartwatch.',
     features: ['Heart rate monitor', 'GPS tracking', 'Water-resistant']
   },
   {
     name: 'Gaming Laptop',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '1499.99',
     description: 'High-performance gaming laptop with the latest GPU and CPU.',
     features: ['16GB RAM', '512GB SSD', 'RTX 3080 graphics']
   },
   {
     name: 'Portable Speaker',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '59.99',
     description: 'Compact and powerful portable speaker for outdoor use.',
     features: ['Water-resistant', '10 hours battery life', 'Bluetooth connectivity']
   },
   {
     name: '4K TV',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '799.99',
     description: 'Ultra-high-definition 4K TV with smart features and voice control.',
     features: ['HDR support', 'Voice assistant', 'Wi-Fi enabled']
   },
   {
     name: 'Smartphone',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '899.99',
     description: 'Latest smartphone with a high-resolution camera and fast processor.',
     features: ['108MP camera', '5G connectivity', '6.5-inch OLED display']
   },
   {
     name: 'Electric Toothbrush',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '49.99',
     description: 'Advanced electric toothbrush with 3 modes and long battery life.',
     features: ['3 brushing modes', 'Waterproof', '2-week battery life']
   },
   {
     name: 'VR Headset',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '299.99',
     description: 'Immerse yourself in virtual reality with this high-quality headset.',
     features: ['1080p resolution', 'Comfortable fit', 'Wide field of view']
   },
   {
     name: 'Bluetooth Earbuds',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '59.99',
     description: 'Compact and comfortable wireless earbuds for everyday use.',
     features: ['Noise-cancellation', '4 hours battery life', 'Sweat-resistant']
   },
   {
     name: 'Action Camera',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     price: '129.99',
     description: 'Capture your adventures with this waterproof action camera.',
     features: ['4K video recording', 'Waterproof up to 10m', 'Wide-angle lens']
@@ -216,12 +216,12 @@ const products = [
 const exploreCategories = [
   {
     title: 'Explore Gaming Accessories',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     buttonText: 'View Gaming Accessories'
   },
   {
     title: 'Discover Home Appliances',
-    image: '/assets/product.jpg',
+    image: '/assets/product.webp',
     buttonText: 'Explore Appliances'
   }
 ]

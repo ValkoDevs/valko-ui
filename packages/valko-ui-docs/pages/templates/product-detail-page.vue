@@ -8,7 +8,7 @@ const productHeaders: TableHeader[] = [
 
 const product = reactive({
   name: 'Smartwatch',
-  img: '/assets/product.jpg',
+  img: '/assets/product.webp',
   prices: {
     regular: 120.00,
     sale: 99.99
@@ -30,9 +30,9 @@ Crafted for those who demand both style and functionality, the SmartSync 360 off
     total: 123
   },
   relatedProducts: [
-    { name: 'Gaming Headset', price: '49.99', image: '/assets/product.jpg' },
-    { name: 'Portable Speaker', price: '59.99', image: '/assets/product.jpg' },
-    { name: 'Noise Cancelling Earbuds', price: '79.99', image: '/assets/product.jpg' }
+    { name: 'Gaming Headset', price: '49.99', image: '/assets/product.webp' },
+    { name: 'Portable Speaker', price: '59.99', image: '/assets/product.webp' },
+    { name: 'Noise Cancelling Earbuds', price: '79.99', image: '/assets/product.webp' }
   ]
 })
 
@@ -46,7 +46,7 @@ const productHeaders: TableHeader[] = [
 
 const product = reactive({
   name: 'Wireless Headphones',
-  img: '/assets/product.jpg',
+  img: '/assets/product.webp',
   price: '99.99',
   description: 'High-quality wireless headphones with noise cancellation.',
   manufacturer: 'AudioTech',
@@ -63,9 +63,9 @@ const product = reactive({
     total: 123
   },
   relatedProducts: [
-    { name: 'Gaming Headset', price: '49.99', image: '/assets/product.jpg' },
-    { name: 'Portable Speaker', price: '59.99', image: '/assets/product.jpg' },
-    { name: 'Noise Cancelling Earbuds', price: '79.99', image: '/assets/product.jpg' }
+    { name: 'Gaming Headset', price: '49.99', image: '/assets/product.webp' },
+    { name: 'Portable Speaker', price: '59.99', image: '/assets/product.webp' },
+    { name: 'Noise Cancelling Earbuds', price: '79.99', image: '/assets/product.webp' }
   ]
 })
 <\u002Fscript>
