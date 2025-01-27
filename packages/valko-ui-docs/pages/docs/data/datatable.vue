@@ -417,6 +417,14 @@ const dataTable = useClientSideDataTable({
   draggable: draggableRef
 })
 
+const exampleTables = useClientSideDataTable({
+  headers: propHeaders,
+  data: tableHeaderInterface,
+  selectionMode: 'none',
+  pageSizeOptions: [10],
+  draggable: false
+})
+
 watch(() => draggableRef, (newValue) => {
   draggableRef.value = newValue.value
 })
@@ -517,7 +525,17 @@ const dataTable = useClientSideDataTable({
 <\u002Fscript>
 `
 
-const extraProps = 'v-bind="dataTable" @on-sort="dataTable.onSort" @on-filter="dataTable.onFilter" @on-page-change="dataTable.onPageChange" @on-limit-change="dataTable.onLimitChange" @on-select="dataTable.onSelect" @on-select-all="dataTable.onSelectAll"'
+const extraProps = `v-bind="dataTable"
+@on-sort="dataTable.onSort"
+@on-filter="dataTable.onFilter"
+@on-page-change="dataTable.onPageChange"
+@on-limit-change="dataTable.onLimitChange"
+@on-select="dataTable.onSelect"
+@on-select-all="dataTable.onSelectAll"
+@on-drag-start="dataTable.onDragStart"
+@on-drag-over="dataTable.onDragOver"
+@on-drop="dataTable.onDrop"
+`
 
 const generateSnippet = snippetGeneratorFactory('vk-data-table')
 </script>
@@ -602,12 +620,14 @@ const generateSnippet = snippetGeneratorFactory('vk-data-table')
         >
           <span>{{ color.label }}</span>
           <vk-data-table
-
             :color="color.value"
-            :headers="propHeaders"
-            :data="tableHeaderInterface"
+            v-bind="exampleTables"
             label="Page Size"
             class="mt-4"
+            @on-sort="exampleTables.onSort"
+            @on-filter="exampleTables.onFilter"
+            @on-page-change="exampleTables.onPageChange"
+            @on-limit-change="exampleTables.onLimitChange"
           />
         </div>
 
@@ -627,10 +647,13 @@ const generateSnippet = snippetGeneratorFactory('vk-data-table')
           </span>
           <vk-data-table
             :variant="variant.value"
-            :headers="propHeaders"
-            :data="tableHeaderInterface"
+            v-bind="exampleTables"
             label="Page Size"
             class="mt-4"
+            @on-sort="exampleTables.onSort"
+            @on-filter="exampleTables.onFilter"
+            @on-page-change="exampleTables.onPageChange"
+            @on-limit-change="exampleTables.onLimitChange"
           />
         </div>
 
@@ -650,10 +673,13 @@ const generateSnippet = snippetGeneratorFactory('vk-data-table')
           </span>
           <vk-data-table
             :shape="shape.value"
-            :headers="propHeaders"
-            :data="tableHeaderInterface"
+            v-bind="exampleTables"
             label="Page Size"
             class="mt-4"
+            @on-sort="exampleTables.onSort"
+            @on-filter="exampleTables.onFilter"
+            @on-page-change="exampleTables.onPageChange"
+            @on-limit-change="exampleTables.onLimitChange"
           />
         </div>
 
@@ -673,10 +699,13 @@ const generateSnippet = snippetGeneratorFactory('vk-data-table')
           </span>
           <vk-data-table
             :size="size.value"
-            :headers="propHeaders"
-            :data="tableHeaderInterface"
+            v-bind="exampleTables"
             label="Page Size"
             class="mt-4"
+            @on-sort="exampleTables.onSort"
+            @on-filter="exampleTables.onFilter"
+            @on-page-change="exampleTables.onPageChange"
+            @on-limit-change="exampleTables.onLimitChange"
           />
         </div>
 
@@ -688,10 +717,13 @@ const generateSnippet = snippetGeneratorFactory('vk-data-table')
       <example-section title="Striped">
         <vk-data-table
           striped
-          :headers="propHeaders"
-          :data="tableHeaderInterface"
+          v-bind="exampleTables"
           label="Page Size"
           class="mt-4"
+          @on-sort="exampleTables.onSort"
+          @on-filter="exampleTables.onFilter"
+          @on-page-change="exampleTables.onPageChange"
+          @on-limit-change="exampleTables.onLimitChange"
         />
 
         <template #code>

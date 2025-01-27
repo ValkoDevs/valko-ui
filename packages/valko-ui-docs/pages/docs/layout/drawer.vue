@@ -155,9 +155,9 @@ const backdropSnippet = `${scriptCode}\n${generateSnippet<string>('backdrop',
   }).replace(/<vk-drawer/g, `${triggerSnippet}`)
 }`
 
-const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>('closable',
+const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
   {
-    values: [true],
+    values: [false],
     hasSlot: true, extraProps
   }).replace(/<vk-drawer/g, `${triggerSnippet}`)
 }`
@@ -367,12 +367,20 @@ const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
         <vk-drawer
           :is-open="drawerStates['closable']"
           title="Closable"
-          closable
+          :closable="false"
           @close="toggleDrawer('closable')"
         >
           <template #default>
             Closable Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+
+            <vk-button
+              class="self-end mt-auto"
+              color="error"
+              @click="toggleDrawer('closable')"
+            >
+              Close Drawer
+            </vk-button>
           </template>
         </vk-drawer>
 
