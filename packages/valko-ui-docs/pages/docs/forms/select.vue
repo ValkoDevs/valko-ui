@@ -15,6 +15,7 @@ const form = ref<SelectProps>({
   size: 'md',
   helpertext: 'Helpertext',
   label: 'Label',
+  placeholder: 'Select an option',
   modelValue: '',
   disabled: false,
   readonly: false,
@@ -106,6 +107,14 @@ const apiData: TableItem[] = [
     default: 'false'
   },
   {
+    key: 'placeholderProp',
+    prop: 'placeholder',
+    required: false,
+    description: 'The placeholder for the Select',
+    values: 'string',
+    default: 'false'
+  },
+  {
     key: 'helpertextProp',
     prop: 'helpertext',
     required: false,
@@ -184,6 +193,7 @@ const people: SelectOption[] = [
       <vk-select
         v-model="form.modelValue"
         :label="form.label"
+        :placeholder="form.placeholder"
         :helpertext="form.helpertext"
         :options="people"
         :color="form.color"
@@ -201,6 +211,11 @@ const people: SelectOption[] = [
       <vk-input
         v-model="form.label"
         label="Label"
+        size="sm"
+      />
+      <vk-input
+        v-model="form.placeholder"
+        label="Placeholder"
         size="sm"
       />
       <vk-input

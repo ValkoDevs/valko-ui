@@ -8,6 +8,7 @@ const form = ref<TextareaProps>({
   size: 'md',
   modelValue: '',
   label: 'Label',
+  placeholder: 'Write a message!',
   helpertext: 'Helpertext',
   disabled: false,
   readonly: false,
@@ -174,6 +175,7 @@ const iconSnippet = `<template>
         :color="form.color"
         :shape="form.shape"
         :label="form.label"
+        :placeholder="form.placeholder"
         :maxlength="form.maxlength"
         :helpertext="form.helpertext"
         @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'neutral' })"
@@ -198,6 +200,11 @@ const iconSnippet = `<template>
       <vk-input
         v-model="form.label"
         label="Label"
+        size="sm"
+      />
+      <vk-input
+        v-model="form.placeholder"
+        label="Placeholder"
         size="sm"
       />
       <vk-input

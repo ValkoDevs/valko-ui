@@ -16,6 +16,7 @@ const form = ref<InputProps>({
   shape: 'soft',
   modelValue: '',
   label: 'Label',
+  placeholder: 'Placeholder',
   helpertext: 'Helpertext',
   disabled: false,
   readonly: false,
@@ -137,6 +138,14 @@ const apiData: TableItem[] = [
     default: 'false'
   },
   {
+    key: 'placeholderProp',
+    prop: 'placeholder',
+    required: false,
+    description: 'The placeholder for the Input',
+    values: 'string',
+    default: 'false'
+  },
+  {
     key: 'helpertextProp',
     prop: 'helpertext',
     required: false,
@@ -241,6 +250,7 @@ const iconSnippet = `<template>
         :shape="form.shape"
         :type="form.type"
         :label="form.label"
+        :placeholder="form.placeholder"
         :helpertext="form.helpertext"
         :min="form.min"
         :max="form.max"
@@ -268,6 +278,11 @@ const iconSnippet = `<template>
       <vk-input
         v-model="form.label"
         label="Label"
+        size="sm"
+      />
+      <vk-input
+        v-model="form.placeholder"
+        label="Placeholder"
         size="sm"
       />
       <vk-input
