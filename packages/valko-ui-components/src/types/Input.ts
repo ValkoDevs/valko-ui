@@ -9,6 +9,7 @@ export interface InputProps extends DefaultComponent {
   modelValue?: string | number;
   helpertext?: string;
   label?: string;
+  placeholder?: string;
   disabled?: boolean;
   loading?: boolean;
   readonly?: boolean;

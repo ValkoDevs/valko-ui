@@ -12,34 +12,37 @@ export default tv({
     textarea: [
       'vk-textarea__textarea',
       'w-full',
-      'px-2',
+      'min-h-[128px]',
+      'h-[128px]',
       'align-middle',
       'outline-none',
       'peer',
       'transition-colors',
       'duration-200',
       'ease-in-out',
+      'placeholder:invisible',
+      'focus:placeholder:visible',
       'focus:ring-0',
-      'min-h-[128px]',
-      'h-[128px]'
+      'data-[left-icon=false]:px-2',
+      'data-[left-icon=true]:pr-2'
     ],
     label: [
       'opacity-80',
+      'px-1',
       'text-left',
       'font-bold',
       'truncate',
       'cursor-text',
-      'px-1',
       'ml-[1px]',
       'absolute',
       'top-1',
       'left-1',
+      'origin-[center_left]',
       'transition-all',
       'duration-200',
-      'origin-[center_left]',
+      'peer-focus:top-0',
       'peer-focus:scale-[.8]',
       'peer-data-[filled=true]:scale-[.8]',
-      'peer-focus:top-0',
       'peer-data-[filled=true]:top-0',
       'peer-data-[filled=true]:translate-y-0'
 
@@ -66,6 +69,19 @@ export default tv({
       'w-full',
       'flex',
       'justify-between'
+    ],
+    leftIcon: [
+      'left-1'
+    ],
+    rightIcon: [
+      'right-1'
+    ],
+    icons: [
+      'cursor-pointer',
+      'absolute',
+      'transition-all',
+      'top-1',
+      'text-2xl'
     ]
   },
   variants: {
@@ -115,6 +131,9 @@ export default tv({
         counter: [
           'text-dark-1',
           'dark:text-light-3'
+        ],
+        icons: [
+          'peer-focus:text-primary-500'
         ]
       },
       neutral: {
@@ -135,6 +154,10 @@ export default tv({
           'peer-focus:text-dark-3',
           'dark:text-light-3',
           'dark:peer-focus:text-light-1'
+        ],
+        icons: [
+          'peer-focus:text-dark-3',
+          'dark:peer-focus:text-light-1'
         ]
       },
       success: {
@@ -149,6 +172,11 @@ export default tv({
         ],
         counter: [
           'text-success-500',
+          'dark:text-success-500'
+        ],
+        icons: [
+          'text-success-500',
+          'focus:text-success-950',
           'dark:text-success-500'
         ]
       },
@@ -165,6 +193,11 @@ export default tv({
         counter: [
           'text-info-500',
           'dark:text-info-500'
+        ],
+        icons: [
+          'text-info-500',
+          'focus:text-info-950',
+          'dark:text-info-500'
         ]
       },
       warning: {
@@ -179,6 +212,11 @@ export default tv({
         ],
         counter: [
           'text-warning-500',
+          'dark:text-warning-500'
+        ],
+        icons: [
+          'text-warning-500',
+          'focus:text-warning-950',
           'dark:text-warning-500'
         ]
       },
@@ -195,6 +233,11 @@ export default tv({
         counter: [
           'text-error-500',
           'dark:text-error-500'
+        ],
+        icons: [
+          'text-error-500',
+          'focus:text-error-950',
+          'dark:text-error-500'
         ]
       }
     },
@@ -202,61 +245,81 @@ export default tv({
       xs: {
         textarea: [
           'text-xs',
-          'pt-3'
+          'pt-3',
+          'data-[left-icon=true]:pl-6'
         ],
         label: [
-          'text-xs'
+          'text-xs',
+          'peer-data-[left-icon=true]:ml-4'
         ],
         helper: [
           'text-xs'
         ],
         counter: [
           'text-xs'
+        ],
+        icons: [
+          'text-[16px]'
         ]
       },
       sm: {
         textarea: [
           'text-sm',
-          'pt-4'
+          'pt-4',
+          'data-[left-icon=true]:pl-7'
         ],
         label: [
-          'text-sm'
+          'text-sm',
+          'peer-data-[left-icon=true]:ml-5'
         ],
         helper: [
           'text-sm'
         ],
         counter: [
           'text-sm'
+        ],
+        icons: [
+          'text-[20px]'
         ]
       },
       md: {
         textarea: [
           'text-base',
-          'pt-5'
+          'pt-5',
+          'data-[left-icon=true]:pl-8'
         ],
         label: [
-          'text-base'
+          'text-base',
+          'peer-data-[left-icon=true]:ml-6'
         ],
         helper: [
           'text-base'
         ],
         counter: [
           'text-base'
+        ],
+        icons: [
+          'text-[24px]'
         ]
       },
       lg: {
         textarea: [
           'text-lg',
-          'pt-6'
+          'pt-6',
+          'data-[left-icon=true]:pl-9'
         ],
         label: [
-          'text-lg'
+          'text-lg',
+          'peer-data-[left-icon=true]:ml-7'
         ],
         helper: [
           'text-lg'
         ],
         counter: [
           'text-lg'
+        ],
+        icons: [
+          'text-[28px]'
         ]
       }
     },

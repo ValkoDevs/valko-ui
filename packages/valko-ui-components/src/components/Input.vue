@@ -50,8 +50,10 @@ const clearInput = () => {
 }
 
 const handleIconClick = (icon: 'left' | 'right') => {
-  emit(`${icon}IconClick`)
-  inputRef.value?.focus()
+  if (!props.disabled && !props.readonly) {
+    emit(`${icon}IconClick`)
+    inputRef.value?.focus()
+  }
 }
 
 watch(() => props.modelValue, (newValue) => {
@@ -65,13 +67,13 @@ watch(() => props.modelValue, (newValue) => {
     <div :class="classes.field">
       <input
         ref="inputRef"
-        :data-leftIcon="!!$slots.leftIcon"
-        :data-rightIcon="!!$slots.rightIcon"
+        :data-left-icon="!!$slots['left-icon']"
+        :data-right-icon="!!$slots['right-icon']"
         :class="classes.input"
         :readonly="readonly"
         :disabled="disabled"
         :type="type"
-        placeholder=" "
+        :placeholder="placeholder"
         :value="inputValue"
         :data-filled="isFilled"
         :id="inputId"
@@ -87,28 +89,28 @@ watch(() => props.modelValue, (newValue) => {
       <vk-icon
         v-if="clearable && !!inputValue"
         name="circle-x"
-        :data-rightIcon="!!$slots.rightIcon"
-        :class="classes.iconClear"
+        :data-right-icon="!!$slots['right-icon']"
+        :class="classes.clearIcon"
         @click="clearInput"
       />
       <span
-        v-if="$slots.leftIcon"
-        :class="[classes.icon, classes.iconLeft]"
+        v-if="$slots['left-icon']"
+        :class="[classes.icons, classes.leftIcon]"
         @click="handleIconClick('left')"
       >
-        <slot name="leftIcon" />
+        <slot name="left-icon" />
       </span>
       <span
-        v-if="$slots.rightIcon"
-        :class="[classes.icon, classes.iconRight]"
+        v-if="$slots['right-icon']"
+        :class="[classes.icons, classes.rightIcon]"
         @click="handleIconClick('right')"
       >
-        <slot name="rightIcon" />
+        <slot name="right-icon" />
       </span>
     </div>
     <span
-      :class="classes.helper"
       v-if="helpertext"
+      :class="classes.helper"
     >
       {{ helpertext }}
     </span>
