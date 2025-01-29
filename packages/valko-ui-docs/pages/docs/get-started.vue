@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const selectedTab = ref(0)
+
 const tabs = [
   { key: 'npm', title: 'npm' },
   { key: 'yarn', title: 'yarn' },
@@ -111,6 +113,7 @@ const counter = ref(0)
           2. Install TailwindCSS
         </h3>
         <vk-tabs
+          v-model="selectedTab"
           :tabs="tabs"
           shape="line"
           variant="ghost"
@@ -142,6 +145,7 @@ const counter = ref(0)
           3. Install Tailwind Variants
         </h3>
         <vk-tabs
+          v-model="selectedTab"
           :tabs="tabs"
           shape="line"
           variant="ghost"

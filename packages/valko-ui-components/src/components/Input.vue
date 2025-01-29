@@ -27,6 +27,7 @@ const inputId = useId()
 const isFilled = ref(false)
 const inputValue = ref(props.modelValue || '')
 const inputRef = ref<HTMLInputElement | null>(null)
+let intervalId: ReturnType<typeof setInterval> | null = null
 
 const updateValue = (e: Event) => {
   const value = (e.target as HTMLInputElement).value
@@ -53,6 +54,29 @@ const handleIconClick = (icon: 'left' | 'right') => {
   if (!props.disabled && !props.readonly) {
     emit(`${icon}IconClick`)
     inputRef.value?.focus()
+  }
+}
+
+const changeValue = (action: 'increment' | 'decrement') => {
+  if (!props.disabled && !props.readonly) {
+    let newValue = parseFloat(inputValue.value.toString() || '0')
+
+    if (action === 'increment') newValue += 1
+    else newValue -= 1
+
+    if (isNaN(newValue)) newValue = 0
+
+    inputValue.value = newValue.toString()
+    emit('update:modelValue', newValue.toString())
+  }
+}
+
+const startHolding = (action: 'increment' | 'decrement') => intervalId = setInterval(() => changeValue(action), 75)
+
+const stopHolding = () => {
+  if (intervalId) {
+    clearInterval(intervalId)
+    intervalId = null
   }
 }
 
@@ -86,6 +110,25 @@ watch(() => props.modelValue, (newValue) => {
       >
         {{ label }}
       </label>
+      <span
+        v-if="type === 'number'"
+        :class="classes.numberArrows"
+      >
+        <vk-icon
+          name="chevron-up"
+          :class="classes.chevrons"
+          @mousedown="startHolding('increment')"
+          @mouseup="stopHolding"
+          @mouseleave="stopHolding"
+        />
+        <vk-icon
+          name="chevron-down"
+          :class="classes.chevrons"
+          @mousedown="startHolding('decrement')"
+          @mouseup="stopHolding"
+          @mouseleave="stopHolding"
+        />
+      </span>
       <vk-icon
         v-if="clearable && !!inputValue"
         name="circle-x"

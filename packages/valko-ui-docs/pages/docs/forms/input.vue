@@ -4,7 +4,8 @@ import { useNotification, type SelectOption, type InputProps, type TableItem, ty
 const typeOptions: SelectOption<InputType>[] = [
   { value:'text', label:'Text' },
   { value:'email', label:'Email' },
-  { value:'password', label:'Password' }
+  { value:'password', label:'Password' },
+  { value:'number', label:'Number' }
 ]
 
 const form = ref<InputProps>({
@@ -53,7 +54,7 @@ const apiData: TableItem[] = [
     prop: 'type',
     required: false,
     description: 'The type of the Input.',
-    values: 'text, email, password',
+    values: 'text, email, password, number',
     default: 'text'
   },
   {
@@ -381,7 +382,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Types"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        classes="md:grid-cols-2 lg:grid-cols-4"
       >
         <vk-input
           v-for="type in typeOptions"

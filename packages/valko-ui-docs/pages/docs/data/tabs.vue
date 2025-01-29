@@ -70,6 +70,14 @@ const tabsProps: TableItem[] = [
     default: 'md'
   },
   {
+    key: 'modelValueProp',
+    prop: 'modelValue',
+    required: false,
+    description: 'Represents the controlled value for the selected tab index. If provided, the component becomes a controlled component and uses this value to manage the selected tab externally. A numeric value indicating the active tab index is expected. If not provided, the component will manage the selected tab index internally.',
+    values: 'number',
+    default: 'undefined'
+  },
+  {
     key: 'growProp',
     prop: 'grow',
     required: false,
@@ -152,6 +160,23 @@ const tabsSlots: TableItem[] = [
     name: '[key: Tab["key"]]',
     description: 'Slot for content associated with a specific tab. Each tab in the `VkTabs` component should have a corresponding slot with a unique name matching the `key` prop of the tab.',
     example: '<template #tab1>\n  <!-- Content for tab 1 -->\n</template>\n<template #tab2>\n  <!-- Content for tab 2 -->\n</template>\n<!-- Add more templates for additional tabs as needed -->'
+  }
+]
+
+const tabsEmits: TableItem[] = [
+  {
+    key: 'tabClickEmit',
+    event: 'tabClick',
+    description: 'Emitted when a tab is clicked. This event notifies the parent component about the tab change.',
+    values: 'number',
+    type: '(index: number) => void'
+  },
+  {
+    key: 'updateModelValueEmit',
+    event: 'update:modelValue',
+    description: 'Emitted when the selected tab index changes. This event allows the parent to control the selected tab index.',
+    values: 'number',
+    type: '(value: number) => void'
   }
 ]
 
@@ -387,6 +412,12 @@ const extraProps = ':tabs="tabs"'
       <vk-table
         :headers="slotHeaders"
         :data="tabsSlots"
+      />
+
+      <h3>Tabs Emits</h3>
+      <vk-table
+        :headers="emitHeaders"
+        :data="tabsEmits"
       />
 
       <h3>Tab Interface</h3>

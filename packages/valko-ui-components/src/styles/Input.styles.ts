@@ -89,7 +89,18 @@ export default tv({
       'scale-90',
       'right-1',
       'dark:text-light-5'
-    ]
+    ],
+    numberArrows: [
+      'flex',
+      'flex-col',
+      'gap-1',
+      'absolute',
+      'right-2',
+      'top-1/2',
+      '-translate-y-1/2',
+      'cursor-pointer'
+    ],
+    chevrons: []
   },
   variants: {
     variant: {
@@ -146,6 +157,9 @@ export default tv({
         clearIcon: [
           'hover:text-primary-500',
           'dark:hover:text-primary-500'
+        ],
+        chevrons: [
+          'hover:text-primary-500'
         ]
       },
       neutral: {
@@ -162,6 +176,10 @@ export default tv({
           'dark:peer-focus:text-light-1'
         ],
         clearIcon: [
+          'hover:text-dark-5',
+          'dark:hover:text-light-1'
+        ],
+        chevrons: [
           'hover:text-dark-5',
           'dark:hover:text-light-1'
         ]
@@ -184,6 +202,9 @@ export default tv({
         clearIcon: [
           'hover:text-success-500',
           'dark:hover:text-success-500'
+        ],
+        chevrons: [
+          'hover:text-success-500'
         ]
       },
       info: {
@@ -204,6 +225,9 @@ export default tv({
         clearIcon: [
           'hover:text-info-500',
           'dark:hover:text-info-500'
+        ],
+        chevrons: [
+          'hover:text-info-500'
         ]
       },
       warning: {
@@ -224,6 +248,9 @@ export default tv({
         clearIcon: [
           'hover:text-warning-500',
           'dark:hover:text-warning-500'
+        ],
+        chevrons: [
+          'hover:text-warning-500'
         ]
       },
       error: {
@@ -244,6 +271,9 @@ export default tv({
         clearIcon: [
           'hover:text-error-500',
           'dark:hover:text-error-500'
+        ],
+        chevrons: [
+          'hover:text-error-500'
         ]
       }
     },
@@ -264,6 +294,10 @@ export default tv({
         ],
         icons: [
           'text-[16px]'
+        ],
+        chevrons: [
+          'text-xs',
+          'leading-none'
         ]
       },
       sm: {
@@ -282,6 +316,10 @@ export default tv({
         ],
         icons: [
           'text-[20px]'
+        ],
+        chevrons: [
+          'text-sm',
+          'leading-none'
         ]
       },
       md: {
@@ -300,6 +338,10 @@ export default tv({
         ],
         icons: [
           'text-[24px]'
+        ],
+        chevrons: [
+          'text-base',
+          'leading-none'
         ]
       },
       lg: {
@@ -318,6 +360,10 @@ export default tv({
         ],
         icons: [
           'text-[28px]'
+        ],
+        chevrons: [
+          'text-lg',
+          'leading-none'
         ]
       }
     },
