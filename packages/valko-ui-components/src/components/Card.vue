@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useSlots } from 'vue'
 import type { CardProps } from '#valkoui/types/Card'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import styles from '#valkoui/styles/Card.styles.ts'
+import VkCardImage from './CardImage.vue'
 
 defineOptions({ name: 'VkCard' })
 
@@ -10,7 +11,9 @@ const props = withDefaults(defineProps<CardProps>(), {
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  layout: 'vertical'
+  layout: 'vertical',
+  isPressable: false,
+  flat: false
 })
 
 const emit = defineEmits(['click'])
@@ -29,6 +32,7 @@ const onClick = () => {
     :is="element"
     :class="classes"
     :data-layout="layout"
+    :data-card-image="useSlots().default?.({}).some((node) => node.type === VkCardImage)"
     @click="onClick"
   >
     <slot />

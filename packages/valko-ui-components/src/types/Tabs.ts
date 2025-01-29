@@ -14,6 +14,7 @@ export interface TabKeymap {
 
 export interface TabsProps extends Sizes, VariantsAlt, Colors {
   tabs: Tab[];
+  modelValue?: number;
   shape?: ShapeWithLine;
   defaultIndex?: number;
   grow?: boolean;

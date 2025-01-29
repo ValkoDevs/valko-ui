@@ -19,7 +19,7 @@ describe('Alert component', () => {
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('span.text-base').exists()).toBe(true)
+        expect(wrapper.find('.vk-alert__p').classes()).toContain('text-base')
       })
 
       it('should be variant filled', () => {
@@ -31,7 +31,7 @@ describe('Alert component', () => {
       })
 
       it('should have default icon', () => {
-        expect(wrapper.find('i.ti.ti-bulb-filled').exists()).toBe(true)
+        expect(wrapper.find('i.ti.ti-alert-hexagon-filled').exists()).toBe(true)
       })
 
       it('should not be flat', () => {
@@ -117,7 +117,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded-full').exists()).toBe(true)
+        expect(wrapper.find('.rounded-3xl').exists()).toBe(true)
       })
 
       it('should be soft when props.shape is soft', () => {
@@ -245,7 +245,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('i.ti.ti-bulb-filled').exists()).toBe(true)
+        expect(wrapper.find('i.ti.ti-alert-hexagon-filled').exists()).toBe(true)
       })
 
       it('should use default icon when icon is undefined', () => {
@@ -255,7 +255,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('i.ti.ti-bulb-filled').exists()).toBe(true)
+        expect(wrapper.find('i.ti.ti-alert-hexagon-filled').exists()).toBe(true)
       })
 
       it('should return default icon when color is unrecognized', () => {
@@ -266,7 +266,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('i.ti.ti-bulb-filled').exists()).toBe(true)
+        expect(wrapper.find('i.ti.ti-alert-hexagon-filled').exists()).toBe(true)
       })
 
       it('should show custom icon when props.icon is an icon name', () => {
@@ -318,7 +318,7 @@ describe('Alert component', () => {
       it('should be empty', () => {
         wrapper = mount(VkAlert, {})
 
-        expect(wrapper.find('span').text()).toBe('')
+        expect(wrapper.find('.vk-alert__p').text()).toBe('')
       })
     })
 
@@ -330,7 +330,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('span').text()).toContain('Hello World')
+        expect(wrapper.find('.vk-alert__p').text()).toBe('Hello World')
       })
     })
   })

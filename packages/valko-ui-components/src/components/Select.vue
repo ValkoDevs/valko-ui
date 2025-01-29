@@ -125,6 +125,7 @@ onUnmounted(() => {
         readonly
         :helpertext="helpertext"
         :label="label"
+        :placeholder="placeholder"
         :disabled="disabled"
         :variant="variant"
         :color="color"
@@ -136,7 +137,7 @@ onUnmounted(() => {
         @focus="() => toggleDropdown(true)"
         @clear="clearSelection"
       >
-        <template #rightIcon>
+        <template #right-icon>
           <vk-icon
             name="chevron-down"
             :data-open="isOpen"

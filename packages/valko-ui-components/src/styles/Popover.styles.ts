@@ -4,7 +4,9 @@ export default tv({
   slots: {
     popover: [
       'vk-popover',
-      'relative'
+      'relative',
+      'w-fit',
+      'h-fit'
     ],
     panel: [
       'vk-popover__panel',

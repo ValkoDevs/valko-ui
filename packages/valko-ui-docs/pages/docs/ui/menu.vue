@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { MenuItem, TableItem, MenuProps } from '#valkoui'
+import type { SelectOption, MenuItem, TableItem, MenuProps } from '#valkoui'
 
 const form = ref<Partial<MenuProps>>({
   color: 'primary',
@@ -152,7 +152,7 @@ const menuSlots: TableItem[] = [
   }
 ]
 
-const generateMenuItems = (items: { value: string; label: string }[], groupName: string) => {
+const generateMenuItems = (items: SelectOption[], groupName: string) => {
   return items.map(item => ({
     key: item.value,
     text: item.label,
@@ -188,53 +188,28 @@ const menuItems: MenuItem[] = [
 const extraProps = ':items="menuItems"'
 
 onMounted(() => {
-  colorOptions.forEach((_, index) => {
-    const firstItemKey = colorOptions[0].value
-    const menuKey = `color-menu-${index}`
-    activeItemsList.value[menuKey] = firstItemKey
-    const menuItem = menuItems.find(item => item.key === firstItemKey)
-    if (menuItem) {
-      menuItem.active = true
-    }
-  })
+  const setFirstItemActive = (options: SelectOption[], menuPrefix: string) => {
+    options.forEach((_, index) => {
+      const firstItemKey = options[0].value
+      const menuKey = `${menuPrefix}-${index}`
+      activeItemsList.value[menuKey] = firstItemKey
 
+      const menuItem = menuItems.find(item => item.key === firstItemKey)
+      if (menuItem) menuItem.active = true
+    })
+  }
 
-  variantOptions.withGradientLinkAndLine.forEach((_, index) => {
-    const firstItemKey = variantOptions.withGradientLinkAndLine[0].value
-    const menuKey = `variant-menu-${index}`
-    activeItemsList.value[menuKey] = firstItemKey
-    const menuItem = menuItems.find(item => item.key === firstItemKey)
-    if (menuItem) {
-      menuItem.active = true
-    }
-  })
-
-  shapeOptions.general.forEach((_, index) => {
-    const firstItemKey = shapeOptions.general[0].value
-    const menuKey = `shape-menu-${index}`
-    activeItemsList.value[menuKey] = firstItemKey
-    const menuItem = menuItems.find(item => item.key === firstItemKey)
-    if (menuItem) {
-      menuItem.active = true
-    }
-  })
-
-  sizeOptions.general.forEach((_, index) => {
-    const firstItemKey = sizeOptions.general[0].value
-    const menuKey = `size-menu-${index}`
-    activeItemsList.value[menuKey] = firstItemKey
-    const menuItem = menuItems.find(item => item.key === firstItemKey)
-    if (menuItem) {
-      menuItem.active = true
-    }
-  })
+  setFirstItemActive(colorOptions, 'color-menu')
+  setFirstItemActive(variantOptions.withGradientLinkAndLine, 'variant-menu')
+  setFirstItemActive(shapeOptions.general, 'shape-menu')
+  setFirstItemActive(sizeOptions.general, 'size-menu')
 
   const firstPlaygroundItemKey = menuItems[0].key
   activeItem.value = firstPlaygroundItemKey
+
   const firstPlaygroundItem = menuItems.find(item => item.key === firstPlaygroundItemKey)
-  if (firstPlaygroundItem) {
-    firstPlaygroundItem.active = true
-  }
+
+  if (firstPlaygroundItem) firstPlaygroundItem.active = true
 })
 </script>
 
@@ -368,7 +343,7 @@ onMounted(() => {
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('floating', { values: [true], extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('floating', { values: [true], extraProps })}`" />
         </template>
       </example-section>
     </template>

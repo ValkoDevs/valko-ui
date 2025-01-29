@@ -3,19 +3,18 @@ import { tv, type TV } from 'tailwind-variants'
 export default tv({
   slots: {
     container: [
-      'vk-checkbox__container',
-      'w-full',
+      'vk-checkbox',
+      'w-fit',
       'flex',
-      'justify-start',
-      'items-center',
-      'cursor-pointer'
+      'flex-col',
+      'gap-1'
     ],
     checkbox: [
       'vk-checkbox__checkbox',
-      'shadow-lg',
-      'shadow-light-4',
       'border-2',
       'border-light-5',
+      'shadow-lg',
+      'shadow-light-4',
       'relative',
       'flex',
       'items-center',
@@ -23,20 +22,26 @@ export default tv({
       'dark:border-dark-1',
       'dark:shadow-dark-5'
     ],
+    checkboxContainer: [
+      'vk-checkbox__container',
+      'w-fit',
+      'flex',
+      'justify-center',
+      'items-center',
+      'gap-1',
+      'cursor-pointer'
+    ],
     input: [
       'hidden'
     ],
     helpertext: [
-      'w-full',
-      'origin-top-left',
-      'transition-all',
-      'duration-200',
-      'break-words',
-      'break-before-all',
-      'inline-block',
-      'scale-[.8]'
+      'vk-checkbox__helpertext',
+      'break-normal',
+      'text-gray-500'
     ],
-    label: [],
+    label: [
+      'cursor-pointer'
+    ],
     icon: [
       'text-light-1'
     ]
@@ -70,7 +75,7 @@ export default tv({
           'text-sm'
         ],
         helpertext: [
-          'text-sm'
+          'text-xs'
         ]
       },
       md: {
@@ -85,7 +90,7 @@ export default tv({
           'text-base'
         ],
         helpertext: [
-          'text-base'
+          'text-sm'
         ]
       },
       lg: {
@@ -100,7 +105,7 @@ export default tv({
           'text-lg'
         ],
         helpertext: [
-          'text-lg'
+          'text-base'
         ]
       }
     },

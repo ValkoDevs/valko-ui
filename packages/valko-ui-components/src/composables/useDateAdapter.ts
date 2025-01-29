@@ -26,8 +26,8 @@ const useDateAdapter = (props: AdapterProps | Ref<AdapterProps>): AdapterResult 
 
     const selected = formatDate(model.value ? new Date(model.value) : new Date())
     const display = tempDate.value ? formatDate(toValue(tempDate) as Date) : selected
-    const min = minDate ? formatDate(new Date(minDate)) : undefined
-    const max = maxDate ? formatDate(new Date(maxDate)) : undefined
+    const min = minDate ? formatDate(new Date(+minDate)) : undefined
+    const max = maxDate ? formatDate(new Date(+maxDate)) : undefined
 
     return {
       selected,

@@ -6,7 +6,7 @@ const position: SelectOption<LabelPosition>[] = [
   { value: 'left', label:'Left' }
 ]
 
-const form = ref<CheckboxProps>({
+const form = reactive<CheckboxProps>({
   color: 'primary',
   variant: 'filled',
   size: 'md',
@@ -15,15 +15,15 @@ const form = ref<CheckboxProps>({
   labelPosition: 'right',
   flat: false,
   disabled: false,
-  readonly: false
+  readonly: false,
+  modelValue: false
 })
 
-const extendedForm = ref({
-  helpertext: '',
-  exampleChecked: true,
-  exampleIndeterminate: true,
-  indeterminate: false,
-  checked: false as boolean | null
+const indeterminateRef = ref(false)
+
+const checkboxStates = reactive<Record<string, boolean>>({
+  readonly: true,
+  disabled: true
 })
 
 const apiData: TableItem[] = [
@@ -137,15 +137,10 @@ const emitData: TableItem[] = [
 
 const generateSnippet = snippetGeneratorFactory('vk-checkbox')
 
-/*
-* This watch function controls the indeterminate checkbox
-* in the documentation page so it is synchronized
-* with the status of the checkbox in the sandbox
-*/
 watchEffect(() => {
-  if (extendedForm.value.indeterminate) extendedForm.value.checked = null
-  if (extendedForm.value.checked !== null) extendedForm.value.indeterminate = false
-  if (!extendedForm.value.indeterminate && extendedForm.value.checked === null) extendedForm.value.checked = false
+  if (indeterminateRef.value) form.modelValue = null
+  if (form.modelValue !== null) indeterminateRef.value = false
+  if (!indeterminateRef.value && form.modelValue === null) form.modelValue = false
 })
 </script>
 
@@ -156,7 +151,7 @@ watchEffect(() => {
   >
     <template #playground-view>
       <vk-checkbox
-        v-model="extendedForm.checked"
+        v-model="form.modelValue"
         :color="form.color"
         :variant="form.variant"
         :size="form.size"
@@ -166,7 +161,6 @@ watchEffect(() => {
         :shape="form.shape"
         :label-position="form.labelPosition"
         :readonly="form.readonly"
-        :indeterminate="extendedForm.indeterminate"
         :label="form.label"
       />
     </template>
@@ -225,7 +219,7 @@ watchEffect(() => {
         label="Readonly"
       />
       <vk-checkbox
-        v-model="extendedForm.indeterminate"
+        v-model="indeterminateRef"
         label="Indeterminate"
       />
     </template>
@@ -238,9 +232,9 @@ watchEffect(() => {
         <vk-checkbox
           v-for="color in colorOptions"
           :key="color.value"
+          v-model="checkboxStates[color.value]"
           :color="color.value"
           :label="color.label"
-          :model-value="extendedForm.exampleChecked"
         />
 
         <template #code>
@@ -255,9 +249,9 @@ watchEffect(() => {
         <vk-checkbox
           v-for="variant in variantOptions.general"
           :key="variant.value"
+          v-model="checkboxStates[variant.value]"
           :variant="variant.value"
           :label="variant.label"
-          :model-value="extendedForm.exampleChecked"
         />
 
         <template #code>
@@ -272,9 +266,9 @@ watchEffect(() => {
         <vk-checkbox
           v-for="shape in shapeOptions.general"
           :key="shape.value"
+          v-model="checkboxStates[shape.value]"
           :shape="shape.value"
           :label="shape.label"
-          :model-value="extendedForm.exampleChecked"
         />
 
         <template #code>
@@ -289,9 +283,9 @@ watchEffect(() => {
         <vk-checkbox
           v-for="size in sizeOptions.general"
           :key="size.value"
+          v-model="checkboxStates[size.value]"
           :size="size.value"
           :label="size.label"
-          :model-value="extendedForm.exampleChecked"
         />
 
         <template #code>
@@ -301,9 +295,9 @@ watchEffect(() => {
 
       <example-section title="Disabled">
         <vk-checkbox
+          v-model="checkboxStates['disabled']"
           label="Disabled"
           disabled
-          :model-value="extendedForm.exampleChecked"
         />
 
         <template #code>
@@ -313,9 +307,9 @@ watchEffect(() => {
 
       <example-section title="Flat">
         <vk-checkbox
+          v-model="checkboxStates['flat']"
           label="Flat"
           flat
-          :model-value="extendedForm.exampleChecked"
         />
 
         <template #code>
@@ -325,9 +319,9 @@ watchEffect(() => {
 
       <example-section title="Readonly">
         <vk-checkbox
+          v-model="checkboxStates['readonly']"
           label="Readonly"
-          read-only
-          :model-value="extendedForm.exampleChecked"
+          readonly
         />
 
         <template #code>
@@ -337,7 +331,7 @@ watchEffect(() => {
 
       <example-section title="Indeterminate">
         <vk-checkbox
-          v-model="extendedForm.exampleIndeterminate"
+          v-model="checkboxStates['indeterminate']"
           label="Inderterminate"
           indeterminate
         />
@@ -354,9 +348,9 @@ watchEffect(() => {
         <vk-checkbox
           v-for="pos in position"
           :key="pos.value"
+          v-model="checkboxStates[pos.value]"
           :label="pos.label"
           :label-position="pos.value"
-          :model-value="extendedForm.exampleChecked"
         />
 
         <template #code>

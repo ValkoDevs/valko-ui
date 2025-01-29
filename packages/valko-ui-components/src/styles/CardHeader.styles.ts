@@ -8,14 +8,15 @@ export default tv({
     'py-2',
     'min-h-10',
     'flex',
+    'self-start',
     'items-center',
     'font-bold',
     'text-lg',
     'text-left',
     'z-30',
     'group-data-[layout=vertical]:order-1',
-    'group-data-[layout=horizontal]:order-2',
-    'group-data-[layout=horizontal]:[grid-column:_2]',
+    'group-data-[layout=horizontal]:group-data-[card-image=true]:order-2',
+    'group-data-[layout=horizontal]:group-data-[card-image=false]:order-1',
     'group-data-[layout=cover]:order-1'
   ]
 }) as unknown as ReturnType<TV>

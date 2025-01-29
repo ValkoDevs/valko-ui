@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import type { SelectOption, InputProps, TableItem, InputType } from '#valkoui'
+import { useNotification, type SelectOption, type InputProps, type TableItem, type InputType } from '#valkoui'
 
 const typeOptions: SelectOption<InputType>[] = [
   { value:'text', label:'Text' },
   { value:'email', label:'Email' },
-  { value:'password', label:'Password' }
+  { value:'password', label:'Password' },
+  { value:'number', label:'Number' }
 ]
 
 const form = ref<InputProps>({
@@ -15,6 +16,7 @@ const form = ref<InputProps>({
   shape: 'soft',
   modelValue: '',
   label: 'Label',
+  placeholder: 'Placeholder',
   helpertext: 'Helpertext',
   disabled: false,
   readonly: false,
@@ -24,6 +26,10 @@ const form = ref<InputProps>({
 const iconsInForm = ref({
   left: false,
   right: false
+})
+
+const inputStates = reactive<Record<string, string>>({
+  readonly: 'Example readonly.'
 })
 
 const apiData: TableItem[] = [
@@ -48,7 +54,7 @@ const apiData: TableItem[] = [
     prop: 'type',
     required: false,
     description: 'The type of the Input.',
-    values: 'text, email, password',
+    values: 'text, email, password, number',
     default: 'text'
   },
   {
@@ -108,28 +114,20 @@ const apiData: TableItem[] = [
     default: 'false'
   },
   {
+    key: 'placeholderProp',
+    prop: 'placeholder',
+    required: false,
+    description: 'The placeholder for the Input',
+    values: 'string',
+    default: 'false'
+  },
+  {
     key: 'helpertextProp',
     prop: 'helpertext',
     required: false,
     description: 'A hint for the Input',
     values: 'string',
     default: 'false'
-  },
-  {
-    key: 'iconLeftProp',
-    prop: 'iconLeft',
-    required: false,
-    description: 'A icon on the left side for the Input',
-    values: 'string',
-    default: ''
-  },
-  {
-    key: 'iconRightProp',
-    prop: 'iconRight',
-    required: false,
-    description: 'A icon on the right side for the Input',
-    values: 'string',
-    default: ''
   },
   {
     key: 'shapeProp',
@@ -182,30 +180,29 @@ const emitData: TableItem[] = [
 const slotData: TableItem[] = [
   {
     key: 'leftIconSlot',
-    name: 'leftIcon',
+    name: 'left-icon',
     description: 'Slot for placing an icon on the left side of the input field. This slot is typically used to include an icon for visual enhancement or to indicate input type.',
-    example: '<template #leftIcon>\n  <!-- Your icon component goes here -->\n</template>'
+    example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>'
   },
   {
     key: 'rightIconSlot',
-    name: 'rightIcon',
+    name: 'right-icon',
     description: 'Slot for placing an icon on the right side of the input field. This slot is typically used to include an icon for actions like clear input or show/hide password.',
-    example: '<template #rightIcon>\n  <!-- Your icon component goes here -->\n</template>'
+    example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>'
   }
 ]
 
 const generateSnippet = snippetGeneratorFactory('vk-input')
 
-const iconSnippet = `
-<template>
+const iconSnippet = `<template>
   <vk-input>
-    <template #leftIcon>
+    <template #left-icon>
       <vk-icon name="home" />
     </template>
   </vk-input>
 
   <vk-input>
-    <template #rightIcon>
+    <template #right-icon>
       <vk-icon name="home" />
     </template>
   </vk-input>
@@ -229,18 +226,21 @@ const iconSnippet = `
         :shape="form.shape"
         :type="form.type"
         :label="form.label"
+        :placeholder="form.placeholder"
         :helpertext="form.helpertext"
         :clearable="form.clearable"
+        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'neutral' })"
+        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'neutral' })"
       >
         <template
           v-if="iconsInForm.left"
-          #leftIcon
+          #left-icon
         >
           <vk-icon name="home" />
         </template>
         <template
           v-if="iconsInForm.right"
-          #rightIcon
+          #right-icon
         >
           <vk-icon name="home" />
         </template>
@@ -251,6 +251,11 @@ const iconSnippet = `
       <vk-input
         v-model="form.label"
         label="Label"
+        size="sm"
+      />
+      <vk-input
+        v-model="form.placeholder"
+        label="Placeholder"
         size="sm"
       />
       <vk-input
@@ -377,7 +382,7 @@ const iconSnippet = `
 
       <example-section
         title="Types"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        classes="md:grid-cols-2 lg:grid-cols-4"
       >
         <vk-input
           v-for="type in typeOptions"
@@ -404,6 +409,7 @@ const iconSnippet = `
 
       <example-section title="Readonly">
         <vk-input
+          v-model="inputStates['readonly']"
           readonly
           label="Readonly"
         />
@@ -431,7 +437,7 @@ const iconSnippet = `
         <vk-input
           label="Left Icon"
         >
-          <template #leftIcon>
+          <template #left-icon>
             <vk-icon name="home" />
           </template>
         </vk-input>
@@ -439,7 +445,7 @@ const iconSnippet = `
         <vk-input
           label="Right Icon"
         >
-          <template #rightIcon>
+          <template #right-icon>
             <vk-icon name="home" />
           </template>
         </vk-input>

@@ -3,7 +3,9 @@ import { tv, type TV } from 'tailwind-variants'
 export default tv({
   slots: {
     container: [
-      'vk-dropdown__container'
+      'vk-dropdown__container',
+      'w-fit',
+      'h-fit'
     ],
     dropdown: [
       'w-full',
@@ -25,8 +27,8 @@ export default tv({
       'shadow-light-4',
       'z-10',
       'absolute',
-      'right-0',
-      'origin-top-right',
+      'left-0',
+      'origin-top-left',
       'dark:bg-dark-3',
       'dark:shadow-dark-3'
     ],

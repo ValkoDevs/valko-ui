@@ -16,7 +16,7 @@ const crumbs: Crumb[] = [
   { key: 'music', title: 'Music', onClick: () => useNotification({ text: 'Music' }) },
   { key: 'artist', title: 'Artist', onClick: () => useNotification({ text: 'Artist' }) },
   { key: 'album', title: 'Album', onClick: () => useNotification({ text: 'Album' }) },
-  { key: 'song', title: 'Song' }
+  { key: 'song', title: 'Song', active: true }
 ]
 
 const crumbsDisabled: Crumb[] = [
@@ -148,6 +148,14 @@ const crumbInterface: TableItem[] = [
     prop: 'disabled',
     required: false,
     description: 'Wheter the Crumb is disabled or not',
+    values: 'true, false',
+    default: ''
+  },
+  {
+    key: 'activeCrumb',
+    prop: 'active',
+    required: false,
+    description: 'Wheter the Crumb is active or not',
     values: 'true, false',
     default: ''
   },

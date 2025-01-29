@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Ref, ref, onUpdated, onMounted, nextTick } from 'vue'
+import { type Ref, ref, watch, onMounted, nextTick, computed } from 'vue'
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 import type { TabsProps } from '#valkoui/types/Tabs'
 import type { SlotStyles } from '#valkoui/types/common'
@@ -16,17 +16,26 @@ const props = withDefaults(defineProps<TabsProps>(), {
   size: 'md',
   defaultIndex: 0,
   vertical: false,
+  modelValue: undefined,
   tabs: () => []
 })
 
-const emit = defineEmits(['tabClick'])
+const emit = defineEmits(['tabClick', 'update:modelValue'])
 
 const classes = useStyle<TabsProps, SlotStyles>(props, styles)
 
+const internalIndex = ref(0)
 const cursor: Ref<HTMLElement | null> = ref(null)
 
-const onChange = async (index: number) => {
-  emit('tabClick', index)
+const selectedIndex = computed({
+  get: () => (props.modelValue ?? internalIndex.value),
+  set: (value: number) => {
+    if (props.modelValue !== undefined) emit('update:modelValue', value)
+    else internalIndex.value = value
+  }
+})
+
+const moveCursor = async () => {
   await nextTick()
   await nextTick()
   if (cursor.value) {
@@ -42,17 +51,24 @@ const onChange = async (index: number) => {
   }
 }
 
-onMounted(onChange)
-onUpdated(onChange)
+const onChange = (index: number) => {
+  emit('tabClick', index)
+  selectedIndex.value = index
+  moveCursor()
+}
+
+onMounted(moveCursor)
+watch(() => props.modelValue, () => moveCursor())
 </script>
 
 <template>
   <div :class="classes.container">
     <tab-group
+      as="div"
       :vertical="vertical"
       :default-index="defaultIndex"
-      as="div"
       :class="classes.group"
+      :selected-index="selectedIndex"
       @change="onChange"
     >
       <tab-list

@@ -256,11 +256,11 @@ describe('DataTable component', () => {
       })
 
       it('should display the radio buttons on the rows', () => {
-        expect(wrapper.find('.vk-radio__container').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio__radio-container').exists()).toBe(true)
       })
 
       it('should emit onSelect when a row radio is clicked', () => {
-        wrapper.find('.vk-radio__container').trigger('click')
+        wrapper.find('.vk-radio__radio-container').trigger('click')
         expect(wrapper.emitted()).toHaveProperty('onSelect')
       })
     })
@@ -400,35 +400,6 @@ describe('DataTable component', () => {
       wrapper.find('i.ti.ti-arrows-sort').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('onSort')
     })
-
-    // it('should display the correct sort icon based on sort state', async () => {
-    //   wrapper = mount(VkDataTable, {
-    //     props: {
-    //       headers: sortHeaders,
-    //       data,
-    //       sort: { field: 'name', direction: 'asc' }
-    //     }
-    //   })
-
-    //   await nextTick()
-    //   expect(wrapper.find('i.ti.ti-arrow-up').exists()).toBe(true)
-    // })
-
-    // it('should update sort icon when sort direction changes', async () => {
-    //   wrapper = mount(VkDataTable, {
-    //     props: {
-    //       headers: sortHeaders,
-    //       data,
-    //       sort: { field: 'name', direction: 'asc' }
-    //     }
-    //   })
-
-    //   await nextTick()
-    //   wrapper.find('i.ti.ti-arrow-up').trigger('click')
-    //   await nextTick()
-
-    //   expect(wrapper.find('i.ti.ti-arrow-down').exists()).toBe(true)
-    // })
   })
 
   describe('When pagination functionality is added', () => {

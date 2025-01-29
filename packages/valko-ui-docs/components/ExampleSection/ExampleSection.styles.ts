@@ -5,12 +5,10 @@ export default tv({
     'w-full',
     'px-4',
     'py-8',
-    'bg-light-4',
+    'bg-light-2',
     'rounded-b-lg',
     'gap-4',
     'grid',
-    'grid-flow-rows',
-    'auto-rows-fr',
     'grid-cols-1',
     'dark:bg-dark-5/[.5]'
   ]

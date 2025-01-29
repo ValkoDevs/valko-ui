@@ -351,13 +351,12 @@ const stopOnFocusSnippet = `
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(6,_minmax(0,_max-content))]"
       >
         <vk-button
           v-for="color in colorOptions"
           :key="color.value"
           :color="color.value"
-          class="mt-4"
           @click="createNotification({ text: color.label, color: color.value })"
         >
           {{ color.label }}
@@ -370,12 +369,11 @@ const stopOnFocusSnippet = `
 
       <example-section
         title="Variants"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+        classes="sm:grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))] lg:grid-cols-[repeat(5,_minmax(0,_max-content))]"
       >
         <vk-button
           v-for="variant in variantOptions.withGradientAndLine"
           :key="variant.value"
-          class="mt-4"
           @click="createNotification({ text: variant.label, variant: variant.value })"
         >
           {{ variant.label }}
@@ -388,13 +386,12 @@ const stopOnFocusSnippet = `
 
       <example-section
         title="Shapes"
-        classes="grid-cols-2 md:grid-cols-3"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] lg:grid-cols-[repeat(3,_minmax(0,_max-content))]"
       >
         <vk-button
           v-for="shape in shapeOptions.general"
           :key="shape.value"
           :shape="shape.value"
-          class="mt-4"
           @click="createNotification({ text: shape.label, shape: shape.value })"
         >
           {{ shape.label }}
@@ -407,13 +404,12 @@ const stopOnFocusSnippet = `
 
       <example-section
         title="Sizes"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        classes="sm:grid-cols-[repeat(2,_minmax(0,_max-content))] lg:grid-cols-[repeat(4,_minmax(0,_max-content))]"
       >
         <vk-button
           v-for="size in sizeOptions.general"
           :key="size.value"
           :size="size.value"
-          class="mt-4"
           @click="createNotification({ text: size.label, size: size.value })"
         >
           {{ size.label }}
@@ -426,13 +422,12 @@ const stopOnFocusSnippet = `
 
       <example-section
         title="Gravity"
-        classes="grid-cols-2"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))]"
       >
         <vk-button
           v-for="gravity in gravityOptions"
           :key="gravity.value"
           :gravity="gravity.value"
-          class="mt-4"
           @click="createNotification({ text: gravity.label, gravity: gravity.value })"
         >
           {{ gravity.label }}
@@ -445,13 +440,12 @@ const stopOnFocusSnippet = `
 
       <example-section
         title="Position"
-        classes="grid-cols-2"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))]"
       >
         <vk-button
           v-for="position in positionOptions"
           :key="position.value"
           :position="position.value"
-          class="mt-4"
           @click="createNotification({ text: position.label, position: position.value })"
         >
           {{ position.label }}
@@ -463,11 +457,7 @@ const stopOnFocusSnippet = `
       </example-section>
 
       <example-section title="Flat">
-        <vk-button
-          flat
-          class="mt-4"
-          @click="createNotification({ text: 'Flat', flat: true })"
-        >
+        <vk-button @click="createNotification({ text: 'Flat', flat: true })">
           Flat
         </vk-button>
 
@@ -477,11 +467,7 @@ const stopOnFocusSnippet = `
       </example-section>
 
       <example-section title="Close">
-        <vk-button
-          close
-          class="mt-4"
-          @click="createNotification({ text: 'Close', close: true })"
-        >
+        <vk-button @click="createNotification({ text: 'Close', close: true })">
           Close
         </vk-button>
 
@@ -491,11 +477,7 @@ const stopOnFocusSnippet = `
       </example-section>
 
       <example-section title="Stop on Focus">
-        <vk-button
-          close
-          class="mt-4"
-          @click="createNotification({ text: 'Stop on Focus', stopOnFocus: true })"
-        >
+        <vk-button @click="createNotification({ text: 'Stop on Focus', stopOnFocus: true })">
           Stop on Focus
         </vk-button>
 

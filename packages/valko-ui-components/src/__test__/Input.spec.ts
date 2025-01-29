@@ -217,20 +217,20 @@ describe('Input component', () => {
   })
 
   describe('Slots', () => {
-    it('Should render leftIcon when slot leftIcon is set', () => {
+    it('Should render left-icon when slot left-icon is set', () => {
       wrapper = mount(VkInput, {
         slots: {
-          leftIcon: '<i class="ti ti-brand-vue"></i>'
+          'left-icon': '<i class="ti ti-brand-vue"></i>'
         }
       })
 
       expect(wrapper.find('i.ti.ti-brand-vue').exists()).toBe(true)
     })
 
-    it('Should render rightIcon when slot rightIcon is set', () => {
+    it('Should render right-icon when slot right-icon is set', () => {
       wrapper = mount(VkInput, {
         slots: {
-          rightIcon: '<i class="ti ti-home"></i>'
+          'right-icon': '<i class="ti ti-home"></i>'
         }
       })
 
@@ -363,10 +363,10 @@ describe('Input component', () => {
       expect(wrapper.emitted()).not.toHaveProperty('update:modelValue')
     })
 
-    it('Should emit leftIconClick when slot leftIcon is clicked', async () => {
+    it('Should emit leftIconClick when slot left-icon is clicked', async () => {
       wrapper = mount(VkInput, {
         slots: {
-          leftIcon: '<i class="ti ti-brand-vue"></i>'
+          'left-icon': '<i class="ti ti-brand-vue"></i>'
         }
       })
 
@@ -375,10 +375,10 @@ describe('Input component', () => {
       expect(wrapper.emitted()).toHaveProperty('leftIconClick')
     })
 
-    it('Should emit rightIconClick when slot rightIcon is clicked', async () => {
+    it('Should emit rightIconClick when slot right-icon is clicked', async () => {
       wrapper = mount(VkInput, {
         slots: {
-          rightIcon: '<i class="ti ti-home"></i>'
+          'right-icon': '<i class="ti ti-home"></i>'
         }
       })
 

@@ -18,7 +18,9 @@ export default tv({
       'flex',
       'justify-around',
       'items-center',
-      'data-[disabled=true]:text-gray-400',
+      'text-gray-500',
+      'data-[active=true]:cursor-default',
+      'data-[disabled=true]:text-gray-700',
       'data-[disabled=true]:cursor-not-allowed'
     ],
     separator: [
@@ -63,43 +65,47 @@ export default tv({
     color: {
       primary: {
         a: [
-          'text-primary-500',
           'hover:text-primary-600',
-          'data-[active=true]:text-primary-600/[.5]'
+          'data-[active=true]:text-primary-500',
+          'data-[active=true]:hover:text-primary-600'
         ]
       },
       neutral: {
         a: [
-          'text-dark-1',
-          'hover:text-dark-3',
-          'data-[active=true]:text-dark-4',
-          'dark:text-light-3',
-          'dark:hover:text-light-5',
-          'dark:data-[active=true]:text-light-1'
+          'hover:text-dark-5',
+          'data-[active=true]:text-dark-3',
+          'data-[active=true]:hover:text-dark-5',
+          'dark:hover:text-light-1',
+          'dark:data-[active=true]:text-light-3',
+          'dark:data-[active=true]:hover:text-light-1'
         ]
       },
       success: {
         a: [
-          'text-success-500',
-          'hover:text-success-600'
+          'hover:text-success-600',
+          'data-[active=true]:text-success-500',
+          'data-[active=true]:hover:text-success-600'
         ]
       },
       info: {
         a: [
-          'text-info-500',
-          'hover:text-info-600'
+          'hover:text-info-600',
+          'data-[active=true]:text-info-500',
+          'data-[active=true]:hover:text-info-600'
         ]
       },
       warning: {
         a: [
-          'text-warning-500',
-          'hover:text-warning-600'
+          'hover:text-warning-600',
+          'data-[active=true]:text-warning-500',
+          'data-[active=true]:hover:text-warning-600'
         ]
       },
       error: {
         a: [
-          'text-error-500',
-          'hover:text-error-600'
+          'hover:text-error-600',
+          'data-[active=true]:text-error-500',
+          'data-[active=true]:hover:text-error-600'
         ]
       }
     },

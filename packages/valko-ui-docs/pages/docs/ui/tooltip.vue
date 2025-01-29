@@ -130,7 +130,7 @@ const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
     <template #examples>
       <example-section
         title="Shapes"
-        classes="grid-cols-2 md:grid-cols-3"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
       >
         <vk-tooltip
           v-for="shape in shapeOptions.general"
@@ -150,7 +150,7 @@ const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
 
       <example-section
         title="Sizes"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
       >
         <vk-tooltip
           v-for="size in sizeOptions.general"
@@ -170,7 +170,7 @@ const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
 
       <example-section
         title="Placements"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
       >
         <vk-tooltip
           v-for="placement in placementOptions"

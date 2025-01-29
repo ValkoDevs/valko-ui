@@ -155,9 +155,9 @@ const backdropSnippet = `${scriptCode}\n${generateSnippet<string>('backdrop',
   }).replace(/<vk-drawer/g, `${triggerSnippet}`)
 }`
 
-const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>('closable',
+const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
   {
-    values: [true],
+    values: [false],
     hasSlot: true, extraProps
   }).replace(/<vk-drawer/g, `${triggerSnippet}`)
 }`
@@ -192,6 +192,14 @@ const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
       >
         <template #default>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus nihil, recusandae, enim sit corporis quia reprehenderit odit obcaecati, voluptas id dolor ipsam maiores at? Dolores incidunt sequi reiciendis nostrum exercitationem.
+
+          <vk-button
+            class="self-end mt-auto"
+            color="error"
+            @click="toggleDrawer('playground-drawer')"
+          >
+            Close Drawer
+          </vk-button>
         </template>
       </vk-drawer>
     </template>
@@ -238,7 +246,7 @@ const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
     <template #examples>
       <example-section
         title="Placement"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
       >
         <div
           v-for="placement in placementOptions"
@@ -267,7 +275,7 @@ const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
 
       <example-section
         title="Shape"
-        classes="grid-cols-2 md:grid-cols-3"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -296,7 +304,7 @@ const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
 
       <example-section
         title="Size"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -325,7 +333,7 @@ const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
 
       <example-section
         title="Backdrop"
-        classes="grid-cols-2 md:grid-cols-3"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
       >
         <div
           v-for="backdrop in backdropOptions"
@@ -359,12 +367,20 @@ const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
         <vk-drawer
           :is-open="drawerStates['closable']"
           title="Closable"
-          closable
+          :closable="false"
           @close="toggleDrawer('closable')"
         >
           <template #default>
             Closable Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+
+            <vk-button
+              class="self-end mt-auto"
+              color="error"
+              @click="toggleDrawer('closable')"
+            >
+              Close Drawer
+            </vk-button>
           </template>
         </vk-drawer>
 

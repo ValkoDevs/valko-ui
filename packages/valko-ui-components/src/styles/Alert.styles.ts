@@ -5,49 +5,38 @@ export default tv({
     container: [
       'vk-alert__container',
       'w-full',
-      'p-4',
-      'gap-4',
+      'p-2',
+      'flex',
+      'gap-2',
       'shadow-lg',
       'shadow-light-4',
-      'flex',
-      'justify-between',
-      'items-stretch',
       'dark:shadow-dark-5'
     ],
-    content: [
+    mainIcon: [],
+    contentContainer: [
+      'flex',
+      'flex-col',
       'grow'
     ],
     title: [
       'font-bold'
     ],
-    button: [
-      'flex',
-      'flex-col',
-      'justify-start'
-    ],
-    span: [
+    p: [
+      'vk-alert__p',
       'font-medium',
-      'break-all',
-      'text-justify'
+      'break-normal'
     ],
-    rightIcon: [
+    closeIcon: [
       'vk-alert__close'
-    ],
-    leftIcon: []
+    ]
   },
   variants: {
     variant: {
       filled: {
-        title: [
+        container: [
           'text-light-1'
         ],
-        leftIcon: [
-          'text-light-1'
-        ],
-        rightIcon: [
-          'text-light-1'
-        ],
-        span: [
+        closeIcon: [
           'text-light-1'
         ]
       },
@@ -65,18 +54,10 @@ export default tv({
       },
       gradient: {
         container: [
-          'bg-gradient-to-br'
-        ],
-        title: [
+          'bg-gradient-to-br',
           'text-light-1'
         ],
-        leftIcon: [
-          'text-light-1'
-        ],
-        rightIcon: [
-          'text-light-1'
-        ],
-        span: [
+        closeIcon: [
           'text-light-1'
         ]
       }
@@ -94,10 +75,10 @@ export default tv({
         title: [
           'text-sm'
         ],
-        leftIcon: [
-          'text-lg'
+        mainIcon: [
+          'text-sm'
         ],
-        span: [
+        p: [
           'text-xs'
         ]
       },
@@ -105,10 +86,10 @@ export default tv({
         title: [
           'text-base'
         ],
-        leftIcon: [
-          'text-xl'
+        mainIcon: [
+          'text-base'
         ],
-        span: [
+        p: [
           'text-sm'
         ]
       },
@@ -116,10 +97,10 @@ export default tv({
         title: [
           'text-lg'
         ],
-        leftIcon: [
-          'text-2xl'
+        mainIcon: [
+          'text-lg'
         ],
-        span: [
+        p: [
           'text-base'
         ]
       },
@@ -127,10 +108,10 @@ export default tv({
         title: [
           'text-xl'
         ],
-        leftIcon: [
-          'text-3xl'
+        mainIcon: [
+          'text-xl'
         ],
-        span: [
+        p: [
           'text-lg'
         ]
       }
@@ -145,9 +126,7 @@ export default tv({
     shape: {
       rounded: {
         container: [
-          'py-4',
-          'px-12',
-          'rounded-full'
+          'rounded-3xl'
         ]
       },
       soft: {
@@ -394,44 +373,30 @@ export default tv({
         ]
       }
     },
-    // filled & gradient & neutral (title,span, icons)
+    // filled & gradient & neutral (title,p, icons)
     {
       variant: ['filled', 'gradient'],
       color: 'neutral',
       class: {
-        title: [
+        container: [
           'text-dark-1',
           'dark:text-light-1'
         ],
-        span: [
-          'text-dark-1',
-          'dark:text-light-1'
-        ],
-        leftIcon: [
-          'text-dark-1',
-          'dark:text-light-1'
-        ],
-        rightIcon: [
+        closeIcon: [
           'text-dark-1',
           'dark:text-light-1'
         ]
       }
     },
-    // ghost & outlined & color (title, span, icons)
+    // ghost & outlined & color (title, p, icons)
     {
       variant: ['ghost', 'outlined'],
       color: 'primary',
       class: {
-        title: [
+        container: [
           'text-primary-500'
         ],
-        span: [
-          'text-primary-500'
-        ],
-        leftIcon: [
-          'text-primary-500'
-        ],
-        rightIcon: [
+        closeIcon: [
           'text-primary-500'
         ]
       }
@@ -440,19 +405,11 @@ export default tv({
       variant: ['ghost', 'outlined'],
       color: 'neutral',
       class: {
-        title: [
+        container: [
           'text-dark-1',
           'dark:text-light-1'
         ],
-        span: [
-          'text-dark-1',
-          'dark:text-light-1'
-        ],
-        leftIcon: [
-          'text-dark-1',
-          'dark:text-light-1'
-        ],
-        rightIcon: [
+        closeIcon: [
           'text-dark-1',
           'dark:text-light-1'
         ]
@@ -462,16 +419,10 @@ export default tv({
       variant: ['ghost', 'outlined'],
       color: 'success',
       class: {
-        title: [
+        container: [
           'text-success-500'
         ],
-        span: [
-          'text-success-500'
-        ],
-        leftIcon: [
-          'text-success-500'
-        ],
-        rightIcon: [
+        closeIcon: [
           'text-success-500'
         ]
       }
@@ -480,16 +431,10 @@ export default tv({
       variant: ['ghost', 'outlined'],
       color: 'info',
       class: {
-        title: [
+        container: [
           'text-info-500'
         ],
-        span: [
-          'text-info-500'
-        ],
-        leftIcon: [
-          'text-info-500'
-        ],
-        rightIcon: [
+        closeIcon: [
           'text-info-500'
         ]
       }
@@ -498,16 +443,10 @@ export default tv({
       variant: ['ghost', 'outlined'],
       color: 'warning',
       class: {
-        title: [
+        container: [
           'text-warning-500'
         ],
-        span: [
-          'text-warning-500'
-        ],
-        leftIcon: [
-          'text-warning-500'
-        ],
-        rightIcon: [
+        closeIcon: [
           'text-warning-500'
         ]
       }
@@ -516,16 +455,10 @@ export default tv({
       variant: ['ghost', 'outlined'],
       color: 'error',
       class: {
-        title: [
+        container: [
           'text-error-500'
         ],
-        span: [
-          'text-error-500'
-        ],
-        leftIcon: [
-          'text-error-500'
-        ],
-        rightIcon: [
+        closeIcon: [
           'text-error-500'
         ]
       }

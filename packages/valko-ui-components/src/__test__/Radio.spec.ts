@@ -10,7 +10,7 @@ describe('Radio component', () => {
       })
 
       it('should render', () => {
-        expect(wrapper.find('.vk-radio__container').exists()).toBe(true)
+        expect(wrapper.find('.vk-radio').exists()).toBe(true)
       })
 
       it('should be color primary', () => {
@@ -231,7 +231,7 @@ describe('Radio component', () => {
         }
       })
 
-      expect(wrapper.find('.inline-block').text()).toContain('Hello World')
+      expect(wrapper.find('.vk-radio__helpertext').text()).toContain('Hello World')
     })
   })
 
@@ -239,7 +239,7 @@ describe('Radio component', () => {
     it('should emit update event', () => {
       const wrapper = mount(VkRadio, {})
 
-      wrapper.find('.vk-radio__container').trigger('click')
+      wrapper.find('.vk-radio__radio-container').trigger('click')
       expect(wrapper.emitted('update:modelValue'))
     })
   })

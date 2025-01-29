@@ -5,7 +5,7 @@ const route = useRoute()
 </script>
 
 <template>
-  <div class="flex gap-1">
+  <div class="flex gap-2">
     <nav>
       <ul class="flex gap-2 justify-between items-center h-full mr-4">
         <li>

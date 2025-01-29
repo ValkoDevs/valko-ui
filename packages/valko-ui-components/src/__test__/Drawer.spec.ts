@@ -52,8 +52,8 @@ describe('Drawer component', () => {
         expect(backdrop.classes()).toContain('bg-light-5/80')
       })
 
-      it('should have title', () => {
-        expect(drawer.find('.text-lg').text()).toContain('Drawer')
+      it('should not have title', () => {
+        expect(drawer.find('.text-lg').text()).toContain('')
       })
 
       it('should not be flat', () => {

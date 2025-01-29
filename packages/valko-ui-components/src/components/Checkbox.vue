@@ -14,7 +14,6 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   shape: 'soft',
   label: '',
   modelValue: false,
-  indeterminate: false,
   readonly: false,
   labelPosition: 'right',
   disabled: false
@@ -30,9 +29,9 @@ const onClick = () => {
 </script>
 
 <template>
-  <div>
+  <div :class="classes.container">
     <div
-      :class="classes.container"
+      :class="classes.checkboxContainer"
       @click="onClick"
     >
       <div
@@ -46,18 +45,20 @@ const onClick = () => {
           :class="classes.icon"
         />
       </div>
+
       <input
-        @click.prevent=""
         type="checkbox"
         :checked="!!modelValue"
         :class="classes.input"
         :indeterminate="modelValue === null"
         :helpertext="helpertext"
+        @click.prevent=""
       >
       <label :class="classes.label">
         {{ label }}
       </label>
     </div>
+
     <span
       v-if="helpertext"
       :class="classes.helpertext"

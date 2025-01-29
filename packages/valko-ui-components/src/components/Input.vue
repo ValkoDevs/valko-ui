@@ -27,6 +27,7 @@ const inputId = useId()
 const isFilled = ref(false)
 const inputValue = ref(props.modelValue || '')
 const inputRef = ref<HTMLInputElement | null>(null)
+let intervalId: ReturnType<typeof setInterval> | null = null
 
 const updateValue = (e: Event) => {
   const value = (e.target as HTMLInputElement).value
@@ -50,8 +51,33 @@ const clearInput = () => {
 }
 
 const handleIconClick = (icon: 'left' | 'right') => {
-  emit(`${icon}IconClick`)
-  inputRef.value?.focus()
+  if (!props.disabled && !props.readonly) {
+    emit(`${icon}IconClick`)
+    inputRef.value?.focus()
+  }
+}
+
+const changeValue = (action: 'increment' | 'decrement') => {
+  if (!props.disabled && !props.readonly) {
+    let newValue = parseFloat(inputValue.value.toString() || '0')
+
+    if (action === 'increment') newValue += 1
+    else newValue -= 1
+
+    if (isNaN(newValue)) newValue = 0
+
+    inputValue.value = newValue.toString()
+    emit('update:modelValue', newValue.toString())
+  }
+}
+
+const startHolding = (action: 'increment' | 'decrement') => intervalId = setInterval(() => changeValue(action), 75)
+
+const stopHolding = () => {
+  if (intervalId) {
+    clearInterval(intervalId)
+    intervalId = null
+  }
 }
 
 watch(() => props.modelValue, (newValue) => {
@@ -65,13 +91,13 @@ watch(() => props.modelValue, (newValue) => {
     <div :class="classes.field">
       <input
         ref="inputRef"
-        :data-leftIcon="!!$slots.leftIcon"
-        :data-rightIcon="!!$slots.rightIcon"
+        :data-left-icon="!!$slots['left-icon']"
+        :data-right-icon="!!$slots['right-icon']"
         :class="classes.input"
         :readonly="readonly"
         :disabled="disabled"
         :type="type"
-        placeholder=" "
+        :placeholder="placeholder"
         :value="inputValue"
         :data-filled="isFilled"
         :id="inputId"
@@ -84,31 +110,50 @@ watch(() => props.modelValue, (newValue) => {
       >
         {{ label }}
       </label>
+      <span
+        v-if="type === 'number'"
+        :class="classes.numberArrows"
+      >
+        <vk-icon
+          name="chevron-up"
+          :class="classes.chevrons"
+          @mousedown="startHolding('increment')"
+          @mouseup="stopHolding"
+          @mouseleave="stopHolding"
+        />
+        <vk-icon
+          name="chevron-down"
+          :class="classes.chevrons"
+          @mousedown="startHolding('decrement')"
+          @mouseup="stopHolding"
+          @mouseleave="stopHolding"
+        />
+      </span>
       <vk-icon
         v-if="clearable && !!inputValue"
         name="circle-x"
-        :data-rightIcon="!!$slots.rightIcon"
-        :class="classes.iconClear"
+        :data-right-icon="!!$slots['right-icon']"
+        :class="classes.clearIcon"
         @click="clearInput"
       />
       <span
-        v-if="$slots.leftIcon"
-        :class="[classes.icon, classes.iconLeft]"
+        v-if="$slots['left-icon']"
+        :class="[classes.icons, classes.leftIcon]"
         @click="handleIconClick('left')"
       >
-        <slot name="leftIcon" />
+        <slot name="left-icon" />
       </span>
       <span
-        v-if="$slots.rightIcon"
-        :class="[classes.icon, classes.iconRight]"
+        v-if="$slots['right-icon']"
+        :class="[classes.icons, classes.rightIcon]"
         @click="handleIconClick('right')"
       >
-        <slot name="rightIcon" />
+        <slot name="right-icon" />
       </span>
     </div>
     <span
-      :class="classes.helper"
       v-if="helpertext"
+      :class="classes.helper"
     >
       {{ helpertext }}
     </span>

@@ -3,11 +3,19 @@ import { tv, type TV } from 'tailwind-variants'
 export default tv({
   slots: {
     container: [
-      'vk-radio__container',
-      'w-full',
+      'vk-radio',
+      'w-fit',
       'flex',
-      'justify-start',
+      'flex-col',
+      'gap-1'
+    ],
+    radioContainer: [
+      'vk-radio__radio-container',
+      'w-fit',
+      'flex',
+      'justify-center',
       'items-center',
+      'gap-1',
       'cursor-pointer'
     ],
     radio: [
@@ -27,14 +35,9 @@ export default tv({
       'hidden'
     ],
     helpertext: [
-      'w-full',
-      'origin-top-left',
-      'transition-all',
-      'duration-200',
-      'break-words',
-      'break-before-all',
-      'inline-block',
-      'scale-[.8]'
+      'vk-radio__helpertext',
+      'break-normal',
+      'text-gray-500'
     ],
     label: [
       'cursor-pointer'
@@ -73,7 +76,7 @@ export default tv({
           'text-sm'
         ],
         helpertext: [
-          'text-sm'
+          'text-xs'
         ]
       },
       md: {
@@ -88,7 +91,7 @@ export default tv({
           'text-base'
         ],
         helpertext: [
-          'text-base'
+          'text-sm'
         ]
       },
       lg: {
@@ -103,7 +106,7 @@ export default tv({
           'text-lg'
         ],
         helpertext: [
-          'text-lg'
+          'text-base'
         ]
       }
     },

@@ -1,11 +1,10 @@
-import type { DefaultComponent, Corner } from './common'
+import type { Sizes, VariantWithGradient, Colors, Shapes, Corner } from './common'
 
-export interface BadgeProps extends DefaultComponent {
+export interface BadgeProps extends Sizes, Colors, Shapes {
+  variant?: VariantWithGradient;
   placement?: Corner;
   content?: number | string;
-  outlined?: boolean;
   flat?: boolean;
   hidden?: boolean;
   dot?: boolean;
-  gradient?: boolean;
 }

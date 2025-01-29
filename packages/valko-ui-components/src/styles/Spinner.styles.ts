@@ -9,7 +9,8 @@ export default tv({
     icon: [
       'animate-spin',
       'leading-none'
-    ]
+    ],
+    iconColor : []
   },
   variants: {
     size: {
@@ -36,33 +37,33 @@ export default tv({
     },
     color: {
       primary: {
-        icon: [
+        iconColor: [
           'text-primary-500'
         ]
       },
       neutral: {
-        icon: [
+        iconColor: [
           'text-dark-3',
           'dark:text-light-2'
         ]
       },
       success: {
-        icon: [
+        iconColor: [
           'text-success-500'
         ]
       },
       info: {
-        icon: [
+        iconColor: [
           'text-info-500'
         ]
       },
       warning: {
-        icon: [
+        iconColor: [
           'text-warning-500'
         ]
       },
       error: {
-        icon: [
+        iconColor: [
           'text-error-500'
         ]
       }

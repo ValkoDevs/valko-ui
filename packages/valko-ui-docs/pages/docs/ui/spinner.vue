@@ -45,6 +45,14 @@ const spinnerProps: TableItem[] = [
     description: 'Reduces the Spinner\'s size.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'classNameProp',
+    prop: 'className',
+    required: false,
+    description: 'Overrides the spinner\'s default colors, allowing you to fully customize its appearance.',
+    values: 'string',
+    default: ''
   }
 ]
 
