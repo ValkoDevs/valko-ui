@@ -2,6 +2,11 @@ import type { DefaultComponent } from './common'
 
 export type Separator = 'line' | 'split' | 'none'
 
+export type ItemsManagement = {
+  itemStates: Record<string, boolean>
+  toggleItem: (id: string) => void
+}
+
 export interface CollapseItemProps {
   title?: string;
 }

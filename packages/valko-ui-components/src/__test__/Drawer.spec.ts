@@ -53,11 +53,11 @@ describe('Drawer component', () => {
       })
 
       it('should not have title', () => {
-        expect(drawer.find('.text-lg').text()).toContain('')
+        expect(drawer.find('.vk-drawer__title').text()).toContain('')
       })
 
       it('should not be flat', () => {
-        expect(drawer.classes('.shadow-none')).toBe(false)
+        expect(drawer.classes()).toContain('shadow-lg')
       })
     })
 
@@ -108,6 +108,37 @@ describe('Drawer component', () => {
         await nextTick()
         drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
         expect(drawer.find('i.ti.ti-x').exists()).toBe(true)
+      })
+
+      it('should not render the header section when both title and closable are falsy', async () => {
+        const wrapper = mount(VkDrawer, {
+          props: {
+            isOpen: true,
+            closable: false,
+            title: ''
+          }
+        })
+
+        await nextTick()
+        const drawerPanel = wrapper.getComponent(DialogPanel)
+        const header = drawerPanel.find('.vk-drawer__panel-child')
+        expect(header.exists()).toBe(false)
+      })
+
+      it('should render header with title but without close button when closable is false', async () => {
+        const wrapper = mount(VkDrawer, {
+          props: {
+            isOpen: true,
+            closable: false,
+            title: 'Drawer'
+          }
+        })
+
+        await nextTick()
+        const drawerPanel = wrapper.getComponent(DialogPanel)
+        const header = drawerPanel.find('.vk-drawer__panel-child')
+
+        expect(header.exists()).toBe(true)
       })
     })
 
@@ -332,6 +363,60 @@ describe('Drawer component', () => {
         expect(panel.classes()).toContain('top-0')
       })
     })
+
+    describe('When flat prop changes', () => {
+      it('should not have shadow if flat is true', async () => {
+        const wrapper = mount(VkDrawer, {
+          props: {
+            isOpen: true,
+            flat: true
+          }
+        })
+
+        await nextTick()
+        drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
+        expect(drawer.classes()).toContain('shadow-none')
+      })
+
+      it('should have shadow if flat is false', async () => {
+        const wrapper = mount(VkDrawer, {
+          props: {
+            isOpen: true,
+            flat: false
+          }
+        })
+
+        await nextTick()
+        drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
+        expect(drawer.classes()).toContain('shadow-lg')
+      })
+    })
+  })
+
+  describe('When isOpen prop changes', () => {
+    it('should render the panel when isOpen is true', async () => {
+      wrapper = mount(VkDrawer, {
+        props: {
+          isOpen: true
+        }
+      })
+
+      await nextTick()
+      drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
+      expect(drawer.find('.vk-drawer__panel').exists()).toBe(true)
+    })
+
+    it('should not render the panel when isOpen is false', async () => {
+      wrapper = mount(VkDrawer, {
+        props: {
+          isOpen: false
+        }
+      })
+
+      await nextTick()
+      drawer = wrapper.findComponent(DialogPanel)
+      expect(drawer.exists()).toBe(false)
+    })
   })
 
   describe('Slots', () => {
@@ -362,7 +447,7 @@ describe('Drawer component', () => {
   })
 
   describe('Emits', () => {
-    it('should emit close event', async () => {
+    it('should emit close if closable is true', async () => {
       const wrapper = mount(VkDrawer, {
         props: {
           isOpen: true,
@@ -372,10 +457,28 @@ describe('Drawer component', () => {
           default: 'Hello World'
         }
       })
+
       await nextTick()
       drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
       drawer.find('i.ti.ti-x').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('close')
+    })
+
+    it('should not emit close if closable is false', async () => {
+      const wrapper = mount(VkDrawer, {
+        props: {
+          isOpen: true,
+          closable: false
+        },
+        slots: {
+          default: 'Hello World'
+        }
+      })
+
+      await nextTick()
+      window.dispatchEvent(new Event('click', { bubbles: true }))
+
+      expect(wrapper.emitted()).not.toHaveProperty('close')
     })
   })
 
