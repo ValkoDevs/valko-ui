@@ -7,6 +7,7 @@ export default tv({
       'flex'
     ],
     icon: [
+      'vk-spinner__icon',
       'animate-spin',
       'leading-none'
     ],

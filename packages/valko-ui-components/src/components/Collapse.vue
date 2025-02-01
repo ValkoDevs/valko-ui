@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { provide, useId } from 'vue'
+import { reactive, provide } from 'vue'
 import type { CollapseProps } from '#valkoui/types/Collapse'
 import styles from '#valkoui/styles/Collapse.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
@@ -10,13 +10,27 @@ const props = withDefaults(defineProps<CollapseProps>(), {
   variant: 'filled',
   size: 'md',
   separator: 'line',
-  shape: 'soft'
+  shape: 'soft',
+  multiple: false
 })
 
 const classes = useStyle<CollapseProps>(props, styles)
 
-const collapseId = useId()
-provide('collapseId', collapseId)
+const itemStates = reactive<Record<string, boolean>>({})
+
+const toggleItem = (id: string) => {
+  const toggleAction = props.multiple
+    ? () => itemStates[id] = !itemStates[id]
+    : () => {
+      const isAlreadyOpen = itemStates[id]
+      Object.keys(itemStates).forEach(key => itemStates[key] = false)
+      if (!isAlreadyOpen) itemStates[id] = true
+    }
+
+  toggleAction()
+}
+
+provide('itemsManagement', { itemStates, toggleItem })
 </script>
 
 <template>
@@ -26,9 +40,7 @@ provide('collapseId', collapseId)
     :data-compact="compact"
     :data-separator="separator"
     :data-variant="variant"
-    :data-multiple="multiple"
     :data-shape="shape"
-    :data-collapse-id="collapseId"
   >
     <slot />
   </div>
