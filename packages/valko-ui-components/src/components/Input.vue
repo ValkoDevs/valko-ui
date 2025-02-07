@@ -16,7 +16,10 @@ const props = withDefaults(defineProps<InputProps>(), {
   type: 'text',
   cursor: 'text',
   modelValue: '',
-  clearable: false
+  clearable: false,
+  step: 1,
+  min: -Infinity,
+  max: Infinity
 })
 
 const emit = defineEmits(['update:modelValue', 'focus', 'clear', 'leftIconClick', 'rightIconClick'])
@@ -57,23 +60,19 @@ const handleIconClick = (icon: 'left' | 'right') => {
   }
 }
 
-const changeValue = (action: 'increment' | 'decrement') => {
-  if (!props.disabled && !props.readonly) {
-    let newValue = parseFloat(inputValue.value.toString() || '0')
+const changeNumericValue = (action: 'increment' | 'decrement') => {
+  if (props.type !== 'number' || props.disabled || props.readonly) return
 
-    if (action === 'increment') newValue += 1
-    else newValue -= 1
+  const newValue = props.step * (action === 'increment' ? 1 : -1) + (+inputValue.value || 0)
 
-    if (isNaN(newValue)) newValue = 0
+  if (newValue > props.max || newValue < props.min) return
 
-    inputValue.value = newValue.toString()
-    emit('update:modelValue', newValue.toString())
-  }
+  emit('update:modelValue', newValue)
 }
 
-const startHolding = (action: 'increment' | 'decrement') => intervalId = setInterval(() => changeValue(action), 75)
+const handleNumericArrowHold = (action: 'increment' | 'decrement') => intervalId = setInterval(() => changeNumericValue(action), 75)
 
-const stopHolding = () => {
+const handleNumericArrowRelease = () => {
   if (intervalId) {
     clearInterval(intervalId)
     intervalId = null
@@ -97,7 +96,10 @@ watch(() => props.modelValue, (newValue) => {
         :readonly="readonly"
         :disabled="disabled"
         :type="type"
-        :placeholder="placeholder"
+        placeholder=" "
+        :min="min"
+        :max="max"
+        :step="step"
         :value="inputValue"
         :data-filled="isFilled"
         :id="inputId"
@@ -117,16 +119,16 @@ watch(() => props.modelValue, (newValue) => {
         <vk-icon
           name="chevron-up"
           :class="classes.chevrons"
-          @mousedown="startHolding('increment')"
-          @mouseup="stopHolding"
-          @mouseleave="stopHolding"
+          @mousedown="handleNumericArrowHold('increment')"
+          @mouseup="handleNumericArrowRelease"
+          @mouseleave="handleNumericArrowRelease"
         />
         <vk-icon
           name="chevron-down"
           :class="classes.chevrons"
-          @mousedown="startHolding('decrement')"
-          @mouseup="stopHolding"
-          @mouseleave="stopHolding"
+          @mousedown="handleNumericArrowHold('decrement')"
+          @mouseup="handleNumericArrowRelease"
+          @mouseleave="handleNumericArrowRelease"
         />
       </span>
       <vk-icon

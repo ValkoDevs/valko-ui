@@ -7,6 +7,5 @@ export interface TextareaProps extends DefaultComponent {
   modelValue?: string;
   helpertext?: string;
   label?: string;
-  placeholder?: string;
   maxlength?: number;
 }

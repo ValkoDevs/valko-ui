@@ -8,8 +8,10 @@ export interface InputProps extends DefaultComponent {
   cursor?: InputCursor;
   modelValue?: string | number;
   helpertext?: string;
+  min?: number;
+  max?: number;
+  step?: number;
   label?: string;
-  placeholder?: string;
   disabled?: boolean;
   loading?: boolean;
   readonly?: boolean;

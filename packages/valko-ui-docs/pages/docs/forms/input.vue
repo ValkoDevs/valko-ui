@@ -16,7 +16,6 @@ const form = ref<InputProps>({
   shape: 'soft',
   modelValue: '',
   label: 'Label',
-  placeholder: 'Placeholder',
   helpertext: 'Helpertext',
   disabled: false,
   readonly: false,
@@ -98,6 +97,30 @@ const apiData: TableItem[] = [
     default: 'false'
   },
   {
+    key: 'minProp',
+    prop: 'min',
+    required: false,
+    description: 'The min value for the Input in type number',
+    values: 'number',
+    default: '-Infinity'
+  },
+  {
+    key: 'maxProp',
+    prop: 'max',
+    required: false,
+    description: 'The max value for the Input in type number',
+    values: 'number',
+    default: 'Infinity'
+  },
+  {
+    key: 'stepProp',
+    prop: 'step',
+    required: false,
+    description: 'The step value for the Input in type number',
+    values: 'number',
+    default: '1'
+  },
+  {
     key: 'readonlyProp',
     prop: 'readonly',
     required: false,
@@ -110,14 +133,6 @@ const apiData: TableItem[] = [
     prop: 'label',
     required: false,
     description: 'The label for the Input',
-    values: 'string',
-    default: 'false'
-  },
-  {
-    key: 'placeholderProp',
-    prop: 'placeholder',
-    required: false,
-    description: 'The placeholder for the Input',
     values: 'string',
     default: 'false'
   },
@@ -226,8 +241,10 @@ const iconSnippet = `<template>
         :shape="form.shape"
         :type="form.type"
         :label="form.label"
-        :placeholder="form.placeholder"
         :helpertext="form.helpertext"
+        :min="form.min"
+        :max="form.max"
+        :step="form.step"
         :clearable="form.clearable"
         @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'neutral' })"
         @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'neutral' })"
@@ -251,11 +268,6 @@ const iconSnippet = `<template>
       <vk-input
         v-model="form.label"
         label="Label"
-        size="sm"
-      />
-      <vk-input
-        v-model="form.placeholder"
-        label="Placeholder"
         size="sm"
       />
       <vk-input
@@ -292,6 +304,27 @@ const iconSnippet = `<template>
         label="Type"
         size="sm"
         :options="typeOptions"
+      />
+      <vk-input
+        v-if="form.type === 'number'"
+        v-model="form.min"
+        label="Min"
+        type="number"
+        size="sm"
+      />
+      <vk-input
+        v-if="form.type === 'number'"
+        v-model="form.max"
+        label="Max"
+        type="number"
+        size="sm"
+      />
+      <vk-input
+        v-if="form.type === 'number'"
+        v-model="form.step"
+        label="Step"
+        type="number"
+        size="sm"
       />
       <vk-checkbox
         v-model="form.disabled"

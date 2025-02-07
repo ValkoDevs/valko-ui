@@ -53,7 +53,7 @@ watch(() => props.modelValue, (newValue) => {
       <textarea
         ref="inputRef"
         :class="classes.textarea"
-        :placeholder="placeholder"
+        placeholder=" "
         :disabled="disabled"
         :readonly="readonly"
         :value="inputValue"

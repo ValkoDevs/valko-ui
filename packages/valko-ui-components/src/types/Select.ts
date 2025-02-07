@@ -9,7 +9,6 @@ export interface SelectProps extends DefaultComponent {
   options?: SelectOption[];
   modelValue?: string | number | Array<string | number>;
   label?: string;
-  placeholder?: string;
   helpertext?: string;
   multiple?: boolean;
   disabled?: boolean;
