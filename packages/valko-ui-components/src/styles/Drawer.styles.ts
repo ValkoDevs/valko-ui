@@ -153,7 +153,7 @@ export default tv({
       size: 'xs',
       class: {
         panel: [
-          'max-h-[10rem]',
+          'max-h-[25%]',
           'md:max-h-[14rem]'
         ]
       }
@@ -163,7 +163,7 @@ export default tv({
       size: 'sm',
       class: {
         panel: [
-          'max-h-[12rem]',
+          'max-h-[50%]',
           'md:max-h-[18rem]'
         ]
       }
@@ -173,7 +173,7 @@ export default tv({
       size: 'md',
       class: {
         panel: [
-          'max-h-[14rem]',
+          'max-h-[75%]',
           'md:max-h-[22rem]'
         ]
       }
@@ -183,7 +183,7 @@ export default tv({
       size: 'lg',
       class: {
         panel: [
-          'max-h-[16rem]',
+          'max-h-full',
           'md:max-h-[26rem]'
         ]
       }
@@ -193,7 +193,7 @@ export default tv({
       size: 'xs',
       class: {
         panel: [
-          'max-w-[12rem]',
+          'max-w-[25%]',
           'md:max-w-xs'
         ]
       }
@@ -203,7 +203,7 @@ export default tv({
       size: 'sm',
       class: {
         panel: [
-          'max-w-[14rem]',
+          'max-w-[50%]',
           'md:max-w-lg'
         ]
       }
@@ -213,7 +213,7 @@ export default tv({
       size: 'md',
       class: {
         panel: [
-          'max-w-[16rem]',
+          'max-w-[75%]',
           'md:max-w-xl'
         ]
       }
@@ -223,7 +223,7 @@ export default tv({
       size: 'lg',
       class: {
         panel: [
-          'max-w-[18rem]',
+          'max-w-full',
           'md:max-w-2xl'
         ]
       }

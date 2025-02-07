@@ -51,6 +51,28 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
       </nuxt-link>
     </h2>
 
+    <div class="flex gap-2 lg:hidden">
+      <theme-switch />
+      <a
+        href="https://github.com/ValkoDevs/valko-ui"
+        target="_blank"
+      >
+        <vk-button
+          variant="link"
+          shape="rounded"
+          color="neutral"
+          condensed
+          size="lg"
+          class="size-10"
+        >
+          <vk-icon
+            name="brand-github"
+            class="text-2xl"
+          />
+        </vk-button>
+      </a>
+    </div>
+
     <site-links class="hidden lg:flex" />
 
     <vk-drawer
@@ -70,28 +92,6 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
         floating
         @item-click="onItemClick"
       />
-
-      <div class="flex gap-2 px-4">
-        <theme-switch />
-        <a
-          href="https://github.com/ValkoDevs/valko-ui"
-          target="_blank"
-        >
-          <vk-button
-            variant="link"
-            shape="rounded"
-            color="neutral"
-            condensed
-            size="lg"
-            class="size-10"
-          >
-            <vk-icon
-              name="brand-github"
-              class="text-2xl"
-            />
-          </vk-button>
-        </a>
-      </div>
     </vk-drawer>
   </vk-navbar>
 
@@ -103,20 +103,19 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
       A modern library for building sleek, responsive user interfaces with ease.
     </p>
 
-    <div class="flex gap-2">
-      <nuxt-link to="/docs">
-        <vk-button
-          condensed
-          class="flex justify-between gap-2 py-2 w-40 px-4"
-        >
-          Get Started  <vk-icon name="arrow-right" />
-        </vk-button>
-      </nuxt-link>
-
+    <div class="flex flex-col md:flex-row gap-2 max-w-full items-stretch">
       <code-block
         code="npm install @valko-ui/components"
-        class="bg-light-3 dark:bg-dark-3 rounded-lg flex justify-start items-center px-4 py-2"
+        class="bg-light-3 dark:bg-dark-3 rounded-lg md:order-2"
       />
+      <nuxt-link to="/docs">
+        <vk-button class="h-full gap-2 items-center">
+          <span class="text-nowrap">Get Started</span>  <vk-icon
+            name="arrow-right"
+            class="text-xl"
+          />
+        </vk-button>
+      </nuxt-link>
     </div>
   </div>
 </template>

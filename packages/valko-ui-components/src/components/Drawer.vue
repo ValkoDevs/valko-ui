@@ -18,7 +18,8 @@ const props = withDefaults(defineProps<DrawerProps>(), {
   isOpen: false,
   closable: true,
   flat: false,
-  title: ''
+  title: '',
+  class: ''
 })
 
 const emit = defineEmits(['close'])
@@ -124,7 +125,7 @@ const transitionClasses = computed(() => {
             :leave-to="transitionClasses.leaveTo"
           >
             <dialog-panel
-              :class="classes.panel"
+              :class="[classes.panel, ...(Array.isArray(props.class) ? props.class : [props.class])]"
               :data-title="!!title"
             >
               <div
