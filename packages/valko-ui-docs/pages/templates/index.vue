@@ -35,7 +35,7 @@ const navigate = (url: string) => navigateTo(url)
 </script>
 
 <template>
-  <div class="w-full max-w-screen-xl mx-auto">
+  <div class="w-full max-w-screen-xl mx-auto px-4">
     <h1 class="text-4xl my-4">
       Templates
     </h1>
@@ -63,7 +63,7 @@ const navigate = (url: string) => navigateTo(url)
         size="xs"
       />
 
-      <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 justify-items-center">
+      <div class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8 justify-items-center">
         <vk-card
           v-for="template in templatesGroup"
           :key="template.key"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TextareaProps, TableItem } from '#valkoui'
+import { useNotification, type TextareaProps, type TableItem } from '#valkoui'
 
 const form = ref<TextareaProps>({
   color: 'primary',
@@ -12,6 +12,11 @@ const form = ref<TextareaProps>({
   disabled: false,
   readonly: false,
   maxlength: undefined
+})
+
+const iconsInForm = ref({
+  left: false,
+  right: false
 })
 
 const apiData: TableItem[] = [
@@ -72,6 +77,14 @@ const apiData: TableItem[] = [
     default: 'false'
   },
   {
+    key: 'placeholderProp',
+    prop: 'placeholder',
+    required: false,
+    description: 'The placeholder for the Textarea',
+    values: 'string',
+    default: 'false'
+  },
+  {
     key: 'helpertextProp',
     prop: 'helpertext',
     required: false,
@@ -96,10 +109,54 @@ const emitData: TableItem [] = [
     description: 'Emitted when the value of the textarea changes.',
     values: 'value: string',
     type: '(value: string) => void'
+  },
+  {
+    key: 'leftIconClickEmit',
+    event: 'leftIconClick',
+    description: 'Emitted when the left icon of the textarea is clicked.',
+    values: '',
+    type: '() => void'
+  },
+  {
+    key: 'rightIconClickEmit',
+    event: 'rightIconClick',
+    description: 'Emitted when the right icon of the textarea is clicked.',
+    values: '',
+    type: '() => void'
+  }
+]
+
+const slotData: TableItem[] = [
+  {
+    key: 'leftIconSlot',
+    name: 'left-icon',
+    description: 'Slot for placing an icon on the left side of the textarea field. This slot is typically used to include an icon for visual enhancement or to indicate textarea type.',
+    example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>'
+  },
+  {
+    key: 'rightIconSlot',
+    name: 'right-icon',
+    description: 'Slot for placing an icon on the right side of the textarea field. This slot is typically used to include an icon for actions like clear the textarea.',
+    example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>'
   }
 ]
 
 const generateSnippet = snippetGeneratorFactory('vk-textarea')
+
+const iconSnippet = `<template>
+  <vk-textarea>
+    <template #left-icon>
+      <vk-icon name="home" />
+    </template>
+  </vk-textarea>
+
+  <vk-textarea>
+    <template #right-icon>
+      <vk-icon name="home" />
+    </template>
+  </vk-textarea>
+</template>
+`
 </script>
 
 <template>
@@ -119,7 +176,22 @@ const generateSnippet = snippetGeneratorFactory('vk-textarea')
         :label="form.label"
         :maxlength="form.maxlength"
         :helpertext="form.helpertext"
-      />
+        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'neutral' })"
+        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'neutral' })"
+      >
+        <template
+          v-if="iconsInForm.left"
+          #left-icon
+        >
+          <vk-icon name="home" />
+        </template>
+        <template
+          v-if="iconsInForm.right"
+          #right-icon
+        >
+          <vk-icon name="home" />
+        </template>
+      </vk-textarea>
     </template>
 
     <template #playground-options>
@@ -170,6 +242,14 @@ const generateSnippet = snippetGeneratorFactory('vk-textarea')
       <vk-checkbox
         v-model="form.readonly"
         label="Readonly"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.left"
+        label="Left Icon"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.right"
+        label="Right Icon"
       />
     </template>
 
@@ -260,6 +340,31 @@ const generateSnippet = snippetGeneratorFactory('vk-textarea')
           <code-block :code="generateSnippet<boolean>('readonly', { values: [true] })" />
         </template>
       </example-section>
+
+      <example-section
+        title="Icons"
+        classes="sm:grid-cols-2"
+      >
+        <vk-textarea
+          label="Left Icon"
+        >
+          <template #left-icon>
+            <vk-icon name="home" />
+          </template>
+        </vk-textarea>
+
+        <vk-textarea
+          label="Right Icon"
+        >
+          <template #right-icon>
+            <vk-icon name="home" />
+          </template>
+        </vk-textarea>
+
+        <template #code>
+          <code-block :code="iconSnippet" />
+        </template>
+      </example-section>
     </template>
 
     <template #api>
@@ -267,6 +372,12 @@ const generateSnippet = snippetGeneratorFactory('vk-textarea')
       <vk-table
         :headers="propHeaders"
         :data="apiData"
+      />
+
+      <h3>Textarea Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="slotData"
       />
 
       <h3>Textarea Emits</h3>

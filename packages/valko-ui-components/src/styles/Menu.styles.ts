@@ -17,9 +17,11 @@ export default tv({
     content: [
       'vk-menu__content',
       'w-full',
-      'flex',
       'py-2.5',
       'px-4',
+      'flex',
+      'text-nowrap',
+      'text-left',
       'transition-color',
       'duration-200',
       'hover:bg-light-3',

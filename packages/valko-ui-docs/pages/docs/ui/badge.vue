@@ -3,12 +3,11 @@ import type { BadgeProps, TableItem, Corner, SelectOption } from '#valkoui'
 
 const form = ref<BadgeProps>({
   color: 'primary',
+  variant: 'filled',
   shape: 'soft',
   size: 'md',
   placement: 'top-right',
   content: 'new',
-  gradient: false,
-  outlined: false,
   flat: false,
   hidden: false,
   dot: false
@@ -123,16 +122,15 @@ const extraProps = {
   >
     <template #playground-view>
       <vk-badge
+        :color="form.color"
+        :variant="form.variant"
         :size="form.size"
         :shape="form.shape"
-        :color="form.color"
         :placement="form.placement"
         :content="form.content"
-        :outlined="form.outlined"
         :flat="form.flat"
         :hidden="form.hidden"
         :dot="form.dot"
-        :gradient="form.gradient"
       >
         <vk-avatar
           :src="src"
@@ -147,6 +145,12 @@ const extraProps = {
         label="Color"
         size="sm"
         :options="colorOptions"
+      />
+      <vk-select
+        v-model="form.variant"
+        label="Variant"
+        size="sm"
+        :options="variantOptions.withGradient"
       />
       <vk-select
         v-model="form.shape"
@@ -171,10 +175,6 @@ const extraProps = {
         :options="placementOptions"
       />
       <vk-checkbox
-        v-model="form.outlined"
-        label="Outlined"
-      />
-      <vk-checkbox
         v-model="form.flat"
         label="Flat"
       />
@@ -185,10 +185,6 @@ const extraProps = {
       <vk-checkbox
         v-model="form.dot"
         label="Dot"
-      />
-      <vk-checkbox
-        v-model="form.gradient"
-        label="Gradient"
       />
     </template>
 
@@ -216,6 +212,32 @@ const extraProps = {
 
         <template #code>
           <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), customSlot, extraProps: extraProps.content })" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Variants"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+      >
+        <div
+          v-for="variant in variantOptions.withGradient"
+          :key="variant.value"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
+        >
+          <span>{{ variant.label }}</span>
+          <vk-badge
+            :variant="variant.value"
+            content="new"
+          >
+            <vk-avatar
+              :src="src"
+              color="neutral"
+            />
+          </vk-badge>
+        </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('variant', { values: variantOptions.withGradient.map(o => o.value), customSlot, extraProps: extraProps.content })" />
         </template>
       </example-section>
 

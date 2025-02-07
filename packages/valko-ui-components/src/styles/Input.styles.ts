@@ -7,7 +7,7 @@ export default tv({
       'w-full',
       'flex',
       'flex-col',
-      'justify-items-start'
+      'gap-1'
     ],
     input: [
       'vk-input__input',
@@ -18,10 +18,12 @@ export default tv({
       'transition-colors',
       'duration-200',
       'ease-in-out',
-      'focus:ring-0',
       'overflow-hidden',
-      'data-[rightIcon=false]:pr-2',
-      'data-[rightIcon=true]:pr-8'
+      'placeholder:invisible',
+      'focus:ring-0',
+      'focus:placeholder:visible',
+      'data-[right-icon=false]:pr-2',
+      'data-[right-icon=true]:pr-8'
     ],
     label: [
       'vk-input__label',
@@ -56,17 +58,10 @@ export default tv({
     ],
     helper: [
       'vk-input__helper',
-      'w-full',
-      'mt-1',
-      'origin-top-left',
-      'transition-all',
-      'duration-200',
-      'break-words',
-      'break-before-all',
-      'inline-block',
-      'scale-[.8]'
+      'break-normal',
+      'text-gray-500'
     ],
-    icon: [
+    icons: [
       'cursor-pointer',
       'opacity-80',
       'absolute',
@@ -74,16 +69,16 @@ export default tv({
       'top-1/2',
       '-translate-y-1/2'
     ],
-    iconRight: [
+    rightIcon: [
       'right-1'
     ],
-    iconLeft: [
+    leftIcon: [
       'left-1'
     ],
     iconOpen: [
       'rotate-180'
     ],
-    iconClear: [
+    clearIcon: [
       'text-dark-1',
       'cursor-pointer',
       'opacity-80',
@@ -94,7 +89,18 @@ export default tv({
       'scale-90',
       'right-1',
       'dark:text-light-5'
-    ]
+    ],
+    numberArrows: [
+      'flex',
+      'flex-col',
+      'gap-1',
+      'absolute',
+      'right-2',
+      'top-1/2',
+      '-translate-y-1/2',
+      'cursor-pointer'
+    ],
+    chevrons: []
   },
   variants: {
     variant: {
@@ -126,12 +132,12 @@ export default tv({
         label: [
           'left-1.5',
           'bg-transparent',
-          'peer-data-[leftIcon=true]:ml-0.5'
+          'peer-data-[left-icon=true]:ml-0.5'
         ],
-        iconLeft: [
+        leftIcon: [
           'left-1.5'
         ],
-        iconRight: [
+        rightIcon: [
           'right-1.5'
         ]
       }
@@ -143,18 +149,17 @@ export default tv({
           'peer-focus:text-primary-500',
           'dark:text-light-2'
         ],
-        helper: [
-          'text-dark-1',
-          'dark:text-light-3'
-        ],
-        icon: [
+        icons: [
           'text-dark-2',
           'peer-focus:text-primary-500',
           'dark:text-light-2'
         ],
-        iconClear: [
+        clearIcon: [
           'hover:text-primary-500',
           'dark:hover:text-primary-500'
+        ],
+        chevrons: [
+          'hover:text-primary-500'
         ]
       },
       neutral: {
@@ -164,19 +169,17 @@ export default tv({
           'dark:text-light-3',
           'dark:peer-focus:text-light-1'
         ],
-        helper: [
+        icons: [
           'text-dark-1',
           'peer-focus:text-dark-3',
           'dark:text-light-3',
           'dark:peer-focus:text-light-1'
         ],
-        icon: [
-          'text-dark-1',
-          'peer-focus:text-dark-3',
-          'dark:text-light-3',
-          'dark:peer-focus:text-light-1'
+        clearIcon: [
+          'hover:text-dark-5',
+          'dark:hover:text-light-1'
         ],
-        iconClear: [
+        chevrons: [
           'hover:text-dark-5',
           'dark:hover:text-light-1'
         ]
@@ -191,14 +194,17 @@ export default tv({
           'text-success-500',
           'dark:text-success-500'
         ],
-        icon: [
+        icons: [
           'text-success-500',
           'focus:text-success-950',
           'dark:text-success-500'
         ],
-        iconClear: [
+        clearIcon: [
           'hover:text-success-500',
           'dark:hover:text-success-500'
+        ],
+        chevrons: [
+          'hover:text-success-500'
         ]
       },
       info: {
@@ -211,14 +217,17 @@ export default tv({
           'text-info-500',
           'dark:text-info-500'
         ],
-        icon: [
+        icons: [
           'text-info-500',
           'focus:text-info-950',
           'dark:text-info-500'
         ],
-        iconClear: [
+        clearIcon: [
           'hover:text-info-500',
           'dark:hover:text-info-500'
+        ],
+        chevrons: [
+          'hover:text-info-500'
         ]
       },
       warning: {
@@ -231,14 +240,17 @@ export default tv({
           'text-warning-500',
           'dark:text-warning-500'
         ],
-        icon: [
+        icons: [
           'text-warning-500',
           'focus:text-warning-950',
           'dark:text-warning-500'
         ],
-        iconClear: [
+        clearIcon: [
           'hover:text-warning-500',
           'dark:hover:text-warning-500'
+        ],
+        chevrons: [
+          'hover:text-warning-500'
         ]
       },
       error: {
@@ -251,14 +263,17 @@ export default tv({
           'text-error-500',
           'dark:text-error-500'
         ],
-        icon: [
+        icons: [
           'text-error-500',
           'focus:text-error-950',
           'dark:text-error-500'
         ],
-        iconClear: [
+        clearIcon: [
           'hover:text-error-500',
           'dark:hover:text-error-500'
+        ],
+        chevrons: [
+          'hover:text-error-500'
         ]
       }
     },
@@ -268,17 +283,21 @@ export default tv({
           'h-10',
           'pt-2',
           'text-xs',
-          'data-[leftIcon=true]:pl-6'
+          'data-[left-icon=true]:pl-6'
         ],
         label: [
           'text-xs',
-          'peer-data-[leftIcon=true]:left-5'
+          'peer-data-[left-icon=true]:left-5'
         ],
         helper: [
           'text-xs'
         ],
-        icon: [
+        icons: [
           'text-[16px]'
+        ],
+        chevrons: [
+          'text-xs',
+          'leading-none'
         ]
       },
       sm: {
@@ -286,17 +305,21 @@ export default tv({
           'h-12',
           'pt-2.5',
           'text-sm',
-          'data-[leftIcon=true]:pl-7'
+          'data-[left-icon=true]:pl-7'
         ],
         label: [
           'text-sm',
-          'peer-data-[leftIcon=true]:left-6'
+          'peer-data-[left-icon=true]:left-6'
         ],
         helper: [
-          'text-sm'
+          'text-xs'
         ],
-        icon: [
+        icons: [
           'text-[20px]'
+        ],
+        chevrons: [
+          'text-sm',
+          'leading-none'
         ]
       },
       md: {
@@ -304,17 +327,21 @@ export default tv({
           'h-14',
           'pt-3',
           'text-base',
-          'data-[leftIcon=true]:pl-8'
+          'data-[left-icon=true]:pl-8'
         ],
         label: [
           'text-base',
-          'peer-data-[leftIcon=true]:left-7'
+          'peer-data-[left-icon=true]:left-7'
         ],
         helper: [
-          'text-base'
+          'text-sm'
         ],
-        icon: [
+        icons: [
           'text-[24px]'
+        ],
+        chevrons: [
+          'text-base',
+          'leading-none'
         ]
       },
       lg: {
@@ -322,17 +349,21 @@ export default tv({
           'h-16',
           'pt-4',
           'text-lg',
-          'data-[leftIcon=true]:pl-9'
+          'data-[left-icon=true]:pl-9'
         ],
         label: [
           'text-lg',
           'peer-data-[leftIcon=true]:left-8'
         ],
         helper: [
-          'text-lg'
+          'text-base'
         ],
-        icon: [
+        icons: [
           'text-[28px]'
+        ],
+        chevrons: [
+          'text-lg',
+          'leading-none'
         ]
       }
     },
@@ -639,11 +670,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1rem_-_1px)]',
-          'data-[leftIcon=true]:pl-6'
+          'data-[left-icon=true]:pl-6'
         ],
         label: [
           'ml-2',
-          'peer-data-[leftIcon=true]:ml-[1px]'
+          'peer-data-[left-icon=true]:ml-[1px]'
         ],
         helper: [
           'ml-4'
@@ -657,11 +688,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1.25rem_-_1px)]',
-          'data-[leftIcon=true]:[calc(1.75rem_+_1px)]'
+          'data-[left-icon=true]:[calc(1.75rem_+_1px)]'
         ],
         label: [
           'ml-3',
-          'peer-data-[leftIcon=true]:ml-[1px]'
+          'peer-data-[left-icon=true]:ml-[1px]'
         ],
         helper: [
           'ml-6'
@@ -675,11 +706,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1.5rem_-_1px)]',
-          'data-[leftIcon=true]:pl-8'
+          'data-[left-icon=true]:pl-8'
         ],
         label: [
           'ml-4',
-          'peer-data-[leftIcon=true]:ml-[1px]'
+          'peer-data-[left-icon=true]:ml-[1px]'
         ],
         helper: [
           'ml-6'
@@ -693,11 +724,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1.75rem_-_1px)]',
-          'data-[leftIcon=true]:[calc(2.25rem_+_1px)]'
+          'data-[left-icon=true]:[calc(2.25rem_+_1px)]'
         ],
         label: [
           'ml-5',
-          'peer-data-[leftIcon=true]:ml-[1px]'
+          'peer-data-[left-icon=true]:ml-[1px]'
         ],
         helper: [
           'ml-8'
@@ -712,11 +743,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1rem_-_3px)]',
-          'data-[leftIcon=true]:pl-[calc(1.5rem_-_2px)]'
+          'data-[left-icon=true]:pl-[calc(1.5rem_-_2px)]'
         ],
         label: [
           'ml-[calc(0.5rem_-_2px)]',
-          'peer-data-[leftIcon=true]:ml-[1px]'
+          'peer-data-[left-icon=true]:ml-[1px]'
         ],
         helper: [
           'ml-4'
@@ -730,11 +761,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1.17rem_-_1px)]',
-          'data-[leftIcon=true]:pl-[1.67rem]'
+          'data-[left-icon=true]:pl-[1.67rem]'
         ],
         label: [
           'ml-[calc(0.75rem_-_1px)]',
-          'peer-data-[leftIcon=true]:ml-[1px]'
+          'peer-data-[left-icon=true]:ml-[1px]'
         ],
         helper: [
           'ml-5'
@@ -748,11 +779,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1.5rem_-_3px)]',
-          'data-[leftIcon=true]:pl-[calc(2rem_-_2px)]'
+          'data-[left-icon=true]:pl-[calc(2rem_-_2px)]'
         ],
         label: [
           'ml-[calc(1rem_-_2px)]',
-          'peer-data-[leftIcon=true]:ml-[1px]'
+          'peer-data-[left-icon=true]:ml-[1px]'
         ],
         helper: [
           'ml-6'
@@ -766,11 +797,11 @@ export default tv({
       class: {
         input: [
           'pl-[calc(1.75rem_-_3px)]',
-          'data-[leftIcon=true]:pl-[calc(2.25rem_-_2px)]'
+          'data-[left-icon=true]:pl-[calc(2.25rem_-_2px)]'
         ],
         label: [
           'ml-[calc(1.25rem_-_2px)]',
-          'peer-data-[leftIcon=true]:ml-[1px]'
+          'peer-data-[left-icon=true]:ml-[1px]'
         ],
         helper: [
           'ml-7'
@@ -810,8 +841,8 @@ export default tv({
       clearable: true,
       size: 'xs',
       class: {
-        iconClear: [
-          'data-[rightIcon=true]:-translate-x-5'
+        clearIcon: [
+          'data-[right-icon=true]:-translate-x-5'
         ]
       }
     },
@@ -819,8 +850,8 @@ export default tv({
       clearable: true,
       size: 'sm',
       class: {
-        iconClear: [
-          'data-[rightIcon=true]:-translate-x-6'
+        clearIcon: [
+          'data-[right-icon=true]:-translate-x-6'
         ]
       }
     },
@@ -828,8 +859,8 @@ export default tv({
       clearable: true,
       size: 'md',
       class: {
-        iconClear: [
-          'data-[rightIcon=true]:-translate-x-7'
+        clearIcon: [
+          'data-[right-icon=true]:-translate-x-7'
         ]
       }
     },
@@ -837,8 +868,8 @@ export default tv({
       clearable: true,
       size: 'lg',
       class: {
-        iconClear: [
-          'data-[rightIcon=true]:-translate-x-8'
+        clearIcon: [
+          'data-[right-icon=true]:-translate-x-8'
         ]
       }
     }

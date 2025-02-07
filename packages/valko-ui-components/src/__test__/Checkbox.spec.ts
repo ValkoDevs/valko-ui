@@ -10,7 +10,7 @@ describe('Checkbox component', () => {
       })
 
       it('should render', () => {
-        expect(wrapper.find('.vk-checkbox__container').exists()).toBe(true)
+        expect(wrapper.find('.vk-checkbox').exists()).toBe(true)
       })
 
       it('should be color primary', () => {
@@ -247,7 +247,7 @@ describe('Checkbox component', () => {
         }
       })
 
-      expect(wrapper.find('.inline-block').text()).toContain('Hello World')
+      expect(wrapper.find('.vk-checkbox__helpertext').text()).toContain('Hello World')
     })
   })
 

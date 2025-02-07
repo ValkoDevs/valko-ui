@@ -18,7 +18,8 @@ const props = withDefaults(defineProps<DrawerProps>(), {
   isOpen: false,
   closable: true,
   flat: false,
-  title: 'Drawer'
+  title: '',
+  class: ''
 })
 
 const emit = defineEmits(['close'])
@@ -124,7 +125,8 @@ const transitionClasses = computed(() => {
             :leave-to="transitionClasses.leaveTo"
           >
             <dialog-panel
-              :class="classes.panel"
+              :class="[classes.panel, ...(Array.isArray(props.class) ? props.class : [props.class])]"
+              :data-title="!!title"
             >
               <div
                 v-if="title || closable"
@@ -151,7 +153,9 @@ const transitionClasses = computed(() => {
                   </div>
                 </vk-button>
               </div>
-              <slot />
+              <div :class="classes.slotContent">
+                <slot />
+              </div>
             </dialog-panel>
           </transition-child>
         </div>

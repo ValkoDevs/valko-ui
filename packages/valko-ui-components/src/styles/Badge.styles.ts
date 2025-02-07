@@ -8,8 +8,8 @@ export default tv({
       'flex',
       'relative'
     ],
-    content: [
-      'vk-badge__content',
+    badge: [
+      'vk-badge__badge',
       'text-white',
       'shadow-sm',
       'shadow-light-3',
@@ -24,37 +24,26 @@ export default tv({
   },
   variants: {
     color: {
-      primary: {
-        content: [
-          'bg-primary-500'
+      primary: {},
+      neutral: {},
+      success: {},
+      info: {},
+      warning: {},
+      error: {}
+    },
+    variant: {
+      filled: {},
+      ghost: {},
+      outlined: {
+        badge: [
+          'border-2',
+          'border-light-1',
+          'dark:border-dark-3'
         ]
       },
-      neutral: {
-        content: [
-          'bg-light-3',
-          'text-dark-1',
-          'dark:bg-dark-2',
-          'dark:text-light-3'
-        ]
-      },
-      success: {
-        content: [
-          'bg-success-500'
-        ]
-      },
-      info: {
-        content: [
-          'bg-info-500'
-        ]
-      },
-      warning: {
-        content: [
-          'bg-warning-500'
-        ]
-      },
-      error: {
-        content: [
-          'bg-error-500'
+      gradient: {
+        badge: [
+          'bg-gradient-to-br'
         ]
       }
     },
@@ -66,24 +55,24 @@ export default tv({
     },
     shape: {
       rounded: {
-        content: [
+        badge: [
           'rounded-full'
         ]
       },
       soft: {
-        content: [
+        badge: [
           'rounded-lg'
         ]
       },
       square: {
-        content: [
+        badge: [
           'rounded-none'
         ]
       }
     },
     placement: {
       'top-right': {
-        content: [
+        badge: [
           'top-0',
           'right-0',
           'origin-top-right',
@@ -92,7 +81,7 @@ export default tv({
         ]
       },
       'top-left': {
-        content: [
+        badge: [
           'top-0',
           'left-0',
           'origin-top-left',
@@ -101,7 +90,7 @@ export default tv({
         ]
       },
       'bottom-right': {
-        content: [
+        badge: [
           'bottom-0',
           'right-0',
           'origin-bottom-right',
@@ -110,7 +99,7 @@ export default tv({
         ]
       },
       'bottom-left': {
-        content: [
+        badge: [
           'bottom-0',
           'left-0',
           'origin-bottom-left',
@@ -119,57 +108,154 @@ export default tv({
         ]
       }
     },
-    outlined: {
-      true: {
-        content: [
-          'border-2',
-          'border-light-1',
-          'dark:border-dark-3'
-        ]
-      }
-    },
     flat: {
       true: {
-        content: [
+        badge: [
           'shadow-none'
         ]
       }
     },
     hidden: {
       true: {
-        content: [
+        badge: [
           'hidden'
         ]
       }
     },
     dot: {
       true: {}
-    },
-    gradient: {
-      true: {
-        content: [
-          'bg-gradient-to-br'
-        ]
-      }
     }
   },
   compoundVariants: [
-    // gradient & color
+    // filled & outlined & color
     {
-      gradient: true,
+      variant: ['filled', 'outlined'],
       color: 'primary',
       class: {
-        content: [
+        badge: [
+          'bg-primary-500'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'neutral',
+      class: {
+        badge: [
+          'bg-light-3',
+          'text-dark-1',
+          'dark:bg-dark-2',
+          'dark:text-light-3'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'success',
+      class: {
+        badge: [
+          'bg-success-500'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'info',
+      class: {
+        badge: [
+          'bg-info-500'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'warning',
+      class: {
+        badge: [
+          'bg-warning-500'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'error',
+      class: {
+        badge: [
+          'bg-error-500'
+        ]
+      }
+    },
+    // ghost & color
+    {
+      variant: 'ghost',
+      color: 'primary',
+      class: {
+        badge: [
+          'bg-primary-500/[.7]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'neutral',
+      class: {
+        badge: [
+          'bg-neutral-500/[.7]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'success',
+      class: {
+        badge: [
+          'bg-success-500/[.7]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'info',
+      class: {
+        badge: [
+          'bg-info-500/[.7]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'warning',
+      class: {
+        badge: [
+          'bg-warning-500/[.7]'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'error',
+      class: {
+        badge: [
+          'bg-error-500/[.3]'
+        ]
+      }
+    },
+    // gradient & color
+    {
+      variant: 'gradient',
+      color: 'primary',
+      class: {
+        badge: [
           'from-primary-500',
           'to-primary-900'
         ]
       }
     },
     {
-      gradient: true,
+      variant: 'gradient',
       color: 'neutral',
       class: {
-        content: [
+        badge: [
           'from-light-1',
           'to-light-5',
           'text-dark-1',
@@ -178,40 +264,40 @@ export default tv({
       }
     },
     {
-      gradient: true,
+      variant: 'gradient',
       color: 'success',
       class: {
-        content: [
+        badge: [
           'from-success-500',
           'to-success-900'
         ]
       }
     },
     {
-      gradient: true,
+      variant: 'gradient',
       color: 'info',
       class: {
-        content: [
+        badge: [
           'from-info-500',
           'to-info-900'
         ]
       }
     },
     {
-      gradient: true,
+      variant: 'gradient',
       color: 'warning',
       class: {
-        content: [
+        badge: [
           'from-warning-500',
           'to-warning-900'
         ]
       }
     },
     {
-      gradient: true,
+      variant: 'gradient',
       color: 'error',
       class: {
-        content: [
+        badge: [
           'from-error-500',
           'to-error-900'
         ]
@@ -222,7 +308,7 @@ export default tv({
       size: 'xs',
       dot: false,
       class: {
-        content: [
+        badge: [
           'text-[0.6321875rem]',
           'leading-[0.6321875rem]',
           'p-[0.180625rem]'
@@ -233,7 +319,7 @@ export default tv({
       size: 'sm',
       dot: false,
       class: {
-        content: [
+        badge: [
           'text-[0.74375rem]',
           'leading-[0.74375rem]',
           'p-[0.2125rem]'
@@ -244,7 +330,7 @@ export default tv({
       size: 'md',
       dot: false,
       class: {
-        content: [
+        badge: [
           'text-sm',
           'leading-[0.875rem]',
           'p-1'
@@ -255,7 +341,7 @@ export default tv({
       size: 'lg',
       dot: false,
       class: {
-        content: [
+        badge: [
           'text-[1.00625rem]',
           'leading-[1.00625rem]',
           'p-[0.2875rem]'
@@ -266,7 +352,7 @@ export default tv({
       size: 'xs',
       dot: true,
       class: {
-        content: [
+        badge: [
           'size-3'
         ]
       }
@@ -275,7 +361,7 @@ export default tv({
       size: 'sm',
       dot: true,
       class: {
-        content: [
+        badge: [
           'size-3.5'
         ]
       }
@@ -284,7 +370,7 @@ export default tv({
       size: 'md',
       dot: true,
       class: {
-        content: [
+        badge: [
           'size-4'
         ]
       }
@@ -293,7 +379,7 @@ export default tv({
       size: 'lg',
       dot: true,
       class: {
-        content: [
+        badge: [
           'size-5'
         ]
       }

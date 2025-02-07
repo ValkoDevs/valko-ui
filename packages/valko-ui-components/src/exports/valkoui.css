@@ -3,6 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  input.vk-input__input[type='number']::-webkit-outer-spin-button,
+  input.vk-input__input[type='number']::-webkit-inner-spin-button,
+  input.vk-input__input[type='number'] {
+    -webkit-appearance: none;
+    margin: 0;
+    -moz-appearance: textfield !important;
+  }
+}
+
 @layer components {
   ::-webkit-scrollbar {
     width: 0.35rem;

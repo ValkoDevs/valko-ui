@@ -136,7 +136,7 @@ onUnmounted(() => {
         @focus="() => toggleDropdown(true)"
         @clear="clearSelection"
       >
-        <template #rightIcon>
+        <template #right-icon>
           <vk-icon
             name="chevron-down"
             :data-open="isOpen"

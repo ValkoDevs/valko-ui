@@ -7,4 +7,5 @@ export interface DrawerProps extends Shapes, Sizes {
   title?: string;
   closable?: boolean;
   flat?: boolean;
+  class?: string | string[];
 }

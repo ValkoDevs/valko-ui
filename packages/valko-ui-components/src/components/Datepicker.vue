@@ -49,7 +49,7 @@ onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside,
       @focus="emit('open')"
       @right-icon-click="emit('open')"
     >
-      <template #rightIcon>
+      <template #right-icon>
         <vk-icon name="calendar" />
       </template>
     </vk-input>

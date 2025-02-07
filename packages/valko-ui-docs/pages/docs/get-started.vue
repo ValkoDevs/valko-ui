@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const selectedTab = ref(0)
+
 const tabs = [
   { key: 'npm', title: 'npm' },
   { key: 'yarn', title: 'yarn' },
@@ -100,93 +102,70 @@ const counter = ref(0)
         <h3 class="text-lg font-medium">
           1. Create a Nuxt Project
         </h3>
-        <code-block
-          code="npx nuxi@latest init"
-          class="p-5 bg-light-3 dark:bg-dark-3 rounded-lg mt-2"
-        />
+        <code-block code="npx nuxi@latest init" />
       </div>
 
       <div class="mt-4">
         <h3 class="text-lg font-medium">
-          2. Install ValkoUI
-        </h3>
-        <code-block
-          code="npm install @valko-ui/components"
-          class="p-5 bg-light-3 dark:bg-dark-3 rounded-lg mt-2"
-        />
-      </div>
-
-      <div class="mt-4">
-        <h3 class="text-lg font-medium">
-          3. Install TailwindCSS
+          2. Install TailwindCSS
         </h3>
         <vk-tabs
+          v-model="selectedTab"
           :tabs="tabs"
           shape="line"
           variant="ghost"
           grow
         >
           <template #npm>
-            <code-block
-              code="npm install --save-dev @nuxtjs/tailwindcss"
-              class="p-5 bg-light-3 dark:bg-dark-3 rounded-lg mt-2"
-            />
+            <code-block code="npm install --save-dev @nuxtjs/tailwindcss" />
           </template>
           <template #yarn>
-            <code-block
-              code="yarn add --dev @nuxtjs/tailwindcss"
-              class="p-5 bg-light-3 dark:bg-dark-3 rounded-lg mt-2"
-            />
+            <code-block code="yarn add --dev @nuxtjs/tailwindcss" />
           </template>
           <template #pnpm>
-            <code-block
-              code="pnpm add --save-dev @nuxtjs/tailwindcss"
-              class="p-5 bg-light-3 dark:bg-dark-3 rounded-lg mt-2"
-            />
+            <code-block code="pnpm add --save-dev @nuxtjs/tailwindcss" />
           </template>
         </vk-tabs>
       </div>
 
       <div class="mt-4">
         <h3 class="text-lg font-medium">
-          4. Install Tailwind Variants
+          3. Install Tailwind Variants
         </h3>
         <vk-tabs
+          v-model="selectedTab"
           :tabs="tabs"
           shape="line"
           variant="ghost"
           grow
         >
           <template #npm>
-            <code-block
-              code="npm install tailwind-variants"
-              class="p-5 bg-light-3 dark:bg-dark-3 rounded-lg mt-2"
-            />
+            <code-block code="npm install tailwind-variants" />
           </template>
           <template #yarn>
-            <code-block
-              code="yarn add tailwind-variants"
-              class="p-5 bg-light-3 dark:bg-dark-3 rounded-lg mt-2"
-            />
+            <code-block code="yarn add tailwind-variants" />
           </template>
           <template #pnpm>
-            <code-block
-              code="pnpm add tailwind-variants"
-              class="p-5 bg-light-3 dark:bg-dark-3 rounded-lg mt-2"
-            />
+            <code-block code="pnpm add tailwind-variants" />
           </template>
         </vk-tabs>
+      </div>
+
+      <div class="mt-4">
+        <h3 class="text-lg font-medium">
+          4. Install ValkoUI
+        </h3>
+        <code-block code="npm install @valko-ui/components" />
       </div>
 
       <div class="mt-4">
         <h3 class="text-lg font-medium">
           5. Configure Nuxt
         </h3>
-        <p>Add the ValkoUI and TailwindCSS modules to your Nuxt configuration file:</p>
+        <p>Add the ValkoUI and TailwindCSS modules to your <span class="text-primary-500">nuxt.config.ts</span> file:</p>
         <code-block
           :code="nuxtConfig"
           language="ts"
-          class="p-5 bg-light-3 dark:bg-dark-3 rounded-lg mt-2"
         />
       </div>
 
@@ -195,15 +174,11 @@ const counter = ref(0)
           6. Initialize Tailwind Config
         </h3>
         <p>Run the following command to create a TailwindCSS configuration file:</p>
-        <code-block
-          code="npx tailwindcss init"
-          class="p-5 bg-light-3 dark:bg-dark-3 rounded-lg mt-2"
-        />
-        <p>Then update your <code>tailwind.config.js</code> to include the ValkoUI preset:</p>
+        <code-block code="npx tailwindcss init" />
+        <p>Then update your <span class="text-primary-500">tailwind.config.js</span> file to include the ValkoUI preset:</p>
         <code-block
           :code="tailwindConfig"
           language="ts"
-          class="p-5 bg-light-3 dark:bg-dark-3 rounded-lg mt-2"
         />
       </div>
 
@@ -212,10 +187,7 @@ const counter = ref(0)
           7. You're ready to build!
         </h3>
         <p>Now that everything is set up, you can start using ValkoUI components in your project. Here's a small example to get you started:</p>
-        <code-block
-          :code="example"
-          class="p-5 bg-light-3 dark:bg-dark-3 rounded-lg mt-2"
-        />
+        <code-block :code="example" />
       </div>
     </div>
   </div>

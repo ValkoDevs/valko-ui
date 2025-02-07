@@ -322,12 +322,13 @@ const customSlot = `<vk-card-image :src="imgSrc" />
 
       <example-section
         title="Layout"
-        classes="sm:grid-cols-2 lg:grid-cols-3"
+        classes="md:grid-cols-1 lg:grid-cols-2"
       >
         <vk-card
           v-for="layout in layoutOptions"
           :key="layout.value"
           :layout="layout.value"
+          :class="layout.value === 'horizontal' ? 'col-span-full' : 'col-span-1'"
         >
           <vk-card-image
             src="/assets/flower-m.jpg"
@@ -351,13 +352,14 @@ const customSlot = `<vk-card-image :src="imgSrc" />
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 lg:grid-cols-3"
+        classes="grid-cols-1 lg:grid-cols-2"
       >
         <vk-card
           v-for="size in sizeOptions.withFull"
           :key="size.value"
           :size="size.value"
           :layout="size.value === 'full' ? 'horizontal' : 'vertical'"
+          :class="size.value === 'full' ? 'col-span-full' : 'col-span-1'"
         >
           <vk-card-image
             src="/assets/flower-m.jpg"
