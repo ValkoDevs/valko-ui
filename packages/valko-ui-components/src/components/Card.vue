@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineSlots } from 'vue'
+import { computed } from 'vue'
 import type { CardProps } from '#valkoui/types/Card'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import styles from '#valkoui/styles/Card.styles.ts'
