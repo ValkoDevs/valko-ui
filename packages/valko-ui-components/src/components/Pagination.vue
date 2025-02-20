@@ -21,41 +21,19 @@ const emit = defineEmits(['update:modelValue'])
 
 const classes = useStyle<PaginationProps, SlotStyles>(props, styles)
 
-const pages = computed(() => {
-  const maxPages = props.pages < 7 ? props.pages : 7
-  const currentPage = props.modelValue
-  const totalPages = +props.pages
-  let pagesArr: Array<string | number>
-  if (totalPages > 7 && currentPage <= 4) {
-    pagesArr = [
-      1,
-      currentPage > 4 ? '...' : 2,
-      currentPage > 4 ? currentPage - 1 : 3,
-      currentPage > 4 ? currentPage : 4,
-      currentPage > 4 ? currentPage + 1 : 5,
-      '...',
-      totalPages
-    ]
-  } else if (totalPages > 7 && currentPage >= 5) {
-    pagesArr = [
-      1,
-      '...',
-      currentPage < totalPages - 3 ? currentPage - 1 : totalPages - 4,
-      currentPage < totalPages - 3 ? currentPage : totalPages - 3,
-      currentPage < totalPages - 3 ? currentPage + 1 : totalPages - 2,
-      currentPage < totalPages - 3 ? '...' : totalPages - 1,
-      totalPages
-    ]
-  } else {
-    pagesArr = Array.from({ length: maxPages }, (_, i) => i + 1)
-  }
-  return pagesArr
+const visiblePages = computed(() => {
+  const total = +props.pages
+  const current = props.modelValue
+
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+  if (current <= 4) return [1, 2, 3, 4, 5, '...', total]
+  if (current > total - 4) return [1, '...', total - 4, total - 3, total - 2, total - 1, total]
+
+  return [1, '...', current - 1, current, current + 1, '...', total]
 })
 
 const changePage = (page: string | number) => {
-  if (page !== props.modelValue && page !== '...' && !props.disabled)
-    emit('update:modelValue', page)
-
+  if (+page !== props.modelValue && page !== '...' && !props.disabled) emit('update:modelValue', page)
 }
 
 watchEffect(() => {
@@ -85,7 +63,7 @@ watchEffect(() => {
         </div>
       </vk-button>
       <vk-button
-        v-for="page in pages"
+        v-for="page in visiblePages"
         :key="page"
         flat
         :variant="page === modelValue ? variant : 'link'"

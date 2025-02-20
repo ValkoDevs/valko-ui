@@ -14,6 +14,7 @@ const props = withDefaults(defineProps<ModalProps>(), {
   size: 'md',
   shape: 'soft',
   backdrop: 'opaque',
+  title: '',
   closable: true,
   isOpen: false,
   flat: false

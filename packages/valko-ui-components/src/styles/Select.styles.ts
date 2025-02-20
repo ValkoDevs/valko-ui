@@ -19,6 +19,7 @@ export default tv({
       'placeholder-shown:truncate'
     ],
     dropdown: [
+      'vk-select__dropdown',
       'absolute',
       'w-full',
       'z-40',

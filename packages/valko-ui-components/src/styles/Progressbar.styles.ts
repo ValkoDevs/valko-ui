@@ -11,6 +11,7 @@ export default tv({
       'ease-in-out'
     ],
     progress: [
+      'vk-progressbar__progress',
       'w-full',
       'h-full',
       'overflow-hidden',
@@ -19,6 +20,7 @@ export default tv({
       'z-20'
     ],
     content: [
+      'vk-progressbar__content',
       'w-full',
       'font-medium',
       'align-middle',

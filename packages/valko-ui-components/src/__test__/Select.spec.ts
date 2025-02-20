@@ -1,5 +1,5 @@
 import { nextTick } from 'vue'
-import { VueWrapper, mount } from '@vue/test-utils'
+import { VueWrapper, mount, DOMWrapper } from '@vue/test-utils'
 import VkSelect from '#valkoui/components/Select.vue'
 
 describe('Select component', () => {
@@ -275,28 +275,462 @@ describe('Select component', () => {
         expect(wrapper.emitted('update:modelValue')?.[1]).toEqual([1])
       })
     })
+
+    describe('When helpertext prop changes', () => {
+      it('should not show when props.helpertext is not set', () => {
+        wrapper = mount(VkSelect, {
+          props: {
+            options
+          }
+        })
+
+        expect(wrapper.find('.vk-input__helper').exists()).toBe(false)
+      })
+
+      it('should show when props.helpertext is set', () => {
+        wrapper = mount(VkSelect, {
+          props: {
+            options,
+            helpertext: 'Hello World'
+          }
+        })
+
+        expect(wrapper.find('.vk-input__helper').text()).toContain('Hello World')
+      })
+    })
   })
 
-  describe('Helpertext', () => {
-    it('should not show when props.helpertext is not set', () => {
-      wrapper = mount(VkSelect, {
-        props: {
-          options
-        }
+  describe('Methods', () => {
+    describe('SelectItem functionality', () => {
+      let items: DOMWrapper<HTMLElement>[]
+
+      beforeEach(async () => {
+        wrapper = mount(VkSelect, {
+          props: {
+            options
+          }
+        })
+
+        await wrapper.find('.vk-input__input').trigger('focus')
+        items = wrapper.findAll('.vk-select__item')
       })
 
-      expect(wrapper.find('.vk-input__helper').exists()).toBe(false)
+      afterEach(() => wrapper.unmount())
+
+      it('should select an item when clicked', async () => {
+        await items[0].trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[1]])
+      })
+
+      it('should deselect an item if it is already selected', async () => {
+        wrapper.setProps({ modelValue: 1 })
+        await wrapper.vm.$nextTick()
+
+        await items[0].trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toEqual(undefined)
+      })
+
+      it('should handle multiple selections', async () => {
+        wrapper.setProps({ multiple: true })
+        await wrapper.vm.$nextTick()
+
+        await items[0].trigger('click')
+        await items[1].trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[[1]], [[2]]])
+      })
+
+      it('should not clear value if clearable is false', async () => {
+        wrapper.setProps({ modelValue: 1, clearable: false })
+        await wrapper.vm.$nextTick()
+
+        await items[0].trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+
+      it('should clear value if clearable is true and item is deselected', async () => {
+        await wrapper.setProps({ modelValue: 1, clearable: true })
+        await wrapper.vm.$nextTick()
+
+        await items[0].trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
+      })
+
+      it('should not emit any event if the component is disabled', async () => {
+        await wrapper.setProps({ disabled: true })
+        await wrapper.vm.$nextTick()
+
+        await items[0].trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+
+      it('should not emit any event if the component is readonly', async () => {
+        await wrapper.setProps({ readonly: true })
+        await wrapper.vm.$nextTick()
+
+        await items[0].trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
     })
 
-    it('should show when props.helpertext is set', () => {
-      wrapper = mount(VkSelect, {
-        props: {
-          options,
-          helpertext: 'Hello World'
-        }
+    describe('isSelected functionality', () => {
+      let items: DOMWrapper<HTMLElement>[]
+
+      beforeEach(async () => {
+        wrapper = mount(VkSelect, {
+          props: {
+            options
+          }
+        })
+
+        await wrapper.find('.vk-input__input').trigger('focus')
+        items = wrapper.findAll('.vk-select__item')
       })
 
-      expect(wrapper.find('.vk-input__helper').text()).toContain('Hello World')
+      afterEach(() => wrapper.unmount())
+
+      it('should set data-selected attribute to true if the value is selected (single selection)', async () => {
+        await wrapper.setProps({ modelValue: 1 })
+        await wrapper.vm.$nextTick()
+
+        expect(items[0].attributes('data-selected')).toBe('true')
+      })
+
+      it('should set data-selected to false if the value is not selected', async () => {
+        await wrapper.setProps({ modelValue: 2 })
+        await wrapper.vm.$nextTick()
+
+        expect(items[0].attributes('data-selected')).toBe('false')
+      })
+
+      it('should set data-selected attribute to true if the value is selected (multiple selection)', async () => {
+        await wrapper.setProps({ modelValue: [1, 2], multiple: true })
+        await wrapper.vm.$nextTick()
+
+        const selectedAttributes = {
+          item1: items[0].attributes('data-selected'),
+          item2: items[1].attributes('data-selected')
+        }
+
+        expect(selectedAttributes).toEqual({ item1: 'true', item2: 'true' })
+      })
+    })
+
+    describe('toggleDropdown functionality', () => {
+      beforeEach(async () => {
+        wrapper = mount(VkSelect, {
+          props: {
+            options
+          }
+        })
+      })
+
+      afterEach(() => wrapper.unmount())
+
+      it('should open the dropdown when the input is focused', async () => {
+        await wrapper.find('.vk-input__input').trigger('focus')
+
+        expect(wrapper.find('.vk-select__dropdown').exists()).toBe(true)
+      })
+
+      it('should not open the dropdown when the input is disabled', async () => {
+        wrapper.setProps({ disabled: true })
+        await wrapper.vm.$nextTick()
+        await wrapper.find('.vk-input__input').trigger('focus')
+
+        expect(wrapper.find('.vk-select__dropdown').exists()).toBe(false)
+      })
+
+      it('should not open the dropdown when the input is readonly', async () => {
+        wrapper.setProps({ readonly: true })
+        await wrapper.vm.$nextTick()
+        await wrapper.find('.vk-input__input').trigger('focus')
+
+        expect(wrapper.find('.vk-select__dropdown').exists()).toBe(false)
+      })
+
+      it('should not open the dropdown when the input is disabled and readonly', async () => {
+        wrapper.setProps({ disabled: true, readonly: true })
+        await wrapper.vm.$nextTick()
+        await wrapper.find('.vk-input__input').trigger('focus')
+
+        expect(wrapper.find('.vk-select__dropdown').exists()).toBe(false)
+      })
+    })
+
+    describe('clearSelection', () => {
+      beforeEach(async () => {
+        wrapper = mount(VkSelect, {
+          props: {
+            options
+          }
+        })
+      })
+
+      afterEach(() => wrapper.unmount())
+
+      it('should clear the selected value', async () => {
+        await wrapper.setProps({ modelValue: 1, clearable: true })
+        await wrapper.vm.$nextTick()
+        const vkInput = wrapper.findComponent({ name: 'VkInput' })
+        vkInput.vm.$emit('clear')
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
+      })
+
+      it('should not clear the selected value if clearable is false', async () => {
+        await wrapper.setProps({ modelValue: 1, clearable: false })
+        await wrapper.vm.$nextTick()
+        const vkInput = wrapper.findComponent({ name: 'VkInput' })
+        vkInput.vm.$emit('clear')
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+
+      it('should emit an empty array if clearable is true and is multiple true', async () => {
+        await wrapper.setProps({ modelValue: [1, 2], clearable: true, multiple: true })
+        await wrapper.vm.$nextTick()
+        const vkInput = wrapper.findComponent({ name: 'VkInput' })
+        vkInput.vm.$emit('clear')
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[[]]])
+      })
+    })
+
+    describe('closeDropdownOnOutsideClick', () => {
+      it('should close the dropdown when clicked outside', async () => {
+        const wrapper = mount(VkSelect, {
+          props: {
+            options,
+            attachTo: document.body
+          }
+        })
+
+        await wrapper.find('.vk-input__input').trigger('focus')
+        await wrapper.vm.$nextTick()
+        document.body.click()
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.find('.vk-select__dropdown').exists()).toBe(false)
+      })
+    })
+
+    describe('handleMultipleSelection', () => {
+      it('should handle multiple selection', async () => {
+        const wrapper = mount(VkSelect, {
+          props: {
+            options,
+            modelValue: [],
+            multiple: true
+          }
+        })
+
+        await wrapper.find('.vk-input__input').trigger('focus')
+        await wrapper.vm.$nextTick()
+        const items = wrapper.findAll('.vk-select__item')
+        items[0].trigger('click')
+        items[1].trigger('click')
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[[1]], [[2]]])
+      })
+
+      it('should remove the selected item if it is already selected', async () => {
+        const wrapper = mount(VkSelect, {
+          props: {
+            options,
+            modelValue: [1, 2],
+            multiple: true
+          }
+        })
+
+        await wrapper.find('.vk-input__input').trigger('focus')
+        await wrapper.vm.$nextTick()
+        wrapper.find('.vk-select__item:first-child').trigger('click')
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[[2]]])
+      })
+
+      it('should not allow to deselected item if clearable is false and its the last item remaining', async () => {
+        const wrapper = mount(VkSelect, {
+          props: {
+            options,
+            modelValue: [1],
+            clearable: false,
+            multiple: true
+          }
+        })
+
+        await wrapper.find('.vk-input__input').trigger('focus')
+        await wrapper.vm.$nextTick()
+        wrapper.find('.vk-select__item:first-child').trigger('click')
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+    })
+
+    describe('handleSingleSelection', () => {
+      it('should not allow to deselect item if clearable is false', async () => {
+        const wrapper = mount(VkSelect, {
+          props: {
+            options,
+            modelValue: 1,
+            clearable: false
+          }
+        })
+
+        await wrapper.find('.vk-input__input').trigger('focus')
+        await wrapper.vm.$nextTick()
+        wrapper.find('.vk-select__item:first-child').trigger('click')
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+
+      it('should allow to deselect item if clearable is true', async () => {
+        const wrapper = mount(VkSelect, {
+          props: {
+            options,
+            modelValue: 1,
+            clearable: true
+          }
+        })
+
+        await wrapper.find('.vk-input__input').trigger('focus')
+        await wrapper.vm.$nextTick()
+        wrapper.find('.vk-select__item:first-child').trigger('click')
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
+      })
+
+      it('should select the item if it is not selected', async () => {
+        const wrapper = mount(VkSelect, {
+          props: {
+            options,
+            modelValue: 2
+          }
+        })
+
+        await wrapper.find('.vk-input__input').trigger('focus')
+        await wrapper.vm.$nextTick()
+        wrapper.find('.vk-select__item:first-child').trigger('click')
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[1]])
+      })
+    })
+
+    describe('updateValue', () => {
+      let items: DOMWrapper<HTMLElement>[]
+
+      beforeEach(async () => {
+        wrapper = mount(VkSelect, {
+          props: {
+            options
+          }
+        })
+
+        await wrapper.find('.vk-input__input').trigger('focus')
+        items = wrapper.findAll('.vk-select__item')
+      })
+
+      afterEach(() => wrapper.unmount())
+
+      it('should emit update:modelValue with the new value', async () => {
+        await items[0].trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[1]])
+      })
+
+      it('should not emit update:modelValue if the component is disabled', async () => {
+        wrapper.setProps({ disabled: true })
+        await wrapper.vm.$nextTick()
+        await wrapper.find('.vk-select__item:first-child').trigger('click')
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+
+      it('should not emit update:modelValue if the component is readonly', async () => {
+        wrapper.setProps({ readonly: true })
+        await wrapper.vm.$nextTick()
+        await wrapper.find('.vk-select__item:first-child').trigger('click')
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+    })
+  })
+
+  describe('Computed properties', () => {
+    describe('showValue', () => {
+      let wrapper: VueWrapper
+
+      beforeEach(() => {
+        wrapper = mount(VkSelect, {
+          props: {
+            options
+          }
+        })
+      })
+
+      afterEach(() => wrapper.unmount())
+
+      it('should return the label for the selected value (single selection)', async () => {
+        await wrapper.setProps({ modelValue: 1 })
+        const vkInput = wrapper.findComponent({ name: 'VkInput' })
+        await wrapper.vm.$nextTick()
+
+        const inputElement = vkInput.find('input')
+        expect(inputElement.element.value).toBe('Wade Cooper')
+      })
+
+      it('should return undefined if no value is selected (single selection)', async () => {
+        await wrapper.setProps({ modelValue: undefined })
+        const vkInput = wrapper.findComponent({ name: 'VkInput' })
+        await wrapper.vm.$nextTick()
+
+        expect(vkInput.attributes('value')).toBe(undefined)
+      })
+
+      it('should return a comma-separated string of labels for selected values (multiple selection)', async () => {
+        await wrapper.setProps({ modelValue: [1, 2], multiple: true })
+        const vkInput = wrapper.findComponent({ name: 'VkInput' })
+        await wrapper.vm.$nextTick()
+
+        const inputElement = vkInput.find('input')
+        expect(inputElement.element.value).toBe('Wade Cooper, Arlene Mccoy')
+      })
+
+      it('should return an empty string if no values are selected (multiple selection)', async () => {
+        await wrapper.setProps({ modelValue: [], multiple: true })
+        const vkInput = wrapper.findComponent({ name: 'VkInput' })
+        await wrapper.vm.$nextTick()
+
+        const inputElement = vkInput.find('input')
+        expect(inputElement.element.value).toBe('')
+      })
+
+      it('should handle non-existent values in the showMap', async () => {
+        await wrapper.setProps({ modelValue: 99 })
+        const vkInput = wrapper.findComponent({ name: 'VkInput' })
+        await wrapper.vm.$nextTick()
+
+        const inputElement = vkInput.find('input')
+        expect(inputElement.element.value).toBe('')
+      })
     })
   })
 
@@ -313,94 +747,6 @@ describe('Select component', () => {
       wrapper.find('.vk-select__item:first-child').trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('update:modelValue')
-    })
-  })
-
-  describe('SelectItem functionality', () => {
-    beforeEach(async () => {
-      wrapper = mount(VkSelect, {
-        props: {
-          options
-        }
-      })
-
-      wrapper.find('.vk-input__input').trigger('focus')
-      await nextTick()
-    })
-
-    it('should select an item', async () => {
-      wrapper.find('.vk-select__item:first-child').trigger('click')
-      await nextTick()
-
-      expect(wrapper.emitted('update:modelValue')).toEqual([[1]])
-    })
-
-    it('should deselect an item if it is already selected', async () => {
-      wrapper = mount(VkSelect, {
-        props: {
-          options,
-          modelValue: 1
-        }
-      })
-
-      wrapper.find('.vk-input__input').trigger('focus')
-      await nextTick()
-      wrapper.find('.vk-select__item:first-child').trigger('click')
-      await nextTick()
-
-      expect(wrapper.emitted('update:modelValue')).toEqual(undefined)
-    })
-
-    it('should handle multiple selections', async () => {
-      wrapper = mount(VkSelect, {
-        props: {
-          options,
-          multiple: true
-        }
-      })
-
-      wrapper.find('.vk-input__input').trigger('focus')
-      await nextTick()
-      wrapper.find('.vk-select__item:first-child').trigger('click')
-      await nextTick()
-      wrapper.find('.vk-select__item:nth-child(2)').trigger('click')
-      await nextTick()
-
-      expect(wrapper.emitted('update:modelValue')).toEqual([[[1]], [[2]]])
-    })
-
-    it('should not clear value if clearable is false', async () => {
-      wrapper = mount(VkSelect, {
-        props: {
-          options,
-          modelValue: 1,
-          clearable: false
-        }
-      })
-
-      wrapper.find('.vk-input__input').trigger('focus')
-      await nextTick()
-      wrapper.find('.vk-select__item:first-child').trigger('click')
-      await nextTick()
-
-      expect(wrapper.emitted('update:modelValue')).toEqual(undefined)
-    })
-
-    it('should clear value if clearable is true', async () => {
-      wrapper = mount(VkSelect, {
-        props: {
-          options,
-          modelValue: 1,
-          clearable: true
-        }
-      })
-
-      wrapper.find('.vk-input__input').trigger('focus')
-      await nextTick()
-      wrapper.find('.vk-select__item:first-child').trigger('click')
-      await nextTick()
-
-      expect(wrapper.emitted('update:modelValue')).toEqual([[undefined]])
     })
   })
 })

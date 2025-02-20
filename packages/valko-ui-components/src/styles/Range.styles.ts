@@ -55,6 +55,7 @@ export default tv({
       'pointer-events-none'
     ],
     label: [
+      'vk-range__label',
       'mt-2',
       'text-dark-1',
       'hover:text-dark-5',

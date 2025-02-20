@@ -79,6 +79,7 @@ export default tv({
       'rotate-180'
     ],
     clearIcon: [
+      'vk-input__clear-icon',
       'text-dark-1',
       'cursor-pointer',
       'opacity-80',
@@ -91,6 +92,7 @@ export default tv({
       'dark:text-light-5'
     ],
     numberArrows: [
+      'vk-input__number-arrows',
       'flex',
       'flex-col',
       'gap-1',
