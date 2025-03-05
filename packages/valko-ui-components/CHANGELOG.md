@@ -1,5 +1,13 @@
 # @valko-ui/components
 
+## 0.3.1
+
+### Patch Changes
+
+- 040f3b9: **Menu:**
+
+  - Updated reduce function to ensure items without a `group` are assigned to the `default` group.
+
 ## 0.3.0
 
 ### Minor Changes
