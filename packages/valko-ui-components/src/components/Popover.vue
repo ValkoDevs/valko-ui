@@ -25,7 +25,8 @@ const rootRef = ref<HTMLElement | null>(null)
 const handleClickOutside = (event: MouseEvent) => {
   const target = event.target as HTMLElement
 
-  if (rootRef.value && !rootRef.value.contains(target) && props.isOpen) emit('close')
+  if (rootRef.value && !rootRef.value.contains(target) && props.isOpen)
+    emit('close')
 }
 
 onMounted(() => nextTick(() => document.addEventListener('click', handleClickOutside)))

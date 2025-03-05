@@ -25,19 +25,24 @@ const visiblePages = computed(() => {
   const total = +props.pages
   const current = props.modelValue
 
-  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
-  if (current <= 4) return [1, 2, 3, 4, 5, '...', total]
-  if (current > total - 4) return [1, '...', total - 4, total - 3, total - 2, total - 1, total]
+  if (total <= 7)
+    return Array.from({ length: total }, (_, i) => i + 1)
+  if (current <= 4)
+    return [1, 2, 3, 4, 5, '...', total]
+  if (current > total - 4)
+    return [1, '...', total - 4, total - 3, total - 2, total - 1, total]
 
   return [1, '...', current - 1, current, current + 1, '...', total]
 })
 
 const changePage = (page: string | number) => {
-  if (+page !== props.modelValue && page !== '...' && !props.disabled) emit('update:modelValue', page)
+  if (+page !== props.modelValue && page !== '...' && !props.disabled)
+    emit('update:modelValue', page)
 }
 
 watchEffect(() => {
-  if (props.modelValue > +props.pages) emit('update:modelValue', +props.pages)
+  if (props.modelValue > +props.pages)
+    emit('update:modelValue', +props.pages)
 })
 </script>
 

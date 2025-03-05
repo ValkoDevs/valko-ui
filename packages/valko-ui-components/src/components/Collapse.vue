@@ -16,21 +16,23 @@ const props = withDefaults(defineProps<CollapseProps>(), {
 
 const classes = useStyle<CollapseProps>(props, styles)
 
-const itemStates = reactive<Record<string, boolean>>({})
+const items = reactive<Record<string, boolean>>({})
 
-const toggleItem = (id: string) => {
+const toggleItem = (id: string | undefined) => {
+  if (!id) return
+
   const toggleAction = props.multiple
-    ? () => itemStates[id] = !itemStates[id]
+    ? () => items[id] = !items[id]
     : () => {
-      const isAlreadyOpen = itemStates[id]
-      Object.keys(itemStates).forEach(key => itemStates[key] = false)
-      if (!isAlreadyOpen) itemStates[id] = true
+      const isAlreadyOpen = items[id]
+      Object.keys(items).forEach(key => items[key] = false)
+      if (!isAlreadyOpen) items[id] = true
     }
 
   toggleAction()
 }
 
-provide('itemsManagement', { itemStates, toggleItem })
+provide('itemStates', { items, toggleItem })
 </script>
 
 <template>

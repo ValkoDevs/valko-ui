@@ -47,11 +47,6 @@ const updateValue = (value: SelectProps['modelValue']) => {
   }
 }
 
-const selectItem = (value: string | number) => {
-  if (props.multiple) handleMultipleSelection(value)
-  else handleSingleSelection(value)
-}
-
 const handleMultipleSelection = (value: string | number) => {
   const selectedValues = Array.isArray(props.modelValue) ? [...props.modelValue] : []
   const index = selectedValues.indexOf(value)
@@ -170,7 +165,7 @@ onUnmounted(() => {
             :data-shape="shape"
             :data-variant="variant"
             :class="classes.item"
-            @click="selectItem(item.value)"
+            @click="multiple ? handleMultipleSelection(item.value) : handleSingleSelection(item.value)"
           >
             {{ item.label }}
           </li>
