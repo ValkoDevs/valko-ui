@@ -252,19 +252,6 @@ describe('Tabs component', () => {
 
   describe('Methods', () => {
     describe('onChange', () => {
-      // it('should emit tabClick event and update selectedIndex', async () => {
-      //   const wrapper = mount(VkTabs, {
-      //     props: {
-      //       tabs,
-      //       modelValue: 0
-      //     }
-      //   })
-
-      //   wrapper.find('[data-key="videos"]').trigger('click')
-
-      //   expect(wrapper.emitted('tabClick')).toEqual(1)
-      // })
-
       it('should not emit tabClick event if the tab is disabled', async () => {
         const wrapper = mount(VkTabs, {
           props: {

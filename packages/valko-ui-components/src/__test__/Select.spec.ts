@@ -343,7 +343,10 @@ describe('Select component', () => {
       })
 
       it('should not clear value if clearable is false', async () => {
-        wrapper.setProps({ modelValue: 1, clearable: false })
+        wrapper.setProps({
+          modelValue: 1,
+          clearable: false
+        })
         await wrapper.vm.$nextTick()
 
         await items[0].trigger('click')
@@ -352,7 +355,10 @@ describe('Select component', () => {
       })
 
       it('should clear value if clearable is true and item is deselected', async () => {
-        await wrapper.setProps({ modelValue: 1, clearable: true })
+        await wrapper.setProps({
+          modelValue: 1,
+          clearable: true
+        })
         await wrapper.vm.$nextTick()
 
         await items[0].trigger('click')
@@ -410,7 +416,10 @@ describe('Select component', () => {
       })
 
       it('should set data-selected attribute to true if the value is selected (multiple selection)', async () => {
-        await wrapper.setProps({ modelValue: [1, 2], multiple: true })
+        await wrapper.setProps({
+          modelValue: [1, 2],
+          multiple: true
+        })
         await wrapper.vm.$nextTick()
 
         const selectedAttributes = {
@@ -456,7 +465,10 @@ describe('Select component', () => {
       })
 
       it('should not open the dropdown when the input is disabled and readonly', async () => {
-        wrapper.setProps({ disabled: true, readonly: true })
+        wrapper.setProps({
+          disabled: true,
+          readonly: true
+        })
         await wrapper.vm.$nextTick()
         await wrapper.find('.vk-input__input').trigger('focus')
 
@@ -476,7 +488,10 @@ describe('Select component', () => {
       afterEach(() => wrapper.unmount())
 
       it('should clear the selected value', async () => {
-        await wrapper.setProps({ modelValue: 1, clearable: true })
+        await wrapper.setProps({
+          modelValue: 1,
+          clearable: true
+        })
         await wrapper.vm.$nextTick()
         const vkInput = wrapper.findComponent({ name: 'VkInput' })
         vkInput.vm.$emit('clear')
@@ -486,7 +501,10 @@ describe('Select component', () => {
       })
 
       it('should not clear the selected value if clearable is false', async () => {
-        await wrapper.setProps({ modelValue: 1, clearable: false })
+        await wrapper.setProps({
+          modelValue: 1,
+          clearable: false
+        })
         await wrapper.vm.$nextTick()
         const vkInput = wrapper.findComponent({ name: 'VkInput' })
         vkInput.vm.$emit('clear')
@@ -496,7 +514,11 @@ describe('Select component', () => {
       })
 
       it('should emit an empty array if clearable is true and is multiple true', async () => {
-        await wrapper.setProps({ modelValue: [1, 2], clearable: true, multiple: true })
+        await wrapper.setProps({
+          modelValue: [1, 2],
+          clearable: true,
+          multiple: true
+        })
         await wrapper.vm.$nextTick()
         const vkInput = wrapper.findComponent({ name: 'VkInput' })
         vkInput.vm.$emit('clear')
@@ -706,7 +728,10 @@ describe('Select component', () => {
       })
 
       it('should return a comma-separated string of labels for selected values (multiple selection)', async () => {
-        await wrapper.setProps({ modelValue: [1, 2], multiple: true })
+        await wrapper.setProps({
+          modelValue: [1, 2],
+          multiple: true
+        })
         const vkInput = wrapper.findComponent({ name: 'VkInput' })
         await wrapper.vm.$nextTick()
 
@@ -715,7 +740,10 @@ describe('Select component', () => {
       })
 
       it('should return an empty string if no values are selected (multiple selection)', async () => {
-        await wrapper.setProps({ modelValue: [], multiple: true })
+        await wrapper.setProps({
+          modelValue: [],
+          multiple: true
+        })
         const vkInput = wrapper.findComponent({ name: 'VkInput' })
         await wrapper.vm.$nextTick()
 

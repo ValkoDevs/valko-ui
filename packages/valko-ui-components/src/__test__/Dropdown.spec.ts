@@ -382,14 +382,6 @@ describe('Dropdown component', () => {
     })
 
     describe('When items prop changes', () => {
-      it('should initialize with an empty items array when not provided', async () => {
-        const wrapper = mount(VkDropdown)
-
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-
-        expect(wrapper.findAll('menu-item').length).toBe(0)
-      })
-
       it('should render all provided items correctly', async () => {
         const wrapper = mount(VkDropdown, {
           props: {

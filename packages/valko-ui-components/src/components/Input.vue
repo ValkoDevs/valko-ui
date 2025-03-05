@@ -67,6 +67,7 @@ const changeNumericValue = (action: 'increment' | 'decrement') => {
 
   if (newValue > props.max || newValue < props.min) return
 
+  inputValue.value = newValue
   emit('update:modelValue', newValue)
 }
 

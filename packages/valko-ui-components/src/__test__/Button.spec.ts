@@ -261,7 +261,11 @@ describe('Button component', () => {
 
       it('should apply correct spinner styles based on color and variant', () => {
         const wrapper = mount(VkButton, {
-          props: { loading: true, color: 'primary', variant: 'filled' }
+          props: {
+            loading: true,
+            color: 'primary',
+            variant: 'filled'
+          }
         })
 
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
@@ -269,7 +273,11 @@ describe('Button component', () => {
 
       it('should apply correct spinner styles for success color', () => {
         const wrapper = mount(VkButton, {
-          props: { loading: true, color: 'success', variant: 'filled' }
+          props: {
+            loading: true,
+            color: 'success',
+            variant: 'filled'
+          }
         })
 
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
@@ -277,42 +285,66 @@ describe('Button component', () => {
 
       it('should apply correct spinner styles when color is neutral and variant is filled', () => {
         const wrapper = mount(VkButton, {
-          props: { loading: true, color: 'neutral', variant: 'filled' }
+          props: {
+            loading: true,
+            color: 'neutral',
+            variant: 'filled'
+          }
         })
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('data-[variant=filled]:data-[color=neutral]:text-white')
       })
 
       it('should apply correct spinner styles when color is primary and variant is filled', () => {
         const wrapper = mount(VkButton, {
-          props: { loading: true, color: 'primary', variant: 'filled' }
+          props: {
+            loading: true,
+            color: 'primary',
+            variant: 'filled'
+          }
         })
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
       })
 
       it('should apply correct spinner styles when color is success and variant is filled', () => {
         const wrapper = mount(VkButton, {
-          props: { loading: true, color: 'success', variant: 'filled' }
+          props: {
+            loading: true,
+            color: 'success',
+            variant: 'filled'
+          }
         })
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
       })
 
       it('should apply correct spinner styles when color is neutral and variant is outlined', () => {
         const wrapper = mount(VkButton, {
-          props: { loading: true, color: 'neutral', variant: 'outlined' }
+          props: {
+            loading: true,
+            color: 'neutral',
+            variant: 'outlined'
+          }
         })
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('data-[variant=outlined]:data-[color=neutral]:text-black')
       })
 
       it('should apply correct spinner styles when color is primary and variant is outlined', () => {
         const wrapper = mount(VkButton, {
-          props: { loading: true, color: 'primary', variant: 'outlined' }
+          props: {
+            loading: true,
+            color: 'primary',
+            variant: 'outlined'
+          }
         })
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-primary-500')
       })
 
       it('should apply correct spinner styles when color is success and variant is outlined', () => {
         const wrapper = mount(VkButton, {
-          props: { loading: true, color: 'success', variant: 'outlined' }
+          props: {
+            loading: true,
+            color: 'success',
+            variant: 'outlined'
+          }
         })
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-success-500')
       })
@@ -347,7 +379,9 @@ describe('Button component', () => {
 
     it('should not emit click event if disabled is true', async () => {
       const wrapper = mount(VkButton, {
-        props: { disabled: true }
+        props: {
+          disabled: true
+        }
       })
 
       await wrapper.find('button').trigger('click')
@@ -356,7 +390,9 @@ describe('Button component', () => {
 
     it('should not emit click event if loading is true', async () => {
       const wrapper = mount(VkButton, {
-        props: { loading: true }
+        props: {
+          loading: true
+        }
       })
 
       await wrapper.find('button').trigger('click')

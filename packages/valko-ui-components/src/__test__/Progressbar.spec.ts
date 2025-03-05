@@ -249,7 +249,9 @@ describe('Progressbar component', () => {
 
       it('should not show buffer when props.buffer is 0', () => {
         const wrapper = mount(VkProgressbar, {
-          props: { buffer: 0 }
+          props: {
+            buffer: 0
+          }
         })
 
         expect(wrapper.find('.vk-progressbar__buffer').exists()).toBe(false)
@@ -257,7 +259,10 @@ describe('Progressbar component', () => {
 
       it('should not show buffer when props.indeterminate is true', () => {
         const wrapper = mount(VkProgressbar, {
-          props: { buffer: 50, indeterminate: true }
+          props: {
+            buffer: 50,
+            indeterminate: true
+          }
         })
 
         expect(wrapper.find('.vk-progressbar__buffer').exists()).toBe(false)
@@ -265,7 +270,10 @@ describe('Progressbar component', () => {
 
       it('should apply the correct buffer style when props.buffer is set and indeterminate is false', () => {
         const wrapper = mount(VkProgressbar, {
-          props: { buffer: 75, indeterminate: false }
+          props: {
+            buffer: 75,
+            ndeterminate: false
+          }
         })
 
         const progress = wrapper.find('.vk-progressbar__buffer')
@@ -274,7 +282,10 @@ describe('Progressbar component', () => {
 
       it('should return an empty bufferStyles when indeterminate is true', () => {
         const wrapper = mount(VkProgressbar, {
-          props: { indeterminate: true, buffer: 75 }
+          props: {
+            indeterminate: true,
+            buffer: 75
+          }
         })
         const bufferStyle = (wrapper.vm as unknown as { bufferStyles: string }).bufferStyles
 
@@ -285,7 +296,9 @@ describe('Progressbar component', () => {
     describe('When indeterminate prop changes', () => {
       it('should apply animation when props.indeterminate is true', () => {
         const wrapper = mount(VkProgressbar, {
-          props: { indeterminate: true }
+          props: {
+            indeterminate: true
+          }
         })
 
         const progress = wrapper.find('.vk-progressbar__progress')
@@ -294,7 +307,10 @@ describe('Progressbar component', () => {
 
       it('should apply left position when props.indeterminate is false', () => {
         const wrapper = mount(VkProgressbar, {
-          props: { progress: 50, indeterminate: false }
+          props: {
+            progress: 50,
+            indeterminate: false
+          }
         })
 
         const progress = wrapper.find('.vk-progressbar__progress')
@@ -305,7 +321,9 @@ describe('Progressbar component', () => {
     describe('When striped prop changes', () => {
       it('should apply striped background when props.striped is true', () => {
         const wrapper = mount(VkProgressbar, {
-          props: { striped: true }
+          props: {
+            striped: true
+          }
         })
 
         const progress = wrapper.find('.vk-progressbar__progress')

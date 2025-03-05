@@ -56,10 +56,6 @@ describe('Breadcrumbs component', () => {
         expect(wrapper.find('.vk-breadcrumbs').classes()).toContain('py-2')
       })
 
-      it('debug breadcrumbs', () => {
-        console.log(wrapper.html()) // Ver qué se está renderizando
-      })
-
       it('should render correct number of crumbs', () => {
         expect(wrapper.findAll('.vk-breadcrumbs__a').length).toBe(crumbs.length)
       })

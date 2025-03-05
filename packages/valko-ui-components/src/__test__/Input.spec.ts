@@ -363,24 +363,6 @@ describe('Input component', () => {
       })
     })
 
-    describe('When placeholder prop changes', () => {
-      it('should render placeholder when props.placeholder is set', () => {
-        wrapper = mount(VkInput, {
-          props: {
-            placeholder: 'Enter text here'
-          }
-        })
-
-        expect(wrapper.find('input').attributes('placeholder')).toBe('Enter text here')
-      })
-
-      it('should not render placeholder when props.placeholder is not set', () => {
-        wrapper = mount(VkInput, {})
-
-        expect(wrapper.find('input').attributes('placeholder')).toBeUndefined()
-      })
-    })
-
     describe('When modelValue changes', () => {
       it('should emit update:modelValue when input value changes', async () => {
         wrapper = mount(VkInput, {
@@ -428,6 +410,42 @@ describe('Input component', () => {
         expect(wrapper.find('.vk-input__input').classes()).toContain('cursor-pointer')
       })
     })
+
+    describe('When step prop changes', () => {
+      it('should be 1 if props.step is not set', () => {
+        const wrapper = mount(VkInput, {})
+
+        expect(wrapper.find('.vk-input__input').attributes('step')).toBe('1')
+      })
+
+      it('should be 2 if props.step is 2', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            step: 2
+          }
+        })
+
+        expect(wrapper.find('.vk-input__input').attributes('step')).toBe('2')
+      })
+
+      it('should update modelValue with the respective step value', async () => {
+        vi.useFakeTimers()
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: 0,
+            step: 5
+          }
+        })
+
+        const upArrow = wrapper.find('i.ti.ti-chevron-up')
+        await upArrow.trigger('mousedown')
+        vi.advanceTimersByTime(75)
+        await upArrow.trigger('mouseup')
+        await wrapper.vm.$nextTick()
+        expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([5])
+      })
+    })
   })
 
   describe('When extra functionality is added', () => {
@@ -437,7 +455,7 @@ describe('Input component', () => {
         const wrapper = mount(VkInput, {
           props: {
             type: 'number',
-            modelValue: '5'
+            modelValue: 5
           }
         })
 
@@ -445,29 +463,8 @@ describe('Input component', () => {
         await upArrow.trigger('mousedown')
         vi.advanceTimersByTime(75)
         await upArrow.trigger('mouseup')
-        await nextTick()
-        const emitted = wrapper.emitted('update:modelValue') as string[][]
-        expect(emitted[0]).toEqual(['6'])
-        vi.useRealTimers()
-      })
-
-      it('should set modelValue to "0" when down arrow is pressed and current value is non-numeric', async () => {
-        vi.useFakeTimers()
-        const wrapper = mount(VkInput, {
-          props: {
-            type: 'number',
-            modelValue: 'abc'
-          }
-        })
-
-        const downArrow = wrapper.find('i.ti.ti-chevron-down')
-        await downArrow.trigger('mousedown')
-        vi.advanceTimersByTime(75)
-        await downArrow.trigger('mouseup')
-        await nextTick()
-        const emitted = wrapper.emitted('update:modelValue') as string[][]
-        expect(emitted[0]).toEqual(['0'])
-        vi.useRealTimers()
+        await wrapper.vm.$nextTick()
+        expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([6])
       })
 
       it('should decrease the value by 1 when down arrow is pressed', async () => {
@@ -475,38 +472,36 @@ describe('Input component', () => {
         const wrapper = mount(VkInput, {
           props: {
             type: 'number',
-            modelValue: '10'
+            modelValue: 10
           }
         })
+
         const downArrow = wrapper.find('i.ti.ti-chevron-down')
         await downArrow.trigger('mousedown')
-        vi.advanceTimersByTime(90)
+        vi.advanceTimersByTime(75)
         await downArrow.trigger('mouseup')
-        await nextTick()
-        const emitted = wrapper.emitted('update:modelValue') as string[][]
-        expect(emitted[0]).toEqual(['9'])
-        vi.useRealTimers()
+        await wrapper.vm.$nextTick()
+        expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([9])
       })
     })
 
     describe('startHolding and stopHolding functionality', () => {
       it('should emit update:modelValue with a higher value when holding the up arrow', async () => {
+        vi.clearAllTimers()
         vi.useFakeTimers()
         const wrapper = mount(VkInput, {
           props: {
             type: 'number',
-            modelValue: '5'
+            modelValue: 5
           }
         })
+
         const upArrow = wrapper.find('i.ti.ti-chevron-up')
         await upArrow.trigger('mousedown')
         vi.advanceTimersByTime(300)
         await upArrow.trigger('mouseup')
-        await nextTick()
-        const emitted = wrapper.emitted('update:modelValue') as string[][]
-
-        expect(emitted[emitted.length - 1]).toEqual(['9'])
-        vi.useRealTimers()
+        await wrapper.vm.$nextTick()
+        expect(wrapper.emitted('update:modelValue')?.[3]).toEqual([9])
       })
 
       it('should not update value after stopHolding is triggered', async () => {

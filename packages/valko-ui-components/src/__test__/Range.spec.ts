@@ -469,7 +469,10 @@ describe('Range component', () => {
     describe('inlineStyles', () => {
       it('should calculate inlineStyles correctly for non-striped, non-indeterminate mode', () => {
         wrapper = mount(VkRange, {
-          props: { modelValue: 0, progress: 50 }
+          props: {
+            modelValue: 0,
+            progress: 50
+          }
         })
 
         const style = (wrapper.vm as unknown as { inlineStyles: string }).inlineStyles
@@ -479,7 +482,12 @@ describe('Range component', () => {
 
       it('should return inlineStyles with striped background when striped is true', () => {
         wrapper = mount(VkRange, {
-          props: { striped: true, modelValue: 0, progress: 50, size: 'md' }
+          props: {
+            striped: true,
+            modelValue: 0,
+            progress: 50,
+            size: 'md'
+          }
         })
         const style = (wrapper.vm as unknown as { inlineStyles: string }).inlineStyles
         expect(style).toContain('background-image')
@@ -487,7 +495,12 @@ describe('Range component', () => {
 
       it('should return an inlineStyles string even if no condition adds styles (when indeterminate is true and striped is false)', () => {
         wrapper = mount(VkRange, {
-          props: { indeterminate: true, striped: false, modelValue: 0, progress: 50 }
+          props: {
+            indeterminate: true,
+            striped: false,
+            modelValue: 0,
+            progress: 50
+          }
         })
         const style = (wrapper.vm as unknown as { inlineStyles: string }).inlineStyles
         expect(style).toBe('left: 0%; width: 0%;')
@@ -497,7 +510,10 @@ describe('Range component', () => {
     describe('thumbStyles', () => {
       it('should calculate thumbStyles correctly for single thumb (modelValue as number)', () => {
         wrapper = mount(VkRange, {
-          props: { modelValue: 50, isDouble: false }
+          props: {
+            modelValue: 50,
+            isDouble: false
+          }
         })
 
         const thumbStyles = (wrapper.vm as unknown as { thumbStyles: { start: { left: string }, end: { left: string } } }).thumbStyles
@@ -507,7 +523,10 @@ describe('Range component', () => {
 
       it('should calculate thumbStyles correctly for double thumb (modelValue as array)', () => {
         wrapper = mount(VkRange, {
-          props: { modelValue: [20, 80], isDouble: true }
+          props: {
+            modelValue: [20, 80],
+            isDouble: true
+          }
         })
 
         const thumbStyles = (wrapper.vm as unknown as { thumbStyles: { start: { left: string }, end: { left: string } } }).thumbStyles
@@ -519,7 +538,12 @@ describe('Range component', () => {
     describe('stepMarks', () => {
       it('should calculate stepMarks correctly', () => {
         wrapper = mount(VkRange, {
-          props: { modelValue: 0, step: 10, min: 0, max: 100 }
+          props: {
+            modelValue: 0,
+            step: 10,
+            min: 0,
+            max: 100
+          }
         })
 
         const marks = (wrapper.vm as unknown as { stepMarks: number[] }).stepMarks
@@ -528,7 +552,12 @@ describe('Range component', () => {
 
       it('should have the first step mark equal to 10%', () => {
         wrapper = mount(VkRange, {
-          props: { modelValue: 0, step: 10, min: 0, max: 100 }
+          props: {
+            modelValue: 0,
+            step: 10,
+            min: 0,
+            max: 100
+          }
         })
 
         const marks = (wrapper.vm as unknown as { stepMarks: number[] }).stepMarks
@@ -540,7 +569,9 @@ describe('Range component', () => {
   describe('Emits', () => {
     it('should emit update:modelValue event when a thumb is dragged', async () => {
       wrapper = mount(VkRange, {
-        props: { modelValue: 0 }
+        props: {
+          modelValue: 0
+        }
       })
 
       const thumb = wrapper.find('.vk-range__thumb')
@@ -554,7 +585,10 @@ describe('Range component', () => {
     it('should emit update:modelValue event when a label is clicked', async () => {
       const labels = [{ value: 30, label: 'Thirty' }]
       wrapper = mount(VkRange, {
-        props: { modelValue: 0, labels }
+        props: {
+          modelValue: 0,
+          labels
+        }
       })
 
       const label = wrapper.find('.vk-range__label')
