@@ -15,8 +15,7 @@ export default tv({
       'w-full',
       'relative',
       'outline-none',
-      'focus:ring-0',
-      'placeholder-shown:truncate'
+      'focus:ring-0'
     ],
     dropdown: [
       'vk-select__dropdown',

@@ -19,9 +19,7 @@ export default tv({
       'duration-200',
       'ease-in-out',
       'overflow-hidden',
-      'placeholder:invisible',
       'focus:ring-0',
-      'focus:placeholder:visible',
       'data-[right-icon=false]:pr-2',
       'data-[right-icon=true]:pr-8'
     ],

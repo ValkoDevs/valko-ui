@@ -128,7 +128,6 @@ onUnmounted(() => {
         readonly
         :helpertext="helpertext"
         :label="label"
-        :placeholder="placeholder"
         :disabled="disabled"
         :variant="variant"
         :color="color"

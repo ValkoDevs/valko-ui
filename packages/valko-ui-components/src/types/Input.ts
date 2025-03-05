@@ -12,7 +12,6 @@ export interface InputProps extends DefaultComponent {
   max?: number;
   step?: number;
   label?: string;
-  placeholder?: string;
   disabled?: boolean;
   loading?: boolean;
   readonly?: boolean;
