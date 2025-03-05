@@ -1,5 +1,5 @@
 import type { Ref, ComputedRef } from 'vue'
-import { DefaultComponent } from './common'
+import type { DefaultComponent } from './common'
 
 export type TimeAdapterProps = Pick<TimeProps, 'format' | 'locale' | 'minTime' | 'maxTime' | 'disabledTimes' | 'modelValue'>
 

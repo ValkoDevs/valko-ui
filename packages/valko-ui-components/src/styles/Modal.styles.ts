@@ -43,6 +43,7 @@ export default tv({
       'dark:bg-dark-3'
     ],
     panelChild: [
+      'vk-modal__panel-child',
       'flex',
       'w-full',
       'justify-between',

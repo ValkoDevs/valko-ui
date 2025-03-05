@@ -155,7 +155,23 @@ const counter = ref(0)
         <h3 class="text-lg font-medium">
           4. Install ValkoUI
         </h3>
-        <code-block code="npm install @valko-ui/components" />
+        <vk-tabs
+          v-model="selectedTab"
+          :tabs="tabs"
+          shape="line"
+          variant="ghost"
+          grow
+        >
+          <template #npm>
+            <code-block code="npm install @valko-ui/components" />
+          </template>
+          <template #yarn>
+            <code-block code="yarn add @valko-ui/components" />
+          </template>
+          <template #pnpm>
+            <code-block code="pnpm add @valko-ui/components" />
+          </template>
+        </vk-tabs>
       </div>
 
       <div class="mt-4">

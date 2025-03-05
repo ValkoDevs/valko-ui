@@ -250,6 +250,26 @@ describe('Tabs component', () => {
     })
   })
 
+  describe('Methods', () => {
+    describe('onChange', () => {
+      it('should not emit tabClick event if the tab is disabled', async () => {
+        const wrapper = mount(VkTabs, {
+          props: {
+            tabs: [
+              { key: 'photos', title: 'Photos', disabled: true },
+              { key: 'videos', title: 'Videos' }
+            ]
+          }
+        })
+
+        const tabList = wrapper.findComponent({ name: 'TabList' })
+        await tabList.find('button').trigger('click')
+
+        expect(wrapper.emitted('tabClick')).toBeUndefined()
+      })
+    })
+  })
+
   describe('Slots', () => {
     it('should render panel based on tabs.key', () => {
       wrapper = mount(VkTabs, {

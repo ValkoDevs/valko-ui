@@ -20,8 +20,6 @@ export default tv({
       'transition-colors',
       'duration-200',
       'ease-in-out',
-      'placeholder:invisible',
-      'focus:placeholder:visible',
       'focus:ring-0',
       'data-[left-icon=false]:px-2',
       'data-[left-icon=true]:pr-2'

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted } from 'vue'
+import { computed, ref, watch } from 'vue'
 import type { RangeProps } from '#valkoui/types/Range'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Range.styles.ts'
@@ -63,6 +63,20 @@ const updateThumbPosition = (newPosition: number, thumb: 'min' | 'max') => {
   }
 }
 
+const registerListeners = () => {
+  document.addEventListener('mousemove', onMove)
+  document.addEventListener('touchmove', onMove)
+  document.addEventListener('mouseup', onEnd)
+  document.addEventListener('touchend', onEnd)
+}
+
+const removeListeners = () => {
+  document.removeEventListener('mousemove', onMove)
+  document.removeEventListener('touchmove', onMove)
+  document.removeEventListener('mouseup', onEnd)
+  document.removeEventListener('touchend', onEnd)
+}
+
 const onStart = (event: MouseEvent | TouchEvent, thumb: 'min' | 'max') => {
   isDragging.value = true
   draggingThumb.value = thumb
@@ -70,10 +84,7 @@ const onStart = (event: MouseEvent | TouchEvent, thumb: 'min' | 'max') => {
   const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX
   updateThumbPosition(getNewThumbPosition(clientX), thumb)
 
-  document.addEventListener('mousemove', onMove)
-  document.addEventListener('touchmove', onMove)
-  document.addEventListener('mouseup', onEnd)
-  document.addEventListener('touchend', onEnd)
+  registerListeners()
 }
 
 const handleSingleThumb = (newPosition: number) => {
@@ -98,10 +109,7 @@ const onSliderClick = (event: MouseEvent | TouchEvent) => {
   if (!props.isDouble) handleSingleThumb(newPosition)
   else handleMultipleThumbs(newPosition)
 
-  document.addEventListener('mousemove', onMove)
-  document.addEventListener('touchmove', onMove)
-  document.addEventListener('mouseup', onEnd)
-  document.addEventListener('touchend', onEnd)
+  registerListeners()
 }
 
 const onMove = (event: MouseEvent | TouchEvent) => {
@@ -116,10 +124,7 @@ const onMove = (event: MouseEvent | TouchEvent) => {
 const onEnd = () => {
   isDragging.value = false
 
-  document.removeEventListener('mousemove', onMove)
-  document.removeEventListener('touchmove', onMove)
-  document.removeEventListener('mouseup', onEnd)
-  document.removeEventListener('touchend', onEnd)
+  removeListeners()
 }
 
 const inlineStyles = computed(() => {
@@ -177,10 +182,6 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
   thumbRefMap.min.value = min
   thumbRefMap.max.value = max
   emit('update:modelValue', isDouble ? [min, max] : max)
-})
-
-onMounted(() => {
-  sliderRef.value = document.querySelector('.vk-range')
 })
 </script>
 

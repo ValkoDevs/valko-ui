@@ -1,5 +1,6 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkCollapse from '#valkoui/components/Collapse.vue'
+import VkCollapseItem from '#valkoui/components/CollapseItem.vue'
 
 describe('Collapse component', () => {
   let wrapper: VueWrapper
@@ -116,6 +117,40 @@ describe('Collapse component', () => {
 
         expect(wrapper.find('.bg-transparent').exists()).toBe(true)
       })
+    })
+  })
+
+  describe('When multiple prop changes', () => {
+    it('should allow multiple items to be opened when props.multiple is true', async () => {
+      wrapper = mount(VkCollapse, {
+        props: {
+          multiple: true
+        },
+        slots: {
+          default: [VkCollapseItem, VkCollapseItem]
+        }
+      })
+
+      const collapseItems = wrapper.findAll('.vk-collapse-item__icon')
+      await collapseItems[0].trigger('click')
+      await collapseItems[1].trigger('click')
+      expect(collapseItems[0].classes()).toContain('-rotate-90')
+    })
+
+    it('should not allow multiple items to be opened when props.multiple is false', async () => {
+      wrapper = mount(VkCollapse, {
+        props: {
+          multiple: false
+        },
+        slots: {
+          default: [VkCollapseItem, VkCollapseItem]
+        }
+      })
+
+      const collapseItems = wrapper.findAll('.vk-collapse-item__icon')
+      await collapseItems[0].trigger('click')
+      await collapseItems[1].trigger('click')
+      expect(collapseItems[0].classes()).not.toContain('-rotate-90')
     })
   })
 })

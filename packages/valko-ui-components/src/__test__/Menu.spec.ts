@@ -3,23 +3,16 @@ import VkMenu from '#valkoui/components/Menu.vue'
 import { MenuItem } from '#valkoui/types/Menu.ts'
 
 describe('Menu component', () => {
+  const onClickMock = vi.fn()
+
   const menuItems: MenuItem[] = [
-    { key: 'get-started', group: 'General', text: 'Get Started' },
-    { key: 'divider', group: 'Layout', text: 'Divider' },
-    { key: 'button', group: 'Forms', text: 'Button' },
-    { key: 'input', group: 'Forms',  text:'Input' },
-    { key: 'checkbox', group: 'Forms', text: 'Checkbox' },
-    { key: 'select', group: 'Forms', text: 'Select' },
-    { key: 'textarea', group: 'Forms', text: 'Textarea' },
-    { key: 'radio', group: 'Forms', text: 'Radio' },
-    { key: 'alert', group: 'Ui', text: 'Alert' },
-    { key: 'progressbar', group: 'Ui', text: 'Progressbar' },
-    { key: 'spinner', group: 'Ui', text: 'Spinner' },
-    { key: 'pagination', group: 'Data', text: 'Pagination' },
-    { key: 'collapse', group: 'Data', text: 'Collapse' },
-    { key: 'tabs', group: 'Data', text: 'Tabs' }
+    { key: 'get-started', group: 'General', text: 'Get Started', onClick:  onClickMock },
+    { key: 'divider', group: 'Layout', text: 'Divider', onClick:  onClickMock, disabled: true },
+    { key: 'button', group: 'Forms', text: 'Button' }
   ]
+
   let wrapper: VueWrapper
+
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(() => {
@@ -289,6 +282,38 @@ describe('Menu component', () => {
     })
   })
 
+  describe('onItemClick', () => {
+    beforeEach(() => onClickMock.mockClear())
+
+    it('should call item.onClick when defined', async () => {
+      wrapper = mount(VkMenu, {
+        props: {
+          items: menuItems,
+          active: 0
+        }
+      })
+
+      const items = wrapper.findAll('button')
+      await items[0].trigger('click')
+
+      expect(onClickMock).toHaveBeenCalledTimes(1)
+    })
+
+    it('should not call item.onClick when disabled is true', async () => {
+      wrapper = mount(VkMenu, {
+        props: {
+          items: menuItems,
+          active: 0
+        }
+      })
+
+      const items = wrapper.findAll('button')
+      await items[1].trigger('click')
+
+      expect(onClickMock).toHaveBeenCalledTimes(0)
+    })
+  })
+
   describe('Emits', () => {
     it('should emit itemClick when an Item in the menu is clicked', async () => {
       wrapper = mount(VkMenu, {
@@ -298,8 +323,8 @@ describe('Menu component', () => {
         }
       })
 
-      const firstMenuItem = wrapper.find('button')
-      await firstMenuItem.trigger('click')
+      const items = wrapper.findAll('button')
+      await items[0].trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('itemClick')
     })

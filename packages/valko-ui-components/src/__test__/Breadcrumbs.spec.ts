@@ -4,8 +4,10 @@ import { Crumb } from '#valkoui/types/Breadcrumbs'
 
 describe('Breadcrumbs component', () => {
   let wrapper: VueWrapper
+  const onClickMock = vi.fn()
+
   const crumbs: Crumb[] = [
-    { key: 'home', title: 'Home', onClick: () => vi.fn(), leftIcon: 'home' },
+    { key: 'home', title: 'Home', onClick: onClickMock, leftIcon: 'home' },
     { key: 'music', title: 'Music', rightIcon: 'music', disabled: true },
     { key: 'artist', title: 'Artist' },
     { key: 'album', title: 'Album' },
@@ -44,6 +46,18 @@ describe('Breadcrumbs component', () => {
 
       it('should not be flat', () => {
         expect(wrapper.find('.shadow-none').exists()).toBe(false)
+      })
+
+      it('should have default separator', () => {
+        expect(wrapper.find('.vk-breadcrumbs').html()).toContain('>')
+      })
+
+      it('should not be condensed', () => {
+        expect(wrapper.find('.vk-breadcrumbs').classes()).toContain('py-2')
+      })
+
+      it('should render correct number of crumbs', () => {
+        expect(wrapper.findAll('.vk-breadcrumbs__a').length).toBe(crumbs.length)
       })
     })
 
@@ -277,6 +291,17 @@ describe('Breadcrumbs component', () => {
         const lastCrumb = crumbsElements[crumbsElements.length - 1]
         expect(lastCrumb.html()).not.toContain('i.ti.ti-minus')
       })
+
+      it('should not render a separator when there is only one crumb', () => {
+        wrapper = mount(VkBreadcrumbs, {
+          props: {
+            crumbs: [{ key: 'home', title: 'Home' }],
+            separator: 'minus'
+          }
+        })
+
+        expect(wrapper.find('.vk-breadcrumbs__separator').exists()).toBe(false)
+      })
     })
   })
 
@@ -299,6 +324,20 @@ describe('Breadcrumbs component', () => {
       })
 
       expect(wrapper.find('i.ti.ti-music').exists()).toBe(true)
+    })
+  })
+
+  describe('Crumb onClick', () => {
+    it('should execute onClick if the crumb has one', () => {
+      const wrapper = mount(VkBreadcrumbs, {
+        props: {
+          crumbs
+        }
+      })
+
+      const itemList = wrapper.findAll('.vk-breadcrumbs__a')
+      itemList[0].trigger('click')
+      expect(onClickMock).toHaveBeenCalledTimes(1)
     })
   })
 

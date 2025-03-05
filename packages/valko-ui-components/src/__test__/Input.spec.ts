@@ -214,6 +214,471 @@ describe('Input component', () => {
         expect(wrapper.find('.bg-inherit').exists()).toBe(true)
       })
     })
+
+    describe('When type prop changes', () => {
+      it('should be text when prop.type is text', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'text'
+          }
+        })
+
+        const input = wrapper.find('input')
+
+        expect(input.attributes('type')).toBe('text')
+      })
+
+      it('should be email when prop.type is email', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'email'
+          }
+        })
+
+        const input = wrapper.find('input')
+
+        expect(input.attributes('type')).toBe('email')
+      })
+
+      it('should be password when prop.type is password', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'password'
+          }
+        })
+
+        const input = wrapper.find('input')
+
+        expect(input.attributes('type')).toBe('password')
+      })
+
+      it('should be number when prop.type is number', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number'
+          }
+        })
+
+        const input = wrapper.find('input')
+
+        expect(input.attributes('type')).toBe('number')
+      })
+    })
+
+    describe('When helpertext prop changes', () => {
+      it('should not show when props.helpertext is not set', () => {
+        wrapper = mount(VkInput, {})
+
+        expect(wrapper.find('.vk-input__helper').exists()).toBe(false)
+      })
+
+      it('should show when props.helpertext is set', () => {
+        wrapper = mount(VkInput, {
+          props: {
+            helpertext: 'Hello World'
+          }
+        })
+
+        expect(wrapper.find('.vk-input__helper').text()).toContain('Hello World')
+      })
+    })
+
+    describe('When clearable prop changes', () => {
+      it('Should not display cleareable icon when cleareable is false', () => {
+        wrapper = mount(VkInput, {
+          props: {
+            clereable: false
+          }
+        })
+
+        expect(wrapper.find('i.ti.ti-circle-x').exists()).toBe(false)
+      })
+
+      it('Should display cleareable icon when cleareable is true and the input has a value', () => {
+        wrapper = mount(VkInput, {
+          props: {
+            clearable: true,
+            modelValue: 'Hello World'
+          }
+        })
+
+        expect(wrapper.find('i.ti.ti-circle-x').exists()).toBe(true)
+      })
+
+      it('should clear the input value when clearable icon is clicked', async () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            clearable: true,
+            modelValue: 'Hello World'
+          }
+        })
+
+        await wrapper.find('i.ti.ti-circle-x').trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toStrictEqual([['']])
+      })
+    })
+
+    describe('When disabled prop changes', () => {
+      it('should be disabled when props.disabled is true', () => {
+        wrapper = mount(VkInput, {
+          props: {
+            disabled: true
+          }
+        })
+
+        expect(wrapper.find('input').attributes('disabled')).toBeDefined()
+      })
+
+      it('should not be disabled when props.disabled is false', () => {
+        wrapper = mount(VkInput, {
+          props: {
+            disabled: false
+          }
+        })
+
+        expect(wrapper.find('input').attributes('disabled')).toBeUndefined()
+      })
+    })
+
+    describe('When readonly prop changes', () => {
+      it('should be readonly when props.readonly is true', () => {
+        wrapper = mount(VkInput, {
+          props: {
+            readonly: true
+          }
+        })
+
+        expect(wrapper.find('input').attributes('readonly')).toBeDefined()
+      })
+
+      it('should not be readonly when props.readonly is false', () => {
+        wrapper = mount(VkInput, {
+          props: {
+            readonly: false
+          }
+        })
+
+        expect(wrapper.find('input').attributes('readonly')).toBeUndefined()
+      })
+    })
+
+    describe('When modelValue changes', () => {
+      it('should emit update:modelValue when input value changes', async () => {
+        wrapper = mount(VkInput, {
+          props: {
+            modelValue: 'Initial value'
+          }
+        })
+
+        const input = wrapper.find('input')
+        await input.setValue('New value')
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([['New value']])
+      })
+
+      it('should display the correct initial value when modelValue is passed', () => {
+        wrapper = mount(VkInput, {
+          props: {
+            modelValue: 'Test Value'
+          }
+        })
+
+        const input = wrapper.find('input')
+        expect(input.element.value).toBe('Test Value')
+      })
+    })
+
+    describe('When cursor prop changes', () => {
+      it('should be text if props.cursor is text', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            cursor: 'text'
+          }
+        })
+
+        expect(wrapper.find('.vk-input__input').classes()).toContain('cursor-text')
+      })
+
+      it('should be pointer if props.cursor is pointer', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            cursor: 'pointer'
+          }
+        })
+
+        expect(wrapper.find('.vk-input__input').classes()).toContain('cursor-pointer')
+      })
+    })
+
+    describe('When step prop changes', () => {
+      it('should be 1 if props.step is not set', () => {
+        const wrapper = mount(VkInput, {})
+
+        expect(wrapper.find('.vk-input__input').attributes('step')).toBe('1')
+      })
+
+      it('should be 2 if props.step is 2', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            step: 2
+          }
+        })
+
+        expect(wrapper.find('.vk-input__input').attributes('step')).toBe('2')
+      })
+
+      it('should update modelValue with the respective step value', async () => {
+        vi.useFakeTimers()
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: 0,
+            step: 5
+          }
+        })
+
+        const upArrow = wrapper.find('i.ti.ti-chevron-up')
+        await upArrow.trigger('mousedown')
+        vi.advanceTimersByTime(75)
+        await upArrow.trigger('mouseup')
+        await wrapper.vm.$nextTick()
+        expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([5])
+      })
+    })
+  })
+
+  describe('When extra functionality is added', () => {
+    describe('changeValue functionality', () => {
+      it('should emit update:modelValue with "6" when one increment is triggered', async () => {
+        vi.useFakeTimers()
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: 5
+          }
+        })
+
+        const upArrow = wrapper.find('i.ti.ti-chevron-up')
+        await upArrow.trigger('mousedown')
+        vi.advanceTimersByTime(75)
+        await upArrow.trigger('mouseup')
+        await wrapper.vm.$nextTick()
+        expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([6])
+      })
+
+      it('should decrease the value by 1 when down arrow is pressed', async () => {
+        vi.useFakeTimers()
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: 10
+          }
+        })
+
+        const downArrow = wrapper.find('i.ti.ti-chevron-down')
+        await downArrow.trigger('mousedown')
+        vi.advanceTimersByTime(75)
+        await downArrow.trigger('mouseup')
+        await wrapper.vm.$nextTick()
+        expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([9])
+      })
+    })
+
+    describe('startHolding and stopHolding functionality', () => {
+      it('should emit update:modelValue with a higher value when holding the up arrow', async () => {
+        vi.clearAllTimers()
+        vi.useFakeTimers()
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: 5
+          }
+        })
+
+        const upArrow = wrapper.find('i.ti.ti-chevron-up')
+        await upArrow.trigger('mousedown')
+        vi.advanceTimersByTime(300)
+        await upArrow.trigger('mouseup')
+        await wrapper.vm.$nextTick()
+        expect(wrapper.emitted('update:modelValue')?.[3]).toEqual([9])
+      })
+
+      it('should not update value after stopHolding is triggered', async () => {
+        vi.useFakeTimers()
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: '5'
+          }
+        })
+
+        const upArrow = wrapper.find('i.ti.ti-chevron-up')
+        await upArrow.trigger('mousedown')
+        vi.advanceTimersByTime(150)
+        await upArrow.trigger('mouseup')
+        await nextTick()
+        const emittedBefore = wrapper.emitted('update:modelValue') as string[][]
+        const lastValue = emittedBefore[emittedBefore.length - 1][0]
+        vi.advanceTimersByTime(300)
+        await nextTick()
+        const emittedAfter = wrapper.emitted('update:modelValue') as string[][]
+
+        expect(emittedAfter[emittedAfter.length - 1]).toEqual([lastValue])
+        vi.useRealTimers()
+      })
+    })
+
+    describe('Watch functionality for modelValue', () => {
+      it('should trigger watch immediately with initial modelValue', () => {
+        const wrapper = mount(VkInput, {
+          props: { modelValue: 'initial' }
+        })
+
+        const input = wrapper.find('input')
+        expect(input.element.value).toBe('initial')
+      })
+
+      it('should update modelValue correctly after user input', async () => {
+        const wrapper = mount(VkInput, {
+          props: { modelValue: 'initial' }
+        })
+
+        await wrapper.find('input').setValue('new user input')
+        expect(wrapper.emitted()['update:modelValue'][0]).toEqual(['new user input'])
+      })
+
+      it('should update the input element value when modelValue prop changes', async () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            modelValue: '10'
+          }
+        })
+
+        const input = wrapper.find('input')
+        expect(input.element.value).toBe('10')
+      })
+
+      it('should update the input element value after modelValue prop is changed', async () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            modelValue: '10'
+          }
+        })
+
+        await wrapper.setProps({ modelValue: '20' })
+        await nextTick()
+        expect(wrapper.find('input').element.value).toBe('20')
+      })
+
+      it('should set data-filled to false when modelValue is empty', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            modelValue: ''
+          }
+        })
+
+        const input = wrapper.find('input')
+        expect(input.attributes('data-filled')).toBe('false')
+      })
+
+      it('should set data-filled to true when modelValue is non-empty', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            modelValue: 'Hello'
+          }
+        })
+
+        const input = wrapper.find('input')
+        expect(input.attributes('data-filled')).toBe('true')
+      })
+
+      it('should set data-filled to false when modelValue is an empty string', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            modelValue: ''
+          }
+        })
+
+        const input = wrapper.find('input')
+        expect(input.attributes('data-filled')).toBe('false')
+      })
+
+      it('should set data-filled to false when modelValue is null', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            modelValue: null as any
+          }
+        })
+
+        const input = wrapper.find('input')
+        expect(input.attributes('data-filled')).toBe('false')
+      })
+
+      it('should set data-filled to true when modelValue is a valid value', async () => {
+        const wrapper = mount(VkInput, {
+          props: { modelValue: 42 }
+        })
+
+        const input = wrapper.find('input')
+        expect(input.attributes('data-filled')).toBe('true')
+      })
+
+      it('should set data-filled to false when modelValue is undefined', async () => {
+        const wrapper = mount(VkInput, {
+          props: { modelValue: undefined }
+        })
+
+        const input = wrapper.find('input')
+        expect(input.attributes('data-filled')).toBe('false')
+      })
+
+      it('should update data-filled when modelValue changes from undefined to number', async () => {
+        const wrapper = mount(VkInput, {
+          props: { modelValue: undefined }
+        })
+
+        await wrapper.setProps({ modelValue: 10 })
+        const input = wrapper.find('input')
+        expect(input.attributes('data-filled')).toBe('true')
+      })
+
+      it('should update data-filled when modelValue changes from number to null', async () => {
+        const wrapper = mount(VkInput, {
+          props: { modelValue: 5 }
+        })
+
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        await wrapper.setProps({ modelValue: null as any })
+        const input = wrapper.find('input')
+
+        expect(input.attributes('data-filled')).toBe('false')
+      })
+    })
+
+    describe('When input type is number', () => {
+      it('should render the custom arrows for the input', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number'
+          }
+        })
+
+        expect(wrapper.find('.vk-input__number-arrows').exists()).toBe(true)
+      })
+
+      it('should not render the custom arrows for the input if type is not number', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'text'
+          }
+        })
+
+        expect(wrapper.find('.vk-input__number-arrows').exists()).toBe(false)
+      })
+    })
   })
 
   describe('Slots', () => {
@@ -250,67 +715,11 @@ describe('Input component', () => {
     })
   })
 
-  describe('Helpertext', () => {
-    it('should not show when props.helpertext is not set', () => {
-      wrapper = mount(VkInput, {})
-
-      expect(wrapper.find('.vk-input__helper').exists()).toBe(false)
-    })
-
-    it('should show when props.helpertext is set', () => {
-      wrapper = mount(VkInput, {
-        props: {
-          helpertext: 'Hello World'
-        }
-      })
-
-      expect(wrapper.find('.vk-input__helper').text()).toContain('Hello World')
-    })
-  })
-
-  describe('Cleareable', () => {
-    it('Should not display cleareable icon when cleareable is false', () => {
-      wrapper = mount(VkInput, {
-        props: {
-          clereable: false
-        }
-      })
-
-      expect(wrapper.find('i.ti.ti-circle-x').exists()).toBe(false)
-    })
-
-    it('Should display cleareable icon when cleareable is true and the input has a value', () => {
-      wrapper = mount(VkInput, {
-        props: {
-          clearable: true,
-          modelValue: 'Hello World'
-        }
-      })
-
-      expect(wrapper.find('i.ti.ti-circle-x').exists()).toBe(true)
-    })
-
-    it('should clear the input value when clearable icon is clicked', async () => {
-      const wrapper = mount(VkInput, {
-        props: {
-          clearable: true,
-          modelValue: 'Hello World'
-        }
-      })
-
-      wrapper.find('i.ti.ti-circle-x').trigger('click')
-      await nextTick()
-
-      expect(wrapper.emitted('update:modelValue')).toStrictEqual([['']])
-    })
-  })
-
   describe('Emits', () => {
     it('should emit focus event', async () => {
       const wrapper = mount(VkInput, {})
 
-      wrapper.find('.vk-input__input').trigger('focus')
-      await nextTick()
+      await wrapper.find('.vk-input__input').trigger('focus')
 
       expect(wrapper.emitted()).toHaveProperty('focus')
     })
@@ -322,8 +731,7 @@ describe('Input component', () => {
         }
       })
 
-      wrapper.find('.vk-input__input').trigger('focus')
-      await nextTick()
+      await wrapper.find('.vk-input__input').trigger('focus')
 
       expect(wrapper.emitted()).not.toHaveProperty('focus')
     })
@@ -331,8 +739,7 @@ describe('Input component', () => {
     it('should emit update:modelvalue on input', async () => {
       wrapper = mount(VkInput, {})
 
-      wrapper.find('.vk-input__input').trigger('input')
-      await nextTick()
+      await wrapper.find('.vk-input__input').trigger('input')
 
       expect(wrapper.emitted()).toHaveProperty('update:modelValue')
     })
@@ -344,8 +751,7 @@ describe('Input component', () => {
         }
       })
 
-      wrapper.find('.vk-input__input').trigger('input')
-      await nextTick()
+      await wrapper.find('.vk-input__input').trigger('input')
 
       expect(wrapper.emitted()).not.toHaveProperty('update:modelValue')
     })
@@ -357,8 +763,7 @@ describe('Input component', () => {
         }
       })
 
-      wrapper.find('.vk-input__input').trigger('input')
-      await nextTick()
+      await wrapper.find('.vk-input__input').trigger('input')
 
       expect(wrapper.emitted()).not.toHaveProperty('update:modelValue')
     })
@@ -370,8 +775,8 @@ describe('Input component', () => {
         }
       })
 
-      wrapper.find('i.ti.ti-brand-vue').trigger('click')
-      await nextTick()
+      await wrapper.find('i.ti.ti-brand-vue').trigger('click')
+
       expect(wrapper.emitted()).toHaveProperty('leftIconClick')
     })
 
@@ -382,9 +787,21 @@ describe('Input component', () => {
         }
       })
 
-      wrapper.find('i.ti.ti-home').trigger('click')
-      await nextTick()
+      await wrapper.find('i.ti.ti-home').trigger('click')
+
       expect(wrapper.emitted()).toHaveProperty('rightIconClick')
+    })
+
+    it('Should emit clear when the clear icon is clickled', () => {
+      wrapper = mount(VkInput, {
+        props: {
+          clearable: true,
+          modelValue: 'Hello World'
+        }
+      })
+
+      wrapper.find('i.ti.ti-circle-x').trigger('click')
+      expect(wrapper.emitted()).toHaveProperty('clear')
     })
   })
 })

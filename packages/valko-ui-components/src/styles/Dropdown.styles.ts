@@ -12,6 +12,7 @@ export default tv({
       'relative'
     ],
     icon: [
+      'vk-dropdown__trigger-icon',
       'ml-2',
       'block',
       'transition-transform',
@@ -20,6 +21,7 @@ export default tv({
       'data-[open=true]:rotate-180'
     ],
     itemsMenu: [
+      'vk-dropdown__items-menu',
       'p-2',
       'mt-2',
       'bg-white',
