@@ -20,6 +20,7 @@ const classes = useStyle<MenuProps, SlotStyles>(props, styles)
 
 const groups = props.items.reduce((acc: Set<string>, item: MenuItem) => {
   if (item.group) acc.add(item.group)
+  else acc.add('default')
   return acc
 }, new Set(['default']) as Set<string>)
 
