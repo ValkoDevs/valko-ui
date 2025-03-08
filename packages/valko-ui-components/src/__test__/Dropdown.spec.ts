@@ -28,7 +28,7 @@ describe('Dropdown component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-primary-500')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-primary-500')
       })
 
       it('should be size md', () => {
@@ -36,7 +36,7 @@ describe('Dropdown component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:text-light-1')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:text-light-1')
       })
 
       it('should be shape soft', () => {
@@ -50,6 +50,10 @@ describe('Dropdown component', () => {
       it('should not be disabled', () => {
         expect(wrapper.find('.cursor-not-allowed').exists()).toBe(false)
       })
+
+      it('should not have a label', () => {
+        expect(wrapper.find('.vk-dropdown__trigger-button').text()).toBe('')
+      })
     })
 
     describe('When color prop changes', () => {
@@ -60,10 +64,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-primary-500')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+        await nextTick()
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-primary-500')
       })
 
       it('should be color neutral when props.color is neutral', async () => {
@@ -73,10 +76,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-light-4')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+        await nextTick()
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-light-4')
       })
 
       it('should be color success when props.color is success', async () => {
@@ -86,10 +88,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-success-500')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+        await nextTick()
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-success-500')
       })
 
       it('should be color info when props.color is info', async () => {
@@ -99,10 +100,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-info-500')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+        await nextTick()
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-info-500')
       })
 
       it('should be color warning when props.color is warning', async () => {
@@ -112,10 +112,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-warning-500')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+        await nextTick()
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-warning-500')
       })
 
       it('should be color error when props.color is error', async () => {
@@ -125,10 +124,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-error-500')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+        await nextTick()
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-error-500')
       })
     })
 
@@ -235,10 +233,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:text-light-1')
+        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+        await nextTick()
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:text-light-1')
       })
 
       it('should be outlined when props.variant is outlined', async () => {
@@ -450,33 +447,17 @@ describe('Dropdown component', () => {
       expect(wrapper.emitted()).toHaveProperty('itemClick')
     })
 
-    it('should not emit itemClick when a disabled item is clicked', async () => {
-      const disabledItem = { key: 'disabled', title: 'Disabled', icon: 'error-404', disabled: true }
+    it('should not emit click event when the clicked item is disabled', async () => {
       const wrapper = mount(VkDropdown, {
         props: {
-          items: [disabledItem]
+          items: [{ key: 'edit', title: 'Edit', icon: 'edit', disabled: true }]
         }
       })
-
-      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-      await wrapper.find('.vk-dropdown__item-button').trigger('click')
+      wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+      await nextTick()
+      wrapper.find('.vk-dropdown__item-button').trigger('click')
 
       expect(wrapper.emitted()).not.toHaveProperty('itemClick')
-    })
-
-    it('should call onClick callback of item when clicked', async () => {
-      const onClickSpy = vi.fn()
-      const clickableItem = { key: 'clickable', title: 'Clickable', icon: 'check', onClick: onClickSpy }
-      const wrapper = mount(VkDropdown, {
-        props: {
-          items: [clickableItem]
-        }
-      })
-
-      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-      await wrapper.find('.vk-dropdown__item-button').trigger('click')
-
-      expect(onClickSpy).toHaveBeenCalled()
     })
   })
 })

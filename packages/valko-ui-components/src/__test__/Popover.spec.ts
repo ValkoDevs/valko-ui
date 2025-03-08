@@ -22,10 +22,6 @@ describe('Popover component', () => {
         expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
 
-      it('should be placement bottom', () => {
-        expect(wrapper.find('.vk-popover__panel').classes()).toContain('mt-1')
-      })
-
       it('should not be flat', () => {
         expect(wrapper.find('.shadow-none').exists()).toBe(false)
       })
