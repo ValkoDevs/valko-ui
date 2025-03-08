@@ -87,7 +87,7 @@ const dropdownProps: TableItem[] = [
   {
     key: 'itemsProp',
     prop: 'items',
-    required: false,
+    required: true,
     description: 'The Dropdown items displayed on the menu.',
     values: 'item[]',
     default: '[]'
