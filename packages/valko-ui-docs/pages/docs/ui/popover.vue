@@ -1,19 +1,12 @@
 <script setup lang="ts">
-import type { PopoverProps, TableItem, Placement, SelectOption } from '#valkoui'
+import type { PopoverProps, TableItem } from '#valkoui'
 
 const form = ref<PopoverProps>({
   shape: 'soft',
   isOpen: false,
   flat: false,
-  placement: 'bottom'
+  condensed: false
 })
-
-const placementOptions: SelectOption<Placement>[] = [
-  { value: 'top', label: 'Top' },
-  { value: 'bottom', label: 'Bottom' },
-  { value: 'left', label: 'Left' },
-  { value: 'right', label: 'Right' }
-]
 
 const popoverProps: TableItem[] = [
   {
@@ -33,14 +26,6 @@ const popoverProps: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'placementProp',
-    prop: 'placement',
-    required: false,
-    description: 'The placement of the Popover.',
-    values: 'top, bottom, left, right',
-    default: 'bottom'
-  },
-  {
     key: 'flatProp',
     prop: 'flat',
     required: false,
@@ -57,12 +42,20 @@ const popoverProps: TableItem[] = [
     default: ''
   },
   {
+    key: 'condensedProp',
+    prop: 'condensed',
+    required: false,
+    description: 'Whether the Popover is condensed, this will remove the padding for the panel.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
     key: 'panelClassesProp',
     prop: 'panelClasses',
     required: false,
     description: 'Allows you to apply custom CSS classes to the popover content for further customization (e.g., for styling the background, padding, borders, etc.). Accepts a single string or an array of strings.',
     values: 'string | string[]',
-    default: ''
+    default: '[]'
   }
 ]
 
@@ -123,7 +116,7 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
         :shape="form.shape"
         :is-open="form.isOpen"
         :flat="form.flat"
-        :placement="form.placement"
+        :condensed="form.condensed"
         text="Popover Content"
         @close="form.isOpen = false"
       >
@@ -140,15 +133,13 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
         size="sm"
         :options="shapeOptions.general"
       />
-      <vk-select
-        v-model="form.placement"
-        label="Placement"
-        size="sm"
-        :options="placementOptions"
-      />
       <vk-checkbox
         v-model="form.flat"
         label="Flat"
+      />
+      <vk-checkbox
+        v-model="form.condensed"
+        label="Condensed"
       />
     </template>
 
@@ -172,28 +163,6 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
 
         <template #code>
           <code-block :code="`${scriptCode}\n${generateSnippet('color', { values: colorOptions.map(o => o.value), customSlot, extraProps })}`" />
-        </template>
-      </example-section>
-
-      <example-section
-        title="Placement"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
-      >
-        <vk-popover
-          v-for="placement in placementOptions"
-          :key="placement.value"
-          :placement="placement.value"
-          :is-open="popoverStates[placement.value]"
-          :text="placement.label"
-          @close="handleClose(placement.value)"
-        >
-          <vk-button @click="togglePopover(placement.value)">
-            {{ placement.label }}
-          </vk-button>
-        </vk-popover>
-
-        <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet('placement', { values: placementOptions.map(o => o.value), customSlot, extraProps })}`" />
         </template>
       </example-section>
     </template>
