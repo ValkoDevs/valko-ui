@@ -1,5 +1,4 @@
 import { VueWrapper, mount, flushPromises } from '@vue/test-utils'
-import { nextTick } from 'vue'
 import VkDropdown from '#valkoui/components/Dropdown.vue'
 
 describe('Dropdown component', () => {
@@ -19,8 +18,8 @@ describe('Dropdown component', () => {
             items: items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
         await flushPromises()
       })
 
@@ -45,7 +44,7 @@ describe('Dropdown component', () => {
       })
 
       it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
+        expect(wrapper.find('.vk-dropdown__items-menu').classes()).toContain('shadow-sm')
       })
 
       it('should not be disabled', () => {
@@ -61,10 +60,12 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-primary-500')
       })
+
       it('should be color neutral when props.color is neutral', async () => {
         wrapper = mount(VkDropdown, {
           props: {
@@ -72,8 +73,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-light-4')
       })
 
@@ -84,8 +86,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-success-500')
       })
 
@@ -96,8 +99,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-info-500')
       })
 
@@ -108,8 +112,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-warning-500')
       })
 
@@ -120,8 +125,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:bg-error-500')
       })
     })
@@ -134,8 +140,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[shape=rounded]:rounded-full')
       })
 
@@ -146,8 +153,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[shape=soft]:rounded-lg')
       })
 
@@ -158,8 +166,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[shape=square]:rounded-none')
       })
     })
@@ -172,8 +181,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('text-xs')
       })
 
@@ -184,8 +194,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('text-sm')
       })
 
@@ -196,8 +207,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('text-base')
       })
 
@@ -208,8 +220,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('text-lg')
       })
     })
@@ -222,8 +235,9 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[active=true]:text-light-1')
       })
 
@@ -234,12 +248,13 @@ describe('Dropdown component', () => {
             items
           }
         })
-        wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        await nextTick()
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('border-2')
       })
 
-      it('should be ghost when props.variant is ghost', () => {
+      it('should be ghost when props.variant is ghost', async () => {
         wrapper = mount(VkDropdown, {
           props: {
             variant: 'ghost',
@@ -247,10 +262,12 @@ describe('Dropdown component', () => {
           }
         })
 
-        expect(wrapper.find('.shadow-none').exists()).toBe(true)
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
+        expect(wrapper.find('.vk-dropdown__items-menu').classes()).toContain('shadow-none')
       })
 
-      it('should be link when props.variant is link', () => {
+      it('should be link when props.variant is link', async () => {
         wrapper = mount(VkDropdown, {
           props: {
             variant: 'link',
@@ -258,10 +275,12 @@ describe('Dropdown component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-transparent').exists()).toBe(true)
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
+        expect(wrapper.find('.vk-dropdown__items-menu').classes()).toContain('bg-transparent')
       })
 
-      it('should be gradient when props.variant is gradient', () => {
+      it('should be gradient when props.variant is gradient', async () => {
         wrapper = mount(VkDropdown, {
           props: {
             variant: 'gradient',
@@ -269,8 +288,151 @@ describe('Dropdown component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('bg-gradient-to-br')
       })
+    })
+
+    describe('When icon prop changes', () => {
+      it('should render the default icon if non is provided', () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items
+          }
+        })
+
+        expect(wrapper.find('i.ti.ti-chevron-down').exists()).toBe(true)
+      })
+
+      it('should render the custom icon if provided', () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items,
+            icon: 'home'
+          }
+        })
+
+        expect(wrapper.find('i.ti.ti-home').exists()).toBe(true)
+      })
+    })
+
+    describe('When flat prop changes', () => {
+      it('should be flat if prop flat is true', async () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items,
+            flat: true
+          }
+        })
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
+        expect(wrapper.find('.vk-dropdown__items-menu').classes()).toContain('shadow-none')
+      })
+
+      it('should have shadow if prop flat is false', async () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items,
+            flat: false
+          }
+        })
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
+        expect(wrapper.find('.vk-dropdown__items-menu').classes()).toContain('shadow-sm')
+      })
+    })
+
+    describe('When disabled prop changes', () => {
+      it('should not be disabled if disabled prop is false', () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items,
+            disabled: false
+          }
+        })
+
+        expect(wrapper.find('.cursor-not-allowed').exists()).toBe(false)
+      })
+
+      it('should be disabled if disabled prop is true', () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items,
+            disabled: true
+          }
+        })
+
+        expect(wrapper.find('.cursor-not-allowed').exists()).toBe(true)
+      })
+
+      it('should the item be disabled if has disabled true', async () => {
+        const disabledItem = { key: 'disabled', title: 'Disabled', icon: 'error-404', disabled: true }
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items: [disabledItem]
+          }
+        })
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[disabled=true]:cursor-not-allowed')
+      })
+    })
+
+    describe('When items prop changes', () => {
+      it('should render all provided items correctly', async () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items
+          }
+        })
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+        const renderedItems = wrapper.findAll('.vk-dropdown__item-button')
+
+        expect(renderedItems.length).toBe(items.length)
+      })
+
+      it('should not render an icon if an item does not provide one', async () => {
+        const itemWithoutIcon = { key: 'no-icon', title: 'No Icon' }
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items: [itemWithoutIcon]
+          }
+        })
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+        const itemButton = wrapper.find('.vk-dropdown__item-button')
+
+        expect(itemButton.findComponent({ name: 'VkIcon' }).exists()).toBe(false)
+      })
+    })
+  })
+
+  describe('Slots', () => {
+    it('should render custom dropdown-trigger if provided on the slot', async () => {
+      const wrapper = mount(VkDropdown, {
+        props: {
+          items
+        },
+        slots: {
+          'dropdown-trigger': '<button class="custom-trigger">Menu</button>'
+        }
+      })
+
+      expect(wrapper.find('.custom-trigger').exists()).toBe(true)
+    })
+
+    it('should render default dropdown-trigger if the slot is not modified', async () => {
+      const wrapper = mount(VkDropdown, {
+        props: {
+          items
+        }
+      })
+
+      expect(wrapper.find('.vk-dropdown__trigger-button').exists()).toBe(true)
     })
   })
 
@@ -281,10 +443,40 @@ describe('Dropdown component', () => {
           items
         }
       })
-      wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-      await nextTick()
-      wrapper.find('.vk-dropdown__item-button').trigger('click')
+
+      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+      await wrapper.find('.vk-dropdown__item-button').trigger('click')
+
       expect(wrapper.emitted()).toHaveProperty('itemClick')
+    })
+
+    it('should not emit itemClick when a disabled item is clicked', async () => {
+      const disabledItem = { key: 'disabled', title: 'Disabled', icon: 'error-404', disabled: true }
+      const wrapper = mount(VkDropdown, {
+        props: {
+          items: [disabledItem]
+        }
+      })
+
+      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+      await wrapper.find('.vk-dropdown__item-button').trigger('click')
+
+      expect(wrapper.emitted()).not.toHaveProperty('itemClick')
+    })
+
+    it('should call onClick callback of item when clicked', async () => {
+      const onClickSpy = vi.fn()
+      const clickableItem = { key: 'clickable', title: 'Clickable', icon: 'check', onClick: onClickSpy }
+      const wrapper = mount(VkDropdown, {
+        props: {
+          items: [clickableItem]
+        }
+      })
+
+      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+      await wrapper.find('.vk-dropdown__item-button').trigger('click')
+
+      expect(onClickSpy).toHaveBeenCalled()
     })
   })
 })

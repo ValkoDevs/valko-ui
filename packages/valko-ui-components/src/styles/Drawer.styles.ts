@@ -47,6 +47,7 @@ export default tv({
       'dark:bg-dark-3'
     ],
     panelChild: [
+      'vk-drawer__panel-child',
       'flex',
       'w-full',
       'group-data-[title=true]:justify-between',

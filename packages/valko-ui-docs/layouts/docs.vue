@@ -127,6 +127,28 @@ onMounted(() => {
         placement="left"
         @close="toggleMenu"
       >
+        <div class="flex gap-2 px-4">
+          <theme-switch />
+          <a
+            href="https://github.com/ValkoDevs/valko-ui"
+            target="_blank"
+          >
+            <vk-button
+              variant="link"
+              shape="rounded"
+              color="neutral"
+              condensed
+              size="lg"
+              class="size-10"
+            >
+              <vk-icon
+                name="brand-github"
+                class="text-2xl"
+              />
+            </vk-button>
+          </a>
+        </div>
+
         <vk-menu
           :items="menuItems"
           :active="activeItem"

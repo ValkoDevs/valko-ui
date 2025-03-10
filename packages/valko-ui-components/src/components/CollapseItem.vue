@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { type Ref, ref, inject } from 'vue'
+import { useId, inject } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
-import type { CollapseItemProps } from '#valkoui/types/Collapse'
+import type { CollapseItemProps, CollapseItemStates } from '#valkoui/types/Collapse'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/CollapseItem.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
@@ -13,36 +13,23 @@ const props = defineProps<CollapseItemProps>()
 
 const classes = useStyle<CollapseItemProps, SlotStyles>(props, styles)
 
-const buttonRef: Ref<Record<string, HTMLElement> | null> = ref(null)
-const collapseId = inject<string>('collapseId', '')
+const {
+  items = {},
+  toggleItem = () => {}
+} = inject<CollapseItemStates>('itemStates') || {}
 
-const onClick = () => {
-  if (buttonRef.value) {
-    const current = buttonRef.value.$el
-    const parent = current.closest('.vk-collapse')
-
-    if (parent?.getAttribute('data-multiple') === 'true') return
-
-    if (collapseId) {
-      const collapseList = document.querySelectorAll(`[data-collapse-id="${collapseId}"] button[data-headlessui-state="open"]`) as unknown as HTMLElement[]
-      for (const collapse of collapseList) {
-        if (collapse !== current) collapse.click()
-      }
-    }
-  }
-}
+const itemId = useId()
 </script>
 
 <template>
   <disclosure
-    v-slot="{ open }"
     as="div"
+    :key="itemId"
     :class="classes.collapse"
   >
     <disclosure-button
-      ref="buttonRef"
       :class="classes.button"
-      @mousedown.stop="onClick"
+      @click="toggleItem(itemId)"
     >
       <slot name="title">
         <div>
@@ -50,7 +37,7 @@ const onClick = () => {
         </div>
         <vk-icon
           name="chevron-left"
-          :class="`${classes.icon} ${open ? classes.iconOpen : ''}`"
+          :class="`${classes.icon} ${itemId && items[itemId] ? classes.iconOpen : ''}`"
         />
       </slot>
     </disclosure-button>
@@ -63,6 +50,8 @@ const onClick = () => {
       leave-to-class="transition-all max-h-0 opacity-0"
     >
       <disclosure-panel
+        v-if="itemId && items[itemId]"
+        static
         :class="classes.panel"
       >
         <slot />

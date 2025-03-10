@@ -72,7 +72,7 @@ describe('Modal component', () => {
       })
     })
 
-    describe('When cosable and title prop changes', () => {
+    describe('When closable and title prop changes', () => {
       it('should not display closable icon when false', async () => {
         wrapper = mount(VkModal, {
           props: {
@@ -83,6 +83,24 @@ describe('Modal component', () => {
         await nextTick()
         modal = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
         expect(modal.find('i.ti.ti-x').exists()).toBe(false)
+      })
+
+      it('should not emit close event when the dialog triggers close', async () => {
+        const wrapper = mount(VkModal, {
+          props: {
+            isOpen: true,
+            closable: false
+          },
+          slots: {
+            default: 'Hello World'
+          }
+        })
+
+        await nextTick()
+        dispatchEvent(new MouseEvent('click', { bubbles: true }))
+        await nextTick()
+
+        expect(wrapper.emitted()).not.toHaveProperty('close')
       })
 
       it('should have title if title props is given', async () => {
@@ -107,6 +125,38 @@ describe('Modal component', () => {
         await nextTick()
         modal = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
         expect(modal.find('i.ti.ti-x').exists()).toBe(true)
+      })
+
+      it('should not render the header section when both title and closable are falsy', async () => {
+        const wrapper = mount(VkModal, {
+          props: {
+            isOpen: true,
+            closable: false,
+            title: ''
+          }
+        })
+
+        await nextTick()
+        const modalPanel = wrapper.getComponent(DialogPanel)
+        const header = modalPanel.find('.vk-modal__panel-child')
+
+        expect(header.exists()).toBe(false)
+      })
+
+      it('should render header with title but without close button when closable is false', async () => {
+        const wrapper = mount(VkModal, {
+          props: {
+            isOpen: true,
+            closable: false,
+            title: 'Drawer'
+          }
+        })
+
+        await nextTick()
+        const modalPanel = wrapper.getComponent(DialogPanel)
+        const header = modalPanel.find('.vk-modal__panel-child')
+
+        expect(header.exists()).toBe(true)
       })
     })
 

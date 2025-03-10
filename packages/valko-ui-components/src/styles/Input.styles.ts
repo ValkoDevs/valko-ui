@@ -19,9 +19,7 @@ export default tv({
       'duration-200',
       'ease-in-out',
       'overflow-hidden',
-      'placeholder:invisible',
       'focus:ring-0',
-      'focus:placeholder:visible',
       'data-[right-icon=false]:pr-2',
       'data-[right-icon=true]:pr-8'
     ],
@@ -79,6 +77,7 @@ export default tv({
       'rotate-180'
     ],
     clearIcon: [
+      'vk-input__clear-icon',
       'text-dark-1',
       'cursor-pointer',
       'opacity-80',
@@ -91,6 +90,7 @@ export default tv({
       'dark:text-light-5'
     ],
     numberArrows: [
+      'vk-input__number-arrows',
       'flex',
       'flex-col',
       'gap-1',

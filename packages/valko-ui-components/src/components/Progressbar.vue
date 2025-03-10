@@ -11,23 +11,25 @@ defineOptions({ name: 'VkProgressbar' })
 const props = withDefaults(defineProps<ProgressbarProps>(), {
   color: 'primary',
   variant: 'filled',
-  indeterminateLabel: 'Loading...',
   size: 'md',
   shape: 'soft',
   progress: 0,
-  buffer: 0
+  buffer: 0,
+  striped: false,
+  indeterminate: false
 })
 
 const classes = useStyle<ProgressbarProps, SlotStyles>(props, styles)
 
 const inlineStyles = computed(() => {
+  let styles = ''
   const sizeMap: Record<string, string> = {
     xs: '1rem',
     sm: '1.25rem',
     md: '1.50rem',
     lg: '1.75rem'
   }
-  let styles = ''
+
   if (props.striped) styles += `background-image: url("${diagonalStripes}"); background-size: ${sizeMap[props.size]};`
   if (!props.indeterminate) styles += `left: ${props.progress - 100}%;`
 

@@ -15,7 +15,10 @@ const props = withDefaults(defineProps<SelectProps>(), {
   size: 'md',
   shape: 'soft',
   options: () => [],
-  clearable: false
+  clearable: false,
+  multiple: false,
+  disabled: false,
+  readonly: false
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -44,39 +47,34 @@ const updateValue = (value: SelectProps['modelValue']) => {
   }
 }
 
-const selectItem = (value: string | number) => {
-  if (props.multiple) {
-    const selectedValues = Array.isArray(props.modelValue) ? [...props.modelValue] : []
-    const index = selectedValues.indexOf(value)
+const handleMultipleSelection = (value: string | number) => {
+  const selectedValues = Array.isArray(props.modelValue) ? [...props.modelValue] : []
+  const index = selectedValues.indexOf(value)
 
-    if (index === -1) selectedValues.push(value)
-    else selectedValues.splice(index, 1)
+  if (index === -1) selectedValues.push(value)
+  else selectedValues.splice(index, 1)
+  if (!props.clearable && selectedValues.length === 0) return
 
-    if (!props.clearable && selectedValues.length === 0) return
+  updateValue(selectedValues)
+}
 
-    updateValue(selectedValues)
-  } else {
-    const newValue = isSelected(value) ? undefined : value
+const handleSingleSelection = (value: string | number) => {
+  const newValue = isSelected(value) ? undefined : value
 
-    if (!props.clearable && newValue === undefined) return
+  if (!props.clearable && newValue === undefined) return
 
-    updateValue(newValue)
-    toggleDropdown(false)
-  }
+  updateValue(newValue)
+  toggleDropdown(false)
 }
 
 const isSelected = (value: string | number) => {
-  if (Array.isArray(props.modelValue)) {
-    return props.modelValue.includes(value)
-  }
+  if (Array.isArray(props.modelValue)) return props.modelValue.includes(value)
   return props.modelValue === value
 }
 
 const closeDropdownOnOutsideClick = (event: MouseEvent) => {
   const target = event.target as HTMLElement
-  if (target.closest('.vk-select__container') !== select.value) {
-    isOpen.value = false
-  }
+  if (target.closest('.vk-select__container') !== select.value) isOpen.value = false
 }
 
 const toggleDropdown = (onFocus: boolean) => {
@@ -133,7 +131,7 @@ onUnmounted(() => {
         :model-value="showValue"
         :clearable="clearable"
         cursor="pointer"
-        @focus="() => toggleDropdown(true)"
+        @focus="toggleDropdown(true)"
         @clear="clearSelection"
       >
         <template #right-icon>
@@ -141,7 +139,7 @@ onUnmounted(() => {
             name="chevron-down"
             :data-open="isOpen"
             :class="classes.icon"
-            @click.stop="() => toggleDropdown(!isOpen)"
+            @click.stop="toggleDropdown(!isOpen)"
           />
         </template>
       </vk-input>
@@ -167,7 +165,7 @@ onUnmounted(() => {
             :data-shape="shape"
             :data-variant="variant"
             :class="classes.item"
-            @click="selectItem(item.value)"
+            @click="multiple ? handleMultipleSelection(item.value) : handleSingleSelection(item.value)"
           >
             {{ item.label }}
           </li>

@@ -204,6 +204,64 @@ describe('Pagination component', () => {
     })
   })
 
+  describe('When visible pages changes', () => {
+    it('should return all pages when total pages are 7 or less', () => {
+      const wrapper = mount(VkPagination, { props: { pages: 5, modelValue: 3 } })
+      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+
+      expect(visiblePages).toEqual([1, 2, 3, 4, 5])
+    })
+
+    it('should return the first five pages and an ellipsis when current page is 1', () => {
+      const wrapper = mount(VkPagination, { props: { pages: 10, modelValue: 1 } })
+      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+
+      expect(visiblePages).toEqual([1, 2, 3, 4, 5, '...', 10])
+    })
+
+    it('should return the first five pages and an ellipsis when current page is 3', () => {
+      const wrapper = mount(VkPagination, { props: { pages: 10, modelValue: 3 } })
+      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+
+      expect(visiblePages).toEqual([1, 2, 3, 4, 5, '...', 10])
+    })
+
+    it('should return the last five pages and an ellipsis when current page is close to the end', () => {
+      const wrapper = mount(VkPagination, { props: { pages: 10, modelValue: 9 } })
+      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+
+      expect(visiblePages).toEqual([1, '...', 6, 7, 8, 9, 10])
+    })
+
+    it('should return the last five pages and an ellipsis when current page is the last one', () => {
+      const wrapper = mount(VkPagination, { props: { pages: 10, modelValue: 10 } })
+      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+
+      expect(visiblePages).toEqual([1, '...', 6, 7, 8, 9, 10])
+    })
+
+    it('should return middle pages with ellipses when current page is in the middle', () => {
+      const wrapper = mount(VkPagination, { props: { pages: 10, modelValue: 5 } })
+      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+
+      expect(visiblePages).toEqual([1, '...', 4, 5, 6, '...', 10])
+    })
+
+    it('should return correct pages when total pages are more than 7 and current page is near the start', () => {
+      const wrapper = mount(VkPagination, { props: { pages: 8, modelValue: 2 } })
+      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+
+      expect(visiblePages).toEqual([1, 2, 3, 4, 5, '...', 8])
+    })
+
+    it('should return correct pages when total pages are more than 7 and current page is near the end', () => {
+      const wrapper = mount(VkPagination, { props: { pages: 8, modelValue: 7 } })
+      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+
+      expect(visiblePages).toEqual([1, '...', 4, 5, 6, 7, 8])
+    })
+  })
+
   describe('Disabled', () => {
     it('should not have arrow left disabled', () => {
       wrapper = mount(VkPagination, {
@@ -237,107 +295,6 @@ describe('Pagination component', () => {
       await nextTick()
       wrapper.find('.vk-pagination__right').trigger('click')
       expect(wrapper.emitted('update:modelValue'))
-    })
-  })
-
-  describe('Pages computed', () => {
-    it('should show all pages when total pages are 7 or fewer', () => {
-      const wrapper = mount(VkPagination, {
-        props: {
-          pages: 5,
-          modelValue: 3
-        }
-      })
-
-      expect(wrapper.vm.pages).toEqual([1, 2, 3, 4, 5])
-    })
-
-    it('should show pages correctly when currentPage is greater than 4 and totalPages is greater than 7', () => {
-      const wrapper = mount(VkPagination, {
-        props: {
-          pages: 10,
-          modelValue: 5
-        }
-      })
-
-      expect(wrapper.vm.pages).toEqual([1, '...', 4, 5, 6, '...', 10])
-    })
-
-    it('should show pages correctly when currentPage is less than or equal to 4 and totalPages is greater than 7', () => {
-      const wrapper = mount(VkPagination, {
-        props: {
-          pages: 10,
-          modelValue: 3
-        }
-      })
-
-      expect(wrapper.vm.pages).toEqual([1, 2, 3, 4, 5, '...', 10])
-    })
-
-    it('should handle cases where currentPage is in the middle and totalPages is greater than 7', () => {
-      const wrapper = mount(VkPagination, {
-        props: {
-          pages: 15,
-          modelValue: 8
-        }
-      })
-
-      expect(wrapper.vm.pages).toEqual([1, '...', 7, 8, 9, '...', 15])
-    })
-
-    it('should handle edge case where currentPage is greater than totalPages', () => {
-      const wrapper = mount(VkPagination, {
-        props: {
-          pages: 5,
-          modelValue: 10
-        }
-      })
-
-      expect(wrapper.vm.pages).toEqual([1, 2, 3, 4, 5])
-    })
-
-    it('should handle edge case where currentPage is exactly at the end', () => {
-      const wrapper = mount(VkPagination, {
-        props: {
-          pages: 10,
-          modelValue: 10
-        }
-      })
-
-      expect(wrapper.vm.pages).toEqual([1, '...', 6, 7, 8, 9, 10])
-    })
-
-    it('should use default page values when currentPage <= 4', () => {
-      const wrapper = mount(VkPagination, {
-        props: {
-          pages: 10,
-          modelValue: 4
-        }
-      })
-
-      expect(wrapper.vm.pages).toEqual([1, 2, 3, 4, 5, '...', 10])
-    })
-
-    it('should use currentPage and currentPage + 1 when currentPage > 4', () => {
-      const wrapper = mount(VkPagination, {
-        props: {
-          pages: 10,
-          modelValue: 6
-        }
-      })
-
-      expect(wrapper.vm.pages).toEqual([1, '...', 5, 6, 7, '...', 10])
-    })
-
-    it('should handle cases where currentPage is near the end and totalPages is greater than 7', () => {
-      const wrapper = mount(VkPagination, {
-        props: {
-          pages: 15,
-          modelValue: 13
-        }
-      })
-
-      expect(wrapper.vm.pages).toEqual([1, '...', 11, 12, 13, 14, 15])
     })
   })
 })

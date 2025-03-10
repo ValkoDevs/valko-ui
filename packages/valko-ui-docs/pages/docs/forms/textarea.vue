@@ -77,14 +77,6 @@ const apiData: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'placeholderProp',
-    prop: 'placeholder',
-    required: false,
-    description: 'The placeholder for the Textarea',
-    values: 'string',
-    default: 'false'
-  },
-  {
     key: 'helpertextProp',
     prop: 'helpertext',
     required: false,

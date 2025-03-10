@@ -12,7 +12,8 @@ const props = withDefaults(defineProps<PopoverProps>(), {
   isOpen: false,
   shape: 'soft',
   text: '',
-  placement: 'bottom'
+  placement: 'bottom',
+  panelClasses: () => []
 })
 
 const emit = defineEmits(['close'])
@@ -24,7 +25,8 @@ const rootRef = ref<HTMLElement | null>(null)
 const handleClickOutside = (event: MouseEvent) => {
   const target = event.target as HTMLElement
 
-  if (rootRef.value && !rootRef.value.contains(target)) emit('close')
+  if (rootRef.value && !rootRef.value.contains(target) && props.isOpen)
+    emit('close')
 }
 
 onMounted(() => nextTick(() => document.addEventListener('click', handleClickOutside)))
