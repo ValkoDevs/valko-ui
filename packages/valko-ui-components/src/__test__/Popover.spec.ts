@@ -71,7 +71,7 @@ describe('Popover component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-popover__panel').classes()).toContain('mb-1')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('data-[placement=top-start]:origin-bottom-left')
       })
 
       it('should be bottom when props.placement is bottom', () => {
@@ -82,7 +82,7 @@ describe('Popover component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-popover__panel').classes()).toContain('mt-1')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('data-[placement=bottom-start]:origin-top-left')
       })
 
       it('should be left when props.placement is left', () => {
@@ -93,7 +93,7 @@ describe('Popover component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-popover__panel').classes()).toContain('mr-1')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('data-[placement=left-start]:origin-right')
       })
 
       it('should be right when props.placement is right', () => {
@@ -104,7 +104,7 @@ describe('Popover component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-popover__panel').classes()).toContain('ml-1')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('data-[placement=right-start]:origin-left')
       })
     })
 
