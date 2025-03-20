@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import type { DropdownProps, TableItem, Item } from '#valkoui'
+import type { DropdownProps, TableItem, Item, SelectOption, PlacementWithAuto, Alignment } from '#valkoui'
 
 const form = ref<Partial<DropdownProps>>({
   color: 'primary',
   variant: 'filled',
   shape: 'soft',
   size: 'md',
+  placement: 'auto',
+  alignment: undefined,
   flat: false,
   disabled: false,
   label: 'Dropdown Menu'
@@ -17,6 +19,20 @@ const items: Item[] = [
   { key: 'disabled', title: 'Disabled', icon: 'error-404', disabled: true },
   { key: 'video', title: 'Upload Video', icon: 'video', onClick: () => useNotification({ text: 'Video uploaded' }) },
   { key: 'delete', title: 'Delete', icon: 'trash', onClick: () => useNotification({ text: 'Item Deleted' }) }
+]
+
+const placementOptions: SelectOption<PlacementWithAuto>[] = [
+  { label: 'Bottom', value: 'bottom' },
+  { label: 'Top', value: 'top' },
+  { label: 'Left', value: 'left' },
+  { label: 'Right', value: 'right' },
+  { label: 'Auto', value: 'auto' }
+]
+
+const alignmentOptions: SelectOption<Alignment>[] = [
+  { label: 'Start', value: 'start' },
+  { label: 'Center', value: 'center' },
+  { label: 'End', value: 'end' }
 ]
 
 const dropdownProps: TableItem[] = [
@@ -51,6 +67,22 @@ const dropdownProps: TableItem[] = [
     description: 'The Dropdown size.',
     values: 'xs, sm, md, lg',
     default: 'md'
+  },
+  {
+    key: 'placementProp',
+    prop: 'placement',
+    required: false,
+    description: 'Defines where the Dropdown should appear relative to the reference element. If set to "auto", the Dropdown will automatically choose the best placement based on available space.',
+    values: 'bottom, top, left, right, auto',
+    default: 'auto'
+  },
+  {
+    key: 'alignmentProp',
+    prop: 'alignment',
+    required: false,
+    description: 'Specifies how the Dropdown is aligned within its placement. If not set, it defaults to the best fit based on available space.',
+    values: 'start, center, end',
+    default: 'undefined'
   },
   {
     key: 'flatProp',
@@ -190,6 +222,8 @@ const extraProps = ':items="items"'
         :flat="form.flat"
         :label="form.label"
         :items="items"
+        :placement="form.placement"
+        :alignment="form.alignment"
       />
     </template>
 
@@ -222,6 +256,18 @@ const extraProps = ':items="items"'
         label="Size"
         size="sm"
         :options="sizeOptions.general"
+      />
+      <vk-select
+        v-model="form.placement"
+        label="Placement"
+        size="sm"
+        :options="placementOptions"
+      />
+      <vk-select
+        v-model="form.alignment"
+        label="Alignment"
+        size="sm"
+        :options="alignmentOptions"
       />
       <vk-checkbox
         v-model="form.flat"
@@ -303,6 +349,42 @@ const extraProps = ':items="items"'
 
         <template #code>
           <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Placements"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(5,_minmax(0,_max-content))]"
+      >
+        <vk-dropdown
+          v-for="placement in placementOptions"
+          :key="placement.value"
+          :placement="placement.value"
+          :title="placement.label"
+          :items="items"
+          :label="placement.label"
+        />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('placement', { values: placementOptions.map(o => o.value), extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Alignments"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+      >
+        <vk-dropdown
+          v-for="alignment in alignmentOptions"
+          :key="alignment.value"
+          :alignment="alignment.value"
+          :title="alignment.label"
+          :items="items"
+          :label="alignment.label"
+        />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('alignment', { values: alignmentOptions.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 

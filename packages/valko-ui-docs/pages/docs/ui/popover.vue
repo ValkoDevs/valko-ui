@@ -1,12 +1,28 @@
 <script setup lang="ts">
-import type { PopoverProps, TableItem } from '#valkoui'
+import type { PopoverProps, TableItem, SelectOption, PlacementWithAuto, Alignment } from '#valkoui'
 
 const form = ref<PopoverProps>({
   shape: 'soft',
+  placement: 'auto',
+  alignment: undefined,
   isOpen: false,
   flat: false,
   condensed: false
 })
+
+const placementOptions: SelectOption<PlacementWithAuto>[] = [
+  { label: 'Bottom', value: 'bottom' },
+  { label: 'Top', value: 'top' },
+  { label: 'Left', value: 'left' },
+  { label: 'Right', value: 'right' },
+  { label: 'Auto', value: 'auto' }
+]
+
+const alignmentOptions: SelectOption<Alignment>[] = [
+  { label: 'Start', value: 'start' },
+  { label: 'Center', value: 'center' },
+  { label: 'End', value: 'end' }
+]
 
 const popoverProps: TableItem[] = [
   {
@@ -24,6 +40,22 @@ const popoverProps: TableItem[] = [
     description: 'The state of the Popover.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'placementProp',
+    prop: 'placement',
+    required: false,
+    description: 'Defines where the Popover should appear relative to the reference element. If set to "auto", the Popover will automatically choose the best placement based on available space.',
+    values: 'bottom, top, left, right, auto',
+    default: 'auto'
+  },
+  {
+    key: 'alignmentProp',
+    prop: 'alignment',
+    required: false,
+    description: 'Specifies how the Popover is aligned within its placement. If not set, it defaults to the best fit based on available space.',
+    values: 'start, center, end',
+    default: 'undefined'
   },
   {
     key: 'flatProp',
@@ -117,6 +149,8 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
         :is-open="form.isOpen"
         :flat="form.flat"
         :condensed="form.condensed"
+        :placement="form.placement"
+        :alignment="form.alignment"
         text="Popover Content"
         @close="form.isOpen = false"
       >
@@ -132,6 +166,18 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
         label="Shape"
         size="sm"
         :options="shapeOptions.general"
+      />
+      <vk-select
+        v-model="form.placement"
+        label="Placement"
+        size="sm"
+        :options="placementOptions"
+      />
+      <vk-select
+        v-model="form.alignment"
+        label="Alignment"
+        size="sm"
+        :options="alignmentOptions"
       />
       <vk-checkbox
         v-model="form.flat"
@@ -162,7 +208,51 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
         </vk-popover>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet('color', { values: colorOptions.map(o => o.value), customSlot, extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), customSlot, extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Placement"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(5,_minmax(0,_max-content))]"
+      >
+        <vk-popover
+          v-for="placement in placementOptions"
+          :key="placement.value"
+          :placement="placement.value"
+          :is-open="popoverStates[placement.value]"
+          :text="placement.label"
+          @close="handleClose(placement.value)"
+        >
+          <vk-button @click="togglePopover(placement.value)">
+            {{ placement.label }}
+          </vk-button>
+        </vk-popover>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('placement', { values: placementOptions.map(o => o.value), customSlot, extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Alignment"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+      >
+        <vk-popover
+          v-for="alignment in alignmentOptions"
+          :key="alignment.value"
+          :alignment="alignment.value"
+          :is-open="popoverStates[alignment.value]"
+          :text="alignment.label"
+          @close="handleClose(alignment.value)"
+        >
+          <vk-button @click="togglePopover(alignment.value)">
+            {{ alignment.label }}
+          </vk-button>
+        </vk-popover>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('alignment', { values: alignmentOptions.map(o => o.value), customSlot, extraProps })}`" />
         </template>
       </example-section>
     </template>

@@ -1,4 +1,4 @@
-import type { Shapes, Colors, Sizes, VariantWithGradientAndLink } from './common'
+import type { Shapes, Colors, Sizes, VariantWithGradientAndLink, PlacementsWithAuto, Alignments } from './common'
 
 export interface Item {
   key: string | number;
@@ -8,7 +8,7 @@ export interface Item {
   onClick?: () => void;
 }
 
-export interface DropdownProps extends Colors, Sizes, Shapes {
+export interface DropdownProps extends Colors, Sizes, Shapes, Alignments, PlacementsWithAuto {
   variant?: VariantWithGradientAndLink;
   items: Item[];
   icon?: string;

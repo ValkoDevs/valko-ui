@@ -18,6 +18,8 @@ const props = withDefaults(defineProps<DropdownProps>(), {
   icon: 'chevron-down',
   flat: false,
   disabled: false,
+  placement: 'auto',
+  alignment: undefined,
   items: () => []
 })
 
@@ -40,6 +42,8 @@ const onItemClick = (item: Item) => {
     :is-open="open && !disabled"
     :flat="flat || variant === 'ghost' || variant === 'link'"
     :shape="shape"
+    :placement="placement"
+    :alignment="alignment"
     condensed
     @close="open = false"
   >

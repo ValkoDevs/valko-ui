@@ -11,7 +11,7 @@ const props = withDefaults(defineProps<PopoverProps>(), {
   isOpen: false,
   shape: 'soft',
   text: '',
-  placement: 'bottom',
+  placement: 'auto',
   panelClasses: () => []
 })
 
@@ -31,6 +31,9 @@ const handleClickOutside = (event: MouseEvent) => {
 }
 
 const placement = computed(() => {
+  if (props.placement !== 'auto')
+    return `${props.placement}-${props.alignment || 'start'}`
+
   if (!slotRef.value || !panelRef.value || !rootRef.value)
     return 'bottom-start'
 
@@ -38,21 +41,26 @@ const placement = computed(() => {
   const { height, width } = panelRef.value.getBoundingClientRect()
   const offset = 8
 
-  const fits = {
+  const placements = {
     bottom: innerHeight - bottom > height + offset,
     top: top > height + offset,
+    right: right > innerWidth - (width + offset),
+    left: left + width + offset < innerWidth
+  }
+
+  const selectedPlacement = Object.entries(placements).find(([, fits]) => fits)?.[0] || 'left'
+
+  if (props.alignment) return `${selectedPlacement}-${props.alignment}`
+
+  const alignments = {
+    start: left + width + offset < innerWidth,
     end: right > innerWidth - (width + offset),
-    start: left + width + offset < innerWidth
+    center: (left > width / 2) && (right > width / 2)
   }
 
-  const placements = {
-    bottom: fits.bottom ? (fits.start ? 'bottom-start' : 'bottom-end') : null,
-    top: fits.top ? (fits.start ? 'top-start' : 'top-end') : null,
-    end: fits.end ? (fits.bottom ? 'right-start' : 'right-end') : null,
-    start: fits.start ? (fits.bottom ? 'left-start' : 'left-end') : null
-  }
+  const selectedAlignment = Object.entries(alignments).find(([, fits]) => fits)?.[0] || 'start'
 
-  return placements.bottom || placements.top || placements.end || placements.start || 'bottom-start'
+  return `${selectedPlacement}-${selectedAlignment}`
 })
 
 onMounted(() => {
