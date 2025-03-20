@@ -15,7 +15,7 @@ describe('Tooltip component', () => {
             default: '<button>Hover Me</button>'
           }
         })
-        wrapper.find('.vk-tooltip_mouseover').trigger('mouseenter')
+        wrapper.find('.vk-tooltip').trigger('mouseenter')
         await nextTick()
       })
 
@@ -28,11 +28,11 @@ describe('Tooltip component', () => {
       })
 
       it('should be shape soft', () => {
-        expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('rounded-lg')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
 
       it('should be flat', () => {
-        expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('shadow-none')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('shadow-none')
       })
     })
 
@@ -48,9 +48,9 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip_mouseover').trigger('mouseenter')
+        wrapper.find('.vk-tooltip').trigger('mouseenter')
         await nextTick()
-        expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('rounded-full')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-2xl')
       })
 
       it('should be soft when props.shape is soft', async () => {
@@ -64,9 +64,9 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip_mouseover').trigger('mouseenter')
+        wrapper.find('.vk-tooltip').trigger('mouseenter')
         await nextTick()
-        expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('rounded-lg')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
 
       it('should be square when props.shape is square', async () => {
@@ -80,9 +80,9 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip_mouseover').trigger('mouseenter')
+        wrapper.find('.vk-tooltip').trigger('mouseenter')
         await nextTick()
-        expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('rounded-none')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-none')
       })
     })
 
@@ -98,7 +98,7 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip_mouseover').trigger('mouseenter')
+        wrapper.find('.vk-tooltip').trigger('mouseenter')
         await nextTick()
         expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('text-xs')
       })
@@ -114,7 +114,7 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip_mouseover').trigger('mouseenter')
+        wrapper.find('.vk-tooltip').trigger('mouseenter')
         await nextTick()
         expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('text-sm')
       })
@@ -130,7 +130,7 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip_mouseover').trigger('mouseenter')
+        wrapper.find('.vk-tooltip').trigger('mouseenter')
         await nextTick()
         expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('text-base')
       })
@@ -146,7 +146,7 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip_mouseover').trigger('mouseenter')
+        wrapper.find('.vk-tooltip').trigger('mouseenter')
         await nextTick()
         expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('text-lg')
       })
@@ -174,7 +174,7 @@ describe('Tooltip component', () => {
         }
       })
 
-      expect(wrapper.find('.vk-tooltip_mouseover').html()).toContain('<button>Hover Me</button>')
+      expect(wrapper.find('.vk-tooltip').html()).toContain('<button>Hover Me</button>')
     })
   })
 
@@ -189,7 +189,7 @@ describe('Tooltip component', () => {
         }
       })
 
-      wrapper.find('.vk-tooltip_mouseover').trigger('mouseenter')
+      wrapper.find('.vk-tooltip').trigger('mouseenter')
       await nextTick()
 
       expect(wrapper.find('.vk-tooltip_tip').exists()).toBe(true)
@@ -205,9 +205,9 @@ describe('Tooltip component', () => {
         }
       })
 
-      wrapper.find('.vk-tooltip_mouseover').trigger('mouseenter')
+      wrapper.find('.vk-tooltip').trigger('mouseenter')
       await nextTick()
-      wrapper.find('.vk-tooltip_mouseover').trigger('mouseleave')
+      wrapper.find('.vk-tooltip').trigger('mouseleave')
       await nextTick()
       expect(wrapper.find('.vk-tooltip_tip').exists()).toBe(false)
     })

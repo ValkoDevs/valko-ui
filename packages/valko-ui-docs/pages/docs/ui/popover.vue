@@ -1,18 +1,27 @@
 <script setup lang="ts">
-import type { PopoverProps, TableItem, Placement, SelectOption } from '#valkoui'
+import type { PopoverProps, TableItem, SelectOption, PlacementWithAuto, Alignment } from '#valkoui'
 
 const form = ref<PopoverProps>({
   shape: 'soft',
+  placement: 'auto',
+  alignment: undefined,
   isOpen: false,
   flat: false,
-  placement: 'bottom'
+  condensed: false
 })
 
-const placementOptions: SelectOption<Placement>[] = [
-  { value: 'top', label: 'Top' },
-  { value: 'bottom', label: 'Bottom' },
-  { value: 'left', label: 'Left' },
-  { value: 'right', label: 'Right' }
+const placementOptions: SelectOption<PlacementWithAuto>[] = [
+  { label: 'Bottom', value: 'bottom' },
+  { label: 'Top', value: 'top' },
+  { label: 'Left', value: 'left' },
+  { label: 'Right', value: 'right' },
+  { label: 'Auto', value: 'auto' }
+]
+
+const alignmentOptions: SelectOption<Alignment>[] = [
+  { label: 'Start', value: 'start' },
+  { label: 'Center', value: 'center' },
+  { label: 'End', value: 'end' }
 ]
 
 const popoverProps: TableItem[] = [
@@ -36,9 +45,17 @@ const popoverProps: TableItem[] = [
     key: 'placementProp',
     prop: 'placement',
     required: false,
-    description: 'The placement of the Popover.',
-    values: 'top, bottom, left, right',
-    default: 'bottom'
+    description: 'Defines where the Popover should appear relative to the reference element. If set to "auto", the Popover will automatically choose the best placement based on available space.',
+    values: 'bottom, top, left, right, auto',
+    default: 'auto'
+  },
+  {
+    key: 'alignmentProp',
+    prop: 'alignment',
+    required: false,
+    description: 'Specifies how the Popover is aligned within its placement. If not set, it defaults to the best fit based on available space.',
+    values: 'start, center, end',
+    default: 'undefined'
   },
   {
     key: 'flatProp',
@@ -57,12 +74,20 @@ const popoverProps: TableItem[] = [
     default: ''
   },
   {
+    key: 'condensedProp',
+    prop: 'condensed',
+    required: false,
+    description: 'Whether the Popover is condensed, this will remove the padding for the panel.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
     key: 'panelClassesProp',
     prop: 'panelClasses',
     required: false,
     description: 'Allows you to apply custom CSS classes to the popover content for further customization (e.g., for styling the background, padding, borders, etc.). Accepts a single string or an array of strings.',
     values: 'string | string[]',
-    default: ''
+    default: '[]'
   }
 ]
 
@@ -123,7 +148,9 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
         :shape="form.shape"
         :is-open="form.isOpen"
         :flat="form.flat"
+        :condensed="form.condensed"
         :placement="form.placement"
+        :alignment="form.alignment"
         text="Popover Content"
         @close="form.isOpen = false"
       >
@@ -146,9 +173,19 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
         size="sm"
         :options="placementOptions"
       />
+      <vk-select
+        v-model="form.alignment"
+        label="Alignment"
+        size="sm"
+        :options="alignmentOptions"
+      />
       <vk-checkbox
         v-model="form.flat"
         label="Flat"
+      />
+      <vk-checkbox
+        v-model="form.condensed"
+        label="Condensed"
       />
     </template>
 
@@ -171,13 +208,13 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
         </vk-popover>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet('color', { values: colorOptions.map(o => o.value), customSlot, extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), customSlot, extraProps })}`" />
         </template>
       </example-section>
 
       <example-section
         title="Placement"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(5,_minmax(0,_max-content))]"
       >
         <vk-popover
           v-for="placement in placementOptions"
@@ -193,7 +230,29 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
         </vk-popover>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet('placement', { values: placementOptions.map(o => o.value), customSlot, extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('placement', { values: placementOptions.map(o => o.value), customSlot, extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Alignment"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+      >
+        <vk-popover
+          v-for="alignment in alignmentOptions"
+          :key="alignment.value"
+          :alignment="alignment.value"
+          :is-open="popoverStates[alignment.value]"
+          :text="alignment.label"
+          @close="handleClose(alignment.value)"
+        >
+          <vk-button @click="togglePopover(alignment.value)">
+            {{ alignment.label }}
+          </vk-button>
+        </vk-popover>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('alignment', { values: alignmentOptions.map(o => o.value), customSlot, extraProps })}`" />
         </template>
       </example-section>
     </template>

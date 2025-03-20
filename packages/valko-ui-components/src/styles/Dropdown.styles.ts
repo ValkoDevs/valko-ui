@@ -7,10 +7,6 @@ export default tv({
       'w-fit',
       'h-fit'
     ],
-    dropdown: [
-      'w-full',
-      'relative'
-    ],
     icon: [
       'vk-dropdown__trigger-icon',
       'ml-2',
@@ -21,18 +17,7 @@ export default tv({
       'data-[open=true]:rotate-180'
     ],
     itemsMenu: [
-      'vk-dropdown__items-menu',
-      'p-2',
-      'mt-2',
-      'bg-white',
-      'shadow-sm',
-      'shadow-light-4',
-      'z-10',
-      'absolute',
-      'left-0',
-      'origin-top-left',
-      'dark:bg-dark-3',
-      'dark:shadow-dark-3'
+      'p-2'
     ],
     triggerButton: [
       'vk-dropdown__trigger-button'
@@ -103,7 +88,7 @@ export default tv({
     variant: {
       filled: {
         itemsButton: [
-          'data-[active=true]:text-light-1'
+          'hover:text-light-1'
         ]
       },
       outlined: {
@@ -112,45 +97,12 @@ export default tv({
           'border-transparent'
         ]
       },
-      ghost: {
-        itemsMenu: [
-          'shadow-none'
-        ]
-      },
-      link: {
-        itemsMenu: [
-          'bg-transparent',
-          'shadow-none'
-        ]
-      },
+      ghost: {},
+      link: {},
       gradient: {
         itemsButton: [
           'bg-gradient-to-br',
-          'data-[active=true]:text-light-1'
-        ]
-      }
-    },
-    shape: {
-      rounded: {
-        itemsMenu: [
-          'rounded-2xl'
-        ]
-      },
-      soft: {
-        itemsMenu: [
-          'rounded-lg'
-        ]
-      },
-      square: {
-        itemsMenu: [
-          'rounded-none'
-        ]
-      }
-    },
-    flat: {
-      true: {
-        itemsMenu: [
-          'shadow-none'
+          'hover:text-light-1'
         ]
       }
     }
@@ -162,8 +114,8 @@ export default tv({
       color: 'primary',
       class: {
         itemsButton: [
-          'data-[active=true]:bg-primary-500',
-          'data-[active=true]:dark:bg-primary-500'
+          'hover:bg-primary-500',
+          'hover:dark:bg-primary-500'
         ]
       }
     },
@@ -172,10 +124,10 @@ export default tv({
       color: 'neutral',
       class: {
         itemsButton: [
-          'data-[active=true]:bg-light-4',
-          'data-[active=true]:text-dark-1',
-          'data-[active=true]:dark:bg-dark-2',
-          'data-[active=true]:dark:text-light-3'
+          'hover:bg-light-4',
+          'hover:text-dark-1',
+          'hover:dark:bg-dark-2',
+          'hover:dark:text-light-3'
         ]
       }
     },
@@ -184,8 +136,8 @@ export default tv({
       color: 'success',
       class: {
         itemsButton: [
-          'data-[active=true]:bg-success-500',
-          'data-[active=true]:dark:bg-success-500'
+          'hover:bg-success-500',
+          'hover:dark:bg-success-500'
         ]
       }
     },
@@ -194,8 +146,8 @@ export default tv({
       color: 'info',
       class: {
         itemsButton: [
-          'data-[active=true]:bg-info-500',
-          'data-[active=true]:dark:bg-info-500'
+          'hover:bg-info-500',
+          'hover:dark:bg-info-500'
         ]
       }
     },
@@ -204,8 +156,8 @@ export default tv({
       color: 'warning',
       class: {
         itemsButton: [
-          'data-[active=true]:bg-warning-500',
-          'data-[active=true]:dark:bg-warning-500'
+          'hover:bg-warning-500',
+          'hover:dark:bg-warning-500'
         ]
       }
     },
@@ -214,8 +166,8 @@ export default tv({
       color: 'error',
       class: {
         itemsButton: [
-          'data-[active=true]:bg-error-500',
-          'data-[active=true]:dark:bg-error-500'
+          'hover:bg-error-500',
+          'hover:dark:bg-error-500'
         ]
       }
     },
@@ -225,8 +177,8 @@ export default tv({
       color: 'primary',
       class: {
         itemsButton: [
-          'data-[active=true]:text-primary-500',
-          'data-[active=true]:border-primary-500'
+          'hover:text-primary-500',
+          'hover:border-primary-500'
         ]
       }
     },
@@ -235,10 +187,10 @@ export default tv({
       color: 'neutral',
       class: {
         itemsButton: [
-          'data-[active=true]:text-dark-1',
-          'data-[active=true]:border-light-4',
-          'data-[active=true]:dark:text-light-4',
-          'data-[active=true]:dark:border-dark-2'
+          'hover:text-dark-1',
+          'hover:border-light-4',
+          'hover:dark:text-light-4',
+          'hover:dark:border-dark-2'
         ]
       }
     },
@@ -247,8 +199,8 @@ export default tv({
       color: 'success',
       class: {
         itemsButton: [
-          'data-[active=true]:text-success-500',
-          'data-[active=true]:border-success-500'
+          'hover:text-success-500',
+          'hover:border-success-500'
         ]
       }
     },
@@ -257,8 +209,8 @@ export default tv({
       color: 'info',
       class: {
         itemsButton: [
-          'data-[active=true]:text-info-500',
-          'data-[active=true]:border-info-500'
+          'hover:text-info-500',
+          'hover:border-info-500'
         ]
       }
     },
@@ -267,8 +219,8 @@ export default tv({
       color: 'warning',
       class: {
         itemsButton: [
-          'data-[active=true]:text-warning-500',
-          'data-[active=true]:border-warning-500'
+          'hover:text-warning-500',
+          'hover:border-warning-500'
         ]
       }
     },
@@ -277,8 +229,8 @@ export default tv({
       color: 'error',
       class: {
         itemsButton: [
-          'data-[active=true]:text-error-500',
-          'data-[active=true]:border-error-500'
+          'hover:text-error-500',
+          'hover:border-error-500'
         ]
       }
     },
@@ -288,9 +240,9 @@ export default tv({
       color: 'primary',
       class: {
         itemsButton: [
-          'data-[active=true]:text-primary-500',
-          'data-[active=true]:bg-primary-500/[.15]',
-          'data-[active=true]:dark:bg-primary-500/[.15]'
+          'hover:text-primary-500',
+          'hover:bg-primary-500/[.15]',
+          'hover:dark:bg-primary-500/[.15]'
         ]
       }
     },
@@ -299,10 +251,10 @@ export default tv({
       color: 'neutral',
       class: {
         itemsButton: [
-          'data-[active=true]:text-dark-1',
-          'data-[active=true]:bg-light-5/[.15]',
-          'data-[active=true]:dark:text-light-4',
-          'data-[active=true]:dark:bg-dark-4/[.15]'
+          'hover:text-dark-1',
+          'hover:bg-light-5/[.15]',
+          'hover:dark:text-light-4',
+          'hover:dark:bg-dark-4/[.15]'
         ]
       }
     },
@@ -311,9 +263,9 @@ export default tv({
       color: 'success',
       class: {
         itemsButton: [
-          'data-[active=true]:text-success-500',
-          'data-[active=true]:bg-success-500/[.15]',
-          'data-[active=true]:dark:bg-success-500/[.15]'
+          'hover:text-success-500',
+          'hover:bg-success-500/[.15]',
+          'hover:dark:bg-success-500/[.15]'
         ]
       }
     },
@@ -322,9 +274,9 @@ export default tv({
       color: 'info',
       class: {
         itemsButton: [
-          'data-[active=true]:text-info-500',
-          'data-[active=true]:bg-info-500/[.15]',
-          'data-[active=true]:dark:bg-info-500/[.15]'
+          'hover:text-info-500',
+          'hover:bg-info-500/[.15]',
+          'hover:dark:bg-info-500/[.15]'
         ]
       }
     },
@@ -333,9 +285,9 @@ export default tv({
       color: 'warning',
       class: {
         itemsButton: [
-          'data-[active=true]:text-warning-500',
-          'data-[active=true]:bg-warning-500/[.15]',
-          'data-[active=true]:dark:bg-warning-500/[.15]'
+          'hover:text-warning-500',
+          'hover:bg-warning-500/[.15]',
+          'hover:dark:bg-warning-500/[.15]'
         ]
       }
     },
@@ -344,9 +296,9 @@ export default tv({
       color: 'error',
       class: {
         itemsButton: [
-          'data-[active=true]:text-error-500',
-          'data-[active=true]:bg-error-500/[.15]',
-          'data-[active=true]:dark:bg-error-500/[.15]'
+          'hover:text-error-500',
+          'hover:bg-error-500/[.15]',
+          'hover:dark:bg-error-500/[.15]'
         ]
       }
     },
@@ -356,7 +308,7 @@ export default tv({
       color: 'primary',
       class: {
         itemsButton: [
-          'data-[active=true]:text-primary-500'
+          'hover:text-primary-500'
         ]
       }
     },
@@ -365,8 +317,8 @@ export default tv({
       color: 'neutral',
       class: {
         itemsButton: [
-          'data-[active=true]:text-dark-3',
-          'data-[active=true]:dark:text-light-5'
+          'hover:text-dark-3',
+          'hover:dark:text-light-5'
         ]
       }
     },
@@ -375,7 +327,7 @@ export default tv({
       color: 'success',
       class: {
         itemsButton: [
-          'data-[active=true]:text-success-500'
+          'hover:text-success-500'
         ]
       }
     },
@@ -384,7 +336,7 @@ export default tv({
       color: 'info',
       class: {
         itemsButton: [
-          'data-[active=true]:text-info-500'
+          'hover:text-info-500'
         ]
       }
     },
@@ -393,7 +345,7 @@ export default tv({
       color: 'warning',
       class: {
         itemsButton: [
-          'data-[active=true]:text-warning-500'
+          'hover:text-warning-500'
         ]
       }
     },
@@ -402,7 +354,7 @@ export default tv({
       color: 'error',
       class: {
         itemsButton: [
-          'data-[active=true]:text-error-500'
+          'hover:text-error-500'
         ]
       }
     },
@@ -412,8 +364,8 @@ export default tv({
       color: 'primary',
       class: {
         itemsButton: [
-          'data-[active=true]:from-primary-500',
-          'data-[active=true]:to-primary-900'
+          'hover:from-primary-500',
+          'hover:to-primary-900'
         ]
       }
     },
@@ -422,12 +374,12 @@ export default tv({
       color: 'neutral',
       class: {
         itemsButton: [
-          'data-[active=true]:from-light-1',
-          'data-[active=true]:to-light-5',
-          'data-[active=true]:text-dark-1',
-          'data-[active=true]:dark:from-dark-1',
-          'data-[active=true]:dark:to-dark-5',
-          'data-[active=true]:dark:text-light-3'
+          'hover:from-light-1',
+          'hover:to-light-5',
+          'hover:text-dark-1',
+          'hover:dark:from-dark-1',
+          'hover:dark:to-dark-5',
+          'hover:dark:text-light-3'
         ]
       }
     },
@@ -436,8 +388,8 @@ export default tv({
       color: 'success',
       class: {
         itemsButton: [
-          'data-[active=true]:from-success-500',
-          'data-[active=true]:to-success-900'
+          'hover:from-success-500',
+          'hover:to-success-900'
         ]
       }
     },
@@ -446,8 +398,8 @@ export default tv({
       color: 'info',
       class: {
         itemsButton: [
-          'data-[active=true]:from-info-500',
-          'data-[active=true]:to-info-900'
+          'hover:from-info-500',
+          'hover:to-info-900'
         ]
       }
     },
@@ -456,8 +408,8 @@ export default tv({
       color: 'warning',
       class: {
         itemsButton: [
-          'data-[active=true]:from-warning-500',
-          'data-[active=true]:to-warning-900'
+          'hover:from-warning-500',
+          'hover:to-warning-900'
         ]
       }
     },
@@ -466,8 +418,8 @@ export default tv({
       color: 'error',
       class: {
         itemsButton: [
-          'data-[active=true]:from-error-500',
-          'data-[active=true]:to-error-900'
+          'hover:from-error-500',
+          'hover:to-error-900'
         ]
       }
     }

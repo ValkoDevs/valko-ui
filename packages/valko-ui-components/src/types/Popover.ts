@@ -1,9 +1,9 @@
-import type { Shapes, Placement } from './common'
+import type { Shapes, Alignments, PlacementsWithAuto } from './common'
 
-export interface PopoverProps extends Shapes {
+export interface PopoverProps extends Shapes, Alignments, PlacementsWithAuto {
   text?: string;
   isOpen?: boolean;
-  placement?: Placement;
   flat?: boolean;
+  condensed?: boolean;
   panelClasses?: string | string[];
 }
