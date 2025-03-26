@@ -47,8 +47,6 @@ const sortIconMap = {
 const localFilters: Ref<Record<keyof TableItem, string>> = ref({})
 const activePopover = ref<string | null>(null)
 const activeFilters = ref<Record<string, boolean>>({})
-const isDataReady = ref(false)
-const isPageChangeTrigger = ref(false)
 
 const selectSize = computed(() => props.pageSizeOptions.map((i) => ({ value: i, label: `${i}` })))
 
@@ -85,9 +83,10 @@ const handleClickOutside = (event: MouseEvent) => {
   if (!isClickInside) activePopover.value = null
 }
 
+const isDataReady = computed(() => Array.isArray(props.data) && props.data.length > 0)
 const totalPages = computed(() => Math.ceil(props.total / props.limit))
 const currentPage = computed({
-  get: () => props.offset / props.limit + 1,
+  get: () => isDataReady.value ? props.offset / props.limit + 1 : 1,
   set: (page: number) => emit('onPageChange', page * props.limit - props.limit)
 })
 
@@ -123,29 +122,13 @@ watch(localFilters, (newFilters) => {
   }
 }, { deep: true })
 
-watch(
-  () => props.data,
-  (newData) => {
-    const isArray = Array.isArray(newData)
-    isDataReady.value = isArray
-
-    if (isArray && !isPageChangeTrigger.value) currentPage.value = 1
-
-    isPageChangeTrigger.value = false
-  },
-  { immediate: true }
-)
-
-watch(
-  () => currentPage.value,
-  (newPage) => isPageChangeTrigger.value = newPage !== 1
-)
+watch(isDataReady, (dataUpdate) => {
+  if (dataUpdate && currentPage.value !== 1) currentPage.value = 1
+}, { immediate: true })
 
 onMounted(() => {
   document.addEventListener('click', handleClickOutside)
   emit('onLimitChange', props.limit)
-
-  if (currentPage.value !== 1) currentPage.value = 1
 
   localFilters.value = props.headers.reduce((acc, { field }) => {
     acc[field] = ''
@@ -160,8 +143,8 @@ onBeforeUnmount(() => {
 
 <template>
   <div
-    :class="classes.table"
     v-if="isDataReady"
+    :class="classes.table"
   >
     <vk-table
       :headers="headers"
