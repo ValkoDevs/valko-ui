@@ -1,19 +1,27 @@
 <script setup lang="ts">
-import type { TooltipProps, TableItem, SelectOption, Placement } from '#valkoui'
+import type { TooltipProps, TableItem, SelectOption, PlacementWithAuto, Alignment } from '#valkoui'
 
 const form = ref<TooltipProps>({
   shape: 'soft',
   size: 'md',
-  placement: 'top',
+  placement: 'auto',
+  alignment: undefined,
   content: 'Tooltip Content',
   flat: true
 })
 
-const placementOptions: SelectOption<Placement>[] = [
-  { value:'top', label:'Top' },
-  { value:'bottom', label:'Bottom' },
-  { value:'left', label:'Left' },
-  { value:'right', label:'Right' }
+const placementOptions: SelectOption<PlacementWithAuto>[] = [
+  { label: 'Bottom', value: 'bottom' },
+  { label: 'Top', value: 'top' },
+  { label: 'Left', value: 'left' },
+  { label: 'Right', value: 'right' },
+  { label: 'Auto', value: 'auto' }
+]
+
+const alignmentOptions: SelectOption<Alignment>[] = [
+  { label: 'Start', value: 'start' },
+  { label: 'Center', value: 'center' },
+  { label: 'End', value: 'end' }
 ]
 
 const tooltipProps: TableItem[] = [
@@ -37,9 +45,17 @@ const tooltipProps: TableItem[] = [
     key: 'placementProp',
     prop: 'placement',
     required: false,
-    description: 'The placement of the Tooltip.',
-    values: 'top, bottom, left, right',
-    default: 'top'
+    description: 'Defines where the Tooltip should appear relative to the reference element. If set to "auto", the Tooltip will automatically choose the best placement based on available space.',
+    values: 'bottom, top, left, right, auto',
+    default: 'auto'
+  },
+  {
+    key: 'alignmentProp',
+    prop: 'alignment',
+    required: false,
+    description: 'Specifies how the Tooltip is aligned within its placement. If not set, it defaults to the best fit based on available space.',
+    values: 'start, center, end',
+    default: 'undefined'
   },
   {
     key: 'contentProp',
@@ -77,6 +93,7 @@ const tooltipSlots: TableItem[] = [
 const generateSnippet = snippetGeneratorFactory('vk-tooltip')
 
 const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
+const extraProps = 'content="Tooltip Content"'
 </script>
 
 <template>
@@ -91,6 +108,7 @@ const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
         :placement="form.placement"
         :content="form.content"
         :flat="form.flat"
+        :alignment="form.alignment"
       >
         <vk-button>
           Hover Me
@@ -111,15 +129,21 @@ const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
         size="sm"
         :options="sizeOptions.general"
       />
-      <vk-input
-        v-model="form.content"
-        label="Content"
-      />
       <vk-select
         v-model="form.placement"
         label="Placement"
         size="sm"
         :options="placementOptions"
+      />
+      <vk-select
+        v-model="form.alignment"
+        label="Alignment"
+        size="sm"
+        :options="alignmentOptions"
+      />
+      <vk-input
+        v-model="form.content"
+        label="Content"
       />
       <vk-checkbox
         v-model="form.flat"
@@ -144,7 +168,7 @@ const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
         </vk-tooltip>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('shape', {values: shapeOptions.general.map(o => o.value), customSlot})" />
+          <code-block :code="generateSnippet<string>('shape', {values: shapeOptions.general.map(o => o.value), customSlot, extraProps})" />
         </template>
       </example-section>
 
@@ -164,13 +188,13 @@ const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
         </vk-tooltip>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('size', {values: sizeOptions.general.map(o => o.value), customSlot})" />
+          <code-block :code="generateSnippet<string>('size', {values: sizeOptions.general.map(o => o.value), customSlot, extraProps})" />
         </template>
       </example-section>
 
       <example-section
         title="Placements"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(5,_minmax(0,_max-content))]"
       >
         <vk-tooltip
           v-for="placement in placementOptions"
@@ -184,7 +208,27 @@ const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
         </vk-tooltip>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('placement', {values: placementOptions.map(o => o.value), customSlot})" />
+          <code-block :code="generateSnippet<string>('placement', {values: placementOptions.map(o => o.value), customSlot, extraProps})" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Alignments"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+      >
+        <vk-tooltip
+          v-for="alignment in alignmentOptions"
+          :key="alignment.value"
+          :content="alignment.label"
+          :alignment="alignment.value"
+        >
+          <vk-button>
+            {{ alignment.label }}
+          </vk-button>
+        </vk-tooltip>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('alignment', {values: alignmentOptions.map(o => o.value), customSlot, extraProps})" />
         </template>
       </example-section>
 
@@ -199,7 +243,7 @@ const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
         </vk-tooltip>
 
         <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', {values: [true], customSlot})" />
+          <code-block :code="generateSnippet<boolean>('flat', {values: [true], customSlot, extraProps})" />
         </template>
       </example-section>
     </template>
