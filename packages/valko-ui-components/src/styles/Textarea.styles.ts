@@ -86,8 +86,8 @@ export default tv({
     variant: {
       filled: {
         textarea: [
-          'bg-light-3',
-          'dark:bg-dark-3',
+          'bg-light-200',
+          'dark:bg-dark-800',
           'border-b-2'
         ]
       },
@@ -95,7 +95,7 @@ export default tv({
         textarea: [
           'bg-inherit',
           'border-b-2',
-          'border-light-5'
+          'border-light-400'
         ],
         label: [
           'bg-inherit'
@@ -104,10 +104,10 @@ export default tv({
       outlined: {
         textarea: [
           'px-2',
-          'bg-light-3',
-          'dark:bg-dark-3',
+          'bg-light-200',
+          'dark:bg-dark-800',
           'border-2',
-          'border-dark-1'
+          'border-dark-600'
         ],
         label: [
           'left-1.5',
@@ -118,17 +118,17 @@ export default tv({
     color: {
       primary: {
         label: [
-          'text-dark-2',
+          'text-dark-700',
           'peer-focus:text-primary-500',
-          'dark:text-light-2'
+          'dark:text-light-100'
         ],
         helper: [
-          'text-dark-1',
-          'dark:text-light-3'
+          'text-dark-600',
+          'dark:text-light-200'
         ],
         counter: [
-          'text-dark-1',
-          'dark:text-light-3'
+          'text-dark-600',
+          'dark:text-light-200'
         ],
         icons: [
           'peer-focus:text-primary-500'
@@ -136,26 +136,26 @@ export default tv({
       },
       neutral: {
         label: [
-          'text-dark-1',
-          'peer-focus:text-dark-3',
-          'dark:text-light-3',
-          'dark:peer-focus:text-light-1'
+          'text-dark-600',
+          'peer-focus:text-dark-800',
+          'dark:text-light-200',
+          'dark:peer-focus:text-light-50'
         ],
         helper: [
-          'text-dark-1',
-          'peer-focus:text-dark-3',
-          'dark:text-light-3',
-          'dark:peer-focus:text-light-1'
+          'text-dark-600',
+          'peer-focus:text-dark-800',
+          'dark:text-light-200',
+          'dark:peer-focus:text-light-50'
         ],
         counter: [
-          'text-dark-1',
-          'peer-focus:text-dark-3',
-          'dark:text-light-3',
-          'dark:peer-focus:text-light-1'
+          'text-dark-600',
+          'peer-focus:text-dark-800',
+          'dark:text-light-200',
+          'dark:peer-focus:text-light-50'
         ],
         icons: [
-          'peer-focus:text-dark-3',
-          'dark:peer-focus:text-light-1'
+          'peer-focus:text-dark-800',
+          'dark:peer-focus:text-light-50'
         ]
       },
       success: {
@@ -369,10 +369,10 @@ export default tv({
       disabled: false,
       class: {
         textarea: [
-          'border-dark-1',
+          'border-dark-600',
           'hover:border-primary-400',
           'focus:border-primary-500',
-          'dark:border-light-5',
+          'dark:border-light-400',
           'dark:hover:border-primary-400',
           'dark:focus:border-primary-500'
         ]
@@ -384,12 +384,12 @@ export default tv({
       disabled: false,
       class: {
         textarea: [
-          'border-light-3',
-          'hover:border-light-4',
-          'focus:border-light-5',
-          'dark:border-dark-3',
-          'dark:hover:border-dark-2',
-          'dark:focus:border-dark-1'
+          'border-light-200',
+          'hover:border-light-300',
+          'focus:border-light-400',
+          'dark:border-dark-800',
+          'dark:hover:border-dark-700',
+          'dark:focus:border-dark-600'
         ]
       }
     },
@@ -457,8 +457,8 @@ export default tv({
       class: {
         textarea: [
           'focus:border-primary-500',
-          'dark:border-light-5',
-          'dark:hover:border-light-4',
+          'dark:border-light-400',
+          'dark:hover:border-light-300',
           'dark:focus:border-primary-500'
         ]
       }
@@ -471,9 +471,9 @@ export default tv({
         textarea: [
           'hover:border-neutral-300',
           'focus:border-neutral-400',
-          'dark:border-light-1',
-          'dark:hover:border-light-3',
-          'dark:focus:border-light-5'
+          'dark:border-light-50',
+          'dark:hover:border-light-200',
+          'dark:focus:border-light-400'
         ]
       }
     },

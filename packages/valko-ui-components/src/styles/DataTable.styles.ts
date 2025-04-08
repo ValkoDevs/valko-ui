@@ -20,8 +20,8 @@ export default tv({
     headerUtilities: [
       'vk-data-table__utilities',
       'cursor-pointer',
-      'text-dark-1',
-      'dark:text-light-5'
+      'text-dark-600',
+      'dark:text-light-400'
     ],
     footer: [
       'flex',
@@ -53,10 +53,10 @@ export default tv({
       },
       neutral: {
         headerUtilities: [
-          'data-[active=true]:text-dark-5',
-          'hover:text-dark-5',
-          'dark:data-[active=true]:text-light-1',
-          'dark:hover:text-light-1'
+          'data-[active=true]:text-dark-950',
+          'hover:text-dark-950',
+          'dark:data-[active=true]:text-light-50',
+          'dark:hover:text-light-50'
         ]
       },
       success: {

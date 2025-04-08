@@ -6,15 +6,15 @@ export default tv({
       'vk-collapse-item',
       'w-full',
       'group-data-[variant=ghost]:bg-transparent',
-      'group-data-[variant=filled]:bg-light-3',
+      'group-data-[variant=filled]:bg-light-200',
       'group-data-[variant=outlined]:group-data-[separator=split]:border-2',
-      'group-data-[variant=outlined]:group-data-[separator=split]:border-light-5',
+      'group-data-[variant=outlined]:group-data-[separator=split]:border-light-400',
       'group-data-[shape=rounded]:group-data-[separator=split]:rounded-3xl',
       'group-data-[shape=soft]:group-data-[separator=split]:rounded-lg',
       'group-data-[shape=square]:rounded-none',
       'group-data-[separator=split]:p-3',
-      'dark:group-data-[variant=filled]:bg-dark-3',
-      'dark:group-data-[variant=outlined]:group-data-[separator=split]:border-dark-1'
+      'dark:group-data-[variant=filled]:bg-dark-800',
+      'dark:group-data-[variant=outlined]:group-data-[separator=split]:border-dark-600'
     ],
     button: [
       'vk-collapse-item__button',

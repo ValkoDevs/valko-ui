@@ -7,10 +7,10 @@ export default tv({
       'w-fit',
       'flex',
       'flex-wrap',
-      'shadow-light-4',
+      'shadow-light-300',
       'transition-colors',
       'duration-200',
-      'dark:shadow-dark-5'
+      'dark:shadow-dark-950'
     ],
     a: [
       'vk-breadcrumbs__a',
@@ -37,8 +37,8 @@ export default tv({
     variant: {
       filled: {
         container: [
-          'bg-light-3',
-          'dark:bg-dark-3'
+          'bg-light-200',
+          'dark:bg-dark-800'
         ]
       },
       outlined: {
@@ -46,14 +46,14 @@ export default tv({
           'py-[calc(0.5rem_-_2px)]',
           'px-[calc(1rem_-_2px)]',
           'border-2',
-          'border-light-5',
-          'dark:border-dark-1'
+          'border-light-400',
+          'dark:border-dark-600'
         ]
       },
       ghost: {
         container: [
-          'bg-light-3/[.50]',
-          'dark:bg-dark-3/[.50]'
+          'bg-light-200/[.50]',
+          'dark:bg-dark-800/[.50]'
         ]
       },
       link: {
@@ -72,12 +72,12 @@ export default tv({
       },
       neutral: {
         a: [
-          'hover:text-dark-5',
-          'data-[active=true]:text-dark-3',
-          'data-[active=true]:hover:text-dark-5',
-          'dark:hover:text-light-1',
-          'dark:data-[active=true]:text-light-3',
-          'dark:data-[active=true]:hover:text-light-1'
+          'hover:text-dark-950',
+          'data-[active=true]:text-dark-800',
+          'data-[active=true]:hover:text-dark-950',
+          'dark:hover:text-light-50',
+          'dark:data-[active=true]:text-light-200',
+          'dark:data-[active=true]:hover:text-light-50'
         ]
       },
       success: {

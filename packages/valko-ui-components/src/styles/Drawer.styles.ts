@@ -44,7 +44,7 @@ export default tv({
       'data-[title=false]:grid-cols-[1fr_auto]',
       'gap-2',
       'group',
-      'dark:bg-dark-3'
+      'dark:bg-dark-800'
     ],
     panelChild: [
       'vk-drawer__panel-child',
@@ -99,8 +99,8 @@ export default tv({
       },
       opaque: {
         backdrop: [
-          'bg-light-5/80',
-          'dark:bg-dark-1/80'
+          'bg-light-400/80',
+          'dark:bg-dark-600/80'
         ]
       },
       transparent: {

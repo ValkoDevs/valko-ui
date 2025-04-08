@@ -49,7 +49,7 @@ describe('Drawer component', () => {
       })
 
       it('should be opaque', () => {
-        expect(backdrop.classes()).toContain('bg-light-5/80')
+        expect(backdrop.classes()).toContain('bg-light-400/80')
       })
 
       it('should not have title', () => {
@@ -262,7 +262,7 @@ describe('Drawer component', () => {
 
         await nextTick()
         backdrop = wrapper.getComponent('.vk-drawer__backdrop') as unknown as VueWrapper
-        expect(backdrop.classes()).toContain('bg-light-5/80')
+        expect(backdrop.classes()).toContain('bg-light-400/80')
       })
 
       it('should be blur when props.backdrop is blur', async () => {

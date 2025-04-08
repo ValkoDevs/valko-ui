@@ -21,15 +21,15 @@ export default tv({
     radio: [
       'vk-radio__radio',
       'shadow-lg',
-      'shadow-light-4',
+      'shadow-light-300',
       'border-2',
-      'border-light-5',
+      'border-light-400',
       'relative',
       'flex',
       'items-center',
       'justify-center',
-      'dark:border-dark-1',
-      'dark:shadow-dark-5'
+      'dark:border-dark-600',
+      'dark:shadow-dark-950'
     ],
     input: [
       'hidden'
@@ -116,9 +116,9 @@ export default tv({
       ghost: {
         radio: [
           'border-0',
-          'bg-light-5/[.15]',
+          'bg-light-400/[.15]',
           'shadow-none',
-          'dark:bg-dark-1/[.15]'
+          'dark:bg-dark-600/[.15]'
         ]
       }
     },
@@ -220,18 +220,18 @@ export default tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-dark-4',
-          'data-[checked=true]:border-dark-4',
-          'data-[indeterminate=true]:border-dark-4',
-          'data-[indeterminate=true]:bg-dark-4',
-          'dark:data-[checked=true]:bg-light-3',
-          'dark:data-[checked=true]:border-light-3',
-          'dark:data-[indeterminate=true]:border-light-3',
-          'dark:data-[indeterminate=true]:bg-light-3'
+          'data-[checked=true]:bg-dark-900',
+          'data-[checked=true]:border-dark-900',
+          'data-[indeterminate=true]:border-dark-900',
+          'data-[indeterminate=true]:bg-dark-900',
+          'dark:data-[checked=true]:bg-light-200',
+          'dark:data-[checked=true]:border-light-200',
+          'dark:data-[indeterminate=true]:border-light-200',
+          'dark:data-[indeterminate=true]:bg-light-200'
         ],
         icon: [
-          'text-light-1',
-          'dark:text-dark-3'
+          'text-light-50',
+          'dark:text-dark-800'
         ]
       }
     },
@@ -327,14 +327,14 @@ export default tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-dark-4',
-          'data-[indeterminate=true]:border-dark-4',
-          'dark:data-[checked=true]:border-light-3',
-          'dark:data-[indeterminate=true]:border-light-3'
+          'data-[checked=true]:border-dark-900',
+          'data-[indeterminate=true]:border-dark-900',
+          'dark:data-[checked=true]:border-light-200',
+          'dark:data-[indeterminate=true]:border-light-200'
         ],
         icon: [
-          'text-dark-1',
-          'dark:text-light-3'
+          'text-dark-600',
+          'dark:text-light-200'
         ]
       }
     },
@@ -429,14 +429,14 @@ export default tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-dark-5/[.5]',
-          'data-[indeterminate=true]:bg-dark-5/[.5]',
-          'dark:data-[checked=true]:bg-light-5/[.5]',
-          'dark:data-[indeterminate=true]:bg-light-5/[.5]'
+          'data-[checked=true]:bg-dark-950/[.5]',
+          'data-[indeterminate=true]:bg-dark-950/[.5]',
+          'dark:data-[checked=true]:bg-light-400/[.5]',
+          'dark:data-[indeterminate=true]:bg-light-400/[.5]'
         ],
         icon: [
-          'text-dark-1',
-          'dark:text-light-3'
+          'text-dark-600',
+          'dark:text-light-200'
         ]
       }
     },

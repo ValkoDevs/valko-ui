@@ -78,7 +78,7 @@ export default tv({
     ],
     clearIcon: [
       'vk-input__clear-icon',
-      'text-dark-1',
+      'text-dark-600',
       'cursor-pointer',
       'opacity-80',
       'absolute',
@@ -87,7 +87,7 @@ export default tv({
       '-translate-y-1/2',
       'scale-90',
       'right-1',
-      'dark:text-light-5'
+      'dark:text-light-400'
     ],
     numberArrows: [
       'vk-input__number-arrows',
@@ -106,8 +106,8 @@ export default tv({
     variant: {
       filled: {
         input: [
-          'bg-light-3',
-          'dark:bg-dark-3',
+          'bg-light-200',
+          'dark:bg-dark-800',
           'border-b-2'
         ]
       },
@@ -115,7 +115,7 @@ export default tv({
         input: [
           'bg-inherit',
           'border-b-2',
-          'border-light-5'
+          'border-light-400'
         ],
         label: [
           'bg-inherit'
@@ -124,10 +124,10 @@ export default tv({
       outlined: {
         input: [
           'px-2',
-          'bg-light-3',
-          'dark:bg-dark-3',
+          'bg-light-200',
+          'dark:bg-dark-800',
           'border-2',
-          'border-dark-1'
+          'border-dark-600'
         ],
         label: [
           'left-1.5',
@@ -145,14 +145,14 @@ export default tv({
     color: {
       primary: {
         label: [
-          'text-dark-2',
+          'text-dark-700',
           'peer-focus:text-primary-500',
-          'dark:text-light-2'
+          'dark:text-light-100'
         ],
         icons: [
-          'text-dark-2',
+          'text-dark-700',
           'peer-focus:text-primary-500',
-          'dark:text-light-2'
+          'dark:text-light-100'
         ],
         clearIcon: [
           'hover:text-primary-500',
@@ -164,24 +164,24 @@ export default tv({
       },
       neutral: {
         label: [
-          'text-dark-1',
-          'peer-focus:text-dark-3',
-          'dark:text-light-3',
-          'dark:peer-focus:text-light-1'
+          'text-dark-600',
+          'peer-focus:text-dark-800',
+          'dark:text-light-200',
+          'dark:peer-focus:text-light-50'
         ],
         icons: [
-          'text-dark-1',
-          'peer-focus:text-dark-3',
-          'dark:text-light-3',
-          'dark:peer-focus:text-light-1'
+          'text-dark-600',
+          'peer-focus:text-dark-800',
+          'dark:text-light-200',
+          'dark:peer-focus:text-light-50'
         ],
         clearIcon: [
-          'hover:text-dark-5',
-          'dark:hover:text-light-1'
+          'hover:text-dark-950',
+          'dark:hover:text-light-50'
         ],
         chevrons: [
-          'hover:text-dark-5',
-          'dark:hover:text-light-1'
+          'hover:text-dark-950',
+          'dark:hover:text-light-50'
         ]
       },
       success: {
@@ -433,10 +433,10 @@ export default tv({
       disabled: false,
       class: {
         input: [
-          'border-dark-1',
+          'border-dark-600',
           'hover:border-primary-400',
           'focus:border-primary-500',
-          'dark:border-light-5',
+          'dark:border-light-400',
           'dark:hover:border-primary-400',
           'dark:focus:border-primary-500'
         ]
@@ -448,12 +448,12 @@ export default tv({
       disabled: false,
       class: {
         input: [
-          'border-light-4/[.5]',
-          'hover:border-light-4',
-          'focus:border-light-5',
-          'dark:border-dark-2/[.5]',
-          'dark:hover:border-dark-2',
-          'dark:focus:border-dark-1'
+          'border-light-300/[.5]',
+          'hover:border-light-300',
+          'focus:border-light-400',
+          'dark:border-dark-700/[.5]',
+          'dark:hover:border-dark-700',
+          'dark:focus:border-dark-600'
         ]
       }
     },
@@ -521,8 +521,8 @@ export default tv({
       class: {
         input: [
           'focus:border-primary-500',
-          'dark:border-light-5',
-          'dark:hover:border-light-4',
+          'dark:border-light-400',
+          'dark:hover:border-light-300',
           'dark:focus:border-primary-500'
         ]
       }
@@ -533,12 +533,12 @@ export default tv({
       disabled: false,
       class: {
         input: [
-          'border-light-3',
-          'hover:border-light-4',
-          'focus:border-light-5',
-          'dark:border-dark-3',
-          'dark:hover:border-dark-2',
-          'dark:focus:border-dark-1'
+          'border-light-200',
+          'hover:border-light-300',
+          'focus:border-light-400',
+          'dark:border-dark-800',
+          'dark:hover:border-dark-700',
+          'dark:focus:border-dark-600'
         ]
       }
     },
@@ -611,10 +611,10 @@ export default tv({
       disabled: false,
       class: {
         input: [
-          'border-light-4',
-          'focus:border-light-5',
-          'dark:border-dark-2',
-          'dark:focus:border-dark-1'
+          'border-light-300',
+          'focus:border-light-400',
+          'dark:border-dark-700',
+          'dark:focus:border-dark-600'
         ]
       }
     },

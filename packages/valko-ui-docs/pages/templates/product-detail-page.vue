@@ -124,7 +124,7 @@ const product = reactive({
           Colors
         </h2>
         <div class="flex gap-4">
-          <div class="size-8 bg-white rounded-lg ring ring-primary-500 ring-offset-4 ring-offset-dark-3 cursor-pointer" />
+          <div class="size-8 bg-white rounded-lg ring ring-primary-500 ring-offset-4 ring-offset-dark-800 cursor-pointer" />
           <div class="size-8 bg-black rounded-lg cursor-pointer" />
           <div class="size-8 bg-teal-500 rounded-lg cursor-pointer" />
           <div class="size-8 bg-blue-500 rounded-lg cursor-pointer" />
@@ -237,7 +237,7 @@ const product = reactive({
               Colors
             </h2>
             <div class="flex gap-4">
-              <div class="size-8 bg-white rounded-lg ring ring-primary-500 ring-offset-4 ring-offset-dark-3 cursor-pointer" />
+              <div class="size-8 bg-white rounded-lg ring ring-primary-500 ring-offset-4 ring-offset-dark-800 cursor-pointer" />
               <div class="size-8 bg-black rounded-lg cursor-pointer" />
               <div class="size-8 bg-teal-500 rounded-lg cursor-pointer" />
               <div class="size-8 bg-blue-500 rounded-lg cursor-pointer" />

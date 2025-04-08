@@ -36,7 +36,7 @@ export default tv({
       'data-[disabled=true]:text-gray-400',
       'data-[disabled=true]:bg-gray-200',
       'data-[disabled=true]:border-transparent',
-      'data-[disabled=true]:dark:bg-dark-1'
+      'data-[disabled=true]:dark:bg-dark-600'
     ],
     itemsIcon: [
       'mr-2'
@@ -88,7 +88,7 @@ export default tv({
     variant: {
       filled: {
         itemsButton: [
-          'hover:text-light-1'
+          'hover:text-light-50'
         ]
       },
       outlined: {
@@ -102,7 +102,7 @@ export default tv({
       gradient: {
         itemsButton: [
           'bg-gradient-to-br',
-          'hover:text-light-1'
+          'hover:text-light-50'
         ]
       }
     }
@@ -124,10 +124,10 @@ export default tv({
       color: 'neutral',
       class: {
         itemsButton: [
-          'hover:bg-light-4',
-          'hover:text-dark-1',
-          'hover:dark:bg-dark-2',
-          'hover:dark:text-light-3'
+          'hover:bg-light-300',
+          'hover:text-dark-600',
+          'hover:dark:bg-dark-700',
+          'hover:dark:text-light-200'
         ]
       }
     },
@@ -187,10 +187,10 @@ export default tv({
       color: 'neutral',
       class: {
         itemsButton: [
-          'hover:text-dark-1',
-          'hover:border-light-4',
-          'hover:dark:text-light-4',
-          'hover:dark:border-dark-2'
+          'hover:text-dark-600',
+          'hover:border-light-300',
+          'hover:dark:text-light-300',
+          'hover:dark:border-dark-700'
         ]
       }
     },
@@ -251,10 +251,10 @@ export default tv({
       color: 'neutral',
       class: {
         itemsButton: [
-          'hover:text-dark-1',
-          'hover:bg-light-5/[.15]',
-          'hover:dark:text-light-4',
-          'hover:dark:bg-dark-4/[.15]'
+          'hover:text-dark-600',
+          'hover:bg-light-400/[.15]',
+          'hover:dark:text-light-300',
+          'hover:dark:bg-dark-900/[.15]'
         ]
       }
     },
@@ -317,8 +317,8 @@ export default tv({
       color: 'neutral',
       class: {
         itemsButton: [
-          'hover:text-dark-3',
-          'hover:dark:text-light-5'
+          'hover:text-dark-800',
+          'hover:dark:text-light-400'
         ]
       }
     },
@@ -374,12 +374,12 @@ export default tv({
       color: 'neutral',
       class: {
         itemsButton: [
-          'hover:from-light-1',
-          'hover:to-light-5',
-          'hover:text-dark-1',
-          'hover:dark:from-dark-1',
-          'hover:dark:to-dark-5',
-          'hover:dark:text-light-3'
+          'hover:from-light-50',
+          'hover:to-light-400',
+          'hover:text-dark-600',
+          'hover:dark:from-dark-600',
+          'hover:dark:to-dark-950',
+          'hover:dark:text-light-200'
         ]
       }
     },

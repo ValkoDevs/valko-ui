@@ -68,8 +68,8 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
 <\u002Fscript>
 
 <template>
-  <div class="max-w-screen-xl mx-auto mt-10 bg-light-4 dark:bg-dark-3/[.8] flex rounded-lg shadow">
-    <aside class="w-1/5 border-r-2 border-light-4">
+  <div class="max-w-screen-xl mx-auto mt-10 bg-light-300 dark:bg-dark-800/[.8] flex rounded-lg shadow">
+    <aside class="w-1/5 border-r-2 border-light-300">
       <vk-menu
         :items="menuItems"
         :active="activeItem"
@@ -213,8 +213,8 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
 <template>
   <page-template>
     <template #example>
-      <div class="max-w-screen-xl mx-auto mt-10 bg-light-4 dark:bg-dark-3/[.8] flex rounded-lg shadow">
-        <aside class="w-1/5 border-r-2 border-light-4">
+      <div class="max-w-screen-xl mx-auto mt-10 bg-light-300 dark:bg-dark-800/[.8] flex rounded-lg shadow">
+        <aside class="w-1/5 border-r-2 border-light-300">
           <vk-menu
             :items="menuItems"
             :active="activeItem"

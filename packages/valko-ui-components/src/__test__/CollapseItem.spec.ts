@@ -26,7 +26,7 @@ describe('CollapseItem component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(childWrapper.classes()).toContain('group-data-[variant=filled]:bg-light-3')
+        expect(childWrapper.classes()).toContain('group-data-[variant=filled]:bg-light-200')
       })
 
       it('should be shape soft', () => {
@@ -169,7 +169,7 @@ describe('CollapseItem component', () => {
         })
 
         childWrapper = wrapper.findComponent(VkCollapseItem)
-        expect(childWrapper.find('.vk-collapse-item').classes()).toContain('group-data-[variant=filled]:bg-light-3')
+        expect(childWrapper.find('.vk-collapse-item').classes()).toContain('group-data-[variant=filled]:bg-light-200')
       })
 
       it('should be outlined when props.variant is outlined', () => {

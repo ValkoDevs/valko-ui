@@ -36,16 +36,16 @@ export default tv({
       'absolute',
       'z-10',
       'transition-all',
-      'bg-light-4',
-      'dark:bg-dark-2'
+      'bg-light-300',
+      'dark:bg-dark-700'
     ]
   },
   variants: {
     variant: {
       filled: {
         container: [
-          'bg-light-3',
-          'dark:bg-dark-1'
+          'bg-light-200',
+          'dark:bg-dark-600'
         ]
       },
       ghost: {
@@ -53,21 +53,21 @@ export default tv({
           'bg-transparent'
         ],
         buffer: [
-          'bg-light-5/[.15]',
-          'dark:bg-dark-1/[.15]'
+          'bg-light-400/[.15]',
+          'dark:bg-dark-600/[.15]'
         ]
       },
       outlined: {
         container: [
           'border-2',
-          'border-light-5',
-          'dark:border-dark-1'
+          'border-light-400',
+          'dark:border-dark-600'
         ]
       },
       gradient: {
         container: [
-          'bg-light-3',
-          'dark:bg-dark-1'
+          'bg-light-200',
+          'dark:bg-dark-600'
         ],
         progress: [
           'bg-gradient-to-br'
@@ -104,8 +104,8 @@ export default tv({
       },
       neutral: {
         progress: [
-          'bg-light-5',
-          'dark:bg-dark-3'
+          'bg-light-400',
+          'dark:bg-dark-800'
         ]
       },
       success: {
@@ -181,7 +181,7 @@ export default tv({
       true: {
         progress: [
           'animate-progress',
-          'origin-left-right'
+          'origin-[0%_50%]'
         ]
       },
       false: {
@@ -213,16 +213,16 @@ export default tv({
       color: 'neutral',
       class: {
         progress: [
-          'bg-light-5/[.15]',
-          'dark:bg-dark-2/[.15]'
+          'bg-light-400/[.15]',
+          'dark:bg-dark-700/[.15]'
         ],
         buffer: [
-          'border-light-3/[.15]',
-          'dark:border-dark-1/[.15]'
+          'border-light-200/[.15]',
+          'dark:border-dark-600/[.15]'
         ],
         content: [
-          'text-dark-1',
-          'dark:text-light-3'
+          'text-dark-600',
+          'dark:text-light-200'
         ]
       }
     },
@@ -302,10 +302,10 @@ export default tv({
       color: 'neutral',
       class: {
         progress: [
-          'from-light-1',
-          'to-light-5',
-          'text-dark-1',
-          'dark:to-dark-5'
+          'from-light-50',
+          'to-light-400',
+          'text-dark-600',
+          'dark:to-dark-950'
         ]
       }
     },

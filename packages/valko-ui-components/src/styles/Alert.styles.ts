@@ -9,8 +9,8 @@ export default tv({
       'flex',
       'gap-2',
       'shadow-lg',
-      'shadow-light-4',
-      'dark:shadow-dark-5'
+      'shadow-light-300',
+      'dark:shadow-dark-950'
     ],
     mainIcon: [],
     contentContainer: [
@@ -34,10 +34,10 @@ export default tv({
     variant: {
       filled: {
         container: [
-          'text-light-1'
+          'text-light-50'
         ],
         closeIcon: [
-          'text-light-1'
+          'text-light-50'
         ]
       },
       ghost: {
@@ -55,10 +55,10 @@ export default tv({
       gradient: {
         container: [
           'bg-gradient-to-br',
-          'text-light-1'
+          'text-light-50'
         ],
         closeIcon: [
-          'text-light-1'
+          'text-light-50'
         ]
       }
     },
@@ -157,8 +157,8 @@ export default tv({
       color: 'neutral',
       class: {
         container: [
-          'bg-light-3',
-          'dark:bg-dark-3'
+          'bg-light-200',
+          'dark:bg-dark-800'
         ]
       }
     },
@@ -213,8 +213,8 @@ export default tv({
       color: 'neutral',
       class: {
         container: [
-          'border-light-3',
-          'dark:border-dark-3'
+          'border-light-200',
+          'dark:border-dark-800'
         ]
       }
     },
@@ -269,8 +269,8 @@ export default tv({
       color: 'neutral',
       class: {
         container: [
-          'bg-light-3/[.4]',
-          'dark:bg-dark-3/[.4]'
+          'bg-light-200/[.4]',
+          'dark:bg-dark-800/[.4]'
         ]
       }
     },
@@ -326,10 +326,10 @@ export default tv({
       color: 'neutral',
       class: {
         container: [
-          'from-light-1',
-          'to-light-5',
-          'dark:from-dark-1',
-          'dark:to-dark-5'
+          'from-light-50',
+          'to-light-400',
+          'dark:from-dark-600',
+          'dark:to-dark-950'
         ]
       }
     },
@@ -379,12 +379,12 @@ export default tv({
       color: 'neutral',
       class: {
         container: [
-          'text-dark-1',
-          'dark:text-light-1'
+          'text-dark-600',
+          'dark:text-light-50'
         ],
         closeIcon: [
-          'text-dark-1',
-          'dark:text-light-1'
+          'text-dark-600',
+          'dark:text-light-50'
         ]
       }
     },
@@ -406,12 +406,12 @@ export default tv({
       color: 'neutral',
       class: {
         container: [
-          'text-dark-1',
-          'dark:text-light-1'
+          'text-dark-600',
+          'dark:text-light-50'
         ],
         closeIcon: [
-          'text-dark-1',
-          'dark:text-light-1'
+          'text-dark-600',
+          'dark:text-light-50'
         ]
       }
     },

@@ -35,7 +35,7 @@ export default tv({
     variant: {
       filled: {
         container: [
-          'text-light-1'
+          'text-light-50'
         ]
       },
       ghost: {
@@ -51,7 +51,7 @@ export default tv({
       gradient: {
         container: [
           'bg-gradient-to-br',
-          'text-light-1'
+          'text-light-50'
         ]
       }
     },
@@ -139,10 +139,10 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-light-4',
-          'text-dark-1',
-          'dark:text-light-3',
-          'dark:bg-dark-3'
+          'bg-light-300',
+          'text-dark-600',
+          'dark:text-light-200',
+          'dark:bg-dark-800'
         ]
       }
     },
@@ -204,8 +204,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-light-5/[.15]',
-          'dark:bg-dark-1/[.15]'
+          'bg-light-400/[.15]',
+          'dark:bg-dark-600/[.15]'
         ]
       }
     },
@@ -271,8 +271,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'border-dark-3',
-          'dark:border-light-4'
+          'border-dark-800',
+          'dark:border-light-300'
         ]
       }
     },
@@ -336,12 +336,12 @@ export default tv({
       color: 'neutral',
       class: {
         container: [
-          'from-light-3',
-          'to-light-5',
-          'text-dark-1',
-          'dark:from-dark-1',
-          'dark:to-dark-3',
-          'dark:text-light-3'
+          'from-light-200',
+          'to-light-400',
+          'text-dark-600',
+          'dark:from-dark-600',
+          'dark:to-dark-800',
+          'dark:text-light-200'
         ]
       }
     },
@@ -489,8 +489,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-light-5',
-          'dark:focus:ring-dark-4'
+          'focus:ring-light-400',
+          'dark:focus:ring-dark-900'
         ]
       }
     },
@@ -557,8 +557,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-light-5/[.30]',
-          'dark:focus:ring-dark-5/[.30]'
+          'focus:ring-light-400/[.30]',
+          'dark:focus:ring-dark-950/[.30]'
         ]
       }
     },
@@ -625,7 +625,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'dark:focus:ring-dark-4/20'
+          'dark:focus:ring-dark-900/20'
         ]
       }
     },

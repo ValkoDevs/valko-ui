@@ -60,7 +60,7 @@ describe('Checkbox component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-dark-4')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-dark-900')
       })
 
       it('should be color success when props.color is success', () => {

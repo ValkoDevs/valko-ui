@@ -26,7 +26,7 @@ describe('Progressbar component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -64,7 +64,7 @@ describe('Progressbar component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-5').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-400').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -200,7 +200,7 @@ describe('Progressbar component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -331,6 +331,7 @@ describe('Progressbar component', () => {
         })
 
         const progress = wrapper.find('.vk-progressbar__progress')
+        console.log(wrapper.html())
         expect(progress.attributes('style')).toContain('background-image')
       })
     })

@@ -10,16 +10,16 @@ export default tv({
       'tracking-wider',
       'ring-inset',
       'shadow-lg',
-      'shadow-light-4',
+      'shadow-light-300',
       'transition-all',
       'ease-in-out',
       'duration-150',
       'outline-none',
       'active:shadow-none',
-      'focus:ring-2',
       'focus:outline-none',
       'focus-visible:outline-none',
-      'dark:shadow-dark-5/[.2]'
+      'focus-visible:ring-2',
+      'dark:shadow-dark-950/[.2]'
     ],
     spinnerContainer: [
       'w-0',
@@ -84,7 +84,7 @@ export default tv({
     variant: {
       filled: {
         button: [
-          'text-light-1'
+          'text-light-50'
         ]
       },
       ghost: {
@@ -106,7 +106,7 @@ export default tv({
       gradient: {
         button: [
           'bg-gradient-to-br',
-          'text-light-1'
+          'text-light-50'
         ]
       }
     },
@@ -137,6 +137,11 @@ export default tv({
           'focus:ring-none',
           'ring-0',
           'active:shadow-lg'
+        ]
+      },
+      false: {
+        button: [
+          'cursor-pointer'
         ]
       }
     },
@@ -204,16 +209,14 @@ export default tv({
       class: {
         button: [
           [
-            'bg-dark-4',
-            'focus:ring-dark-4',
-            'hover:bg-dark-2',
-            'active:bg-dark-3',
-            'text-light-3',
-            'dark:bg-light-2',
-            'dark:focus:ring-light-3',
-            'dark:hover:bg-light-3',
-            'dark:active:bg-light-2',
-            'dark:text-dark-5'
+            'bg-light-300',
+            'hover:bg-light-300/[.8]',
+            'active:bg-light-400/[.5]',
+            'text-dark-700',
+            'dark:bg-dark-600',
+            'dark:hover:bg-dark-600/[.8]',
+            'dark:active:bg-dark-700',
+            'dark:text-light-100'
           ]
         ]
       }
@@ -294,16 +297,16 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-dark-1',
-          'bg-dark-3/[.15]',
-          'focus:ring-dark-3/[.30]',
-          'hover:bg-dark-3/[.25]',
-          'active:bg-dark-3/[.30]',
-          'dark:text-light-3',
-          'dark:bg-light-4/[.15]',
-          'dark:focus:ring-light-5/[.30]',
-          'dark:hover:bg-light-3/[.25]',
-          'dark:active:bg-light-5/[.30]'
+          'text-dark-600',
+          'bg-dark-800/[.15]',
+          'focus:ring-dark-800/[.30]',
+          'hover:bg-dark-800/[.25]',
+          'active:bg-dark-800/[.30]',
+          'dark:text-light-200',
+          'dark:bg-light-300/[.15]',
+          'dark:focus:ring-light-400/[.30]',
+          'dark:hover:bg-light-200/[.25]',
+          'dark:active:bg-light-400/[.30]'
         ]
       }
     },
@@ -395,14 +398,14 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-dark-3',
-          'focus:ring-light-4/40',
-          'hover:bg-light-3/40',
-          'active:bg-light-4/40',
-          'dark:text-light-3',
-          'dark:focus:ring-dark-4/40',
-          'dark:hover:bg-dark-3/40',
-          'dark:active:bg-dark-4/40'
+          'text-dark-800',
+          'focus:ring-light-300/40',
+          'hover:bg-light-200/40',
+          'active:bg-light-300/40',
+          'dark:text-light-200',
+          'dark:focus:ring-dark-900/40',
+          'dark:hover:bg-dark-800/40',
+          'dark:active:bg-dark-900/40'
         ]
       }
     },
@@ -479,16 +482,16 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-dark-3',
-          'focus:ring-dark-4/20',
-          'hover:bg-dark-5/20',
-          'active:bg-dark-4/20',
-          'border-dark-4',
-          'dark:text-light-3',
-          'dark:focus:ring-light-4/20',
-          'dark:hover:bg-light-5/20',
-          'dark:active:bg-light-4/20',
-          'dark:border-light-3'
+          'text-dark-800',
+          'focus:ring-dark-900/20',
+          'hover:bg-dark-950/20',
+          'active:bg-dark-900/20',
+          'border-dark-900',
+          'dark:text-light-200',
+          'dark:focus:ring-light-300/20',
+          'dark:hover:bg-light-400/20',
+          'dark:active:bg-light-300/20',
+          'dark:border-light-200'
         ]
       }
     },
@@ -570,20 +573,20 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'from-dark-1',
-          'to-dark-5',
-          'focus:ring-dark-5',
-          'hover:to-dark-3',
-          'active:from-dark-5',
-          'active:to-dark-1',
-          'text-light-3',
-          'dark:text-dark-5',
-          'dark:from-light-3',
-          'dark:to-light-5',
-          'dark:focus:ring-light-5',
-          'dark:hover:to-light-5',
-          'dark:active:from-light-5',
-          'dark:active:to-light-3'
+          'from-dark-600',
+          'to-dark-950',
+          'focus:ring-dark-950',
+          'hover:to-dark-800',
+          'active:from-dark-950',
+          'active:to-dark-600',
+          'text-light-200',
+          'dark:text-dark-950',
+          'dark:from-light-200',
+          'dark:to-light-400',
+          'dark:focus:ring-light-400',
+          'dark:hover:to-light-400',
+          'dark:active:from-light-400',
+          'dark:active:to-light-200'
         ]
       }
     },

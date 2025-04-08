@@ -40,7 +40,7 @@ const toggleRating = (selectedRating: number) => {
 <\u002Fscript>
 
 <template>
-  <aside class="flex gap-6 p-6 rounded-lg h-[15vh] items-start bg-light-2 dark:bg-dark-3/[.4]">
+  <aside class="flex gap-6 p-6 rounded-lg h-[15vh] items-start bg-light-100 dark:bg-dark-800/[.4]">
     <div class="flex flex-col gap-2 w-fit">
       <h3 class="text-sm font-semibold mb-2">
         Price
@@ -172,7 +172,7 @@ const toggleRating = (selectedRating: number) => {
 <template>
   <page-template>
     <template #example>
-      <aside class="flex gap-6 p-6 rounded-lg h-[15vh] items-start bg-light-2 dark:bg-dark-3/[.4]">
+      <aside class="flex gap-6 p-6 rounded-lg h-[15vh] items-start bg-light-100 dark:bg-dark-800/[.4]">
         <div class="flex flex-col gap-2 w-fit">
           <h3 class="text-sm font-semibold mb-2">
             Price

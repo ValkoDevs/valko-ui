@@ -23,7 +23,7 @@ describe('Switch component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-4')).toBeDefined()
+        expect(wrapper.find('.bg-light-300')).toBeDefined()
       })
 
       it('should be shape soft', () => {
@@ -53,7 +53,7 @@ describe('Switch component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-5')).toBeDefined()
+        expect(wrapper.find('.bg-light-400')).toBeDefined()
       })
 
       it('should be color success when props.color is success', () => {

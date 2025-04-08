@@ -12,14 +12,14 @@ export default tv({
       'vk-badge__badge',
       'text-white',
       'shadow-sm',
-      'shadow-light-3',
+      'shadow-light-200',
       'overflow-hidden',
       'flex',
       'justify-center',
       'items-center',
       'align-middle',
       'absolute',
-      'dark:shadow-dark-3'
+      'dark:shadow-dark-800'
     ]
   },
   variants: {
@@ -37,8 +37,8 @@ export default tv({
       outlined: {
         badge: [
           'border-2',
-          'border-light-1',
-          'dark:border-dark-3'
+          'border-light-50',
+          'dark:border-dark-800'
         ]
       },
       gradient: {
@@ -142,10 +142,10 @@ export default tv({
       color: 'neutral',
       class: {
         badge: [
-          'bg-light-3',
-          'text-dark-1',
-          'dark:bg-dark-2',
-          'dark:text-light-3'
+          'bg-light-200',
+          'text-dark-600',
+          'dark:bg-dark-700',
+          'dark:text-light-200'
         ]
       }
     },
@@ -256,10 +256,10 @@ export default tv({
       color: 'neutral',
       class: {
         badge: [
-          'from-light-1',
-          'to-light-5',
-          'text-dark-1',
-          'dark:to-dark-5'
+          'from-light-50',
+          'to-light-400',
+          'text-dark-600',
+          'dark:to-dark-950'
         ]
       }
     },

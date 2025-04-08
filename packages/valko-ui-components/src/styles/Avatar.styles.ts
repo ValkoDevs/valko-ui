@@ -10,9 +10,9 @@ export default tv({
       'font-bold',
       'select-none',
       'shadow-lg',
-      'shadow-light-4',
+      'shadow-light-300',
       'overflow-hidden',
-      'dark:shadow-dark-5'
+      'dark:shadow-dark-950'
     ],
     img: [
       'w-full',
@@ -29,7 +29,7 @@ export default tv({
     variant: {
       filled: {
         container: [
-          'text-light-1'
+          'text-light-50'
         ]
       },
       outlined: {},
@@ -41,7 +41,7 @@ export default tv({
       gradient: {
         container: [
           'bg-gradient-to-br',
-          'text-light-1'
+          'text-light-50'
         ]
       }
     },
@@ -124,8 +124,8 @@ export default tv({
       color: 'neutral',
       class: {
         container: [
-          'bg-light-4',
-          'dark:bg-dark-3'
+          'bg-light-300',
+          'dark:bg-dark-800'
         ]
       }
     },
@@ -181,10 +181,10 @@ export default tv({
       color: 'neutral',
       class: {
         container: [
-          'border-light-4',
-          'text-light-4',
-          'dark:border-dark-3',
-          'dark:text-dark-1'
+          'border-light-300',
+          'text-light-300',
+          'dark:border-dark-800',
+          'dark:text-dark-600'
         ]
       }
     },
@@ -244,10 +244,10 @@ export default tv({
       color: 'neutral',
       class: {
         container: [
-          'bg-light-4/[.20]',
-          'text-light-4',
-          'dark:bg-dark-3/[.20]',
-          'dark:text-dark-1'
+          'bg-light-300/[.20]',
+          'text-light-300',
+          'dark:bg-dark-800/[.20]',
+          'dark:text-dark-600'
         ]
       }
     },
@@ -307,10 +307,10 @@ export default tv({
       color: 'neutral',
       class: {
         container: [
-          'from-light-3',
-          'to-light-5',
-          'dark:from-dark-1',
-          'dark:to-dark-3'
+          'from-light-200',
+          'to-light-400',
+          'dark:from-dark-600',
+          'dark:to-dark-800'
         ]
       }
     },

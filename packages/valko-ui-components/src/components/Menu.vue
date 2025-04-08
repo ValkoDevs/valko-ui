@@ -52,10 +52,10 @@ const onItemClick = (item: MenuItem) => {
             :item="item"
           >
             <button
-              @click.prevent="onItemClick(item)"
               :class="classes.content"
               :data-active="item.key === props.active"
               :data-disabled="item.disabled"
+              @click.prevent="onItemClick(item)"
             >
               {{ item.text }}
             </button>

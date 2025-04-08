@@ -52,7 +52,7 @@ describe('Divider component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-4').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-300').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {

@@ -12,23 +12,23 @@ export default tv({
   variants: {
     variant: {
       filled: [
-        'bg-light-3',
-        'dark:bg-dark-3'
+        'bg-light-200',
+        'dark:bg-dark-800'
       ],
       ghost: [
         'bg-transparent'
       ],
       outlined: [
         'border-2',
-        'border-light-5',
-        'dark:border-dark-1'
+        'border-light-400',
+        'dark:border-dark-600'
       ]
     },
     separator: {
       line: [
         'divide-y-2',
-        'divide-light-5',
-        'dark:divide-dark-1'
+        'divide-light-400',
+        'dark:divide-dark-600'
       ],
       split: [
         'p-0',

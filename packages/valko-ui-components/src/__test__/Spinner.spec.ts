@@ -40,7 +40,7 @@ describe('Spinner component', () => {
           }
         })
 
-        expect(wrapper.find('.text-dark-3').exists()).toBe(true)
+        expect(wrapper.find('.text-dark-800').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {

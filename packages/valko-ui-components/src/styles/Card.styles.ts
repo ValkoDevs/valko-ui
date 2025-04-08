@@ -13,17 +13,17 @@ export default tv({
   variants: {
     variant: {
       filled: [
-        'bg-light-2',
-        'dark:bg-dark-3'
+        'bg-light-100',
+        'dark:bg-dark-800'
       ],
       outlined: [
         'border-2',
-        'border-light-5',
-        'dark:border-dark-1'
+        'border-light-400',
+        'dark:border-dark-600'
       ],
       ghost: [
-        'bg-light-3/[.5]',
-        'dark:bg-dark-3/[.5]',
+        'bg-light-200/[.5]',
+        'dark:bg-dark-800/[.5]',
         'backdrop-blur-lg',
         'shadow-none'
       ]
@@ -149,10 +149,10 @@ export default tv({
       layout: 'cover',
       variant: 'filled',
       class: [
-        'data-[layout=cover]:data-[card-image=true]:text-light-3',
-        'data-[layout=cover]:data-[card-image=false]:text-dark-3',
-        'dark:data-[layout=cover]:data-[card-image=true]:text-light-3',
-        'dark:data-[layout=cover]:data-[card-image=false]:text-light-3'
+        'data-[layout=cover]:data-[card-image=true]:text-light-200',
+        'data-[layout=cover]:data-[card-image=false]:text-dark-800',
+        'dark:data-[layout=cover]:data-[card-image=true]:text-light-200',
+        'dark:data-[layout=cover]:data-[card-image=false]:text-light-200'
       ]
     }
   ]

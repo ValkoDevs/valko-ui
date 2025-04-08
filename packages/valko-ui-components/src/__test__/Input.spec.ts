@@ -15,7 +15,7 @@ describe('Input component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.text-dark-2').exists()).toBe(true)
+        expect(wrapper.find('.text-dark-700').exists()).toBe(true)
       })
 
       it('should be size md', () => {
@@ -23,7 +23,7 @@ describe('Input component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -55,7 +55,7 @@ describe('Input component', () => {
           }
         })
 
-        expect(wrapper.find('.text-dark-2').exists()).toBe(true)
+        expect(wrapper.find('.text-dark-700').exists()).toBe(true)
       })
 
       it('should be color neutral when props.color is neutral', () => {
@@ -65,7 +65,7 @@ describe('Input component', () => {
           }
         })
 
-        expect(wrapper.find('.text-dark-1').exists()).toBe(true)
+        expect(wrapper.find('.text-dark-600').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {

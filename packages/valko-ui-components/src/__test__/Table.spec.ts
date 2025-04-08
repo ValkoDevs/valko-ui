@@ -106,7 +106,7 @@ describe('Table component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-4').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-300').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -136,7 +136,7 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-dark-1/[.3]')
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-dark-600/[.3]')
       })
 
       it('should be color success when props.color is success', () => {
@@ -286,7 +286,7 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-4').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-300').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -310,7 +310,7 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-table__thead').classes()).toContain('bg-light-4/[.60]')
+        expect(wrapper.find('.vk-table__thead').classes()).toContain('bg-light-300/[.60]')
       })
     })
 
@@ -324,7 +324,7 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-table__tr').classes()).toContain('even:bg-light-3/[.8]')
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('even:bg-light-200/[.8]')
       })
     })
   })

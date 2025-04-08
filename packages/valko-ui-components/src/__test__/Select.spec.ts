@@ -80,7 +80,7 @@ describe('Select component', () => {
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-light-3')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-light-200')
       })
 
       it('should be color success when props.color is success', async () => {

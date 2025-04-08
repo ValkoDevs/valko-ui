@@ -18,7 +18,7 @@ export default tv({
       'vk-popover__panel',
       'h-fit',
       'w-fit',
-      'bg-light-3',
+      'bg-light-200',
       'shadow-md',
       'absolute',
       'z-40',
@@ -80,7 +80,7 @@ export default tv({
       'data-[placement=right-end]:left-full',
       'data-[placement=right-end]:bottom-0',
       'data-[placement=right-end]:origin-bottom-left',
-      'dark:bg-dark-3'
+      'dark:bg-dark-800'
     ]
   },
   variants: {

@@ -59,7 +59,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be variant filled', () => {
-      expect(notification?.className).toContain('text-light-1')
+      expect(notification?.className).toContain('text-light-50')
     })
 
     it('should have progressbar', () => {
@@ -97,7 +97,7 @@ describe('useNotification composable', () => {
       await nextTick()
       notification = document.querySelector('.vk-notification')
 
-      expect(notification?.className).toContain('bg-light-4')
+      expect(notification?.className).toContain('bg-light-300')
     })
 
     it('should be success when color props is success', async () => {
@@ -169,7 +169,7 @@ describe('useNotification composable', () => {
       await nextTick()
       notification = document.querySelector('.vk-notification')
 
-      expect(notification?.className).toContain('text-light-1')
+      expect(notification?.className).toContain('text-light-50')
     })
 
     it('should be outlined when variant props is outlined', async () => {

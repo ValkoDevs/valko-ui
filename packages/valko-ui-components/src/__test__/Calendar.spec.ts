@@ -119,7 +119,7 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-dark-4')
+        expect(button.classes()).toContain('bg-dark-900')
       })
 
       it('should be color success when props.color is success', async () => {
@@ -280,7 +280,7 @@ describe('Calendar component', () => {
           }
         })
 
-        expect(wrapper.find('.text-light-1').exists()).toBe(true)
+        expect(wrapper.find('.text-light-50').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
