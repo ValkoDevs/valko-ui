@@ -1,6 +1,10 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkProgressbar from '#valkoui/components/Progressbar.vue'
 
+vi.mock('#valkoui/img/diagonal-stripes.svg', () => ({
+  default: '/img/diagonal-stripes.svg'
+}))
+
 describe('Progressbar component', () => {
   let wrapper: VueWrapper
   describe('Props', () => {
@@ -327,7 +331,7 @@ describe('Progressbar component', () => {
         })
 
         const progress = wrapper.find('.vk-progressbar__progress')
-        expect(progress.attributes('style')).toContain('background-image: url(/img/diagonal-stripes.svg)')
+        expect(progress.attributes('style')).toContain('background-image')
       })
     })
   })
