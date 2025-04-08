@@ -1,5 +1,11 @@
 # @valko-ui/eslint-config
 
+## 0.2.0
+
+### Minor Changes
+
+- 63b16b9: Update version of all packages
+
 ## 0.1.1
 
 ### Minor Changes
