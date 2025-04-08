@@ -11,7 +11,7 @@ const baseMenuItems: MenuItem[] = [
   { key: '/docs/forms/button', group: 'Forms', text: 'Button' },
   { key: '/docs/forms/checkbox', group: 'Forms', text: 'Checkbox' },
   { key: '/docs/forms/datepicker', group: 'Forms', text: 'Datepicker' },
-  { key: '/docs/forms/input', group: 'Forms',  text: 'Input' },
+  { key: '/docs/forms/input', group: 'Forms', text: 'Input' },
   { key: '/docs/forms/radio', group: 'Forms', text: 'Radio' },
   { key: '/docs/forms/range', group: 'Forms', text: 'Range' },
   { key: '/docs/forms/select', group: 'Forms', text: 'Select' },
@@ -24,6 +24,7 @@ const baseMenuItems: MenuItem[] = [
   { key: '/docs/ui/breadcrumbs', group: 'Ui', text: 'Breadcrumbs' },
   { key: '/docs/ui/calendar', group: 'Ui', text: 'Calendar' },
   { key: '/docs/ui/card', group: 'Ui', text: 'Card' },
+  { key: '/docs/ui/fullcalendar', group: 'Ui', text: 'Full Calendar' },
   { key: '/docs/ui/menu', group: 'Ui', text: 'Menu' },
   { key: '/docs/ui/navbar', group: 'Ui', text: 'Navbar' },
   { key: '/docs/ui/notification', group: 'Ui', text: 'Notification' },
@@ -68,28 +69,11 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-col w-full">
-    <vk-navbar
-      color="neutral"
-      variant="outlined"
-      size="md"
-      shape="square"
-      flat
-      fixed
-      class="flex justify-between !bg-light-2 dark:!bg-dark-3"
-    >
-      <vk-button
-        variant="link"
-        shape="rounded"
-        color="neutral"
-        condensed
-        size="lg"
-        class="size-10 lg:hidden"
-        @click="toggleMenu"
-      >
-        <vk-icon
-          name="paw"
-          class="text-2xl"
-        />
+    <vk-navbar color="neutral" variant="outlined" size="md" shape="square" flat fixed
+      class="flex justify-between !bg-light-2 dark:!bg-dark-3">
+      <vk-button variant="link" shape="rounded" color="neutral" condensed size="lg" class="size-10 lg:hidden"
+        @click="toggleMenu">
+        <vk-icon name="paw" class="text-2xl" />
       </vk-button>
       <h2 class="text-primary-600 dark:text-primary-400 text-3xl font-serif tracking-wider">
         <nuxt-link to="/">
@@ -98,22 +82,9 @@ onMounted(() => {
       </h2>
       <div class="lg:hidden gap-2 flex">
         <theme-switch />
-        <a
-          href="https://github.com/ValkoDevs/valko-ui"
-          target="_blank"
-        >
-          <vk-button
-            variant="link"
-            shape="rounded"
-            color="neutral"
-            condensed
-            size="lg"
-            class="size-10"
-          >
-            <vk-icon
-              name="brand-github"
-              class="text-2xl"
-            />
+        <a href="https://github.com/ValkoDevs/valko-ui" target="_blank">
+          <vk-button variant="link" shape="rounded" color="neutral" condensed size="lg" class="size-10">
+            <vk-icon name="brand-github" class="text-2xl" />
           </vk-button>
         </a>
       </div>
@@ -121,56 +92,23 @@ onMounted(() => {
     </vk-navbar>
 
     <div class="w-full flex">
-      <vk-drawer
-        :is-open="menuOpen"
-        shape="soft"
-        placement="left"
-        @close="toggleMenu"
-      >
+      <vk-drawer :is-open="menuOpen" shape="soft" placement="left" @close="toggleMenu">
         <div class="flex gap-2 px-4">
           <theme-switch />
-          <a
-            href="https://github.com/ValkoDevs/valko-ui"
-            target="_blank"
-          >
-            <vk-button
-              variant="link"
-              shape="rounded"
-              color="neutral"
-              condensed
-              size="lg"
-              class="size-10"
-            >
-              <vk-icon
-                name="brand-github"
-                class="text-2xl"
-              />
+          <a href="https://github.com/ValkoDevs/valko-ui" target="_blank">
+            <vk-button variant="link" shape="rounded" color="neutral" condensed size="lg" class="size-10">
+              <vk-icon name="brand-github" class="text-2xl" />
             </vk-button>
           </a>
         </div>
 
-        <vk-menu
-          :items="menuItems"
-          :active="activeItem"
-          color="primary"
-          size="md"
-          variant="ghost"
-          shape="soft"
-          floating
-          @item-click="onItemClick"
-        />
+        <vk-menu :items="menuItems" :active="activeItem" color="primary" size="md" variant="ghost" shape="soft" floating
+          @item-click="onItemClick" />
       </vk-drawer>
-      <aside class="hidden lg:block lg:w-52 bg-light-2 dark:bg-dark-3 shrink-0 overflow-y-auto border-r border-light-4 dark:border-dark-2 max-h-[calc(100vh_-_3.5rem)] h-screen sticky top-14">
-        <vk-menu
-          :items="menuItems"
-          :active="activeItem"
-          color="primary"
-          size="md"
-          variant="ghost"
-          shape="soft"
-          floating
-          @item-click="onItemClick"
-        />
+      <aside
+        class="hidden lg:block lg:w-52 bg-light-2 dark:bg-dark-3 shrink-0 overflow-y-auto border-r border-light-4 dark:border-dark-2 max-h-[calc(100vh_-_3.5rem)] h-screen sticky top-14">
+        <vk-menu :items="menuItems" :active="activeItem" color="primary" size="md" variant="ghost" shape="soft" floating
+          @item-click="onItemClick" />
       </aside>
       <div class="flex flex-col grow justify-between items-center max-w-screen-xl w-full px-4 mx-auto">
         <main class="w-full grow">
