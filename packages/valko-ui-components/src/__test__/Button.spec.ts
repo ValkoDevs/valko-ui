@@ -68,7 +68,7 @@ describe('Button component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-dark-900').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-300').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
