@@ -36,7 +36,7 @@ describe('Dropdown component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:text-light-1')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:text-light-50')
       })
 
       it('should be shape soft', () => {
@@ -76,7 +76,7 @@ describe('Dropdown component', () => {
           }
         })
         await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-light-4')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-light-300')
       })
 
       it('should be color success when props.color is success', async () => {
@@ -228,7 +228,7 @@ describe('Dropdown component', () => {
           }
         })
         await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:text-light-1')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:text-light-50')
       })
 
       it('should be outlined when props.variant is outlined', async () => {

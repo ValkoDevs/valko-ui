@@ -36,7 +36,7 @@ const profileStats = [
 <template>
   <div class="relative h-full max-w-screen-xl mx-auto w-full">
     <div class="flex flex-row gap-8 py-8">
-      <div class="w-1/3 flex flex-col items-center shadow-lg rounded-lg p-6 bg-light-4 dark:bg-dark-3/[.8]">
+      <div class="w-1/3 flex flex-col items-center shadow-lg rounded-lg p-6 bg-light-300 dark:bg-dark-800/[.8]">
         <vk-avatar
           src="/assets/avatar.jpg"
           size="lg"
@@ -47,13 +47,13 @@ const profileStats = [
         <h3 class="text-lg font-semibold mb-1">
           Marie Poole
         </h3>
-        <span class="text-sm text-dark-1 dark:text-light-5">Microsoft Inc.</span>
+        <span class="text-sm text-dark-600 dark:text-light-400">Microsoft Inc.</span>
 
         <div class="mt-6 w-full flex flex-col gap-4">
           <div
             v-for="stat in profileStats"
             :key="stat.label"
-            class="flex justify-between items-center bg-light-3 dark:bg-dark-3 rounded-md p-2"
+            class="flex justify-between items-center bg-light-200 dark:bg-dark-800 rounded-md p-2"
           >
             <span class="text-sm">{{ stat.label }}</span>
             <span class="text-sm font-semibold">{{ stat.value }}</span>
@@ -70,7 +70,7 @@ const profileStats = [
         </vk-button>
       </div>
 
-      <div class="w-fit shadow-lg rounded-lg p-6 bg-light-4 dark:bg-dark-3/[.8]">
+      <div class="w-fit shadow-lg rounded-lg p-6 bg-light-300 dark:bg-dark-800/[.8]">
         <vk-tabs
           :tabs
           shape="line"
@@ -172,7 +172,7 @@ const profileStats = [
     <template #example>
       <div class="relative h-full max-w-screen-xl mx-auto w-full">
         <div class="flex flex-row gap-8 py-8">
-          <div class="w-1/3 flex flex-col items-center shadow-lg rounded-lg p-6 bg-light-4 dark:bg-dark-3/[.8]">
+          <div class="w-1/3 flex flex-col items-center shadow-lg rounded-lg p-6 bg-light-300 dark:bg-dark-800/[.8]">
             <vk-avatar
               src="/assets/avatar.jpg"
               size="lg"
@@ -183,13 +183,13 @@ const profileStats = [
             <h3 class="text-lg font-semibold mb-1">
               Marie Poole
             </h3>
-            <span class="text-sm text-dark-1 dark:text-light-5">Microsoft Inc.</span>
+            <span class="text-sm text-dark-600 dark:text-light-400">Microsoft Inc.</span>
 
             <div class="mt-6 w-full flex flex-col gap-4">
               <div
                 v-for="stat in profileStats"
                 :key="stat.label"
-                class="flex justify-between items-center bg-light-3 dark:bg-dark-3 rounded-md p-2"
+                class="flex justify-between items-center bg-light-200 dark:bg-dark-800 rounded-md p-2"
               >
                 <span class="text-sm">{{ stat.label }}</span>
                 <span class="text-sm font-semibold">{{ stat.value }}</span>
@@ -206,7 +206,7 @@ const profileStats = [
             </vk-button>
           </div>
 
-          <div class="w-fit shadow-lg rounded-lg p-6 bg-light-4 dark:bg-dark-3/[.8]">
+          <div class="w-fit shadow-lg rounded-lg p-6 bg-light-300 dark:bg-dark-800/[.8]">
             <vk-tabs
               :tabs
               shape="line"

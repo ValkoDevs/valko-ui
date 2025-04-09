@@ -67,7 +67,7 @@ describe('Menu component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-light-3')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-light-200')
       })
 
       it('should be color success when props.color is success', () => {

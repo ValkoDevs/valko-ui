@@ -66,8 +66,8 @@ export default tv({
       variant: 'filled',
       color: 'neutral',
       class: [
-        'bg-light-4',
-        'dark:bg-dark-1'
+        'bg-light-300',
+        'dark:bg-dark-600'
       ]
     },
     {
@@ -110,8 +110,8 @@ export default tv({
       variant: 'outlined',
       color: 'neutral',
       class: [
-        'border-light-4',
-        'dark:border-dark-3'
+        'border-light-300',
+        'dark:border-dark-800'
       ]
     },
     {
@@ -154,8 +154,8 @@ export default tv({
       variant: 'ghost',
       color: 'neutral',
       class: [
-        'bg-light-4/[.5]',
-        'dark:bg-dark-3/[.5]'
+        'bg-light-300/[.5]',
+        'dark:bg-dark-800/[.5]'
       ]
     },
     {

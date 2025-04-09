@@ -7,14 +7,14 @@ export default tv({
     'justify-items-center',
     'items-center',
     'shadow-lg',
-    'shadow-light-4',
-    'dark:shadow-dark-5'
+    'shadow-light-300',
+    'dark:shadow-dark-950'
   ],
   variants: {
     variant: {
       filled: [
         'filter-none',
-        'text-light-1'
+        'text-light-50'
       ],
       outlined: [
         'bg-transparent',
@@ -27,14 +27,14 @@ export default tv({
       gradient: [
         'bg-gradient-to-br',
         'filter-none',
-        'text-light-1'
+        'text-light-50'
       ]
     },
     color: {
       primary: [],
       neutral: [
-        'text-dark-1',
-        'dark:text-light-1'
+        'text-dark-600',
+        'dark:text-light-50'
       ],
       success: [],
       error: [],
@@ -101,8 +101,8 @@ export default tv({
       color: 'neutral',
       variant: 'filled',
       class: [
-        'bg-light-3',
-        'dark:bg-dark-3'
+        'bg-light-200',
+        'dark:bg-dark-800'
       ]
     },
     {
@@ -147,8 +147,8 @@ export default tv({
       variant: 'outlined',
       class: [
         'bg-transparent',
-        'border-light-4',
-        'dark:border-dark-2'
+        'border-light-300',
+        'dark:border-dark-700'
       ]
     },
     {
@@ -195,8 +195,8 @@ export default tv({
       color: 'neutral',
       variant: 'ghost',
       class: [
-        'bg-light-4/[.3]',
-        'dark:bg-dark-3/[.3]'
+        'bg-light-300/[.3]',
+        'dark:bg-dark-800/[.3]'
       ]
     },
     {
@@ -240,10 +240,10 @@ export default tv({
       variant: 'gradient',
       color: 'neutral',
       class: [
-        'from-light-1',
-        'to-light-5',
-        'dark:from-dark-1',
-        'dark:to-dark-5'
+        'from-light-50',
+        'to-light-400',
+        'dark:from-dark-600',
+        'dark:to-dark-950'
       ]
     },
     {

@@ -25,7 +25,7 @@ export default tv({
     ],
     thumb: [
       'vk-range__thumb',
-      'bg-light-1',
+      'bg-light-50',
       'shadow-lg',
       'absolute',
       'transform',
@@ -35,19 +35,19 @@ export default tv({
       'z-30',
       'cursor-pointer',
       'pointer-events-auto',
-      'dark:bg-light-3'
+      'dark:bg-light-200'
     ],
     stepMark: [
       'vk-range__mark',
       'w-1.5',
       'h-1.5',
-      'bg-light-5',
+      'bg-light-400',
       'rounded-full',
       'absolute',
       'top-1/2',
       '-translate-y-1/2',
       'z-10',
-      'dark:bg-dark-4'
+      'dark:bg-dark-900'
     ],
     labelContainer: [
       'absolute',
@@ -57,43 +57,43 @@ export default tv({
     label: [
       'vk-range__label',
       'mt-2',
-      'text-dark-1',
-      'hover:text-dark-5',
+      'text-dark-600',
+      'hover:text-dark-950',
       'cursor-pointer',
       'pointer-events-auto',
       'absolute',
       'top-1/2',
       '-translate-x-1/4',
       'z-10',
-      'dark:text-light-4',
-      'dark:hover:text-light-1'
+      'dark:text-light-300',
+      'dark:hover:text-light-50'
     ]
   },
   variants: {
     variant: {
       filled: {
         progressContainer: [
-          'bg-light-3',
-          'dark:bg-dark-1'
+          'bg-light-200',
+          'dark:bg-dark-600'
         ]
       },
       ghost: {
         progressContainer: [
-          'bg-light-3/[.5]',
-          'dark:bg-dark-1/[.5]'
+          'bg-light-200/[.5]',
+          'dark:bg-dark-600/[.5]'
         ]
       },
       outlined: {
         progressContainer: [
           'border-2',
-          'border-light-5',
-          'dark:border-dark-1'
+          'border-light-400',
+          'dark:border-dark-600'
         ]
       },
       gradient: {
         progressContainer: [
-          'bg-light-3',
-          'dark:bg-dark-1'
+          'bg-light-200',
+          'dark:bg-dark-600'
         ],
         progress: [
           'bg-gradient-to-br'
@@ -108,8 +108,8 @@ export default tv({
       },
       neutral: {
         progress: [
-          'bg-light-5',
-          'dark:bg-dark-3'
+          'bg-light-400',
+          'dark:bg-dark-800'
         ]
       },
       success: {
@@ -240,8 +240,8 @@ export default tv({
       color: 'neutral',
       class: {
         progress: [
-          'bg-light-5/[.5]',
-          'dark:bg-dark-2/[.5]'
+          'bg-light-400/[.5]',
+          'dark:bg-dark-700/[.5]'
         ]
       }
     },
@@ -297,10 +297,10 @@ export default tv({
       color: 'neutral',
       class: {
         progress: [
-          'from-light-1',
-          'to-light-5',
-          'text-dark-1',
-          'dark:to-dark-5'
+          'from-light-50',
+          'to-light-400',
+          'text-dark-600',
+          'dark:to-dark-950'
         ]
       }
     },

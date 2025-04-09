@@ -363,7 +363,7 @@ onUnmounted(() => {
       </aside>
     </vk-drawer>
 
-    <aside class="hidden lg:block bg-light-2 dark:bg-dark-3/[.4] w-[25vw] flex flex-col gap-4 p-10 rounded-lg">
+    <aside class="hidden lg:block bg-light-100 dark:bg-dark-800/[.4] w-[25vw] flex flex-col gap-4 p-10 rounded-lg">
       <div class="flex flex-col gap-4">
         <h2 class="text-2xl font-bold text-center">
           Filters
@@ -470,8 +470,8 @@ onUnmounted(() => {
       </div>
     </aside>
 
-    <main class="grid gap-10 bg-light-2 dark:bg-dark-3/[.4] p-4 rounded-lg w-full">
-      <div class="lg:hidden bg-light-4 dark:bg-dark-2 flex flex-wrap justify-around items-center h-fit gap-4 p-2 rounded-lg">
+    <main class="grid gap-10 bg-light-100 dark:bg-dark-800/[.4] p-4 rounded-lg w-full">
+      <div class="lg:hidden bg-light-300 dark:bg-dark-700 flex flex-wrap justify-around items-center h-fit gap-4 p-2 rounded-lg">
         <vk-tag
           v-for="(isActive, category) in filters.categories"
           :key="category"
@@ -705,7 +705,7 @@ onUnmounted(() => {
           </aside>
         </vk-drawer>
 
-        <aside class="hidden lg:flex bg-light-2 dark:bg-dark-3/[.4] w-[25vw] flex-col gap-4 p-10 rounded-lg">
+        <aside class="hidden lg:flex bg-light-100 dark:bg-dark-800/[.4] w-[25vw] flex-col gap-4 p-10 rounded-lg">
           <div class="flex flex-col gap-4">
             <h2 class="text-2xl font-bold text-center">
               Filters
@@ -813,7 +813,7 @@ onUnmounted(() => {
         </aside>
 
         <main class="grid gap-10 w-full">
-          <div class="lg:hidden bg-light-4 dark:bg-dark-3/[.4] flex flex-wrap justify-around items-center h-fit gap-4 p-2 rounded-lg">
+          <div class="lg:hidden bg-light-300 dark:bg-dark-800/[.4] flex flex-wrap justify-around items-center h-fit gap-4 p-2 rounded-lg">
             <vk-tag
               v-for="(isActive, category) in filters.categories"
               :key="category"

@@ -64,7 +64,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-dark-4')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-dark-900')
       })
 
       it('should be color success when props.color is success', () => {

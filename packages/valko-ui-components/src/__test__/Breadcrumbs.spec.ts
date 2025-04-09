@@ -37,7 +37,7 @@ describe('Breadcrumbs component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-breadcrumbs').classes()).toContain('bg-light-3')
+        expect(wrapper.find('.vk-breadcrumbs').classes()).toContain('bg-light-200')
       })
 
       it('should be shape soft', () => {
@@ -81,7 +81,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-dark-5')
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-dark-950')
       })
 
       it('should be color success when props.color is success', () => {
@@ -219,7 +219,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -241,7 +241,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs').classes()).toContain('bg-light-3/[.50]')
+        expect(wrapper.find('.vk-breadcrumbs').classes()).toContain('bg-light-200/[.50]')
       })
 
       it('should be link when props.variant is link', () => {

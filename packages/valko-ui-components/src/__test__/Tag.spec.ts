@@ -23,7 +23,7 @@ describe('Tag component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.text-light-1').exists()).toBe(true)
+        expect(wrapper.find('.text-light-50').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -67,7 +67,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-4').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-300').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -205,7 +205,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.text-light-1').exists()).toBe(true)
+        expect(wrapper.find('.text-light-50').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -276,7 +276,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-tag__closable').classes()).toContain('text-dark-3')
+        expect(wrapper.find('.vk-tag__closable').classes()).toContain('text-dark-800')
       })
 
       it('should have props.color if variant is outlined or ghost', () => {

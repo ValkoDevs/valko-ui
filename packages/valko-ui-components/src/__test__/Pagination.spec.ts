@@ -23,7 +23,7 @@ describe('Pagination component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -53,7 +53,7 @@ describe('Pagination component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -179,7 +179,7 @@ describe('Pagination component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {

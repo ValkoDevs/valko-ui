@@ -65,7 +65,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -191,7 +191,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.text-light-1').exists()).toBe(true)
+        expect(wrapper.find('.text-light-50').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {

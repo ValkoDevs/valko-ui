@@ -66,7 +66,7 @@ const states: SelectOption[] = [
 <\u002Fscript>
 
 <template>
-  <div class="flex flex-col gap-4 w-full max-w-lg mx-auto p-6 rounded-lg bg-light-4 dark:bg-dark-3/[.8] shadow mt-5">
+  <div class="flex flex-col gap-4 w-full max-w-lg mx-auto p-6 rounded-lg bg-light-300 dark:bg-dark-800/[.8] shadow mt-5">
     <div class="flex justify-between">
       <h1 class="text-xl font-semibold">
         Billing Address
@@ -134,7 +134,7 @@ const states: SelectOption[] = [
 <template>
   <page-template>
     <template #example>
-      <div class="flex flex-col gap-4 w-full max-w-lg mx-auto p-6 rounded-lg bg-light-4 dark:bg-dark-3/[.8] shadow mt-5">
+      <div class="flex flex-col gap-4 w-full max-w-lg mx-auto p-6 rounded-lg bg-light-300 dark:bg-dark-800/[.8] shadow mt-5">
         <div class="flex justify-between">
           <h1 class="text-xl font-semibold">
             Billing Address

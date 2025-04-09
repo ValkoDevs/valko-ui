@@ -22,7 +22,7 @@ describe('Button component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.text-light-1').exists()).toBe(true)
+        expect(wrapper.find('.text-light-50').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -68,7 +68,7 @@ describe('Button component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-dark-4').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-300').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {
@@ -194,7 +194,7 @@ describe('Button component', () => {
           }
         })
 
-        expect(wrapper.find('.text-light-1').exists()).toBe(true)
+        expect(wrapper.find('.text-light-50').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {

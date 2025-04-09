@@ -20,7 +20,7 @@ export default tv({
       'ease-in-out',
       'relative',
       'shadow-sm',
-      'shadow-dark-3'
+      'shadow-dark-800'
     ],
     thumb: [
       'inline-block',
@@ -101,37 +101,37 @@ export default tv({
     variant: {
       filled: {
         switch: [
-          'bg-light-4',
-          'border-light-4',
-          'dark:bg-dark-2',
-          'dark:border-dark-2'
+          'bg-light-300',
+          'border-light-300',
+          'dark:bg-dark-700',
+          'dark:border-dark-700'
         ],
         thumb: [
-          'bg-light-2',
-          'dark:bg-light-3'
+          'bg-light-100',
+          'dark:bg-light-200'
         ]
       },
       outlined: {
         switch: [
-          'border-light-5',
-          'dark:border-dark-1'
+          'border-light-400',
+          'dark:border-dark-600'
         ],
         thumb: [
           'scale-[.9]',
-          'bg-light-5',
-          'dark:bg-dark-1'
+          'bg-light-400',
+          'dark:bg-dark-600'
         ]
       },
       ghost: {
         switch: [
           'border-transparent',
-          'bg-light-5/[.15]',
+          'bg-light-400/[.15]',
           'shadow-none',
-          'dark:bg-dark-2/[.15]'
+          'dark:bg-dark-700/[.15]'
         ],
         thumb: [
-          'bg-light-5/[.5]',
-          'dark:bg-dark-5/[.5]'
+          'bg-light-400/[.5]',
+          'dark:bg-dark-950/[.5]'
         ]
       }
     },
@@ -226,14 +226,14 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-dark-5',
-          'data-[active=true]:border-dark-5',
-          'dark:data-[active=true]:bg-light-3',
-          'dark:data-[active=true]:border-light-3'
+          'data-[active=true]:bg-dark-950',
+          'data-[active=true]:border-dark-950',
+          'dark:data-[active=true]:bg-light-200',
+          'dark:data-[active=true]:border-light-200'
         ],
         thumb: [
-          'bg-light-2',
-          'dark:bg-dark-3'
+          'bg-light-100',
+          'dark:bg-dark-800'
         ]
       }
     },
@@ -311,12 +311,12 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-dark-4',
-          'dark:data-[active=true]:border-light-3'
+          'data-[active=true]:border-dark-900',
+          'dark:data-[active=true]:border-light-200'
         ],
         thumb: [
-          'data-[selected=true]:bg-dark-4',
-          'dark:data-[selected=true]:bg-light-3'
+          'data-[selected=true]:bg-dark-900',
+          'dark:data-[selected=true]:bg-light-200'
         ]
       }
     },
@@ -402,12 +402,12 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-dark-5/[.4]',
-          'dark:data-[active=true]:bg-light-2/[.4]'
+          'data-[active=true]:bg-dark-950/[.4]',
+          'dark:data-[active=true]:bg-light-100/[.4]'
         ],
         thumb: [
-          'data-[selected=true]:bg-dark-5/[.5]',
-          'dark:data-[selected=true]:bg-light-2/[.5]'
+          'data-[selected=true]:bg-dark-950/[.5]',
+          'dark:data-[selected=true]:bg-light-100/[.5]'
         ]
       }
     },

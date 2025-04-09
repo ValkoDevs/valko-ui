@@ -21,8 +21,8 @@ export default tv({
     ],
     tr: [
       'vk-table__tr',
-      'hover:bg-light-4',
-      'dark:hover:bg-dark-2',
+      'hover:bg-light-300',
+      'dark:hover:bg-dark-700',
       'data-[row-events=true]:cursor-pointer'
     ],
     td: [
@@ -46,36 +46,36 @@ export default tv({
       filled: {
         thead: [
           'border-b',
-          'dark:border-dark-3',
-          'bg-light-4',
-          'dark:bg-dark-2'
+          'dark:border-dark-800',
+          'bg-light-300',
+          'dark:bg-dark-700'
         ],
         td: [
           'border-t',
-          'border-light-4',
-          'dark:border-dark-4'
+          'border-light-300',
+          'dark:border-dark-900'
         ],
         tr: [
-          'bg-light-2/[.5]',
-          'dark:bg-dark-3'
+          'bg-light-100/[.5]',
+          'dark:bg-dark-800'
         ]
       },
       outlined: {
         thead: [
           'border-b',
-          'border-dark-4',
-          'dark:border-light-4'
+          'border-dark-900',
+          'dark:border-light-300'
         ],
         tr: [
           'border-b',
-          'border-dark-1/[.1]',
-          'dark:border-light-4/[.1]'
+          'border-dark-600/[.1]',
+          'dark:border-light-300/[.1]'
         ]
       },
       ghost: {
         thead: [
-          'bg-light-4/[.60]',
-          'dark:bg-dark-2/[.30]'
+          'bg-light-300/[.60]',
+          'dark:bg-dark-700/[.30]'
         ]
       }
     },
@@ -134,8 +134,8 @@ export default tv({
       striped: true,
       class: {
         tr: [
-          'even:bg-light-3/[.8]',
-          'dark:even:bg-dark-3/[.5]'
+          'even:bg-light-200/[.8]',
+          'dark:even:bg-dark-800/[.5]'
         ]
       }
     },
@@ -144,8 +144,8 @@ export default tv({
       striped: true,
       class: {
         tr: [
-          'even:bg-light-3/[.5]',
-          'dark:even:bg-dark-3/[.5]'
+          'even:bg-light-200/[.5]',
+          'dark:even:bg-dark-800/[.5]'
         ]
       }
     },
@@ -154,8 +154,8 @@ export default tv({
       striped: true,
       class: {
         tr: [
-          'even:bg-light-3/[.5]',
-          'dark:even:bg-dark-3/[.5]'
+          'even:bg-light-200/[.5]',
+          'dark:even:bg-dark-800/[.5]'
         ]
       }
     },
@@ -185,8 +185,8 @@ export default tv({
       color: 'neutral',
       class: {
         tr: [
-          'data-[selected=true]:bg-dark-1/[.3]',
-          'dark:data-[selected=true]:bg-light-2/[.3]'
+          'data-[selected=true]:bg-dark-600/[.3]',
+          'dark:data-[selected=true]:bg-light-100/[.3]'
         ]
       }
     },
@@ -245,8 +245,8 @@ export default tv({
       color: 'neutral',
       class: {
         tr: [
-          'data-[selected=true]:bg-dark-1/[.3]',
-          'dark:data-[selected=true]:bg-light-2/[.3]'
+          'data-[selected=true]:bg-dark-600/[.3]',
+          'dark:data-[selected=true]:bg-light-100/[.3]'
         ]
       }
     },

@@ -40,10 +40,10 @@ export default tv({
     variant: {
       filled: {
         notification: [
-          'text-light-1'
+          'text-light-50'
         ],
         progressbar: [
-          'bg-light-1'
+          'bg-light-50'
         ]
       },
       ghost: {
@@ -55,8 +55,8 @@ export default tv({
       outlined: {
         notification: [
           'border-2',
-          'bg-light-1',
-          'dark:bg-dark-3'
+          'bg-light-50',
+          'dark:bg-dark-800'
         ],
         content: [
           'p-[calc(0.75rem_-_2px)]'
@@ -64,17 +64,17 @@ export default tv({
       },
       line: {
         notification: [
-          'bg-light-3',
-          'dark:bg-dark-3'
+          'bg-light-200',
+          'dark:bg-dark-800'
         ]
       },
       gradient: {
         notification: [
           'bg-gradient-to-br',
-          'text-light-1'
+          'text-light-50'
         ],
         progressbar: [
-          'bg-light-1'
+          'bg-light-50'
         ]
       }
     },
@@ -173,14 +173,14 @@ export default tv({
       color: 'neutral',
       class: {
         notification: [
-          'bg-light-4',
-          'text-dark-1',
-          'dark:bg-dark-3',
-          'dark:text-light-3'
+          'bg-light-300',
+          'text-dark-600',
+          'dark:bg-dark-800',
+          'dark:text-light-200'
         ],
         progressbar: [
-          'bg-dark-1',
-          'dark:bg-light-3'
+          'bg-dark-600',
+          'dark:bg-light-200'
         ]
       }
     },
@@ -239,14 +239,14 @@ export default tv({
       color: 'neutral',
       class: {
         notification: [
-          'border-light-4',
-          'text-dark-1',
-          'dark:border-dark-2',
-          'dark:text-light-3'
+          'border-light-300',
+          'text-dark-600',
+          'dark:border-dark-700',
+          'dark:text-light-200'
         ],
         progressbar: [
-          'bg-light-4',
-          'dark:bg-dark-2'
+          'bg-light-300',
+          'dark:bg-dark-700'
         ]
       }
     },
@@ -321,14 +321,14 @@ export default tv({
       color: 'neutral',
       class: {
         notification: [
-          'bg-light-4/[.20]',
-          'text-dark-1',
-          'dark:bg-dark-2/[.20]',
-          'dark:text-light-3'
+          'bg-light-300/[.20]',
+          'text-dark-600',
+          'dark:bg-dark-700/[.20]',
+          'dark:text-light-200'
         ],
         progressbar: [
-          'bg-light-4/[.40]',
-          'dark:bg-dark-2/[.40]'
+          'bg-light-300/[.40]',
+          'dark:bg-dark-700/[.40]'
         ]
       }
     },
@@ -399,8 +399,8 @@ export default tv({
       color: 'neutral',
       class: {
         progressbar: [
-          'bg-light-4',
-          'dark:bg-dark-2'
+          'bg-light-300',
+          'dark:bg-dark-700'
         ]
       }
     },
@@ -456,16 +456,16 @@ export default tv({
       color: 'neutral',
       class: {
         notification: [
-          'from-light-3',
-          'to-light-5',
-          'text-dark-1',
-          'dark:from-dark-1',
-          'dark:to-dark-5',
-          'dark:text-light-3'
+          'from-light-200',
+          'to-light-400',
+          'text-dark-600',
+          'dark:from-dark-600',
+          'dark:to-dark-950',
+          'dark:text-light-200'
         ],
         progressbar: [
-          'bg-dark-1',
-          'dark:bg-light-3'
+          'bg-dark-600',
+          'dark:bg-light-200'
         ]
       }
     },

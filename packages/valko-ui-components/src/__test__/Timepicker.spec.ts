@@ -68,7 +68,7 @@ describe('Time component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-input__input').classes()).toContain('bg-light-3')
+        expect(wrapper.find('.vk-input__input').classes()).toContain('bg-light-200')
       })
 
       it('should be shape soft', () => {
@@ -102,7 +102,7 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-input__label').classes()).toContain('peer-focus:text-dark-3')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('peer-focus:text-dark-800')
       })
 
       it('should be color success when props.color is success', () => {

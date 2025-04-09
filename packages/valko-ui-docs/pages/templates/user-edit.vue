@@ -48,7 +48,7 @@ const user = ref({
 <\u002Fscript>
 
 <template>
-  <div class="max-w-screen-xl mx-auto bg-light-2 dark:bg-dark-3/[.8] rounded-lg mt-10">
+  <div class="max-w-screen-xl mx-auto bg-light-100 dark:bg-dark-800/[.8] rounded-lg mt-10">
     <vk-tabs
       :tabs
       grow
@@ -75,7 +75,7 @@ const user = ref({
           <div
             v-for="(value, permissionKey) in user.permissions"
             :key="permissionKey"
-            class="flex justify-between items-center p-4 shadow rounded-lg bg-light-1 dark:bg-dark-2"
+            class="flex justify-between items-center p-4 shadow rounded-lg bg-light-50 dark:bg-dark-700"
           >
             <h2 class="text-lg capitalize">
               {{ permissionKey }}
@@ -142,7 +142,7 @@ const user = ref({
 <template>
   <page-template>
     <template #example>
-      <div class="max-w-screen-xl mx-auto bg-light-2 dark:bg-dark-3/[.8] rounded-lg mt-10">
+      <div class="max-w-screen-xl mx-auto bg-light-100 dark:bg-dark-800/[.8] rounded-lg mt-10">
         <vk-tabs
           :tabs
           grow
@@ -169,7 +169,7 @@ const user = ref({
               <div
                 v-for="(value, permissionKey) in user.permissions"
                 :key="permissionKey"
-                class="flex justify-between items-center p-4 shadow rounded-lg bg-light-1 dark:bg-dark-2"
+                class="flex justify-between items-center p-4 shadow rounded-lg bg-light-50 dark:bg-dark-700"
               >
                 <h2 class="text-lg capitalize">
                   {{ permissionKey }}

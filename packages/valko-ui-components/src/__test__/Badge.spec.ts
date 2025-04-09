@@ -56,7 +56,7 @@ describe('Avatar component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-3').exists()).toBe(true)
+        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
       })
 
       it('should be color success when props.color is success', () => {

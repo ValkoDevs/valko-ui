@@ -148,7 +148,7 @@ const data: TableItem[] = [
 
     <div class="flex justify-center gap-12 py-4">
       <vk-card class="w-80">
-        <vk-card-header class="justify-center bg-neutral-700 text-light-3">
+        <vk-card-header class="justify-center bg-neutral-700 text-light-200">
           Basic
         </vk-card-header>
         <vk-card-body>
@@ -176,7 +176,7 @@ const data: TableItem[] = [
         class="scale-105 shadow-primary-600 shadow-md border-2 border-primary-600"
         size="lg"
       >
-        <vk-card-header class="justify-center bg-gradient-to-br from-primary-500 to-primary-700 text-light-3 gap-4">
+        <vk-card-header class="justify-center bg-gradient-to-br from-primary-500 to-primary-700 text-light-200 gap-4">
           Pro
         </vk-card-header>
         <vk-tag
@@ -209,7 +209,7 @@ const data: TableItem[] = [
       </vk-card>
 
       <vk-card class="w-80">
-        <vk-card-header class="justify-center bg-neutral-700 text-light-3">
+        <vk-card-header class="justify-center bg-neutral-700 text-light-200">
           Premium
         </vk-card-header>
         <vk-card-body>
@@ -291,7 +291,7 @@ const data: TableItem[] = [
 
         <div class="flex justify-center gap-12 py-4">
           <vk-card class="w-80">
-            <vk-card-header class="justify-center bg-neutral-700 text-light-3">
+            <vk-card-header class="justify-center bg-neutral-700 text-light-200">
               Basic
             </vk-card-header>
             <vk-card-body>
@@ -319,7 +319,7 @@ const data: TableItem[] = [
             class="scale-105 shadow-primary-600 shadow-md border-2 border-primary-600"
             size="lg"
           >
-            <vk-card-header class="justify-center bg-gradient-to-br from-primary-500 to-primary-700 text-light-3 gap-4">
+            <vk-card-header class="justify-center bg-gradient-to-br from-primary-500 to-primary-700 text-light-200 gap-4">
               Pro
             </vk-card-header>
             <vk-tag
@@ -352,7 +352,7 @@ const data: TableItem[] = [
           </vk-card>
 
           <vk-card class="w-80">
-            <vk-card-header class="justify-center bg-neutral-700 text-light-3">
+            <vk-card-header class="justify-center bg-neutral-700 text-light-200">
               Premium
             </vk-card-header>
             <vk-card-body>

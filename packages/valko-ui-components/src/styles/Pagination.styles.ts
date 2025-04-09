@@ -10,8 +10,8 @@ export default tv({
       'shadow-sm',
       'w-fit',
       'flex',
-      'shadow-light-4',
-      'dark:shadow-dark-5'
+      'shadow-light-300',
+      'dark:shadow-dark-950'
     ],
     button: [
       'vk-pagination__button',
@@ -30,16 +30,16 @@ export default tv({
     variant: {
       filled: {
         nav: [
-          'bg-light-3',
-          'dark:bg-dark-3'
+          'bg-light-200',
+          'dark:bg-dark-800'
         ]
       },
       outlined: {
         nav: [
           'p-1.5',
           'border-2',
-          'border-light-3',
-          'dark:border-dark-3'
+          'border-light-200',
+          'dark:border-dark-800'
         ]
       },
       ghost: {

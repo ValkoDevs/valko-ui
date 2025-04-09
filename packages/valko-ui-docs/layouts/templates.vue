@@ -50,7 +50,7 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
       shape="square"
       flat
       fixed
-      class="flex justify-between !bg-light-2 dark:!bg-dark-3"
+      class="flex justify-between !bg-light-100 dark:!bg-dark-800"
     >
       <vk-button
         variant="link"

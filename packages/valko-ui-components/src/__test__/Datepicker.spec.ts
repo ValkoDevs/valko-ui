@@ -86,7 +86,7 @@ describe('Datepicker component', () => {
       it('should be variant filled', () => {
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('bg-light-3')
+        expect(input.classes()).toContain('bg-light-200')
       })
 
       it('should be shape soft', async () => {
@@ -127,7 +127,7 @@ describe('Datepicker component', () => {
 
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('focus:border-light-5')
+        expect(input.classes()).toContain('focus:border-light-400')
       })
 
       it('should be color success when props.color is success', () => {
@@ -328,7 +328,7 @@ describe('Datepicker component', () => {
 
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('bg-light-3')
+        expect(input.classes()).toContain('bg-light-200')
       })
 
       it('should be outlined when props.variant is outlined', () => {

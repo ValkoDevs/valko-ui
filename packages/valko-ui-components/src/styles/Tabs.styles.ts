@@ -49,13 +49,13 @@ export default tv({
     ],
     cursor: [
       'shadow-lg',
-      'shadow-light-4',
+      'shadow-light-300',
       'absolute',
       'inset-0',
       'z-10',
       'transition-all',
       'duration-200',
-      'dark:shadow-dark-5'
+      'dark:shadow-dark-950'
     ],
     cursorGradient: [
       'absolute',
@@ -77,15 +77,15 @@ export default tv({
     variant: {
       filled: {
         list: [
-          'bg-light-3',
-          'dark:bg-dark-3'
+          'bg-light-200',
+          'dark:bg-dark-800'
         ]
       },
       outlined: {
         list: [
           'border-2',
-          'border-light-5',
-          'dark:border-dark-1'
+          'border-light-400',
+          'dark:border-dark-600'
         ]
       },
       ghost: {
@@ -101,8 +101,8 @@ export default tv({
       },
       gradient: {
         list: [
-          'bg-light-3',
-          'dark:bg-dark-3'
+          'bg-light-200',
+          'dark:bg-dark-800'
         ],
         cursor: [
           'bg-gradient-to-br'
@@ -242,14 +242,14 @@ export default tv({
       color: 'neutral',
       class: {
         cursor: [
-          'from-light-1',
-          'to-light-5',
-          'dark:from-dark-1',
-          'dark:to-dark-5'
+          'from-light-50',
+          'to-light-400',
+          'dark:from-dark-600',
+          'dark:to-dark-950'
         ],
         tab: [
-          'data-[headlessui-state=selected]:text-dark-1',
-          'dark:data-[headlessui-state=selected]:text-light-3'
+          'data-[headlessui-state=selected]:text-dark-600',
+          'dark:data-[headlessui-state=selected]:text-light-200'
         ]
       }
     },
@@ -312,8 +312,8 @@ export default tv({
       shape: 'line',
       class: {
         cursor: [
-          'border-light-4',
-          'dark:border-dark-2'
+          'border-light-300',
+          'dark:border-dark-700'
         ]
       }
     },
@@ -368,12 +368,12 @@ export default tv({
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-light-4',
-          'dark:bg-dark-2'
+          'bg-light-300',
+          'dark:bg-dark-700'
         ],
         tab: [
-          'data-[headlessui-state=selected]:text-dark-1',
-          'dark:data-[headlessui-state=selected]:text-light-3'
+          'data-[headlessui-state=selected]:text-dark-600',
+          'dark:data-[headlessui-state=selected]:text-light-200'
         ]
       }
     },
