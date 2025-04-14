@@ -75,7 +75,7 @@ onMounted(() => {
       shape="square"
       flat
       fixed
-      class="flex justify-between !bg-light-100 dark:!bg-dark-800"
+      class="flex justify-between !bg-surface-container !border-surface-dim"
     >
       <vk-button
         variant="link"
@@ -160,7 +160,7 @@ onMounted(() => {
           @item-click="onItemClick"
         />
       </vk-drawer>
-      <aside class="hidden lg:block lg:w-52 bg-light-100 dark:bg-dark-800 shrink-0 overflow-y-auto border-r border-light-300 dark:border-dark-700 max-h-[calc(100vh_-_3.5rem)] h-screen sticky top-14">
+      <aside class="hidden lg:block lg:w-52 bg-surface-container shrink-0 overflow-y-auto border-r border-surface-dim max-h-[calc(100vh_-_3.5rem)] h-screen sticky top-14">
         <vk-menu
           :items="menuItems"
           :active="activeItem"
@@ -172,11 +172,11 @@ onMounted(() => {
           @item-click="onItemClick"
         />
       </aside>
-      <div class="flex flex-col grow justify-between items-center max-w-screen-xl w-full px-4 mx-auto">
-        <main class="w-full grow">
+      <div class="flex flex-col grow justify-between items-center w-full">
+        <main class="w-full max-w-screen-xl mx-auto grow">
           <NuxtPage />
         </main>
-        <footer class="w-full px-2 py-1 text-sm bg-light-200 dark:bg-dark-950">
+        <footer class="w-full px-2 py-1 text-sm bg-surface-container-lowest">
           ValkoUI all rights reserved
         </footer>
       </div>

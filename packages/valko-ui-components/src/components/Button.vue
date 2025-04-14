@@ -39,31 +39,33 @@ const onClick = () => {
     :block="block"
     @click="onClick"
   >
-    <div
-      :class="classes.spinnerContainer"
-    >
-      <transition
-        enter-active-class="transition ease-out duration-150"
-        enter-from-class="opacity-0"
-        enter-to-class="opacity-100"
-        leave-active-class="transition ease-out duration-150"
-        leave-from-class="opacity-100"
-        leave-to-class="opacity-0"
+    <div :class="classes.stateLayer">
+      <div
+        :class="classes.spinnerContainer"
       >
-        <vk-spinner
-          v-if="loading"
-          condensed
-          :data-variant="props.variant"
-          :data-color="props.color"
-          :class-name="props.color === 'neutral'
-            ? `${classes.loader}`
-            : (props.variant === 'filled' || props.variant === 'gradient')
-              ? 'text-white'
-              : `text-${props.color}-500`"
-          :size="size"
-        />
-      </transition>
+        <transition
+          enter-active-class="transition ease-out duration-150"
+          enter-from-class="opacity-0"
+          enter-to-class="opacity-100"
+          leave-active-class="transition ease-out duration-150"
+          leave-from-class="opacity-100"
+          leave-to-class="opacity-0"
+        >
+          <vk-spinner
+            v-if="loading"
+            condensed
+            :data-variant="props.variant"
+            :data-color="props.color"
+            :class-name="props.color === 'neutral'
+              ? `${classes.loader}`
+              : (props.variant === 'filled' || props.variant === 'gradient')
+                ? 'text-white'
+                : `text-${props.color}-500`"
+            :size="size"
+          />
+        </transition>
+      </div>
+      <slot />
     </div>
-    <slot />
   </button>
 </template>
