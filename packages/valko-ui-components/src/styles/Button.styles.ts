@@ -471,8 +471,8 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'from-primary',
-          'to-primary-container',
+          'from-primary-gradient-start',
+          'to-primary-gradient-end',
           'text-on-primary'
         ]
       }
@@ -483,8 +483,8 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'from-secondary',
-          'to-secondary-container',
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end',
           'text-on-secondary'
         ]
       }
@@ -495,8 +495,8 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'from-positive',
-          'to-positive-container',
+          'from-positive-gradient-start',
+          'to-positive-gradient-end',
           'text-on-positive'
         ]
       }
@@ -507,8 +507,8 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'from-accent',
-          'to-accent-container',
+          'from-accent-gradient-start',
+          'to-accent-gradient-end',
           'text-on-accent'
         ]
       }
@@ -519,9 +519,9 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'from-warning',
-          'to-warning-container',
-          'text-on-waring'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end',
+          'text-on-warning'
         ]
       }
     },
@@ -531,8 +531,8 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'from-negative',
-          'to-negative-container',
+          'from-negative-gradient-start',
+          'to-negative-gradient-end',
           'text-on-negative'
         ]
       }
@@ -552,8 +552,8 @@ export default tv({
       disabled: true,
       class: {
         button: [
-          'from-disabled',
-          'to-disabled-container'
+          'from-disabled-gradient-start',
+          'to-disabled-gradient-end'
         ]
       }
     },

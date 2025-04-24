@@ -26,36 +26,51 @@
   --color-on-primary: oklch(100% 0 0);
   --color-primary-container: oklch(81.1% 0.111 293.571);
   --color-on-primary-container: oklch(54.1% 0.281 293.009);
+  --color-primary-gradient-start: oklch(58% 0.29 293.009);
+  --color-primary-gradient-end: oklch(30% 0.26 293.009);
 
   --color-secondary: oklch(44.6% 0.043 257.281);
   --color-on-secondary: oklch(100% 0 0);
   --color-secondary-container: oklch(86.9% 0.022 252.894);
   --color-on-secondary-container: oklch(44.6% 0.043 257.281);
+  --color-secondary-gradient-start: oklch(48% 0.05 257.281);
+  --color-secondary-gradient-end: oklch(20% 0.03 257.281);
 
   --color-accent: oklch(59.1% 0.293 322.896);
   --color-on-accent: oklch(100% 0 0);
   --color-accent-container: oklch(83.3% 0.145 321.434);
   --color-on-accent-container: oklch(59.1% 0.293 322.896);
+  --color-accent-gradient-start: oklch(63% 0.30 322.896);
+  --color-accent-gradient-end: oklch(35% 0.26 322.896);
 
   --color-positive: oklch(59.6% 0.145 163.225);
   --color-on-positive: oklch(100% 0 0);
   --color-positive-container: oklch(90.5% 0.093 164.15);
   --color-on-positive-container: oklch(59.6% 0.145 163.225);
+  --color-positive-gradient-start: oklch(63% 0.15 163.225);
+  --color-positive-gradient-end: oklch(35% 0.13 163.225);
 
   --color-negative: oklch(58.6% 0.253 17.585);
   --color-on-negative: oklch(100% 0 0);
   --color-negative-container: oklch(81% 0.117 11.638);
   --color-on-negative-container: oklch(58.6% 0.253 17.585);
+  --color-negative-gradient-start: oklch(62% 0.26 17.585);
+  --color-negative-gradient-end: oklch(34% 0.24 17.585);
 
   --color-warning: oklch(66.6% 0.179 58.318);
   --color-on-warning: oklch(100% 0 0);
   --color-warning-container: oklch(92.4% 0.12 95.746);
   --color-on-warning-container: oklch(66.6% 0.179 58.318);
+  --color-warning-gradient-start: oklch(70% 0.18 58.318);
+  --color-warning-gradient-end: oklch(42% 0.16 58.318);
 
   --color-disabled: oklch(44.6% 0.03 256.802);
   --color-on-disabled: oklch(98.5% 0.002 247.839);
   --color-disabled-container: oklch(21% 0.034 264.665);
   --color-on-disabled-container: oklch(44.6% 0.03 256.802);
+  --color-disabled-gradient-start: oklch(44.6% 0.03 256.802);
+  --color-disabled-gradient-end: oklch(16.6% 0.034 264.665);
+
 
   /* Animations */
   --animate-progress: progress 1.5s infinite linear;
@@ -97,36 +112,52 @@ html.dark {
   --color-on-primary: oklch(0 0 0);
   --color-primary-container: oklch(38% 0.189 293.745);
   --color-on-primary-container: oklch(81.1% 0.111 293.571);
+  --color-primary-gradient-start: oklch(75% 0.19 293.541);
+  --color-primary-gradient-end: oklch(47% 0.17 293.541);
 
   --color-secondary: oklch(70.4% 0.04 256.788);
   --color-on-secondary: oklch(0 0 0);
   --color-secondary-container: oklch(20.8% 0.042 265.755);
   --color-on-secondary-container: oklch(86.9% 0.022 252.894);
+  --color-secondary-gradient-start: oklch(74% 0.045 256.788);
+  --color-secondary-gradient-end: oklch(46% 0.035 256.788);
+
 
   --color-accent: oklch(59.1% 0.293 322.896);
   --color-on-accent: oklch(0 0 0);
   --color-accent-container: oklch(45.2% 0.211 324.591);
   --color-on-accent-container: oklch(90.3% 0.076 319.62);
+  --color-accent-gradient-start: oklch(63% 0.31 322.896);
+  --color-accent-gradient-end: oklch(45% 0.27 322.896);
+
 
   --color-positive: oklch(84.5% 0.143 164.978);
   --color-on-positive: oklch(0 0 0);
   --color-positive-container: oklch(26.2% 0.051 172.552);
   --color-on-positive-container: oklch(90.5% 0.093 164.15);
+  --color-positive-gradient-start: oklch(88% 0.15 164.978);
+  --color-positive-gradient-end: oklch(60% 0.13 164.978);
 
   --color-negative: oklch(81% 0.117 11.638);
   --color-on-negative: oklch(0 0 0);
   --color-negative-container: oklch(41% 0.159 10.272);
   --color-on-negative-container: oklch(89.2% 0.058 10.001);
+  --color-negative-gradient-start: oklch(85% 0.13 11.638);
+  --color-negative-gradient-end: oklch(58% 0.11 11.638);
 
   --color-warning: oklch(92.4% 0.12 95.746);
   --color-on-warning: oklch(0 0 0);
   --color-warning-container: oklch(41.4% 0.112 45.904);
   --color-on-warning-container: oklch(92.4% 0.12 95.746);
+  --color-warning-gradient-start: oklch(95% 0.13 95.746);
+  --color-warning-gradient-end: oklch(68% 0.11 95.746);
 
   --color-disabled: oklch(44.6% 0.03 256.802);
   --color-on-disabled: oklch(98.5% 0.002 247.839);
   --color-disabled-container: oklch(21% 0.034 264.665);
   --color-on-disabled-container: oklch(44.6% 0.03 256.802);
+  --color-disabled-gradient-start: oklch(44.6% 0.03 256.802);
+  --color-disabled-gradient-end: oklch(16.6% 0.034 264.665);
 }
 
 @utility toastify {

@@ -136,8 +136,8 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:bg-primary-500',
-          'data-[active=true]:dark:bg-primary-500'
+          'data-[active=true]:bg-primary',
+          'data-[active=true]:dark:bg-primary'
         ]
       }
     },
@@ -146,10 +146,8 @@ export default tv({
       color: 'neutral',
       class: {
         content: [
-          'data-[active=true]:bg-light-200',
-          'data-[active=true]:text-dark-800',
-          'data-[active=true]:dark:bg-dark-800',
-          'data-[active=true]:dark:text-light-50'
+          'data-[active=true]:bg-secondary-container',
+          'data-[active=true]:text-on-secondary-container'
         ]
       }
     },
@@ -158,8 +156,8 @@ export default tv({
       color: 'success',
       class: {
         content: [
-          'data-[active=true]:bg-success-500',
-          'data-[active=true]:dark:bg-success-500'
+          'data-[active=true]:bg-positive',
+          'data-[active=true]:dark:bg-positive'
         ]
       }
     },
@@ -168,8 +166,8 @@ export default tv({
       color: 'error',
       class: {
         content: [
-          'data-[active=true]:bg-error-500',
-          'data-[active=true]:dark:bg-error-500'
+          'data-[active=true]:bg-negative',
+          'data-[active=true]:dark:bg-negative'
         ]
       }
     },
@@ -178,8 +176,8 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:bg-warning-500',
-          'data-[active=true]:dark:bg-warning-500'
+          'data-[active=true]:bg-warning',
+          'data-[active=true]:dark:bg-warning'
         ]
       }
     },
@@ -188,8 +186,8 @@ export default tv({
       color: 'info',
       class: {
         content: [
-          'data-[active=true]:bg-info-500',
-          'data-[active=true]:dark:bg-info-500'
+          'data-[active=true]:bg-accent',
+          'data-[active=true]:dark:bg-accent'
         ]
       }
     },
@@ -199,8 +197,8 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:text-primary-500',
-          'data-[active=true]:border-primary-500'
+          'data-[active=true]:text-primary',
+          'data-[active=true]:border-primary'
         ]
       }
     },
@@ -209,10 +207,8 @@ export default tv({
       color: 'neutral',
       class: {
         content: [
-          'data-[active=true]:text-dark-600',
-          'data-[active=true]:border-light-300',
-          'data-[active=true]:dark:text-light-200',
-          'data-[active=true]:dark:border-dark-700'
+          'data-[active=true]:text-on-secondary-container',
+          'data-[active=true]:border-secondary-container'
         ]
       }
     },
@@ -221,8 +217,8 @@ export default tv({
       color: 'success',
       class: {
         content: [
-          'data-[active=true]:text-success-500',
-          'data-[active=true]:border-success-500'
+          'data-[active=true]:text-positive',
+          'data-[active=true]:border-positive'
         ]
       }
     },
@@ -231,8 +227,8 @@ export default tv({
       color: 'error',
       class: {
         content: [
-          'data-[active=true]:text-error-500',
-          'data-[active=true]:border-error-500'
+          'data-[active=true]:text-negative',
+          'data-[active=true]:border-negative'
         ]
       }
     },
@@ -241,8 +237,8 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:text-warning-500',
-          'data-[active=true]:border-warning-500'
+          'data-[active=true]:text-warning',
+          'data-[active=true]:border-warning'
         ]
       }
     },
@@ -251,8 +247,8 @@ export default tv({
       color: 'info',
       class: {
         content: [
-          'data-[active=true]:text-info-500',
-          'data-[active=true]:border-info-500'
+          'data-[active=true]:text-accent',
+          'data-[active=true]:border-accent'
         ]
       }
     },
@@ -262,9 +258,8 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:text-primary-500',
-          'data-[active=true]:bg-primary-500/[.15]',
-          'data-[active=true]:dark:bg-primary-500/[.15]'
+          'data-[active=true]:text-on-primary-container',
+          'data-[active=true]:bg-primary-container'
         ]
       }
     },
@@ -273,10 +268,8 @@ export default tv({
       color: 'neutral',
       class: {
         content: [
-          'data-[active=true]:text-dark-600',
-          'data-[active=true]:bg-light-300/[.2]',
-          'data-[active=true]:dark:text-light-200',
-          'data-[active=true]:dark:bg-dark-700/[.2]'
+          'data-[active=true]:text-on-secondary-container',
+          'data-[active=true]:bg-secondary-container/[.2]'
         ]
       }
     },
@@ -285,9 +278,8 @@ export default tv({
       color: 'success',
       class: {
         content: [
-          'data-[active=true]:text-success-500',
-          'data-[active=true]:bg-success-500/[.15]',
-          'data-[active=true]:dark:bg-success-500/[.15]'
+          'data-[active=true]:text-on-positive-container',
+          'data-[active=true]:bg-positive-container'
         ]
       }
     },
@@ -296,9 +288,8 @@ export default tv({
       color: 'error',
       class: {
         content: [
-          'data-[active=true]:text-error-500',
-          'data-[active=true]:bg-error-500/[.15]',
-          'data-[active=true]:dark:bg-error-500/[.15]'
+          'data-[active=true]:text-on-negative-container',
+          'data-[active=true]:bg-negative-container'
         ]
       }
     },
@@ -307,9 +298,8 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:text-warning-500',
-          'data-[active=true]:bg-warning-500/[.15]',
-          'data-[active=true]:dark:bg-warning-500/[.15]'
+          'data-[active=true]:text-on-warning-container',
+          'data-[active=true]:bg-warning-container'
         ]
       }
     },
@@ -318,9 +308,8 @@ export default tv({
       color: 'info',
       class: {
         content: [
-          'data-[active=true]:text-info-500',
-          'data-[active=true]:bg-info-500/[.15]',
-          'data-[active=true]:dark:bg-info-500/[.15]'
+          'data-[active=true]:text-on-accent-container',
+          'data-[active=true]:bg-accent-container'
         ]
       }
     },
@@ -330,7 +319,7 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:text-primary-500'
+          'data-[active=true]:text-primary'
         ]
       }
     },
@@ -339,8 +328,7 @@ export default tv({
       color: 'neutral',
       class: {
         content: [
-          'data-[active=true]:text-dark-950',
-          'data-[active=true]:dark:text-light-400'
+          'data-[active=true]:text-on-secondary'
         ]
       }
     },
@@ -349,7 +337,7 @@ export default tv({
       color: 'success',
       class: {
         content: [
-          'data-[active=true]:text-success-500'
+          'data-[active=true]:text-positive'
         ]
       }
     },
@@ -358,7 +346,7 @@ export default tv({
       color: 'error',
       class: {
         content: [
-          'data-[active=true]:text-error-500'
+          'data-[active=true]:text-negative'
         ]
       }
     },
@@ -367,7 +355,7 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:text-warning-500'
+          'data-[active=true]:text-warning'
         ]
       }
     },
@@ -376,7 +364,7 @@ export default tv({
       color: 'info',
       class: {
         content: [
-          'data-[active=true]:text-info-500'
+          'data-[active=true]:text-accent'
         ]
       }
     },
@@ -386,7 +374,7 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:border-primary-500'
+          'data-[active=true]:border-primary'
         ]
       }
     },
@@ -395,8 +383,7 @@ export default tv({
       color: 'neutral',
       class: {
         content: [
-          'data-[active=true]:border-light-300',
-          'data-[active=true]:dark:border-dark-700'
+          'data-[active=true]:border-secondary'
         ]
       }
     },
@@ -405,7 +392,7 @@ export default tv({
       color: 'success',
       class: {
         content: [
-          'data-[active=true]:border-success-500'
+          'data-[active=true]:border-positive'
         ]
       }
     },
@@ -414,7 +401,7 @@ export default tv({
       color: 'error',
       class: {
         content: [
-          'data-[active=true]:border-error-500'
+          'data-[active=true]:border-negative'
         ]
       }
     },
@@ -423,7 +410,7 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:border-warning-500'
+          'data-[active=true]:border-warning'
         ]
       }
     },
@@ -432,7 +419,7 @@ export default tv({
       color: 'info',
       class: {
         content: [
-          'data-[active=true]:border-info-500'
+          'data-[active=true]:border-accent'
         ]
       }
     },
@@ -442,8 +429,8 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:from-primary-500',
-          'data-[active=true]:to-primary-900'
+          'data-[active=true]:from-primary-gradient-start',
+          'data-[active=true]:to-primary-gradient-end'
         ]
       }
     },
@@ -452,12 +439,8 @@ export default tv({
       color: 'neutral',
       class: {
         content: [
-          'data-[active=true]:from-light-200',
-          'data-[active=true]:to-light-400',
-          'data-[active=true]:text-dark-800',
-          'data-[active=true]:dark:from-dark-600',
-          'data-[active=true]:dark:to-dark-800',
-          'data-[active=true]:dark:text-light-50'
+          'data-[active=true]:from-secondary-gradient-start',
+          'data-[active=true]:to-secondary-gradient-end'
         ]
       }
     },
@@ -466,8 +449,8 @@ export default tv({
       color: 'success',
       class: {
         content: [
-          'data-[active=true]:from-success-500',
-          'data-[active=true]:to-success-900'
+          'data-[active=true]:from-positive-gradient-start',
+          'data-[active=true]:to-positive-gradient-end'
         ]
       }
     },
@@ -476,8 +459,8 @@ export default tv({
       color: 'info',
       class: {
         content: [
-          'data-[active=true]:from-info-500',
-          'data-[active=true]:to-info-900'
+          'data-[active=true]:from-accent-gradient-start',
+          'data-[active=true]:to-accent-gradient-end'
         ]
       }
     },
@@ -486,8 +469,8 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:from-warning-500',
-          'data-[active=true]:to-warning-900'
+          'data-[active=true]:from-warning-gradient-start',
+          'data-[active=true]:to-warning-gradient-end'
         ]
       }
     },
@@ -496,8 +479,8 @@ export default tv({
       color: 'error',
       class: {
         content: [
-          'data-[active=true]:from-error-500',
-          'data-[active=true]:to-error-900'
+          'data-[active=true]:from-negative-gradient-start',
+          'data-[active=true]:to-negative-gradient-end'
         ]
       }
     },
