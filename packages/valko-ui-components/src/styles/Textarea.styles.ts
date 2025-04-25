@@ -134,7 +134,7 @@ export default tv({
           'peer-focus:text-primary-500'
         ]
       },
-      neutral: {
+      secondary: {
         label: [
           'text-dark-600',
           'peer-focus:text-dark-800',
@@ -158,84 +158,84 @@ export default tv({
           'dark:peer-focus:text-light-50'
         ]
       },
-      success: {
+      positive: {
         label: [
-          'text-success-500',
-          'focus:text-success-950',
-          'dark:text-success-500'
+          'text-positive',
+          'focus:text-positive',
+          'dark:text-positive'
         ],
         helper: [
-          'text-success-500',
-          'dark:text-success-500'
+          'text-positive',
+          'dark:text-positive'
         ],
         counter: [
-          'text-success-500',
-          'dark:text-success-500'
+          'text-positive',
+          'dark:text-positive'
         ],
         icons: [
-          'text-success-500',
-          'focus:text-success-950',
-          'dark:text-success-500'
+          'text-positive',
+          'focus:text-positive',
+          'dark:text-positive'
         ]
       },
-      info: {
+      accent: {
         label: [
-          'text-info-500',
-          'focus:text-info-950',
-          'dark:text-info-500'
+          'text-accent',
+          'focus:text-accent',
+          'dark:text-accent'
         ],
         helper: [
-          'text-info-500',
-          'dark:text-info-500'
+          'text-accent',
+          'dark:text-accent'
         ],
         counter: [
-          'text-info-500',
-          'dark:text-info-500'
+          'text-accent',
+          'dark:text-accent'
         ],
         icons: [
-          'text-info-500',
-          'focus:text-info-950',
-          'dark:text-info-500'
+          'text-accent',
+          'focus:text-accent',
+          'dark:text-accent'
         ]
       },
       warning: {
         label: [
-          'text-warning-500',
+          'text-warning',
           'focus:text-warning-950',
-          'dark:text-warning-500'
+          'dark:text-warning'
         ],
         helper: [
-          'text-warning-500',
-          'dark:text-warning-500'
+          'text-warning',
+          'dark:text-warning'
         ],
         counter: [
-          'text-warning-500',
-          'dark:text-warning-500'
+          'text-warning',
+          'dark:text-warning'
         ],
         icons: [
-          'text-warning-500',
+          'text-warning',
           'focus:text-warning-950',
-          'dark:text-warning-500'
+          'dark:text-warning'
         ]
       },
-      error: {
+      negative: {
         label: [
-          'text-error-500',
-          'focus:text-error-950',
-          'dark:text-error-500'
+          'text-negative',
+          'focus:text-negative',
+          'dark:text-negative'
         ],
         helper: [
-          'text-error-500',
-          'dark:text-error-500'
+          'text-negative',
+          'dark:text-negative'
         ],
         counter: [
-          'text-error-500',
-          'dark:text-error-500'
+          'text-negative',
+          'dark:text-negative'
         ],
         icons: [
-          'text-error-500',
-          'focus:text-error-950',
-          'dark:text-error-500'
+          'text-negative',
+          'focus:text-negative',
+          'dark:text-negative'
         ]
       }
     },
@@ -380,7 +380,7 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         textarea: [
@@ -395,29 +395,29 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         textarea: [
-          'border-success-300',
-          'hover:border-success-400',
-          'focus:border-success-500',
-          'dark:border-success-500',
-          'dark:focus:border-success-700'
+          'border-positive',
+          'hover:border-positive',
+          'focus:border-positive',
+          'dark:border-positive',
+          'dark:focus:border-positive'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         textarea: [
-          'border-info-300',
-          'hover:border-info-400',
-          'focus:border-info-500',
-          'dark:border-info-500',
-          'dark:focus:border-info-700'
+          'border-accent',
+          'hover:border-accent',
+          'focus:border-accent',
+          'dark:border-accent',
+          'dark:focus:border-accent'
         ]
       }
     },
@@ -427,25 +427,25 @@ export default tv({
       disabled: false,
       class: {
         textarea: [
-          'border-warning-300',
-          'hover:border-warning-400',
-          'focus:border-warning-500',
-          'dark:border-warning-500',
-          'dark:focus:border-warning-700'
+          'border-warning',
+          'hover:border-warning',
+          'focus:border-warning',
+          'dark:border-warning',
+          'dark:focus:border-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         textarea: [
-          'border-error-300',
-          'hover:border-error-400',
-          'focus:border-error-500',
-          'dark:border-error-500',
-          'dark:focus:border-error-700'
+          'border-negative',
+          'hover:border-negative',
+          'focus:border-negative',
+          'dark:border-negative',
+          'dark:focus:border-negative'
         ]
       }
     },
@@ -465,12 +465,12 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         textarea: [
-          'hover:border-neutral-300',
-          'focus:border-neutral-400',
+          'hover:border-secondary',
+          'focus:border-secondary',
           'dark:border-light-50',
           'dark:hover:border-light-200',
           'dark:focus:border-light-400'
@@ -479,27 +479,27 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         textarea: [
-          'border-success-400',
-          'focus:border-success-500',
-          'dark:border-success-400',
-          'dark:focus:border-success-500'
+          'border-positive',
+          'focus:border-positive',
+          'dark:border-positive',
+          'dark:focus:border-positive'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         textarea: [
-          'border-info-400',
-          'focus:border-info-500',
-          'dark:border-info-400',
-          'dark:focus:border-info-500'
+          'border-accent',
+          'focus:border-accent',
+          'dark:border-accent',
+          'dark:focus:border-accent'
         ]
       }
     },
@@ -509,23 +509,23 @@ export default tv({
       disabled: false,
       class: {
         textarea: [
-          'border-warning-400',
-          'focus:border-warning-500',
-          'dark:border-warning-400',
-          'dark:focus:border-warning-500'
+          'border-warning',
+          'focus:border-warning',
+          'dark:border-warning',
+          'dark:focus:border-warning'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         textarea: [
-          'border-error-400',
-          'focus:border-error-500',
-          'dark:border-error-400',
-          'dark:focus:border-error-500'
+          'border-negative',
+          'focus:border-negative',
+          'dark:border-negative',
+          'dark:focus:border-negative'
         ]
       }
     },
@@ -542,33 +542,33 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         textarea: [
-          'focus:border-neutral-500'
+          'focus:border-secondary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         textarea: [
-          'border-success-500',
-          'focus:border-success-500'
+          'border-positive',
+          'focus:border-positive'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         textarea: [
-          'border-info-600',
-          'focus:border-info-600'
+          'border-accent',
+          'focus:border-accent'
         ]
       }
     },
@@ -578,19 +578,19 @@ export default tv({
       disabled: false,
       class: {
         textarea: [
-          'border-warning-600',
-          'focus:border-warning-600'
+          'border-warning',
+          'focus:border-warning'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         textarea: [
-          'border-error-600',
-          'focus:border-error-600'
+          'border-negative',
+          'focus:border-negative'
         ]
       }
     },

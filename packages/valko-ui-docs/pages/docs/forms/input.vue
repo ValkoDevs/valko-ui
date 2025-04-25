@@ -37,7 +37,7 @@ const apiData: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Input.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -228,7 +228,7 @@ const iconSnippet = `<template>
 <template>
   <doc-section
     title="Input"
-    description="Area where the user can enter text or other data. Inputs allow users to provide information such as text, numbers, or selections, and are commonly used in forms and search fields."
+    description="Area where the user can enter text or other data. Inputs allow users to provide accent such as text, numbers, or selections, and are commonly used in forms and search fields."
   >
     <template #playground-view>
       <vk-input
@@ -246,8 +246,8 @@ const iconSnippet = `<template>
         :max="form.max"
         :step="form.step"
         :clearable="form.clearable"
-        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'neutral' })"
-        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'neutral' })"
+        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'secondary' })"
+        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'secondary' })"
       >
         <template
           v-if="iconsInForm.left"

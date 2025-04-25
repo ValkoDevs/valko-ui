@@ -77,11 +77,11 @@ export default tv({
     },
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     },
     size: {
       xs: {

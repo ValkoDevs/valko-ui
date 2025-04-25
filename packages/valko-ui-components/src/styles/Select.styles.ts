@@ -65,7 +65,9 @@ export default tv({
         item: [
           //filled
           'data-[variant=filled]:hover:bg-primary',
+          'data-[variant=filled]:hover:text-on-primary',
           'data-[variant=filled]:data-[selected=true]:bg-primary',
+          'data-[variant=filled]:data-[selected=true]:text-on-primary',
           //outlined
           'data-[variant=outlined]:hover:border-primary',
           'data-[variant=outlined]:hover:text-primary',
@@ -78,7 +80,7 @@ export default tv({
           'data-[variant=ghost]:data-[selected=true]:bg-primary'
         ]
       },
-      neutral: {
+      secondary: {
         item: [
           //filled
           'data-[variant=filled]:data-[selected=true]:bg-light',
@@ -97,7 +99,7 @@ export default tv({
           'data-[variant=ghost]:data-[selected=true]:bg-light-300/[.4]'
         ]
       },
-      success: {
+      positive: {
         item: [
           //filled
           'data-[variant=filled]:hover:bg-positive',
@@ -114,7 +116,7 @@ export default tv({
           'data-[variant=ghost]:data-[selected=true]:bg-positive'
         ]
       },
-      info: {
+      accent: {
         item: [
           //filled
           'data-[variant=filled]:hover:bg-accent',
@@ -148,7 +150,7 @@ export default tv({
           'data-[variant=ghost]:data-[selected=true]:bg-warning'
         ]
       },
-      error: {
+      negative: {
         item: [
           //filled
           'data-[variant=filled]:hover:bg-negative',

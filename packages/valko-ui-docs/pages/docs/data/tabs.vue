@@ -42,7 +42,7 @@ const tabsProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Tabs.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -82,7 +82,7 @@ const tabsProps: TableItem[] = [
     prop: 'grow',
     required: false,
     description: 'Allow the Tabs to grow to fill any available space',
-    values: 'primary, secondary, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {

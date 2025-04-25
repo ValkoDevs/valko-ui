@@ -12,7 +12,7 @@ const route = useRoute()
           <nuxt-link to="/">
             <vk-button
               variant="link"
-              :color="route.fullPath === '/' ? 'primary' : 'neutral'"
+              :color="route.fullPath === '/' ? 'primary' : 'secondary'"
               size="sm"
             >
               Home
@@ -23,7 +23,7 @@ const route = useRoute()
           <nuxt-link to="/docs">
             <vk-button
               variant="link"
-              :color="route.fullPath.startsWith('/docs') ? 'primary' : 'neutral'"
+              :color="route.fullPath.startsWith('/docs') ? 'primary' : 'secondary'"
               size="sm"
             >
               Documentation
@@ -34,7 +34,7 @@ const route = useRoute()
           <nuxt-link to="/templates">
             <vk-button
               variant="link"
-              :color="route.fullPath.startsWith('/templates') ? 'primary' : 'neutral'"
+              :color="route.fullPath.startsWith('/templates') ? 'primary' : 'secondary'"
               size="sm"
             >
               Templates
@@ -52,7 +52,7 @@ const route = useRoute()
       <vk-button
         variant="link"
         shape="rounded"
-        color="neutral"
+        color="secondary"
         condensed
         size="lg"
         class="size-10"

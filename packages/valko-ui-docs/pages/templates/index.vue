@@ -44,7 +44,7 @@ const navigate = (url: string) => navigateTo(url)
     </p>
 
     <vk-divider
-      color="neutral"
+      color="secondary"
       size="xs"
       class="mb-16 mt-8"
     />
@@ -59,7 +59,7 @@ const navigate = (url: string) => navigateTo(url)
       </h2>
 
       <vk-divider
-        color="neutral"
+        color="secondary"
         size="xs"
       />
 

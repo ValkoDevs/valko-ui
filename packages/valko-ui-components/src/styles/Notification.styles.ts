@@ -80,11 +80,11 @@ export default tv({
     },
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     },
     size: {
       xs: {
@@ -170,7 +170,7 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         notification: [
           'bg-light-300',
@@ -186,19 +186,19 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       class: {
         notification: [
-          'bg-success-500'
+          'bg-positive'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       class: {
         notification: [
-          'bg-info-500'
+          'bg-accent'
         ]
       }
     },
@@ -207,16 +207,16 @@ export default tv({
       color: 'warning',
       class: {
         notification: [
-          'bg-warning-500'
+          'bg-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       class: {
         notification: [
-          'bg-error-500'
+          'bg-negative'
         ]
       }
     },
@@ -236,7 +236,7 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         notification: [
           'border-light-300',
@@ -252,27 +252,27 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       class: {
         notification: [
-          'border-success-500',
-          'text-success-500'
+          'border-positive',
+          'text-positive'
         ],
         progressbar: [
-          'bg-success-500'
+          'bg-positive'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       class: {
         notification: [
-          'border-info-500',
-          'text-info-500'
+          'border-accent',
+          'text-accent'
         ],
         progressbar: [
-          'bg-info-500'
+          'bg-accent'
         ]
       }
     },
@@ -281,24 +281,24 @@ export default tv({
       color: 'warning',
       class: {
         notification: [
-          'border-warning-500',
-          'text-warning-500'
+          'border-warning',
+          'text-warning'
         ],
         progressbar: [
-          'bg-warning-500'
+          'bg-warning'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       class: {
         notification: [
-          'border-error-500',
-          'text-error-500'
+          'border-negative',
+          'text-negative'
         ],
         progressbar: [
-          'bg-error-500'
+          'bg-negative'
         ]
       }
     },
@@ -318,7 +318,7 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         notification: [
           'bg-light-300/[.20]',
@@ -334,27 +334,27 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       class: {
         notification: [
-          'bg-success-500/[.20]',
-          'text-success-500'
+          'bg-positive',
+          'text-positive'
         ],
         progressbar: [
-          'bg-success-500/[.40]'
+          'bg-positive'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       class: {
         notification: [
-          'bg-info-500/[.20]',
-          'text-info-500'
+          'bg-accent',
+          'text-accent'
         ],
         progressbar: [
-          'bg-info-500/[.40]'
+          'bg-accent'
         ]
       }
     },
@@ -363,24 +363,24 @@ export default tv({
       color: 'warning',
       class: {
         notification: [
-          'bg-warning-500/[.20]',
-          'text-warning-500'
+          'bg-warning/[.20]',
+          'text-warning'
         ],
         progressbar: [
-          'bg-warning-500/[.40]'
+          'bg-warning/[.40]'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       class: {
         notification: [
-          'bg-error-500/[.20]',
-          'text-error-500'
+          'bg-negative',
+          'text-negative'
         ],
         progressbar: [
-          'bg-error-500/[.40]'
+          'bg-negative'
         ]
       }
     },
@@ -396,7 +396,7 @@ export default tv({
     },
     {
       variant: 'line',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         progressbar: [
           'bg-light-300',
@@ -406,19 +406,19 @@ export default tv({
     },
     {
       variant: 'line',
-      color: 'success',
+      color: 'positive',
       class: {
         progressbar: [
-          'bg-success-500'
+          'bg-positive'
         ]
       }
     },
     {
       variant: 'line',
-      color: 'info',
+      color: 'accent',
       class: {
         progressbar: [
-          'bg-info-500'
+          'bg-accent'
         ]
       }
     },
@@ -427,16 +427,16 @@ export default tv({
       color: 'warning',
       class: {
         progressbar: [
-          'bg-warning-500'
+          'bg-warning'
         ]
       }
     },
     {
       variant: 'line',
-      color: 'error',
+      color: 'negative',
       class: {
         progressbar: [
-          'bg-error-500'
+          'bg-negative'
         ]
       }
     },
@@ -453,7 +453,7 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         notification: [
           'from-light-200',
@@ -471,21 +471,21 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       class: {
         notification: [
-          'from-success-500',
-          'to-success-900'
+          'from-positive',
+          'to-positive'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       class: {
         notification: [
-          'from-info-500',
-          'to-info-900'
+          'from-accent',
+          'to-accent'
         ]
       }
     },
@@ -494,18 +494,18 @@ export default tv({
       color: 'warning',
       class: {
         notification: [
-          'from-warning-500',
-          'to-warning-900'
+          'from-warning',
+          'to-warning'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       class: {
         notification: [
-          'from-error-500',
-          'to-error-900'
+          'from-negative',
+          'to-negative'
         ]
       }
     }

@@ -86,10 +86,10 @@ describe('useNotification composable', () => {
       expect(notification?.className).toContain('bg-primary-500')
     })
 
-    it('should be neutral when color props is neutral', async () => {
+    it('should be secondary when color props is secondary', async () => {
       wrapper = mount(TestButton, {
         props: {
-          onClick: () => useNotification({ text: 'Hello World', color: 'neutral' })
+          onClick: () => useNotification({ text: 'Hello World', color: 'secondary' })
         }
       })
 
@@ -100,10 +100,10 @@ describe('useNotification composable', () => {
       expect(notification?.className).toContain('bg-light-300')
     })
 
-    it('should be success when color props is success', async () => {
+    it('should be positive when color props is positive', async () => {
       wrapper = mount(TestButton, {
         props: {
-          onClick: () => useNotification({ text: 'Hello World', color: 'success' })
+          onClick: () => useNotification({ text: 'Hello World', color: 'positive' })
         }
       })
 
@@ -111,13 +111,13 @@ describe('useNotification composable', () => {
       await nextTick()
       notification = document.querySelector('.vk-notification')
 
-      expect(notification?.className).toContain('bg-success-500')
+      expect(notification?.className).toContain('bg-positive')
     })
 
-    it('should be info when color props is info', async () => {
+    it('should be accent when color props is accent', async () => {
       wrapper = mount(TestButton, {
         props: {
-          onClick: () => useNotification({ text: 'Hello World', color: 'info' })
+          onClick: () => useNotification({ text: 'Hello World', color: 'accent' })
         }
       })
 
@@ -125,7 +125,7 @@ describe('useNotification composable', () => {
       await nextTick()
       notification = document.querySelector('.vk-notification')
 
-      expect(notification?.className).toContain('bg-info-500')
+      expect(notification?.className).toContain('bg-accent')
     })
 
     it('should be warning when color props is warning', async () => {
@@ -139,13 +139,13 @@ describe('useNotification composable', () => {
       await nextTick()
       notification = document.querySelector('.vk-notification')
 
-      expect(notification?.className).toContain('bg-warning-500')
+      expect(notification?.className).toContain('bg-warning')
     })
 
-    it('should be error when color props is error', async () => {
+    it('should be negative when color props is negative', async () => {
       wrapper = mount(TestButton, {
         props: {
-          onClick: () => useNotification({ text: 'Hello World', color: 'error' })
+          onClick: () => useNotification({ text: 'Hello World', color: 'negative' })
         }
       })
 
@@ -153,7 +153,7 @@ describe('useNotification composable', () => {
       await nextTick()
       notification = document.querySelector('.vk-notification')
 
-      expect(notification?.className).toContain('bg-error-500')
+      expect(notification?.className).toContain('bg-negative')
     })
   })
 

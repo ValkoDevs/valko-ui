@@ -15,7 +15,7 @@ const product = reactive({
   },
   description: `
 Introducing the SmartSync 360, a revolutionary smartwatch designed to enhance every aspect of your daily routine. Combining cutting-edge technology with sleek, timeless aesthetics, this watch isn't just a piece of wearable tech — it’s an extension of you. Whether you're working, working out, or relaxing, the SmartSync 360 seamlessly integrates into your lifestyle, offering a truly personalized experience.
-Crafted for those who demand both style and functionality, the SmartSync 360 offers a perfect balance between advanced features and an elegant design. Its lightweight yet durable build ensures comfort all day long, whether you're attending meetings or pushing your limits during a workout. The vibrant AMOLED display ensures that you can effortlessly access information at a glance, while the intuitive interface allows you to stay connected and in control.`,
+Crafted for those who demand both style and functionality, the SmartSync 360 offers a perfect balance between advanced features and an elegant design. Its lightweight yet durable build ensures comfort all day long, whether you're attending meetings or pushing your limits during a workout. The vibrant AMOLED display ensures that you can effortlessly access accent at a glance, while the intuitive interface allows you to stay connected and in control.`,
   manufacturer: 'FitTech',
   shippingCost: 'Free Shipping',
   specifications: [
@@ -80,7 +80,7 @@ const product = reactive({
         {{ product.manufacturer }}
         <vk-divider
           direction="vertical"
-          color="neutral"
+          color="secondary"
           size="xs"
         />
         <div>
@@ -131,7 +131,7 @@ const product = reactive({
         </div>
 
         <div class="my-4 flex items-center gap-2">
-          <small class="text-lg line-through decoration-[3px] text-neutral-500">&nbsp;$ {{ product.prices.regular.toFixed(2) }}&nbsp;</small>
+          <small class="text-lg line-through decoration-[3px] text-secondary">&nbsp;$ {{ product.prices.regular.toFixed(2) }}&nbsp;</small>
           <span class="text-3xl font-bold ">$ {{ product.prices.sale.toFixed(2) }}</span>
         </div>
 
@@ -193,7 +193,7 @@ const product = reactive({
             {{ product.manufacturer }}
             <vk-divider
               direction="vertical"
-              color="neutral"
+              color="secondary"
               size="xs"
             />
             <div>
@@ -244,7 +244,7 @@ const product = reactive({
             </div>
 
             <div class="my-4 flex items-center gap-2">
-              <small class="text-lg line-through decoration-[3px] text-neutral-500">&nbsp;$ {{ product.prices.regular.toFixed(2) }}&nbsp;</small>
+              <small class="text-lg line-through decoration-[3px] text-secondary">&nbsp;$ {{ product.prices.regular.toFixed(2) }}&nbsp;</small>
               <span class="text-3xl font-bold ">$ {{ product.prices.sale.toFixed(2) }}</span>
             </div>
 

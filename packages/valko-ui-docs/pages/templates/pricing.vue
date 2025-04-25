@@ -112,7 +112,7 @@ const data: TableItem[] = [
 <template>
   <div class="flex flex-col gap-4">
     <vk-navbar
-      color="neutral"
+      color="secondary"
       flat
       class="flex gap-4 justify-between"
     >
@@ -122,19 +122,19 @@ const data: TableItem[] = [
       <div class="flex gap-4">
         <vk-button
           variant="link"
-          color="neutral"
+          color="secondary"
         >
           Features
         </vk-button>
         <vk-button
           variant="link"
-          color="neutral"
+          color="secondary"
         >
           Enterprise
         </vk-button>
         <vk-button
           variant="link"
-          color="neutral"
+          color="secondary"
         >
           Support
         </vk-button>
@@ -148,7 +148,7 @@ const data: TableItem[] = [
 
     <div class="flex justify-center gap-12 py-4">
       <vk-card class="w-80">
-        <vk-card-header class="justify-center bg-neutral-700 text-light-200">
+        <vk-card-header class="justify-center bg-secondary text-light-200">
           Basic
         </vk-card-header>
         <vk-card-body>
@@ -209,7 +209,7 @@ const data: TableItem[] = [
       </vk-card>
 
       <vk-card class="w-80">
-        <vk-card-header class="justify-center bg-neutral-700 text-light-200">
+        <vk-card-header class="justify-center bg-secondary text-light-200">
           Premium
         </vk-card-header>
         <vk-card-body>
@@ -255,7 +255,7 @@ const data: TableItem[] = [
     <template #example>
       <div class="flex flex-col gap-4">
         <vk-navbar
-          color="neutral"
+          color="secondary"
           flat
           class="flex gap-4 justify-between"
         >
@@ -265,19 +265,19 @@ const data: TableItem[] = [
           <div class="flex gap-4">
             <vk-button
               variant="link"
-              color="neutral"
+              color="secondary"
             >
               Features
             </vk-button>
             <vk-button
               variant="link"
-              color="neutral"
+              color="secondary"
             >
               Enterprise
             </vk-button>
             <vk-button
               variant="link"
-              color="neutral"
+              color="secondary"
             >
               Support
             </vk-button>
@@ -291,7 +291,7 @@ const data: TableItem[] = [
 
         <div class="flex justify-center gap-12 py-4">
           <vk-card class="w-80">
-            <vk-card-header class="justify-center bg-neutral-700 text-light-200">
+            <vk-card-header class="justify-center bg-secondary text-light-200">
               Basic
             </vk-card-header>
             <vk-card-body>
@@ -352,7 +352,7 @@ const data: TableItem[] = [
           </vk-card>
 
           <vk-card class="w-80">
-            <vk-card-header class="justify-center bg-neutral-700 text-light-200">
+            <vk-card-header class="justify-center bg-secondary text-light-200">
               Premium
             </vk-card-header>
             <vk-card-body>

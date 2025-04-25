@@ -127,40 +127,40 @@ describe('Table component', () => {
         expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-primary-500/[.3]')
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkTable, {
           props: {
             headers,
             data,
-            color: 'neutral'
+            color: 'secondary'
           }
         })
 
         expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-dark-600/[.3]')
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkTable, {
           props: {
             headers,
             data,
-            color: 'success'
+            color: 'positive'
           }
         })
 
-        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-success-500/[.3]')
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-positive')
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkTable, {
           props: {
             headers,
             data,
-            color: 'info'
+            color: 'accent'
           }
         })
 
-        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-info-500/[.3]')
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-accent')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -172,19 +172,19 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-warning-500/[.3]')
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-warning')
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkTable, {
           props: {
             headers,
             data,
-            color: 'error'
+            color: 'negative'
           }
         })
 
-        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-error-500/[.3]')
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-negative')
       })
     })
 
@@ -480,7 +480,7 @@ describe('Table component', () => {
           selection: []
         }
       })
-      expect(wrapper.find('.vk-table__tr').classes()).not.toContain('data-[selected=true]:bg-success-500/[.3]')
+      expect(wrapper.find('.vk-table__tr').classes()).not.toContain('data-[selected=true]:bg-positive')
     })
   })
 })

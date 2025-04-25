@@ -82,7 +82,7 @@ const closeModal = () => { if (props.closable) emit('close') }
                   size="xs"
                   variant="link"
                   shape="rounded"
-                  color="neutral"
+                  color="secondary"
                   condensed
                   :class="classes.closeButton"
                   @click="closeModal"

@@ -18,7 +18,7 @@ const paginationProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The Pagination color theme.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {

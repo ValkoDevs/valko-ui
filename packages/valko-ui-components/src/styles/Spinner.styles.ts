@@ -42,30 +42,30 @@ export default tv({
           'text-primary-500'
         ]
       },
-      neutral: {
+      secondary: {
         iconColor: [
           'text-dark-800',
           'dark:text-light-100'
         ]
       },
-      success: {
+      positive: {
         iconColor: [
-          'text-success-500'
+          'text-positive'
         ]
       },
-      info: {
+      accent: {
         iconColor: [
-          'text-info-500'
+          'text-accent'
         ]
       },
       warning: {
         iconColor: [
-          'text-warning-500'
+          'text-warning'
         ]
       },
-      error: {
+      negative: {
         iconColor: [
-          'text-error-500'
+          'text-negative'
         ]
       }
     },

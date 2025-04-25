@@ -56,7 +56,7 @@ const employeeData: TableItem[] = [
     email: 'michael.brown@example.com',
     sales: 67,
     date: '2023-10-30',
-    status: 'error',
+    status: 'negative',
     company: 'Retail Masters Corp.'
   },
   {
@@ -101,7 +101,7 @@ const employeeData: TableItem[] = [
     email: 'chloe.harris@example.com',
     sales: 130,
     date: '2023-12-11',
-    status: 'error',
+    status: 'negative',
     company: 'Global Solutions Ltd.'
   },
   {
@@ -181,7 +181,7 @@ const employeeData: TableItem[] = [
     email: 'michael.brown@example.com',
     sales: 67,
     date: '2023-10-30',
-    status: 'error',
+    status: 'negative',
     company: 'Retail Masters Corp.'
   },
   {
@@ -226,7 +226,7 @@ const employeeData: TableItem[] = [
     email: 'chloe.harris@example.com',
     sales: 130,
     date: '2023-12-11',
-    status: 'error',
+    status: 'negative',
     company: 'Global Solutions Ltd.'
   },
   {

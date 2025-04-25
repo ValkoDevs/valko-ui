@@ -69,7 +69,7 @@ onMounted(() => {
 <template>
   <div class="flex flex-col w-full">
     <vk-navbar
-      color="neutral"
+      color="secondary"
       variant="outlined"
       size="md"
       shape="square"
@@ -80,7 +80,7 @@ onMounted(() => {
       <vk-button
         variant="link"
         shape="rounded"
-        color="neutral"
+        color="secondary"
         condensed
         size="lg"
         class="size-10 lg:hidden"
@@ -105,7 +105,7 @@ onMounted(() => {
           <vk-button
             variant="link"
             shape="rounded"
-            color="neutral"
+            color="secondary"
             condensed
             size="lg"
             class="size-10"
@@ -136,7 +136,7 @@ onMounted(() => {
             <vk-button
               variant="link"
               shape="rounded"
-              color="neutral"
+              color="secondary"
               condensed
               size="lg"
               class="size-10"

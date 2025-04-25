@@ -8,9 +8,7 @@ export default tv({
       'p-2',
       'flex',
       'gap-2',
-      'shadow-lg',
-      'shadow-light-300',
-      'dark:shadow-dark-950'
+      'shadow-lg'
     ],
     mainIcon: [],
     contentContainer: [
@@ -64,11 +62,11 @@ export default tv({
     },
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     },
     size: {
       xs: {
@@ -148,35 +146,34 @@ export default tv({
       color: 'primary',
       class: {
         container: [
-          'bg-primary-500'
+          'bg-primary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         container: [
-          'bg-light-200',
-          'dark:bg-dark-800'
+          'bg-secondary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       class: {
         container: [
-          'bg-success-500'
+          'bg-positive'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       class: {
         container: [
-          'bg-info-500'
+          'bg-accent'
         ]
       }
     },
@@ -185,16 +182,16 @@ export default tv({
       color: 'warning',
       class: {
         container: [
-          'bg-warning-500'
+          'bg-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       class: {
         container: [
-          'bg-error-500'
+          'bg-negative'
         ]
       }
     },
@@ -204,35 +201,34 @@ export default tv({
       color: 'primary',
       class: {
         container: [
-          'border-primary-500'
+          'border-primary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         container: [
-          'border-light-200',
-          'dark:border-dark-800'
+          'border-secondary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       class: {
         container: [
-          'border-success-500'
+          'border-positive'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       class: {
         container: [
-          'border-info-500'
+          'border-accent'
         ]
       }
     },
@@ -241,16 +237,16 @@ export default tv({
       color: 'warning',
       class: {
         container: [
-          'border-warning-500'
+          'border-warning'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       class: {
         container: [
-          'border-error-500'
+          'border-negative'
         ]
       }
     },
@@ -260,35 +256,34 @@ export default tv({
       color: 'primary',
       class: {
         container: [
-          'bg-primary-500/[.20]'
+          'bg-primary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         container: [
-          'bg-light-200/[.4]',
-          'dark:bg-dark-800/[.4]'
+          'bg-secondary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       class: {
         container: [
-          'bg-success-500/[.20]'
+          'bg-positive-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       class: {
         container: [
-          'bg-info-500/[.20]'
+          'bg-accent-container'
         ]
       }
     },
@@ -297,16 +292,16 @@ export default tv({
       color: 'warning',
       class: {
         container: [
-          'bg-warning-500/[.20]'
+          'bg-warning-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       class: {
         container: [
-          'bg-error-500/[.20]'
+          'bg-negative-container'
         ]
       }
     },
@@ -316,40 +311,38 @@ export default tv({
       color: 'primary',
       class: {
         container: [
-          'from-primary-500',
-          'to-primary-900'
+          'from-primary-gradient-start',
+          'to-primary-gradient-end'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         container: [
-          'from-light-50',
-          'to-light-400',
-          'dark:from-dark-600',
-          'dark:to-dark-950'
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       class: {
         container: [
-          'from-success-500',
-          'to-success-900'
+          'from-positive-gradient-start',
+          'to-positive-gradient-end'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       class: {
         container: [
-          'from-info-500',
-          'to-info-900'
+          'from-accent-gradient-start',
+          'to-accent-gradient-end'
         ]
       }
     },
@@ -358,25 +351,25 @@ export default tv({
       color: 'warning',
       class: {
         container: [
-          'from-warning-500',
-          'to-warning-900'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       class: {
         container: [
-          'from-error-500',
-          'to-error-900'
+          'from-negative-gradient-start',
+          'to-negative-gradient-end'
         ]
       }
     },
-    // filled & gradient & neutral (title,p, icons)
+    // filled & gradient & secondary (title,p, icons)
     {
       variant: ['filled', 'gradient'],
-      color: 'neutral',
+      color: 'secondary',
       class: {
         container: [
           'text-dark-600',
@@ -394,48 +387,46 @@ export default tv({
       color: 'primary',
       class: {
         container: [
-          'text-primary-500'
+          'text-on-primary-container'
         ],
         closeIcon: [
-          'text-primary-500'
+          'text-on-primary-container'
         ]
       }
     },
     {
       variant: ['ghost', 'outlined'],
-      color: 'neutral',
+      color: 'secondary',
       class: {
         container: [
-          'text-dark-600',
-          'dark:text-light-50'
+          'text-on-secondary-container'
         ],
         closeIcon: [
-          'text-dark-600',
-          'dark:text-light-50'
+          'text-on-secondary-container'
         ]
       }
     },
     {
       variant: ['ghost', 'outlined'],
-      color: 'success',
+      color: 'positive',
       class: {
         container: [
-          'text-success-500'
+          'text-on-positive-container'
         ],
         closeIcon: [
-          'text-success-500'
+          'text-on-positive-container'
         ]
       }
     },
     {
       variant: ['ghost', 'outlined'],
-      color: 'info',
+      color: 'accent',
       class: {
         container: [
-          'text-info-500'
+          'text-on-accent-container'
         ],
         closeIcon: [
-          'text-info-500'
+          'text-on-accent-container'
         ]
       }
     },
@@ -444,22 +435,22 @@ export default tv({
       color: 'warning',
       class: {
         container: [
-          'text-warning-500'
+          'text-on-warning-container'
         ],
         closeIcon: [
-          'text-warning-500'
+          'text-on-warning-container'
         ]
       }
     },
     {
       variant: ['ghost', 'outlined'],
-      color: 'error',
+      color: 'negative',
       class: {
         container: [
-          'text-error-500'
+          'text-on-negative-container'
         ],
         closeIcon: [
-          'text-error-500'
+          'text-on-negative-container'
         ]
       }
     }

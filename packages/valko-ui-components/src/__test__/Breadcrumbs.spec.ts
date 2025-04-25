@@ -73,37 +73,37 @@ describe('Breadcrumbs component', () => {
         expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-primary-600')
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkBreadcrumbs, {
           props: {
             crumbs,
-            color: 'neutral'
+            color: 'secondary'
           }
         })
 
         expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-dark-950')
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkBreadcrumbs, {
           props: {
             crumbs,
-            color: 'success'
+            color: 'positive'
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-success-600')
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-positive')
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkBreadcrumbs, {
           props: {
             crumbs,
-            color: 'info'
+            color: 'accent'
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-info-600')
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-accent')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -114,18 +114,18 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-warning-600')
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-warning')
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkBreadcrumbs, {
           props: {
             crumbs,
-            color: 'error'
+            color: 'negative'
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-error-600')
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-negative')
       })
     })
 

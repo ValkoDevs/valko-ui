@@ -44,7 +44,7 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
 <template>
   <div>
     <vk-navbar
-      color="neutral"
+      color="secondary"
       variant="outlined"
       size="md"
       shape="square"
@@ -55,7 +55,7 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
       <vk-button
         variant="link"
         shape="rounded"
-        color="neutral"
+        color="secondary"
         condensed
         size="lg"
         class="size-10 lg:hidden"
@@ -82,7 +82,7 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
           <vk-button
             variant="link"
             shape="rounded"
-            color="neutral"
+            color="secondary"
             condensed
             size="lg"
             class="size-10"

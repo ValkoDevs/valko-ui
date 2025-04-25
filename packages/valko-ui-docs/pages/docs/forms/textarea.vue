@@ -25,7 +25,7 @@ const apiData: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Textarea.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -168,8 +168,8 @@ const iconSnippet = `<template>
         :label="form.label"
         :maxlength="form.maxlength"
         :helpertext="form.helpertext"
-        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'neutral' })"
-        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'neutral' })"
+        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'secondary' })"
+        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'secondary' })"
       >
         <template
           v-if="iconsInForm.left"

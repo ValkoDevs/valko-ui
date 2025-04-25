@@ -123,30 +123,30 @@ export default tv({
     },
     color: {
       primary: {},
-      neutral: {
+      secondary: {
         helpertext: [
           'text-dark-600',
           'dark:text-light-200'
         ]
       },
-      success: {
+      positive: {
         helpertext: [
-          'text-success-500'
+          'text-positive'
         ]
       },
-      info: {
+      accent: {
         helpertext: [
-          'text-info-500'
+          'text-accent'
         ]
       },
       warning: {
         helpertext: [
-          'text-warning-500'
+          'text-warning'
         ]
       },
-      error: {
+      negative: {
         helpertext: [
-          'text-error-500'
+          'text-negative'
         ]
       }
     },
@@ -224,7 +224,7 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         checkbox: [
@@ -245,35 +245,35 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-success-500',
-          'data-[checked=true]:border-success-500',
-          'data-[indeterminate=true]:border-success-500',
-          'data-[indeterminate=true]:bg-success-500',
-          'dark:data-[checked=true]:bg-success-500',
-          'dark:data-[checked=true]:border-success-500',
-          'dark:data-[indeterminate=true]:border-success-500',
-          'dark:data-[indeterminate=true]:bg-success-500'
+          'data-[checked=true]:bg-positive',
+          'data-[checked=true]:border-positive',
+          'data-[indeterminate=true]:border-positive',
+          'data-[indeterminate=true]:bg-positive',
+          'dark:data-[checked=true]:bg-positive',
+          'dark:data-[checked=true]:border-positive',
+          'dark:data-[indeterminate=true]:border-positive',
+          'dark:data-[indeterminate=true]:bg-positive'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-info-500',
-          'data-[checked=true]:border-info-500',
-          'data-[indeterminate=true]:border-info-500',
-          'data-[indeterminate=true]:bg-info-500',
-          'dark:data-[checked=true]:bg-info-500',
-          'dark:data-[checked=true]:border-info-500',
-          'dark:data-[indeterminate=true]:border-info-500',
-          'dark:data-[indeterminate=true]:bg-info-500'
+          'data-[checked=true]:bg-accent',
+          'data-[checked=true]:border-accent',
+          'data-[indeterminate=true]:border-accent',
+          'data-[indeterminate=true]:bg-accent',
+          'dark:data-[checked=true]:bg-accent',
+          'dark:data-[checked=true]:border-accent',
+          'dark:data-[indeterminate=true]:border-accent',
+          'dark:data-[indeterminate=true]:bg-accent'
         ]
       }
     },
@@ -283,31 +283,31 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-warning-500',
-          'data-[checked=true]:border-warning-500',
-          'data-[indeterminate=true]:border-warning-500',
-          'data-[indeterminate=true]:bg-warning-500',
-          'dark:data-[checked=true]:bg-warning-500',
-          'dark:data-[checked=true]:border-warning-500',
-          'dark:data-[indeterminate=true]:border-warning-500',
-          'dark:data-[indeterminate=true]:bg-warning-500'
+          'data-[checked=true]:bg-warning',
+          'data-[checked=true]:border-warning',
+          'data-[indeterminate=true]:border-warning',
+          'data-[indeterminate=true]:bg-warning',
+          'dark:data-[checked=true]:bg-warning',
+          'dark:data-[checked=true]:border-warning',
+          'dark:data-[indeterminate=true]:border-warning',
+          'dark:data-[indeterminate=true]:bg-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-error-500',
-          'data-[checked=true]:border-error-500',
-          'data-[indeterminate=true]:border-error-500',
-          'data-[indeterminate=true]:bg-error-500',
-          'dark:data-[checked=true]:bg-error-500',
-          'dark:data-[checked=true]:border-error-500',
-          'dark:data-[indeterminate=true]:border-error-500',
-          'dark:data-[indeterminate=true]:bg-error-500'
+          'data-[checked=true]:bg-negative',
+          'data-[checked=true]:border-negative',
+          'data-[indeterminate=true]:border-negative',
+          'data-[indeterminate=true]:bg-negative',
+          'dark:data-[checked=true]:bg-negative',
+          'dark:data-[checked=true]:border-negative',
+          'dark:data-[indeterminate=true]:border-negative',
+          'dark:data-[indeterminate=true]:bg-negative'
         ]
       }
     },
@@ -331,7 +331,7 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         checkbox: [
@@ -348,35 +348,35 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:border-success-500',
-          'data-[indeterminate=true]:border-success-500',
-          'dark:data-[checked=true]:border-success-500',
-          'dark:data-[indeterminate=true]:border-success-500'
+          'data-[checked=true]:border-positive',
+          'data-[indeterminate=true]:border-positive',
+          'dark:data-[checked=true]:border-positive',
+          'dark:data-[indeterminate=true]:border-positive'
         ],
         icon: [
-          'text-success-500',
-          'dark:text-success-500'
+          'text-positive',
+          'dark:text-positive'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:border-info-500',
-          'data-[indeterminate=true]:border-info-500',
-          'dark:data-[checked=true]:border-info-500',
-          'dark:data-[indeterminate=true]:border-info-500'
+          'data-[checked=true]:border-accent',
+          'data-[indeterminate=true]:border-accent',
+          'dark:data-[checked=true]:border-accent',
+          'dark:data-[indeterminate=true]:border-accent'
         ],
         icon: [
-          'text-info-500',
-          'dark:text-info-500'
+          'text-accent',
+          'dark:text-accent'
         ]
       }
     },
@@ -386,31 +386,31 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:border-warning-500',
-          'data-[indeterminate=true]:border-warning-500',
-          'dark:data-[checked=true]:border-warning-500',
-          'dark:data-[indeterminate=true]:border-warning-500'
+          'data-[checked=true]:border-warning',
+          'data-[indeterminate=true]:border-warning',
+          'dark:data-[checked=true]:border-warning',
+          'dark:data-[indeterminate=true]:border-warning'
         ],
         icon: [
-          'text-warning-500',
-          'dark:text-warning-500'
+          'text-warning',
+          'dark:text-warning'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:border-error-500',
-          'data-[indeterminate=true]:border-error-500',
-          'dark:data-[checked=true]:border-error-500',
-          'dark:data-[indeterminate=true]:border-error-500'
+          'data-[checked=true]:border-negative',
+          'data-[indeterminate=true]:border-negative',
+          'dark:data-[checked=true]:border-negative',
+          'dark:data-[indeterminate=true]:border-negative'
         ],
         icon: [
-          'text-error-500',
-          'dark:text-error-500'
+          'text-negative',
+          'dark:text-negative'
         ]
       }
     },
@@ -433,7 +433,7 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         checkbox: [
@@ -450,33 +450,33 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-success-500/[.15]',
-          'data-[indeterminate=true]:bg-success-500/[.15]',
-          'dark:data-[checked=true]:bg-success-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-success-500/[.15]'
+          'data-[checked=true]:bg-positive',
+          'data-[indeterminate=true]:bg-positive',
+          'dark:data-[checked=true]:bg-positive',
+          'dark:data-[indeterminate=true]:bg-positive'
         ],
         icon: [
-          'text-success-500'
+          'text-positive'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-info-500/[.15]',
-          'data-[indeterminate=true]:bg-info-500/[.15]',
-          'dark:data-[checked=true]:bg-info-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-info-500/[.15]'
+          'data-[checked=true]:bg-accent',
+          'data-[indeterminate=true]:bg-accent',
+          'dark:data-[checked=true]:bg-accent',
+          'dark:data-[indeterminate=true]:bg-accent'
         ],
         icon: [
-          'text-info-500'
+          'text-accent'
         ]
       }
     },
@@ -486,29 +486,29 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-warning-500/[.15]',
-          'data-[indeterminate=true]:bg-warning-500/[.15]',
-          'dark:data-[checked=true]:bg-warning-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-warning-500/[.15]'
+          'data-[checked=true]:bg-warning/[.15]',
+          'data-[indeterminate=true]:bg-warning/[.15]',
+          'dark:data-[checked=true]:bg-warning/[.15]',
+          'dark:data-[indeterminate=true]:bg-warning/[.15]'
         ],
         icon: [
-          'text-warning-500'
+          'text-warning'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-error-500/[.15]',
-          'data-[indeterminate=true]:bg-error-500/[.15]',
-          'dark:data-[checked=true]:bg-error-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-error-500/[.15]'
+          'data-[checked=true]:bg-negative',
+          'data-[indeterminate=true]:bg-negative',
+          'dark:data-[checked=true]:bg-negative',
+          'dark:data-[indeterminate=true]:bg-negative'
         ],
         icon: [
-          'text-error-500'
+          'text-negative'
         ]
       }
     }

@@ -24,16 +24,16 @@ export default tv({
       'duration-150'
     ],
     loader: [
-      'data-[variant=filled]:data-[color=neutral]:text-white',
-      'data-[variant=gradient]:data-[color=neutral]:text-white',
-      'data-[variant=ghost]:data-[color=neutral]:text-black',
-      'data-[variant=outlined]:data-[color=neutral]:text-black',
-      'data-[variant=link]:data-[color=neutral]:text-black',
-      'dark:data-[variant=filled]:data-[color=neutral]:text-black',
-      'dark:data-[variant=gradient]:data-[color=neutral]:text-black',
-      'dark:data-[variant=ghost]:data-[color=neutral]:text-white',
-      'dark:data-[variant=outlined]:data-[color=neutral]:text-white',
-      'dark:data-[variant=link]:data-[color=neutral]:text-white'
+      'data-[variant=filled]:data-[color=secondarywhite',
+      'data-[variant=gradient]:data-[color=secondarywhite',
+      'data-[variant=ghost]:data-[color=secondaryblack',
+      'data-[variant=outlined]:data-[color=secondaryblack',
+      'data-[variant=link]:data-[color=secondaryblack',
+      'dark:data-[variant=filled]:data-[color=secondaryblack',
+      'dark:data-[variant=gradient]:data-[color=secondaryblack',
+      'dark:data-[variant=ghost]:data-[color=secondarywhite',
+      'dark:data-[variant=outlined]:data-[color=secondarywhite',
+      'dark:data-[variant=link]:data-[color=secondarywhite'
     ],
     stateLayer: [
       'w-full',
@@ -53,11 +53,11 @@ export default tv({
   variants: {
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     },
     size: {
       xs: {
@@ -152,13 +152,7 @@ export default tv({
       true: {
         stateLayer: [
           'px-0',
-          'py-0',
-          'font-normal'
-        ]
-      },
-      false: {
-        stateLayer: [
-          'font-semibold'
+          'py-0'
         ]
       }
     },
@@ -214,7 +208,7 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         button: [
@@ -227,7 +221,7 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         button: [
@@ -238,7 +232,7 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         button: [
@@ -260,7 +254,7 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         button: [
@@ -283,7 +277,7 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         button: [
@@ -294,7 +288,7 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         button: [
@@ -305,7 +299,7 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         button: [
@@ -327,7 +321,7 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         button: [
@@ -349,7 +343,7 @@ export default tv({
     },
     {
       variant: 'link',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         button: [
@@ -359,7 +353,7 @@ export default tv({
     },
     {
       variant: 'link',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         button: [
@@ -369,7 +363,7 @@ export default tv({
     },
     {
       variant: 'link',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         button: [
@@ -389,7 +383,7 @@ export default tv({
     },
     {
       variant: 'link',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         button: [
@@ -411,7 +405,7 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         button: [
@@ -422,7 +416,7 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         button: [
@@ -433,7 +427,7 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         button: [
@@ -455,7 +449,7 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         button: [
@@ -479,7 +473,7 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         button: [
@@ -491,7 +485,7 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         button: [
@@ -503,7 +497,7 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         button: [
@@ -527,7 +521,7 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         button: [

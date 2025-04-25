@@ -27,7 +27,7 @@ const apiData: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Switch.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {

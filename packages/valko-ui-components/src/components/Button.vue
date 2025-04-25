@@ -56,7 +56,7 @@ const onClick = () => {
             condensed
             :data-variant="props.variant"
             :data-color="props.color"
-            :class-name="props.color === 'neutral'
+            :class-name="props.color === 'secondary'
               ? `${classes.loader}`
               : (props.variant === 'filled' || props.variant === 'gradient')
                 ? 'text-white'

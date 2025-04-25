@@ -58,34 +58,34 @@ describe('Input component', () => {
         expect(wrapper.find('.text-dark-700').exists()).toBe(true)
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkInput, {
           props: {
-            color: 'neutral'
+            color: 'secondary'
           }
         })
 
         expect(wrapper.find('.text-dark-600').exists()).toBe(true)
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkInput, {
           props: {
-            color: 'success'
+            color: 'positive'
           }
         })
 
-        expect(wrapper.find('.text-success-500').exists()).toBe(true)
+        expect(wrapper.find('.text-positive').exists()).toBe(true)
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkInput, {
           props: {
-            color: 'info'
+            color: 'accent'
           }
         })
 
-        expect(wrapper.find('.text-info-500').exists()).toBe(true)
+        expect(wrapper.find('.text-accent').exists()).toBe(true)
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -95,17 +95,17 @@ describe('Input component', () => {
           }
         })
 
-        expect(wrapper.find('.text-warning-500').exists()).toBe(true)
+        expect(wrapper.find('.text-warning').exists()).toBe(true)
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkInput, {
           props: {
-            color: 'error'
+            color: 'negative'
           }
         })
 
-        expect(wrapper.find('.text-error-500').exists()).toBe(true)
+        expect(wrapper.find('.text-negative').exists()).toBe(true)
       })
     })
 

@@ -180,11 +180,11 @@ export default tv({
     },
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     },
     grow: {
       true: {
@@ -239,7 +239,7 @@ export default tv({
     {
       variant: 'gradient',
       shape: ['soft', 'rounded', 'square'],
-      color: 'neutral',
+      color: 'secondary',
       class: {
         cursor: [
           'from-light-50',
@@ -256,22 +256,22 @@ export default tv({
     {
       variant: 'gradient',
       shape: ['soft', 'rounded', 'square'],
-      color: 'success',
+      color: 'positive',
       class: {
         cursor: [
-          'from-success-500',
-          'to-success-900'
+          'from-positive',
+          'to-positive'
         ]
       }
     },
     {
       variant: 'gradient',
       shape: ['soft', 'rounded', 'square'],
-      color: 'info',
+      color: 'accent',
       class: {
         cursor: [
-          'from-info-500',
-          'to-info-900'
+          'from-accent',
+          'to-accent'
         ]
       }
     },
@@ -281,19 +281,19 @@ export default tv({
       color: 'warning',
       class: {
         cursor: [
-          'from-warning-500',
-          'to-warning-900'
+          'from-warning',
+          'to-warning'
         ]
       }
     },
     {
       variant: 'gradient',
       shape: ['soft', 'rounded', 'square'],
-      color: 'error',
+      color: 'negative',
       class: {
         cursor: [
-          'from-error-500',
-          'to-error-900'
+          'from-negative',
+          'to-negative'
         ]
       }
     },
@@ -308,7 +308,7 @@ export default tv({
       }
     },
     {
-      color: 'neutral',
+      color: 'secondary',
       shape: 'line',
       class: {
         cursor: [
@@ -318,20 +318,20 @@ export default tv({
       }
     },
     {
-      color: 'success',
+      color: 'positive',
       shape: 'line',
       class: {
         cursor: [
-          'border-success-500'
+          'border-positive'
         ]
       }
     },
     {
-      color: 'info',
+      color: 'accent',
       shape: 'line',
       class: {
         cursor: [
-          'border-info-500'
+          'border-accent'
         ]
       }
     },
@@ -340,16 +340,16 @@ export default tv({
       shape: 'line',
       class: {
         cursor: [
-          'border-warning-500'
+          'border-warning'
         ]
       }
     },
     {
-      color: 'error',
+      color: 'negative',
       shape: 'line',
       class: {
         cursor: [
-          'border-error-500'
+          'border-negative'
         ]
       }
     },
@@ -364,7 +364,7 @@ export default tv({
       }
     },
     {
-      color: 'neutral',
+      color: 'secondary',
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
@@ -378,20 +378,20 @@ export default tv({
       }
     },
     {
-      color: 'success',
+      color: 'positive',
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-success-500'
+          'bg-positive'
         ]
       }
     },
     {
-      color: 'info',
+      color: 'accent',
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-info-500'
+          'bg-accent'
         ]
       }
     },
@@ -400,16 +400,16 @@ export default tv({
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-warning-500'
+          'bg-warning'
         ]
       }
     },
     {
-      color: 'error',
+      color: 'negative',
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-error-500'
+          'bg-negative'
         ]
       }
     },
@@ -489,7 +489,7 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       shape: 'line',
       class: {
         cursorGradient: [
@@ -500,23 +500,23 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-success-500',
-          'to-success-900'
+          'from-positive',
+          'to-positive'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-info-500',
-          'to-info-900'
+          'from-accent',
+          'to-accent'
         ]
       }
     },
@@ -526,19 +526,19 @@ export default tv({
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-warning-500',
-          'to-warning-900'
+          'from-warning',
+          'to-warning'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-error-500',
-          'to-error-900'
+          'from-negative',
+          'to-negative'
         ]
       }
     }

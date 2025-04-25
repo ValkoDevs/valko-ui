@@ -196,7 +196,7 @@ const employeeData = reactive<TableItem[]>([
 <template>
   <div class="maw-w-screen-xl h-full mx-auto px-10 mt-5">
     <vk-navbar
-      color="neutral"
+      color="secondary"
       shape="square"
       flat
       class="justify-between"
@@ -219,7 +219,7 @@ const employeeData = reactive<TableItem[]>([
       <template #cell-status="{ item }">
         <vk-tag
           :text="\`\${item.status}\`"
-          :color="item.status === 'active' ? 'success' : 'error'"
+          :color="item.status === 'active' ? 'positive' : 'negative'"
           variant="ghost"
         />
       </template>
@@ -227,7 +227,7 @@ const employeeData = reactive<TableItem[]>([
       <template #cell-actions="{ item }">
         <div class="flex gap-2">
           <vk-button
-            color="info"
+            color="accent"
             variant="link"
             condensed
             class="size-6"
@@ -237,7 +237,7 @@ const employeeData = reactive<TableItem[]>([
 
           <vk-button
             v-if="item.status === 'inactive'"
-            color="success"
+            color="positive"
             variant="link"
             condensed
             class="size-6"
@@ -256,7 +256,7 @@ const employeeData = reactive<TableItem[]>([
           </vk-button>
 
           <vk-button
-            color="error"
+            color="negative"
             variant="link"
             condensed
             class="size-6"
@@ -276,7 +276,7 @@ const employeeData = reactive<TableItem[]>([
     <template #example>
       <div class="maw-w-screen-xl h-full mx-auto px-10 mt-5">
         <vk-navbar
-          color="neutral"
+          color="secondary"
           shape="square"
           flat
           class="justify-between"
@@ -299,7 +299,7 @@ const employeeData = reactive<TableItem[]>([
           <template #cell-status="{ item }">
             <vk-tag
               :text="`${item.status}`"
-              :color="item.status === 'active' ? 'success' : 'error'"
+              :color="item.status === 'active' ? 'positive' : 'negative'"
               variant="ghost"
             />
           </template>
@@ -307,7 +307,7 @@ const employeeData = reactive<TableItem[]>([
           <template #cell-actions="{ item }">
             <div class="flex gap-2">
               <vk-button
-                color="info"
+                color="accent"
                 variant="link"
                 condensed
                 class="size-6"
@@ -317,7 +317,7 @@ const employeeData = reactive<TableItem[]>([
 
               <vk-button
                 v-if="item.status === 'inactive'"
-                color="success"
+                color="positive"
                 variant="link"
                 condensed
                 class="size-6"
@@ -336,7 +336,7 @@ const employeeData = reactive<TableItem[]>([
               </vk-button>
 
               <vk-button
-                color="error"
+                color="negative"
                 variant="link"
                 condensed
                 class="size-6"

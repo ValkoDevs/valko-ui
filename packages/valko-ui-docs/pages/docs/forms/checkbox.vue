@@ -32,7 +32,7 @@ const apiData: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Checkbox.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {

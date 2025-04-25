@@ -18,8 +18,8 @@ const navbarProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Navbar.',
-    values: 'primary, neutral, error, warning, info, success',
-    default: 'neutral'
+    values: 'primary, secondary, negative, warning, accent, positive',
+    default: 'secondary'
   },
   {
     key: 'variantProp',
@@ -96,7 +96,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
 <template>
   <doc-section
     title="Navbar"
-    description="A visual navigation component that provides links and other navigation-related information to the user."
+    description="A visual navigation component that provides links and other navigation-related accent to the user."
   >
     <template #playground-view>
       <vk-navbar

@@ -114,11 +114,11 @@ describe('Datepicker component', () => {
         expect(input.classes()).toContain('focus:border-primary-500')
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkDatepicker, {
           props: {
             isOpen: true,
-            color: 'neutral',
+            color: 'secondary',
             parsedModel,
             modelValue,
             adapter
@@ -130,11 +130,11 @@ describe('Datepicker component', () => {
         expect(input.classes()).toContain('focus:border-light-400')
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkDatepicker, {
           props: {
             isOpen: true,
-            color: 'success',
+            color: 'positive',
             parsedModel,
             modelValue,
             adapter
@@ -143,14 +143,14 @@ describe('Datepicker component', () => {
 
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('focus:border-success-500')
+        expect(input.classes()).toContain('focus:border-positive')
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkDatepicker, {
           props: {
             isOpen: true,
-            color: 'info',
+            color: 'accent',
             parsedModel,
             modelValue,
             adapter
@@ -159,7 +159,7 @@ describe('Datepicker component', () => {
 
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('focus:border-info-500')
+        expect(input.classes()).toContain('focus:border-accent')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -175,14 +175,14 @@ describe('Datepicker component', () => {
 
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('focus:border-warning-500')
+        expect(input.classes()).toContain('focus:border-warning')
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkDatepicker, {
           props: {
             isOpen: true,
-            color: 'error',
+            color: 'negative',
             parsedModel,
             modelValue,
             adapter
@@ -191,7 +191,7 @@ describe('Datepicker component', () => {
 
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('focus:border-error-500')
+        expect(input.classes()).toContain('focus:border-negative')
       })
     })
 

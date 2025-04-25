@@ -44,7 +44,7 @@ const rangeProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Range slider.',
-    values: 'primary, neutral, success, info, warning, error',
+    values: 'primary, secondary, positive, accent, warning, negative',
     default: 'primary'
   },
   {

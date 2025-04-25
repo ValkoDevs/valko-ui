@@ -16,7 +16,7 @@ const form = ref<Partial<DropdownProps>>({
 const items: Item[] = [
   { key: 'image', title: 'Upload Image', icon: 'photo', onClick: () => useNotification({ text: 'Image Uploaded' }) },
   { key: 'edit', title: 'Edit', icon: 'edit', onClick: () => useNotification({ text: 'Editing' }) },
-  { key: 'disabled', title: 'Disabled', icon: 'error-404', disabled: true },
+  { key: 'disabled', title: 'Disabled', icon: 'negative', disabled: true },
   { key: 'video', title: 'Upload Video', icon: 'video', onClick: () => useNotification({ text: 'Video uploaded' }) },
   { key: 'delete', title: 'Delete', icon: 'trash', onClick: () => useNotification({ text: 'Item Deleted' }) }
 ]
@@ -41,7 +41,7 @@ const dropdownProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The Dropdown color theme.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -195,7 +195,7 @@ import type { Item } from '#valkoui'
 const items: Item[] = [
   { key: 'image', title: 'Upload Image', icon: 'photo' },
   { key: 'edit', title: 'Edit', icon: 'edit' },
-  { key: 'disabled', title: 'Disabled', icon: 'error-404', disabled: true },
+  { key: 'disabled', title: 'Disabled', icon: 'negative', disabled: true },
   { key: 'video', title: 'Upload Video', icon: 'video' },
   { key: 'delete', title: 'Delete', icon: 'trash' }
 ]

@@ -25,11 +25,11 @@ export default tv({
   variants: {
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     },
     variant: {
       filled: {},
@@ -139,7 +139,7 @@ export default tv({
     },
     {
       variant: ['filled', 'outlined'],
-      color: 'neutral',
+      color: 'secondary',
       class: {
         badge: [
           'bg-light-200',
@@ -151,19 +151,19 @@ export default tv({
     },
     {
       variant: ['filled', 'outlined'],
-      color: 'success',
+      color: 'positive',
       class: {
         badge: [
-          'bg-success-500'
+          'bg-positive'
         ]
       }
     },
     {
       variant: ['filled', 'outlined'],
-      color: 'info',
+      color: 'accent',
       class: {
         badge: [
-          'bg-info-500'
+          'bg-accent'
         ]
       }
     },
@@ -172,16 +172,16 @@ export default tv({
       color: 'warning',
       class: {
         badge: [
-          'bg-warning-500'
+          'bg-warning'
         ]
       }
     },
     {
       variant: ['filled', 'outlined'],
-      color: 'error',
+      color: 'negative',
       class: {
         badge: [
-          'bg-error-500'
+          'bg-negative'
         ]
       }
     },
@@ -197,28 +197,28 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         badge: [
-          'bg-neutral-500/[.7]'
+          'bg-secondary'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       class: {
         badge: [
-          'bg-success-500/[.7]'
+          'bg-positive'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       class: {
         badge: [
-          'bg-info-500/[.7]'
+          'bg-accent'
         ]
       }
     },
@@ -227,16 +227,16 @@ export default tv({
       color: 'warning',
       class: {
         badge: [
-          'bg-warning-500/[.7]'
+          'bg-warning'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       class: {
         badge: [
-          'bg-error-500/[.3]'
+          'bg-negative'
         ]
       }
     },
@@ -253,7 +253,7 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         badge: [
           'from-light-50',
@@ -265,21 +265,21 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       class: {
         badge: [
-          'from-success-500',
-          'to-success-900'
+          'from-positive',
+          'to-positive'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       class: {
         badge: [
-          'from-info-500',
-          'to-info-900'
+          'from-accent',
+          'to-accent'
         ]
       }
     },
@@ -288,18 +288,18 @@ export default tv({
       color: 'warning',
       class: {
         badge: [
-          'from-warning-500',
-          'to-warning-900'
+          'from-warning',
+          'to-warning'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       class: {
         badge: [
-          'from-error-500',
-          'to-error-900'
+          'from-negative',
+          'to-negative'
         ]
       }
     },

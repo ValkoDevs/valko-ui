@@ -53,7 +53,7 @@ const employeeData: TableItem[] = [
     email: 'michael.brown@example.com',
     sales: 67,
     date: '2023-10-30',
-    status: 'error',
+    status: 'negative',
     company: 'Retail Masters Corp.'
   },
   {
@@ -126,7 +126,7 @@ const employeeData: TableItem[] = [
     email: 'michael.brown@example.com',
     sales: 67,
     date: '2023-10-30',
-    status: 'error',
+    status: 'negative',
     company: 'Retail Masters Corp.'
   },
   {
@@ -161,7 +161,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
         <h1 class="text-lg font-semibold">
           Dashboard
         </h1>
-        <vk-button color="neutral">
+        <vk-button color="secondary">
           Profile
         </vk-button>
       </header>
@@ -245,7 +245,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
             <h1 class="text-lg font-semibold">
               Dashboard
             </h1>
-            <vk-button color="neutral">
+            <vk-button color="secondary">
               Profile
             </vk-button>
           </header>

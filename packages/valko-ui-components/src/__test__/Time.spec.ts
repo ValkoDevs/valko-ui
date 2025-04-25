@@ -86,10 +86,10 @@ describe('Time component', () => {
         expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-primary-500')
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkTime, {
           props: {
-            color: 'neutral',
+            color: 'secondary',
             modelValue,
             adapter
           }
@@ -98,28 +98,28 @@ describe('Time component', () => {
         expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-light-300')
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkTime, {
           props: {
-            color: 'success',
+            color: 'positive',
             modelValue,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-success-500')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-positive')
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkTime, {
           props: {
-            color: 'info',
+            color: 'accent',
             modelValue,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-info-500')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-accent')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -131,19 +131,19 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-warning-500')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-warning')
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkTime, {
           props: {
-            color: 'error',
+            color: 'negative',
             modelValue,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-error-500')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-negative')
       })
     })
 

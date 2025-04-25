@@ -91,10 +91,10 @@ describe('Time component', () => {
         expect(wrapper.find('.vk-input__label').classes()).toContain('peer-focus:text-primary-500')
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkTimepicker, {
           props: {
-            color: 'neutral',
+            color: 'secondary',
             modelValue,
             isOpen: true,
             parsedModel,
@@ -105,10 +105,10 @@ describe('Time component', () => {
         expect(wrapper.find('.vk-input__label').classes()).toContain('peer-focus:text-dark-800')
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkTimepicker, {
           props: {
-            color: 'success',
+            color: 'positive',
             modelValue,
             isOpen: true,
             parsedModel,
@@ -116,13 +116,13 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-input__label').classes()).toContain('text-success-500')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('text-positive')
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkTimepicker, {
           props: {
-            color: 'info',
+            color: 'accent',
             modelValue,
             isOpen: true,
             parsedModel,
@@ -130,7 +130,7 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-input__label').classes()).toContain('text-info-500')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('text-accent')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -144,13 +144,13 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-input__label').classes()).toContain('text-warning-500')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('text-warning')
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkTimepicker, {
           props: {
-            color: 'error',
+            color: 'negative',
             modelValue,
             isOpen: true,
             parsedModel,
@@ -158,7 +158,7 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-input__label').classes()).toContain('text-error-500')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('text-negative')
       })
     })
 

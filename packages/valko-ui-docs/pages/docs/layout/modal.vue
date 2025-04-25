@@ -172,7 +172,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
 
           <vk-button
-            color="success"
+            color="positive"
             size="sm"
             class="self-end"
             @click="() => {form.isOpen = false}"
@@ -340,7 +340,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
 
             <vk-button
-              color="success"
+              color="positive"
               size="sm"
               class="self-end"
               @click="toggleModal('closable')"

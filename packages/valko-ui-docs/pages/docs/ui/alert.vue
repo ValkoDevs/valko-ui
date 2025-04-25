@@ -20,7 +20,7 @@ const alertProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Alert.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -128,7 +128,7 @@ const iconSnippet = `
 <template>
   <doc-section
     title="Alert"
-    description="Visual notification that informs the user about an important state or action. Alerts are commonly used to communicate success messages, warnings, or errors to the user."
+    description="Visual notification that accent the user about an important state or action. Alerts are commonly used to communicate positive messages, warnings, or negative to the user."
   >
     <template #playground-view>
       <transition
@@ -151,7 +151,7 @@ const iconSnippet = `
           :icon="iconsForm.noIcon ? null : iconsForm.customIcon ? 'brand-vue' : ''"
           @close="closeAlert()"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus negative Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
         </vk-alert>
       </transition>
     </template>
@@ -215,7 +215,7 @@ const iconSnippet = `
           :color="color.value"
           :title="color.label"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus negative Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
         </vk-alert>
 
         <template #code>
@@ -233,7 +233,7 @@ const iconSnippet = `
           :variant="variant.value"
           :title="variant.label"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus negative Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
         </vk-alert>
 
         <template #code>
@@ -251,7 +251,7 @@ const iconSnippet = `
           :shape="shape.value"
           :title="shape.label"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus negative Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
         </vk-alert>
 
         <template #code>
@@ -269,7 +269,7 @@ const iconSnippet = `
           :size="size.value"
           :title="size.label"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus negative Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
         </vk-alert>
 
         <template #code>
@@ -283,11 +283,11 @@ const iconSnippet = `
       >
         <vk-alert
           title="Default Icon"
-          color="success"
+          color="positive"
         />
         <vk-alert
           title="Custom Icon"
-          color="info"
+          color="accent"
           icon="home"
         />
         <vk-alert

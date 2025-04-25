@@ -37,7 +37,7 @@ const onArrowClick = (operation: 1 | -1) => emit('changeYear', props.display.yea
         :disabled="(min && display.year === min.year && index < min.month) || (max && display.year === max.year && index > max.month)"
         :class="classes.gridButton"
         :size="size"
-        :color="isSelected(index) ? color : 'neutral'"
+        :color="isSelected(index) ? color : 'secondary'"
         :variant="isSelected(index) ? variant : 'link'"
         :shape="shape"
         condensed

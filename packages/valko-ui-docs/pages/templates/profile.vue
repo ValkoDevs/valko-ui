@@ -63,7 +63,7 @@ const profileStats = [
         <vk-button
           class="mt-6 w-full"
           variant="outlined"
-          color="neutral"
+          color="secondary"
           flat
         >
           View LinkedIn Profile
@@ -83,42 +83,42 @@ const profileStats = [
                 <vk-input
                   label="First Name"
                   variant="outlined"
-                  color="neutral"
+                  color="secondary"
                 />
                 <vk-input
                   label="Last Name"
                   variant="outlined"
-                  color="neutral"
+                  color="secondary"
                 />
                 <vk-input
                   label="Email"
                   variant="outlined"
-                  color="neutral"
+                  color="secondary"
                 />
                 <vk-input
                   label="Phone Number"
                   variant="outlined"
-                  color="neutral"
+                  color="secondary"
                 />
                 <vk-input
                   label="Address"
                   variant="outlined"
-                  color="neutral"
+                  color="secondary"
                 />
                 <vk-input
                   label="City"
                   variant="outlined"
-                  color="neutral"
+                  color="secondary"
                 />
                 <vk-input
                   label="State"
                   variant="outlined"
-                  color="neutral"
+                  color="secondary"
                 />
                 <vk-input
                   label="Zip Code"
                   variant="outlined"
-                  color="neutral"
+                  color="secondary"
                 />
               </div>
               <div class="flex gap-4">
@@ -127,7 +127,7 @@ const profileStats = [
                 </vk-button>
                 <vk-button
                   class="w-1/2"
-                  color="neutral"
+                  color="secondary"
                   variant="outlined"
                 >
                   Cancel
@@ -199,7 +199,7 @@ const profileStats = [
             <vk-button
               class="mt-6 w-full"
               variant="outlined"
-              color="neutral"
+              color="secondary"
               flat
             >
               View LinkedIn Profile
@@ -219,42 +219,42 @@ const profileStats = [
                     <vk-input
                       label="First Name"
                       variant="outlined"
-                      color="neutral"
+                      color="secondary"
                     />
                     <vk-input
                       label="Last Name"
                       variant="outlined"
-                      color="neutral"
+                      color="secondary"
                     />
                     <vk-input
                       label="Email"
                       variant="outlined"
-                      color="neutral"
+                      color="secondary"
                     />
                     <vk-input
                       label="Phone Number"
                       variant="outlined"
-                      color="neutral"
+                      color="secondary"
                     />
                     <vk-input
                       label="Address"
                       variant="outlined"
-                      color="neutral"
+                      color="secondary"
                     />
                     <vk-input
                       label="City"
                       variant="outlined"
-                      color="neutral"
+                      color="secondary"
                     />
                     <vk-input
                       label="State"
                       variant="outlined"
-                      color="neutral"
+                      color="secondary"
                     />
                     <vk-input
                       label="Zip Code"
                       variant="outlined"
-                      color="neutral"
+                      color="secondary"
                     />
                   </div>
                   <div class="flex gap-4">
@@ -263,7 +263,7 @@ const profileStats = [
                     </vk-button>
                     <vk-button
                       class="w-1/2"
-                      color="neutral"
+                      color="secondary"
                       variant="outlined"
                     >
                       Cancel

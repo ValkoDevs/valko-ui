@@ -20,7 +20,7 @@ const dividerProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Divider.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -239,7 +239,7 @@ const generateSnippet = snippetGeneratorFactory('vk-divider')
         </div>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('direction', { values: directionOptions.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('direction', { values: directionOptions.map(o => o.value as string) })" />
         </template>
       </example-section>
     </template>

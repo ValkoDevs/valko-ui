@@ -51,7 +51,7 @@ export default tv({
           'dark:hover:text-primary-500'
         ]
       },
-      neutral: {
+      secondary: {
         headerUtilities: [
           'data-[active=true]:text-dark-950',
           'hover:text-dark-950',
@@ -59,36 +59,36 @@ export default tv({
           'dark:hover:text-light-50'
         ]
       },
-      success: {
+      positive: {
         headerUtilities: [
-          'data-[active=true]:text-success-500',
-          'hover:text-success-500',
-          'dark:data-[active=true]:text-success-500',
-          'dark:hover:text-success-500'
+          'data-[active=true]:text-positive',
+          'hover:text-positive',
+          'dark:data-[active=true]:text-positive',
+          'dark:hover:text-positive'
         ]
       },
-      info: {
+      accent: {
         headerUtilities: [
-          'data-[active=true]:text-info-500',
-          'hover:text-info-500',
-          'dark:data-[active=true]:text-info-500',
-          'dark:hover:text-info-500'
+          'data-[active=true]:text-accent',
+          'hover:text-accent',
+          'dark:data-[active=true]:text-accent',
+          'dark:hover:text-accent'
         ]
       },
       warning: {
         headerUtilities: [
-          'data-[active=true]:text-warning-500',
-          'hover:text-warning-500',
-          'dark:data-[active=true]:text-warning-500',
-          'dark:hover:text-warning-500'
+          'data-[active=true]:text-warning',
+          'hover:text-warning',
+          'dark:data-[active=true]:text-warning',
+          'dark:hover:text-warning'
         ]
       },
-      error: {
+      negative: {
         headerUtilities: [
-          'data-[active=true]:text-error-500',
-          'hover:text-error-500',
-          'dark:data-[active=true]:text-error-500',
-          'dark:hover:text-error-500'
+          'data-[active=true]:text-negative',
+          'hover:text-negative',
+          'dark:data-[active=true]:text-negative',
+          'dark:hover:text-negative'
         ]
       }
     }

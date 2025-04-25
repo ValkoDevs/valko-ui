@@ -143,7 +143,7 @@ const transitionClasses = computed(() => {
                   size="xs"
                   variant="link"
                   shape="rounded"
-                  color="neutral"
+                  color="secondary"
                   condensed
                   :class="classes.closeButton"
                   @click="closeDrawer"

@@ -32,14 +32,14 @@ export default tv({
     },
     color: {
       primary: [],
-      neutral: [
+      secondary: [
         'text-dark-600',
         'dark:text-light-50'
       ],
-      success: [],
-      error: [],
+      positive: [],
+      negative: [],
       warning: [],
-      info: []
+      accent: []
     },
     size: {
       xs: [],
@@ -98,7 +98,7 @@ export default tv({
       ]
     },
     {
-      color: 'neutral',
+      color: 'secondary',
       variant: 'filled',
       class: [
         'bg-light-200',
@@ -106,31 +106,31 @@ export default tv({
       ]
     },
     {
-      color: 'success',
+      color: 'positive',
       variant: 'filled',
       class: [
-        'bg-success-500'
+        'bg-positive'
       ]
     },
     {
-      color: 'info',
+      color: 'accent',
       variant: 'filled',
       class: [
-        'bg-info-500'
+        'bg-accent'
       ]
     },
     {
       color: 'warning',
       variant: 'filled',
       class: [
-        'bg-warning-500'
+        'bg-warning'
       ]
     },
     {
-      color: 'error',
+      color: 'negative',
       variant: 'filled',
       class: [
-        'bg-error-500'
+        'bg-negative'
       ]
     },
     // outlined & color
@@ -143,7 +143,7 @@ export default tv({
       ]
     },
     {
-      color: 'neutral',
+      color: 'secondary',
       variant: 'outlined',
       class: [
         'bg-transparent',
@@ -152,19 +152,19 @@ export default tv({
       ]
     },
     {
-      color: 'success',
+      color: 'positive',
       variant: 'outlined',
       class: [
         'bg-transparent',
-        'border-success-500'
+        'border-positive'
       ]
     },
     {
-      color: 'info',
+      color: 'accent',
       variant: 'outlined',
       class: [
         'bg-transparent',
-        'border-info-500'
+        'border-accent'
       ]
     },
     {
@@ -172,15 +172,15 @@ export default tv({
       variant: 'outlined',
       class: [
         'bg-transparent',
-        'border-warning-500'
+        'border-warning'
       ]
     },
     {
-      color: 'error',
+      color: 'negative',
       variant: 'outlined',
       class: [
         'bg-transparent',
-        'border-error-500'
+        'border-negative'
       ]
     },
     // ghost & color
@@ -192,7 +192,7 @@ export default tv({
       ]
     },
     {
-      color: 'neutral',
+      color: 'secondary',
       variant: 'ghost',
       class: [
         'bg-light-300/[.3]',
@@ -200,31 +200,31 @@ export default tv({
       ]
     },
     {
-      color: 'success',
+      color: 'positive',
       variant: 'ghost',
       class: [
-        'bg-success-500/[.15]'
+        'bg-positive'
       ]
     },
     {
-      color: 'info',
+      color: 'accent',
       variant: 'ghost',
       class: [
-        'bg-info-500/[.15]'
+        'bg-accent'
       ]
     },
     {
       color: 'warning',
       variant: 'ghost',
       class: [
-        'bg-warning-500/[.15]'
+        'bg-warning/[.15]'
       ]
     },
     {
-      color: 'error',
+      color: 'negative',
       variant: 'ghost',
       class: [
-        'bg-error-500/[.15]'
+        'bg-negative'
       ]
     },
     // gradient & color
@@ -238,7 +238,7 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       class: [
         'from-light-50',
         'to-light-400',
@@ -248,34 +248,34 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       class: [
-        'from-success-500',
-        'to-success-900'
+        'from-positive',
+        'to-positive'
       ]
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       class: [
-        'from-info-500',
-        'to-info-900'
+        'from-accent',
+        'to-accent'
       ]
     },
     {
       variant: 'gradient',
       color: 'warning',
       class: [
-        'from-warning-500',
-        'to-warning-900'
+        'from-warning',
+        'to-warning'
       ]
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       class: [
-        'from-error-500',
-        'to-error-900'
+        'from-negative',
+        'to-negative'
       ]
     },
     // floating & variant

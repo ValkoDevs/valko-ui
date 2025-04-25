@@ -195,7 +195,7 @@ const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
 
           <vk-button
             class="self-end mt-auto"
-            color="error"
+            color="negative"
             @click="toggleDrawer('playground-drawer')"
           >
             Close Drawer
@@ -376,7 +376,7 @@ const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
 
             <vk-button
               class="self-end mt-auto"
-              color="error"
+              color="negative"
               @click="toggleDrawer('closable')"
             >
               Close Drawer

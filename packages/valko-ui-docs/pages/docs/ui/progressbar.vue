@@ -20,7 +20,7 @@ const progressbarProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Progressbar.',
-    values: 'primary, neutral, success, info, warning, error',
+    values: 'primary, secondary, positive, accent, warning, negative',
     default: 'primary'
   },
   {
@@ -96,7 +96,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
 <template>
   <doc-section
     title="Progressbar"
-    description="Visual indicator that shows the progress or status of a task. Progress bars are used to convey information about the completion status of an operation, such as file uploads, form submissions, or loading processes."
+    description="Visual indicator that shows the progress or status of a task. Progress bars are used to convey accent about the completion status of an operation, such as file uploads, form submissions, or loading processes."
   >
     <template #playground-view>
       <vk-progressbar

@@ -33,7 +33,7 @@ const notificationProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Notification.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -264,7 +264,7 @@ const stopOnFocusSnippet = `
 <template>
   <doc-section
     title="Notification"
-    description="Versatile tool for displaying brief, timely messages to users. It serves to alert users to important information, such as successful actions, warnings, or errors, enhancing their awareness and interaction with the application. Unlike pop-up alerts that interrupt workflow, notifications are subtle, non-intrusive cues that seamlessly integrate into the user interface, providing a seamless user experience. With customizable options for appearance and behavior, the Notification component empowers developers to tailor notifications to suit the specific needs and aesthetics of their application."
+    description="Versatile tool for displaying brief, timely messages to users. It serves to alert users to important accent, such as positive actions, warnings, or negative, enhancing their awareness and interaction with the application. Unlike pop-up alerts that interrupt workflow, notifications are subtle, non-intrusive cues that seamlessly integrate into the user interface, providing a seamless user experience. With customizable options for appearance and behavior, the Notification component empowers developers to tailor notifications to suit the specific needs and aesthetics of their application."
   >
     <template #playground-view>
       <vk-button

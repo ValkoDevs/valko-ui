@@ -120,11 +120,11 @@ export default tv({
     },
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     }
   },
   compoundVariants: [
@@ -182,7 +182,7 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         tr: [
           'data-[selected=true]:bg-dark-600/[.3]',
@@ -192,21 +192,21 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       class: {
         tr: [
-          'data-[selected=true]:bg-success-500/[.3]',
-          'dark:data-[selected=true]:bg-success-500/[.3]'
+          'data-[selected=true]:bg-positive',
+          'dark:data-[selected=true]:bg-positive'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       class: {
         tr: [
-          'data-[selected=true]:bg-info-500/[.3]',
-          'dark:data-[selected=true]:bg-info-500/[.3]'
+          'data-[selected=true]:bg-accent',
+          'dark:data-[selected=true]:bg-accent'
         ]
       }
     },
@@ -215,18 +215,18 @@ export default tv({
       color: 'warning',
       class: {
         tr: [
-          'data-[selected=true]:bg-warning-500/[.3]',
-          'dark:data-[selected=true]:bg-warning-500/[.3]'
+          'data-[selected=true]:bg-warning',
+          'dark:data-[selected=true]:bg-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       class: {
         tr: [
-          'data-[selected=true]:bg-error-500/[.3]',
-          'dark:data-[selected=true]:bg-error-500/[.3]'
+          'data-[selected=true]:bg-negative',
+          'dark:data-[selected=true]:bg-negative'
         ]
       }
     },
@@ -242,7 +242,7 @@ export default tv({
     },
     {
       variant: ['ghost', 'outlined'],
-      color: 'neutral',
+      color: 'secondary',
       class: {
         tr: [
           'data-[selected=true]:bg-dark-600/[.3]',
@@ -252,21 +252,21 @@ export default tv({
     },
     {
       variant: ['ghost', 'outlined'],
-      color: 'success',
+      color: 'positive',
       class: {
         tr: [
-          'data-[selected=true]:bg-success-500/[.1]',
-          'dark:data-[selected=true]:bg-success-500/[.1]'
+          'data-[selected=true]:bg-positive',
+          'dark:data-[selected=true]:bg-positive'
         ]
       }
     },
     {
       variant: ['ghost', 'outlined'],
-      color: 'info',
+      color: 'accent',
       class: {
         tr: [
-          'data-[selected=true]:bg-info-500/[.1]',
-          'dark:data-[selected=true]:bg-info-500/[.1]'
+          'data-[selected=true]:bg-accent',
+          'dark:data-[selected=true]:bg-accent'
         ]
       }
     },
@@ -275,18 +275,18 @@ export default tv({
       color: 'warning',
       class: {
         tr: [
-          'data-[selected=true]:bg-warning-500/[.1]',
-          'dark:data-[selected=true]:bg-warning-500/[.1]'
+          'data-[selected=true]:bg-warning',
+          'dark:data-[selected=true]:bg-warning'
         ]
       }
     },
     {
       variant: ['ghost', 'outlined'],
-      color: 'error',
+      color: 'negative',
       class: {
         tr: [
-          'data-[selected=true]:bg-error-500/[.1]',
-          'dark:data-[selected=true]:bg-error-500/[.1]'
+          'data-[selected=true]:bg-negative',
+          'dark:data-[selected=true]:bg-negative'
         ]
       }
     }

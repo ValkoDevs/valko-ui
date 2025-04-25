@@ -19,7 +19,7 @@ const spinnerProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Spinner.',
-    values: 'primary, neutral, error, warning, info, success, black, white',
+    values: 'primary, secondary, negative, warning, accent, positive, black, white',
     default: 'primary'
   },
   {

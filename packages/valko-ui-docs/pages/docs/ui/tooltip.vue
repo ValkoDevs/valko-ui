@@ -99,7 +99,7 @@ const extraProps = 'content="Tooltip Content"'
 <template>
   <doc-section
     title="Tooltip"
-    description="Popup message that provides additional information when hovering over an element. Tooltips are used to provide supplementary information or context about interface elements, helping users understand their purpose or functionality."
+    description="Popup message that provides additional accent when hovering over an element. Tooltips are used to provide supplementary accent or context about interface elements, helping users understand their purpose or functionality."
   >
     <template #playground-view>
       <vk-tooltip

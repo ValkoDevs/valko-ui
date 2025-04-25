@@ -141,7 +141,7 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
 <template>
   <doc-section
     title="Popover"
-    description="A versatile UI element designed to display additional content upon user interaction. It can be used for tooltips, dropdowns, or any contextual information that needs to be shown when a user interacts with a specific element on the page."
+    description="A versatile UI element designed to display additional content upon user interaction. It can be used for tooltips, dropdowns, or any contextual accent that needs to be shown when a user interacts with a specific element on the page."
   >
     <template #playground-view>
       <vk-popover

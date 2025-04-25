@@ -27,11 +27,11 @@ export type Size = 'xs' | 'sm' | 'md' | 'lg'
 export type SizeWithFull = Size | 'full'
 export type Color =
   | 'primary'
-  | 'neutral'
-  | 'success'
-  | 'info'
+  | 'secondary'
+  | 'accent'
+  | 'positive'
   | 'warning'
-  | 'error'
+  | 'negative'
 
 export interface Shapes { shape?: Shape; }
 export interface Variants { variant?: Variant; }

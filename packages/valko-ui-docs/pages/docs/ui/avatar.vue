@@ -22,7 +22,7 @@ const avatarProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Avatar.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {

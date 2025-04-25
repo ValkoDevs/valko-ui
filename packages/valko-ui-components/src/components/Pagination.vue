@@ -54,7 +54,7 @@ watchEffect(() => {
       <vk-button
         variant="link"
         class="vk-pagination__left"
-        color="neutral"
+        color="secondary"
         :shape="shape"
         :size="size"
         condensed
@@ -72,7 +72,7 @@ watchEffect(() => {
         :key="page"
         flat
         :variant="page === modelValue ? variant : 'link'"
-        :color="page === modelValue ? color : 'neutral'"
+        :color="page === modelValue ? color : 'secondary'"
         :size="size"
         :shape="shape"
         condensed
@@ -86,7 +86,7 @@ watchEffect(() => {
       <vk-button
         variant="link"
         class="vk-pagination__right"
-        color="neutral"
+        color="secondary"
         :shape="shape"
         :size="size"
         flat

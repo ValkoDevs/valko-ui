@@ -165,7 +165,7 @@ export default tv({
           'hover:text-primary'
         ]
       },
-      neutral: {
+      secondary: {
         input: [
           'hover:border-secondary-container',
           'focus:border-on-secondary-container'
@@ -185,7 +185,7 @@ export default tv({
           'hover:text-secondary'
         ]
       },
-      success: {
+      positive: {
         input: [
           'hover:border-positive-container',
           'focus:border-on-positive-container'
@@ -205,7 +205,7 @@ export default tv({
           'hover:text-positive'
         ]
       },
-      info: {
+      accent: {
         input: [
           'hover:border-accent-container',
           'focus:border-on-accent-container'
@@ -245,7 +245,7 @@ export default tv({
           'hover:text-warning'
         ]
       },
-      error: {
+      negative: {
         input: [
           'hover:border-positive-container',
           'focus:border-on-positive-container'

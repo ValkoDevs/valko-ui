@@ -28,7 +28,7 @@ const badgeProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Badge.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -108,7 +108,7 @@ const badgeSlots: TableItem[] = [
 
 const generateSnippet = snippetGeneratorFactory('vk-badge')
 
-const customSlot = '<vk-avatar\n      :src="src"\n      color="neutral"\n    />'
+const customSlot = '<vk-avatar\n      :src="src"\n      color="secondary"\n    />'
 const extraProps = {
   content: 'content="new"',
   dot: 'dot'
@@ -118,7 +118,7 @@ const extraProps = {
 <template>
   <doc-section
     title="Badge"
-    description="Visual element that displays additional information, such as notifications or states. Badges are typically used to indicate new or unread items, status indicators, or numeric counters."
+    description="Visual element that displays additional accent, such as notifications or states. Badges are typically used to indicate new or unread items, status indicators, or numeric counters."
   >
     <template #playground-view>
       <vk-badge
@@ -134,7 +134,7 @@ const extraProps = {
       >
         <vk-avatar
           :src="src"
-          color="neutral"
+          color="secondary"
         />
       </vk-badge>
     </template>
@@ -205,7 +205,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="neutral"
+              color="secondary"
             />
           </vk-badge>
         </div>
@@ -231,7 +231,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="neutral"
+              color="secondary"
             />
           </vk-badge>
         </div>
@@ -257,7 +257,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="neutral"
+              color="secondary"
             />
           </vk-badge>
         </div>
@@ -283,7 +283,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="neutral"
+              color="secondary"
             />
           </vk-badge>
         </div>
@@ -309,7 +309,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="neutral"
+              color="secondary"
             />
           </vk-badge>
         </div>
@@ -326,7 +326,7 @@ const extraProps = {
         >
           <vk-avatar
             :src="src"
-            color="neutral"
+            color="secondary"
           />
         </vk-badge>
 
@@ -342,7 +342,7 @@ const extraProps = {
         >
           <vk-avatar
             :src="src"
-            color="neutral"
+            color="secondary"
           />
         </vk-badge>
 
@@ -367,7 +367,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="neutral"
+              color="secondary"
             />
           </vk-badge>
         </div>
@@ -383,7 +383,7 @@ const extraProps = {
         >
           <vk-avatar
             :src="src"
-            color="neutral"
+            color="secondary"
           />
         </vk-badge>
 

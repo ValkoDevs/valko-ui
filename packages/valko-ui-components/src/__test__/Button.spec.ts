@@ -61,34 +61,34 @@ describe('Button component', () => {
         expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkButton, {
           props: {
-            color: 'neutral'
+            color: 'secondary'
           }
         })
 
         expect(wrapper.find('.bg-light-300').exists()).toBe(true)
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkButton, {
           props: {
-            color: 'success'
+            color: 'positive'
           }
         })
 
-        expect(wrapper.find('.bg-success-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-positive').exists()).toBe(true)
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkButton, {
           props: {
-            color: 'info'
+            color: 'accent'
           }
         })
 
-        expect(wrapper.find('.bg-info-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-accent').exists()).toBe(true)
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -98,17 +98,17 @@ describe('Button component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-warning-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-warning').exists()).toBe(true)
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkButton, {
           props: {
-            color: 'error'
+            color: 'negative'
           }
         })
 
-        expect(wrapper.find('.bg-error-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-negative').exists()).toBe(true)
       })
     })
 
@@ -271,11 +271,11 @@ describe('Button component', () => {
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
       })
 
-      it('should apply correct spinner styles for success color', () => {
+      it('should apply correct spinner styles for positive color', () => {
         const wrapper = mount(VkButton, {
           props: {
             loading: true,
-            color: 'success',
+            color: 'positive',
             variant: 'filled'
           }
         })
@@ -283,15 +283,15 @@ describe('Button component', () => {
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
       })
 
-      it('should apply correct spinner styles when color is neutral and variant is filled', () => {
+      it('should apply correct spinner styles when color is secondary and variant is filled', () => {
         const wrapper = mount(VkButton, {
           props: {
             loading: true,
-            color: 'neutral',
+            color: 'secondary',
             variant: 'filled'
           }
         })
-        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('data-[variant=filled]:data-[color=neutral]:text-white')
+        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('data-[variant=filled]:data-[color=secondarywhite')
       })
 
       it('should apply correct spinner styles when color is primary and variant is filled', () => {
@@ -305,26 +305,26 @@ describe('Button component', () => {
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
       })
 
-      it('should apply correct spinner styles when color is success and variant is filled', () => {
+      it('should apply correct spinner styles when color is positive and variant is filled', () => {
         const wrapper = mount(VkButton, {
           props: {
             loading: true,
-            color: 'success',
+            color: 'positive',
             variant: 'filled'
           }
         })
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
       })
 
-      it('should apply correct spinner styles when color is neutral and variant is outlined', () => {
+      it('should apply correct spinner styles when color is secondary and variant is outlined', () => {
         const wrapper = mount(VkButton, {
           props: {
             loading: true,
-            color: 'neutral',
+            color: 'secondary',
             variant: 'outlined'
           }
         })
-        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('data-[variant=outlined]:data-[color=neutral]:text-black')
+        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('data-[variant=outlined]:data-[color=secondaryblack')
       })
 
       it('should apply correct spinner styles when color is primary and variant is outlined', () => {
@@ -338,15 +338,15 @@ describe('Button component', () => {
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-primary-500')
       })
 
-      it('should apply correct spinner styles when color is success and variant is outlined', () => {
+      it('should apply correct spinner styles when color is positive and variant is outlined', () => {
         const wrapper = mount(VkButton, {
           props: {
             loading: true,
-            color: 'success',
+            color: 'positive',
             variant: 'outlined'
           }
         })
-        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-success-500')
+        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-positive')
       })
     })
   })

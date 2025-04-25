@@ -42,7 +42,7 @@ const tableProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the table.',
-    values: 'primary, neutral, success, info, warning, error',
+    values: 'primary, secondary, positive, accent, warning, negative',
     default: 'primary'
   },
   {
@@ -494,7 +494,7 @@ const propData: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the table.',
-    values: 'primary, neutral, success, info, warning, error',
+    values: 'primary, secondary, positive, accent, warning, negative',
     default: 'primary'
   },
   {

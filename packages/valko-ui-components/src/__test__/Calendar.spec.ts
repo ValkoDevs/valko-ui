@@ -107,10 +107,10 @@ describe('Calendar component', () => {
         expect(button.classes()).toContain('bg-primary-500')
       })
 
-      it('should be color neutral when props.color is neutral', async () => {
+      it('should be color secondary when props.color is secondary', async () => {
         wrapper = mount(VkCalendar, {
           props: {
-            color: 'neutral',
+            color: 'secondary',
             modelValue,
             adapter
           }
@@ -122,10 +122,10 @@ describe('Calendar component', () => {
         expect(button.classes()).toContain('bg-light-300')
       })
 
-      it('should be color success when props.color is success', async () => {
+      it('should be color positive when props.color is positive', async () => {
         wrapper = mount(VkCalendar, {
           props: {
-            color: 'success',
+            color: 'positive',
             modelValue,
             adapter
           }
@@ -134,13 +134,13 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-success-500')
+        expect(button.classes()).toContain('bg-positive')
       })
 
-      it('should be color info when props.color is info', async () => {
+      it('should be color accent when props.color is accent', async () => {
         wrapper = mount(VkCalendar, {
           props: {
-            color: 'info',
+            color: 'accent',
             modelValue,
             adapter
           }
@@ -149,7 +149,7 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-info-500')
+        expect(button.classes()).toContain('bg-accent')
       })
 
       it('should be color warning when props.color is warning', async () => {
@@ -163,13 +163,13 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-warning-500')
+        expect(button.classes()).toContain('bg-warning')
       })
 
-      it('should be color error when props.color is error', async () => {
+      it('should be color negative when props.color is negative', async () => {
         wrapper = mount(VkCalendar, {
           props: {
-            color: 'error',
+            color: 'negative',
             modelValue,
             adapter
           }
@@ -178,7 +178,7 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-error-500')
+        expect(button.classes()).toContain('bg-negative')
       })
     })
 

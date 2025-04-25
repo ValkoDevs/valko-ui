@@ -66,10 +66,10 @@ describe('Tabs component', () => {
         expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkTabs, {
           props: {
-            color: 'neutral',
+            color: 'secondary',
             tabs
           }
         })
@@ -77,26 +77,26 @@ describe('Tabs component', () => {
         expect(wrapper.find('.bg-light-300').exists()).toBe(true)
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkTabs, {
           props: {
-            color: 'success',
+            color: 'positive',
             tabs
           }
         })
 
-        expect(wrapper.find('.bg-success-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-positive').exists()).toBe(true)
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkTabs, {
           props: {
-            color: 'info',
+            color: 'accent',
             tabs
           }
         })
 
-        expect(wrapper.find('.bg-info-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-accent').exists()).toBe(true)
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -107,18 +107,18 @@ describe('Tabs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-warning-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-warning').exists()).toBe(true)
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkTabs, {
           props: {
-            color: 'error',
+            color: 'negative',
             tabs
           }
         })
 
-        expect(wrapper.find('.bg-error-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-negative').exists()).toBe(true)
       })
     })
 

@@ -46,34 +46,34 @@ describe('Switch component', () => {
         expect(wrapper.find('.bg-primary-500')).toBeDefined()
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkSwitch, {
           props: {
-            color: 'neutral'
+            color: 'secondary'
           }
         })
 
         expect(wrapper.find('.bg-light-400')).toBeDefined()
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkSwitch, {
           props: {
-            color: 'success'
+            color: 'positive'
           }
         })
 
-        expect(wrapper.find('.bg-success-500')).toBeDefined()
+        expect(wrapper.find('.bg-positive')).toBeDefined()
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkSwitch, {
           props: {
-            color: 'info'
+            color: 'accent'
           }
         })
 
-        expect(wrapper.find('.bg-info-500')).toBeDefined()
+        expect(wrapper.find('.bg-accent')).toBeDefined()
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -83,17 +83,17 @@ describe('Switch component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-warning-500')).toBeDefined()
+        expect(wrapper.find('.bg-warning')).toBeDefined()
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkSwitch, {
           props: {
-            color: 'error'
+            color: 'negative'
           }
         })
 
-        expect(wrapper.find('.bg-error-500')).toBeDefined()
+        expect(wrapper.find('.bg-negative')).toBeDefined()
       })
     })
 

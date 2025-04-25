@@ -70,7 +70,7 @@ export default tv({
           'data-[active=true]:hover:text-primary-600'
         ]
       },
-      neutral: {
+      secondary: {
         a: [
           'hover:text-dark-950',
           'data-[active=true]:text-dark-800',
@@ -80,32 +80,32 @@ export default tv({
           'dark:data-[active=true]:hover:text-light-50'
         ]
       },
-      success: {
+      positive: {
         a: [
-          'hover:text-success-600',
-          'data-[active=true]:text-success-500',
-          'data-[active=true]:hover:text-success-600'
+          'hover:text-positive',
+          'data-[active=true]:text-positive',
+          'data-[active=true]:hover:text-positive'
         ]
       },
-      info: {
+      accent: {
         a: [
-          'hover:text-info-600',
-          'data-[active=true]:text-info-500',
-          'data-[active=true]:hover:text-info-600'
+          'hover:text-accent',
+          'data-[active=true]:text-accent',
+          'data-[active=true]:hover:text-accent'
         ]
       },
       warning: {
         a: [
-          'hover:text-warning-600',
-          'data-[active=true]:text-warning-500',
-          'data-[active=true]:hover:text-warning-600'
+          'hover:text-warning',
+          'data-[active=true]:text-warning',
+          'data-[active=true]:hover:text-warning'
         ]
       },
-      error: {
+      negative: {
         a: [
-          'hover:text-error-600',
-          'data-[active=true]:text-error-500',
-          'data-[active=true]:hover:text-error-600'
+          'hover:text-negative',
+          'data-[active=true]:text-negative',
+          'data-[active=true]:hover:text-negative'
         ]
       }
     },

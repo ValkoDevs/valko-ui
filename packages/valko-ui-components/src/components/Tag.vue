@@ -55,7 +55,7 @@ const onClose = () => {
     <vk-button
       v-if="closable"
       :class="classes.closable"
-      :color="variant === 'filled' ? 'neutral' : color"
+      :color="variant === 'filled' ? 'secondary' : color"
       variant="link"
       shape="rounded"
       size="xs"

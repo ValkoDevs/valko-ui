@@ -32,11 +32,11 @@ export default tv({
   variants: {
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     },
     variant: {
       filled: {
@@ -143,7 +143,7 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         content: [
           'data-[active=true]:bg-secondary-container',
@@ -153,7 +153,7 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       class: {
         content: [
           'data-[active=true]:bg-positive',
@@ -163,7 +163,7 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       class: {
         content: [
           'data-[active=true]:bg-negative',
@@ -183,7 +183,7 @@ export default tv({
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       class: {
         content: [
           'data-[active=true]:bg-accent',
@@ -204,7 +204,7 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         content: [
           'data-[active=true]:text-on-secondary-container',
@@ -214,7 +214,7 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       class: {
         content: [
           'data-[active=true]:text-positive',
@@ -224,7 +224,7 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       class: {
         content: [
           'data-[active=true]:text-negative',
@@ -244,7 +244,7 @@ export default tv({
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       class: {
         content: [
           'data-[active=true]:text-accent',
@@ -265,7 +265,7 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         content: [
           'data-[active=true]:text-on-secondary-container',
@@ -275,7 +275,7 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       class: {
         content: [
           'data-[active=true]:text-on-positive-container',
@@ -285,7 +285,7 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       class: {
         content: [
           'data-[active=true]:text-on-negative-container',
@@ -305,7 +305,7 @@ export default tv({
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       class: {
         content: [
           'data-[active=true]:text-on-accent-container',
@@ -325,7 +325,7 @@ export default tv({
     },
     {
       variant: 'link',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         content: [
           'data-[active=true]:text-on-secondary'
@@ -334,7 +334,7 @@ export default tv({
     },
     {
       variant: 'link',
-      color: 'success',
+      color: 'positive',
       class: {
         content: [
           'data-[active=true]:text-positive'
@@ -343,7 +343,7 @@ export default tv({
     },
     {
       variant: 'link',
-      color: 'error',
+      color: 'negative',
       class: {
         content: [
           'data-[active=true]:text-negative'
@@ -361,7 +361,7 @@ export default tv({
     },
     {
       variant: 'link',
-      color: 'info',
+      color: 'accent',
       class: {
         content: [
           'data-[active=true]:text-accent'
@@ -380,7 +380,7 @@ export default tv({
     },
     {
       variant: 'line',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         content: [
           'data-[active=true]:border-secondary'
@@ -389,7 +389,7 @@ export default tv({
     },
     {
       variant: 'line',
-      color: 'success',
+      color: 'positive',
       class: {
         content: [
           'data-[active=true]:border-positive'
@@ -398,7 +398,7 @@ export default tv({
     },
     {
       variant: 'line',
-      color: 'error',
+      color: 'negative',
       class: {
         content: [
           'data-[active=true]:border-negative'
@@ -416,7 +416,7 @@ export default tv({
     },
     {
       variant: 'line',
-      color: 'info',
+      color: 'accent',
       class: {
         content: [
           'data-[active=true]:border-accent'
@@ -436,7 +436,7 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         content: [
           'data-[active=true]:from-secondary-gradient-start',
@@ -446,7 +446,7 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       class: {
         content: [
           'data-[active=true]:from-positive-gradient-start',
@@ -456,7 +456,7 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       class: {
         content: [
           'data-[active=true]:from-accent-gradient-start',
@@ -476,7 +476,7 @@ export default tv({
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       class: {
         content: [
           'data-[active=true]:from-negative-gradient-start',
