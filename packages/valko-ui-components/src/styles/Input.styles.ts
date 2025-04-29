@@ -25,11 +25,10 @@ export default tv({
     ],
     label: [
       'vk-input__label',
-      'opacity-80',
       'text-left',
       'font-bold',
       'truncate',
-      'px-1',
+      'p-1',
       'ml-[1px]',
       'absolute',
       'top-1/2',
@@ -82,7 +81,7 @@ export default tv({
     ],
     clearIcon: [
       'vk-input__clear-icon',
-      'text-on-surface-container',
+      'text-on-surface',
       'cursor-pointer',
       'opacity-80',
       'absolute',
@@ -109,31 +108,31 @@ export default tv({
     variant: {
       filled: {
         input: [
-          'bg-surface-container-high',
+          'bg-surface-container-highest',
           'border-b-2',
-          'border-surface-container-highest'
+          'border-on-surface-variant'
         ]
       },
       ghost: {
         input: [
-          'bg-inherit',
+          'bg-transparent',
           'border-b-2',
-          'border-surface-container-highest'
+          'border-on-surface-variant'
         ],
         label: [
-          'bg-inherit'
+          'bg-transparent'
         ]
       },
       outlined: {
         input: [
           'px-2',
-          'bg-surface-container-low',
+          'bg-inherit',
           'border-2',
-          'border-surface-container'
+          'border-outlined'
         ],
         label: [
           'left-1.5',
-          'bg-transparent',
+          'bg-inherit',
           'peer-data-[left-icon=true]:ml-0.5'
         ],
         leftIcon: [
@@ -147,15 +146,15 @@ export default tv({
     color: {
       primary: {
         input: [
-          'hover:border-primary-container',
-          'focus:border-on-primary-container'
+          'hover:border-primary',
+          'focus:border-primary'
         ],
         label: [
-          'text-on-surface-container',
+          'text-on-surface',
           'peer-focus:text-primary'
         ],
         icons: [
-          'text-on-surface-container',
+          'text-on-surface',
           'peer-focus:text-primary'
         ],
         clearIcon: [
@@ -167,15 +166,15 @@ export default tv({
       },
       secondary: {
         input: [
-          'hover:border-secondary-container',
-          'focus:border-on-secondary-container'
+          'hover:border-secondary',
+          'focus:border-secondary'
         ],
         label: [
-          'text-on-surface-container',
+          'text-on-surface',
           'peer-focus:text-secondary'
         ],
         icons: [
-          'text-on-surface-container',
+          'text-on-surface',
           'peer-focus:text-secondary'
         ],
         clearIcon: [
@@ -187,15 +186,15 @@ export default tv({
       },
       positive: {
         input: [
-          'hover:border-positive-container',
-          'focus:border-on-positive-container'
+          'hover:border-positive',
+          'focus:border-positive'
         ],
         label: [
-          'text-on-surface-container',
+          'text-on-surface',
           'peer-focus:text-positive'
         ],
         icons: [
-          'text-on-surface-container',
+          'text-on-surface',
           'peer-focus:text-positive'
         ],
         clearIcon: [
@@ -207,15 +206,15 @@ export default tv({
       },
       accent: {
         input: [
-          'hover:border-accent-container',
-          'focus:border-on-accent-container'
+          'hover:border-accent',
+          'focus:border-accent'
         ],
         label: [
-          'text-on-surface-container',
+          'text-on-surface',
           'peer-focus:text-accent'
         ],
         icons: [
-          'text-on-surface-container',
+          'text-on-surface',
           'peer-focus:text-accent'
         ],
         clearIcon: [
@@ -227,15 +226,15 @@ export default tv({
       },
       warning: {
         input: [
-          'hover:border-warning-container',
-          'focus:border-on-warning-container'
+          'hover:border-warning',
+          'focus:border-on-warning'
         ],
         label: [
-          'text-on-surface-container',
+          'text-on-surface',
           'peer-focus:text-warning'
         ],
         icons: [
-          'text-on-surface-container',
+          'text-on-surface',
           'peer-focus:text-warning'
         ],
         clearIcon: [
@@ -247,22 +246,22 @@ export default tv({
       },
       negative: {
         input: [
-          'hover:border-positive-container',
-          'focus:border-on-positive-container'
+          'hover:border-negative',
+          'focus:border-on-negative'
         ],
         label: [
-          'text-on-surface-container',
-          'peer-focus:text-positive'
+          'text-on-surface',
+          'peer-focus:text-negative'
         ],
         icons: [
-          'text-on-surface-container',
-          'peer-focus:text-positive'
+          'text-on-surface',
+          'peer-focus:text-negative'
         ],
         clearIcon: [
-          'hover:text-positive'
+          'hover:text-negative'
         ],
         chevrons: [
-          'hover:text-positive'
+          'hover:text-negative'
         ]
       }
     },

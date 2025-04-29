@@ -20,8 +20,8 @@ export default tv({
     headerUtilities: [
       'vk-data-table__utilities',
       'cursor-pointer',
-      'text-dark-600',
-      'dark:text-light-400'
+      'text-black',
+      'dark:text-white'
     ],
     footer: [
       'flex',
@@ -45,50 +45,38 @@ export default tv({
     color: {
       primary: {
         headerUtilities: [
-          'data-[active=true]:text-primary-500',
-          'hover:text-primary-500',
-          'dark:data-[active=true]:text-primary-500',
-          'dark:hover:text-primary-500'
+          'data-[active=true]:text-primary',
+          'hover:text-primary'
         ]
       },
       secondary: {
         headerUtilities: [
-          'data-[active=true]:text-dark-950',
-          'hover:text-dark-950',
-          'dark:data-[active=true]:text-light-50',
-          'dark:hover:text-light-50'
+          'data-[active=true]:text-secondary',
+          'hover:text-secondary'
         ]
       },
       positive: {
         headerUtilities: [
           'data-[active=true]:text-positive',
-          'hover:text-positive',
-          'dark:data-[active=true]:text-positive',
-          'dark:hover:text-positive'
+          'hover:text-positive'
         ]
       },
       accent: {
         headerUtilities: [
           'data-[active=true]:text-accent',
-          'hover:text-accent',
-          'dark:data-[active=true]:text-accent',
-          'dark:hover:text-accent'
+          'hover:text-accent'
         ]
       },
       warning: {
         headerUtilities: [
           'data-[active=true]:text-warning',
-          'hover:text-warning',
-          'dark:data-[active=true]:text-warning',
-          'dark:hover:text-warning'
+          'hover:text-warning'
         ]
       },
       negative: {
         headerUtilities: [
           'data-[active=true]:text-negative',
-          'hover:text-negative',
-          'dark:data-[active=true]:text-negative',
-          'dark:hover:text-negative'
+          'hover:text-negative'
         ]
       }
     }

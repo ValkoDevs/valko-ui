@@ -9,9 +9,7 @@ export default tv({
       '-space-x-px',
       'shadow-sm',
       'w-fit',
-      'flex',
-      'shadow-light-300',
-      'dark:shadow-dark-950'
+      'flex'
     ],
     button: [
       'vk-pagination__button',
@@ -30,16 +28,14 @@ export default tv({
     variant: {
       filled: {
         nav: [
-          'bg-light-200',
-          'dark:bg-dark-800'
+          'bg-surface-container'
         ]
       },
       outlined: {
         nav: [
           'p-1.5',
           'border-2',
-          'border-light-200',
-          'dark:border-dark-800'
+          'border-outlined'
         ]
       },
       ghost: {

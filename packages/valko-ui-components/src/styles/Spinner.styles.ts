@@ -39,13 +39,12 @@ export default tv({
     color: {
       primary: {
         iconColor: [
-          'text-primary-500'
+          'text-primary'
         ]
       },
       secondary: {
         iconColor: [
-          'text-dark-800',
-          'dark:text-light-100'
+          'text-secondary'
         ]
       },
       positive: {

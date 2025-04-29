@@ -49,13 +49,11 @@ export default tv({
     ],
     cursor: [
       'shadow-lg',
-      'shadow-light-300',
       'absolute',
       'inset-0',
       'z-10',
       'transition-all',
-      'duration-200',
-      'dark:shadow-dark-950'
+      'duration-200'
     ],
     cursorGradient: [
       'absolute',
@@ -77,15 +75,13 @@ export default tv({
     variant: {
       filled: {
         list: [
-          'bg-light-200',
-          'dark:bg-dark-800'
+          'bg-'
         ]
       },
       outlined: {
         list: [
           'border-2',
-          'border-light-400',
-          'dark:border-dark-600'
+          'border-outlined'
         ]
       },
       ghost: {
@@ -101,8 +97,7 @@ export default tv({
       },
       gradient: {
         list: [
-          'bg-light-200',
-          'dark:bg-dark-800'
+          'bg-surface-container'
         ],
         cursor: [
           'bg-gradient-to-br'

@@ -5,7 +5,7 @@ export default tv({
     'w-full',
     'px-4',
     'py-8',
-    'bg-surface-container',
+    'bg-surface-container-lowest',
     'rounded-b-lg',
     'gap-4',
     'grid',

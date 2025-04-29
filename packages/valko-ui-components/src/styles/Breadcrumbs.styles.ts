@@ -7,10 +7,8 @@ export default tv({
       'w-fit',
       'flex',
       'flex-wrap',
-      'shadow-light-300',
       'transition-colors',
-      'duration-200',
-      'dark:shadow-dark-950'
+      'duration-200'
     ],
     a: [
       'vk-breadcrumbs__a',
@@ -37,8 +35,7 @@ export default tv({
     variant: {
       filled: {
         container: [
-          'bg-light-200',
-          'dark:bg-dark-800'
+          'bg-surface-container'
         ]
       },
       outlined: {
@@ -52,8 +49,7 @@ export default tv({
       },
       ghost: {
         container: [
-          'bg-light-200/[.50]',
-          'dark:bg-dark-800/[.50]'
+          'bg-surface-container/[.5]'
         ]
       },
       link: {
@@ -65,47 +61,32 @@ export default tv({
     color: {
       primary: {
         a: [
-          'hover:text-primary-600',
-          'data-[active=true]:text-primary-500',
-          'data-[active=true]:hover:text-primary-600'
+          'hover:text-primary'
         ]
       },
       secondary: {
         a: [
-          'hover:text-dark-950',
-          'data-[active=true]:text-dark-800',
-          'data-[active=true]:hover:text-dark-950',
-          'dark:hover:text-light-50',
-          'dark:data-[active=true]:text-light-200',
-          'dark:data-[active=true]:hover:text-light-50'
+          'hover:text-secondary'
         ]
       },
       positive: {
         a: [
-          'hover:text-positive',
-          'data-[active=true]:text-positive',
-          'data-[active=true]:hover:text-positive'
+          'hover:text-positive'
         ]
       },
       accent: {
         a: [
-          'hover:text-accent',
-          'data-[active=true]:text-accent',
-          'data-[active=true]:hover:text-accent'
+          'hover:text-accent'
         ]
       },
       warning: {
         a: [
-          'hover:text-warning',
-          'data-[active=true]:text-warning',
-          'data-[active=true]:hover:text-warning'
+          'hover:text-warning'
         ]
       },
       negative: {
         a: [
-          'hover:text-negative',
-          'data-[active=true]:text-negative',
-          'data-[active=true]:hover:text-negative'
+          'hover:text-negative'
         ]
       }
     },

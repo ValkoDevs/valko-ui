@@ -25,8 +25,7 @@ export default tv({
       'transition-color',
       'duration-200',
       'cursor-pointer',
-      'hover:bg-light-200',
-      'hover:dark:bg-dark-800'
+      'hover:bg-surface-container'
     ]
   },
   variants: {
@@ -41,7 +40,7 @@ export default tv({
     variant: {
       filled: {
         content: [
-          'data-[active=true]:text-light-50'
+          'data-[active=true]:text-white'
         ]
       },
       outlined: {
@@ -51,7 +50,7 @@ export default tv({
           'border-2',
           'border-transparent',
           'data-[active=true]:bg-transparent',
-          'data-[active=true]:dark:-transparent'
+          'data-[active=true]:dark:bg-transparent'
         ]
       },
       ghost: {
@@ -73,7 +72,7 @@ export default tv({
       gradient: {
         content: [
           'bg-gradient-to-br',
-          'data-[active=true]:text-light-50'
+          'data-[active=true]:text-white'
         ]
       }
     },
@@ -136,8 +135,7 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:bg-primary',
-          'data-[active=true]:dark:bg-primary'
+          'data-[active=true]:bg-primary'
         ]
       }
     },
@@ -146,8 +144,7 @@ export default tv({
       color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:bg-secondary-container',
-          'data-[active=true]:text-on-secondary-container'
+          'data-[active=true]:bg-secondary'
         ]
       }
     },
@@ -156,8 +153,7 @@ export default tv({
       color: 'positive',
       class: {
         content: [
-          'data-[active=true]:bg-positive',
-          'data-[active=true]:dark:bg-positive'
+          'data-[active=true]:bg-positive'
         ]
       }
     },
@@ -166,8 +162,7 @@ export default tv({
       color: 'negative',
       class: {
         content: [
-          'data-[active=true]:bg-negative',
-          'data-[active=true]:dark:bg-negative'
+          'data-[active=true]:bg-negative'
         ]
       }
     },
@@ -176,8 +171,7 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:bg-warning',
-          'data-[active=true]:dark:bg-warning'
+          'data-[active=true]:bg-warning'
         ]
       }
     },
@@ -186,8 +180,7 @@ export default tv({
       color: 'accent',
       class: {
         content: [
-          'data-[active=true]:bg-accent',
-          'data-[active=true]:dark:bg-accent'
+          'data-[active=true]:bg-accent'
         ]
       }
     },
@@ -207,8 +200,8 @@ export default tv({
       color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:text-on-secondary-container',
-          'data-[active=true]:border-secondary-container'
+          'data-[active=true]:text-secondary',
+          'data-[active=true]:border-secondary'
         ]
       }
     },
@@ -269,7 +262,7 @@ export default tv({
       class: {
         content: [
           'data-[active=true]:text-on-secondary-container',
-          'data-[active=true]:bg-secondary-container/[.2]'
+          'data-[active=true]:bg-secondary-container'
         ]
       }
     },
@@ -328,7 +321,7 @@ export default tv({
       color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:text-on-secondary'
+          'data-[active=true]:text-secondary'
         ]
       }
     },

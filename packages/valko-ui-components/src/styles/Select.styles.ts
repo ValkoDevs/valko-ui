@@ -83,20 +83,20 @@ export default tv({
       secondary: {
         item: [
           //filled
-          'data-[variant=filled]:data-[selected=true]:bg-light',
-          'data-[variant=filled]:hover:bg-light',
-          'data-[variant=filled]:hover:text-dark',
-          'data-[variant=filled]:data-[selected=true]:text-dark',
+          'data-[variant=filled]:data-[selected=true]:bg-secondary',
+          'data-[variant=filled]:hover:bg-secondary',
+          'data-[variant=filled]:hover:text-secondary',
+          'data-[variant=filled]:data-[selected=true]:text-on-secondary',
           //outlined
-          'data-[variant=outlined]:hover:border-light-300',
-          'data-[variant=outlined]:hover:text-dark',
-          'data-[variant=outlined]:data-[selected=true]:text-dark',
-          'data-[variant=outlined]:data-[selected=true]:border-light-300',
+          'data-[variant=outlined]:hover:border-secondary',
+          'data-[variant=outlined]:hover:text-secondary',
+          'data-[variant=outlined]:data-[selected=true]:text-secondary',
+          'data-[variant=outlined]:data-[selected=true]:border-secondary',
           //ghost
-          'data-[variant=ghost]:hover:bg-light-300/[.4]',
-          'data-[variant=ghost]:hover:text-dark',
-          'data-[variant=ghost]:data-[selected=true]:text-dark',
-          'data-[variant=ghost]:data-[selected=true]:bg-light-300/[.4]'
+          'data-[variant=ghost]:hover:bg-secondary-container',
+          'data-[variant=ghost]:hover:text-on-secondary-container',
+          'data-[variant=ghost]:data-[selected=true]:text-secondary',
+          'data-[variant=ghost]:data-[selected=true]:bg-light-secondary'
         ]
       },
       positive: {

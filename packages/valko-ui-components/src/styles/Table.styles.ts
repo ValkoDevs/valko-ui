@@ -21,8 +21,7 @@ export default tv({
     ],
     tr: [
       'vk-table__tr',
-      'hover:bg-light-300',
-      'dark:hover:bg-dark-700',
+      'hover:bg-surface-container-high',
       'data-[row-events=true]:cursor-pointer'
     ],
     td: [
@@ -46,36 +45,30 @@ export default tv({
       filled: {
         thead: [
           'border-b',
-          'dark:border-dark-800',
-          'bg-light-300',
-          'dark:bg-dark-700'
+          'dark:border-outlined',
+          'bg-surface-container'
         ],
         td: [
           'border-t',
-          'border-light-300',
-          'dark:border-dark-900'
+          'border-outlined'
         ],
         tr: [
-          'bg-light-100/[.5]',
-          'dark:bg-dark-800'
+          'bg-surface-container-high'
         ]
       },
       outlined: {
         thead: [
           'border-b',
-          'border-dark-900',
-          'dark:border-light-300'
+          'border-outlined'
         ],
         tr: [
           'border-b',
-          'border-dark-600/[.1]',
-          'dark:border-light-300/[.1]'
+          'border-outlined'
         ]
       },
       ghost: {
         thead: [
-          'bg-light-300/[.60]',
-          'dark:bg-dark-700/[.30]'
+          'bg-outlined-variant'
         ]
       }
     },
@@ -134,8 +127,7 @@ export default tv({
       striped: true,
       class: {
         tr: [
-          'even:bg-light-200/[.8]',
-          'dark:even:bg-dark-800/[.5]'
+          'even:bg-surface-container-highest'
         ]
       }
     },
@@ -144,8 +136,7 @@ export default tv({
       striped: true,
       class: {
         tr: [
-          'even:bg-light-200/[.5]',
-          'dark:even:bg-dark-800/[.5]'
+          'even:bg-surface-container-highest/[.5]'
         ]
       }
     },
@@ -154,8 +145,7 @@ export default tv({
       striped: true,
       class: {
         tr: [
-          'even:bg-light-200/[.5]',
-          'dark:even:bg-dark-800/[.5]'
+          'even:bg-surface-container-highest/[.5]'
         ]
       }
     },
@@ -175,8 +165,8 @@ export default tv({
       color: 'primary',
       class: {
         tr: [
-          'data-[selected=true]:bg-primary-500/[.3]',
-          'dark:data-[selected=true]:bg-primary-500/[.3]'
+          'data-[selected=true]:bg-primary-container',
+          'dark:data-[selected=true]:bg-primary-container'
         ]
       }
     },
@@ -185,8 +175,8 @@ export default tv({
       color: 'secondary',
       class: {
         tr: [
-          'data-[selected=true]:bg-dark-600/[.3]',
-          'dark:data-[selected=true]:bg-light-100/[.3]'
+          'data-[selected=true]:bg-secondary-cbg-primary-container',
+          'dark:data-[selected=true]:bg-secondary-cbg-primary-container'
         ]
       }
     },
@@ -195,8 +185,8 @@ export default tv({
       color: 'positive',
       class: {
         tr: [
-          'data-[selected=true]:bg-positive',
-          'dark:data-[selected=true]:bg-positive'
+          'data-[selected=true]:bg-positive-container',
+          'dark:data-[selected=true]:bg-positive-container'
         ]
       }
     },
@@ -205,8 +195,8 @@ export default tv({
       color: 'accent',
       class: {
         tr: [
-          'data-[selected=true]:bg-accent',
-          'dark:data-[selected=true]:bg-accent'
+          'data-[selected=true]:bg-accent-container',
+          'dark:data-[selected=true]:bg-accent-container'
         ]
       }
     },
@@ -215,8 +205,8 @@ export default tv({
       color: 'warning',
       class: {
         tr: [
-          'data-[selected=true]:bg-warning',
-          'dark:data-[selected=true]:bg-warning'
+          'data-[selected=true]:bg-warning-container',
+          'dark:data-[selected=true]:bg-warning-container'
         ]
       }
     },
@@ -225,8 +215,8 @@ export default tv({
       color: 'negative',
       class: {
         tr: [
-          'data-[selected=true]:bg-negative',
-          'dark:data-[selected=true]:bg-negative'
+          'data-[selected=true]:bg-negative-container',
+          'dark:data-[selected=true]:bg-negative-container'
         ]
       }
     },
@@ -235,8 +225,8 @@ export default tv({
       color: 'primary',
       class: {
         tr: [
-          'data-[selected=true]:bg-primary-500/[.1]',
-          'dark:data-[selected=true]:bg-primary-500/[.1]'
+          'data-[selected=true]:bg-on-primary-container',
+          'dark:data-[selected=true]:bg-on-primary-container'
         ]
       }
     },
@@ -245,8 +235,8 @@ export default tv({
       color: 'secondary',
       class: {
         tr: [
-          'data-[selected=true]:bg-dark-600/[.3]',
-          'dark:data-[selected=true]:bg-light-100/[.3]'
+          'data-[selected=true]:bg-on-secondary-container',
+          'dark:data-[selected=true]:bg-on-secondary-container'
         ]
       }
     },
@@ -255,8 +245,8 @@ export default tv({
       color: 'positive',
       class: {
         tr: [
-          'data-[selected=true]:bg-positive',
-          'dark:data-[selected=true]:bg-positive'
+          'data-[selected=true]:bg-on-positive-container',
+          'dark:data-[selected=true]:bg-on-positive-container'
         ]
       }
     },
@@ -265,8 +255,8 @@ export default tv({
       color: 'accent',
       class: {
         tr: [
-          'data-[selected=true]:bg-accent',
-          'dark:data-[selected=true]:bg-accent'
+          'data-[selected=true]:bg-on-accent-container',
+          'dark:data-[selected=true]:bg-on-accent-container'
         ]
       }
     },
@@ -275,8 +265,8 @@ export default tv({
       color: 'warning',
       class: {
         tr: [
-          'data-[selected=true]:bg-warning',
-          'dark:data-[selected=true]:bg-warning'
+          'data-[selected=true]:bg-on-warning-container',
+          'dark:data-[selected=true]:bg-on-warning-container'
         ]
       }
     },
@@ -285,8 +275,8 @@ export default tv({
       color: 'negative',
       class: {
         tr: [
-          'data-[selected=true]:bg-negative',
-          'dark:data-[selected=true]:bg-negative'
+          'data-[selected=true]:bg-on-negative-container',
+          'dark:data-[selected=true]:bg-on-negative-container'
         ]
       }
     }

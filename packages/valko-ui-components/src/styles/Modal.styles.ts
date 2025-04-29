@@ -29,7 +29,7 @@ export default tv({
       'vk-modal__panel',
       'w-full',
       'p-6',
-      'bg-white',
+      'bg-surface-container',
       'shadow-lg',
       'text-left',
       'overflow-hidden',
@@ -39,8 +39,7 @@ export default tv({
       'align-middle',
       'gap-4',
       'transition-all',
-      'transform',
-      'dark:bg-dark-800'
+      'transform'
     ],
     panelChild: [
       'vk-modal__panel-child',
@@ -122,8 +121,7 @@ export default tv({
       },
       opaque: {
         backdrop: [
-          'bg-light-400/80',
-          'dark:bg-dark-600/80'
+          'bg-surface-container/[.8]'
         ]
       },
       transparent: {

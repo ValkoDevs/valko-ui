@@ -18,7 +18,7 @@ export default tv({
       'vk-popover__panel',
       'h-fit',
       'w-fit',
-      'bg-light-200',
+      'bg-surface-container',
       'shadow-md',
       'absolute',
       'z-40',

@@ -41,13 +41,12 @@ export default tv({
       'vk-range__mark',
       'w-1.5',
       'h-1.5',
-      'bg-light-400',
+      'bg-surface-container',
       'rounded-full',
       'absolute',
       'top-1/2',
       '-translate-y-1/2',
-      'z-10',
-      'dark:bg-dark-900'
+      'z-10'
     ],
     labelContainer: [
       'absolute',
@@ -57,43 +56,36 @@ export default tv({
     label: [
       'vk-range__label',
       'mt-2',
-      'text-dark-600',
-      'hover:text-dark-950',
+      'text-on-surface-container',
       'cursor-pointer',
       'pointer-events-auto',
       'absolute',
       'top-1/2',
       '-translate-x-1/4',
-      'z-10',
-      'dark:text-light-300',
-      'dark:hover:text-light-50'
+      'z-10'
     ]
   },
   variants: {
     variant: {
       filled: {
         progressContainer: [
-          'bg-light-200',
-          'dark:bg-dark-600'
+          'bg-surface-container'
         ]
       },
       ghost: {
         progressContainer: [
-          'bg-light-200/[.5]',
-          'dark:bg-dark-600/[.5]'
+          'bg-surface-container/[.5]'
         ]
       },
       outlined: {
         progressContainer: [
           'border-2',
-          'border-light-400',
-          'dark:border-dark-600'
+          'border-outlined'
         ]
       },
       gradient: {
         progressContainer: [
-          'bg-light-200',
-          'dark:bg-dark-600'
+          'bg-surface-container'
         ],
         progress: [
           'bg-gradient-to-br'
@@ -103,13 +95,12 @@ export default tv({
     color: {
       primary: {
         progress: [
-          'bg-primary-500'
+          'bg-primary'
         ]
       },
       secondary: {
         progress: [
-          'bg-light-400',
-          'dark:bg-dark-800'
+          'bg-secondary'
         ]
       },
       positive: {
@@ -231,7 +222,7 @@ export default tv({
       color: 'primary',
       class: {
         progress: [
-          'bg-primary-500/[.5]'
+          'bg-primary-container'
         ]
       }
     },
@@ -240,8 +231,7 @@ export default tv({
       color: 'secondary',
       class: {
         progress: [
-          'bg-light-400/[.5]',
-          'dark:bg-dark-700/[.5]'
+          'bg-secondary-container'
         ]
       }
     },
@@ -250,7 +240,7 @@ export default tv({
       color: 'positive',
       class: {
         progress: [
-          'bg-positive'
+          'bg-positive-container'
         ]
       }
     },
@@ -259,7 +249,7 @@ export default tv({
       color: 'accent',
       class: {
         progress: [
-          'bg-accent'
+          'bg-accent-container'
         ]
       }
     },
@@ -268,7 +258,7 @@ export default tv({
       color: 'warning',
       class: {
         progress: [
-          'bg-warning'
+          'bg-warning-container'
         ]
       }
     },
@@ -277,7 +267,7 @@ export default tv({
       color: 'negative',
       class: {
         progress: [
-          'bg-negative'
+          'bg-negative-container'
         ]
       }
     },
@@ -287,8 +277,8 @@ export default tv({
       color: 'primary',
       class: {
         progress: [
-          'from-primary-500',
-          'to-primary-900'
+          'from-primary-gradient-start',
+          'to-primary-gradient-end'
         ]
       }
     },
@@ -297,10 +287,8 @@ export default tv({
       color: 'secondary',
       class: {
         progress: [
-          'from-light-50',
-          'to-light-400',
-          'text-dark-600',
-          'dark:to-dark-950'
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end'
         ]
       }
     },
@@ -309,8 +297,8 @@ export default tv({
       color: 'positive',
       class: {
         progress: [
-          'from-positive',
-          'to-positive'
+          'from-positive-gradient-start',
+          'to-positive-gradient-end'
         ]
       }
     },
@@ -319,8 +307,8 @@ export default tv({
       color: 'accent',
       class: {
         progress: [
-          'from-accent',
-          'to-accent'
+          'from-accent-gradient-start',
+          'to-accent-gradient-end'
         ]
       }
     },
@@ -329,8 +317,8 @@ export default tv({
       color: 'warning',
       class: {
         progress: [
-          'from-warning',
-          'to-warning'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end'
         ]
       }
     },
@@ -339,8 +327,8 @@ export default tv({
       color: 'negative',
       class: {
         progress: [
-          'from-negative',
-          'to-negative'
+          'from-negative-gradient-start',
+          'to-negative-gradient-end'
         ]
       }
     },

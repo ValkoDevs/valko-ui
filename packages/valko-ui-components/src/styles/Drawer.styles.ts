@@ -34,7 +34,7 @@ export default tv({
       'w-full',
       'h-full',
       'p-2',
-      'bg-white',
+      'bg-surface-container',
       'shadow-lg',
       'text-left',
       'overflow-y-auto',
@@ -43,8 +43,7 @@ export default tv({
       'data-[title=true]:grid-rows-[auto_1fr]',
       'data-[title=false]:grid-cols-[1fr_auto]',
       'gap-2',
-      'group',
-      'dark:bg-dark-800'
+      'group'
     ],
     panelChild: [
       'vk-drawer__panel-child',
@@ -99,8 +98,7 @@ export default tv({
       },
       opaque: {
         backdrop: [
-          'bg-light-400/80',
-          'dark:bg-dark-600/80'
+          'bg-surface-container/[.8]'
         ]
       },
       transparent: {

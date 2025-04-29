@@ -12,14 +12,12 @@ export default tv({
       'vk-badge__badge',
       'text-white',
       'shadow-sm',
-      'shadow-light-200',
       'overflow-hidden',
       'flex',
       'justify-center',
       'items-center',
       'align-middle',
-      'absolute',
-      'dark:shadow-dark-800'
+      'absolute'
     ]
   },
   variants: {
@@ -37,8 +35,7 @@ export default tv({
       outlined: {
         badge: [
           'border-2',
-          'border-light-50',
-          'dark:border-dark-800'
+          'border-outlined'
         ]
       },
       gradient: {
@@ -133,7 +130,7 @@ export default tv({
       color: 'primary',
       class: {
         badge: [
-          'bg-primary-500'
+          'bg-primary'
         ]
       }
     },
@@ -142,10 +139,7 @@ export default tv({
       color: 'secondary',
       class: {
         badge: [
-          'bg-light-200',
-          'text-dark-600',
-          'dark:bg-dark-700',
-          'dark:text-light-200'
+          'bg-secondary'
         ]
       }
     },
@@ -191,7 +185,7 @@ export default tv({
       color: 'primary',
       class: {
         badge: [
-          'bg-primary-500/[.7]'
+          'bg-primary'
         ]
       }
     },
@@ -246,8 +240,8 @@ export default tv({
       color: 'primary',
       class: {
         badge: [
-          'from-primary-500',
-          'to-primary-900'
+          'from-primary-gradient-start',
+          'to-primary-gradient-end'
         ]
       }
     },
@@ -256,10 +250,8 @@ export default tv({
       color: 'secondary',
       class: {
         badge: [
-          'from-light-50',
-          'to-light-400',
-          'text-dark-600',
-          'dark:to-dark-950'
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end'
         ]
       }
     },
@@ -268,8 +260,8 @@ export default tv({
       color: 'positive',
       class: {
         badge: [
-          'from-positive',
-          'to-positive'
+          'from-positive-gradient-start',
+          'to-positive-gradient-end'
         ]
       }
     },
@@ -278,8 +270,8 @@ export default tv({
       color: 'accent',
       class: {
         badge: [
-          'from-accent',
-          'to-accent'
+          'from-accent-gradient-start',
+          'to-accent-gradient-end'
         ]
       }
     },
@@ -288,8 +280,8 @@ export default tv({
       color: 'warning',
       class: {
         badge: [
-          'from-warning',
-          'to-warning'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end'
         ]
       }
     },
@@ -298,8 +290,8 @@ export default tv({
       color: 'negative',
       class: {
         badge: [
-          'from-negative',
-          'to-negative'
+          'from-negative-gradient-start',
+          'to-negative-gradient-end'
         ]
       }
     },

@@ -12,15 +12,12 @@ export default tv({
     checkbox: [
       'vk-checkbox__checkbox',
       'border-2',
-      'border-light-400',
+      'border-outlined',
       'shadow-lg',
-      'shadow-light-300',
       'relative',
       'flex',
       'items-center',
-      'justify-center',
-      'dark:border-dark-600',
-      'dark:shadow-dark-950'
+      'justify-center'
     ],
     checkboxContainer: [
       'vk-checkbox__container',
@@ -43,7 +40,8 @@ export default tv({
       'cursor-pointer'
     ],
     icon: [
-      'text-light-50'
+      'text-white',
+      'dark:text-black'
     ]
   },
   variants: {
@@ -116,8 +114,7 @@ export default tv({
         checkbox: [
           'shadow-none',
           'border-0',
-          'bg-light-400/[.15]',
-          'dark:bg-dark-600/[.15]'
+          'bg-surface-container/[.15]'
         ]
       }
     },
@@ -125,8 +122,7 @@ export default tv({
       primary: {},
       secondary: {
         helpertext: [
-          'text-dark-600',
-          'dark:text-light-200'
+          'text-secondary'
         ]
       },
       positive: {
@@ -211,14 +207,14 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-primary-500',
-          'data-[checked=true]:border-primary-500',
-          'data-[indeterminate=true]:border-primary-500',
-          'data-[indeterminate=true]:bg-primary-500',
-          'dark:data-[checked=true]:bg-primary-500',
-          'dark:data-[checked=true]:border-primary-500',
-          'dark:data-[indeterminate=true]:border-primary-500',
-          'dark:data-[indeterminate=true]:bg-primary-500'
+          'data-[checked=true]:bg-primary',
+          'data-[checked=true]:border-primary',
+          'data-[indeterminate=true]:border-primary',
+          'data-[indeterminate=true]:bg-primary',
+          'dark:data-[checked=true]:bg-primary',
+          'dark:data-[checked=true]:border-primary',
+          'dark:data-[indeterminate=true]:border-primary',
+          'dark:data-[indeterminate=true]:bg-primary'
         ]
       }
     },
@@ -228,18 +224,17 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-dark-900',
-          'data-[checked=true]:border-dark-900',
-          'data-[indeterminate=true]:border-dark-900',
-          'data-[indeterminate=true]:bg-dark-900',
-          'dark:data-[checked=true]:bg-light-200',
-          'dark:data-[checked=true]:border-light-200',
-          'dark:data-[indeterminate=true]:border-light-200',
-          'dark:data-[indeterminate=true]:bg-light-200'
+          'data-[checked=true]:bg-secondary',
+          'data-[checked=true]:border-secondary',
+          'data-[indeterminate=true]:border-secondary',
+          'data-[indeterminate=true]:bg-secondary',
+          'dark:data-[checked=true]:bg-secondary',
+          'dark:data-[checked=true]:border-secondary',
+          'dark:data-[indeterminate=true]:border-secondary',
+          'dark:data-[indeterminate=true]:bg-secondary'
         ],
         icon: [
-          'text-light-50',
-          'dark:text-dark-800'
+          'text-secondary'
         ]
       }
     },
@@ -318,14 +313,14 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:border-primary-500',
-          'data-[indeterminate=true]:border-primary-500',
-          'dark:data-[checked=true]:border-primary-500',
-          'dark:data-[indeterminate=true]:border-primary-500'
+          'data-[checked=true]:border-primary',
+          'data-[indeterminate=true]:border-primary',
+          'dark:data-[checked=true]:border-primary',
+          'dark:data-[indeterminate=true]:border-primary'
         ],
         icon: [
-          'text-primary-500',
-          'dark:text-primary-500'
+          'text-primary',
+          'dark:text-primary'
         ]
       }
     },
@@ -335,14 +330,13 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:border-dark-900',
-          'data-[indeterminate=true]:border-dark-900',
-          'dark:data-[checked=true]:border-light-200',
-          'dark:data-[indeterminate=true]:border-light-200'
+          'data-[checked=true]:border-secondary',
+          'data-[indeterminate=true]:border-secondary',
+          'dark:data-[checked=true]:border-secondary',
+          'dark:data-[indeterminate=true]:border-secondary'
         ],
         icon: [
-          'text-dark-600',
-          'dark:text-light-200'
+          'text-secondary'
         ]
       }
     },
@@ -421,13 +415,13 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-primary-500/[.15]',
-          'data-[indeterminate=true]:bg-primary-500/[.15]',
-          'dark:data-[checked=true]:bg-primary-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-primary-500/[.15]'
+          'data-[checked=true]:bg-primary-container',
+          'data-[indeterminate=true]:bg-primary-container',
+          'dark:data-[checked=true]:bg-primary-container',
+          'dark:data-[indeterminate=true]:bg-primary-container'
         ],
         icon: [
-          'text-primary-500'
+          'text-on-primary-container'
         ]
       }
     },
@@ -437,14 +431,13 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-light-300/[.15]',
-          'data-[indeterminate=true]:bg-light-300/[.15]',
-          'dark:data-[checked=true]:bg-dark-800/[.15]',
-          'dark:data-[indeterminate=true]:bg-dark-800/[.15]'
+          'data-[checked=true]:bg-secondary-container',
+          'data-[indeterminate=true]:bg-secondary-container',
+          'dark:data-[checked=true]:bg-secondary-container',
+          'dark:data-[indeterminate=true]:bg-secondary-container'
         ],
         icon: [
-          'text-dark-600',
-          'dark:text-light-200'
+          'text-on-secondary-container'
         ]
       }
     },
@@ -454,13 +447,13 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-positive',
-          'data-[indeterminate=true]:bg-positive',
-          'dark:data-[checked=true]:bg-positive',
-          'dark:data-[indeterminate=true]:bg-positive'
+          'data-[checked=true]:bg-positive-container',
+          'data-[indeterminate=true]:bg-positive-container',
+          'dark:data-[checked=true]:bg-positive-container',
+          'dark:data-[indeterminate=true]:bg-positive-container'
         ],
         icon: [
-          'text-positive'
+          'text-on-positive-container'
         ]
       }
     },
@@ -470,13 +463,13 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-accent',
-          'data-[indeterminate=true]:bg-accent',
-          'dark:data-[checked=true]:bg-accent',
-          'dark:data-[indeterminate=true]:bg-accent'
+          'data-[checked=true]:bg-accent-container',
+          'data-[indeterminate=true]:bg-accent-container',
+          'dark:data-[checked=true]:bg-accent-container',
+          'dark:data-[indeterminate=true]:bg-accent-container'
         ],
         icon: [
-          'text-accent'
+          'text-on-accent-container'
         ]
       }
     },
@@ -486,13 +479,13 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-warning/[.15]',
-          'data-[indeterminate=true]:bg-warning/[.15]',
-          'dark:data-[checked=true]:bg-warning/[.15]',
-          'dark:data-[indeterminate=true]:bg-warning/[.15]'
+          'data-[checked=true]:bg-warning-container',
+          'data-[indeterminate=true]:bg-warning-container',
+          'dark:data-[checked=true]:bg-warning-container',
+          'dark:data-[indeterminate=true]:bg-warning-container'
         ],
         icon: [
-          'text-warning'
+          'text-on-warning-container'
         ]
       }
     },
@@ -502,13 +495,13 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-negative',
-          'data-[indeterminate=true]:bg-negative',
-          'dark:data-[checked=true]:bg-negative',
-          'dark:data-[indeterminate=true]:bg-negative'
+          'data-[checked=true]:bg-negative-container',
+          'data-[indeterminate=true]:bg-negative-container',
+          'dark:data-[checked=true]:bg-negative-container',
+          'dark:data-[indeterminate=true]:bg-negative-container'
         ],
         icon: [
-          'text-negative'
+          'text-on-negative-container'
         ]
       }
     }
