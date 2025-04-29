@@ -36,6 +36,7 @@ export default tv({
     ],
     playgroundView: [
       'w-full',
+      'bg-surface-container-lowest',
       'p-8',
       'flex',
       'md:w-auto',

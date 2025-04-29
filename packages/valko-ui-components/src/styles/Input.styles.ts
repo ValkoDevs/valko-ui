@@ -20,11 +20,13 @@ export default tv({
       'ease-in-out',
       'overflow-hidden',
       'focus:ring-0',
+      'text-on-surface',
       'data-[right-icon=false]:pr-2',
       'data-[right-icon=true]:pr-8'
     ],
     label: [
       'vk-input__label',
+      'text-on-surface-variant',
       'text-left',
       'font-bold',
       'truncate',
@@ -52,19 +54,16 @@ export default tv({
       'p-0',
       'flex',
       'flex-col',
-      'items-start',
-      'hover:bg-state-hover',
-      'active:bg-state-active',
-      'focus:bg-state-focus'
+      'items-start'
     ],
     helper: [
       'vk-input__helper',
       'break-normal',
-      'text-gray-500'
+      'text-on-surface-variant'
     ],
     icons: [
       'cursor-pointer',
-      'opacity-80',
+      'text-on-surface-variant',
       'absolute',
       'transition-all',
       'top-1/2',
@@ -81,9 +80,8 @@ export default tv({
     ],
     clearIcon: [
       'vk-input__clear-icon',
-      'text-on-surface',
+      'text-on-surface-variant',
       'cursor-pointer',
-      'opacity-80',
       'absolute',
       'transition-all',
       'top-1/2',
@@ -93,6 +91,7 @@ export default tv({
     ],
     numberArrows: [
       'vk-input__number-arrows',
+      'text-on-surface-variant',
       'flex',
       'flex-col',
       'gap-1',
@@ -124,16 +123,21 @@ export default tv({
         ]
       },
       outlined: {
+        container: [
+          'bg-inherit'
+        ],
+        field: [
+          'bg-inherit'
+        ],
         input: [
-          'px-2',
           'bg-inherit',
           'border-2',
           'border-outlined'
         ],
         label: [
-          'left-1.5',
-          'bg-inherit',
-          'peer-data-[left-icon=true]:ml-0.5'
+          'px-3.5',
+          'left-3',
+          'bg-inherit'
         ],
         leftIcon: [
           'left-1.5'
@@ -150,11 +154,9 @@ export default tv({
           'focus:border-primary'
         ],
         label: [
-          'text-on-surface',
           'peer-focus:text-primary'
         ],
         icons: [
-          'text-on-surface',
           'peer-focus:text-primary'
         ],
         clearIcon: [
@@ -170,11 +172,9 @@ export default tv({
           'focus:border-secondary'
         ],
         label: [
-          'text-on-surface',
           'peer-focus:text-secondary'
         ],
         icons: [
-          'text-on-surface',
           'peer-focus:text-secondary'
         ],
         clearIcon: [
@@ -190,11 +190,9 @@ export default tv({
           'focus:border-positive'
         ],
         label: [
-          'text-on-surface',
           'peer-focus:text-positive'
         ],
         icons: [
-          'text-on-surface',
           'peer-focus:text-positive'
         ],
         clearIcon: [
@@ -210,11 +208,9 @@ export default tv({
           'focus:border-accent'
         ],
         label: [
-          'text-on-surface',
           'peer-focus:text-accent'
         ],
         icons: [
-          'text-on-surface',
           'peer-focus:text-accent'
         ],
         clearIcon: [
@@ -230,11 +226,9 @@ export default tv({
           'focus:border-on-warning'
         ],
         label: [
-          'text-on-surface',
           'peer-focus:text-warning'
         ],
         icons: [
-          'text-on-surface',
           'peer-focus:text-warning'
         ],
         clearIcon: [
@@ -247,14 +241,12 @@ export default tv({
       negative: {
         input: [
           'hover:border-negative',
-          'focus:border-on-negative'
+          'focus:border-negative'
         ],
         label: [
-          'text-on-surface',
           'peer-focus:text-negative'
         ],
         icons: [
-          'text-on-surface',
           'peer-focus:text-negative'
         ],
         clearIcon: [
@@ -341,7 +333,7 @@ export default tv({
         ],
         label: [
           'text-lg',
-          'peer-data-[leftIcon=true]:left-8'
+          'peer-data-[left-icon=true]:left-8'
         ],
         helper: [
           'text-base'
@@ -376,11 +368,12 @@ export default tv({
     },
     disabled: {
       true: {
+        container: [
+          'opacity-50'
+        ],
         input: [
-          'bg-disabled',
           'text-on-disabled',
-          'border-disabled-container',
-          'cursor-not-allowed'
+          'border-disabled-container'
         ],
         label: [
           'peer-data-[filled=true]:bg-inherit',
@@ -394,22 +387,8 @@ export default tv({
       }
     },
     cursor: {
-      pointer: {
-        input: [
-          'cursor-pointer'
-        ],
-        label: [
-          'cursor-pointer'
-        ]
-      },
-      text: {
-        input: [
-          'cursor-text'
-        ],
-        label: [
-          'cursor-text'
-        ]
-      }
+      pointer: {},
+      text: {}
     }
   },
   compoundVariants: [
@@ -486,19 +465,71 @@ export default tv({
         ]
       }
     },
+    // outlined & size
+    {
+      variant: 'outlined',
+      size: 'xs',
+      class: {
+        input: [
+          'py-1'
+        ],
+        label: [
+          'peer-focus:-top-3',
+          'peer-data-[filled=true]:-top-3',
+          'peer-data-[left-icon=true]:left-3.5'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: 'sm',
+      class: {
+        input: [
+          'py-2'
+        ],
+        label: [
+          'peer-focus:-top-3.5',
+          'peer-data-[filled=true]:-top-3.5',
+          'peer-data-[left-icon=true]:left-4.5'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: 'md',
+      class: {
+        input: [
+          'py-3'
+        ],
+        label: [
+          'peer-focus:-top-4',
+          'peer-data-[filled=true]:-top-4',
+          'peer-data-[left-icon=true]:left-5.5'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: 'lg',
+      class: {
+        input: [
+          'py-3.5'
+        ],
+        label: [
+          'peer-focus:-top-4.5',
+          'peer-data-[filled=true]:-top-4.5',
+          'peer-data-[left-icon=true]:left-6.5'
+        ]
+      }
+    },
     // outlined & rounded
     {
       variant: 'outlined',
       shape: 'rounded',
       size: 'xs',
       class: {
-        input: [
-          'pl-[calc(1rem_-_3px)]',
-          'data-[left-icon=true]:pl-[calc(1.5rem_-_2px)]'
-        ],
         label: [
-          'ml-[calc(0.5rem_-_2px)]',
-          'peer-data-[left-icon=true]:ml-[1px]'
+          'left-3.5'
         ],
         helper: [
           'ml-4'
@@ -510,13 +541,8 @@ export default tv({
       shape: 'rounded',
       size: 'sm',
       class: {
-        input: [
-          'pl-[calc(1.17rem_-_1px)]',
-          'data-[left-icon=true]:pl-[1.67rem]'
-        ],
         label: [
-          'ml-[calc(0.75rem_-_1px)]',
-          'peer-data-[left-icon=true]:ml-[1px]'
+          'left-4.5'
         ],
         helper: [
           'ml-5'
@@ -528,13 +554,8 @@ export default tv({
       shape: 'rounded',
       size: 'md',
       class: {
-        input: [
-          'pl-[calc(1.5rem_-_3px)]',
-          'data-[left-icon=true]:pl-[calc(2rem_-_2px)]'
-        ],
         label: [
-          'ml-[calc(1rem_-_2px)]',
-          'peer-data-[left-icon=true]:ml-[1px]'
+          'left-5.5'
         ],
         helper: [
           'ml-6'
@@ -544,26 +565,12 @@ export default tv({
     {
       variant: 'outlined',
       shape: 'rounded',
-      size: 'lg',
       class: {
-        input: [
-          'pl-[calc(1.75rem_-_3px)]',
-          'data-[left-icon=true]:pl-[calc(2.25rem_-_2px)]'
-        ],
         label: [
-          'ml-[calc(1.25rem_-_2px)]',
-          'peer-data-[left-icon=true]:ml-[1px]'
+          'left-6.5'
         ],
         helper: [
           'ml-7'
-        ]
-      }
-    },
-    {
-      type: 'date',
-      class: {
-        label: [
-          'cursor-default'
         ]
       }
     },
@@ -627,6 +634,51 @@ export default tv({
       class: {
         clearIcon: [
           'data-[right-icon=true]:-translate-x-8'
+        ]
+      }
+    },
+    {
+      type: 'date',
+      class: {
+        label: [
+          'cursor-default'
+        ]
+      }
+    },
+    // cursor & disabled
+    {
+      cursor: ['pointer', 'text'],
+      disabled: true,
+      class: {
+        input: [
+          'cursor-not-allowed'
+        ],
+        label: [
+          'cursor-not-allowed'
+        ]
+      }
+    },
+    {
+      cursor: 'pointer',
+      disabled: false,
+      class: {
+        input: [
+          'cursor-pointer'
+        ],
+        label: [
+          'cursor-pointer'
+        ]
+      }
+    },
+    {
+      cursor: 'text',
+      disabled: false,
+      class: {
+        input: [
+          'cursor-text'
+        ],
+        label: [
+          'cursor-text'
         ]
       }
     }
