@@ -5,6 +5,6 @@ export interface ButtonProps extends Shapes, Sizes, Colors {
   block?: boolean;
   disabled?: boolean;
   loading?: boolean;
-  flat?: boolean;
+  elevated?: boolean;
   condensed?: boolean;
 }

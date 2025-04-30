@@ -6,14 +6,10 @@ export default tv({
       'vk-button__base',
       'flex',
       'ring-inset',
-      'shadow-lg',
-      'shadow-light-300',
       'outline-none',
-      'active:shadow-none',
       'focus:outline-none',
       'focus-visible:outline-none',
-      'focus-visible:ring-2',
-      'dark:shadow-dark-950/[.2]'
+      'focus-visible:ring-2'
     ],
     spinnerContainer: [
       'w-0',
@@ -22,18 +18,6 @@ export default tv({
       'transition-all',
       'linear',
       'duration-150'
-    ],
-    loader: [
-      'data-[variant=filled]:data-[color=secondarywhite',
-      'data-[variant=gradient]:data-[color=secondarywhite',
-      'data-[variant=ghost]:data-[color=secondaryblack',
-      'data-[variant=outlined]:data-[color=secondaryblack',
-      'data-[variant=link]:data-[color=secondaryblack',
-      'dark:data-[variant=filled]:data-[color=secondaryblack',
-      'dark:data-[variant=gradient]:data-[color=secondaryblack',
-      'dark:data-[variant=ghost]:data-[color=secondarywhite',
-      'dark:data-[variant=outlined]:data-[color=secondarywhite',
-      'dark:data-[variant=link]:data-[color=secondarywhite'
     ],
     stateLayer: [
       'w-full',
@@ -91,11 +75,7 @@ export default tv({
     },
     variant: {
       filled: {},
-      ghost: {
-        button: [
-          'shadow-none'
-        ]
-      },
+      ghost: {},
       outlined: {
         button: [
           'border-2'
@@ -103,8 +83,7 @@ export default tv({
       },
       link: {
         button: [
-          'bg-transparent',
-          'shadow-none'
+          'bg-transparent'
         ]
       },
       gradient: {
@@ -125,10 +104,10 @@ export default tv({
         ]
       }
     },
-    flat: {
+    elevated: {
       true: {
         button: [
-          'shadow-none'
+          'shadow-el1'
         ]
       }
     },
@@ -138,8 +117,7 @@ export default tv({
           'cursor-not-allowed',
           'opacity-50',
           'focus:ring-none',
-          'ring-0',
-          'active:shadow-lg'
+          'ring-0'
         ]
       },
       false: {
@@ -565,10 +543,10 @@ export default tv({
         ]
       }
     },
-    // disabled & flat
+    // disabled & elevated
     {
       disabled: true,
-      flat: true,
+      elevated: true,
       class: {
         button: [
           'active:shadow-none'

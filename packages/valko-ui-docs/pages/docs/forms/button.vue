@@ -7,7 +7,7 @@ const form = ref<ButtonProps>({
   size: 'md',
   shape: 'soft',
   disabled: false,
-  flat: false,
+  elevated: false,
   block: false,
   condensed: false,
   loading: false
@@ -55,10 +55,10 @@ const apiData: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'flat',
-    prop: 'flat',
+    key: 'elevated',
+    prop: 'elevated',
     required: false,
-    description: 'Whether the Button has a shadow or not.',
+    description: 'Adds a subtle shadow to the button, giving it a slightly raised appearance. When false (default), the button appears flat with no shadow.',
     values: 'true, false',
     default: 'false'
   },
@@ -115,7 +115,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
         :variant="form.variant"
         :size="form.size"
         :disabled="form.disabled"
-        :flat="form.flat"
+        :elevated="form.elevated"
         :block="form.block"
         :condensed="form.condensed"
         :shape="form.shape"
@@ -160,8 +160,8 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
         label="Condensed"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
+        v-model="form.elevated"
+        label="Elevated"
       />
       <vk-checkbox
         v-model="form.block"
@@ -242,13 +242,13 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
         </template>
       </example-section>
 
-      <example-section title="Flat">
-        <vk-button flat>
-          Flat
+      <example-section title="Elevated">
+        <vk-button elevated>
+          Elevated
         </vk-button>
 
         <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', { values: [true], hasSlot: true })" />
+          <code-block :code="generateSnippet<boolean>('elevated', { values: [true], hasSlot: true })" />
         </template>
       </example-section>
 
