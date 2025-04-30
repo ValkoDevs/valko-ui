@@ -9,16 +9,6 @@ export default tv({
       'flex-col',
       'gap-1'
     ],
-    checkbox: [
-      'vk-checkbox__checkbox',
-      'border-2',
-      'border-outlined',
-      'shadow-lg',
-      'relative',
-      'flex',
-      'items-center',
-      'justify-center'
-    ],
     checkboxContainer: [
       'vk-checkbox__container',
       'w-fit',
@@ -28,13 +18,28 @@ export default tv({
       'gap-1',
       'cursor-pointer'
     ],
+    stateLayer: [
+      'hover:bg-state-hover',
+      'focus:bg-state-focus',
+      'active:bg-state-active'
+    ],
+    checkbox: [
+      'vk-checkbox__checkbox',
+      'size-full',
+      'border-2',
+      'border-on-surface-variant',
+      'relative',
+      'flex',
+      'items-center',
+      'justify-center'
+    ],
     input: [
       'hidden'
     ],
     helpertext: [
       'vk-checkbox__helpertext',
       'break-normal',
-      'text-gray-500'
+      'text-on-surface-variant'
     ],
     label: [
       'cursor-pointer'
@@ -47,7 +52,7 @@ export default tv({
   variants: {
     size: {
       xs: {
-        checkbox: [
+        stateLayer: [
           'w-3.5',
           'h-3.5'
         ],
@@ -62,7 +67,7 @@ export default tv({
         ]
       },
       sm: {
-        checkbox: [
+        stateLayer: [
           'w-4',
           'h-4'
         ],
@@ -77,7 +82,7 @@ export default tv({
         ]
       },
       md: {
-        checkbox: [
+        stateLayer: [
           'w-5',
           'h-5'
         ],
@@ -92,7 +97,7 @@ export default tv({
         ]
       },
       lg: {
-        checkbox: [
+        stateLayer: [
           'w-6',
           'h-6'
         ],
@@ -112,19 +117,14 @@ export default tv({
       outlined: {},
       ghost: {
         checkbox: [
-          'shadow-none',
           'border-0',
-          'bg-surface-container/[.15]'
+          'bg-on-surface-variant/[.15]'
         ]
       }
     },
     color: {
       primary: {},
-      secondary: {
-        helpertext: [
-          'text-secondary'
-        ]
-      },
+      secondary: {},
       positive: {
         helpertext: [
           'text-positive'
@@ -149,12 +149,15 @@ export default tv({
     disabled: {
       true: {
         checkbox: [
-          'bg-gray-600',
-          'text-gray-600',
+          'bg-disabled',
+          'text-on-disabled',
           'opacity-50',
           'cursor-not-allowed',
-          'data-[checked=true]:border-gray-600',
-          'data-[checked=true]:bg-gray-600'
+          'data-[checked=true]:border-disabled',
+          'data-[checked=true]:bg-disabled'
+        ],
+        label: [
+          'cursor-not-allowed'
         ]
       }
     },
@@ -176,25 +179,27 @@ export default tv({
     },
     shape: {
       rounded: {
+        stateLayer: [
+          'rounded-full'
+        ],
         checkbox: [
           'rounded-full'
         ]
       },
       soft: {
+        stateLayer: [
+          'rounded-sm'
+        ],
         checkbox: [
-          'rounded'
+          'rounded-sm'
         ]
       },
       square: {
+        stateLayer: [
+          'rounded-none'
+        ],
         checkbox: [
           'rounded-none'
-        ]
-      }
-    },
-    flat: {
-      true: {
-        checkbox: [
-          'shadow-none'
         ]
       }
     }

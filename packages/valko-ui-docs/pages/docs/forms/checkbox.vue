@@ -13,7 +13,6 @@ const form = reactive<CheckboxProps>({
   shape: 'soft',
   label: 'Checkbox',
   labelPosition: 'right',
-  flat: false,
   disabled: false,
   readonly: false,
   modelValue: false
@@ -157,7 +156,6 @@ watchEffect(() => {
         :size="form.size"
         :helpertext="form.helpertext"
         :disabled="form.disabled"
-        :flat="form.flat"
         :shape="form.shape"
         :label-position="form.labelPosition"
         :readonly="form.readonly"
@@ -209,10 +207,6 @@ watchEffect(() => {
       <vk-checkbox
         v-model="form.disabled"
         label="Disabled"
-      />
-      <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
       />
       <vk-checkbox
         v-model="form.readonly"
@@ -302,18 +296,6 @@ watchEffect(() => {
 
         <template #code>
           <code-block :code="generateSnippet<boolean>('disabled', { values: [true] })" />
-        </template>
-      </example-section>
-
-      <example-section title="Flat">
-        <vk-checkbox
-          v-model="checkboxStates['flat']"
-          label="Flat"
-          flat
-        />
-
-        <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', { values: [true] })" />
         </template>
       </example-section>
 

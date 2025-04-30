@@ -34,16 +34,18 @@ const onClick = () => {
       :class="classes.checkboxContainer"
       @click="onClick"
     >
-      <div
-        :class="classes.checkbox"
-        :data-checked="!!modelValue"
-        :data-indeterminate="modelValue === null"
-      >
-        <vk-icon
-          v-if="modelValue !== false"
-          :name="`${modelValue === null ? 'minus' : 'check'}`"
-          :class="classes.icon"
-        />
+      <div :class="classes.stateLayer">
+        <div
+          :class="classes.checkbox"
+          :data-checked="!!modelValue"
+          :data-indeterminate="modelValue === null"
+        >
+          <vk-icon
+            v-if="modelValue !== false"
+            :name="`${modelValue === null ? 'minus' : 'check'}`"
+            :class="classes.icon"
+          />
+        </div>
       </div>
 
       <input
