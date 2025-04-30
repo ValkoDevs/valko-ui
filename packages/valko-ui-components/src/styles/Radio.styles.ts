@@ -18,11 +18,16 @@ export default tv({
       'gap-1',
       'cursor-pointer'
     ],
+    stateLayer: [
+      'hover:bg-state-hover',
+      'focus:bg-state-focus',
+      'active:bg-state-active'
+    ],
     radio: [
       'vk-radio__radio',
-      'shadow-lg',
+      'size-full',
       'border-2',
-      'border-outlined',
+      'border-on-surface-variant',
       'relative',
       'flex',
       'items-center',
@@ -34,7 +39,7 @@ export default tv({
     helpertext: [
       'vk-radio__helpertext',
       'break-normal',
-      'text-gray-500'
+      'text-on-surface-variant'
     ],
     label: [
       'cursor-pointer'
@@ -48,7 +53,7 @@ export default tv({
   variants: {
     size: {
       xs: {
-        radio: [
+        stateLayer: [
           'w-3.5',
           'h-3.5'
         ],
@@ -63,7 +68,7 @@ export default tv({
         ]
       },
       sm: {
-        radio: [
+        stateLayer: [
           'w-4',
           'h-4'
         ],
@@ -78,7 +83,7 @@ export default tv({
         ]
       },
       md: {
-        radio: [
+        stateLayer: [
           'w-5',
           'h-5'
         ],
@@ -93,7 +98,7 @@ export default tv({
         ]
       },
       lg: {
-        radio: [
+        stateLayer: [
           'w-6',
           'h-6'
         ],
@@ -114,8 +119,7 @@ export default tv({
       ghost: {
         radio: [
           'border-0',
-          'bg-surface-container/[.15]',
-          'shadow-none'
+          'bg-on-surface-variant/[.15]'
         ]
       }
     },
@@ -146,15 +150,18 @@ export default tv({
     disabled: {
       true: {
         radio: [
-          'bg-gray-600',
-          'border-gray-600',
+          'bg-disabled',
+          'border-disabled',
           'opacity-50',
           'cursor-not-allowed',
-          'data-[checked=true]:border-gray-600',
-          'data-[checked=true]:bg-gray-600'
+          'data-[checked=true]:border-disabled',
+          'data-[checked=true]:bg-disabled'
         ],
         icon: [
-          'text-gray-600'
+          'text-on-disabled'
+        ],
+        label: [
+          'cursor-not-allowed'
         ]
       }
     },
@@ -176,16 +183,25 @@ export default tv({
     },
     shape: {
       soft: {
+        stateLayer: [
+          'rounded-sm'
+        ],
         radio: [
-          'rounded'
+          'rounded-sm'
         ]
       },
       rounded: {
+        stateLayer: [
+          'rounded-full'
+        ],
         radio: [
           'rounded-full'
         ]
       },
       square: {
+        stateLayer: [
+          'rounded-none'
+        ],
         radio: [
           'rounded-none'
         ]
