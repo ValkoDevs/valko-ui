@@ -223,7 +223,7 @@ export default tv({
       warning: {
         input: [
           'hover:border-warning',
-          'focus:border-on-warning'
+          'focus:border-warning'
         ],
         label: [
           'peer-focus:text-warning'
