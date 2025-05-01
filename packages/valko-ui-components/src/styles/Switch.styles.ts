@@ -19,7 +19,7 @@ export default tv({
       'duration-200',
       'ease-in-out',
       'relative',
-      'shadow-sm'
+      'border-outlined'
     ],
     thumb: [
       'inline-block',
@@ -100,10 +100,10 @@ export default tv({
     variant: {
       filled: {
         switch: [
-          'bg-surface-container'
+          'bg-surface-container-highest'
         ],
         thumb: [
-          'bg-on-surface-variant'
+          'bg-outlined'
         ]
       },
       outlined: {
@@ -112,17 +112,16 @@ export default tv({
         ],
         thumb: [
           'scale-[.9]',
-          'bg-on-surface-variant'
+          'bg-outlined'
         ]
       },
       ghost: {
         switch: [
           'border-transparent',
-          'bg-surface-container/[.15]',
-          'shadow-none'
+          'bg-surface-container-highest/[.5]'
         ],
         thumb: [
-          'bg-surface-container/[.5]'
+          'bg-outlined/[.5]'
         ]
       }
     },
@@ -145,10 +144,10 @@ export default tv({
       },
       soft: {
         switch: [
-          'rounded'
+          'rounded-xs'
         ],
         thumb: [
-          'rounded'
+          'rounded-xs'
         ]
       },
       square: {
@@ -164,12 +163,12 @@ export default tv({
       true: {
         switch: [
           'pointer-events-none',
-          'bg-gray-500/[.3]',
-          'dark:bg-gray-500/[.3]'
+          'bg-disabled/[.3]',
+          'dark:bg-disabled/[.3]'
         ],
         thumb: [
-          'bg-gray-500/[.2]',
-          'dark:bg-gray-500/[.2]'
+          'bg-disabled/[.2]',
+          'dark:bg-disabled/[.2]'
         ]
       }
     },
@@ -205,9 +204,10 @@ export default tv({
       class: {
         switch: [
           'data-[active=true]:bg-primary',
-          'data-[active=true]:border-primary',
-          'dark:data-[active=true]:bg-primary',
-          'dark:data-[active=true]:border-primary'
+          'data-[active=true]:border-primary'
+        ],
+        thumb: [
+          'data-[selected=true]:bg-on-primary'
         ]
       }
     },
@@ -218,9 +218,10 @@ export default tv({
       class: {
         switch: [
           'data-[active=true]:bg-secondary',
-          'data-[active=true]:border-secondary',
-          'dark:data-[active=true]:bg-secondary',
-          'dark:data-[active=true]:border-secondary'
+          'data-[active=true]:border-secondary'
+        ],
+        thumb: [
+          'data-[selected=true]:bg-on-secondary'
         ]
       }
     },
@@ -231,9 +232,10 @@ export default tv({
       class: {
         switch: [
           'data-[active=true]:bg-positive',
-          'data-[active=true]:border-positive',
-          'dark:data-[active=true]:bg-positive',
-          'dark:data-[active=true]:border-positive'
+          'data-[active=true]:border-positive'
+        ],
+        thumb: [
+          'data-[selected=true]:bg-on-positive'
         ]
       }
     },
@@ -244,9 +246,10 @@ export default tv({
       class: {
         switch: [
           'data-[active=true]:bg-accent',
-          'data-[active=true]:border-accent',
-          'dark:data-[active=true]:bg-accent',
-          'dark:data-[active=true]:border-accent'
+          'data-[active=true]:border-accent'
+        ],
+        thumb: [
+          'data-[selected=true]:bg-on-accent'
         ]
       }
     },
@@ -257,9 +260,10 @@ export default tv({
       class: {
         switch: [
           'data-[active=true]:bg-warning',
-          'data-[active=true]:border-warning',
-          'dark:data-[active=true]:bg-warning',
-          'dark:data-[active=true]:border-warning'
+          'data-[active=true]:border-warning'
+        ],
+        thumb: [
+          'data-[selected=true]:bg-on-warning'
         ]
       }
     },
@@ -270,9 +274,10 @@ export default tv({
       class: {
         switch: [
           'data-[active=true]:bg-negative',
-          'data-[active=true]:border-negative',
-          'dark:data-[active=true]:bg-negative',
-          'dark:data-[active=true]:border-negative'
+          'data-[active=true]:border-negative'
+        ],
+        thumb: [
+          'data-[selected=true]:bg-on-negative'
         ]
       }
     },
@@ -283,12 +288,10 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-primary',
-          'dark:data-[active=true]:border-primary'
+          'data-[active=true]:border-primary'
         ],
         thumb: [
-          'data-[selected=true]:bg-primary',
-          'dark:data-[selected=true]:bg-primary'
+          'data-[selected=true]:bg-primary'
         ]
       }
     },
@@ -298,12 +301,10 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-secondary',
-          'dark:data-[active=true]:border-secondary'
+          'data-[active=true]:border-secondary'
         ],
         thumb: [
-          'data-[selected=true]:bg-secondary',
-          'dark:data-[selected=true]:bg-secondary'
+          'data-[selected=true]:bg-secondary'
         ]
       }
     },
@@ -313,12 +314,10 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-positive',
-          'dark:data-[active=true]:border-positive'
+          'data-[active=true]:border-positive'
         ],
         thumb: [
-          'data-[selected=true]:bg-positive',
-          'dark:data-[selected=true]:bg-positive'
+          'data-[selected=true]:bg-positive'
         ]
       }
     },
@@ -328,12 +327,10 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-accent',
-          'dark:data-[active=true]:border-accent'
+          'data-[active=true]:border-accent'
         ],
         thumb: [
-          'data-[selected=true]:bg-accent',
-          'dark:data-[selected=true]:bg-accent'
+          'data-[selected=true]:bg-accent'
         ]
       }
     },
@@ -343,12 +340,10 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-warning',
-          'dark:data-[active=true]:border-warning'
+          'data-[active=true]:border-warning'
         ],
         thumb: [
-          'data-[selected=true]:bg-warning',
-          'dark:data-[selected=true]:bg-warning'
+          'data-[selected=true]:bg-warning'
         ]
       }
     },
@@ -358,12 +353,10 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-negative',
-          'dark:data-[active=true]:border-negative'
+          'data-[active=true]:border-negative'
         ],
         thumb: [
-          'data-[selected=true]:bg-negative',
-          'dark:data-[selected=true]:bg-negative'
+          'data-[selected=true]:bg-negative'
         ]
       }
     },
@@ -374,12 +367,10 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-primary-container',
-          'dark:data-[active=true]:bg-primary-container'
+          'data-[active=true]:bg-primary-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-primary-container',
-          'dark:data-[selected=true]:bg-on-primary-container'
+          'data-[selected=true]:bg-on-primary-container'
         ]
       }
     },
@@ -389,12 +380,10 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-secondary-container',
-          'dark:data-[active=true]:bg-secondary-container'
+          'data-[active=true]:bg-secondary-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-secondary-container',
-          'dark:data-[selected=true]:bg-on-secondary-container'
+          'data-[selected=true]:bg-on-secondary-container'
         ]
       }
     },
@@ -404,12 +393,10 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-positive-container',
-          'dark:data-[active=true]:bg-positive-container'
+          'data-[active=true]:bg-positive-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-positive-container',
-          'dark:data-[selected=true]:bg-on-positive-container'
+          'data-[selected=true]:bg-on-positive-container'
         ]
       }
     },
@@ -419,12 +406,10 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-accent-container',
-          'dark:data-[active=true]:bg-accent-container'
+          'data-[active=true]:bg-accent-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-accent-container',
-          'dark:data-[selected=true]:bg-on-accent-container'
+          'data-[selected=true]:bg-on-accent-container'
         ]
       }
     },
@@ -434,12 +419,10 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-warning-container',
-          'dark:data-[active=true]:bg-warning-container'
+          'data-[active=true]:bg-warning-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-warning-container',
-          'dark:data-[selected=true]:bg-on-warning-container'
+          'data-[selected=true]:bg-on-warning-container'
         ]
       }
     },
@@ -449,12 +432,10 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-negative-container',
-          'dark:data-[active=true]:bg-negative-container'
+          'data-[active=true]:bg-negative-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-negative-container',
-          'dark:data-[selected=true]:bg-on-negative-container'
+          'data-[selected=true]:bg-on-negative-container'
         ]
       }
     }
