@@ -10,8 +10,7 @@ const form = ref<SwitchProps>({
   labelPosition: 'right',
   disabled: false,
   readonly: false,
-  modelValue: false,
-  flat: false
+  modelValue: false
 })
 
 const position: SelectOption<LabelPosition>[] = [
@@ -125,7 +124,6 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         :disabled="form.disabled"
         :readonly="form.readonly"
         :label-position="form.labelPosition"
-        :flat="form.flat"
       />
     </template>
 
@@ -172,10 +170,6 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
       <vk-checkbox
         v-model="form.readonly"
         label="Readonly"
-      />
-      <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
       />
     </template>
 

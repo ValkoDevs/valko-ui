@@ -103,7 +103,8 @@ export default tv({
           'bg-surface-container-highest'
         ],
         thumb: [
-          'bg-outlined'
+          'bg-outlined',
+          'scale-[.9]'
         ]
       },
       outlined: {
@@ -164,11 +165,10 @@ export default tv({
         switch: [
           'pointer-events-none',
           'bg-disabled/[.3]',
-          'dark:bg-disabled/[.3]'
+          'border-disabled-container'
         ],
         thumb: [
-          'bg-disabled/[.2]',
-          'dark:bg-disabled/[.2]'
+          'bg-disabled/[.2]'
         ]
       }
     },
@@ -184,13 +184,6 @@ export default tv({
       right: {
         label: [
           'mr-2'
-        ]
-      }
-    },
-    flat: {
-      true: {
-        switch: [
-          'shadow-none'
         ]
       }
     }
