@@ -25,8 +25,6 @@ export default tv({
     ],
     thumb: [
       'vk-range__thumb',
-      'bg-light-50',
-      'shadow-lg',
       'absolute',
       'transform',
       '-translate-x-1/4',
@@ -35,13 +33,12 @@ export default tv({
       'z-30',
       'cursor-pointer',
       'pointer-events-auto',
-      'dark:bg-light-200'
+      'shadow-el1'
     ],
     stepMark: [
       'vk-range__mark',
       'w-1.5',
       'h-1.5',
-      'bg-surface-container',
       'rounded-full',
       'absolute',
       'top-1/2',
@@ -56,7 +53,7 @@ export default tv({
     label: [
       'vk-range__label',
       'mt-2',
-      'text-on-surface-container',
+      'text-on-surface',
       'cursor-pointer',
       'pointer-events-auto',
       'absolute',
@@ -69,12 +66,12 @@ export default tv({
     variant: {
       filled: {
         progressContainer: [
-          'bg-surface-container'
+          'bg-surface-container-high'
         ]
       },
       ghost: {
         progressContainer: [
-          'bg-surface-container/[.5]'
+          'bg-surface-container-high/[.5]'
         ]
       },
       outlined: {
@@ -85,7 +82,7 @@ export default tv({
       },
       gradient: {
         progressContainer: [
-          'bg-surface-container'
+          'bg-surface-container-high'
         ],
         progress: [
           'bg-gradient-to-br'
@@ -96,31 +93,67 @@ export default tv({
       primary: {
         progress: [
           'bg-primary'
+        ],
+        thumb: [
+          'bg-on-primary'
+        ],
+        stepMark: [
+          'bg-on-primary'
         ]
       },
       secondary: {
         progress: [
           'bg-secondary'
+        ],
+        thumb: [
+          'bg-on-secondary'
+        ],
+        stepMark: [
+          'bg-on-secondary'
         ]
       },
       positive: {
         progress: [
           'bg-positive'
+        ],
+        thumb: [
+          'bg-on-positive'
+        ],
+        stepMark: [
+          'bg-on-positive'
         ]
       },
       accent: {
         progress: [
           'bg-accent'
+        ],
+        thumb: [
+          'bg-on-accent'
+        ],
+        stepMark: [
+          'bg-on-accent'
         ]
       },
       warning: {
         progress: [
           'bg-warning'
+        ],
+        thumb: [
+          'bg-on-warning'
+        ],
+        stepMark: [
+          'bg-on-warning'
         ]
       },
       negative: {
         progress: [
           'bg-negative'
+        ],
+        thumb: [
+          'bg-on-negative'
+        ],
+        stepMark: [
+          'bg-on-negative'
         ]
       }
     },
@@ -223,6 +256,9 @@ export default tv({
       class: {
         progress: [
           'bg-primary-container'
+        ],
+        thumb: [
+          'bg-on-primary-container'
         ]
       }
     },
@@ -232,6 +268,9 @@ export default tv({
       class: {
         progress: [
           'bg-secondary-container'
+        ],
+        thumb: [
+          'bg-on-secondary-container'
         ]
       }
     },
@@ -241,6 +280,9 @@ export default tv({
       class: {
         progress: [
           'bg-positive-container'
+        ],
+        thumb: [
+          'bg-on-positive-container'
         ]
       }
     },
@@ -250,6 +292,9 @@ export default tv({
       class: {
         progress: [
           'bg-accent-container'
+        ],
+        thumb: [
+          'bg-on-accent-container'
         ]
       }
     },
@@ -259,6 +304,9 @@ export default tv({
       class: {
         progress: [
           'bg-warning-container'
+        ],
+        thumb: [
+          'bg-on-warning-container'
         ]
       }
     },
@@ -268,6 +316,9 @@ export default tv({
       class: {
         progress: [
           'bg-negative-container'
+        ],
+        thumb: [
+          'bg-on-negative-container'
         ]
       }
     },
