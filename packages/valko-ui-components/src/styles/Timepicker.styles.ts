@@ -12,12 +12,12 @@ export default tv({
     content: [
       'vk-timepicker__content',
       'p-4',
-      'bg-light-200',
+      'bg-surface-container-high',
+      'shadow-el2',
       'absolute',
       'z-10',
       'mt-1',
-      'left-0',
-      'dark:bg-dark-800'
+      'left-0'
     ]
   },
   variants: {
