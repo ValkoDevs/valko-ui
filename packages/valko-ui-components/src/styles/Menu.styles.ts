@@ -25,7 +25,7 @@ export default tv({
       'transition-color',
       'duration-200',
       'cursor-pointer',
-      'hover:bg-surface-container'
+      'hover:bg-surface-container-highest'
     ]
   },
   variants: {
@@ -38,19 +38,14 @@ export default tv({
       negative: {}
     },
     variant: {
-      filled: {
-        content: [
-          'data-[active=true]:text-white'
-        ]
-      },
+      filled: {},
       outlined: {
         content: [
           'py-[calc(0.625rem_-_2px)]',
           'px-[calc(1rem_-_2px)]',
           'border-2',
           'border-transparent',
-          'data-[active=true]:bg-transparent',
-          'data-[active=true]:dark:bg-transparent'
+          'data-[active=true]:bg-transparent'
         ]
       },
       ghost: {
@@ -71,8 +66,7 @@ export default tv({
       },
       gradient: {
         content: [
-          'bg-gradient-to-br',
-          'data-[active=true]:text-white'
+          'bg-gradient-to-br'
         ]
       }
     },
@@ -135,7 +129,8 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:bg-primary'
+          'data-[active=true]:bg-primary',
+          'data-[active=true]:text-on-primary'
         ]
       }
     },
@@ -144,7 +139,8 @@ export default tv({
       color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:bg-secondary'
+          'data-[active=true]:bg-secondary',
+          'data-[active=true]:text-on-secondary'
         ]
       }
     },
@@ -153,7 +149,8 @@ export default tv({
       color: 'positive',
       class: {
         content: [
-          'data-[active=true]:bg-positive'
+          'data-[active=true]:bg-positive',
+          'data-[active=true]:text-on-positive'
         ]
       }
     },
@@ -162,7 +159,8 @@ export default tv({
       color: 'negative',
       class: {
         content: [
-          'data-[active=true]:bg-negative'
+          'data-[active=true]:bg-negative',
+          'data-[active=true]:text-on-negative'
         ]
       }
     },
@@ -171,7 +169,8 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:bg-warning'
+          'data-[active=true]:bg-warning',
+          'data-[active=true]:text-on-warning'
         ]
       }
     },
@@ -180,7 +179,8 @@ export default tv({
       color: 'accent',
       class: {
         content: [
-          'data-[active=true]:bg-accent'
+          'data-[active=true]:bg-accent',
+          'data-[active=true]:text-on-accent'
         ]
       }
     },
@@ -423,7 +423,8 @@ export default tv({
       class: {
         content: [
           'data-[active=true]:from-primary-gradient-start',
-          'data-[active=true]:to-primary-gradient-end'
+          'data-[active=true]:to-primary-gradient-end',
+          'data-[active=true]:text-on-primary'
         ]
       }
     },
@@ -433,7 +434,8 @@ export default tv({
       class: {
         content: [
           'data-[active=true]:from-secondary-gradient-start',
-          'data-[active=true]:to-secondary-gradient-end'
+          'data-[active=true]:to-secondary-gradient-end',
+          'data-[active=true]:text-on-secondary'
         ]
       }
     },
@@ -443,7 +445,8 @@ export default tv({
       class: {
         content: [
           'data-[active=true]:from-positive-gradient-start',
-          'data-[active=true]:to-positive-gradient-end'
+          'data-[active=true]:to-positive-gradient-end',
+          'data-[active=true]:text-on-positive'
         ]
       }
     },
@@ -453,7 +456,8 @@ export default tv({
       class: {
         content: [
           'data-[active=true]:from-accent-gradient-start',
-          'data-[active=true]:to-accent-gradient-end'
+          'data-[active=true]:to-accent-gradient-end',
+          'data-[active=true]:text-on-accent'
         ]
       }
     },
@@ -463,7 +467,8 @@ export default tv({
       class: {
         content: [
           'data-[active=true]:from-warning-gradient-start',
-          'data-[active=true]:to-warning-gradient-end'
+          'data-[active=true]:to-warning-gradient-end',
+          'data-[active=true]:text-on-warning'
         ]
       }
     },
@@ -473,7 +478,8 @@ export default tv({
       class: {
         content: [
           'data-[active=true]:from-negative-gradient-start',
-          'data-[active=true]:to-negative-gradient-end'
+          'data-[active=true]:to-negative-gradient-end',
+          'data-[active=true]:text-on-negative'
         ]
       }
     },
