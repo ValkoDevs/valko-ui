@@ -15,8 +15,7 @@ const props = withDefaults(defineProps<AlertProps>(), {
   size: 'md',
   shape: 'soft',
   icon: '',
-  closable: false,
-  flat: false
+  closable: false
 })
 
 const emit = defineEmits(['close'])
@@ -30,7 +29,7 @@ const defaultIcon = computed(() => {
     case 'primary': return 'alert-hexagon-filled'
     case 'secondary': return 'alert-hexagon-filled'
     case 'positive': return 'circle-check-filled'
-    case 'accent': return 'accentcircle-filled'
+    case 'accent': return 'alert-circle-filled'
     case 'warning': return 'alert-circle-filled'
     case 'negative': return 'circle-x-filled'
     default: return 'alert-hexagon-filled'

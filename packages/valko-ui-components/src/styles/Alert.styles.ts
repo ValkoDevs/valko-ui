@@ -8,9 +8,11 @@ export default tv({
       'p-2',
       'flex',
       'gap-2',
-      'shadow-lg'
+      'shadow-el2'
     ],
-    mainIcon: [],
+    mainIcon: [
+      'mt-1'
+    ],
     contentContainer: [
       'flex',
       'flex-col',
@@ -30,18 +32,10 @@ export default tv({
   },
   variants: {
     variant: {
-      filled: {
-        container: [
-          'text-light-50'
-        ],
-        closeIcon: [
-          'text-light-50'
-        ]
-      },
+      filled: {},
       ghost: {
         container: [
-          'bg-transparent',
-          'shadow-none'
+          'bg-transparent'
         ]
       },
       outlined: {
@@ -52,11 +46,7 @@ export default tv({
       },
       gradient: {
         container: [
-          'bg-gradient-to-br',
-          'text-light-50'
-        ],
-        closeIcon: [
-          'text-light-50'
+          'bg-gradient-to-br'
         ]
       }
     },
@@ -111,13 +101,6 @@ export default tv({
         ],
         p: [
           'text-lg'
-        ]
-      }
-    },
-    flat: {
-      true: {
-        container: [
-          'shadow-none'
         ]
       }
     },
@@ -366,18 +349,76 @@ export default tv({
         ]
       }
     },
-    // filled & gradient & secondary (title,p, icons)
+    // filled & gradient (title,p, icons)
+    {
+      variant: ['filled', 'gradient'],
+      color: 'primary',
+      class: {
+        container: [
+          'text-on-primary'
+        ],
+        closeIcon: [
+          'text-on-primary'
+        ]
+      }
+    },
     {
       variant: ['filled', 'gradient'],
       color: 'secondary',
       class: {
         container: [
-          'text-dark-600',
-          'dark:text-light-50'
+          'text-on-secondary'
         ],
         closeIcon: [
-          'text-dark-600',
-          'dark:text-light-50'
+          'text-on-secondary'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'gradient'],
+      color: 'positive',
+      class: {
+        container: [
+          'text-on-positive'
+        ],
+        closeIcon: [
+          'text-on-positive'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'gradient'],
+      color: 'accent',
+      class: {
+        container: [
+          'text-on-accent'
+        ],
+        closeIcon: [
+          'text-on-accent'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'gradient'],
+      color: 'warning',
+      class: {
+        container: [
+          'text-on-warning'
+        ],
+        closeIcon: [
+          'text-on-warning'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'gradient'],
+      color: 'negative',
+      class: {
+        container: [
+          'text-on-negative'
+        ],
+        closeIcon: [
+          'text-on-negative'
         ]
       }
     },

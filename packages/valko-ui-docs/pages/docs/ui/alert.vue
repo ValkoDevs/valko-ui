@@ -8,8 +8,7 @@ const form = ref<AlertProps>({
   variant: 'filled',
   size: 'md',
   title: 'Title',
-  shape: 'soft',
-  flat: false
+  shape: 'soft'
 })
 
 const iconsForm = ref<Record<string, boolean>>({})
@@ -70,14 +69,6 @@ const alertProps: TableItem[] = [
     description: 'The icon of the Alert.',
     values: 'string | null',
     default: ''
-  },
-  {
-    key: 'flatProp',
-    prop: 'flat',
-    required: false,
-    description: 'Displays a shadow for the Alert.',
-    values: 'true, false',
-    default: 'false'
   }
 ]
 
@@ -147,7 +138,6 @@ const iconSnippet = `
           :shape="form.shape"
           :color="form.color"
           :closable="form.closable"
-          :flat="form.flat"
           :icon="iconsForm.noIcon ? null : iconsForm.customIcon ? 'brand-vue' : ''"
           @close="closeAlert()"
         >
@@ -197,10 +187,6 @@ const iconSnippet = `
       <vk-checkbox
         v-model="iconsForm.noIcon"
         label="Without Icon"
-      />
-      <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
       />
     </template>
 
@@ -298,19 +284,6 @@ const iconSnippet = `
 
         <template #code>
           <code-block :code="iconSnippet" />
-        </template>
-      </example-section>
-
-      <example-section title="Flat">
-        <vk-alert
-          title="Flat"
-          flat
-        >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem aut recusandae obcaecati qui neque? Magni aperiam odio aliquid ratione. Aliquam atque voluptates velit praesentium a sequi unde maiores tempora fugit!
-        </vk-alert>
-
-        <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', { values: [true], hasSlot: true })" />
         </template>
       </example-section>
 
