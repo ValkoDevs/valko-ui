@@ -153,7 +153,6 @@ export default tv({
         ]
       }
     },
-    flat: {},
     shape: {
       soft: {},
       square: {},
