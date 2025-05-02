@@ -8,7 +8,6 @@ const form = ref<BadgeProps>({
   size: 'md',
   placement: 'top-right',
   content: 'new',
-  flat: false,
   hidden: false,
   dot: false
 })
@@ -72,14 +71,6 @@ const badgeProps: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'flatProp',
-    prop: 'flat',
-    required: false,
-    description: 'Displays a shadow for the Badge.',
-    values: 'true, false',
-    default: 'false'
-  },
-  {
     key: 'dotProp',
     prop: 'dot',
     required: false,
@@ -128,7 +119,6 @@ const extraProps = {
         :shape="form.shape"
         :placement="form.placement"
         :content="form.content"
-        :flat="form.flat"
         :hidden="form.hidden"
         :dot="form.dot"
       >
@@ -173,10 +163,6 @@ const extraProps = {
         label="Placement"
         size="sm"
         :options="placementOptions"
-      />
-      <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
       />
       <vk-checkbox
         v-model="form.hidden"
@@ -316,22 +302,6 @@ const extraProps = {
 
         <template #code>
           <code-block :code="generateSnippet<string>('placement', { values: placementOptions.map(o => o.value), customSlot, extraProps: extraProps.content })" />
-        </template>
-      </example-section>
-
-      <example-section title="Flat">
-        <vk-badge
-          flat
-          content="new"
-        >
-          <vk-avatar
-            :src="src"
-            color="secondary"
-          />
-        </vk-badge>
-
-        <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', { values: [true], customSlot, extraProps: extraProps.content })" />
         </template>
       </example-section>
 

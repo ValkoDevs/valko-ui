@@ -14,8 +14,7 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   shape: 'soft',
   placement: 'top-right',
   dot: false,
-  hidden: false,
-  flat: false
+  hidden: false
 })
 
 const classes = useStyle<BadgeProps, SlotStyles>(props, styles)
