@@ -11,7 +11,8 @@ const props = withDefaults(defineProps<AvatarProps>(), {
   color: 'primary',
   variant: 'filled',
   size: 'md',
-  shape: 'soft'
+  shape: 'soft',
+  elevated: false
 })
 
 const classes = useStyle<AvatarProps, SlotStyles>(props, styles)

@@ -7,7 +7,7 @@ const form = reactive<AvatarProps>({
   shape: 'soft',
   size: 'md',
   name: 'Louise Barnett',
-  flat: false,
+  elevated: false,
   src: '/assets/avatar.jpg'
 })
 
@@ -66,10 +66,10 @@ const avatarProps: TableItem[] = [
     default: ''
   },
   {
-    key: 'flatProp',
-    prop: 'flat',
+    key: 'elevatedProp',
+    prop: 'elevated',
     required: false,
-    description: 'Displays a shadow for the Avatar.',
+    description: 'Applies a shadow to visually elevate the Avatar.',
     values: 'true, false',
     default: 'false'
   }
@@ -99,7 +99,7 @@ const extraProps = {
         :variant="form.variant"
         :src="avatarSrc"
         :name="form.name"
-        :flat="form.flat"
+        :elevated="form.elevated"
       />
     </template>
 
@@ -133,8 +133,8 @@ const extraProps = {
         label="Hide Avatar"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
+        v-model="form.elevated"
+        label="Elevated"
       />
     </template>
 
@@ -261,13 +261,13 @@ const extraProps = {
         </template>
       </example-section>
 
-      <example-section title="Flat">
+      <example-section title="Elevated">
         <vk-avatar
-          flat
+          elevated
         />
 
         <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', { values: [true] })" />
+          <code-block :code="generateSnippet<boolean>('elevated', { values: [true] })" />
         </template>
       </example-section>
     </template>
