@@ -7,22 +7,20 @@ export default tv({
     'min-w-48',
     'overflow-hidden',
     'grid',
-    'shadow-lg',
     'group'
   ],
   variants: {
     variant: {
       filled: [
-        'bg-surface-container'
+        'bg-surface-container-highest'
       ],
       outlined: [
         'border-2',
         'border-outlined'
       ],
       ghost: [
-        'bg-surface-container/[.5]',
-        'backdrop-blur-lg',
-        'shadow-none'
+        'bg-surface-container-highest/[.5]',
+        'backdrop-blur-lg'
       ]
     },
     shape: {
@@ -61,9 +59,9 @@ export default tv({
     disabled: {
       true: []
     },
-    flat: {
+    elevated: {
       true: [
-        'shadow-none'
+        'shadow-el1'
       ]
     },
     isPressable: {
@@ -71,13 +69,27 @@ export default tv({
         'transition-all',
         'duration-200',
         'ease-in-out',
-        'active:shadow-none',
         'active:scale-95',
         'cursor-pointer'
       ]
     }
   },
   compoundVariants: [
+    // elevated & bg
+    {
+      elevated: true,
+      variant: 'filled',
+      class: [
+        'bg-surface-container-low'
+      ]
+    },
+    {
+      elevated: true,
+      variant: 'ghost',
+      class: [
+        'bg-surface-container-low/[.5]'
+      ]
+    },
     {
       layout: ['vertical', 'cover'],
       size: 'xs',

@@ -8,7 +8,7 @@ const form = ref<CardProps>({
   size: 'md',
   layout: 'vertical',
   isPressable: false,
-  flat: false
+  elevated: false
 })
 
 const cardComponents = reactive({
@@ -66,10 +66,10 @@ const cardProps: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'flatProp',
-    prop: 'flat',
+    key: 'elevatedProp',
+    prop: 'elevated',
     required: false,
-    description: 'Displays a shadow for the Card.',
+    description: 'Applies a shadow and lowers the background tone to emphasize interactive content inside the Card. Useful when the Card contains inputs or other elevated elements.',
     values: 'true, false',
     default: 'false'
   }
@@ -165,7 +165,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
         :shape="form.shape"
         :size="form.size"
         :layout="form.layout"
-        :flat="form.flat"
+        :elevated="form.elevated"
         @click="onClick"
       >
         <vk-card-header
@@ -239,8 +239,8 @@ const customSlot = `<vk-card-image :src="imgSrc" />
         label="Pressable"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
+        v-model="form.elevated"
+        label="Elevated"
       />
       <vk-checkbox
         v-model="cardComponents.header"
@@ -406,14 +406,14 @@ const customSlot = `<vk-card-image :src="imgSrc" />
         </template>
       </example-section>
 
-      <example-section title="Flat">
-        <vk-card flat>
+      <example-section title="Elevated">
+        <vk-card elevated>
           <vk-card-image
             src="/assets/flower-m.jpg"
             class="text-white"
           />
           <vk-card-header>
-            Flat
+            Elevated
           </vk-card-header>
           <vk-card-body>
             <h3 class="font-semibold">
@@ -424,7 +424,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
         </vk-card>
 
         <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', { values: [true], customSlot })" />
+          <code-block :code="generateSnippet<boolean>('elevated', { values: [true], customSlot })" />
         </template>
       </example-section>
     </template>
