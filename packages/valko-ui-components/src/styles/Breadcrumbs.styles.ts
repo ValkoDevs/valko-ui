@@ -16,13 +16,15 @@ export default tv({
       'flex',
       'justify-around',
       'items-center',
-      'text-gray-500',
+      'text-on-surface-variant',
       'data-[active=true]:cursor-default',
-      'data-[disabled=true]:text-gray-700',
+      'data-[disabled=true]:text-disabled',
+      'data-[disabled=true]:opacity-50',
       'data-[disabled=true]:cursor-not-allowed'
     ],
     separator: [
-      'mx-1'
+      'mx-1',
+      'text-on-surface'
     ],
     iconLeft: [
       'mr-1'
@@ -35,7 +37,7 @@ export default tv({
     variant: {
       filled: {
         container: [
-          'bg-surface-container'
+          'bg-surface-container-low'
         ]
       },
       outlined: {
@@ -43,13 +45,12 @@ export default tv({
           'py-[calc(0.5rem_-_2px)]',
           'px-[calc(1rem_-_2px)]',
           'border-2',
-          'border-light-400',
-          'dark:border-dark-600'
+          'border-outlined'
         ]
       },
       ghost: {
         container: [
-          'bg-surface-container/[.5]'
+          'bg-surface-container-low/[.5]'
         ]
       },
       link: {
@@ -61,32 +62,38 @@ export default tv({
     color: {
       primary: {
         a: [
-          'hover:text-primary'
+          'hover:text-on-primary-container',
+          'data-[active=true]:text-primary'
         ]
       },
       secondary: {
         a: [
-          'hover:text-secondary'
+          'hover:text-on-secondary-container',
+          'data-[active=true]:text-secondary'
         ]
       },
       positive: {
         a: [
-          'hover:text-positive'
+          'hover:text-on-positive-container',
+          'data-[active=true]:text-positive'
         ]
       },
       accent: {
         a: [
-          'hover:text-accent'
+          'hover:text-on-accent-container',
+          'data-[active=true]:text-accent'
         ]
       },
       warning: {
         a: [
-          'hover:text-warning'
+          'hover:text-on-warning-container',
+          'data-[active=true]:text-warning'
         ]
       },
       negative: {
         a: [
-          'hover:text-negative'
+          'hover:text-on-negative-container',
+          'data-[active=true]:text-negative'
         ]
       }
     },
@@ -145,26 +152,5 @@ export default tv({
         ]
       }
     }
-  },
-  compoundVariants: [
-    // flat & variants
-    {
-      variant: ['filled', 'outlined'],
-      flat: false,
-      class: {
-        container: [
-          'shadow-sm'
-        ]
-      }
-    },
-    {
-      variant: ['filled', 'outlined'],
-      flat: true,
-      class: {
-        container: [
-          'shadow-none'
-        ]
-      }
-    }
-  ]
+  }
 }) as unknown as ReturnType<TV>

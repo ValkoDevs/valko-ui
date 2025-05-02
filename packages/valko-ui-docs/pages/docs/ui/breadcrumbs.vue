@@ -7,8 +7,7 @@ const form = ref<Partial<BreadcrumbsProps>>({
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  separator: '>',
-  flat: false
+  separator: '>'
 })
 
 const crumbs: Crumb[] = [
@@ -99,14 +98,6 @@ const breadcrumbsProps: TableItem[] = [
     description: 'The separator for the Breadcrumbs. Up to 2 character or an icon if passed the name.',
     values: 'string',
     default: '>'
-  },
-  {
-    key: 'flatProp',
-    prop: 'flat',
-    required: false,
-    description: 'Wether the Breadcrumbs has a shadow or not.',
-    values: 'true, false',
-    default: 'false'
   }
 ]
 
@@ -236,7 +227,6 @@ const extraProps = ':crumbs="crumbs"'
         :variant="form.variant"
         :crumbs="crumbs"
         :separator="form.separator"
-        :flat="form.flat"
       />
     </template>
 
@@ -268,10 +258,6 @@ const extraProps = ':crumbs="crumbs"'
       <vk-input
         v-model="form.separator"
         label="Separator"
-      />
-      <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
       />
     </template>
 
@@ -357,17 +343,6 @@ const extraProps = ':crumbs="crumbs"'
 
         <template #code>
           <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps })}`" />
-        </template>
-      </example-section>
-
-      <example-section title="Flat">
-        <vk-breadcrumbs
-          flat
-          :crumbs="crumbs"
-        />
-
-        <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('flat', { values: [true], extraProps })}`" />
         </template>
       </example-section>
 
