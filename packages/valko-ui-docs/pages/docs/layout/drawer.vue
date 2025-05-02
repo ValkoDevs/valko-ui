@@ -7,8 +7,7 @@ const form = ref<Omit<DrawerProps, 'isOpen'>>({
   placement: 'right',
   backdrop: 'opaque',
   title: 'Drawer',
-  closable: true,
-  flat: false
+  closable: true
 })
 
 const placementOptions: SelectOption<Placement>[] = [
@@ -80,14 +79,6 @@ const drawerProps: TableItem[] = [
     description: 'Displays a close button on the Drawer and allows to close it by clicking outside or pressing esc',
     values: 'true, false',
     default: 'true'
-  },
-  {
-    key: 'flatProp',
-    prop: 'flat',
-    required: false,
-    description: 'Wheter the Drawer has a shadow or not',
-    values: 'true, false',
-    default: 'false'
   }
 ]
 
@@ -161,13 +152,6 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
     hasSlot: true, extraProps
   }).replace(/<vk-drawer/g, `${triggerSnippet}`)
 }`
-
-const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
-  {
-    values: [true],
-    hasSlot: true, extraProps
-  }).replace(/<vk-drawer/g, `${triggerSnippet}`)
-}`
 </script>
 
 <template>
@@ -186,7 +170,6 @@ const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
         :shape="form.shape"
         :closable="form.closable"
         :title="form.title"
-        :flat="form.flat"
         :size="form.size"
         @close="toggleDrawer('playground-drawer')"
       >
@@ -236,10 +219,6 @@ const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
       <vk-checkbox
         v-model="form.closable"
         label="Closable"
-      />
-      <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
       />
     </template>
 
@@ -386,27 +365,6 @@ const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
 
         <template #code>
           <code-block :code="closableSnippet" />
-        </template>
-      </example-section>
-
-      <example-section title="Flat">
-        <vk-button @click="toggleDrawer('flat')">
-          Flat
-        </vk-button>
-        <vk-drawer
-          :is-open="drawerStates['flat']"
-          title="Flat"
-          flat
-          @close="toggleDrawer('flat')"
-        >
-          <template #default>
-            Closable Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
-          </template>
-        </vk-drawer>
-
-        <template #code>
-          <code-block :code="flatSnippet" />
         </template>
       </example-section>
     </template>

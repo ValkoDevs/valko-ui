@@ -34,8 +34,7 @@ export default tv({
       'w-full',
       'h-full',
       'p-2',
-      'bg-surface-container',
-      'shadow-lg',
+      'bg-surface-container-high',
       'text-left',
       'overflow-y-auto',
       'absolute',
@@ -72,8 +71,7 @@ export default tv({
       'font-medium'
     ],
     closeButton: [
-      'text-black',
-      'dark:text-white',
+      'text-on-surface',
       'justify-self-end'
     ],
     closeIcon: [
@@ -98,7 +96,7 @@ export default tv({
       },
       opaque: {
         backdrop: [
-          'bg-surface-container/[.8]'
+          'bg-state-scrim'
         ]
       },
       transparent: {
@@ -134,13 +132,6 @@ export default tv({
       right: {
         panel: [
           'right-0'
-        ]
-      }
-    },
-    flat: {
-      true: {
-        panel: [
-          'shadow-none'
         ]
       }
     }
@@ -298,6 +289,15 @@ export default tv({
       class: {
         panel: [
           'rounded-t-2xl'
+        ]
+      }
+    },
+    // sizes & shadow
+    {
+      size: ['xs', 'sm', 'md', 'lg'],
+      class: {
+        panel: [
+          'shadow-el3'
         ]
       }
     }
