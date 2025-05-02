@@ -9,7 +9,8 @@ export default tv({
     content: [
       'vk-datepicker__content',
       'p-2',
-      'bg-surface-container',
+      'bg-surface-container-high',
+      'shadow-el2',
       'absolute',
       'z-10',
       'mt-1',
@@ -36,7 +37,6 @@ export default tv({
       md: {},
       lg: {}
     },
-    flat: {},
     shape: {
       rounded: {
         content: [
