@@ -4,7 +4,7 @@ export default tv({
   slots: {
     notification: [
       'vk-notification',
-      'shadow-md',
+      'shadow-el3',
       'overflow-hidden'
     ],
     container: [
@@ -39,9 +39,6 @@ export default tv({
   variants: {
     variant: {
       filled: {
-        notification: [
-          'text-white'
-        ],
         progressbar: [
           'bg-white'
         ]
@@ -55,7 +52,7 @@ export default tv({
       outlined: {
         notification: [
           'border-2',
-          'bg-surface-container'
+          'bg-surface'
         ],
         content: [
           'p-[calc(0.75rem_-_2px)]'
@@ -63,14 +60,10 @@ export default tv({
       },
       line: {
         notification: [
-          'bg-surface-container'
+          'bg-surface'
         ]
       },
       gradient: {
-        notification: [
-          'bg-gradient-to-br',
-          'text-white'
-        ],
         progressbar: [
           'bg-white'
         ]
@@ -162,7 +155,8 @@ export default tv({
       color: 'primary',
       class: {
         notification: [
-          'bg-primary'
+          'bg-primary',
+          'text-on-primary'
         ]
       }
     },
@@ -171,7 +165,8 @@ export default tv({
       color: 'secondary',
       class: {
         notification: [
-          'bg-secondary'
+          'bg-secondary',
+          'text-on-secondary'
         ]
       }
     },
@@ -180,7 +175,8 @@ export default tv({
       color: 'positive',
       class: {
         notification: [
-          'bg-positive'
+          'bg-positive',
+          'text-on-positive'
         ]
       }
     },
@@ -189,7 +185,8 @@ export default tv({
       color: 'accent',
       class: {
         notification: [
-          'bg-accent'
+          'bg-accent',
+          'text-on-accent'
         ]
       }
     },
@@ -198,7 +195,8 @@ export default tv({
       color: 'warning',
       class: {
         notification: [
-          'bg-warning'
+          'bg-warning',
+          'text-on-warning'
         ]
       }
     },
@@ -207,7 +205,8 @@ export default tv({
       color: 'negative',
       class: {
         notification: [
-          'bg-negative'
+          'bg-negative',
+          'text-on-negative'
         ]
       }
     },
@@ -300,7 +299,7 @@ export default tv({
           'text-on-primary-container'
         ],
         progressbar: [
-          'bg-primary-container'
+          'bg-on-primary-container'
         ]
       }
     },
@@ -313,7 +312,7 @@ export default tv({
           'text-on-secondary-container'
         ],
         progressbar: [
-          'bg-secondary-container'
+          'bg-on-secondary-container'
         ]
       }
     },
@@ -326,7 +325,7 @@ export default tv({
           'text-on-positive-container'
         ],
         progressbar: [
-          'bg-positive-container'
+          'bg-on-positive-container'
         ]
       }
     },
@@ -339,7 +338,7 @@ export default tv({
           'text-on-accent-container'
         ],
         progressbar: [
-          'bg-accent'
+          'bg-on-accent-container'
         ]
       }
     },
@@ -352,7 +351,7 @@ export default tv({
           'text-on-warning-container'
         ],
         progressbar: [
-          'bg-warning'
+          'bg-on-warning-container'
         ]
       }
     },
@@ -365,7 +364,7 @@ export default tv({
           'text-on-negative-container'
         ],
         progressbar: [
-          'bg-negative'
+          'bg-on-negative-container'
         ]
       }
     },
@@ -431,7 +430,8 @@ export default tv({
       class: {
         notification: [
           'from-primary-gradient-start',
-          'to-primary-gradient-end'
+          'to-primary-gradient-end',
+          'text-on-primary'
         ]
       }
     },
@@ -441,7 +441,8 @@ export default tv({
       class: {
         notification: [
           'from-secondary-gradient-start',
-          'to-secondary-gradient-end'
+          'to-secondary-gradient-end',
+          'text-on-secondary'
         ]
       }
     },
@@ -451,7 +452,8 @@ export default tv({
       class: {
         notification: [
           'from-positive-gradient-start',
-          'to-positive-gradient-end'
+          'to-positive-gradient-end',
+          'text-on-positive'
         ]
       }
     },
@@ -461,7 +463,8 @@ export default tv({
       class: {
         notification: [
           'from-accent-gradient-start',
-          'to-accent-gradient-end'
+          'to-accent-gradient-end',
+          'text-on-accent'
         ]
       }
     },
@@ -471,7 +474,8 @@ export default tv({
       class: {
         notification: [
           'from-warning-gradient-start',
-          'to-warning-gradient-end'
+          'to-warning-gradient-end',
+          'text-on-warning'
         ]
       }
     },
@@ -481,7 +485,8 @@ export default tv({
       class: {
         notification: [
           'from-negative-gradient-start',
-          'to-negative-gradient-end'
+          'to-negative-gradient-end',
+          'text-on-negative'
         ]
       }
     }

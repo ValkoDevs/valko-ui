@@ -9,9 +9,7 @@ export default tv({
   variants: {
     variant: {
       filled: [
-        'filter-none',
-        'text-white',
-        'dark:text-black'
+        'filter-none'
       ],
       outlined: [
         'bg-transparent',
@@ -23,9 +21,7 @@ export default tv({
       ],
       gradient: [
         'bg-gradient-to-br',
-        'filter-none',
-        'text-white',
-        'dark:text-black'
+        'filter-none'
       ]
     },
     color: {
@@ -91,42 +87,48 @@ export default tv({
       color: 'primary',
       variant: 'filled',
       class: [
-        'bg-primary'
+        'bg-primary',
+        'text-on-primary'
       ]
     },
     {
       color: 'secondary',
       variant: 'filled',
       class: [
-        'bg-secondary'
+        'bg-secondary',
+        'text-on-secondary'
       ]
     },
     {
       color: 'positive',
       variant: 'filled',
       class: [
-        'bg-positive'
+        'bg-positive',
+        'text-on-positive'
       ]
     },
     {
       color: 'accent',
       variant: 'filled',
       class: [
-        'bg-accent'
+        'bg-accent',
+        'text-on-accent'
       ]
     },
     {
       color: 'warning',
       variant: 'filled',
       class: [
-        'bg-warning'
+        'bg-warning',
+        'text-on-warning'
       ]
     },
     {
       color: 'negative',
       variant: 'filled',
       class: [
-        'bg-negative'
+        'bg-negative',
+        'text-on-negative'
       ]
     },
     // outlined & color
@@ -221,7 +223,8 @@ export default tv({
       color: 'primary',
       class: [
         'from-primary-gradient-start',
-        'to-primary-gradient-end'
+        'to-primary-gradient-end',
+        'text-on-primary'
       ]
     },
     {
@@ -229,7 +232,8 @@ export default tv({
       color: 'secondary',
       class: [
         'from-secondary-gradient-start',
-        'to-secondary-gradient-end'
+        'to-secondary-gradient-end',
+        'text-on-secondary'
       ]
     },
     {
@@ -237,7 +241,8 @@ export default tv({
       color: 'positive',
       class: [
         'from-positive-gradient-start',
-        'to-positive-gradient-end'
+        'to-positive-gradient-end',
+        'text-on-positive'
       ]
     },
     {
@@ -245,7 +250,8 @@ export default tv({
       color: 'accent',
       class: [
         'from-accent-gradient-start',
-        'to-accent-gradient-end'
+        'to-accent-gradient-end',
+        'text-on-accent'
       ]
     },
     {
@@ -253,7 +259,8 @@ export default tv({
       color: 'warning',
       class: [
         'from-warning-gradient-start',
-        'to-warning-gradient-end'
+        'to-warning-gradient-end',
+        'text-on-warning'
       ]
     },
     {
@@ -261,7 +268,8 @@ export default tv({
       color: 'negative',
       class: [
         'from-negative-gradient-start',
-        'to-negative-gradient-end'
+        'to-negative-gradient-end',
+        'text-on-negative'
       ]
     },
     // floating & variant

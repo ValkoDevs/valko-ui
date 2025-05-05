@@ -27,9 +27,8 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
     variant="outlined"
     size="md"
     shape="square"
-    flat
     fixed
-    class="flex justify-between !bg-light-100 dark:!bg-dark-800"
+    class="flex justify-between !bg-surface-container !border-surface-dim"
   >
     <vk-button
       variant="link"
@@ -45,7 +44,7 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
         class="text-2xl"
       />
     </vk-button>
-    <h2 class="text-primary-500 dark:text-primary-400 text-3xl font-serif tracking-wider">
+    <h2 class="text-primary text-3xl font-serif tracking-wider">
       <nuxt-link to="/">
         ValkoUI
       </nuxt-link>

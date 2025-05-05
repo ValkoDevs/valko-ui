@@ -73,7 +73,6 @@ onMounted(() => {
       variant="outlined"
       size="md"
       shape="square"
-      flat
       fixed
       class="flex justify-between !bg-surface-container !border-surface-dim"
     >
@@ -91,7 +90,7 @@ onMounted(() => {
           class="text-2xl"
         />
       </vk-button>
-      <h2 class="text-primary-600 dark:text-primary-400 text-3xl font-serif tracking-wider">
+      <h2 class="text-primary text-3xl font-serif tracking-wider">
         <nuxt-link to="/">
           ValkoUI
         </nuxt-link>
