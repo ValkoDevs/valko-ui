@@ -4,15 +4,14 @@ export default tv({
   base: [
     'vk-navbar',
     'flex',
-    'justify-items-center',
-    'items-center',
-    'shadow-lg'
+    'items-center'
   ],
   variants: {
     variant: {
       filled: [
         'filter-none',
-        'text-white'
+        'text-white',
+        'dark:text-black'
       ],
       outlined: [
         'bg-transparent',
@@ -25,7 +24,8 @@ export default tv({
       gradient: [
         'bg-gradient-to-br',
         'filter-none',
-        'text-light-50'
+        'text-white',
+        'dark:text-black'
       ]
     },
     color: {
@@ -49,24 +49,25 @@ export default tv({
       ],
       soft: []
     },
-    fixed: {
-      true: [
-        'sticky',
-        'top-0',
-        'left-0',
-        'right-0',
-        'z-50'
-      ]
-    },
     floating: {
       true: [
         'm-2',
         'w-[calc(100%_-_1rem)]'
       ]
     },
-    flat: {
+    elevated: {
       true: [
-        'shadow-none'
+        'shadow-el1'
+      ]
+    },
+    fixed: {
+      true: [
+        'sticky',
+        'top-0',
+        'left-0',
+        'right-0',
+        'z-50',
+        'shadow-el2'
       ]
     },
     vertical: {
@@ -78,6 +79,7 @@ export default tv({
       true: [
         'h-full',
         'w-fit',
+        'min-w-48',
         'flex-col',
         'py-4'
       ]
@@ -132,7 +134,6 @@ export default tv({
       color: 'primary',
       variant: 'outlined',
       class: [
-        'bg-transparent',
         'border-primary'
       ]
     },
@@ -140,7 +141,6 @@ export default tv({
       color: 'secondary',
       variant: 'outlined',
       class: [
-        'bg-transparent',
         'border-secondary'
       ]
     },
@@ -148,7 +148,6 @@ export default tv({
       color: 'positive',
       variant: 'outlined',
       class: [
-        'bg-transparent',
         'border-positive'
       ]
     },
@@ -156,7 +155,6 @@ export default tv({
       color: 'accent',
       variant: 'outlined',
       class: [
-        'bg-transparent',
         'border-accent'
       ]
     },
@@ -164,7 +162,6 @@ export default tv({
       color: 'warning',
       variant: 'outlined',
       class: [
-        'bg-transparent',
         'border-warning'
       ]
     },
@@ -172,7 +169,6 @@ export default tv({
       color: 'negative',
       variant: 'outlined',
       class: [
-        'bg-transparent',
         'border-negative'
       ]
     },
