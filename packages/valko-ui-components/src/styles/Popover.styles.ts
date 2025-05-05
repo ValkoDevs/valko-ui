@@ -18,8 +18,7 @@ export default tv({
       'vk-popover__panel',
       'h-fit',
       'w-fit',
-      'bg-surface-container',
-      'shadow-md',
+      'bg-surface-container-highest',
       'absolute',
       'z-40',
       'data-[text=true]:max-w-xs',
@@ -79,15 +78,19 @@ export default tv({
       'data-[placement=right-end]:ml-1',
       'data-[placement=right-end]:left-full',
       'data-[placement=right-end]:bottom-0',
-      'data-[placement=right-end]:origin-bottom-left',
-      'dark:bg-dark-800'
+      'data-[placement=right-end]:origin-bottom-left'
     ]
   },
   variants: {
-    flat: {
+    elevated: {
+      false: {
+        panel: [
+          'shadow-el2'
+        ]
+      },
       true: {
         panel: [
-          'shadow-none'
+          'shadow-el3'
         ]
       }
     },

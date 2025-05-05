@@ -12,6 +12,7 @@ const props = withDefaults(defineProps<PopoverProps>(), {
   shape: 'soft',
   text: '',
   placement: 'auto',
+  elevated: false,
   panelClasses: () => []
 })
 
