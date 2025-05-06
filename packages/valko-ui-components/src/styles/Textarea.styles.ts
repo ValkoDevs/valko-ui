@@ -37,6 +37,7 @@ export default tv({
       'data-[left-icon=true]:pr-2'
     ],
     label: [
+      'vk-textarea__label',
       'text-on-surface-variant',
       'p-1',
       'text-left',

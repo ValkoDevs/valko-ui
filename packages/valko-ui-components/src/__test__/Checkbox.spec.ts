@@ -14,7 +14,7 @@ describe('Checkbox component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be size md', () => {
@@ -22,11 +22,11 @@ describe('Checkbox component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be shape soft', () => {
-        expect(wrapper.find('.rounded').exists()).toBe(true)
+        expect(wrapper.find('.rounded-sm').exists()).toBe(true)
       })
 
       it('should have label on left', () => {
@@ -50,7 +50,7 @@ describe('Checkbox component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -60,7 +60,7 @@ describe('Checkbox component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-dark-900')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-secondary')
       })
 
       it('should be color positive when props.color is positive', () => {
@@ -122,7 +122,7 @@ describe('Checkbox component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded').exists()).toBe(true)
+        expect(wrapper.find('.rounded-sm').exists()).toBe(true)
       })
 
       it('should be square when props.shape is square', () => {
@@ -186,7 +186,7 @@ describe('Checkbox component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -196,7 +196,7 @@ describe('Checkbox component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:border-primary-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:border-primary')
       })
 
       it('should be ghost when props.variant is ghost', () => {

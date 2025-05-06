@@ -24,11 +24,15 @@ export default tv({
   },
   variants: {
     variant: {
-      filled: {},
+      filled: {
+        container: [
+          'vk-avatar__filled'
+        ]
+      },
       outlined: {},
       ghost: {
         container: [
-          'shadow-none'
+          'vk-avatar__ghost'
         ]
       },
       gradient: {

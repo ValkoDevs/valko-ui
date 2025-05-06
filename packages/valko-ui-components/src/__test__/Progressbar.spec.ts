@@ -18,7 +18,7 @@ describe('Progressbar component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be size md', () => {
@@ -26,7 +26,7 @@ describe('Progressbar component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-lowest').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -54,7 +54,7 @@ describe('Progressbar component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -64,7 +64,7 @@ describe('Progressbar component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-400').exists()).toBe(true)
+        expect(wrapper.find('.bg-secondary').exists()).toBe(true)
       })
 
       it('should be color positive when props.color is positive', () => {
@@ -200,7 +200,7 @@ describe('Progressbar component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-lowest').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {

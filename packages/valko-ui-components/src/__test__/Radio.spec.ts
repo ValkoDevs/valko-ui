@@ -14,7 +14,7 @@ describe('Radio component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be size md', () => {
@@ -22,7 +22,7 @@ describe('Radio component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be shape rounded', () => {
@@ -54,7 +54,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -64,7 +64,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-dark-900')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-secondary')
       })
 
       it('should be color positive when props.color is positive', () => {
@@ -126,7 +126,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded').exists()).toBe(true)
+        expect(wrapper.find('.rounded-sm').exists()).toBe(true)
       })
 
       it('should be square when props.shape is square', () => {
@@ -190,7 +190,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -202,7 +202,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.text-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.text-primary').exists()).toBe(true)
       })
 
       it('should be ghost when props.variant is ghost', () => {

@@ -73,7 +73,7 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-primary-500')
+        expect(button.classes()).toContain('bg-primary')
       })
 
       it('should be size md', () => {
@@ -83,11 +83,11 @@ describe('Calendar component', () => {
       it('should be variant filled', async () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
-        expect(button.classes()).toContain('bg-primary-500')
+        expect(button.classes()).toContain('bg-primary')
       })
 
       it('should be shape soft', () => {
-        expect(wrapper.find('.vk-calendar__grid-button').classes()).toContain('rounded')
+        expect(wrapper.find('.vk-calendar__grid-button').classes()).toContain('rounded-sm')
       })
     })
 
@@ -104,7 +104,7 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-primary-500')
+        expect(button.classes()).toContain('bg-primary')
       })
 
       it('should be color secondary when props.color is secondary', async () => {
@@ -119,7 +119,7 @@ describe('Calendar component', () => {
         const button = wrapper.findAll('.vk-calendar__grid-button')[14]
         await button.trigger('click')
 
-        expect(button.classes()).toContain('bg-light-300')
+        expect(button.classes()).toContain('bg-secondary')
       })
 
       it('should be color positive when props.color is positive', async () => {
@@ -204,7 +204,7 @@ describe('Calendar component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-calendar__grid-button').classes()).toContain('rounded')
+        expect(wrapper.find('.vk-calendar__grid-button').classes()).toContain('rounded-sm')
       })
 
       it('should be square when props.shape is square', () => {
@@ -280,7 +280,7 @@ describe('Calendar component', () => {
           }
         })
 
-        expect(wrapper.find('.text-light-50').exists()).toBe(true)
+        expect(wrapper.find('.vk-calendar__filled').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -304,7 +304,7 @@ describe('Calendar component', () => {
           }
         })
 
-        expect(wrapper.find('.shadow-none').exists()).toBe(true)
+        expect(wrapper.find('.vk-calendar__ghost').exists()).toBe(true)
       })
     })
   })

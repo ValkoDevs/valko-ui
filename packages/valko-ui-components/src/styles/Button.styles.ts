@@ -74,8 +74,16 @@ export default tv({
       }
     },
     variant: {
-      filled: {},
-      ghost: {},
+      filled: {
+        button: [
+          'vk-button__filled'
+        ]
+      },
+      ghost: {
+        button: [
+          'vk-button__ghost'
+        ]
+      },
       outlined: {
         button: [
           'border-2'

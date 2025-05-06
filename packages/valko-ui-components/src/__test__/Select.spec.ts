@@ -28,7 +28,7 @@ describe('Select component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-primary-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-primary')
       })
 
       it('should be size md', () => {
@@ -67,7 +67,7 @@ describe('Select component', () => {
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-primary-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-primary')
       })
 
       it('should be color secondary when props.color is secondary', async () => {
@@ -80,7 +80,7 @@ describe('Select component', () => {
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-light-200')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-secondary')
       })
 
       it('should be color positive when props.color is positive', async () => {

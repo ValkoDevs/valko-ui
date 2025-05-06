@@ -106,7 +106,7 @@ describe('Table component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-300').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-low').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -124,7 +124,7 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-primary-500/[.3]')
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-primary-container')
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -136,7 +136,7 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-dark-600/[.3]')
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-secondary-container')
       })
 
       it('should be color positive when props.color is positive', () => {
@@ -148,7 +148,7 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-positive')
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-positive-container')
       })
 
       it('should be color accent when props.color is accent', () => {
@@ -160,7 +160,7 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-accent')
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-accent-container')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -172,7 +172,7 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-warning')
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-warning-container')
       })
 
       it('should be color negative when props.color is negative', () => {
@@ -184,7 +184,7 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-negative')
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-negative-container')
       })
     })
 
@@ -286,7 +286,7 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-300').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-low').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -310,7 +310,7 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-table__thead').classes()).toContain('bg-light-300/[.60]')
+        expect(wrapper.find('.vk-table__thead').classes()).toContain('bg-surface-container-highest/[.5]')
       })
     })
 
@@ -324,7 +324,7 @@ describe('Table component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-table__tr').classes()).toContain('even:bg-light-200/[.8]')
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('even:bg-surface-container')
       })
     })
   })
@@ -468,7 +468,7 @@ describe('Table component', () => {
         }
       })
 
-      expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-primary-500/[.3]')
+      expect(wrapper.find('.vk-table__tr').classes()).toContain('data-[selected=true]:bg-primary-container')
     })
 
     it('should handle empty selection', () => {

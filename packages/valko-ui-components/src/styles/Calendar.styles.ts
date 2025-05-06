@@ -71,8 +71,16 @@ export default tv({
   },
   variants: {
     variant: {
-      filled: {},
-      ghost: {},
+      filled: {
+        container: [
+          'vk-calendar__filled'
+        ]
+      },
+      ghost: {
+        container: [
+          'vk-calendar__ghost'
+        ]
+      },
       outlined: {}
     },
     color: {

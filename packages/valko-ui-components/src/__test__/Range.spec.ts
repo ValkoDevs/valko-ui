@@ -22,7 +22,7 @@ describe('Range component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be size md', () => {
@@ -30,7 +30,7 @@ describe('Range component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-high').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -47,7 +47,7 @@ describe('Range component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -58,7 +58,7 @@ describe('Range component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-400').exists()).toBe(true)
+        expect(wrapper.find('.bg-secondary').exists()).toBe(true)
       })
 
       it('should be color positive when props.color is positive', () => {
@@ -196,7 +196,7 @@ describe('Range component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-high').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -218,7 +218,7 @@ describe('Range component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-range__progress').classes()).toContain('bg-light-200/[.5]')
+        expect(wrapper.find('.vk-range__progress').classes()).toContain('bg-surface-container-high/[.5]')
       })
 
       it('should be gradient when props.variant is gradient', () => {

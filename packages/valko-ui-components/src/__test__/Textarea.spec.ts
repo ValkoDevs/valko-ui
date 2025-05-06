@@ -14,7 +14,7 @@ describe('Textarea component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.text-dark-700').exists()).toBe(true)
+        expect(wrapper.find('.vk-textarea__label').classes()).toContain('peer-focus:text-primary')
       })
 
       it('should be size md', () => {
@@ -22,7 +22,7 @@ describe('Textarea component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-highest').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -54,7 +54,7 @@ describe('Textarea component', () => {
           }
         })
 
-        expect(wrapper.find('.text-dark-700').exists()).toBe(true)
+        expect(wrapper.find('.vk-textarea__label').classes()).toContain('peer-focus:text-primary')
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -64,7 +64,7 @@ describe('Textarea component', () => {
           }
         })
 
-        expect(wrapper.find('.text-dark-600').exists()).toBe(true)
+        expect(wrapper.find('.vk-textarea__label').classes()).toContain('peer-focus:text-secondary')
       })
 
       it('should be color positive when props.color is positive', () => {
@@ -210,7 +210,7 @@ describe('Textarea component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-inherit').exists()).toBe(true)
+        expect(wrapper.find('.bg-transparent').exists()).toBe(true)
       })
     })
   })

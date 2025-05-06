@@ -28,7 +28,7 @@ describe('Dropdown component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-primary-500')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-primary')
       })
 
       it('should be size md', () => {
@@ -36,15 +36,11 @@ describe('Dropdown component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:text-light-50')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-primary')
       })
 
       it('should be shape soft', () => {
         expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('data-[shape=soft]:rounded-lg')
-      })
-
-      it('should not be flat', () => {
-        expect(wrapper.find('.vk-popover__panel').classes()).toContain('shadow-md')
       })
 
       it('should not be disabled', () => {
@@ -65,7 +61,7 @@ describe('Dropdown component', () => {
           }
         })
         await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-primary-500')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-primary')
       })
 
       it('should be color secondary when props.color is secondary', async () => {
@@ -76,7 +72,7 @@ describe('Dropdown component', () => {
           }
         })
         await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-light-300')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-secondary')
       })
 
       it('should be color positive when props.color is positive', async () => {
@@ -220,7 +216,7 @@ describe('Dropdown component', () => {
     })
 
     describe('When variant prop changes', () => {
-      it('should be filled when props.size is filled', async () => {
+      it('should be filled when props.variant is filled', async () => {
         wrapper = mount(VkDropdown, {
           props: {
             variant: 'filled',
@@ -228,7 +224,7 @@ describe('Dropdown component', () => {
           }
         })
         await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:text-light-50')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-primary')
       })
 
       it('should be outlined when props.variant is outlined', async () => {
@@ -254,7 +250,7 @@ describe('Dropdown component', () => {
 
         await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
 
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-primary-500/[.15]')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:bg-primary-container')
       })
 
       it('should be link when props.variant is link', async () => {
@@ -267,7 +263,7 @@ describe('Dropdown component', () => {
 
         await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
 
-        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:text-primary-500')
+        expect(wrapper.find('.vk-dropdown__item-button').classes()).toContain('hover:text-primary')
       })
 
       it('should be gradient when props.variant is gradient', async () => {
@@ -304,34 +300,6 @@ describe('Dropdown component', () => {
         })
 
         expect(wrapper.find('i.ti.ti-home').exists()).toBe(true)
-      })
-    })
-
-    describe('When flat prop changes', () => {
-      it('should be flat if prop flat is true', async () => {
-        const wrapper = mount(VkDropdown, {
-          props: {
-            items,
-            flat: true
-          }
-        })
-
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-
-        expect(wrapper.find('.vk-popover__panel').classes()).toContain('shadow-none')
-      })
-
-      it('should have shadow if prop flat is false', async () => {
-        const wrapper = mount(VkDropdown, {
-          props: {
-            items,
-            flat: false
-          }
-        })
-
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-
-        expect(wrapper.find('.vk-popover__panel').classes()).toContain('shadow-md')
       })
     })
 

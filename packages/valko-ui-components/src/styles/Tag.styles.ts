@@ -35,7 +35,11 @@ export default tv({
   variants: {
     variant: {
       filled: {},
-      ghost: {},
+      ghost: {
+        container: [
+          'vk-tag__ghost'
+        ]
+      },
       outlined: {
         container: [
           'border-2'

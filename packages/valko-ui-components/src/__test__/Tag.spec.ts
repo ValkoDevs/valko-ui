@@ -19,11 +19,11 @@ describe('Tag component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.text-light-50').exists()).toBe(true)
+        expect(wrapper.find('.text-on-primary').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -32,10 +32,6 @@ describe('Tag component', () => {
 
       it('should be size md', () => {
         expect(wrapper.find('.text-sm').exists()).toBe(true)
-      })
-
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
       })
 
       it('should not be closable', () => {
@@ -56,7 +52,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -67,7 +63,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-300').exists()).toBe(true)
+        expect(wrapper.find('.bg-secondary').exists()).toBe(true)
       })
 
       it('should be color positive when props.color is positive', () => {
@@ -205,7 +201,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.text-light-50').exists()).toBe(true)
+        expect(wrapper.find('.text-on-primary').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -227,7 +223,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.shadow-none').exists()).toBe(true)
+        expect(wrapper.find('.vk-tag__ghost').exists()).toBe(true)
       })
 
       it('should be gradient when props.variant is gradient', () => {
@@ -276,7 +272,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-tag__closable').classes()).toContain('text-dark-800')
+        expect(wrapper.find('.vk-tag__closable').classes()).toContain('text-on-primary-container')
       })
 
       it('should have props.color if variant is outlined or ghost', () => {
@@ -288,7 +284,7 @@ describe('Tag component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-tag__closable').classes()).toContain('text-primary-500')
+        expect(wrapper.find('.vk-tag__closable').classes()).toContain('text-on-primary-container')
       })
     })
   })

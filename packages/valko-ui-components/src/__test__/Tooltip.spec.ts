@@ -30,10 +30,6 @@ describe('Tooltip component', () => {
       it('should be shape soft', () => {
         expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
-
-      it('should be flat', () => {
-        expect(wrapper.find('.vk-popover__panel').classes()).toContain('shadow-none')
-      })
     })
 
     describe('When shape prop changes', () => {

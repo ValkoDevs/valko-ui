@@ -15,7 +15,7 @@ describe('Pagination component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be size md', () => {
@@ -23,15 +23,11 @@ describe('Pagination component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
         expect(wrapper.find('.rounded-lg').exists()).toBe(true)
-      })
-
-      it('should be flat', () => {
-        expect(wrapper.find('.shadow-sm').exists()).toBe(true)
       })
     })
 
@@ -43,7 +39,7 @@ describe('Pagination component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -53,7 +49,7 @@ describe('Pagination component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-secondary').exists()).toBe(true)
       })
 
       it('should be color positive when props.color is positive', () => {
@@ -179,7 +175,7 @@ describe('Pagination component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {

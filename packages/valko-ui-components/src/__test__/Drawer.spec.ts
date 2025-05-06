@@ -49,15 +49,15 @@ describe('Drawer component', () => {
       })
 
       it('should be opaque', () => {
-        expect(backdrop.classes()).toContain('bg-light-400/80')
+        expect(backdrop.classes()).toContain('bg-state-scrim')
       })
 
       it('should not have title', () => {
         expect(drawer.find('.vk-drawer__title').text()).toContain('')
       })
 
-      it('should not be flat', () => {
-        expect(drawer.classes()).toContain('shadow-lg')
+      it('should be elevated', () => {
+        expect(drawer.classes()).toContain('shadow-el3')
       })
     })
 
@@ -262,7 +262,7 @@ describe('Drawer component', () => {
 
         await nextTick()
         backdrop = wrapper.getComponent('.vk-drawer__backdrop') as unknown as VueWrapper
-        expect(backdrop.classes()).toContain('bg-light-400/80')
+        expect(backdrop.classes()).toContain('bg-state-scrim')
       })
 
       it('should be blur when props.backdrop is blur', async () => {
@@ -361,34 +361,6 @@ describe('Drawer component', () => {
         await nextTick()
         panel = wrapper.getComponent('.vk-drawer__panel') as unknown as VueWrapper
         expect(panel.classes()).toContain('top-0')
-      })
-    })
-
-    describe('When flat prop changes', () => {
-      it('should not have shadow if flat is true', async () => {
-        const wrapper = mount(VkDrawer, {
-          props: {
-            isOpen: true,
-            flat: true
-          }
-        })
-
-        await nextTick()
-        drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
-        expect(drawer.classes()).toContain('shadow-none')
-      })
-
-      it('should have shadow if flat is false', async () => {
-        const wrapper = mount(VkDrawer, {
-          props: {
-            isOpen: true,
-            flat: false
-          }
-        })
-
-        await nextTick()
-        drawer = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
-        expect(drawer.classes()).toContain('shadow-lg')
       })
     })
   })

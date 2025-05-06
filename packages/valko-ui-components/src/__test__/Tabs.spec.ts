@@ -26,7 +26,7 @@ describe('Tabs component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be size md', () => {
@@ -34,7 +34,7 @@ describe('Tabs component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -63,7 +63,7 @@ describe('Tabs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -74,7 +74,7 @@ describe('Tabs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-300').exists()).toBe(true)
+        expect(wrapper.find('.bg-secondary').exists()).toBe(true)
       })
 
       it('should be color positive when props.color is positive', () => {
@@ -212,7 +212,7 @@ describe('Tabs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {

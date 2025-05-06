@@ -20,7 +20,7 @@ describe('Avatar component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be size md', () => {
@@ -28,7 +28,7 @@ describe('Avatar component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.text-light-50').exists()).toBe(true)
+        expect(wrapper.find('.vk-avatar__filled').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -49,7 +49,7 @@ describe('Avatar component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -60,7 +60,7 @@ describe('Avatar component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-300').exists()).toBe(true)
+        expect(wrapper.find('.bg-secondary').exists()).toBe(true)
       })
 
       it('should be color positive when props.color is positive', () => {
@@ -198,7 +198,7 @@ describe('Avatar component', () => {
           }
         })
 
-        expect(wrapper.find('.text-light-50').exists()).toBe(true)
+        expect(wrapper.find('.vk-avatar__filled').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -220,7 +220,7 @@ describe('Avatar component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-avatar').classes()).toContain('bg-primary-500/[.20]')
+        expect(wrapper.find('.vk-avatar__ghost').exists()).toBe(true)
       })
 
       it('should be gradient when props.variant is gradient', () => {

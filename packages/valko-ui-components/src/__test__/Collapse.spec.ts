@@ -15,7 +15,7 @@ describe('Collapse component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -95,7 +95,7 @@ describe('Collapse component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {

@@ -74,7 +74,7 @@ describe('Datepicker component', () => {
       it('should be color primary', async () => {
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('focus:border-primary-500')
+        expect(input.classes()).toContain('focus:border-primary')
       })
 
       it('should be size md', () => {
@@ -86,7 +86,7 @@ describe('Datepicker component', () => {
       it('should be variant filled', () => {
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('bg-light-200')
+        expect(input.classes()).toContain('bg-surface-container-highest')
       })
 
       it('should be shape soft', async () => {
@@ -111,7 +111,7 @@ describe('Datepicker component', () => {
 
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('focus:border-primary-500')
+        expect(input.classes()).toContain('focus:border-primary')
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -127,7 +127,7 @@ describe('Datepicker component', () => {
 
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('focus:border-light-400')
+        expect(input.classes()).toContain('focus:border-secondary')
       })
 
       it('should be color positive when props.color is positive', () => {
@@ -328,7 +328,7 @@ describe('Datepicker component', () => {
 
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('bg-light-200')
+        expect(input.classes()).toContain('bg-surface-container-highest')
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -360,7 +360,7 @@ describe('Datepicker component', () => {
 
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('bg-inherit')
+        expect(input.classes()).toContain('bg-transparent')
       })
     })
   })

@@ -14,7 +14,7 @@ describe('Spinner component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.text-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.text-primary').exists()).toBe(true)
       })
 
       it('should be size md', () => {
@@ -30,7 +30,7 @@ describe('Spinner component', () => {
           }
         })
 
-        expect(wrapper.find('.text-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.text-primary').exists()).toBe(true)
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -40,7 +40,7 @@ describe('Spinner component', () => {
           }
         })
 
-        expect(wrapper.find('.text-dark-800').exists()).toBe(true)
+        expect(wrapper.find('.text-secondary').exists()).toBe(true)
       })
 
       it('should be color positive when props.color is positive', () => {

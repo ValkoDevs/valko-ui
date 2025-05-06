@@ -32,10 +32,14 @@ export default tv({
   },
   variants: {
     variant: {
-      filled: {},
+      filled: {
+        container: [
+          'vk-alert__filled'
+        ]
+      },
       ghost: {
         container: [
-          'bg-transparent'
+          'vk-alert__ghost'
         ]
       },
       outlined: {

@@ -47,7 +47,7 @@ describe('useNotification composable', () => {
     })
 
     it('should be color primary', () => {
-      expect(notification?.className).toContain('bg-primary-500')
+      expect(notification?.className).toContain('bg-primary')
     })
 
     it('should be size md', () => {
@@ -59,15 +59,11 @@ describe('useNotification composable', () => {
     })
 
     it('should be variant filled', () => {
-      expect(notification?.className).toContain('text-light-50')
+      expect(notification?.className).toContain('text-on-primary')
     })
 
     it('should have progressbar', () => {
       expect(document.querySelector('.vk-notification__progressbar')).not.toBeNull()
-    })
-
-    it('should not be flat', () => {
-      expect(notification?.className).toContain('shadow-md')
     })
   })
 
@@ -83,7 +79,7 @@ describe('useNotification composable', () => {
       await nextTick()
       notification = document.querySelector('.vk-notification')
 
-      expect(notification?.className).toContain('bg-primary-500')
+      expect(notification?.className).toContain('bg-primary')
     })
 
     it('should be secondary when color props is secondary', async () => {
@@ -97,7 +93,7 @@ describe('useNotification composable', () => {
       await nextTick()
       notification = document.querySelector('.vk-notification')
 
-      expect(notification?.className).toContain('bg-light-300')
+      expect(notification?.className).toContain('bg-secondary')
     })
 
     it('should be positive when color props is positive', async () => {
@@ -169,7 +165,7 @@ describe('useNotification composable', () => {
       await nextTick()
       notification = document.querySelector('.vk-notification')
 
-      expect(notification?.className).toContain('text-light-50')
+      expect(notification?.className).toContain('text-on-primary')
     })
 
     it('should be outlined when variant props is outlined', async () => {

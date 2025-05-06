@@ -29,7 +29,7 @@ describe('Menu component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-primary-500')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-primary')
       })
 
       it('should be size md', () => {
@@ -55,7 +55,7 @@ describe('Menu component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-primary-500')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-primary')
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -67,7 +67,7 @@ describe('Menu component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-light-200')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-secondary')
       })
 
       it('should be color positive when props.color is positive', () => {
