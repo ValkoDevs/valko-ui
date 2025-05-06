@@ -193,7 +193,7 @@ describe('useNotification composable', () => {
       await nextTick()
       notification = document.querySelector('.vk-notification')
 
-      expect(notification?.className).toContain('shadow-none')
+      expect(notification?.className).toContain('backdrop-blur')
     })
   })
 

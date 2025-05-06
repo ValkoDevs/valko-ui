@@ -35,8 +35,8 @@ describe('Avatar component', () => {
         expect(wrapper.find('.rounded-lg').exists()).toBe(true)
       })
 
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
+      it('should not be elevated', () => {
+        expect(wrapper.find('.shadow-el1').exists()).toBe(false)
       })
     })
 
@@ -263,6 +263,19 @@ describe('Avatar component', () => {
         wrapper = mount(VkAvatar, {})
 
         expect(wrapper.find('i.ti.ti-user').exists()).toBe(true)
+      })
+    })
+
+    describe('When prop elevated changes', () => {
+      it('should be elevated when props.elevated is true', () => {
+        wrapper = mount(VkAvatar, {
+          props: {
+            src: 'example.url',
+            elevated: true
+          }
+        })
+
+        expect(wrapper.find('.shadow-el1').exists()).toBe(true)
       })
     })
   })

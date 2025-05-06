@@ -76,7 +76,6 @@ const onArrowClick = (operation: 1 | -1) => emit('changeMonth', props.display.mo
           :variant="isSelected(cell) ? variant : 'link'"
           :shape="shape"
           condensed
-          flat
           @click="onSelectDate(cell)"
         >
           {{ cell }}

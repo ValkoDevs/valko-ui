@@ -327,6 +327,17 @@ describe('Button component', () => {
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-positive')
       })
     })
+
+    describe('When elevated prop changes', () => {
+      it('should be elevated when props.elevated is true', () => {
+        wrapper = mount(VkButton, {
+          props: {
+            elevated: true
+          }
+        })
+        expect(wrapper.find('.vk-button__base').classes()).toContain('shadow-el1')
+      })
+    })
   })
 
   describe('With slots', () => {

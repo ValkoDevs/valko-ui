@@ -41,7 +41,6 @@ const onArrowClick = (operation: 1 | -1) => emit('changeYear', props.display.yea
         :variant="isSelected(index) ? variant : 'link'"
         :shape="shape"
         condensed
-        flat
         @click="onSelectMonth(index)"
       >
         {{ month }}

@@ -44,10 +44,6 @@ describe('Breadcrumbs component', () => {
         expect(wrapper.find('.rounded-lg').exists()).toBe(true)
       })
 
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
-      })
-
       it('should have default separator', () => {
         expect(wrapper.find('.vk-breadcrumbs').html()).toContain('>')
       })

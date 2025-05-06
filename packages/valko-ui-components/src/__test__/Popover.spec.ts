@@ -22,8 +22,8 @@ describe('Popover component', () => {
         expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
 
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
+      it('should not be elevated', () => {
+        expect(wrapper.find('.shadow-el2').exists()).toBe(true)
       })
     })
 
@@ -159,6 +159,19 @@ describe('Popover component', () => {
 
         const panel = wrapper.find('.vk-popover__panel')
         expect(panel.classes()).toEqual(expect.arrayContaining(['class-one', 'class-two']))
+      })
+    })
+
+    describe('When elevated prop changes', () => {
+      it('should be elevated when props.elevated is true', () => {
+        wrapper = mount(VkPopover, {
+          props: {
+            isOpen: true,
+            elevated: true
+          }
+        })
+
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('shadow-el3')
       })
     })
   })

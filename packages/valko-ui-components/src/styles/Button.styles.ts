@@ -557,7 +557,7 @@ export default tv({
       elevated: true,
       class: {
         button: [
-          'active:shadow-none'
+          'active:shadow-el0'
         ]
       }
     },

@@ -40,7 +40,6 @@ export default tv({
       md: {},
       lg: {}
     },
-    flat: {},
     shape: {
       rounded: {
         content: [

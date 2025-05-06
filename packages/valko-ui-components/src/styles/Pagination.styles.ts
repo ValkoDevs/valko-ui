@@ -39,8 +39,7 @@ export default tv({
       },
       ghost: {
         nav: [
-          'bg-transparent',
-          'shadow-none'
+          'bg-transparent'
         ]
       }
     },

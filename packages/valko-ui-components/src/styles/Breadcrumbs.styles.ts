@@ -136,9 +136,6 @@ export default tv({
         ]
       }
     },
-    flat: {
-      true: {}
-    },
     condensed: {
       true: {
         container: [

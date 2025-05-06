@@ -33,10 +33,6 @@ describe('Checkbox component', () => {
         expect(wrapper.find('.ml-2').exists()).toBe(true)
       })
 
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
-      })
-
       it('should not be disabled', () => {
         expect(wrapper.find('.cursor-not-allowed').exists()).toBe(false)
       })

@@ -50,6 +50,10 @@ describe('Dropdown component', () => {
       it('should not have a label', () => {
         expect(wrapper.find('.vk-dropdown__trigger-button').text()).toBe('')
       })
+
+      it('should not be elevated', () => {
+        expect(wrapper.find('.shadow-el1').exists()).toBe(false)
+      })
     })
 
     describe('When color prop changes', () => {
@@ -365,6 +369,18 @@ describe('Dropdown component', () => {
         const itemButton = wrapper.find('.vk-dropdown__item-button')
 
         expect(itemButton.findComponent({ name: 'VkIcon' }).exists()).toBe(false)
+      })
+    })
+
+    describe('When elevated prop changes', () => {
+      it('should be elevated when props.elevated is true', () => {
+        wrapper = mount(VkDropdown, {
+          props: {
+            elevated: true,
+            items
+          }
+        })
+        expect(wrapper.find('.vk-button__base').classes()).toContain('shadow-el1')
       })
     })
   })

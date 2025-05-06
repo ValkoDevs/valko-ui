@@ -37,10 +37,6 @@ describe('Radio component', () => {
         expect(wrapper.find('.vk-radio__icon').exists()).toBe(false)
       })
 
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
-      })
-
       it('should not be disabled', () => {
         expect(wrapper.find('.cursor-not-allowed').exists()).toBe(false)
       })

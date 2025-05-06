@@ -91,7 +91,7 @@ export default tv({
           'bg-transparent'
         ],
         cursor: [
-          'shadow-none'
+          'shadow-el0'
         ]
       },
       gradient: {
@@ -110,7 +110,7 @@ export default tv({
         ],
         cursor: [
           'border-b-2',
-          'shadow-none'
+          'shadow-el0'
         ]
       },
       rounded: {

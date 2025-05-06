@@ -29,10 +29,6 @@ describe('Avatar component', () => {
         expect(wrapper.find('.right-0').exists()).toBe(true)
       })
 
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
-      })
-
       it('should not be dot', () => {
         expect(wrapper.find('.vk-badge__badge').classes()).not.toContain('size-4')
       })

@@ -13,8 +13,7 @@ const useNotification = (props: NotificationProps) => {
     color: props.color || 'primary',
     variant: props.variant || 'filled',
     shape: props.shape || 'soft',
-    size: props.size || 'md',
-    flat: props.flat || false
+    size: props.size || 'md'
   }
 
   const combinedProps = { ...props, ...defaultProps }

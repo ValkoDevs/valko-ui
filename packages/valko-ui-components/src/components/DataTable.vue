@@ -269,7 +269,6 @@ onBeforeUnmount(() => {
           :shape="shape"
           :size="size"
           :pages="totalPages"
-          flat
           :class="classes.footerNav"
           v-model="currentPage"
         />

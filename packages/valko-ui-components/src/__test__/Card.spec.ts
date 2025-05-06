@@ -25,6 +25,10 @@ describe('Card component', () => {
       it('should be shape soft', () => {
         expect(wrapper.find('.rounded-lg').exists()).toBe(true)
       })
+
+      it('should not be elevated', () => {
+        expect(wrapper.find('.shadow-el1').exists()).toBe(false)
+      })
     })
 
     describe('When shape prop changes', () => {
@@ -140,6 +144,18 @@ describe('Card component', () => {
         })
 
         expect(wrapper.find('.vk-card').classes()).toContain('bg-surface-container-highest/[.5]')
+      })
+    })
+
+    describe('When prop elevated changes', () => {
+      it('should be elevated when props.elevated is true', () => {
+        wrapper = mount(VkCard, {
+          props: {
+            elevated: true
+          }
+        })
+
+        expect(wrapper.find('.vk-card').classes()).toContain('shadow-el1')
       })
     })
   })

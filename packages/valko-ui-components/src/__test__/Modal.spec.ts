@@ -54,10 +54,6 @@ describe('Modal component', () => {
       it('should not have title', () => {
         expect(modal.find('.text-lg').text()).toContain('')
       })
-
-      it('should not be flat', () => {
-        expect(modal.classes('.shadow-none')).toBe(false)
-      })
     })
 
     describe('When isOpen prop changes', () => {

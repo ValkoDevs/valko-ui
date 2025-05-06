@@ -45,7 +45,6 @@ export default tv({
       },
       ghost: {
         notification: [
-          'shadow-none',
           'backdrop-blur'
         ]
       },
@@ -137,13 +136,6 @@ export default tv({
       square: {
         notification: [
           'rounded-none'
-        ]
-      }
-    },
-    flat: {
-      true: {
-        notification: [
-          'shadow-none'
         ]
       }
     }

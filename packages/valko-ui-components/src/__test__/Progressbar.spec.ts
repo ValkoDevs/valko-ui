@@ -331,7 +331,6 @@ describe('Progressbar component', () => {
         })
 
         const progress = wrapper.find('.vk-progressbar__progress')
-        console.log(wrapper.html())
         expect(progress.attributes('style')).toContain('background-image')
       })
     })

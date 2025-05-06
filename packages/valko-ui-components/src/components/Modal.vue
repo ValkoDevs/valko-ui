@@ -16,8 +16,7 @@ const props = withDefaults(defineProps<ModalProps>(), {
   backdrop: 'opaque',
   title: '',
   closable: true,
-  isOpen: false,
-  flat: false
+  isOpen: false
 })
 
 const emit = defineEmits(['close'])

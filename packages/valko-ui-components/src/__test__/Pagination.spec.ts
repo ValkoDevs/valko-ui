@@ -29,6 +29,10 @@ describe('Pagination component', () => {
       it('should be shape soft', () => {
         expect(wrapper.find('.rounded-lg').exists()).toBe(true)
       })
+
+      it('should not be elevated', () => {
+        expect(wrapper.find('.shadow-el1').exists()).toBe(false)
+      })
     })
 
     describe('When color prop changes', () => {
@@ -196,6 +200,18 @@ describe('Pagination component', () => {
         })
 
         expect(wrapper.find('.bg-transparent').exists()).toBe(true)
+      })
+    })
+
+    describe('When elevated prop changes', () => {
+      it('should be elevated when props.elevated is true', () => {
+        wrapper = mount(VkPagination, {
+          props: {
+            elevated: true
+          }
+        })
+
+        expect(wrapper.find('.shadow-el1').exists()).toBe(true)
       })
     })
   })

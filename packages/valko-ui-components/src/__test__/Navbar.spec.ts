@@ -29,8 +29,8 @@ describe('Navbar component', () => {
         expect(wrapper.find('.rounded-b-lg').exists()).toBe(true)
       })
 
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
+      it('should not be elevated', () => {
+        expect(wrapper.find('.shadow-el1').exists()).toBe(false)
       })
     })
 
@@ -209,6 +209,18 @@ describe('Navbar component', () => {
         })
 
         expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
+      })
+    })
+
+    describe('When elevated prop changes', () => {
+      it('should be elevated when props.elevated is true', () => {
+        wrapper = mount(VkNavbar, {
+          props: {
+            elevated: true
+          }
+        })
+
+        expect(wrapper.find('.shadow-el1').exists()).toBe(true)
       })
     })
   })

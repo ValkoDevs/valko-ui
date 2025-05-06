@@ -17,7 +17,6 @@ const props = withDefaults(defineProps<DrawerProps>(), {
   placement: 'right',
   isOpen: false,
   closable: true,
-  flat: false,
   title: '',
   class: ''
 })

@@ -51,7 +51,6 @@ onMounted(() => {
         :variant="selected.year === year ? variant : 'link'"
         :shape="shape"
         condensed
-        flat
         @click="onSelectYear(year)"
       >
         {{ year }}

@@ -59,7 +59,6 @@ const onClose = () => {
       variant="link"
       shape="rounded"
       size="xs"
-      flat
       condensed
       :disabled="disabled"
       @click="onClose"
