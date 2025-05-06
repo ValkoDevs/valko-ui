@@ -213,7 +213,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -275,7 +275,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <div
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
         >
           <span>{{ color.label }}</span>
@@ -286,7 +286,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
         </div>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -365,7 +365,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <div
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
         >
           <span>{{ color.label }}</span>
@@ -376,7 +376,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
         </div>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps: 'striped' })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps: 'striped' })" />
         </template>
       </example-section>
     </template>

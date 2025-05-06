@@ -96,7 +96,7 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
 
   <div class="flex flex-col items-center justify-center p-6 h-[80vh]">
     <h1 class="text-4xl font-bold text-center mb-4">
-      Welcome to <span class="text-primary-500">ValkoUI</span>
+      Welcome to <span class="text-primary">ValkoUI</span>
     </h1>
     <p class="text-center mb-6">
       A modern library for building sleek, responsive user interfaces with ease.

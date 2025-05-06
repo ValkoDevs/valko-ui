@@ -172,10 +172,10 @@ const data: TableItem[] = [
       </vk-card>
 
       <vk-card
-        class="scale-105 shadow-primary-600 shadow-md border-2 border-primary-600"
+        class="scale-105 shadow-primary shadow-md border-2 border-primary"
         size="lg"
       >
-        <vk-card-header class="justify-center bg-gradient-to-br from-primary-500 to-primary-700 text-light-200 gap-4">
+        <vk-card-header class="justify-center bg-gradient-to-br from-primary to-primary text-light-200 gap-4">
           Pro
         </vk-card-header>
         <vk-tag
@@ -314,10 +314,10 @@ const data: TableItem[] = [
           </vk-card>
 
           <vk-card
-            class="scale-105 shadow-primary-600 shadow-md border-2 border-primary-600"
+            class="scale-105 shadow-primary shadow-md border-2 border-primary"
             size="lg"
           >
-            <vk-card-header class="justify-center bg-gradient-to-br from-primary-500 to-primary-700 text-light-200 gap-4">
+            <vk-card-header class="justify-center bg-gradient-to-br from-primary to-primary text-light-200 gap-4">
               Pro
             </vk-card-header>
             <vk-tag

@@ -178,7 +178,7 @@ watchEffect(() => {
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -224,7 +224,7 @@ watchEffect(() => {
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <vk-checkbox
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           v-model="checkboxStates[color.value]"
           :color="color.value"
@@ -232,7 +232,7 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 

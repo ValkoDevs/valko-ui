@@ -137,7 +137,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -179,7 +179,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <vk-switch
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           v-model="exampleSectionModel[color.value]"
           :color="color.value"
@@ -187,7 +187,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         />
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 

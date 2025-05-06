@@ -115,7 +115,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -127,7 +127,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.shape"
@@ -163,7 +163,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <div
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           class="flex flex-col gap-2"
         >
@@ -176,7 +176,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
         </div>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 

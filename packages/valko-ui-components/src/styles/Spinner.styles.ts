@@ -66,6 +66,11 @@ export default tv({
         iconColor: [
           'text-negative'
         ]
+      },
+      surface: {
+        iconColor: [
+          'text-on-surface'
+        ]
       }
     },
     condensed: {

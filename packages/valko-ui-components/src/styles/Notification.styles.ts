@@ -63,6 +63,9 @@ export default tv({
         ]
       },
       gradient: {
+        notification: [
+          'bg-gradient-to-b'
+        ],
         progressbar: [
           'bg-white'
         ]

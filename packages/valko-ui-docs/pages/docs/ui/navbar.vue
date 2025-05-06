@@ -121,7 +121,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -165,7 +165,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-navbar
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           :color="color.value"
         >
@@ -177,7 +177,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
         </vk-navbar>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), customSlot })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), customSlot })" />
         </template>
       </example-section>
 

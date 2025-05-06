@@ -41,7 +41,8 @@ export default tv({
       positive: {},
       accent: {},
       warning: {},
-      negative: {}
+      negative: {},
+      surface: {}
     },
     size: {
       xs: {
@@ -249,6 +250,17 @@ export default tv({
         ]
       }
     },
+    {
+      variant: 'filled',
+      color: 'surface',
+      disabled: false,
+      class: {
+        button: [
+          'bg-surface-container-highest',
+          'text-on-surface'
+        ]
+      }
+    },
     // ghost & color
     {
       variant: 'ghost',
@@ -316,6 +328,17 @@ export default tv({
         ]
       }
     },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      disabled: false,
+      class: {
+        button: [
+          'bg-surface-container-highest/[.5]',
+          'text-on-surface'
+        ]
+      }
+    },
     // link & color
     {
       variant: 'link',
@@ -374,6 +397,16 @@ export default tv({
       class: {
         button: [
           'text-on-negative-container'
+        ]
+      }
+    },
+    {
+      variant: 'link',
+      color: 'surface',
+      disabled: false,
+      class: {
+        button: [
+          'text-on-surface'
         ]
       }
     },
@@ -441,6 +474,17 @@ export default tv({
         button: [
           'text-on-negative-container',
           'border-negative'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'surface',
+      disabled: false,
+      class: {
+        button: [
+          'text-on-surface',
+          'border-outlined'
         ]
       }
     },
@@ -514,6 +558,18 @@ export default tv({
           'from-negative-gradient-start',
           'to-negative-gradient-end',
           'text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'surface',
+      disabled: false,
+      class: {
+        button: [
+          'from-surface-container',
+          'to-surface-container-highest',
+          'text-on-surface'
         ]
       }
     },

@@ -19,7 +19,7 @@ const apiData: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Button.',
-    values: 'primary, secondary, negative, warning, accent, positive',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -131,7 +131,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -176,10 +176,10 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(6,_minmax(0,_max-content))]"
+        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(7,_minmax(0,_max-content))]"
       >
         <vk-button
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           :color="color.value"
         >
@@ -187,7 +187,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), hasSlot: true })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), hasSlot: true })" />
         </template>
       </example-section>
 

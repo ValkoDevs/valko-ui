@@ -237,7 +237,7 @@ const extraProps = ':items="items"'
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -285,7 +285,7 @@ const extraProps = ':items="items"'
         classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(6,_minmax(0,_max-content))]"
       >
         <vk-dropdown
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           :color="color.value"
           :title="color.label"
@@ -294,7 +294,7 @@ const extraProps = ':items="items"'
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 

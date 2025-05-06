@@ -54,7 +54,7 @@ const copyToClipboard = async () => {
 </script>
 
 <template>
-  <div class="relative group w-full p-5 bg-light-200 dark:bg-dark-800 rounded-lg">
+  <div class="relative group w-full p-5 bg-surface-container rounded-lg">
     <vk-button
       variant="link"
       shape="rounded"
@@ -65,7 +65,7 @@ const copyToClipboard = async () => {
     >
       <vk-icon
         :name="btnIcon"
-        :class="`text-2xl ${btnIcon === 'copy' ? 'hover:text-primary-500' : ''} ${iconClass}`"
+        :class="`text-2xl ${btnIcon === 'copy' ? 'hover:text-primary' : ''} ${iconClass}`"
       />
     </vk-button>
 

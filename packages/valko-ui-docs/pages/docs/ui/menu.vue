@@ -199,7 +199,7 @@ onMounted(() => {
     })
   }
 
-  setFirstItemActive(colorOptions, 'color-menu')
+  setFirstItemActive(colorOptions.general, 'color-menu')
   setFirstItemActive(variantOptions.withGradientLinkAndLine, 'variant-menu')
   setFirstItemActive(shapeOptions.general, 'shape-menu')
   setFirstItemActive(sizeOptions.general, 'size-menu')
@@ -235,7 +235,7 @@ onMounted(() => {
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -267,16 +267,16 @@ onMounted(() => {
         classes="grid-cols-2 md:grid-cols-3"
       >
         <vk-menu
-          v-for="(color, index) in colorOptions"
+          v-for="(color, index) in colorOptions.general"
           :key="`color-menu-${index}`"
-          :items="generateMenuItems(colorOptions, color.label)"
+          :items="generateMenuItems(colorOptions.general, color.label)"
           :color="color.value"
           :active="activeItemsList[`color-menu-${index}`]"
           @item-click="(item: MenuItem) => onItemClick(item, `color-menu-${index}`)"
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 

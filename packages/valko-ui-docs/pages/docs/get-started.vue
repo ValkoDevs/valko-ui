@@ -54,7 +54,7 @@ const counter = ref(0)
   <div class="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-6">
     <h1 class="text-3xl font-bold text-center mb-4">
       Welcome to
-      <span class="text-primary-500">ValkoUI</span>
+      <span class="text-primary">ValkoUI</span>
     </h1>
 
     <p class="text-gray-700 text-center mb-6">
@@ -63,7 +63,7 @@ const counter = ref(0)
 
     <div class="flex flex-col items-center gap-4 bg-white shadow-lg p-6 rounded-lg">
       <span class="text-xl font-semibold">
-        Counter: <span class="text-primary-500">{{ counter }}</span>
+        Counter: <span class="text-primary">{{ counter }}</span>
       </span>
       <vk-button
         color="primary"
@@ -178,7 +178,7 @@ const counter = ref(0)
         <h3 class="text-lg font-medium">
           5. Configure Nuxt
         </h3>
-        <p>Add the ValkoUI and TailwindCSS modules to your <span class="text-primary-500">nuxt.config.ts</span> file:</p>
+        <p>Add the ValkoUI and TailwindCSS modules to your <span class="text-primary">nuxt.config.ts</span> file:</p>
         <code-block
           :code="nuxtConfig"
           language="ts"
@@ -191,7 +191,7 @@ const counter = ref(0)
         </h3>
         <p>Run the following command to create a TailwindCSS configuration file:</p>
         <code-block code="npx tailwindcss init" />
-        <p>Then update your <span class="text-primary-500">tailwind.config.js</span> file to include the ValkoUI preset:</p>
+        <p>Then update your <span class="text-primary">tailwind.config.js</span> file to include the ValkoUI preset:</p>
         <code-block
           :code="tailwindConfig"
           language="ts"

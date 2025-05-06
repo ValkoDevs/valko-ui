@@ -279,7 +279,7 @@ const iconSnippet = `<template>
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -354,14 +354,14 @@ const iconSnippet = `<template>
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-input
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           :color="color.value"
           :label="color.label"
         />
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 

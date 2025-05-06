@@ -134,7 +134,7 @@ const extraProps = {
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -180,7 +180,7 @@ const extraProps = {
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <div
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
@@ -197,7 +197,7 @@ const extraProps = {
         </div>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), customSlot, extraProps: extraProps.content })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), customSlot, extraProps: extraProps.content })" />
         </template>
       </example-section>
 

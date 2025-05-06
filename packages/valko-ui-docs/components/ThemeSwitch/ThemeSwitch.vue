@@ -21,7 +21,7 @@ const onClick = () => theme.value = theme.value === 'light' ? 'dark' : 'light'
   >
     <vk-icon
       :name="iconName"
-      class="text-2xl"
+      class="text-2xl px-2"
     />
   </vk-button>
 </template>

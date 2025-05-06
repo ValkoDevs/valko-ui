@@ -468,7 +468,7 @@ const extraProps = 'v-model="model" :adapter="adapter"'
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -500,7 +500,7 @@ const extraProps = 'v-model="model" :adapter="adapter"'
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <div
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
@@ -513,7 +513,7 @@ const extraProps = 'v-model="model" :adapter="adapter"'
         </div>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps}) }`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps}) }`" />
         </template>
       </example-section>
 

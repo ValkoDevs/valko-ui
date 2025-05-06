@@ -59,7 +59,7 @@ const route = useRoute()
       >
         <vk-icon
           name="brand-github"
-          class="text-2xl"
+          class="text-2xl px-2"
         />
       </vk-button>
     </a>

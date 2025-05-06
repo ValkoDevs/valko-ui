@@ -191,7 +191,7 @@ const extraProps = 'text="Content"'
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -244,14 +244,14 @@ const extraProps = 'text="Content"'
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <vk-tag
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           :color="color.value"
           :text="color.label"
         />
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', {values: colorOptions.map(o => o.value), extraProps})" />
+          <code-block :code="generateSnippet<string>('color', {values: colorOptions.general.map(o => o.value), extraProps})" />
         </template>
       </example-section>
 

@@ -576,7 +576,7 @@ const generateSnippet = snippetGeneratorFactory('vk-data-table')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -615,7 +615,7 @@ const generateSnippet = snippetGeneratorFactory('vk-data-table')
     <template #examples>
       <example-section title="Colors">
         <div
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
         >
           <span>{{ color.label }}</span>
@@ -632,7 +632,7 @@ const generateSnippet = snippetGeneratorFactory('vk-data-table')
         </div>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 

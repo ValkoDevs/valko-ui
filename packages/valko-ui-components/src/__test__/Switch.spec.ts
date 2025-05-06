@@ -15,7 +15,7 @@ describe('Switch component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-500')).toBeDefined()
+        expect(wrapper.find('.bg-primary')).toBeDefined()
       })
 
       it('should be size md', () => {
@@ -23,7 +23,7 @@ describe('Switch component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-300')).toBeDefined()
+        expect(wrapper.find('.bg-surface-container-highest')).toBeDefined()
       })
 
       it('should be shape soft', () => {
@@ -43,7 +43,7 @@ describe('Switch component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-500')).toBeDefined()
+        expect(wrapper.find('.bg-primary')).toBeDefined()
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -53,7 +53,7 @@ describe('Switch component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-400')).toBeDefined()
+        expect(wrapper.find('.bg-secondary')).toBeDefined()
       })
 
       it('should be color positive when props.color is positive', () => {

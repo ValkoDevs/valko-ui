@@ -170,7 +170,7 @@ const createNotification = (props: NotificationProps) => useNotification(props)
 
 const colorSnippet = `
 <template>
-  ${colorOptions.map(color => `<vk-button
+  ${colorOptions.general.map(color => `<vk-button
     @click="createNotification({ text: ${color.label}, color: ${color.value} })"
   >
     ${color.label}
@@ -280,7 +280,7 @@ const stopOnFocusSnippet = `
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -337,7 +337,7 @@ const stopOnFocusSnippet = `
         classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(6,_minmax(0,_max-content))]"
       >
         <vk-button
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           :color="color.value"
           @click="createNotification({ text: color.label, color: color.value })"

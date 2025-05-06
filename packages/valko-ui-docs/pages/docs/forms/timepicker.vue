@@ -514,7 +514,7 @@ ${scriptCode}
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -546,7 +546,7 @@ ${scriptCode}
         classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <vk-timepicker
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           :label="color.label"
           :adapter="adapter"
@@ -558,7 +558,7 @@ ${scriptCode}
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps})}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
