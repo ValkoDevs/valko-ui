@@ -298,7 +298,6 @@ const table = useClientSideDataTable({
 
       <vk-button
         variant="outlined"
-        flat
       >
         Add Tab
       </vk-button>
@@ -359,7 +358,6 @@ const table = useClientSideDataTable({
 
           <vk-button
             variant="outlined"
-            flat
           >
             Add Tab
           </vk-button>

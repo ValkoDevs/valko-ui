@@ -10,7 +10,6 @@ const form = ref<NotificationProps>({
   gravity: 'top',
   position: 'right',
   duration: 3000,
-  flat: false,
   close: false,
   newWindow: false,
   destination: '',
@@ -151,7 +150,6 @@ const createNotification = (props: NotificationProps) => {
     size: props.size,
     gravity: props.gravity,
     position: props.position,
-    flat: props.flat,
     close: props.close,
     newWindow: props.newWindow,
     destination: props.destination,
@@ -230,16 +228,6 @@ const positionSnippet = `
 </template>
 `
 
-const flatSnippet = `
-<template>
-  <vk-button
-    @click="createNotification({ text: Flat, flat: true })"
-  >
-    Flat
-  </vk-button>
-</template>
-`
-
 const closeSnippet = `
 <template>
   <vk-button
@@ -276,7 +264,6 @@ const stopOnFocusSnippet = `
           size: form.size,
           gravity: form.gravity,
           position: form.position,
-          flat: form.flat,
           close: form.close,
           newWindow: form.newWindow,
           destination: form.destination,
@@ -333,10 +320,6 @@ const stopOnFocusSnippet = `
         v-model="form.duration"
         label="Duration"
         type="number"
-      />
-      <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
       />
       <vk-checkbox
         v-model="form.close"
@@ -453,16 +436,6 @@ const stopOnFocusSnippet = `
 
         <template #code>
           <code-block :code="`${scriptCode}${positionSnippet}`" />
-        </template>
-      </example-section>
-
-      <example-section title="Flat">
-        <vk-button @click="createNotification({ text: 'Flat', flat: true })">
-          Flat
-        </vk-button>
-
-        <template #code>
-          <code-block :code="`${scriptCode}${flatSnippet}`" />
         </template>
       </example-section>
 

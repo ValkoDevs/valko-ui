@@ -7,7 +7,7 @@ const form = ref<TooltipProps>({
   placement: 'auto',
   alignment: undefined,
   content: 'Tooltip Content',
-  flat: true
+  elevated: true
 })
 
 const placementOptions: SelectOption<PlacementWithAuto>[] = [
@@ -66,10 +66,10 @@ const tooltipProps: TableItem[] = [
     default: ''
   },
   {
-    key: 'flatProp',
-    prop: 'flat',
+    key: 'elevatedProp',
+    prop: 'elevated',
     required: false,
-    description: 'Determines whether to display a shadow for the Tooltip.',
+    description: 'Elevates the tooltip by one level.',
     values: 'true, false',
     default: 'true'
   }
@@ -107,7 +107,7 @@ const extraProps = 'content="Tooltip Content"'
         :shape="form.shape"
         :placement="form.placement"
         :content="form.content"
-        :flat="form.flat"
+        :elevated="form.elevated"
         :alignment="form.alignment"
       >
         <vk-button>
@@ -146,8 +146,8 @@ const extraProps = 'content="Tooltip Content"'
         label="Content"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
+        v-model="form.elevated"
+        label="Elevated"
       />
     </template>
 
@@ -232,18 +232,18 @@ const extraProps = 'content="Tooltip Content"'
         </template>
       </example-section>
 
-      <example-section title="Flat">
+      <example-section title="Elevated">
         <vk-tooltip
-          flat
-          content="Flat"
+          elevated
+          content="Elevated"
         >
           <vk-button>
-            Flat
+            Elevated
           </vk-button>
         </vk-tooltip>
 
         <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', {values: [true], customSlot, extraProps})" />
+          <code-block :code="generateSnippet<boolean>('elevated', {values: [true], customSlot, extraProps})" />
         </template>
       </example-section>
     </template>

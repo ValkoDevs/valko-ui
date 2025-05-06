@@ -198,7 +198,6 @@ const employeeData = reactive<TableItem[]>([
     <vk-navbar
       color="secondary"
       shape="square"
-      flat
       class="justify-between"
     >
       <h1 class="text-xl font-bold">
@@ -278,7 +277,6 @@ const employeeData = reactive<TableItem[]>([
         <vk-navbar
           color="secondary"
           shape="square"
-          flat
           class="justify-between"
         >
           <h1 class="text-xl font-bold">

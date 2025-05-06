@@ -122,7 +122,6 @@ const states: SelectOption[] = [
 
     <vk-button
       variant="outlined"
-      flat
     >
       Save Address
     </vk-button>
@@ -190,7 +189,6 @@ const states: SelectOption[] = [
 
         <vk-button
           variant="outlined"
-          flat
         >
           Save Address
         </vk-button>

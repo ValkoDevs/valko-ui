@@ -113,7 +113,6 @@ const data: TableItem[] = [
   <div class="flex flex-col gap-4">
     <vk-navbar
       color="secondary"
-      flat
       class="flex gap-4 justify-between"
     >
       <h1 class="text-xl font-bold">
@@ -256,7 +255,6 @@ const data: TableItem[] = [
       <div class="flex flex-col gap-4">
         <vk-navbar
           color="secondary"
-          flat
           class="flex gap-4 justify-between"
         >
           <h1 class="text-xl font-bold">

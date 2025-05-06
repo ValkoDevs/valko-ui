@@ -502,7 +502,6 @@ onUnmounted(() => {
           v-for="(product, index) in products"
           :key="\`\${product.name}-\${index}\`"
           :size="isMd ? 'md' : 'sm'"
-          flat
           is-pressable
         >
           <vk-card-header>
@@ -561,7 +560,6 @@ onUnmounted(() => {
           :key="index"
           size="full"
           layout="cover"
-          flat
         >
           <vk-card-image
             :src="category.image"
@@ -844,7 +842,6 @@ onUnmounted(() => {
               v-for="(product, index) in products"
               :key="`${product.name}-${index}`"
               :size="isMd ? 'md' : 'sm'"
-              flat
               is-pressable
             >
               <vk-card-header>
@@ -903,7 +900,6 @@ onUnmounted(() => {
               :key="index"
               size="full"
               layout="cover"
-              flat
             >
               <vk-card-image
                 :src="category.image"

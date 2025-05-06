@@ -192,7 +192,6 @@ const customSlot = `<vk-card-image :src="imgSrc" />
             color="secondary"
             size="sm"
             :variant="form.variant"
-            flat
             @click="randomImage"
           >
             Random
@@ -201,7 +200,6 @@ const customSlot = `<vk-card-image :src="imgSrc" />
             color="primary"
             size="sm"
             :variant="form.variant"
-            flat
             @click="nextImage"
           >
             See next

@@ -64,7 +64,6 @@ const profileStats = [
           class="mt-6 w-full"
           variant="outlined"
           color="secondary"
-          flat
         >
           View LinkedIn Profile
         </vk-button>
@@ -200,7 +199,6 @@ const profileStats = [
               class="mt-6 w-full"
               variant="outlined"
               color="secondary"
-              flat
             >
               View LinkedIn Profile
             </vk-button>

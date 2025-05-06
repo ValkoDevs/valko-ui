@@ -43,7 +43,6 @@ const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM' })
     </div>
     <vk-button
       label="Add Card"
-      flat
     >
       Add Card
     </vk-button>
@@ -87,7 +86,6 @@ const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM' })
         </div>
         <vk-button
           label="Add Card"
-          flat
         >
           Add Card
         </vk-button>
