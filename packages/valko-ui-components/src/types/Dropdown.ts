@@ -13,6 +13,6 @@ export interface DropdownProps extends Colors, Sizes, Shapes, Alignments, Placem
   items: Item[];
   icon?: string;
   label?: string;
-  flat?: boolean;
+  elevated?: boolean;
   disabled?: boolean;
 }

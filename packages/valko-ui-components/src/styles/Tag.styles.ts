@@ -7,7 +7,8 @@ export default tv({
       'w-fit',
       'flex',
       'justify-between',
-      'items-center'
+      'items-center',
+      'shadow-el1'
     ],
     icons: [
       'mx-1'
@@ -33,16 +34,8 @@ export default tv({
   },
   variants: {
     variant: {
-      filled: {
-        container: [
-          'text-light-50'
-        ]
-      },
-      ghost: {
-        container: [
-          'shadow-none'
-        ]
-      },
+      filled: {},
+      ghost: {},
       outlined: {
         container: [
           'border-2'
@@ -50,8 +43,7 @@ export default tv({
       },
       gradient: {
         container: [
-          'bg-gradient-to-br',
-          'text-light-50'
+          'bg-gradient-to-br'
         ]
       }
     },
@@ -129,7 +121,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-primary-500'
+          'bg-primary',
+          'text-on-primary'
         ]
       }
     },
@@ -139,10 +132,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-light-300',
-          'text-dark-600',
-          'dark:text-light-200',
-          'dark:bg-dark-800'
+          'bg-secondary',
+          'text-on-secondary'
         ]
       }
     },
@@ -152,7 +143,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-positive'
+          'bg-positive',
+          'text-on-positive'
         ]
       }
     },
@@ -162,7 +154,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-accent'
+          'bg-accent',
+          'text-on-accent'
         ]
       }
     },
@@ -172,7 +165,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-warning'
+          'bg-warning',
+          'text-on-warning'
         ]
       }
     },
@@ -182,7 +176,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-negative'
+          'bg-negative',
+          'text-on-negative'
         ]
       }
     },
@@ -193,8 +188,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-primary-500',
-          'bg-primary-500/[.15]'
+          'text-on-primary-container',
+          'bg-primary-container'
         ]
       }
     },
@@ -204,8 +199,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-light-400/[.15]',
-          'dark:bg-dark-600/[.15]'
+          'text-on-secondary-container',
+          'bg-secondary-container'
         ]
       }
     },
@@ -215,8 +210,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-positive',
-          'bg-positive'
+          'text-on-positive-container',
+          'bg-positive-container'
         ]
       }
     },
@@ -226,8 +221,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-accent',
-          'bg-accent'
+          'text-on-accent-container',
+          'bg-accent-container'
         ]
       }
     },
@@ -237,8 +232,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-warning',
-          'bg-warning/[.15]'
+          'text-on-warning-container',
+          'bg-warning-container'
         ]
       }
     },
@@ -248,8 +243,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-negative',
-          'bg-negative'
+          'text-on-negative-container',
+          'bg-negative-container'
         ]
       }
     },
@@ -260,8 +255,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-primary-500',
-          'border-primary-500'
+          'text-primary',
+          'border-primary'
         ]
       }
     },
@@ -271,8 +266,8 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'border-dark-800',
-          'dark:border-light-300'
+          'border-secondary',
+          'text-secondary'
         ]
       }
     },
@@ -326,8 +321,9 @@ export default tv({
       color: 'primary',
       class: {
         container: [
-          'from-primary-500',
-          'to-primary-900'
+          'from-primary-gradient-start',
+          'to-primary-gradient-end',
+          'text-on-primary'
         ]
       }
     },
@@ -336,12 +332,9 @@ export default tv({
       color: 'secondary',
       class: {
         container: [
-          'from-light-200',
-          'to-light-400',
-          'text-dark-600',
-          'dark:from-dark-600',
-          'dark:to-dark-800',
-          'dark:text-light-200'
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end',
+          'text-on-secondary'
         ]
       }
     },
@@ -350,8 +343,9 @@ export default tv({
       color: 'positive',
       class: {
         container: [
-          'from-positive',
-          'to-positive'
+          'from-positive-gradient-start',
+          'to-positive-gradient-end',
+          'text-on-positive'
         ]
       }
     },
@@ -360,8 +354,9 @@ export default tv({
       color: 'accent',
       class: {
         container: [
-          'from-accent',
-          'to-accent'
+          'from-accent-gradient-start',
+          'to-accent-gradient-end',
+          'text-on-accent'
         ]
       }
     },
@@ -370,8 +365,9 @@ export default tv({
       color: 'warning',
       class: {
         container: [
-          'from-warning',
-          'to-warning'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end',
+          'text-on-warning'
         ]
       }
     },
@@ -380,8 +376,9 @@ export default tv({
       color: 'negative',
       class: {
         container: [
-          'from-negative',
-          'to-negative'
+          'from-negative-gradient-start',
+          'to-negative-gradient-end',
+          'text-on-negative'
         ]
       }
     },
@@ -391,7 +388,7 @@ export default tv({
       disabled: true,
       class: {
         container: [
-          'bg-gray-600',
+          'bg-disabled',
           'opacity-50',
           'cursor-not-allowed'
         ]
@@ -402,7 +399,7 @@ export default tv({
       disabled: true,
       class: {
         container: [
-          'text-gray-600',
+          'text-on-disabled',
           'hover:bg-transparent',
           'active:bg-transparent',
           'opacity-50',
@@ -415,11 +412,11 @@ export default tv({
       disabled: true,
       class: {
         container: [
-          'text-gray-600',
+          'text-on-disabled',
           'hover:bg-transparent',
           'active:bg-transparent',
           'opacity-50',
-          'border-gray-600',
+          'border-disabled',
           'cursor-not-allowed'
         ]
       }
@@ -478,7 +475,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-primary-700'
+          'focus:ring-primary'
         ]
       }
     },
@@ -489,8 +486,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-light-400',
-          'dark:focus:ring-dark-900'
+          'focus:ring-secondary'
         ]
       }
     },
@@ -546,7 +542,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-primary-500/[.30]'
+          'focus:ring-primary-container'
         ]
       }
     },
@@ -557,8 +553,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-light-400/[.30]',
-          'dark:focus:ring-dark-950/[.30]'
+          'focus:ring-secondary-container'
         ]
       }
     },
@@ -569,7 +564,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-positive'
+          'focus:ring-positive-container'
         ]
       }
     },
@@ -580,7 +575,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-accent'
+          'focus:ring-accent-container'
         ]
       }
     },
@@ -591,7 +586,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-warning/[.30]'
+          'focus:ring-warning-container'
         ]
       }
     },
@@ -602,7 +597,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-negative'
+          'focus:ring-negative-container'
         ]
       }
     },
@@ -614,7 +609,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-primary-400/20'
+          'focus:ring-primary'
         ]
       }
     },
@@ -625,7 +620,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'dark:focus:ring-dark-900/20'
+          'dark:focus:ring-secondary'
         ]
       }
     },
@@ -658,7 +653,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-warning/20'
+          'focus:ring-warning'
         ]
       }
     },

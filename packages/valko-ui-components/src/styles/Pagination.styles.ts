@@ -7,7 +7,6 @@ export default tv({
       'p-2',
       'inline-flex',
       '-space-x-px',
-      'shadow-sm',
       'w-fit',
       'flex'
     ],
@@ -64,10 +63,10 @@ export default tv({
       md: {},
       lg: {}
     },
-    flat: {
+    elevated: {
       true: {
         nav: [
-          'shadow-none'
+          'shadow-el1'
         ]
       }
     }

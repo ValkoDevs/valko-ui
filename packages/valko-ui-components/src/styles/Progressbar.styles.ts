@@ -43,8 +43,10 @@ export default tv({
     variant: {
       filled: {
         container: [
-          'bg-light-200',
-          'dark:bg-dark-600'
+          'bg-surface-container-lowest'
+        ],
+        content: [
+          'text-on-surface'
         ]
       },
       ghost: {
@@ -63,10 +65,13 @@ export default tv({
       },
       gradient: {
         container: [
-          'bg-surface-container'
+          'bg-surface-container-lowest'
         ],
         progress: [
           'bg-gradient-to-br'
+        ],
+        content: [
+          'text-on-surface'
         ]
       }
     },

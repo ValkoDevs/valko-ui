@@ -30,8 +30,7 @@ export default tv({
       split: [
         'p-0',
         'gap-2',
-        'bg-transparent',
-        'dark:bg-transparent'
+        'bg-transparent'
       ],
       none: [
         'gap-0'

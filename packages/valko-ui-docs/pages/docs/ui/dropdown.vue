@@ -8,15 +8,15 @@ const form = ref<Partial<DropdownProps>>({
   size: 'md',
   placement: 'auto',
   alignment: undefined,
-  flat: false,
   disabled: false,
+  elevated: false,
   label: 'Dropdown Menu'
 })
 
 const items: Item[] = [
   { key: 'image', title: 'Upload Image', icon: 'photo', onClick: () => useNotification({ text: 'Image Uploaded' }) },
   { key: 'edit', title: 'Edit', icon: 'edit', onClick: () => useNotification({ text: 'Editing' }) },
-  { key: 'disabled', title: 'Disabled', icon: 'negative', disabled: true },
+  { key: 'disabled', title: 'Disabled', icon: 'ban', disabled: true },
   { key: 'video', title: 'Upload Video', icon: 'video', onClick: () => useNotification({ text: 'Video uploaded' }) },
   { key: 'delete', title: 'Delete', icon: 'trash', onClick: () => useNotification({ text: 'Item Deleted' }) }
 ]
@@ -69,6 +69,14 @@ const dropdownProps: TableItem[] = [
     default: 'md'
   },
   {
+    key: 'elevatedProp',
+    prop: 'elevated',
+    required: false,
+    description: 'Wheter the Dropdown is elevated or not.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
     key: 'placementProp',
     prop: 'placement',
     required: false,
@@ -83,14 +91,6 @@ const dropdownProps: TableItem[] = [
     description: 'Specifies how the Dropdown is aligned within its placement. If not set, it defaults to the best fit based on available space.',
     values: 'start, center, end',
     default: 'undefined'
-  },
-  {
-    key: 'flatProp',
-    prop: 'flat',
-    required: false,
-    description: 'Wheter the Dropdown is flat or not.',
-    values: 'true, false',
-    default: 'false'
   },
   {
     key: 'disabledProp',
@@ -217,9 +217,9 @@ const extraProps = ':items="items"'
         :color="form.color"
         :size="form.size"
         :variant="form.variant"
+        :elevated="form.elevated"
         :shape="form.shape"
         :disabled="form.disabled"
-        :flat="form.flat"
         :label="form.label"
         :items="items"
         :placement="form.placement"
@@ -270,8 +270,8 @@ const extraProps = ':items="items"'
         :options="alignmentOptions"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
+        v-model="form.elevated"
+        label="Elevated"
       />
       <vk-checkbox
         v-model="form.disabled"
@@ -388,15 +388,15 @@ const extraProps = ':items="items"'
         </template>
       </example-section>
 
-      <example-section title="Flat">
+      <example-section title="Elevated">
         <vk-dropdown
-          title="Flat"
+          title="Elevated"
           :items="items"
-          label="Flat"
+          label="Elevated"
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('flat', { values: [true], extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('elevated', { values: [true], extraProps })}`" />
         </template>
       </example-section>
 

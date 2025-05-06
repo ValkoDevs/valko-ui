@@ -20,8 +20,7 @@ export default tv({
     headerUtilities: [
       'vk-data-table__utilities',
       'cursor-pointer',
-      'text-black',
-      'dark:text-white'
+      'text-on-surface'
     ],
     footer: [
       'flex',

@@ -8,7 +8,7 @@ const form = ref<PaginationProps>({
   size: 'md',
   modelValue: 1,
   pages: 20,
-  flat: false,
+  elevated: false,
   disabled: false
 })
 
@@ -60,6 +60,22 @@ const paginationProps: TableItem[] = [
     description: 'The current page.',
     values: 'number',
     default: '1'
+  },
+  {
+    key: 'elevatedProp',
+    prop: 'elevated',
+    required: false,
+    description: 'Wheter the Pagination is elevated or not.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
+    key: 'disabledProp',
+    prop: 'disabled',
+    required: false,
+    description: 'Wheter the Pagination is disabled or not.',
+    values: 'true, false',
+    default: 'false'
   }
 ]
 
@@ -88,7 +104,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
         :size="form.size"
         :variant="form.variant"
         :pages="form.pages"
-        :flat="form.flat"
+        :elevated="form.elevated"
         :shape="form.shape"
         :disabled="form.disabled"
       />
@@ -132,8 +148,8 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
         size="sm"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
+        v-model="form.elevated"
+        label="Elevated"
       />
       <vk-checkbox
         v-model="form.disabled"
@@ -229,15 +245,15 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
         </template>
       </example-section>
 
-      <example-section title="Flat">
+      <example-section title="Elevated">
         <vk-pagination
           v-model="form.modelValue"
-          flat
+          elevated
           :pages="form.pages"
         />
 
         <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', { values: [true] })" />
+          <code-block :code="generateSnippet<boolean>('elevated', { values: [true] })" />
         </template>
       </example-section>
 

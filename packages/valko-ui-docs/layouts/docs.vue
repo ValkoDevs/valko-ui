@@ -24,6 +24,7 @@ const baseMenuItems: MenuItem[] = [
   { key: '/docs/ui/breadcrumbs', group: 'Ui', text: 'Breadcrumbs' },
   { key: '/docs/ui/calendar', group: 'Ui', text: 'Calendar' },
   { key: '/docs/ui/card', group: 'Ui', text: 'Card' },
+  { key: '/docs/ui/dropdown', group: 'Ui', text: 'Dropdown' },
   { key: '/docs/ui/menu', group: 'Ui', text: 'Menu' },
   { key: '/docs/ui/navbar', group: 'Ui', text: 'Navbar' },
   { key: '/docs/ui/notification', group: 'Ui', text: 'Notification' },
@@ -35,7 +36,6 @@ const baseMenuItems: MenuItem[] = [
   { key: '/docs/ui/tooltip', group: 'Ui', text: 'Tooltip' },
   { key: '/docs/data/collapse', group: 'Data', text: 'Collapse' },
   { key: '/docs/data/datatable', group: 'Data', text: 'DataTable' },
-  { key: '/docs/data/dropdown', group: 'Data', text: 'Dropdown' },
   { key: '/docs/data/pagination', group: 'Data', text: 'Pagination' },
   { key: '/docs/data/table', group: 'Data', text: 'Table' },
   { key: '/docs/data/tabs', group: 'Data', text: 'Tabs' }
