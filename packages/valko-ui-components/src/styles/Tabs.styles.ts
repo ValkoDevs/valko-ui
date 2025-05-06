@@ -40,15 +40,14 @@ export default tv({
       'items-center',
       'transition',
       'duration-200',
-      'disabled:text-gray-400',
-      'disabled:cursor-not-allowed',
-      'dark:disabled:text-gray-500'
+      'disabled:text-on-disabled',
+      'disabled:cursor-not-allowed'
     ],
     content: [
       'grow'
     ],
     cursor: [
-      'shadow-lg',
+      'shadow-el1',
       'absolute',
       'inset-0',
       'z-10',
@@ -75,7 +74,7 @@ export default tv({
     variant: {
       filled: {
         list: [
-          'bg-'
+          'bg-surface-container'
         ]
       },
       outlined: {
@@ -119,8 +118,8 @@ export default tv({
           'rounded-full'
         ],
         tab: [
-          'data-[headlessui-state=selected]:text-white',
-          'rounded-full'
+          'rounded-full',
+          'text-on-surface'
         ],
         cursor: [
           'rounded-full'
@@ -131,7 +130,7 @@ export default tv({
           'rounded-none'
         ],
         tab: [
-          'data-[headlessui-state=selected]:text-white'
+          'text-on-surface'
         ]
       },
       soft: {
@@ -140,7 +139,7 @@ export default tv({
         ],
         tab: [
           'rounded-lg',
-          'data-[headlessui-state=selected]:text-white'
+          'text-on-surface'
         ],
         cursor: [
           'rounded-lg'
@@ -226,8 +225,11 @@ export default tv({
       color: 'primary',
       class: {
         cursor: [
-          'from-primary-500',
-          'to-primary-900'
+          'from-primary-gradient-start',
+          'to-primary-gradient-end'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-primary'
         ]
       }
     },
@@ -237,14 +239,11 @@ export default tv({
       color: 'secondary',
       class: {
         cursor: [
-          'from-light-50',
-          'to-light-400',
-          'dark:from-dark-600',
-          'dark:to-dark-950'
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end'
         ],
         tab: [
-          'data-[headlessui-state=selected]:text-dark-600',
-          'dark:data-[headlessui-state=selected]:text-light-200'
+          'data-[headlessui-state=selected]:text-on-secondary'
         ]
       }
     },
@@ -254,8 +253,11 @@ export default tv({
       color: 'positive',
       class: {
         cursor: [
-          'from-positive',
-          'to-positive'
+          'from-positive-gradient-start',
+          'to-positive-gradient-end'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-positive'
         ]
       }
     },
@@ -265,8 +267,11 @@ export default tv({
       color: 'accent',
       class: {
         cursor: [
-          'from-accent',
-          'to-accent'
+          'from-accent-gradient-start',
+          'to-accent-gradient-end'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-accent'
         ]
       }
     },
@@ -276,8 +281,11 @@ export default tv({
       color: 'warning',
       class: {
         cursor: [
-          'from-warning',
-          'to-warning'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-warning'
         ]
       }
     },
@@ -287,8 +295,11 @@ export default tv({
       color: 'negative',
       class: {
         cursor: [
-          'from-negative',
-          'to-negative'
+          'from-negative-gradient-start',
+          'to-negative-gradient-end'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-negative'
         ]
       }
     },
@@ -298,7 +309,7 @@ export default tv({
       shape: 'line',
       class: {
         cursor: [
-          'border-primary-500'
+          'border-primary'
         ]
       }
     },
@@ -307,8 +318,7 @@ export default tv({
       shape: 'line',
       class: {
         cursor: [
-          'border-light-300',
-          'dark:border-dark-700'
+          'border-secondary'
         ]
       }
     },
@@ -354,7 +364,10 @@ export default tv({
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-primary-500'
+          'bg-primary'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-primary'
         ]
       }
     },
@@ -363,12 +376,10 @@ export default tv({
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-light-300',
-          'dark:bg-dark-700'
+          'bg-secondary'
         ],
         tab: [
-          'data-[headlessui-state=selected]:text-dark-600',
-          'dark:data-[headlessui-state=selected]:text-light-200'
+          'data-[headlessui-state=selected]:text-on-secondary'
         ]
       }
     },
@@ -378,6 +389,9 @@ export default tv({
       class: {
         cursor: [
           'bg-positive'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-positive'
         ]
       }
     },
@@ -387,6 +401,9 @@ export default tv({
       class: {
         cursor: [
           'bg-accent'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-accent'
         ]
       }
     },
@@ -396,6 +413,9 @@ export default tv({
       class: {
         cursor: [
           'bg-warning'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-warning'
         ]
       }
     },
@@ -405,6 +425,9 @@ export default tv({
       class: {
         cursor: [
           'bg-negative'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-negative'
         ]
       }
     },
@@ -477,8 +500,8 @@ export default tv({
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-primary-500',
-          'to-primary-900'
+          'from-primary-gradient-start',
+          'to-primary-gradient-end'
         ]
       }
     },
@@ -488,8 +511,8 @@ export default tv({
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-primary-500',
-          'to-primary-900'
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end'
         ]
       }
     },
@@ -499,8 +522,8 @@ export default tv({
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-positive',
-          'to-positive'
+          'from-positive-gradient-start',
+          'to-positive-gradient-end'
         ]
       }
     },
@@ -510,8 +533,8 @@ export default tv({
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-accent',
-          'to-accent'
+          'from-accent-gradient-start',
+          'to-accent-gradient-end'
         ]
       }
     },
@@ -521,8 +544,8 @@ export default tv({
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-warning',
-          'to-warning'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end'
         ]
       }
     },
@@ -532,8 +555,8 @@ export default tv({
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-negative',
-          'to-negative'
+          'from-negative-gradient-start',
+          'to-negative-gradient-end'
         ]
       }
     }
