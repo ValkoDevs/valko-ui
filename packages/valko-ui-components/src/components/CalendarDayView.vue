@@ -72,7 +72,7 @@ const onArrowClick = (operation: 1 | -1) => emit('changeMonth', props.display.mo
           :class="classes.gridButton"
           :size="size"
           :disabled="disabledDays?.includes(cell) || (disableWeekends && isWeekend(index))"
-          :color="isSelected(cell) ? color : 'secondary'"
+          :color="isSelected(cell) ? color : 'surface'"
           :variant="isSelected(cell) ? variant : 'link'"
           :shape="shape"
           condensed

@@ -36,28 +36,27 @@ const onClick = () => {
     :disabled="disabled"
     @click="onClick"
   >
-    <div :class="classes.stateLayer">
-      <div
-        :class="classes.spinnerContainer"
+    <div :class="classes.stateLayer" />
+    <div
+      :class="classes.spinnerContainer"
+    >
+      <transition
+        enter-active-class="transition ease-out duration-150"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition ease-out duration-150"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
       >
-        <transition
-          enter-active-class="transition ease-out duration-150"
-          enter-from-class="opacity-0"
-          enter-to-class="opacity-100"
-          leave-active-class="transition ease-out duration-150"
-          leave-from-class="opacity-100"
-          leave-to-class="opacity-0"
-        >
-          <vk-spinner
-            v-if="loading"
-            condensed
-            :class-name="variant === 'filled' || variant === 'gradient' ? 'text-white dark:text-black' : ''"
-            :size="size"
-            :color="color"
-          />
-        </transition>
-      </div>
-      <slot />
+        <vk-spinner
+          v-if="loading"
+          condensed
+          :classes="variant === 'filled' || variant === 'gradient' ? 'text-white dark:text-black' : ''"
+          :size="size"
+          :color="color"
+        />
+      </transition>
     </div>
+    <slot />
   </button>
 </template>

@@ -5,6 +5,10 @@ export default tv({
     button: [
       'vk-button__base',
       'flex',
+      'relative',
+      'items-center',
+      'justify-center',
+      'tracking-wider',
       'ring-inset',
       'outline-none',
       'focus:outline-none',
@@ -20,10 +24,9 @@ export default tv({
       'duration-150'
     ],
     stateLayer: [
-      'flex',
-      'items-center',
-      'justify-center',
-      'tracking-wider',
+      'absolute',
+      'inset-0',
+      'z-[1]',
       'transition-all',
       'ease-in-out',
       'duration-150',
@@ -44,28 +47,28 @@ export default tv({
     },
     size: {
       xs: {
-        stateLayer: [
+        button: [
           'px-2',
           'py-2',
           'text-xs'
         ]
       },
       sm: {
-        stateLayer: [
+        button: [
           'px-3',
           'py-2.5',
           'text-sm'
         ]
       },
       md: {
-        stateLayer: [
+        button: [
           'px-4',
           'py-2.5',
           'text-base'
         ]
       },
       lg: {
-        stateLayer: [
+        button: [
           'px-5',
           'py-3',
           'text-lg'
@@ -103,17 +106,11 @@ export default tv({
       true: {
         button: [
           'w-full'
-        ],
-        stateLayer: [
-          'w-full'
         ]
       },
       false: {
         button: [
-          'size-fit'
-        ],
-        stateLayer: [
-          'size-fit'
+          'w-fit'
         ]
       }
     },
@@ -141,7 +138,7 @@ export default tv({
     },
     condensed: {
       true: {
-        stateLayer: [
+        button: [
           'px-0',
           'py-0'
         ]
@@ -175,10 +172,8 @@ export default tv({
     },
     loading: {
       true: {
-        stateLayer: [
-          'gap-1'
-        ],
         button: [
+          'gap-1',
           'opacity-75',
           'pointer-events-none'
         ]
@@ -633,7 +628,7 @@ export default tv({
       variant: 'outlined',
       condensed: false,
       class: {
-        stateLayer: [
+        button: [
           'px-[calc(0.5rem_-_2px)]',
           'py-[calc(0.5rem_-_2px)]'
         ]
@@ -644,7 +639,7 @@ export default tv({
       variant: 'outlined',
       condensed: false,
       class: {
-        stateLayer: [
+        button: [
           'px-[calc(0.75rem_-_2px)]',
           'py-[calc(0.625rem_-_2px)]'
         ]
@@ -655,7 +650,7 @@ export default tv({
       variant: 'outlined',
       condensed: false,
       class: {
-        stateLayer: [
+        button: [
           'px-[calc(1rem_-_2px)]',
           'py-[calc(0.625rem_-_2px)]'
         ]
@@ -666,7 +661,7 @@ export default tv({
       variant: 'outlined',
       condensed: false,
       class: {
-        stateLayer: [
+        button: [
           'px-[calc(1.25rem_-_2px)]',
           'py-[calc(0.75rem_-_2px)]'
         ]

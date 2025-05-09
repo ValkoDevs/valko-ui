@@ -82,8 +82,8 @@ const popoverProps: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'panelClassesProp',
-    prop: 'panelClasses',
+    key: 'classesProp',
+    prop: 'classes',
     required: false,
     description: 'Allows you to apply custom CSS classes to the popover content for further customization (e.g., for styling the background, padding, borders, etc.). Accepts a single string or an array of strings.',
     values: 'string | string[]',

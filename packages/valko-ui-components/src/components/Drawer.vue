@@ -124,7 +124,7 @@ const transitionClasses = computed(() => {
             :leave-to="transitionClasses.leaveTo"
           >
             <dialog-panel
-              :class="[classes.panel, ...(Array.isArray(props.class) ? props.class : [props.class])]"
+              :class="[classes.panel, ...(Array.isArray(props.classes) ? props.classes : [props.classes])]"
               :data-title="!!title"
             >
               <div

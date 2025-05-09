@@ -5,5 +5,5 @@ export interface PopoverProps extends Shapes, Alignments, PlacementsWithAuto {
   isOpen?: boolean;
   elevated?: boolean;
   condensed?: boolean;
-  panelClasses?: string | string[];
+  classes?: string | string[];
 }

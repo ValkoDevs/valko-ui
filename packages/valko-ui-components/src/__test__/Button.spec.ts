@@ -34,7 +34,7 @@ describe('Button component', () => {
       })
 
       it('should not be block', () => {
-        expect(wrapper.find('.size-fit').exists()).toBe(true)
+        expect(wrapper.find('.w-fit').exists()).toBe(true)
       })
 
       it('should not be condensed', () => {

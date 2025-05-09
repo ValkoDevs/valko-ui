@@ -47,8 +47,8 @@ const spinnerProps: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'classNameProp',
-    prop: 'className',
+    key: 'classesProp',
+    prop: 'classes',
     required: false,
     description: 'Overrides the spinner\'s default colors, allowing you to fully customize its appearance.',
     values: 'string',

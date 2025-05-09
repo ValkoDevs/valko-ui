@@ -136,12 +136,12 @@ describe('Popover component', () => {
       })
     })
 
-    describe('When panelClasses prop changes', () => {
-      it('should apply panelClasses when passed as a string', () => {
+    describe('When classes prop changes', () => {
+      it('should apply classes when passed as a string', () => {
         const wrapper = mount(VkPopover, {
           props: {
             isOpen: true,
-            panelClasses: 'custom-class'
+            classes: 'custom-class'
           }
         })
 
@@ -149,11 +149,11 @@ describe('Popover component', () => {
         expect(panel.classes()).toContain('custom-class')
       })
 
-      it('should apply multiple panelClasses when passed as an array', () => {
+      it('should apply multiple classes when passed as an array', () => {
         const wrapper = mount(VkPopover, {
           props: {
             isOpen: true,
-            panelClasses: ['class-one', 'class-two']
+            classes: ['class-one', 'class-two']
           }
         })
 

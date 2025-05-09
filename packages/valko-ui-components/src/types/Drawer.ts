@@ -5,5 +5,5 @@ export interface DrawerProps extends Shapes, Sizes, Placements {
   backdrop?: Backdrop;
   title?: string;
   closable?: boolean;
-  class?: string | string[];
+  classes?: string | string[];
 }

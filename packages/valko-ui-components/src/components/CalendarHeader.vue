@@ -32,7 +32,7 @@ const classes = useStyle<CalendarHeaderProps, SlotStyles>(props, styles)
 
     <vk-button
       :size="size"
-      color="secondary"
+      color="surface"
       variant="link"
       condensed
       :shape="shape"

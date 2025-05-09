@@ -96,7 +96,7 @@ onBeforeUnmount(() => {
       <div
         v-if="isOpen"
         ref="panelRef"
-        :class="[classes.panel, ...(Array.isArray(panelClasses) ? panelClasses : [panelClasses])]"
+        :class="[classes.panel, ...(Array.isArray(props.classes) ? props.classes : [props.classes])]"
         :data-text="!!text"
         :data-placement="placement"
       >
