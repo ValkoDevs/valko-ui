@@ -55,7 +55,7 @@ watchEffect(() => {
       <vk-button
         variant="link"
         class="vk-pagination__left"
-        color="secondary"
+        color="surface"
         :shape="shape"
         :size="size"
         condensed
@@ -71,7 +71,7 @@ watchEffect(() => {
         v-for="page in visiblePages"
         :key="page"
         :variant="page === modelValue ? variant : 'link'"
-        :color="page === modelValue ? color : 'secondary'"
+        :color="page === modelValue ? color : 'surface'"
         :size="size"
         :shape="shape"
         condensed
@@ -85,7 +85,7 @@ watchEffect(() => {
       <vk-button
         variant="link"
         class="vk-pagination__right"
-        color="secondary"
+        color="surface"
         :shape="shape"
         :size="size"
         condensed

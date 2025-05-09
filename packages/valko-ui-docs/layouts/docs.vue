@@ -79,7 +79,7 @@ onMounted(() => {
       <vk-button
         variant="link"
         shape="rounded"
-        color="secondary"
+        color="surface"
         condensed
         size="lg"
         class="size-10 lg:hidden"
@@ -95,28 +95,7 @@ onMounted(() => {
           ValkoUI
         </nuxt-link>
       </h2>
-      <div class="lg:hidden gap-2 flex">
-        <theme-switch />
-        <a
-          href="https://github.com/ValkoDevs/valko-ui"
-          target="_blank"
-        >
-          <vk-button
-            variant="link"
-            shape="rounded"
-            color="secondary"
-            condensed
-            size="lg"
-            class="size-10"
-          >
-            <vk-icon
-              name="brand-github"
-              class="text-2xl"
-            />
-          </vk-button>
-        </a>
-      </div>
-      <site-links class="hidden lg:flex" />
+      <site-links />
     </vk-navbar>
 
     <div class="w-full flex">
@@ -126,38 +105,18 @@ onMounted(() => {
         placement="left"
         @close="toggleMenu"
       >
-        <div class="flex gap-2 px-4">
-          <theme-switch />
-          <a
-            href="https://github.com/ValkoDevs/valko-ui"
-            target="_blank"
-          >
-            <vk-button
-              variant="link"
-              shape="rounded"
-              color="secondary"
-              condensed
-              size="lg"
-              class="size-10"
-            >
-              <vk-icon
-                name="brand-github"
-                class="text-2xl"
-              />
-            </vk-button>
-          </a>
+        <div class="flex px-4">
+          <vk-menu
+            :items="menuItems"
+            :active="activeItem"
+            color="primary"
+            size="md"
+            variant="ghost"
+            shape="soft"
+            floating
+            @item-click="onItemClick"
+          />
         </div>
-
-        <vk-menu
-          :items="menuItems"
-          :active="activeItem"
-          color="primary"
-          size="md"
-          variant="ghost"
-          shape="soft"
-          floating
-          @item-click="onItemClick"
-        />
       </vk-drawer>
       <aside class="hidden lg:block lg:w-52 bg-surface-container shrink-0 overflow-y-auto border-r border-surface-dim max-h-[calc(100vh_-_3.5rem)] h-screen sticky top-14">
         <vk-menu
@@ -175,7 +134,7 @@ onMounted(() => {
         <main class="w-full max-w-screen-xl mx-auto grow">
           <NuxtPage />
         </main>
-        <footer class="w-full px-2 py-1 text-sm bg-surface-container-lowest">
+        <footer class="w-full px-2 py-1 text-sm bg-surface-container-lowest items-center justify-center flex">
           ValkoUI all rights reserved
         </footer>
       </div>

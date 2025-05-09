@@ -262,29 +262,77 @@ describe('Tag component', () => {
       })
     })
 
-    describe('Closable button color', () => {
-      it('should be secondary if variant is filled', () => {
+    describe('Closable icon color', () => {
+      it('should be primary if props.color is primary', () => {
         wrapper = mount(VkTag, {
           props: {
-            variant: 'filled',
+            color: 'primary',
             closable: true,
             text: 'Hello World'
           }
         })
 
-        expect(wrapper.find('.vk-tag__closable').classes()).toContain('text-on-primary-container')
+        expect(wrapper.find('.vk-tag__close-icon').classes()).toContain('text-on-primary')
       })
 
-      it('should have props.color if variant is outlined or ghost', () => {
+      it('should be secondary if props.color is secondary', () => {
         wrapper = mount(VkTag, {
           props: {
-            variant: 'outlined',
+            color: 'secondary',
             closable: true,
             text: 'Hello World'
           }
         })
 
-        expect(wrapper.find('.vk-tag__closable').classes()).toContain('text-on-primary-container')
+        expect(wrapper.find('.vk-tag__close-icon').classes()).toContain('text-on-secondary')
+      })
+
+      it('should be positive if props.color is positive', () => {
+        wrapper = mount(VkTag, {
+          props: {
+            color: 'positive',
+            closable: true,
+            text: 'Hello World'
+          }
+        })
+
+        expect(wrapper.find('.vk-tag__close-icon').classes()).toContain('text-on-positive')
+      })
+
+      it('should be negative if props.color is negative', () => {
+        wrapper = mount(VkTag, {
+          props: {
+            color: 'negative',
+            closable: true,
+            text: 'Hello World'
+          }
+        })
+
+        expect(wrapper.find('.vk-tag__close-icon').classes()).toContain('text-on-negative')
+      })
+
+      it('should be warning if props.color is warning', () => {
+        wrapper = mount(VkTag, {
+          props: {
+            color: 'warning',
+            closable: true,
+            text: 'Hello World'
+          }
+        })
+
+        expect(wrapper.find('.vk-tag__close-icon').classes()).toContain('text-on-warning')
+      })
+
+      it('should be accent if props.color is accent', () => {
+        wrapper = mount(VkTag, {
+          props: {
+            color: 'accent',
+            closable: true,
+            text: 'Hello World'
+          }
+        })
+
+        expect(wrapper.find('.vk-tag__close-icon').classes()).toContain('text-on-accent')
       })
     })
   })

@@ -55,7 +55,7 @@ const onClose = () => {
     <vk-button
       v-if="closable"
       :class="classes.closable"
-      :color="color"
+      color="surface"
       variant="link"
       shape="rounded"
       size="xs"
@@ -65,6 +65,7 @@ const onClose = () => {
     >
       <vk-icon
         name="x"
+        :class="classes.closeIcon"
       />
     </vk-button>
   </div>

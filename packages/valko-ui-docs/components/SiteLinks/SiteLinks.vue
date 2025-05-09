@@ -7,12 +7,12 @@ const route = useRoute()
 <template>
   <div class="flex gap-2">
     <nav>
-      <ul class="flex gap-2 justify-between items-center h-full mr-4">
+      <ul class="hidden lg:flex gap-2 justify-between items-center h-full mr-4">
         <li>
           <nuxt-link to="/">
             <vk-button
               variant="link"
-              :color="route.fullPath === '/' ? 'primary' : 'secondary'"
+              :color="route.fullPath === '/' ? 'primary' : 'surface'"
               size="sm"
             >
               Home
@@ -23,7 +23,7 @@ const route = useRoute()
           <nuxt-link to="/docs">
             <vk-button
               variant="link"
-              :color="route.fullPath.startsWith('/docs') ? 'primary' : 'secondary'"
+              :color="route.fullPath.startsWith('/docs') ? 'primary' : 'surface'"
               size="sm"
             >
               Documentation
@@ -34,7 +34,7 @@ const route = useRoute()
           <nuxt-link to="/templates">
             <vk-button
               variant="link"
-              :color="route.fullPath.startsWith('/templates') ? 'primary' : 'secondary'"
+              :color="route.fullPath.startsWith('/templates') ? 'primary' : 'surface'"
               size="sm"
             >
               Templates
@@ -52,14 +52,14 @@ const route = useRoute()
       <vk-button
         variant="link"
         shape="rounded"
-        color="secondary"
+        color="surface"
         condensed
         size="lg"
         class="size-10"
       >
         <vk-icon
           name="brand-github"
-          class="text-2xl px-2"
+          class="text-2xl p-2"
         />
       </vk-button>
     </a>

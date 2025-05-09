@@ -61,7 +61,7 @@ const defaultIcon = computed(() => {
     <vk-button
       v-if="closable"
       variant="link"
-      color="secondary"
+      color="surface"
       size="xs"
       shape="rounded"
       class="size-4"

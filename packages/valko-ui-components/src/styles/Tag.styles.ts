@@ -30,6 +30,9 @@ export default tv({
       'gap-1',
       'justify-center',
       'items-center'
+    ],
+    closeIcon: [
+      'vk-tag__close-icon'
     ]
   },
   variants: {
@@ -127,6 +130,9 @@ export default tv({
         container: [
           'bg-primary',
           'text-on-primary'
+        ],
+        closeIcon: [
+          'text-on-primary'
         ]
       }
     },
@@ -137,6 +143,9 @@ export default tv({
       class: {
         container: [
           'bg-secondary',
+          'text-on-secondary'
+        ],
+        closeIcon: [
           'text-on-secondary'
         ]
       }
@@ -149,6 +158,9 @@ export default tv({
         container: [
           'bg-positive',
           'text-on-positive'
+        ],
+        closeIcon: [
+          'text-on-positive'
         ]
       }
     },
@@ -159,6 +171,9 @@ export default tv({
       class: {
         container: [
           'bg-accent',
+          'text-on-accent'
+        ],
+        closeIcon: [
           'text-on-accent'
         ]
       }
@@ -171,6 +186,9 @@ export default tv({
         container: [
           'bg-warning',
           'text-on-warning'
+        ],
+        closeIcon: [
+          'text-on-warning'
         ]
       }
     },
@@ -181,6 +199,9 @@ export default tv({
       class: {
         container: [
           'bg-negative',
+          'text-on-negative'
+        ],
+        closeIcon: [
           'text-on-negative'
         ]
       }
@@ -194,6 +215,9 @@ export default tv({
         container: [
           'text-on-primary-container',
           'bg-primary-container'
+        ],
+        closeIcon: [
+          'text-on-primary-container'
         ]
       }
     },
@@ -205,6 +229,9 @@ export default tv({
         container: [
           'text-on-secondary-container',
           'bg-secondary-container'
+        ],
+        closeIcon: [
+          'text-on-secondary-container'
         ]
       }
     },
@@ -216,6 +243,9 @@ export default tv({
         container: [
           'text-on-positive-container',
           'bg-positive-container'
+        ],
+        closeIcon: [
+          'text-on-positive-container'
         ]
       }
     },
@@ -227,6 +257,9 @@ export default tv({
         container: [
           'text-on-accent-container',
           'bg-accent-container'
+        ],
+        closeIcon: [
+          'text-on-accent-container'
         ]
       }
     },
@@ -238,6 +271,9 @@ export default tv({
         container: [
           'text-on-warning-container',
           'bg-warning-container'
+        ],
+        closeIcon: [
+          'text-on-warning-container'
         ]
       }
     },
@@ -249,6 +285,9 @@ export default tv({
         container: [
           'text-on-negative-container',
           'bg-negative-container'
+        ],
+        closeIcon: [
+          'text-on-negative-container'
         ]
       }
     },
@@ -261,6 +300,9 @@ export default tv({
         container: [
           'text-primary',
           'border-primary'
+        ],
+        closeIcon: [
+          'text-primary'
         ]
       }
     },
@@ -271,6 +313,9 @@ export default tv({
       class: {
         container: [
           'border-secondary',
+          'text-secondary'
+        ],
+        closeIcon: [
           'text-secondary'
         ]
       }
@@ -283,6 +328,9 @@ export default tv({
         container: [
           'text-positive',
           'border-positive'
+        ],
+        closeIcon: [
+          'text-positive'
         ]
       }
     },
@@ -294,6 +342,9 @@ export default tv({
         container: [
           'text-accent',
           'border-accent'
+        ],
+        closeIcon: [
+          'text-accent'
         ]
       }
     },
@@ -305,6 +356,9 @@ export default tv({
         container: [
           'text-warning',
           'border-warning'
+        ],
+        closeIcon: [
+          'text-warning'
         ]
       }
     },
@@ -316,6 +370,9 @@ export default tv({
         container: [
           'text-negative',
           'border-negative'
+        ],
+        closeIcon: [
+          'text-negative'
         ]
       }
     },
@@ -328,6 +385,9 @@ export default tv({
           'from-primary-gradient-start',
           'to-primary-gradient-end',
           'text-on-primary'
+        ],
+        closeIcon: [
+          'text-on-primary'
         ]
       }
     },
@@ -338,6 +398,9 @@ export default tv({
         container: [
           'from-secondary-gradient-start',
           'to-secondary-gradient-end',
+          'text-on-secondary'
+        ],
+        closeIcon: [
           'text-on-secondary'
         ]
       }
@@ -350,6 +413,9 @@ export default tv({
           'from-positive-gradient-start',
           'to-positive-gradient-end',
           'text-on-positive'
+        ],
+        closeIcon: [
+          'text-on-positive'
         ]
       }
     },
@@ -360,6 +426,9 @@ export default tv({
         container: [
           'from-accent-gradient-start',
           'to-accent-gradient-end',
+          'text-on-accent'
+        ],
+        closeIcon: [
           'text-on-accent'
         ]
       }
@@ -372,6 +441,9 @@ export default tv({
           'from-warning-gradient-start',
           'to-warning-gradient-end',
           'text-on-warning'
+        ],
+        closeIcon: [
+          'text-on-warning'
         ]
       }
     },
@@ -382,6 +454,9 @@ export default tv({
         container: [
           'from-negative-gradient-start',
           'to-negative-gradient-end',
+          'text-on-negative'
+        ],
+        closeIcon: [
           'text-on-negative'
         ]
       }

@@ -54,7 +54,7 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
       <vk-button
         variant="link"
         shape="rounded"
-        color="secondary"
+        color="surface"
         condensed
         size="lg"
         class="size-10 lg:hidden"
@@ -72,29 +72,7 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
         </nuxt-link>
       </h2>
 
-      <div class="flex gap-2 lg:hidden">
-        <theme-switch />
-        <a
-          href="https://github.com/ValkoDevs/valko-ui"
-          target="_blank"
-        >
-          <vk-button
-            variant="link"
-            shape="rounded"
-            color="secondary"
-            condensed
-            size="lg"
-            class="size-10"
-          >
-            <vk-icon
-              name="brand-github"
-              class="text-2xl"
-            />
-          </vk-button>
-        </a>
-      </div>
-
-      <site-links class="hidden lg:flex" />
+      <site-links />
 
       <vk-drawer
         :is-open="menuOpen"
