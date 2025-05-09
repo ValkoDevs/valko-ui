@@ -47,11 +47,10 @@ onMounted(() => {
         :disabled="!!(minYear && year < minYear) || !!(maxYear && year > maxYear)"
         :class="classes.gridButton"
         :size="size"
-        :color="selected.year === year ? color : 'neutral'"
+        :color="selected.year === year ? color : 'surface'"
         :variant="selected.year === year ? variant : 'link'"
         :shape="shape"
         condensed
-        flat
         @click="onSelectYear(year)"
       >
         {{ year }}

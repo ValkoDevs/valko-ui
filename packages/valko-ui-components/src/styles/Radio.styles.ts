@@ -18,18 +18,20 @@ export default tv({
       'gap-1',
       'cursor-pointer'
     ],
+    stateLayer: [
+      'hover:bg-state-hover',
+      'focus:bg-state-focus',
+      'active:bg-state-active'
+    ],
     radio: [
       'vk-radio__radio',
-      'shadow-lg',
-      'shadow-light-300',
+      'size-full',
       'border-2',
-      'border-light-400',
+      'border-on-surface-variant',
       'relative',
       'flex',
       'items-center',
-      'justify-center',
-      'dark:border-dark-600',
-      'dark:shadow-dark-950'
+      'justify-center'
     ],
     input: [
       'hidden'
@@ -37,20 +39,21 @@ export default tv({
     helpertext: [
       'vk-radio__helpertext',
       'break-normal',
-      'text-gray-500'
+      'text-on-surface-variant'
     ],
     label: [
       'cursor-pointer'
     ],
     icon: [
       'vk-radio__icon',
-      'text-white'
+      'text-white',
+      'dark:text-black'
     ]
   },
   variants: {
     size: {
       xs: {
-        radio: [
+        stateLayer: [
           'w-3.5',
           'h-3.5'
         ],
@@ -65,7 +68,7 @@ export default tv({
         ]
       },
       sm: {
-        radio: [
+        stateLayer: [
           'w-4',
           'h-4'
         ],
@@ -80,7 +83,7 @@ export default tv({
         ]
       },
       md: {
-        radio: [
+        stateLayer: [
           'w-5',
           'h-5'
         ],
@@ -95,7 +98,7 @@ export default tv({
         ]
       },
       lg: {
-        radio: [
+        stateLayer: [
           'w-6',
           'h-6'
         ],
@@ -116,48 +119,49 @@ export default tv({
       ghost: {
         radio: [
           'border-0',
-          'bg-light-400/[.15]',
-          'shadow-none',
-          'dark:bg-dark-600/[.15]'
+          'bg-on-surface-variant/[.15]'
         ]
       }
     },
     color: {
       primary: {},
-      neutral: {},
-      success: {
+      secondary: {},
+      positive: {
         helpertext: [
-          'text-success-500'
+          'text-positive'
         ]
       },
-      info: {
+      accent: {
         helpertext: [
-          'text-info-500'
+          'text-accent'
         ]
       },
       warning: {
         helpertext: [
-          'text-warning-500'
+          'text-warning'
         ]
       },
-      error: {
+      negative: {
         helpertext: [
-          'text-error-500'
+          'text-negative'
         ]
       }
     },
     disabled: {
       true: {
         radio: [
-          'bg-gray-600',
-          'border-gray-600',
+          'bg-disabled',
+          'border-disabled',
           'opacity-50',
           'cursor-not-allowed',
-          'data-[checked=true]:border-gray-600',
-          'data-[checked=true]:bg-gray-600'
+          'data-[checked=true]:border-disabled',
+          'data-[checked=true]:bg-disabled'
         ],
         icon: [
-          'text-gray-600'
+          'text-on-disabled'
+        ],
+        label: [
+          'cursor-not-allowed'
         ]
       }
     },
@@ -179,16 +183,25 @@ export default tv({
     },
     shape: {
       soft: {
+        stateLayer: [
+          'rounded-sm'
+        ],
         radio: [
-          'rounded'
+          'rounded-sm'
         ]
       },
       rounded: {
+        stateLayer: [
+          'rounded-full'
+        ],
         radio: [
           'rounded-full'
         ]
       },
       square: {
+        stateLayer: [
+          'rounded-none'
+        ],
         radio: [
           'rounded-none'
         ]
@@ -203,69 +216,65 @@ export default tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-primary-500',
-          'data-[checked=true]:border-primary-500',
-          'data-[indeterminate=true]:border-primary-500',
-          'data-[indeterminate=true]:bg-primary-500',
-          'dark:data-[checked=true]:bg-primary-500',
-          'dark:data-[checked=true]:border-primary-500',
-          'dark:data-[indeterminate=true]:border-primary-500',
-          'dark:data-[indeterminate=true]:bg-primary-500'
+          'data-[checked=true]:bg-primary',
+          'data-[checked=true]:border-primary',
+          'data-[indeterminate=true]:border-primary',
+          'data-[indeterminate=true]:bg-primary',
+          'dark:data-[checked=true]:bg-primary',
+          'dark:data-[checked=true]:border-primary',
+          'dark:data-[indeterminate=true]:border-primary',
+          'dark:data-[indeterminate=true]:bg-primary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-dark-900',
-          'data-[checked=true]:border-dark-900',
-          'data-[indeterminate=true]:border-dark-900',
-          'data-[indeterminate=true]:bg-dark-900',
-          'dark:data-[checked=true]:bg-light-200',
-          'dark:data-[checked=true]:border-light-200',
-          'dark:data-[indeterminate=true]:border-light-200',
-          'dark:data-[indeterminate=true]:bg-light-200'
-        ],
-        icon: [
-          'text-light-50',
-          'dark:text-dark-800'
+          'data-[checked=true]:bg-secondary',
+          'data-[checked=true]:border-secondary',
+          'data-[indeterminate=true]:border-secondary',
+          'data-[indeterminate=true]:bg-secondary',
+          'dark:data-[checked=true]:bg-secondary',
+          'dark:data-[checked=true]:border-secondary',
+          'dark:data-[indeterminate=true]:border-secondary',
+          'dark:data-[indeterminate=true]:bg-secondary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-success-500',
-          'data-[checked=true]:border-success-500',
-          'data-[indeterminate=true]:border-success-500',
-          'data-[indeterminate=true]:bg-success-500',
-          'dark:data-[checked=true]:bg-success-500',
-          'dark:data-[checked=true]:border-success-500',
-          'dark:data-[indeterminate=true]:border-success-500',
-          'dark:data-[indeterminate=true]:bg-success-500'
+          'data-[checked=true]:bg-positive',
+          'data-[checked=true]:border-positive',
+          'data-[indeterminate=true]:border-positive',
+          'data-[indeterminate=true]:bg-positive',
+          'dark:data-[checked=true]:bg-positive',
+          'dark:data-[checked=true]:border-positive',
+          'dark:data-[indeterminate=true]:border-positive',
+          'dark:data-[indeterminate=true]:bg-positive'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-info-500',
-          'data-[checked=true]:border-info-500',
-          'data-[indeterminate=true]:border-info-500',
-          'data-[indeterminate=true]:bg-info-500',
-          'dark:data-[checked=true]:bg-info-500',
-          'dark:data-[checked=true]:border-info-500',
-          'dark:data-[indeterminate=true]:border-info-500',
-          'dark:data-[indeterminate=true]:bg-info-500'
+          'data-[checked=true]:bg-accent',
+          'data-[checked=true]:border-accent',
+          'data-[indeterminate=true]:border-accent',
+          'data-[indeterminate=true]:bg-accent',
+          'dark:data-[checked=true]:bg-accent',
+          'dark:data-[checked=true]:border-accent',
+          'dark:data-[indeterminate=true]:border-accent',
+          'dark:data-[indeterminate=true]:bg-accent'
         ]
       }
     },
@@ -275,31 +284,31 @@ export default tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-warning-500',
-          'data-[checked=true]:border-warning-500',
-          'data-[indeterminate=true]:border-warning-500',
-          'data-[indeterminate=true]:bg-warning-500',
-          'dark:data-[checked=true]:bg-warning-500',
-          'dark:data-[checked=true]:border-warning-500',
-          'dark:data-[indeterminate=true]:border-warning-500',
-          'dark:data-[indeterminate=true]:bg-warning-500'
+          'data-[checked=true]:bg-warning',
+          'data-[checked=true]:border-warning',
+          'data-[indeterminate=true]:border-warning',
+          'data-[indeterminate=true]:bg-warning',
+          'dark:data-[checked=true]:bg-warning',
+          'dark:data-[checked=true]:border-warning',
+          'dark:data-[indeterminate=true]:border-warning',
+          'dark:data-[indeterminate=true]:bg-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-error-500',
-          'data-[checked=true]:border-error-500',
-          'data-[indeterminate=true]:border-error-500',
-          'data-[indeterminate=true]:bg-error-500',
-          'dark:data-[checked=true]:bg-error-500',
-          'dark:data-[checked=true]:border-error-500',
-          'dark:data-[indeterminate=true]:border-error-500',
-          'dark:data-[indeterminate=true]:bg-error-500'
+          'data-[checked=true]:bg-negative',
+          'data-[checked=true]:border-negative',
+          'data-[indeterminate=true]:border-negative',
+          'data-[indeterminate=true]:bg-negative',
+          'dark:data-[checked=true]:bg-negative',
+          'dark:data-[checked=true]:border-negative',
+          'dark:data-[indeterminate=true]:border-negative',
+          'dark:data-[indeterminate=true]:bg-negative'
         ]
       }
     },
@@ -310,65 +319,65 @@ export default tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-primary-500',
-          'data-[indeterminate=true]:border-primary-500',
-          'dark:data-[checked=true]:border-primary-500',
-          'dark:data-[indeterminate=true]:border-primary-500'
+          'data-[checked=true]:border-primary',
+          'data-[indeterminate=true]:border-primary',
+          'dark:data-[checked=true]:border-primary',
+          'dark:data-[indeterminate=true]:border-primary'
         ],
         icon: [
-          'text-primary-500',
-          'dark:text-primary-500'
+          'text-primary',
+          'dark:text-primary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-dark-900',
-          'data-[indeterminate=true]:border-dark-900',
-          'dark:data-[checked=true]:border-light-200',
-          'dark:data-[indeterminate=true]:border-light-200'
+          'data-[checked=true]:border-secondary',
+          'data-[indeterminate=true]:border-secondary',
+          'dark:data-[checked=true]:border-secondary',
+          'dark:data-[indeterminate=true]:border-secondary'
         ],
         icon: [
-          'text-dark-600',
-          'dark:text-light-200'
+          'text-secondary',
+          'dark:text-secondary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-success-500',
-          'data-[indeterminate=true]:border-success-500',
-          'dark:data-[checked=true]:border-success-500',
-          'dark:data-[indeterminate=true]:border-success-500'
+          'data-[checked=true]:border-positive',
+          'data-[indeterminate=true]:border-positive',
+          'dark:data-[checked=true]:border-positive',
+          'dark:data-[indeterminate=true]:border-positive'
         ],
         icon: [
-          'text-success-500',
-          'dark:text-success-500'
+          'text-positive',
+          'dark:text-positive'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-info-500',
-          'data-[indeterminate=true]:border-info-500',
-          'dark:data-[checked=true]:border-info-500',
-          'dark:data-[indeterminate=true]:border-info-500'
+          'data-[checked=true]:border-accent',
+          'data-[indeterminate=true]:border-accent',
+          'dark:data-[checked=true]:border-accent',
+          'dark:data-[indeterminate=true]:border-accent'
         ],
         icon: [
-          'text-info-500',
-          'dark:text-info-500'
+          'text-accent',
+          'dark:text-accent'
         ]
       }
     },
@@ -378,31 +387,31 @@ export default tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-warning-500',
-          'data-[indeterminate=true]:border-warning-500',
-          'dark:data-[checked=true]:border-warning-500',
-          'dark:data-[indeterminate=true]:border-warning-500'
+          'data-[checked=true]:border-warning',
+          'data-[indeterminate=true]:border-warning',
+          'dark:data-[checked=true]:border-warning',
+          'dark:data-[indeterminate=true]:border-warning'
         ],
         icon: [
-          'text-warning-500',
-          'dark:text-warning-500'
+          'text-warning',
+          'dark:text-warning'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-error-500',
-          'data-[indeterminate=true]:border-error-500',
-          'dark:data-[checked=true]:border-error-500',
-          'dark:data-[indeterminate=true]:border-error-500'
+          'data-[checked=true]:border-negative',
+          'data-[indeterminate=true]:border-negative',
+          'dark:data-[checked=true]:border-negative',
+          'dark:data-[indeterminate=true]:border-negative'
         ],
         icon: [
-          'text-error-500',
-          'dark:text-error-500'
+          'text-negative',
+          'dark:text-negative'
         ]
       }
     },
@@ -413,62 +422,61 @@ export default tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-primary-500/[.15]',
-          'data-[indeterminate=true]:bg-primary-500/[.15]',
-          'dark:data-[checked=true]:bg-primary-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-primary-500/[.15]'
+          'data-[checked=true]:bg-primary-container',
+          'data-[indeterminate=true]:bg-primary-container',
+          'dark:data-[checked=true]:bg-primary-container',
+          'dark:data-[indeterminate=true]:bg-primary-container'
         ],
         icon: [
-          'text-primary-500'
+          'text-on-primary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-dark-950/[.5]',
-          'data-[indeterminate=true]:bg-dark-950/[.5]',
-          'dark:data-[checked=true]:bg-light-400/[.5]',
-          'dark:data-[indeterminate=true]:bg-light-400/[.5]'
+          'data-[checked=true]:bg-secondary-container',
+          'data-[indeterminate=true]:bg-secondary-container',
+          'dark:data-[checked=true]:bg-secondary-container',
+          'dark:data-[indeterminate=true]:bg-secondary-container'
         ],
         icon: [
-          'text-dark-600',
-          'dark:text-light-200'
+          'text-on-secondary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-success-500/[.15]',
-          'data-[indeterminate=true]:bg-success-500/[.15]',
-          'dark:data-[checked=true]:bg-success-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-success-500/[.15]'
+          'data-[checked=true]:bg-positive-container',
+          'data-[indeterminate=true]:bg-positive-container',
+          'dark:data-[checked=true]:bg-positive-container',
+          'dark:data-[indeterminate=true]:bg-positive-container'
         ],
         icon: [
-          'text-success-500'
+          'text-on-positive-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-info-500/[.15]',
-          'data-[indeterminate=true]:bg-info-500/[.15]',
-          'dark:data-[checked=true]:bg-info-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-info-500/[.15]'
+          'data-[checked=true]:bg-accent-container',
+          'data-[indeterminate=true]:bg-accent-container',
+          'dark:data-[checked=true]:bg-accent-container',
+          'dark:data-[indeterminate=true]:bg-accent-container'
         ],
         icon: [
-          'text-info-500'
+          'text-on-accent-container'
         ]
       }
     },
@@ -478,29 +486,29 @@ export default tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-warning-500/[.15]',
-          'data-[indeterminate=true]:bg-warning-500/[.15]',
-          'dark:data-[checked=true]:bg-warning-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-warning-500/[.15]'
+          'data-[checked=true]:bg-warning-container',
+          'data-[indeterminate=true]:bg-warning-container',
+          'dark:data-[checked=true]:bg-warning-container',
+          'dark:data-[indeterminate=true]:bg-warning-container'
         ],
         icon: [
-          'text-warning-500'
+          'text-on-warning-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-error-500/[.15]',
-          'data-[indeterminate=true]:bg-error-500/[.15]',
-          'dark:data-[checked=true]:bg-error-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-error-500/[.15]'
+          'data-[checked=true]:bg-negative-container',
+          'data-[indeterminate=true]:bg-negative-container',
+          'dark:data-[checked=true]:bg-negative-container',
+          'dark:data-[indeterminate=true]:bg-negative-container'
         ],
         icon: [
-          'text-error-500'
+          'text-on-negative-container'
         ]
       }
     }

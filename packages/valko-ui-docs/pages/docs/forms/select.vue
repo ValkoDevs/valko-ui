@@ -30,7 +30,7 @@ const apiData: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Select.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -212,7 +212,7 @@ const people: SelectOption[] = [
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -256,7 +256,7 @@ const people: SelectOption[] = [
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-select
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           v-model="exampleSectionModel[color.value]"
           :color="color.value"
@@ -265,7 +265,7 @@ const people: SelectOption[] = [
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 

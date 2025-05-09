@@ -5,7 +5,7 @@ import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Calendar.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import VkCalendarDayView from './CalendarDayView.vue'
-import VkCalendarMonthView from './CalendayMonthView.vue'
+import VkCalendarMonthView from './CalendarMonthView.vue'
 import VkCalendarYearView from './CalendarYearView.vue'
 
 defineOptions({ name: 'VkCalendar' })

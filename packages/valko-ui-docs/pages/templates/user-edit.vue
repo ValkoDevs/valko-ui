@@ -2,7 +2,7 @@
 import type { Tab } from '#valkoui'
 
 const tabs: Tab[] = [
-  { key: 'user-info', title: 'User Info' },
+  { key: 'user-accent', title: 'User accent' },
   { key: 'permissions', title: 'Permissions' }
 ]
 
@@ -55,7 +55,7 @@ const user = ref({
       variant="ghost"
       shape="line"
     >
-      <template #user-info>
+      <template #user-accent
         <div class="grid grid-cols-2 gap-4 p-4">
           <div
             v-for="(_, key) in user"
@@ -88,7 +88,7 @@ const user = ref({
                   condensed
                   shape="rounded"
                   class="size-8"
-                  :color="value === 0 ? 'error' : 'neutral'"
+                  :color="value === 0 ? 'negative' : 'secondary'"
                 >
                   <vk-icon name="ban" />
                 </vk-button>
@@ -100,7 +100,7 @@ const user = ref({
                   condensed
                   shape="rounded"
                   class="size-8"
-                  :color="value === 1 ? 'warning' : 'neutral'"
+                  :color="value === 1 ? 'warning' : 'secondary'"
                 >
                   <vk-icon name="eye" />
                 </vk-button>
@@ -112,7 +112,7 @@ const user = ref({
                   condensed
                   shape="rounded"
                   class="size-8"
-                  :color="value === 2 ? 'success' : 'neutral'"
+                  :color="value === 2 ? 'positive' : 'secondary'"
                 >
                   <vk-icon name="pencil" />
                 </vk-button>
@@ -129,7 +129,7 @@ const user = ref({
       </vk-button>
       <vk-button
         variant="outlined"
-        color="neutral"
+        color="secondary"
       >
         Cancel
       </vk-button>
@@ -182,7 +182,7 @@ const user = ref({
                       condensed
                       shape="rounded"
                       class="size-8"
-                      :color="value === 0 ? 'error' : 'neutral'"
+                      :color="value === 0 ? 'negative' : 'secondary'"
                     >
                       <vk-icon name="ban" />
                     </vk-button>
@@ -194,7 +194,7 @@ const user = ref({
                       condensed
                       shape="rounded"
                       class="size-8"
-                      :color="value === 1 ? 'warning' : 'neutral'"
+                      :color="value === 1 ? 'warning' : 'secondary'"
                     >
                       <vk-icon name="eye" />
                     </vk-button>
@@ -206,7 +206,7 @@ const user = ref({
                       condensed
                       shape="rounded"
                       class="size-8"
-                      :color="value === 2 ? 'success' : 'neutral'"
+                      :color="value === 2 ? 'positive' : 'secondary'"
                     >
                       <vk-icon name="pencil" />
                     </vk-button>
@@ -223,7 +223,7 @@ const user = ref({
           </vk-button>
           <vk-button
             variant="outlined"
-            color="neutral"
+            color="secondary"
           >
             Cancel
           </vk-button>

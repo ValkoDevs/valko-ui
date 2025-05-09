@@ -11,25 +11,19 @@ const props = withDefaults(defineProps<AvatarProps>(), {
   color: 'primary',
   variant: 'filled',
   size: 'md',
-  shape: 'soft'
+  shape: 'soft',
+  elevated: false
 })
 
 const classes = useStyle<AvatarProps, SlotStyles>(props, styles)
 
-const getInitials = (name: string) => {
-  const words = name.split(' ')
-  let initials = ''
-
-  if (words.length > 0) {
-    initials += words[0][0].toUpperCase()
-
-    if (words.length > 1) {
-      const lastWordIndex = words.length - 1
-      initials += words[lastWordIndex][0].toUpperCase()
-    }
-  }
-
-  return initials
+const getInitials = (name: string): string => {
+  return name
+    .split(' ')
+    .filter(Boolean)
+    .map(word => word[0].toUpperCase())
+    .slice(0, 2)
+    .join('')
 }
 </script>
 

@@ -14,7 +14,8 @@ const props = withDefaults(defineProps<PaginationProps>(), {
   shape: 'soft',
   size: 'md',
   pages: 1,
-  modelValue: 1
+  modelValue: 1,
+  elevated: false
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -54,11 +55,10 @@ watchEffect(() => {
       <vk-button
         variant="link"
         class="vk-pagination__left"
-        color="neutral"
+        color="surface"
         :shape="shape"
         :size="size"
         condensed
-        flat
         :disabled="modelValue === 1 || disabled"
         @click="() => changePage(modelValue - 1)"
       >
@@ -70,9 +70,8 @@ watchEffect(() => {
       <vk-button
         v-for="page in visiblePages"
         :key="page"
-        flat
         :variant="page === modelValue ? variant : 'link'"
-        :color="page === modelValue ? color : 'neutral'"
+        :color="page === modelValue ? color : 'surface'"
         :size="size"
         :shape="shape"
         condensed
@@ -86,10 +85,9 @@ watchEffect(() => {
       <vk-button
         variant="link"
         class="vk-pagination__right"
-        color="neutral"
+        color="surface"
         :shape="shape"
         :size="size"
-        flat
         condensed
         :disabled="modelValue === +pages || disabled"
         @click="() => changePage(modelValue + 1)"

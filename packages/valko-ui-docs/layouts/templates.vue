@@ -44,18 +44,17 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
 <template>
   <div>
     <vk-navbar
-      color="neutral"
+      color="secondary"
       variant="outlined"
       size="md"
       shape="square"
-      flat
       fixed
-      class="flex justify-between !bg-light-100 dark:!bg-dark-800"
+      class="flex justify-between !bg-surface-container !border-surface-dim"
     >
       <vk-button
         variant="link"
         shape="rounded"
-        color="neutral"
+        color="surface"
         condensed
         size="lg"
         class="size-10 lg:hidden"
@@ -67,35 +66,13 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
         />
       </vk-button>
 
-      <h2 class="text-primary-600 dark:text-primary-400 text-3xl font-serif tracking-wider">
+      <h2 class="text-primary text-3xl font-serif tracking-wider">
         <nuxt-link to="/">
           ValkoUI
         </nuxt-link>
       </h2>
 
-      <div class="flex gap-2 lg:hidden">
-        <theme-switch />
-        <a
-          href="https://github.com/ValkoDevs/valko-ui"
-          target="_blank"
-        >
-          <vk-button
-            variant="link"
-            shape="rounded"
-            color="neutral"
-            condensed
-            size="lg"
-            class="size-10"
-          >
-            <vk-icon
-              name="brand-github"
-              class="text-2xl"
-            />
-          </vk-button>
-        </a>
-      </div>
-
-      <site-links class="hidden lg:flex" />
+      <site-links />
 
       <vk-drawer
         :is-open="menuOpen"

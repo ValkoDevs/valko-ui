@@ -279,7 +279,7 @@ onUnmounted(() => {
           />
         </div>
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
         />
         <div class="flex flex-col gap-4">
@@ -310,7 +310,7 @@ onUnmounted(() => {
           </div>
         </div>
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
         />
         <div class="flex flex-col gap-4">
@@ -328,7 +328,7 @@ onUnmounted(() => {
           </div>
         </div>
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
         />
         <div class="flex flex-col gap-4">
@@ -349,12 +349,12 @@ onUnmounted(() => {
           />
         </div>
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
         />
         <div>
           <vk-button
-            color="neutral"
+            color="secondary"
             variant="outlined"
           >
             Reset Filters
@@ -369,7 +369,7 @@ onUnmounted(() => {
           Filters
         </h2>
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="sm"
         />
         <h3 class="text-xl font-semibold">
@@ -383,7 +383,7 @@ onUnmounted(() => {
           :max="10000"
         />
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
         />
       </div>
@@ -414,7 +414,7 @@ onUnmounted(() => {
           />
         </div>
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
         />
       </div>
@@ -433,7 +433,7 @@ onUnmounted(() => {
           />
         </div>
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
         />
       </div>
@@ -455,14 +455,14 @@ onUnmounted(() => {
           label="Out of Stock"
         />
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
         />
       </div>
 
       <div class="mt-4">
         <vk-button
-          color="neutral"
+          color="secondary"
           variant="outlined"
         >
           Reset Filters
@@ -476,7 +476,7 @@ onUnmounted(() => {
           v-for="(isActive, category) in filters.categories"
           :key="category"
           :text="category"
-          :color="isActive ? 'primary' : 'neutral'"
+          :color="isActive ? 'primary' : 'secondary'"
           variant="outlined"
           is-pressable
           @click="toggleCategory(category)"
@@ -484,7 +484,7 @@ onUnmounted(() => {
         <vk-button
           variant="link"
           shape="rounded"
-          color="neutral"
+          color="secondary"
           condensed
           size="lg"
           class="size-10"
@@ -502,7 +502,6 @@ onUnmounted(() => {
           v-for="(product, index) in products"
           :key="\`\${product.name}-\${index}\`"
           :size="isMd ? 'md' : 'sm'"
-          flat
           is-pressable
         >
           <vk-card-header>
@@ -523,7 +522,7 @@ onUnmounted(() => {
                   :key="tag"
                   :text="tag"
                   variant="outlined"
-                  color="neutral"
+                  color="secondary"
                 />
               </div>
               <p class="font-bold text-lg text-left">
@@ -540,7 +539,7 @@ onUnmounted(() => {
               </vk-button>
               <vk-icon
                 name="heart"
-                :class="\`\text-2xl hover:text-error-500 \${favIcons.has(index) ? 'text-error-500' : ''}\`"
+                :class="\`\text-2xl hover:text-negative \${favIcons.has(index) ? 'text-negative' : ''}\`"
                 @click="toggleFav(index)"
               />
             </div>
@@ -561,7 +560,6 @@ onUnmounted(() => {
           :key="index"
           size="full"
           layout="cover"
-          flat
         >
           <vk-card-image
             :src="category.image"
@@ -621,7 +619,7 @@ onUnmounted(() => {
               />
             </div>
             <vk-divider
-              color="neutral"
+              color="secondary"
               size="xs"
             />
             <div class="flex flex-col gap-4">
@@ -652,7 +650,7 @@ onUnmounted(() => {
               </div>
             </div>
             <vk-divider
-              color="neutral"
+              color="secondary"
               size="xs"
             />
             <div class="flex flex-col gap-4">
@@ -670,7 +668,7 @@ onUnmounted(() => {
               </div>
             </div>
             <vk-divider
-              color="neutral"
+              color="secondary"
               size="xs"
             />
             <div class="flex flex-col gap-4">
@@ -691,12 +689,12 @@ onUnmounted(() => {
               />
             </div>
             <vk-divider
-              color="neutral"
+              color="secondary"
               size="xs"
             />
             <div>
               <vk-button
-                color="neutral"
+                color="secondary"
                 variant="outlined"
               >
                 Reset Filters
@@ -711,7 +709,7 @@ onUnmounted(() => {
               Filters
             </h2>
             <vk-divider
-              color="neutral"
+              color="secondary"
               size="sm"
             />
             <h3 class="text-xl font-semibold">
@@ -725,7 +723,7 @@ onUnmounted(() => {
               :max="10000"
             />
             <vk-divider
-              color="neutral"
+              color="secondary"
               size="xs"
             />
           </div>
@@ -756,7 +754,7 @@ onUnmounted(() => {
               />
             </div>
             <vk-divider
-              color="neutral"
+              color="secondary"
               size="xs"
             />
           </div>
@@ -775,7 +773,7 @@ onUnmounted(() => {
               />
             </div>
             <vk-divider
-              color="neutral"
+              color="secondary"
               size="xs"
             />
           </div>
@@ -797,14 +795,14 @@ onUnmounted(() => {
               label="Out of Stock"
             />
             <vk-divider
-              color="neutral"
+              color="secondary"
               size="xs"
             />
           </div>
 
           <div class="mt-4">
             <vk-button
-              color="neutral"
+              color="secondary"
               variant="outlined"
             >
               Reset Filters
@@ -818,7 +816,7 @@ onUnmounted(() => {
               v-for="(isActive, category) in filters.categories"
               :key="category"
               :text="category"
-              :color="isActive ? 'primary' : 'neutral'"
+              :color="isActive ? 'primary' : 'secondary'"
               variant="outlined"
               is-pressable
               @click="toggleCategory(category)"
@@ -826,7 +824,7 @@ onUnmounted(() => {
             <vk-button
               variant="link"
               shape="rounded"
-              color="neutral"
+              color="secondary"
               condensed
               size="lg"
               class="size-10"
@@ -844,7 +842,6 @@ onUnmounted(() => {
               v-for="(product, index) in products"
               :key="`${product.name}-${index}`"
               :size="isMd ? 'md' : 'sm'"
-              flat
               is-pressable
             >
               <vk-card-header>
@@ -865,7 +862,7 @@ onUnmounted(() => {
                       :key="tag"
                       :text="tag"
                       variant="outlined"
-                      color="neutral"
+                      color="secondary"
                     />
                   </div>
                   <p class="font-bold text-lg text-left">
@@ -882,7 +879,7 @@ onUnmounted(() => {
                   </vk-button>
                   <vk-icon
                     name="heart"
-                    :class="`text-2xl hover:text-error-500 ${favIcons.has(index) ? 'text-error-500' : ''}`"
+                    :class="`text-2xl hover:text-negative ${favIcons.has(index) ? 'text-negative' : ''}`"
                     @click="toggleFav(index)"
                   />
                 </div>
@@ -903,7 +900,6 @@ onUnmounted(() => {
               :key="index"
               size="full"
               layout="cover"
-              flat
             >
               <vk-card-image
                 :src="category.image"

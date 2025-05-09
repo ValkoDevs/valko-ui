@@ -22,7 +22,7 @@ describe('Range component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be size md', () => {
@@ -30,7 +30,7 @@ describe('Range component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-high').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -47,40 +47,40 @@ describe('Range component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkRange, {
           props: {
-            color: 'neutral',
+            color: 'secondary',
             modelValue: 0
           }
         })
 
-        expect(wrapper.find('.bg-light-400').exists()).toBe(true)
+        expect(wrapper.find('.bg-secondary').exists()).toBe(true)
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkRange, {
           props: {
-            color: 'success',
+            color: 'positive',
             modelValue: 0
           }
         })
 
-        expect(wrapper.find('.bg-success-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-positive').exists()).toBe(true)
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkRange, {
           props: {
-            color: 'info',
+            color: 'accent',
             modelValue: 0
           }
         })
 
-        expect(wrapper.find('.bg-info-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-accent').exists()).toBe(true)
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -91,18 +91,18 @@ describe('Range component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-warning-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-warning').exists()).toBe(true)
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkRange, {
           props: {
-            color: 'error',
+            color: 'negative',
             modelValue: 0
           }
         })
 
-        expect(wrapper.find('.bg-error-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-negative').exists()).toBe(true)
       })
     })
 
@@ -196,7 +196,7 @@ describe('Range component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-high').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -218,7 +218,7 @@ describe('Range component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-range__progress').classes()).toContain('bg-light-200/[.5]')
+        expect(wrapper.find('.vk-range__progress').classes()).toContain('bg-surface-container-high/[.5]')
       })
 
       it('should be gradient when props.variant is gradient', () => {

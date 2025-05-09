@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<DropdownProps>(), {
   size: 'md',
   shape: 'soft',
   icon: 'chevron-down',
-  flat: false,
+  elevated: false,
   disabled: false,
   placement: 'auto',
   alignment: undefined,
@@ -40,7 +40,6 @@ const onItemClick = (item: Item) => {
   <vk-popover
     :class="classes.container"
     :is-open="open && !disabled"
-    :flat="flat || variant === 'ghost' || variant === 'link'"
     :shape="shape"
     :placement="placement"
     :alignment="alignment"
@@ -55,6 +54,7 @@ const onItemClick = (item: Item) => {
       <vk-button
         v-bind="props"
         :disabled="disabled"
+        :elevated="elevated"
         :class="classes.triggerButton"
         @click="open = !open"
       >

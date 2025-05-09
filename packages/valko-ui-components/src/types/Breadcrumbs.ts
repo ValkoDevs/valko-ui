@@ -14,6 +14,5 @@ export interface BreadcrumbsProps extends Shapes, Sizes, Colors {
   variant?: VariantWithLink;
   crumbs: Crumb[];
   separator?: string;
-  flat?: boolean;
   condensed?: boolean;
 }

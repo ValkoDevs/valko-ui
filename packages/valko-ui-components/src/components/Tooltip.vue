@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   shape: 'soft',
   placement: 'auto',
   alignment: undefined,
-  flat: true
+  elevated: false
 })
 
 const classes = useStyle<TooltipProps, SlotStyles>(props, styles)
@@ -33,7 +33,7 @@ const showTooltip = (value: boolean) => {
     :placement="placement"
     :alignment="alignment"
     :shape="shape"
-    :flat="flat"
+    :elevated="elevated"
     :class="classes.container"
     condensed
     @mouseenter="() => showTooltip(true)"

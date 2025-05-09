@@ -7,7 +7,7 @@ const form = reactive<AvatarProps>({
   shape: 'soft',
   size: 'md',
   name: 'Louise Barnett',
-  flat: false,
+  elevated: false,
   src: '/assets/avatar.jpg'
 })
 
@@ -22,7 +22,7 @@ const avatarProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Avatar.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -66,10 +66,10 @@ const avatarProps: TableItem[] = [
     default: ''
   },
   {
-    key: 'flatProp',
-    prop: 'flat',
+    key: 'elevatedProp',
+    prop: 'elevated',
     required: false,
-    description: 'Displays a shadow for the Avatar.',
+    description: 'Applies a shadow to visually elevate the Avatar.',
     values: 'true, false',
     default: 'false'
   }
@@ -99,7 +99,7 @@ const extraProps = {
         :variant="form.variant"
         :src="avatarSrc"
         :name="form.name"
-        :flat="form.flat"
+        :elevated="form.elevated"
       />
     </template>
 
@@ -108,7 +108,7 @@ const extraProps = {
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -133,8 +133,8 @@ const extraProps = {
         label="Hide Avatar"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
+        v-model="form.elevated"
+        label="Elevated"
       />
     </template>
 
@@ -144,7 +144,7 @@ const extraProps = {
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <div
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           class="flex flex-col gap-2 justify-center items-center md:items-start md:justify-start"
         >
@@ -155,7 +155,7 @@ const extraProps = {
         </div>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -164,7 +164,7 @@ const extraProps = {
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <div
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           class="flex flex-col gap-2 justify-center items-center md:items-start md:justify-start"
         >
@@ -176,7 +176,7 @@ const extraProps = {
         </div>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps: extraProps.name })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps: extraProps.name })" />
         </template>
       </example-section>
 
@@ -261,13 +261,13 @@ const extraProps = {
         </template>
       </example-section>
 
-      <example-section title="Flat">
+      <example-section title="Elevated">
         <vk-avatar
-          flat
+          elevated
         />
 
         <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', { values: [true] })" />
+          <code-block :code="generateSnippet<boolean>('elevated', { values: [true] })" />
         </template>
       </example-section>
     </template>
