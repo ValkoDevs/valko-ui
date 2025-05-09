@@ -20,8 +20,6 @@ export default tv({
       'duration-150'
     ],
     stateLayer: [
-      'w-full',
-      'h-full',
       'flex',
       'items-center',
       'justify-center',
@@ -105,11 +103,17 @@ export default tv({
       true: {
         button: [
           'w-full'
+        ],
+        stateLayer: [
+          'w-full'
         ]
       },
       false: {
         button: [
-          'w-fit'
+          'size-fit'
+        ],
+        stateLayer: [
+          'size-fit'
         ]
       }
     },
@@ -600,10 +604,16 @@ export default tv({
         button: [
           'border-disabled',
           'text-on-disabled-container'
-        ],
+        ]
+      }
+    },
+    {
+      disabled: true,
+      class: {
         stateLayer: [
           'hover:bg-transparent',
-          'active:bg-transparent'
+          'active:bg-transparent',
+          'focus:bg-transparent'
         ]
       }
     },
@@ -613,7 +623,7 @@ export default tv({
       elevated: true,
       class: {
         button: [
-          'active:shadow-el0'
+          'shadow-el0'
         ]
       }
     },

@@ -21,6 +21,25 @@ const form = reactive<CheckboxProps>({
 const indeterminateRef = ref(false)
 
 const checkboxStates = reactive<Record<string, boolean>>({
+  primary: true,
+  secondary: true,
+  accent: true,
+  warning: true,
+  negative: true,
+  positive: true,
+  filled: true,
+  outlined: true,
+  ghost: true,
+  rounded: true,
+  square: true,
+  soft: true,
+  xs: true,
+  sm: true,
+  md: true,
+  lg: true,
+  indeterminate: true,
+  right: true,
+  left: true,
   readonly: true,
   disabled: true
 })
