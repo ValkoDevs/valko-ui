@@ -30,7 +30,8 @@ export default tv({
       positive: [],
       negative: [],
       warning: [],
-      accent: []
+      accent: [],
+      surface: []
     },
     size: {
       xs: [],
@@ -131,6 +132,14 @@ export default tv({
         'text-on-negative'
       ]
     },
+    {
+      color: 'surface',
+      variant: 'filled',
+      class: [
+        'bg-surface-container-highest',
+        'text-on-surface'
+      ]
+    },
     // outlined & color
     {
       color: 'primary',
@@ -174,6 +183,14 @@ export default tv({
         'border-negative'
       ]
     },
+    {
+      color: 'surface',
+      variant: 'outlined',
+      class: [
+        'border-outlined',
+        'text-on-surface-variant'
+      ]
+    },
     // ghost & color
     {
       color: 'primary',
@@ -215,6 +232,13 @@ export default tv({
       variant: 'ghost',
       class: [
         'bg-negative-container'
+      ]
+    },
+    {
+      color: 'surface',
+      variant: 'ghost',
+      class: [
+        'bg-surface-container-highest/[.5]'
       ]
     },
     // gradient & color
@@ -270,6 +294,14 @@ export default tv({
         'from-negative-gradient-start',
         'to-negative-gradient-end',
         'text-on-negative'
+      ]
+    },
+    {
+      variant: 'gradient',
+      color: 'surface',
+      class: [
+        'from-surface-container',
+        'to-surface-container-highest'
       ]
     },
     // floating & variant

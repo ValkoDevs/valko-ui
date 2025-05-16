@@ -22,7 +22,7 @@ const avatarProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Avatar.',
-    values: 'primary, secondary, negative, warning, accent, positive',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -108,7 +108,7 @@ const extraProps = {
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions.general"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -141,10 +141,10 @@ const extraProps = {
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-7"
       >
         <div
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           class="flex flex-col gap-2 justify-center items-center md:items-start md:justify-start"
         >
@@ -155,16 +155,16 @@ const extraProps = {
         </div>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value) })" />
         </template>
       </example-section>
 
       <example-section
         title="Colors with Initials"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-7"
       >
         <div
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           class="flex flex-col gap-2 justify-center items-center md:items-start md:justify-start"
         >
@@ -176,7 +176,7 @@ const extraProps = {
         </div>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps: extraProps.name })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), extraProps: extraProps.name })" />
         </template>
       </example-section>
 

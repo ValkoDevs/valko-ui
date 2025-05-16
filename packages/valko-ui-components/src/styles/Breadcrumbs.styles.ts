@@ -95,6 +95,12 @@ export default tv({
           'hover:text-on-negative-container',
           'data-[active=true]:text-negative'
         ]
+      },
+      surface: {
+        a: [
+          'hover:text-outlined',
+          'data-[active=true]:text-on-surface'
+        ]
       }
     },
     size: {

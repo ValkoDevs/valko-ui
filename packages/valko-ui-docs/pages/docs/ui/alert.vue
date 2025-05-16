@@ -19,7 +19,7 @@ const alertProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Alert.',
-    values: 'primary, secondary, negative, warning, accent, positive',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -151,7 +151,7 @@ const iconSnippet = `
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions.general"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -196,7 +196,7 @@ const iconSnippet = `
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-alert
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           :color="color.value"
           :title="color.label"
@@ -205,7 +205,7 @@ const iconSnippet = `
         </vk-alert>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), hasSlot: true })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), hasSlot: true })" />
         </template>
       </example-section>
 

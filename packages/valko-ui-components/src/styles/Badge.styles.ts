@@ -25,7 +25,8 @@ export default tv({
       positive: {},
       accent: {},
       warning: {},
-      negative: {}
+      negative: {},
+      surface: {}
     },
     variant: {
       filled: {},
@@ -176,6 +177,26 @@ export default tv({
         ]
       }
     },
+    {
+      variant: 'filled',
+      color: 'surface',
+      class: {
+        badge: [
+          'bg-surface-container-highest',
+          'text-on-surface'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'surface',
+      class: {
+        badge: [
+          'bg-surface-container-highest',
+          'text-on-surface-variant'
+        ]
+      }
+    },
     // ghost & color
     {
       variant: 'ghost',
@@ -234,6 +255,16 @@ export default tv({
         badge: [
           'bg-negative-container',
           'text-on-negative-container'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      class: {
+        badge: [
+          'bg-surface-container-highest/[.8]',
+          'text-on-surface-variant'
         ]
       }
     },
@@ -301,6 +332,17 @@ export default tv({
           'from-negative-gradient-start',
           'to-negative-gradient-end',
           'text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'surface',
+      class: {
+        badge: [
+          'from-surface-container',
+          'to-surface-container-highest',
+          'text-on-surface'
         ]
       }
     },

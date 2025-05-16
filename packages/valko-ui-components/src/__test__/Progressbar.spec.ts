@@ -26,7 +26,7 @@ describe('Progressbar component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-surface-container-lowest').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-high').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -200,7 +200,7 @@ describe('Progressbar component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-surface-container-lowest').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-high').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {

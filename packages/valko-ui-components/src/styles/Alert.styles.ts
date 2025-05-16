@@ -60,7 +60,8 @@ export default tv({
       positive: {},
       accent: {},
       warning: {},
-      negative: {}
+      negative: {},
+      surface: {}
     },
     size: {
       xs: {
@@ -182,6 +183,15 @@ export default tv({
         ]
       }
     },
+    {
+      variant: 'filled',
+      color: 'surface',
+      class: {
+        container: [
+          'bg-surface-container-highest'
+        ]
+      }
+    },
     // outlined & color (container)
     {
       variant: 'outlined',
@@ -237,6 +247,15 @@ export default tv({
         ]
       }
     },
+    {
+      variant: 'outlined',
+      color: 'surface',
+      class: {
+        container: [
+          'border-outlined'
+        ]
+      }
+    },
     // ghost & color (container)
     {
       variant: 'ghost',
@@ -289,6 +308,15 @@ export default tv({
       class: {
         container: [
           'bg-negative-container'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      class: {
+        container: [
+          'bg-surface-container-highest/[.5]'
         ]
       }
     },
@@ -350,6 +378,16 @@ export default tv({
         container: [
           'from-negative-gradient-start',
           'to-negative-gradient-end'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'surface',
+      class: {
+        container: [
+          'from-surface-container',
+          'to-surface-container-highest'
         ]
       }
     },
@@ -426,6 +464,18 @@ export default tv({
         ]
       }
     },
+    {
+      variant: ['filled', 'gradient'],
+      color: 'surface',
+      class: {
+        container: [
+          'text-on-surface'
+        ],
+        closeIcon: [
+          'text-on-surface'
+        ]
+      }
+    },
     // ghost & outlined & color (title, p, icons)
     {
       variant: ['ghost', 'outlined'],
@@ -496,6 +546,18 @@ export default tv({
         ],
         closeIcon: [
           'text-on-negative-container'
+        ]
+      }
+    },
+    {
+      variant: ['ghost', 'outlined'],
+      color: 'surface',
+      class: {
+        container: [
+          'text-on-surface-variant'
+        ],
+        closeIcon: [
+          'text-on-surface-variant'
         ]
       }
     }

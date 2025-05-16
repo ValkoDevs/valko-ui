@@ -334,7 +334,7 @@ export default tv({
       class: {
         button: [
           'bg-surface-container-highest/[.5]',
-          'text-on-surface'
+          'text-on-surface-variant'
         ]
       }
     },
@@ -482,7 +482,7 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-on-surface',
+          'text-on-surface-variant',
           'border-outlined'
         ]
       }

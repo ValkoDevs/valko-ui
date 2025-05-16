@@ -40,7 +40,7 @@ const breadcrumbsProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Breadcrumbs.',
-    values: 'primary, secondary, negative, warning, accent, positive',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -235,7 +235,7 @@ const extraProps = ':crumbs="crumbs"'
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions.general"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -267,7 +267,7 @@ const extraProps = ':crumbs="crumbs"'
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <div
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           class="flex flex-col gap-2 items-center justify-center"
         >
@@ -279,7 +279,7 @@ const extraProps = ':crumbs="crumbs"'
         </div>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 

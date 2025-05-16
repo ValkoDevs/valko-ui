@@ -77,7 +77,8 @@ export default tv({
       positive: {},
       accent: {},
       warning: {},
-      negative: {}
+      negative: {},
+      surface: {}
     },
     size: {
       xs: {
@@ -205,6 +206,16 @@ export default tv({
         ]
       }
     },
+    {
+      variant: 'filled',
+      color: 'surface',
+      class: {
+        notification: [
+          'bg-surface-container-highest',
+          'text-on-surface'
+        ]
+      }
+    },
     // outlined & color
     {
       variant: 'outlined',
@@ -281,6 +292,19 @@ export default tv({
         ],
         progressbar: [
           'bg-negative'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'surface',
+      class: {
+        notification: [
+          'border-outlined',
+          'text-on-surface-variant'
+        ],
+        progressbar: [
+          'bg-outlined'
         ]
       }
     },
@@ -363,6 +387,19 @@ export default tv({
         ]
       }
     },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      class: {
+        notification: [
+          'bg-surface-container-highest/[.5]',
+          'text-on-surface-variant'
+        ],
+        progressbar: [
+          'bg-on-surface-variant'
+        ]
+      }
+    },
     // line & color
     {
       variant: 'line',
@@ -415,6 +452,15 @@ export default tv({
       class: {
         progressbar: [
           'bg-negative'
+        ]
+      }
+    },
+    {
+      variant: 'line',
+      color: 'surface',
+      class: {
+        progressbar: [
+          'bg-surface-container-highest'
         ]
       }
     },
@@ -482,6 +528,17 @@ export default tv({
           'from-negative-gradient-start',
           'to-negative-gradient-end',
           'text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'surface',
+      class: {
+        notification: [
+          'from-surface-container',
+          'to-surface-container-highest',
+          'text-on-surface'
         ]
       }
     }

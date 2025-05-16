@@ -12,7 +12,8 @@ export default tv({
       positive: [],
       accent: [],
       warning: [],
-      negative: []
+      negative: [],
+      surface: []
     },
     variant: {
       filled: [
@@ -97,6 +98,13 @@ export default tv({
         'bg-negative'
       ]
     },
+    {
+      variant: 'filled',
+      color: 'surface',
+      class: [
+        'bg-surface-container-highest'
+      ]
+    },
     // outlined & color
     {
       variant: 'outlined',
@@ -140,6 +148,13 @@ export default tv({
         'border-negative'
       ]
     },
+    {
+      variant: 'outlined',
+      color: 'surface',
+      class: [
+        'border-outlined'
+      ]
+    },
     // ghost & color
     {
       variant: 'ghost',
@@ -181,6 +196,13 @@ export default tv({
       color: 'negative',
       class: [
         'bg-negative-container'
+      ]
+    },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      class: [
+        'bg-surface-container-highest/[.5]'
       ]
     },
     // vertical & size

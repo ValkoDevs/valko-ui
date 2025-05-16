@@ -47,7 +47,8 @@ export default tv({
       positive: {},
       accent: {},
       warning: {},
-      negative: {}
+      negative: {},
+      surface: {}
     },
     size: {
       xs: {
@@ -166,6 +167,16 @@ export default tv({
         ]
       }
     },
+    {
+      variant: 'filled',
+      color: 'surface',
+      class: {
+        container: [
+          'bg-surface-container-highest',
+          'text-on-surface'
+        ]
+      }
+    },
     // outlined & color
     {
       variant: 'outlined',
@@ -227,6 +238,16 @@ export default tv({
         ]
       }
     },
+    {
+      variant: 'outlined',
+      colors: 'surface',
+      class: {
+        container: [
+          'border-outlined',
+          'text-on-surface-variant'
+        ]
+      }
+    },
     // ghost & color
     {
       variant: 'ghost',
@@ -285,6 +306,16 @@ export default tv({
         container: [
           'bg-negative-container',
           'text-on-negative-container'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      class: {
+        container: [
+          'bg-surface-container-highest/[.5]',
+          'text-on-surface-variant'
         ]
       }
     },
@@ -352,6 +383,17 @@ export default tv({
           'from-negative-gradient-start',
           'to-negative-gradient-end',
           'text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'surface',
+      class: {
+        container: [
+          'from-surface-container',
+          'to-surface-container-highest',
+          'text-on-surface'
         ]
       }
     },

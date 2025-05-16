@@ -107,7 +107,8 @@ export default tv({
       positive: {},
       accent: {},
       warning: {},
-      negative: {}
+      negative: {},
+      surface: {}
     },
     disabled: {
       true: {}
@@ -206,6 +207,20 @@ export default tv({
         ]
       }
     },
+    {
+      variant: 'filled',
+      color: 'surface',
+      disabled: false,
+      class: {
+        container: [
+          'bg-surface-container-highest',
+          'text-on-surface'
+        ],
+        closeIcon: [
+          'text-on-surface'
+        ]
+      }
+    },
     // ghost & color
     {
       variant: 'ghost',
@@ -288,6 +303,20 @@ export default tv({
         ],
         closeIcon: [
           'text-on-negative-container'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      disabled: false,
+      class: {
+        container: [
+          'text-on-surface-variant',
+          'bg-surface-container-highest/[.5]'
+        ],
+        closeIcon: [
+          'text-on-surface-variant'
         ]
       }
     },
@@ -376,6 +405,20 @@ export default tv({
         ]
       }
     },
+    {
+      variant: 'outlined',
+      color: 'surface',
+      disabled: false,
+      class: {
+        container: [
+          'border-outlined',
+          'text-on-surface-variant'
+        ],
+        closeIcon: [
+          'text-on-surface-variant'
+        ]
+      }
+    },
     // gradient & color
     {
       variant: 'gradient',
@@ -458,6 +501,20 @@ export default tv({
         ],
         closeIcon: [
           'text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'surface',
+      class: {
+        container: [
+          'from-surface-container',
+          'to-surface-container-highest',
+          'text-on-surface'
+        ],
+        closeIcon: [
+          'text-on-surface'
         ]
       }
     },

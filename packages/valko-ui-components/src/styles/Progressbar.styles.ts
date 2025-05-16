@@ -36,17 +36,14 @@ export default tv({
       'absolute',
       'z-10',
       'transition-all',
-      'bg-surface-container'
+      'bg-surface-container-highest'
     ]
   },
   variants: {
     variant: {
       filled: {
         container: [
-          'bg-surface-container-lowest'
-        ],
-        content: [
-          'text-on-surface'
+          'bg-surface-container-high'
         ]
       },
       ghost: {
@@ -54,7 +51,7 @@ export default tv({
           'bg-transparent'
         ],
         buffer: [
-          'bg-surface-container/[.15]'
+          'bg-surface-container-highest/[.15]'
         ]
       },
       outlined: {
@@ -65,13 +62,10 @@ export default tv({
       },
       gradient: {
         container: [
-          'bg-surface-container-lowest'
+          'bg-surface-container-high'
         ],
         progress: [
           'bg-gradient-to-br'
-        ],
-        content: [
-          'text-on-surface'
         ]
       }
     },
@@ -101,31 +95,49 @@ export default tv({
       primary: {
         progress: [
           'bg-primary'
+        ],
+        content: [
+          'text-on-primary'
         ]
       },
       secondary: {
         progress: [
           'bg-secondary'
+        ],
+        content: [
+          'text-on-secondary'
         ]
       },
       positive: {
         progress: [
           'bg-positive'
+        ],
+        content: [
+          'text-on-positive'
         ]
       },
       accent: {
         progress: [
           'bg-accent'
+        ],
+        content: [
+          'text-on-accent'
         ]
       },
       warning: {
         progress: [
           'bg-warning'
+        ],
+        content: [
+          'text-on-warning'
         ]
       },
       negative: {
         progress: [
           'bg-negative'
+        ],
+        content: [
+          'text-on-negative'
         ]
       }
     },

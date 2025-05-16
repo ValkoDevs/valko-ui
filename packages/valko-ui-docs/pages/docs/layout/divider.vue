@@ -20,7 +20,7 @@ const dividerProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Divider.',
-    values: 'primary, secondary, negative, warning, accent, positive',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -91,7 +91,7 @@ const generateSnippet = snippetGeneratorFactory('vk-divider')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions.general"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -122,10 +122,10 @@ const generateSnippet = snippetGeneratorFactory('vk-divider')
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7"
       >
         <div
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
         >
           <span class="font-semibold">{{ color.label }}</span>
@@ -139,7 +139,7 @@ const generateSnippet = snippetGeneratorFactory('vk-divider')
         </div>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value) })" />
         </template>
       </example-section>
 

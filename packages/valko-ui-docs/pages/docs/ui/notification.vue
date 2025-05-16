@@ -32,7 +32,7 @@ const notificationProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Notification.',
-    values: 'primary, secondary, negative, warning, accent, positive',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -170,7 +170,7 @@ const createNotification = (props: NotificationProps) => useNotification(props)
 
 const colorSnippet = `
 <template>
-  ${colorOptions.general.map(color => `<vk-button
+  ${colorOptions.withSurface.map(color => `<vk-button
     @click="createNotification({ text: ${color.label}, color: ${color.value} })"
   >
     ${color.label}
@@ -280,7 +280,7 @@ const stopOnFocusSnippet = `
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions.general"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -334,10 +334,10 @@ const stopOnFocusSnippet = `
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(6,_minmax(0,_max-content))]"
+        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(7,_minmax(0,_max-content))]"
       >
         <vk-button
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           :color="color.value"
           @click="createNotification({ text: color.label, color: color.value })"

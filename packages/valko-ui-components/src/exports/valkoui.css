@@ -17,6 +17,8 @@
   --color-on-surface-variant: #44474e;
   --color-outlined: #74777f;
   --color-outlined-variant: #c4c6d0;
+  --color-inverse-surface: #352e33;
+  --color-on-inverse-surface: #faedf4;
 
   /* State colors */
   --color-state-hover: rgba(0, 0, 0, .08);
@@ -114,6 +116,8 @@ html.dark {
   --color-on-surface-variant: #c4c6d0;
   --color-outlined: #8e9099;
   --color-outlined-variant: #44474e;
+  --color-inverse-surface: #ebdfe6;
+  --color-on-inverse-surface: #352e33;
 
   /* State colors */
   --color-state-hover: rgba(0, 0, 0, 0.08);

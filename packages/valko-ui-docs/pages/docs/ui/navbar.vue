@@ -18,7 +18,7 @@ const navbarProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Navbar.',
-    values: 'primary, secondary, negative, warning, accent, positive',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'secondary'
   },
   {
@@ -121,7 +121,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions.general"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -165,7 +165,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-navbar
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           :color="color.value"
         >
@@ -177,7 +177,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
         </vk-navbar>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), customSlot })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), customSlot })" />
         </template>
       </example-section>
 

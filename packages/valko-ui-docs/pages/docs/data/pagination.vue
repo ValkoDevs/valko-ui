@@ -18,7 +18,7 @@ const paginationProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The Pagination color theme.',
-    values: 'primary, secondary, negative, warning, accent, positive',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -115,19 +115,13 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions.general"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
         label="Variant"
         size="sm"
         :options="variantOptions.general"
-      />
-      <vk-select
-        v-model="form.color"
-        label="Color"
-        size="sm"
-        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.shape"
@@ -163,7 +157,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <div
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           class="flex flex-col gap-2"
         >
@@ -176,7 +170,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
         </div>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value) })" />
         </template>
       </example-section>
 
