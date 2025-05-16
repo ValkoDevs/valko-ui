@@ -48,15 +48,11 @@ describe('Modal component', () => {
       })
 
       it('should be opaque', () => {
-        expect(backdrop.classes()).toContain('bg-light-400/80')
+        expect(backdrop.classes()).toContain('bg-state-scrim')
       })
 
       it('should not have title', () => {
         expect(modal.find('.text-lg').text()).toContain('')
-      })
-
-      it('should not be flat', () => {
-        expect(modal.classes('.shadow-none')).toBe(false)
       })
     })
 
@@ -218,7 +214,7 @@ describe('Modal component', () => {
 
         await nextTick()
         backdrop = wrapper.getComponent('.vk-modal__backdrop') as unknown as VueWrapper
-        expect(backdrop.classes()).toContain('bg-light-400/80')
+        expect(backdrop.classes()).toContain('bg-state-scrim')
       })
 
       it('should be blur when props.backdrop is blur', async () => {

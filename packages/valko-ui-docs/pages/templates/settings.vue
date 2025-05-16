@@ -177,7 +177,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
           label="Billing Address"
         />
         <vk-button class="w-1/5 mt-auto">
-          Save Billing Info
+          Save Billing accent
         </vk-button>
       </div>
 
@@ -322,7 +322,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
               label="Billing Address"
             />
             <vk-button class="w-1/5 mt-auto">
-              Save Billing Info
+              Save Billing accent
             </vk-button>
           </div>
 

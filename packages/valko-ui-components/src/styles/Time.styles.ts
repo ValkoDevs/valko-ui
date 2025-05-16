@@ -17,7 +17,7 @@ export default tv({
     footer: [
       'p-2',
       'border-t',
-      'border-neutral-500',
+      'border-outlined',
       'col-span-3',
       'flex',
       'flex-row-reverse',
@@ -25,7 +25,7 @@ export default tv({
     ],
     unitContainer: [
       'border-r',
-      'border-neutral-500',
+      'border-outlined',
       'last:border-r-0',
       'p-2',
       'h-64',

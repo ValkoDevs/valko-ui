@@ -37,7 +37,7 @@ const apiData: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Input.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -228,7 +228,7 @@ const iconSnippet = `<template>
 <template>
   <doc-section
     title="Input"
-    description="Area where the user can enter text or other data. Inputs allow users to provide information such as text, numbers, or selections, and are commonly used in forms and search fields."
+    description="Area where the user can enter text or other data. Inputs allow users to provide accent such as text, numbers, or selections, and are commonly used in forms and search fields."
   >
     <template #playground-view>
       <vk-input
@@ -246,8 +246,8 @@ const iconSnippet = `<template>
         :max="form.max"
         :step="form.step"
         :clearable="form.clearable"
-        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'neutral' })"
-        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'neutral' })"
+        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'secondary' })"
+        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'secondary' })"
       >
         <template
           v-if="iconsInForm.left"
@@ -279,7 +279,7 @@ const iconSnippet = `<template>
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -354,14 +354,14 @@ const iconSnippet = `<template>
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-input
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           :color="color.value"
           :label="color.label"
         />
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 

@@ -14,7 +14,7 @@ describe('Textarea component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.text-dark-700').exists()).toBe(true)
+        expect(wrapper.find('.vk-textarea__label').classes()).toContain('peer-focus:text-primary')
       })
 
       it('should be size md', () => {
@@ -22,7 +22,7 @@ describe('Textarea component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-highest').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -54,37 +54,37 @@ describe('Textarea component', () => {
           }
         })
 
-        expect(wrapper.find('.text-dark-700').exists()).toBe(true)
+        expect(wrapper.find('.vk-textarea__label').classes()).toContain('peer-focus:text-primary')
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkTextarea, {
           props: {
-            color: 'neutral'
+            color: 'secondary'
           }
         })
 
-        expect(wrapper.find('.text-dark-600').exists()).toBe(true)
+        expect(wrapper.find('.vk-textarea__label').classes()).toContain('peer-focus:text-secondary')
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkTextarea, {
           props: {
-            color: 'success'
+            color: 'positive'
           }
         })
 
-        expect(wrapper.find('.text-success-500').exists()).toBe(true)
+        expect(wrapper.find('.text-positive').exists()).toBe(true)
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkTextarea, {
           props: {
-            color: 'info'
+            color: 'accent'
           }
         })
 
-        expect(wrapper.find('.text-info-500').exists()).toBe(true)
+        expect(wrapper.find('.text-accent').exists()).toBe(true)
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -94,17 +94,17 @@ describe('Textarea component', () => {
           }
         })
 
-        expect(wrapper.find('.text-warning-500').exists()).toBe(true)
+        expect(wrapper.find('.text-warning').exists()).toBe(true)
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkTextarea, {
           props: {
-            color: 'error'
+            color: 'negative'
           }
         })
 
-        expect(wrapper.find('.text-error-500').exists()).toBe(true)
+        expect(wrapper.find('.text-negative').exists()).toBe(true)
       })
     })
 
@@ -210,7 +210,7 @@ describe('Textarea component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-inherit').exists()).toBe(true)
+        expect(wrapper.find('.bg-transparent').exists()).toBe(true)
       })
     })
   })

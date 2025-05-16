@@ -10,26 +10,23 @@ export default tv({
     ],
     badge: [
       'vk-badge__badge',
-      'text-white',
-      'shadow-sm',
-      'shadow-light-200',
       'overflow-hidden',
       'flex',
       'justify-center',
       'items-center',
       'align-middle',
-      'absolute',
-      'dark:shadow-dark-800'
+      'absolute'
     ]
   },
   variants: {
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {},
+      surface: {}
     },
     variant: {
       filled: {},
@@ -37,8 +34,7 @@ export default tv({
       outlined: {
         badge: [
           'border-2',
-          'border-light-50',
-          'dark:border-dark-800'
+          'border-outlined'
         ]
       },
       gradient: {
@@ -108,13 +104,6 @@ export default tv({
         ]
       }
     },
-    flat: {
-      true: {
-        badge: [
-          'shadow-none'
-        ]
-      }
-    },
     hidden: {
       true: {
         badge: [
@@ -133,37 +122,38 @@ export default tv({
       color: 'primary',
       class: {
         badge: [
-          'bg-primary-500'
+          'bg-primary',
+          'text-on-primary'
         ]
       }
     },
     {
       variant: ['filled', 'outlined'],
-      color: 'neutral',
+      color: 'secondary',
       class: {
         badge: [
-          'bg-light-200',
-          'text-dark-600',
-          'dark:bg-dark-700',
-          'dark:text-light-200'
+          'bg-secondary',
+          'text-on-secondary'
         ]
       }
     },
     {
       variant: ['filled', 'outlined'],
-      color: 'success',
+      color: 'positive',
       class: {
         badge: [
-          'bg-success-500'
+          'bg-positive',
+          'text-on-positive'
         ]
       }
     },
     {
       variant: ['filled', 'outlined'],
-      color: 'info',
+      color: 'accent',
       class: {
         badge: [
-          'bg-info-500'
+          'bg-accent',
+          'text-on-accent'
         ]
       }
     },
@@ -172,16 +162,38 @@ export default tv({
       color: 'warning',
       class: {
         badge: [
-          'bg-warning-500'
+          'bg-warning',
+          'text-on-warning'
         ]
       }
     },
     {
       variant: ['filled', 'outlined'],
-      color: 'error',
+      color: 'negative',
       class: {
         badge: [
-          'bg-error-500'
+          'bg-negative',
+          'text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'surface',
+      class: {
+        badge: [
+          'bg-surface-container-highest',
+          'text-on-surface'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'surface',
+      class: {
+        badge: [
+          'bg-surface-container-highest',
+          'text-on-surface-variant'
         ]
       }
     },
@@ -191,34 +203,38 @@ export default tv({
       color: 'primary',
       class: {
         badge: [
-          'bg-primary-500/[.7]'
+          'bg-primary-container',
+          'text-on-primary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         badge: [
-          'bg-neutral-500/[.7]'
+          'bg-secondary-container',
+          'text-on-secondary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       class: {
         badge: [
-          'bg-success-500/[.7]'
+          'bg-positive-container',
+          'text-on-positive-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       class: {
         badge: [
-          'bg-info-500/[.7]'
+          'bg-accent-container',
+          'text-on-accent-container'
         ]
       }
     },
@@ -227,16 +243,28 @@ export default tv({
       color: 'warning',
       class: {
         badge: [
-          'bg-warning-500/[.7]'
+          'bg-warning-container',
+          'text-on-warning-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       class: {
         badge: [
-          'bg-error-500/[.3]'
+          'bg-negative-container',
+          'text-on-negative-container'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      class: {
+        badge: [
+          'bg-surface-container-highest/[.8]',
+          'text-on-surface-variant'
         ]
       }
     },
@@ -246,40 +274,42 @@ export default tv({
       color: 'primary',
       class: {
         badge: [
-          'from-primary-500',
-          'to-primary-900'
+          'from-primary-gradient-start',
+          'to-primary-gradient-end',
+          'text-on-primary'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         badge: [
-          'from-light-50',
-          'to-light-400',
-          'text-dark-600',
-          'dark:to-dark-950'
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end',
+          'text-on-secondary'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       class: {
         badge: [
-          'from-success-500',
-          'to-success-900'
+          'from-positive-gradient-start',
+          'to-positive-gradient-end',
+          'text-on-positive'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       class: {
         badge: [
-          'from-info-500',
-          'to-info-900'
+          'from-accent-gradient-start',
+          'to-accent-gradient-end',
+          'text-on-accent'
         ]
       }
     },
@@ -288,18 +318,31 @@ export default tv({
       color: 'warning',
       class: {
         badge: [
-          'from-warning-500',
-          'to-warning-900'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end',
+          'text-on-warning'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       class: {
         badge: [
-          'from-error-500',
-          'to-error-900'
+          'from-negative-gradient-start',
+          'to-negative-gradient-end',
+          'text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'surface',
+      class: {
+        badge: [
+          'from-surface-container',
+          'to-surface-container-highest',
+          'text-on-surface'
         ]
       }
     },

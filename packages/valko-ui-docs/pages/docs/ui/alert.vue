@@ -8,8 +8,7 @@ const form = ref<AlertProps>({
   variant: 'filled',
   size: 'md',
   title: 'Title',
-  shape: 'soft',
-  flat: false
+  shape: 'soft'
 })
 
 const iconsForm = ref<Record<string, boolean>>({})
@@ -20,7 +19,7 @@ const alertProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Alert.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -70,14 +69,6 @@ const alertProps: TableItem[] = [
     description: 'The icon of the Alert.',
     values: 'string | null',
     default: ''
-  },
-  {
-    key: 'flatProp',
-    prop: 'flat',
-    required: false,
-    description: 'Displays a shadow for the Alert.',
-    values: 'true, false',
-    default: 'false'
   }
 ]
 
@@ -128,7 +119,7 @@ const iconSnippet = `
 <template>
   <doc-section
     title="Alert"
-    description="Visual notification that informs the user about an important state or action. Alerts are commonly used to communicate success messages, warnings, or errors to the user."
+    description="Visual notification that accent the user about an important state or action. Alerts are commonly used to communicate positive messages, warnings, or negative to the user."
   >
     <template #playground-view>
       <transition
@@ -147,11 +138,10 @@ const iconSnippet = `
           :shape="form.shape"
           :color="form.color"
           :closable="form.closable"
-          :flat="form.flat"
           :icon="iconsForm.noIcon ? null : iconsForm.customIcon ? 'brand-vue' : ''"
           @close="closeAlert()"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus negative Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
         </vk-alert>
       </transition>
     </template>
@@ -161,7 +151,7 @@ const iconSnippet = `
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -198,10 +188,6 @@ const iconSnippet = `
         v-model="iconsForm.noIcon"
         label="Without Icon"
       />
-      <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
-      />
     </template>
 
     <template #examples>
@@ -210,16 +196,16 @@ const iconSnippet = `
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-alert
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           :color="color.value"
           :title="color.label"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus negative Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
         </vk-alert>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), hasSlot: true })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), hasSlot: true })" />
         </template>
       </example-section>
 
@@ -233,7 +219,7 @@ const iconSnippet = `
           :variant="variant.value"
           :title="variant.label"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus negative Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
         </vk-alert>
 
         <template #code>
@@ -251,7 +237,7 @@ const iconSnippet = `
           :shape="shape.value"
           :title="shape.label"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus negative Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
         </vk-alert>
 
         <template #code>
@@ -269,7 +255,7 @@ const iconSnippet = `
           :size="size.value"
           :title="size.label"
         >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus error? Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus negative Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
         </vk-alert>
 
         <template #code>
@@ -283,11 +269,11 @@ const iconSnippet = `
       >
         <vk-alert
           title="Default Icon"
-          color="success"
+          color="positive"
         />
         <vk-alert
           title="Custom Icon"
-          color="info"
+          color="accent"
           icon="home"
         />
         <vk-alert
@@ -298,19 +284,6 @@ const iconSnippet = `
 
         <template #code>
           <code-block :code="iconSnippet" />
-        </template>
-      </example-section>
-
-      <example-section title="Flat">
-        <vk-alert
-          title="Flat"
-          flat
-        >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem aut recusandae obcaecati qui neque? Magni aperiam odio aliquid ratione. Aliquam atque voluptates velit praesentium a sequi unde maiores tempora fugit!
-        </vk-alert>
-
-        <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', { values: [true], hasSlot: true })" />
         </template>
       </example-section>
 

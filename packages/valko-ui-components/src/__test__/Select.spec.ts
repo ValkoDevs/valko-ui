@@ -28,7 +28,7 @@ describe('Select component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-primary-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-primary')
       })
 
       it('should be size md', () => {
@@ -67,46 +67,46 @@ describe('Select component', () => {
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-primary-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-primary')
       })
 
-      it('should be color neutral when props.color is neutral', async () => {
+      it('should be color secondary when props.color is secondary', async () => {
         wrapper = mount(VkSelect, {
           props: {
             options,
-            color: 'neutral'
+            color: 'secondary'
           }
         })
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-light-200')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-secondary')
       })
 
-      it('should be color success when props.color is success', async () => {
+      it('should be color positive when props.color is positive', async () => {
         wrapper = mount(VkSelect, {
           props: {
             options,
-            color: 'success'
+            color: 'positive'
           }
         })
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-success-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-positive')
       })
 
-      it('should be color info when props.color is info', async () => {
+      it('should be color accent when props.color is accent', async () => {
         wrapper = mount(VkSelect, {
           props: {
             options,
-            color: 'info'
+            color: 'accent'
           }
         })
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-info-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-accent')
       })
 
       it('should be color warning when props.color is warning', async () => {
@@ -119,20 +119,20 @@ describe('Select component', () => {
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-warning-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-warning')
       })
 
-      it('should be color error when props.color is error', async () => {
+      it('should be color negative when props.color is negative', async () => {
         wrapper = mount(VkSelect, {
           props: {
             options,
-            color: 'error'
+            color: 'negative'
           }
         })
 
         wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
-        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-error-500')
+        expect(wrapper.find('.vk-select__item').classes()).toContain('data-[variant=filled]:data-[selected=true]:bg-negative')
       })
     })
 

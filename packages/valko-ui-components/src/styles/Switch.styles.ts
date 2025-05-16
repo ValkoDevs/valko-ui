@@ -19,8 +19,7 @@ export default tv({
       'duration-200',
       'ease-in-out',
       'relative',
-      'shadow-sm',
-      'shadow-dark-800'
+      'border-outlined'
     ],
     thumb: [
       'inline-block',
@@ -101,47 +100,39 @@ export default tv({
     variant: {
       filled: {
         switch: [
-          'bg-light-300',
-          'border-light-300',
-          'dark:bg-dark-700',
-          'dark:border-dark-700'
+          'bg-surface-container-highest'
         ],
         thumb: [
-          'bg-light-100',
-          'dark:bg-light-200'
+          'bg-outlined',
+          'scale-[.9]'
         ]
       },
       outlined: {
         switch: [
-          'border-light-400',
-          'dark:border-dark-600'
+          'border-outlined'
         ],
         thumb: [
           'scale-[.9]',
-          'bg-light-400',
-          'dark:bg-dark-600'
+          'bg-outlined'
         ]
       },
       ghost: {
         switch: [
           'border-transparent',
-          'bg-light-400/[.15]',
-          'shadow-none',
-          'dark:bg-dark-700/[.15]'
+          'bg-surface-container-highest/[.5]'
         ],
         thumb: [
-          'bg-light-400/[.5]',
-          'dark:bg-dark-950/[.5]'
+          'bg-outlined/[.5]'
         ]
       }
     },
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     },
     shape: {
       rounded: {
@@ -154,10 +145,10 @@ export default tv({
       },
       soft: {
         switch: [
-          'rounded'
+          'rounded-xs'
         ],
         thumb: [
-          'rounded'
+          'rounded-xs'
         ]
       },
       square: {
@@ -173,12 +164,11 @@ export default tv({
       true: {
         switch: [
           'pointer-events-none',
-          'bg-gray-500/[.3]',
-          'dark:bg-gray-500/[.3]'
+          'bg-disabled/[.3]',
+          'border-disabled-container'
         ],
         thumb: [
-          'bg-gray-500/[.2]',
-          'dark:bg-gray-500/[.2]'
+          'bg-disabled/[.2]'
         ]
       }
     },
@@ -196,13 +186,6 @@ export default tv({
           'mr-2'
         ]
       }
-    },
-    flat: {
-      true: {
-        switch: [
-          'shadow-none'
-        ]
-      }
     }
   },
   compoundVariants: [
@@ -213,53 +196,53 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-primary-500',
-          'data-[active=true]:border-primary-500',
-          'dark:data-[active=true]:bg-primary-500',
-          'dark:data-[active=true]:border-primary-500'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'neutral',
-      disabled: false,
-      class: {
-        switch: [
-          'data-[active=true]:bg-dark-950',
-          'data-[active=true]:border-dark-950',
-          'dark:data-[active=true]:bg-light-200',
-          'dark:data-[active=true]:border-light-200'
+          'data-[active=true]:bg-primary',
+          'data-[active=true]:border-primary'
         ],
         thumb: [
-          'bg-light-100',
-          'dark:bg-dark-800'
+          'data-[selected=true]:bg-on-primary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'secondary',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-success-500',
-          'data-[active=true]:border-success-500',
-          'dark:data-[active=true]:bg-success-500',
-          'dark:data-[active=true]:border-success-500'
+          'data-[active=true]:bg-secondary',
+          'data-[active=true]:border-secondary'
+        ],
+        thumb: [
+          'data-[selected=true]:bg-on-secondary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'positive',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-info-500',
-          'data-[active=true]:border-info-500',
-          'dark:data-[active=true]:bg-info-500',
-          'dark:data-[active=true]:border-info-500'
+          'data-[active=true]:bg-positive',
+          'data-[active=true]:border-positive'
+        ],
+        thumb: [
+          'data-[selected=true]:bg-on-positive'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'accent',
+      disabled: false,
+      class: {
+        switch: [
+          'data-[active=true]:bg-accent',
+          'data-[active=true]:border-accent'
+        ],
+        thumb: [
+          'data-[selected=true]:bg-on-accent'
         ]
       }
     },
@@ -269,23 +252,25 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-warning-500',
-          'data-[active=true]:border-warning-500',
-          'dark:data-[active=true]:bg-warning-500',
-          'dark:data-[active=true]:border-warning-500'
+          'data-[active=true]:bg-warning',
+          'data-[active=true]:border-warning'
+        ],
+        thumb: [
+          'data-[selected=true]:bg-on-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-error-500',
-          'data-[active=true]:border-error-500',
-          'dark:data-[active=true]:bg-error-500',
-          'dark:data-[active=true]:border-error-500'
+          'data-[active=true]:bg-negative',
+          'data-[active=true]:border-negative'
+        ],
+        thumb: [
+          'data-[selected=true]:bg-on-negative'
         ]
       }
     },
@@ -296,57 +281,49 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-primary-500',
-          'dark:data-[active=true]:border-primary-500'
+          'data-[active=true]:border-primary'
         ],
         thumb: [
-          'data-[selected=true]:bg-primary-500',
-          'dark:data-[selected=true]:bg-primary-500'
+          'data-[selected=true]:bg-primary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-dark-900',
-          'dark:data-[active=true]:border-light-200'
+          'data-[active=true]:border-secondary'
         ],
         thumb: [
-          'data-[selected=true]:bg-dark-900',
-          'dark:data-[selected=true]:bg-light-200'
+          'data-[selected=true]:bg-secondary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-success-500',
-          'dark:data-[active=true]:border-success-500'
+          'data-[active=true]:border-positive'
         ],
         thumb: [
-          'data-[selected=true]:bg-success-500',
-          'dark:data-[selected=true]:bg-success-500'
+          'data-[selected=true]:bg-positive'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-info-500',
-          'dark:data-[active=true]:border-info-500'
+          'data-[active=true]:border-accent'
         ],
         thumb: [
-          'data-[selected=true]:bg-info-500',
-          'dark:data-[selected=true]:bg-info-500'
+          'data-[selected=true]:bg-accent'
         ]
       }
     },
@@ -356,27 +333,23 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-warning-500',
-          'dark:data-[active=true]:border-warning-500'
+          'data-[active=true]:border-warning'
         ],
         thumb: [
-          'data-[selected=true]:bg-warning-500',
-          'dark:data-[selected=true]:bg-warning-500'
+          'data-[selected=true]:bg-warning'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:border-error-500',
-          'dark:data-[active=true]:border-error-500'
+          'data-[active=true]:border-negative'
         ],
         thumb: [
-          'data-[selected=true]:bg-error-500',
-          'dark:data-[selected=true]:bg-error-500'
+          'data-[selected=true]:bg-negative'
         ]
       }
     },
@@ -387,57 +360,49 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-primary-500/[.15]',
-          'dark:data-[active=true]:bg-primary-500/[.15]'
+          'data-[active=true]:bg-primary-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-primary-500/[.5]',
-          'dark:data-[selected=true]:bg-primary-500/[.5]'
+          'data-[selected=true]:bg-on-primary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-dark-950/[.4]',
-          'dark:data-[active=true]:bg-light-100/[.4]'
+          'data-[active=true]:bg-secondary-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-dark-950/[.5]',
-          'dark:data-[selected=true]:bg-light-100/[.5]'
+          'data-[selected=true]:bg-on-secondary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-success-500/[.15]',
-          'dark:data-[active=true]:bg-success-500/[.15]'
+          'data-[active=true]:bg-positive-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-success-500/[.5]',
-          'dark:data-[selected=true]:bg-success-500/[.5]'
+          'data-[selected=true]:bg-on-positive-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-info-500/[.15]',
-          'dark:data-[active=true]:bg-info-500/[.15]'
+          'data-[active=true]:bg-accent-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-info-500/[.5]',
-          'dark:data-[selected=true]:bg-info-500/[.5]'
+          'data-[selected=true]:bg-on-accent-container'
         ]
       }
     },
@@ -447,27 +412,23 @@ export default tv({
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-warning-500/[.15]',
-          'dark:data-[active=true]:bg-warning-500/[.15]'
+          'data-[active=true]:bg-warning-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-warning-500/[.5]',
-          'dark:data-[selected=true]:bg-warning-500/[.5]'
+          'data-[selected=true]:bg-on-warning-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         switch: [
-          'data-[active=true]:bg-error-500/[.15]',
-          'dark:data-[active=true]:bg-error-500/[.15]'
+          'data-[active=true]:bg-negative-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-error-500/[.5]',
-          'dark:data-[selected=true]:bg-error-500/[.5]'
+          'data-[selected=true]:bg-on-negative-container'
         ]
       }
     }

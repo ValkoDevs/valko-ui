@@ -9,19 +9,6 @@ export default tv({
       'flex-col',
       'gap-1'
     ],
-    checkbox: [
-      'vk-checkbox__checkbox',
-      'border-2',
-      'border-light-400',
-      'shadow-lg',
-      'shadow-light-300',
-      'relative',
-      'flex',
-      'items-center',
-      'justify-center',
-      'dark:border-dark-600',
-      'dark:shadow-dark-950'
-    ],
     checkboxContainer: [
       'vk-checkbox__container',
       'w-fit',
@@ -31,25 +18,38 @@ export default tv({
       'gap-1',
       'cursor-pointer'
     ],
+    stateLayer: [
+      'hover:bg-state-hover',
+      'focus:bg-state-focus',
+      'active:bg-state-active'
+    ],
+    checkbox: [
+      'vk-checkbox__checkbox',
+      'size-full',
+      'border-2',
+      'border-on-surface-variant',
+      'relative',
+      'flex',
+      'items-center',
+      'justify-center'
+    ],
     input: [
       'hidden'
     ],
     helpertext: [
       'vk-checkbox__helpertext',
       'break-normal',
-      'text-gray-500'
+      'text-on-surface-variant'
     ],
     label: [
       'cursor-pointer'
     ],
-    icon: [
-      'text-light-50'
-    ]
+    icon: []
   },
   variants: {
     size: {
       xs: {
-        checkbox: [
+        stateLayer: [
           'w-3.5',
           'h-3.5'
         ],
@@ -64,7 +64,7 @@ export default tv({
         ]
       },
       sm: {
-        checkbox: [
+        stateLayer: [
           'w-4',
           'h-4'
         ],
@@ -79,7 +79,7 @@ export default tv({
         ]
       },
       md: {
-        checkbox: [
+        stateLayer: [
           'w-5',
           'h-5'
         ],
@@ -94,7 +94,7 @@ export default tv({
         ]
       },
       lg: {
-        checkbox: [
+        stateLayer: [
           'w-6',
           'h-6'
         ],
@@ -114,51 +114,47 @@ export default tv({
       outlined: {},
       ghost: {
         checkbox: [
-          'shadow-none',
           'border-0',
-          'bg-light-400/[.15]',
-          'dark:bg-dark-600/[.15]'
+          'bg-on-surface-variant/[.15]'
         ]
       }
     },
     color: {
       primary: {},
-      neutral: {
+      secondary: {},
+      positive: {
         helpertext: [
-          'text-dark-600',
-          'dark:text-light-200'
+          'text-positive'
         ]
       },
-      success: {
+      accent: {
         helpertext: [
-          'text-success-500'
-        ]
-      },
-      info: {
-        helpertext: [
-          'text-info-500'
+          'text-accent'
         ]
       },
       warning: {
         helpertext: [
-          'text-warning-500'
+          'text-warning'
         ]
       },
-      error: {
+      negative: {
         helpertext: [
-          'text-error-500'
+          'text-negative'
         ]
       }
     },
     disabled: {
       true: {
         checkbox: [
-          'bg-gray-600',
-          'text-gray-600',
+          'bg-disabled',
+          'text-on-disabled',
           'opacity-50',
           'cursor-not-allowed',
-          'data-[checked=true]:border-gray-600',
-          'data-[checked=true]:bg-gray-600'
+          'data-[checked=true]:border-disabled',
+          'data-[checked=true]:bg-disabled'
+        ],
+        label: [
+          'cursor-not-allowed'
         ]
       }
     },
@@ -180,25 +176,27 @@ export default tv({
     },
     shape: {
       rounded: {
+        stateLayer: [
+          'rounded-full'
+        ],
         checkbox: [
           'rounded-full'
         ]
       },
       soft: {
+        stateLayer: [
+          'rounded-sm'
+        ],
         checkbox: [
-          'rounded'
+          'rounded-sm'
         ]
       },
       square: {
+        stateLayer: [
+          'rounded-none'
+        ],
         checkbox: [
           'rounded-none'
-        ]
-      }
-    },
-    flat: {
-      true: {
-        checkbox: [
-          'shadow-none'
         ]
       }
     }
@@ -211,69 +209,61 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-primary-500',
-          'data-[checked=true]:border-primary-500',
-          'data-[indeterminate=true]:border-primary-500',
-          'data-[indeterminate=true]:bg-primary-500',
-          'dark:data-[checked=true]:bg-primary-500',
-          'dark:data-[checked=true]:border-primary-500',
-          'dark:data-[indeterminate=true]:border-primary-500',
-          'dark:data-[indeterminate=true]:bg-primary-500'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'neutral',
-      disabled: false,
-      class: {
-        checkbox: [
-          'data-[checked=true]:bg-dark-900',
-          'data-[checked=true]:border-dark-900',
-          'data-[indeterminate=true]:border-dark-900',
-          'data-[indeterminate=true]:bg-dark-900',
-          'dark:data-[checked=true]:bg-light-200',
-          'dark:data-[checked=true]:border-light-200',
-          'dark:data-[indeterminate=true]:border-light-200',
-          'dark:data-[indeterminate=true]:bg-light-200'
+          'data-[checked=true]:bg-primary',
+          'data-[checked=true]:border-primary',
+          'data-[indeterminate=true]:border-primary',
+          'data-[indeterminate=true]:bg-primary'
         ],
         icon: [
-          'text-light-50',
-          'dark:text-dark-800'
+          'text-on-primary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'secondary',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-success-500',
-          'data-[checked=true]:border-success-500',
-          'data-[indeterminate=true]:border-success-500',
-          'data-[indeterminate=true]:bg-success-500',
-          'dark:data-[checked=true]:bg-success-500',
-          'dark:data-[checked=true]:border-success-500',
-          'dark:data-[indeterminate=true]:border-success-500',
-          'dark:data-[indeterminate=true]:bg-success-500'
+          'data-[checked=true]:bg-secondary',
+          'data-[checked=true]:border-secondary',
+          'data-[indeterminate=true]:border-secondary',
+          'data-[indeterminate=true]:bg-secondary'
+        ],
+        icon: [
+          'text-on-secondary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'positive',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-info-500',
-          'data-[checked=true]:border-info-500',
-          'data-[indeterminate=true]:border-info-500',
-          'data-[indeterminate=true]:bg-info-500',
-          'dark:data-[checked=true]:bg-info-500',
-          'dark:data-[checked=true]:border-info-500',
-          'dark:data-[indeterminate=true]:border-info-500',
-          'dark:data-[indeterminate=true]:bg-info-500'
+          'data-[checked=true]:bg-positive',
+          'data-[checked=true]:border-positive',
+          'data-[indeterminate=true]:border-positive',
+          'data-[indeterminate=true]:bg-positive'
+        ],
+        icon: [
+          'text-on-positive'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'accent',
+      disabled: false,
+      class: {
+        checkbox: [
+          'data-[checked=true]:bg-accent',
+          'data-[checked=true]:border-accent',
+          'data-[indeterminate=true]:border-accent',
+          'data-[indeterminate=true]:bg-accent'
+        ],
+        icon: [
+          'text-on-accent'
         ]
       }
     },
@@ -283,31 +273,29 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-warning-500',
-          'data-[checked=true]:border-warning-500',
-          'data-[indeterminate=true]:border-warning-500',
-          'data-[indeterminate=true]:bg-warning-500',
-          'dark:data-[checked=true]:bg-warning-500',
-          'dark:data-[checked=true]:border-warning-500',
-          'dark:data-[indeterminate=true]:border-warning-500',
-          'dark:data-[indeterminate=true]:bg-warning-500'
+          'data-[checked=true]:bg-warning',
+          'data-[checked=true]:border-warning',
+          'data-[indeterminate=true]:border-warning',
+          'data-[indeterminate=true]:bg-warning'
+        ],
+        icon: [
+          'text-on-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-error-500',
-          'data-[checked=true]:border-error-500',
-          'data-[indeterminate=true]:border-error-500',
-          'data-[indeterminate=true]:bg-error-500',
-          'dark:data-[checked=true]:bg-error-500',
-          'dark:data-[checked=true]:border-error-500',
-          'dark:data-[indeterminate=true]:border-error-500',
-          'dark:data-[indeterminate=true]:bg-error-500'
+          'data-[checked=true]:bg-negative',
+          'data-[checked=true]:border-negative',
+          'data-[indeterminate=true]:border-negative',
+          'data-[indeterminate=true]:bg-negative'
+        ],
+        icon: [
+          'text-on-negative'
         ]
       }
     },
@@ -318,65 +306,53 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:border-primary-500',
-          'data-[indeterminate=true]:border-primary-500',
-          'dark:data-[checked=true]:border-primary-500',
-          'dark:data-[indeterminate=true]:border-primary-500'
+          'data-[checked=true]:border-primary',
+          'data-[indeterminate=true]:border-primary'
         ],
         icon: [
-          'text-primary-500',
-          'dark:text-primary-500'
+          'text-primary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:border-dark-900',
-          'data-[indeterminate=true]:border-dark-900',
-          'dark:data-[checked=true]:border-light-200',
-          'dark:data-[indeterminate=true]:border-light-200'
+          'data-[checked=true]:border-secondary',
+          'data-[indeterminate=true]:border-secondary'
         ],
         icon: [
-          'text-dark-600',
-          'dark:text-light-200'
+          'text-secondary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:border-success-500',
-          'data-[indeterminate=true]:border-success-500',
-          'dark:data-[checked=true]:border-success-500',
-          'dark:data-[indeterminate=true]:border-success-500'
+          'data-[checked=true]:border-positive',
+          'data-[indeterminate=true]:border-positive'
         ],
         icon: [
-          'text-success-500',
-          'dark:text-success-500'
+          'text-positive'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:border-info-500',
-          'data-[indeterminate=true]:border-info-500',
-          'dark:data-[checked=true]:border-info-500',
-          'dark:data-[indeterminate=true]:border-info-500'
+          'data-[checked=true]:border-accent',
+          'data-[indeterminate=true]:border-accent'
         ],
         icon: [
-          'text-info-500',
-          'dark:text-info-500'
+          'text-accent'
         ]
       }
     },
@@ -386,31 +362,25 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:border-warning-500',
-          'data-[indeterminate=true]:border-warning-500',
-          'dark:data-[checked=true]:border-warning-500',
-          'dark:data-[indeterminate=true]:border-warning-500'
+          'data-[checked=true]:border-warning',
+          'data-[indeterminate=true]:border-warning'
         ],
         icon: [
-          'text-warning-500',
-          'dark:text-warning-500'
+          'text-warning'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:border-error-500',
-          'data-[indeterminate=true]:border-error-500',
-          'dark:data-[checked=true]:border-error-500',
-          'dark:data-[indeterminate=true]:border-error-500'
+          'data-[checked=true]:border-negative',
+          'data-[indeterminate=true]:border-negative'
         ],
         icon: [
-          'text-error-500',
-          'dark:text-error-500'
+          'text-negative'
         ]
       }
     },
@@ -421,62 +391,53 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-primary-500/[.15]',
-          'data-[indeterminate=true]:bg-primary-500/[.15]',
-          'dark:data-[checked=true]:bg-primary-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-primary-500/[.15]'
+          'data-[checked=true]:bg-primary-container',
+          'data-[indeterminate=true]:bg-primary-container'
         ],
         icon: [
-          'text-primary-500'
+          'text-on-primary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-light-300/[.15]',
-          'data-[indeterminate=true]:bg-light-300/[.15]',
-          'dark:data-[checked=true]:bg-dark-800/[.15]',
-          'dark:data-[indeterminate=true]:bg-dark-800/[.15]'
+          'data-[checked=true]:bg-secondary-container',
+          'data-[indeterminate=true]:bg-secondary-container'
         ],
         icon: [
-          'text-dark-600',
-          'dark:text-light-200'
+          'text-on-secondary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-success-500/[.15]',
-          'data-[indeterminate=true]:bg-success-500/[.15]',
-          'dark:data-[checked=true]:bg-success-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-success-500/[.15]'
+          'data-[checked=true]:bg-positive-container',
+          'data-[indeterminate=true]:bg-positive-container'
         ],
         icon: [
-          'text-success-500'
+          'text-on-positive-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-info-500/[.15]',
-          'data-[indeterminate=true]:bg-info-500/[.15]',
-          'dark:data-[checked=true]:bg-info-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-info-500/[.15]'
+          'data-[checked=true]:bg-accent-container',
+          'data-[indeterminate=true]:bg-accent-container'
         ],
         icon: [
-          'text-info-500'
+          'text-on-accent-container'
         ]
       }
     },
@@ -486,29 +447,25 @@ export default tv({
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-warning-500/[.15]',
-          'data-[indeterminate=true]:bg-warning-500/[.15]',
-          'dark:data-[checked=true]:bg-warning-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-warning-500/[.15]'
+          'data-[checked=true]:bg-warning-container',
+          'data-[indeterminate=true]:bg-warning-container'
         ],
         icon: [
-          'text-warning-500'
+          'text-on-warning-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         checkbox: [
-          'data-[checked=true]:bg-error-500/[.15]',
-          'data-[indeterminate=true]:bg-error-500/[.15]',
-          'dark:data-[checked=true]:bg-error-500/[.15]',
-          'dark:data-[indeterminate=true]:bg-error-500/[.15]'
+          'data-[checked=true]:bg-negative-container',
+          'data-[indeterminate=true]:bg-negative-container'
         ],
         icon: [
-          'text-error-500'
+          'text-on-negative-container'
         ]
       }
     }

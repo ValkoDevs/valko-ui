@@ -1,8 +1,7 @@
-import type { Colors, VariantsAlt, Shapes, Sizes } from './common'
+import type { ColorsWithSurface, VariantsAlt, Shapes, Sizes } from './common'
 
-export interface AlertProps extends Colors, VariantsAlt, Shapes, Sizes {
+export interface AlertProps extends ColorsWithSurface, VariantsAlt, Shapes, Sizes {
   icon?: string | null;
   title?: string;
   closable?: boolean;
-  flat?: boolean;
 }

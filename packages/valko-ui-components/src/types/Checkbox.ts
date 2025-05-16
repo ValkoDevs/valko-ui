@@ -5,7 +5,6 @@ export interface CheckboxProps extends DefaultComponent {
   label?: string;
   modelValue?: boolean | null;
   disabled?: boolean;
-  flat?: boolean;
   labelPosition?: LabelPosition;
   readonly?: boolean;
 }

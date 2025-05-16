@@ -60,7 +60,7 @@ const toggleRating = (selectedRating: number) => {
     </div>
 
     <vk-divider
-      color="neutral"
+      color="secondary"
       size="xs"
       direction="vertical"
     />
@@ -101,7 +101,7 @@ const toggleRating = (selectedRating: number) => {
     </div>
 
     <vk-divider
-      color="neutral"
+      color="secondary"
       size="xs"
       direction="vertical"
     />
@@ -124,7 +124,7 @@ const toggleRating = (selectedRating: number) => {
     </div>
 
     <vk-divider
-      color="neutral"
+      color="secondary"
       size="xs"
       direction="vertical"
     />
@@ -152,13 +152,13 @@ const toggleRating = (selectedRating: number) => {
     </div>
 
     <vk-divider
-      color="neutral"
+      color="secondary"
       size="xs"
       direction="vertical"
     />
 
     <vk-button
-      color="neutral"
+      color="secondary"
       variant="outlined"
       class="text-xs"
     >
@@ -192,7 +192,7 @@ const toggleRating = (selectedRating: number) => {
         </div>
 
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
           direction="vertical"
         />
@@ -233,7 +233,7 @@ const toggleRating = (selectedRating: number) => {
         </div>
 
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
           direction="vertical"
         />
@@ -256,7 +256,7 @@ const toggleRating = (selectedRating: number) => {
         </div>
 
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
           direction="vertical"
         />
@@ -284,13 +284,13 @@ const toggleRating = (selectedRating: number) => {
         </div>
 
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
           direction="vertical"
         />
 
         <vk-button
-          color="neutral"
+          color="secondary"
           variant="outlined"
           class="text-xs"
         >

@@ -34,8 +34,7 @@ export default tv({
       'w-full',
       'h-full',
       'p-2',
-      'bg-white',
-      'shadow-lg',
+      'bg-surface-container-high',
       'text-left',
       'overflow-y-auto',
       'absolute',
@@ -43,8 +42,7 @@ export default tv({
       'data-[title=true]:grid-rows-[auto_1fr]',
       'data-[title=false]:grid-cols-[1fr_auto]',
       'gap-2',
-      'group',
-      'dark:bg-dark-800'
+      'group'
     ],
     panelChild: [
       'vk-drawer__panel-child',
@@ -73,8 +71,7 @@ export default tv({
       'font-medium'
     ],
     closeButton: [
-      'text-black',
-      'dark:text-white',
+      'text-on-surface',
       'justify-self-end'
     ],
     closeIcon: [
@@ -99,8 +96,7 @@ export default tv({
       },
       opaque: {
         backdrop: [
-          'bg-light-400/80',
-          'dark:bg-dark-600/80'
+          'bg-state-scrim'
         ]
       },
       transparent: {
@@ -136,13 +132,6 @@ export default tv({
       right: {
         panel: [
           'right-0'
-        ]
-      }
-    },
-    flat: {
-      true: {
-        panel: [
-          'shadow-none'
         ]
       }
     }
@@ -300,6 +289,15 @@ export default tv({
       class: {
         panel: [
           'rounded-t-2xl'
+        ]
+      }
+    },
+    // sizes & shadow
+    {
+      size: ['xs', 'sm', 'md', 'lg'],
+      class: {
+        panel: [
+          'shadow-el3'
         ]
       }
     }
