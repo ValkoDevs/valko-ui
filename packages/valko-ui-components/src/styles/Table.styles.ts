@@ -21,8 +21,7 @@ export default tv({
     ],
     tr: [
       'vk-table__tr',
-      'hover:bg-light-300',
-      'dark:hover:bg-dark-700',
+      'hover:bg-surface-container-high',
       'data-[row-events=true]:cursor-pointer'
     ],
     td: [
@@ -46,36 +45,30 @@ export default tv({
       filled: {
         thead: [
           'border-b',
-          'dark:border-dark-800',
-          'bg-light-300',
-          'dark:bg-dark-700'
+          'border-outlined',
+          'bg-surface-container-highest'
         ],
         td: [
           'border-t',
-          'border-light-300',
-          'dark:border-dark-900'
+          'border-outlined'
         ],
         tr: [
-          'bg-light-100/[.5]',
-          'dark:bg-dark-800'
+          'bg-surface-container-low'
         ]
       },
       outlined: {
         thead: [
           'border-b',
-          'border-dark-900',
-          'dark:border-light-300'
+          'border-outlined'
         ],
         tr: [
           'border-b',
-          'border-dark-600/[.1]',
-          'dark:border-light-300/[.1]'
+          'border-outlined'
         ]
       },
       ghost: {
         thead: [
-          'bg-light-300/[.60]',
-          'dark:bg-dark-700/[.30]'
+          'bg-surface-container-highest/[.5]'
         ]
       }
     },
@@ -120,11 +113,11 @@ export default tv({
     },
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     }
   },
   compoundVariants: [
@@ -134,28 +127,16 @@ export default tv({
       striped: true,
       class: {
         tr: [
-          'even:bg-light-200/[.8]',
-          'dark:even:bg-dark-800/[.5]'
+          'even:bg-surface-container'
         ]
       }
     },
     {
-      variant: 'outlined',
+      variant: ['outlined', 'ghost'],
       striped: true,
       class: {
         tr: [
-          'even:bg-light-200/[.5]',
-          'dark:even:bg-dark-800/[.5]'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      striped: true,
-      class: {
-        tr: [
-          'even:bg-light-200/[.5]',
-          'dark:even:bg-dark-800/[.5]'
+          'even:bg-surface-container/[.5]'
         ]
       }
     },
@@ -175,38 +156,34 @@ export default tv({
       color: 'primary',
       class: {
         tr: [
-          'data-[selected=true]:bg-primary-500/[.3]',
-          'dark:data-[selected=true]:bg-primary-500/[.3]'
+          'data-[selected=true]:bg-primary-container'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         tr: [
-          'data-[selected=true]:bg-dark-600/[.3]',
-          'dark:data-[selected=true]:bg-light-100/[.3]'
+          'data-[selected=true]:bg-secondary-container'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       class: {
         tr: [
-          'data-[selected=true]:bg-success-500/[.3]',
-          'dark:data-[selected=true]:bg-success-500/[.3]'
+          'data-[selected=true]:bg-positive-container'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       class: {
         tr: [
-          'data-[selected=true]:bg-info-500/[.3]',
-          'dark:data-[selected=true]:bg-info-500/[.3]'
+          'data-[selected=true]:bg-accent-container'
         ]
       }
     },
@@ -215,18 +192,16 @@ export default tv({
       color: 'warning',
       class: {
         tr: [
-          'data-[selected=true]:bg-warning-500/[.3]',
-          'dark:data-[selected=true]:bg-warning-500/[.3]'
+          'data-[selected=true]:bg-warning-container'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       class: {
         tr: [
-          'data-[selected=true]:bg-error-500/[.3]',
-          'dark:data-[selected=true]:bg-error-500/[.3]'
+          'data-[selected=true]:bg-negative-container'
         ]
       }
     },
@@ -235,38 +210,34 @@ export default tv({
       color: 'primary',
       class: {
         tr: [
-          'data-[selected=true]:bg-primary-500/[.1]',
-          'dark:data-[selected=true]:bg-primary-500/[.1]'
+          'data-[selected=true]:bg-primary-container'
         ]
       }
     },
     {
       variant: ['ghost', 'outlined'],
-      color: 'neutral',
+      color: 'secondary',
       class: {
         tr: [
-          'data-[selected=true]:bg-dark-600/[.3]',
-          'dark:data-[selected=true]:bg-light-100/[.3]'
+          'data-[selected=true]:bg-secondary-container'
         ]
       }
     },
     {
       variant: ['ghost', 'outlined'],
-      color: 'success',
+      color: 'positive',
       class: {
         tr: [
-          'data-[selected=true]:bg-success-500/[.1]',
-          'dark:data-[selected=true]:bg-success-500/[.1]'
+          'data-[selected=true]:bg-positive-container'
         ]
       }
     },
     {
       variant: ['ghost', 'outlined'],
-      color: 'info',
+      color: 'accent',
       class: {
         tr: [
-          'data-[selected=true]:bg-info-500/[.1]',
-          'dark:data-[selected=true]:bg-info-500/[.1]'
+          'data-[selected=true]:bg-accent-container'
         ]
       }
     },
@@ -275,18 +246,16 @@ export default tv({
       color: 'warning',
       class: {
         tr: [
-          'data-[selected=true]:bg-warning-500/[.1]',
-          'dark:data-[selected=true]:bg-warning-500/[.1]'
+          'data-[selected=true]:bg-warning-container'
         ]
       }
     },
     {
       variant: ['ghost', 'outlined'],
-      color: 'error',
+      color: 'negative',
       class: {
         tr: [
-          'data-[selected=true]:bg-error-500/[.1]',
-          'dark:data-[selected=true]:bg-error-500/[.1]'
+          'data-[selected=true]:bg-negative-container'
         ]
       }
     }

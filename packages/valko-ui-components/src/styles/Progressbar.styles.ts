@@ -5,72 +5,77 @@ export default tv({
     container: [
       'vk-progressbar__container',
       'w-full',
-      'overflow-hidden',
       'relative',
-      'transition-width',
-      'ease-in-out'
-    ],
-    progress: [
-      'vk-progressbar__progress',
-      'w-full',
-      'h-full',
-      'overflow-hidden',
-      'absolute',
-      'transition-all',
-      'z-20'
-    ],
-    content: [
-      'vk-progressbar__content',
-      'w-full',
-      'font-medium',
-      'align-middle',
       'flex',
-      'justify-center',
-      'absolute',
-      'z-30'
+      'overflow-hidden'
+    ],
+    background: [
+      'w-full',
+      'h-full'
     ],
     buffer: [
       'vk-progressbar__buffer',
       'w-full',
       'h-full',
       'absolute',
-      'z-10',
       'transition-all',
-      'bg-light-300',
-      'dark:bg-dark-700'
+      'bg-surface-container-highest'
+    ],
+    content: [
+      'vk-progressbar__content',
+      'absolute',
+      'inset-0',
+      'flex',
+      'justify-center',
+      'items-center',
+      'text-center'
+    ],
+    progress: [
+      'vk-progressbar__progress',
+      'absolute',
+      'flex',
+      'justify-center',
+      'items-center',
+      'inset-0',
+      'transition-all',
+      'ease-linear'
+    ],
+    stripes: [
+      'vk-progressbar__stripes',
+      'absolute',
+      'inset-0'
     ]
   },
   variants: {
     variant: {
       filled: {
-        container: [
-          'bg-light-200',
-          'dark:bg-dark-600'
+        background: [
+          'bg-surface-container-high'
+        ],
+        content: [
+          'text-on-surface'
         ]
       },
       ghost: {
-        container: [
+        background: [
           'bg-transparent'
-        ],
-        buffer: [
-          'bg-light-400/[.15]',
-          'dark:bg-dark-600/[.15]'
         ]
       },
       outlined: {
         container: [
-          'border-2',
-          'border-light-400',
-          'dark:border-dark-600'
+          'ring-2',
+          'ring-outlined'
         ]
       },
       gradient: {
-        container: [
-          'bg-light-200',
-          'dark:bg-dark-600'
+        background: [
+          'bg-surface-container-high'
         ],
         progress: [
           'bg-gradient-to-br'
+        ],
+        content: [
+          'text-on-surface'
         ]
       }
     },
@@ -99,33 +104,38 @@ export default tv({
     color: {
       primary: {
         progress: [
-          'bg-primary-500'
+          'bg-primary',
+          'text-on-primary'
         ]
       },
-      neutral: {
+      secondary: {
         progress: [
-          'bg-light-400',
-          'dark:bg-dark-800'
+          'bg-secondary',
+          'text-on-secondary'
         ]
       },
-      success: {
+      positive: {
         progress: [
-          'bg-success-500'
+          'bg-positive',
+          'text-on-positive'
         ]
       },
-      info: {
+      accent: {
         progress: [
-          'bg-info-500'
+          'bg-accent',
+          'text-on-accent'
         ]
       },
       warning: {
         progress: [
-          'bg-warning-500'
+          'bg-warning',
+          'text-on-warning'
         ]
       },
-      error: {
+      negative: {
         progress: [
-          'bg-error-500'
+          'bg-negative',
+          'text-on-negative'
         ]
       }
     },
@@ -137,6 +147,9 @@ export default tv({
         content: [
           'h-4',
           'text-xs'
+        ],
+        progress: [
+          'text-xs'
         ]
       },
       sm: {
@@ -145,6 +158,9 @@ export default tv({
         ],
         content: [
           'h-5',
+          'text-sm'
+        ],
+        progress: [
           'text-sm'
         ]
       },
@@ -155,6 +171,9 @@ export default tv({
         content: [
           'h-6',
           'text-base'
+        ],
+        progress: [
+          'text-base'
         ]
       },
       lg: {
@@ -164,16 +183,23 @@ export default tv({
         content: [
           'h-7',
           'text-lg'
+        ],
+        progress: [
+          'text-lg'
         ]
       }
     },
     striped:{
       true: {
-        progress: [
+        stripes: [
           'bg-contain',
           'bg-repeat',
           'bg-blend-multiply',
           'animate-cicle'
+        ],
+        progress: [
+          'max-h-full',
+          'overflow-hidden'
         ]
       }
     },
@@ -198,61 +224,38 @@ export default tv({
       color: 'primary',
       class: {
         progress: [
-          'bg-primary-500/[.15]'
-        ],
-        buffer: [
-          'border-primary-500/[.15]'
-        ],
-        content: [
-          'text-primary-500'
+          'bg-primary-container',
+          'text-on-primary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         progress: [
-          'bg-light-400/[.15]',
-          'dark:bg-dark-700/[.15]'
-        ],
-        buffer: [
-          'border-light-200/[.15]',
-          'dark:border-dark-600/[.15]'
-        ],
-        content: [
-          'text-dark-600',
-          'dark:text-light-200'
+          'bg-secondary-container',
+          'text-on-secondary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       class: {
         progress: [
-          'bg-success-500/[.15]'
-        ],
-        buffer: [
-          'border-success-500/[.15]'
-        ],
-        content: [
-          'text-success-500'
+          'bg-positive-container',
+          'text-on-positive-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       class: {
         progress: [
-          'bg-info-500/[.15]'
-        ],
-        buffer: [
-          'border-info-500/[.15]'
-        ],
-        content: [
-          'text-info-500'
+          'bg-accent-container',
+          'text-on-accent-container'
         ]
       }
     },
@@ -261,28 +264,18 @@ export default tv({
       color: 'warning',
       class: {
         progress: [
-          'bg-warning-500/[.15]'
-        ],
-        buffer: [
-          'border-warning-500/[.15]'
-        ],
-        content: [
-          'text-warning-500'
+          'bg-warning-container',
+          'text-on-warning-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       class: {
         progress: [
-          'bg-error-500/[.15]'
-        ],
-        buffer: [
-          'border-error-500/[.15]'
-        ],
-        content: [
-          'text-error-500'
+          'bg-negative-container',
+          'text-on-negative-container'
         ]
       }
     },
@@ -292,40 +285,38 @@ export default tv({
       color: 'primary',
       class: {
         progress: [
-          'from-primary-500',
-          'to-primary-900'
+          'from-primary-gradient-start',
+          'to-primary-gradient-end'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         progress: [
-          'from-light-50',
-          'to-light-400',
-          'text-dark-600',
-          'dark:to-dark-950'
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       class: {
         progress: [
-          'from-success-500',
-          'to-success-900'
+          'from-positive-gradient-start',
+          'to-positive-gradient-end'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       class: {
         progress: [
-          'from-info-500',
-          'to-info-900'
+          'from-accent-gradient-start',
+          'to-accent-gradient-end'
         ]
       }
     },
@@ -334,18 +325,18 @@ export default tv({
       color: 'warning',
       class: {
         progress: [
-          'from-warning-500',
-          'to-warning-900'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       class: {
         progress: [
-          'from-error-500',
-          'to-error-900'
+          'from-negative-gradient-start',
+          'to-negative-gradient-end'
         ]
       }
     },
@@ -354,7 +345,7 @@ export default tv({
       size: 'xs',
       striped: true,
       class: {
-        progress: [
+        stripes: [
           'h-8'
         ]
       }
@@ -363,7 +354,7 @@ export default tv({
       size: 'sm',
       striped: true,
       class: {
-        progress: [
+        stripes: [
           'h-10'
         ]
       }
@@ -372,7 +363,7 @@ export default tv({
       size: 'md',
       striped: true,
       class: {
-        progress: [
+        stripes: [
           'h-12'
         ]
       }
@@ -381,7 +372,7 @@ export default tv({
       size: 'lg',
       striped: true,
       class: {
-        progress: [
+        stripes: [
           'h-14'
         ]
       }
@@ -420,43 +411,6 @@ export default tv({
       class: {
         container: [
           'h-2.5'
-        ]
-      }
-    },
-    // outlined & size
-    {
-      variant: 'outlined',
-      size: 'xs',
-      class: {
-        content: [
-          'leading-[calc(1rem_-_4px)]'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      size: 'sm',
-      class: {
-        content: [
-          'leading-[calc(1.25rem_-_4px)]'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      size: 'md',
-      class: {
-        content: [
-          'leading-[calc(1.50rem_-_4px)]'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      size: 'lg',
-      class: {
-        content: [
-          'leading-[calc(2rem_-_4px)]'
         ]
       }
     }

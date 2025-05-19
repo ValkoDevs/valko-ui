@@ -8,15 +8,15 @@ const form = ref<Partial<DropdownProps>>({
   size: 'md',
   placement: 'auto',
   alignment: undefined,
-  flat: false,
   disabled: false,
+  elevated: false,
   label: 'Dropdown Menu'
 })
 
 const items: Item[] = [
   { key: 'image', title: 'Upload Image', icon: 'photo', onClick: () => useNotification({ text: 'Image Uploaded' }) },
   { key: 'edit', title: 'Edit', icon: 'edit', onClick: () => useNotification({ text: 'Editing' }) },
-  { key: 'disabled', title: 'Disabled', icon: 'error-404', disabled: true },
+  { key: 'disabled', title: 'Disabled', icon: 'ban', disabled: true },
   { key: 'video', title: 'Upload Video', icon: 'video', onClick: () => useNotification({ text: 'Video uploaded' }) },
   { key: 'delete', title: 'Delete', icon: 'trash', onClick: () => useNotification({ text: 'Item Deleted' }) }
 ]
@@ -41,7 +41,7 @@ const dropdownProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The Dropdown color theme.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -69,6 +69,14 @@ const dropdownProps: TableItem[] = [
     default: 'md'
   },
   {
+    key: 'elevatedProp',
+    prop: 'elevated',
+    required: false,
+    description: 'Wheter the Dropdown is elevated or not.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
     key: 'placementProp',
     prop: 'placement',
     required: false,
@@ -83,14 +91,6 @@ const dropdownProps: TableItem[] = [
     description: 'Specifies how the Dropdown is aligned within its placement. If not set, it defaults to the best fit based on available space.',
     values: 'start, center, end',
     default: 'undefined'
-  },
-  {
-    key: 'flatProp',
-    prop: 'flat',
-    required: false,
-    description: 'Wheter the Dropdown is flat or not.',
-    values: 'true, false',
-    default: 'false'
   },
   {
     key: 'disabledProp',
@@ -195,7 +195,7 @@ import type { Item } from '#valkoui'
 const items: Item[] = [
   { key: 'image', title: 'Upload Image', icon: 'photo' },
   { key: 'edit', title: 'Edit', icon: 'edit' },
-  { key: 'disabled', title: 'Disabled', icon: 'error-404', disabled: true },
+  { key: 'disabled', title: 'Disabled', icon: 'negative', disabled: true },
   { key: 'video', title: 'Upload Video', icon: 'video' },
   { key: 'delete', title: 'Delete', icon: 'trash' }
 ]
@@ -217,9 +217,9 @@ const extraProps = ':items="items"'
         :color="form.color"
         :size="form.size"
         :variant="form.variant"
+        :elevated="form.elevated"
         :shape="form.shape"
         :disabled="form.disabled"
-        :flat="form.flat"
         :label="form.label"
         :items="items"
         :placement="form.placement"
@@ -237,7 +237,7 @@ const extraProps = ':items="items"'
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -270,8 +270,8 @@ const extraProps = ':items="items"'
         :options="alignmentOptions"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
+        v-model="form.elevated"
+        label="Elevated"
       />
       <vk-checkbox
         v-model="form.disabled"
@@ -285,7 +285,7 @@ const extraProps = ':items="items"'
         classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(6,_minmax(0,_max-content))]"
       >
         <vk-dropdown
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           :color="color.value"
           :title="color.label"
@@ -294,7 +294,7 @@ const extraProps = ':items="items"'
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -388,15 +388,15 @@ const extraProps = ':items="items"'
         </template>
       </example-section>
 
-      <example-section title="Flat">
+      <example-section title="Elevated">
         <vk-dropdown
-          title="Flat"
+          title="Elevated"
           :items="items"
-          label="Flat"
+          label="Elevated"
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('flat', { values: [true], extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('elevated', { values: [true], extraProps })}`" />
         </template>
       </example-section>
 

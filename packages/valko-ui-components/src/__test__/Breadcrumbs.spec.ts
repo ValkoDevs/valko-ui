@@ -29,7 +29,7 @@ describe('Breadcrumbs component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-primary-600')
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-on-primary-container')
       })
 
       it('should be size md', () => {
@@ -37,15 +37,11 @@ describe('Breadcrumbs component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-breadcrumbs').classes()).toContain('bg-light-200')
+        expect(wrapper.find('.vk-breadcrumbs').classes()).toContain('bg-surface-container-low')
       })
 
       it('should be shape soft', () => {
         expect(wrapper.find('.rounded-lg').exists()).toBe(true)
-      })
-
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
       })
 
       it('should have default separator', () => {
@@ -70,40 +66,40 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-primary-600')
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-on-primary-container')
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkBreadcrumbs, {
           props: {
             crumbs,
-            color: 'neutral'
+            color: 'secondary'
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-dark-950')
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-on-secondary-container')
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkBreadcrumbs, {
           props: {
             crumbs,
-            color: 'success'
+            color: 'positive'
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-success-600')
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-on-positive-container')
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkBreadcrumbs, {
           props: {
             crumbs,
-            color: 'info'
+            color: 'accent'
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-info-600')
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-on-accent-container')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -114,18 +110,29 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-warning-600')
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-on-warning-container')
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkBreadcrumbs, {
           props: {
             crumbs,
-            color: 'error'
+            color: 'negative'
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-error-600')
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-on-negative-container')
+      })
+
+      it('should be color surface when props.color is surface', () => {
+        wrapper = mount(VkBreadcrumbs, {
+          props: {
+            crumbs,
+            color: 'surface'
+          }
+        })
+
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-outlined')
       })
     })
 
@@ -219,7 +226,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-low').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -241,7 +248,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs').classes()).toContain('bg-light-200/[.50]')
+        expect(wrapper.find('.vk-breadcrumbs').classes()).toContain('bg-surface-container-low/[.5]')
       })
 
       it('should be link when props.variant is link', () => {

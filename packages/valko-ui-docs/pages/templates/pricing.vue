@@ -112,8 +112,7 @@ const data: TableItem[] = [
 <template>
   <div class="flex flex-col gap-4">
     <vk-navbar
-      color="neutral"
-      flat
+      color="secondary"
       class="flex gap-4 justify-between"
     >
       <h1 class="text-xl font-bold">
@@ -122,19 +121,19 @@ const data: TableItem[] = [
       <div class="flex gap-4">
         <vk-button
           variant="link"
-          color="neutral"
+          color="secondary"
         >
           Features
         </vk-button>
         <vk-button
           variant="link"
-          color="neutral"
+          color="secondary"
         >
           Enterprise
         </vk-button>
         <vk-button
           variant="link"
-          color="neutral"
+          color="secondary"
         >
           Support
         </vk-button>
@@ -148,7 +147,7 @@ const data: TableItem[] = [
 
     <div class="flex justify-center gap-12 py-4">
       <vk-card class="w-80">
-        <vk-card-header class="justify-center bg-neutral-700 text-light-200">
+        <vk-card-header class="justify-center bg-secondary text-light-200">
           Basic
         </vk-card-header>
         <vk-card-body>
@@ -173,10 +172,10 @@ const data: TableItem[] = [
       </vk-card>
 
       <vk-card
-        class="scale-105 shadow-primary-600 shadow-md border-2 border-primary-600"
+        class="scale-105 shadow-primary shadow-md border-2 border-primary"
         size="lg"
       >
-        <vk-card-header class="justify-center bg-gradient-to-br from-primary-500 to-primary-700 text-light-200 gap-4">
+        <vk-card-header class="justify-center bg-gradient-to-br from-primary to-primary text-light-200 gap-4">
           Pro
         </vk-card-header>
         <vk-tag
@@ -209,7 +208,7 @@ const data: TableItem[] = [
       </vk-card>
 
       <vk-card class="w-80">
-        <vk-card-header class="justify-center bg-neutral-700 text-light-200">
+        <vk-card-header class="justify-center bg-secondary text-light-200">
           Premium
         </vk-card-header>
         <vk-card-body>
@@ -255,8 +254,7 @@ const data: TableItem[] = [
     <template #example>
       <div class="flex flex-col gap-4">
         <vk-navbar
-          color="neutral"
-          flat
+          color="secondary"
           class="flex gap-4 justify-between"
         >
           <h1 class="text-xl font-bold">
@@ -265,19 +263,19 @@ const data: TableItem[] = [
           <div class="flex gap-4">
             <vk-button
               variant="link"
-              color="neutral"
+              color="secondary"
             >
               Features
             </vk-button>
             <vk-button
               variant="link"
-              color="neutral"
+              color="secondary"
             >
               Enterprise
             </vk-button>
             <vk-button
               variant="link"
-              color="neutral"
+              color="secondary"
             >
               Support
             </vk-button>
@@ -291,7 +289,7 @@ const data: TableItem[] = [
 
         <div class="flex justify-center gap-12 py-4">
           <vk-card class="w-80">
-            <vk-card-header class="justify-center bg-neutral-700 text-light-200">
+            <vk-card-header class="justify-center bg-secondary text-light-200">
               Basic
             </vk-card-header>
             <vk-card-body>
@@ -316,10 +314,10 @@ const data: TableItem[] = [
           </vk-card>
 
           <vk-card
-            class="scale-105 shadow-primary-600 shadow-md border-2 border-primary-600"
+            class="scale-105 shadow-primary shadow-md border-2 border-primary"
             size="lg"
           >
-            <vk-card-header class="justify-center bg-gradient-to-br from-primary-500 to-primary-700 text-light-200 gap-4">
+            <vk-card-header class="justify-center bg-gradient-to-br from-primary to-primary text-light-200 gap-4">
               Pro
             </vk-card-header>
             <vk-tag
@@ -352,7 +350,7 @@ const data: TableItem[] = [
           </vk-card>
 
           <vk-card class="w-80">
-            <vk-card-header class="justify-center bg-neutral-700 text-light-200">
+            <vk-card-header class="justify-center bg-secondary text-light-200">
               Premium
             </vk-card-header>
             <vk-card-body>

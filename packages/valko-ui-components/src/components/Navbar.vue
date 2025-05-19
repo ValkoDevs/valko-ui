@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<NavbarProps>(), {
   variant: 'filled',
   shape: 'soft',
   fixed: false,
-  flat: false,
+  elevated: false,
   floating: false,
   vertical: false
 })

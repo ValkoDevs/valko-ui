@@ -21,8 +21,13 @@ const props = withDefaults(defineProps<ProgressbarProps>(), {
 
 const classes = useStyle<ProgressbarProps, SlotStyles>(props, styles)
 
-const inlineStyles = computed(() => {
-  let styles = ''
+const progressStyles = computed(() => {
+  return {
+    clipPath: `inset(0 ${100 - props.progress}% 0 0)`
+  }
+})
+
+const stripeStyles = computed(() => {
   const sizeMap: Record<string, string> = {
     xs: '1rem',
     sm: '1.25rem',
@@ -30,31 +35,49 @@ const inlineStyles = computed(() => {
     lg: '1.75rem'
   }
 
-  if (props.striped) styles += `background-image: url("${diagonalStripes}"); background-size: ${sizeMap[props.size]};`
-  if (!props.indeterminate) styles += `left: ${props.progress - 100}%;`
-
-  return styles.trimStart()
+  return {
+    backgroundImage: props.striped ? `url("${diagonalStripes}")` : undefined,
+    backgroundSize: props.striped ? sizeMap[props.size] : undefined
+  }
 })
 
 const bufferStyles = computed(() => !props.indeterminate ? `left: ${props.buffer - 100}%;` : '')
+
+const showContent = computed(() => props.shape !== 'line')
 </script>
 
 <template>
-  <div :class="classes.container">
+  <div
+    :class="classes.container"
+  >
+    <div :class="classes.background">
+      <div
+        v-if="!!buffer && !indeterminate"
+        :class="classes.buffer"
+        :style="bufferStyles"
+      />
+      <div :class="classes.content">
+        <slot
+          v-if="showContent"
+          :progress="progress"
+          :buffer="buffer"
+        />
+      </div>
+    </div>
     <div
       :class="classes.progress"
-      :style="inlineStyles"
-    />
-    <div :class="classes.content">
+      :style="progressStyles"
+    >
+      <div
+        v-if="striped"
+        :class="classes.stripes"
+        :style="stripeStyles"
+      />
       <slot
-        :pogress="progress"
+        v-if="showContent"
+        :progress="progress"
         :buffer="buffer"
       />
     </div>
-    <div
-      v-if="!!buffer && !indeterminate"
-      :class="classes.buffer"
-      :style="bufferStyles"
-    />
   </div>
 </template>

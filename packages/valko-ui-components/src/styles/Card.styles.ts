@@ -7,25 +7,20 @@ export default tv({
     'min-w-48',
     'overflow-hidden',
     'grid',
-    'shadow-lg',
     'group'
   ],
   variants: {
     variant: {
       filled: [
-        'bg-light-100',
-        'dark:bg-dark-800'
+        'bg-surface-container-highest'
       ],
       outlined: [
         'border-2',
-        'border-light-400',
-        'dark:border-dark-600'
+        'border-outlined'
       ],
       ghost: [
-        'bg-light-200/[.5]',
-        'dark:bg-dark-800/[.5]',
-        'backdrop-blur-lg',
-        'shadow-none'
+        'bg-surface-container-highest/[.5]',
+        'backdrop-blur-lg'
       ]
     },
     shape: {
@@ -64,9 +59,9 @@ export default tv({
     disabled: {
       true: []
     },
-    flat: {
+    elevated: {
       true: [
-        'shadow-none'
+        'shadow-el1'
       ]
     },
     isPressable: {
@@ -74,13 +69,27 @@ export default tv({
         'transition-all',
         'duration-200',
         'ease-in-out',
-        'active:shadow-none',
         'active:scale-95',
         'cursor-pointer'
       ]
     }
   },
   compoundVariants: [
+    // elevated & bg
+    {
+      elevated: true,
+      variant: 'filled',
+      class: [
+        'bg-surface-container-low'
+      ]
+    },
+    {
+      elevated: true,
+      variant: 'ghost',
+      class: [
+        'bg-surface-container-low/[.5]'
+      ]
+    },
     {
       layout: ['vertical', 'cover'],
       size: 'xs',
@@ -149,10 +158,10 @@ export default tv({
       layout: 'cover',
       variant: 'filled',
       class: [
-        'data-[layout=cover]:data-[card-image=true]:text-light-200',
-        'data-[layout=cover]:data-[card-image=false]:text-dark-800',
-        'dark:data-[layout=cover]:data-[card-image=true]:text-light-200',
-        'dark:data-[layout=cover]:data-[card-image=false]:text-light-200'
+        'data-[layout=cover]:data-[card-image=true]:text-white',
+        'data-[layout=cover]:data-[card-image=false]:text-black',
+        'dark:data-[layout=cover]:data-[card-image=true]:text-white',
+        'dark:data-[layout=cover]:data-[card-image=false]:text-white'
       ]
     }
   ]

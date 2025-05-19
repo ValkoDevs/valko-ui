@@ -9,12 +9,12 @@ export default tv({
     content: [
       'vk-datepicker__content',
       'p-2',
-      'bg-light-200',
+      'bg-surface-container-high',
+      'shadow-el2',
       'absolute',
       'z-10',
       'mt-1',
-      'left-0',
-      'dark:bg-dark-800'
+      'left-0'
     ]
   },
   variants: {
@@ -25,11 +25,11 @@ export default tv({
     },
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     },
     size: {
       xs: {},
@@ -37,7 +37,6 @@ export default tv({
       md: {},
       lg: {}
     },
-    flat: {},
     shape: {
       rounded: {
         content: [

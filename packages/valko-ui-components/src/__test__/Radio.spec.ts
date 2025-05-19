@@ -14,7 +14,7 @@ describe('Radio component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be size md', () => {
@@ -22,7 +22,7 @@ describe('Radio component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be shape rounded', () => {
@@ -35,10 +35,6 @@ describe('Radio component', () => {
 
       it('Should not be selected', () => {
         expect(wrapper.find('.vk-radio__icon').exists()).toBe(false)
-      })
-
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
       })
 
       it('should not be disabled', () => {
@@ -54,37 +50,37 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkRadio, {
           props: {
-            color: 'neutral'
+            color: 'secondary'
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-dark-900')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-secondary')
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkRadio, {
           props: {
-            color: 'success'
+            color: 'positive'
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-success-500')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-positive')
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkRadio, {
           props: {
-            color: 'info'
+            color: 'accent'
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-info-500')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-accent')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -94,17 +90,17 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-warning-500')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-warning')
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkRadio, {
           props: {
-            color: 'error'
+            color: 'negative'
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-error-500')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-negative')
       })
     })
 
@@ -126,7 +122,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded').exists()).toBe(true)
+        expect(wrapper.find('.rounded-sm').exists()).toBe(true)
       })
 
       it('should be square when props.shape is square', () => {
@@ -190,7 +186,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -202,7 +198,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.text-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.text-primary').exists()).toBe(true)
       })
 
       it('should be ghost when props.variant is ghost', () => {

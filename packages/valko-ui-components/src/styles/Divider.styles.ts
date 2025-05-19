@@ -8,11 +8,12 @@ export default tv({
   variants: {
     color: {
       primary: [],
-      neutral: [],
-      success: [],
-      info: [],
+      secondary: [],
+      positive: [],
+      accent: [],
       warning: [],
-      error: []
+      negative: [],
+      surface: []
     },
     variant: {
       filled: [
@@ -59,43 +60,49 @@ export default tv({
       variant: 'filled',
       color: 'primary',
       class: [
-        'bg-primary-500'
+        'bg-primary'
       ]
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       class: [
-        'bg-light-300',
-        'dark:bg-dark-600'
+        'bg-secondary'
       ]
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       class: [
-        'bg-success-500'
+        'bg-positive'
       ]
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       class: [
-        'bg-info-500'
+        'bg-accent'
       ]
     },
     {
       variant: 'filled',
       color: 'warning',
       class: [
-        'bg-warning-500'
+        'bg-warning'
       ]
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       class: [
-        'bg-error-500'
+        'bg-negative'
+      ]
+    },
+    {
+      variant: 'filled',
+      color: 'surface',
+      class: [
+        'bg-surface-container-highest'
       ]
     },
     // outlined & color
@@ -103,43 +110,49 @@ export default tv({
       variant: 'outlined',
       color: 'primary',
       class: [
-        'border-primary-500'
+        'border-primary'
       ]
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       class: [
-        'border-light-300',
-        'dark:border-dark-800'
+        'border-secondary'
       ]
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       class: [
-        'border-success-500'
+        'border-positive'
       ]
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       class: [
-        'border-info-500'
+        'border-accent'
       ]
     },
     {
       variant: 'outlined',
       color: 'warning',
       class: [
-        'border-warning-500'
+        'border-warning'
       ]
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       class: [
-        'border-error-500'
+        'border-negative'
+      ]
+    },
+    {
+      variant: 'outlined',
+      color: 'surface',
+      class: [
+        'border-outlined'
       ]
     },
     // ghost & color
@@ -147,43 +160,49 @@ export default tv({
       variant: 'ghost',
       color: 'primary',
       class: [
-        'bg-primary-500/[.5]'
+        'bg-primary-container'
       ]
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       class: [
-        'bg-light-300/[.5]',
-        'dark:bg-dark-800/[.5]'
+        'bg-secondary-container'
       ]
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       class: [
-        'bg-success-500/[.5]'
+        'bg-positive-container'
       ]
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       class: [
-        'bg-info-500/[.5]'
+        'bg-accent-container'
       ]
     },
     {
       variant: 'ghost',
       color: 'warning',
       class: [
-        'bg-warning-500/[.5]'
+        'bg-warning-container'
       ]
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       class: [
-        'bg-error-500/[.5]'
+        'bg-negative-container'
+      ]
+    },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      class: [
+        'bg-surface-container-highest/[.5]'
       ]
     },
     // vertical & size

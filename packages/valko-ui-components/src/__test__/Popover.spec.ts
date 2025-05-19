@@ -22,8 +22,8 @@ describe('Popover component', () => {
         expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
 
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
+      it('should not be elevated', () => {
+        expect(wrapper.find('.shadow-el2').exists()).toBe(true)
       })
     })
 
@@ -136,12 +136,12 @@ describe('Popover component', () => {
       })
     })
 
-    describe('When panelClasses prop changes', () => {
-      it('should apply panelClasses when passed as a string', () => {
+    describe('When classes prop changes', () => {
+      it('should apply classes when passed as a string', () => {
         const wrapper = mount(VkPopover, {
           props: {
             isOpen: true,
-            panelClasses: 'custom-class'
+            classes: 'custom-class'
           }
         })
 
@@ -149,16 +149,29 @@ describe('Popover component', () => {
         expect(panel.classes()).toContain('custom-class')
       })
 
-      it('should apply multiple panelClasses when passed as an array', () => {
+      it('should apply multiple classes when passed as an array', () => {
         const wrapper = mount(VkPopover, {
           props: {
             isOpen: true,
-            panelClasses: ['class-one', 'class-two']
+            classes: ['class-one', 'class-two']
           }
         })
 
         const panel = wrapper.find('.vk-popover__panel')
         expect(panel.classes()).toEqual(expect.arrayContaining(['class-one', 'class-two']))
+      })
+    })
+
+    describe('When elevated prop changes', () => {
+      it('should be elevated when props.elevated is true', () => {
+        wrapper = mount(VkPopover, {
+          props: {
+            isOpen: true,
+            elevated: true
+          }
+        })
+
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('shadow-el3')
       })
     })
   })

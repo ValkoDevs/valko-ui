@@ -29,7 +29,7 @@ const apiData: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Radio.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -177,7 +177,7 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -219,7 +219,7 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <vk-radio
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           v-model="radioStates['color-radio-group']"
           name="color-radio-group"
@@ -229,7 +229,7 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
         />
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 

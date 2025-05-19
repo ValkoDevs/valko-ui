@@ -15,7 +15,7 @@ describe('Alert component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be size md', () => {
@@ -23,7 +23,7 @@ describe('Alert component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.vk-alert__filled').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -32,10 +32,6 @@ describe('Alert component', () => {
 
       it('should have default icon', () => {
         expect(wrapper.find('i.ti.ti-alert-hexagon-filled').exists()).toBe(true)
-      })
-
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
       })
 
       it('should not be closable', () => {
@@ -55,37 +51,37 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkAlert, {
           props: {
-            color: 'neutral'
+            color: 'secondary'
           }
         })
 
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-secondary').exists()).toBe(true)
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkAlert, {
           props: {
-            color: 'success'
+            color: 'positive'
           }
         })
 
-        expect(wrapper.find('.bg-success-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-positive').exists()).toBe(true)
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkAlert, {
           props: {
-            color: 'info'
+            color: 'accent'
           }
         })
 
-        expect(wrapper.find('.bg-info-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-accent').exists()).toBe(true)
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -95,17 +91,27 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-warning-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-warning').exists()).toBe(true)
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkAlert, {
           props: {
-            color: 'error'
+            color: 'negative'
           }
         })
 
-        expect(wrapper.find('.bg-error-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-negative').exists()).toBe(true)
+      })
+
+      it('should be color surface when props.color is surface', () => {
+        wrapper = mount(VkAlert, {
+          props: {
+            color: 'surface'
+          }
+        })
+
+        expect(wrapper.find('.bg-surface-container-highest').exists()).toBe(true)
       })
     })
 
@@ -191,7 +197,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.text-light-50').exists()).toBe(true)
+        expect(wrapper.find('.vk-alert__filled').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -211,7 +217,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.shadow-none').exists()).toBe(true)
+        expect(wrapper.find('.vk-alert__ghost').exists()).toBe(true)
       })
 
       it('should be gradient when props.variant is gradient', () => {

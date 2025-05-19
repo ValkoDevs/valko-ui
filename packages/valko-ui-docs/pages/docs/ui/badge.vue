@@ -8,7 +8,6 @@ const form = ref<BadgeProps>({
   size: 'md',
   placement: 'top-right',
   content: 'new',
-  flat: false,
   hidden: false,
   dot: false
 })
@@ -28,7 +27,7 @@ const badgeProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Badge.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -72,14 +71,6 @@ const badgeProps: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'flatProp',
-    prop: 'flat',
-    required: false,
-    description: 'Displays a shadow for the Badge.',
-    values: 'true, false',
-    default: 'false'
-  },
-  {
     key: 'dotProp',
     prop: 'dot',
     required: false,
@@ -108,7 +99,7 @@ const badgeSlots: TableItem[] = [
 
 const generateSnippet = snippetGeneratorFactory('vk-badge')
 
-const customSlot = '<vk-avatar\n      :src="src"\n      color="neutral"\n    />'
+const customSlot = '<vk-avatar\n      :src="src"\n      color="secondary"\n    />'
 const extraProps = {
   content: 'content="new"',
   dot: 'dot'
@@ -118,7 +109,7 @@ const extraProps = {
 <template>
   <doc-section
     title="Badge"
-    description="Visual element that displays additional information, such as notifications or states. Badges are typically used to indicate new or unread items, status indicators, or numeric counters."
+    description="Visual element that displays additional accent, such as notifications or states. Badges are typically used to indicate new or unread items, status indicators, or numeric counters."
   >
     <template #playground-view>
       <vk-badge
@@ -128,13 +119,12 @@ const extraProps = {
         :shape="form.shape"
         :placement="form.placement"
         :content="form.content"
-        :flat="form.flat"
         :hidden="form.hidden"
         :dot="form.dot"
       >
         <vk-avatar
           :src="src"
-          color="neutral"
+          color="secondary"
         />
       </vk-badge>
     </template>
@@ -144,7 +134,7 @@ const extraProps = {
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -175,10 +165,6 @@ const extraProps = {
         :options="placementOptions"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
-      />
-      <vk-checkbox
         v-model="form.hidden"
         label="Hidden"
       />
@@ -191,10 +177,10 @@ const extraProps = {
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-7"
       >
         <div
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
@@ -205,13 +191,13 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="neutral"
+              color="secondary"
             />
           </vk-badge>
         </div>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), customSlot, extraProps: extraProps.content })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), customSlot, extraProps: extraProps.content })" />
         </template>
       </example-section>
 
@@ -231,7 +217,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="neutral"
+              color="secondary"
             />
           </vk-badge>
         </div>
@@ -257,7 +243,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="neutral"
+              color="secondary"
             />
           </vk-badge>
         </div>
@@ -283,7 +269,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="neutral"
+              color="secondary"
             />
           </vk-badge>
         </div>
@@ -309,29 +295,13 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="neutral"
+              color="secondary"
             />
           </vk-badge>
         </div>
 
         <template #code>
           <code-block :code="generateSnippet<string>('placement', { values: placementOptions.map(o => o.value), customSlot, extraProps: extraProps.content })" />
-        </template>
-      </example-section>
-
-      <example-section title="Flat">
-        <vk-badge
-          flat
-          content="new"
-        >
-          <vk-avatar
-            :src="src"
-            color="neutral"
-          />
-        </vk-badge>
-
-        <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', { values: [true], customSlot, extraProps: extraProps.content })" />
         </template>
       </example-section>
 
@@ -342,7 +312,7 @@ const extraProps = {
         >
           <vk-avatar
             :src="src"
-            color="neutral"
+            color="secondary"
           />
         </vk-badge>
 
@@ -367,7 +337,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="neutral"
+              color="secondary"
             />
           </vk-badge>
         </div>
@@ -383,7 +353,7 @@ const extraProps = {
         >
           <vk-avatar
             :src="src"
-            color="neutral"
+            color="secondary"
           />
         </vk-badge>
 

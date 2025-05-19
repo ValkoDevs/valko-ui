@@ -4,6 +4,7 @@ import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Spinner.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import VkIcon from './Icon.vue'
+import { computed } from 'vue'
 
 defineOptions({ name: 'VkSpinner' })
 
@@ -14,13 +15,22 @@ const props = withDefaults(defineProps<SpinnerProps>(), {
 })
 
 const classes = useStyle<SpinnerProps, SlotStyles>(props, styles)
+
+const iconClasses = computed(() => [
+  classes.value.icon,
+  ...(props.classes
+    ? Array.isArray(props.classes)
+      ? props.classes
+      : [props.classes]
+    : [classes.value.iconColor])
+])
 </script>
 
 <template>
   <div :class="classes.container">
     <vk-icon
       :name="name"
-      :class="[classes.icon, className ? className : classes.iconColor]"
+      :class="iconClasses"
     />
   </div>
 </template>

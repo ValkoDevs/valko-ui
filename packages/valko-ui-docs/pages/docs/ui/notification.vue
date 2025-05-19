@@ -10,7 +10,6 @@ const form = ref<NotificationProps>({
   gravity: 'top',
   position: 'right',
   duration: 3000,
-  flat: false,
   close: false,
   newWindow: false,
   destination: '',
@@ -33,7 +32,7 @@ const notificationProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Notification.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -151,7 +150,6 @@ const createNotification = (props: NotificationProps) => {
     size: props.size,
     gravity: props.gravity,
     position: props.position,
-    flat: props.flat,
     close: props.close,
     newWindow: props.newWindow,
     destination: props.destination,
@@ -172,7 +170,7 @@ const createNotification = (props: NotificationProps) => useNotification(props)
 
 const colorSnippet = `
 <template>
-  ${colorOptions.map(color => `<vk-button
+  ${colorOptions.withSurface.map(color => `<vk-button
     @click="createNotification({ text: ${color.label}, color: ${color.value} })"
   >
     ${color.label}
@@ -230,16 +228,6 @@ const positionSnippet = `
 </template>
 `
 
-const flatSnippet = `
-<template>
-  <vk-button
-    @click="createNotification({ text: Flat, flat: true })"
-  >
-    Flat
-  </vk-button>
-</template>
-`
-
 const closeSnippet = `
 <template>
   <vk-button
@@ -264,7 +252,7 @@ const stopOnFocusSnippet = `
 <template>
   <doc-section
     title="Notification"
-    description="Versatile tool for displaying brief, timely messages to users. It serves to alert users to important information, such as successful actions, warnings, or errors, enhancing their awareness and interaction with the application. Unlike pop-up alerts that interrupt workflow, notifications are subtle, non-intrusive cues that seamlessly integrate into the user interface, providing a seamless user experience. With customizable options for appearance and behavior, the Notification component empowers developers to tailor notifications to suit the specific needs and aesthetics of their application."
+    description="Versatile tool for displaying brief, timely messages to users. It serves to alert users to important accent, such as positive actions, warnings, or negative, enhancing their awareness and interaction with the application. Unlike pop-up alerts that interrupt workflow, notifications are subtle, non-intrusive cues that seamlessly integrate into the user interface, providing a seamless user experience. With customizable options for appearance and behavior, the Notification component empowers developers to tailor notifications to suit the specific needs and aesthetics of their application."
   >
     <template #playground-view>
       <vk-button
@@ -276,7 +264,6 @@ const stopOnFocusSnippet = `
           size: form.size,
           gravity: form.gravity,
           position: form.position,
-          flat: form.flat,
           close: form.close,
           newWindow: form.newWindow,
           destination: form.destination,
@@ -293,7 +280,7 @@ const stopOnFocusSnippet = `
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -335,10 +322,6 @@ const stopOnFocusSnippet = `
         type="number"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
-      />
-      <vk-checkbox
         v-model="form.close"
         label="Close"
       />
@@ -351,10 +334,10 @@ const stopOnFocusSnippet = `
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(6,_minmax(0,_max-content))]"
+        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(7,_minmax(0,_max-content))]"
       >
         <vk-button
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           :color="color.value"
           @click="createNotification({ text: color.label, color: color.value })"
@@ -453,16 +436,6 @@ const stopOnFocusSnippet = `
 
         <template #code>
           <code-block :code="`${scriptCode}${positionSnippet}`" />
-        </template>
-      </example-section>
-
-      <example-section title="Flat">
-        <vk-button @click="createNotification({ text: 'Flat', flat: true })">
-          Flat
-        </vk-button>
-
-        <template #code>
-          <code-block :code="`${scriptCode}${flatSnippet}`" />
         </template>
       </example-section>
 

@@ -46,7 +46,7 @@ const toggleRating = (selectedRating: number) => {
           Filters
         </h2>
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="sm"
         />
         <h3 class="text-xl font-semibold">
@@ -60,7 +60,7 @@ const toggleRating = (selectedRating: number) => {
           :max="10000"
         />
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
         />
       </div>
@@ -91,7 +91,7 @@ const toggleRating = (selectedRating: number) => {
           />
         </div>
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
         />
       </div>
@@ -110,7 +110,7 @@ const toggleRating = (selectedRating: number) => {
           />
         </div>
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
         />
       </div>
@@ -132,14 +132,14 @@ const toggleRating = (selectedRating: number) => {
           label="Out of Stock"
         />
         <vk-divider
-          color="neutral"
+          color="secondary"
           size="xs"
         />
       </div>
 
       <div class="mt-4">
         <vk-button
-          color="neutral"
+          color="secondary"
           variant="outlined"
         >
           Reset Filters
@@ -159,7 +159,7 @@ const toggleRating = (selectedRating: number) => {
             Filters
           </h2>
           <vk-divider
-            color="neutral"
+            color="secondary"
             size="sm"
           />
           <h3 class="text-xl font-semibold">
@@ -173,7 +173,7 @@ const toggleRating = (selectedRating: number) => {
             :max="10000"
           />
           <vk-divider
-            color="neutral"
+            color="secondary"
             size="xs"
           />
         </div>
@@ -204,7 +204,7 @@ const toggleRating = (selectedRating: number) => {
             />
           </div>
           <vk-divider
-            color="neutral"
+            color="secondary"
             size="xs"
           />
         </div>
@@ -223,7 +223,7 @@ const toggleRating = (selectedRating: number) => {
             />
           </div>
           <vk-divider
-            color="neutral"
+            color="secondary"
             size="xs"
           />
         </div>
@@ -245,14 +245,14 @@ const toggleRating = (selectedRating: number) => {
             label="Out of Stock"
           />
           <vk-divider
-            color="neutral"
+            color="secondary"
             size="xs"
           />
         </div>
 
         <div class="mt-4">
           <vk-button
-            color="neutral"
+            color="secondary"
             variant="outlined"
           >
             Reset Filters

@@ -6,5 +6,4 @@ export interface ModalProps extends Shapes {
   backdrop?: Backdrop;
   title?: string;
   closable?: boolean;
-  flat?: boolean;
 }

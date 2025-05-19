@@ -4,7 +4,7 @@ export default tv({
   slots: {
     notification: [
       'vk-notification',
-      'shadow-md',
+      'shadow-el3',
       'overflow-hidden'
     ],
     container: [
@@ -39,24 +39,19 @@ export default tv({
   variants: {
     variant: {
       filled: {
-        notification: [
-          'text-light-50'
-        ],
         progressbar: [
-          'bg-light-50'
+          'bg-white'
         ]
       },
       ghost: {
         notification: [
-          'shadow-none',
           'backdrop-blur'
         ]
       },
       outlined: {
         notification: [
           'border-2',
-          'bg-light-50',
-          'dark:bg-dark-800'
+          'bg-surface'
         ],
         content: [
           'p-[calc(0.75rem_-_2px)]'
@@ -64,27 +59,26 @@ export default tv({
       },
       line: {
         notification: [
-          'bg-light-200',
-          'dark:bg-dark-800'
+          'bg-surface'
         ]
       },
       gradient: {
         notification: [
-          'bg-gradient-to-br',
-          'text-light-50'
+          'bg-gradient-to-b'
         ],
         progressbar: [
-          'bg-light-50'
+          'bg-white'
         ]
       }
     },
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {},
+      surface: {}
     },
     size: {
       xs: {
@@ -148,13 +142,6 @@ export default tv({
           'rounded-none'
         ]
       }
-    },
-    flat: {
-      true: {
-        notification: [
-          'shadow-none'
-        ]
-      }
     }
   },
   compoundVariants: [
@@ -164,41 +151,38 @@ export default tv({
       color: 'primary',
       class: {
         notification: [
-          'bg-primary-500'
+          'bg-primary',
+          'text-on-primary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         notification: [
-          'bg-light-300',
-          'text-dark-600',
-          'dark:bg-dark-800',
-          'dark:text-light-200'
-        ],
-        progressbar: [
-          'bg-dark-600',
-          'dark:bg-light-200'
+          'bg-secondary',
+          'text-on-secondary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       class: {
         notification: [
-          'bg-success-500'
+          'bg-positive',
+          'text-on-positive'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       class: {
         notification: [
-          'bg-info-500'
+          'bg-accent',
+          'text-on-accent'
         ]
       }
     },
@@ -207,16 +191,28 @@ export default tv({
       color: 'warning',
       class: {
         notification: [
-          'bg-warning-500'
+          'bg-warning',
+          'text-on-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       class: {
         notification: [
-          'bg-error-500'
+          'bg-negative',
+          'text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'surface',
+      class: {
+        notification: [
+          'bg-surface-container-highest',
+          'text-on-surface'
         ]
       }
     },
@@ -226,53 +222,50 @@ export default tv({
       color: 'primary',
       class: {
         notification: [
-          'border-primary-500',
-          'text-primary-500'
+          'border-primary',
+          'text-primary'
         ],
         progressbar: [
-          'bg-primary-500'
+          'bg-primary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         notification: [
-          'border-light-300',
-          'text-dark-600',
-          'dark:border-dark-700',
-          'dark:text-light-200'
+          'border-secondary',
+          'text-secondary'
         ],
         progressbar: [
-          'bg-light-300',
-          'dark:bg-dark-700'
+          'bg-secondary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       class: {
         notification: [
-          'border-success-500',
-          'text-success-500'
+          'border-positive',
+          'text-positive'
         ],
         progressbar: [
-          'bg-success-500'
+          'bg-positive'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       class: {
         notification: [
-          'border-info-500',
-          'text-info-500'
+          'border-accent',
+          'text-accent'
         ],
         progressbar: [
-          'bg-info-500'
+          'bg-accent'
         ]
       }
     },
@@ -281,24 +274,37 @@ export default tv({
       color: 'warning',
       class: {
         notification: [
-          'border-warning-500',
-          'text-warning-500'
+          'border-warning',
+          'text-warning'
         ],
         progressbar: [
-          'bg-warning-500'
+          'bg-warning'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       class: {
         notification: [
-          'border-error-500',
-          'text-error-500'
+          'border-negative',
+          'text-negative'
         ],
         progressbar: [
-          'bg-error-500'
+          'bg-negative'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'surface',
+      class: {
+        notification: [
+          'border-outlined',
+          'text-on-surface-variant'
+        ],
+        progressbar: [
+          'bg-outlined'
         ]
       }
     },
@@ -308,53 +314,50 @@ export default tv({
       color: 'primary',
       class: {
         notification: [
-          'bg-primary-500/[.20]',
-          'text-primary-500'
+          'bg-primary-container',
+          'text-on-primary-container'
         ],
         progressbar: [
-          'bg-primary-500/[.40]'
+          'bg-on-primary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         notification: [
-          'bg-light-300/[.20]',
-          'text-dark-600',
-          'dark:bg-dark-700/[.20]',
-          'dark:text-light-200'
+          'bg-secondary-container',
+          'text-on-secondary-container'
         ],
         progressbar: [
-          'bg-light-300/[.40]',
-          'dark:bg-dark-700/[.40]'
+          'bg-on-secondary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       class: {
         notification: [
-          'bg-success-500/[.20]',
-          'text-success-500'
+          'bg-positive-container',
+          'text-on-positive-container'
         ],
         progressbar: [
-          'bg-success-500/[.40]'
+          'bg-on-positive-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       class: {
         notification: [
-          'bg-info-500/[.20]',
-          'text-info-500'
+          'bg-accent-container',
+          'text-on-accent-container'
         ],
         progressbar: [
-          'bg-info-500/[.40]'
+          'bg-on-accent-container'
         ]
       }
     },
@@ -363,24 +366,37 @@ export default tv({
       color: 'warning',
       class: {
         notification: [
-          'bg-warning-500/[.20]',
-          'text-warning-500'
+          'bg-warning-container',
+          'text-on-warning-container'
         ],
         progressbar: [
-          'bg-warning-500/[.40]'
+          'bg-on-warning-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       class: {
         notification: [
-          'bg-error-500/[.20]',
-          'text-error-500'
+          'bg-negative-container',
+          'text-on-negative-container'
         ],
         progressbar: [
-          'bg-error-500/[.40]'
+          'bg-on-negative-container'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      class: {
+        notification: [
+          'bg-surface-container-highest/[.5]',
+          'text-on-surface-variant'
+        ],
+        progressbar: [
+          'bg-on-surface-variant'
         ]
       }
     },
@@ -390,35 +406,34 @@ export default tv({
       color: 'primary',
       class: {
         progressbar: [
-          'bg-primary-500'
+          'bg-primary'
         ]
       }
     },
     {
       variant: 'line',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         progressbar: [
-          'bg-light-300',
-          'dark:bg-dark-700'
+          'bg-secondary'
         ]
       }
     },
     {
       variant: 'line',
-      color: 'success',
+      color: 'positive',
       class: {
         progressbar: [
-          'bg-success-500'
+          'bg-positive'
         ]
       }
     },
     {
       variant: 'line',
-      color: 'info',
+      color: 'accent',
       class: {
         progressbar: [
-          'bg-info-500'
+          'bg-accent'
         ]
       }
     },
@@ -427,16 +442,25 @@ export default tv({
       color: 'warning',
       class: {
         progressbar: [
-          'bg-warning-500'
+          'bg-warning'
         ]
       }
     },
     {
       variant: 'line',
-      color: 'error',
+      color: 'negative',
       class: {
         progressbar: [
-          'bg-error-500'
+          'bg-negative'
+        ]
+      }
+    },
+    {
+      variant: 'line',
+      color: 'surface',
+      class: {
+        progressbar: [
+          'bg-surface-container-highest'
         ]
       }
     },
@@ -446,46 +470,42 @@ export default tv({
       color: 'primary',
       class: {
         notification: [
-          'from-primary-500',
-          'to-primary-900'
+          'from-primary-gradient-start',
+          'to-primary-gradient-end',
+          'text-on-primary'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         notification: [
-          'from-light-200',
-          'to-light-400',
-          'text-dark-600',
-          'dark:from-dark-600',
-          'dark:to-dark-950',
-          'dark:text-light-200'
-        ],
-        progressbar: [
-          'bg-dark-600',
-          'dark:bg-light-200'
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end',
+          'text-on-secondary'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       class: {
         notification: [
-          'from-success-500',
-          'to-success-900'
+          'from-positive-gradient-start',
+          'to-positive-gradient-end',
+          'text-on-positive'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       class: {
         notification: [
-          'from-info-500',
-          'to-info-900'
+          'from-accent-gradient-start',
+          'to-accent-gradient-end',
+          'text-on-accent'
         ]
       }
     },
@@ -494,18 +514,31 @@ export default tv({
       color: 'warning',
       class: {
         notification: [
-          'from-warning-500',
-          'to-warning-900'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end',
+          'text-on-warning'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       class: {
         notification: [
-          'from-error-500',
-          'to-error-900'
+          'from-negative-gradient-start',
+          'to-negative-gradient-end',
+          'text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'surface',
+      class: {
+        notification: [
+          'from-surface-container',
+          'to-surface-container-highest',
+          'text-on-surface'
         ]
       }
     }

@@ -17,7 +17,6 @@ const props = withDefaults(defineProps<DrawerProps>(), {
   placement: 'right',
   isOpen: false,
   closable: true,
-  flat: false,
   title: '',
   class: ''
 })
@@ -125,7 +124,7 @@ const transitionClasses = computed(() => {
             :leave-to="transitionClasses.leaveTo"
           >
             <dialog-panel
-              :class="[classes.panel, ...(Array.isArray(props.class) ? props.class : [props.class])]"
+              :class="[classes.panel, ...(Array.isArray(props.classes) ? props.classes : [props.classes])]"
               :data-title="!!title"
             >
               <div
@@ -143,7 +142,7 @@ const transitionClasses = computed(() => {
                   size="xs"
                   variant="link"
                   shape="rounded"
-                  color="neutral"
+                  color="surface"
                   condensed
                   :class="classes.closeButton"
                   @click="closeDrawer"

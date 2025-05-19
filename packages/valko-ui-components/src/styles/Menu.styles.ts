@@ -25,33 +25,27 @@ export default tv({
       'transition-color',
       'duration-200',
       'cursor-pointer',
-      'hover:bg-light-200',
-      'hover:dark:bg-dark-800'
+      'hover:bg-surface-container-highest'
     ]
   },
   variants: {
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     },
     variant: {
-      filled: {
-        content: [
-          'data-[active=true]:text-light-50'
-        ]
-      },
+      filled: {},
       outlined: {
         content: [
           'py-[calc(0.625rem_-_2px)]',
           'px-[calc(1rem_-_2px)]',
           'border-2',
           'border-transparent',
-          'data-[active=true]:bg-transparent',
-          'data-[active=true]:dark:-transparent'
+          'data-[active=true]:bg-transparent'
         ]
       },
       ghost: {
@@ -72,8 +66,7 @@ export default tv({
       },
       gradient: {
         content: [
-          'bg-gradient-to-br',
-          'data-[active=true]:text-light-50'
+          'bg-gradient-to-br'
         ]
       }
     },
@@ -136,40 +129,38 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:bg-primary-500',
-          'data-[active=true]:dark:bg-primary-500'
+          'data-[active=true]:bg-primary',
+          'data-[active=true]:text-on-primary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:bg-light-200',
-          'data-[active=true]:text-dark-800',
-          'data-[active=true]:dark:bg-dark-800',
-          'data-[active=true]:dark:text-light-50'
+          'data-[active=true]:bg-secondary',
+          'data-[active=true]:text-on-secondary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       class: {
         content: [
-          'data-[active=true]:bg-success-500',
-          'data-[active=true]:dark:bg-success-500'
+          'data-[active=true]:bg-positive',
+          'data-[active=true]:text-on-positive'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       class: {
         content: [
-          'data-[active=true]:bg-error-500',
-          'data-[active=true]:dark:bg-error-500'
+          'data-[active=true]:bg-negative',
+          'data-[active=true]:text-on-negative'
         ]
       }
     },
@@ -178,18 +169,18 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:bg-warning-500',
-          'data-[active=true]:dark:bg-warning-500'
+          'data-[active=true]:bg-warning',
+          'data-[active=true]:text-on-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       class: {
         content: [
-          'data-[active=true]:bg-info-500',
-          'data-[active=true]:dark:bg-info-500'
+          'data-[active=true]:bg-accent',
+          'data-[active=true]:text-on-accent'
         ]
       }
     },
@@ -199,40 +190,38 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:text-primary-500',
-          'data-[active=true]:border-primary-500'
+          'data-[active=true]:text-primary',
+          'data-[active=true]:border-primary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:text-dark-600',
-          'data-[active=true]:border-light-300',
-          'data-[active=true]:dark:text-light-200',
-          'data-[active=true]:dark:border-dark-700'
+          'data-[active=true]:text-secondary',
+          'data-[active=true]:border-secondary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       class: {
         content: [
-          'data-[active=true]:text-success-500',
-          'data-[active=true]:border-success-500'
+          'data-[active=true]:text-positive',
+          'data-[active=true]:border-positive'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       class: {
         content: [
-          'data-[active=true]:text-error-500',
-          'data-[active=true]:border-error-500'
+          'data-[active=true]:text-negative',
+          'data-[active=true]:border-negative'
         ]
       }
     },
@@ -241,18 +230,18 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:text-warning-500',
-          'data-[active=true]:border-warning-500'
+          'data-[active=true]:text-warning',
+          'data-[active=true]:border-warning'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       class: {
         content: [
-          'data-[active=true]:text-info-500',
-          'data-[active=true]:border-info-500'
+          'data-[active=true]:text-accent',
+          'data-[active=true]:border-accent'
         ]
       }
     },
@@ -262,43 +251,38 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:text-primary-500',
-          'data-[active=true]:bg-primary-500/[.15]',
-          'data-[active=true]:dark:bg-primary-500/[.15]'
+          'data-[active=true]:text-on-primary-container',
+          'data-[active=true]:bg-primary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:text-dark-600',
-          'data-[active=true]:bg-light-300/[.2]',
-          'data-[active=true]:dark:text-light-200',
-          'data-[active=true]:dark:bg-dark-700/[.2]'
+          'data-[active=true]:text-on-secondary-container',
+          'data-[active=true]:bg-secondary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       class: {
         content: [
-          'data-[active=true]:text-success-500',
-          'data-[active=true]:bg-success-500/[.15]',
-          'data-[active=true]:dark:bg-success-500/[.15]'
+          'data-[active=true]:text-on-positive-container',
+          'data-[active=true]:bg-positive-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       class: {
         content: [
-          'data-[active=true]:text-error-500',
-          'data-[active=true]:bg-error-500/[.15]',
-          'data-[active=true]:dark:bg-error-500/[.15]'
+          'data-[active=true]:text-on-negative-container',
+          'data-[active=true]:bg-negative-container'
         ]
       }
     },
@@ -307,20 +291,18 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:text-warning-500',
-          'data-[active=true]:bg-warning-500/[.15]',
-          'data-[active=true]:dark:bg-warning-500/[.15]'
+          'data-[active=true]:text-on-warning-container',
+          'data-[active=true]:bg-warning-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       class: {
         content: [
-          'data-[active=true]:text-info-500',
-          'data-[active=true]:bg-info-500/[.15]',
-          'data-[active=true]:dark:bg-info-500/[.15]'
+          'data-[active=true]:text-on-accent-container',
+          'data-[active=true]:bg-accent-container'
         ]
       }
     },
@@ -330,35 +312,34 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:text-primary-500'
+          'data-[active=true]:text-primary'
         ]
       }
     },
     {
       variant: 'link',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:text-dark-950',
-          'data-[active=true]:dark:text-light-400'
+          'data-[active=true]:text-secondary'
         ]
       }
     },
     {
       variant: 'link',
-      color: 'success',
+      color: 'positive',
       class: {
         content: [
-          'data-[active=true]:text-success-500'
+          'data-[active=true]:text-positive'
         ]
       }
     },
     {
       variant: 'link',
-      color: 'error',
+      color: 'negative',
       class: {
         content: [
-          'data-[active=true]:text-error-500'
+          'data-[active=true]:text-negative'
         ]
       }
     },
@@ -367,16 +348,16 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:text-warning-500'
+          'data-[active=true]:text-warning'
         ]
       }
     },
     {
       variant: 'link',
-      color: 'info',
+      color: 'accent',
       class: {
         content: [
-          'data-[active=true]:text-info-500'
+          'data-[active=true]:text-accent'
         ]
       }
     },
@@ -386,35 +367,34 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:border-primary-500'
+          'data-[active=true]:border-primary'
         ]
       }
     },
     {
       variant: 'line',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:border-light-300',
-          'data-[active=true]:dark:border-dark-700'
+          'data-[active=true]:border-secondary'
         ]
       }
     },
     {
       variant: 'line',
-      color: 'success',
+      color: 'positive',
       class: {
         content: [
-          'data-[active=true]:border-success-500'
+          'data-[active=true]:border-positive'
         ]
       }
     },
     {
       variant: 'line',
-      color: 'error',
+      color: 'negative',
       class: {
         content: [
-          'data-[active=true]:border-error-500'
+          'data-[active=true]:border-negative'
         ]
       }
     },
@@ -423,16 +403,16 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:border-warning-500'
+          'data-[active=true]:border-warning'
         ]
       }
     },
     {
       variant: 'line',
-      color: 'info',
+      color: 'accent',
       class: {
         content: [
-          'data-[active=true]:border-info-500'
+          'data-[active=true]:border-accent'
         ]
       }
     },
@@ -442,42 +422,42 @@ export default tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:from-primary-500',
-          'data-[active=true]:to-primary-900'
+          'data-[active=true]:from-primary-gradient-start',
+          'data-[active=true]:to-primary-gradient-end',
+          'data-[active=true]:text-on-primary'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:from-light-200',
-          'data-[active=true]:to-light-400',
-          'data-[active=true]:text-dark-800',
-          'data-[active=true]:dark:from-dark-600',
-          'data-[active=true]:dark:to-dark-800',
-          'data-[active=true]:dark:text-light-50'
+          'data-[active=true]:from-secondary-gradient-start',
+          'data-[active=true]:to-secondary-gradient-end',
+          'data-[active=true]:text-on-secondary'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       class: {
         content: [
-          'data-[active=true]:from-success-500',
-          'data-[active=true]:to-success-900'
+          'data-[active=true]:from-positive-gradient-start',
+          'data-[active=true]:to-positive-gradient-end',
+          'data-[active=true]:text-on-positive'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       class: {
         content: [
-          'data-[active=true]:from-info-500',
-          'data-[active=true]:to-info-900'
+          'data-[active=true]:from-accent-gradient-start',
+          'data-[active=true]:to-accent-gradient-end',
+          'data-[active=true]:text-on-accent'
         ]
       }
     },
@@ -486,18 +466,20 @@ export default tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:from-warning-500',
-          'data-[active=true]:to-warning-900'
+          'data-[active=true]:from-warning-gradient-start',
+          'data-[active=true]:to-warning-gradient-end',
+          'data-[active=true]:text-on-warning'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       class: {
         content: [
-          'data-[active=true]:from-error-500',
-          'data-[active=true]:to-error-900'
+          'data-[active=true]:from-negative-gradient-start',
+          'data-[active=true]:to-negative-gradient-end',
+          'data-[active=true]:text-on-negative'
         ]
       }
     },
