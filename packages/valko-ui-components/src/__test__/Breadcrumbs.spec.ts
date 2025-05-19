@@ -123,6 +123,17 @@ describe('Breadcrumbs component', () => {
 
         expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-on-negative-container')
       })
+
+      it('should be color surface when props.color is surface', () => {
+        wrapper = mount(VkBreadcrumbs, {
+          props: {
+            crumbs,
+            color: 'surface'
+          }
+        })
+
+        expect(wrapper.find('.vk-breadcrumbs__a').classes()).toContain('hover:text-outlined')
+      })
     })
 
     describe('When shape prop changes', () => {

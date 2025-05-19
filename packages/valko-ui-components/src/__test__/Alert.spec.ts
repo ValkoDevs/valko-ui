@@ -103,6 +103,16 @@ describe('Alert component', () => {
 
         expect(wrapper.find('.bg-negative').exists()).toBe(true)
       })
+
+      it('should be color surface when props.color is surface', () => {
+        wrapper = mount(VkAlert, {
+          props: {
+            color: 'surface'
+          }
+        })
+
+        expect(wrapper.find('.bg-surface-container-highest').exists()).toBe(true)
+      })
     })
 
     describe('When shape prop changes', () => {

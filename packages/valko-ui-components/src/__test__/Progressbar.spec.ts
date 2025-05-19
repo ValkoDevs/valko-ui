@@ -210,7 +210,7 @@ describe('Progressbar component', () => {
           }
         })
 
-        expect(wrapper.find('.border-2').exists()).toBe(true)
+        expect(wrapper.find('.ring-2').exists()).toBe(true)
       })
 
       it('should be ghost when props.variant is ghost', () => {
@@ -318,7 +318,7 @@ describe('Progressbar component', () => {
         })
 
         const progress = wrapper.find('.vk-progressbar__progress')
-        expect(progress.attributes('style')).toContain('left: -50%')
+        expect(progress.attributes('style')).toContain('clip-path: inset(0 50% 0 0);')
       })
     })
 
@@ -330,7 +330,7 @@ describe('Progressbar component', () => {
           }
         })
 
-        const progress = wrapper.find('.vk-progressbar__progress')
+        const progress = wrapper.find('.vk-progressbar__stripes')
         expect(progress.attributes('style')).toContain('background-image')
       })
     })
