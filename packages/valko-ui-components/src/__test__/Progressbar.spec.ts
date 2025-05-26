@@ -18,7 +18,7 @@ describe('Progressbar component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be size md', () => {
@@ -26,7 +26,7 @@ describe('Progressbar component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-high').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
@@ -54,37 +54,37 @@ describe('Progressbar component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkProgressbar, {
           props: {
-            color: 'neutral'
+            color: 'secondary'
           }
         })
 
-        expect(wrapper.find('.bg-light-400').exists()).toBe(true)
+        expect(wrapper.find('.bg-secondary').exists()).toBe(true)
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkProgressbar, {
           props: {
-            color: 'success'
+            color: 'positive'
           }
         })
 
-        expect(wrapper.find('.bg-success-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-positive').exists()).toBe(true)
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkProgressbar, {
           props: {
-            color: 'info'
+            color: 'accent'
           }
         })
 
-        expect(wrapper.find('.bg-info-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-accent').exists()).toBe(true)
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -94,17 +94,17 @@ describe('Progressbar component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-warning-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-warning').exists()).toBe(true)
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkProgressbar, {
           props: {
-            color: 'error'
+            color: 'negative'
           }
         })
 
-        expect(wrapper.find('.bg-error-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-negative').exists()).toBe(true)
       })
     })
 
@@ -200,7 +200,7 @@ describe('Progressbar component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-200').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-high').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -210,7 +210,7 @@ describe('Progressbar component', () => {
           }
         })
 
-        expect(wrapper.find('.border-2').exists()).toBe(true)
+        expect(wrapper.find('.ring-2').exists()).toBe(true)
       })
 
       it('should be ghost when props.variant is ghost', () => {
@@ -318,7 +318,7 @@ describe('Progressbar component', () => {
         })
 
         const progress = wrapper.find('.vk-progressbar__progress')
-        expect(progress.attributes('style')).toContain('left: -50%')
+        expect(progress.attributes('style')).toContain('clip-path: inset(0 50% 0 0);')
       })
     })
 
@@ -330,8 +330,7 @@ describe('Progressbar component', () => {
           }
         })
 
-        const progress = wrapper.find('.vk-progressbar__progress')
-        console.log(wrapper.html())
+        const progress = wrapper.find('.vk-progressbar__stripes')
         expect(progress.attributes('style')).toContain('background-image')
       })
     })

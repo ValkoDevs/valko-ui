@@ -20,7 +20,7 @@ const progressbarProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Progressbar.',
-    values: 'primary, neutral, success, info, warning, error',
+    values: 'primary, secondary, positive, accent, warning, negative',
     default: 'primary'
   },
   {
@@ -96,7 +96,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
 <template>
   <doc-section
     title="Progressbar"
-    description="Visual indicator that shows the progress or status of a task. Progress bars are used to convey information about the completion status of an operation, such as file uploads, form submissions, or loading processes."
+    description="Visual indicator that shows the progress or status of a task. Progress bars are used to convey accent about the completion status of an operation, such as file uploads, form submissions, or loading processes."
   >
     <template #playground-view>
       <vk-progressbar
@@ -118,7 +118,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -167,7 +167,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-progressbar
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           :color="color.value"
           :progress="25"
@@ -176,7 +176,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
         </vk-progressbar>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', {values: colorOptions.map(o => o.value), hasSlot: true})" />
+          <code-block :code="generateSnippet<string>('color', {values: colorOptions.general.map(o => o.value), hasSlot: true})" />
         </template>
       </example-section>
 
@@ -249,7 +249,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-progressbar
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           :color="color.value"
           :progress="25"
@@ -259,7 +259,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
         </vk-progressbar>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', {values: colorOptions.map(o => o.value), hasSlot: true, extraProps: 'striped'})" />
+          <code-block :code="generateSnippet<string>('color', {values: colorOptions.general.map(o => o.value), hasSlot: true, extraProps: 'striped'})" />
         </template>
       </example-section>
 

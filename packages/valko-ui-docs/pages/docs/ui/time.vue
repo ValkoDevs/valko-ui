@@ -31,7 +31,7 @@ const timeProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Time.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -442,7 +442,7 @@ const minmaxSnippet = `${scriptCode}
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -474,7 +474,7 @@ const minmaxSnippet = `${scriptCode}
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <div
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
@@ -486,7 +486,7 @@ const minmaxSnippet = `${scriptCode}
         </div>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', {values: colorOptions.map(o => o.value), extraProps})}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', {values: colorOptions.general.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 

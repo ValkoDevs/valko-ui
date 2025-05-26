@@ -7,7 +7,8 @@ export default tv({
       'w-fit',
       'flex',
       'justify-between',
-      'items-center'
+      'items-center',
+      'shadow-el1'
     ],
     icons: [
       'mx-1'
@@ -29,18 +30,17 @@ export default tv({
       'gap-1',
       'justify-center',
       'items-center'
+    ],
+    closeIcon: [
+      'vk-tag__close-icon'
     ]
   },
   variants: {
     variant: {
-      filled: {
-        container: [
-          'text-light-50'
-        ]
-      },
+      filled: {},
       ghost: {
         container: [
-          'shadow-none'
+          'vk-tag__ghost'
         ]
       },
       outlined: {
@@ -50,8 +50,7 @@ export default tv({
       },
       gradient: {
         container: [
-          'bg-gradient-to-br',
-          'text-light-50'
+          'bg-gradient-to-br'
         ]
       }
     },
@@ -104,11 +103,12 @@ export default tv({
     },
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {},
+      surface: {}
     },
     disabled: {
       true: {}
@@ -129,40 +129,53 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-primary-500'
+          'bg-primary',
+          'text-on-primary'
+        ],
+        closeIcon: [
+          'text-on-primary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         container: [
-          'bg-light-300',
-          'text-dark-600',
-          'dark:text-light-200',
-          'dark:bg-dark-800'
+          'bg-secondary',
+          'text-on-secondary'
+        ],
+        closeIcon: [
+          'text-on-secondary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         container: [
-          'bg-success-500'
+          'bg-positive',
+          'text-on-positive'
+        ],
+        closeIcon: [
+          'text-on-positive'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         container: [
-          'bg-info-500'
+          'bg-accent',
+          'text-on-accent'
+        ],
+        closeIcon: [
+          'text-on-accent'
         ]
       }
     },
@@ -172,17 +185,39 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'bg-warning-500'
+          'bg-warning',
+          'text-on-warning'
+        ],
+        closeIcon: [
+          'text-on-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         container: [
-          'bg-error-500'
+          'bg-negative',
+          'text-on-negative'
+        ],
+        closeIcon: [
+          'text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'surface',
+      disabled: false,
+      class: {
+        container: [
+          'bg-surface-container-highest',
+          'text-on-surface'
+        ],
+        closeIcon: [
+          'text-on-surface'
         ]
       }
     },
@@ -193,41 +228,53 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-primary-500',
-          'bg-primary-500/[.15]'
+          'text-on-primary-container',
+          'bg-primary-container'
+        ],
+        closeIcon: [
+          'text-on-primary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         container: [
-          'bg-light-400/[.15]',
-          'dark:bg-dark-600/[.15]'
+          'text-on-secondary-container',
+          'bg-secondary-container'
+        ],
+        closeIcon: [
+          'text-on-secondary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         container: [
-          'text-success-500',
-          'bg-success-500/[.15]'
+          'text-on-positive-container',
+          'bg-positive-container'
+        ],
+        closeIcon: [
+          'text-on-positive-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         container: [
-          'text-info-500',
-          'bg-info-500/[.15]'
+          'text-on-accent-container',
+          'bg-accent-container'
+        ],
+        closeIcon: [
+          'text-on-accent-container'
         ]
       }
     },
@@ -237,19 +284,39 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-warning-500',
-          'bg-warning-500/[.15]'
+          'text-on-warning-container',
+          'bg-warning-container'
+        ],
+        closeIcon: [
+          'text-on-warning-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         container: [
-          'text-error-500',
-          'bg-error-500/[.15]'
+          'text-on-negative-container',
+          'bg-negative-container'
+        ],
+        closeIcon: [
+          'text-on-negative-container'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      disabled: false,
+      class: {
+        container: [
+          'text-on-surface-variant',
+          'bg-surface-container-highest/[.5]'
+        ],
+        closeIcon: [
+          'text-on-surface-variant'
         ]
       }
     },
@@ -260,41 +327,53 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-primary-500',
-          'border-primary-500'
+          'text-primary',
+          'border-primary'
+        ],
+        closeIcon: [
+          'text-primary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         container: [
-          'border-dark-800',
-          'dark:border-light-300'
+          'border-secondary',
+          'text-secondary'
+        ],
+        closeIcon: [
+          'text-secondary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         container: [
-          'text-success-500',
-          'border-success-500'
+          'text-positive',
+          'border-positive'
+        ],
+        closeIcon: [
+          'text-positive'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         container: [
-          'text-info-500',
-          'border-info-500'
+          'text-accent',
+          'border-accent'
+        ],
+        closeIcon: [
+          'text-accent'
         ]
       }
     },
@@ -304,19 +383,39 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'text-warning-500',
-          'border-warning-500'
+          'text-warning',
+          'border-warning'
+        ],
+        closeIcon: [
+          'text-warning'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         container: [
-          'text-error-500',
-          'border-error-500'
+          'text-negative',
+          'border-negative'
+        ],
+        closeIcon: [
+          'text-negative'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'surface',
+      disabled: false,
+      class: {
+        container: [
+          'border-outlined',
+          'text-on-surface-variant'
+        ],
+        closeIcon: [
+          'text-on-surface-variant'
         ]
       }
     },
@@ -326,42 +425,54 @@ export default tv({
       color: 'primary',
       class: {
         container: [
-          'from-primary-500',
-          'to-primary-900'
+          'from-primary-gradient-start',
+          'to-primary-gradient-end',
+          'text-on-primary'
+        ],
+        closeIcon: [
+          'text-on-primary'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         container: [
-          'from-light-200',
-          'to-light-400',
-          'text-dark-600',
-          'dark:from-dark-600',
-          'dark:to-dark-800',
-          'dark:text-light-200'
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end',
+          'text-on-secondary'
+        ],
+        closeIcon: [
+          'text-on-secondary'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       class: {
         container: [
-          'from-success-500',
-          'to-success-900'
+          'from-positive-gradient-start',
+          'to-positive-gradient-end',
+          'text-on-positive'
+        ],
+        closeIcon: [
+          'text-on-positive'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       class: {
         container: [
-          'from-info-500',
-          'to-info-900'
+          'from-accent-gradient-start',
+          'to-accent-gradient-end',
+          'text-on-accent'
+        ],
+        closeIcon: [
+          'text-on-accent'
         ]
       }
     },
@@ -370,18 +481,40 @@ export default tv({
       color: 'warning',
       class: {
         container: [
-          'from-warning-500',
-          'to-warning-900'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end',
+          'text-on-warning'
+        ],
+        closeIcon: [
+          'text-on-warning'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       class: {
         container: [
-          'from-error-500',
-          'to-error-900'
+          'from-negative-gradient-start',
+          'to-negative-gradient-end',
+          'text-on-negative'
+        ],
+        closeIcon: [
+          'text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'surface',
+      class: {
+        container: [
+          'from-surface-container',
+          'to-surface-container-highest',
+          'text-on-surface'
+        ],
+        closeIcon: [
+          'text-on-surface'
         ]
       }
     },
@@ -391,7 +524,7 @@ export default tv({
       disabled: true,
       class: {
         container: [
-          'bg-gray-600',
+          'bg-disabled',
           'opacity-50',
           'cursor-not-allowed'
         ]
@@ -402,7 +535,7 @@ export default tv({
       disabled: true,
       class: {
         container: [
-          'text-gray-600',
+          'text-on-disabled',
           'hover:bg-transparent',
           'active:bg-transparent',
           'opacity-50',
@@ -415,11 +548,11 @@ export default tv({
       disabled: true,
       class: {
         container: [
-          'text-gray-600',
+          'text-on-disabled',
           'hover:bg-transparent',
           'active:bg-transparent',
           'opacity-50',
-          'border-gray-600',
+          'border-disabled',
           'cursor-not-allowed'
         ]
       }
@@ -478,41 +611,40 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-primary-700'
+          'focus:ring-primary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-light-400',
-          'dark:focus:ring-dark-900'
+          'focus:ring-secondary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-success-700'
+          'focus:ring-positive'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-info-700'
+          'focus:ring-accent'
         ]
       }
     },
@@ -523,18 +655,18 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-warning-700'
+          'focus:ring-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-error-700'
+          'focus:ring-negative'
         ]
       }
     },
@@ -546,41 +678,40 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-primary-500/[.30]'
+          'focus:ring-primary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-light-400/[.30]',
-          'dark:focus:ring-dark-950/[.30]'
+          'focus:ring-secondary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-success-500/[.30]'
+          'focus:ring-positive-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-info-500/[.30]'
+          'focus:ring-accent-container'
         ]
       }
     },
@@ -591,18 +722,18 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-warning-500/[.30]'
+          'focus:ring-warning-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-error-500/[.30]'
+          'focus:ring-negative-container'
         ]
       }
     },
@@ -614,40 +745,40 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-primary-400/20'
+          'focus:ring-primary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'dark:focus:ring-dark-900/20'
+          'dark:focus:ring-secondary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-success-400/20'
+          'focus:ring-positive'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-info-400/20'
+          'focus:ring-accent'
         ]
       }
     },
@@ -658,18 +789,18 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'focus:ring-warning-400/20'
+          'focus:ring-warning'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       isPressable: true,
       disabled: false,
       class: {
         container: [
-          'focus:ring-error-400/20'
+          'focus:ring-negative'
         ]
       }
     }

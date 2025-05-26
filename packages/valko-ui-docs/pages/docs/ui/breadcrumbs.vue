@@ -7,8 +7,7 @@ const form = ref<Partial<BreadcrumbsProps>>({
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  separator: '>',
-  flat: false
+  separator: '>'
 })
 
 const crumbs: Crumb[] = [
@@ -41,7 +40,7 @@ const breadcrumbsProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Breadcrumbs.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -99,14 +98,6 @@ const breadcrumbsProps: TableItem[] = [
     description: 'The separator for the Breadcrumbs. Up to 2 character or an icon if passed the name.',
     values: 'string',
     default: '>'
-  },
-  {
-    key: 'flatProp',
-    prop: 'flat',
-    required: false,
-    description: 'Wether the Breadcrumbs has a shadow or not.',
-    values: 'true, false',
-    default: 'false'
   }
 ]
 
@@ -236,7 +227,6 @@ const extraProps = ':crumbs="crumbs"'
         :variant="form.variant"
         :crumbs="crumbs"
         :separator="form.separator"
-        :flat="form.flat"
       />
     </template>
 
@@ -245,7 +235,7 @@ const extraProps = ':crumbs="crumbs"'
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -269,10 +259,6 @@ const extraProps = ':crumbs="crumbs"'
         v-model="form.separator"
         label="Separator"
       />
-      <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
-      />
     </template>
 
     <template #examples>
@@ -281,7 +267,7 @@ const extraProps = ':crumbs="crumbs"'
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <div
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           class="flex flex-col gap-2 items-center justify-center"
         >
@@ -293,7 +279,7 @@ const extraProps = ':crumbs="crumbs"'
         </div>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
@@ -357,17 +343,6 @@ const extraProps = ':crumbs="crumbs"'
 
         <template #code>
           <code-block :code="`${scriptCode}\n${generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), extraProps })}`" />
-        </template>
-      </example-section>
-
-      <example-section title="Flat">
-        <vk-breadcrumbs
-          flat
-          :crumbs="crumbs"
-        />
-
-        <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('flat', { values: [true], extraProps })}`" />
         </template>
       </example-section>
 

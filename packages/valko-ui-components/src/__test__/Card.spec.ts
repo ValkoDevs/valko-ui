@@ -19,15 +19,15 @@ describe('Card component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.bg-light-100').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-highest').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
         expect(wrapper.find('.rounded-lg').exists()).toBe(true)
       })
 
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
+      it('should not be elevated', () => {
+        expect(wrapper.find('.shadow-el1').exists()).toBe(false)
       })
     })
 
@@ -123,7 +123,7 @@ describe('Card component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-light-100').exists()).toBe(true)
+        expect(wrapper.find('.bg-surface-container-highest').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -143,7 +143,19 @@ describe('Card component', () => {
           }
         })
 
-        expect(wrapper.find('.shadow-none').exists()).toBe(true)
+        expect(wrapper.find('.vk-card').classes()).toContain('bg-surface-container-highest/[.5]')
+      })
+    })
+
+    describe('When prop elevated changes', () => {
+      it('should be elevated when props.elevated is true', () => {
+        wrapper = mount(VkCard, {
+          props: {
+            elevated: true
+          }
+        })
+
+        expect(wrapper.find('.vk-card').classes()).toContain('shadow-el1')
       })
     })
   })

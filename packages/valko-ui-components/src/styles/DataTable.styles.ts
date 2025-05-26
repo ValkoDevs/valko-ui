@@ -20,8 +20,7 @@ export default tv({
     headerUtilities: [
       'vk-data-table__utilities',
       'cursor-pointer',
-      'text-dark-600',
-      'dark:text-light-400'
+      'text-on-surface'
     ],
     footer: [
       'flex',
@@ -45,50 +44,38 @@ export default tv({
     color: {
       primary: {
         headerUtilities: [
-          'data-[active=true]:text-primary-500',
-          'hover:text-primary-500',
-          'dark:data-[active=true]:text-primary-500',
-          'dark:hover:text-primary-500'
+          'data-[active=true]:text-primary',
+          'hover:text-primary'
         ]
       },
-      neutral: {
+      secondary: {
         headerUtilities: [
-          'data-[active=true]:text-dark-950',
-          'hover:text-dark-950',
-          'dark:data-[active=true]:text-light-50',
-          'dark:hover:text-light-50'
+          'data-[active=true]:text-secondary',
+          'hover:text-secondary'
         ]
       },
-      success: {
+      positive: {
         headerUtilities: [
-          'data-[active=true]:text-success-500',
-          'hover:text-success-500',
-          'dark:data-[active=true]:text-success-500',
-          'dark:hover:text-success-500'
+          'data-[active=true]:text-positive',
+          'hover:text-positive'
         ]
       },
-      info: {
+      accent: {
         headerUtilities: [
-          'data-[active=true]:text-info-500',
-          'hover:text-info-500',
-          'dark:data-[active=true]:text-info-500',
-          'dark:hover:text-info-500'
+          'data-[active=true]:text-accent',
+          'hover:text-accent'
         ]
       },
       warning: {
         headerUtilities: [
-          'data-[active=true]:text-warning-500',
-          'hover:text-warning-500',
-          'dark:data-[active=true]:text-warning-500',
-          'dark:hover:text-warning-500'
+          'data-[active=true]:text-warning',
+          'hover:text-warning'
         ]
       },
-      error: {
+      negative: {
         headerUtilities: [
-          'data-[active=true]:text-error-500',
-          'hover:text-error-500',
-          'dark:data-[active=true]:text-error-500',
-          'dark:hover:text-error-500'
+          'data-[active=true]:text-negative',
+          'hover:text-negative'
         ]
       }
     }

@@ -15,8 +15,7 @@ const props = withDefaults(defineProps<AlertProps>(), {
   size: 'md',
   shape: 'soft',
   icon: '',
-  closable: false,
-  flat: false
+  closable: false
 })
 
 const emit = defineEmits(['close'])
@@ -28,11 +27,11 @@ const onClick = () => emit('close')
 const defaultIcon = computed(() => {
   switch (props.color) {
     case 'primary': return 'alert-hexagon-filled'
-    case 'neutral': return 'alert-hexagon-filled'
-    case 'success': return 'circle-check-filled'
-    case 'info': return 'info-circle-filled'
+    case 'secondary': return 'alert-hexagon-filled'
+    case 'positive': return 'circle-check-filled'
+    case 'accent': return 'info-circle-filled'
     case 'warning': return 'alert-circle-filled'
-    case 'error': return 'circle-x-filled'
+    case 'negative': return 'circle-x-filled'
     default: return 'alert-hexagon-filled'
   }
 })
@@ -62,11 +61,10 @@ const defaultIcon = computed(() => {
     <vk-button
       v-if="closable"
       variant="link"
-      color="neutral"
+      color="surface"
       size="xs"
       shape="rounded"
       class="size-4"
-      flat
       condensed
       @click="onClick"
     >

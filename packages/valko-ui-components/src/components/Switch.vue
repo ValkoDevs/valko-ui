@@ -46,7 +46,7 @@ const onClick = (event: boolean) => {
           <span
             aria-hidden="true"
             :data-selected="modelValue"
-            :class="`${classes.thumb}`"
+            :class="classes.thumb"
           />
         </Switch>
       </div>

@@ -25,7 +25,7 @@ const apiData: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Textarea.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -168,8 +168,8 @@ const iconSnippet = `<template>
         :label="form.label"
         :maxlength="form.maxlength"
         :helpertext="form.helpertext"
-        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'neutral' })"
-        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'neutral' })"
+        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'secondary' })"
+        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'secondary' })"
       >
         <template
           v-if="iconsInForm.left"
@@ -213,7 +213,7 @@ const iconSnippet = `<template>
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.shape"
@@ -251,14 +251,14 @@ const iconSnippet = `<template>
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-textarea
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           :color="color.value"
           :label="color.label"
         />
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 

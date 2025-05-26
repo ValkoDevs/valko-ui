@@ -14,7 +14,6 @@ const props = withDefaults(defineProps<BreadcrumbsProps>(), {
   shape: 'soft',
   separator: '>',
   crumbs: () => [],
-  flat: false,
   condensed: false
 })
 

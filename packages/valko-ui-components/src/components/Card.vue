@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<CardProps>(), {
   size: 'md',
   layout: 'vertical',
   isPressable: false,
-  flat: false
+  elevated: false
 })
 
 const emit = defineEmits(['click'])

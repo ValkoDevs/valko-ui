@@ -13,7 +13,6 @@ const form = reactive<CheckboxProps>({
   shape: 'soft',
   label: 'Checkbox',
   labelPosition: 'right',
-  flat: false,
   disabled: false,
   readonly: false,
   modelValue: false
@@ -22,6 +21,25 @@ const form = reactive<CheckboxProps>({
 const indeterminateRef = ref(false)
 
 const checkboxStates = reactive<Record<string, boolean>>({
+  primary: true,
+  secondary: true,
+  accent: true,
+  warning: true,
+  negative: true,
+  positive: true,
+  filled: true,
+  outlined: true,
+  ghost: true,
+  rounded: true,
+  square: true,
+  soft: true,
+  xs: true,
+  sm: true,
+  md: true,
+  lg: true,
+  indeterminate: true,
+  right: true,
+  left: true,
   readonly: true,
   disabled: true
 })
@@ -32,7 +50,7 @@ const apiData: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Checkbox.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -157,7 +175,6 @@ watchEffect(() => {
         :size="form.size"
         :helpertext="form.helpertext"
         :disabled="form.disabled"
-        :flat="form.flat"
         :shape="form.shape"
         :label-position="form.labelPosition"
         :readonly="form.readonly"
@@ -180,7 +197,7 @@ watchEffect(() => {
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -211,10 +228,6 @@ watchEffect(() => {
         label="Disabled"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
-      />
-      <vk-checkbox
         v-model="form.readonly"
         label="Readonly"
       />
@@ -230,7 +243,7 @@ watchEffect(() => {
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <vk-checkbox
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           v-model="checkboxStates[color.value]"
           :color="color.value"
@@ -238,7 +251,7 @@ watchEffect(() => {
         />
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 
@@ -302,18 +315,6 @@ watchEffect(() => {
 
         <template #code>
           <code-block :code="generateSnippet<boolean>('disabled', { values: [true] })" />
-        </template>
-      </example-section>
-
-      <example-section title="Flat">
-        <vk-checkbox
-          v-model="checkboxStates['flat']"
-          label="Flat"
-          flat
-        />
-
-        <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', { values: [true] })" />
         </template>
       </example-section>
 

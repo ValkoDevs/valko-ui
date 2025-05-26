@@ -42,7 +42,7 @@ const tabsProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Tabs.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -82,7 +82,7 @@ const tabsProps: TableItem[] = [
     prop: 'grow',
     required: false,
     description: 'Allow the Tabs to grow to fill any available space',
-    values: 'primary, secondary, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -250,7 +250,7 @@ const extraProps = ':tabs="tabs"'
         type="outlined"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -293,7 +293,7 @@ const extraProps = ':tabs="tabs"'
         classes="md:grid-cols-2"
       >
         <div
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
         >
           <span> {{ color.label }} </span>
@@ -304,7 +304,7 @@ const extraProps = ':tabs="tabs"'
         </div>
 
         <template #code>
-          <code-block :code="`${scriptNoIcons}\n${generateSnippet<string>('color', { values: colorOptions.map(o => o.value), extraProps })}`" />
+          <code-block :code="`${scriptNoIcons}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 

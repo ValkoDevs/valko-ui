@@ -1,10 +1,22 @@
-import type { SelectOption, Color } from '#valkoui'
+import type { SelectOption, Color, ColorWithSurface } from '#valkoui'
 
-export default [
+const general = [
   { value: 'primary', label: 'Primary' },
-  { value: 'neutral', label: 'Neutral' },
-  { value: 'success', label: 'Success' },
-  { value: 'info', label: 'Info' },
+  { value: 'secondary', label: 'Secondary' },
+  { value: 'accent', label: 'Accent' },
+  { value: 'positive', label: 'Positive' },
   { value: 'warning', label: 'Warning' },
-  { value: 'error', label: 'Error' }
+  { value: 'negative', label: 'Negative' }
 ] as SelectOption<Color>[]
+
+const withSurface = [
+  ...general,
+  { value: 'surface', label: 'Surface' }
+] as SelectOption<ColorWithSurface>[]
+
+const colorOptions = {
+  general,
+  withSurface
+}
+
+export default colorOptions

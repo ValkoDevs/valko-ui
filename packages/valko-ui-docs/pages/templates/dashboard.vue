@@ -53,7 +53,7 @@ const employeeData: TableItem[] = [
     email: 'michael.brown@example.com',
     sales: 67,
     date: '2023-10-30',
-    status: 'error',
+    status: 'negative',
     company: 'Retail Masters Corp.'
   },
   {
@@ -67,7 +67,7 @@ const employeeData: TableItem[] = [
   }
 ]
 
-const activeItem = ref('account')
+const activeItem = ref('dashboard')
 
 const onItemClick = (item: MenuItem) => activeItem.value = `${item.key}`
 
@@ -126,7 +126,7 @@ const employeeData: TableItem[] = [
     email: 'michael.brown@example.com',
     sales: 67,
     date: '2023-10-30',
-    status: 'error',
+    status: 'negative',
     company: 'Retail Masters Corp.'
   },
   {
@@ -161,7 +161,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
         <h1 class="text-lg font-semibold">
           Dashboard
         </h1>
-        <vk-button color="neutral">
+        <vk-button color="secondary">
           Profile
         </vk-button>
       </header>
@@ -231,7 +231,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
   <page-template>
     <template #example>
       <div class="flex h-full">
-        <aside class="w-[10vw] border-r border-light-300 dark:border-dark-700 bg-light-200 dark:bg-dark-800/[.8]">
+        <aside class="w-[10vw] border-r border-outlined bg-surface-container">
           <vk-menu
             :items="menuItems"
             :active="activeItem"
@@ -241,18 +241,18 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
         </aside>
 
         <div class="flex-1 flex flex-col">
-          <header class="p-4 border-b border-light-300 dark:border-dark-700 flex justify-between items-center bg-light-200 dark:bg-dark-800/[.8]">
+          <header class="p-4 border-b border-outlined flex justify-between items-center bg-surface-container">
             <h1 class="text-lg font-semibold">
               Dashboard
             </h1>
-            <vk-button color="neutral">
+            <vk-button color="secondary">
               Profile
             </vk-button>
           </header>
 
           <main class="p-6 flex-1 overflow-auto space-y-6">
             <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              <div class="p-4 shadow-md rounded flex flex-col items-center bg-light-100 dark:bg-dark-800/[.5]">
+              <div class="p-4 shadow-md rounded flex flex-col items-center bg-surface-container">
                 <h3>
                   Total Users
                 </h3>
@@ -260,7 +260,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
                   1,234
                 </p>
               </div>
-              <div class="p-4 shadow-md rounded flex flex-col items-center bg-light-100 dark:bg-dark-800/[.5]">
+              <div class="p-4 shadow-md rounded flex flex-col items-center bg-surface-container">
                 <h3>
                   Sales
                 </h3>
@@ -268,7 +268,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
                   $45,678
                 </p>
               </div>
-              <div class="p-4 shadow-md rounded flex flex-col items-center bg-light-100 dark:bg-dark-800/[.5]">
+              <div class="p-4 shadow-md rounded flex flex-col items-center bg-surface-container">
                 <h3>
                   Projects
                 </h3>
@@ -276,7 +276,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
                   56
                 </p>
               </div>
-              <div class="p-4 shadow-md rounded flex flex-col items-center bg-light-100 dark:bg-dark-800/[.5]">
+              <div class="p-4 shadow-md rounded flex flex-col items-center bg-surface-container">
                 <h3>
                   Pending Tasks
                 </h3>
@@ -294,7 +294,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
               />
             </section>
 
-            <section class="p-6 shadow-md rounded bg-light-100 dark:bg-dark-800/[.5]">
+            <section class="p-6 shadow-md rounded bg-surface-container">
               <h2 class="text-lg font-semibold mb-4">
                 Analytics
               </h2>

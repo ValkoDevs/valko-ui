@@ -39,33 +39,37 @@ export default tv({
     color: {
       primary: {
         iconColor: [
-          'text-primary-500'
+          'text-primary'
         ]
       },
-      neutral: {
+      secondary: {
         iconColor: [
-          'text-dark-800',
-          'dark:text-light-100'
+          'text-secondary'
         ]
       },
-      success: {
+      positive: {
         iconColor: [
-          'text-success-500'
+          'text-positive'
         ]
       },
-      info: {
+      accent: {
         iconColor: [
-          'text-info-500'
+          'text-accent'
         ]
       },
       warning: {
         iconColor: [
-          'text-warning-500'
+          'text-warning'
         ]
       },
-      error: {
+      negative: {
         iconColor: [
-          'text-error-500'
+          'text-negative'
+        ]
+      },
+      surface: {
+        iconColor: [
+          'text-on-surface'
         ]
       }
     },

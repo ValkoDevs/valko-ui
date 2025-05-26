@@ -40,22 +40,19 @@ export default tv({
       'items-center',
       'transition',
       'duration-200',
-      'disabled:text-gray-400',
-      'disabled:cursor-not-allowed',
-      'dark:disabled:text-gray-500'
+      'disabled:text-on-disabled',
+      'disabled:cursor-not-allowed'
     ],
     content: [
       'grow'
     ],
     cursor: [
-      'shadow-lg',
-      'shadow-light-300',
+      'shadow-el1',
       'absolute',
       'inset-0',
       'z-10',
       'transition-all',
-      'duration-200',
-      'dark:shadow-dark-950'
+      'duration-200'
     ],
     cursorGradient: [
       'absolute',
@@ -77,15 +74,13 @@ export default tv({
     variant: {
       filled: {
         list: [
-          'bg-light-200',
-          'dark:bg-dark-800'
+          'bg-surface-container'
         ]
       },
       outlined: {
         list: [
           'border-2',
-          'border-light-400',
-          'dark:border-dark-600'
+          'border-outlined'
         ]
       },
       ghost: {
@@ -96,13 +91,12 @@ export default tv({
           'bg-transparent'
         ],
         cursor: [
-          'shadow-none'
+          'shadow-el0'
         ]
       },
       gradient: {
         list: [
-          'bg-light-200',
-          'dark:bg-dark-800'
+          'bg-surface-container'
         ],
         cursor: [
           'bg-gradient-to-br'
@@ -116,7 +110,7 @@ export default tv({
         ],
         cursor: [
           'border-b-2',
-          'shadow-none'
+          'shadow-el0'
         ]
       },
       rounded: {
@@ -124,8 +118,8 @@ export default tv({
           'rounded-full'
         ],
         tab: [
-          'data-[headlessui-state=selected]:text-white',
-          'rounded-full'
+          'rounded-full',
+          'text-on-surface'
         ],
         cursor: [
           'rounded-full'
@@ -136,7 +130,7 @@ export default tv({
           'rounded-none'
         ],
         tab: [
-          'data-[headlessui-state=selected]:text-white'
+          'text-on-surface'
         ]
       },
       soft: {
@@ -145,7 +139,7 @@ export default tv({
         ],
         tab: [
           'rounded-lg',
-          'data-[headlessui-state=selected]:text-white'
+          'text-on-surface'
         ],
         cursor: [
           'rounded-lg'
@@ -180,11 +174,11 @@ export default tv({
     },
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     },
     grow: {
       true: {
@@ -231,47 +225,53 @@ export default tv({
       color: 'primary',
       class: {
         cursor: [
-          'from-primary-500',
-          'to-primary-900'
-        ]
-      }
-    },
-    {
-      variant: 'gradient',
-      shape: ['soft', 'rounded', 'square'],
-      color: 'neutral',
-      class: {
-        cursor: [
-          'from-light-50',
-          'to-light-400',
-          'dark:from-dark-600',
-          'dark:to-dark-950'
+          'from-primary-gradient-start',
+          'to-primary-gradient-end'
         ],
         tab: [
-          'data-[headlessui-state=selected]:text-dark-600',
-          'dark:data-[headlessui-state=selected]:text-light-200'
+          'data-[headlessui-state=selected]:text-on-primary'
         ]
       }
     },
     {
       variant: 'gradient',
       shape: ['soft', 'rounded', 'square'],
-      color: 'success',
+      color: 'secondary',
       class: {
         cursor: [
-          'from-success-500',
-          'to-success-900'
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-secondary'
         ]
       }
     },
     {
       variant: 'gradient',
       shape: ['soft', 'rounded', 'square'],
-      color: 'info',
+      color: 'positive',
       class: {
         cursor: [
-          'from-info-500',
-          'to-info-900'
+          'from-positive-gradient-start',
+          'to-positive-gradient-end'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-positive'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      shape: ['soft', 'rounded', 'square'],
+      color: 'accent',
+      class: {
+        cursor: [
+          'from-accent-gradient-start',
+          'to-accent-gradient-end'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-accent'
         ]
       }
     },
@@ -281,19 +281,25 @@ export default tv({
       color: 'warning',
       class: {
         cursor: [
-          'from-warning-500',
-          'to-warning-900'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-warning'
         ]
       }
     },
     {
       variant: 'gradient',
       shape: ['soft', 'rounded', 'square'],
-      color: 'error',
+      color: 'negative',
       class: {
         cursor: [
-          'from-error-500',
-          'to-error-900'
+          'from-negative-gradient-start',
+          'to-negative-gradient-end'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-negative'
         ]
       }
     },
@@ -303,35 +309,34 @@ export default tv({
       shape: 'line',
       class: {
         cursor: [
-          'border-primary-500'
+          'border-primary'
         ]
       }
     },
     {
-      color: 'neutral',
+      color: 'secondary',
       shape: 'line',
       class: {
         cursor: [
-          'border-light-300',
-          'dark:border-dark-700'
+          'border-secondary'
         ]
       }
     },
     {
-      color: 'success',
+      color: 'positive',
       shape: 'line',
       class: {
         cursor: [
-          'border-success-500'
+          'border-positive'
         ]
       }
     },
     {
-      color: 'info',
+      color: 'accent',
       shape: 'line',
       class: {
         cursor: [
-          'border-info-500'
+          'border-accent'
         ]
       }
     },
@@ -340,16 +345,16 @@ export default tv({
       shape: 'line',
       class: {
         cursor: [
-          'border-warning-500'
+          'border-warning'
         ]
       }
     },
     {
-      color: 'error',
+      color: 'negative',
       shape: 'line',
       class: {
         cursor: [
-          'border-error-500'
+          'border-negative'
         ]
       }
     },
@@ -359,39 +364,46 @@ export default tv({
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-primary-500'
-        ]
-      }
-    },
-    {
-      color: 'neutral',
-      shape: ['rounded', 'square', 'soft'],
-      class: {
-        cursor: [
-          'bg-light-300',
-          'dark:bg-dark-700'
+          'bg-primary'
         ],
         tab: [
-          'data-[headlessui-state=selected]:text-dark-600',
-          'dark:data-[headlessui-state=selected]:text-light-200'
+          'data-[headlessui-state=selected]:text-on-primary'
         ]
       }
     },
     {
-      color: 'success',
+      color: 'secondary',
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-success-500'
+          'bg-secondary'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-secondary'
         ]
       }
     },
     {
-      color: 'info',
+      color: 'positive',
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-info-500'
+          'bg-positive'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-positive'
+        ]
+      }
+    },
+    {
+      color: 'accent',
+      shape: ['rounded', 'square', 'soft'],
+      class: {
+        cursor: [
+          'bg-accent'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-accent'
         ]
       }
     },
@@ -400,16 +412,22 @@ export default tv({
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-warning-500'
+          'bg-warning'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-warning'
         ]
       }
     },
     {
-      color: 'error',
+      color: 'negative',
       shape: ['rounded', 'square', 'soft'],
       class: {
         cursor: [
-          'bg-error-500'
+          'bg-negative'
+        ],
+        tab: [
+          'data-[headlessui-state=selected]:text-on-negative'
         ]
       }
     },
@@ -482,41 +500,41 @@ export default tv({
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-primary-500',
-          'to-primary-900'
+          'from-primary-gradient-start',
+          'to-primary-gradient-end'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-primary-500',
-          'to-primary-900'
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-success-500',
-          'to-success-900'
+          'from-positive-gradient-start',
+          'to-positive-gradient-end'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-info-500',
-          'to-info-900'
+          'from-accent-gradient-start',
+          'to-accent-gradient-end'
         ]
       }
     },
@@ -526,19 +544,19 @@ export default tv({
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-warning-500',
-          'to-warning-900'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       shape: 'line',
       class: {
         cursorGradient: [
-          'from-error-500',
-          'to-error-900'
+          'from-negative-gradient-start',
+          'to-negative-gradient-end'
         ]
       }
     }

@@ -6,5 +6,4 @@ export interface SwitchProps extends DefaultComponent {
   disabled?: boolean;
   readonly?: boolean;
   modelValue?: boolean;
-  flat?: boolean;
 }

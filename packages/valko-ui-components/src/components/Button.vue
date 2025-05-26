@@ -13,7 +13,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   size: 'md',
   shape: 'soft',
   block: false,
-  flat: false,
+  elevated: false,
   disabled: false,
   condensed: false,
   loading: false
@@ -34,11 +34,9 @@ const onClick = () => {
   <button
     :class="classes.button"
     :disabled="disabled"
-    :flat="flat"
-    :condensed="condensed"
-    :block="block"
     @click="onClick"
   >
+    <div :class="classes.stateLayer" />
     <div
       :class="classes.spinnerContainer"
     >
@@ -53,14 +51,9 @@ const onClick = () => {
         <vk-spinner
           v-if="loading"
           condensed
-          :data-variant="props.variant"
-          :data-color="props.color"
-          :class-name="props.color === 'neutral'
-            ? `${classes.loader}`
-            : (props.variant === 'filled' || props.variant === 'gradient')
-              ? 'text-white'
-              : `text-${props.color}-500`"
+          :classes="variant === 'filled' || variant === 'gradient' ? 'text-white dark:text-black' : ''"
           :size="size"
+          :color="color"
         />
       </transition>
     </div>

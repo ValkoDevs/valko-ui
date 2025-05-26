@@ -14,7 +14,7 @@ describe('Button component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
       it('should be size md', () => {
@@ -22,19 +22,19 @@ describe('Button component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.text-light-50').exists()).toBe(true)
+        expect(wrapper.find('.vk-button__filled').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
-        expect(wrapper.find('.rounded').exists()).toBe(true)
+        expect(wrapper.find('.rounded-sm').exists()).toBe(true)
       })
 
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
+      it('should not be elevated', () => {
+        expect(wrapper.find('.shadow-el1').exists()).toBe(false)
       })
 
       it('should not be block', () => {
-        expect(wrapper.find('.w-full').exists()).toBe(false)
+        expect(wrapper.find('.w-fit').exists()).toBe(true)
       })
 
       it('should not be condensed', () => {
@@ -58,37 +58,37 @@ describe('Button component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-primary-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-primary').exists()).toBe(true)
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkButton, {
           props: {
-            color: 'neutral'
+            color: 'secondary'
           }
         })
 
-        expect(wrapper.find('.bg-light-300').exists()).toBe(true)
+        expect(wrapper.find('.bg-secondary').exists()).toBe(true)
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkButton, {
           props: {
-            color: 'success'
+            color: 'positive'
           }
         })
 
-        expect(wrapper.find('.bg-success-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-positive').exists()).toBe(true)
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkButton, {
           props: {
-            color: 'info'
+            color: 'accent'
           }
         })
 
-        expect(wrapper.find('.bg-info-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-accent').exists()).toBe(true)
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -98,17 +98,27 @@ describe('Button component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-warning-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-warning').exists()).toBe(true)
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkButton, {
           props: {
-            color: 'error'
+            color: 'negative'
           }
         })
 
-        expect(wrapper.find('.bg-error-500').exists()).toBe(true)
+        expect(wrapper.find('.bg-negative').exists()).toBe(true)
+      })
+
+      it('should be color surface when props.color is surface', () => {
+        wrapper = mount(VkButton, {
+          props: {
+            color: 'surface'
+          }
+        })
+
+        expect(wrapper.find('.bg-surface-container-highest').exists()).toBe(true)
       })
     })
 
@@ -130,7 +140,7 @@ describe('Button component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded').exists()).toBe(true)
+        expect(wrapper.find('.rounded-sm').exists()).toBe(true)
       })
 
       it('should be square when props.shape is square', () => {
@@ -194,7 +204,7 @@ describe('Button component', () => {
           }
         })
 
-        expect(wrapper.find('.text-light-50').exists()).toBe(true)
+        expect(wrapper.find('.vk-button__filled').exists()).toBe(true)
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -214,7 +224,7 @@ describe('Button component', () => {
           }
         })
 
-        expect(wrapper.find('.shadow-none').exists()).toBe(true)
+        expect(wrapper.find('.vk-button__ghost').exists()).toBe(true)
       })
 
       it('should be link when props.variant is link', () => {
@@ -271,27 +281,16 @@ describe('Button component', () => {
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
       })
 
-      it('should apply correct spinner styles for success color', () => {
+      it('should apply correct spinner styles for positive color', () => {
         const wrapper = mount(VkButton, {
           props: {
             loading: true,
-            color: 'success',
+            color: 'positive',
             variant: 'filled'
           }
         })
 
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
-      })
-
-      it('should apply correct spinner styles when color is neutral and variant is filled', () => {
-        const wrapper = mount(VkButton, {
-          props: {
-            loading: true,
-            color: 'neutral',
-            variant: 'filled'
-          }
-        })
-        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('data-[variant=filled]:data-[color=neutral]:text-white')
       })
 
       it('should apply correct spinner styles when color is primary and variant is filled', () => {
@@ -305,26 +304,15 @@ describe('Button component', () => {
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
       })
 
-      it('should apply correct spinner styles when color is success and variant is filled', () => {
+      it('should apply correct spinner styles when color is positive and variant is filled', () => {
         const wrapper = mount(VkButton, {
           props: {
             loading: true,
-            color: 'success',
+            color: 'positive',
             variant: 'filled'
           }
         })
         expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
-      })
-
-      it('should apply correct spinner styles when color is neutral and variant is outlined', () => {
-        const wrapper = mount(VkButton, {
-          props: {
-            loading: true,
-            color: 'neutral',
-            variant: 'outlined'
-          }
-        })
-        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('data-[variant=outlined]:data-[color=neutral]:text-black')
       })
 
       it('should apply correct spinner styles when color is primary and variant is outlined', () => {
@@ -335,18 +323,29 @@ describe('Button component', () => {
             variant: 'outlined'
           }
         })
-        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-primary-500')
+        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-primary')
       })
 
-      it('should apply correct spinner styles when color is success and variant is outlined', () => {
+      it('should apply correct spinner styles when color is positive and variant is outlined', () => {
         const wrapper = mount(VkButton, {
           props: {
             loading: true,
-            color: 'success',
+            color: 'positive',
             variant: 'outlined'
           }
         })
-        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-success-500')
+        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-positive')
+      })
+    })
+
+    describe('When elevated prop changes', () => {
+      it('should be elevated when props.elevated is true', () => {
+        wrapper = mount(VkButton, {
+          props: {
+            elevated: true
+          }
+        })
+        expect(wrapper.find('.vk-button__base').classes()).toContain('shadow-el1')
       })
     })
   })

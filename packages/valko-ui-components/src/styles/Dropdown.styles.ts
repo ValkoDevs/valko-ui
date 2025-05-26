@@ -33,10 +33,10 @@ export default tv({
       'data-[shape=soft]:rounded-lg',
       'data-[shape=square]:rounded-none',
       'data-[disabled=true]:cursor-not-allowed',
-      'data-[disabled=true]:text-gray-400',
-      'data-[disabled=true]:bg-gray-200',
-      'data-[disabled=true]:border-transparent',
-      'data-[disabled=true]:dark:bg-dark-600'
+      'data-[disabled=true]:text-on-disabled',
+      'data-[disabled=true]:bg-disabled',
+      'data-[disabled=true]:opacity-30',
+      'data-[disabled=true]:border-transparent'
     ],
     itemsIcon: [
       'mr-2'
@@ -45,11 +45,11 @@ export default tv({
   variants: {
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {}
     },
     size: {
       xs: {
@@ -86,11 +86,7 @@ export default tv({
       }
     },
     variant: {
-      filled: {
-        itemsButton: [
-          'hover:text-light-50'
-        ]
-      },
+      filled: {},
       outlined: {
         itemsButton: [
           'border-2',
@@ -101,8 +97,7 @@ export default tv({
       link: {},
       gradient: {
         itemsButton: [
-          'bg-gradient-to-br',
-          'hover:text-light-50'
+          'bg-gradient-to-br'
         ]
       }
     }
@@ -114,40 +109,38 @@ export default tv({
       color: 'primary',
       class: {
         itemsButton: [
-          'hover:bg-primary-500',
-          'hover:dark:bg-primary-500'
+          'hover:bg-primary',
+          'hover:text-on-primary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         itemsButton: [
-          'hover:bg-light-300',
-          'hover:text-dark-600',
-          'hover:dark:bg-dark-700',
-          'hover:dark:text-light-200'
+          'hover:bg-secondary',
+          'hover:text-on-secondary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       class: {
         itemsButton: [
-          'hover:bg-success-500',
-          'hover:dark:bg-success-500'
+          'hover:bg-positive',
+          'hover:text-on-positive'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       class: {
         itemsButton: [
-          'hover:bg-info-500',
-          'hover:dark:bg-info-500'
+          'hover:bg-accent',
+          'hover:text-on-accent'
         ]
       }
     },
@@ -156,18 +149,18 @@ export default tv({
       color: 'warning',
       class: {
         itemsButton: [
-          'hover:bg-warning-500',
-          'hover:dark:bg-warning-500'
+          'hover:bg-warning',
+          'hover:text-on-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       class: {
         itemsButton: [
-          'hover:bg-error-500',
-          'hover:dark:bg-error-500'
+          'hover:bg-negative',
+          'hover:text-on-negative'
         ]
       }
     },
@@ -177,40 +170,38 @@ export default tv({
       color: 'primary',
       class: {
         itemsButton: [
-          'hover:text-primary-500',
-          'hover:border-primary-500'
+          'hover:text-primary',
+          'hover:border-primary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         itemsButton: [
-          'hover:text-dark-600',
-          'hover:border-light-300',
-          'hover:dark:text-light-300',
-          'hover:dark:border-dark-700'
+          'hover:text-secondary',
+          'hover:border-secondary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       class: {
         itemsButton: [
-          'hover:text-success-500',
-          'hover:border-success-500'
+          'hover:text-positive',
+          'hover:border-positive'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       class: {
         itemsButton: [
-          'hover:text-info-500',
-          'hover:border-info-500'
+          'hover:text-accent',
+          'hover:border-accent'
         ]
       }
     },
@@ -219,18 +210,18 @@ export default tv({
       color: 'warning',
       class: {
         itemsButton: [
-          'hover:text-warning-500',
-          'hover:border-warning-500'
+          'hover:text-warning',
+          'hover:border-warning'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       class: {
         itemsButton: [
-          'hover:text-error-500',
-          'hover:border-error-500'
+          'hover:text-negative',
+          'hover:border-negative'
         ]
       }
     },
@@ -240,43 +231,38 @@ export default tv({
       color: 'primary',
       class: {
         itemsButton: [
-          'hover:text-primary-500',
-          'hover:bg-primary-500/[.15]',
-          'hover:dark:bg-primary-500/[.15]'
+          'hover:text-on-primary-container',
+          'hover:bg-primary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         itemsButton: [
-          'hover:text-dark-600',
-          'hover:bg-light-400/[.15]',
-          'hover:dark:text-light-300',
-          'hover:dark:bg-dark-900/[.15]'
+          'hover:text-on-secondary-container',
+          'hover:bg-secondary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       class: {
         itemsButton: [
-          'hover:text-success-500',
-          'hover:bg-success-500/[.15]',
-          'hover:dark:bg-success-500/[.15]'
+          'hover:text-on-positive-container',
+          'hover:bg-positive-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       class: {
         itemsButton: [
-          'hover:text-info-500',
-          'hover:bg-info-500/[.15]',
-          'hover:dark:bg-info-500/[.15]'
+          'hover:text-on-accent-container',
+          'hover:bg-accent-container'
         ]
       }
     },
@@ -285,20 +271,18 @@ export default tv({
       color: 'warning',
       class: {
         itemsButton: [
-          'hover:text-warning-500',
-          'hover:bg-warning-500/[.15]',
-          'hover:dark:bg-warning-500/[.15]'
+          'hover:text-on-warning-container',
+          'hover:bg-warning-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       class: {
         itemsButton: [
-          'hover:text-error-500',
-          'hover:bg-error-500/[.15]',
-          'hover:dark:bg-error-500/[.15]'
+          'hover:text-on-negative-container',
+          'hover:bg-negative-container'
         ]
       }
     },
@@ -308,35 +292,34 @@ export default tv({
       color: 'primary',
       class: {
         itemsButton: [
-          'hover:text-primary-500'
+          'hover:text-primary'
         ]
       }
     },
     {
       variant: 'link',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         itemsButton: [
-          'hover:text-dark-800',
-          'hover:dark:text-light-400'
+          'hover:text-secondary'
         ]
       }
     },
     {
       variant: 'link',
-      color: 'success',
+      color: 'positive',
       class: {
         itemsButton: [
-          'hover:text-success-500'
+          'hover:text-positive'
         ]
       }
     },
     {
       variant: 'link',
-      color: 'info',
+      color: 'accent',
       class: {
         itemsButton: [
-          'hover:text-info-500'
+          'hover:text-accent'
         ]
       }
     },
@@ -345,16 +328,16 @@ export default tv({
       color: 'warning',
       class: {
         itemsButton: [
-          'hover:text-warning-500'
+          'hover:text-warning'
         ]
       }
     },
     {
       variant: 'link',
-      color: 'error',
+      color: 'negative',
       class: {
         itemsButton: [
-          'hover:text-error-500'
+          'hover:text-negative'
         ]
       }
     },
@@ -364,42 +347,42 @@ export default tv({
       color: 'primary',
       class: {
         itemsButton: [
-          'hover:from-primary-500',
-          'hover:to-primary-900'
+          'hover:from-primary-gradient-start',
+          'hover:to-primary-gradient-end',
+          'hover:text-on-primary'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       class: {
         itemsButton: [
-          'hover:from-light-50',
-          'hover:to-light-400',
-          'hover:text-dark-600',
-          'hover:dark:from-dark-600',
-          'hover:dark:to-dark-950',
-          'hover:dark:text-light-200'
+          'hover:from-secondary-gradient-start',
+          'hover:to-secondary-gradient-end',
+          'hover:text-on-secondary'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       class: {
         itemsButton: [
-          'hover:from-success-500',
-          'hover:to-success-900'
+          'hover:from-positive-gradient-start',
+          'hover:to-positive-gradient-end',
+          'hover:text-on-positive'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       class: {
         itemsButton: [
-          'hover:from-info-500',
-          'hover:to-info-900'
+          'hover:from-accent-gradient-start',
+          'hover:to-accent-gradient-end',
+          'hover:text-on-accent'
         ]
       }
     },
@@ -408,18 +391,20 @@ export default tv({
       color: 'warning',
       class: {
         itemsButton: [
-          'hover:from-warning-500',
-          'hover:to-warning-900'
+          'hover:from-warning-gradient-start',
+          'hover:to-warning-gradient-end',
+          'hover:text-on-warning'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       class: {
         itemsButton: [
-          'hover:from-error-500',
-          'hover:to-error-900'
+          'hover:from-negative-gradient-start',
+          'hover:to-negative-gradient-end',
+          'hover:text-on-negative'
         ]
       }
     }

@@ -1,7 +1,7 @@
-import type { Colors, VariantsAlt, Shapes, Sizes } from './common'
+import type { ColorsWithSurface, VariantsAlt, Shapes, Sizes } from './common'
 
-export interface AvatarProps extends Colors, VariantsAlt, Shapes, Sizes {
+export interface AvatarProps extends ColorsWithSurface, VariantsAlt, Shapes, Sizes {
   src?: string;
   name?: string;
-  flat?: boolean;
+  elevated?: boolean;
 }

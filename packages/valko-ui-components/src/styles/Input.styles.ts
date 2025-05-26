@@ -20,16 +20,17 @@ export default tv({
       'ease-in-out',
       'overflow-hidden',
       'focus:ring-0',
+      'text-on-surface',
       'data-[right-icon=false]:pr-2',
       'data-[right-icon=true]:pr-8'
     ],
     label: [
       'vk-input__label',
-      'opacity-80',
+      'text-on-surface-variant',
       'text-left',
       'font-bold',
       'truncate',
-      'px-1',
+      'p-1',
       'ml-[1px]',
       'absolute',
       'top-1/2',
@@ -48,6 +49,7 @@ export default tv({
     field: [
       'relative',
       'w-full',
+      'h-full',
       'm-0',
       'p-0',
       'flex',
@@ -57,11 +59,11 @@ export default tv({
     helper: [
       'vk-input__helper',
       'break-normal',
-      'text-gray-500'
+      'text-on-surface-variant'
     ],
     icons: [
       'cursor-pointer',
-      'opacity-80',
+      'text-on-surface-variant',
       'absolute',
       'transition-all',
       'top-1/2',
@@ -78,19 +80,18 @@ export default tv({
     ],
     clearIcon: [
       'vk-input__clear-icon',
-      'text-dark-600',
+      'text-on-surface-variant',
       'cursor-pointer',
-      'opacity-80',
       'absolute',
       'transition-all',
       'top-1/2',
       '-translate-y-1/2',
       'scale-90',
-      'right-1',
-      'dark:text-light-400'
+      'right-1'
     ],
     numberArrows: [
       'vk-input__number-arrows',
+      'text-on-surface-variant',
       'flex',
       'flex-col',
       'gap-1',
@@ -106,33 +107,37 @@ export default tv({
     variant: {
       filled: {
         input: [
-          'bg-light-200',
-          'dark:bg-dark-800',
-          'border-b-2'
+          'bg-surface-container-highest',
+          'border-b-2',
+          'border-on-surface-variant'
         ]
       },
       ghost: {
         input: [
-          'bg-inherit',
+          'bg-transparent',
           'border-b-2',
-          'border-light-400'
+          'border-on-surface-variant'
         ],
         label: [
-          'bg-inherit'
+          'bg-transparent'
         ]
       },
       outlined: {
+        container: [
+          'bg-inherit'
+        ],
+        field: [
+          'bg-inherit'
+        ],
         input: [
-          'px-2',
-          'bg-light-200',
-          'dark:bg-dark-800',
+          'bg-inherit',
           'border-2',
-          'border-dark-600'
+          'border-outlined'
         ],
         label: [
-          'left-1.5',
-          'bg-transparent',
-          'peer-data-[left-icon=true]:ml-0.5'
+          'px-3.5',
+          'left-3',
+          'bg-inherit'
         ],
         leftIcon: [
           'left-1.5'
@@ -144,136 +149,111 @@ export default tv({
     },
     color: {
       primary: {
+        input: [
+          'hover:border-primary',
+          'focus:border-primary'
+        ],
         label: [
-          'text-dark-700',
-          'peer-focus:text-primary-500',
-          'dark:text-light-100'
+          'peer-focus:text-primary'
         ],
         icons: [
-          'text-dark-700',
-          'peer-focus:text-primary-500',
-          'dark:text-light-100'
+          'peer-focus:text-primary'
         ],
         clearIcon: [
-          'hover:text-primary-500',
-          'dark:hover:text-primary-500'
+          'hover:text-primary'
         ],
         chevrons: [
-          'hover:text-primary-500'
+          'hover:text-primary'
         ]
       },
-      neutral: {
+      secondary: {
+        input: [
+          'hover:border-secondary',
+          'focus:border-secondary'
+        ],
         label: [
-          'text-dark-600',
-          'peer-focus:text-dark-800',
-          'dark:text-light-200',
-          'dark:peer-focus:text-light-50'
+          'peer-focus:text-secondary'
         ],
         icons: [
-          'text-dark-600',
-          'peer-focus:text-dark-800',
-          'dark:text-light-200',
-          'dark:peer-focus:text-light-50'
+          'peer-focus:text-secondary'
         ],
         clearIcon: [
-          'hover:text-dark-950',
-          'dark:hover:text-light-50'
+          'hover:text-secondary'
         ],
         chevrons: [
-          'hover:text-dark-950',
-          'dark:hover:text-light-50'
+          'hover:text-secondary'
         ]
       },
-      success: {
-        label: [
-          'text-success-500',
-          'focus:text-success-950',
-          'dark:text-success-500'
+      positive: {
+        input: [
+          'hover:border-positive',
+          'focus:border-positive'
         ],
-        helper: [
-          'text-success-500',
-          'dark:text-success-500'
+        label: [
+          'peer-focus:text-positive'
         ],
         icons: [
-          'text-success-500',
-          'focus:text-success-950',
-          'dark:text-success-500'
+          'peer-focus:text-positive'
         ],
         clearIcon: [
-          'hover:text-success-500',
-          'dark:hover:text-success-500'
+          'hover:text-positive'
         ],
         chevrons: [
-          'hover:text-success-500'
+          'hover:text-positive'
         ]
       },
-      info: {
-        label: [
-          'text-info-500',
-          'focus:text-info-950',
-          'dark:text-info-500'
+      accent: {
+        input: [
+          'hover:border-accent',
+          'focus:border-accent'
         ],
-        helper: [
-          'text-info-500',
-          'dark:text-info-500'
+        label: [
+          'peer-focus:text-accent'
         ],
         icons: [
-          'text-info-500',
-          'focus:text-info-950',
-          'dark:text-info-500'
+          'peer-focus:text-accent'
         ],
         clearIcon: [
-          'hover:text-info-500',
-          'dark:hover:text-info-500'
+          'hover:text-accent'
         ],
         chevrons: [
-          'hover:text-info-500'
+          'hover:text-accent'
         ]
       },
       warning: {
-        label: [
-          'text-warning-500',
-          'focus:text-warning-950',
-          'dark:text-warning-500'
+        input: [
+          'hover:border-warning',
+          'focus:border-warning'
         ],
-        helper: [
-          'text-warning-500',
-          'dark:text-warning-500'
+        label: [
+          'peer-focus:text-warning'
         ],
         icons: [
-          'text-warning-500',
-          'focus:text-warning-950',
-          'dark:text-warning-500'
+          'peer-focus:text-warning'
         ],
         clearIcon: [
-          'hover:text-warning-500',
-          'dark:hover:text-warning-500'
+          'hover:text-warning'
         ],
         chevrons: [
-          'hover:text-warning-500'
+          'hover:text-warning'
         ]
       },
-      error: {
-        label: [
-          'text-error-500',
-          'focus:text-error-950',
-          'dark:text-error-500'
+      negative: {
+        input: [
+          'hover:border-negative',
+          'focus:border-negative'
         ],
-        helper: [
-          'text-error-500',
-          'dark:text-error-500'
+        label: [
+          'peer-focus:text-negative'
         ],
         icons: [
-          'text-error-500',
-          'focus:text-error-950',
-          'dark:text-error-500'
+          'peer-focus:text-negative'
         ],
         clearIcon: [
-          'hover:text-error-500',
-          'dark:hover:text-error-500'
+          'hover:text-negative'
         ],
         chevrons: [
-          'hover:text-error-500'
+          'hover:text-negative'
         ]
       }
     },
@@ -353,7 +333,7 @@ export default tv({
         ],
         label: [
           'text-lg',
-          'peer-data-[leftIcon=true]:left-8'
+          'peer-data-[left-icon=true]:left-8'
         ],
         helper: [
           'text-base'
@@ -371,297 +351,47 @@ export default tv({
       rounded: {
         input: [
           'rounded-full'
+        ],
+        field: [
+          'rounded-full'
         ]
       },
       soft: {},
       square: {
         input: [
           'rounded-none'
+        ],
+        field: [
+          'rounded-none'
         ]
       }
     },
     disabled: {
       true: {
+        container: [
+          'opacity-50'
+        ],
         input: [
-          'bg-gray-500/[.25]',
-          'text-gray-500',
-          'border-gray-500/[.25]',
-          'cursor-not-allowed',
-          'dark:bg-gray-400/[.25]',
-          'dark:border-gray-400/[.25]'
+          'text-on-disabled',
+          'border-disabled-container'
         ],
         label: [
           'peer-data-[filled=true]:bg-inherit',
           'peer-data-[filled=false]:bg-inherit',
-          'peer-data-[filled=true]:text-gray-500',
-          'peer-data-[filled=false]:text-gray-500',
-          'dark:bg-inherit',
-          'dark:peer-data-[filled=true]:text-gray-500',
-          'dark:peer-data-[filled=false]:text-gray-500',
-          'dark:peer-data-[filled=true]:bg-inherit',
-          'dark:peer-data-[filled=false]:bg-inherit'
+          'peer-data-[filled=true]:text-on-disabled',
+          'peer-data-[filled=false]:text-on-disabled'
         ],
         helper: [
-          'text-gray-500'
+          'text-on-disabled'
         ]
       }
     },
     cursor: {
-      pointer: {
-        input: [
-          'cursor-pointer'
-        ],
-        label: [
-          'cursor-pointer'
-        ]
-      },
-      text: {
-        input: [
-          'cursor-text'
-        ],
-        label: [
-          'cursor-text'
-        ]
-      }
+      pointer: {},
+      text: {}
     }
   },
   compoundVariants: [
-    // filled & color
-    {
-      variant: 'filled',
-      color: 'primary',
-      disabled: false,
-      class: {
-        input: [
-          'border-dark-600',
-          'hover:border-primary-400',
-          'focus:border-primary-500',
-          'dark:border-light-400',
-          'dark:hover:border-primary-400',
-          'dark:focus:border-primary-500'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'neutral',
-      disabled: false,
-      class: {
-        input: [
-          'border-light-300/[.5]',
-          'hover:border-light-300',
-          'focus:border-light-400',
-          'dark:border-dark-700/[.5]',
-          'dark:hover:border-dark-700',
-          'dark:focus:border-dark-600'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'success',
-      disabled: false,
-      class: {
-        input: [
-          'border-success-300',
-          'hover:border-success-400',
-          'focus:border-success-500',
-          'dark:border-success-500',
-          'dark:focus:border-success-700'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'info',
-      disabled: false,
-      class: {
-        input: [
-          'border-info-300',
-          'hover:border-info-400',
-          'focus:border-info-500',
-          'dark:border-info-500',
-          'dark:focus:border-info-700'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'warning',
-      disabled: false,
-      class: {
-        input: [
-          'border-warning-300',
-          'hover:border-warning-400',
-          'focus:border-warning-500',
-          'dark:border-warning-500',
-          'dark:focus:border-warning-700'
-        ]
-      }
-    },
-    {
-      variant: 'filled',
-      color: 'error',
-      disabled: false,
-      class: {
-        input: [
-          'border-error-300',
-          'hover:border-error-400',
-          'focus:border-error-500',
-          'dark:border-error-500',
-          'dark:focus:border-error-700'
-        ]
-      }
-    },
-    // ghost & color
-    {
-      variant: 'ghost',
-      color: 'primary',
-      disabled: false,
-      class: {
-        input: [
-          'focus:border-primary-500',
-          'dark:border-light-400',
-          'dark:hover:border-light-300',
-          'dark:focus:border-primary-500'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'neutral',
-      disabled: false,
-      class: {
-        input: [
-          'border-light-200',
-          'hover:border-light-300',
-          'focus:border-light-400',
-          'dark:border-dark-800',
-          'dark:hover:border-dark-700',
-          'dark:focus:border-dark-600'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'success',
-      disabled: false,
-      class: {
-        input: [
-          'border-success-400',
-          'focus:border-success-500',
-          'dark:border-success-400',
-          'dark:focus:border-success-500'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'info',
-      disabled: false,
-      class: {
-        input: [
-          'border-info-400',
-          'focus:border-info-500',
-          'dark:border-info-400',
-          'dark:focus:border-info-500'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'warning',
-      disabled: false,
-      class: {
-        input: [
-          'border-warning-400',
-          'focus:border-warning-500',
-          'dark:border-warning-400',
-          'dark:focus:border-warning-500'
-        ]
-      }
-    },
-    {
-      variant: 'ghost',
-      color: 'error',
-      disabled: false,
-      class: {
-        input: [
-          'border-error-400',
-          'focus:border-error-500',
-          'dark:border-error-400',
-          'dark:focus:border-error-500'
-        ]
-      }
-    },
-    // outlined & color
-    {
-      variant: 'outlined',
-      color: 'primary',
-      disabled: false,
-      class: {
-        input: [
-          'focus:border-primary-500'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'neutral',
-      disabled: false,
-      class: {
-        input: [
-          'border-light-300',
-          'focus:border-light-400',
-          'dark:border-dark-700',
-          'dark:focus:border-dark-600'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'success',
-      disabled: false,
-      class: {
-        input: [
-          'border-success-500',
-          'focus:border-success-500'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'info',
-      disabled: false,
-      class: {
-        input: [
-          'border-info-600',
-          'focus:border-info-600'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'warning',
-      disabled: false,
-      class: {
-        input: [
-          'border-warning-600',
-          'focus:border-warning-600'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      color: 'error',
-      disabled: false,
-      class: {
-        input: [
-          'border-error-600',
-          'focus:border-error-600'
-        ]
-      }
-    },
     // filled & ghost & rounded
     {
       variant: ['filled', 'ghost'],
@@ -735,19 +465,71 @@ export default tv({
         ]
       }
     },
+    // outlined & size
+    {
+      variant: 'outlined',
+      size: 'xs',
+      class: {
+        input: [
+          'py-1'
+        ],
+        label: [
+          'peer-focus:-top-3',
+          'peer-data-[filled=true]:-top-3',
+          'peer-data-[left-icon=true]:left-3.5'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: 'sm',
+      class: {
+        input: [
+          'py-2'
+        ],
+        label: [
+          'peer-focus:-top-3.5',
+          'peer-data-[filled=true]:-top-3.5',
+          'peer-data-[left-icon=true]:left-4.5'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: 'md',
+      class: {
+        input: [
+          'py-3'
+        ],
+        label: [
+          'peer-focus:-top-4',
+          'peer-data-[filled=true]:-top-4',
+          'peer-data-[left-icon=true]:left-5.5'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      size: 'lg',
+      class: {
+        input: [
+          'py-3.5'
+        ],
+        label: [
+          'peer-focus:-top-4.5',
+          'peer-data-[filled=true]:-top-4.5',
+          'peer-data-[left-icon=true]:left-6.5'
+        ]
+      }
+    },
     // outlined & rounded
     {
       variant: 'outlined',
       shape: 'rounded',
       size: 'xs',
       class: {
-        input: [
-          'pl-[calc(1rem_-_3px)]',
-          'data-[left-icon=true]:pl-[calc(1.5rem_-_2px)]'
-        ],
         label: [
-          'ml-[calc(0.5rem_-_2px)]',
-          'peer-data-[left-icon=true]:ml-[1px]'
+          'left-3.5'
         ],
         helper: [
           'ml-4'
@@ -759,13 +541,8 @@ export default tv({
       shape: 'rounded',
       size: 'sm',
       class: {
-        input: [
-          'pl-[calc(1.17rem_-_1px)]',
-          'data-[left-icon=true]:pl-[1.67rem]'
-        ],
         label: [
-          'ml-[calc(0.75rem_-_1px)]',
-          'peer-data-[left-icon=true]:ml-[1px]'
+          'left-4.5'
         ],
         helper: [
           'ml-5'
@@ -777,13 +554,8 @@ export default tv({
       shape: 'rounded',
       size: 'md',
       class: {
-        input: [
-          'pl-[calc(1.5rem_-_3px)]',
-          'data-[left-icon=true]:pl-[calc(2rem_-_2px)]'
-        ],
         label: [
-          'ml-[calc(1rem_-_2px)]',
-          'peer-data-[left-icon=true]:ml-[1px]'
+          'left-5.5'
         ],
         helper: [
           'ml-6'
@@ -793,26 +565,12 @@ export default tv({
     {
       variant: 'outlined',
       shape: 'rounded',
-      size: 'lg',
       class: {
-        input: [
-          'pl-[calc(1.75rem_-_3px)]',
-          'data-[left-icon=true]:pl-[calc(2.25rem_-_2px)]'
-        ],
         label: [
-          'ml-[calc(1.25rem_-_2px)]',
-          'peer-data-[left-icon=true]:ml-[1px]'
+          'left-6.5'
         ],
         helper: [
           'ml-7'
-        ]
-      }
-    },
-    {
-      type: 'date',
-      class: {
-        label: [
-          'cursor-default'
         ]
       }
     },
@@ -823,6 +581,9 @@ export default tv({
       class: {
         input: [
           'rounded-md'
+        ],
+        field: [
+          'rounded-md'
         ]
       }
     },
@@ -832,6 +593,9 @@ export default tv({
       shape: 'soft',
       class: {
         input: [
+          'rounded-t-lg'
+        ],
+        field: [
           'rounded-t-lg'
         ]
       }
@@ -870,6 +634,51 @@ export default tv({
       class: {
         clearIcon: [
           'data-[right-icon=true]:-translate-x-8'
+        ]
+      }
+    },
+    {
+      type: 'date',
+      class: {
+        label: [
+          'cursor-default'
+        ]
+      }
+    },
+    // cursor & disabled
+    {
+      cursor: ['pointer', 'text'],
+      disabled: true,
+      class: {
+        input: [
+          'cursor-not-allowed'
+        ],
+        label: [
+          'cursor-not-allowed'
+        ]
+      }
+    },
+    {
+      cursor: 'pointer',
+      disabled: false,
+      class: {
+        input: [
+          'cursor-pointer'
+        ],
+        label: [
+          'cursor-pointer'
+        ]
+      }
+    },
+    {
+      cursor: 'text',
+      disabled: false,
+      class: {
+        input: [
+          'cursor-text'
+        ],
+        label: [
+          'cursor-text'
         ]
       }
     }

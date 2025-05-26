@@ -13,8 +13,7 @@ export default tv({
       'mb-4',
       'mt-1',
       'w-full',
-      'border-light-300',
-      'dark:border-dark-600'
+      'border-outlined'
     ],
     section: [
       'w-full',
@@ -37,6 +36,7 @@ export default tv({
     ],
     playgroundView: [
       'w-full',
+      'bg-surface-container-lowest',
       'p-8',
       'flex',
       'md:w-auto',
@@ -44,8 +44,7 @@ export default tv({
       'justify-center',
       'items-center',
       'border',
-      'border-light-300',
-      'dark:border-dark-600',
+      'border-outlined',
       'rounded'
     ],
     playgroundForm: [

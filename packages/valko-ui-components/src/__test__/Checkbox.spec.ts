@@ -14,7 +14,7 @@ describe('Checkbox component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be size md', () => {
@@ -22,19 +22,15 @@ describe('Checkbox component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be shape soft', () => {
-        expect(wrapper.find('.rounded').exists()).toBe(true)
+        expect(wrapper.find('.rounded-sm').exists()).toBe(true)
       })
 
       it('should have label on left', () => {
         expect(wrapper.find('.ml-2').exists()).toBe(true)
-      })
-
-      it('should not be flat', () => {
-        expect(wrapper.find('.shadow-none').exists()).toBe(false)
       })
 
       it('should not be disabled', () => {
@@ -50,37 +46,37 @@ describe('Checkbox component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkCheckbox, {
           props: {
-            color: 'neutral'
+            color: 'secondary'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-dark-900')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-secondary')
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkCheckbox, {
           props: {
-            color: 'success'
+            color: 'positive'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-success-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-positive')
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkCheckbox, {
           props: {
-            color: 'info'
+            color: 'accent'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-info-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-accent')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -90,17 +86,17 @@ describe('Checkbox component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-warning-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-warning')
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkCheckbox, {
           props: {
-            color: 'error'
+            color: 'negative'
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-error-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-negative')
       })
     })
 
@@ -122,7 +118,7 @@ describe('Checkbox component', () => {
           }
         })
 
-        expect(wrapper.find('.rounded').exists()).toBe(true)
+        expect(wrapper.find('.rounded-sm').exists()).toBe(true)
       })
 
       it('should be square when props.shape is square', () => {
@@ -186,7 +182,7 @@ describe('Checkbox component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:bg-primary')
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -196,7 +192,7 @@ describe('Checkbox component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:border-primary-500')
+        expect(wrapper.find('.vk-checkbox__checkbox').classes()).toContain('data-[checked=true]:border-primary')
       })
 
       it('should be ghost when props.variant is ghost', () => {

@@ -18,5 +18,5 @@ export interface CardProps extends Variants, Shapes {
   size?: SizeWithFull;
   isPressable?: boolean;
   disabled?: boolean;
-  flat?: boolean;
+  elevated?: boolean;
 }

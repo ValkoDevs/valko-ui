@@ -16,7 +16,7 @@ const templateSnippet = `<template>
       />
       <a
         href="#"
-        class="text-primary-500 hover:text-primary-600 mb-4 text-center"
+        class="text-primary hover:text-primary-600 mb-4 text-center"
       >
         Forgot your password?
       </a>
@@ -28,7 +28,7 @@ const templateSnippet = `<template>
         Don't have an account?
         <a
           href="#"
-          class="text-primary-500 hover:text-primary-600"
+          class="text-primary hover:text-primary-600"
         >
           Sign up
         </a>
@@ -58,7 +58,7 @@ const templateSnippet = `<template>
           />
           <a
             href="#"
-            class="text-primary-500 hover:text-primary-600 mb-4 text-center"
+            class="text-primary hover:text-primary-600 mb-4 text-center"
           >
             Forgot your password?
           </a>
@@ -70,7 +70,7 @@ const templateSnippet = `<template>
             Don't have an account?
             <a
               href="#"
-              class="text-primary-500 hover:text-primary-600"
+              class="text-primary hover:text-primary-600"
             >
               Sign up
             </a>

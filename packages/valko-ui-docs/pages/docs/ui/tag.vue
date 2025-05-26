@@ -24,7 +24,7 @@ const tagProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Tag.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -191,7 +191,7 @@ const extraProps = 'text="Content"'
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -241,17 +241,17 @@ const extraProps = 'text="Content"'
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-7"
       >
         <vk-tag
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           :color="color.value"
           :text="color.label"
         />
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', {values: colorOptions.map(o => o.value), extraProps})" />
+          <code-block :code="generateSnippet<string>('color', {values: colorOptions.withSurface.map(o => o.value), extraProps})" />
         </template>
       </example-section>
 

@@ -36,7 +36,7 @@ code.hljs {
 .hljs-name,
 .hljs-keyword,
 .hljs-built_in {
-  color: theme('colors.primary.700')
+  color: var(--color-primary)
 }
 .hljs-name {
   font-weight: bold
@@ -50,7 +50,7 @@ code.hljs {
 .hljs-number,
 .hljs-regexp,
 .hljs-link {
-  color: theme('colors.info.900')
+  color: var(--color-accent)
 }
 .hljs-title,
 .hljs-symbol,
@@ -70,7 +70,7 @@ code.hljs {
 .hljs-attr,
 .hljs-subst,
 .hljs-tag {
-  color: theme('colors.error.700')
+  color: var(--color-negative)
 }
 .hljs-formula {
   background-color: #eee;
@@ -118,7 +118,7 @@ html.dark .hljs-quote {
 html.dark .hljs-name,
 html.dark .hljs-keyword,
 html.dark .hljs-built_in {
-  color: theme('colors.primary.500')
+  color: var(--color-primary)
 }
 
 html.dark .hljs-code,
@@ -127,7 +127,7 @@ html.dark .hljs-meta .hljs-string,
 html.dark .hljs-number,
 html.dark .hljs-regexp,
 html.dark .hljs-link {
-  color: theme('colors.info.400')
+  color: var(--color-accent)
 }
 html.dark .hljs-title,
 html.dark .hljs-symbol,
@@ -146,7 +146,7 @@ html.dark .hljs-function .hljs-title,
 html.dark .hljs-attr,
 html.dark .hljs-subst,
 html.dark .hljs-tag {
-  color: theme('colors.error.400')
+  color: var(--color-negative)
 }
 html.dark .hljs-formula {
   background-color: #eee;

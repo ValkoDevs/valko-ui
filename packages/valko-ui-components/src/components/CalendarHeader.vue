@@ -25,7 +25,6 @@ const classes = useStyle<CalendarHeaderProps, SlotStyles>(props, styles)
       :shape="shape"
       :class="classes.arrows"
       :disabled="disabledLeft"
-      flat
       @click="() => emit('previousClick')"
     >
       <vk-icon name="chevron-left" />
@@ -33,12 +32,11 @@ const classes = useStyle<CalendarHeaderProps, SlotStyles>(props, styles)
 
     <vk-button
       :size="size"
-      color="neutral"
+      color="surface"
       variant="link"
       condensed
       :shape="shape"
       :class="classes.periodButton"
-      flat
       @click="() => emit('viewChange')"
     >
       {{ loadedPeriod }}
@@ -52,7 +50,6 @@ const classes = useStyle<CalendarHeaderProps, SlotStyles>(props, styles)
       :shape="shape"
       :class="classes.arrows"
       :disabled="disabledRight"
-      flat
       @click="() => emit('nextClick')"
     >
       <vk-icon name="chevron-right" />

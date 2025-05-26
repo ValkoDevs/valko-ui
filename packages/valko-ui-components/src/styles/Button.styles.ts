@@ -5,21 +5,15 @@ export default tv({
     button: [
       'vk-button__base',
       'flex',
+      'relative',
       'items-center',
       'justify-center',
       'tracking-wider',
       'ring-inset',
-      'shadow-lg',
-      'shadow-light-300',
-      'transition-all',
-      'ease-in-out',
-      'duration-150',
       'outline-none',
-      'active:shadow-none',
       'focus:outline-none',
       'focus-visible:outline-none',
-      'focus-visible:ring-2',
-      'dark:shadow-dark-950/[.2]'
+      'focus-visible:ring-2'
     ],
     spinnerContainer: [
       'w-0',
@@ -29,27 +23,27 @@ export default tv({
       'linear',
       'duration-150'
     ],
-    loader: [
-      'data-[variant=filled]:data-[color=neutral]:text-white',
-      'data-[variant=gradient]:data-[color=neutral]:text-white',
-      'data-[variant=ghost]:data-[color=neutral]:text-black',
-      'data-[variant=outlined]:data-[color=neutral]:text-black',
-      'data-[variant=link]:data-[color=neutral]:text-black',
-      'dark:data-[variant=filled]:data-[color=neutral]:text-black',
-      'dark:data-[variant=gradient]:data-[color=neutral]:text-black',
-      'dark:data-[variant=ghost]:data-[color=neutral]:text-white',
-      'dark:data-[variant=outlined]:data-[color=neutral]:text-white',
-      'dark:data-[variant=link]:data-[color=neutral]:text-white'
+    stateLayer: [
+      'absolute',
+      'inset-0',
+      'z-[1]',
+      'transition-all',
+      'ease-in-out',
+      'duration-150',
+      'hover:bg-state-hover',
+      'active:bg-state-active',
+      'focus:bg-state-focus'
     ]
   },
   variants: {
     color: {
       primary: {},
-      neutral: {},
-      success: {},
-      info: {},
+      secondary: {},
+      positive: {},
+      accent: {},
       warning: {},
-      error: {}
+      negative: {},
+      surface: {}
     },
     size: {
       xs: {
@@ -84,12 +78,12 @@ export default tv({
     variant: {
       filled: {
         button: [
-          'text-light-50'
+          'vk-button__filled'
         ]
       },
       ghost: {
         button: [
-          'shadow-none'
+          'vk-button__ghost'
         ]
       },
       outlined: {
@@ -99,14 +93,12 @@ export default tv({
       },
       link: {
         button: [
-          'bg-transparent',
-          'shadow-none'
+          'bg-transparent'
         ]
       },
       gradient: {
         button: [
-          'bg-gradient-to-br',
-          'text-light-50'
+          'bg-gradient-to-br'
         ]
       }
     },
@@ -122,10 +114,10 @@ export default tv({
         ]
       }
     },
-    flat: {
+    elevated: {
       true: {
         button: [
-          'shadow-none'
+          'shadow-el1'
         ]
       }
     },
@@ -135,8 +127,7 @@ export default tv({
           'cursor-not-allowed',
           'opacity-50',
           'focus:ring-none',
-          'ring-0',
-          'active:shadow-lg'
+          'ring-0'
         ]
       },
       false: {
@@ -149,13 +140,7 @@ export default tv({
       true: {
         button: [
           'px-0',
-          'py-0',
-          'font-normal'
-        ]
-      },
-      false: {
-        button: [
-          'font-semibold'
+          'py-0'
         ]
       }
     },
@@ -163,25 +148,32 @@ export default tv({
       rounded: {
         button: [
           'rounded-full'
+        ],
+        stateLayer: [
+          'rounded-full'
         ]
       },
       soft: {
         button: [
-          'rounded'
+          'rounded-sm'
+        ],
+        stateLayer: [
+          'rounded-sm'
         ]
       },
       square: {
         button: [
+          'rounded-none'
+        ],
+        stateLayer: [
           'rounded-none'
         ]
       }
     },
     loading: {
       true: {
-        spinnerContainer: [
-          'mr-1'
-        ],
         button: [
+          'gap-1',
           'opacity-75',
           'pointer-events-none'
         ]
@@ -195,55 +187,43 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'bg-primary-500',
-          'focus:ring-primary-600',
-          'hover:bg-primary-500/[.8]',
-          'active:bg-primary-600'
+          'bg-primary',
+          'text-on-primary'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         button: [
           [
-            'bg-light-300',
-            'hover:bg-light-300/[.8]',
-            'active:bg-light-400/[.5]',
-            'text-dark-700',
-            'dark:bg-dark-600',
-            'dark:hover:bg-dark-600/[.8]',
-            'dark:active:bg-dark-700',
-            'dark:text-light-100'
+            'bg-secondary',
+            'text-on-secondary'
           ]
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         button: [
-          'bg-success-500',
-          'focus:ring-success-600',
-          'hover:bg-success-500/[.8]',
-          'active:bg-success-600'
+          'bg-positive',
+          'text-on-positive'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         button: [
-          'bg-info-500',
-          'focus:ring-info-600',
-          'hover:bg-info-500/[.8]',
-          'active:bg-info-600'
+          'bg-accent',
+          'text-on-accent'
         ]
       }
     },
@@ -253,23 +233,30 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'bg-warning-500',
-          'focus:ring-warning-600',
-          'hover:bg-warning-500/[.8]',
-          'active:bg-warning-600'
+          'bg-warning',
+          'text-on-warning'
         ]
       }
     },
     {
       variant: 'filled',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         button: [
-          'bg-error-500',
-          'focus:ring-error-600',
-          'hover:bg-error-500/[.8]',
-          'active:bg-error-600'
+          'bg-negative',
+          'text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'filled',
+      color: 'surface',
+      disabled: false,
+      class: {
+        button: [
+          'bg-surface-container-highest',
+          'text-on-surface'
         ]
       }
     },
@@ -280,67 +267,41 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-primary-500',
-          'bg-primary-500/[.3]',
-          'focus:ring-primary-500/[.30]',
-          'hover:bg-primary-500/[.25]',
-          'active:bg-primary-500/[.30]',
-          'dark:bg-primary-500/[.15]',
-          'dark:hover:bg-primary-500/[.25]',
-          'dark:active:bg-primary-500/[.30]'
+          'bg-primary-container',
+          'text-on-primary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         button: [
-          'text-dark-600',
-          'bg-dark-800/[.15]',
-          'focus:ring-dark-800/[.30]',
-          'hover:bg-dark-800/[.25]',
-          'active:bg-dark-800/[.30]',
-          'dark:text-light-200',
-          'dark:bg-light-300/[.15]',
-          'dark:focus:ring-light-400/[.30]',
-          'dark:hover:bg-light-200/[.25]',
-          'dark:active:bg-light-400/[.30]'
+          'bg-secondary-container',
+          'text-on-secondary-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         button: [
-          'text-success-500',
-          'bg-success-500/[.3]',
-          'focus:ring-success-500/[.30]',
-          'hover:bg-success-500/[.25]',
-          'active:bg-success-500/[.30]',
-          'dark:bg-success-500/[.15]',
-          'dark:hover:bg-success-500/[.25]',
-          'dark:active:bg-success-500/[.30]'
+          'bg-positive-container',
+          'text-on-positive-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         button: [
-          'text-info-500',
-          'bg-info-500/[.3]',
-          'focus:ring-info-500/[.30]',
-          'hover:bg-info-500/[.25]',
-          'active:bg-info-500/[.30]',
-          'dark:bg-info-500/[.15]',
-          'dark:hover:bg-info-500/[.25]',
-          'dark:active:bg-info-500/[.30]'
+          'bg-accent-container',
+          'text-on-accent-container'
         ]
       }
     },
@@ -350,31 +311,30 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-warning-500',
-          'bg-warning-500/[.3]',
-          'focus:ring-warning-500/[.30]',
-          'hover:bg-warning-500/[.25]',
-          'active:bg-warning-500/[.30]',
-          'dark:bg-warning-500/[.15]',
-          'dark:hover:bg-warning-500/[.25]',
-          'dark:active:bg-warning-500/[.30]'
+          'bg-warning-container',
+          'text-on-warning-container'
         ]
       }
     },
     {
       variant: 'ghost',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         button: [
-          'text-error-500',
-          'bg-error-500/[.3]',
-          'focus:ring-error-500/[.30]',
-          'hover:bg-error-500/[.25]',
-          'active:bg-error-500/[.30]',
-          'dark:bg-error-500/[.15]',
-          'dark:hover:bg-error-500/[.25]',
-          'dark:active:bg-error-500/[.30]'
+          'bg-negative-container',
+          'text-on-negative-container'
+        ]
+      }
+    },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      disabled: false,
+      class: {
+        button: [
+          'bg-surface-container-highest/[.5]',
+          'text-on-surface-variant'
         ]
       }
     },
@@ -385,53 +345,37 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-primary-500',
-          'focus:ring-primary-400/20',
-          'hover:bg-primary-300/20',
-          'active:bg-primary-400/20'
+          'text-on-primary-container'
         ]
       }
     },
     {
       variant: 'link',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         button: [
-          'text-dark-800',
-          'focus:ring-light-300/40',
-          'hover:bg-light-200/40',
-          'active:bg-light-300/40',
-          'dark:text-light-200',
-          'dark:focus:ring-dark-900/40',
-          'dark:hover:bg-dark-800/40',
-          'dark:active:bg-dark-900/40'
+          'text-on-secondary-container'
         ]
       }
     },
     {
       variant: 'link',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         button: [
-          'text-success-500',
-          'focus:ring-success-400/20',
-          'hover:bg-success-300/20',
-          'active:bg-success-400/20'
+          'text-on-positive-container'
         ]
       }
     },
     {
       variant: 'link',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         button: [
-          'text-info-500',
-          'focus:ring-info-400/20',
-          'hover:bg-info-300/20',
-          'active:bg-info-400/20'
+          'text-on-accent-container'
         ]
       }
     },
@@ -441,23 +385,27 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-warning-500',
-          'focus:ring-warning-400/20',
-          'hover:bg-warning-300/20',
-          'active:bg-warning-400/20'
+          'text-on-warning-container'
         ]
       }
     },
     {
       variant: 'link',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         button: [
-          'text-error-500',
-          'focus:ring-error-400/20',
-          'hover:bg-error-300/20',
-          'active:bg-error-400/20'
+          'text-on-negative-container'
+        ]
+      }
+    },
+    {
+      variant: 'link',
+      color: 'surface',
+      disabled: false,
+      class: {
+        button: [
+          'text-on-surface'
         ]
       }
     },
@@ -468,58 +416,41 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-primary-500',
-          'focus:ring-primary-400/20',
-          'hover:bg-primary-300/20',
-          'active:bg-primary-400/20',
-          'border-primary-500'
+          'text-on-primary-container',
+          'border-primary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         button: [
-          'text-dark-800',
-          'focus:ring-dark-900/20',
-          'hover:bg-dark-950/20',
-          'active:bg-dark-900/20',
-          'border-dark-900',
-          'dark:text-light-200',
-          'dark:focus:ring-light-300/20',
-          'dark:hover:bg-light-400/20',
-          'dark:active:bg-light-300/20',
-          'dark:border-light-200'
+          'text-on-secondary-container',
+          'border-secondary'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         button: [
-          'text-success-500',
-          'focus:ring-success-400/20',
-          'hover:bg-success-300/20',
-          'active:bg-success-400/20',
-          'border-success-500'
+          'text-on-positive-container',
+          'border-positive'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         button: [
-          'text-info-500',
-          'focus:ring-info-400/20',
-          'hover:bg-info-300/20',
-          'active:bg-info-400/20',
-          'border-info-500'
+          'text-on-accent-container',
+          'border-accent'
         ]
       }
     },
@@ -529,25 +460,30 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'text-warning-500',
-          'focus:ring-warning-400/20',
-          'hover:bg-warning-300/20',
-          'active:bg-warning-400/20',
-          'border-warning-500'
+          'text-on-warning-container',
+          'border-warning'
         ]
       }
     },
     {
       variant: 'outlined',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         button: [
-          'text-error-500',
-          'focus:ring-error-400/20',
-          'hover:bg-error-300/20',
-          'active:bg-error-400/20',
-          'border-error-500'
+          'text-on-negative-container',
+          'border-negative'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'surface',
+      disabled: false,
+      class: {
+        button: [
+          'text-on-surface-variant',
+          'border-outlined'
         ]
       }
     },
@@ -558,65 +494,45 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'from-primary-500',
-          'to-primary-900',
-          'focus:ring-primary-700',
-          'hover:to-primary-700',
-          'active:from-primary-600',
-          'active:to-primary-800'
+          'from-primary-gradient-start',
+          'to-primary-gradient-end',
+          'text-on-primary'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'neutral',
+      color: 'secondary',
       disabled: false,
       class: {
         button: [
-          'from-dark-600',
-          'to-dark-950',
-          'focus:ring-dark-950',
-          'hover:to-dark-800',
-          'active:from-dark-950',
-          'active:to-dark-600',
-          'text-light-200',
-          'dark:text-dark-950',
-          'dark:from-light-200',
-          'dark:to-light-400',
-          'dark:focus:ring-light-400',
-          'dark:hover:to-light-400',
-          'dark:active:from-light-400',
-          'dark:active:to-light-200'
+          'from-secondary-gradient-start',
+          'to-secondary-gradient-end',
+          'text-on-secondary'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'success',
+      color: 'positive',
       disabled: false,
       class: {
         button: [
-          'from-success-500',
-          'to-success-900',
-          'focus:ring-success-700',
-          'hover:to-success-700',
-          'active:from-success-600',
-          'active:to-success-800'
+          'from-positive-gradient-start',
+          'to-positive-gradient-end',
+          'text-on-positive'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'info',
+      color: 'accent',
       disabled: false,
       class: {
         button: [
-          'from-info-500',
-          'to-info-900',
-          'focus:ring-info-700',
-          'hover:to-info-700',
-          'active:from-info-600',
-          'active:to-info-800'
+          'from-accent-gradient-start',
+          'to-accent-gradient-end',
+          'text-on-accent'
         ]
       }
     },
@@ -626,27 +542,33 @@ export default tv({
       disabled: false,
       class: {
         button: [
-          'from-warning-500',
-          'to-warning-900',
-          'focus:ring-warning-700',
-          'hover:to-warning-700',
-          'active:from-warning-600',
-          'active:to-warning-800'
+          'from-warning-gradient-start',
+          'to-warning-gradient-end',
+          'text-on-warning'
         ]
       }
     },
     {
       variant: 'gradient',
-      color: 'error',
+      color: 'negative',
       disabled: false,
       class: {
         button: [
-          'from-error-500',
-          'to-error-900',
-          'focus:ring-error-700',
-          'hover:to-error-700',
-          'active:from-error-600',
-          'active:to-error-800'
+          'from-negative-gradient-start',
+          'to-negative-gradient-end',
+          'text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'surface',
+      disabled: false,
+      class: {
+        button: [
+          'from-surface-container',
+          'to-surface-container-highest',
+          'text-on-surface'
         ]
       }
     },
@@ -656,7 +578,7 @@ export default tv({
       disabled: true,
       class: {
         button: [
-          'bg-gray-600'
+          'bg-disabled'
         ]
       }
     },
@@ -665,8 +587,8 @@ export default tv({
       disabled: true,
       class: {
         button: [
-          'from-gray-600',
-          'to-gray-900'
+          'from-disabled-gradient-start',
+          'to-disabled-gradient-end'
         ]
       }
     },
@@ -675,20 +597,28 @@ export default tv({
       disabled: true,
       class: {
         button: [
-          'text-gray-600',
-          'border-gray-600',
-          'hover:bg-transparent',
-          'active:bg-transparent'
+          'border-disabled',
+          'text-on-disabled-container'
         ]
       }
     },
-    // disabled & flat
     {
       disabled: true,
-      flat: true,
+      class: {
+        stateLayer: [
+          'hover:bg-transparent',
+          'active:bg-transparent',
+          'focus:bg-transparent'
+        ]
+      }
+    },
+    // disabled & elevated
+    {
+      disabled: true,
+      elevated: true,
       class: {
         button: [
-          'active:shadow-none'
+          'shadow-el0'
         ]
       }
     },

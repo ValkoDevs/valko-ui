@@ -6,7 +6,7 @@ const form = ref<PopoverProps>({
   placement: 'auto',
   alignment: undefined,
   isOpen: false,
-  flat: false,
+  elevated: false,
   condensed: false
 })
 
@@ -58,10 +58,10 @@ const popoverProps: TableItem[] = [
     default: 'undefined'
   },
   {
-    key: 'flatProp',
-    prop: 'flat',
+    key: 'elevatedProp',
+    prop: 'elevated',
     required: false,
-    description: 'Whether the Popover displays a shadow.',
+    description: 'Whether the Popover is elevated, this will increase the level of the shadow.',
     values: 'true, false',
     default: 'false'
   },
@@ -82,8 +82,8 @@ const popoverProps: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'panelClassesProp',
-    prop: 'panelClasses',
+    key: 'classesProp',
+    prop: 'classes',
     required: false,
     description: 'Allows you to apply custom CSS classes to the popover content for further customization (e.g., for styling the background, padding, borders, etc.). Accepts a single string or an array of strings.',
     values: 'string | string[]',
@@ -141,13 +141,13 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
 <template>
   <doc-section
     title="Popover"
-    description="A versatile UI element designed to display additional content upon user interaction. It can be used for tooltips, dropdowns, or any contextual information that needs to be shown when a user interacts with a specific element on the page."
+    description="A versatile UI element designed to display additional content upon user interaction. It can be used for tooltips, dropdowns, or any contextual accent that needs to be shown when a user interacts with a specific element on the page."
   >
     <template #playground-view>
       <vk-popover
         :shape="form.shape"
         :is-open="form.isOpen"
-        :flat="form.flat"
+        :elevated="form.elevated"
         :condensed="form.condensed"
         :placement="form.placement"
         :alignment="form.alignment"
@@ -180,8 +180,8 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
         :options="alignmentOptions"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
+        v-model="form.elevated"
+        label="elevated"
       />
       <vk-checkbox
         v-model="form.condensed"
@@ -253,6 +253,23 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
 
         <template #code>
           <code-block :code="`${scriptCode}\n${generateSnippet<string>('alignment', { values: alignmentOptions.map(o => o.value), customSlot, extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section title="Elevated">
+        <vk-popover
+          elevated
+          :is-open="popoverStates.elevated"
+          text="Elevated"
+          @close="handleClose('elevated')"
+        >
+          <vk-button @click="togglePopover('elevated')">
+            Elevated
+          </vk-button>
+        </vk-popover>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('elevated', { values: [true], customSlot, extraProps })}`" />
         </template>
       </example-section>
     </template>

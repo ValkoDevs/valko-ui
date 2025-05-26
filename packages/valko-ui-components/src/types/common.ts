@@ -27,16 +27,17 @@ export type Size = 'xs' | 'sm' | 'md' | 'lg'
 export type SizeWithFull = Size | 'full'
 export type Color =
   | 'primary'
-  | 'neutral'
-  | 'success'
-  | 'info'
+  | 'secondary'
+  | 'accent'
+  | 'positive'
   | 'warning'
-  | 'error'
-
+  | 'negative'
+export type ColorWithSurface = Color | 'surface'
 export interface Shapes { shape?: Shape; }
 export interface Variants { variant?: Variant; }
 export interface Sizes { size?: Size; }
 export interface Colors { color?: Color; }
+export interface ColorsWithSurface { color?: ColorWithSurface; }
 export interface VariantsAlt { variant?: VariantWithGradient; }
 export interface Alignments { alignment?: Alignment; }
 export interface Placements { placement?: Placement; }

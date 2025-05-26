@@ -7,10 +7,8 @@ export default tv({
       'w-fit',
       'flex',
       'flex-wrap',
-      'shadow-light-300',
       'transition-colors',
-      'duration-200',
-      'dark:shadow-dark-950'
+      'duration-200'
     ],
     a: [
       'vk-breadcrumbs__a',
@@ -18,13 +16,15 @@ export default tv({
       'flex',
       'justify-around',
       'items-center',
-      'text-gray-500',
+      'text-on-surface-variant',
       'data-[active=true]:cursor-default',
-      'data-[disabled=true]:text-gray-700',
+      'data-[disabled=true]:text-disabled',
+      'data-[disabled=true]:opacity-50',
       'data-[disabled=true]:cursor-not-allowed'
     ],
     separator: [
-      'mx-1'
+      'mx-1',
+      'text-on-surface'
     ],
     iconLeft: [
       'mr-1'
@@ -37,8 +37,7 @@ export default tv({
     variant: {
       filled: {
         container: [
-          'bg-light-200',
-          'dark:bg-dark-800'
+          'bg-surface-container-low'
         ]
       },
       outlined: {
@@ -46,14 +45,12 @@ export default tv({
           'py-[calc(0.5rem_-_2px)]',
           'px-[calc(1rem_-_2px)]',
           'border-2',
-          'border-light-400',
-          'dark:border-dark-600'
+          'border-outlined'
         ]
       },
       ghost: {
         container: [
-          'bg-light-200/[.50]',
-          'dark:bg-dark-800/[.50]'
+          'bg-surface-container-low/[.5]'
         ]
       },
       link: {
@@ -65,47 +62,44 @@ export default tv({
     color: {
       primary: {
         a: [
-          'hover:text-primary-600',
-          'data-[active=true]:text-primary-500',
-          'data-[active=true]:hover:text-primary-600'
+          'hover:text-on-primary-container',
+          'data-[active=true]:text-primary'
         ]
       },
-      neutral: {
+      secondary: {
         a: [
-          'hover:text-dark-950',
-          'data-[active=true]:text-dark-800',
-          'data-[active=true]:hover:text-dark-950',
-          'dark:hover:text-light-50',
-          'dark:data-[active=true]:text-light-200',
-          'dark:data-[active=true]:hover:text-light-50'
+          'hover:text-on-secondary-container',
+          'data-[active=true]:text-secondary'
         ]
       },
-      success: {
+      positive: {
         a: [
-          'hover:text-success-600',
-          'data-[active=true]:text-success-500',
-          'data-[active=true]:hover:text-success-600'
+          'hover:text-on-positive-container',
+          'data-[active=true]:text-positive'
         ]
       },
-      info: {
+      accent: {
         a: [
-          'hover:text-info-600',
-          'data-[active=true]:text-info-500',
-          'data-[active=true]:hover:text-info-600'
+          'hover:text-on-accent-container',
+          'data-[active=true]:text-accent'
         ]
       },
       warning: {
         a: [
-          'hover:text-warning-600',
-          'data-[active=true]:text-warning-500',
-          'data-[active=true]:hover:text-warning-600'
+          'hover:text-on-warning-container',
+          'data-[active=true]:text-warning'
         ]
       },
-      error: {
+      negative: {
         a: [
-          'hover:text-error-600',
-          'data-[active=true]:text-error-500',
-          'data-[active=true]:hover:text-error-600'
+          'hover:text-on-negative-container',
+          'data-[active=true]:text-negative'
+        ]
+      },
+      surface: {
+        a: [
+          'hover:text-outlined',
+          'data-[active=true]:text-on-surface'
         ]
       }
     },
@@ -148,9 +142,6 @@ export default tv({
         ]
       }
     },
-    flat: {
-      true: {}
-    },
     condensed: {
       true: {
         container: [
@@ -164,26 +155,5 @@ export default tv({
         ]
       }
     }
-  },
-  compoundVariants: [
-    // flat & variants
-    {
-      variant: ['filled', 'outlined'],
-      flat: false,
-      class: {
-        container: [
-          'shadow-sm'
-        ]
-      }
-    },
-    {
-      variant: ['filled', 'outlined'],
-      flat: true,
-      class: {
-        container: [
-          'shadow-none'
-        ]
-      }
-    }
-  ]
+  }
 }) as unknown as ReturnType<TV>

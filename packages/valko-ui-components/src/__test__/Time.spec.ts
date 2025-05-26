@@ -57,7 +57,7 @@ describe('Time component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-primary-500')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-primary')
       })
 
       it('should be size md', () => {
@@ -65,11 +65,11 @@ describe('Time component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-primary-500')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-primary')
       })
 
       it('should be shape soft', () => {
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('rounded')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('rounded-sm')
       })
     })
 
@@ -83,43 +83,43 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-primary-500')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-primary')
       })
 
-      it('should be color neutral when props.color is neutral', () => {
+      it('should be color secondary when props.color is secondary', () => {
         wrapper = mount(VkTime, {
           props: {
-            color: 'neutral',
+            color: 'secondary',
             modelValue,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-light-300')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-secondary')
       })
 
-      it('should be color success when props.color is success', () => {
+      it('should be color positive when props.color is positive', () => {
         wrapper = mount(VkTime, {
           props: {
-            color: 'success',
+            color: 'positive',
             modelValue,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-success-500')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-positive')
       })
 
-      it('should be color info when props.color is info', () => {
+      it('should be color accent when props.color is accent', () => {
         wrapper = mount(VkTime, {
           props: {
-            color: 'info',
+            color: 'accent',
             modelValue,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-info-500')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-accent')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -131,19 +131,19 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-warning-500')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-warning')
       })
 
-      it('should be color error when props.color is error', () => {
+      it('should be color negative when props.color is negative', () => {
         wrapper = mount(VkTime, {
           props: {
-            color: 'error',
+            color: 'negative',
             modelValue,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-error-500')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-negative')
       })
     })
 
@@ -169,7 +169,7 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('rounded')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('rounded-sm')
       })
 
       it('should be square when props.shape is square', () => {
@@ -245,7 +245,7 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-primary-500')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-primary')
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -257,7 +257,7 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('border-primary-500')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('border-primary')
       })
 
       it('should be ghost when props.variant is ghost', () => {
@@ -269,7 +269,7 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-primary-500/[.3]')
+        expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-primary-container')
       })
     })
   })

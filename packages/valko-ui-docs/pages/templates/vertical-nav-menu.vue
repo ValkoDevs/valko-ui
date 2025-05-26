@@ -31,7 +31,6 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
   <div class="m-4 bg-light-200 dark:bg-dark-800 h-[70vh] flex">
     <vk-navbar
       vertical
-      flat
       shape="square"
       class="justify-between"
     >
@@ -69,7 +68,6 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
       <div class="m-4 bg-light-200 dark:bg-dark-800 h-[70vh] flex">
         <vk-navbar
           vertical
-          flat
           shape="square"
           class="justify-between"
         >

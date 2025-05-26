@@ -23,18 +23,17 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
 
 <template>
   <vk-navbar
-    color="neutral"
+    color="secondary"
     variant="outlined"
     size="md"
     shape="square"
-    flat
     fixed
-    class="flex justify-between !bg-light-100 dark:!bg-dark-800"
+    class="flex justify-between !bg-surface-container !border-surface-dim"
   >
     <vk-button
       variant="link"
       shape="rounded"
-      color="neutral"
+      color="surface"
       condensed
       size="lg"
       class="size-10 lg:hidden"
@@ -45,35 +44,13 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
         class="text-2xl"
       />
     </vk-button>
-    <h2 class="text-primary-500 dark:text-primary-400 text-3xl font-serif tracking-wider">
+    <h2 class="text-primary text-3xl font-serif tracking-wider">
       <nuxt-link to="/">
         ValkoUI
       </nuxt-link>
     </h2>
 
-    <div class="flex gap-2 lg:hidden">
-      <theme-switch />
-      <a
-        href="https://github.com/ValkoDevs/valko-ui"
-        target="_blank"
-      >
-        <vk-button
-          variant="link"
-          shape="rounded"
-          color="neutral"
-          condensed
-          size="lg"
-          class="size-10"
-        >
-          <vk-icon
-            name="brand-github"
-            class="text-2xl"
-          />
-        </vk-button>
-      </a>
-    </div>
-
-    <site-links class="hidden lg:flex" />
+    <site-links />
 
     <vk-drawer
       :is-open="menuOpen"
@@ -97,7 +74,7 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
 
   <div class="flex flex-col items-center justify-center p-6 h-[80vh]">
     <h1 class="text-4xl font-bold text-center mb-4">
-      Welcome to <span class="text-primary-500">ValkoUI</span>
+      Welcome to <span class="text-primary">ValkoUI</span>
     </h1>
     <p class="text-center mb-6">
       A modern library for building sleek, responsive user interfaces with ease.

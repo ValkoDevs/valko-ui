@@ -6,7 +6,6 @@ const form = ref<ModalProps>({
   size: 'md',
   backdrop: 'opaque',
   title: 'Modal',
-  flat: false,
   closable: true,
   isOpen: false
 })
@@ -65,14 +64,6 @@ const modalProps: TableItem[] = [
     description: 'Displays a close button on the Modal and allows to close it by clicking outside or pressing esc',
     values: 'true, false',
     default: 'true'
-  },
-  {
-    key: 'flatProp',
-    prop: 'flat',
-    required: false,
-    description: 'Wheter the Modal has a shadow or not',
-    values: 'true, false',
-    default: 'false'
   }
 ]
 
@@ -133,13 +124,6 @@ const backdropSnippet = `${scriptCode}\n${generateSnippet<string>('backdrop',
   }).replace(/<vk-modal/g, `${triggerSnippet}`)
 }`
 
-const flatSnippet = `${scriptCode}\n${generateSnippet<boolean>('flat',
-  {
-    values: [true],
-    hasSlot: true, extraProps
-  }).replace(/<vk-modal/g, `${triggerSnippet}`)
-}`
-
 const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
   {
     values: ['false'],
@@ -160,7 +144,6 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
       <vk-modal
         :is-open="form.isOpen"
         :size="form.size"
-        :flat="form.flat"
         :shape="form.shape"
         :backdrop="form.backdrop"
         :title="form.title"
@@ -172,7 +155,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
 
           <vk-button
-            color="success"
+            color="positive"
             size="sm"
             class="self-end"
             @click="() => {form.isOpen = false}"
@@ -205,10 +188,6 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
         label="Backdrop"
         size="sm"
         :options="backdropOptions"
-      />
-      <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
       />
       <vk-checkbox
         v-model="form.closable"
@@ -304,27 +283,6 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
         </template>
       </example-section>
 
-      <example-section title="Flat">
-        <vk-button @click="toggleModal('flat')">
-          Flat
-        </vk-button>
-        <vk-modal
-          :is-open="modalStates['flat']"
-          title="Flat"
-          flat
-          @close="toggleModal('flat')"
-        >
-          <template #default>
-            Flat Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
-          </template>
-        </vk-modal>
-
-        <template #code>
-          <code-block :code="flatSnippet" />
-        </template>
-      </example-section>
-
       <example-section title="Closable">
         <vk-button @click="toggleModal('closable')">
           Closable
@@ -340,7 +298,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
 
             <vk-button
-              color="success"
+              color="positive"
               size="sm"
               class="self-end"
               @click="toggleModal('closable')"

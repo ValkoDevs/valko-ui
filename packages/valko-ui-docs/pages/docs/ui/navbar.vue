@@ -8,7 +8,7 @@ const form = ref<NavbarProps>({
   size: 'md',
   floating: false,
   fixed: false,
-  flat: false,
+  elevated: false,
   vertical: false
 })
 
@@ -18,8 +18,8 @@ const navbarProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Navbar.',
-    values: 'primary, neutral, error, warning, info, success',
-    default: 'neutral'
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
+    default: 'secondary'
   },
   {
     key: 'variantProp',
@@ -46,10 +46,10 @@ const navbarProps: TableItem[] = [
     default: 'md'
   },
   {
-    key: 'flatProp',
-    prop: 'flat',
+    key: 'elevatedProp',
+    prop: 'elevated',
     required: false,
-    description: 'Displays a shadow for the Navbar.',
+    description: 'Adds a subtle shadow to the Navbar (elevation level 1) when not fixed. If the Navbar is also fixed, the elevation is increased to level 2.',
     values: 'true, false',
     default: 'false'
   },
@@ -57,7 +57,7 @@ const navbarProps: TableItem[] = [
     key: 'fixedProp',
     prop: 'fixed',
     required: false,
-    description: 'Determines if the Navbar is fixed to the top of the page.',
+    description: 'Fixes the Navbar to the top of the viewport and increases its elevation to level 2, regardless of the "elevated" setting.',
     values: 'true, false',
     default: 'false'
   },
@@ -96,7 +96,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
 <template>
   <doc-section
     title="Navbar"
-    description="A visual navigation component that provides links and other navigation-related information to the user."
+    description="A visual navigation component that provides links and other navigation-related accent to the user."
   >
     <template #playground-view>
       <vk-navbar
@@ -106,7 +106,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
         :size="form.size"
         :floating="form.floating"
         :fixed="form.fixed"
-        :flat="form.flat"
+        :elevated="form.elevated"
         :vertical="form.vertical"
       >
         <vk-icon
@@ -121,7 +121,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -150,8 +150,8 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
         label="Fixed"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
+        v-model="form.elevated"
+        label="Elevated"
       />
       <vk-checkbox
         v-model="form.vertical"
@@ -165,7 +165,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <vk-navbar
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           :color="color.value"
         >
@@ -177,7 +177,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
         </vk-navbar>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), customSlot })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), customSlot })" />
         </template>
       </example-section>
 
@@ -263,20 +263,20 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
         </template>
       </example-section>
 
-      <example-section title="Flat">
+      <example-section title="Elevated">
         <vk-navbar
-          flat
+          elevated
         >
           <vk-icon
             name="brand-vue"
             size="md"
             class="text-white"
           />
-          <span class="font-semibold ml-4">Flat</span>
+          <span class="font-semibold ml-4">Elevated</span>
         </vk-navbar>
 
         <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', { values: [true], customSlot })" />
+          <code-block :code="generateSnippet<boolean>('elevated', { values: [true], customSlot })" />
         </template>
       </example-section>
 

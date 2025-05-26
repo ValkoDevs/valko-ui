@@ -10,8 +10,7 @@ const form = ref<SwitchProps>({
   labelPosition: 'right',
   disabled: false,
   readonly: false,
-  modelValue: false,
-  flat: false
+  modelValue: false
 })
 
 const position: SelectOption<LabelPosition>[] = [
@@ -27,7 +26,7 @@ const apiData: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Switch.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary'
   },
   {
@@ -125,7 +124,6 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         :disabled="form.disabled"
         :readonly="form.readonly"
         :label-position="form.labelPosition"
-        :flat="form.flat"
       />
     </template>
 
@@ -139,7 +137,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.general"
       />
       <vk-select
         v-model="form.variant"
@@ -173,10 +171,6 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         v-model="form.readonly"
         label="Readonly"
       />
-      <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
-      />
     </template>
 
     <template #examples>
@@ -185,7 +179,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <vk-switch
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.general"
           :key="color.value"
           v-model="exampleSectionModel[color.value]"
           :color="color.value"
@@ -193,7 +187,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         />
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value) })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
         </template>
       </example-section>
 

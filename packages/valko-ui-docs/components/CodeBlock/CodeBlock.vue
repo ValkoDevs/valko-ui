@@ -36,8 +36,8 @@ const highlightedCode = computed(() => hljs.highlight(
 ).value)
 
 const iconClass = computed(() => {
-  if (btnIcon.value === 'check') return 'text-success-500'
-  if (btnIcon.value === 'error-404') return 'text-error-500'
+  if (btnIcon.value === 'check') return 'text-positive'
+  if (btnIcon.value === 'error') return 'text-negative'
   return ''
 })
 
@@ -47,25 +47,25 @@ const copyToClipboard = async () => {
     btnIcon.value = 'check'
     setTimeout(() => btnIcon.value = 'copy', 3000)
   } catch (error) {
-    btnIcon.value = 'error-404'
+    btnIcon.value = 'error'
     console.error(error)
   }
 }
 </script>
 
 <template>
-  <div class="relative group w-full p-5 bg-light-200 dark:bg-dark-800 rounded-lg w-full">
+  <div class="relative group w-full p-5 bg-surface-container rounded-lg">
     <vk-button
       variant="link"
       shape="rounded"
-      color="neutral"
+      color="secondary"
       condensed
       class="size-5 absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
       @click="copyToClipboard"
     >
       <vk-icon
         :name="btnIcon"
-        :class="`text-2xl ${btnIcon === 'copy' ? 'hover:text-primary-500' : ''} ${iconClass}`"
+        :class="`text-2xl ${btnIcon === 'copy' ? 'hover:text-primary' : ''} ${iconClass}`"
       />
     </vk-button>
 

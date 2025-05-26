@@ -5,7 +5,6 @@ export interface MockProps {
   shape?: string
   icon?: string
   closable?: boolean
-  flat?: boolean
 }
 
 export const mockProps: MockProps = {
@@ -14,6 +13,5 @@ export const mockProps: MockProps = {
   size: 'md',
   shape: 'soft',
   icon: '',
-  closable: false,
-  flat: false
+  closable: false
 }

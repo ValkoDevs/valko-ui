@@ -7,7 +7,7 @@ const form = ref<ButtonProps>({
   size: 'md',
   shape: 'soft',
   disabled: false,
-  flat: false,
+  elevated: false,
   block: false,
   condensed: false,
   loading: false
@@ -19,7 +19,7 @@ const apiData: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Button.',
-    values: 'primary, neutral, error, warning, info, success',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -55,10 +55,10 @@ const apiData: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'flat',
-    prop: 'flat',
+    key: 'elevated',
+    prop: 'elevated',
     required: false,
-    description: 'Whether the Button has a shadow or not.',
+    description: 'Adds a subtle shadow to the button, giving it a slightly raised appearance. When false (default), the button appears flat with no shadow.',
     values: 'true, false',
     default: 'false'
   },
@@ -115,7 +115,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
         :variant="form.variant"
         :size="form.size"
         :disabled="form.disabled"
-        :flat="form.flat"
+        :elevated="form.elevated"
         :block="form.block"
         :condensed="form.condensed"
         :shape="form.shape"
@@ -131,7 +131,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -160,8 +160,8 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
         label="Condensed"
       />
       <vk-checkbox
-        v-model="form.flat"
-        label="Flat"
+        v-model="form.elevated"
+        label="Elevated"
       />
       <vk-checkbox
         v-model="form.block"
@@ -176,10 +176,10 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(6,_minmax(0,_max-content))]"
+        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(7,_minmax(0,_max-content))]"
       >
         <vk-button
-          v-for="color in colorOptions"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           :color="color.value"
         >
@@ -187,7 +187,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
         </vk-button>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('color', { values: colorOptions.map(o => o.value), hasSlot: true })" />
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), hasSlot: true })" />
         </template>
       </example-section>
 
@@ -242,13 +242,13 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
         </template>
       </example-section>
 
-      <example-section title="Flat">
-        <vk-button flat>
-          Flat
+      <example-section title="Elevated">
+        <vk-button elevated>
+          Elevated
         </vk-button>
 
         <template #code>
-          <code-block :code="generateSnippet<boolean>('flat', { values: [true], hasSlot: true })" />
+          <code-block :code="generateSnippet<boolean>('elevated', { values: [true], hasSlot: true })" />
         </template>
       </example-section>
 

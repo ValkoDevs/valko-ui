@@ -60,7 +60,7 @@ describe('DataTable component', () => {
         })
 
         it('should be variant filled', () => {
-          expect(wrapper.find('.bg-light-300').exists()).toBe(true)
+          expect(wrapper.find('.bg-surface-container-low').exists()).toBe(true)
         })
 
         it('should be shape soft', () => {
@@ -166,7 +166,7 @@ describe('DataTable component', () => {
             }
           })
 
-          expect(wrapper.find('.bg-light-300').exists()).toBe(true)
+          expect(wrapper.find('.bg-surface-container-low').exists()).toBe(true)
         })
 
         it('should be outlined when props.variant is outlined', () => {
@@ -190,7 +190,7 @@ describe('DataTable component', () => {
             }
           })
 
-          expect(wrapper.find('.vk-table__thead').classes()).toContain('bg-light-300/[.60]')
+          expect(wrapper.find('.vk-table__thead').classes()).toContain('bg-surface-container-highest/[.5]')
         })
       })
 
@@ -204,7 +204,7 @@ describe('DataTable component', () => {
             }
           })
 
-          expect(wrapper.find('.vk-table__tr').classes()).toContain('even:bg-light-200/[.8]')
+          expect(wrapper.find('.vk-table__tr').classes()).toContain('even:bg-surface-container')
         })
       })
     })
@@ -355,7 +355,7 @@ describe('DataTable component', () => {
       const input = wrapper.findComponent(VkInput)
       await input.setValue('some filter')
 
-      expect(wrapper.find('i.ti.ti-search').classes()).toContain('data-[active=true]:text-primary-500')
+      expect(wrapper.find('i.ti.ti-search').classes()).toContain('data-[active=true]:text-primary')
     })
 
     it('should emit onFilter when the filter is being used', async () => {

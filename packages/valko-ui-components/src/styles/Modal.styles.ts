@@ -29,8 +29,7 @@ export default tv({
       'vk-modal__panel',
       'w-full',
       'p-6',
-      'bg-white',
-      'shadow-lg',
+      'bg-surface-container-high',
       'text-left',
       'overflow-hidden',
       'flex',
@@ -39,8 +38,7 @@ export default tv({
       'align-middle',
       'gap-4',
       'transition-all',
-      'transform',
-      'dark:bg-dark-800'
+      'transform'
     ],
     panelChild: [
       'vk-modal__panel-child',
@@ -56,8 +54,7 @@ export default tv({
       'font-medium'
     ],
     closeButton: [
-      'text-black',
-      'dark:text-white',
+      'text-on-surface',
       'justify-self-end'
     ],
     closeIcon: [
@@ -122,8 +119,7 @@ export default tv({
       },
       opaque: {
         backdrop: [
-          'bg-light-400/80',
-          'dark:bg-dark-600/80'
+          'bg-state-scrim'
         ]
       },
       transparent: {
@@ -131,13 +127,16 @@ export default tv({
           'bg-transparent'
         ]
       }
-    },
-    flat: {
-      true: {
+    }
+  },
+  compoundVariants: [
+    {
+      size: ['xs', 'sm', 'md', 'lg'],
+      class: {
         panel: [
-          'shadow-none'
+          'shadow-el3'
         ]
       }
     }
-  }
+  ]
 }) as unknown as ReturnType<TV>

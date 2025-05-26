@@ -16,8 +16,7 @@ const props = withDefaults(defineProps<ModalProps>(), {
   backdrop: 'opaque',
   title: '',
   closable: true,
-  isOpen: false,
-  flat: false
+  isOpen: false
 })
 
 const emit = defineEmits(['close'])
@@ -82,7 +81,7 @@ const closeModal = () => { if (props.closable) emit('close') }
                   size="xs"
                   variant="link"
                   shape="rounded"
-                  color="neutral"
+                  color="surface"
                   condensed
                   :class="classes.closeButton"
                   @click="closeModal"
