@@ -55,7 +55,7 @@ const classes = useStyle<DocSectionProps, SlotStyles>(props, styles)
         API
       </h2>
       <hr :class="classes.divider">
-      <div class="flex flex-col justify-around items-start gap-2 text-xl">
+      <div class="flex flex-col justify-around items-start gap-4 text-xl">
         <slot name="api" />
       </div>
     </section>
