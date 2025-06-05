@@ -18,7 +18,16 @@ const position: SelectOption<LabelPosition>[] = [
   { value: 'left', label: 'Left' }
 ]
 
-const exampleSectionModel = reactive<Record<string, boolean>>({ readonly: true })
+const switchStates = reactive(
+  Object.fromEntries([
+    ...colorOptions.general,
+    ...variantOptions.general,
+    ...shapeOptions.general,
+    ...sizeOptions.general,
+    ...position,
+    { value: 'readonly' }
+  ].map(opt => [opt.value, true]))
+)
 
 const apiData: TableItem[] = [
   {
@@ -181,7 +190,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         <vk-switch
           v-for="color in colorOptions.general"
           :key="color.value"
-          v-model="exampleSectionModel[color.value]"
+          v-model="switchStates[color.value]"
           :color="color.value"
           :label="color.label"
         />
@@ -198,7 +207,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         <vk-switch
           v-for="variant in variantOptions.general"
           :key="variant.value"
-          v-model="exampleSectionModel[variant.value]"
+          v-model="switchStates[variant.value]"
           :variant="variant.value"
           :label="variant.label"
         />
@@ -215,7 +224,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         <vk-switch
           v-for="shape in shapeOptions.general"
           :key="shape.value"
-          v-model="exampleSectionModel[shape.value]"
+          v-model="switchStates[shape.value]"
           :shape="shape.value"
           :label="shape.label"
         />
@@ -232,7 +241,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         <vk-switch
           v-for="size in sizeOptions.general"
           :key="size.value"
-          v-model="exampleSectionModel[size.value]"
+          v-model="switchStates[size.value]"
           :size="size.value"
           :label="size.label"
         />
@@ -252,7 +261,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
 
       <example-section title="Readonly">
         <vk-switch
-          v-model="exampleSectionModel['readonly']"
+          v-model="switchStates['readonly']"
           readonly
         />
 
@@ -268,7 +277,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
         <vk-switch
           v-for="pos in position"
           :key="pos.value"
-          v-model="exampleSectionModel[pos.value]"
+          v-model="switchStates[pos.value]"
           :label-position="pos.value"
           :label="pos.label"
         />

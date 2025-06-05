@@ -54,13 +54,13 @@ const copyToClipboard = async () => {
 </script>
 
 <template>
-  <div class="relative group w-full p-5 bg-surface-container rounded-lg">
+  <div class="relative group w-full p-5 bg-surface-container rounded">
     <vk-button
       variant="link"
       shape="rounded"
       color="secondary"
       condensed
-      class="size-5 absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+      class="size-5 absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity"
       @click="copyToClipboard"
     >
       <vk-icon

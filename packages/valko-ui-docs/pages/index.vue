@@ -83,7 +83,7 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
     <div class="flex flex-col md:flex-row gap-2 max-w-full items-stretch">
       <code-block
         code="npm install @valko-ui/components"
-        class="bg-light-200 dark:bg-dark-800 rounded-lg md:order-2"
+        class="md:order-2"
       />
       <nuxt-link to="/docs">
         <vk-button class="h-full gap-2 items-center">
