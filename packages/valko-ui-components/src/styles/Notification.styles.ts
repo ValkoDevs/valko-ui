@@ -38,11 +38,7 @@ export default tv({
   },
   variants: {
     variant: {
-      filled: {
-        progressbar: [
-          'bg-white'
-        ]
-      },
+      filled: {},
       ghost: {
         notification: [
           'backdrop-blur'
@@ -51,7 +47,7 @@ export default tv({
       outlined: {
         notification: [
           'border-2',
-          'bg-surface'
+          'bg-on-inverse-surface'
         ],
         content: [
           'p-[calc(0.75rem_-_2px)]'
@@ -59,7 +55,8 @@ export default tv({
       },
       line: {
         notification: [
-          'bg-surface'
+          'bg-inverse-surface',
+          'text-on-inverse-surface'
         ]
       },
       gradient: {
@@ -67,7 +64,7 @@ export default tv({
           'bg-gradient-to-b'
         ],
         progressbar: [
-          'bg-white'
+          'bg-on-inverse-surface'
         ]
       }
     },
@@ -153,6 +150,9 @@ export default tv({
         notification: [
           'bg-primary',
           'text-on-primary'
+        ],
+        progressbar: [
+          'bg-on-primary'
         ]
       }
     },
@@ -163,6 +163,9 @@ export default tv({
         notification: [
           'bg-secondary',
           'text-on-secondary'
+        ],
+        progressbar: [
+          'bg-on-secondary'
         ]
       }
     },
@@ -173,6 +176,9 @@ export default tv({
         notification: [
           'bg-positive',
           'text-on-positive'
+        ],
+        progressbar: [
+          'bg-on-positive'
         ]
       }
     },
@@ -183,6 +189,9 @@ export default tv({
         notification: [
           'bg-accent',
           'text-on-accent'
+        ],
+        progressbar: [
+          'bg-on-accent'
         ]
       }
     },
@@ -193,6 +202,9 @@ export default tv({
         notification: [
           'bg-warning',
           'text-on-warning'
+        ],
+        progressbar: [
+          'bg-on-warning'
         ]
       }
     },
@@ -203,6 +215,9 @@ export default tv({
         notification: [
           'bg-negative',
           'text-on-negative'
+        ],
+        progressbar: [
+          'bg-on-negative'
         ]
       }
     },
@@ -211,8 +226,11 @@ export default tv({
       color: 'surface',
       class: {
         notification: [
-          'bg-surface-container-highest',
-          'text-on-surface'
+          'bg-inverse-surface',
+          'text-on-inverse-surface'
+        ],
+        progressbar: [
+          'bg-on-inverse-surface'
         ]
       }
     },
@@ -392,11 +410,11 @@ export default tv({
       color: 'surface',
       class: {
         notification: [
-          'bg-surface-container-highest/[.5]',
-          'text-on-surface-variant'
+          'bg-inverse-surface/[.6]',
+          'text-on-inverse-surface'
         ],
         progressbar: [
-          'bg-on-surface-variant'
+          'bg-on-inverse-surface'
         ]
       }
     },
@@ -460,7 +478,7 @@ export default tv({
       color: 'surface',
       class: {
         progressbar: [
-          'bg-surface-container-highest'
+          'bg-on-inverse-surface'
         ]
       }
     },

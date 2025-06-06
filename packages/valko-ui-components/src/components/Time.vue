@@ -60,7 +60,6 @@ const formatHour = (hour: number): number => {
         <vk-button
           v-for="(_, H) in formatMap.hsColItems"
           :key="`hours-button-${H}`"
-          condensed
           :size="size"
           :shape="shape"
           :disabled="adapter.isTimeDisabled(H)"
@@ -79,7 +78,6 @@ const formatHour = (hour: number): number => {
         <vk-button
           v-for="m in 60 / minuteStep"
           :key="`minutes-button-${m-1}`"
-          condensed
           :size="size"
           :shape="shape"
           :disabled="adapter.isTimeDisabled(selectedTime.hours, m - 1)"
@@ -98,7 +96,6 @@ const formatHour = (hour: number): number => {
         <vk-button
           v-for="s in 60"
           :key="`seconds-button-${s-1}`"
-          condensed
           :size="size"
           :shape="shape"
           :variant="selectedTime.seconds === (s - 1) ? variant : 'link'"

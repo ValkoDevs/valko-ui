@@ -131,7 +131,7 @@ onMounted(() => {
         />
       </aside>
       <div class="flex flex-col grow justify-between items-center w-full">
-        <main class="w-full max-w-screen-xl mx-auto grow">
+        <main class="w-full max-w-screen-xl mx-auto grow px-10">
           <NuxtPage />
         </main>
         <footer class="w-full px-2 py-1 text-sm bg-surface-container-lowest items-center justify-center flex">

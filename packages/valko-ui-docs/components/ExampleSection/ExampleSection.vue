@@ -19,7 +19,7 @@ const parsedStyles = useStyle<ExampleSectionProps>(props, styles)
 </script>
 
 <template>
-  <section class="w-full mt-10">
+  <section class="w-full mt-10 overflow-visible relative">
     <h3 class="text-xl pl-3 pt-3 bg-surface-container-lowest rounded-t-lg">
       {{ props.title }}
     </h3>
