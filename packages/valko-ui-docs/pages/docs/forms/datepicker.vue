@@ -135,7 +135,7 @@ const datepickerProps: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Calendar.',
-    values: 'primary, secondary, negative, warning, accent, positive',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -558,7 +558,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions.general"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -602,7 +602,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
         classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
       >
         <vk-datepicker
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           v-model="model"
           :label="color.label"
@@ -616,7 +616,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps})}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 

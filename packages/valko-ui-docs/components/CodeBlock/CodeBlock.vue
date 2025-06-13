@@ -38,6 +38,7 @@ const highlightedCode = computed(() => hljs.highlight(
 const iconClass = computed(() => {
   if (btnIcon.value === 'check') return 'text-positive'
   if (btnIcon.value === 'error') return 'text-negative'
+  if (btnIcon.value === 'copy') return 'hover:text-primary'
   return ''
 })
 
@@ -54,21 +55,20 @@ const copyToClipboard = async () => {
 </script>
 
 <template>
-  <div class="relative group w-full p-5 bg-surface-container rounded">
+  <div class="relative group w-full h-full flex p-5 justify-start items-center bg-surface-container rounded">
     <vk-button
       variant="link"
       shape="rounded"
       color="secondary"
       condensed
-      class="size-5 absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity"
+      :class="`size-10 absolute! top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity ${iconClass}`"
       @click="copyToClipboard"
     >
       <vk-icon
         :name="btnIcon"
-        :class="`text-2xl ${btnIcon === 'copy' ? 'hover:text-primary' : ''} ${iconClass}`"
+        class="text-2xl p-2"
       />
     </vk-button>
-
-    <pre class="flex overflow-auto"><code v-html="highlightedCode" /></pre>
+    <pre class="overflow-auto flex w-full h-full items-center justify-start mr-10"><code v-html="highlightedCode" /></pre>
   </div>
 </template>
