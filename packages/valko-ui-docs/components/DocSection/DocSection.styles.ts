@@ -17,7 +17,9 @@ export default tv({
     ],
     section: [
       'w-full',
-      'mb-16'
+      'mb-16',
+      'relative',
+      'overflow-visible'
     ],
     container: [
       'w-full',
@@ -25,7 +27,9 @@ export default tv({
       'flex-col',
       'justify-start',
       'items-start',
-      'py-5'
+      'py-5',
+      'relative',
+      'overflow-visible'
     ],
     playground: [
       'flex',

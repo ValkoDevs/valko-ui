@@ -33,8 +33,7 @@ export default tv({
     ],
     unitButton: [
       'vk-time__unit-button',
-      'truncate',
-      'font-normal'
+      'truncate'
     ],
     periodContainer: [
       'flex'

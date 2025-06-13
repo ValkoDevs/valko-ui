@@ -139,7 +139,7 @@ const calendarProp: TableItem[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Calendar.',
-    values: 'primary, secondary, negative, warning, accent, positive',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary'
   },
   {
@@ -468,7 +468,7 @@ const extraProps = 'v-model="model" :adapter="adapter"'
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions.general"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -500,7 +500,7 @@ const extraProps = 'v-model="model" :adapter="adapter"'
         classes="sm:grid-cols-2 md:grid-cols-3"
       >
         <div
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
@@ -513,7 +513,7 @@ const extraProps = 'v-model="model" :adapter="adapter"'
         </div>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps}) }`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), extraProps}) }`" />
         </template>
       </example-section>
 

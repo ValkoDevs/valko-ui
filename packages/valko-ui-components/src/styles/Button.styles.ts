@@ -578,7 +578,8 @@ export default tv({
       disabled: true,
       class: {
         button: [
-          'bg-disabled'
+          'bg-disabled',
+          'text-on-disabled'
         ]
       }
     },
@@ -588,7 +589,8 @@ export default tv({
       class: {
         button: [
           'from-disabled-gradient-start',
-          'to-disabled-gradient-end'
+          'to-disabled-gradient-end',
+          'text-on-disabled'
         ]
       }
     },

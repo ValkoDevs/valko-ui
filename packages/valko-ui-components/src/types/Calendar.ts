@@ -1,5 +1,5 @@
 import type { ComputedRef, Ref } from 'vue'
-import type { DefaultComponent } from './common'
+import type { Sizes, ColorsWithSurface, Variants, Shapes } from './common'
 
 export type DisplayView = 'days' | 'months' | 'years'
 export type SelectionType = 'full' | 'month-only' | 'year-only' | 'day-month' | 'month-year'
@@ -21,7 +21,7 @@ export interface FormattedDate<T = any> {
   obj: T;
 }
 
-export interface CalendarProps extends DefaultComponent {
+export interface CalendarProps extends Sizes, ColorsWithSurface, Variants, Shapes {
   adapter: CalendarAdapter;
   modelValue: EpochTimeStamp;
   locale?: string;

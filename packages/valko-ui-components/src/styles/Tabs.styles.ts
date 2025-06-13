@@ -5,12 +5,15 @@ export default tv({
     container: [
       'vk-tabs__container',
       'flex',
-      'overflow-x-auto'
+      'overflow-visible',
+      'relative'
     ],
     group: [
       'w-fit',
       'flex',
-      'flex-col'
+      'flex-col',
+      'relative',
+      'overflow-visible'
     ],
     list: [
       'tab-list',
@@ -44,7 +47,9 @@ export default tv({
       'disabled:cursor-not-allowed'
     ],
     content: [
-      'grow'
+      'grow',
+      'relative',
+      'overflow-visible'
     ],
     cursor: [
       'shadow-el1',
