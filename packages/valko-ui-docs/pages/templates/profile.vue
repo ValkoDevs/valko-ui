@@ -36,7 +36,7 @@ const profileStats = [
 <template>
   <div class="relative h-full max-w-screen-xl mx-auto w-full">
     <div class="flex flex-row gap-8 py-8">
-      <div class="w-1/3 flex flex-col items-center shadow-lg rounded-lg p-6 bg-light-300 dark:bg-dark-800/[.8]">
+      <div class="w-1/3 flex flex-col items-center shadow-lg rounded-lg p-6 bg-surface-container">
         <vk-avatar
           src="/assets/avatar.jpg"
           size="lg"
@@ -47,13 +47,13 @@ const profileStats = [
         <h3 class="text-lg font-semibold mb-1">
           Marie Poole
         </h3>
-        <span class="text-sm text-dark-600 dark:text-light-400">Microsoft Inc.</span>
+        <span class="text-sm text-on-surface-variant">Microsoft Inc.</span>
 
         <div class="mt-6 w-full flex flex-col gap-4">
           <div
             v-for="stat in profileStats"
             :key="stat.label"
-            class="flex justify-between items-center bg-light-200 dark:bg-dark-800 rounded-md p-2"
+            class="flex justify-between items-center bg-surface-container-high rounded-md p-2"
           >
             <span class="text-sm">{{ stat.label }}</span>
             <span class="text-sm font-semibold">{{ stat.value }}</span>
@@ -63,13 +63,13 @@ const profileStats = [
         <vk-button
           class="mt-6 w-full"
           variant="outlined"
-          color="secondary"
+          color="surface"
         >
           View LinkedIn Profile
         </vk-button>
       </div>
 
-      <div class="w-fit shadow-lg rounded-lg p-6 bg-light-300 dark:bg-dark-800/[.8]">
+      <div class="w-fit shadow-lg rounded-lg p-6 bg-surface-container">
         <vk-tabs
           :tabs
           shape="line"
@@ -82,42 +82,42 @@ const profileStats = [
                 <vk-input
                   label="First Name"
                   variant="outlined"
-                  color="secondary"
+                  color="surface"
                 />
                 <vk-input
                   label="Last Name"
                   variant="outlined"
-                  color="secondary"
+                  color="surface"
                 />
                 <vk-input
                   label="Email"
                   variant="outlined"
-                  color="secondary"
+                  color="surface"
                 />
                 <vk-input
                   label="Phone Number"
                   variant="outlined"
-                  color="secondary"
+                  color="surface"
                 />
                 <vk-input
                   label="Address"
                   variant="outlined"
-                  color="secondary"
+                  color="surface"
                 />
                 <vk-input
                   label="City"
                   variant="outlined"
-                  color="secondary"
+                  color="surface"
                 />
                 <vk-input
                   label="State"
                   variant="outlined"
-                  color="secondary"
+                  color="surface"
                 />
                 <vk-input
                   label="Zip Code"
                   variant="outlined"
-                  color="secondary"
+                  color="surface"
                 />
               </div>
               <div class="flex gap-4">
@@ -126,7 +126,7 @@ const profileStats = [
                 </vk-button>
                 <vk-button
                   class="w-1/2"
-                  color="secondary"
+                  color="surface"
                   variant="outlined"
                 >
                   Cancel
@@ -171,7 +171,7 @@ const profileStats = [
     <template #example>
       <div class="relative h-full max-w-screen-xl mx-auto w-full">
         <div class="flex flex-row gap-8 py-8">
-          <div class="w-1/3 flex flex-col items-center shadow-lg rounded-lg p-6 bg-light-300 dark:bg-dark-800/[.8]">
+          <div class="w-1/3 flex flex-col items-center shadow-lg rounded-lg p-6 bg-surface-container">
             <vk-avatar
               src="/assets/avatar.jpg"
               size="lg"
@@ -182,13 +182,13 @@ const profileStats = [
             <h3 class="text-lg font-semibold mb-1">
               Marie Poole
             </h3>
-            <span class="text-sm text-dark-600 dark:text-light-400">Microsoft Inc.</span>
+            <span class="text-sm text-on-surface-variant">Microsoft Inc.</span>
 
             <div class="mt-6 w-full flex flex-col gap-4">
               <div
                 v-for="stat in profileStats"
                 :key="stat.label"
-                class="flex justify-between items-center bg-light-200 dark:bg-dark-800 rounded-md p-2"
+                class="flex justify-between items-center bg-surface-container-high rounded-md p-2"
               >
                 <span class="text-sm">{{ stat.label }}</span>
                 <span class="text-sm font-semibold">{{ stat.value }}</span>
@@ -198,13 +198,13 @@ const profileStats = [
             <vk-button
               class="mt-6 w-full"
               variant="outlined"
-              color="secondary"
+              color="surface"
             >
               View LinkedIn Profile
             </vk-button>
           </div>
 
-          <div class="w-fit shadow-lg rounded-lg p-6 bg-light-300 dark:bg-dark-800/[.8]">
+          <div class="w-fit shadow-lg rounded-lg p-6 bg-surface-container">
             <vk-tabs
               :tabs
               shape="line"
@@ -217,42 +217,42 @@ const profileStats = [
                     <vk-input
                       label="First Name"
                       variant="outlined"
-                      color="secondary"
+                      color="surface"
                     />
                     <vk-input
                       label="Last Name"
                       variant="outlined"
-                      color="secondary"
+                      color="surface"
                     />
                     <vk-input
                       label="Email"
                       variant="outlined"
-                      color="secondary"
+                      color="surface"
                     />
                     <vk-input
                       label="Phone Number"
                       variant="outlined"
-                      color="secondary"
+                      color="surface"
                     />
                     <vk-input
                       label="Address"
                       variant="outlined"
-                      color="secondary"
+                      color="surface"
                     />
                     <vk-input
                       label="City"
                       variant="outlined"
-                      color="secondary"
+                      color="surface"
                     />
                     <vk-input
                       label="State"
                       variant="outlined"
-                      color="secondary"
+                      color="surface"
                     />
                     <vk-input
                       label="Zip Code"
                       variant="outlined"
-                      color="secondary"
+                      color="surface"
                     />
                   </div>
                   <div class="flex gap-4">
@@ -261,7 +261,7 @@ const profileStats = [
                     </vk-button>
                     <vk-button
                       class="w-1/2"
-                      color="secondary"
+                      color="surface"
                       variant="outlined"
                     >
                       Cancel

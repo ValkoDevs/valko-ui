@@ -168,8 +168,8 @@ const iconSnippet = `<template>
         :label="form.label"
         :maxlength="form.maxlength"
         :helpertext="form.helpertext"
-        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'secondary' })"
-        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'secondary' })"
+        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
+        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'surface' })"
       >
         <template
           v-if="iconsInForm.left"

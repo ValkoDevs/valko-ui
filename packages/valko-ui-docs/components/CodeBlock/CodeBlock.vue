@@ -59,7 +59,7 @@ const copyToClipboard = async () => {
     <vk-button
       variant="link"
       shape="rounded"
-      color="secondary"
+      color="surface"
       condensed
       :class="`size-10 absolute! top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity ${iconClass}`"
       @click="copyToClipboard"

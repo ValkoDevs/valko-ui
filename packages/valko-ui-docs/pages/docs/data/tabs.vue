@@ -82,8 +82,8 @@ const tabsProps: TableItem[] = [
     prop: 'grow',
     required: false,
     description: 'Allow the Tabs to grow to fill any available space',
-    values: 'primary, secondary, negative, warning, accent, positive',
-    default: 'primary'
+    values: 'true, false',
+    default: 'false'
   },
   {
     key: 'tabsProp',

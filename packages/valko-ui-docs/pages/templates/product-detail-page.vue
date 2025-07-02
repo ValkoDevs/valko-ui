@@ -80,7 +80,7 @@ const product = reactive({
         {{ product.manufacturer }}
         <vk-divider
           direction="vertical"
-          color="secondary"
+          color="surface"
           size="xs"
         />
         <div>
@@ -193,7 +193,7 @@ const product = reactive({
             {{ product.manufacturer }}
             <vk-divider
               direction="vertical"
-              color="secondary"
+              color="surface"
               size="xs"
             />
             <div>

@@ -40,7 +40,7 @@ const toggleRating = (selectedRating: number) => {
 <\u002Fscript>
 
 <template>
-  <aside class="flex gap-6 p-6 rounded-lg h-[15vh] items-start bg-light-100 dark:bg-dark-800/[.4]">
+  <aside class="flex gap-6 p-6 h-[15vh] items-start bg-surface-container">
     <div class="flex flex-col gap-2 w-fit">
       <h3 class="text-sm font-semibold mb-2">
         Price
@@ -60,7 +60,7 @@ const toggleRating = (selectedRating: number) => {
     </div>
 
     <vk-divider
-      color="secondary"
+      color="surface"
       size="xs"
       direction="vertical"
     />
@@ -101,7 +101,7 @@ const toggleRating = (selectedRating: number) => {
     </div>
 
     <vk-divider
-      color="secondary"
+      color="surface"
       size="xs"
       direction="vertical"
     />
@@ -124,7 +124,7 @@ const toggleRating = (selectedRating: number) => {
     </div>
 
     <vk-divider
-      color="secondary"
+      color="surface"
       size="xs"
       direction="vertical"
     />
@@ -152,13 +152,13 @@ const toggleRating = (selectedRating: number) => {
     </div>
 
     <vk-divider
-      color="secondary"
+      color="surface"
       size="xs"
       direction="vertical"
     />
 
     <vk-button
-      color="secondary"
+      color="surface"
       variant="outlined"
       class="text-xs"
     >
@@ -172,7 +172,7 @@ const toggleRating = (selectedRating: number) => {
 <template>
   <page-template>
     <template #example>
-      <aside class="flex gap-6 p-6 rounded-lg h-[15vh] items-start bg-light-100 dark:bg-dark-800/[.4]">
+      <aside class="flex gap-6 p-6 h-[15vh] items-start bg-surface-container">
         <div class="flex flex-col gap-2 w-fit">
           <h3 class="text-sm font-semibold mb-2">
             Price
@@ -192,7 +192,7 @@ const toggleRating = (selectedRating: number) => {
         </div>
 
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
           direction="vertical"
         />
@@ -233,7 +233,7 @@ const toggleRating = (selectedRating: number) => {
         </div>
 
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
           direction="vertical"
         />
@@ -256,7 +256,7 @@ const toggleRating = (selectedRating: number) => {
         </div>
 
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
           direction="vertical"
         />
@@ -284,13 +284,13 @@ const toggleRating = (selectedRating: number) => {
         </div>
 
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
           direction="vertical"
         />
 
         <vk-button
-          color="secondary"
+          color="surface"
           variant="outlined"
           class="text-xs"
         >

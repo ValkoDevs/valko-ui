@@ -28,7 +28,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
 <\u002Fscript>
 
 <template>
-  <div class="m-4 bg-light-200 dark:bg-dark-800 h-[70vh] flex">
+  <div class="m-4 bg-surface-container h-[70vh] flex">
     <vk-navbar
       vertical
       shape="square"
@@ -42,7 +42,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
       />
     </vk-navbar>
 
-    <aside class="bg-light-100 dark:bg-dark-800 border-r border-light-300 dark:border-dark-700 max-h-[70vh] h-screen w-56">
+    <aside class="bg-surface-container border-r border-outlined max-h-[70vh] h-screen w-56">
       <vk-menu
         :items="menuItems"
         :active="activeItem"
@@ -65,7 +65,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
 <template>
   <page-template>
     <template #example>
-      <div class="m-4 bg-light-200 dark:bg-dark-800 h-[70vh] flex">
+      <div class="m-4 bg-surface-container h-[70vh] flex">
         <vk-navbar
           vertical
           shape="square"
@@ -79,7 +79,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
           />
         </vk-navbar>
 
-        <aside class="bg-light-100 dark:bg-dark-800 border-r border-light-300 dark:border-dark-700 max-h-[70vh] h-screen w-56">
+        <aside class="bg-surface-container border-r border-outlined max-h-[70vh] h-screen w-56">
           <vk-menu
             :items="menuItems"
             :active="activeItem"

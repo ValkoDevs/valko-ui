@@ -265,7 +265,7 @@ onUnmounted(() => {
       title="Filters"
       @close="toggleFilters"
     >
-      <aside class="w-full flex flex-col gap-4">
+      <aside class="w-full flex flex-col gap-4 px-2">
         <div class="flex flex-col gap-4">
           <h3 class="text-xl font-semibold">
             Price
@@ -279,7 +279,7 @@ onUnmounted(() => {
           />
         </div>
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
         />
         <div class="flex flex-col gap-4">
@@ -310,7 +310,7 @@ onUnmounted(() => {
           </div>
         </div>
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
         />
         <div class="flex flex-col gap-4">
@@ -328,7 +328,7 @@ onUnmounted(() => {
           </div>
         </div>
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
         />
         <div class="flex flex-col gap-4">
@@ -349,12 +349,12 @@ onUnmounted(() => {
           />
         </div>
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
         />
         <div>
           <vk-button
-            color="secondary"
+            color="surface"
             variant="outlined"
           >
             Reset Filters
@@ -363,13 +363,13 @@ onUnmounted(() => {
       </aside>
     </vk-drawer>
 
-    <aside class="hidden lg:block bg-light-100 dark:bg-dark-800/[.4] w-[25vw] flex flex-col gap-4 p-10 rounded-lg">
+    <aside class="hidden lg:flex bg-surface-container w-[25vw] flex-col gap-4 p-10 rounded-lg">
       <div class="flex flex-col gap-4">
         <h2 class="text-2xl font-bold text-center">
           Filters
         </h2>
         <vk-divider
-          color="secondary"
+          color="surface"
           size="sm"
         />
         <h3 class="text-xl font-semibold">
@@ -383,7 +383,7 @@ onUnmounted(() => {
           :max="10000"
         />
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
         />
       </div>
@@ -414,7 +414,7 @@ onUnmounted(() => {
           />
         </div>
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
         />
       </div>
@@ -433,7 +433,7 @@ onUnmounted(() => {
           />
         </div>
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
         />
       </div>
@@ -455,14 +455,14 @@ onUnmounted(() => {
           label="Out of Stock"
         />
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
         />
       </div>
 
       <div class="mt-4">
         <vk-button
-          color="secondary"
+          color="surface"
           variant="outlined"
         >
           Reset Filters
@@ -470,13 +470,13 @@ onUnmounted(() => {
       </div>
     </aside>
 
-    <main class="grid gap-10 bg-light-100 dark:bg-dark-800/[.4] p-4 rounded-lg w-full">
-      <div class="lg:hidden bg-light-300 dark:bg-dark-700 flex flex-wrap justify-around items-center h-fit gap-4 p-2 rounded-lg">
+    <main class="grid gap-10 w-full">
+      <div class="lg:hidden bg-surface-container flex flex-wrap justify-around items-center h-fit gap-4 p-2 rounded-lg">
         <vk-tag
           v-for="(isActive, category) in filters.categories"
           :key="category"
           :text="category"
-          :color="isActive ? 'primary' : 'secondary'"
+          :color="isActive ? 'primary' : 'surface'"
           variant="outlined"
           is-pressable
           @click="toggleCategory(category)"
@@ -484,7 +484,7 @@ onUnmounted(() => {
         <vk-button
           variant="link"
           shape="rounded"
-          color="secondary"
+          color="surface"
           condensed
           size="lg"
           class="size-10"
@@ -522,7 +522,7 @@ onUnmounted(() => {
                   :key="tag"
                   :text="tag"
                   variant="outlined"
-                  color="secondary"
+                  color="surface"
                 />
               </div>
               <p class="font-bold text-lg text-left">
@@ -539,7 +539,7 @@ onUnmounted(() => {
               </vk-button>
               <vk-icon
                 name="heart"
-                :class="\`\text-2xl hover:text-negative \${favIcons.has(index) ? 'text-negative' : ''}\`"
+                :class="\`text-2xl hover:text-negative \${favIcons.has(index) ? 'text-negative' : ''}\`"
                 @click="toggleFav(index)"
               />
             </div>
@@ -605,7 +605,7 @@ onUnmounted(() => {
           title="Filters"
           @close="toggleFilters"
         >
-          <aside class="w-full flex flex-col gap-4">
+          <aside class="w-full flex flex-col gap-4 px-2">
             <div class="flex flex-col gap-4">
               <h3 class="text-xl font-semibold">
                 Price
@@ -619,7 +619,7 @@ onUnmounted(() => {
               />
             </div>
             <vk-divider
-              color="secondary"
+              color="surface"
               size="xs"
             />
             <div class="flex flex-col gap-4">
@@ -650,7 +650,7 @@ onUnmounted(() => {
               </div>
             </div>
             <vk-divider
-              color="secondary"
+              color="surface"
               size="xs"
             />
             <div class="flex flex-col gap-4">
@@ -668,7 +668,7 @@ onUnmounted(() => {
               </div>
             </div>
             <vk-divider
-              color="secondary"
+              color="surface"
               size="xs"
             />
             <div class="flex flex-col gap-4">
@@ -689,12 +689,12 @@ onUnmounted(() => {
               />
             </div>
             <vk-divider
-              color="secondary"
+              color="surface"
               size="xs"
             />
             <div>
               <vk-button
-                color="secondary"
+                color="surface"
                 variant="outlined"
               >
                 Reset Filters
@@ -703,13 +703,13 @@ onUnmounted(() => {
           </aside>
         </vk-drawer>
 
-        <aside class="hidden lg:flex bg-light-100 dark:bg-dark-800/[.4] w-[25vw] flex-col gap-4 p-10 rounded-lg">
+        <aside class="hidden lg:flex bg-surface-container w-[25vw] flex-col gap-4 p-10 rounded-lg">
           <div class="flex flex-col gap-4">
             <h2 class="text-2xl font-bold text-center">
               Filters
             </h2>
             <vk-divider
-              color="secondary"
+              color="surface"
               size="sm"
             />
             <h3 class="text-xl font-semibold">
@@ -723,7 +723,7 @@ onUnmounted(() => {
               :max="10000"
             />
             <vk-divider
-              color="secondary"
+              color="surface"
               size="xs"
             />
           </div>
@@ -754,7 +754,7 @@ onUnmounted(() => {
               />
             </div>
             <vk-divider
-              color="secondary"
+              color="surface"
               size="xs"
             />
           </div>
@@ -773,7 +773,7 @@ onUnmounted(() => {
               />
             </div>
             <vk-divider
-              color="secondary"
+              color="surface"
               size="xs"
             />
           </div>
@@ -795,14 +795,14 @@ onUnmounted(() => {
               label="Out of Stock"
             />
             <vk-divider
-              color="secondary"
+              color="surface"
               size="xs"
             />
           </div>
 
           <div class="mt-4">
             <vk-button
-              color="secondary"
+              color="surface"
               variant="outlined"
             >
               Reset Filters
@@ -811,12 +811,12 @@ onUnmounted(() => {
         </aside>
 
         <main class="grid gap-10 w-full">
-          <div class="lg:hidden bg-light-300 dark:bg-dark-800/[.4] flex flex-wrap justify-around items-center h-fit gap-4 p-2 rounded-lg">
+          <div class="lg:hidden bg-surface-container flex flex-wrap justify-around items-center h-fit gap-4 p-2 rounded-lg">
             <vk-tag
               v-for="(isActive, category) in filters.categories"
               :key="category"
               :text="category"
-              :color="isActive ? 'primary' : 'secondary'"
+              :color="isActive ? 'primary' : 'surface'"
               variant="outlined"
               is-pressable
               @click="toggleCategory(category)"
@@ -824,7 +824,7 @@ onUnmounted(() => {
             <vk-button
               variant="link"
               shape="rounded"
-              color="secondary"
+              color="surface"
               condensed
               size="lg"
               class="size-10"
@@ -862,7 +862,7 @@ onUnmounted(() => {
                       :key="tag"
                       :text="tag"
                       variant="outlined"
-                      color="secondary"
+                      color="surface"
                     />
                   </div>
                   <p class="font-bold text-lg text-left">

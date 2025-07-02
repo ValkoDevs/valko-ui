@@ -99,7 +99,7 @@ const badgeSlots: TableItem[] = [
 
 const generateSnippet = snippetGeneratorFactory('vk-badge')
 
-const customSlot = '<vk-avatar\n      :src="src"\n      color="secondary"\n    />'
+const customSlot = '<vk-avatar\n      :src="src"\n      color="surface"\n    />'
 const extraProps = {
   content: 'content="new"',
   dot: 'dot'
@@ -124,7 +124,7 @@ const extraProps = {
       >
         <vk-avatar
           :src="src"
-          color="secondary"
+          color="surface"
         />
       </vk-badge>
     </template>
@@ -191,7 +191,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="secondary"
+              color="surface"
             />
           </vk-badge>
         </div>
@@ -217,7 +217,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="secondary"
+              color="surface"
             />
           </vk-badge>
         </div>
@@ -243,7 +243,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="secondary"
+              color="surface"
             />
           </vk-badge>
         </div>
@@ -269,7 +269,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="secondary"
+              color="surface"
             />
           </vk-badge>
         </div>
@@ -295,7 +295,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="secondary"
+              color="surface"
             />
           </vk-badge>
         </div>
@@ -312,7 +312,7 @@ const extraProps = {
         >
           <vk-avatar
             :src="src"
-            color="secondary"
+            color="surface"
           />
         </vk-badge>
 
@@ -337,7 +337,7 @@ const extraProps = {
           >
             <vk-avatar
               :src="src"
-              color="secondary"
+              color="surface"
             />
           </vk-badge>
         </div>
@@ -353,7 +353,7 @@ const extraProps = {
         >
           <vk-avatar
             :src="src"
-            color="secondary"
+            color="surface"
           />
         </vk-badge>
 

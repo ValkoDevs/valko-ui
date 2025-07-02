@@ -23,7 +23,7 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
 
 <template>
   <vk-navbar
-    color="secondary"
+    color="surface"
     variant="outlined"
     size="md"
     shape="square"

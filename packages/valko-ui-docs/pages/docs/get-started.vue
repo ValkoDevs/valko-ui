@@ -88,7 +88,7 @@ const counter = ref(0)
         ValkoUI is a Vue 3 and Nuxt component library built with TailwindCSS. It empowers developers to create modern, responsive, and accessible web interfaces effortlessly. Whether you're starting out or are an experienced developer, ValkoUI simplifies your workflow with ready-to-use components and flexible configurations.
       </p>
       <vk-divider
-        color="secondary"
+        color="surface"
         size="xs"
       />
     </div>
