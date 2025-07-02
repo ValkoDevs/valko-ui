@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const templateSnippet = `<template>
-  <div class="m-4 bg-light-200 dark:bg-dark-800">
+  <div class="m-4 bg-surface-container">
     <vk-navbar class="flex justify-between">
       Brand-Name
 
@@ -23,7 +23,7 @@ const templateSnippet = `<template>
 <template>
   <page-template>
     <template #example>
-      <div class="m-4 bg-light-200 dark:bg-dark-800">
+      <div class="m-4 bg-surface-container">
         <vk-navbar class="flex justify-between">
           Brand-Name
 

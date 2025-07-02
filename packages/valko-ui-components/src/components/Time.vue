@@ -60,12 +60,11 @@ const formatHour = (hour: number): number => {
         <vk-button
           v-for="(_, H) in formatMap.hsColItems"
           :key="`hours-button-${H}`"
-          condensed
           :size="size"
           :shape="shape"
           :disabled="adapter.isTimeDisabled(H)"
           :variant="selectedTime.hours === formatHour(H) ? variant : 'link'"
-          :color="selectedTime.hours === formatHour(H) ? color : 'secondary'"
+          :color="selectedTime.hours === formatHour(H) ? color : 'surface'"
           :class="classes.unitButton"
           @click="adapter.setDisplayUnit('h', formatHour(H))"
         >
@@ -79,12 +78,11 @@ const formatHour = (hour: number): number => {
         <vk-button
           v-for="m in 60 / minuteStep"
           :key="`minutes-button-${m-1}`"
-          condensed
           :size="size"
           :shape="shape"
           :disabled="adapter.isTimeDisabled(selectedTime.hours, m - 1)"
           :variant="selectedTime.minutes === (m - 1) ? variant : 'link'"
-          :color="selectedTime.minutes === (m - 1) ? color : 'secondary'"
+          :color="selectedTime.minutes === (m - 1) ? color : 'surface'"
           :class="classes.unitButton"
           @click="adapter.setDisplayUnit('m', m - 1)"
         >
@@ -98,11 +96,10 @@ const formatHour = (hour: number): number => {
         <vk-button
           v-for="s in 60"
           :key="`seconds-button-${s-1}`"
-          condensed
           :size="size"
           :shape="shape"
           :variant="selectedTime.seconds === (s - 1) ? variant : 'link'"
-          :color="selectedTime.seconds === (s - 1) ? color : 'secondary'"
+          :color="selectedTime.seconds === (s - 1) ? color : 'surface'"
           :class="classes.unitButton"
           @click="adapter.setDisplayUnit('s', s - 1)"
         >
@@ -129,7 +126,7 @@ const formatHour = (hour: number): number => {
           size="xs"
           :shape="shape"
           :variant="adapter.period.value === 'AM' ? variant : 'link'"
-          :color="adapter.period.value === 'AM' ? color : 'secondary'"
+          :color="adapter.period.value === 'AM' ? color : 'surface'"
           :class="classes.periodButton"
           @click="adapter.onSelectAMPM('AM')"
         >
@@ -139,7 +136,7 @@ const formatHour = (hour: number): number => {
           size="xs"
           :shape="shape"
           :variant="adapter.period.value === 'PM' ? variant : 'link'"
-          :color="adapter.period.value === 'PM' ? color : 'secondary'"
+          :color="adapter.period.value === 'PM' ? color : 'surface'"
           :class="classes.periodButton"
           @click="adapter.onSelectAMPM('PM')"
         >

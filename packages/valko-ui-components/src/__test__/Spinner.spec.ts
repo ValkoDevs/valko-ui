@@ -82,6 +82,16 @@ describe('Spinner component', () => {
 
         expect(wrapper.find('.text-negative').exists()).toBe(true)
       })
+
+      it('should be color surface when props.color is surface', () => {
+        wrapper = mount(VkSpinner, {
+          props: {
+            color: 'surface'
+          }
+        })
+
+        expect(wrapper.find('.text-on-surface').exists()).toBe(true)
+      })
     })
 
     describe('When size prop changes', () => {

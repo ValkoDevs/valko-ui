@@ -42,7 +42,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
     </vk-navbar>
 
     <div class="flex">
-      <aside class="bg-light-100 dark:bg-dark-800 border-r border-light-300 dark:border-dark-700 max-h-[70vh] h-screen w-52">
+      <aside class="bg-surface-container border-r border-outlined max-h-[70vh] h-screen w-52">
         <vk-menu
           :items="menuItems"
           :active="activeItem"
@@ -81,7 +81,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
         </vk-navbar>
 
         <div class="flex">
-          <aside class="bg-light-100 dark:bg-dark-800 border-r border-light-300 dark:border-dark-700 max-h-[70vh] h-screen w-52">
+          <aside class="bg-surface-container border-r border-outlined max-h-[70vh] h-screen w-52">
             <vk-menu
               :items="menuItems"
               :active="activeItem"

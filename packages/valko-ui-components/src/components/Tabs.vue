@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Ref, ref, watch, onMounted, nextTick, computed } from 'vue'
+import { type Ref, ref, watch, nextTick, computed, onUpdated } from 'vue'
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 import type { TabsProps } from '#valkoui/types/Tabs'
 import type { SlotStyles } from '#valkoui/types/common'
@@ -57,8 +57,12 @@ const onChange = (index: number) => {
   moveCursor()
 }
 
-onMounted(moveCursor)
-watch(() => props.modelValue, () => moveCursor())
+onUpdated(() => moveCursor())
+watch(
+  [() => props.modelValue, () => internalIndex.value],
+  moveCursor,
+  { immediate: true }
+)
 </script>
 
 <template>
@@ -109,6 +113,7 @@ watch(() => props.modelValue, () => moveCursor())
           v-for="item in tabs"
           :key="item.key"
           :data-key="item.key"
+          :class="classes.content"
         >
           <slot :name="item.key" />
         </tab-panel>

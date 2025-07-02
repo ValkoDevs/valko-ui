@@ -19,8 +19,8 @@ const parsedStyles = useStyle<ExampleSectionProps>(props, styles)
 </script>
 
 <template>
-  <section class="w-full mt-10">
-    <h3 class="text-xl pl-3 pt-3 bg-light-200 dark:bg-dark-800 rounded-t-lg">
+  <section class="w-full mt-10 overflow-visible relative">
+    <h3 class="text-xl pl-3 pt-3 bg-surface-container-lowest rounded-t-lg">
       {{ props.title }}
     </h3>
     <vk-tabs
@@ -35,7 +35,7 @@ const parsedStyles = useStyle<ExampleSectionProps>(props, styles)
       </template>
 
       <template #code>
-        <div class="p-4 bg-light-300 dark:bg-dark-950/[.5] rounded-b-lg">
+        <div class="p-4 bg-surface-container-lowest rounded-b-lg">
           <slot name="code" />
         </div>
       </template>

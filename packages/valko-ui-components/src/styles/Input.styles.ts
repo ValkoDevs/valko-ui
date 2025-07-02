@@ -255,6 +255,24 @@ export default tv({
         chevrons: [
           'hover:text-negative'
         ]
+      },
+      surface: {
+        input: [
+          'hover:border-on-surface',
+          'focus:border-on-surface'
+        ],
+        label: [
+          'peer-focus:text-on-surface'
+        ],
+        icons: [
+          'peer-focus:text-on-surface'
+        ],
+        clearIcon: [
+          'hover:text-on-surface'
+        ],
+        chevrons: [
+          'hover:text-on-surface'
+        ]
       }
     },
     size: {
@@ -372,17 +390,19 @@ export default tv({
           'opacity-50'
         ],
         input: [
-          'text-on-disabled',
-          'border-disabled-container'
+          'text-disabled',
+          'border-disabled',
+          'hover:border-disabled',
+          'focus:border-disabled'
         ],
         label: [
           'peer-data-[filled=true]:bg-inherit',
           'peer-data-[filled=false]:bg-inherit',
-          'peer-data-[filled=true]:text-on-disabled',
-          'peer-data-[filled=false]:text-on-disabled'
+          'peer-data-[filled=true]:text-disabled',
+          'peer-data-[filled=false]:text-disabled'
         ],
         helper: [
-          'text-on-disabled'
+          'text-disabled'
         ]
       }
     },

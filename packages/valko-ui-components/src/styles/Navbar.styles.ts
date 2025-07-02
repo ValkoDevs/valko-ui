@@ -54,7 +54,7 @@ export default tv({
     },
     elevated: {
       true: [
-        'shadow-el1'
+        'shadow-el2'
       ]
     },
     fixed: {
@@ -63,8 +63,7 @@ export default tv({
         'top-0',
         'left-0',
         'right-0',
-        'z-50',
-        'shadow-el2'
+        'z-50'
       ]
     },
     vertical: {

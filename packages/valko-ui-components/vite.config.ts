@@ -28,7 +28,7 @@ export default defineConfig({
       tsconfigOverride: {
         compilerOptions: {
           outDir: 'dist',
-          sourceMap: false,
+          sourceMap: true,
           declaration: false,
           declarationMap: false
         }
@@ -38,11 +38,11 @@ export default defineConfig({
     copy({
       hook: 'writeBundle',
       targets: [
-        { src: 'src/components/*.vue', dest: 'dist/components' },
-        { src: 'src/composables/*.ts', dest: 'dist/composables' },
-        { src: 'src/styles/*.ts', dest: 'dist/styles' },
-        { src: 'src/types/*.ts', dest: 'dist/types' },
-        { src: 'src/img/*', dest: 'dist/img' }
+        { src: 'src/components/*.vue', dest: 'dist/components', ignore: ['**/*.map'] },
+        { src: 'src/composables/*.ts', dest: 'dist/composables', ignore: ['**/*.map'] },
+        { src: 'src/styles/*.ts', dest: 'dist/styles', ignore: ['**/*.map'] },
+        { src: 'src/types/*.ts', dest: 'dist/types', ignore: ['**/*.map'] },
+        { src: 'src/img/*', dest: 'dist/img', ignore: ['**/*.map'] }
       ]
     })
   ],
@@ -52,14 +52,16 @@ export default defineConfig({
     include: ['__test__/*.spec.ts'],
     environment: 'jsdom',
     coverage: {
-      provider: 'v8',
+      provider: 'istanbul',
       reporter: ['text', 'html'],
+      enabled: true,
       reportsDirectory: '../coverage',
       exclude: ['exports', 'scripts', 'types', 'img', '**/__mocks__', '**/__test__']
     }
   },
   build: {
     cssCodeSplit: true,
+    sourcemap: false,
     lib: {
       entry: 'src/index.ts',
       name: 'ValkoUI',

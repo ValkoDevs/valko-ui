@@ -196,7 +196,7 @@ const employeeData = reactive<TableItem[]>([
 <template>
   <div class="maw-w-screen-xl h-full mx-auto px-10 mt-5">
     <vk-navbar
-      color="secondary"
+      color="surface"
       shape="square"
       class="justify-between"
     >
@@ -275,7 +275,7 @@ const employeeData = reactive<TableItem[]>([
     <template #example>
       <div class="maw-w-screen-xl h-full mx-auto px-10 mt-5">
         <vk-navbar
-          color="secondary"
+          color="surface"
           shape="square"
           class="justify-between"
         >

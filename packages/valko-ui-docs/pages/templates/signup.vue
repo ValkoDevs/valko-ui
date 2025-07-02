@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const templateSnippet = `<template>
-  <div class="w-full max-w-md mx-auto p-8 rounded-lg bg-light-300 dark:bg-dark-800/[.8] shadow mt-10">
+  <div class="w-full max-w-md mx-auto p-8 rounded-lg bg-surface-container shadow mt-10">
     <h1 class="text-2xl font-semibold mb-6 text-center">
       Sign Up
     </h1>
@@ -20,7 +20,7 @@ const templateSnippet = `<template>
         type="password"
       />
 
-      <vk-button>
+      <vk-button block>
         Sign Up
       </vk-button>
 
@@ -42,7 +42,7 @@ const templateSnippet = `<template>
 <template>
   <page-template>
     <template #example>
-      <div class="w-full max-w-md mx-auto p-8 rounded-lg bg-light-300 dark:bg-dark-800/[.8] shadow mt-10">
+      <div class="w-full max-w-md mx-auto p-8 rounded-lg bg-surface-container shadow mt-10">
         <h1 class="text-2xl font-semibold mb-6 text-center">
           Sign Up
         </h1>
@@ -62,7 +62,7 @@ const templateSnippet = `<template>
             type="password"
           />
 
-          <vk-button>
+          <vk-button block>
             Sign Up
           </vk-button>
 

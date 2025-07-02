@@ -189,7 +189,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
           class="flex justify-between"
         >
           <vk-button
-            color="secondary"
+            color="surface"
             size="sm"
             :variant="form.variant"
             @click="randomImage"

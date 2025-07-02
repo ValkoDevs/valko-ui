@@ -9,6 +9,8 @@ export default tv({
     'rounded-b-lg',
     'gap-4',
     'grid',
-    'grid-cols-1'
+    'grid-cols-1',
+    'relative',
+    'overflow-visible'
   ]
 }) as unknown as ReturnType<TV>

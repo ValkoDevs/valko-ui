@@ -19,7 +19,7 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Navbar.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'secondary'
+    default: 'primary'
   },
   {
     key: 'variantProp',

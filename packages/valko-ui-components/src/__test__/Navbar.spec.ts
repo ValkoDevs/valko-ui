@@ -230,7 +230,7 @@ describe('Navbar component', () => {
           }
         })
 
-        expect(wrapper.find('.shadow-el1').exists()).toBe(true)
+        expect(wrapper.find('.shadow-el2').exists()).toBe(true)
       })
     })
   })

@@ -40,13 +40,13 @@ const toggleRating = (selectedRating: number) => {
 <\u002Fscript>
 
 <template>
-  <aside class="hidden lg:flex bg-light-100 dark:bg-dark-800/[.4] w-[25vw] flex-col gap-4 p-10 rounded-lg">
+  <aside class="hidden lg:flex bg-surface-container w-[25vw] flex-col gap-4 p-10">
       <div class="flex flex-col gap-4">
         <h2 class="text-2xl font-bold text-center">
           Filters
         </h2>
         <vk-divider
-          color="secondary"
+          color="surface"
           size="sm"
         />
         <h3 class="text-xl font-semibold">
@@ -60,7 +60,7 @@ const toggleRating = (selectedRating: number) => {
           :max="10000"
         />
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
         />
       </div>
@@ -91,7 +91,7 @@ const toggleRating = (selectedRating: number) => {
           />
         </div>
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
         />
       </div>
@@ -110,7 +110,7 @@ const toggleRating = (selectedRating: number) => {
           />
         </div>
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
         />
       </div>
@@ -132,14 +132,14 @@ const toggleRating = (selectedRating: number) => {
           label="Out of Stock"
         />
         <vk-divider
-          color="secondary"
+          color="surface"
           size="xs"
         />
       </div>
 
       <div class="mt-4">
         <vk-button
-          color="secondary"
+          color="surface"
           variant="outlined"
         >
           Reset Filters
@@ -153,13 +153,13 @@ const toggleRating = (selectedRating: number) => {
 <template>
   <page-template>
     <template #example>
-      <aside class="hidden lg:flex bg-light-100 dark:bg-dark-800/[.4] w-[25vw] flex-col gap-4 p-10 rounded-lg">
+      <aside class="hidden lg:flex bg-surface-container w-[25vw] flex-col gap-4 p-10">
         <div class="flex flex-col gap-4">
           <h2 class="text-2xl font-bold text-center">
             Filters
           </h2>
           <vk-divider
-            color="secondary"
+            color="surface"
             size="sm"
           />
           <h3 class="text-xl font-semibold">
@@ -173,7 +173,7 @@ const toggleRating = (selectedRating: number) => {
             :max="10000"
           />
           <vk-divider
-            color="secondary"
+            color="surface"
             size="xs"
           />
         </div>
@@ -204,7 +204,7 @@ const toggleRating = (selectedRating: number) => {
             />
           </div>
           <vk-divider
-            color="secondary"
+            color="surface"
             size="xs"
           />
         </div>
@@ -223,7 +223,7 @@ const toggleRating = (selectedRating: number) => {
             />
           </div>
           <vk-divider
-            color="secondary"
+            color="surface"
             size="xs"
           />
         </div>
@@ -245,14 +245,14 @@ const toggleRating = (selectedRating: number) => {
             label="Out of Stock"
           />
           <vk-divider
-            color="secondary"
+            color="surface"
             size="xs"
           />
         </div>
 
         <div class="mt-4">
           <vk-button
-            color="secondary"
+            color="surface"
             variant="outlined"
           >
             Reset Filters

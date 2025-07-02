@@ -14,6 +14,7 @@ const route = useRoute()
               variant="link"
               :color="route.fullPath === '/' ? 'primary' : 'surface'"
               size="sm"
+              class="font-bold"
             >
               Home
             </vk-button>
@@ -25,6 +26,7 @@ const route = useRoute()
               variant="link"
               :color="route.fullPath.startsWith('/docs') ? 'primary' : 'surface'"
               size="sm"
+              class="font-bold"
             >
               Documentation
             </vk-button>
@@ -36,6 +38,7 @@ const route = useRoute()
               variant="link"
               :color="route.fullPath.startsWith('/templates') ? 'primary' : 'surface'"
               size="sm"
+              class="font-bold"
             >
               Templates
             </vk-button>

@@ -19,9 +19,15 @@ const position: SelectOption<LabelPosition>[] = [
   { value: 'left', label:'Left' }
 ]
 
-const radioStates = reactive<Record<string, string>>({
-  'readonly-radio': 'readonly'
-})
+const radioStates = reactive(
+  Object.fromEntries([
+    ...colorOptions.general,
+    ...variantOptions.general,
+    ...shapeOptions.general,
+    ...sizeOptions.general,
+    { value: 'readonly' }
+  ].map(opt => [opt.value, opt.value]))
+)
 
 const apiData: TableItem[] = [
   {
@@ -221,8 +227,8 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
         <vk-radio
           v-for="color in colorOptions.general"
           :key="color.value"
-          v-model="radioStates['color-radio-group']"
-          name="color-radio-group"
+          v-model="radioStates[color.value]"
+          :name="color.value"
           :color="color.value"
           :label="color.label"
           :value="color.value"
@@ -240,8 +246,8 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
         <vk-radio
           v-for="variant in variantOptions.general"
           :key="variant.value"
-          v-model="radioStates['variant-radio-group']"
-          name="variant-radio-group"
+          v-model="radioStates[variant.value]"
+          :name="variant.value"
           :variant="variant.value"
           :label="variant.label"
           :value="variant.value"
@@ -259,8 +265,8 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
         <vk-radio
           v-for="shape in shapeOptions.general"
           :key="shape.value"
-          v-model="radioStates['shape-radio-group']"
-          name="shape-radio-group"
+          v-model="radioStates[shape.value]"
+          :name="shape.value"
           :shape="shape.value"
           :label="shape.label"
           :value="shape.value"
@@ -278,8 +284,8 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
         <vk-radio
           v-for="size in sizeOptions.general"
           :key="size.value"
-          v-model="radioStates['size-radio-group']"
-          name="size-radio-group"
+          v-model="radioStates[size.value]"
+          :name="size.value"
           :size="size.value"
           :label="size.label"
           :value="size.value"
@@ -303,8 +309,8 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
 
       <example-section title="Readonly">
         <vk-radio
-          v-model="radioStates['readonly-radio']"
-          name="readonly-radio"
+          v-model="radioStates['readonly']"
+          name="readonly"
           value="readonly"
           readonly
           label="Readonly"

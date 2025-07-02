@@ -11,7 +11,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM' })
 <\u002Fscript>
 
 <template>
-  <div class="w-full flex flex-col max-w-lg mx-auto gap-4 p-6 rounded-lg bg-light-300 dark:bg-dark-800/[.8] shadow mt-10">
+  <div class="w-full flex flex-col max-w-lg mx-auto gap-4 p-6 rounded-lg bg-surface-container shadow mt-10">
     <div class="flex justify-between">
       <h1 class="text-xl font-semibold">
         Add Payment Method
@@ -54,7 +54,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM' })
 <template>
   <page-template>
     <template #example>
-      <div class="w-full flex flex-col max-w-lg mx-auto gap-4 p-6 rounded-lg bg-light-300 dark:bg-dark-800/[.8] shadow mt-10">
+      <div class="w-full flex flex-col max-w-lg mx-auto gap-4 p-6 rounded-lg bg-surface-container shadow mt-10">
         <div class="flex justify-between">
           <h1 class="text-xl font-semibold">
             Add Payment Method
