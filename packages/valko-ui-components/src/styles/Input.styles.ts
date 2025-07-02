@@ -258,20 +258,20 @@ export default tv({
       },
       surface: {
         input: [
-          'hover:border-on-surface-variant',
-          'focus:border-on-surface-variant'
+          'hover:border-on-surface',
+          'focus:border-on-surface'
         ],
         label: [
-          'peer-focus:text-on-surface-variant'
+          'peer-focus:text-on-surface'
         ],
         icons: [
-          'peer-focus:text-on-surface-variant'
+          'peer-focus:text-on-surface'
         ],
         clearIcon: [
-          'hover:text-on-surface-variant'
+          'hover:text-on-surface'
         ],
         chevrons: [
-          'hover:text-on-surface-variant'
+          'hover:text-on-surface'
         ]
       }
     },

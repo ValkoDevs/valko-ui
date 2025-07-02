@@ -115,7 +115,7 @@ describe('Input component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-input__label').classes()).toContain('peer-focus:text-on-surface-variant')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('peer-focus:text-on-surface')
       })
     })
 

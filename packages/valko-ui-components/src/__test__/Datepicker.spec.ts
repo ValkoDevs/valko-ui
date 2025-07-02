@@ -207,7 +207,7 @@ describe('Datepicker component', () => {
 
         const input = wrapper.find('.vk-input__input')
 
-        expect(input.classes()).toContain('focus:border-on-surface-variant')
+        expect(input.classes()).toContain('focus:border-on-surface')
       })
     })
 

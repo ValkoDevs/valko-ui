@@ -69,7 +69,7 @@ onMounted(() => {
 <template>
   <div class="flex flex-col w-full">
     <vk-navbar
-      color="secondary"
+      color="surface"
       variant="outlined"
       size="md"
       shape="square"
