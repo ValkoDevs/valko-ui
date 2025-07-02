@@ -58,7 +58,11 @@ const onChange = (index: number) => {
 }
 
 onUpdated(() => moveCursor())
-watch([() => props.modelValue, () => internalIndex.value], () => moveCursor(), { immediate: true })
+watch(
+  [() => props.modelValue, () => internalIndex.value],
+  moveCursor,
+  { immediate: true }
+)
 </script>
 
 <template>

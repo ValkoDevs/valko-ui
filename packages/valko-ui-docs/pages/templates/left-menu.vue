@@ -29,7 +29,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
 
 <template>
   <div class="m-4 bg-surface-container flex">
-    <aside class="bg-surface-container-high border-r border-outluined max-h-[70vh] h-screen w-56">
+    <aside class="bg-surface-container-high border-r border-outlined max-h-[70vh] h-screen w-56">
       <vk-menu
         :items="menuItems"
         :active="activeItem"
@@ -56,7 +56,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
   <page-template>
     <template #example>
       <div class="m-4 bg-surface-container flex">
-        <aside class="bg-surface-container-high border-r border-outluined max-h-[70vh] h-screen w-56">
+        <aside class="bg-surface-container-high border-r border-outlined max-h-[70vh] h-screen w-56">
           <vk-menu
             :items="menuItems"
             :active="activeItem"

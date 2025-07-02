@@ -30,9 +30,7 @@ export default defineConfig({
           outDir: 'dist',
           sourceMap: true,
           declaration: false,
-          declarationMap: false,
-          noEmitOnError: false,
-          noEmit: false
+          declarationMap: false
         }
       },
       exclude: ['vite.config.ts']
