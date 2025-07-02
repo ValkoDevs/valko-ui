@@ -180,6 +180,21 @@ describe('Calendar component', () => {
 
         expect(button.classes()).toContain('bg-negative')
       })
+
+      it('should be color surface when props.color is surface', async () => {
+        wrapper = mount(VkCalendar, {
+          props: {
+            color: 'surface',
+            modelValue,
+            adapter
+          }
+        })
+
+        const button = wrapper.findAll('.vk-calendar__grid-button')[14]
+        await button.trigger('click')
+
+        expect(button.classes()).toContain('bg-surface-container-highest')
+      })
     })
 
     describe('When shape prop changes', () => {

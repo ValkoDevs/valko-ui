@@ -151,6 +151,20 @@ describe('useNotification composable', () => {
 
       expect(notification?.className).toContain('bg-negative')
     })
+
+    it('should be surface when color props is surface', async () => {
+      wrapper = mount(TestButton, {
+        props: {
+          onClick: () => useNotification({ text: 'Hello World', color: 'surface' })
+        }
+      })
+
+      await wrapper.trigger('click')
+      await nextTick()
+      notification = document.querySelector('.vk-notification')
+
+      expect(notification?.className).toContain('bg-inverse-surface')
+    })
   })
 
   describe('When variant props changes', () => {

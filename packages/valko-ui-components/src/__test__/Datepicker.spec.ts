@@ -193,6 +193,22 @@ describe('Datepicker component', () => {
 
         expect(input.classes()).toContain('focus:border-negative')
       })
+
+      it('should be color surface when props.color is surface', () => {
+        wrapper = mount(VkDatepicker, {
+          props: {
+            isOpen: true,
+            color: 'surface',
+            parsedModel,
+            modelValue,
+            adapter
+          }
+        })
+
+        const input = wrapper.find('.vk-input__input')
+
+        expect(input.classes()).toContain('focus:border-on-surface-variant')
+      })
     })
 
     describe('When shape prop changes', () => {
