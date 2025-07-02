@@ -35,7 +35,7 @@
     "@types/toastify-js": "^1.12.3",
     "@valko-ui/eslint-config": "*",
     "@vitejs/plugin-vue": "^5.2.3",
-    "@vitest/coverage-v8": "^3.1.1",
+    "@vitest/coverage-istanbul": "^3.1.1",
     "@vue/test-utils": "^2.4.6",
     "clean-css": "^5.3.2",
     "jsdom": "^23.2.0",

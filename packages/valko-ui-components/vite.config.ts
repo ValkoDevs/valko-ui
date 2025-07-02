@@ -52,7 +52,7 @@ export default defineConfig({
     include: ['__test__/*.spec.ts'],
     environment: 'jsdom',
     coverage: {
-      provider: 'v8',
+      provider: 'istanbul',
       reporter: ['text', 'html'],
       enabled: true,
       reportsDirectory: '../coverage',
