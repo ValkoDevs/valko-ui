@@ -1,5 +1,159 @@
 # @valko-ui/docs
 
+## 0.5.0
+
+### Minor Changes
+
+- 60f85f8: ## @valko-ui/components
+
+  ### General
+
+  - Upgraded to **TailwindCSS v4**. Since the `tailwind.config.ts` file is no longer used, all theme color variants have been moved to `valkoui.css`.
+  - The `flat` prop has been removed across all components. Components now default to **elevation level 0**, which has no shadow. Some components (like `Button`) can now be visually elevated by setting an `elevated` prop (e.g., from 0 to 1).
+
+  ### Components
+
+  - **Alert**: Removed `flat` prop.
+  - **Avatar**: Added `elevated` prop.
+  - **Badge**: Removed `flat` prop.
+  - **Breadcrumbs**: Removed `flat` prop.
+  - **Button**:
+    - Replaced `flat` with `elevated`.
+    - Removed unnecessary bindings for `condensed` and `block`.
+    - Added `stateLayer`.
+    - Removed dynamic classes for the loader.
+  - **Calendar**: Fixed a typo in import (was `CalendayMonthView`, now correctly `CalendarMonthView`).
+  - **Card**: Replaced `flat` with `elevated`.
+  - **Checkbox**: Added `stateLayer`.
+  - **Drawer**: Removed `flat` prop.
+  - **Dropdown**: Replaced `flat` with `elevated`.
+  - **Modal**: Removed `flat` prop.
+  - **Navbar**: Replaced `flat` with `elevated`. Now uses elevation level 1 when `elevated` and level 2 when `sticky`.
+  - **Pagination**: Replaced `flat` with `elevated`.
+  - **Popover**: Replaced `flat` with `elevated`.
+  - **Radio**: Added `stateLayer`.
+  - **Switch**: Simplified `thumb` span class by removing unnecessary template string.
+  - **Tooltip**: Replaced `flat` with `elevated`.
+  - **Notification**: Replaced `flat` with `elevated`.
+
+  ### Styles
+
+  - All style files were updated to use the new color variable names.
+  - Removed all references to `flat` and replaced them with `elevated` where applicable.
+
+  ### Types
+
+  - Removed `flat` prop from: `Alert`, `Badge`, `Breadcrumbs`, `Checkbox`, `Datepicker`, `Drawer`, `Modal`, `Notification`, `Switch`, `Timepicker`.
+  - Replaced `flat` with `elevated` in: `Avatar`, `Button`, `Card`, `Dropdown`, `Navbar`, `Pagination`, `Popover`, `Tooltip`.
+  - Updated `common.ts` to rename color variables:
+    - `neutral` → `secondary`
+    - `info` → `accent`
+    - `success` → `positive`
+    - `error` → `negative`
+
+  ***
+
+  ## @valko-ui/docs
+
+  ### General
+
+  - Updated all documentation pages to reflect the changes introduced in TailwindCSS v4 and component updates.
+
+  ### Assets
+
+  - Updated `styles.css` to use new color variable names.
+
+  ### Components
+
+  - **CodeBlock**, **SiteLinks**, **ThemeSwitch**: Updated color variables.
+  - **DocSection**, **ExampleSection**: Updated styles.
+
+  ### Layouts
+
+  - **Docs**: Moved `Dropdown` from the `Data` group to the `UI` group. Updated color variables.
+  - **Templates**: Updated color variables.
+
+  ### Templates
+
+  - Removed all remaining instances of the `flat` prop.
+
+  ### Utils
+
+  - Renamed colors to match new variable naming conventions.
+
+- 7990f68: ### Components
+
+  - Updated TailwindCSS to V4.
+  - Removed `tailwind.config.ts` since is no longer needed in v4.
+
+  ## Styles
+
+  - Updated all styles to match recent changes.
+
+  ## Test
+
+  - Updated all tests to match recent changes.
+
+  ## Exports
+
+  - Removed `tailwind.preset.js` since is no longer needed in v4.
+  - Updated `valkoui.css` to match recent changes.
+
+  ### Docs
+
+  - Removed `tailwind.config.ts` since is no longer needed in v4.
+
+  ## Assets
+
+  - Updated `styles.css` to match recent changes.
+
+  ## Templates
+
+  - Updated templates to match recent changes.
+
+  ## Layouts
+
+  - Updated layouts to match recent changes.
+
+  ## Components
+
+  - Updated doc components to match recent changes.
+
+  ## Pages
+
+  - Updated `index` page to match recent changes.
+
+### Patch Changes
+
+- bfbd459: ## Doc:
+
+  - Added consistent spacing between tables and section titles across all API documentation pages.
+  - Ensure all switches in the documentation are turned on by default to better reflect typical usage.
+  - In the example sections, decouple radio buttons so they are no longer grouped—this will allow each to be set as checked independently by default.
+  - Make the top navigation menu items bold to distinguish them from general buttons (only the top menu, not all buttons).
+  - Updated all templates to match the changes made with TailwindCSS v4.
+
+  ## Components:
+
+  - Added surface color option for Calendar.
+  - Improve disabled button colors—they currently lack appropriate contrast or clarity.
+  - Fixed issue where the Tabs panel prevents content from expanding beyond its container.
+  - Fixed cursor position issues in Tabs when props change dynamically—cursor sometimes fails to update correctly.
+  - Fixed issue where buttons in the Time component are styled and positioned correctly.
+  - In Navbar component removed elevation (box-shadow) from the sticky navbar by default. Introduce an elevated option to allow setting it to elevation level 2 (el2) when needed.
+  - Ensure notifications use the surface-inverse color to maintain legibility.
+  - Fixed layout issues in CodeBlock component: the copy button is misaligned (on the wrong side) and padding appears incorrect.
+  - Fixed Input surface colors.
+
+  ## Test:
+
+  - Updated all test suits where needed.
+
+- Updated dependencies [60f85f8]
+- Updated dependencies [bfbd459]
+- Updated dependencies [7990f68]
+  - @valko-ui/components@0.5.0
+
 ## 0.4.0
 
 ### Minor Changes
