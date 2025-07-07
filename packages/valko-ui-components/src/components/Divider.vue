@@ -17,5 +17,11 @@ const classes = useStyle<DividerProps>(props, styles)
 </script>
 
 <template>
-  <hr :class="classes">
+  <hr
+    :class="classes"
+    role="separator"
+    :aria-orientation="direction"
+    :aria-label="props['aria-label']"
+    :aria-labelledby="props['aria-labelledby']"
+  >
 </template>

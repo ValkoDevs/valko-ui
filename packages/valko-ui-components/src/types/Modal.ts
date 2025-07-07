@@ -6,4 +6,6 @@ export interface ModalProps extends Shapes {
   backdrop?: Backdrop;
   title?: string;
   closable?: boolean;
+  'aria-labelledby'?: string;
+  'aria-description'?: string;
 }

@@ -128,6 +128,38 @@ const apiData: TableItem[] = [
     description: 'The shape of the Checkbox',
     values: 'soft, rounded, square',
     default: 'soft'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Defines a string value that labels the checkbox for screen readers.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaLabelledByProp',
+    prop: 'aria-labelledby',
+    required: false,
+    description: 'References the ID of the element that labels the checkbox.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaDescribedByProp',
+    prop: 'aria-describedby',
+    required: false,
+    description: 'References the ID of the element that provides a description for the checkbox.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'nameProp',
+    prop: 'name',
+    required: false,
+    description: 'Specifies the name of the checkbox input.',
+    values: 'string',
+    default: ''
   }
 ]
 

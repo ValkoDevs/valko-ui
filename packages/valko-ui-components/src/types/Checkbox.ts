@@ -7,4 +7,8 @@ export interface CheckboxProps extends DefaultComponent {
   disabled?: boolean;
   labelPosition?: LabelPosition;
   readonly?: boolean;
+  name?: string;
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  'aria-describedby'?: string;
 }

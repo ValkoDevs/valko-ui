@@ -7,4 +7,5 @@ export interface ButtonProps extends Shapes, Sizes, ColorsWithSurface {
   loading?: boolean;
   elevated?: boolean;
   condensed?: boolean;
+  'aria-label'?: string;
 }

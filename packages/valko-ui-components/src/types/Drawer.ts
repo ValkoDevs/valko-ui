@@ -6,4 +6,6 @@ export interface DrawerProps extends Shapes, Sizes, Placements {
   title?: string;
   closable?: boolean;
   classes?: string | string[];
+  'aria-labelledby'?: string;
+  'aria-description'?: string;
 }

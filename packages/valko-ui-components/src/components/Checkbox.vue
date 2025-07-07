@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useId } from 'vue'
 import type { CheckboxProps } from '#valkoui/types/Checkbox'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Checkbox.styles.ts'
@@ -22,6 +23,8 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
 const emit = defineEmits(['update:modelValue'])
 
 const classes = useStyle<CheckboxProps, SlotStyles>(props, styles)
+
+const inputId = useId()
 
 const onClick = () => {
   if (!props.disabled && !props.readonly) emit('update:modelValue', !props.modelValue)
@@ -49,14 +52,24 @@ const onClick = () => {
       </div>
 
       <input
+        :id="inputId"
         type="checkbox"
         :checked="!!modelValue"
-        :class="classes.input"
         :indeterminate="modelValue === null"
-        :helpertext="helpertext"
+        :class="classes.input"
+        :name="name"
+        :aria-label="props['aria-label']"
+        :aria-labelledby="props['aria-labelledby']"
+        :aria-describedby="props['aria-describedby']"
+        :aria-disabled="disabled"
+        :aria-checked="modelValue === null ? 'mixed' : !!modelValue"
+        :disabled="disabled"
         @click.prevent=""
       >
-      <label :class="classes.label">
+      <label
+        :for="inputId"
+        :class="classes.label"
+      >
         {{ label }}
       </label>
     </div>

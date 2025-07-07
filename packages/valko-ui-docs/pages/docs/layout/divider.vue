@@ -54,6 +54,22 @@ const dividerProps: TableItem[] = [
     description: 'The direction of the Divider.',
     values: 'vertical, horizontal',
     default: 'horizontal'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Defines a string label for the divider element. Used by screen readers when no visible text is provided.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaLabelledByProp',
+    prop: 'aria-labelledby',
+    required: false,
+    description: 'References the ID of another element that labels the divider. Useful for complex labeling.',
+    values: 'string',
+    default: ''
   }
 ]
 

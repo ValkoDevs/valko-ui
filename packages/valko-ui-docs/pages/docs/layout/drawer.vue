@@ -72,6 +72,22 @@ const drawerProps: TableItem[] = [
     description: 'Displays a close button on the Drawer and allows to close it by clicking outside or pressing esc',
     values: 'true, false',
     default: 'true'
+  },
+  {
+    key: 'ariaLabelledByProp',
+    prop: 'aria-labelledby',
+    required: false,
+    description: 'Specifies the ID of the element that labels the Drawer. Required for accessibility to associate the title with the dialog.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaDescriptionProp',
+    prop: 'aria-description',
+    required: false,
+    description: 'Provides additional descriptive text for the Drawer, improving context for screen readers. The text will be visually hidden but read by assistive technologies.',
+    values: 'string',
+    default: ''
   }
 ]
 
