@@ -25,6 +25,7 @@ const baseMenuItems: MenuItem[] = [
   { key: '/docs/ui/calendar', group: 'Ui', text: 'Calendar' },
   { key: '/docs/ui/card', group: 'Ui', text: 'Card' },
   { key: '/docs/ui/dropdown', group: 'Ui', text: 'Dropdown' },
+  { key: '/docs/ui/icon', group: 'Ui', text: 'Icon' },
   { key: '/docs/ui/menu', group: 'Ui', text: 'Menu' },
   { key: '/docs/ui/navbar', group: 'Ui', text: 'Navbar' },
   { key: '/docs/ui/notification', group: 'Ui', text: 'Notification' },
