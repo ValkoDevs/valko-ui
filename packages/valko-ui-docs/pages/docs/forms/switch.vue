@@ -101,6 +101,30 @@ const apiData: TableItem[] = [
     description: 'The shape of the Switch.',
     values: 'rounded, square, soft',
     default: 'soft'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Defines a string value that labels the switch element.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaLabelledByProp',
+    prop: 'aria-labelledby',
+    required: false,
+    description: 'ID reference to a label element that labels the switch.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaDescribedByProp',
+    prop: 'aria-describedby',
+    required: false,
+    description: 'ID reference to an element that describes the switch (e.g., helper text).',
+    values: 'string',
+    default: ''
   }
 ]
 

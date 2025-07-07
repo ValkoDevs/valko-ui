@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useId, computed } from 'vue'
 import type { RadioProps } from '#valkoui/types/Radio'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Radio.styles.ts'
@@ -20,6 +21,16 @@ const emit = defineEmits(['update:modelValue'])
 
 const classes = useStyle<RadioProps, SlotStyles>(props, styles)
 
+const inputId = useId()
+const helpertextId = useId()
+
+const describedBy = computed(() => {
+  const ids = []
+  if (props.helpertext) ids.push(helpertextId)
+  if (props['aria-describedby']) ids.push(props['aria-describedby'])
+  return ids.length > 0 ? ids.join(' ') : undefined
+})
+
 const onClick = () => {
   if (!props.disabled && !props.readonly) emit('update:modelValue', props.value)
 }
@@ -33,8 +44,17 @@ const onClick = () => {
     >
       <div :class="classes.stateLayer">
         <div
-          :class="classes.radio"
-          :data-checked="value && modelValue === value"
+          :class="classes.radioContainer"
+          role="radio"
+          :tabindex="disabled ? -1 : 0"
+          :aria-checked="modelValue === value"
+          :aria-disabled="disabled"
+          :aria-label="props['aria-label']"
+          :aria-labelledby="props['aria-labelledby']"
+          :aria-describedby="describedBy"
+          @click="onClick"
+          @keydown.enter.prevent="onClick"
+          @keydown.space.prevent="onClick"
         >
           <vk-icon
             v-if="value && modelValue === value"
@@ -45,14 +65,17 @@ const onClick = () => {
       </div>
 
       <input
-        :class="classes.input"
+        :id="inputId"
         type="radio"
-        :value="value"
         :name="name"
+        :value="value"
         :checked="modelValue === value"
+        :disabled="disabled"
+        :class="classes.input"
+        @change="$emit('update:modelValue', value)"
       >
       <label
-        :for="name"
+        :for="inputId"
         :class="classes.label"
       >
         {{ label }}
@@ -61,6 +84,7 @@ const onClick = () => {
     <span
       v-if="helpertext"
       :class="classes.helpertext"
+      :id="helpertextId"
     >
       {{ helpertext }}
     </span>

@@ -34,10 +34,8 @@ const onClick = () => {
   <button
     :class="classes.button"
     :disabled="disabled"
-    role="button"
     :aria-disabled="disabled"
     :aria-label="props['aria-label']"
-    :tabindex="disabled ? -1 : 0"
     @click="onClick"
   >
     <div :class="classes.stateLayer" />

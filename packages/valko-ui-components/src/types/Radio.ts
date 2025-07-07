@@ -9,4 +9,7 @@ export interface RadioProps extends DefaultComponent {
   labelPosition?: LabelPosition;
   disabled?: boolean;
   readonly?: boolean;
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  'aria-describedby'?: string;
 }

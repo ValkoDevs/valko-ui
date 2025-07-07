@@ -6,4 +6,7 @@ export interface SwitchProps extends DefaultComponent {
   disabled?: boolean;
   readonly?: boolean;
   modelValue?: boolean;
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  'aria-describedby'?: string;
 }
