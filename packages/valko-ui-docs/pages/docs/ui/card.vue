@@ -261,7 +261,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
     <template #examples>
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 lg:grid-cols-3"
+        classes="sm:grid-cols-2 xl:grid-cols-3"
       >
         <vk-card
           v-for="variant in variantOptions.general"
@@ -291,7 +291,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 lg:grid-cols-3"
+        classes="sm:grid-cols-2 xl:grid-cols-3"
       >
         <vk-card
           v-for="shape in shapeOptions.general"

@@ -278,7 +278,7 @@ describe('Button component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
+        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-surface')
       })
 
       it('should apply correct spinner styles for positive color', () => {
@@ -290,7 +290,7 @@ describe('Button component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
+        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-surface')
       })
 
       it('should apply correct spinner styles when color is primary and variant is filled', () => {
@@ -301,7 +301,7 @@ describe('Button component', () => {
             variant: 'filled'
           }
         })
-        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
+        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-surface')
       })
 
       it('should apply correct spinner styles when color is positive and variant is filled', () => {
@@ -312,7 +312,7 @@ describe('Button component', () => {
             variant: 'filled'
           }
         })
-        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-white')
+        expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-surface')
       })
 
       it('should apply correct spinner styles when color is primary and variant is outlined', () => {

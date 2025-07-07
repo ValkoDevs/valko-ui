@@ -290,7 +290,7 @@ const extraProps = ':tabs="tabs"'
     <template #examples>
       <example-section
         title="Colors"
-        classes="md:grid-cols-2"
+        classes="xl:grid-cols-2 overflow-x-auto"
       >
         <div
           v-for="color in colorOptions.general"
@@ -310,7 +310,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="Variants"
-        classes="md:grid-cols-2"
+        classes="xl:grid-cols-2 overflow-x-auto"
       >
         <div
           v-for="variant in variantOptions.withGradient"
@@ -330,7 +330,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="Shapes"
-        classes="md:grid-cols-2"
+        classes="xl:grid-cols-2 overflow-x-auto"
       >
         <div
           v-for="shape in shapeOptions.withLine"
@@ -351,7 +351,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="Sizes"
-        classes="md:grid-cols-2"
+        classes="xl:grid-cols-2 overflow-x-auto"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -369,7 +369,10 @@ const extraProps = ':tabs="tabs"'
         </template>
       </example-section>
 
-      <example-section title="Grow">
+      <example-section
+        title="Grow"
+        class="overflow-x-auto"
+      >
         <vk-tabs
           grow
           :tabs="tabs"
@@ -380,7 +383,10 @@ const extraProps = ':tabs="tabs"'
         </template>
       </example-section>
 
-      <example-section title="With Icons">
+      <example-section
+        title="With Icons"
+        class="overflow-x-auto"
+      >
         <vk-tabs
           :tabs="tabWithIcon"
         />
@@ -390,7 +396,10 @@ const extraProps = ':tabs="tabs"'
         </template>
       </example-section>
 
-      <example-section title="Disabled">
+      <example-section
+        title="Disabled"
+        class="overflow-x-auto"
+      >
         <vk-tabs
           :tabs="tabDisabled"
         />

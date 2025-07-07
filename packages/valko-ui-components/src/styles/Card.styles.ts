@@ -53,7 +53,8 @@ export default tv({
       cover: [
         'grid-cols-1',
         'content-end',
-        'relative'
+        'relative',
+        'text-on-surface'
       ]
     },
     disabled: {
@@ -152,16 +153,6 @@ export default tv({
       size: 'lg',
       class: [
         'h-96'
-      ]
-    },
-    {
-      layout: 'cover',
-      variant: 'filled',
-      class: [
-        'data-[layout=cover]:data-[card-image=true]:text-white',
-        'data-[layout=cover]:data-[card-image=false]:text-black',
-        'dark:data-[layout=cover]:data-[card-image=true]:text-white',
-        'dark:data-[layout=cover]:data-[card-image=false]:text-white'
       ]
     }
   ]

@@ -41,7 +41,9 @@ export default tv({
     playgroundView: [
       'w-full',
       'bg-surface-container-lowest',
-      'p-8',
+      'p-2',
+      'md:p-4',
+      'lg:p-8',
       'flex',
       'md:w-auto',
       'md:grow',
@@ -49,7 +51,8 @@ export default tv({
       'items-center',
       'border',
       'border-outlined',
-      'rounded'
+      'rounded',
+      'overflow-x-auto'
     ],
     playgroundForm: [
       'w-full',

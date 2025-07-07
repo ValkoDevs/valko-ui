@@ -334,7 +334,7 @@ const stopOnFocusSnippet = `
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(7,_minmax(0,_max-content))]"
+        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(4,_minmax(0,_max-content))] xl:grid-cols-[repeat(7,_minmax(0,_max-content))]"
       >
         <vk-button
           v-for="color in colorOptions.withSurface"

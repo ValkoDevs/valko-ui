@@ -756,7 +756,7 @@ export default tv({
       disabled: false,
       class: {
         container: [
-          'dark:focus:ring-secondary'
+          'focus:ring-secondary'
         ]
       }
     },

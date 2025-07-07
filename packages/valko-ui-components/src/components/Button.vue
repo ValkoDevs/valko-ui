@@ -51,7 +51,7 @@ const onClick = () => {
         <vk-spinner
           v-if="loading"
           condensed
-          :classes="variant === 'filled' || variant === 'gradient' ? 'text-white dark:text-black' : ''"
+          :classes="variant === 'filled' || variant === 'gradient' ? 'text-surface' : ''"
           :size="size"
           :color="color"
         />

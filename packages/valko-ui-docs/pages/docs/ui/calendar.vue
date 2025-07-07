@@ -497,7 +497,7 @@ const extraProps = 'v-model="model" :adapter="adapter"'
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        classes="sm:grid-cols-2 xl:grid-cols-3"
       >
         <div
           v-for="color in colorOptions.withSurface"
