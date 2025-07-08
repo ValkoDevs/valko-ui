@@ -144,6 +144,46 @@ const apiData: TableItem[] = [
     description: 'Allows to leave the selection empty and displays an icon that clears the selection when clicked.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Accessible text label read by assistive technologies when no visible label is provided.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaLabelledByProp',
+    prop: 'aria-labelledby',
+    required: false,
+    description: 'ID reference to an element that labels the select (e.g. a visible <label>).',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaDescribedByProp',
+    prop: 'aria-describedby',
+    required: false,
+    description: 'ID reference to an element that further describes the select, such as helper or error text.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaRequiredProp',
+    prop: 'aria-required',
+    required: false,
+    description: 'Marks the select as required for form submission.',
+    values: 'true, false',
+    default: ''
+  },
+  {
+    key: 'ariaInvalidProp',
+    prop: 'aria-invalid',
+    required: false,
+    description: 'Indicates that the current value entered into the select is invalid.',
+    values: 'true, false',
+    default: ''
   }
 ]
 

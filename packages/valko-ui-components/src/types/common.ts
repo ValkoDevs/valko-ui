@@ -33,6 +33,8 @@ export type Color =
   | 'warning'
   | 'negative'
 export type ColorWithSurface = Color | 'surface'
+
+// Prop interfaces
 export interface Shapes { shape?: Shape; }
 export interface Variants { variant?: Variant; }
 export interface Sizes { size?: Size; }
@@ -43,3 +45,14 @@ export interface Alignments { alignment?: Alignment; }
 export interface Placements { placement?: Placement; }
 export interface PlacementsWithAuto { placement?: PlacementWithAuto; }
 export interface DefaultComponent extends Shapes, Variants, Colors, Sizes { }
+export interface AriaAttributes {
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+  'aria-describedby'?: string;
+  'aria-description'?: string;
+  'aria-disabled'?: boolean;
+  'aria-checked'?: boolean | 'mixed';
+  'aria-required'?: boolean;
+  'aria-invalid'?: boolean;
+  'aria-hidden'?: boolean;
+}

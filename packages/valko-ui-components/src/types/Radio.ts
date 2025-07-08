@@ -1,6 +1,6 @@
-import type { DefaultComponent, LabelPosition } from './common'
+import type { DefaultComponent, LabelPosition, AriaAttributes } from './common'
 
-export interface RadioProps extends DefaultComponent {
+export interface RadioProps extends DefaultComponent, Pick<AriaAttributes, 'aria-label' | 'aria-labelledby' | 'aria-describedby'> {
   name?: string;
   modelValue?: string | number;
   value?: string | number;
@@ -9,7 +9,4 @@ export interface RadioProps extends DefaultComponent {
   labelPosition?: LabelPosition;
   disabled?: boolean;
   readonly?: boolean;
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  'aria-describedby'?: string;
 }

@@ -40,21 +40,21 @@ const onClick = () => {
   <div :class="classes.container">
     <div
       :class="classes.radioContainer"
+      role="radio"
+      :tabindex="disabled ? -1 : 0"
+      :aria-checked="modelValue === value"
+      :aria-disabled="disabled"
+      :aria-label="props['aria-label']"
+      :aria-labelledby="props['aria-labelledby']"
+      :aria-describedby="describedBy"
       @click="onClick"
+      @keydown.enter.prevent="onClick"
+      @keydown.space.prevent="onClick"
     >
       <div :class="classes.stateLayer">
         <div
-          :class="classes.radioContainer"
-          role="radio"
-          :tabindex="disabled ? -1 : 0"
-          :aria-checked="modelValue === value"
-          :aria-disabled="disabled"
-          :aria-label="props['aria-label']"
-          :aria-labelledby="props['aria-labelledby']"
-          :aria-describedby="describedBy"
-          @click="onClick"
-          @keydown.enter.prevent="onClick"
-          @keydown.space.prevent="onClick"
+          :class="classes.radio"
+          :data-checked="value && modelValue === value"
         >
           <vk-icon
             v-if="value && modelValue === value"
@@ -72,7 +72,6 @@ const onClick = () => {
         :checked="modelValue === value"
         :disabled="disabled"
         :class="classes.input"
-        @change="$emit('update:modelValue', value)"
       >
       <label
         :for="inputId"

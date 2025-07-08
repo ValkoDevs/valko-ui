@@ -42,24 +42,23 @@ const onClick = () => {
 <template>
   <div :class="classes.container">
     <div
+      role="checkbox"
       :class="classes.checkboxContainer"
+      :aria-checked="modelValue === null ? 'mixed' : !!modelValue"
+      :aria-disabled="disabled"
+      :aria-label="props['aria-label']"
+      :aria-labelledby="props['aria-labelledby']"
+      :aria-describedby="describedBy"
+      :tabindex="disabled ? -1 : 0"
       @click="onClick"
+      @keydown.enter.prevent="onClick"
+      @keydown.space.prevent="onClick"
     >
       <div :class="classes.stateLayer">
         <div
-          role="checkbox"
           :class="classes.checkbox"
           :data-checked="!!modelValue"
           :data-indeterminate="modelValue === null"
-          :aria-checked="modelValue === null ? 'mixed' : !!modelValue"
-          :aria-disabled="disabled"
-          :aria-label="props['aria-label']"
-          :aria-labelledby="props['aria-labelledby']"
-          :aria-describedby="describedBy"
-          :tabindex="disabled ? -1 : 0"
-          @click="onClick"
-          @keydown.enter.prevent="onClick"
-          @keydown.space.prevent="onClick"
         >
           <vk-icon
             v-if="modelValue !== false"
@@ -76,6 +75,7 @@ const onClick = () => {
         :indeterminate="modelValue === null"
         :name="name"
         :disabled="disabled"
+        :class="classes.input"
         @click.prevent=""
       >
       <label

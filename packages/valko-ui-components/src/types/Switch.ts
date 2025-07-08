@@ -1,12 +1,9 @@
-import type { DefaultComponent, LabelPosition } from './common'
+import type { DefaultComponent, LabelPosition, AriaAttributes } from './common'
 
-export interface SwitchProps extends DefaultComponent {
+export interface SwitchProps extends DefaultComponent, Pick<AriaAttributes, 'aria-label' | 'aria-labelledby' | 'aria-describedby'> {
   label?: string;
   labelPosition?: LabelPosition;
   disabled?: boolean;
   readonly?: boolean;
   modelValue?: boolean;
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  'aria-describedby'?: string;
 }

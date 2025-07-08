@@ -1,6 +1,6 @@
-import type { DefaultComponent, LabelPosition } from './common'
+import type { DefaultComponent, LabelPosition, AriaAttributes } from './common'
 
-export interface CheckboxProps extends DefaultComponent {
+export interface CheckboxProps extends DefaultComponent, Pick<AriaAttributes, 'aria-label' | 'aria-labelledby' | 'aria-describedby'> {
   helpertext?: string;
   label?: string;
   modelValue?: boolean | null;
@@ -8,7 +8,4 @@ export interface CheckboxProps extends DefaultComponent {
   labelPosition?: LabelPosition;
   readonly?: boolean;
   name?: string;
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  'aria-describedby'?: string;
 }
