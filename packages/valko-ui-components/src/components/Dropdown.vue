@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, useId } from 'vue'
 import type { DropdownProps, Item } from '#valkoui/types/Dropdown'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Dropdown.styles.ts'
@@ -28,11 +28,14 @@ const emit = defineEmits(['itemClick'])
 const classes = useStyle<DropdownProps, SlotStyles>(props, styles)
 
 const open = ref(false)
+const dropdownId = useId()
+const menuId = useId()
 
 const onItemClick = (item: Item) => {
   if (item.disabled) return
   emit('itemClick', item)
   item.onClick?.()
+  open.value = false
 }
 </script>
 
@@ -53,9 +56,13 @@ const onItemClick = (item: Item) => {
     >
       <vk-button
         v-bind="props"
+        :id="dropdownId"
         :disabled="disabled"
         :elevated="elevated"
         :class="classes.triggerButton"
+        :aria-haspopup="'menu'"
+        :aria-expanded="open"
+        :aria-controls="menuId"
         @click="open = !open"
       >
         {{ label }}
@@ -68,10 +75,20 @@ const onItemClick = (item: Item) => {
     </slot>
 
     <template #popover-content>
-      <div :class="classes.itemsMenu">
+      <div
+        :id="menuId"
+        role="menu"
+        :aria-labelledby="dropdownId"
+        :class="classes.itemsMenu"
+      >
         <button
           v-for="item in items"
           :key="item.key"
+          role="menuitem"
+          type="button"
+          :tabindex="item.disabled ? -1 : 0"
+          :aria-disabled="item.disabled || undefined"
+          :disabled="item.disabled"
           :class="classes.itemsButton"
           :data-disabled="item.disabled"
           :data-shape="shape"

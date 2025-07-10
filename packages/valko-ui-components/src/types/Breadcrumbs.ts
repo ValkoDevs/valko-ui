@@ -1,4 +1,4 @@
-import type { Shapes, ColorsWithSurface, Sizes, VariantWithLink } from './common'
+import type { Shapes, ColorsWithSurface, Sizes, VariantWithLink, AriaAttributes } from './common'
 
 export interface Crumb {
   key: string;
@@ -10,7 +10,7 @@ export interface Crumb {
   onClick?: () => void;
 }
 
-export interface BreadcrumbsProps extends Shapes, Sizes, ColorsWithSurface {
+export interface BreadcrumbsProps extends Shapes, Sizes, ColorsWithSurface, Pick<AriaAttributes, 'aria-label'> {
   variant?: VariantWithLink;
   crumbs: Crumb[];
   separator?: string;

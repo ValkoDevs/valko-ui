@@ -37,6 +37,8 @@ const onClose = () => {
 <template>
   <div
     :class="classes.container"
+    :role="isPressable ? 'button' : undefined"
+    :tabindex="isPressable ? 0 : undefined"
     @click="onClick"
   >
     <div :class="classes.contentContainer">

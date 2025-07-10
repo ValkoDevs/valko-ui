@@ -17,11 +17,13 @@ const onClick = () => theme.value = theme.value === 'light' ? 'dark' : 'light'
     condensed
     size="lg"
     class="size-10"
+    aria-label="Toggle Theme"
     @click="onClick"
   >
     <vk-icon
       :name="iconName"
       class="text-2xl p-2"
+      aria-label="Toggle Theme Icon"
     />
   </vk-button>
 </template>

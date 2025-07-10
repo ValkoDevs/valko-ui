@@ -23,7 +23,14 @@ const classes = useStyle<BadgeProps, SlotStyles>(props, styles)
 
 <template>
   <div :class="classes.container">
-    <span :class="classes.badge">{{ !dot ? content : '' }}</span>
+    <span
+      :class="classes.badge"
+      :aria-hidden="(dot && !props['aria-label'] && !content) || undefined"
+      :role="(dot && !props['aria-label'] && !content) ? undefined : 'status'"
+      :aria-label="props['aria-label'] || (!dot ? String(content) : undefined)"
+    >
+      {{ !dot ? content : '' }}
+    </span>
     <slot />
   </div>
 </template>

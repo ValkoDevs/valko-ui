@@ -22,6 +22,16 @@ export default tv({
       'data-[disabled=true]:opacity-50',
       'data-[disabled=true]:cursor-not-allowed'
     ],
+    ol: [
+      'flex',
+      'items-center',
+      'gap-2'
+    ],
+    li: [
+      'inline-flex',
+      'items-center',
+      'gap-1'
+    ],
     separator: [
       'mx-1',
       'text-on-surface'

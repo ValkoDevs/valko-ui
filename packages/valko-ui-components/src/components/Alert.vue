@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useId } from 'vue'
 import type { AlertProps } from '#valkoui/types/Alert'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Alert.styles.ts'
@@ -22,6 +22,8 @@ const emit = defineEmits(['close'])
 
 const classes = useStyle<AlertProps, SlotStyles>(props, styles)
 
+const titleId = useId()
+
 const onClick = () => emit('close')
 
 const defaultIcon = computed(() => {
@@ -35,10 +37,24 @@ const defaultIcon = computed(() => {
     default: return 'alert-hexagon-filled'
   }
 })
+
+const ariaRole = computed(() => {
+  return ['warning', 'negative'].includes(props.color) ? 'alert' : 'status'
+})
+
+const ariaLive = computed(() => {
+  return ['warning', 'negative'].includes(props.color) ? 'assertive' : 'polite'
+})
 </script>
 
 <template>
-  <div :class="classes.container">
+  <div
+    :class="classes.container"
+    :role="ariaRole"
+    :aria-live="ariaLive"
+    :aria-label="title ? titleId : props['aria-label']"
+    :aria-labelledby="props['aria-labelledby']"
+  >
     <vk-icon
       v-if="icon !== null"
       :name="icon ? icon : defaultIcon"
@@ -47,8 +63,9 @@ const defaultIcon = computed(() => {
 
     <div :class="classes.contentContainer">
       <h6
-        :class="classes.title"
         v-if="title"
+        :id="titleId"
+        :class="classes.title"
       >
         {{ title }}
       </h6>

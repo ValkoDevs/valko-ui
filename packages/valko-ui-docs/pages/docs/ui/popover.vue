@@ -74,6 +74,30 @@ const popoverProps: TableItem[] = [
     description: 'Allows you to apply custom CSS classes to the popover content for further customization (e.g., for styling the background, padding, borders, etc.). Accepts a single string or an array of strings.',
     values: 'string | string[]',
     default: '[]'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Accessible label for the popover panel when no visible heading is provided.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaLabelledbyProp',
+    prop: 'aria-labelledby',
+    required: false,
+    description: 'ID of the element that labels the popover.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaDescribedbyProp',
+    prop: 'aria-describedby',
+    required: false,
+    description: 'ID of the element that describes the popover’s content.',
+    values: 'string',
+    default: ''
   }
 ]
 

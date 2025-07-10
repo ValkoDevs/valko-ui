@@ -87,6 +87,14 @@ const badgeProps: TableItem[] = [
     description: 'If true the Badge will be hidden.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Accessible text label read by assistive technologies when no visible label is provided.',
+    values: 'string',
+    default: ''
   }
 ]
 

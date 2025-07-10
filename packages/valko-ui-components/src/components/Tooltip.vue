@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, useId } from 'vue'
 import type { TooltipProps } from '#valkoui/types/Tooltip'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Tooltip.styles.ts'
@@ -21,6 +21,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
 const classes = useStyle<TooltipProps, SlotStyles>(props, styles)
 
 const isShown = ref(false)
+const tooltipId = useId()
 
 const showTooltip = (value: boolean) => {
   isShown.value = value
@@ -39,10 +40,14 @@ const showTooltip = (value: boolean) => {
     @mouseenter="() => showTooltip(true)"
     @mouseleave="() => showTooltip(false)"
   >
-    <slot />
+    <slot :aria-describedby="tooltipId" />
 
     <template #popover-content>
-      <div :class="classes.tip">
+      <div
+        :id="tooltipId"
+        role="tooltip"
+        :class="classes.tip"
+      >
         {{ content }}
       </div>
     </template>

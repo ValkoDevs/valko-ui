@@ -59,10 +59,12 @@ const route = useRoute()
         condensed
         size="lg"
         class="size-10"
+        aria-label="GitHub"
       >
         <vk-icon
           name="brand-github"
           class="text-2xl p-2"
+          aria-label="GitHub Icon"
         />
       </vk-button>
     </a>

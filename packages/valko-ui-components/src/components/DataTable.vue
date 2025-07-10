@@ -220,6 +220,9 @@ onBeforeUnmount(() => {
             :class="classes.headerUtilities"
           >
             <vk-icon
+              role="button"
+              :tabindex="0"
+              :aria-label="`Sort by ${header.label}`"
               :size="size"
               :name="sortIconMap[sort?.field === header.key && sort.direction ? sort.direction : 'none']"
               :class="classes.headerUtilities"
@@ -236,8 +239,8 @@ onBeforeUnmount(() => {
           draggable="true"
           :class="classes.dragIcon"
           @dragstart="() => emit('onDragStart', rowIndex)"
-          @dragover="(event) => emit('onDragOver', event)"
-          @drop="(event) => emit('onDrop', event, rowIndex)"
+          @dragover="(event: DragEvent) => emit('onDragOver', event)"
+          @drop="(event: DragEvent) => emit('onDrop', event, rowIndex)"
         />
       </template>
 

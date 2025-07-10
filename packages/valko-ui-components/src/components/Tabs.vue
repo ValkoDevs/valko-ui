@@ -78,6 +78,7 @@ watch(
       <tab-list
         :class="classes.list"
         as="nav"
+        :aria-label="props['aria-label'] ?? 'Tab navigation'"
       >
         <div
           :class="classes.cursor"
