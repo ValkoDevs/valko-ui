@@ -9,43 +9,27 @@ const tabs = [
 
 const nuxtConfig = `// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
+  compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@valko-ui/components/nuxt'],
-  vite: {
-    optimizeDeps: {
-      include: ['@valko-ui/components'],
-    },
-  },
+  modules: [
+    '@valko-ui/components/nuxt'
+  ],
   postcss: {
     plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
+      '@tailwindcss/postcss': {}
     }
   }
 })
 `
 
-const tailwindConfig = `/** @type {import('tailwindcss').Config} */
-import ValkoUI from '@valko-ui/components/tailwind.preset'
-export default {
-  presets: [ValkoUI],
-  content: [
-    './components/**/*.{html,js,ts,vue}',
-    './pages/**/*.{html,js,ts,vue}',
-    './templates/**/*.{html,js,ts,vue}',
-    './composables/**/*.{html,js,ts,vue}',
-    './app.vue',
-    './node_modules/@valko-ui/components/**/*.{html,js,ts,vue,css}'
-  ],
-  theme: {
-    extend: {}
-  }
-}
+const valkoUICss = `@import "@valko-ui/components/styles";
+@source "../../node_modules/@valko-ui/components/dist";
+@custom-variant dark (&:where(.dark, .dark *));
 `
 
 const example = `<script setup lang="ts">
 import { ref } from 'vue'
+import '@/valko-ui.css'
 
 const counter = ref(0)
 <\u002Fscript>
@@ -85,7 +69,7 @@ const counter = ref(0)
         Introduction
       </h2>
       <p>
-        ValkoUI is a Vue 3 and Nuxt component library built with TailwindCSS. It empowers developers to create modern, responsive, and accessible web interfaces effortlessly. Whether you're starting out or are an experienced developer, ValkoUI simplifies your workflow with ready-to-use components and flexible configurations.
+        ValkoUI is a Vue 3 and Nuxt component library built with TailwindCSS. It empowers developers to create modern, responsive, and accessible web interfaces effortlessly. ValkoUI currently supports Nuxt 3 only (e.g. 3.18.0). Nuxt 4 is not supported yet.
       </p>
       <vk-divider
         color="surface"
@@ -95,19 +79,12 @@ const counter = ref(0)
 
     <div class="flex flex-col gap-6 mt-6">
       <h2 class="text-2xl font-semibold">
-        Quick Start with Nuxt
+        Quick Start with Nuxt 3
       </h2>
 
       <div class="mt-4">
         <h3 class="text-lg font-medium">
-          1. Create a Nuxt Project
-        </h3>
-        <code-block code="npx nuxi@latest init" />
-      </div>
-
-      <div class="mt-4">
-        <h3 class="text-lg font-medium">
-          2. Install TailwindCSS
+          1. Create a Nuxt 3 Project
         </h3>
         <vk-tabs
           v-model="selectedTab"
@@ -117,20 +94,23 @@ const counter = ref(0)
           grow
         >
           <template #npm>
-            <code-block code="npm install --save-dev @nuxtjs/tailwindcss" />
+            <code-block code="npm create nuxt@latest <project-name> -- -t v3" />
           </template>
           <template #yarn>
-            <code-block code="yarn add --dev @nuxtjs/tailwindcss" />
+            <code-block code="yarn create nuxt@latest <project-name> -- -t v3" />
           </template>
           <template #pnpm>
-            <code-block code="pnpm add --save-dev @nuxtjs/tailwindcss" />
+            <code-block code="pnpm create nuxt@latest <project-name> -- -t v3" />
           </template>
         </vk-tabs>
+        <p class="mt-2 text-sm text-warning">
+          Make sure to use Nuxt 3 (e.g. 3.18.0). Nuxt 4 is not supported.
+        </p>
       </div>
 
       <div class="mt-4">
         <h3 class="text-lg font-medium">
-          3. Install Tailwind Variants
+          2. Install Required Dependencies
         </h3>
         <vk-tabs
           v-model="selectedTab"
@@ -140,20 +120,20 @@ const counter = ref(0)
           grow
         >
           <template #npm>
-            <code-block code="npm install tailwind-variants" />
+            <code-block code="npm install tailwindcss @tailwindcss/postcss tailwind-variants @headlessui/vue toastify-js" />
           </template>
           <template #yarn>
-            <code-block code="yarn add tailwind-variants" />
+            <code-block code="yarn add tailwindcss @tailwindcss/postcss tailwind-variants @headlessui/vue toastify-js" />
           </template>
           <template #pnpm>
-            <code-block code="pnpm add tailwind-variants" />
+            <code-block code="pnpm add tailwindcss @tailwindcss/postcss tailwind-variants @headlessui/vue toastify-js" />
           </template>
         </vk-tabs>
       </div>
 
       <div class="mt-4">
         <h3 class="text-lg font-medium">
-          4. Install ValkoUI
+          3. Install ValkoUI Library
         </h3>
         <vk-tabs
           v-model="selectedTab"
@@ -172,28 +152,40 @@ const counter = ref(0)
             <code-block code="pnpm add @valko-ui/components" />
           </template>
         </vk-tabs>
+        <p class="mt-2 text-primary font-semibold">
+          This is the core ValkoUI library. Make sure to install it!
+        </p>
       </div>
 
       <div class="mt-4">
         <h3 class="text-lg font-medium">
-          5. Configure Nuxt
+          4. Configure Nuxt
         </h3>
-        <p>Add the ValkoUI and TailwindCSS modules to your <span class="text-primary">nuxt.config.ts</span> file:</p>
+        <p>Add the ValkoUI module and TailwindCSS plugin to your <span class="text-primary">nuxt.config.ts</span> file:</p>
         <code-block
           :code="nuxtConfig"
           language="ts"
         />
       </div>
 
-      <div class="flex flex-col gap-2">
+      <div class="mt-4">
         <h3 class="text-lg font-medium">
-          6. Initialize Tailwind Config
+          5. Create ValkoUI CSS
         </h3>
-        <p>Run the following command to create a TailwindCSS configuration file:</p>
-        <code-block code="npx tailwindcss init" />
-        <p>Then update your <span class="text-primary">tailwind.config.js</span> file to include the ValkoUI preset:</p>
+        <p>Create a CSS file (e.g. <span class="text-primary">valko-ui.css</span>) in your project and add the following:</p>
+        <code-block :code="valkoUICss" />
+        <p class="mt-2">
+          This will import ValkoUI styles, source, and enable dark mode support. (The source is your relative path to the ValkoUI components CSS file, which is usually located in <span class="text-primary">node_modules/@valko-ui/components/dist</span>.)
+        </p>
+      </div>
+
+      <div class="mt-4">
+        <h3 class="text-lg font-medium">
+          6. Import ValkoUI CSS in app.vue
+        </h3>
+        <p>Import your <span class="text-primary">valko-ui.css</span> file in your <span class="text-primary">app.vue</span> script section:</p>
         <code-block
-          :code="tailwindConfig"
+          code="import '@/valko-ui.css'"
           language="ts"
         />
       </div>
@@ -204,6 +196,16 @@ const counter = ref(0)
         </h3>
         <p>Now that everything is set up, you can start using ValkoUI components in your project. Here's a small example to get you started:</p>
         <code-block :code="example" />
+        <div class="my-4">
+          <p class="mt-2 text-lg font-medium text-primary">
+            Want to see more? Check out our <nuxt-link
+              to="/templates"
+              class="underline"
+            >
+              templates
+            </nuxt-link> for ready-to-use UI examples!
+          </p>
+        </div>
       </div>
     </div>
   </div>
