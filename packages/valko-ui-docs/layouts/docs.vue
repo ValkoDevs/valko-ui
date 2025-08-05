@@ -131,8 +131,10 @@ onMounted(() => {
         />
       </aside>
       <div class="flex flex-col grow justify-between items-center w-full">
-        <main class="w-full max-w-screen-xl mx-auto grow px-10">
-          <NuxtPage />
+        <main class="w-full grow">
+          <div class="mx-auto w-full max-w-screen-xl px-4 md:px-6 lg:px-10">
+            <NuxtPage />
+          </div>
         </main>
         <footer class="w-full px-2 py-1 text-sm bg-surface-container-lowest items-center justify-center flex">
           ValkoUI all rights reserved

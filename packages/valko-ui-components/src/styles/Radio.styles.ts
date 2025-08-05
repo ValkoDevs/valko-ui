@@ -46,8 +46,7 @@ export default tv({
     ],
     icon: [
       'vk-radio__icon',
-      'text-white',
-      'dark:text-black'
+      'text-surface'
     ]
   },
   variants: {
@@ -219,11 +218,7 @@ export default tv({
           'data-[checked=true]:bg-primary',
           'data-[checked=true]:border-primary',
           'data-[indeterminate=true]:border-primary',
-          'data-[indeterminate=true]:bg-primary',
-          'dark:data-[checked=true]:bg-primary',
-          'dark:data-[checked=true]:border-primary',
-          'dark:data-[indeterminate=true]:border-primary',
-          'dark:data-[indeterminate=true]:bg-primary'
+          'data-[indeterminate=true]:bg-primary'
         ]
       }
     },
@@ -236,11 +231,7 @@ export default tv({
           'data-[checked=true]:bg-secondary',
           'data-[checked=true]:border-secondary',
           'data-[indeterminate=true]:border-secondary',
-          'data-[indeterminate=true]:bg-secondary',
-          'dark:data-[checked=true]:bg-secondary',
-          'dark:data-[checked=true]:border-secondary',
-          'dark:data-[indeterminate=true]:border-secondary',
-          'dark:data-[indeterminate=true]:bg-secondary'
+          'data-[indeterminate=true]:bg-secondary'
         ]
       }
     },
@@ -253,11 +244,7 @@ export default tv({
           'data-[checked=true]:bg-positive',
           'data-[checked=true]:border-positive',
           'data-[indeterminate=true]:border-positive',
-          'data-[indeterminate=true]:bg-positive',
-          'dark:data-[checked=true]:bg-positive',
-          'dark:data-[checked=true]:border-positive',
-          'dark:data-[indeterminate=true]:border-positive',
-          'dark:data-[indeterminate=true]:bg-positive'
+          'data-[indeterminate=true]:bg-positive'
         ]
       }
     },
@@ -270,11 +257,7 @@ export default tv({
           'data-[checked=true]:bg-accent',
           'data-[checked=true]:border-accent',
           'data-[indeterminate=true]:border-accent',
-          'data-[indeterminate=true]:bg-accent',
-          'dark:data-[checked=true]:bg-accent',
-          'dark:data-[checked=true]:border-accent',
-          'dark:data-[indeterminate=true]:border-accent',
-          'dark:data-[indeterminate=true]:bg-accent'
+          'data-[indeterminate=true]:bg-accent'
         ]
       }
     },
@@ -287,11 +270,7 @@ export default tv({
           'data-[checked=true]:bg-warning',
           'data-[checked=true]:border-warning',
           'data-[indeterminate=true]:border-warning',
-          'data-[indeterminate=true]:bg-warning',
-          'dark:data-[checked=true]:bg-warning',
-          'dark:data-[checked=true]:border-warning',
-          'dark:data-[indeterminate=true]:border-warning',
-          'dark:data-[indeterminate=true]:bg-warning'
+          'data-[indeterminate=true]:bg-warning'
         ]
       }
     },
@@ -304,11 +283,7 @@ export default tv({
           'data-[checked=true]:bg-negative',
           'data-[checked=true]:border-negative',
           'data-[indeterminate=true]:border-negative',
-          'data-[indeterminate=true]:bg-negative',
-          'dark:data-[checked=true]:bg-negative',
-          'dark:data-[checked=true]:border-negative',
-          'dark:data-[indeterminate=true]:border-negative',
-          'dark:data-[indeterminate=true]:bg-negative'
+          'data-[indeterminate=true]:bg-negative'
         ]
       }
     },
@@ -320,13 +295,10 @@ export default tv({
       class: {
         radio: [
           'data-[checked=true]:border-primary',
-          'data-[indeterminate=true]:border-primary',
-          'dark:data-[checked=true]:border-primary',
-          'dark:data-[indeterminate=true]:border-primary'
+          'data-[indeterminate=true]:border-primary'
         ],
         icon: [
-          'text-primary',
-          'dark:text-primary'
+          'text-primary'
         ]
       }
     },
@@ -337,13 +309,10 @@ export default tv({
       class: {
         radio: [
           'data-[checked=true]:border-secondary',
-          'data-[indeterminate=true]:border-secondary',
-          'dark:data-[checked=true]:border-secondary',
-          'dark:data-[indeterminate=true]:border-secondary'
+          'data-[indeterminate=true]:border-secondary'
         ],
         icon: [
-          'text-secondary',
-          'dark:text-secondary'
+          'text-secondary'
         ]
       }
     },
@@ -354,13 +323,10 @@ export default tv({
       class: {
         radio: [
           'data-[checked=true]:border-positive',
-          'data-[indeterminate=true]:border-positive',
-          'dark:data-[checked=true]:border-positive',
-          'dark:data-[indeterminate=true]:border-positive'
+          'data-[indeterminate=true]:border-positive'
         ],
         icon: [
-          'text-positive',
-          'dark:text-positive'
+          'text-positive'
         ]
       }
     },
@@ -371,13 +337,10 @@ export default tv({
       class: {
         radio: [
           'data-[checked=true]:border-accent',
-          'data-[indeterminate=true]:border-accent',
-          'dark:data-[checked=true]:border-accent',
-          'dark:data-[indeterminate=true]:border-accent'
+          'data-[indeterminate=true]:border-accent'
         ],
         icon: [
-          'text-accent',
-          'dark:text-accent'
+          'text-accent'
         ]
       }
     },
@@ -388,13 +351,10 @@ export default tv({
       class: {
         radio: [
           'data-[checked=true]:border-warning',
-          'data-[indeterminate=true]:border-warning',
-          'dark:data-[checked=true]:border-warning',
-          'dark:data-[indeterminate=true]:border-warning'
+          'data-[indeterminate=true]:border-warning'
         ],
         icon: [
-          'text-warning',
-          'dark:text-warning'
+          'text-warning'
         ]
       }
     },
@@ -405,13 +365,10 @@ export default tv({
       class: {
         radio: [
           'data-[checked=true]:border-negative',
-          'data-[indeterminate=true]:border-negative',
-          'dark:data-[checked=true]:border-negative',
-          'dark:data-[indeterminate=true]:border-negative'
+          'data-[indeterminate=true]:border-negative'
         ],
         icon: [
-          'text-negative',
-          'dark:text-negative'
+          'text-negative'
         ]
       }
     },
@@ -423,9 +380,7 @@ export default tv({
       class: {
         radio: [
           'data-[checked=true]:bg-primary-container',
-          'data-[indeterminate=true]:bg-primary-container',
-          'dark:data-[checked=true]:bg-primary-container',
-          'dark:data-[indeterminate=true]:bg-primary-container'
+          'data-[indeterminate=true]:bg-primary-container'
         ],
         icon: [
           'text-on-primary-container'
@@ -439,9 +394,7 @@ export default tv({
       class: {
         radio: [
           'data-[checked=true]:bg-secondary-container',
-          'data-[indeterminate=true]:bg-secondary-container',
-          'dark:data-[checked=true]:bg-secondary-container',
-          'dark:data-[indeterminate=true]:bg-secondary-container'
+          'data-[indeterminate=true]:bg-secondary-container'
         ],
         icon: [
           'text-on-secondary-container'
@@ -455,9 +408,7 @@ export default tv({
       class: {
         radio: [
           'data-[checked=true]:bg-positive-container',
-          'data-[indeterminate=true]:bg-positive-container',
-          'dark:data-[checked=true]:bg-positive-container',
-          'dark:data-[indeterminate=true]:bg-positive-container'
+          'data-[indeterminate=true]:bg-positive-container'
         ],
         icon: [
           'text-on-positive-container'
@@ -471,9 +422,7 @@ export default tv({
       class: {
         radio: [
           'data-[checked=true]:bg-accent-container',
-          'data-[indeterminate=true]:bg-accent-container',
-          'dark:data-[checked=true]:bg-accent-container',
-          'dark:data-[indeterminate=true]:bg-accent-container'
+          'data-[indeterminate=true]:bg-accent-container'
         ],
         icon: [
           'text-on-accent-container'
@@ -487,9 +436,7 @@ export default tv({
       class: {
         radio: [
           'data-[checked=true]:bg-warning-container',
-          'data-[indeterminate=true]:bg-warning-container',
-          'dark:data-[checked=true]:bg-warning-container',
-          'dark:data-[indeterminate=true]:bg-warning-container'
+          'data-[indeterminate=true]:bg-warning-container'
         ],
         icon: [
           'text-on-warning-container'
@@ -503,9 +450,7 @@ export default tv({
       class: {
         radio: [
           'data-[checked=true]:bg-negative-container',
-          'data-[indeterminate=true]:bg-negative-container',
-          'dark:data-[checked=true]:bg-negative-container',
-          'dark:data-[indeterminate=true]:bg-negative-container'
+          'data-[indeterminate=true]:bg-negative-container'
         ],
         icon: [
           'text-on-negative-container'

@@ -282,7 +282,7 @@ const extraProps = ':items="items"'
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(6,_minmax(0,_max-content))]"
+        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] xl:grid-cols-[repeat(6,_minmax(0,_max-content))]"
       >
         <vk-dropdown
           v-for="color in colorOptions.general"

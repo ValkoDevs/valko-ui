@@ -47,7 +47,7 @@ export default tv({
       outlined: {
         notification: [
           'border-2',
-          'bg-on-inverse-surface'
+          'bg-inverse-on-surface'
         ],
         content: [
           'p-[calc(0.75rem_-_2px)]'
@@ -56,7 +56,7 @@ export default tv({
       line: {
         notification: [
           'bg-inverse-surface',
-          'text-on-inverse-surface'
+          'text-inverse-on-surface'
         ]
       },
       gradient: {
@@ -64,7 +64,7 @@ export default tv({
           'bg-gradient-to-b'
         ],
         progressbar: [
-          'bg-on-inverse-surface'
+          'bg-inverse-on-surface'
         ]
       }
     },
@@ -227,10 +227,10 @@ export default tv({
       class: {
         notification: [
           'bg-inverse-surface',
-          'text-on-inverse-surface'
+          'text-inverse-on-surface'
         ],
         progressbar: [
-          'bg-on-inverse-surface'
+          'bg-inverse-on-surface'
         ]
       }
     },
@@ -411,10 +411,10 @@ export default tv({
       class: {
         notification: [
           'bg-inverse-surface/[.6]',
-          'text-on-inverse-surface'
+          'text-inverse-on-surface'
         ],
         progressbar: [
-          'bg-on-inverse-surface'
+          'bg-inverse-on-surface'
         ]
       }
     },
@@ -478,7 +478,7 @@ export default tv({
       color: 'surface',
       class: {
         progressbar: [
-          'bg-on-inverse-surface'
+          'bg-inverse-on-surface'
         ]
       }
     },

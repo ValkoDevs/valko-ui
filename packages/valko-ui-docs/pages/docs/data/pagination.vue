@@ -154,7 +154,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        classes="md:grid-cols-2 xl:grid-cols-3 overflow-x-auto"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -176,7 +176,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        classes="md:grid-cols-2 xl:grid-cols-3 overflow-x-auto"
       >
         <div
           v-for="variant in variantOptions.general"
@@ -198,7 +198,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        classes="md:grid-cols-2 xl:grid-cols-3 overflow-x-auto"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -220,7 +220,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        classes="md:grid-cols-2 xl:grid-cols-3 overflow-x-auto"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -239,7 +239,10 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
         </template>
       </example-section>
 
-      <example-section title="Elevated">
+      <example-section
+        title="Elevated"
+        class="overflow-x-auto"
+      >
         <vk-pagination
           v-model="form.modelValue"
           elevated
@@ -251,7 +254,10 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
         </template>
       </example-section>
 
-      <example-section title="Disabled">
+      <example-section
+        title="Disabled"
+        class="overflow-x-auto"
+      >
         <vk-pagination
           v-model="form.modelValue"
           disabled

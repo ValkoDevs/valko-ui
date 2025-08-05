@@ -26,12 +26,13 @@ export default tv({
     ],
     gradient: [
       'bg-gradient-to-b',
-      'from-transparent',
-      'to-black',
+      'from-surface-bright',
+      'to-surface-dim',
       'absolute',
       'inset-0',
       'group-data-[layout=cover]:block',
-      'hidden'
+      'hidden',
+      'opacity-50'
     ]
   }
 }) as unknown as ReturnType<TV>
