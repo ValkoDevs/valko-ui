@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DropdownProps, TableItem, Item, SelectOption, PlacementWithAuto, Alignment } from '#valkoui'
+import type { DropdownProps, TableItem, Item } from '#valkoui'
 
 const form = ref<Partial<DropdownProps>>({
   color: 'primary',
@@ -19,20 +19,6 @@ const items: Item[] = [
   { key: 'disabled', title: 'Disabled', icon: 'ban', disabled: true },
   { key: 'video', title: 'Upload Video', icon: 'video', onClick: () => useNotification({ text: 'Video uploaded' }) },
   { key: 'delete', title: 'Delete', icon: 'trash', onClick: () => useNotification({ text: 'Item Deleted' }) }
-]
-
-const placementOptions: SelectOption<PlacementWithAuto>[] = [
-  { label: 'Bottom', value: 'bottom' },
-  { label: 'Top', value: 'top' },
-  { label: 'Left', value: 'left' },
-  { label: 'Right', value: 'right' },
-  { label: 'Auto', value: 'auto' }
-]
-
-const alignmentOptions: SelectOption<Alignment>[] = [
-  { label: 'Start', value: 'start' },
-  { label: 'Center', value: 'center' },
-  { label: 'End', value: 'end' }
 ]
 
 const dropdownProps: TableItem[] = [
@@ -261,7 +247,7 @@ const extraProps = ':items="items"'
         v-model="form.placement"
         label="Placement"
         size="sm"
-        :options="placementOptions"
+        :options="placementOptions.withAuto"
       />
       <vk-select
         v-model="form.alignment"
@@ -357,7 +343,7 @@ const extraProps = ':items="items"'
         classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(5,_minmax(0,_max-content))]"
       >
         <vk-dropdown
-          v-for="placement in placementOptions"
+          v-for="placement in placementOptions.withAuto"
           :key="placement.value"
           :placement="placement.value"
           :title="placement.label"
@@ -366,7 +352,7 @@ const extraProps = ':items="items"'
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('placement', { values: placementOptions.map(o => o.value), extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('placement', { values: placementOptions.withAuto.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 

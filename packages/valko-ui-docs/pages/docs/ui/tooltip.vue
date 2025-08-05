@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TooltipProps, TableItem, SelectOption, PlacementWithAuto, Alignment } from '#valkoui'
+import type { TooltipProps, TableItem } from '#valkoui'
 
 const form = ref<TooltipProps>({
   shape: 'soft',
@@ -9,20 +9,6 @@ const form = ref<TooltipProps>({
   content: 'Tooltip Content',
   elevated: true
 })
-
-const placementOptions: SelectOption<PlacementWithAuto>[] = [
-  { label: 'Bottom', value: 'bottom' },
-  { label: 'Top', value: 'top' },
-  { label: 'Left', value: 'left' },
-  { label: 'Right', value: 'right' },
-  { label: 'Auto', value: 'auto' }
-]
-
-const alignmentOptions: SelectOption<Alignment>[] = [
-  { label: 'Start', value: 'start' },
-  { label: 'Center', value: 'center' },
-  { label: 'End', value: 'end' }
-]
 
 const tooltipProps: TableItem[] = [
   {
@@ -133,7 +119,7 @@ const extraProps = 'content="Tooltip Content"'
         v-model="form.placement"
         label="Placement"
         size="sm"
-        :options="placementOptions"
+        :options="placementOptions.withAuto"
       />
       <vk-select
         v-model="form.alignment"
@@ -197,7 +183,7 @@ const extraProps = 'content="Tooltip Content"'
         classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(5,_minmax(0,_max-content))]"
       >
         <vk-tooltip
-          v-for="placement in placementOptions"
+          v-for="placement in placementOptions.withAuto"
           :key="placement.value"
           :content="placement.label"
           :placement="placement.value"
@@ -208,7 +194,7 @@ const extraProps = 'content="Tooltip Content"'
         </vk-tooltip>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('placement', {values: placementOptions.map(o => o.value), customSlot, extraProps})" />
+          <code-block :code="generateSnippet<string>('placement', {values: placementOptions.withAuto.map(o => o.value), customSlot, extraProps})" />
         </template>
       </example-section>
 

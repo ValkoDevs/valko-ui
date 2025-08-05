@@ -67,42 +67,10 @@ export default tv({
       }
     },
     placement: {
-      'top-right': {
-        badge: [
-          'top-0',
-          'right-0',
-          'origin-top-right',
-          '-translate-y-1/2',
-          'translate-x-1/2'
-        ]
-      },
-      'top-left': {
-        badge: [
-          'top-0',
-          'left-0',
-          'origin-top-left',
-          '-translate-y-1/2',
-          '-translate-x-1/2'
-        ]
-      },
-      'bottom-right': {
-        badge: [
-          'bottom-0',
-          'right-0',
-          'origin-bottom-right',
-          'translate-y-1/2',
-          'translate-x-1/2'
-        ]
-      },
-      'bottom-left': {
-        badge: [
-          'bottom-0',
-          'left-0',
-          'origin-bottom-left',
-          'translate-y-1/2',
-          '-translate-x-1/2'
-        ]
-      }
+      right: {},
+      left: {},
+      top: {},
+      bottom: {}
     },
     hidden: {
       true: {
@@ -424,6 +392,151 @@ export default tv({
       class: {
         badge: [
           'size-5'
+        ]
+      }
+    },
+    /// Placement & Alignment
+    {
+      placement: 'top',
+      alignment: 'start',
+      class: {
+        badge: [
+          'top-0',
+          'left-0',
+          '-translate-x-1/2',
+          '-translate-y-1/2'
+        ]
+      }
+    },
+    {
+      placement: 'top',
+      alignment: 'center',
+      class: {
+        badge: [
+          'top-0',
+          'left-1/2',
+          '-translate-x-1/2',
+          '-translate-y-1/2'
+        ]
+      }
+    },
+    {
+      placement: 'top',
+      alignment: 'end',
+      class: {
+        badge: [
+          'top-0',
+          'right-0',
+          '-translate-y-1/2',
+          'translate-x-1/2'
+        ]
+      }
+    },
+    {
+      placement: 'bottom',
+      alignment: 'start',
+      class: {
+        badge: [
+          'bottom-0',
+          'left-0',
+          '-translate-x-1/2',
+          'translate-y-1/2'
+        ]
+      }
+    },
+    {
+      placement: 'bottom',
+      alignment: 'center',
+      class: {
+        badge: [
+          'bottom-0',
+          'left-1/2',
+          '-translate-x-1/2',
+          'translate-y-1/2'
+        ]
+      }
+    },
+    {
+      placement: 'bottom',
+      alignment: 'end',
+      class: {
+        badge: [
+          'bottom-0',
+          'right-0',
+          'translate-y-1/2',
+          'translate-x-1/2'
+        ]
+      }
+    },
+    {
+      placement: 'left',
+      alignment: 'start',
+      class: {
+        badge: [
+          'left-0',
+          'top-0',
+          '-translate-x-1/2',
+          '-translate-y-1/2'
+        ]
+      }
+    },
+    {
+      placement: 'left',
+      alignment: 'center',
+      class: {
+        badge: [
+          'left-0',
+          'top-1/2',
+          '-translate-x-1/2',
+          '-translate-y-1/2'
+        ]
+      }
+    },
+    {
+      placement: 'left',
+      alignment: 'end',
+      class: {
+        badge: [
+          'left-0',
+          'bottom-0',
+          '-translate-x-1/2',
+          'translate-y-1/2'
+        ]
+      }
+    },
+    {
+      placement: 'right',
+      alignment: 'start',
+      class: {
+        badge: [
+          'right-0',
+          'top-0',
+          'translate-x-1/2',
+          '-translate-y-1/2'
+        ]
+      }
+    },
+    {
+      placement: 'right',
+      alignment: 'center',
+      class: {
+        badge: [
+          'right-0',
+          'top-1/2',
+          'translate-x-1/2',
+          '-translate-y-1/2'
+        ]
+      }
+    },
+    {
+      placement: 'right',
+      alignment: 'end',
+      class: {
+        badge: [
+          'right-0',
+          'bottom-0',
+          'translate-x-1/2',
+          'translate-y-1/2'
         ]
       }
     }

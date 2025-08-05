@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DrawerProps, SelectOption, TableItem, Backdrop, Placement } from '#valkoui'
+import type { DrawerProps, SelectOption, TableItem, Backdrop } from '#valkoui'
 
 const form = ref<Omit<DrawerProps, 'isOpen'>>({
   shape: 'soft',
@@ -9,13 +9,6 @@ const form = ref<Omit<DrawerProps, 'isOpen'>>({
   title: 'Drawer',
   closable: true
 })
-
-const placementOptions: SelectOption<Placement>[] = [
-  { value: 'right', label: 'Right' },
-  { value: 'left', label: 'Left' },
-  { value: 'top', label: 'Top' },
-  { value: 'bottom', label: 'Bottom' }
-]
 
 const backdropOptions: SelectOption<Backdrop>[] = [
   { value: 'opaque', label: 'Opaque' },
@@ -120,7 +113,7 @@ const extraProps = ':is-open="drawerStates[\'drawerId\']" @close="toggleDrawer(\
 
 const placementSnippet = `${scriptCode}\n${generateSnippet<string>('placement',
   {
-    values: placementOptions.map(o => o.value),
+    values: placementOptions.general.map(o => o.value),
     hasSlot: true, extraProps
   }).replace(/<vk-drawer/g, `${triggerSnippet}`)
 }`
@@ -208,7 +201,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
         v-model="form.placement"
         label="Placement"
         size="sm"
-        :options="placementOptions"
+        :options="placementOptions.general"
       />
       <vk-select
         v-model="form.backdrop"
@@ -228,7 +221,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
         classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
       >
         <div
-          v-for="placement in placementOptions"
+          v-for="placement in placementOptions.general"
           :key="placement.value"
         >
           <vk-button @click="toggleDrawer(placement.value)">

@@ -1,23 +1,17 @@
 <script setup lang="ts">
-import type { BadgeProps, TableItem, Corner, SelectOption } from '#valkoui'
+import type { BadgeProps, TableItem } from '#valkoui'
 
 const form = ref<BadgeProps>({
   color: 'primary',
   variant: 'filled',
   shape: 'soft',
   size: 'md',
-  placement: 'top-right',
+  placement: 'top',
+  alignment: 'end',
   content: 'new',
   hidden: false,
   dot: false
 })
-
-const placementOptions: SelectOption<Corner>[] = [
-  { value: 'top-right', label: 'Top Right' },
-  { value: 'bottom-right', label: 'Bottom Right' },
-  { value: 'top-left', label: 'Top Left' },
-  { value: 'bottom-left', label: 'Bottom Left' }
-]
 
 const src = '/assets/badge.jpg'
 
@@ -51,8 +45,16 @@ const badgeProps: TableItem[] = [
     prop: 'placement',
     required: false,
     description: 'The placement of the Badge.',
-    values: 'top-right | top-left | bottom-right | bottom-left',
-    default: 'top-right'
+    values: 'bottom, top, right, left',
+    default: 'top'
+  },
+  {
+    key: 'alignmentProp',
+    prop: 'alignment',
+    required: false,
+    description: 'The alignment of the Badge.',
+    values: 'start, center, end',
+    default: 'end'
   },
   {
     key: 'contentProp',
@@ -118,6 +120,7 @@ const extraProps = {
         :size="form.size"
         :shape="form.shape"
         :placement="form.placement"
+        :alignment="form.alignment"
         :content="form.content"
         :hidden="form.hidden"
         :dot="form.dot"
@@ -162,7 +165,13 @@ const extraProps = {
         v-model="form.placement"
         label="Placement"
         size="sm"
-        :options="placementOptions"
+        :options="placementOptions.general"
+      />
+      <vk-select
+        v-model="form.alignment"
+        label="Alignment"
+        size="sm"
+        :options="alignmentOptions"
       />
       <vk-checkbox
         v-model="form.hidden"
@@ -284,7 +293,7 @@ const extraProps = {
         classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         <div
-          v-for="placement in placementOptions"
+          v-for="placement in placementOptions.general"
           :key="placement.value"
           class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
@@ -301,7 +310,33 @@ const extraProps = {
         </div>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('placement', { values: placementOptions.map(o => o.value), customSlot, extraProps: extraProps.content })" />
+          <code-block :code="generateSnippet<string>('placement', { values: placementOptions.general.map(o => o.value), customSlot, extraProps: extraProps.content })" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Alignments"
+        classes="grid-cols-2 lg:grid-cols-3"
+      >
+        <div
+          v-for="alignment in alignmentOptions"
+          :key="alignment.value"
+          class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
+        >
+          <span>{{ alignment.label }}</span>
+          <vk-badge
+            :alignment="alignment.value"
+            content="new"
+          >
+            <vk-avatar
+              :src="src"
+              color="surface"
+            />
+          </vk-badge>
+        </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('alignment', { values: alignmentOptions.map(o => o.value), customSlot, extraProps: extraProps.content })" />
         </template>
       </example-section>
 

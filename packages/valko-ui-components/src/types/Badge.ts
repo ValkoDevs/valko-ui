@@ -1,8 +1,7 @@
-import type { Sizes, VariantWithGradient, ColorsWithSurface, Shapes, Corner } from './common'
+import type { Sizes, VariantWithGradient, ColorsWithSurface, Shapes, Alignments, Placements } from './common'
 
-export interface BadgeProps extends Sizes, ColorsWithSurface, Shapes {
+export interface BadgeProps extends Sizes, ColorsWithSurface, Shapes, Alignments, Placements {
   variant?: VariantWithGradient;
-  placement?: Corner;
   content?: number | string;
   hidden?: boolean;
   dot?: boolean;

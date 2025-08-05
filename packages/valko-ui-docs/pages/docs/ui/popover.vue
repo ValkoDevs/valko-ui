@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PopoverProps, TableItem, SelectOption, PlacementWithAuto, Alignment } from '#valkoui'
+import type { PopoverProps, TableItem } from '#valkoui'
 
 const form = ref<PopoverProps>({
   shape: 'soft',
@@ -9,20 +9,6 @@ const form = ref<PopoverProps>({
   elevated: false,
   condensed: false
 })
-
-const placementOptions: SelectOption<PlacementWithAuto>[] = [
-  { label: 'Bottom', value: 'bottom' },
-  { label: 'Top', value: 'top' },
-  { label: 'Left', value: 'left' },
-  { label: 'Right', value: 'right' },
-  { label: 'Auto', value: 'auto' }
-]
-
-const alignmentOptions: SelectOption<Alignment>[] = [
-  { label: 'Start', value: 'start' },
-  { label: 'Center', value: 'center' },
-  { label: 'End', value: 'end' }
-]
 
 const popoverProps: TableItem[] = [
   {
@@ -171,7 +157,7 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
         v-model="form.placement"
         label="Placement"
         size="sm"
-        :options="placementOptions"
+        :options="placementOptions.withAuto"
       />
       <vk-select
         v-model="form.alignment"
@@ -217,7 +203,7 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
         classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(5,_minmax(0,_max-content))]"
       >
         <vk-popover
-          v-for="placement in placementOptions"
+          v-for="placement in placementOptions.withAuto"
           :key="placement.value"
           :placement="placement.value"
           :is-open="popoverStates[placement.value]"
@@ -230,7 +216,7 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
         </vk-popover>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('placement', { values: placementOptions.map(o => o.value), customSlot, extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('placement', { values: placementOptions.withAuto.map(o => o.value), customSlot, extraProps })}`" />
         </template>
       </example-section>
 
