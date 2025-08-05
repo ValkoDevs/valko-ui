@@ -12,7 +12,8 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  placement: 'top-right',
+  placement: 'top',
+  alignment: 'end',
   dot: false,
   hidden: false
 })
