@@ -22,10 +22,23 @@ const generateSnippet = snippetGeneratorFactory('vk-icon')
 </script>
 
 <template>
-  <doc-section
-    title="Icon"
-    description="Icon component that renders any Tabler Icon by specifying its name. Useful for visually enhancing UI elements such as buttons, links, alerts, and more."
-  >
+  <doc-section title="Icon">
+    <template #description>
+      <div class="flex flex-col gap-2">
+        <span>Icon component that renders any Tabler Icon by specifying its name. Useful for visually enhancing UI elements such as buttons, links, alerts, and more.</span>
+        <span>
+          See the
+          <a
+            href="https://tabler.io/icons"
+            class="text-primary underline"
+            target="_blank"
+          >
+            Tabler Icons
+          </a>
+          catalog for available icon names.
+        </span>
+      </div>
+    </template>
     <template #playground-view>
       <vk-icon :name="form.name" />
     </template>

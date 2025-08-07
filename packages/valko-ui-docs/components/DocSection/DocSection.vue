@@ -16,12 +16,14 @@ const classes = useStyle<DocSectionProps, SlotStyles>(props, styles)
 <template>
   <div :class="classes.container">
     <h1 :class="classes.title">
-      {{ props.title }}
+      {{ title }}
     </h1>
     <hr :class="classes.divider">
 
     <section :class="classes.section">
-      {{ props.description }}
+      <slot name="description">
+        {{ description }}
+      </slot>
     </section>
 
     <section :class="classes.section">
