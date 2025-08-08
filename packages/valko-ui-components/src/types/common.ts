@@ -34,7 +34,6 @@ export type Color =
   | 'negative'
 export type ColorWithSurface = Color | 'surface'
 
-// Prop interfaces
 export interface Shapes { shape?: Shape; }
 export interface Variants { variant?: Variant; }
 export interface Sizes { size?: Size; }
@@ -50,9 +49,6 @@ export interface AriaAttributes {
   'aria-labelledby'?: string;
   'aria-describedby'?: string;
   'aria-description'?: string;
-  'aria-disabled'?: boolean;
-  'aria-checked'?: boolean | 'mixed';
   'aria-required'?: boolean;
   'aria-invalid'?: boolean;
-  'aria-hidden'?: boolean;
 }

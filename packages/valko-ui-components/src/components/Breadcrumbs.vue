@@ -29,7 +29,7 @@ const onCrumbClick = (item: Crumb) => {
   item.onClick?.()
 }
 
-const useIcon = (separator: string) => separator.length > 2
+const selectIcon = (separator: string) => separator.length > 2
 </script>
 
 <template>
@@ -88,7 +88,7 @@ const useIcon = (separator: string) => separator.length > 2
           :class="classes.separator"
           aria-hidden="true"
         >
-          <template v-if="useIcon(separator)">
+          <template v-if="selectIcon(separator)">
             <vk-icon :name="separator" />
           </template>
           <template v-else>

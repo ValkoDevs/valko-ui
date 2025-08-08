@@ -180,34 +180,25 @@ const onLabelClick = (newPosition: number) => {
 }
 
 const handleKeyDown = (e: KeyboardEvent, thumb: 'min' | 'max') => {
-  const step = props.step
-  const min = props.min
-  const max = props.max
-  const value = thumbRefMap[thumb].value
+  type AllowedKeys = 'ArrowRight' | 'ArrowUp' | 'ArrowLeft' | 'ArrowDown' | 'Home' | 'End'
 
-  let newValue = value
+  const allowedKeys: AllowedKeys[] = ['ArrowRight', 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'Home', 'End']
+  const currentKey = e.key as AllowedKeys
 
-  switch (e.key) {
-    case 'ArrowRight':
-    case 'ArrowUp':
-      newValue = Math.min(max, value + step)
-      break
-    case 'ArrowLeft':
-    case 'ArrowDown':
-      newValue = Math.max(min, value - step)
-      break
-    case 'Home':
-      newValue = min
-      break
-    case 'End':
-      newValue = max
-      break
-    default:
-      return
-  }
+  if (!allowedKeys.includes(currentKey)) return
 
   e.preventDefault()
-  updateThumbPosition(newValue, thumb)
+
+  const formulaMap: Record<AllowedKeys, (value: number) => number> = {
+    ArrowRight: (value: number) => Math.min(value + props.step, props.max),
+    ArrowUp: (value: number) => Math.min(value + props.step, props.max),
+    ArrowLeft: (value: number) => Math.max(value - props.step, props.min),
+    ArrowDown: (value: number) => Math.max(value - props.step, props.min),
+    Home: () => props.min,
+    End: () => props.max
+  }
+
+  updateThumbPosition(formulaMap[currentKey](thumbRefMap[thumb].value), thumb)
 }
 
 watch([() => props.min, () => props.max, () => props.isDouble, () => props.step], ([min, max, isDouble]) => {

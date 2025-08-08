@@ -5,7 +5,7 @@ export interface SelectOption<T = string | number> {
   label: string;
 }
 
-export interface SelectProps extends DefaultComponent, Pick<AriaAttributes, 'aria-label' | 'aria-describedby' | 'aria-labelledby' | 'aria-required' | 'aria-invalid'> {
+export interface SelectProps extends DefaultComponent, Omit<AriaAttributes, 'aria-description'> {
   options?: SelectOption[];
   modelValue?: string | number | Array<string | number>;
   label?: string;

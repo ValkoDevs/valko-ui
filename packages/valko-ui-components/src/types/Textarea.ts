@@ -1,6 +1,6 @@
 import type { DefaultComponent, AriaAttributes } from './common'
 
-export interface TextareaProps extends DefaultComponent, Pick<AriaAttributes, 'aria-label' | 'aria-labelledby' | 'aria-describedby' | 'aria-invalid' | 'aria-required'>{
+export interface TextareaProps extends DefaultComponent, Omit<AriaAttributes, 'aria-description'>{
   disabled?: boolean;
   loading?: boolean;
   readonly?: boolean;

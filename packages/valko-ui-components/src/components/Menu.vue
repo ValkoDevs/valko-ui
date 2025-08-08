@@ -54,42 +54,27 @@ const focusItem = (index: number) => {
 
 const focusedKey = computed(() => navigableItems.value[focusedIndex.value]?.key)
 
-const onKeyDown = (event: KeyboardEvent, item: MenuItem) => {
-  const currentIndex = navigableItems.value.findIndex(i => i.key === item.key)
-  if (currentIndex === -1) return
+const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
+  type AllowedKeys = 'ArrowDown' | 'ArrowUp' | 'Home' | 'End' | 'Enter' | 'SpaceBar'
+  const allowedKeys: AllowedKeys[] = ['ArrowDown', 'ArrowUp', 'Home', 'End', 'Enter', 'SpaceBar']
+  const currentKey = e.key as AllowedKeys
 
-  let newIndex = currentIndex
+  if (!allowedKeys.includes(currentKey)) return
 
-  switch (event.key) {
-    case 'ArrowDown':
-      newIndex = (currentIndex + 1) % navigableItems.value.length
-      event.preventDefault()
-      break
-    case 'ArrowUp':
-      newIndex = (currentIndex - 1 + navigableItems.value.length) % navigableItems.value.length
-      event.preventDefault()
-      break
-    case 'Home':
-      newIndex = 0
-      event.preventDefault()
-      break
-    case 'End':
-      newIndex = navigableItems.value.length - 1
-      event.preventDefault()
-      break
-    case 'Enter':
-    case ' ':
-      if (!item.disabled) {
-        onItemClick(item)
-      }
-      event.preventDefault()
-      break
-    default:
-      return
+  e.preventDefault()
+
+  const formulaMap = {
+    ArrowDown: () => (focusedIndex.value + 1) % navigableItems.value.length,
+    ArrowUp: () => (focusedIndex.value - 1 + navigableItems.value.length) % navigableItems.value.length,
+    Home: () => 0,
+    End: () => navigableItems.value.length - 1
   }
 
-  if (newIndex !== currentIndex) {
+  if (!['Enter', 'SpaceBar'].includes(currentKey)) {
+    const newIndex = formulaMap[currentKey as keyof typeof formulaMap]()
     focusItem(newIndex)
+  } else if (!item.disabled) {
+    onItemClick(item)
   }
 }
 </script>
@@ -130,7 +115,7 @@ const onKeyDown = (event: KeyboardEvent, item: MenuItem) => {
               role="menuitem"
               :tabindex="focusedKey === item.key ? 0 : -1"
               @click.prevent="onItemClick(item)"
-              @keydown="(e) => onKeyDown(e, item)"
+              @keydown="(e) => handleKeyDown(e, item)"
             >
               {{ item.text }}
             </button>

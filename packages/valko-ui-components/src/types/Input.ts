@@ -3,7 +3,7 @@ import type { Sizes, ColorsWithSurface, Variants, Shapes, AriaAttributes } from 
 export type InputType = 'text' | 'password' | 'email' | 'number'
 export type InputCursor = 'text' | 'pointer'
 
-export interface InputProps extends Sizes, ColorsWithSurface, Variants, Shapes, Pick<AriaAttributes, 'aria-label' | 'aria-labelledby' | 'aria-describedby' | 'aria-invalid' | 'aria-required'> {
+export interface InputProps extends Sizes, ColorsWithSurface, Variants, Shapes, Omit<AriaAttributes, 'aria-description'> {
   type?: InputType;
   cursor?: InputCursor;
   modelValue?: string | number;
