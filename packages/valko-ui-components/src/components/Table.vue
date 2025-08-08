@@ -32,13 +32,24 @@ const headers = computed(() => props.headers)
 
 <template>
   <div :class="classes.container">
-    <table :class="classes.table">
-      <thead :class="classes.thead">
-        <tr :class="classes.htr">
+    <table
+      :class="classes.table"
+      role="table"
+    >
+      <thead
+        :class="classes.thead"
+        role="rowgroup"
+      >
+        <tr
+          :class="classes.htr"
+          role="row"
+        >
           <th
             v-for="header in headers"
             :key="header.key"
             :class="classes.th"
+            role="columnheader"
+            scope="col"
           >
             <slot
               :name="`header-cell-${header.key}`"
@@ -50,23 +61,34 @@ const headers = computed(() => props.headers)
           </th>
         </tr>
       </thead>
-      <tbody :class="classes.body">
+      <tbody
+        :class="classes.body"
+        role="rowgroup"
+      >
         <tr
           v-for="(item, index) in items"
           :key="item.key"
+          role="row"
           :class="classes.tr"
           :data-key="item.key"
           :data-row-events="rowEvents"
+          :tabindex="rowEvents ? 0 : undefined"
+          :aria-selected="!!selection && rowEvents && (
+            Array.isArray(selection)
+              ? selection.some(row => row?.key === item.key)
+              : selection?.key === item.key
+          )"
           :data-selected="!!selection && rowEvents && (
             Array.isArray(selection)
               ? selection.some(row => row?.key === item.key)
               : selection?.key === item.key
           )"
-          @click="rowEvents ? emit('onRowClick', item) : undefined"
+          @click="rowEvents && emit('onRowClick', item)"
         >
           <td
             v-for="{ field } in headers"
             :key="`cell-${field}`"
+            role="cell"
             :class="[classes.td, index === items.length - 1 ? classes.shape : '']"
           >
             <slot

@@ -1,9 +1,9 @@
-import type { Sizes, ColorsWithSurface, Variants, Shapes } from './common'
+import type { Sizes, ColorsWithSurface, Variants, Shapes, AriaAttributes } from './common'
 
 export type InputType = 'text' | 'password' | 'email' | 'number'
 export type InputCursor = 'text' | 'pointer'
 
-export interface InputProps extends Sizes, ColorsWithSurface, Variants, Shapes {
+export interface InputProps extends Sizes, ColorsWithSurface, Variants, Shapes, Omit<AriaAttributes, 'aria-description'> {
   type?: InputType;
   cursor?: InputCursor;
   modelValue?: string | number;

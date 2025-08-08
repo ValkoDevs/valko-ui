@@ -142,6 +142,14 @@ const rangeProps: TableItem[] = [
     description: 'The labels for the stepmarks in the slider.',
     values: 'Label[]',
     default: '[]'
+  },
+  {
+    key: 'ariaDescribedByProp',
+    prop: 'aria-describedby',
+    required: false,
+    description: 'ID reference to an element that further describes the range, such as helper or error text.',
+    values: 'string',
+    default: ''
   }
 ]
 

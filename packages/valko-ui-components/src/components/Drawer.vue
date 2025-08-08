@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, useId } from 'vue'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 import type { DrawerProps } from '#valkoui/types/Drawer'
 import type { SlotStyles } from '#valkoui/types/common'
@@ -26,6 +26,7 @@ const emit = defineEmits(['close'])
 const classes = useStyle<DrawerProps, SlotStyles>(props, styles)
 
 const containerRef = ref(null)
+const descriptionId = useId()
 
 const closeDrawer = () => { if (props.closable) emit('close') }
 
@@ -87,9 +88,12 @@ const transitionClasses = computed(() => {
     as="template"
   >
     <Dialog
-      @close="closeDrawer"
       :class="classes.dialog"
       :initial-focus="containerRef"
+      :aria-modal="true"
+      :aria-describedby="props['aria-description'] ? descriptionId : undefined"
+      :aria-labelledby="props['aria-labelledby']"
+      @close="closeDrawer"
     >
       <transition-child
         as="template"
@@ -133,9 +137,17 @@ const transitionClasses = computed(() => {
               >
                 <dialog-title
                   :class="classes.title"
+                  :id="props['aria-labelledby']"
                 >
                   {{ title }}
                 </dialog-title>
+                <div
+                  v-if="props['aria-description']"
+                  class="sr-only"
+                  :id="descriptionId"
+                >
+                  {{ props['aria-description'] }}
+                </div>
                 <vk-button
                   v-if="closable"
                   tabindex="-1"

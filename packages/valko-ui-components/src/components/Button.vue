@@ -34,6 +34,8 @@ const onClick = () => {
   <button
     :class="classes.button"
     :disabled="disabled"
+    :aria-disabled="disabled"
+    :aria-label="props['aria-label']"
     @click="onClick"
   >
     <div :class="classes.stateLayer" />
@@ -54,6 +56,9 @@ const onClick = () => {
           :classes="variant === 'filled' || variant === 'gradient' ? 'text-surface' : ''"
           :size="size"
           :color="color"
+          role="status"
+          aria-live="polite"
+          aria-label="Loading..."
         />
       </transition>
     </div>

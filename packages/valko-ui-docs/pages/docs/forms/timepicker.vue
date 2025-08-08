@@ -238,6 +238,46 @@ const timepickerProps: TableItem[] = [
     description: 'A composable that provides methods and computed properties for managing time selection and formatting. We provide a useTimeAdapter for the component.',
     values: 'TimeAdapterInterface',
     default: ''
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Defines a string label for assistive technologies.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaLabelledbyProp',
+    prop: 'aria-labelledby',
+    required: false,
+    description: 'References the ID of the element that labels the timepicker.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaDescribedbyProp',
+    prop: 'aria-describedby',
+    required: false,
+    description: 'References the ID of the element that describes the timepicker.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaInvalidProp',
+    prop: 'aria-invalid',
+    required: false,
+    description: 'Indicates whether the value entered in the timepicker is invalid.',
+    values: 'true, false',
+    default: ''
+  },
+  {
+    key: 'ariaRequiredProp',
+    prop: 'aria-required',
+    required: false,
+    description: 'Indicates whether the timepicker is required.',
+    values: 'true, false',
+    default: ''
   }
 ]
 

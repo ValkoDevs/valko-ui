@@ -7,5 +7,10 @@ const props = defineProps<IconProps>()
 </script>
 
 <template>
-  <i :class="`ti ti-${props.name}`" />
+  <i
+    :class="`ti ti-${props.name}`"
+    :role="props['aria-label'] ? 'img' : undefined"
+    :aria-label="props['aria-label']"
+    :aria-hidden="!props['aria-label'] || undefined"
+  />
 </template>

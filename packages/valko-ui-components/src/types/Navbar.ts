@@ -1,6 +1,6 @@
-import type { ColorsWithSurface, Shapes, VariantsAlt, Sizes } from './common'
+import type { ColorsWithSurface, Shapes, VariantsAlt, Sizes, AriaAttributes } from './common'
 
-export interface NavbarProps extends Sizes, Shapes, VariantsAlt, ColorsWithSurface {
+export interface NavbarProps extends Sizes, Shapes, VariantsAlt, ColorsWithSurface, Pick<AriaAttributes, 'aria-label'> {
   fixed?: boolean;
   floating?: boolean;
   elevated?: boolean;

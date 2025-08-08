@@ -72,6 +72,14 @@ const avatarProps: TableItem[] = [
     description: 'Applies a shadow to visually elevate the Avatar.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Accessible text label read by assistive technologies when no visible label is provided.',
+    values: 'string',
+    default: ''
   }
 ]
 

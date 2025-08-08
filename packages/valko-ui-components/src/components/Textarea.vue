@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, useId, watch, computed } from 'vue'
 import type { TextareaProps } from '#valkoui/types/Textarea'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Textarea.styles.ts'
@@ -23,6 +23,15 @@ const classes = useStyle<TextareaProps, SlotStyles>(props, styles)
 const isFilled = ref(false)
 const inputValue = ref(props.modelValue || '')
 const inputRef = ref<HTMLInputElement | null>(null)
+const helpertextId = useId()
+const inputId = useId()
+
+const describedBy = computed(() => {
+  const ids: string[] = []
+  if (props.helpertext) ids.push(helpertextId)
+  if (props['aria-describedby']) ids.push(props['aria-describedby'])
+  return ids.length > 0 ? ids.join(' ') : undefined
+})
 
 const updateValue = (e: Event) => {
   const value = (e.target as HTMLInputElement).value
@@ -52,12 +61,18 @@ watch(() => props.modelValue, (newValue) => {
     <div :class="classes.field">
       <textarea
         ref="inputRef"
+        :id="inputId"
         :class="classes.textarea"
         :disabled="disabled"
         :readonly="readonly"
         :value="inputValue"
         :data-filled="isFilled"
         :maxlength="maxlength"
+        :aria-label="props['aria-label']"
+        :aria-labelledby="props['aria-labelledby']"
+        :aria-describedby="describedBy"
+        :aria-invalid="props['aria-invalid']"
+        :aria-required="props['aria-required']"
         :data-left-icon="!!$slots['left-icon']"
         :data-right-icon="!!$slots['right-icon']"
         @input="updateValue"
@@ -77,11 +92,17 @@ watch(() => props.modelValue, (newValue) => {
       >
         <slot name="right-icon" />
       </span>
-      <label :class="classes.label">{{ label }}</label>
+      <label
+        :for="inputId"
+        :class="classes.label"
+      >
+        {{ label }}
+      </label>
     </div>
     <div :class="classes.footer">
       <span
         v-if="helpertext"
+        :id="helpertextId"
         :class="classes.helper"
       > {{ helpertext }}</span>
       <span

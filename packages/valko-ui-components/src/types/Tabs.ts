@@ -1,4 +1,4 @@
-import type { Sizes, Colors, VariantsAlt, ShapeWithLine } from './common'
+import type { Sizes, Colors, VariantsAlt, ShapeWithLine, AriaAttributes } from './common'
 
 export interface Tab {
   key: string | number;
@@ -12,7 +12,7 @@ export interface TabKeymap {
   [key: string]: string
 }
 
-export interface TabsProps extends Sizes, VariantsAlt, Colors {
+export interface TabsProps extends Sizes, VariantsAlt, Colors, Pick<AriaAttributes, 'aria-label'> {
   tabs: Tab[];
   modelValue?: number;
   shape?: ShapeWithLine;

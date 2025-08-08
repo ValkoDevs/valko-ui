@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useId, ref, watch } from 'vue'
+import { useId, ref, watch, computed } from 'vue'
 import type { InputProps } from '#valkoui/types/Input'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Input.styles.ts'
@@ -27,6 +27,7 @@ const emit = defineEmits(['update:modelValue', 'focus', 'clear', 'leftIconClick'
 const classes = useStyle<InputProps, SlotStyles>(props, styles)
 
 const inputId = useId()
+const helpertextId = useId()
 const isFilled = ref(false)
 const inputValue = ref(props.modelValue || '')
 const inputRef = ref<HTMLInputElement | null>(null)
@@ -80,6 +81,13 @@ const handleNumericArrowRelease = () => {
   }
 }
 
+const describedBy = computed(() => {
+  const ids = []
+  if (props.helpertext) ids.push(helpertextId)
+  if (props['aria-describedby']) ids.push(props['aria-describedby'])
+  return ids.length > 0 ? ids.join(' ') : undefined
+})
+
 watch(() => props.modelValue, (newValue) => {
   inputValue.value = newValue
   isFilled.value = newValue !== null && newValue !== undefined && newValue !== ''
@@ -104,6 +112,11 @@ watch(() => props.modelValue, (newValue) => {
         :value="inputValue"
         :data-filled="isFilled"
         :id="inputId"
+        :aria-label="props['aria-label']"
+        :aria-labelledby="props['aria-labelledby']"
+        :aria-describedby="describedBy"
+        :aria-invalid="props['aria-invalid']"
+        :aria-required="props['aria-required']"
         @focus="onFocus"
         @input="updateValue"
       >
@@ -156,6 +169,7 @@ watch(() => props.modelValue, (newValue) => {
     </div>
     <span
       v-if="helpertext"
+      :id="helpertextId"
       :class="classes.helper"
     >
       {{ helpertext }}

@@ -69,6 +69,22 @@ const alertProps: TableItem[] = [
     description: 'The icon of the Alert.',
     values: 'string | null',
     default: ''
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Accessible text label read by assistive technologies when no visible label is provided.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaLabelledByProp',
+    prop: 'aria-labelledby',
+    required: false,
+    description: 'ID reference to an element that labels the input (e.g. a visible <label>).',
+    values: 'string',
+    default: ''
   }
 ]
 

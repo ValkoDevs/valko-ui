@@ -31,6 +31,9 @@ const getInitials = (name: string): string => {
   <div
     :class="classes.container"
     :title="name"
+    :role="src || name ? 'img' : 'presentation'"
+    :aria-label="props['aria-label'] ? props['aria-label'] : name"
+    :aria-hidden="!(src || name) || undefined"
   >
     <img
       v-if="src"

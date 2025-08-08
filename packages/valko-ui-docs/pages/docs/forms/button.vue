@@ -77,6 +77,14 @@ const apiData: TableItem[] = [
     description: 'Whether the Button is loading or not.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Defines a string label for the button when no visible text is present. Useful for icon-only buttons or when additional context is needed for assistive technologies.',
+    values: 'string',
+    default: ''
   }
 ]
 

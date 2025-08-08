@@ -76,6 +76,14 @@ const navbarProps: TableItem[] = [
     description: 'Determines if the Navbar is vertical or not.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Accessible label for the navbar to describe its purpose to assistive technologies.',
+    values: 'string',
+    default: 'Main navigation'
   }
 ]
 

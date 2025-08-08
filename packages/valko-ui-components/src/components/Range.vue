@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, toValue, useId } from 'vue'
 import type { RangeProps } from '#valkoui/types/Range'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Range.styles.ts'
@@ -27,6 +27,7 @@ const emit = defineEmits(['update:modelValue'])
 
 const classes = useStyle<RangeProps, SlotStyles>(props, styles)
 
+const rangeId = useId()
 const isDragging = ref(false)
 const sliderRef = ref<HTMLElement | null>(null)
 const draggingThumb = ref<'min' | 'max'>('min')
@@ -178,6 +179,28 @@ const onLabelClick = (newPosition: number) => {
   else handleMultipleThumbs(newPosition)
 }
 
+const handleKeyDown = (e: KeyboardEvent, thumb: 'min' | 'max') => {
+  type AllowedKeys = 'ArrowRight' | 'ArrowUp' | 'ArrowLeft' | 'ArrowDown' | 'Home' | 'End'
+
+  const allowedKeys: AllowedKeys[] = ['ArrowRight', 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'Home', 'End']
+  const currentKey = e.key as AllowedKeys
+
+  if (!allowedKeys.includes(currentKey)) return
+
+  e.preventDefault()
+
+  const formulaMap: Record<AllowedKeys, (value: number) => number> = {
+    ArrowRight: (value: number) => Math.min(value + props.step, props.max),
+    ArrowUp: (value: number) => Math.min(value + props.step, props.max),
+    ArrowLeft: (value: number) => Math.max(value - props.step, props.min),
+    ArrowDown: (value: number) => Math.max(value - props.step, props.min),
+    Home: () => props.min,
+    End: () => props.max
+  }
+
+  updateThumbPosition(formulaMap[currentKey](thumbRefMap[thumb].value), thumb)
+}
+
 watch([() => props.min, () => props.max, () => props.isDouble, () => props.step], ([min, max, isDouble]) => {
   thumbRefMap.min.value = min
   thumbRefMap.max.value = max
@@ -189,6 +212,7 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
   <div
     :class="classes.container"
     ref="sliderRef"
+    :id="rangeId"
     @mousedown="onSliderClick"
   >
     <div :class="classes.progressContainer">
@@ -210,13 +234,31 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
         v-if="isDouble"
         :class="classes.thumb"
         :style="thumbStyles.start"
+        role="slider"
+        tabindex="0"
+        :aria-valuemin="min"
+        :aria-valuemax="max"
+        :aria-valuenow="toValue(thumbRefMap.min)"
+        :aria-labelledby="rangeId"
+        :aria-describedby="props['aria-describedby']"
+        aria-label="Minimum value"
         @mousedown="(event) => onStart(event, 'min')"
+        @keydown="(event) => handleKeyDown(event, 'min')"
         @touchstart="(event) => onStart(event, 'min')"
       />
       <div
         :class="classes.thumb"
         :style="thumbStyles.end"
+        role="slider"
+        tabindex="0"
+        :aria-valuemin="min"
+        :aria-valuemax="max"
+        :aria-valuenow="toValue(thumbRefMap.max)"
+        :aria-labelledby="rangeId"
+        :aria-describedby="props['aria-describedby']"
+        :aria-label="isDouble ? 'Maximum value' : 'Value'"
         @mousedown="(event) => onStart(event, 'max')"
+        @keydown="(event) => handleKeyDown(event, 'max')"
         @touchstart="(event) => onStart(event, 'max')"
       />
     </div>

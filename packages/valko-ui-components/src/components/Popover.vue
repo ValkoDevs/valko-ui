@@ -96,6 +96,11 @@ onBeforeUnmount(() => {
       <div
         v-if="isOpen"
         ref="panelRef"
+        role="dialog"
+        :aria-modal="false"
+        :aria-label="props['aria-label']"
+        :aria-labelledby="props['aria-labelledby']"
+        :aria-describedby="props['aria-describedby']"
         :class="[classes.panel, ...(Array.isArray(props.classes) ? props.classes : [props.classes])]"
         :data-text="!!text"
         :data-placement="placement"

@@ -131,6 +131,11 @@ onUnmounted(() => {
         :model-value="showValue"
         :clearable="clearable"
         cursor="pointer"
+        :aria-label="props['aria-label']"
+        :aria-labelledby="props['aria-labelledby']"
+        :aria-describedby="props['aria-describedby']"
+        :aria-invalid="props['aria-invalid']"
+        :aria-required="props['aria-required']"
         @focus="toggleDropdown(true)"
         @clear="clearSelection"
       >
@@ -153,18 +158,23 @@ onUnmounted(() => {
       >
         <ul
           v-if="isOpen"
+          role="listbox"
           :data-helper="!!helpertext"
           :class="classes.dropdown"
           :data-shape="shape"
           :data-variant="variant"
+          :aria-multiselectable="multiple || undefined"
+          :aria-label="label || 'Select options'"
         >
           <li
             v-for="item in options"
+            role="option"
             :key="item.value"
             :data-selected="isSelected(item.value)"
             :data-shape="shape"
             :data-variant="variant"
             :class="classes.item"
+            :aria-selected="isSelected(item.value)"
             @click="multiple ? handleMultipleSelection(item.value) : handleSingleSelection(item.value)"
           >
             {{ item.label }}

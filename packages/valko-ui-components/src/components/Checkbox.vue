@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useId, computed } from 'vue'
 import type { CheckboxProps } from '#valkoui/types/Checkbox'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Checkbox.styles.ts'
@@ -23,6 +24,16 @@ const emit = defineEmits(['update:modelValue'])
 
 const classes = useStyle<CheckboxProps, SlotStyles>(props, styles)
 
+const inputId = useId()
+const helpertextId = useId()
+
+const describedBy = computed(() => {
+  const ids = []
+  if (props.helpertext) ids.push(helpertextId)
+  if (props['aria-describedby']) ids.push(props['aria-describedby'])
+  return ids.length > 0 ? ids.join(' ') : undefined
+})
+
 const onClick = () => {
   if (!props.disabled && !props.readonly) emit('update:modelValue', !props.modelValue)
 }
@@ -31,8 +42,17 @@ const onClick = () => {
 <template>
   <div :class="classes.container">
     <div
+      role="checkbox"
       :class="classes.checkboxContainer"
+      :aria-checked="modelValue === null ? 'mixed' : !!modelValue"
+      :aria-disabled="disabled"
+      :aria-label="props['aria-label']"
+      :aria-labelledby="props['aria-labelledby']"
+      :aria-describedby="describedBy"
+      :tabindex="disabled ? -1 : 0"
       @click="onClick"
+      @keydown.enter.prevent="onClick"
+      @keydown.space.prevent="onClick"
     >
       <div :class="classes.stateLayer">
         <div
@@ -50,13 +70,18 @@ const onClick = () => {
 
       <input
         type="checkbox"
+        :id="inputId"
         :checked="!!modelValue"
-        :class="classes.input"
         :indeterminate="modelValue === null"
-        :helpertext="helpertext"
+        :name="name"
+        :disabled="disabled"
+        :class="classes.input"
         @click.prevent=""
       >
-      <label :class="classes.label">
+      <label
+        :for="inputId"
+        :class="classes.label"
+      >
         {{ label }}
       </label>
     </div>
@@ -64,6 +89,7 @@ const onClick = () => {
     <span
       v-if="helpertext"
       :class="classes.helpertext"
+      :id="helpertextId"
     >
       {{ helpertext }}
     </span>

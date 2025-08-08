@@ -91,6 +91,46 @@ const apiData: TableItem[] = [
     description: 'The shape of the Textarea',
     values: 'soft, rounded, square',
     default: 'soft'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Accessible text label read by assistive technologies when no visible label is provided.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaLabelledByProp',
+    prop: 'aria-labelledby',
+    required: false,
+    description: 'ID reference to an element that labels the textarea (e.g. a visible <label>).',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaDescribedByProp',
+    prop: 'aria-describedby',
+    required: false,
+    description: 'ID reference to an element that further describes the textarea, such as helper or error text.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaRequiredProp',
+    prop: 'aria-required',
+    required: false,
+    description: 'Marks the textarea as required for form submission.',
+    values: 'true, false',
+    default: ''
+  },
+  {
+    key: 'ariaInvalidProp',
+    prop: 'aria-invalid',
+    required: false,
+    description: 'Indicates that the current value entered into the textarea is invalid.',
+    values: 'true, false',
+    default: ''
   }
 ]
 

@@ -108,6 +108,14 @@ const tabsProps: TableItem[] = [
     description: 'The default selected tab',
     values: 'number',
     default: '0'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Accessible label for the tab list. Used by assistive technologies when no visible heading is present.',
+    values: 'string',
+    default: 'Tab navigation'
   }
 ]
 

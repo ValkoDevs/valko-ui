@@ -51,6 +51,7 @@ watchEffect(() => {
   <div>
     <nav
       :class="classes.nav"
+      :aria-label="props['aria-label'] ?? 'Pagination'"
     >
       <vk-button
         variant="link"

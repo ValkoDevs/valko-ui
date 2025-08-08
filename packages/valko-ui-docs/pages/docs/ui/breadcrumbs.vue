@@ -98,6 +98,14 @@ const breadcrumbsProps: TableItem[] = [
     description: 'The separator for the Breadcrumbs. Up to 2 character or an icon if passed the name.',
     values: 'string',
     default: '>'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Accessible label for the breadcrumb navigation.',
+    values: 'string',
+    default: 'Breadcrumb'
   }
 ]
 

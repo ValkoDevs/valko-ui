@@ -21,7 +21,11 @@ const classes = useStyle<NavbarProps, SlotStyles>(props, styles)
 </script>
 
 <template>
-  <header :class="classes">
+  <nav
+    :class="classes"
+    role="navigation"
+    :aria-label="props['aria-label'] ?? 'Main navigation'"
+  >
     <slot />
-  </header>
+  </nav>
 </template>

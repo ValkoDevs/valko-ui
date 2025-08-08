@@ -1,6 +1,6 @@
-import type { Shapes, ColorsWithSurface, Sizes, VariantWithGradientAndLink } from './common'
+import type { Shapes, ColorsWithSurface, Sizes, VariantWithGradientAndLink, AriaAttributes } from './common'
 
-export interface ButtonProps extends Shapes, Sizes, ColorsWithSurface {
+export interface ButtonProps extends Shapes, Sizes, ColorsWithSurface, Pick<AriaAttributes, 'aria-label'> {
   variant?: VariantWithGradientAndLink;
   block?: boolean;
   disabled?: boolean;

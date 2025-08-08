@@ -225,6 +225,46 @@ const datepickerProps: TableItem[] = [
     description: 'The maximum selectable date as an Epoch timestamp.',
     values: 'EpochTimeStamp',
     default: '[]'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Defines a string value that labels the datepicker for assistive technologies.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaLabelledbyProp',
+    prop: 'aria-labelledby',
+    required: false,
+    description: 'Identifies the element(s) that labels the datepicker.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaDescribedbyProp',
+    prop: 'aria-describedby',
+    required: false,
+    description: 'Identifies the element(s) that describe the datepicker.',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'ariaInvalidProp',
+    prop: 'aria-invalid',
+    required: false,
+    description: 'Indicates that the current value of the datepicker is invalid.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
+    key: 'ariaRequiredProp',
+    prop: 'aria-required',
+    required: false,
+    description: 'Indicates that user input is required on the datepicker.',
+    values: 'true, false',
+    default: 'false'
   }
 ]
 

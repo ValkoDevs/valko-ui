@@ -29,41 +29,73 @@ const onCrumbClick = (item: Crumb) => {
   item.onClick?.()
 }
 
-const useIcon = (separator: string) => separator.length > 2
+const selectIcon = (separator: string) => separator.length > 2
 </script>
 
 <template>
-  <div :class="classes.container">
-    <a
-      v-for="crumb in crumbs"
-      :key="crumb.key"
-      :class="classes.a"
-      :data-disabled="crumb.disabled"
-      :data-active="crumb.active"
-      @click="onCrumbClick(crumb)"
-    >
-      <vk-icon
-        v-if="crumb.leftIcon"
-        :name="crumb.leftIcon"
-        :class="classes.iconLeft"
-      />
-      <span>{{ crumb.title }}</span>
-      <vk-icon
-        v-if="crumb.rightIcon"
-        :name="crumb.rightIcon"
-        :class="classes.iconRight"
-      />
-      <span
-        v-if="crumb.key !== lastCrumbKey"
-        :class="classes.separator"
+  <nav
+    :class="classes.container"
+    :aria-label="props['aria-label'] ?? 'Breadcrumbs'"
+  >
+    <ol :class="classes.ol">
+      <li
+        v-for="crumb in crumbs"
+        :key="crumb.key"
+        :class="classes.li"
       >
-        <template v-if="useIcon(separator)">
-          <vk-icon :name="separator" />
-        </template>
-        <template v-else>
-          {{ separator }}
-        </template>
-      </span>
-    </a>
-  </div>
+        <a
+          v-if="crumb.key !== lastCrumbKey"
+          role="link"
+          :tabindex="crumb.key !== lastCrumbKey ? 0 : -1"
+          :class="classes.a"
+          :data-disabled="crumb.disabled"
+          :aria-disabled="crumb.disabled || undefined"
+          @click.prevent="onCrumbClick(crumb)"
+        >
+          <vk-icon
+            v-if="crumb.leftIcon"
+            :name="crumb.leftIcon"
+            :class="classes.iconLeft"
+          />
+          <span>{{ crumb.title }}</span>
+          <vk-icon
+            v-if="crumb.rightIcon"
+            :name="crumb.rightIcon"
+            :class="classes.iconRight"
+          />
+        </a>
+
+        <span
+          v-else
+          :class="[classes.a, '!cursor-default']"
+          aria-current="page"
+        >
+          <vk-icon
+            v-if="crumb.leftIcon"
+            :name="crumb.leftIcon"
+            :class="classes.iconLeft"
+          />
+          <span>{{ crumb.title }}</span>
+          <vk-icon
+            v-if="crumb.rightIcon"
+            :name="crumb.rightIcon"
+            :class="classes.iconRight"
+          />
+        </span>
+
+        <span
+          v-if="crumb.key !== lastCrumbKey"
+          :class="classes.separator"
+          aria-hidden="true"
+        >
+          <template v-if="selectIcon(separator)">
+            <vk-icon :name="separator" />
+          </template>
+          <template v-else>
+            {{ separator }}
+          </template>
+        </span>
+      </li>
+    </ol>
+  </nav>
 </template>

@@ -76,6 +76,14 @@ const paginationProps: TableItem[] = [
     description: 'Wheter the Pagination is disabled or not.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Accessible label for the pagination.',
+    values: 'string',
+    default: 'Pagination'
   }
 ]
 
