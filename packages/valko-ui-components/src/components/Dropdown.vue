@@ -52,7 +52,7 @@ const onItemClick = (item: Item) => {
     <slot
       name="dropdown-trigger"
       :v-bind="props"
-      :open="open"
+      :toggle="() => open = !open"
     >
       <vk-button
         v-bind="props"
