@@ -169,7 +169,7 @@ const dropdownSlots: TableItem[] = [
   {
     key: 'dropdownTriggerSlot',
     name: 'dropdown-trigger',
-    description: 'The dropdown-trigger slot for the Dropdown. By default, it renders a `VkButton`. If you use a custom component within this slot, you can access the `props` for binding attributes like color, variant, and size, as well as an `toggle` function to control the dropdown state. This allows you to integrate any custom component as the dropdown trigger, while retaining full control over its appearance and behavior.',
+    description: 'The dropdown-trigger slot for the Dropdown. By default, it renders a `VkButton`.\nIf you use a custom component within this slot, you can access the `props` for binding attributes like color, variant, and size.\nAdditionally, the slot exposes:\n- `toggle`: a function to open or close the dropdown.\n- `open`: a boolean indicating the current open state.\nThis lets you integrate any custom component as the trigger while reacting to the dropdown’s state.',
     example: '<template #dropdown-trigger="{ toggle }">\n  <!-- Your custom dropdown trigger component here -->\n</template>'
   }
 ]
