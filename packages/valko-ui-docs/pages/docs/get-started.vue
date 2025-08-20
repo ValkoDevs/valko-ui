@@ -60,6 +60,23 @@ const counter = ref(0)
   </div>
 </template>
 `
+
+const tsconfig = `{
+  // ...other configs...
+  "compilerOptions": {
+    // ...existing compiler options...
+    "paths": {
+    // ...existing compiler options...
+      "#valkoui/*": [
+        "./node_modules/@valko-ui/components/dist/*"
+      ],
+      "#valkoui": [
+        "./node_modules/@valko-ui/components/dist"
+      ]
+    }
+  }
+}
+`
 </script>
 
 <template>
@@ -69,7 +86,7 @@ const counter = ref(0)
         Introduction
       </h2>
       <p>
-        ValkoUI is a Vue 3 and Nuxt component library built with TailwindCSS. It empowers developers to create modern, responsive, and accessible web interfaces effortlessly. ValkoUI currently supports Nuxt 3 only (e.g. 3.18.0). Nuxt 4 is not supported yet.
+        ValkoUI is a Vue 3 and Nuxt component library built with TailwindCSS. It empowers developers to create modern, responsive, and accessible web interfaces effortlessly.
       </p>
       <vk-divider
         color="surface"
@@ -79,12 +96,12 @@ const counter = ref(0)
 
     <div class="flex flex-col gap-6 mt-6">
       <h2 class="text-2xl font-semibold">
-        Quick Start with Nuxt 3
+        Quick Start with Nuxt 3 or 4
       </h2>
 
       <div class="mt-4">
         <h3 class="text-lg font-medium">
-          1. Create a Nuxt 3 Project
+          1. Create a Nuxt Project
         </h3>
         <vk-tabs
           v-model="selectedTab"
@@ -94,18 +111,22 @@ const counter = ref(0)
           grow
         >
           <template #npm>
-            <code-block code="npm create nuxt@latest <project-name> -- -t v3" />
+            <code-block code="npm create nuxt@latest <project-name>" />
           </template>
           <template #yarn>
-            <code-block code="yarn create nuxt@latest <project-name> -- -t v3" />
+            <code-block code="yarn create nuxt@latest <project-name>" />
           </template>
           <template #pnpm>
-            <code-block code="pnpm create nuxt@latest <project-name> -- -t v3" />
+            <code-block code="pnpm create nuxt@latest <project-name>" />
           </template>
         </vk-tabs>
-        <p class="mt-2 text-sm text-warning">
-          Make sure to use Nuxt 3 (e.g. 3.18.0). Nuxt 4 is not supported.
-        </p>
+        <vk-alert
+          color="accent"
+          variant="ghost"
+          class="mt-4"
+        >
+          If you want to use Nuxt 3 instead of 4, add <span class="bg-black/[.2] px-2">-- -t v3</span> at the end of the create command.
+        </vk-alert>
       </div>
 
       <div class="mt-4">
@@ -157,13 +178,26 @@ const counter = ref(0)
         </p>
       </div>
 
-      <div class="mt-4">
+      <div class="mt-4 flex flex-col gap-4">
         <h3 class="text-lg font-medium">
           4. Configure Nuxt
         </h3>
         <p>Add the ValkoUI module and TailwindCSS plugin to your <span class="text-primary">nuxt.config.ts</span> file:</p>
         <code-block
           :code="nuxtConfig"
+          language="ts"
+        />
+
+        <vk-alert
+          color="warning"
+          variant="ghost"
+          title="If you use Nuxt 4 or newer"
+        >
+          <p>Nuxt 4 relies a lot more on Vite compiler so we need to add aliases to tsconfig.json for the library to work correctly.</p>
+        </vk-alert>
+
+        <code-block
+          :code="tsconfig"
           language="ts"
         />
       </div>
