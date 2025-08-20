@@ -11,7 +11,7 @@ export default defineNuxtModule({
     name: '@valko-ui/components',
     configKey: 'valko-ui',
     compatibility: {
-      nuxt: '^3.5.0'
+      nuxt: '^3.5.0 || ^4.0.0'
     }
   },
   defaults: {
