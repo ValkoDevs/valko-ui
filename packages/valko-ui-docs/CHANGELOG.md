@@ -1,5 +1,22 @@
 # @valko-ui/docs
 
+## 0.6.1
+
+### Patch Changes
+
+- 5a386d4: ### Components
+
+  **exports:**
+
+  - Update compatibility field on `nuxt.module.js` to support v3 and v4.
+
+  ### Docs
+
+  - Update `get-started` page with the new configuration required for Nuxt v4.
+
+- Updated dependencies [5a386d4]
+  - @valko-ui/components@0.5.2
+
 ## 0.6.0
 
 ### Minor Changes
