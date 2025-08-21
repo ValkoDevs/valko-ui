@@ -11,6 +11,7 @@ export default tv({
       'tracking-wider',
       'ring-inset',
       'outline-none',
+      'overflow-hidden',
       'focus:outline-none',
       'focus-visible:outline-none',
       'focus-visible:ring-2'
@@ -33,6 +34,14 @@ export default tv({
       'hover:bg-state-hover',
       'active:bg-state-active',
       'focus:bg-state-focus'
+    ],
+    ripple: [
+      'absolute',
+      'animate-ripple',
+      'rounded-full',
+      'events-none',
+      'bg-current/[.5]',
+      'z-20'
     ]
   },
   variants: {
@@ -137,12 +146,7 @@ export default tv({
       }
     },
     condensed: {
-      true: {
-        button: [
-          'px-0',
-          'py-0'
-        ]
-      }
+      true: {}
     },
     shape: {
       rounded: {
@@ -181,6 +185,16 @@ export default tv({
     }
   },
   compoundVariants: [
+    {
+      condensed: true,
+      size: ['xs', 'sm', 'md', 'lg'],
+      class: {
+        button: [
+          'py-0',
+          'px-0'
+        ]
+      }
+    },
     {
       variant: 'filled',
       color: 'primary',

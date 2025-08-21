@@ -35,18 +35,20 @@ const getInitials = (name: string): string => {
     :aria-label="props['aria-label'] ? props['aria-label'] : name"
     :aria-hidden="!(src || name) || undefined"
   >
-    <img
-      v-if="src"
-      :src="src"
-      :alt="name"
-      :class="classes.img"
-    >
-    <span v-else-if="name">
-      {{ getInitials(name) }}
-    </span>
-    <vk-icon
-      v-else
-      name="user"
-    />
+    <slot>
+      <img
+        v-if="src"
+        :src="src"
+        :alt="name"
+        :class="classes.img"
+      >
+      <span v-else-if="name">
+        {{ getInitials(name) }}
+      </span>
+      <vk-icon
+        v-else
+        name="user"
+      />
+    </slot>
   </div>
 </template>

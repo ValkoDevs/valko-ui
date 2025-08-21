@@ -5,15 +5,43 @@
 
 ### Components
 
+**Avatar:**
+- Added a slot to let users replace the Avatar’s content.
+
+**Button:**
+- Introduced a ripple effect on click for clearer interaction feedback.
+
+**Card:**
+- Removed default minimum height and width to allow more flexible sizing.
+
+**Checkbox:**
+- Restored label click behavior, so users can check/uncheck via the label.
+
 **Dropdown:**
-- Exposed a `toggle` method to manually control the dropdown’s open state when using a custom trigger via slot.
-  (Previously, this was handled internally by Headless UI, but since we removed that dependency, users now need this method to replicate the same behavior.)
+- Added a `toggle` method to manually control the open state when using a custom trigger slot.
+  (Previously handled internally by Headless UI, now exposed for users after removing that dependency.)
+
+**Input:**
+- Standardized padding and spacing across all sizes and variants.
+- Fixed icon misalignment when `type="number"`.
 
 **Navbar:**
-- Fixed an issue where the navbar did not apply the correct border-radius to corners when using different `shape` values (`rounded`, `square`, `soft`) while `floating` was enabled.
+- Fixed border-radius not being applied correctly when using different `shape` values (`rounded`, `square`, `soft`) with `floating`.
 
 **Notification:**
-- Restored the `text` prop in the TypeScript interface, which was accidentally removed.
+- Restored the `text` prop in the TypeScript interface (previously removed by mistake).
+
+### Tests
+
+- Updated test suites for `Input`, `Select`, and `Card` to reflect recent changes.
 
 ### Docs
-- Updated the Dropdown documentation to show how to use the new `toggle` method with custom trigger content.
+
+**CodeBlock:**
+- Added `css` language support.
+
+**Pages:**
+- Updated Dropdown docs with an example using the new `toggle` method and custom trigger content.
+- Updated Icon API docs to include ARIA props.
+- Renamed `Icon` page to `Icons` and moved it to the **General** section.
+- Added a new `Theme` page under **General**.

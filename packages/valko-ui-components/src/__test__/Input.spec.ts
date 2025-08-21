@@ -39,7 +39,7 @@ describe('Input component', () => {
       })
 
       it('should not have label', () => {
-        expect(wrapper.find('.font-bold').text()).toContain('')
+        expect(wrapper.find('.vk-input__label').text()).toContain('')
       })
 
       it('should not have helpertext', () => {
@@ -301,7 +301,7 @@ describe('Input component', () => {
           }
         })
 
-        expect(wrapper.find('i.ti.ti-circle-x').exists()).toBe(false)
+        expect(wrapper.find('i.ti.ti-x').exists()).toBe(false)
       })
 
       it('Should display cleareable icon when cleareable is true and the input has a value', () => {
@@ -312,7 +312,7 @@ describe('Input component', () => {
           }
         })
 
-        expect(wrapper.find('i.ti.ti-circle-x').exists()).toBe(true)
+        expect(wrapper.find('i.ti.ti-x').exists()).toBe(true)
       })
 
       it('should clear the input value when clearable icon is clicked', async () => {
@@ -323,7 +323,7 @@ describe('Input component', () => {
           }
         })
 
-        await wrapper.find('i.ti.ti-circle-x').trigger('click')
+        await wrapper.find('i.ti.ti-x').trigger('click')
 
         expect(wrapper.emitted('update:modelValue')).toStrictEqual([['']])
       })
@@ -810,7 +810,7 @@ describe('Input component', () => {
         }
       })
 
-      wrapper.find('i.ti.ti-circle-x').trigger('click')
+      wrapper.find('i.ti.ti-x').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('clear')
     })
   })

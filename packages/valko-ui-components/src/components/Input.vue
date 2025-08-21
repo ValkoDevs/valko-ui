@@ -101,6 +101,7 @@ watch(() => props.modelValue, (newValue) => {
         ref="inputRef"
         :data-left-icon="!!$slots['left-icon']"
         :data-right-icon="!!$slots['right-icon']"
+        :data-clear-icon="clearable"
         :class="classes.input"
         :readonly="readonly"
         :disabled="disabled"
@@ -147,8 +148,9 @@ watch(() => props.modelValue, (newValue) => {
       </span>
       <vk-icon
         v-if="clearable && !!inputValue"
-        name="circle-x"
+        name="x"
         :data-right-icon="!!$slots['right-icon']"
+        :data-chevron-icons="type === 'number'"
         :class="classes.clearIcon"
         @click="clearInput"
       />
@@ -161,6 +163,7 @@ watch(() => props.modelValue, (newValue) => {
       </span>
       <span
         v-if="$slots['right-icon']"
+        :data-chevron-icons="type === 'number'"
         :class="[classes.icons, classes.rightIcon]"
         @click="handleIconClick('right')"
       >

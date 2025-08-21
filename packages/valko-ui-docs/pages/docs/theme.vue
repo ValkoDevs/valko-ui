@@ -1,9 +1,12 @@
-@import url("https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css");
-@import "tailwindcss";
+<script setup lang="ts">
+import type { Tab } from '#valkoui'
 
-@custom-variant dark (&:where(.dark, .dark *));
+const tabs: Tab[] = [
+  { key: 'light', title: 'Light Mode' },
+  { key: 'dark', title: 'Dark Mode' }
+]
 
-@theme {
+const themeLight = `@theme {
   /* Background colors */
   --color-surface-dim: #d9d9e0;
   --color-surface: #f9f9ff;
@@ -89,33 +92,9 @@
   --animate-progress: progress 1.5s infinite linear;
   --animate-cicle: cicle 1s infinite linear;
   --animate-ripple: ripple 0.6s linear;
+}`
 
-  @keyframes progress {
-    0% { clip-path: inset(0 100% 0 0) }
-    25% { clip-path: inset(0 50% 0 0) }
-    50% { clip-path: inset(0 25% 0 25%) }
-    75% { clip-path: inset(0 0 0 50%) }
-    100% { clip-path: inset(0 0 0 100%) }
-  }
-
-  @keyframes cicle {
-    0% { transform: translateY(-50%); }
-    100% { transform: translateY(0); }
-  }
-
-  @keyframes ripple {
-    0% {
-      transform: scale(0);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 0;
-    }
-  }
-}
-
-html.dark {
+const themeDark = `html.dark {
   /* Background colors */
   --color-surface-dim: #111318;
   --color-surface: #111318;
@@ -186,118 +165,62 @@ html.dark {
   --color-on-disabled-container: oklch(44.6% 0.03 256.802);
   --color-disabled-gradient-start: oklch(44.6% 0.03 256.802);
   --color-disabled-gradient-end: oklch(16.6% 0.034 264.665);
+}`
+
+const overrideExample = `:root {
+  --color-primary: #ff00aa;
+  --color-surface: #f0f0f0;
 }
 
-@utility toastify {
-  display: inline-block;
-  position: fixed;
-  opacity: 0;
-  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
-  cursor: pointer;
-  z-index: 2147483647;
+html.dark {
+  --color-primary: #ff99cc;
+  --color-surface: #222233;
+}`
+</script>
 
-  &.on {
-    opacity: 1;
-  }
-}
+<template>
+  <div class="flex flex-col gap-6 px-4 md:px-6 lg:px-10 py-5">
+    <h1 class="text-2xl font-bold">
+      Theme Customization
+    </h1>
+    <p>
+      ValkoUI uses CSS custom properties for all theme colors, backgrounds, gradients, and shadows. You can override any variable in your own CSS to match your brand or design system.
+    </p>
+    <h2 class="text-xl font-semibold">
+      How to Override
+    </h2>
+    <p>
+      To customize the theme, override the variables in your own CSS file. For example:
+    </p>
+    <code-block
+      :code="overrideExample"
+      language="css"
+    />
+    <h2 class="text-xl font-semibold">
+      All Theme Variables
+    </h2>
+    <p>
+      Below are the default variables for both light and dark mode. Copy and override as needed.
+    </p>
+    <vk-tabs
+      :tabs
+      variant="ghost"
+      shape="line"
+      grow
+    >
+      <template #light>
+        <code-block
+          :code="themeLight"
+          language="css"
+        />
+      </template>
 
-@utility on {
-  &.toastify {
-    opacity: 1;
-  }
-}
-
-@utility toast-close {
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-}
-
-@utility toastify-right {
-  right: 15px;
-
-  @media only screen and (max-width: 360px) {
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    max-width: fit-content;
-  }
-}
-
-@utility toastify-left {
-  left: 15px;
-
-  @media only screen and (max-width: 360px) {
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    max-width: fit-content;
-  }
-}
-
-@utility toastify-top {
-  top: -150px;
-}
-
-@utility toastify-bottom {
-  bottom: -150px;
-}
-
-@utility toastify-rounded {
-  border-radius: 25px;
-}
-
-@utility toastify-avatar {
-  width: 1.5em;
-  height: 1.5em;
-  margin: -7px 5px;
-  border-radius: 2px;
-}
-
-@utility toastify-center {
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  max-width: fit-content;
-  max-width: -moz-fit-content;
-}
-
-@layer base {
-  input.vk-input__input[type="number"]::-webkit-outer-spin-button,
-  input.vk-input__input[type="number"]::-webkit-inner-spin-button,
-  input.vk-input__input[type="number"] {
-    -webkit-appearance: none;
-    margin: 0;
-    -moz-appearance: textfield !important;
-  }
-}
-
-@layer components {
-  ::-webkit-scrollbar {
-    width: 0.35rem;
-    height: 0.35rem;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-surface-container-high);
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-surface-container-highest);
-  }
-}
-
-body,
-#app {
-  @apply bg-surface
-    text-on-surface
-    text-base
-    subpixel-antialiased;
-}
+      <template #dark>
+        <code-block
+          :code="themeDark"
+          language="css"
+        />
+      </template>
+    </vk-tabs>
+  </div>
+</template>

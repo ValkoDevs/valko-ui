@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { ButtonProps } from '#valkoui/types/Button'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Button.styles.ts'
@@ -23,15 +24,42 @@ const emit = defineEmits(['click'])
 
 const classes = useStyle<ButtonProps, SlotStyles>(props, styles)
 
-const onClick = () => {
+const buttonRef = ref<HTMLButtonElement | null>(null)
+
+const createRipple = (event: MouseEvent) => {
+  const btn = buttonRef.value
+  if (!btn) return
+
+  const ripple = document.createElement('span')
+  ripple.className = classes.value.ripple
+
+  const { left, top } = btn.getBoundingClientRect()
+  const size = Math.max(btn.offsetWidth, btn.offsetHeight)
+  const x = event.clientX - left - size / 2
+  const y = event.clientY - top - size / 2
+
+  Object.assign(ripple.style, {
+    width: `${size}px`,
+    height: `${size}px`,
+    left: `${x}px`,
+    top: `${y}px`
+  })
+
+  ripple.addEventListener('animationend', () => ripple.remove())
+  btn.appendChild(ripple)
+}
+
+const onClick = (event: MouseEvent) => {
   if (!props.disabled && !props.loading) {
     emit('click')
+    createRipple(event)
   }
 }
 </script>
 
 <template>
   <button
+    ref="buttonRef"
     :class="classes.button"
     :disabled="disabled"
     :aria-disabled="disabled"
