@@ -81,6 +81,7 @@ const onClick = () => {
       <label
         :for="inputId"
         :class="classes.label"
+        @click="onClick"
       >
         {{ label }}
       </label>

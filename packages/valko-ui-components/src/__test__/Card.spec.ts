@@ -15,7 +15,7 @@ describe('Card component', () => {
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('.w-80').exists()).toBe(true)
+        expect(wrapper.find('.text-base').exists()).toBe(true)
       })
 
       it('should be variant filled', () => {
@@ -71,7 +71,7 @@ describe('Card component', () => {
           }
         })
 
-        expect(wrapper.find('.w-48').exists()).toBe(true)
+        expect(wrapper.find('.text-xs').exists()).toBe(true)
       })
 
       it('should be sm when props.size is sm', () => {
@@ -81,7 +81,7 @@ describe('Card component', () => {
           }
         })
 
-        expect(wrapper.find('.w-64').exists()).toBe(true)
+        expect(wrapper.find('.text-sm').exists()).toBe(true)
       })
 
       it('should be md when props.size is md', () => {
@@ -91,7 +91,7 @@ describe('Card component', () => {
           }
         })
 
-        expect(wrapper.find('.w-80').exists()).toBe(true)
+        expect(wrapper.find('.text-base').exists()).toBe(true)
       })
 
       it('should be lg when props.size is lg', () => {
@@ -101,7 +101,7 @@ describe('Card component', () => {
           }
         })
 
-        expect(wrapper.find('.w-96').exists()).toBe(true)
+        expect(wrapper.find('.text-lg').exists()).toBe(true)
       })
 
       it('should be full when props.size is full', () => {

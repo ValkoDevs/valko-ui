@@ -3,9 +3,11 @@ import type { CodeBlockProps } from './interfaces'
 import hljs from 'highlight.js/lib/core'
 import xml from 'highlight.js/lib/languages/xml'
 import typescript from 'highlight.js/lib/languages/typescript'
+import css from 'highlight.js/lib/languages/css'
 
 hljs.registerLanguage('ts', typescript)
 hljs.registerLanguage('html', xml)
+hljs.registerLanguage('css', css)
 hljs.registerLanguage('vue', (hljs) => ({
   subLanguage: 'html',
   contains: [

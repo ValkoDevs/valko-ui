@@ -52,7 +52,7 @@ describe('Select component', () => {
       })
 
       it('should not have label', () => {
-        expect(wrapper.find('.font-bold').text()).toContain('')
+        expect(wrapper.find('.vk-input__label').text()).toContain('')
       })
     })
 

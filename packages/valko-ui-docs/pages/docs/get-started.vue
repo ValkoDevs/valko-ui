@@ -80,7 +80,7 @@ const tsconfig = `{
 </script>
 
 <template>
-  <div class="flex flex-col gap-6 mt-6">
+  <div class="flex flex-col gap-6 px-4 md:px-6 lg:px-10 py-5">
     <div>
       <h2 class="text-2xl font-semibold">
         Introduction
@@ -94,12 +94,12 @@ const tsconfig = `{
       />
     </div>
 
-    <div class="flex flex-col gap-6 mt-6">
+    <div class="flex flex-col gap-8">
       <h2 class="text-2xl font-semibold">
         Quick Start with Nuxt 3 or 4
       </h2>
 
-      <div class="mt-4">
+      <div class="flex flex-col gap-4">
         <h3 class="text-lg font-medium">
           1. Create a Nuxt Project
         </h3>
@@ -123,13 +123,12 @@ const tsconfig = `{
         <vk-alert
           color="accent"
           variant="ghost"
-          class="mt-4"
         >
           If you want to use Nuxt 3 instead of 4, add <span class="bg-black/[.2] px-2">-- -t v3</span> at the end of the create command.
         </vk-alert>
       </div>
 
-      <div class="mt-4">
+      <div class="flex flex-col gap-4">
         <h3 class="text-lg font-medium">
           2. Install Required Dependencies
         </h3>
@@ -152,7 +151,7 @@ const tsconfig = `{
         </vk-tabs>
       </div>
 
-      <div class="mt-4">
+      <div class="flex flex-col gap-4">
         <h3 class="text-lg font-medium">
           3. Install ValkoUI Library
         </h3>
@@ -178,7 +177,7 @@ const tsconfig = `{
         </p>
       </div>
 
-      <div class="mt-4 flex flex-col gap-4">
+      <div class=" flex flex-col gap-4">
         <h3 class="text-lg font-medium">
           4. Configure Nuxt
         </h3>
@@ -193,7 +192,7 @@ const tsconfig = `{
           variant="ghost"
           title="If you use Nuxt 4 or newer"
         >
-          <p>Nuxt 4 relies a lot more on Vite compiler so we need to add aliases to tsconfig.json for the library to work correctly.</p>
+          <p>Nuxt 4 relies a lot more on Vite compiler so we need to add aliases to <span class="underline">tsconfig.json</span> for the library to work correctly.</p>
         </vk-alert>
 
         <code-block
@@ -202,18 +201,33 @@ const tsconfig = `{
         />
       </div>
 
-      <div class="mt-4">
+      <div class=" flex flex-col gap-4">
         <h3 class="text-lg font-medium">
           5. Create ValkoUI CSS
         </h3>
         <p>Create a CSS file (e.g. <span class="text-primary">valko-ui.css</span>) in your project and add the following:</p>
-        <code-block :code="valkoUICss" />
-        <p class="mt-2">
+        <code-block
+          :code="valkoUICss"
+          language="css"
+        />
+        <p>
           This will import ValkoUI styles, source, and enable dark mode support. (The source is your relative path to the ValkoUI components CSS file, which is usually located in <span class="text-primary">node_modules/@valko-ui/components/dist</span>.)
         </p>
+        <vk-alert
+          color="accent"
+          variant="ghost"
+        >
+          If you want to override any styles check out the
+          <nuxt-link
+            to="/docs/theme"
+            class="underline"
+          >
+            theme documentation
+          </nuxt-link>.
+        </vk-alert>
       </div>
 
-      <div class="mt-4">
+      <div class="flex flex-col gap-4">
         <h3 class="text-lg font-medium">
           6. Import ValkoUI CSS in app.vue
         </h3>
@@ -224,22 +238,28 @@ const tsconfig = `{
         />
       </div>
 
-      <div>
+      <div class="flex flex-col gap-4">
         <h3 class="text-lg font-medium">
           7. You're ready to build!
         </h3>
         <p>Now that everything is set up, you can start using ValkoUI components in your project. Here's a small example to get you started:</p>
         <code-block :code="example" />
-        <div class="my-4">
-          <p class="mt-2 text-lg font-medium text-primary">
-            Want to see more? Check out our <nuxt-link
+
+        <vk-alert
+          color="accent"
+          variant="ghost"
+        >
+          <p>
+            Want to see more? Check out our
+            <nuxt-link
               to="/templates"
               class="underline"
             >
               templates
-            </nuxt-link> for ready-to-use UI examples!
+            </nuxt-link>
+            for ready-to-use UI examples!
           </p>
-        </div>
+        </vk-alert>
       </div>
     </div>
   </div>

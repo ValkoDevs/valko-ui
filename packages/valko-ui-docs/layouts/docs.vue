@@ -5,6 +5,8 @@ const router = useRouter()
 
 const baseMenuItems: MenuItem[] = [
   { key: '/docs/get-started', group: 'General', text: 'Get Started' },
+  { key: '/docs/icons', group: 'General', text: 'Icons' },
+  { key: '/docs/theme', group: 'General', text: 'Theme' },
   { key: '/docs/layout/divider', group: 'Layout', text: 'Divider' },
   { key: '/docs/layout/drawer', group: 'Layout', text: 'Drawer' },
   { key: '/docs/layout/modal', group: 'Layout', text: 'Modal' },
@@ -25,7 +27,6 @@ const baseMenuItems: MenuItem[] = [
   { key: '/docs/ui/calendar', group: 'Ui', text: 'Calendar' },
   { key: '/docs/ui/card', group: 'Ui', text: 'Card' },
   { key: '/docs/ui/dropdown', group: 'Ui', text: 'Dropdown' },
-  { key: '/docs/ui/icon', group: 'Ui', text: 'Icon' },
   { key: '/docs/ui/menu', group: 'Ui', text: 'Menu' },
   { key: '/docs/ui/navbar', group: 'Ui', text: 'Navbar' },
   { key: '/docs/ui/notification', group: 'Ui', text: 'Notification' },

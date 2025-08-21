@@ -386,6 +386,7 @@ export default tv({
     // vertical & shape
     {
       vertical: false,
+      floating: false,
       shape: 'rounded',
       class: [
         'rounded-b-2xl'
@@ -393,6 +394,7 @@ export default tv({
     },
     {
       vertical: false,
+      floating: false,
       shape: 'soft',
       class: [
         'rounded-b-lg'
@@ -400,6 +402,7 @@ export default tv({
     },
     {
       vertical: true,
+      floating: false,
       shape: 'rounded',
       class: [
         'rounded-r-2xl'
@@ -407,6 +410,7 @@ export default tv({
     },
     {
       vertical: true,
+      floating: false,
       shape: 'soft',
       class: [
         'rounded-r-lg'

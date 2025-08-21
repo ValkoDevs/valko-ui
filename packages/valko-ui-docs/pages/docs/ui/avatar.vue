@@ -83,6 +83,15 @@ const avatarProps: TableItem[] = [
   }
 ]
 
+const avatarSlots: TableItem[] = [
+  {
+    key: 'defaultSlot',
+    name: 'default',
+    description: 'Default slot for the Avatar, this would replace any existing content.',
+    example: '<vk-avatar>\n  <template #default>\n Your custom content goes here!\n  </template>\n</vk-avatar>'
+  }
+]
+
 const avatarSrc = computed(() => { return extraForm.avatar ? '' : form.src })
 
 const generateSnippet = snippetGeneratorFactory('vk-avatar')
@@ -278,6 +287,12 @@ const extraProps = {
           <code-block :code="generateSnippet<boolean>('elevated', { values: [true] })" />
         </template>
       </example-section>
+
+      <example-section title="Slots">
+        <vk-avatar>
+          <span>:)</span>
+        </vk-avatar>
+      </example-section>
     </template>
 
     <template #api>
@@ -285,6 +300,11 @@ const extraProps = {
       <vk-table
         :headers="propHeaders"
         :data="avatarProps"
+      />
+      <h3>Avatar Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="avatarSlots"
       />
     </template>
   </doc-section>
