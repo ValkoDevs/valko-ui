@@ -1,4 +1,4 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
 export default tv({
   base: [
@@ -12,4 +12,4 @@ export default tv({
     'group-data-[card-image=true]:order-3',
     'group-data-[card-image=false]:order-2'
   ]
-}) as unknown as ReturnType<TV>
+})

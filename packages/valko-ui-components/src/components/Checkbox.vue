@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { useId, computed } from 'vue'
 import type { CheckboxProps } from '#valkoui/types/Checkbox'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Checkbox.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkIcon from './Icon.vue'
 
 defineOptions({ name: 'VkCheckbox' })
@@ -17,12 +15,13 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   modelValue: false,
   readonly: false,
   labelPosition: 'right',
-  disabled: false
+  disabled: false,
+  styleSlots: undefined
 })
 
 const emit = defineEmits(['update:modelValue'])
 
-const classes = useStyle<CheckboxProps, SlotStyles>(props, styles)
+const classes = styles(props)
 
 const inputId = useId()
 const helpertextId = useId()
@@ -40,10 +39,10 @@ const onClick = () => {
 </script>
 
 <template>
-  <div :class="classes.container">
+  <div :class="classes.container({ class: styleSlots?.container })">
     <div
       role="checkbox"
-      :class="classes.checkboxContainer"
+      :class="classes.checkboxContainer({ class: styleSlots?.checkboxContainer })"
       :aria-checked="modelValue === null ? 'mixed' : !!modelValue"
       :aria-disabled="disabled"
       :aria-label="props['aria-label']"
@@ -54,9 +53,9 @@ const onClick = () => {
       @keydown.enter.prevent="onClick"
       @keydown.space.prevent="onClick"
     >
-      <div :class="classes.stateLayer">
+      <div :class="classes.stateLayer({ class: styleSlots?.stateLayer })">
         <div
-          :class="classes.checkbox"
+          :class="classes.checkbox({ class: styleSlots?.checkbox })"
           :data-checked="!!modelValue"
           :data-indeterminate="modelValue === null"
         >
@@ -75,12 +74,12 @@ const onClick = () => {
         :indeterminate="modelValue === null"
         :name="name"
         :disabled="disabled"
-        :class="classes.input"
+        :class="classes.input({ class: styleSlots?.input })"
         @click.prevent=""
       >
       <label
         :for="inputId"
-        :class="classes.label"
+        :class="classes.label({ class: styleSlots?.label })"
         @click="onClick"
       >
         {{ label }}
@@ -89,7 +88,7 @@ const onClick = () => {
 
     <span
       v-if="helpertext"
-      :class="classes.helpertext"
+      :class="classes.helpertext({ class: styleSlots?.helpertext })"
       :id="helpertextId"
     >
       {{ helpertext }}

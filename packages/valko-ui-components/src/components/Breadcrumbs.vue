@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { BreadcrumbsProps, Crumb } from '#valkoui/types/Breadcrumbs'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Breadcrumbs.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkIcon from './Icon.vue'
 
 defineOptions({ name: 'VkBreadcrumbs' })
@@ -14,12 +12,13 @@ const props = withDefaults(defineProps<BreadcrumbsProps>(), {
   shape: 'soft',
   separator: '>',
   crumbs: () => [],
-  condensed: false
+  condensed: false,
+  styleSlots: undefined
 })
 
 const emit = defineEmits(['crumbClick'])
 
-const classes = useStyle<BreadcrumbsProps, SlotStyles>(props, styles)
+const classes = styles(props)
 
 const lastCrumbKey = props.crumbs[props.crumbs.length - 1]?.key
 
@@ -34,20 +33,20 @@ const selectIcon = (separator: string) => separator.length > 2
 
 <template>
   <nav
-    :class="classes.container"
+    :class="classes.container({ class: styleSlots?.container })"
     :aria-label="props['aria-label'] ?? 'Breadcrumbs'"
   >
-    <ol :class="classes.ol">
+    <ol :class="classes.ol({ class: styleSlots?.ol })">
       <li
         v-for="crumb in crumbs"
         :key="crumb.key"
-        :class="classes.li"
+        :class="classes.li({ class: styleSlots?.li })"
       >
         <a
           v-if="crumb.key !== lastCrumbKey"
           role="link"
           :tabindex="crumb.key !== lastCrumbKey ? 0 : -1"
-          :class="classes.a"
+          :class="classes.a({ class: styleSlots?.a })"
           :data-disabled="crumb.disabled"
           :aria-disabled="crumb.disabled || undefined"
           @click.prevent="onCrumbClick(crumb)"
@@ -55,37 +54,37 @@ const selectIcon = (separator: string) => separator.length > 2
           <vk-icon
             v-if="crumb.leftIcon"
             :name="crumb.leftIcon"
-            :class="classes.iconLeft"
+            :class="classes.iconLeft({ class: styleSlots?.iconLeft })"
           />
           <span>{{ crumb.title }}</span>
           <vk-icon
             v-if="crumb.rightIcon"
             :name="crumb.rightIcon"
-            :class="classes.iconRight"
+            :class="classes.iconRight({ class: styleSlots?.iconRight })"
           />
         </a>
 
         <span
           v-else
-          :class="[classes.a, '!cursor-default']"
+          :class="[classes.a({ class: styleSlots?.a }), '!cursor-default']"
           aria-current="page"
         >
           <vk-icon
             v-if="crumb.leftIcon"
             :name="crumb.leftIcon"
-            :class="classes.iconLeft"
+            :class="classes.iconLeft({ class: styleSlots?.iconLeft })"
           />
           <span>{{ crumb.title }}</span>
           <vk-icon
             v-if="crumb.rightIcon"
             :name="crumb.rightIcon"
-            :class="classes.iconRight"
+            :class="classes.iconRight({ class: styleSlots?.iconRight })"
           />
         </span>
 
         <span
           v-if="crumb.key !== lastCrumbKey"
-          :class="classes.separator"
+          :class="classes.separator({ class: styleSlots?.separator })"
           aria-hidden="true"
         >
           <template v-if="selectIcon(separator)">

@@ -30,6 +30,17 @@ export interface CalendarProps extends Sizes, ColorsWithSurface, Variants, Shape
   disableWeekends?: boolean;
   minDate?: EpochTimeStamp;
   maxDate?: EpochTimeStamp;
+  styleSlots?: {
+    container?: string;
+    headerContainer?: string;
+    arrows?: string;
+    periodButton?: string;
+    viewContainer?: string;
+    panel?: string;
+    weekdaySpan?: string;
+    hiddenGridButton?: string;
+    gridButton?: string;
+  };
 }
 
 export interface CalendarDayViewProps extends CalendarProps {

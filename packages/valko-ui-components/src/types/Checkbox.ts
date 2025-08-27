@@ -8,4 +8,14 @@ export interface CheckboxProps extends DefaultComponent, Pick<AriaAttributes, 'a
   labelPosition?: LabelPosition;
   readonly?: boolean;
   name?: string;
+  styleSlots?: {
+    container?: string;
+    checkboxContainer?: string;
+    stateLayer?: string;
+    checkbox?: string;
+    icon?: string;
+    input?: string;
+    label?: string;
+    helpertext?: string;
+  };
 }

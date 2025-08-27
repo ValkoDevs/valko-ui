@@ -1,4 +1,4 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
 export default tv({
   slots: {
@@ -55,4 +55,4 @@ export default tv({
       '-rotate-90'
     ]
   }
-}) as unknown as ReturnType<TV>
+})

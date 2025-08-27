@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import type { ButtonProps } from '#valkoui/types/Button'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Button.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkSpinner from './Spinner.vue'
 import useRipple from '#valkoui/composables/useRipple.ts'
 
@@ -19,12 +17,13 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   disabled: false,
   condensed: false,
   loading: false,
-  type: 'button'
+  type: 'button',
+  styleSlots: undefined
 })
 
 const emit = defineEmits(['click'])
 
-const classes = useStyle<ButtonProps, SlotStyles>(props, styles)
+const classes = styles(props)
 
 const buttonRef = ref<HTMLButtonElement | null>(null)
 const createRipple = useRipple(buttonRef)
@@ -45,7 +44,7 @@ const onMouseDown = (event: MouseEvent | TouchEvent) => {
 <template>
   <button
     ref="buttonRef"
-    :class="classes.button"
+    :class="classes.button({ class: styleSlots?.button })"
     :disabled="disabled"
     :aria-disabled="disabled"
     :aria-label="props['aria-label']"
@@ -54,9 +53,9 @@ const onMouseDown = (event: MouseEvent | TouchEvent) => {
     @mousedown="onMouseDown"
     @touchstart="onMouseDown"
   >
-    <div :class="classes.stateLayer" />
+    <div :class="classes.stateLayer({ class: styleSlots?.stateLayer })" />
     <div
-      :class="classes.spinnerContainer"
+      :class="classes.spinnerContainer({ class: styleSlots?.spinnerContainer })"
     >
       <transition
         enter-active-class="transition ease-out duration-150"

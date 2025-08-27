@@ -2,7 +2,6 @@
 import { reactive, provide } from 'vue'
 import type { CollapseProps } from '#valkoui/types/Collapse'
 import styles from '#valkoui/styles/Collapse.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 
 defineOptions({ name: 'VkCollapse' })
 
@@ -11,10 +10,11 @@ const props = withDefaults(defineProps<CollapseProps>(), {
   size: 'md',
   separator: 'line',
   shape: 'soft',
-  multiple: false
+  multiple: false,
+  styleSlots: undefined
 })
 
-const classes = useStyle<CollapseProps>(props, styles)
+const classes = styles({ ...props, class: props.styleSlots?.container })
 
 const items = reactive<Record<string, boolean>>({})
 

@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { AvatarProps } from '#valkoui/types/Avatar'
-import type { SlotStyles } from '#valkoui/types/common'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import styles from '#valkoui/styles/Avatar.styles.ts'
 import VkIcon from './Icon.vue'
 
@@ -12,10 +10,11 @@ const props = withDefaults(defineProps<AvatarProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  elevated: false
+  elevated: false,
+  styleSlots: undefined
 })
 
-const classes = useStyle<AvatarProps, SlotStyles>(props, styles)
+const classes = styles(props)
 
 const getInitials = (name: string): string => {
   return name
@@ -29,7 +28,7 @@ const getInitials = (name: string): string => {
 
 <template>
   <div
-    :class="classes.container"
+    :class="classes.container({ class: styleSlots?.container })"
     :title="name"
     :role="src || name ? 'img' : 'presentation'"
     :aria-label="props['aria-label'] ? props['aria-label'] : name"
@@ -40,7 +39,7 @@ const getInitials = (name: string): string => {
         v-if="src"
         :src="src"
         :alt="name"
-        :class="classes.img"
+        :class="classes.img({ class: styleSlots?.img })"
       >
       <span v-else-if="name">
         {{ getInitials(name) }}

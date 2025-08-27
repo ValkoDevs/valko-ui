@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed, useId } from 'vue'
 import type { AlertProps } from '#valkoui/types/Alert'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Alert.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 
@@ -15,12 +13,13 @@ const props = withDefaults(defineProps<AlertProps>(), {
   size: 'md',
   shape: 'soft',
   icon: '',
-  closable: false
+  closable: false,
+  styleSlots: undefined
 })
 
 const emit = defineEmits(['close'])
 
-const classes = useStyle<AlertProps, SlotStyles>(props, styles)
+const classes = styles(props)
 
 const titleId = useId()
 
@@ -49,7 +48,7 @@ const ariaLive = computed(() => {
 
 <template>
   <div
-    :class="classes.container"
+    :class="classes.container({ class: styleSlots?.container })"
     :role="ariaRole"
     :aria-live="ariaLive"
     :aria-label="title ? titleId : props['aria-label']"
@@ -58,19 +57,19 @@ const ariaLive = computed(() => {
     <vk-icon
       v-if="icon !== null"
       :name="icon ? icon : defaultIcon"
-      :class="classes.mainIcon"
+      :class="classes.mainIcon({ class: styleSlots?.mainIcon })"
     />
 
-    <div :class="classes.contentContainer">
+    <div :class="classes.contentContainer({ class: styleSlots?.contentContainer })">
       <h6
         v-if="title"
         :id="titleId"
-        :class="classes.title"
+        :class="classes.title({ class: styleSlots?.title })"
       >
         {{ title }}
       </h6>
 
-      <p :class="classes.p">
+      <p :class="classes.p({ class: styleSlots?.p })">
         <slot />
       </p>
     </div>
@@ -87,7 +86,7 @@ const ariaLive = computed(() => {
     >
       <vk-icon
         name="x"
-        :class="classes.closeIcon"
+        :class="classes.closeIcon({ class: styleSlots?.closeIcon })"
       />
     </vk-button>
   </div>
