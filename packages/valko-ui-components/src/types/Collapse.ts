@@ -9,6 +9,12 @@ export type CollapseItemStates = {
 
 export interface CollapseItemProps {
   title?: string;
+  styleSlots?: {
+    collapse?: string;
+    button?: string;
+    icon?: string;
+    panel?: string;
+  }
 }
 
 export interface CollapseProps extends DefaultComponent {
@@ -16,4 +22,7 @@ export interface CollapseProps extends DefaultComponent {
   title?: string;
   compact?: boolean;
   multiple?: boolean;
+  styleSlots?: {
+    container?: string;
+  }
 }

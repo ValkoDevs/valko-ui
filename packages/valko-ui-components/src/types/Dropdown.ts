@@ -1,4 +1,5 @@
 import type { Shapes, ColorsWithSurface, Sizes, VariantWithGradientAndLink, PlacementsWithAuto, Alignments } from './common'
+import type { ButtonProps } from './Button'
 
 export interface Item {
   key: string | number;

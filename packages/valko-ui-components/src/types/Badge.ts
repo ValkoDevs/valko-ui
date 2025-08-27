@@ -5,4 +5,8 @@ export interface BadgeProps extends Sizes, ColorsWithSurface, Shapes, Alignments
   content?: number | string;
   hidden?: boolean;
   dot?: boolean;
+  styleSlots?: {
+    container?: string;
+    badge?: string;
+  };
 }

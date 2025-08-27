@@ -46,6 +46,16 @@ export interface DataTableProps extends TableProps {
   page?: number;
   pageSizeOptions?: number[];
   label?: string;
+  styleSlots?: {
+    table?: string;
+    headerContainer?: string;
+    headerLabel?: string;
+    headerUtilities?: string;
+    dragIcon?: string;
+    footer?: string;
+    footerNav?: string;
+    footerSelect?: string;
+  }
 }
 
 export interface ClientSideDataTable<T extends TableItem> {

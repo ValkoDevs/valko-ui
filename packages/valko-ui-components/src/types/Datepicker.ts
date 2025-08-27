@@ -5,4 +5,8 @@ export interface DatepickerProps extends CalendarProps, Omit<AriaAttributes, 'ar
   parsedModel: string;
   isOpen: boolean;
   label?: string;
+  styleSlots?: {
+    container?: string;
+    content?: string;
+  }
 }

@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import useStyle from '#valkoui/composables/useStyle.ts'
 import styles from '#valkoui/styles/CardHeader.styles.ts'
+import type { CardHeaderProps } from '#valkoui/types/Card'
 
 defineOptions({ name: 'VkCardHeader' })
 
-const classes = useStyle({}, styles)
+const props = withDefaults(defineProps<CardHeaderProps>(), {
+  styleSlots: undefined
+})
+
+const classes = styles({ ...props, class: props.styleSlots?.container })
 </script>
 
 <template>

@@ -1,4 +1,4 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
 export default tv({
   slots: {
@@ -35,4 +35,4 @@ export default tv({
       'opacity-50'
     ]
   }
-}) as unknown as ReturnType<TV>
+})

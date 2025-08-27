@@ -4,4 +4,8 @@ export interface AvatarProps extends ColorsWithSurface, VariantsAlt, Shapes, Siz
   src?: string;
   name?: string;
   elevated?: boolean;
+  styleSlots?: {
+    container?: string;
+    img?: string;
+  };
 }

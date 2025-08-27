@@ -15,4 +15,13 @@ export interface BreadcrumbsProps extends Shapes, Sizes, ColorsWithSurface, Pick
   crumbs: Crumb[];
   separator?: string;
   condensed?: boolean;
+  styleSlots?: {
+    container?: string;
+    a?: string;
+    ol?: string;
+    li?: string;
+    separator?: string;
+    iconLeft?: string;
+    iconRight?: string;
+  };
 }

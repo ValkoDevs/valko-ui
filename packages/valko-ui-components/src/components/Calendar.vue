@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import type { CalendarProps, DisplayView, SelectionType } from '#valkoui/types/Calendar'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Calendar.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkCalendarDayView from './CalendarDayView.vue'
 import VkCalendarMonthView from './CalendarMonthView.vue'
 import VkCalendarYearView from './CalendarYearView.vue'
@@ -20,7 +18,7 @@ const props = withDefaults(defineProps<CalendarProps>(), {
 
 const emit = defineEmits(['update:modelValue', 'finalizeSelection'])
 
-const classes = useStyle<CalendarProps, SlotStyles>(props, styles)
+const classes = styles(props)
 
 const formatPatternMap: Record<string, DisplayView> = {
   D: 'days',
@@ -106,7 +104,7 @@ watch(() => props.format, () => {
 </script>
 
 <template>
-  <div :class="classes.container">
+  <div :class="classes.container({ class: styleSlots?.container })">
     <vk-calendar-day-view
       v-if="currentView === 'days'"
       v-bind="props"

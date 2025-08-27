@@ -1,4 +1,4 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
 export default tv({
   base: [
@@ -264,4 +264,4 @@ export default tv({
       ]
     }
   ]
-}) as unknown as ReturnType<TV>
+})
