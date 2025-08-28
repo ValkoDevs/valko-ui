@@ -34,6 +34,9 @@
 **Notification:**
 - Restored the `text` prop in the TypeScript interface (previously removed by mistake).
 
+**Popover:**
+- Replaced `w-fit/h-fit` with `w-auto/h-auto` to allow popover sizing based on content.
+
 **Tabs:**
 - Added slots for tab customization. Slot names are now `item['key']-tab` and `item['key']-content`.
 - Fixed `grow` prop not working correctly.

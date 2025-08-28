@@ -4,20 +4,20 @@ export default tv({
   slots: {
     popover: [
       'vk-popover',
-      'w-fit',
-      'h-fit',
+      'w-auto',
+      'h-auto',
       'relative'
     ],
     slotContainer: [
-      'h-fit',
-      'w-fit',
+      'h-auto',
+      'w-auto',
       'relative',
       'cursor-pointer'
     ],
     panel: [
       'vk-popover__panel',
-      'h-fit',
-      'w-fit',
+      'h-auto',
+      'w-auto',
       'bg-surface-container-highest',
       'absolute',
       'z-40',
