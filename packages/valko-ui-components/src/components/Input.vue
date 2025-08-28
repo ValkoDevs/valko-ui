@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<InputProps>(), {
   max: Infinity
 })
 
-const emit = defineEmits(['update:modelValue', 'focus', 'clear', 'leftIconClick', 'rightIconClick'])
+const emit = defineEmits(['update:modelValue', 'focus', 'clear', 'blur', 'leftIconClick', 'rightIconClick'])
 
 const classes = useStyle<InputProps, SlotStyles>(props, styles)
 
@@ -45,6 +45,10 @@ const updateValue = (e: Event) => {
 
 const onFocus = (event: Event) => {
   if (!props.disabled) emit('focus', event)
+}
+
+const onBlur = (event: Event) => {
+  if (!props.disabled) emit('blur', event)
 }
 
 const clearInput = () => {
@@ -120,6 +124,7 @@ watch(() => props.modelValue, (newValue) => {
         :aria-required="props['aria-required']"
         @focus="onFocus"
         @input="updateValue"
+        @blur="onBlur"
       >
       <label
         :for="inputId"

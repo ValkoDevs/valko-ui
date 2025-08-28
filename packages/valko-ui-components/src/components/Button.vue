@@ -17,7 +17,8 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   elevated: false,
   disabled: false,
   condensed: false,
-  loading: false
+  loading: false,
+  type: 'button'
 })
 
 const emit = defineEmits(['click'])
@@ -64,6 +65,7 @@ const onClick = (event: MouseEvent) => {
     :disabled="disabled"
     :aria-disabled="disabled"
     :aria-label="props['aria-label']"
+    :type="type"
     @click="onClick"
   >
     <div :class="classes.stateLayer" />

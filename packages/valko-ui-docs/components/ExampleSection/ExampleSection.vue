@@ -35,7 +35,7 @@ const parsedStyles = useStyle<ExampleSectionProps>(props, styles)
       </template>
 
       <template #code>
-        <div class="p-4 bg-surface-container-lowest rounded-b-lg">
+        <div class="p-4 bg-surface-container-lowest rounded-b-lg w-full">
           <slot name="code" />
         </div>
       </template>

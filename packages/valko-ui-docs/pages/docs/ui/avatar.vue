@@ -287,12 +287,6 @@ const extraProps = {
           <code-block :code="generateSnippet<boolean>('elevated', { values: [true] })" />
         </template>
       </example-section>
-
-      <example-section title="Slots">
-        <vk-avatar>
-          <span>:)</span>
-        </vk-avatar>
-      </example-section>
     </template>
 
     <template #api>

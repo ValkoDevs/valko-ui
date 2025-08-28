@@ -57,29 +57,21 @@ export default tv({
     size: {
       xs: {
         button: [
-          'px-2',
-          'py-2',
           'text-xs'
         ]
       },
       sm: {
         button: [
-          'px-3',
-          'py-2.5',
           'text-sm'
         ]
       },
       md: {
         button: [
-          'px-4',
-          'py-2.5',
           'text-base'
         ]
       },
       lg: {
         button: [
-          'px-5',
-          'py-3',
           'text-lg'
         ]
       }
@@ -186,12 +178,42 @@ export default tv({
   },
   compoundVariants: [
     {
-      condensed: true,
-      size: ['xs', 'sm', 'md', 'lg'],
+      condensed: false,
+      size: 'xs',
       class: {
         button: [
-          'py-0',
-          'px-0'
+          'px-2',
+          'py-2'
+        ]
+      }
+    },
+    {
+      condensed: false,
+      size: 'sm',
+      class: {
+        button: [
+          'px-3',
+          'py-2.5'
+        ]
+      }
+    },
+    {
+      condensed: false,
+      size: 'md',
+      class: {
+        button: [
+          'px-4',
+          'py-2.5'
+        ]
+      }
+    },
+    {
+      condensed: false,
+      size: 'lg',
+      class: {
+        button: [
+          'px-5',
+          'py-3'
         ]
       }
     },

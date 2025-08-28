@@ -95,17 +95,19 @@ watch(
           :key="item.key"
           :disabled="item.disabled"
         >
-          <vk-icon
-            v-if="item.leftIcon"
-            :name="item.leftIcon"
-            :class="classes.leftIcon"
-          />
-          <span> {{ item.title }} </span>
-          <vk-icon
-            v-if="item.rightIcon"
-            :name="item.rightIcon"
-            :class="classes.rightIcon"
-          />
+          <slot :name="`${item.key}-tab`">
+            <vk-icon
+              v-if="item.leftIcon"
+              :name="item.leftIcon"
+              :class="classes.leftIcon"
+            />
+            <span> {{ item.title }} </span>
+            <vk-icon
+              v-if="item.rightIcon"
+              :name="item.rightIcon"
+              :class="classes.rightIcon"
+            />
+          </slot>
         </tab>
       </tab-list>
 
@@ -116,7 +118,7 @@ watch(
           :data-key="item.key"
           :class="classes.content"
         >
-          <slot :name="item.key" />
+          <slot :name="`${item.key}-content`" />
         </tab-panel>
       </tab-panels>
     </tab-group>

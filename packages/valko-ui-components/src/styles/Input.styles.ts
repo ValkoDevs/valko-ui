@@ -178,21 +178,29 @@ export default tv({
       },
       positive: {
         input: [
+          'border-positive',
           'hover:border-positive',
           'focus:border-positive'
         ],
         label: [
+          'text-positive',
           'peer-focus:text-positive'
         ],
         icons: [
+          'text-positive',
           'hover:text-positive',
           'peer-focus:text-positive'
         ],
         clearIcon: [
+          'text-positive',
           'hover:text-positive'
         ],
         chevrons: [
+          'text-positive',
           'hover:text-positive'
+        ],
+        helper: [
+          'text-positive'
         ]
       },
       accent: {
@@ -216,40 +224,56 @@ export default tv({
       },
       warning: {
         input: [
+          'border-warning',
           'hover:border-warning',
           'focus:border-warning'
         ],
         label: [
+          'text-warning',
           'peer-focus:text-warning'
         ],
         icons: [
+          'text-warning',
           'hover:text-warning',
           'peer-focus:text-warning'
         ],
         clearIcon: [
+          'text-warning',
           'hover:text-warning'
         ],
         chevrons: [
+          'text-warning',
           'hover:text-warning'
+        ],
+        helper: [
+          'text-warning'
         ]
       },
       negative: {
         input: [
+          'border-negative',
           'hover:border-negative',
           'focus:border-negative'
         ],
         label: [
+          'text-negative',
           'peer-focus:text-negative'
         ],
         icons: [
+          'text-negative',
           'hover:text-negative',
           'peer-focus:text-negative'
         ],
         clearIcon: [
+          'text-negative',
           'hover:text-negative'
         ],
         chevrons: [
+          'text-negative',
           'hover:text-negative'
+        ],
+        helper: [
+          'text-negative'
         ]
       },
       surface: {

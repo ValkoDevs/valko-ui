@@ -9,7 +9,6 @@ export default tv({
       'relative'
     ],
     group: [
-      'w-fit',
       'flex',
       'flex-col',
       'relative',
@@ -18,9 +17,7 @@ export default tv({
     list: [
       'tab-list',
       'p-2',
-      'w-fit',
       'max-w-full',
-      'h-fit',
       'flex',
       'justify-start',
       'relative',
@@ -30,8 +27,6 @@ export default tv({
     ],
     tab: [
       'vk-tabs__tab',
-      'w-fit',
-      'h-fit',
       'tracking-wider',
       'font-semibold',
       'text-nowrap',
@@ -47,6 +42,7 @@ export default tv({
       'disabled:cursor-not-allowed'
     ],
     content: [
+      'flex',
       'grow',
       'relative',
       'overflow-visible'
@@ -188,18 +184,12 @@ export default tv({
     grow: {
       true: {
         group: [
-          'w-auto',
-          'h-auto',
           'grow'
         ],
         list: [
-          'w-auto',
-          'h-auto',
           'grow'
         ],
         container: [
-          'h-auto',
-          'w-auto',
           'grow'
         ]
       },
@@ -207,6 +197,17 @@ export default tv({
         container: [
           'h-fit',
           'w-fit'
+        ],
+        group: [
+          'w-fit'
+        ],
+        tab: [
+          'w-fit',
+          'h-fit'
+        ],
+        list: [
+          'w-fit',
+          'h-fit'
         ]
       }
     },

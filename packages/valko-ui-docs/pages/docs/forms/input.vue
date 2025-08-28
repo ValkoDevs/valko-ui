@@ -210,6 +210,13 @@ const emitData: TableItem[] = [
     type: '(event: FocusEvent) => void'
   },
   {
+    key: 'blurEmit',
+    event: 'blur',
+    description: 'Emitted when the input loses focus.',
+    values: '',
+    type: '(event: FocusEvent) => void'
+  },
+  {
     key: 'clearEmit',
     event: 'clear',
     description: 'Emitted when the input is cleared using the clearable icon.',
