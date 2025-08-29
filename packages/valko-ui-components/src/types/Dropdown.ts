@@ -1,5 +1,5 @@
 import type { Shapes, ColorsWithSurface, Sizes, VariantWithGradientAndLink, PlacementsWithAuto, Alignments } from './common'
-import type { ButtonProps } from './Button'
+import type { DropdownSlots } from '../styles/Dropdown.styles'
 
 export interface Item {
   key: string | number;
@@ -17,4 +17,5 @@ export interface DropdownProps extends ColorsWithSurface, Sizes, Shapes, Alignme
   elevated?: boolean;
   disabled?: boolean;
   isOpen?: boolean;
+  styleSlots?: Partial<DropdownSlots>;
 }

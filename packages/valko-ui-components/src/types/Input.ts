@@ -1,4 +1,5 @@
 import type { Sizes, ColorsWithSurface, Variants, Shapes, AriaAttributes } from './common'
+import type { InputSlots } from '../styles/Input.styles'
 
 export type InputType = 'text' | 'password' | 'email' | 'number'
 export type InputCursor = 'text' | 'pointer'
@@ -16,4 +17,5 @@ export interface InputProps extends Sizes, ColorsWithSurface, Variants, Shapes, 
   loading?: boolean;
   readonly?: boolean;
   clearable?: boolean;
+  styleSlots?: Partial<InputSlots>;
 }

@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<CollapseProps>(), {
   styleSlots: undefined
 })
 
-const classes = styles({ ...props, class: props.styleSlots?.container })
+const classes = styles({ ...props, class: props.styleSlots })
 
 const items = reactive<Record<string, boolean>>({})
 

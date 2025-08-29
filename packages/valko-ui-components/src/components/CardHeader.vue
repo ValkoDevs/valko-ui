@@ -8,13 +8,11 @@ const props = withDefaults(defineProps<CardHeaderProps>(), {
   styleSlots: undefined
 })
 
-const classes = styles({ ...props, class: props.styleSlots?.container })
+const classes = styles({ ...props, class: props.styleSlots })
 </script>
 
 <template>
-  <div
-    :class="classes"
-  >
+  <div :class="classes">
     <slot />
   </div>
 </template>

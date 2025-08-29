@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<DividerProps>(), {
   direction: 'horizontal'
 })
 
-const classes = styles({ ...props, class: props.styleSlots?.container })
+const classes = styles({ ...props, class: props.styleSlots })
 </script>
 
 <template>

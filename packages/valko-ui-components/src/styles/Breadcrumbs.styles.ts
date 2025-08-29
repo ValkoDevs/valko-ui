@@ -1,8 +1,8 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const breadcrumbs = tv({
   slots: {
-    container: [
+    nav: [
       'vk-breadcrumbs',
       'w-fit',
       'flex',
@@ -10,7 +10,7 @@ export default tv({
       'transition-colors',
       'duration-200'
     ],
-    a: [
+    link: [
       'vk-breadcrumbs__a',
       'cursor-pointer',
       'flex',
@@ -22,12 +22,12 @@ export default tv({
       'data-[disabled=true]:opacity-50',
       'data-[disabled=true]:cursor-not-allowed'
     ],
-    ol: [
+    list: [
       'flex',
       'items-center',
       'gap-2'
     ],
-    li: [
+    listItem: [
       'inline-flex',
       'items-center',
       'gap-1'
@@ -46,12 +46,12 @@ export default tv({
   variants: {
     variant: {
       filled: {
-        container: [
+        nav: [
           'bg-surface-container-low'
         ]
       },
       outlined: {
-        container: [
+        nav: [
           'py-[calc(0.5rem_-_2px)]',
           'px-[calc(1rem_-_2px)]',
           'border-2',
@@ -59,55 +59,55 @@ export default tv({
         ]
       },
       ghost: {
-        container: [
+        nav: [
           'bg-surface-container-low/[.5]'
         ]
       },
       link: {
-        container: [
+        nav: [
           'bg-transparent'
         ]
       }
     },
     color: {
       primary: {
-        a: [
+        link: [
           'hover:text-on-primary-container',
           'data-[active=true]:text-primary'
         ]
       },
       secondary: {
-        a: [
+        link: [
           'hover:text-on-secondary-container',
           'data-[active=true]:text-secondary'
         ]
       },
       positive: {
-        a: [
+        link: [
           'hover:text-on-positive-container',
           'data-[active=true]:text-positive'
         ]
       },
       accent: {
-        a: [
+        link: [
           'hover:text-on-accent-container',
           'data-[active=true]:text-accent'
         ]
       },
       warning: {
-        a: [
+        link: [
           'hover:text-on-warning-container',
           'data-[active=true]:text-warning'
         ]
       },
       negative: {
-        a: [
+        link: [
           'hover:text-on-negative-container',
           'data-[active=true]:text-negative'
         ]
       },
       surface: {
-        a: [
+        link: [
           'hover:text-outlined',
           'data-[active=true]:text-on-surface'
         ]
@@ -115,51 +115,51 @@ export default tv({
     },
     size: {
       xs: {
-        container: [
+        nav: [
           'text-xs'
         ]
       },
       sm: {
-        container: [
+        nav: [
           'text-sm'
         ]
       },
       md: {
-        container: [
+        nav: [
           'text-base'
         ]
       },
       lg: {
-        container: [
+        nav: [
           'text-lg'
         ]
       }
     },
     shape: {
       rounded: {
-        container: [
+        nav: [
           'rounded-full'
         ]
       },
       soft: {
-        container: [
+        nav: [
           'rounded-lg'
         ]
       },
       square: {
-        container: [
+        nav: [
           'rounded-none'
         ]
       }
     },
     condensed: {
       true: {
-        container: [
+        nav: [
           'p-0'
         ]
       },
       false: {
-        container: [
+        nav: [
           'py-2',
           'px-4'
         ]
@@ -167,3 +167,6 @@ export default tv({
     }
   }
 })
+
+export default breadcrumbs
+export type BreadcrumbsSlots = typeof breadcrumbs.slots

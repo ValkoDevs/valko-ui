@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref, useId, computed } from 'vue'
 import type { DropdownProps, Item } from '#valkoui/types/Dropdown'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Dropdown.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 import VkPopover from './Popover.vue'
@@ -26,7 +24,7 @@ const props = withDefaults(defineProps<DropdownProps>(), {
 
 const emit = defineEmits(['itemClick', 'click'])
 
-const classes = useStyle<DropdownProps, SlotStyles>(props, styles)
+const { container, icon, itemsMenu, triggerButton, itemsButton, itemsIcon } = styles(props)
 
 const dropdownId = useId()
 const menuId = useId()
@@ -54,7 +52,7 @@ const onItemClick = (item: Item) => {
 
 <template>
   <vk-popover
-    :class="classes.container"
+    :class="container({ class: props.styleSlots?.container })"
     :is-open="open && !disabled"
     :shape="shape"
     :placement="placement"
@@ -69,11 +67,14 @@ const onItemClick = (item: Item) => {
       :toggle="onClick"
     >
       <vk-button
-        v-bind="props"
+        :variant="variant"
+        :shape="shape"
+        :color="color"
+        :size="size"
         :id="dropdownId"
         :disabled="disabled"
         :elevated="elevated"
-        :class="classes.triggerButton"
+        :class="triggerButton({ class: styleSlots?.triggerButton })"
         :aria-haspopup="'menu'"
         :aria-expanded="open"
         :aria-controls="menuId"
@@ -81,7 +82,7 @@ const onItemClick = (item: Item) => {
       >
         {{ label }}
         <vk-icon
-          :class="classes.icon"
+          :class="icon({ class: styleSlots?.icon })"
           :name="icon"
           :data-open="open"
         />
@@ -93,7 +94,7 @@ const onItemClick = (item: Item) => {
         :id="menuId"
         role="menu"
         :aria-labelledby="dropdownId"
-        :class="classes.itemsMenu"
+        :class="itemsMenu({ class: styleSlots?.itemsMenu })"
       >
         <button
           v-for="item in items"
@@ -103,14 +104,14 @@ const onItemClick = (item: Item) => {
           :tabindex="item.disabled ? -1 : 0"
           :aria-disabled="item.disabled || undefined"
           :disabled="item.disabled"
-          :class="classes.itemsButton"
+          :class="itemsButton({ class: styleSlots?.itemsButton })"
           :data-disabled="item.disabled"
           :data-shape="shape"
           @click.prevent="onItemClick(item)"
         >
           <vk-icon
             v-if="item.icon"
-            :class="classes.itemsIcon"
+            :class="itemsIcon({ class: styleSlots?.itemsIcon })"
             :name="item.icon"
           />
           {{ item.title }}

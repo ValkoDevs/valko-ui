@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, nextTick } from 'vue'
 import type { MenuProps, MenuItem } from '#valkoui/types/Menu'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Menu.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 
 defineOptions({ name: 'VkMenu' })
 
@@ -17,7 +15,7 @@ const props = withDefaults(defineProps<MenuProps>(), {
 
 const emit = defineEmits(['itemClick'])
 
-const classes = useStyle<MenuProps, SlotStyles>(props, styles)
+const classes = styles(props)
 
 const groups = props.items.reduce((acc: Set<string>, item: MenuItem) => {
   if (item.group) acc.add(item.group)

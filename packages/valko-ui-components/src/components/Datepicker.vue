@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<DatepickerProps>(), {
 
 const emit = defineEmits(['update:modelValue', 'open', 'close'])
 
-const classes = styles(props)
+const { container, content } = styles(props)
 
 const rootRef = ref<HTMLElement | null>(null)
 
@@ -30,13 +30,13 @@ const handleClickOutside = (event: MouseEvent) => {
 }
 
 onMounted(() => nextTick(() => document.addEventListener('mousedown', handleClickOutside, true)))
-onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside, true))
+onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutside, true))
 </script>
 
 <template>
   <div
     ref="rootRef"
-    :class="classes.container({ class: styleSlots?.container })"
+    :class="container({ class: styleSlots?.container })"
   >
     <vk-input
       v-bind="props"
@@ -62,7 +62,7 @@ onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside,
     >
       <div
         v-show="isOpen"
-        :class="classes.content({ class: styleSlots?.content })"
+        :class="content({ class: styleSlots?.content })"
       >
         <vk-calendar
           v-if="isOpen"

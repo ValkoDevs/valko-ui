@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const modal = tv({
   slots: {
     container: [
       'vk-modal__container',
@@ -140,3 +140,6 @@ export default tv({
     }
   ]
 })
+
+export default modal
+export type ModalSlots = typeof modal.slots

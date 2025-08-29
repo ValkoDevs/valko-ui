@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const progressbar = tv({
   slots: {
     container: [
       'vk-progressbar__container',
@@ -465,3 +465,6 @@ export default tv({
     }
   ]
 })
+
+export default progressbar
+export type ProgressbarSlots = typeof progressbar.slots

@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<CalendarProps>(), {
 
 const emit = defineEmits(['update:modelValue', 'finalizeSelection'])
 
-const classes = styles(props)
+const { container } = styles(props)
 
 const formatPatternMap: Record<string, DisplayView> = {
   D: 'days',
@@ -104,7 +104,7 @@ watch(() => props.format, () => {
 </script>
 
 <template>
-  <div :class="classes.container({ class: styleSlots?.container })">
+  <div :class="container({ class: styleSlots?.container })">
     <vk-calendar-day-view
       v-if="currentView === 'days'"
       v-bind="props"

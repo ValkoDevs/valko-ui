@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const navbar = tv({
   base: [
     'vk-navbar',
     'flex',
@@ -418,3 +418,6 @@ export default tv({
     }
   ]
 })
+
+export default navbar
+export type NavbarSlots = typeof navbar.base

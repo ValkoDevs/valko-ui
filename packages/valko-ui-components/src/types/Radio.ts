@@ -1,4 +1,5 @@
 import type { DefaultComponent, LabelPosition, AriaAttributes } from './common'
+import type { RadioSlots } from '../styles/Radio.styles'
 
 export interface RadioProps extends DefaultComponent, Pick<AriaAttributes, 'aria-label' | 'aria-labelledby' | 'aria-describedby'> {
   name?: string;
@@ -9,4 +10,5 @@ export interface RadioProps extends DefaultComponent, Pick<AriaAttributes, 'aria
   labelPosition?: LabelPosition;
   disabled?: boolean;
   readonly?: boolean;
+  styleSlots?: Partial<RadioSlots>;
 }

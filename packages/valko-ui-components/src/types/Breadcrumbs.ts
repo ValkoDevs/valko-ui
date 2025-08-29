@@ -1,4 +1,5 @@
 import type { Shapes, ColorsWithSurface, Sizes, VariantWithLink, AriaAttributes } from './common'
+import type { BreadcrumbsSlots } from '../styles/Breadcrumbs.styles'
 
 export interface Crumb {
   key: string;
@@ -15,13 +16,5 @@ export interface BreadcrumbsProps extends Shapes, Sizes, ColorsWithSurface, Pick
   crumbs: Crumb[];
   separator?: string;
   condensed?: boolean;
-  styleSlots?: {
-    container?: string;
-    a?: string;
-    ol?: string;
-    li?: string;
-    separator?: string;
-    iconLeft?: string;
-    iconRight?: string;
-  };
+  styleSlots?: Partial<BreadcrumbsSlots>;
 }

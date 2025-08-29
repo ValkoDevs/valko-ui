@@ -10,18 +10,18 @@ const props = defineProps<CalendarHeaderProps>()
 
 const emit = defineEmits(['previousClick', 'nextClick', 'viewChange'])
 
-const classes = styles(props)
+const { headerContainer, arrows, periodButton } = styles(props)
 </script>
 
 <template>
-  <div :class="classes.headerContainer({ class: styleSlots?.headerContainer })">
+  <div :class="headerContainer({ class: styleSlots?.headerContainer })">
     <vk-button
       :size="size"
       :color="color"
       variant="link"
       condensed
       :shape="shape"
-      :class="classes.arrows({ class: styleSlots?.arrows })"
+      :class="arrows({ class: styleSlots?.arrows })"
       :disabled="disabledLeft"
       @click="() => emit('previousClick')"
     >
@@ -34,7 +34,7 @@ const classes = styles(props)
       variant="link"
       condensed
       :shape="shape"
-      :class="classes.periodButton({ class: styleSlots?.periodButton })"
+      :class="periodButton({ class: styleSlots?.periodButton })"
       @click="() => emit('viewChange')"
     >
       {{ loadedPeriod }}
@@ -46,7 +46,7 @@ const classes = styles(props)
       variant="link"
       condensed
       :shape="shape"
-      :class="classes.arrows({ class: styleSlots?.arrows })"
+      :class="arrows({ class: styleSlots?.arrows })"
       :disabled="disabledRight"
       @click="() => emit('nextClick')"
     >

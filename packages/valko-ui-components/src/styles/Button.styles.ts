@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const button = tv({
   slots: {
     button: [
       'vk-button__base',
@@ -34,6 +34,10 @@ export default tv({
       'hover:bg-state-hover',
       'active:bg-state-active',
       'focus:bg-state-focus'
+    ],
+    spinner: [
+      'data-[variant=filled]:text-surface',
+      'data-[variant=gradient]:text-surface'
     ]
   },
   variants: {
@@ -736,3 +740,6 @@ export default tv({
     }
   ]
 })
+
+export default button
+export type ButtonSlots = typeof button.slots

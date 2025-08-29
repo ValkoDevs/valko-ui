@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const alert = tv({
   slots: {
     container: [
       'vk-alert__container',
@@ -20,10 +20,13 @@ export default tv({
     title: [
       'font-bold'
     ],
-    p: [
+    content: [
       'vk-alert__p',
       'font-medium',
       'break-normal'
+    ],
+    closeButton: [
+      'size-4'
     ],
     closeIcon: [
       'vk-alert__close'
@@ -33,12 +36,12 @@ export default tv({
     variant: {
       filled: {
         container: [
-          'vk-alert__filled'
+          'vk-container__filled'
         ]
       },
       ghost: {
         container: [
-          'vk-alert__ghost'
+          'vk-container__ghost'
         ]
       },
       outlined: {
@@ -70,7 +73,7 @@ export default tv({
         mainIcon: [
           'text-sm'
         ],
-        p: [
+        content: [
           'text-xs'
         ]
       },
@@ -81,7 +84,7 @@ export default tv({
         mainIcon: [
           'text-base'
         ],
-        p: [
+        content: [
           'text-sm'
         ]
       },
@@ -92,7 +95,7 @@ export default tv({
         mainIcon: [
           'text-lg'
         ],
-        p: [
+        content: [
           'text-base'
         ]
       },
@@ -103,7 +106,7 @@ export default tv({
         mainIcon: [
           'text-xl'
         ],
-        p: [
+        content: [
           'text-lg'
         ]
       }
@@ -397,7 +400,7 @@ export default tv({
         ]
       }
     },
-    // filled & gradient (title,p, icons)
+    // filled & gradient (title,content, icons)
     {
       variant: ['filled', 'gradient'],
       color: 'primary',
@@ -482,7 +485,7 @@ export default tv({
         ]
       }
     },
-    // ghost & outlined & color (title, p, icons)
+    // ghost & outlined & color (title, content, icons)
     {
       variant: ['ghost', 'outlined'],
       color: 'primary',
@@ -569,3 +572,6 @@ export default tv({
     }
   ]
 })
+
+export default alert
+export type AlertSlots = typeof alert.slots

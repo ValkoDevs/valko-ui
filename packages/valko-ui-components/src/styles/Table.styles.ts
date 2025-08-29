@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const table = tv({
   slots: {
     container: [
       'w-full',
@@ -261,3 +261,6 @@ export default tv({
     }
   ]
 })
+
+export default table
+export type TableSlots = typeof table.slots

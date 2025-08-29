@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { useId, computed } from 'vue'
 import type { RadioProps } from '#valkoui/types/Radio'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Radio.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkIcon from './Icon.vue'
 
 defineOptions({ name: 'VkRadio' })
@@ -19,7 +17,7 @@ const props = withDefaults(defineProps<RadioProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
-const classes = useStyle<RadioProps, SlotStyles>(props, styles)
+const { container, radioContainer, stateLayer, radio, input, helpertext, label, icon } = styles(props)
 
 const inputId = useId()
 const helpertextId = useId()
@@ -37,9 +35,9 @@ const onClick = () => {
 </script>
 
 <template>
-  <div :class="classes.container">
+  <div :class="container({ class: styleSlots?.container })">
     <div
-      :class="classes.radioContainer"
+      :class="radioContainer({ class: styleSlots?.radioContainer })"
       role="radio"
       :tabindex="disabled ? -1 : 0"
       :aria-checked="modelValue === value"
@@ -51,15 +49,15 @@ const onClick = () => {
       @keydown.enter.prevent="onClick"
       @keydown.space.prevent="onClick"
     >
-      <div :class="classes.stateLayer">
+      <div :class="stateLayer({ class: styleSlots?.stateLayer })">
         <div
-          :class="classes.radio"
+          :class="radio({ class: styleSlots?.radio })"
           :data-checked="value && modelValue === value"
         >
           <vk-icon
             v-if="value && modelValue === value"
             name="point-filled"
-            :class="classes.icon"
+            :class="icon({ class: styleSlots?.icon })"
           />
         </div>
       </div>
@@ -71,18 +69,18 @@ const onClick = () => {
         :value="value"
         :checked="modelValue === value"
         :disabled="disabled"
-        :class="classes.input"
+        :class="input({ class: styleSlots?.input })"
       >
       <label
         :for="inputId"
-        :class="classes.label"
+        :class="label({ class: styleSlots?.label })"
       >
         {{ label }}
       </label>
     </div>
     <span
       v-if="helpertext"
-      :class="classes.helpertext"
+      :class="helpertext({ class: styleSlots?.helpertext })"
       :id="helpertextId"
     >
       {{ helpertext }}

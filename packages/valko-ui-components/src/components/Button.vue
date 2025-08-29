@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 
 const emit = defineEmits(['click'])
 
-const classes = styles(props)
+const { button, stateLayer, spinnerContainer, spinner } = styles(props)
 
 const buttonRef = ref<HTMLButtonElement | null>(null)
 const createRipple = useRipple(buttonRef)
@@ -44,7 +44,7 @@ const onMouseDown = (event: MouseEvent | TouchEvent) => {
 <template>
   <button
     ref="buttonRef"
-    :class="classes.button({ class: styleSlots?.button })"
+    :class="button({ class: styleSlots?.button })"
     :disabled="disabled"
     :aria-disabled="disabled"
     :aria-label="props['aria-label']"
@@ -53,10 +53,8 @@ const onMouseDown = (event: MouseEvent | TouchEvent) => {
     @mousedown="onMouseDown"
     @touchstart="onMouseDown"
   >
-    <div :class="classes.stateLayer({ class: styleSlots?.stateLayer })" />
-    <div
-      :class="classes.spinnerContainer({ class: styleSlots?.spinnerContainer })"
-    >
+    <div :class="stateLayer({ class: styleSlots?.stateLayer })" />
+    <div :class="spinnerContainer({ class: styleSlots?.spinnerContainer })">
       <transition
         enter-active-class="transition ease-out duration-150"
         enter-from-class="opacity-0"
@@ -68,7 +66,8 @@ const onMouseDown = (event: MouseEvent | TouchEvent) => {
         <vk-spinner
           v-if="loading"
           condensed
-          :classes="variant === 'filled' || variant === 'gradient' ? 'text-surface' : ''"
+          :data-variant="variant"
+          :class="spinner({ class: styleSlots?.spinner })"
           :size="size"
           :color="color"
           role="status"
