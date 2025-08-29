@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const badge = tv({
   slots: {
     container: [
       'vk-badge',
@@ -542,3 +542,6 @@ export default tv({
     }
   ]
 })
+
+export default badge
+export type BadgeSlots = typeof badge.slots

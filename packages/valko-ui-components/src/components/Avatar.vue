@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<AvatarProps>(), {
   styleSlots: undefined
 })
 
-const classes = styles(props)
+const { container, imageTag } = styles(props)
 
 const getInitials = (name: string): string => {
   return name
@@ -28,7 +28,7 @@ const getInitials = (name: string): string => {
 
 <template>
   <div
-    :class="classes.container({ class: styleSlots?.container })"
+    :class="container({ class: styleSlots?.container })"
     :title="name"
     :role="src || name ? 'img' : 'presentation'"
     :aria-label="props['aria-label'] ? props['aria-label'] : name"
@@ -39,7 +39,7 @@ const getInitials = (name: string): string => {
         v-if="src"
         :src="src"
         :alt="name"
-        :class="classes.img({ class: styleSlots?.img })"
+        :class="imageTag({ class: styleSlots?.imageTag })"
       >
       <span v-else-if="name">
         {{ getInitials(name) }}

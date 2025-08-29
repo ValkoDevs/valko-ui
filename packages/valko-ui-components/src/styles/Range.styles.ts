@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const range = tv({
   slots: {
     container: [
       'vk-range',
@@ -460,3 +460,6 @@ export default tv({
     }
   ]
 })
+
+export default range
+export type RangeSlots = typeof range.slots

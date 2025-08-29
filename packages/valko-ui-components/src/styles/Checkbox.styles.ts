@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const checkbox = tv({
   slots: {
     container: [
       'vk-checkbox',
@@ -471,3 +471,6 @@ export default tv({
     }
   ]
 })
+
+export default checkbox
+export type CheckboxSlots = typeof checkbox.slots

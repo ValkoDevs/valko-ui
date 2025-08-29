@@ -17,13 +17,13 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   styleSlots: undefined
 })
 
-const classes = styles(props)
+const { container, badge } = styles(props)
 </script>
 
 <template>
-  <div :class="classes.container({ class: styleSlots?.container })">
+  <div :class="container({ class: styleSlots?.container })">
     <span
-      :class="classes.badge({ class: styleSlots?.badge })"
+      :class="badge({ class: styleSlots?.badge })"
       :aria-hidden="(dot && !props['aria-label'] && !content) || undefined"
       :role="(dot && !props['aria-label'] && !content) ? undefined : 'status'"
       :aria-label="props['aria-label'] || (!dot ? String(content) : undefined)"

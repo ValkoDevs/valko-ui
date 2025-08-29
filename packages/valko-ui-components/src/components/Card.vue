@@ -20,7 +20,7 @@ const emit = defineEmits(['click'])
 
 const slots = defineSlots<{ default(): Record<string, unknown>[] }>()
 
-const classes = styles({ ...props, class: props.slotStyles?.container })
+const classes = styles({ ...props, class: props.styleSlots })
 
 const hasImageSlot = computed(() => slots.default?.().some((node) => node.type === VkCardImage))
 

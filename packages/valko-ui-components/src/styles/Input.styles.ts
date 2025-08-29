@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const input = tv({
   slots: {
     container: [
       'vk-input__container',
@@ -71,9 +71,6 @@ export default tv({
     ],
     leftIcon: [
       'left-3'
-    ],
-    iconOpen: [
-      'rotate-180'
     ],
     clearIcon: [
       'vk-input__clear-icon',
@@ -817,3 +814,6 @@ export default tv({
     }
   ]
 })
+
+export default input
+export type InputSlots = typeof input.slots

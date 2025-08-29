@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { useId, ref, watch, computed } from 'vue'
 import type { InputProps } from '#valkoui/types/Input'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Input.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkIcon from './Icon.vue'
 
 defineOptions({ name: 'VkInput' })
@@ -24,7 +22,19 @@ const props = withDefaults(defineProps<InputProps>(), {
 
 const emit = defineEmits(['update:modelValue', 'focus', 'clear', 'blur', 'leftIconClick', 'rightIconClick'])
 
-const classes = useStyle<InputProps, SlotStyles>(props, styles)
+const {
+  container,
+  input,
+  label,
+  field,
+  helper,
+  icons,
+  rightIcon,
+  leftIcon,
+  clearIcon,
+  numberArrows,
+  chevrons
+} = styles(props)
 
 const inputId = useId()
 const helpertextId = useId()
@@ -108,14 +118,14 @@ watch(() => props.modelValue, (newValue) => {
 </script>
 
 <template>
-  <div :class="classes.container">
-    <div :class="classes.field">
+  <div :class="container({ class: styleSlots?.container })">
+    <div :class="field({ class: styleSlots?.field })">
       <input
         ref="inputRef"
         :data-left-icon="!!$slots['left-icon']"
         :data-right-icon="!!$slots['right-icon']"
         :data-clear-icon="clearable"
-        :class="classes.input"
+        :class="input({ class: styleSlots?.input })"
         :readonly="readonly"
         :disabled="disabled"
         :type="type"
@@ -137,17 +147,17 @@ watch(() => props.modelValue, (newValue) => {
       >
       <label
         :for="inputId"
-        :class="classes.label"
+        :class="label({ class: styleSlots?.label })"
       >
         {{ label }}
       </label>
       <span
         v-if="type === 'number'"
-        :class="classes.numberArrows"
+        :class="numberArrows({ class: styleSlots?.numberArrows })"
       >
         <vk-icon
           name="chevron-up"
-          :class="classes.chevrons"
+          :class="chevrons({ class: styleSlots?.chevrons })"
           @mousedown="handleNumericArrowHold('increment')"
           @mouseup="handleNumericArrowRelease"
           @mouseleave="handleNumericArrowRelease"
@@ -155,7 +165,7 @@ watch(() => props.modelValue, (newValue) => {
         />
         <vk-icon
           name="chevron-down"
-          :class="classes.chevrons"
+          :class="chevrons({ class: styleSlots?.chevrons })"
           @mousedown="handleNumericArrowHold('decrement')"
           @mouseup="handleNumericArrowRelease"
           @mouseleave="handleNumericArrowRelease"
@@ -167,13 +177,13 @@ watch(() => props.modelValue, (newValue) => {
         name="x"
         :data-right-icon="!!$slots['right-icon']"
         :data-chevron-icons="type === 'number'"
-        :class="classes.clearIcon"
+        :class="clearIcon({ class: styleSlots?.clearIcon })"
         @click="clearInput"
         @touchend="clearInput"
       />
       <span
         v-if="$slots['left-icon']"
-        :class="[classes.icons, classes.leftIcon]"
+        :class="[icons({ class: styleSlots?.icons }), leftIcon({ class: styleSlots?.leftIcon })]"
         @click="handleIconClick('left')"
         @touchend="handleIconClick('left')"
       >
@@ -182,7 +192,7 @@ watch(() => props.modelValue, (newValue) => {
       <span
         v-if="$slots['right-icon']"
         :data-chevron-icons="type === 'number'"
-        :class="[classes.icons, classes.rightIcon]"
+        :class="[icons({ class: styleSlots?.icons }), rightIcon({ class: styleSlots?.rightIcon })]"
         @click="handleIconClick('right')"
         @touchend="handleIconClick('right')"
       >
@@ -192,7 +202,7 @@ watch(() => props.modelValue, (newValue) => {
     <span
       v-if="helpertext"
       :id="helpertextId"
-      :class="classes.helper"
+      :class="helper({ class: styleSlots?.helper })"
     >
       {{ helpertext }}
     </span>

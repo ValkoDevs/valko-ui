@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed, watchEffect } from 'vue'
 import type { PaginationProps } from '#valkoui/types/Pagination'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Pagination.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 
@@ -20,7 +18,7 @@ const props = withDefaults(defineProps<PaginationProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
-const classes = useStyle<PaginationProps, SlotStyles>(props, styles)
+const { nav, button, arrows } = styles(props)
 
 const visiblePages = computed(() => {
   const total = +props.pages
@@ -50,7 +48,7 @@ watchEffect(() => {
 <template>
   <div>
     <nav
-      :class="classes.nav"
+      :class="nav({ class: styleSlots?.nav })"
       :aria-label="props['aria-label'] ?? 'Pagination'"
     >
       <vk-button
@@ -63,7 +61,7 @@ watchEffect(() => {
         :disabled="modelValue === 1 || disabled"
         @click="() => changePage(modelValue - 1)"
       >
-        <div :class="classes.arrows">
+        <div :class="arrows({ class: styleSlots?.arrows })">
           <span class="sr-only">Previous</span>
           <vk-icon name="chevron-left" />
         </div>
@@ -79,7 +77,7 @@ watchEffect(() => {
         :disabled="disabled"
         @click="() => changePage(page)"
       >
-        <div :class="classes.button">
+        <div :class="button({ class: styleSlots?.button })">
           {{ page }}
         </div>
       </vk-button>
@@ -93,7 +91,7 @@ watchEffect(() => {
         :disabled="modelValue === +pages || disabled"
         @click="() => changePage(modelValue + 1)"
       >
-        <div :class="classes.arrows">
+        <div :class="arrows({ class: styleSlots?.arrows })">
           <span class="sr-only">Next</span>
           <vk-icon name="chevron-right" />
         </div>

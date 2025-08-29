@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { ProgressbarProps } from '#valkoui/types/Progressbar'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Progressbar.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import diagonalStripes from '#valkoui/img/diagonal-stripes.svg'
 
 defineOptions({ name: 'VkProgressbar' })
@@ -19,7 +17,7 @@ const props = withDefaults(defineProps<ProgressbarProps>(), {
   indeterminate: false
 })
 
-const classes = useStyle<ProgressbarProps, SlotStyles>(props, styles)
+const { container, background, buffer, content, progress, stripes } = styles(props)
 
 const progressStyles = computed(() => {
   return {
@@ -48,15 +46,15 @@ const showContent = computed(() => props.shape !== 'line')
 
 <template>
   <div
-    :class="classes.container"
+    :class="container({ class: styleSlots?.container })"
   >
-    <div :class="classes.background">
+    <div :class="background({ class: styleSlots?.background })">
       <div
         v-if="!!buffer && !indeterminate"
-        :class="classes.buffer"
+        :class="buffer()"
         :style="bufferStyles"
       />
-      <div :class="classes.content">
+      <div :class="content({ class: styleSlots?.content})">
         <slot
           v-if="showContent"
           :progress="progress"
@@ -65,12 +63,12 @@ const showContent = computed(() => props.shape !== 'line')
       </div>
     </div>
     <div
-      :class="classes.progress"
+      :class="progress({ class: styleSlots?.progress })"
       :style="progressStyles"
     >
       <div
         v-if="striped"
-        :class="classes.stripes"
+        :class="stripes({ class: styleSlots?.stripes })"
         :style="stripeStyles"
       />
       <slot

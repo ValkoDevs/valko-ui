@@ -1,8 +1,8 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const popover = tv({
   slots: {
-    popover: [
+    container: [
       'vk-popover',
       'w-auto',
       'h-auto',
@@ -120,3 +120,6 @@ export default tv({
     }
   }
 })
+
+export default popover
+export type PopoverSlots = typeof popover.slots

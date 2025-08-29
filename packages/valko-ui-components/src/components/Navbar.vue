@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { NavbarProps } from '#valkoui/types/Navbar'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Navbar.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 
 defineOptions({ name: 'VkNavbar' })
 
@@ -17,7 +15,7 @@ const props = withDefaults(defineProps<NavbarProps>(), {
   vertical: false
 })
 
-const classes = useStyle<NavbarProps, SlotStyles>(props, styles)
+const classes = styles({ ...props, class: props.styleSlots })
 </script>
 
 <template>

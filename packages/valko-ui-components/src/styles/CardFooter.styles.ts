@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const cardFooter = tv({
   base: [
     'vk-card__footer',
     'px-4',
@@ -16,3 +16,6 @@ export default tv({
     'group-data-[card-image=false]:order-3'
   ]
 })
+
+export default cardFooter
+export type CardFooterSlots = typeof cardFooter.base

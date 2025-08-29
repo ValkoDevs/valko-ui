@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const divider = tv({
   base: [
     'vk-divider',
     'border-0'
@@ -265,3 +265,6 @@ export default tv({
     }
   ]
 })
+
+export default divider
+export type DividerSlots = typeof divider.base

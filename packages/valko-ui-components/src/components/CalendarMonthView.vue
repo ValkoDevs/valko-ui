@@ -10,7 +10,7 @@ const props = defineProps<CalendarMonthViewProps>()
 
 const emit = defineEmits(['selectMonth', 'viewChange', 'changeYear'])
 
-const classes = styles(props)
+const { viewContainer, panel, gridButton } = styles(props)
 
 const isSelected = (index: number) => props.selected.year === props.display.year && props.selected.month === index
 const onSelectMonth = (month: number) => emit('selectMonth', month)
@@ -18,7 +18,7 @@ const onArrowClick = (operation: 1 | -1) => emit('changeYear', props.display.yea
 </script>
 
 <template>
-  <div :class="classes.viewContainer({ class: styleSlots?.viewContainer })">
+  <div :class="viewContainer({ class: styleSlots?.viewContainer })">
     <vk-calendar-header
       v-bind="props"
       :loaded-period="display.year"
@@ -28,12 +28,12 @@ const onArrowClick = (operation: 1 | -1) => emit('changeYear', props.display.yea
       @next-click="onArrowClick(1)"
       @previous-click="onArrowClick(-1)"
     />
-    <div :class="classes.panel({ class: styleSlots?.panel })">
+    <div :class="panel({ class: styleSlots?.panel })">
       <vk-button
         v-for="(month, index) in monthNames"
         :key="`month-cell-${index}`"
         :disabled="(min && display.year === min.year && index < min.month) || (max && display.year === max.year && index > max.month)"
-        :class="classes.gridButton({ class: styleSlots?.gridButton })"
+        :class="gridButton({ class: styleSlots?.gridButton })"
         :size="size"
         :color="isSelected(index) ? color : 'surface'"
         :variant="isSelected(index) ? variant : 'link'"

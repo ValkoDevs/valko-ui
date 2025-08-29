@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const dataTable = tv({
   slots: {
     table: [
       'vk-data-table',
@@ -28,10 +28,10 @@ export default tv({
       'items-center',
       'mt-2'
     ],
-    footerNav: [
+    pagination: [
       'mr-auto'
     ],
-    footerSelect: [
+    select: [
       'vk-data-table__select',
       'ml-auto'
     ],
@@ -81,3 +81,6 @@ export default tv({
     }
   }
 })
+
+export default dataTable
+export type DataTableSlots = typeof dataTable.slots

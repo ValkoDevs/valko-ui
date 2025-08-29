@@ -23,7 +23,7 @@ const itemId = useId()
   <disclosure
     as="div"
     :key="itemId"
-    :class="classes.collapse({ class: styleSlots?.collapse })"
+    :class="classes.collapseItem({ class: styleSlots?.collapseItem })"
   >
     <disclosure-button
       :class="classes.button({ class: styleSlots?.button })"

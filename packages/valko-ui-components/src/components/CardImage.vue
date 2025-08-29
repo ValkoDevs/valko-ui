@@ -11,21 +11,21 @@ const props = withDefaults(defineProps<CardImageProps>(), {
   styleSlots: undefined
 })
 
-const classes = styles(props)
+const { container, imageTag, gradient } = styles(props)
 </script>
 
 <template>
   <div
     :style="`width:${width}; height:${height};`"
-    :class="classes.container({ class: props.styleSlots?.container })"
+    :class="container({ class: styleSlots?.container })"
   >
-    <slot :classes="classes.img({ class: props.styleSlots?.img })">
+    <slot :classes="imageTag({ class: styleSlots?.imageTag })">
       <img
         :src="src"
         :alt="alt"
-        :class="classes.img({ class: props.styleSlots?.img })"
+        :class="imageTag({ class: styleSlots?.imageTag })"
       >
     </slot>
-    <div :class="classes.gradient({ class: props.styleSlots?.gradient })" />
+    <div :class="gradient({ class: styleSlots?.gradient })" />
   </div>
 </template>

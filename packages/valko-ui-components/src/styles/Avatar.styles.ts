@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const avatar = tv({
   slots: {
     container: [
       'vk-avatar',
@@ -11,15 +11,10 @@ export default tv({
       'select-none',
       'overflow-hidden'
     ],
-    img: [
+    imageTag: [
       'w-full',
       'h-full',
       'object-cover'
-    ],
-    span: [
-      'w-full',
-      'h-full',
-      'shrink-0'
     ]
   },
   variants: {
@@ -418,3 +413,6 @@ export default tv({
     }
   ]
 })
+
+export default avatar
+export type AvatarSlots = typeof avatar.slots

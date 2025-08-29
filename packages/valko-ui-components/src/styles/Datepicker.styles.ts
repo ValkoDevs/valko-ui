@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const datePicker = tv({
   slots: {
     container: [
       'vk-datepicker',
@@ -57,3 +57,6 @@ export default tv({
     }
   }
 })
+
+export default datePicker
+export type DatePickerSlots = typeof datePicker.slots

@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch, toValue, useId } from 'vue'
 import type { RangeProps } from '#valkoui/types/Range'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Range.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import diagonalStripes from '#valkoui/img/diagonal-stripes.svg'
 
 defineOptions({ name: 'VkRange' })
@@ -25,7 +23,7 @@ const props = withDefaults(defineProps<RangeProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
-const classes = useStyle<RangeProps, SlotStyles>(props, styles)
+const { container, progressContainer, progress, thumbContainer, thumb, stepMark, labelContainer, label } = styles(props)
 
 const rangeId = useId()
 const isDragging = ref(false)
@@ -210,14 +208,14 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
 
 <template>
   <div
-    :class="classes.container"
+    :class="container({ class: styleSlots?.container })"
     ref="sliderRef"
     :id="rangeId"
     @mousedown="onSliderClick"
   >
-    <div :class="classes.progressContainer">
+    <div :class="progressContainer({ class: styleSlots?.progressContainer })">
       <div
-        :class="classes.progress"
+        :class="progress({ class: styleSlots?.progress })"
         :style="inlineStyles"
       />
       <div v-if="showSteps">
@@ -225,14 +223,14 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
           v-for="(position, index) in stepMarks"
           :key="index"
           :style="`left:${position}%`"
-          :class="classes.stepMark"
+          :class="stepMark({ class: styleSlots?.stepMark })"
         />
       </div>
     </div>
-    <div :class="classes.thumbContainer">
+    <div :class="thumbContainer({ class: styleSlots?.thumbContainer })">
       <div
         v-if="isDouble"
-        :class="classes.thumb"
+        :class="thumb({ class: styleSlots?.thumb })"
         :style="thumbStyles.start"
         role="slider"
         tabindex="0"
@@ -247,7 +245,7 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
         @touchstart="(event) => onStart(event, 'min')"
       />
       <div
-        :class="classes.thumb"
+        :class="thumb({ class: styleSlots?.thumb })"
         :style="thumbStyles.end"
         role="slider"
         tabindex="0"
@@ -264,13 +262,13 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
     </div>
     <div
       v-if="labels.length > 0"
-      :class="classes.labelContainer"
+      :class="labelContainer({ class: styleSlots?.labelContainer })"
     >
       <span
         v-for="(el, index) in labels"
         :key="index"
         :style="`left:${el.value}%`"
-        :class="classes.label"
+        :class="label({ class: styleSlots?.label })"
         @click="() => onLabelClick(el.value)"
       >
         {{ el.label }}

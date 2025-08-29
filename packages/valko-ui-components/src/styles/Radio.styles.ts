@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const radio = tv({
   slots: {
     container: [
       'vk-radio',
@@ -459,3 +459,6 @@ export default tv({
     }
   ]
 })
+
+export default radio
+export type RadioSlots = typeof radio.slots

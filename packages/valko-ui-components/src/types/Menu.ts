@@ -1,4 +1,5 @@
 import type { Colors, VariantWithGradientLinkAndLine, Sizes, Shapes } from './common'
+import type { MenuSlots } from '../styles/Menu.styles'
 
 export interface MenuItem {
   key: string | number;
@@ -15,4 +16,5 @@ export interface MenuProps extends Colors, Sizes, Shapes {
   items: MenuItem[];
   active: null | string | number;
   floating?: boolean;
+  styleSlots?: Partial<MenuSlots>;
 }
