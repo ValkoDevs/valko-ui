@@ -1,4 +1,5 @@
 import type { DefaultComponent, AriaAttributes } from './common'
+import type { SelectSlots } from '../styles/Select.styles'
 
 export interface SelectOption<T = string | number> {
   value: T;
@@ -14,4 +15,5 @@ export interface SelectProps extends DefaultComponent, Omit<AriaAttributes, 'ari
   disabled?: boolean;
   readonly?: boolean;
   clearable?: boolean;
+  styleSlots?: Partial<SelectSlots>;
 }

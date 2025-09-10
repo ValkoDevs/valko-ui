@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const select = tv({
   slots: {
     container: [
       'vk-select__container',
@@ -235,3 +235,6 @@ export default tv({
     }
   }
 })
+
+export default select
+export type SelectSlots = typeof select.slots

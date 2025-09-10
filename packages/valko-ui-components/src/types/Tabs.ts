@@ -1,4 +1,5 @@
 import type { Sizes, Colors, VariantsAlt, ShapeWithLine, AriaAttributes } from './common'
+import type { TabsSlots } from '../styles/Tabs.styles'
 
 export interface Tab {
   key: string | number;
@@ -19,4 +20,5 @@ export interface TabsProps extends Sizes, VariantsAlt, Colors, Pick<AriaAttribut
   defaultIndex?: number;
   grow?: boolean;
   vertical?: boolean;
+  styleSlots?: Partial<TabsSlots>;
 }
