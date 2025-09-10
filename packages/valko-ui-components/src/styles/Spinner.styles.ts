@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const spinner = tv({
   slots: {
     container: [
       'vk-spinner',
@@ -10,8 +10,7 @@ export default tv({
       'vk-spinner__icon',
       'animate-spin',
       'leading-none'
-    ],
-    iconColor : []
+    ]
   },
   variants: {
     size: {
@@ -38,37 +37,37 @@ export default tv({
     },
     color: {
       primary: {
-        iconColor: [
+        icon: [
           'text-primary'
         ]
       },
       secondary: {
-        iconColor: [
+        icon: [
           'text-secondary'
         ]
       },
       positive: {
-        iconColor: [
+        icon: [
           'text-positive'
         ]
       },
       accent: {
-        iconColor: [
+        icon: [
           'text-accent'
         ]
       },
       warning: {
-        iconColor: [
+        icon: [
           'text-warning'
         ]
       },
       negative: {
-        iconColor: [
+        icon: [
           'text-negative'
         ]
       },
       surface: {
-        iconColor: [
+        icon: [
           'text-on-surface'
         ]
       }
@@ -120,3 +119,6 @@ export default tv({
     }
   ]
 })
+
+export default spinner
+export type SpinnerSlots = typeof spinner.slots

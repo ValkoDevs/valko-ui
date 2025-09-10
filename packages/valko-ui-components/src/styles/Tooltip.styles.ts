@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const tooltip = tv({
   slots: {
     container: [
       'vk-tooltip'
@@ -39,3 +39,6 @@ export default tv({
     }
   }
 })
+
+export default tooltip
+export type TooltipSlots = typeof tooltip.slots

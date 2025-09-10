@@ -2,9 +2,7 @@
 import { useId } from 'vue'
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 import type { SwitchProps } from '#valkoui/types/Switch'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Switch.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 
 defineOptions({ name: 'VkSwitch' })
 
@@ -20,7 +18,7 @@ const props = withDefaults(defineProps<SwitchProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
-const classes = useStyle<SwitchProps, SlotStyles>(props, styles)
+const { container, switchSlot, thumb, content, labelSlot } = styles(props)
 
 const inputId = useId()
 
@@ -30,13 +28,13 @@ const onClick = (event: boolean) => {
 </script>
 
 <template>
-  <div :class="classes.container">
+  <div :class="container({ class: styleSlots?.container })">
     <switch-group>
-      <div :class="classes.content">
+      <div :class="content({ class: styleSlots?.content })">
         <switch-label
           v-if="label"
           :for="inputId"
-          :class="classes.label"
+          :class="labelSlot({ class: styleSlots?.labelSlot })"
           passive
         >
           {{ label }}
@@ -46,7 +44,7 @@ const onClick = (event: boolean) => {
           :model-value="modelValue"
           :disabled="disabled"
           :data-active="modelValue"
-          :class="classes.switch"
+          :class="switchSlot({ class: styleSlots?.switchSlot })"
           :aria-label="props['aria-label']"
           :aria-labelledby="props['aria-labelledby']"
           :aria-describedby="props['aria-describedby']"
@@ -58,7 +56,7 @@ const onClick = (event: boolean) => {
           <span
             aria-hidden="true"
             :data-selected="modelValue"
-            :class="classes.thumb"
+            :class="thumb({ class: styleSlots?.thumb })"
           />
         </Switch>
       </div>

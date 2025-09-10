@@ -1,6 +1,6 @@
 import { tv } from 'tailwind-variants'
 
-export default tv({
+const tag = tv({
   slots: {
     container: [
       'vk-tag',
@@ -806,3 +806,6 @@ export default tv({
     }
   ]
 })
+
+export default tag
+export type TagSlots = typeof tag.slots

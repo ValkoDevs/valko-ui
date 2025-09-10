@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref, useId, watch, computed } from 'vue'
 import type { TextareaProps } from '#valkoui/types/Textarea'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Textarea.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 
 defineOptions({ name: 'VkTextarea' })
 
@@ -18,7 +16,7 @@ const props = withDefaults(defineProps<TextareaProps>(), {
 
 const emit = defineEmits(['update:modelValue', 'leftIconClick', 'rightIconClick'])
 
-const classes = useStyle<TextareaProps, SlotStyles>(props, styles)
+const { container, field, textarea, label, helper, counter, footer, leftIcon, rightIcon, icons } = styles(props)
 
 const isFilled = ref(false)
 const inputValue = ref(props.modelValue || '')
@@ -57,12 +55,12 @@ watch(() => props.modelValue, (newValue) => {
 </script>
 
 <template>
-  <div :class="classes.container">
-    <div :class="classes.field">
+  <div :class="container({ class: styleSlots?.container })">
+    <div :class="field({ class: styleSlots?.field })">
       <textarea
         ref="inputRef"
         :id="inputId"
-        :class="classes.textarea"
+        :class="textarea({ class: styleSlots?.textarea })"
         :disabled="disabled"
         :readonly="readonly"
         :value="inputValue"
@@ -79,7 +77,7 @@ watch(() => props.modelValue, (newValue) => {
       />
       <span
         v-if="!!$slots['left-icon']"
-        :class="[classes.icons, classes.leftIcon]"
+        :class="[icons({ class: styleSlots?.icons }), leftIcon({ class: styleSlots?.leftIcon })]"
         @click="handleIconClick('left')"
       >
         <slot name="left-icon" />
@@ -87,27 +85,27 @@ watch(() => props.modelValue, (newValue) => {
 
       <span
         v-if="!!$slots['right-icon']"
-        :class="[classes.icons, classes.rightIcon]"
+        :class="[icons({ class: styleSlots?.icons }), rightIcon({ class: styleSlots?.rightIcon })]"
         @click="handleIconClick('right')"
       >
         <slot name="right-icon" />
       </span>
       <label
         :for="inputId"
-        :class="classes.label"
+        :class="label({ class: styleSlots?.label })"
       >
         {{ label }}
       </label>
     </div>
-    <div :class="classes.footer">
+    <div :class="footer({ class: styleSlots?.footer })">
       <span
         v-if="helpertext"
         :id="helpertextId"
-        :class="classes.helper"
+        :class="helper({ class: styleSlots?.helper })"
       > {{ helpertext }}</span>
       <span
         v-if="maxlength && maxlength > 0"
-        :class="classes.counter"
+        :class="counter({ class: styleSlots?.counter })"
       >{{ `${inputValue.length} / ${maxlength}` }}</span>
     </div>
   </div>

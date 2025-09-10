@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref, useId } from 'vue'
 import type { TooltipProps } from '#valkoui/types/Tooltip'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Tooltip.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkPopover from './Popover.vue'
 
 defineOptions({ name: 'VkTooltip' })
@@ -18,7 +16,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   elevated: false
 })
 
-const classes = useStyle<TooltipProps, SlotStyles>(props, styles)
+const { container, tip } = styles(props)
 
 const isShown = ref(false)
 const tooltipId = useId()
@@ -35,7 +33,7 @@ const showTooltip = (value: boolean) => {
     :alignment="alignment"
     :shape="shape"
     :elevated="elevated"
-    :class="classes.container"
+    :class="container({ class: styleSlots?.container })"
     condensed
     @mouseenter="() => showTooltip(true)"
     @mouseleave="() => showTooltip(false)"
@@ -46,7 +44,7 @@ const showTooltip = (value: boolean) => {
       <div
         :id="tooltipId"
         role="tooltip"
-        :class="classes.tip"
+        :class="tip({ class: styleSlots?.tip })"
       >
         {{ content }}
       </div>
