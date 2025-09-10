@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { computed, ref, onMounted, onUnmounted, nextTick, Ref } from 'vue'
 import type { SelectProps, SelectOption } from '#valkoui/types/Select'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Select.styles.ts'
@@ -26,6 +26,7 @@ const emit = defineEmits(['update:modelValue'])
 const classes = useStyle<SelectProps, SlotStyles>(props, styles)
 
 const select = ref(null)
+const itemRefs: Ref<(HTMLElement | null)[]> = ref([])
 const isOpen = ref(false)
 
 const showMap: Record<string, string> = props.options.reduce((acc: Record<string, string>, opt: SelectOption) => ({
@@ -88,6 +89,34 @@ const clearSelection = () => {
   toggleDropdown(false)
 }
 
+const highlightedIndex = ref(-1)
+
+const handleKeyDown = (e: KeyboardEvent) => {
+  type AllowedKeys = 'ArrowDown' | 'ArrowUp' | 'Home' | 'End' | 'Enter' | 'SpaceBar'
+  const allowedKeys: AllowedKeys[] = ['ArrowDown', 'ArrowUp', 'Home', 'End', 'Enter', 'SpaceBar']
+  const currentKey = e.key === ' ' ? 'SpaceBar' : (e.key as AllowedKeys)
+
+  if (!isOpen.value || !allowedKeys.includes(currentKey)) return
+
+  e.preventDefault()
+
+  const formulaMap = {
+    ArrowDown: () => (highlightedIndex.value + 1) % props.options.length,
+    ArrowUp: () => (highlightedIndex.value - 1 + props.options.length) % props.options.length,
+    Home: () => 0,
+    End: () => props.options.length - 1
+  }
+
+  if (['Enter', 'SpaceBar'].includes(currentKey) && highlightedIndex.value >= 0) {
+    const item = props.options[highlightedIndex.value]
+    if (props.multiple) handleMultipleSelection(item.value)
+    else handleSingleSelection(item.value)
+  }
+
+  highlightedIndex.value = formulaMap[currentKey as keyof typeof formulaMap]()
+  nextTick(() => itemRefs.value[highlightedIndex.value]?.scrollIntoView({ block: 'nearest' }))
+}
+
 onMounted(() => {
   document.addEventListener('click', closeDropdownOnOutsideClick)
 })
@@ -137,7 +166,10 @@ onUnmounted(() => {
         :aria-invalid="props['aria-invalid']"
         :aria-required="props['aria-required']"
         @focus="toggleDropdown(true)"
+        @blur="toggleDropdown(false)"
         @clear="clearSelection"
+        @keydown="handleKeyDown"
+        @keydown.escape="toggleDropdown(false)"
       >
         <template #right-icon>
           <vk-icon
@@ -167,10 +199,12 @@ onUnmounted(() => {
           :aria-label="label || 'Select options'"
         >
           <li
-            v-for="item in options"
+            v-for="(item, index) in options"
             role="option"
+            :ref="el => itemRefs[index] = (el as HTMLElement | null)"
             :key="item.value"
             :data-selected="isSelected(item.value)"
+            :data-highlighted="highlightedIndex === index"
             :data-shape="shape"
             :data-variant="variant"
             :class="classes.item"

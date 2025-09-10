@@ -34,13 +34,15 @@ const inputRef = ref<HTMLInputElement | null>(null)
 let intervalId: ReturnType<typeof setInterval> | null = null
 
 const updateValue = (e: Event) => {
-  const value = (e.target as HTMLInputElement).value
+  let value: string | number = (e.target as HTMLInputElement).value
 
-  if (!props.disabled && !props.readonly) {
-    inputValue.value = value
-    emit('update:modelValue', value)
-    isFilled.value = value !== ''
-  }
+  if (props.disabled || props.readonly) return
+
+  if (props.type === 'number') value = value === '' ? '' : Number(value)
+
+  inputValue.value = value
+  emit('update:modelValue', value)
+  isFilled.value = value !== ''
 }
 
 const onFocus = (event: Event) => {

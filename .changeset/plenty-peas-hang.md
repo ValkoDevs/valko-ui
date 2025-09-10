@@ -12,6 +12,7 @@
 - Introduced a ripple effect on click for clearer interaction feedback.
 - Added `type` prop for better form compatibility. (`button`, `reset`, `submit`.)
 - Fixed `condensed` prop not working correctly.
+- Exposed native click event when the button is clicked.
 
 **Card:**
 - Removed default minimum height and width to allow more flexible sizing.
@@ -20,13 +21,17 @@
 - Restored label click behavior, so users can check/uncheck via the label.
 
 **Dropdown:**
-- Added a `toggle` method to manually control the open state when using a custom trigger slot.
+- Added an `isOpen` prop to support both controlled and uncontrolled open state management.
+- Exposed a `toggle` method for manual control of the open state when using a custom trigger slot.
   (Previously handled internally by Headless UI, now exposed for users after removing that dependency.)
+- Exposed a native click event emit when the dropdown trigger is clicked.
+- Added missing `surface` color option.
 
 **Input:**
 - Standardized padding and spacing across all sizes and variants.
 - Fixed icon misalignment when `type="number"`.
 - Added `blur` event emit.
+- Fixed input to emit a number value (instead of a string) when `type="number"`.
 
 **Navbar:**
 - Fixed border-radius not being applied correctly when using different `shape` values (`rounded`, `square`, `soft`) with `floating`.
@@ -36,6 +41,9 @@
 
 **Popover:**
 - Replaced `w-fit/h-fit` with `w-auto/h-auto` to allow popover sizing based on content.
+
+**Select:**
+- Added full keyboard navigation support, allowing users to open, close, and select options using arrow keys, Enter, and SpaceBar.
 
 **Tabs:**
 - Added slots for tab customization. Slot names are now `item['key']-tab` and `item['key']-content`.
@@ -59,4 +67,4 @@
 - Renamed `Icon` page to `Icons` and moved it to the **General** section.
 - Added a new `Theme` page under **General**.
 - Updated the following component API docs to reflect recent changes:
-    - Avatar, Button, Input, Tabs.
+    - Avatar, Button, Card, Input, Select, Tabs.

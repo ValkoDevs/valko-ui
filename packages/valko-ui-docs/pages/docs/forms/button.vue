@@ -108,8 +108,8 @@ const emitData: TableItem[] = [
     key: 'click',
     event: 'click',
     description: 'Emitted when the button is clicked.',
-    values: '',
-    type: '() => void'
+    values: 'MouseEvent',
+    type: '(event: MouseEvent) => void'
   }
 ]
 

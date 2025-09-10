@@ -28,13 +28,13 @@ const parsedStyles = useStyle<ExampleSectionProps>(props, styles)
       shape="line"
       grow
     >
-      <template #examples>
+      <template #examples-content>
         <div :class="`${parsedStyles} ${classes}`">
           <slot />
         </div>
       </template>
 
-      <template #code>
+      <template #code-content>
         <div class="p-4 bg-surface-container-lowest rounded-b-lg w-full">
           <slot name="code" />
         </div>

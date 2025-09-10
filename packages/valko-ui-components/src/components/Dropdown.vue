@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, useId } from 'vue'
+import { ref, useId, computed } from 'vue'
 import type { DropdownProps, Item } from '#valkoui/types/Dropdown'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Dropdown.styles.ts'
@@ -20,16 +20,29 @@ const props = withDefaults(defineProps<DropdownProps>(), {
   disabled: false,
   placement: 'auto',
   alignment: undefined,
+  isOpen: undefined,
   items: () => []
 })
 
-const emit = defineEmits(['itemClick'])
+const emit = defineEmits(['itemClick', 'click'])
 
 const classes = useStyle<DropdownProps, SlotStyles>(props, styles)
 
-const open = ref(false)
 const dropdownId = useId()
 const menuId = useId()
+const internalOpen = ref(false)
+
+const open = computed({
+  get: () => props.isOpen ?? internalOpen.value,
+  set: (val: boolean) => {
+    if (props.isOpen === undefined) internalOpen.value = val
+  }
+})
+
+const onClick = (event: MouseEvent) => {
+  open.value = !open.value
+  emit('click', event)
+}
 
 const onItemClick = (item: Item) => {
   if (item.disabled) return
@@ -53,7 +66,7 @@ const onItemClick = (item: Item) => {
       name="dropdown-trigger"
       :v-bind="props"
       :open="open"
-      :toggle="() => open = !open"
+      :toggle="onClick"
     >
       <vk-button
         v-bind="props"
@@ -64,7 +77,7 @@ const onItemClick = (item: Item) => {
         :aria-haspopup="'menu'"
         :aria-expanded="open"
         :aria-controls="menuId"
-        @click="open = !open"
+        @click.stop="onClick"
       >
         {{ label }}
         <vk-icon

@@ -114,8 +114,8 @@ const cardEmits: TableItem[] = [
   {
     key: 'clickEmit',
     event: 'click',
-    type: '() => void',
-    values: '',
+    type: '(event: MouseEvent) => void',
+    values: 'MouseEvent',
     description: 'Emitted when the Card is clicked by the user.'
   }
 ]

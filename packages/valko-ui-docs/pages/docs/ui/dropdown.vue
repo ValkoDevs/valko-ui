@@ -35,7 +35,7 @@ const dropdownProps: TableItem[] = [
     prop: 'variant',
     required: false,
     description: 'The Dropdown variant.',
-    values: 'filled, outlined, ghost, gradient',
+    values: 'filled, outlined, ghost, gradient, link',
     default: 'filled'
   },
   {
@@ -53,6 +53,14 @@ const dropdownProps: TableItem[] = [
     description: 'The Dropdown size.',
     values: 'xs, sm, md, lg',
     default: 'md'
+  },
+  {
+    key: 'isOpenProp',
+    prop: 'isOpen',
+    required: false,
+    description: 'Controls the open state of the Dropdown, if not provided it will be managed internally.',
+    values: 'true, false',
+    default: 'false'
   },
   {
     key: 'elevatedProp',
@@ -162,6 +170,13 @@ const dropdownEmits: TableItem[] = [
     description: 'Emitted when an item in the dropdown menu is clicked.',
     values: 'Item',
     type: '(item: Item) => void'
+  },
+  {
+    key: 'clickEmit',
+    event: 'click',
+    description: 'Emitted when the dropdown trigger is clicked.',
+    values: 'MouseEvent',
+    type: '(event: MouseEvent) => void'
   }
 ]
 
@@ -223,7 +238,7 @@ const extraProps = ':items="items"'
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions.general"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -271,7 +286,7 @@ const extraProps = ':items="items"'
         classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] xl:grid-cols-[repeat(6,_minmax(0,_max-content))]"
       >
         <vk-dropdown
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           :color="color.value"
           :title="color.label"
@@ -280,7 +295,7 @@ const extraProps = ':items="items"'
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 

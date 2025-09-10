@@ -52,7 +52,7 @@ const createRipple = (event: MouseEvent) => {
 
 const onClick = (event: MouseEvent) => {
   if (!props.disabled && !props.loading) {
-    emit('click')
+    emit('click', event)
     createRipple(event)
   }
 }
