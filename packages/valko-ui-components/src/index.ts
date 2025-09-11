@@ -17,6 +17,7 @@ export { default as useClientSideFilter } from '#valkoui/composables/useClientSi
 export { default as useClientSideDragAndDrop } from '#valkoui/composables/useClientSideDragAndDrop.ts'
 export { default as useClientSideDataTable } from '#valkoui/composables/useClientSideDataTable.ts'
 export { default as useDateAdapter } from '#valkoui/composables/useDateAdapter.ts'
+export { default as useRipple } from '#valkoui/composables/useRipple.ts'
 export { default as useTimeAdapter } from '#valkoui/composables/useTimeAdapter.ts'
 
 ///////////////////

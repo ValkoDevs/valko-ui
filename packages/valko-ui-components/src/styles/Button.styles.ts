@@ -34,14 +34,6 @@ export default tv({
       'hover:bg-state-hover',
       'active:bg-state-active',
       'focus:bg-state-focus'
-    ],
-    ripple: [
-      'absolute',
-      'animate-ripple',
-      'rounded-full',
-      'events-none',
-      'bg-current/[.5]',
-      'z-20'
     ]
   },
   variants: {

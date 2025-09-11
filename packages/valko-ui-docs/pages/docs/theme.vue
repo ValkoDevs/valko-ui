@@ -29,6 +29,7 @@ const themeLight = `@theme {
   --color-state-active: rgba(0, 0, 0, .1);
   --color-state-scrim: rgba(0, 0, 0, .32);
   --color-state-shadow: rgba(0, 0, 0, .32);
+  --color-state-drag: rgba(0, 0, 0, .16);
 
   /* Semantic colors */
   --color-primary: #7e4d7c;
@@ -112,9 +113,12 @@ const themeDark = `html.dark {
   --color-inverse-on-surface: #352e33;
 
   /* State colors */
-  --color-state-hover: rgba(0, 0, 0, 0.08);
-  --color-state-focus: rgba(0, 0, 0, 0.10);
-  --color-state-active: rgba(0, 0, 0, 0.10);
+  --color-state-hover: rgba(0, 0, 0, .08);
+  --color-state-focus: rgba(0, 0, 0, .1);
+  --color-state-active: rgba(0, 0, 0, .1);
+  --color-state-scrim: rgba(0, 0, 0, .32);
+  --color-state-shadow: rgba(0, 0, 0, .32);
+  --color-state-drag: rgba(0, 0, 0, .16);
 
   /* Semantic colors */
   --color-primary: #efb4e9;

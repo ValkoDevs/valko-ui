@@ -3,13 +3,13 @@
 "@valko-ui/docs": patch
 ---
 
-### Components
+## Valko-UI Components:
 
 **Avatar:**
 - Added a slot to let users replace the Avatar’s content.
 
 **Button:**
-- Introduced a ripple effect on click for clearer interaction feedback.
+- Introduced a ripple effect on click for clearer interaction feedback (now powered by useRipple composable).
 - Added `type` prop for better form compatibility. (`button`, `reset`, `submit`.)
 - Fixed `condensed` prop not working correctly.
 - Exposed native click event when the button is clicked.
@@ -52,11 +52,20 @@
 **Textarea:**
 - Standardized padding and spacing across all sizes and variants.
 
+### Composables
+- Added `useRipple` composable to enable ripple effects on any component.
+
 ### Tests
 
 - Updated test suites for `Input`, `Select`, and `Card` to reflect recent changes.
 
-### Docs
+### Exports
+
+**valkoui.css:**
+- Added `--state-drag` CSS variable to support styling for drag-and-drop interactions.
+- Added missing state CSS variables to `html.dark` for proper dark mode support.
+
+## Valko-UI Docs:
 
 **CodeBlock:**
 - Added `css` language support.
@@ -66,5 +75,4 @@
 - Updated Icon API docs to include ARIA props.
 - Renamed `Icon` page to `Icons` and moved it to the **General** section.
 - Added a new `Theme` page under **General**.
-- Updated the following component API docs to reflect recent changes:
-    - Avatar, Button, Card, Input, Select, Tabs.
+- Updated API docs to reflect recent changes in Avatar, Button, Card, Input, Select and Tabs.
