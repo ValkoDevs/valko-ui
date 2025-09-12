@@ -10,13 +10,18 @@ const tabs = [
     :tabs
     grow
     shape="line"
+    class="w-full"
   >
-    <template #example>
-      <slot name="example" />
+    <template #example-content>
+      <div class="w-full p-4">
+        <slot name="example" />
+      </div>
     </template>
 
-    <template #code>
-      <slot name="code" />
+    <template #code-content>
+      <div class="w-full p-4">
+        <slot name="code" />
+      </div>
     </template>
   </vk-tabs>
 </template>

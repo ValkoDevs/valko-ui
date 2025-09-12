@@ -327,7 +327,7 @@ const table = useClientSideDataTable({
             shape="line"
             variant="ghost"
           >
-            <template #employee-list>
+            <template #employee-list-content>
               <vk-data-table
                 class="mt-5"
                 striped
@@ -343,13 +343,13 @@ const table = useClientSideDataTable({
               />
             </template>
 
-            <template #product>
+            <template #product-content>
               <p class="mt-5 max-w-screen-md">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </p>
             </template>
 
-            <template #sales-result>
+            <template #sales-result-content>
               <p class="mt-5 max-w-screen-md ">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </p>

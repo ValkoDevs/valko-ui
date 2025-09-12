@@ -70,6 +70,7 @@ const navigate = (url: string) => navigateTo(url)
           layout="cover"
           is-pressable
           size="md"
+          class="min-w-80 min-h-48"
           @click="navigate(template.link)"
         >
           <vk-card-header class="justify-center">
@@ -79,6 +80,7 @@ const navigate = (url: string) => navigateTo(url)
             <img
               class="object-cover object-center size-full"
               :src="template.image"
+              :alt="`${template.name} image`"
             >
           </vk-card-image>
         </vk-card>

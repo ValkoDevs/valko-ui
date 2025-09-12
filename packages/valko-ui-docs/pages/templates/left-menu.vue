@@ -55,7 +55,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
 <template>
   <page-template>
     <template #example>
-      <div class="m-4 bg-surface-container flex">
+      <div class="bg-surface-container flex">
         <aside class="bg-surface-container-high border-r border-outlined max-h-[70vh] h-screen w-56">
           <vk-menu
             :items="menuItems"
