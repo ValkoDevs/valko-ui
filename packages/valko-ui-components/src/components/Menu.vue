@@ -85,20 +85,20 @@ const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
     >
       <span
         v-if="group !== 'default'"
-        :class="classes.group"
+        :class="classes.group({ class: styleSlots?.group })"
         role="presentation"
       >
         {{ group }}
       </span>
       <ul
-        :class="classes.menu"
+        :class="classes.menu({ class: styleSlots?.menu })"
         role="menu"
         :aria-label="group !== 'default' ? group : 'Menu'"
       >
         <li
           v-for="item in props.items.filter(i => i.group === group)"
           :key="item.key"
-          :class="classes.item"
+          :class="classes.item({ class: styleSlots?.item })"
           role="none"
         >
           <slot
@@ -106,7 +106,7 @@ const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
             :item="item"
           >
             <button
-              :class="classes.content"
+              :class="classes.content({ class: styleSlots?.content })"
               :data-active="item.key === props.active"
               :data-disabled="item.disabled"
               :aria-disabled="item.disabled || undefined"

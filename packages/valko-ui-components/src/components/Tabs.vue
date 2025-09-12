@@ -80,7 +80,7 @@ watch(
       >
         <div
           :class="cursor({ class: styleSlots?.cursor })"
-          ref="cursor"
+          ref="cursorRef"
         >
           <div
             v-if="variant === 'gradient'"

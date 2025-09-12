@@ -8,10 +8,10 @@ const useNotification = (props: NotificationProps) => {
   let notification: ReturnType<typeof Toastify> | null = null
 
   const defaultProps = {
-    color: props.color || 'primary',
-    variant: props.variant || 'filled',
-    shape: props.shape || 'soft',
-    size: props.size || 'md'
+    color: props.color ?? 'primary',
+    variant: props.variant ?? 'filled',
+    shape: props.shape ?? 'soft',
+    size: props.size ?? 'md'
   }
 
   const styleProps = {
@@ -21,6 +21,7 @@ const useNotification = (props: NotificationProps) => {
     size: defaultProps.size,
     styleSlots: props.styleSlots
   }
+
   const classes = styles(styleProps)
 
   const defaultOnClick = () => notification?.hideToast()

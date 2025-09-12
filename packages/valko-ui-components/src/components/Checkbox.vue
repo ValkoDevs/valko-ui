@@ -82,7 +82,7 @@ const onClick = () => {
         :class="label({ class: styleSlots?.label })"
         @click="onClick"
       >
-        {{ label }}
+        {{ props.label }}
       </label>
     </div>
 
@@ -91,7 +91,7 @@ const onClick = () => {
       :class="helpertext({ class: styleSlots?.helpertext })"
       :id="helpertextId"
     >
-      {{ helpertext }}
+      {{ props.helpertext }}
     </span>
   </div>
 </template>

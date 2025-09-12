@@ -66,7 +66,7 @@ const ariaLive = computed(() => {
         :id="titleId"
         :class="title({ class: styleSlots?.title })"
       >
-        {{ title }}
+        {{ props.title }}
       </h6>
 
       <p :class="content({ class: styleSlots?.content })">
