@@ -110,13 +110,13 @@ const tsconfig = `{
           variant="ghost"
           grow
         >
-          <template #npm>
+          <template #npm-content>
             <code-block code="npm create nuxt@latest <project-name>" />
           </template>
-          <template #yarn>
+          <template #yarn-content>
             <code-block code="yarn create nuxt@latest <project-name>" />
           </template>
-          <template #pnpm>
+          <template #pnpm-content>
             <code-block code="pnpm create nuxt@latest <project-name>" />
           </template>
         </vk-tabs>
@@ -139,13 +139,13 @@ const tsconfig = `{
           variant="ghost"
           grow
         >
-          <template #npm>
+          <template #npm-content>
             <code-block code="npm install tailwindcss @tailwindcss/postcss tailwind-variants @headlessui/vue toastify-js" />
           </template>
-          <template #yarn>
+          <template #yarn-content>
             <code-block code="yarn add tailwindcss @tailwindcss/postcss tailwind-variants @headlessui/vue toastify-js" />
           </template>
-          <template #pnpm>
+          <template #pnpm-content>
             <code-block code="pnpm add tailwindcss @tailwindcss/postcss tailwind-variants @headlessui/vue toastify-js" />
           </template>
         </vk-tabs>
@@ -162,13 +162,13 @@ const tsconfig = `{
           variant="ghost"
           grow
         >
-          <template #npm>
+          <template #npm-content>
             <code-block code="npm install @valko-ui/components" />
           </template>
-          <template #yarn>
+          <template #yarn-content>
             <code-block code="yarn add @valko-ui/components" />
           </template>
-          <template #pnpm>
+          <template #pnpm-content>
             <code-block code="pnpm add @valko-ui/components" />
           </template>
         </vk-tabs>

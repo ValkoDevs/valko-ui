@@ -44,11 +44,6 @@ export default tv({
       ],
       lg: [
         'text-lg'
-      ],
-      full: [
-        'w-full',
-        'h-full',
-        'text-base'
       ]
     },
     layout: {

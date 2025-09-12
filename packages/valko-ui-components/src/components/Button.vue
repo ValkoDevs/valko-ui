@@ -32,6 +32,11 @@ const createRipple = useRipple(buttonRef)
 const onClick = (event: MouseEvent) => {
   if (!props.disabled && !props.loading) {
     emit('click', event)
+  }
+}
+
+const onMouseDown = (event: MouseEvent | TouchEvent) => {
+  if (!props.disabled && !props.loading) {
     createRipple(event)
   }
 }
@@ -46,6 +51,8 @@ const onClick = (event: MouseEvent) => {
     :aria-label="props['aria-label']"
     :type="type"
     @click="onClick"
+    @mousedown="onMouseDown"
+    @touchstart="onMouseDown"
   >
     <div :class="classes.stateLayer" />
     <div

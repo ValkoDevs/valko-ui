@@ -161,7 +161,7 @@ describe('Range component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-range__progress').classes()).toContain('h-2.5')
+        expect(wrapper.find('.vk-range__progress_container').classes()).toContain('h-2.5')
       })
 
       it('should be md when props.size is md', () => {
@@ -183,7 +183,7 @@ describe('Range component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-range__progress').classes()).toContain('h-3.5')
+        expect(wrapper.find('.vk-range__progress_container').classes()).toContain('h-3.5')
       })
     })
 
@@ -218,7 +218,7 @@ describe('Range component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-range__progress').classes()).toContain('bg-surface-container-high/[.5]')
+        expect(wrapper.find('.vk-range__progress_container').classes()).toContain('bg-surface-container-high/[.5]')
       })
 
       it('should be gradient when props.variant is gradient', () => {
@@ -229,7 +229,7 @@ describe('Range component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
+        expect(wrapper.find('.vk-range__progress').classes()).toContain('bg-gradient-to-br')
       })
     })
 

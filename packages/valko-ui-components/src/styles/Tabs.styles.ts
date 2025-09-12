@@ -48,6 +48,7 @@ export default tv({
       'overflow-visible'
     ],
     cursor: [
+      'vk-tabs__cursor',
       'shadow-el1',
       'absolute',
       'inset-0',
@@ -366,6 +367,7 @@ export default tv({
     },
     //color rounded square & soft
     {
+      variant: ['filled', 'ghost', 'outlined'],
       color: 'primary',
       shape: ['rounded', 'square', 'soft'],
       class: {
@@ -378,6 +380,7 @@ export default tv({
       }
     },
     {
+      variant: ['filled', 'ghost', 'outlined'],
       color: 'secondary',
       shape: ['rounded', 'square', 'soft'],
       class: {
@@ -390,6 +393,7 @@ export default tv({
       }
     },
     {
+      variant: ['filled', 'ghost', 'outlined'],
       color: 'positive',
       shape: ['rounded', 'square', 'soft'],
       class: {
@@ -402,6 +406,7 @@ export default tv({
       }
     },
     {
+      variant: ['filled', 'ghost', 'outlined'],
       color: 'accent',
       shape: ['rounded', 'square', 'soft'],
       class: {
@@ -414,6 +419,7 @@ export default tv({
       }
     },
     {
+      variant: ['filled', 'ghost', 'outlined'],
       color: 'warning',
       shape: ['rounded', 'square', 'soft'],
       class: {
@@ -426,6 +432,7 @@ export default tv({
       }
     },
     {
+      variant: ['filled', 'ghost', 'outlined'],
       color: 'negative',
       shape: ['rounded', 'square', 'soft'],
       class: {

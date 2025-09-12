@@ -8,7 +8,8 @@ const form = ref<AlertProps>({
   variant: 'filled',
   size: 'md',
   title: 'Title',
-  shape: 'soft'
+  shape: 'soft',
+  elevated: false
 })
 
 const iconsForm = ref<Record<string, boolean>>({})
@@ -45,6 +46,14 @@ const alertProps: TableItem[] = [
     description: 'The size of the Alert.',
     values: 'xs, sm, md, lg',
     default: 'md'
+  },
+  {
+    key: 'elevatedProp',
+    prop: 'elevated',
+    required: false,
+    description: 'Adds a subtle shadow to the Alert, giving it a slightly raised appearance. When false (default), the alert appears flat with no shadow.',
+    values: 'true, false',
+    default: 'false'
   },
   {
     key: 'closableProp',
@@ -154,6 +163,7 @@ const iconSnippet = `
           :shape="form.shape"
           :color="form.color"
           :closable="form.closable"
+          :elevated="form.elevated"
           :icon="iconsForm.noIcon ? null : iconsForm.customIcon ? 'brand-vue' : ''"
           @close="closeAlert()"
         >
@@ -191,6 +201,10 @@ const iconSnippet = `
         v-model="form.title"
         label="Title"
         size="sm"
+      />
+      <vk-checkbox
+        v-model="form.elevated"
+        label="Elevated"
       />
       <vk-checkbox
         v-model="form.closable"
@@ -276,6 +290,18 @@ const iconSnippet = `
 
         <template #code>
           <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), hasSlot: true })" />
+        </template>
+      </example-section>
+
+      <example-section title="Elevated">
+        <vk-alert
+          elevated
+        >
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque animi neque doloremque dignissimos ducimus negative Molestias perferendis, sequi, laboriosam quod voluptatem voluptas repellat ut, earum nostrum dolore blanditiis facere impedit.
+        </vk-alert>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('elevated', { values: [true], hasSlot: true })" />
         </template>
       </example-section>
 

@@ -5,6 +5,9 @@
 
 ## Valko-UI Components:
 
+**Alert:**
+- Added `elevated` prop allowing users to enable or disable shadow for custom elevation.
+
 **Avatar:**
 - Added a slot to let users replace the Avatar’s content.
 
@@ -32,6 +35,7 @@
 - Fixed icon misalignment when `type="number"`.
 - Added `blur` event emit.
 - Fixed input to emit a number value (instead of a string) when `type="number"`.
+- Added touch support.
 
 **Navbar:**
 - Fixed border-radius not being applied correctly when using different `shape` values (`rounded`, `square`, `soft`) with `floating`.
@@ -63,6 +67,7 @@
 
 **valkoui.css:**
 - Added `--state-drag` CSS variable to support styling for drag-and-drop interactions.
+- Added `--state-ripple` CSS variable for ripple effect styling.
 - Added missing state CSS variables to `html.dark` for proper dark mode support.
 
 ## Valko-UI Docs:
@@ -75,4 +80,4 @@
 - Updated Icon API docs to include ARIA props.
 - Renamed `Icon` page to `Icons` and moved it to the **General** section.
 - Added a new `Theme` page under **General**.
-- Updated API docs to reflect recent changes in Avatar, Button, Card, Input, Select and Tabs.
+- Updated API docs to reflect recent changes in Alert, Avatar, Button, Card, Input, Select and Tabs.

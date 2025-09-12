@@ -103,16 +103,6 @@ describe('Card component', () => {
 
         expect(wrapper.find('.text-lg').exists()).toBe(true)
       })
-
-      it('should be full when props.size is full', () => {
-        wrapper = mount(VkCard, {
-          props: {
-            size: 'full'
-          }
-        })
-
-        expect(wrapper.find('.w-full').exists()).toBe(true)
-      })
     })
 
     describe('When variant prop changes', () => {

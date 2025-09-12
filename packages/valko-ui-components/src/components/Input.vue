@@ -78,13 +78,20 @@ const changeNumericValue = (action: 'increment' | 'decrement') => {
   emit('update:modelValue', newValue)
 }
 
-const handleNumericArrowHold = (action: 'increment' | 'decrement') => intervalId = setInterval(() => changeNumericValue(action), 75)
+const handleNumericArrowHold = (action: 'increment' | 'decrement') => {
+  intervalId = setInterval(() => changeNumericValue(action), 75)
+  window.addEventListener('touchend', handleNumericArrowRelease)
+  window.addEventListener('touchcancel', handleNumericArrowRelease)
+}
 
 const handleNumericArrowRelease = () => {
   if (intervalId) {
     clearInterval(intervalId)
     intervalId = null
   }
+
+  window.removeEventListener('touchend', handleNumericArrowRelease)
+  window.removeEventListener('touchcancel', handleNumericArrowRelease)
 }
 
 const describedBy = computed(() => {
@@ -144,6 +151,7 @@ watch(() => props.modelValue, (newValue) => {
           @mousedown="handleNumericArrowHold('increment')"
           @mouseup="handleNumericArrowRelease"
           @mouseleave="handleNumericArrowRelease"
+          @touchstart="handleNumericArrowHold('increment')"
         />
         <vk-icon
           name="chevron-down"
@@ -151,6 +159,7 @@ watch(() => props.modelValue, (newValue) => {
           @mousedown="handleNumericArrowHold('decrement')"
           @mouseup="handleNumericArrowRelease"
           @mouseleave="handleNumericArrowRelease"
+          @touchstart="handleNumericArrowHold('decrement')"
         />
       </span>
       <vk-icon
@@ -160,11 +169,13 @@ watch(() => props.modelValue, (newValue) => {
         :data-chevron-icons="type === 'number'"
         :class="classes.clearIcon"
         @click="clearInput"
+        @touchend="clearInput"
       />
       <span
         v-if="$slots['left-icon']"
         :class="[classes.icons, classes.leftIcon]"
         @click="handleIconClick('left')"
+        @touchend="handleIconClick('left')"
       >
         <slot name="left-icon" />
       </span>
@@ -173,6 +184,7 @@ watch(() => props.modelValue, (newValue) => {
         :data-chevron-icons="type === 'number'"
         :class="[classes.icons, classes.rightIcon]"
         @click="handleIconClick('right')"
+        @touchend="handleIconClick('right')"
       >
         <slot name="right-icon" />
       </span>

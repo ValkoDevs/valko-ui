@@ -46,7 +46,7 @@ const cardProps: TableItem[] = [
     prop: 'size',
     required: false,
     description: 'The size of the Card.',
-    values: 'xs, sm, md, lg, full',
+    values: 'xs, sm, md, lg',
     default: 'md'
   },
   {
@@ -159,53 +159,55 @@ const customSlot = `<vk-card-image :src="imgSrc" />
       CardImage: An special component who allows to display a background image in the card."
   >
     <template #playground-view>
-      <vk-card
-        :is-pressable="form.isPressable"
-        :variant="form.variant"
-        :shape="form.shape"
-        :size="form.size"
-        :layout="form.layout"
-        :elevated="form.elevated"
-        @click="onClick"
-      >
-        <vk-card-header
-          v-if="cardComponents.header"
+      <div :class="`flex justify-center items-center ${form.layout === 'horizontal' ? 'max-h-25' : 'max-w-80'}`">
+        <vk-card
+          :is-pressable="form.isPressable"
+          :variant="form.variant"
+          :shape="form.shape"
+          :size="form.size"
+          :layout="form.layout"
+          :elevated="form.elevated"
+          @click="onClick"
         >
-          Best nature pics 2024!
-        </vk-card-header>
-        <vk-card-image
-          v-if="cardComponents.image"
-          src="/assets/flower-m.jpg"
-          class="text-white w-1/2"
-        />
+          <vk-card-header
+            v-if="cardComponents.header"
+          >
+            Best nature pics 2024!
+          </vk-card-header>
+          <vk-card-image
+            v-if="cardComponents.image"
+            src="/assets/flower-m.jpg"
+            class="text-white w-1/2"
+          />
 
-        <vk-card-body
-          v-if="cardComponents.body"
-        >
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
-        </vk-card-body>
-        <vk-card-footer
-          v-if="cardComponents.footer"
-          class="flex justify-between"
-        >
-          <vk-button
-            color="surface"
-            size="sm"
-            :variant="form.variant"
-            @click="randomImage"
+          <vk-card-body
+            v-if="cardComponents.body"
           >
-            Random
-          </vk-button>
-          <vk-button
-            color="primary"
-            size="sm"
-            :variant="form.variant"
-            @click="nextImage"
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit eos laboriosam, accusamus illo rerum earum cupiditate fugiat explicabo nulla nisi aspernatur quaerat molestias esse pariatur nobis, eaque harum neque dolor!</p>
+          </vk-card-body>
+          <vk-card-footer
+            v-if="cardComponents.footer"
+            class="flex justify-between"
           >
-            See next
-          </vk-button>
-        </vk-card-footer>
-      </vk-card>
+            <vk-button
+              color="surface"
+              size="sm"
+              :variant="form.variant"
+              @click="randomImage"
+            >
+              Random
+            </vk-button>
+            <vk-button
+              color="primary"
+              size="sm"
+              :variant="form.variant"
+              @click="nextImage"
+            >
+              See next
+            </vk-button>
+          </vk-card-footer>
+        </vk-card>
+      </div>
     </template>
     <template #playground-options>
       <vk-select
@@ -224,7 +226,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
         v-model="form.size"
         label="Size"
         size="sm"
-        :options="sizeOptions.withFull"
+        :options="sizeOptions.general"
       />
       <vk-select
         v-model="form.layout"
@@ -353,11 +355,9 @@ const customSlot = `<vk-card-image :src="imgSrc" />
         classes="grid-cols-1 lg:grid-cols-2"
       >
         <vk-card
-          v-for="size in sizeOptions.withFull"
+          v-for="size in sizeOptions.general"
           :key="size.value"
           :size="size.value"
-          :layout="size.value === 'full' ? 'horizontal' : 'vertical'"
-          :class="size.value === 'full' ? 'col-span-full' : 'col-span-1'"
         >
           <vk-card-image
             src="/assets/flower-m.jpg"
@@ -375,7 +375,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
         </vk-card>
 
         <template #code>
-          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.withFull.map(o => o.value), customSlot })" />
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), customSlot })" />
         </template>
       </example-section>
 

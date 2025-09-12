@@ -27,6 +27,7 @@
   --color-state-scrim: rgba(0, 0, 0, .32);
   --color-state-shadow: rgba(0, 0, 0, .32);
   --color-state-drag: rgba(0, 0, 0, .16);
+  --color-state-ripple: rgba(0, 0, 0, .1);
 
   /* Semantic colors */
   --color-primary: #7e4d7c;
@@ -89,7 +90,7 @@
   /* Animations */
   --animate-progress: progress 1.5s infinite linear;
   --animate-cicle: cicle 1s infinite linear;
-  --animate-ripple: ripple 0.6s linear;
+  --animate-ripple: ripple 0.4s ease-out;
 
   @keyframes progress {
     0% { clip-path: inset(0 100% 0 0) }
@@ -107,11 +108,11 @@
   @keyframes ripple {
     0% {
       transform: scale(0);
-      opacity: 1;
+      opacity: 0;
     }
     100% {
       transform: scale(1);
-      opacity: 0;
+      opacity: 1;
     }
   }
 }
@@ -140,6 +141,7 @@ html.dark {
   --color-state-scrim: rgba(0, 0, 0, .32);
   --color-state-shadow: rgba(0, 0, 0, .32);
   --color-state-drag: rgba(0, 0, 0, .16);
+  --color-state-ripple: rgba(0, 0, 0, .1);
 
   /* Semantic colors */
   --color-primary: #efb4e9;
