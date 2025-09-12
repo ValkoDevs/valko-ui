@@ -84,6 +84,65 @@ const paginationProps: TableItem[] = [
     description: 'Accessible label for the pagination.',
     values: 'string',
     default: 'Pagination'
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Pagination component.',
+    values: 'PaginationSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the pagination.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'item',
+    prop: 'item',
+    required: false,
+    description: 'Pagination item (page button).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'active',
+    prop: 'active',
+    required: false,
+    description: 'Active page item.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'prev',
+    prop: 'prev',
+    required: false,
+    description: 'Previous page button.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'next',
+    prop: 'next',
+    required: false,
+    description: 'Next page button.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'ellipsis',
+    prop: 'ellipsis',
+    required: false,
+    description: 'Ellipsis for skipped pages.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -283,6 +342,12 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
       <vk-table
         :headers="propHeaders"
         :data="paginationProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Pagination Emits</h3>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { type Tab, useStyle } from '#valkoui'
+import type { Tab } from '#valkoui'
 import type { ExampleSectionProps } from './interfaces'
 import styles from './ExampleSection.styles'
 
@@ -15,12 +15,12 @@ const tabs: Tab[] = [
   { key: 'code', title: 'Code' }
 ]
 
-const parsedStyles = useStyle<ExampleSectionProps>(props, styles)
+const { section, slotContainer, title, codeContainer } = styles(props)
 </script>
 
 <template>
-  <section class="w-full mt-10 overflow-visible relative">
-    <h3 class="text-xl pl-3 pt-3 bg-surface-container-lowest rounded-t-lg">
+  <section :class="section({ class: props.styleSlots?.section })">
+    <h3 :class="title({ class: props.styleSlots?.title })">
       {{ props.title }}
     </h3>
     <vk-tabs
@@ -29,13 +29,13 @@ const parsedStyles = useStyle<ExampleSectionProps>(props, styles)
       grow
     >
       <template #examples-content>
-        <div :class="`${parsedStyles} ${classes}`">
+        <div :class="slotContainer({ class: props.styleSlots?.slotContainer })">
           <slot />
         </div>
       </template>
 
       <template #code-content>
-        <div class="p-4 bg-surface-container-lowest rounded-b-lg w-full">
+        <div :class="codeContainer({ class: props.styleSlots?.codeContainer })">
           <slot name="code" />
         </div>
       </template>

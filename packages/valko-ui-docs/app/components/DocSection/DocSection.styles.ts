@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const docSection = tv({
   slots: {
     title: [
       'text-4xl',
@@ -8,12 +8,6 @@ export default tv({
     ],
     subtitle: [
       'text-2xl'
-    ],
-    divider: [
-      'mb-4',
-      'mt-1',
-      'w-full',
-      'border-outlined'
     ],
     section: [
       'w-full',
@@ -63,6 +57,17 @@ export default tv({
       'gap-4',
       'justify-start',
       'items-stretch'
+    ],
+    apiContainer: [
+      'flex',
+      'flex-col',
+      'justify-around',
+      'items-start',
+      'gap-4',
+      'text-xl'
     ]
   }
-}) as unknown as ReturnType<TV>
+})
+
+export default docSection
+export type DocSectionSlots = typeof docSection.slots

@@ -72,6 +72,14 @@ const cardProps: TableItem[] = [
     description: 'Applies a shadow and lowers the background tone to emphasize interactive content inside the Card. Useful when the Card contains inputs or other elevated elements.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Card.',
+    values: 'object',
+    default: '{}'
   }
 ]
 
@@ -126,6 +134,44 @@ const cardSlots: TableItem[] = [
     name: 'default',
     description: 'Slot for the main content of the Card.',
     example: '<template #default>\n<vk-card-body>This is the main content of the Card.</vk-card-body>\n</template>'
+  }
+]
+
+const styleSlotsInterface = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Card.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'header',
+    prop: 'header',
+    description: 'Header section of the Card.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'body',
+    prop: 'body',
+    description: 'Body section of the Card.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'footer',
+    prop: 'footer',
+    description: 'Footer section of the Card.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'image',
+    prop: 'image',
+    description: 'Image section of the Card.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -433,7 +479,11 @@ const customSlot = `<vk-card-image :src="imgSrc" />
         :headers="propHeaders"
         :data="cardProps"
       />
-
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
+      />
       <h3>Card Emits</h3>
       <vk-table
         :headers="emitHeaders"

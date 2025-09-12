@@ -98,6 +98,38 @@ const popoverProps: TableItem[] = [
     description: 'ID of the element that describes the popover’s content.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Popover.',
+    values: 'object',
+    default: '{}'
+  }
+]
+
+const styleSlotsInterface = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Popover.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panel',
+    prop: 'panel',
+    description: 'Panel section of the Popover.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'trigger',
+    prop: 'trigger',
+    description: 'Trigger element for the Popover.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -289,6 +321,12 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
       <vk-table
         :headers="propHeaders"
         :data="popoverProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Popover Emits</h3>

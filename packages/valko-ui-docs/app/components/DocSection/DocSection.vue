@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { useStyle, type SlotStyles } from '@valko-ui/components'
 import type { DocSectionProps } from './interfaces'
 import styles from './DocSection.styles'
 
@@ -10,54 +9,70 @@ const props = withDefaults(defineProps<DocSectionProps>(), {
   description: 'Description'
 })
 
-const classes = useStyle<DocSectionProps, SlotStyles>(props, styles)
-
+const { container, title, section, subtitle, playground, playgroundView, playgroundForm, apiContainer } = styles(props)
 </script>
-<template>
-  <div :class="classes.container">
-    <h1 :class="classes.title">
-      {{ title }}
-    </h1>
-    <hr :class="classes.divider">
 
-    <section :class="classes.section">
+<template>
+  <div :class="container({ class: props.styleSlots?.container })">
+    <h1 :class="title({ class: props.styleSlots?.title })">
+      {{ props.title }}
+    </h1>
+    <vk-divider
+      class="mb-4"
+      size="sm"
+      color="surface"
+    />
+
+    <section :class="section({ class: props.styleSlots?.section })">
       <slot name="description">
         {{ description }}
       </slot>
     </section>
 
-    <section :class="classes.section">
-      <h2 :class="classes.subtitle">
+    <section :class="section({ class: props.styleSlots?.section })">
+      <h2 :class="subtitle({ class: props.styleSlots?.subtitle })">
         Playground
       </h2>
-      <hr :class="classes.divider">
-      <div :class="classes.playground">
-        <div :class="classes.playgroundView">
+      <vk-divider
+        class="mb-4"
+        size="sm"
+        color="surface"
+      />
+      <div :class="playground({ class: props.styleSlots?.playground })">
+        <div :class="playgroundView({ class: props.styleSlots?.playgroundView })">
           <slot name="playground-view" />
         </div>
         <form
           action=""
-          :class="classes.playgroundForm"
+          :class="playgroundForm({ class: props.styleSlots?.playgroundForm })"
         >
           <slot name="playground-options" />
         </form>
       </div>
     </section>
 
-    <section :class="classes.section">
-      <h2 :class="classes.subtitle">
+    <section :class="section({ class: props.styleSlots?.section })">
+      <h2 :class="subtitle({ class: props.styleSlots?.subtitle })">
         Examples
       </h2>
-      <hr :class="classes.divider">
+      <vk-divider
+        class="mb-4"
+        size="sm"
+        color="surface"
+      />
       <slot name="examples" />
     </section>
 
-    <section :class="classes.section">
-      <h2 :class="classes.subtitle">
+    <section :class="section({ class: props.styleSlots?.section })">
+      <h2 :class="subtitle({ class: props.styleSlots?.subtitle })">
         API
       </h2>
-      <hr :class="classes.divider">
-      <div class="flex flex-col justify-around items-start gap-4 text-xl">
+      <vk-divider
+        class="mb-4"
+        size="sm"
+        color="surface"
+      />
+      <div :class="apiContainer({ class: props.styleSlots?.apiContainer })">
         <slot name="api" />
       </div>
     </section>

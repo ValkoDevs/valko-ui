@@ -116,6 +116,65 @@ const tabsProps: TableItem[] = [
     description: 'Accessible label for the tab list. Used by assistive technologies when no visible heading is present.',
     values: 'string',
     default: 'Tab navigation'
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Tabs component.',
+    values: 'TabsSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the tabs.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'tab',
+    prop: 'tab',
+    required: false,
+    description: 'Individual tab button.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'active',
+    prop: 'active',
+    required: false,
+    description: 'Active tab styling.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    required: false,
+    description: 'Icon for tab.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'list',
+    prop: 'list',
+    required: false,
+    description: 'Tabs list container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panel',
+    prop: 'panel',
+    required: false,
+    description: 'Tab panel content.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -429,6 +488,12 @@ const extraProps = ':tabs="tabs"'
       <vk-table
         :headers="propHeaders"
         :data="tabsProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Tabs Slots</h3>

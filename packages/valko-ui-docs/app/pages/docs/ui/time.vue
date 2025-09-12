@@ -129,6 +129,45 @@ const timeProps: TableItem[] = [
     description: 'A composable that provides methods and computed properties for managing time selection and formatting. We provide a useTimeAdapter for the component.',
     values: 'TimeAdapterInterface',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Time.',
+    values: 'object',
+    default: '{}'
+  }
+]
+
+const styleSlotsInterface = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Time.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'input',
+    prop: 'input',
+    description: 'Input field for time selection.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panel',
+    prop: 'panel',
+    description: 'Panel section of the Time picker.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'footer',
+    prop: 'footer',
+    description: 'Footer section of the Time picker.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -596,6 +635,12 @@ const minmaxSnippet = `${scriptCode}
         :data="timeProps"
       />
 
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
+      />
+
       <h3>Time Adapter Props</h3>
       <vk-table
         :headers="propHeaders"
@@ -624,6 +669,12 @@ const minmaxSnippet = `${scriptCode}
       <vk-table
         :headers="propHeaders"
         :data="timeFormats"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

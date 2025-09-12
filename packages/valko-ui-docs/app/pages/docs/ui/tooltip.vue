@@ -58,6 +58,38 @@ const tooltipProps: TableItem[] = [
     description: 'Elevates the tooltip by one level.',
     values: 'true, false',
     default: 'true'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Tooltip.',
+    values: 'object',
+    default: '{}'
+  }
+]
+
+const styleSlotsInterface = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Tooltip.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panel',
+    prop: 'panel',
+    description: 'Panel section of the Tooltip.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'trigger',
+    prop: 'trigger',
+    description: 'Trigger element for the Tooltip.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -239,6 +271,12 @@ const extraProps = 'content="Tooltip Content"'
       <vk-table
         :headers="propHeaders"
         :data="tooltipProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Tooltip Slots</h3>

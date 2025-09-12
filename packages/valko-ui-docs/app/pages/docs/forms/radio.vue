@@ -149,6 +149,81 @@ const apiData: TableItem[] = [
     description: 'References the ID of the element that provides a description for the radio.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Radio component.',
+    values: 'RadioSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the radio.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'radioContainer',
+    prop: 'radioContainer',
+    required: false,
+    description: 'Main radio control wrapper.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'stateLayer',
+    prop: 'stateLayer',
+    required: false,
+    description: 'State layer for checked/unchecked visuals.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'radio',
+    prop: 'radio',
+    required: false,
+    description: 'Radio button element.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    required: false,
+    description: 'Icon for checked state.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'input',
+    prop: 'input',
+    required: false,
+    description: 'Native input element.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'label',
+    prop: 'label',
+    required: false,
+    description: 'Label for the radio.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'helpertext',
+    prop: 'helpertext',
+    required: false,
+    description: 'Helper text below the radio.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -351,6 +426,12 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
       <vk-table
         :headers="propHeaders"
         :data="apiData"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Radio Emits</h3>

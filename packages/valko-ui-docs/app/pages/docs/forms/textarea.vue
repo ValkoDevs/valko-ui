@@ -131,6 +131,97 @@ const apiData: TableItem[] = [
     description: 'Indicates that the current value entered into the textarea is invalid.',
     values: 'true, false',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Textarea component.',
+    values: 'TextareaSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the textarea.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'field',
+    prop: 'field',
+    required: false,
+    description: 'Field wrapper for textarea and icons.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'textarea',
+    prop: 'textarea',
+    required: false,
+    description: 'The textarea element itself.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icons',
+    prop: 'icons',
+    required: false,
+    description: 'Wrapper for left/right icons.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'leftIcon',
+    prop: 'leftIcon',
+    required: false,
+    description: 'Left icon slot.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'rightIcon',
+    prop: 'rightIcon',
+    required: false,
+    description: 'Right icon slot.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'label',
+    prop: 'label',
+    required: false,
+    description: 'Label for the textarea.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'footer',
+    prop: 'footer',
+    required: false,
+    description: 'Footer container below the textarea.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'helper',
+    prop: 'helper',
+    required: false,
+    description: 'Helper text in the footer.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'counter',
+    prop: 'counter',
+    required: false,
+    description: 'Character counter in the footer.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -404,6 +495,12 @@ const iconSnippet = `<template>
       <vk-table
         :headers="propHeaders"
         :data="apiData"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Textarea Slots</h3>

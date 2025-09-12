@@ -48,6 +48,66 @@ const tableProps: TableItem[] = [
     description: 'Allows rows to emit event onRowClick.',
     values: 'false, true',
     default: 'false'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Table component.',
+    values: 'TableSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'table',
+    prop: 'table',
+    required: false,
+    description: 'Styles for the main table element.',
+    values: 'string'
+  },
+  {
+    key: 'header',
+    prop: 'header',
+    required: false,
+    description: 'Styles for the table header section.',
+    values: 'string'
+  },
+  {
+    key: 'headerCell',
+    prop: 'headerCell',
+    required: false,
+    description: 'Styles for individual header cells.',
+    values: 'string'
+  },
+  {
+    key: 'body',
+    prop: 'body',
+    required: false,
+    description: 'Styles for the table body section.',
+    values: 'string'
+  },
+  {
+    key: 'row',
+    prop: 'row',
+    required: false,
+    description: 'Styles for individual data rows.',
+    values: 'string'
+  },
+  {
+    key: 'cell',
+    prop: 'cell',
+    required: false,
+    description: 'Styles for individual data cells.',
+    values: 'string'
+  },
+  {
+    key: 'noDataMessage',
+    prop: 'noDataMessage',
+    required: false,
+    description: 'Styles for the no data message row.',
+    values: 'string'
   }
 ]
 
@@ -342,6 +402,12 @@ const generateSnippet = snippetGeneratorFactory('vk-table')
       <vk-table
         :headers="propHeaders"
         :data="tableProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Table Item Props</h3>

@@ -117,6 +117,14 @@ const dropdownProps: TableItem[] = [
     description: 'The Dropdown items displayed on the menu.',
     values: 'item[]',
     default: '[]'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Dropdown.',
+    values: 'DropdownStyleSlots',
+    default: '{}'
   }
 ]
 
@@ -159,6 +167,37 @@ const itemInterface: TableItem[] = [
     required: false,
     description: 'Emit for the Item',
     values: '() => void',
+    default: ''
+  }
+]
+
+const styleSlotsInterface = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Dropdown.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'trigger',
+    prop: 'trigger',
+    description: 'Trigger element for the Dropdown.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'menu',
+    prop: 'menu',
+    description: 'Menu section of the Dropdown.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'item',
+    prop: 'item',
+    description: 'Dropdown item element.',
+    values: 'string[]',
     default: ''
   }
 ]
@@ -421,7 +460,11 @@ const extraProps = ':items="items"'
         :headers="propHeaders"
         :data="dropdownProps"
       />
-
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
+      />
       <h3>Item interface</h3>
       <vk-table
         :headers="propHeaders"

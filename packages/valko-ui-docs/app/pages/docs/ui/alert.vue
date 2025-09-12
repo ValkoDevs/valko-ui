@@ -94,6 +94,14 @@ const alertProps: TableItem[] = [
     description: 'ID reference to an element that labels the input (e.g. a visible <label>).',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Alert component.',
+    values: 'AlertSlots',
+    default: ''
   }
 ]
 
@@ -113,6 +121,57 @@ const alertSlots: TableItem[] = [
     name: 'default',
     description: 'Slot for the main content of the alert.',
     example: '<template #default>\n  <p>This is the main content of the alert.</p>\n</template>'
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the alert. Controls the overall layout and background.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    required: false,
+    description: 'Styles for the icon container. Applies to the icon area if present.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'title',
+    prop: 'title',
+    required: false,
+    description: 'Styles for the alert title text.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    required: false,
+    description: 'Styles for the main content area (slot).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'close',
+    prop: 'close',
+    required: false,
+    description: 'Styles for the close button container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeIcon',
+    prop: 'closeIcon',
+    required: false,
+    description: 'Styles for the close icon itself.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -359,6 +418,12 @@ const iconSnippet = `
       <vk-table
         :headers="propHeaders"
         :data="alertProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Alert Emits</h3>
