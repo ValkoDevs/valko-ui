@@ -84,6 +84,38 @@ const navbarProps: TableItem[] = [
     description: 'Accessible label for the navbar to describe its purpose to assistive technologies.',
     values: 'string',
     default: 'Main navigation'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Navbar.',
+    values: 'object',
+    default: '{}'
+  }
+]
+
+const styleSlotsInterface = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Navbar.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'brand',
+    prop: 'brand',
+    description: 'Brand/logo section of the Navbar.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'links',
+    prop: 'links',
+    description: 'Navigation links section.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -338,6 +370,12 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
       <vk-table
         :headers="slotHeaders"
         :data="navbarSlots"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

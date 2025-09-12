@@ -98,6 +98,45 @@ const tagProps: TableItem[] = [
     description: 'Disables interaction with the Tag.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Tag.',
+    values: 'object',
+    default: '{}'
+  }
+]
+
+const styleSlotsInterface = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Tag.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    description: 'Icon element of the Tag.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'text',
+    prop: 'text',
+    description: 'Text section of the Tag.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'close',
+    prop: 'close',
+    description: 'Close button element.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -380,6 +419,12 @@ const extraProps = 'text="Content"'
       <vk-table
         :headers="propHeaders"
         :data="tagProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Tag Emits</h3>

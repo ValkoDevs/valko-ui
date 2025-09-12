@@ -150,6 +150,14 @@ const rangeProps: TableItem[] = [
     description: 'ID reference to an element that further describes the range, such as helper or error text.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Range component.',
+    values: 'RangeSlots',
+    default: ''
   }
 ]
 
@@ -177,6 +185,73 @@ const labelsInterface: TableItem[] = [
     required: true,
     description: 'The displayed name of the label.',
     values: 'string',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the range slider.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'progressContainer',
+    prop: 'progressContainer',
+    required: false,
+    description: 'Progress bar container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'progress',
+    prop: 'progress',
+    required: false,
+    description: 'Progress bar element.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'stepMark',
+    prop: 'stepMark',
+    required: false,
+    description: 'Step mark indicators.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'thumbContainer',
+    prop: 'thumbContainer',
+    required: false,
+    description: 'Container for slider thumbs.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'thumb',
+    prop: 'thumb',
+    required: false,
+    description: 'Slider thumb element.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'labelContainer',
+    prop: 'labelContainer',
+    required: false,
+    description: 'Container for range labels.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'label',
+    prop: 'label',
+    required: false,
+    description: 'Individual range label.',
+    values: 'string[]',
     default: ''
   }
 ]
@@ -394,6 +469,12 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
       <vk-table
         :headers="propHeaders"
         :data="rangeProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Label Interface</h3>

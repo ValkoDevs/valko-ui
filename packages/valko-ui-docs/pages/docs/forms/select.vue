@@ -184,6 +184,65 @@ const apiData: TableItem[] = [
     description: 'Indicates that the current value entered into the select is invalid.',
     values: 'true, false',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Select component.',
+    values: 'SelectSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the select.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'select',
+    prop: 'select',
+    required: false,
+    description: 'Native select element (hidden).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'field',
+    prop: 'field',
+    required: false,
+    description: 'Field wrapper for input and icons.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    required: false,
+    description: 'Dropdown chevron icon.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'dropdown',
+    prop: 'dropdown',
+    required: false,
+    description: 'Dropdown menu container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'item',
+    prop: 'item',
+    required: false,
+    description: 'Individual dropdown item.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -393,6 +452,12 @@ const people: SelectOption[] = [
       <vk-table
         :headers="propHeaders"
         :data="apiData"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Select Emits</h3>

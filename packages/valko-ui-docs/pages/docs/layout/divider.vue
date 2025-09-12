@@ -70,6 +70,24 @@ const dividerProps: TableItem[] = [
     description: 'References the ID of another element that labels the divider. Useful for complex labeling.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Divider.',
+    values: 'object',
+    default: '{}'
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Divider.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -265,6 +283,11 @@ const generateSnippet = snippetGeneratorFactory('vk-divider')
       <vk-table
         :headers="propHeaders"
         :data="dividerProps"
+      />
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

@@ -19,7 +19,24 @@ const iconProps: TableItem[] = [
     prop: 'aria-label',
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
-    values: 'string',
+    values: 'string'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Icon.',
+    values: 'IconStyleSlots',
+    default: '{}'
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Icon.',
+    values: 'string[]',
     default: ''
   }
 ]
@@ -81,6 +98,12 @@ const generateSnippet = snippetGeneratorFactory('vk-icon')
       <vk-table
         :headers="propHeaders"
         :data="iconProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

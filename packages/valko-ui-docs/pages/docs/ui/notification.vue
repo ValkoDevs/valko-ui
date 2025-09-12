@@ -60,6 +60,14 @@ const notificationProps: TableItem[] = [
     default: 'md'
   },
   {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Notification.',
+    values: 'object',
+    default: '{}'
+  },
+  {
     key: 'textProp',
     prop: 'text',
     required: true,
@@ -138,6 +146,37 @@ const notificationProps: TableItem[] = [
     description: 'Invoked when the Notification is clicked.',
     values: '() => void',
     default: 'null'
+  }
+]
+
+const styleSlotsInterface = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Notification.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    description: 'Icon section of the Notification.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'text',
+    prop: 'text',
+    description: 'Text/message section.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'close',
+    prop: 'close',
+    description: 'Close button element.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -465,6 +504,12 @@ const stopOnFocusSnippet = `
       <vk-table
         :headers="propHeaders"
         :data="notificationProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

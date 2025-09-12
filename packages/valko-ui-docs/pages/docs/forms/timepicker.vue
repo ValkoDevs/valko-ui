@@ -281,6 +281,33 @@ const timepickerProps: TableItem[] = [
   }
 ]
 
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the timepicker.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'input',
+    prop: 'input',
+    required: false,
+    description: 'Input element for time display.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    required: false,
+    description: 'Dropdown/time selection content container.',
+    values: 'string[]',
+    default: ''
+  }
+]
+
 const timepickerEmits: TableItem[] = [
   {
     key: 'onSelectEmit',
@@ -592,7 +619,7 @@ ${scriptCode}
           :adapter="adapter"
           :parsed-model="parsedModel"
           :color="color.value"
-          :is-open="timepickerStates[color.value]"
+          :is-open="timepickerStates[color.value] ?? false"
           @open="() => timepickerStates[color.value] = true"
           @close="() => timepickerStates[color.value] = false"
         />
@@ -612,7 +639,7 @@ ${scriptCode}
           :adapter="adapter"
           :parsed-model="parsedModel"
           :variant="variant.value"
-          :is-open="timepickerStates[variant.value]"
+          :is-open="timepickerStates[variant.value] ?? false"
           :label="variant.label"
           @open="() => timepickerStates[variant.value] = true"
           @close="() => timepickerStates[variant.value] = false"
@@ -634,7 +661,7 @@ ${scriptCode}
           :adapter="adapter"
           :parsed-model="parsedModel"
           :shape="shape.value"
-          :is-open="timepickerStates[shape.value]"
+          :is-open="timepickerStates[shape.value] ?? false"
           @open="() => timepickerStates[shape.value] = true"
           @close="() => timepickerStates[shape.value] = false"
         />
@@ -655,7 +682,7 @@ ${scriptCode}
           :adapter="adapter"
           :parsed-model="parsedModel"
           :size="size.value"
-          :is-open="timepickerStates[size.value]"
+          :is-open="timepickerStates[size.value] ?? false"
           @open="() => timepickerStates[size.value] = true"
           @close="() => timepickerStates[size.value] = false"
         />
@@ -674,7 +701,7 @@ ${scriptCode}
           :adapter="adapter"
           :parsed-model="parsedModel"
           :min-time="1730710858"
-          :is-open="timepickerStates['min']"
+          :is-open="timepickerStates['min'] ?? false"
           @open="() => timepickerStates['min'] = true"
           @close="() => timepickerStates['min'] = false"
         />
@@ -683,7 +710,7 @@ ${scriptCode}
           :adapter="adapter"
           :parsed-model="parsedModel"
           :max-time="1730739658"
-          :is-open="timepickerStates['max']"
+          :is-open="timepickerStates['max'] ?? false"
           @open="() => timepickerStates['max'] = true"
           @close="() => timepickerStates['max'] = false"
         />
@@ -699,7 +726,7 @@ ${scriptCode}
           :adapter="adapter"
           :parsed-model="parsedModel"
           :disabled-times="form.disabledTimes"
-          :is-open="timepickerStates['disabledTimes']"
+          :is-open="timepickerStates['disabledTimes'] ?? false"
           @open="() => timepickerStates['disabledTimes'] = true"
           @close="() => timepickerStates['disabledTimes'] = false"
         />
@@ -715,6 +742,12 @@ ${scriptCode}
       <vk-table
         :headers="propHeaders"
         :data="timepickerProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Timepicker Emits</h3>

@@ -78,6 +78,38 @@ const progressbarProps: TableItem[] = [
     description: 'Wheter the Progressbar is striped or not.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Progressbar.',
+    values: 'object',
+    default: '{}'
+  }
+]
+
+const styleSlotsInterface = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Progressbar.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'bar',
+    prop: 'bar',
+    description: 'Bar element of the Progressbar.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'buffer',
+    prop: 'buffer',
+    description: 'Buffer section of the Progressbar.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -301,6 +333,12 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
       <vk-table
         :headers="slotHeaders"
         :data="progressbarSlots"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

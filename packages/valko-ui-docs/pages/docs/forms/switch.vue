@@ -125,6 +125,57 @@ const apiData: TableItem[] = [
     description: 'ID reference to an element that describes the switch (e.g., helper text).',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Switch component.',
+    values: 'SwitchSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the switch.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    required: false,
+    description: 'Content wrapper for label and switch.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'labelSlot',
+    prop: 'labelSlot',
+    required: false,
+    description: 'Label slot for the switch.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'switchSlot',
+    prop: 'switchSlot',
+    required: false,
+    description: 'Switch control element.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'thumb',
+    prop: 'thumb',
+    required: false,
+    description: 'Switch thumb element.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -317,6 +368,12 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
       <vk-table
         :headers="propHeaders"
         :data="apiData"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Switch Emits</h3>

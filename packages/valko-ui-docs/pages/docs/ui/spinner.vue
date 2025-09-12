@@ -53,6 +53,31 @@ const spinnerProps: TableItem[] = [
     description: 'Overrides the spinner\'s default colors, allowing you to fully customize its appearance.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Spinner.',
+    values: 'object',
+    default: '{}'
+  }
+]
+
+const styleSlotsInterface = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Spinner.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    description: 'Icon element of the Spinner.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -165,6 +190,12 @@ const generateSnippet = snippetGeneratorFactory('vk-spinner')
       <vk-table
         :headers="propHeaders"
         :data="spinnerProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

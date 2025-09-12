@@ -229,6 +229,14 @@ const calendarProp: TableItem[] = [
     description: 'The maximum selectable date as an Epoch timestamp.',
     values: 'EpochTimeStamp',
     default: '[]'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Calendar.',
+    values: 'object',
+    default: '{}'
   }
 ]
 
@@ -413,6 +421,37 @@ const calendarEmits: TableItem[] = [
     description: 'Emitted when the final selection of a date is confirmed, completing the date selection process.',
     values: '',
     type: '() => void'
+  }
+]
+
+const styleSlotsInterface = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Calendar.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'header',
+    prop: 'header',
+    description: 'Header section of the Calendar.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'body',
+    prop: 'body',
+    description: 'Body section of the Calendar.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'footer',
+    prop: 'footer',
+    description: 'Footer section of the Calendar.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -629,7 +668,11 @@ const extraProps = 'v-model="model" :adapter="adapter"'
         :headers="propHeaders"
         :data="calendarProp"
       />
-
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
+      />
       <h3>Calendar Emits</h3>
       <vk-table
         :headers="emitHeaders"

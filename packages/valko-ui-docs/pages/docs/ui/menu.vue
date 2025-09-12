@@ -71,6 +71,73 @@ const menuProps: TableItem[] = [
     description: 'The Menu items.',
     values: 'MenuItem[]',
     default: '[]'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Menu.',
+    values: 'MenuStyleSlots',
+    default: '{}'
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Menu.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'item',
+    prop: 'item',
+    description: 'Each item of the Menu.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'itemActive',
+    prop: 'itemActive',
+    description: 'The active item of the Menu.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'itemDisabled',
+    prop: 'itemDisabled',
+    description: 'The disabled item of the Menu.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'itemIcon',
+    prop: 'itemIcon',
+    description: 'The icon of the Menu item.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'itemText',
+    prop: 'itemText',
+    description: 'The text of the Menu item.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'groupWrapper',
+    prop: 'groupWrapper',
+    description: 'The wrapper for each group of items.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'groupLabel',
+    prop: 'groupLabel',
+    description: 'The label for each group of items.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -190,6 +257,7 @@ const extraProps = ':items="menuItems"'
 onMounted(() => {
   const setFirstItemActive = (options: SelectOption[], menuPrefix: string) => {
     options.forEach((_, index) => {
+      if (!options[0]) return
       const firstItemKey = options[0].value
       const menuKey = `${menuPrefix}-${index}`
       activeItemsList.value[menuKey] = firstItemKey
@@ -204,8 +272,8 @@ onMounted(() => {
   setFirstItemActive(shapeOptions.general, 'shape-menu')
   setFirstItemActive(sizeOptions.general, 'size-menu')
 
-  const firstPlaygroundItemKey = menuItems[0].key
-  activeItem.value = firstPlaygroundItemKey
+  const firstPlaygroundItemKey = menuItems[0]?.key
+  activeItem.value = firstPlaygroundItemKey ?? null
 
   const firstPlaygroundItem = menuItems.find(item => item.key === firstPlaygroundItemKey)
 
@@ -271,7 +339,7 @@ onMounted(() => {
           :key="`color-menu-${index}`"
           :items="generateMenuItems(colorOptions.general, color.label)"
           :color="color.value"
-          :active="activeItemsList[`color-menu-${index}`]"
+          :active="activeItemsList[`color-menu-${index}`] ?? ''"
           @item-click="(item: MenuItem) => onItemClick(item, `color-menu-${index}`)"
         />
 
@@ -289,7 +357,7 @@ onMounted(() => {
           :key="`variant-menu-${index}`"
           :items="generateMenuItems(variantOptions.withGradientLinkAndLine, variant.label)"
           :variant="variant.value"
-          :active="activeItemsList[`variant-menu-${index}`]"
+          :active="activeItemsList[`variant-menu-${index}`] ?? ''"
           @item-click="(item: MenuItem) => onItemClick(item, `variant-menu-${index}`)"
         />
 
@@ -307,7 +375,7 @@ onMounted(() => {
           :key="`shape-menu-${index}`"
           :items="generateMenuItems(shapeOptions.general, shape.label)"
           :shape="shape.value"
-          :active="activeItemsList[`shape-menu-${index}`]"
+          :active="activeItemsList[`shape-menu-${index}`] ?? ''"
           @item-click="(item: MenuItem) => onItemClick(item, `shape-menu-${index}`)"
         />
 
@@ -325,7 +393,7 @@ onMounted(() => {
           :key="`size-menu-${index}`"
           :items="generateMenuItems(sizeOptions.general, size.label)"
           :size="size.value"
-          :active="activeItemsList[`size-menu-${index}`]"
+          :active="activeItemsList[`size-menu-${index}`] ?? ''"
           @item-click="(item: MenuItem) => onItemClick(item, `size-menu-${index}`)"
         />
 
@@ -371,6 +439,12 @@ onMounted(() => {
       <vk-table
         :headers="slotHeaders"
         :data="menuSlots"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

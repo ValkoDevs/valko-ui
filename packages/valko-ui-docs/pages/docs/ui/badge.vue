@@ -95,6 +95,14 @@ const badgeProps: TableItem[] = [
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Slots for applying custom styles to the Badge.',
+    values: 'BadgeSlots',
+    default: ''
   }
 ]
 
@@ -104,6 +112,25 @@ const badgeSlots: TableItem[] = [
     name: 'default',
     description: 'Slot for additional content to be placed inside the badge. This slot is typically used to include custom elements like icons, text, or other components.',
     example: '<template #default>\n  <!-- Your custom content goes here -->\n</template>'
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the badge. Controls the overall layout and background.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'badge',
+    prop: 'badge',
+    required: false,
+    description: 'Styles for the badge element itself, including positioning and appearance.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -411,6 +438,12 @@ const extraProps = {
       <vk-table
         :headers="propHeaders"
         :data="badgeProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Badge Slots</h3>

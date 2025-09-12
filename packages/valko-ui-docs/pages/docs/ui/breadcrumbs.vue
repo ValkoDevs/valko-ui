@@ -106,6 +106,14 @@ const breadcrumbsProps: TableItem[] = [
     description: 'Accessible label for the breadcrumb navigation.',
     values: 'string',
     default: 'Breadcrumb'
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Breadcrumbs component.',
+    values: 'BreadcrumbsSlots',
+    default: ''
   }
 ]
 
@@ -164,6 +172,65 @@ const crumbInterface: TableItem[] = [
     required: true,
     description: 'The function for the Crumb',
     values: '() => void',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'nav',
+    prop: 'nav',
+    required: false,
+    description: 'Root container for the breadcrumbs. Controls the overall layout and background.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'link',
+    prop: 'link',
+    required: false,
+    description: 'The crumb itself, which is typically a clickable link. (this includes the icons/title on the crumb.)',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'list',
+    prop: 'list',
+    required: false,
+    description: 'Container for the list items of crumbs.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'listItem',
+    prop: 'listItem',
+    required: false,
+    description: 'The container of the crumb.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'separator',
+    prop: 'separator',
+    required: false,
+    description: 'The separator between crumbs.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'iconLeft',
+    prop: 'iconLeft',
+    required: false,
+    description: 'The class for the left icon.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'iconRight',
+    prop: 'iconRight',
+    required: false,
+    description: 'The class for the right icon.',
+    values: 'string[]',
     default: ''
   }
 ]
@@ -382,6 +449,12 @@ const extraProps = ':crumbs="crumbs"'
       <vk-table
         :headers="propHeaders"
         :data="crumbInterface"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Breadcrumbs Emits</h3>

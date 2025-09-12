@@ -148,6 +148,89 @@ const tableProps: TableItem[] = [
     description: 'Specifies whether the table is in a loading state.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the DataTable component.',
+    values: 'DataTableSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'table',
+    prop: 'table',
+    required: false,
+    description: 'Styles for the table element itself, this is the main container aswell.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'header',
+    prop: 'header',
+    required: false,
+    description: 'Styles for the header element of the table.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'body',
+    prop: 'body',
+    required: false,
+    description: 'Styles for the body element of the table.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'row',
+    prop: 'row',
+    required: false,
+    description: 'Styles for each row element of the table.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'cell',
+    prop: 'cell',
+    required: false,
+    description: 'Styles for each cell element of the table.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'footer',
+    prop: 'footer',
+    required: false,
+    description: 'Styles for the footer element of the table.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'pagination',
+    prop: 'pagination',
+    required: false,
+    description: 'Styles for the pagination container element.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'selectAllCheckbox',
+    prop: 'selectAllCheckbox',
+    required: false,
+    description: 'Styles for the select all checkbox element in the header.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'checkbox',
+    prop: 'checkbox',
+    required: false,
+    description: 'Styles for each checkbox element in the rows.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -737,6 +820,12 @@ const generateSnippet = snippetGeneratorFactory('vk-data-table')
       <vk-table
         :headers="propHeaders"
         :data="tableProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Table Slots</h3>

@@ -58,6 +58,65 @@ const collapseProps: TableItem[] = [
     description: 'Allow multiple items to be expanded at the same time.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Collapse component.',
+    values: 'CollapseSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the collapse.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'item',
+    prop: 'item',
+    required: false,
+    description: 'Collapse item container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'header',
+    prop: 'header',
+    required: false,
+    description: 'Header section for each collapse item.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    required: false,
+    description: 'Content section for each collapse item.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    required: false,
+    description: 'Icon for expand/collapse indicator.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'separator',
+    prop: 'separator',
+    required: false,
+    description: 'Separator between items.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -326,6 +385,12 @@ const customSlot = '<vk-collapse-item title="example-item">\n      Lorem.\n    <
       <vk-table
         :headers="propHeaders"
         :data="collapseProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3 title="">

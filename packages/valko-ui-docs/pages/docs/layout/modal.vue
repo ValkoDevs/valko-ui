@@ -80,6 +80,45 @@ const modalProps: TableItem[] = [
     description: 'Provides additional descriptive text for the Modal, improving context for screen readers. The text will be visually hidden but read by assistive technologies.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Modal.',
+    values: 'object',
+    default: '{}'
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Modal.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'header',
+    prop: 'header',
+    description: 'Header section of the Modal.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'body',
+    prop: 'body',
+    description: 'Body section of the Modal.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'footer',
+    prop: 'footer',
+    description: 'Footer section of the Modal.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -225,7 +264,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
           </vk-button>
           <vk-modal
             :shape="shape.value"
-            :is-open="modalStates[shape.value]"
+            :is-open="modalStates[shape.value] ?? false"
             :title="shape.label"
             @close="toggleModal(shape.value)"
           >
@@ -254,7 +293,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
           </vk-button>
           <vk-modal
             :size="size.value"
-            :is-open="modalStates[size.value]"
+            :is-open="modalStates[size.value] ?? false"
             :title="size.label"
             @close="toggleModal(size.value)"
           >
@@ -283,7 +322,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
           </vk-button>
           <vk-modal
             :backdrop="backdrop.value"
-            :is-open="modalStates[backdrop.value]"
+            :is-open="modalStates[backdrop.value] ?? false"
             :title="backdrop.label"
             @close="toggleModal(backdrop.value)"
           >
@@ -304,7 +343,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
           Closable
         </vk-button>
         <vk-modal
-          :is-open="modalStates['closable']"
+          :is-open="modalStates['closable'] ?? false"
           title="Closable"
           :closable="false"
           @close="toggleModal('closable')"
@@ -335,6 +374,12 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
       <vk-table
         :headers="propHeaders"
         :data="modalProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Modal Emits</h3>

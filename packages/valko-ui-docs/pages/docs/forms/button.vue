@@ -100,6 +100,49 @@ const apiData: TableItem[] = [
     description: 'Defines a string label for the button when no visible text is present. Useful for icon-only buttons or when additional context is needed for assistive technologies.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Slots for applying custom styles to the Button.',
+    values: 'ButtonSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'button',
+    prop: 'button',
+    required: false,
+    description: 'Styles for the button element itself, this is the main container aswell.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'spinnerContainer',
+    prop: 'spinnerContainer',
+    required: false,
+    description: 'Styles for the spinner container element.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'spinner',
+    prop: 'spinner',
+    required: false,
+    description: 'Styles for the spinner component itself.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'stateLayer',
+    prop: 'stateLayer',
+    required: false,
+    description: 'Styles for the state layer element (e.g., hover, focus, active states).',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -345,6 +388,12 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
       <vk-table
         :headers="propHeaders"
         :data="apiData"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Button Emits</h3>

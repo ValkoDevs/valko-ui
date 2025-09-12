@@ -80,6 +80,49 @@ const avatarProps: TableItem[] = [
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Avatar component.',
+    values: 'AvatarSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the avatar. Controls the overall layout and background.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'image',
+    prop: 'image',
+    required: false,
+    description: 'Styles for the avatar image element.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'initials',
+    prop: 'initials',
+    required: false,
+    description: 'Styles for the initials text when no image is provided.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    required: false,
+    description: 'Styles for the icon shown in the avatar.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -295,10 +338,17 @@ const extraProps = {
         :headers="propHeaders"
         :data="avatarProps"
       />
+
       <h3>Avatar Slots</h3>
       <vk-table
         :headers="slotHeaders"
         :data="avatarSlots"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>
