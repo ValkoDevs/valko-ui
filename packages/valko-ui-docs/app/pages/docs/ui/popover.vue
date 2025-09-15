@@ -104,30 +104,30 @@ const popoverProps: TableItem[] = [
     prop: 'styleSlots',
     required: false,
     description: 'Customizes style slots for Popover.',
-    values: 'object',
-    default: '{}'
+    values: 'PopoverSlots',
+    default: ''
   }
 ]
 
-const styleSlotsInterface = [
+const styleSlotsInterface: TableItem[] = [
   {
-    key: 'root',
-    prop: 'root',
-    description: 'Root element of the Popover.',
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the Popover.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'slotContainer',
+    prop: 'slotContainer',
+    description: 'Container for the trigger slot (the element that opens the popover).',
     values: 'string[]',
     default: ''
   },
   {
     key: 'panel',
     prop: 'panel',
-    description: 'Panel section of the Popover.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'trigger',
-    prop: 'trigger',
-    description: 'Trigger element for the Popover.',
+    description: 'Panel element that displays the popover content.',
     values: 'string[]',
     default: ''
   }

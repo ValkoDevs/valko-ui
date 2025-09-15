@@ -33,6 +33,7 @@ const breadcrumbs = tv({
       'gap-1'
     ],
     separator: [
+      'vk-breadcrumbs__separator',
       'mx-1',
       'text-on-surface'
     ],

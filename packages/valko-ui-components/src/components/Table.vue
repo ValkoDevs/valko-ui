@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<TableProps>(), {
 
 const emit = defineEmits(['onRowClick'])
 
-const { container, table, thead, th, tr, td, noDataMessage, body, shape, tableFooter } = styles(props)
+const { container, table, thead, th, tr, td, noDataMessage, body, tableFooter } = styles(props)
 
 const items = computed<TableItem[]>(() => props.data.map((item, index) => ({
   ...item,
@@ -87,7 +87,7 @@ const headers = computed(() => props.headers)
             v-for="{ field } in headers"
             :key="`cell-${field}`"
             role="cell"
-            :class="[td({ class: styleSlots?.td }), index === items.length - 1 ? shape({ class: styleSlots?.td }) : '']"
+            :class="td({ class: styleSlots?.td })"
           >
             <slot
               :name="`cell-${field}`"

@@ -97,50 +97,23 @@ const paginationProps: TableItem[] = [
 
 const styleSlotsInterface: TableItem[] = [
   {
-    key: 'container',
-    prop: 'container',
-    required: false,
-    description: 'Root container for the pagination.',
+    key: 'nav',
+    prop: 'nav',
+    description: 'Styles for the navigation container (<nav> element).',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'item',
-    prop: 'item',
-    required: false,
-    description: 'Pagination item (page button).',
+    key: 'button',
+    prop: 'button',
+    description: 'Styles for each page button.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'active',
-    prop: 'active',
-    required: false,
-    description: 'Active page item.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'prev',
-    prop: 'prev',
-    required: false,
-    description: 'Previous page button.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'next',
-    prop: 'next',
-    required: false,
-    description: 'Next page button.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'ellipsis',
-    prop: 'ellipsis',
-    required: false,
-    description: 'Ellipsis for skipped pages.',
+    key: 'arrows',
+    prop: 'arrows',
+    description: 'Styles for the previous/next arrow icons.',
     values: 'string[]',
     default: ''
   }

@@ -193,7 +193,6 @@ const styleSlotsInterface: TableItem[] = [
   {
     key: 'container',
     prop: 'container',
-    required: false,
     description: 'Root container for the range slider.',
     values: 'string[]',
     default: ''
@@ -201,56 +200,49 @@ const styleSlotsInterface: TableItem[] = [
   {
     key: 'progressContainer',
     prop: 'progressContainer',
-    required: false,
-    description: 'Progress bar container.',
+    description: 'Container for the progress bar and step marks.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'progress',
     prop: 'progress',
-    required: false,
-    description: 'Progress bar element.',
+    description: 'Progress bar element showing the selected range.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'stepMark',
     prop: 'stepMark',
-    required: false,
-    description: 'Step mark indicators.',
+    description: 'Step mark indicator for each step on the slider.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'thumbContainer',
     prop: 'thumbContainer',
-    required: false,
-    description: 'Container for slider thumbs.',
+    description: 'Container for the slider thumbs.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'thumb',
     prop: 'thumb',
-    required: false,
-    description: 'Slider thumb element.',
+    description: 'Slider thumb element (draggable handle).',
     values: 'string[]',
     default: ''
   },
   {
     key: 'labelContainer',
     prop: 'labelContainer',
-    required: false,
-    description: 'Container for range labels.',
+    description: 'Container for custom labels below the slider.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'label',
     prop: 'label',
-    required: false,
-    description: 'Individual range label.',
+    description: 'Custom label element for the slider.',
     values: 'string[]',
     default: ''
   }

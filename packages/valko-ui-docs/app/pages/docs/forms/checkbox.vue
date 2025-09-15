@@ -176,7 +176,7 @@ const styleSlotsInterface: TableItem[] = [
     key: 'container',
     prop: 'container',
     required: false,
-    description: 'The root container.',
+    description: 'The root container, controls layout between the checkbox and helpertext.',
     values: 'string[]',
     default: ''
   },
@@ -208,7 +208,7 @@ const styleSlotsInterface: TableItem[] = [
     key: 'input',
     prop: 'input',
     required: false,
-    description: 'The classes for the checkbox input element (this is hidden by default).',
+    description: 'The classes for the checkbox input element (this is hidden since we use a custom checkbox).',
     values: 'string[]',
     default: ''
   },

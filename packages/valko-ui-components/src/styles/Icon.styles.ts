@@ -1,7 +1,9 @@
 import { tv } from 'tailwind-variants'
 
 const icon = tv({
-  base: []
+  base: [
+    'vk-icon'
+  ]
 })
 
 export default icon

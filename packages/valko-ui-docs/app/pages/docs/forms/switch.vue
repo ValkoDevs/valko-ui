@@ -140,40 +140,35 @@ const styleSlotsInterface: TableItem[] = [
   {
     key: 'container',
     prop: 'container',
-    required: false,
-    description: 'Root container for the switch.',
+    description: 'Root container for the switch component.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'content',
     prop: 'content',
-    required: false,
-    description: 'Content wrapper for label and switch.',
+    description: 'Wrapper for the label and switch.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'labelSlot',
     prop: 'labelSlot',
-    required: false,
-    description: 'Label slot for the switch.',
+    description: 'Styles for the label element.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'switchSlot',
     prop: 'switchSlot',
-    required: false,
-    description: 'Switch control element.',
+    description: 'Styles for the switch track.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'thumb',
     prop: 'thumb',
-    required: false,
-    description: 'Switch thumb element.',
+    description: 'Styles for the switch thumb (the moving part).',
     values: 'string[]',
     default: ''
   }

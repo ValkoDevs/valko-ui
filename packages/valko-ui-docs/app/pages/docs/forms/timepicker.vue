@@ -278,6 +278,14 @@ const timepickerProps: TableItem[] = [
     description: 'Indicates whether the timepicker is required.',
     values: 'true, false',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for the timepicker.',
+    values: 'TimeSlots',
+    default: ''
   }
 ]
 
@@ -285,24 +293,21 @@ const styleSlotsInterface: TableItem[] = [
   {
     key: 'container',
     prop: 'container',
-    required: false,
-    description: 'Root container for the timepicker.',
+    description: 'Root container for the timepicker component.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'input',
     prop: 'input',
-    required: false,
-    description: 'Input element for time display.',
+    description: 'Styles for the input field that triggers the timepicker.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'content',
     prop: 'content',
-    required: false,
-    description: 'Dropdown/time selection content container.',
+    description: 'Container for the timepicker dropdown/popup content.',
     values: 'string[]',
     default: ''
   }

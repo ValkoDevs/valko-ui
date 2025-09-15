@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<TagProps>(), {
 
 const emit = defineEmits(['click', 'close'])
 
-const { container, icons, content, closable, contentContainer, closeIcon } = styles(props)
+const { container, icons, content, closeButton, contentContainer, closeIcon } = styles(props)
 
 const onClick = () => {
   if (!props.disabled && props.isPressable) {
@@ -53,8 +53,8 @@ const onClose = () => {
       />
     </div>
     <vk-button
-      v-if="props.closable"
-      :class="closable({ class: styleSlots?.closable })"
+      v-if="closable"
+      :class="closeButton({ class: styleSlots?.closeButton })"
       color="surface"
       variant="link"
       shape="rounded"

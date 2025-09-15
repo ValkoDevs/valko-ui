@@ -426,30 +426,65 @@ const calendarEmits: TableItem[] = [
 
 const styleSlotsInterface = [
   {
-    key: 'root',
-    prop: 'root',
-    description: 'Root element of the Calendar.',
+    key: 'container',
+    prop: 'container',
+    description: 'Root container (does not manage the layout).',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'header',
-    prop: 'header',
-    description: 'Header section of the Calendar.',
+    key: 'viewContainer',
+    prop: 'viewContainer',
+    description: 'Main container for all views (month, week, day) this manages the layout.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'body',
-    prop: 'body',
-    description: 'Body section of the Calendar.',
+    key: 'panel',
+    prop: 'panel',
+    description: 'Panel section of the Calendar (grid of days/months/years).',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'footer',
-    prop: 'footer',
-    description: 'Footer section of the Calendar.',
+    key: 'gridButton',
+    prop: 'gridButton',
+    description: 'The buttons on the grid panel (shared across all views).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'hiddenGridButton',
+    prop: 'hiddenGridButton',
+    description: 'The hidden buttons on the grid panel (only present on day view).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'weekdaySpan',
+    prop: 'weekdaySpan',
+    description: 'Span containing the weekdays (only present on day view).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'headerContainer',
+    prop: 'headerContainer',
+    description: 'Main container for the header (contains the month/year navigation and title).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'arrows',
+    prop: 'arrows',
+    description: 'Class shared for both navigation arrows.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'periodButton',
+    prop: 'periodButton',
+    description: 'The main button that shows the current period (month/year).',
     values: 'string[]',
     default: ''
   }

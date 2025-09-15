@@ -18,6 +18,7 @@ const alert = tv({
       'grow'
     ],
     title: [
+      'vk-alert__title',
       'font-bold'
     ],
     content: [

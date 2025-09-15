@@ -86,37 +86,72 @@ const modalProps: TableItem[] = [
     prop: 'styleSlots',
     required: false,
     description: 'Customizes style slots for Modal.',
-    values: 'object',
-    default: '{}'
+    values: 'ModalSlots',
+    default: ''
   }
 ]
 
 const styleSlotsInterface: TableItem[] = [
   {
-    key: 'root',
-    prop: 'root',
-    description: 'Root element of the Modal.',
+    key: 'dialog',
+    prop: 'dialog',
+    description: 'Root dialog container for the Modal.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'header',
-    prop: 'header',
-    description: 'Header section of the Modal.',
+    key: 'backdrop',
+    prop: 'backdrop',
+    description: 'Backdrop overlay behind the Modal.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'body',
-    prop: 'body',
-    description: 'Body section of the Modal.',
+    key: 'container',
+    prop: 'container',
+    description: 'Outer container wrapping the Modal content.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'footer',
-    prop: 'footer',
-    description: 'Footer section of the Modal.',
+    key: 'content',
+    prop: 'content',
+    description: 'Content wrapper for transitions and layout.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panel',
+    prop: 'panel',
+    description: 'Main panel element of the Modal.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panelChild',
+    prop: 'panelChild',
+    description: 'Container for the title and close button at the top of the Modal.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'title',
+    prop: 'title',
+    description: 'Title text element inside the Modal.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeButton',
+    prop: 'closeButton',
+    description: 'Close button element for dismissing the Modal.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeIcon',
+    prop: 'closeIcon',
+    description: 'Icon inside the close button.',
     values: 'string[]',
     default: ''
   }

@@ -135,37 +135,65 @@ const timeProps: TableItem[] = [
     prop: 'styleSlots',
     required: false,
     description: 'Customizes style slots for Time.',
-    values: 'object',
-    default: '{}'
+    values: 'TimeSlots',
+    default: ''
   }
 ]
 
-const styleSlotsInterface = [
+const styleSlotsInterface: TableItem[] = [
   {
-    key: 'root',
-    prop: 'root',
-    description: 'Root element of the Time.',
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the time picker.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'input',
-    prop: 'input',
-    description: 'Input field for time selection.',
+    key: 'grid',
+    prop: 'grid',
+    description: 'Grid container for time unit selectors.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'panel',
-    prop: 'panel',
-    description: 'Panel section of the Time picker.',
+    key: 'unitContainer',
+    prop: 'unitContainer',
+    description: 'Container for each time unit (hours, minutes, seconds) selector.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'unitButton',
+    prop: 'unitButton',
+    description: 'Button for selecting a time unit value.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'footer',
     prop: 'footer',
-    description: 'Footer section of the Time picker.',
+    description: 'Footer container for OK button and AM/PM selector.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'okButton',
+    prop: 'okButton',
+    description: 'OK button to confirm time selection.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'periodContainer',
+    prop: 'periodContainer',
+    description: 'Container for AM/PM selector buttons.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'periodButton',
+    prop: 'periodButton',
+    description: 'Button for selecting AM or PM.',
     values: 'string[]',
     default: ''
   }

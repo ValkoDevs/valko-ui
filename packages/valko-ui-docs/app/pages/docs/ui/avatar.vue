@@ -101,26 +101,10 @@ const styleSlotsInterface: TableItem[] = [
     default: ''
   },
   {
-    key: 'image',
-    prop: 'image',
+    key: 'imageTag',
+    prop: 'imageTag',
     required: false,
     description: 'Styles for the avatar image element.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'initials',
-    prop: 'initials',
-    required: false,
-    description: 'Styles for the initials text when no image is provided.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'icon',
-    prop: 'icon',
-    required: false,
-    description: 'Styles for the icon shown in the avatar.',
     values: 'string[]',
     default: ''
   }

@@ -164,39 +164,31 @@ const styleSlotsInterface: TableItem[] = [
     key: 'table',
     prop: 'table',
     required: false,
-    description: 'Styles for the table element itself, this is the main container aswell.',
+    description: 'Root container.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'header',
-    prop: 'header',
+    key: 'headerContainer',
+    prop: 'headerContainer',
     required: false,
-    description: 'Styles for the header element of the table.',
+    description: 'Styles for the header cell container of the table.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'body',
-    prop: 'body',
+    key: 'headerCheckbox',
+    prop: 'headerCheckbox',
     required: false,
-    description: 'Styles for the body element of the table.',
+    description: 'Styles for the header checkbox container (only present when selectionMode is "multiple").',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'row',
-    prop: 'row',
+    key: 'headerUtilities',
+    prop: 'headerUtilities',
     required: false,
-    description: 'Styles for each row element of the table.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'cell',
-    prop: 'cell',
-    required: false,
-    description: 'Styles for each cell element of the table.',
+    description: 'Styles for each utility element in the header of the table (filters, sort, etc.).',
     values: 'string[]',
     default: ''
   },
@@ -204,7 +196,7 @@ const styleSlotsInterface: TableItem[] = [
     key: 'footer',
     prop: 'footer',
     required: false,
-    description: 'Styles for the footer element of the table.',
+    description: 'Container for the footer content (pagination, select).',
     values: 'string[]',
     default: ''
   },
@@ -212,23 +204,23 @@ const styleSlotsInterface: TableItem[] = [
     key: 'pagination',
     prop: 'pagination',
     required: false,
-    description: 'Styles for the pagination container element.',
+    description: 'Styles for the pagination component of the table.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'selectAllCheckbox',
-    prop: 'selectAllCheckbox',
+    key: 'select',
+    prop: 'select',
     required: false,
-    description: 'Styles for the select all checkbox element in the header.',
+    description: 'Styles for the select component of the table.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'checkbox',
-    prop: 'checkbox',
+    key: 'dragIcon',
+    prop: 'dragIcon',
     required: false,
-    description: 'Styles for each checkbox element in the rows.',
+    description: 'Styles for the drag icon (only present when row dragging is enabled).',
     values: 'string[]',
     default: ''
   }

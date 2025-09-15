@@ -206,88 +206,77 @@ const styleSlotsInterface: TableItem[] = [
   {
     key: 'container',
     prop: 'container',
-    required: false,
-    description: 'Root container for the input.',
+    description: 'Root container for the input component.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'field',
     prop: 'field',
-    required: false,
-    description: 'Field wrapper for input and icons.',
+    description: 'Wrapper for the input field and related elements.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'input',
     prop: 'input',
-    required: false,
-    description: 'The input element itself.',
+    description: 'The input element itself (hidden since we use a custom input).',
     values: 'string[]',
     default: ''
   },
   {
     key: 'label',
     prop: 'label',
-    required: false,
-    description: 'Label for the input.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'numberArrows',
-    prop: 'numberArrows',
-    required: false,
-    description: 'Numeric input arrow controls.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'chevrons',
-    prop: 'chevrons',
-    required: false,
-    description: 'Chevron icons for numeric input.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'clearIcon',
-    prop: 'clearIcon',
-    required: false,
-    description: 'Clear (reset) icon.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'icons',
-    prop: 'icons',
-    required: false,
-    description: 'Wrapper for left/right icons.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'leftIcon',
-    prop: 'leftIcon',
-    required: false,
-    description: 'Left icon slot.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'rightIcon',
-    prop: 'rightIcon',
-    required: false,
-    description: 'Right icon slot.',
+    description: 'Label element for the input.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'helper',
     prop: 'helper',
-    required: false,
-    description: 'Helper text below the input.',
+    description: 'Helper text displayed below the input.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icons',
+    prop: 'icons',
+    description: 'Base styles for icon containers.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'leftIcon',
+    prop: 'leftIcon',
+    description: 'Styles for the left icon slot.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'rightIcon',
+    prop: 'rightIcon',
+    description: 'Styles for the right icon slot.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'clearIcon',
+    prop: 'clearIcon',
+    description: 'Styles for the clear (reset) icon.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'numberArrows',
+    prop: 'numberArrows',
+    description: 'Container for number input increment/decrement arrows.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'chevrons',
+    prop: 'chevrons',
+    description: 'Styles for the chevron icons used in number input arrows.',
     values: 'string[]',
     default: ''
   }

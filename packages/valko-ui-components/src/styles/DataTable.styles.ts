@@ -13,7 +13,7 @@ const dataTable = tv({
       'gap-1',
       'items-center'
     ],
-    headerLabel: [
+    headerCheckbox: [
       'mr-2',
       'self-center'
     ],

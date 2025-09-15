@@ -101,6 +101,7 @@ const tabs = tv({
           'bg-surface-container'
         ],
         cursor: [
+          'vk-tabs__cursor',
           'bg-gradient-to-br'
         ]
       }

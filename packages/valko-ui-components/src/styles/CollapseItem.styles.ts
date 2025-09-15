@@ -42,17 +42,15 @@ const collapseItem = tv({
     ],
     icon: [
       'vk-collapse-item__icon',
+      'transform',
       'transition-all',
       'duration-300',
       'ease-out',
+      'data-[open=true]:-rotate-90',
       'group-data-[size=xs]:text-xs',
       'group-data-[size=sm]:text-sm',
       'group-data-[size=md]:text-base',
       'group-data-[size=lg]:text-lg'
-    ],
-    iconOpen: [
-      'transform',
-      '-rotate-90'
     ]
   }
 })

@@ -35,7 +35,7 @@ const props = withDefaults(defineProps<DataTableProps>(), {
 
 const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll', 'onDragStart', 'onDragOver', 'onDrop'])
 
-const { table, headerContainer, headerLabel, headerUtilities, footer, pagination, select, dragIcon } = styles(props)
+const { table, headerContainer, headerCheckbox, headerUtilities, footer, pagination, select, dragIcon } = styles(props)
 
 const sortIconMap = {
   asc: 'arrow-up',
@@ -163,7 +163,7 @@ onBeforeUnmount(() => {
         :key="header.key"
       >
         <div :class="headerContainer({ class: styleSlots?.headerContainer })">
-          <div :class="headerLabel({ class: styleSlots?.headerLabel })">
+          <div :class="headerCheckbox({ class: styleSlots?.headerCheckbox })">
             <vk-checkbox
               v-if="selectionMode === 'multiple' && header.key === 'selection'"
               :color="color"

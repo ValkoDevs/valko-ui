@@ -124,7 +124,7 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Dropdown.',
     values: 'DropdownStyleSlots',
-    default: '{}'
+    default: ''
   }
 ]
 
@@ -173,30 +173,44 @@ const itemInterface: TableItem[] = [
 
 const styleSlotsInterface = [
   {
-    key: 'root',
-    prop: 'root',
-    description: 'Root element of the Dropdown.',
+    key: 'container',
+    prop: 'container',
+    description: 'Root element of the Dropdown (vk-popover).',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'trigger',
-    prop: 'trigger',
-    description: 'Trigger element for the Dropdown.',
+    key: 'triggerButton',
+    prop: 'triggerButton',
+    description: 'Styles for the default trigger button.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'menu',
-    prop: 'menu',
-    description: 'Menu section of the Dropdown.',
+    key: 'icon',
+    prop: 'icon',
+    description: 'Styles for the default icon on the trigger.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'item',
-    prop: 'item',
-    description: 'Dropdown item element.',
+    key: 'itemsMenu',
+    prop: 'itemsMenu',
+    description: 'Main container for the Dropdown items.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'itemsButton',
+    prop: 'itemsButton',
+    description: 'Styles for the Dropdown items buttons.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'itemsIcon',
+    prop: 'itemsIcon',
+    description: 'Styles for the Dropdown items icons.',
     values: 'string[]',
     default: ''
   }

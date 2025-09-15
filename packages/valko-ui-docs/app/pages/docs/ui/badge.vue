@@ -128,7 +128,7 @@ const styleSlotsInterface: TableItem[] = [
     key: 'badge',
     prop: 'badge',
     required: false,
-    description: 'Styles for the badge element itself, including positioning and appearance.',
+    description: 'Styles for the badge element itself.',
     values: 'string[]',
     default: ''
   }

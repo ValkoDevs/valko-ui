@@ -35,7 +35,8 @@ const itemId = useId()
         </div>
         <vk-icon
           name="chevron-left"
-          :class="`${classes.icon({ class: styleSlots?.icon })} ${itemId && items[itemId] ? classes.iconOpen : ''}`"
+          :data-open="itemId && items[itemId]"
+          :class="classes.icon({ class: styleSlots?.icon })"
         />
       </slot>
     </disclosure-button>

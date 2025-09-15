@@ -104,37 +104,51 @@ const tagProps: TableItem[] = [
     prop: 'styleSlots',
     required: false,
     description: 'Customizes style slots for Tag.',
-    values: 'object',
-    default: '{}'
+    values: 'TagSlots',
+    default: ''
   }
 ]
 
-const styleSlotsInterface = [
+const styleSlotsInterface: TableItem[] = [
   {
-    key: 'root',
-    prop: 'root',
-    description: 'Root element of the Tag.',
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the tag component.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'icon',
-    prop: 'icon',
-    description: 'Icon element of the Tag.',
+    key: 'contentContainer',
+    prop: 'contentContainer',
+    description: 'Wrapper for the tag content and icons.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'text',
-    prop: 'text',
-    description: 'Text section of the Tag.',
+    key: 'icons',
+    prop: 'icons',
+    description: 'Styles for left and right icons.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'close',
-    prop: 'close',
-    description: 'Close button element.',
+    key: 'content',
+    prop: 'content',
+    description: 'Text content of the tag.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeButton',
+    prop: 'closeButton',
+    description: 'Styles for the close button container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeIcon',
+    prop: 'closeIcon',
+    description: 'Icon for the close button.',
     values: 'string[]',
     default: ''
   }

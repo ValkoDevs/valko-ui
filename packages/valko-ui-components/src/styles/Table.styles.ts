@@ -35,7 +35,6 @@ const table = tv({
       'text-center'
     ],
     body: [],
-    shape: [],
     tableFooter: [
       'vk-table_footer'
     ]
