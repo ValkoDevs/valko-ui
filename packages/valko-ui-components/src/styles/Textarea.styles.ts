@@ -26,28 +26,27 @@ export default tv({
       'w-full',
       'min-h-[128px]',
       'h-[128px]',
+      'pl-4',
+      'pr-4',
+      'pt-4',
       'align-middle',
       'outline-none',
       'peer',
       'transition-colors',
       'duration-200',
       'ease-in-out',
-      'focus:ring-0',
-      'data-[left-icon=false]:px-2',
-      'data-[left-icon=true]:pr-2'
+      'focus:ring-0'
     ],
     label: [
       'vk-textarea__label',
       'text-on-surface-variant',
-      'p-1',
       'text-left',
       'font-bold',
       'truncate',
       'cursor-text',
-      'ml-[1px]',
       'absolute',
-      'top-1',
-      'left-1',
+      'top-3',
+      'left-4',
       'origin-[center_left]',
       'transition-all',
       'duration-200',
@@ -66,26 +65,31 @@ export default tv({
       'vk-textarea__counter',
       'w-fit',
       'whitespace-nowrap',
-      'text-on-surface-variant'
+      'text-on-surface-variant',
+      'ml-auto'
     ],
     footer: [
       'w-full',
       'flex',
-      'justify-between'
+      'justify-between',
+      'gap-4',
+      'px-4'
     ],
     leftIcon: [
-      'left-1'
+      'left-3'
     ],
     rightIcon: [
-      'right-1'
+      'right-3'
     ],
     icons: [
       'cursor-pointer',
       'absolute',
       'transition-all',
-      'top-1',
+      'top-2.5',
       'text-2xl',
-      'text-on-surface-variant'
+      'text-on-surface-variant',
+      'peer-data-[filled=true]:top-3',
+      'peer-data-[filled=false]:peer-focus:top-3'
     ]
   },
   variants: {
@@ -120,8 +124,13 @@ export default tv({
           'border-outlined'
         ],
         label: [
+          'px-1',
           'left-3',
           'bg-inherit'
+        ],
+        icons: [
+          'peer-data-[filled=true]:top-3.5',
+          'peer-data-[filled=false]:peer-focus:top-3.5'
         ]
       }
     },
@@ -209,12 +218,14 @@ export default tv({
       xs: {
         textarea: [
           'text-xs',
-          'pt-3.5',
-          'data-[left-icon=true]:pl-6'
+          'data-[left-icon=true]:pl-11',
+          'data-[left-icon=false]:pl-4',
+          'data-[right-icon=true]:pr-11',
+          'data-[right-icon=false]:pr-4'
         ],
         label: [
           'text-xs',
-          'peer-data-[left-icon=true]:ml-4'
+          'peer-data-[left-icon=true]:left-11'
         ],
         helper: [
           'text-xs'
@@ -223,61 +234,67 @@ export default tv({
           'text-xs'
         ],
         icons: [
-          'text-[16px]'
+          'text-base'
         ]
       },
       sm: {
         textarea: [
           'text-sm',
-          'pt-4.5',
-          'data-[left-icon=true]:pl-7'
+          'data-[left-icon=true]:pl-12',
+          'data-[left-icon=false]:pl-4',
+          'data-[right-icon=true]:pr-12',
+          'data-[right-icon=false]:pr-4'
         ],
         label: [
           'text-sm',
-          'peer-data-[left-icon=true]:ml-5'
+          'peer-data-[left-icon=true]:left-12'
         ],
         helper: [
-          'text-sm'
+          'text-xs'
         ],
         counter: [
           'text-sm'
         ],
         icons: [
-          'text-[20px]'
+          'text-xl'
         ]
       },
       md: {
         textarea: [
           'text-base',
-          'pt-5',
-          'data-[left-icon=true]:pl-8'
+          'data-[left-icon=true]:pl-13',
+          'data-[left-icon=false]:pl-4',
+          'data-[right-icon=true]:pr-13',
+          'data-[right-icon=false]:pr-4'
         ],
         label: [
           'text-base',
-          'peer-data-[left-icon=true]:ml-6'
+          'peer-data-[left-icon=true]:left-13'
         ],
         helper: [
-          'text-base'
+          'text-sm'
         ],
         counter: [
           'text-base'
         ],
         icons: [
-          'text-[24px]'
+          'text-2xl'
         ]
       },
       lg: {
         textarea: [
           'text-lg',
-          'pt-6',
-          'data-[left-icon=true]:pl-9'
+          'data-[left-icon=true]:pl-14',
+          'data-[left-icon=false]:pl-4',
+          'data-[right-icon=true]:pr-14',
+          'data-[right-icon=false]:pr-4'
         ],
         label: [
           'text-lg',
-          'peer-data-[left-icon=true]:ml-7'
+          'peer-data-[left-icon=true]:left-14'
         ],
         helper: [
-          'text-lg'
+          'text-base'
         ],
         counter: [
           'text-lg'
@@ -357,6 +374,7 @@ export default tv({
       disabled: false,
       class: {
         textarea: [
+          'border-positive',
           'hover:border-positive',
           'focus:border-positive'
         ]
@@ -379,6 +397,7 @@ export default tv({
       disabled: false,
       class: {
         textarea: [
+          'border-warning',
           'hover:border-warning',
           'focus:border-warning'
         ]
@@ -390,6 +409,7 @@ export default tv({
       disabled: false,
       class: {
         textarea: [
+          'border-negative',
           'hover:border-negative',
           'focus:border-negative'
         ]
@@ -433,7 +453,6 @@ export default tv({
       disabled: false,
       class: {
         textarea: [
-          'border-accent',
           'focus:border-accent'
         ]
       }
@@ -485,13 +504,9 @@ export default tv({
       variant: 'outlined',
       size: 'xs',
       class: {
-        textarea: [
-          'pt-2'
-        ],
         label: [
-          'peer-focus:-top-2.5',
-          'peer-data-[filled=true]:-top-2.5',
-          'peer-data-[left-icon=true]:ml-2.5'
+          'peer-focus:-top-2',
+          'peer-data-[filled=true]:-top-2'
         ]
       }
     },
@@ -499,13 +514,9 @@ export default tv({
       variant: 'outlined',
       size: 'sm',
       class: {
-        textarea: [
-          'pt-2.5'
-        ],
         label: [
-          'peer-focus:-top-3',
-          'peer-data-[filled=true]:-top-3',
-          'peer-data-[left-icon=true]:ml-3.5'
+          'peer-focus:-top-2.5',
+          'peer-data-[filled=true]:-top-2.5'
         ]
       }
     },
@@ -513,13 +524,9 @@ export default tv({
       variant: 'outlined',
       size: 'md',
       class: {
-        textarea: [
-          'pt-2.5'
-        ],
         label: [
-          'peer-focus:-top-3.5',
-          'peer-data-[filled=true]:-top-3.5',
-          'peer-data-[left-icon=true]:ml-4.5'
+          'peer-focus:-top-3',
+          'peer-data-[filled=true]:-top-3'
         ]
       }
     },
@@ -527,13 +534,29 @@ export default tv({
       variant: 'outlined',
       size: 'lg',
       class: {
-        textarea: [
-          'pt-3'
-        ],
         label: [
-          'peer-focus:-top-4',
-          'peer-data-[filled=true]:-top-4',
-          'peer-data-[left-icon=true]:ml-5.5'
+          'peer-focus:-top-3.5',
+          'peer-data-[filled=true]:-top-3.5'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      shape: ['soft', 'square'],
+      class: {
+        label: [
+          'peer-data-[left-icon=true]:peer-data-[filled=true]:left-4',
+          'peer-data-[left-icon=true]:peer-focus:left-4'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      shape: 'rounded',
+      class: {
+        label: [
+          'peer-data-[left-icon=true]:peer-data-[filled=true]:left-6',
+          'peer-data-[left-icon=true]:peer-focus:left-6'
         ]
       }
     }

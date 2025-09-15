@@ -206,7 +206,14 @@ const emitData: TableItem[] = [
     key: 'focusEmit',
     event: 'focus',
     description: 'Emitted when the input is focused.',
-    values: '',
+    values: 'FocusEvent',
+    type: '(event: FocusEvent) => void'
+  },
+  {
+    key: 'blurEmit',
+    event: 'blur',
+    description: 'Emitted when the input loses focus.',
+    values: 'FocusEvent',
     type: '(event: FocusEvent) => void'
   },
   {

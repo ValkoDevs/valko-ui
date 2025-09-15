@@ -245,7 +245,7 @@ describe('Tabs component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
+        expect(wrapper.find('.vk-tabs__cursor').classes()).toContain('bg-gradient-to-br')
       })
     })
   })

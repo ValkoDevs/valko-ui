@@ -26,8 +26,8 @@ const hasImageSlot = computed(() => slots.default?.().some((node) => node.type =
 
 const element = computed(() => props.isPressable ? 'html:button' : 'div')
 
-const onClick = () => {
-  if (!props.disabled && props.isPressable) emit('click')
+const onClick = (e: MouseEvent) => {
+  if (!props.disabled && props.isPressable) emit('click', e)
 }
 </script>
 

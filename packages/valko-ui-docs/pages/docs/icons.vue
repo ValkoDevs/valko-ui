@@ -13,6 +13,14 @@ const iconProps: TableItem[] = [
     description: 'The name of the icon to display. It must match a valid Tabler Icons name.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'ariaLabelProp',
+    prop: 'aria-label',
+    required: false,
+    description: 'Accessible text label read by assistive technologies when no visible label is provided.',
+    values: 'string',
+    default: ''
   }
 ]
 

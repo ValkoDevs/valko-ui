@@ -9,11 +9,12 @@ export default tv({
       'select-none'
     ],
     progressContainer: [
-      'vk-range__progress',
+      'vk-range__progress_container',
       'overflow-hidden',
       'relative'
     ],
     progress: [
+      'vk-range__progress',
       'h-full',
       'absolute',
       'z-20'
@@ -91,9 +92,6 @@ export default tv({
     },
     color: {
       primary: {
-        progress: [
-          'bg-primary'
-        ],
         thumb: [
           'bg-on-primary'
         ],
@@ -102,9 +100,6 @@ export default tv({
         ]
       },
       secondary: {
-        progress: [
-          'bg-secondary'
-        ],
         thumb: [
           'bg-on-secondary'
         ],
@@ -113,9 +108,6 @@ export default tv({
         ]
       },
       positive: {
-        progress: [
-          'bg-positive'
-        ],
         thumb: [
           'bg-on-positive'
         ],
@@ -124,9 +116,6 @@ export default tv({
         ]
       },
       accent: {
-        progress: [
-          'bg-accent'
-        ],
         thumb: [
           'bg-on-accent'
         ],
@@ -135,9 +124,6 @@ export default tv({
         ]
       },
       warning: {
-        progress: [
-          'bg-warning'
-        ],
         thumb: [
           'bg-on-warning'
         ],
@@ -146,9 +132,6 @@ export default tv({
         ]
       },
       negative: {
-        progress: [
-          'bg-negative'
-        ],
         thumb: [
           'bg-on-negative'
         ],
@@ -249,6 +232,61 @@ export default tv({
     }
   },
   compoundVariants: [
+    // filled-outlined & color
+    {
+      variant: ['filled', 'outlined'],
+      color: 'primary',
+      class: {
+        progress: [
+          'bg-primary'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'secondary',
+      class: {
+        progress: [
+          'bg-secondary'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'accent',
+      class: {
+        progress: [
+          'bg-accent'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'warning',
+      class: {
+        progress: [
+          'bg-warning'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'positive',
+      class: {
+        progress: [
+          'bg-positive'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'negative',
+      class: {
+        progress: [
+          'bg-negative'
+        ]
+      }
+    },
     // ghost & color
     {
       variant: 'ghost',

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ButtonProps, TableItem } from '@valko-ui/components'
+import type { ButtonProps, TableItem, SelectOption } from '@valko-ui/components'
 
 const form = ref<ButtonProps>({
   color: 'primary',
@@ -10,8 +10,15 @@ const form = ref<ButtonProps>({
   elevated: false,
   block: false,
   condensed: false,
-  loading: false
+  loading: false,
+  type: 'button'
 })
+
+const typeOptions: SelectOption<'button' | 'submit' | 'reset'>[] = [
+  { value: 'button', label: 'Button' },
+  { value: 'submit', label: 'Submit' },
+  { value: 'reset', label: 'Reset' }
+]
 
 const apiData: TableItem[] = [
   {
@@ -55,6 +62,14 @@ const apiData: TableItem[] = [
     default: 'false'
   },
   {
+    key: 'type',
+    prop: 'type',
+    required: false,
+    description: 'The type of the button.',
+    values: 'button, submit, reset',
+    default: 'button'
+  },
+  {
     key: 'elevated',
     prop: 'elevated',
     required: false,
@@ -93,8 +108,8 @@ const emitData: TableItem[] = [
     key: 'click',
     event: 'click',
     description: 'Emitted when the button is clicked.',
-    values: '',
-    type: '() => void'
+    values: 'MouseEvent',
+    type: '(event: MouseEvent) => void'
   }
 ]
 
@@ -128,6 +143,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
         :condensed="form.condensed"
         :shape="form.shape"
         :loading="form.loading"
+        :type="form.type"
         @click="onClick"
       >
         Button
@@ -158,6 +174,12 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
         label="Shape"
         size="sm"
         :options="shapeOptions.general"
+      />
+      <vk-select
+        v-model="form.type"
+        label="Type"
+        size="sm"
+        :options="typeOptions"
       />
       <vk-checkbox
         v-model="form.disabled"
@@ -247,6 +269,23 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
 
         <template #code>
           <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value), hasSlot: true })" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Types"
+        classes="sm:grid-cols-[repeat(2,_minmax(0,_max-content))] lg:grid-cols-[repeat(4,_minmax(0,_max-content))]"
+      >
+        <vk-button
+          v-for="type in typeOptions"
+          :key="type.value"
+          :type="type.value"
+        >
+          {{ type.label }}
+        </vk-button>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('type', { values: typeOptions.map(o => o.value), hasSlot: true })" />
         </template>
       </example-section>
 

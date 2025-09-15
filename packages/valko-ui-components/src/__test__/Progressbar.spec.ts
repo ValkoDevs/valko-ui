@@ -230,7 +230,7 @@ describe('Progressbar component', () => {
           }
         })
 
-        expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
+        expect(wrapper.find('.vk-progressbar__progress').classes()).toContain('bg-gradient-to-br')
       })
     })
 

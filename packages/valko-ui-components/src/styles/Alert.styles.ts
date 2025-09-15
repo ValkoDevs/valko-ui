@@ -7,8 +7,7 @@ export default tv({
       'w-full',
       'p-2',
       'flex',
-      'gap-2',
-      'shadow-el2'
+      'gap-2'
     ],
     mainIcon: [
       'mt-1'
@@ -123,6 +122,13 @@ export default tv({
       square: {
         container: [
           'rounded-none'
+        ]
+      }
+    },
+    elevated: {
+      true: {
+        container: [
+          'shadow-el2'
         ]
       }
     }

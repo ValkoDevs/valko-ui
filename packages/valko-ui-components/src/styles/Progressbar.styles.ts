@@ -104,37 +104,31 @@ export default tv({
     color: {
       primary: {
         progress: [
-          'bg-primary',
           'text-on-primary'
         ]
       },
       secondary: {
         progress: [
-          'bg-secondary',
           'text-on-secondary'
         ]
       },
       positive: {
         progress: [
-          'bg-positive',
           'text-on-positive'
         ]
       },
       accent: {
         progress: [
-          'bg-accent',
           'text-on-accent'
         ]
       },
       warning: {
         progress: [
-          'bg-warning',
           'text-on-warning'
         ]
       },
       negative: {
         progress: [
-          'bg-negative',
           'text-on-negative'
         ]
       }
@@ -218,6 +212,61 @@ export default tv({
     }
   },
   compoundVariants: [
+    // filled-outlined & color
+    {
+      variant: ['filled', 'outlined'],
+      color: 'primary',
+      class: {
+        progress: [
+          'bg-primary'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'secondary',
+      class: {
+        progress: [
+          'bg-secondary'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'accent',
+      class: {
+        progress: [
+          'bg-accent'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'warning',
+      class: {
+        progress: [
+          'bg-warning'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'positive',
+      class: {
+        progress: [
+          'bg-positive'
+        ]
+      }
+    },
+    {
+      variant: ['filled', 'outlined'],
+      color: 'negative',
+      class: {
+        progress: [
+          'bg-negative'
+        ]
+      }
+    },
     // ghost & color
     {
       variant: 'ghost',

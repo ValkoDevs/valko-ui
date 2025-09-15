@@ -4,4 +4,5 @@ export interface AlertProps extends ColorsWithSurface, VariantsAlt, Shapes, Size
   icon?: string | null;
   title?: string;
   closable?: boolean;
+  elevated?: boolean;
 }

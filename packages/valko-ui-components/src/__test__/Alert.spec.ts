@@ -41,6 +41,10 @@ describe('Alert component', () => {
       it('should not have title', () => {
         expect(wrapper.find('h6').exists()).toBe(false)
       })
+
+      it('should not have shadow', () => {
+        expect(wrapper.find('.vk-alert__container').classes()).not.toContain('shadow-el2')
+      })
     })
 
     describe('When color prop changes', () => {
@@ -293,6 +297,28 @@ describe('Alert component', () => {
         })
 
         expect(wrapper.find('i.ti').exists()).toBe(false)
+      })
+    })
+
+    describe('When elevated prop changes', () => {
+      it('should have shadow when elevated is true', () => {
+        wrapper = mount(VkAlert, {
+          props: {
+            elevated: true
+          }
+        })
+
+        expect(wrapper.find('.vk-alert__container').classes()).toContain('shadow-el2')
+      })
+
+      it('should not have shadow when elevated is false', () => {
+        wrapper = mount(VkAlert, {
+          props: {
+            elevated: false
+          }
+        })
+
+        expect(wrapper.find('.vk-alert__container').classes()).not.toContain('shadow-el2')
       })
     })
 

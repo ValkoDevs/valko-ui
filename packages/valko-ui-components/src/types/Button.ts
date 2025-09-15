@@ -7,4 +7,5 @@ export interface ButtonProps extends Shapes, Sizes, ColorsWithSurface, Pick<Aria
   loading?: boolean;
   elevated?: boolean;
   condensed?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 }

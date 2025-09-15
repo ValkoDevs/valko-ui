@@ -164,10 +164,16 @@ const tabInterface: TableItem[] = [
 
 const tabsSlots: TableItem[] = [
   {
-    key: 'tabKeySlot',
-    name: '[key: Tab["key"]]',
-    description: 'Slot for content associated with a specific tab. Each tab in the `VkTabs` component should have a corresponding slot with a unique name matching the `key` prop of the tab.',
-    example: '<template #tab1>\n  <!-- Content for tab 1 -->\n</template>\n<template #tab2>\n  <!-- Content for tab 2 -->\n</template>\n<!-- Add more templates for additional tabs as needed -->'
+    key: 'tabKeyTabSlot',
+    name: '[key: Tab["key"]]-tab',
+    description: 'Slot for customizing the tab button itself. Use this slot to replace the default tab rendering (title and icons) with your own custom tab content. The slot name should match the tab key followed by "-tab".',
+    example: '<template #photos-tab><!-- Custom tab button for "Photos" --></template>'
+  },
+  {
+    key: 'tabKeyContentSlot',
+    name: '[key: Tab["key"]]-content',
+    description: 'Slot for the content panel associated with a specific tab. The slot name should match the tab key followed by "-content".',
+    example: '<template #photos-content><!-- Content for "Photos" tab --></template>'
   }
 ]
 

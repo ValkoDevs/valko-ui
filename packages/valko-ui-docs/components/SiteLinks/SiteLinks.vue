@@ -49,6 +49,27 @@ const route = useRoute()
 
     <theme-switch />
     <a
+      href="https://www.npmjs.com/package/@valko-ui/components"
+      target="_blank"
+    >
+      <vk-button
+        variant="link"
+        shape="rounded"
+        color="surface"
+        condensed
+        size="lg"
+        class="size-10"
+        aria-label="NPM"
+      >
+        <vk-icon
+          name="brand-npm"
+          class="text-2xl p-2"
+          aria-label="NPM Icon"
+        />
+      </vk-button>
+    </a>
+
+    <a
       href="https://github.com/ValkoDevs/valko-ui"
       target="_blank"
     >

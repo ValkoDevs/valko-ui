@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<InputProps>(), {
   max: Infinity
 })
 
-const emit = defineEmits(['update:modelValue', 'focus', 'clear', 'leftIconClick', 'rightIconClick'])
+const emit = defineEmits(['update:modelValue', 'focus', 'clear', 'blur', 'leftIconClick', 'rightIconClick'])
 
 const classes = useStyle<InputProps, SlotStyles>(props, styles)
 
@@ -34,17 +34,23 @@ const inputRef = ref<HTMLInputElement | null>(null)
 let intervalId: ReturnType<typeof setInterval> | null = null
 
 const updateValue = (e: Event) => {
-  const value = (e.target as HTMLInputElement).value
+  let value: string | number = (e.target as HTMLInputElement).value
 
-  if (!props.disabled && !props.readonly) {
-    inputValue.value = value
-    emit('update:modelValue', value)
-    isFilled.value = value !== ''
-  }
+  if (props.disabled || props.readonly) return
+
+  if (props.type === 'number') value = value === '' ? '' : Number(value)
+
+  inputValue.value = value
+  emit('update:modelValue', value)
+  isFilled.value = value !== ''
 }
 
 const onFocus = (event: Event) => {
   if (!props.disabled) emit('focus', event)
+}
+
+const onBlur = (event: Event) => {
+  if (!props.disabled) emit('blur', event)
 }
 
 const clearInput = () => {
@@ -72,13 +78,20 @@ const changeNumericValue = (action: 'increment' | 'decrement') => {
   emit('update:modelValue', newValue)
 }
 
-const handleNumericArrowHold = (action: 'increment' | 'decrement') => intervalId = setInterval(() => changeNumericValue(action), 75)
+const handleNumericArrowHold = (action: 'increment' | 'decrement') => {
+  intervalId = setInterval(() => changeNumericValue(action), 75)
+  window.addEventListener('touchend', handleNumericArrowRelease)
+  window.addEventListener('touchcancel', handleNumericArrowRelease)
+}
 
 const handleNumericArrowRelease = () => {
   if (intervalId) {
     clearInterval(intervalId)
     intervalId = null
   }
+
+  window.removeEventListener('touchend', handleNumericArrowRelease)
+  window.removeEventListener('touchcancel', handleNumericArrowRelease)
 }
 
 const describedBy = computed(() => {
@@ -101,6 +114,7 @@ watch(() => props.modelValue, (newValue) => {
         ref="inputRef"
         :data-left-icon="!!$slots['left-icon']"
         :data-right-icon="!!$slots['right-icon']"
+        :data-clear-icon="clearable"
         :class="classes.input"
         :readonly="readonly"
         :disabled="disabled"
@@ -119,6 +133,7 @@ watch(() => props.modelValue, (newValue) => {
         :aria-required="props['aria-required']"
         @focus="onFocus"
         @input="updateValue"
+        @blur="onBlur"
       >
       <label
         :for="inputId"
@@ -136,6 +151,7 @@ watch(() => props.modelValue, (newValue) => {
           @mousedown="handleNumericArrowHold('increment')"
           @mouseup="handleNumericArrowRelease"
           @mouseleave="handleNumericArrowRelease"
+          @touchstart="handleNumericArrowHold('increment')"
         />
         <vk-icon
           name="chevron-down"
@@ -143,26 +159,32 @@ watch(() => props.modelValue, (newValue) => {
           @mousedown="handleNumericArrowHold('decrement')"
           @mouseup="handleNumericArrowRelease"
           @mouseleave="handleNumericArrowRelease"
+          @touchstart="handleNumericArrowHold('decrement')"
         />
       </span>
       <vk-icon
         v-if="clearable && !!inputValue"
-        name="circle-x"
+        name="x"
         :data-right-icon="!!$slots['right-icon']"
+        :data-chevron-icons="type === 'number'"
         :class="classes.clearIcon"
         @click="clearInput"
+        @touchend="clearInput"
       />
       <span
         v-if="$slots['left-icon']"
         :class="[classes.icons, classes.leftIcon]"
         @click="handleIconClick('left')"
+        @touchend="handleIconClick('left')"
       >
         <slot name="left-icon" />
       </span>
       <span
         v-if="$slots['right-icon']"
+        :data-chevron-icons="type === 'number'"
         :class="[classes.icons, classes.rightIcon]"
         @click="handleIconClick('right')"
+        @touchend="handleIconClick('right')"
       >
         <slot name="right-icon" />
       </span>

@@ -1,9 +1,11 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { ButtonProps } from '#valkoui/types/Button'
 import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Button.styles.ts'
 import useStyle from '#valkoui/composables/useStyle.ts'
 import VkSpinner from './Spinner.vue'
+import useRipple from '#valkoui/composables/useRipple.ts'
 
 defineOptions({ name: 'VkButton' })
 
@@ -16,27 +18,41 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   elevated: false,
   disabled: false,
   condensed: false,
-  loading: false
+  loading: false,
+  type: 'button'
 })
 
 const emit = defineEmits(['click'])
 
 const classes = useStyle<ButtonProps, SlotStyles>(props, styles)
 
-const onClick = () => {
+const buttonRef = ref<HTMLButtonElement | null>(null)
+const createRipple = useRipple(buttonRef)
+
+const onClick = (event: MouseEvent) => {
   if (!props.disabled && !props.loading) {
-    emit('click')
+    emit('click', event)
+  }
+}
+
+const onMouseDown = (event: MouseEvent | TouchEvent) => {
+  if (!props.disabled && !props.loading) {
+    createRipple(event)
   }
 }
 </script>
 
 <template>
   <button
+    ref="buttonRef"
     :class="classes.button"
     :disabled="disabled"
     :aria-disabled="disabled"
     :aria-label="props['aria-label']"
+    :type="type"
     @click="onClick"
+    @mousedown="onMouseDown"
+    @touchstart="onMouseDown"
   >
     <div :class="classes.stateLayer" />
     <div

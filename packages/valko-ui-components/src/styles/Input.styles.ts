@@ -12,7 +12,8 @@ export default tv({
     input: [
       'vk-input__input',
       'w-full',
-      'pl-2',
+      'pl-4',
+      'pr-4',
       'outline-none',
       'peer',
       'transition-colors',
@@ -20,21 +21,16 @@ export default tv({
       'ease-in-out',
       'overflow-hidden',
       'focus:ring-0',
-      'text-on-surface',
-      'data-[right-icon=false]:pr-2',
-      'data-[right-icon=true]:pr-8'
+      'text-on-surface'
     ],
     label: [
       'vk-input__label',
       'text-on-surface-variant',
       'text-left',
-      'font-bold',
       'truncate',
-      'p-1',
-      'ml-[1px]',
       'absolute',
       'top-1/2',
-      'left-1',
+      'left-4',
       'transition-all',
       'duration-200',
       'origin-[center_left]',
@@ -59,7 +55,8 @@ export default tv({
     helper: [
       'vk-input__helper',
       'break-normal',
-      'text-on-surface-variant'
+      'text-on-surface-variant',
+      'px-4'
     ],
     icons: [
       'cursor-pointer',
@@ -70,10 +67,10 @@ export default tv({
       '-translate-y-1/2'
     ],
     rightIcon: [
-      'right-1'
+      'right-3'
     ],
     leftIcon: [
-      'left-1'
+      'left-3'
     ],
     iconOpen: [
       'rotate-180'
@@ -86,8 +83,7 @@ export default tv({
       'transition-all',
       'top-1/2',
       '-translate-y-1/2',
-      'scale-90',
-      'right-1'
+      'right-3'
     ],
     numberArrows: [
       'vk-input__number-arrows',
@@ -96,7 +92,7 @@ export default tv({
       'flex-col',
       'gap-1',
       'absolute',
-      'right-2',
+      'right-3',
       'top-1/2',
       '-translate-y-1/2',
       'cursor-pointer'
@@ -135,15 +131,9 @@ export default tv({
           'border-outlined'
         ],
         label: [
-          'px-3.5',
+          'px-1',
           'left-3',
           'bg-inherit'
-        ],
-        leftIcon: [
-          'left-1.5'
-        ],
-        rightIcon: [
-          'right-1.5'
         ]
       }
     },
@@ -157,6 +147,7 @@ export default tv({
           'peer-focus:text-primary'
         ],
         icons: [
+          'hover:text-primary',
           'peer-focus:text-primary'
         ],
         clearIcon: [
@@ -175,6 +166,7 @@ export default tv({
           'peer-focus:text-secondary'
         ],
         icons: [
+          'hover:text-secondary',
           'peer-focus:text-secondary'
         ],
         clearIcon: [
@@ -186,20 +178,29 @@ export default tv({
       },
       positive: {
         input: [
+          'border-positive',
           'hover:border-positive',
           'focus:border-positive'
         ],
         label: [
+          'text-positive',
           'peer-focus:text-positive'
         ],
         icons: [
+          'text-positive',
+          'hover:text-positive',
           'peer-focus:text-positive'
         ],
         clearIcon: [
+          'text-positive',
           'hover:text-positive'
         ],
         chevrons: [
+          'text-positive',
           'hover:text-positive'
+        ],
+        helper: [
+          'text-positive'
         ]
       },
       accent: {
@@ -211,6 +212,7 @@ export default tv({
           'peer-focus:text-accent'
         ],
         icons: [
+          'hover:text-accent',
           'peer-focus:text-accent'
         ],
         clearIcon: [
@@ -222,38 +224,56 @@ export default tv({
       },
       warning: {
         input: [
+          'border-warning',
           'hover:border-warning',
           'focus:border-warning'
         ],
         label: [
+          'text-warning',
           'peer-focus:text-warning'
         ],
         icons: [
+          'text-warning',
+          'hover:text-warning',
           'peer-focus:text-warning'
         ],
         clearIcon: [
+          'text-warning',
           'hover:text-warning'
         ],
         chevrons: [
+          'text-warning',
           'hover:text-warning'
+        ],
+        helper: [
+          'text-warning'
         ]
       },
       negative: {
         input: [
+          'border-negative',
           'hover:border-negative',
           'focus:border-negative'
         ],
         label: [
+          'text-negative',
           'peer-focus:text-negative'
         ],
         icons: [
+          'text-negative',
+          'hover:text-negative',
           'peer-focus:text-negative'
         ],
         clearIcon: [
+          'text-negative',
           'hover:text-negative'
         ],
         chevrons: [
+          'text-negative',
           'hover:text-negative'
+        ],
+        helper: [
+          'text-negative'
         ]
       },
       surface: {
@@ -265,6 +285,7 @@ export default tv({
           'peer-focus:text-on-surface'
         ],
         icons: [
+          'hover:text-text-on-surface',
           'peer-focus:text-on-surface'
         ],
         clearIcon: [
@@ -281,17 +302,24 @@ export default tv({
           'h-10',
           'pt-2',
           'text-xs',
-          'data-[left-icon=true]:pl-6'
+          'data-[left-icon=true]:pl-11',
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-11',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-17',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-11'
         ],
         label: [
           'text-xs',
-          'peer-data-[left-icon=true]:left-5'
+          'peer-data-[left-icon=true]:left-11'
         ],
         helper: [
           'text-xs'
         ],
         icons: [
-          'text-[16px]'
+          'text-base'
+        ],
+        clearIcon: [
+          'text-xs',
+          'data-[right-icon=true]:right-11'
         ],
         chevrons: [
           'text-xs',
@@ -303,17 +331,24 @@ export default tv({
           'h-12',
           'pt-2.5',
           'text-sm',
-          'data-[left-icon=true]:pl-7'
+          'data-[left-icon=true]:pl-12',
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-12',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-19',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-12'
         ],
         label: [
           'text-sm',
-          'peer-data-[left-icon=true]:left-6'
+          'peer-data-[left-icon=true]:left-12'
         ],
         helper: [
           'text-xs'
         ],
         icons: [
-          'text-[20px]'
+          'text-xl'
+        ],
+        clearIcon: [
+          'text-sm',
+          'data-[right-icon=true]:right-12'
         ],
         chevrons: [
           'text-sm',
@@ -325,17 +360,24 @@ export default tv({
           'h-14',
           'pt-3',
           'text-base',
-          'data-[left-icon=true]:pl-8'
+          'data-[left-icon=true]:pl-13',
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-13',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-21',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-13'
         ],
         label: [
           'text-base',
-          'peer-data-[left-icon=true]:left-7'
+          'peer-data-[left-icon=true]:left-13'
         ],
         helper: [
           'text-sm'
         ],
         icons: [
-          'text-[24px]'
+          'text-2xl'
+        ],
+        clearIcon: [
+          'text-base',
+          'data-[right-icon=true]:right-13'
         ],
         chevrons: [
           'text-base',
@@ -347,17 +389,24 @@ export default tv({
           'h-16',
           'pt-4',
           'text-lg',
-          'data-[left-icon=true]:pl-9'
+          'data-[left-icon=true]:pl-14',
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-14',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-23',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-14'
         ],
         label: [
           'text-lg',
-          'peer-data-[left-icon=true]:left-8'
+          'peer-data-[left-icon=true]:left-14'
         ],
         helper: [
           'text-base'
         ],
         icons: [
           'text-[28px]'
+        ],
+        clearIcon: [
+          'text-lg',
+          'data-[right-icon=true]:right-14'
         ],
         chevrons: [
           'text-lg',
@@ -368,10 +417,30 @@ export default tv({
     shape: {
       rounded: {
         input: [
-          'rounded-full'
+          'rounded-full',
+          'pl-6',
+          'pr-6'
         ],
         field: [
           'rounded-full'
+        ],
+        label: [
+          'left-6'
+        ],
+        leftIcon: [
+          'left-4'
+        ],
+        rightIcon: [
+          'right-4'
+        ],
+        clearIcon: [
+          'right-4'
+        ],
+        numberArrows: [
+          'right-4'
+        ],
+        helper: [
+          'px-6'
         ]
       },
       soft: {},
@@ -412,76 +481,213 @@ export default tv({
     }
   },
   compoundVariants: [
-    // filled & ghost & rounded
+    // shapes - sizes - types
     {
-      variant: ['filled', 'ghost'],
       shape: 'rounded',
+      type: ['text', 'email', 'password'],
       size: 'xs',
       class: {
         input: [
-          'pl-[calc(1rem_-_1px)]',
-          'data-[left-icon=true]:pl-6'
+          'data-[left-icon=true]:pl-13',
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-13',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-19',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-13'
         ],
         label: [
-          'ml-2',
-          'peer-data-[left-icon=true]:ml-[1px]'
+          'peer-data-[left-icon=true]:left-13'
         ],
-        helper: [
-          'ml-4'
+        clearIcon: [
+          'data-[right-icon=true]:right-13'
         ]
       }
     },
     {
-      variant: ['filled', 'ghost'],
       shape: 'rounded',
+      type: ['text', 'email', 'password'],
       size: 'sm',
       class: {
         input: [
-          'pl-[calc(1.25rem_-_1px)]',
-          'data-[left-icon=true]:[calc(1.75rem_+_1px)]'
+          'data-[left-icon=true]:pl-14',
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-14',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-21',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-14'
         ],
         label: [
-          'ml-3',
-          'peer-data-[left-icon=true]:ml-[1px]'
+          'peer-data-[left-icon=true]:left-14'
         ],
-        helper: [
-          'ml-6'
+        clearIcon: [
+          'data-[right-icon=true]:right-14'
         ]
       }
     },
     {
-      variant: ['filled', 'ghost'],
       shape: 'rounded',
+      type: ['text', 'email', 'password'],
       size: 'md',
       class: {
         input: [
-          'pl-[calc(1.5rem_-_1px)]',
-          'data-[left-icon=true]:pl-8'
+          'data-[left-icon=true]:pl-15',
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-15',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-23',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-15'
         ],
         label: [
-          'ml-4',
-          'peer-data-[left-icon=true]:ml-[1px]'
+          'peer-data-[left-icon=true]:left-15'
         ],
-        helper: [
-          'ml-6'
+        clearIcon: [
+          'data-[right-icon=true]:right-15'
         ]
       }
     },
     {
-      variant: ['filled', 'ghost'],
       shape: 'rounded',
+      type: ['text', 'email', 'password'],
       size: 'lg',
       class: {
         input: [
-          'pl-[calc(1.75rem_-_1px)]',
-          'data-[left-icon=true]:[calc(2.25rem_+_1px)]'
+          'data-[left-icon=true]:pl-16',
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-16',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-25',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-16'
         ],
         label: [
-          'ml-5',
-          'peer-data-[left-icon=true]:ml-[1px]'
+          'peer-data-[left-icon=true]:left-16'
         ],
-        helper: [
-          'ml-8'
+        clearIcon: [
+          'data-[right-icon=true]:right-16'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: ['soft', 'square'],
+      size: 'xs',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-7'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-13',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-7'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: ['soft', 'square'],
+      size: 'sm',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-7.5'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-14.5',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-7.5'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: ['soft', 'square'],
+      size: 'md',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-8'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-16',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-8'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: ['soft', 'square'],
+      size: 'lg',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-8.5'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-17.5',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-8.5'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: 'rounded',
+      size: 'xs',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-9'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-15',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-9'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: 'rounded',
+      size: 'sm',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-9.5'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-16.5',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-9.5'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: 'rounded',
+      size: 'md',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-10'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-18',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-10'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: 'rounded',
+      size: 'lg',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-10.5'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-19.5',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-10.5'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      shape: ['soft', 'square'],
+      class: {
+        label: [
+          'peer-data-[left-icon=true]:peer-data-[filled=true]:left-4',
+          'peer-data-[left-icon=true]:peer-focus:left-4'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      shape: 'rounded',
+      class: {
+        label: [
+          'left-5',
+          'peer-data-[left-icon=true]:peer-data-[filled=true]:left-6',
+          'peer-data-[left-icon=true]:peer-focus:left-6'
         ]
       }
     },
@@ -494,9 +700,8 @@ export default tv({
           'py-1'
         ],
         label: [
-          'peer-focus:-top-3',
-          'peer-data-[filled=true]:-top-3',
-          'peer-data-[left-icon=true]:left-3.5'
+          'peer-focus:-top-2',
+          'peer-data-[filled=true]:-top-2'
         ]
       }
     },
@@ -508,9 +713,8 @@ export default tv({
           'py-2'
         ],
         label: [
-          'peer-focus:-top-3.5',
-          'peer-data-[filled=true]:-top-3.5',
-          'peer-data-[left-icon=true]:left-4.5'
+          'peer-focus:-top-2.5',
+          'peer-data-[filled=true]:-top-2.5'
         ]
       }
     },
@@ -522,9 +726,8 @@ export default tv({
           'py-3'
         ],
         label: [
-          'peer-focus:-top-4',
-          'peer-data-[filled=true]:-top-4',
-          'peer-data-[left-icon=true]:left-5.5'
+          'peer-focus:-top-3',
+          'peer-data-[filled=true]:-top-3'
         ]
       }
     },
@@ -536,61 +739,8 @@ export default tv({
           'py-3.5'
         ],
         label: [
-          'peer-focus:-top-4.5',
-          'peer-data-[filled=true]:-top-4.5',
-          'peer-data-[left-icon=true]:left-6.5'
-        ]
-      }
-    },
-    // outlined & rounded
-    {
-      variant: 'outlined',
-      shape: 'rounded',
-      size: 'xs',
-      class: {
-        label: [
-          'left-3.5'
-        ],
-        helper: [
-          'ml-4'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      shape: 'rounded',
-      size: 'sm',
-      class: {
-        label: [
-          'left-4.5'
-        ],
-        helper: [
-          'ml-5'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      shape: 'rounded',
-      size: 'md',
-      class: {
-        label: [
-          'left-5.5'
-        ],
-        helper: [
-          'ml-6'
-        ]
-      }
-    },
-    {
-      variant: 'outlined',
-      shape: 'rounded',
-      class: {
-        label: [
-          'left-6.5'
-        ],
-        helper: [
-          'ml-7'
+          'peer-focus:-top-3.5',
+          'peer-data-[filled=true]:-top-3.5'
         ]
       }
     },
@@ -617,43 +767,6 @@ export default tv({
         ],
         field: [
           'rounded-t-lg'
-        ]
-      }
-    },
-    // clear icon & size
-    {
-      clearable: true,
-      size: 'xs',
-      class: {
-        clearIcon: [
-          'data-[right-icon=true]:-translate-x-5'
-        ]
-      }
-    },
-    {
-      clearable: true,
-      size: 'sm',
-      class: {
-        clearIcon: [
-          'data-[right-icon=true]:-translate-x-6'
-        ]
-      }
-    },
-    {
-      clearable: true,
-      size: 'md',
-      class: {
-        clearIcon: [
-          'data-[right-icon=true]:-translate-x-7'
-        ]
-      }
-    },
-    {
-      clearable: true,
-      size: 'lg',
-      class: {
-        clearIcon: [
-          'data-[right-icon=true]:-translate-x-8'
         ]
       }
     },

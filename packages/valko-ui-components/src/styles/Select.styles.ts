@@ -67,16 +67,22 @@ export default tv({
           'data-[variant=filled]:hover:text-on-primary',
           'data-[variant=filled]:data-[selected=true]:bg-primary',
           'data-[variant=filled]:data-[selected=true]:text-on-primary',
+          'data-[variant=filled]:data-[highlighted=true]:bg-primary',
+          'data-[variant=filled]:data-[highlighted=true]:text-on-primary',
           //outlined
           'data-[variant=outlined]:hover:border-primary',
           'data-[variant=outlined]:hover:text-primary',
           'data-[variant=outlined]:data-[selected=true]:text-primary',
           'data-[variant=outlined]:data-[selected=true]:border-primary',
+          'data-[variant=outlined]:data-[highlighted=true]:text-primary',
+          'data-[variant=outlined]:data-[highlighted=true]:border-primary',
           //ghost
           'data-[variant=ghost]:hover:bg-primary-container',
           'data-[variant=ghost]:hover:text-on-primary-container',
-          'data-[variant=ghost]:data-[selected=true]:text-primary-container',
-          'data-[variant=ghost]:data-[selected=true]:bg-on-primary-container'
+          'data-[variant=ghost]:data-[selected=true]:text-on-primary-container',
+          'data-[variant=ghost]:data-[selected=true]:bg-primary-container',
+          'data-[variant=ghost]:data-[highlighted=true]:bg-primary-container',
+          'data-[variant=ghost]:data-[highlighted=true]:text-on-primary-container'
         ]
       },
       secondary: {
@@ -86,16 +92,22 @@ export default tv({
           'data-[variant=filled]:hover:text-on-secondary',
           'data-[variant=filled]:data-[selected=true]:bg-secondary',
           'data-[variant=filled]:data-[selected=true]:text-on-secondary',
+          'data-[variant=filled]:data-[highlighted=true]:bg-secondary',
+          'data-[variant=filled]:data-[highlighted=true]:text-on-secondary',
           //outlined
           'data-[variant=outlined]:hover:border-secondary',
           'data-[variant=outlined]:hover:text-secondary',
           'data-[variant=outlined]:data-[selected=true]:text-secondary',
           'data-[variant=outlined]:data-[selected=true]:border-secondary',
+          'data-[variant=outlined]:data-[highlighted=true]:text-secondary',
+          'data-[variant=outlined]:data-[highlighted=true]:border-secondary',
           //ghost
           'data-[variant=ghost]:hover:bg-secondary-container',
           'data-[variant=ghost]:hover:text-on-secondary-container',
-          'data-[variant=ghost]:data-[selected=true]:text-secondary-container',
-          'data-[variant=ghost]:data-[selected=true]:bg-on-secondary-container'
+          'data-[variant=ghost]:data-[selected=true]:text-on-secondary-container',
+          'data-[variant=ghost]:data-[selected=true]:bg-secondary-container',
+          'data-[variant=ghost]:data-[highlighted=true]:text-on-secondary-container',
+          'data-[variant=ghost]:data-[highlighted=true]:bg-secondary-container'
         ]
       },
       positive: {
@@ -105,16 +117,22 @@ export default tv({
           'data-[variant=filled]:hover:text-on-positive',
           'data-[variant=filled]:data-[selected=true]:bg-positive',
           'data-[variant=filled]:data-[selected=true]:text-on-positive',
+          'data-[variant=filled]:data-[highlighted=true]:bg-positive',
+          'data-[variant=filled]:data-[highlighted=true]:text-on-positive',
           //outlined
           'data-[variant=outlined]:hover:border-positive',
           'data-[variant=outlined]:hover:text-positive',
           'data-[variant=outlined]:data-[selected=true]:text-positive',
           'data-[variant=outlined]:data-[selected=true]:border-positive',
+          'data-[variant=outlined]:data-[highlighted=true]:text-positive',
+          'data-[variant=outlined]:data-[highlighted=true]:border-positive',
           //ghost
           'data-[variant=ghost]:hover:bg-positive-container',
           'data-[variant=ghost]:hover:text-on-positive-container',
-          'data-[variant=ghost]:data-[selected=true]:text-positive-container',
-          'data-[variant=ghost]:data-[selected=true]:bg-on-positive-container'
+          'data-[variant=ghost]:data-[selected=true]:text-on-positive-container',
+          'data-[variant=ghost]:data-[selected=true]:bg-positive-container',
+          'data-[variant=ghost]:data-[highlighted=true]:text-on-positive-container',
+          'data-[variant=ghost]:data-[highlighted=true]:bg-positive-container'
         ]
       },
       accent: {
@@ -124,16 +142,22 @@ export default tv({
           'data-[variant=filled]:hover:text-on-accent',
           'data-[variant=filled]:data-[selected=true]:bg-accent',
           'data-[variant=filled]:data-[selected=true]:text-on-accent',
+          'data-[variant=filled]:data-[highlighted=true]:bg-accent',
+          'data-[variant=filled]:data-[highlighted=true]:text-on-accent',
           //outlined
           'data-[variant=outlined]:hover:border-accent',
           'data-[variant=outlined]:hover:text-accent',
           'data-[variant=outlined]:data-[selected=true]:text-accent',
           'data-[variant=outlined]:data-[selected=true]:border-accent',
+          'data-[variant=outlined]:data-[highlighted=true]:text-accent',
+          'data-[variant=outlined]:data-[highlighted=true]:border-accent',
           //ghost
           'data-[variant=ghost]:hover:bg-accent-container',
           'data-[variant=ghost]:hover:text-on-accent-container',
-          'data-[variant=ghost]:data-[selected=true]:text-accent-container',
-          'data-[variant=ghost]:data-[selected=true]:bg-on-accent-container'
+          'data-[variant=ghost]:data-[selected=true]:text-on-accent-container',
+          'data-[variant=ghost]:data-[selected=true]:bg-accent-container',
+          'data-[variant=ghost]:data-[highlighted=true]:text-on-accent-container',
+          'data-[variant=ghost]:data-[highlighted=true]:bg-accent-container'
         ]
       },
       warning: {
@@ -143,16 +167,22 @@ export default tv({
           'data-[variant=filled]:hover:text-on-warning',
           'data-[variant=filled]:data-[selected=true]:bg-warning',
           'data-[variant=filled]:data-[selected=true]:text-on-warning',
+          'data-[variant=filled]:data-[highlighted=true]:bg-warning',
+          'data-[variant=filled]:data-[highlighted=true]:text-on-warning',
           //outlined
           'data-[variant=outlined]:hover:border-warning',
           'data-[variant=outlined]:hover:text-warning',
           'data-[variant=outlined]:data-[selected=true]:text-warning',
           'data-[variant=outlined]:data-[selected=true]:border-warning',
+          'data-[variant=outlined]:data-[highlighted=true]:text-warning',
+          'data-[variant=outlined]:data-[highlighted=true]:border-warning',
           //ghost
           'data-[variant=ghost]:hover:bg-warning-container',
           'data-[variant=ghost]:hover:text-on-warning-container',
-          'data-[variant=ghost]:data-[selected=true]:text-warning-container',
-          'data-[variant=ghost]:data-[selected=true]:bg-on-warning-container'
+          'data-[variant=ghost]:data-[selected=true]:text-on-warning-container',
+          'data-[variant=ghost]:data-[selected=true]:bg-warning-container',
+          'data-[variant=ghost]:data-[highlighted=true]:text-on-warning-container',
+          'data-[variant=ghost]:data-[highlighted=true]:bg-warning-container'
         ]
       },
       negative: {
@@ -162,16 +192,22 @@ export default tv({
           'data-[variant=filled]:hover:text-on-negative',
           'data-[variant=filled]:data-[selected=true]:bg-negative',
           'data-[variant=filled]:data-[selected=true]:text-on-negative',
+          'data-[variant=filled]:data-[highlighted=true]:bg-negative',
+          'data-[variant=filled]:data-[highlighted=true]:text-on-negative',
           //outlined
           'data-[variant=outlined]:hover:border-negative',
           'data-[variant=outlined]:hover:text-negative',
           'data-[variant=outlined]:data-[selected=true]:text-negative',
           'data-[variant=outlined]:data-[selected=true]:border-negative',
+          'data-[variant=outlined]:data-[highlighted=true]:text-negative',
+          'data-[variant=outlined]:data-[highlighted=true]:border-negative',
           //ghost
           'data-[variant=ghost]:hover:bg-negative-container',
           'data-[variant=ghost]:hover:text-on-negative-container',
-          'data-[variant=ghost]:data-[selected=true]:text-negative-container',
-          'data-[variant=ghost]:data-[selected=true]:bg-on-negative-container'
+          'data-[variant=ghost]:data-[selected=true]:text-on-negative-container',
+          'data-[variant=ghost]:data-[selected=true]:bg-negative-container',
+          'data-[variant=ghost]:data-[highlighted=true]:text-on-negative-container',
+          'data-[variant=ghost]:data-[highlighted=true]:bg-negative-container'
         ]
       }
     },

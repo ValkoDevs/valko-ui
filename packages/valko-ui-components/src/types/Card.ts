@@ -1,4 +1,4 @@
-import type { SizeWithFull, Variants, Shapes } from './common'
+import type { Sizes, Variants, Shapes } from './common'
 
 export type Layout = 'vertical' | 'horizontal' | 'cover'
 
@@ -13,9 +13,8 @@ export interface CardImageProps {
   height?: string;
 }
 
-export interface CardProps extends Variants, Shapes {
+export interface CardProps extends Variants, Shapes, Sizes {
   layout?: Layout;
-  size?: SizeWithFull;
   isPressable?: boolean;
   disabled?: boolean;
   elevated?: boolean;

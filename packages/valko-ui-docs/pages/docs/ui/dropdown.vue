@@ -35,7 +35,7 @@ const dropdownProps: TableItem[] = [
     prop: 'variant',
     required: false,
     description: 'The Dropdown variant.',
-    values: 'filled, outlined, ghost, gradient',
+    values: 'filled, outlined, ghost, gradient, link',
     default: 'filled'
   },
   {
@@ -53,6 +53,14 @@ const dropdownProps: TableItem[] = [
     description: 'The Dropdown size.',
     values: 'xs, sm, md, lg',
     default: 'md'
+  },
+  {
+    key: 'isOpenProp',
+    prop: 'isOpen',
+    required: false,
+    description: 'Controls the open state of the Dropdown, if not provided it will be managed internally.',
+    values: 'true, false',
+    default: 'false'
   },
   {
     key: 'elevatedProp',
@@ -162,6 +170,13 @@ const dropdownEmits: TableItem[] = [
     description: 'Emitted when an item in the dropdown menu is clicked.',
     values: 'Item',
     type: '(item: Item) => void'
+  },
+  {
+    key: 'clickEmit',
+    event: 'click',
+    description: 'Emitted when the dropdown trigger is clicked.',
+    values: 'MouseEvent',
+    type: '(event: MouseEvent) => void'
   }
 ]
 
@@ -169,8 +184,8 @@ const dropdownSlots: TableItem[] = [
   {
     key: 'dropdownTriggerSlot',
     name: 'dropdown-trigger',
-    description: 'The dropdown-trigger slot for the Dropdown. By default, it renders a `VkButton`. If you use a custom component within this slot, you can access the `props` for binding attributes like color, variant, and size, as well as an `open` prop indicating the dropdown’s current state. This allows you to integrate any custom component as the dropdown trigger, while retaining full control over its appearance and behavior.',
-    example: '<template #dropdown-trigger>\n  <!-- Your custom dropdown trigger component here -->\n</template>'
+    description: 'The dropdown-trigger slot for the Dropdown. By default, it renders a `VkButton`.\nIf you use a custom component within this slot, you can access the `props` for binding attributes like color, variant, and size.\nAdditionally, the slot exposes:\n- `toggle`: a function to open or close the dropdown.\n- `open`: a boolean indicating the current open state.\nThis lets you integrate any custom component as the trigger while reacting to the dropdown’s state.',
+    example: '<template #dropdown-trigger="{ toggle }">\n  <!-- Your custom dropdown trigger component here -->\n</template>'
   }
 ]
 
@@ -223,7 +238,7 @@ const extraProps = ':items="items"'
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions.general"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -271,7 +286,7 @@ const extraProps = ':items="items"'
         classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] xl:grid-cols-[repeat(6,_minmax(0,_max-content))]"
       >
         <vk-dropdown
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           :color="color.value"
           :title="color.label"
@@ -280,7 +295,7 @@ const extraProps = ':items="items"'
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), extraProps })}`" />
         </template>
       </example-section>
 
