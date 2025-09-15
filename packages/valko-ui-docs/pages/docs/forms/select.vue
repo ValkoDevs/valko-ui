@@ -199,48 +199,42 @@ const styleSlotsInterface: TableItem[] = [
   {
     key: 'container',
     prop: 'container',
-    required: false,
-    description: 'Root container for the select.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'select',
-    prop: 'select',
-    required: false,
-    description: 'Native select element (hidden).',
+    description: 'Root container for the select component.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'field',
     prop: 'field',
-    required: false,
-    description: 'Field wrapper for input and icons.',
+    description: 'Wrapper for the input and dropdown.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'icon',
-    prop: 'icon',
-    required: false,
-    description: 'Dropdown chevron icon.',
+    key: 'select',
+    prop: 'select',
+    description: 'Hidden native select element.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'dropdown',
     prop: 'dropdown',
-    required: false,
-    description: 'Dropdown menu container.',
+    description: 'Dropdown menu container for options.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'item',
     prop: 'item',
-    required: false,
-    description: 'Individual dropdown item.',
+    description: 'Styles for each option item in the dropdown.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    description: 'Icon for dropdown toggle (chevron).',
     values: 'string[]',
     default: ''
   }

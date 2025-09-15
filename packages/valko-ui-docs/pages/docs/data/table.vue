@@ -61,53 +61,67 @@ const tableProps: TableItem[] = [
 
 const styleSlotsInterface: TableItem[] = [
   {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the table component.',
+    values: 'string[]',
+    default: ''
+  },
+  {
     key: 'table',
     prop: 'table',
-    required: false,
-    description: 'Styles for the main table element.',
-    values: 'string'
+    description: 'Styles for the <table> element.',
+    values: 'string[]',
+    default: ''
   },
   {
-    key: 'header',
-    prop: 'header',
-    required: false,
+    key: 'thead',
+    prop: 'thead',
     description: 'Styles for the table header section.',
-    values: 'string'
+    values: 'string[]',
+    default: ''
   },
   {
-    key: 'headerCell',
-    prop: 'headerCell',
-    required: false,
-    description: 'Styles for individual header cells.',
-    values: 'string'
+    key: 'tr',
+    prop: 'tr',
+    description: 'Styles for table rows.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'th',
+    prop: 'th',
+    description: 'Styles for table header cells.',
+    values: 'string[]',
+    default: ''
   },
   {
     key: 'body',
     prop: 'body',
-    required: false,
     description: 'Styles for the table body section.',
-    values: 'string'
+    values: 'string[]',
+    default: ''
   },
   {
-    key: 'row',
-    prop: 'row',
-    required: false,
-    description: 'Styles for individual data rows.',
-    values: 'string'
-  },
-  {
-    key: 'cell',
-    prop: 'cell',
-    required: false,
-    description: 'Styles for individual data cells.',
-    values: 'string'
+    key: 'td',
+    prop: 'td',
+    description: 'Styles for table data cells.',
+    values: 'string[]',
+    default: ''
   },
   {
     key: 'noDataMessage',
     prop: 'noDataMessage',
-    required: false,
     description: 'Styles for the no data message row.',
-    values: 'string'
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'tableFooter',
+    prop: 'tableFooter',
+    description: 'Styles for the table footer section.',
+    values: 'string[]',
+    default: ''
   }
 ]
 

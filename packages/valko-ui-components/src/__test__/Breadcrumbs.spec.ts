@@ -283,7 +283,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('i.ti.ti-minus').exists()).toBe(true)
+        expect(wrapper.find('.vk-breadcrumbs__separator').classes()).toContain('ti-minus')
       })
 
       it('should not render a separator after the last crumb', () => {

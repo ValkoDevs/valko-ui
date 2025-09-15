@@ -59,16 +59,16 @@ const spinnerProps: TableItem[] = [
     prop: 'styleSlots',
     required: false,
     description: 'Customizes style slots for Spinner.',
-    values: 'object',
-    default: '{}'
+    values: 'SpinnerSlots',
+    default: ''
   }
 ]
 
 const styleSlotsInterface = [
   {
-    key: 'root',
-    prop: 'root',
-    description: 'Root element of the Spinner.',
+    key: 'container',
+    prop: 'container',
+    description: 'Root container of the Spinner.',
     values: 'string[]',
     default: ''
   },

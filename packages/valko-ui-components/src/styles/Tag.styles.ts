@@ -18,7 +18,7 @@ const tag = tv({
       'font-semibold',
       'tracking-wider'
     ],
-    closable: [
+    closeButton: [
       'vk-tag__closable',
       'ml-1',
       'flex',
@@ -561,7 +561,7 @@ const tag = tv({
     {
       disabled: true,
       class: {
-        closable: [
+        closeButton: [
           'cursor-not-allowed'
         ]
       }

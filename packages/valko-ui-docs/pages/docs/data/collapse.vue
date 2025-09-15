@@ -63,58 +63,7 @@ const collapseProps: TableItem[] = [
     key: 'styleSlotsProps',
     prop: 'styleSlots',
     required: false,
-    description: 'Custom styles for different parts of the Collapse component.',
-    values: 'CollapseSlots',
-    default: ''
-  }
-]
-
-const styleSlotsInterface: TableItem[] = [
-  {
-    key: 'container',
-    prop: 'container',
-    required: false,
-    description: 'Root container for the collapse.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'item',
-    prop: 'item',
-    required: false,
-    description: 'Collapse item container.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'header',
-    prop: 'header',
-    required: false,
-    description: 'Header section for each collapse item.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'content',
-    prop: 'content',
-    required: false,
-    description: 'Content section for each collapse item.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'icon',
-    prop: 'icon',
-    required: false,
-    description: 'Icon for expand/collapse indicator.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'separator',
-    prop: 'separator',
-    required: false,
-    description: 'Separator between items.',
+    description: 'Root container.',
     values: 'string[]',
     default: ''
   }
@@ -141,6 +90,58 @@ const itemSlots: TableItem[] = [
     name: 'default',
     description: 'Slot for the main content of the collapse item. This slot is typically used to include additional content inside the collapse item.',
     example: '<template #default>\n  <!-- Your main content goes here -->\n</template>'
+  }
+]
+
+const collapseItemProps: TableItem[] = [
+  {
+    key: 'title',
+    prop: 'title',
+    description: 'Title of the collapse item (this is replaced by the title slot).',
+    values: 'string',
+    default: ''
+  },
+  {
+    key: 'styleSlots',
+    prop: 'styleSlots',
+    description: 'Custom styles for different parts of the Collapse Item.',
+    values: 'CollapseItemSlots',
+    default: ''
+  }
+]
+
+const collapseItemStyleSlotsInterface: TableItem[] = [
+  {
+    key: 'collapseItem',
+    prop: 'collapseItem',
+    required: false,
+    description: 'Root container of the Collapse Item.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'button',
+    prop: 'button',
+    required: false,
+    description: 'Button element in the Collapse Item header (title & icon).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    required: false,
+    description: 'Icon element in the Collapse Item header (this is replaced when the title slot is used).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panel',
+    prop: 'panel',
+    required: false,
+    description: 'Panel container that holds the content of the Collapse Item.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -387,12 +388,6 @@ const customSlot = '<vk-collapse-item title="example-item">\n      Lorem.\n    <
         :data="collapseProps"
       />
 
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
       <h3 title="">
         Collapse Slots
       </h3>
@@ -407,6 +402,18 @@ const customSlot = '<vk-collapse-item title="example-item">\n      Lorem.\n    <
       <vk-table
         :headers="slotHeaders"
         :data="itemSlots"
+      />
+
+      <h3>Collapse Item Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="collapseItemProps"
+      />
+
+      <h3>Collapse Item Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="collapseItemStyleSlotsInterface"
       />
     </template>
   </doc-section>

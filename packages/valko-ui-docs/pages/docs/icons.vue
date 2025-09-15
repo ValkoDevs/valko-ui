@@ -25,17 +25,7 @@ const iconProps: TableItem[] = [
     key: 'styleSlotsProp',
     prop: 'styleSlots',
     required: false,
-    description: 'Customizes style slots for Icon.',
-    values: 'IconStyleSlots',
-    default: '{}'
-  }
-]
-
-const styleSlotsInterface: TableItem[] = [
-  {
-    key: 'root',
-    prop: 'root',
-    description: 'Root element of the Icon.',
+    description: 'Root container.',
     values: 'string[]',
     default: ''
   }
@@ -98,12 +88,6 @@ const generateSnippet = snippetGeneratorFactory('vk-icon')
       <vk-table
         :headers="propHeaders"
         :data="iconProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

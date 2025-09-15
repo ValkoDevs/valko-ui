@@ -64,30 +64,23 @@ const tooltipProps: TableItem[] = [
     prop: 'styleSlots',
     required: false,
     description: 'Customizes style slots for Tooltip.',
-    values: 'object',
-    default: '{}'
+    values: 'TooltipSlots',
+    default: ''
   }
 ]
 
-const styleSlotsInterface = [
+const styleSlotsInterface: TableItem[] = [
   {
-    key: 'root',
-    prop: 'root',
-    description: 'Root element of the Tooltip.',
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the tooltip popover.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'panel',
-    prop: 'panel',
-    description: 'Panel section of the Tooltip.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'trigger',
-    prop: 'trigger',
-    description: 'Trigger element for the Tooltip.',
+    key: 'tip',
+    prop: 'tip',
+    description: 'Styles for the tooltip content element.',
     values: 'string[]',
     default: ''
   }

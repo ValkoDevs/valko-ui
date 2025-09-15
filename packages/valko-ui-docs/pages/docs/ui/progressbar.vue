@@ -84,30 +84,51 @@ const progressbarProps: TableItem[] = [
     prop: 'styleSlots',
     required: false,
     description: 'Customizes style slots for Progressbar.',
-    values: 'object',
-    default: '{}'
+    values: 'progressbarSlots',
+    default: ''
   }
 ]
 
-const styleSlotsInterface = [
+const styleSlotsInterface: TableItem[] = [
   {
-    key: 'root',
-    prop: 'root',
-    description: 'Root element of the Progressbar.',
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the Progressbar.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'bar',
-    prop: 'bar',
-    description: 'Bar element of the Progressbar.',
+    key: 'background',
+    prop: 'background',
+    description: 'Background bar element.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'buffer',
     prop: 'buffer',
-    description: 'Buffer section of the Progressbar.',
+    description: 'Buffer bar element (shows buffered progress).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    description: 'Content area for slot content inside the bar.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'progress',
+    prop: 'progress',
+    description: 'Progress bar element (shows current progress).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'stripes',
+    prop: 'stripes',
+    description: 'Stripes overlay for striped progress bars.',
     values: 'string[]',
     default: ''
   }

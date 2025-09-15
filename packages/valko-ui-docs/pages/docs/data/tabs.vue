@@ -131,48 +131,63 @@ const styleSlotsInterface: TableItem[] = [
   {
     key: 'container',
     prop: 'container',
-    required: false,
-    description: 'Root container for the tabs.',
+    description: 'Root container for the tabs component.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'tab',
-    prop: 'tab',
-    required: false,
-    description: 'Individual tab button.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'active',
-    prop: 'active',
-    required: false,
-    description: 'Active tab styling.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'icon',
-    prop: 'icon',
-    required: false,
-    description: 'Icon for tab.',
+    key: 'group',
+    prop: 'group',
+    description: 'Tab group wrapper element.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'list',
     prop: 'list',
-    required: false,
-    description: 'Tabs list container.',
+    description: 'Tab list navigation container.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'panel',
-    prop: 'panel',
-    required: false,
-    description: 'Tab panel content.',
+    key: 'tabSlot',
+    prop: 'tabSlot',
+    description: 'Styles for each individual tab button.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'cursor',
+    prop: 'cursor',
+    description: 'Cursor indicator for the active tab.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'cursorGradient',
+    prop: 'cursorGradient',
+    description: 'Gradient effect for the cursor indicator (if variant is gradient).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'leftIcon',
+    prop: 'leftIcon',
+    description: 'Styles for the left icon in a tab.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'rightIcon',
+    prop: 'rightIcon',
+    description: 'Styles for the right icon in a tab.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    description: 'Container for tab panels and their content.',
     values: 'string[]',
     default: ''
   }

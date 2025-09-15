@@ -94,38 +94,79 @@ const drawerProps: TableItem[] = [
     prop: 'styleSlots',
     required: false,
     description: 'Customizes style slots for Drawer.',
-    values: 'object',
-    default: '{}'
+    values: 'DrawerSlots',
+    default: ''
   }
 ]
 
 const styleSlotsInterface: TableItem[] = [
   {
-    key: 'root',
-    prop: 'root',
-    required: false,
-    description: 'Root element of the Drawer.',
+    key: 'dialog',
+    prop: 'dialog',
+    description: 'Root dialog container for the Drawer.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'header',
-    prop: 'header',
-    description: 'Header section of the Drawer.',
+    key: 'backdrop',
+    prop: 'backdrop',
+    description: 'Backdrop overlay behind the Drawer.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'body',
-    prop: 'body',
-    description: 'Body section of the Drawer.',
+    key: 'container',
+    prop: 'container',
+    description: 'Outer container wrapping the Drawer content.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'footer',
-    prop: 'footer',
-    description: 'Footer section of the Drawer.',
+    key: 'content',
+    prop: 'content',
+    description: 'Content wrapper for transitions and layout.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panel',
+    prop: 'panel',
+    description: 'Main panel element of the Drawer.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panelChild',
+    prop: 'panelChild',
+    description: 'Container for the title and close button at the top of the Drawer.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'title',
+    prop: 'title',
+    description: 'Title text element inside the Drawer.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeButton',
+    prop: 'closeButton',
+    description: 'Close button element for dismissing the Drawer.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeIcon',
+    prop: 'closeIcon',
+    description: 'Icon inside the close button.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'slotContainer',
+    prop: 'slotContainer',
+    description: 'Container for Drawer slot content (main body).',
     values: 'string[]',
     default: ''
   }

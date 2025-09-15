@@ -134,10 +134,10 @@ const styleSlotsInterface: TableItem[] = [
     default: ''
   },
   {
-    key: 'icon',
-    prop: 'icon',
+    key: 'mainIcon',
+    prop: 'mainIcon',
     required: false,
-    description: 'Styles for the icon container. Applies to the icon area if present.',
+    description: 'Styles for the main icon.',
     values: 'string[]',
     default: ''
   },
@@ -150,18 +150,26 @@ const styleSlotsInterface: TableItem[] = [
     default: ''
   },
   {
-    key: 'content',
-    prop: 'content',
+    key: 'contentContainer',
+    prop: 'contentContainer',
     required: false,
-    description: 'Styles for the main content area (slot).',
+    description: 'Container for the title and content.',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'close',
-    prop: 'close',
+    key: 'content',
+    prop: 'content',
     required: false,
-    description: 'Styles for the close button container.',
+    description: 'Container for the main content area (slot).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeButton',
+    prop: 'closeButton',
+    required: false,
+    description: 'Styles for the close button itself.',
     values: 'string[]',
     default: ''
   },

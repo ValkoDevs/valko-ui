@@ -146,80 +146,70 @@ const styleSlotsInterface: TableItem[] = [
   {
     key: 'container',
     prop: 'container',
-    required: false,
-    description: 'Root container for the textarea.',
+    description: 'Root container for the textarea component.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'field',
     prop: 'field',
-    required: false,
-    description: 'Field wrapper for textarea and icons.',
+    description: 'Wrapper for the textarea and icons.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'textarea',
     prop: 'textarea',
-    required: false,
     description: 'The textarea element itself.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'icons',
-    prop: 'icons',
-    required: false,
-    description: 'Wrapper for left/right icons.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'leftIcon',
-    prop: 'leftIcon',
-    required: false,
-    description: 'Left icon slot.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'rightIcon',
-    prop: 'rightIcon',
-    required: false,
-    description: 'Right icon slot.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'label',
     prop: 'label',
-    required: false,
     description: 'Label for the textarea.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'footer',
-    prop: 'footer',
-    required: false,
-    description: 'Footer container below the textarea.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'helper',
     prop: 'helper',
-    required: false,
-    description: 'Helper text in the footer.',
+    description: 'Helper text displayed below the textarea.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'counter',
     prop: 'counter',
-    required: false,
-    description: 'Character counter in the footer.',
+    description: 'Character counter for the textarea.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'footer',
+    prop: 'footer',
+    description: 'Footer container for helper text and counter.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icons',
+    prop: 'icons',
+    description: 'Base styles for icon containers.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'leftIcon',
+    prop: 'leftIcon',
+    description: 'Styles for the left icon slot.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'rightIcon',
+    prop: 'rightIcon',
+    description: 'Styles for the right icon slot.',
     values: 'string[]',
     default: ''
   }

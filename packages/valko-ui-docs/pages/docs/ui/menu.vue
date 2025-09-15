@@ -78,64 +78,36 @@ const menuProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Menu.',
     values: 'MenuStyleSlots',
-    default: '{}'
+    default: ''
   }
 ]
 
 const styleSlotsInterface: TableItem[] = [
   {
-    key: 'root',
-    prop: 'root',
-    description: 'Root element of the Menu.',
+    key: 'group',
+    prop: 'group',
+    description: 'Styles for the group label (if grouping is used).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'menu',
+    prop: 'menu',
+    description: 'Styles for the menu container (the <ul> element).',
     values: 'string[]',
     default: ''
   },
   {
     key: 'item',
     prop: 'item',
-    description: 'Each item of the Menu.',
+    description: 'Styles for each menu item container (<li> element).',
     values: 'string[]',
     default: ''
   },
   {
-    key: 'itemActive',
-    prop: 'itemActive',
-    description: 'The active item of the Menu.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'itemDisabled',
-    prop: 'itemDisabled',
-    description: 'The disabled item of the Menu.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'itemIcon',
-    prop: 'itemIcon',
-    description: 'The icon of the Menu item.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'itemText',
-    prop: 'itemText',
-    description: 'The text of the Menu item.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'groupWrapper',
-    prop: 'groupWrapper',
-    description: 'The wrapper for each group of items.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'groupLabel',
-    prop: 'groupLabel',
-    description: 'The label for each group of items.',
+    key: 'content',
+    prop: 'content',
+    description: 'Styles for the menu item content/button.',
     values: 'string[]',
     default: ''
   }

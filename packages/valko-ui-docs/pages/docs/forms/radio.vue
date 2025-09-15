@@ -164,64 +164,56 @@ const styleSlotsInterface: TableItem[] = [
   {
     key: 'container',
     prop: 'container',
-    required: false,
-    description: 'Root container for the radio.',
+    description: 'Root container for the radio component.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'radioContainer',
     prop: 'radioContainer',
-    required: false,
-    description: 'Main radio control wrapper.',
+    description: 'Container for the radio input and label.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'stateLayer',
     prop: 'stateLayer',
-    required: false,
-    description: 'State layer for checked/unchecked visuals.',
+    description: 'Layer for visual state effects (focus, hover, etc).',
     values: 'string[]',
     default: ''
   },
   {
     key: 'radio',
     prop: 'radio',
-    required: false,
-    description: 'Radio button element.',
+    description: 'The visual representation of the radio button.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'icon',
     prop: 'icon',
-    required: false,
-    description: 'Icon for checked state.',
+    description: 'Icon shown when the radio is checked.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'input',
     prop: 'input',
-    required: false,
-    description: 'Native input element.',
+    description: 'Native radio input element (hidden since we use a custom radio).',
     values: 'string[]',
     default: ''
   },
   {
     key: 'label',
     prop: 'label',
-    required: false,
-    description: 'Label for the radio.',
+    description: 'Label for the radio input.',
     values: 'string[]',
     default: ''
   },
   {
     key: 'helpertext',
     prop: 'helpertext',
-    required: false,
-    description: 'Helper text below the radio.',
+    description: 'Helper text displayed below the radio.',
     values: 'string[]',
     default: ''
   }
