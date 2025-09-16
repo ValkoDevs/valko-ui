@@ -221,7 +221,23 @@ const customSlot = `<vk-card-image :src="imgSrc" />
         Subtitle
       </h3>
       <p>Lorem</p>
-    </vk-card-body>`
+    </vk-card-body>
+`
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'xl:grid-cols-3'
+  ],
+  layout: [
+    'md:grid-cols-1',
+    'lg:grid-cols-2'
+  ],
+  sizes: [
+    'grid-cols-1',
+    'lg:grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -339,7 +355,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
     <template #examples>
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 xl:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-card
           v-for="variant in variantOptions.general"
@@ -369,7 +385,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 xl:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-card
           v-for="shape in shapeOptions.general"
@@ -398,7 +414,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
 
       <example-section
         title="Layout"
-        classes="md:grid-cols-1 lg:grid-cols-2"
+        :style-slots="styles.layout"
       >
         <vk-card
           v-for="layout in layoutOptions"
@@ -428,7 +444,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
 
       <example-section
         title="Sizes"
-        classes="grid-cols-1 lg:grid-cols-2"
+        :style-slots="styles.sizes"
       >
         <vk-card
           v-for="size in sizeOptions.general"

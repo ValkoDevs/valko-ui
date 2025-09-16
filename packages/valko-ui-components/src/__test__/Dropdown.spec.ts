@@ -303,6 +303,8 @@ describe('Dropdown component', () => {
           }
         })
 
+        console.warn(wrapper.html())
+
         expect(wrapper.find('i.ti.ti-home').exists()).toBe(true)
       })
     })

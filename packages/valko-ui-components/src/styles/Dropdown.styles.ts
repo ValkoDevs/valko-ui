@@ -49,7 +49,8 @@ const dropdown = tv({
       positive: {},
       accent: {},
       warning: {},
-      negative: {}
+      negative: {},
+      surface: {}
     },
     size: {
       xs: {
@@ -164,6 +165,16 @@ const dropdown = tv({
         ]
       }
     },
+    {
+      variant: 'filled',
+      color: 'surface',
+      class: {
+        itemsButton: [
+          'hover:bg-surface-container-highest',
+          'hover:text-on-surface'
+        ]
+      }
+    },
     // outlined & color
     {
       variant: 'outlined',
@@ -222,6 +233,16 @@ const dropdown = tv({
         itemsButton: [
           'hover:text-negative',
           'hover:border-negative'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'surface',
+      class: {
+        itemsButton: [
+          'hover:text-on-surface-variant',
+          'hover:border-outlined'
         ]
       }
     },
@@ -286,6 +307,16 @@ const dropdown = tv({
         ]
       }
     },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      class: {
+        itemsButton: [
+          'hover:bg-surface-container-highest/[.5]',
+          'hover:text-on-surface-variant'
+        ]
+      }
+    },
     // link & color
     {
       variant: 'link',
@@ -338,6 +369,15 @@ const dropdown = tv({
       class: {
         itemsButton: [
           'hover:text-negative'
+        ]
+      }
+    },
+    {
+      variant: 'link',
+      color: 'surface',
+      class: {
+        itemsButton: [
+          'hover:text-on-surface'
         ]
       }
     },
@@ -405,6 +445,17 @@ const dropdown = tv({
           'hover:from-negative-gradient-start',
           'hover:to-negative-gradient-end',
           'hover:text-on-negative'
+        ]
+      }
+    },
+    {
+      variant: 'gradient',
+      color: 'surface',
+      class: {
+        itemsButton: [
+          'hover:from-surface-container',
+          'hover:to-surface-container-highest',
+          'hover:text-on-surface'
         ]
       }
     }

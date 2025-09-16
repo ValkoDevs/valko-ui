@@ -62,7 +62,7 @@ const ariaLive = computed(() => {
 
     <div :class="contentContainer({ class: styleSlots?.contentContainer })">
       <h6
-        v-if="title"
+        v-if="props.title"
         :id="titleId"
         :class="title({ class: styleSlots?.title })"
       >

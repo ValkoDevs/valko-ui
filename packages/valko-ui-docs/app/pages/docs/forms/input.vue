@@ -358,6 +358,25 @@ const iconSnippet = `<template>
   </vk-input>
 </template>
 `
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  types: [
+    'md:grid-cols-2',
+    'lg:grid-cols-4'
+  ],
+  icons: [
+    'sm:grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -486,7 +505,7 @@ const iconSnippet = `<template>
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-input
           v-for="color in colorOptions.withSurface"
@@ -502,7 +521,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-input
           v-for="variant in variantOptions.general"
@@ -518,7 +537,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-input
           v-for="shape in shapeOptions.general"
@@ -534,7 +553,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <vk-input
           v-for="size in sizeOptions.general"
@@ -550,7 +569,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Types"
-        classes="md:grid-cols-2 lg:grid-cols-4"
+        :style-slots="styles.types"
       >
         <vk-input
           v-for="type in typeOptions"
@@ -600,7 +619,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Icons"
-        classes="sm:grid-cols-2"
+        :style-slots="styles.icons"
       >
         <vk-input
           label="Left Icon"

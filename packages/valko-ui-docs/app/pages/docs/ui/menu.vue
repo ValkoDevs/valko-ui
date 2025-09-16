@@ -251,6 +251,13 @@ onMounted(() => {
 
   if (firstPlaygroundItem) firstPlaygroundItem.active = true
 })
+
+const styles = generateStyles({
+  default: [
+    'grid-cols-2',
+    'md:grid-cols-3'
+  ]
+})
 </script>
 
 <template>
@@ -304,7 +311,7 @@ onMounted(() => {
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-menu
           v-for="(color, index) in colorOptions.general"
@@ -322,7 +329,7 @@ onMounted(() => {
 
       <example-section
         title="Variants"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-menu
           v-for="(variant, index) in variantOptions.withGradientLinkAndLine"
@@ -340,7 +347,7 @@ onMounted(() => {
 
       <example-section
         title="Shapes"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-menu
           v-for="(shape, index) in shapeOptions.general"
@@ -358,7 +365,7 @@ onMounted(() => {
 
       <example-section
         title="Sizes"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="{ slotContainer: ['grid-cols-2 md:grid-cols-3 lg:grid-cols-4'] }"
       >
         <vk-menu
           v-for="(size, index) in sizeOptions.general"

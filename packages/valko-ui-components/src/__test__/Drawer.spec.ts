@@ -121,8 +121,7 @@ describe('Drawer component', () => {
 
         await nextTick()
         const drawerPanel = wrapper.getComponent(DialogPanel)
-        const header = drawerPanel.find('.vk-drawer__panel-child')
-        expect(header.exists()).toBe(false)
+        expect(drawerPanel.find('.vk-drawer__panel-child').exists()).toBe(false)
       })
 
       it('should render header with title but without close button when closable is false', async () => {

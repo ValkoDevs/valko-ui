@@ -87,11 +87,11 @@ const selectIcon = (separator: string) => separator.length > 2
           :class="separator({ class: styleSlots?.separator })"
           aria-hidden="true"
         >
-          <template v-if="selectIcon(separator)">
-            <vk-icon :name="separator" />
+          <template v-if="selectIcon(props.separator)">
+            <vk-icon :name="props.separator" />
           </template>
           <template v-else>
-            {{ separator }}
+            {{ props.separator }}
           </template>
         </span>
       </li>

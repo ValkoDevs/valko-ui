@@ -11,7 +11,7 @@ const classes = styles({ ...props, class: props.styleSlots })
 
 <template>
   <i
-    :class="[classes, `ti ti-${props.name}`]"
+    :class="[classes, `ti ti-${name}`]"
     :role="props['aria-label'] ? 'img' : undefined"
     :aria-label="props['aria-label']"
     :aria-hidden="!props['aria-label'] || undefined"

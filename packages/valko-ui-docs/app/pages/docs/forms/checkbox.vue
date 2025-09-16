@@ -247,6 +247,30 @@ watchEffect(() => {
   if (form.modelValue !== null) indeterminateRef.value = false
   if (!indeterminateRef.value && form.modelValue === null) form.modelValue = false
 })
+
+const styles = generateStyles({
+  colors: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-6'
+  ],
+  variants: [
+    'grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  shapes: [
+    'grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  label: [
+    'sm:grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -327,7 +351,7 @@ watchEffect(() => {
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        :style-slots="styles.colors"
       >
         <vk-checkbox
           v-for="color in colorOptions.general"
@@ -344,7 +368,7 @@ watchEffect(() => {
 
       <example-section
         title="Variants"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.variants"
       >
         <vk-checkbox
           v-for="variant in variantOptions.general"
@@ -361,7 +385,7 @@ watchEffect(() => {
 
       <example-section
         title="Shapes"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.shapes"
       >
         <vk-checkbox
           v-for="shape in shapeOptions.general"
@@ -378,7 +402,7 @@ watchEffect(() => {
 
       <example-section
         title="Sizes"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <vk-checkbox
           v-for="size in sizeOptions.general"
@@ -431,7 +455,7 @@ watchEffect(() => {
 
       <example-section
         title="Label Position"
-        classes="sm:grid-cols-2"
+        :style-slots="styles.label"
       >
         <vk-checkbox
           v-for="pos in position"

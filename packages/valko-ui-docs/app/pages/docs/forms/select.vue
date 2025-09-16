@@ -266,6 +266,18 @@ const people: SelectOption[] = [
 ]
 <\u002Fscript>
 `
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ]
+})
 </script>
 
 <template>
@@ -346,7 +358,7 @@ const people: SelectOption[] = [
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-select
           v-for="color in colorOptions.general"
@@ -364,7 +376,7 @@ const people: SelectOption[] = [
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-select
           v-for="variant in variantOptions.general"
@@ -382,7 +394,7 @@ const people: SelectOption[] = [
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-select
           v-for="shape in shapeOptions.general"
@@ -400,7 +412,7 @@ const people: SelectOption[] = [
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <vk-select
           v-for="size in sizeOptions.general"

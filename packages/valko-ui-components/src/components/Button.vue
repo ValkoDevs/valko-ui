@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import type { ButtonProps } from '#valkoui/types/Button'
 import styles from '#valkoui/styles/Button.styles.ts'
 import VkSpinner from './Spinner.vue'
-import useRipple from '#valkoui/composables/useRipple.ts'
+import useRipple from '#valkoui/composables/useRipple'
 
 defineOptions({ name: 'VkButton' })
 
@@ -45,10 +45,10 @@ const onMouseDown = (event: MouseEvent | TouchEvent) => {
   <button
     ref="buttonRef"
     :class="button({ class: styleSlots?.button })"
-    :disabled="disabled"
-    :aria-disabled="disabled"
+    :disabled="props.disabled"
+    :aria-disabled="props.disabled"
     :aria-label="props['aria-label']"
-    :type="type"
+    :type="props.type"
     @click="onClick"
     @mousedown="onMouseDown"
     @touchstart="onMouseDown"
@@ -64,12 +64,12 @@ const onMouseDown = (event: MouseEvent | TouchEvent) => {
         leave-to-class="opacity-0"
       >
         <vk-spinner
-          v-if="loading"
+          v-if="props.loading"
           condensed
-          :data-variant="variant"
-          :class="spinner({ class: styleSlots?.spinner })"
-          :size="size"
-          :color="color"
+          :data-variant="props.variant"
+          :style-slots="{ icon: [spinner({ class: styleSlots?.spinner })] }"
+          :size="props.size"
+          :color="props.color"
           role="status"
           aria-live="polite"
           aria-label="Loading..."

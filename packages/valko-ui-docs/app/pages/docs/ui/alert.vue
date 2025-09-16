@@ -206,6 +206,18 @@ const iconSnippet = `
   />
 </template>
 `
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  defaultAlt: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ]
+})
 </script>
 
 <template>
@@ -290,7 +302,7 @@ const iconSnippet = `
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-alert
           v-for="color in colorOptions.withSurface"
@@ -308,7 +320,7 @@ const iconSnippet = `
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.defaultAlt"
       >
         <vk-alert
           v-for="variant in variantOptions.withGradient"
@@ -326,7 +338,7 @@ const iconSnippet = `
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-alert
           v-for="shape in shapeOptions.general"
@@ -344,7 +356,7 @@ const iconSnippet = `
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.defaultAlt"
       >
         <vk-alert
           v-for="size in sizeOptions.general"
@@ -374,7 +386,7 @@ const iconSnippet = `
 
       <example-section
         title="Icons"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-alert
           title="Default Icon"

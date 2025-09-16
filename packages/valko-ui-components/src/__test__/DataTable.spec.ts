@@ -308,7 +308,7 @@ describe('DataTable component', () => {
       })
 
       it('should emit onSelect when a row is clicked', () => {
-        wrapper.find('.vk-table__tr').trigger('click')
+        wrapper.find('.vk-table__td').trigger('click')
         expect(wrapper.emitted()).toHaveProperty('onSelect')
       })
     })
@@ -327,7 +327,7 @@ describe('DataTable component', () => {
       })
 
       it('should emit onSelect when a row is clicked', () => {
-        wrapper.find('.vk-table__tr').trigger('click')
+        wrapper.find('.vk-table__td').trigger('click')
         expect(wrapper.emitted()).toHaveProperty('onSelect')
       })
     })

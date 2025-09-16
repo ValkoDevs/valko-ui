@@ -236,6 +236,23 @@ const radios = [
 ]
 
 const generateSnippet = snippetGeneratorFactory('vk-radio')
+
+const styles = generateStyles({
+  colors: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-6'
+  ],
+  default: [
+    'grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ]
+})
 </script>
 
 <template>
@@ -313,7 +330,7 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        :style-slots="styles.colors"
       >
         <vk-radio
           v-for="color in colorOptions.general"
@@ -332,7 +349,7 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
 
       <example-section
         title="Variants"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-radio
           v-for="variant in variantOptions.general"
@@ -351,7 +368,7 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
 
       <example-section
         title="Shapes"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-radio
           v-for="shape in shapeOptions.general"
@@ -370,7 +387,7 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
 
       <example-section
         title="Sizes"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <vk-radio
           v-for="size in sizeOptions.general"

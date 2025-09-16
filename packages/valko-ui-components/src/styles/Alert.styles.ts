@@ -37,12 +37,12 @@ const alert = tv({
     variant: {
       filled: {
         container: [
-          'vk-container__filled'
+          'vk-alert__filled'
         ]
       },
       ghost: {
         container: [
-          'vk-container__ghost'
+          'vk-alert__ghost'
         ]
       },
       outlined: {

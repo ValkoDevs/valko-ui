@@ -153,7 +153,7 @@ describe('CollapseItem component', () => {
         childWrapper = wrapper.findComponent(VkCollapseItem)
         childWrapper.find('.vk-collapse-item__button').trigger('click')
         await nextTick()
-        expect(childWrapper.find('.vk-collapse-item__icon').classes()).toContain('-rotate-90')
+        expect(childWrapper.find('.vk-collapse-item__icon').attributes('data-open')).toBe('true')
       })
     })
 

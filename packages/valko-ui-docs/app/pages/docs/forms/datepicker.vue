@@ -581,6 +581,30 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
   />
 </template>
 `
+
+const styles = generateStyles({
+  colors: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-6'
+  ],
+  variants: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  shapes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  dates: [
+    'md:grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -666,7 +690,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        :style-slots="styles.colors"
       >
         <vk-datepicker
           v-for="color in colorOptions.withSurface"
@@ -689,7 +713,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.variants"
       >
         <vk-datepicker
           v-for="variant in variantOptions.general"
@@ -712,7 +736,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.shapes"
       >
         <vk-datepicker
           v-for="shape in shapeOptions.general"
@@ -735,7 +759,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <vk-datepicker
           v-for="size in sizeOptions.general"
@@ -801,7 +825,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
 
       <example-section
         title="Disabled Dates"
-        classes="md:grid-cols-2"
+        :style-slots="styles.dates"
       >
         <vk-datepicker
           v-model="disabledModel"

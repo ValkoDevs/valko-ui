@@ -270,6 +270,21 @@ const iconSnippet = `<template>
   </vk-textarea>
 </template>
 `
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  icons: [
+    'sm:grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -369,7 +384,7 @@ const iconSnippet = `<template>
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-textarea
           v-for="color in colorOptions.general"
@@ -385,7 +400,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-textarea
           v-for="variant in variantOptions.general"
@@ -401,7 +416,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-textarea
           v-for="shape in shapeOptions.general"
@@ -417,7 +432,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <vk-textarea
           v-for="size in sizeOptions.general"
@@ -456,7 +471,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Icons"
-        classes="sm:grid-cols-2"
+        :style-slots="styles.icons"
       >
         <vk-textarea
           label="Left Icon"

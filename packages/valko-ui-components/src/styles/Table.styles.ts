@@ -25,6 +25,7 @@ const table = tv({
       'data-[row-events=true]:cursor-pointer'
     ],
     td: [
+      'vk-table__td',
       'px-4',
       'py-2',
       'text-left'
