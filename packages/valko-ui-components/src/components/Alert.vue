@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<AlertProps>(), {
 
 const emit = defineEmits(['close'])
 
-const { container, mainIcon, contentContainer, title, content, closeButton, closeIcon } = styles(props)
+const s = computed(() => styles(props))
 
 const titleId = useId()
 
@@ -48,7 +48,7 @@ const ariaLive = computed(() => {
 
 <template>
   <div
-    :class="container({ class: styleSlots?.container })"
+    :class="s.container({ class: styleSlots?.container })"
     :role="ariaRole"
     :aria-live="ariaLive"
     :aria-label="props.title ? titleId : props['aria-label']"
@@ -57,19 +57,19 @@ const ariaLive = computed(() => {
     <vk-icon
       v-if="icon !== null"
       :name="icon ? icon : defaultIcon"
-      :class="mainIcon({ class: styleSlots?.mainIcon })"
+      :class="s.mainIcon({ class: styleSlots?.mainIcon })"
     />
 
-    <div :class="contentContainer({ class: styleSlots?.contentContainer })">
+    <div :class="s.contentContainer({ class: styleSlots?.contentContainer })">
       <h6
         v-if="props.title"
         :id="titleId"
-        :class="title({ class: styleSlots?.title })"
+        :class="s.title({ class: styleSlots?.title })"
       >
         {{ props.title }}
       </h6>
 
-      <p :class="content({ class: styleSlots?.content })">
+      <p :class="s.content({ class: styleSlots?.content })">
         <slot />
       </p>
     </div>
@@ -80,13 +80,13 @@ const ariaLive = computed(() => {
       color="surface"
       size="xs"
       shape="rounded"
-      :class="closeButton({ class: styleSlots?.closeButton })"
+      :class="s.closeButton({ class: styleSlots?.closeButton })"
       condensed
       @click="onClick"
     >
       <vk-icon
         name="x"
-        :class="closeIcon({ class: styleSlots?.closeIcon })"
+        :class="s.closeIcon({ class: styleSlots?.closeIcon })"
       />
     </vk-button>
   </div>

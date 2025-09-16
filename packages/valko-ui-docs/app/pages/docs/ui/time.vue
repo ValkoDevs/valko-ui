@@ -713,12 +713,6 @@ const styles = generateStyles({
         :headers="propHeaders"
         :data="timeFormats"
       />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
     </template>
   </doc-section>
 </template>

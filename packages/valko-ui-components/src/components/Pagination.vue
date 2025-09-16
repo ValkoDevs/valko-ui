@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<PaginationProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
-const { nav, button, arrows } = styles(props)
+const s = computed(() => styles(props))
 
 const visiblePages = computed(() => {
   const total = +props.pages
@@ -48,7 +48,7 @@ watchEffect(() => {
 <template>
   <div>
     <nav
-      :class="nav({ class: styleSlots?.nav })"
+      :class="s.nav({ class: styleSlots?.nav })"
       :aria-label="props['aria-label'] ?? 'Pagination'"
     >
       <vk-button
@@ -61,7 +61,7 @@ watchEffect(() => {
         :disabled="modelValue === 1 || disabled"
         @click="() => changePage(modelValue - 1)"
       >
-        <div :class="arrows({ class: styleSlots?.arrows })">
+        <div :class="s.arrows({ class: styleSlots?.arrows })">
           <span class="sr-only">Previous</span>
           <vk-icon name="chevron-left" />
         </div>
@@ -77,7 +77,7 @@ watchEffect(() => {
         :disabled="disabled"
         @click="() => changePage(page)"
       >
-        <div :class="button({ class: styleSlots?.button })">
+        <div :class="s.button({ class: styleSlots?.button })">
           {{ page }}
         </div>
       </vk-button>
@@ -91,7 +91,7 @@ watchEffect(() => {
         :disabled="modelValue === +pages || disabled"
         @click="() => changePage(modelValue + 1)"
       >
-        <div :class="arrows({ class: styleSlots?.arrows })">
+        <div :class="s.arrows({ class: styleSlots?.arrows })">
           <span class="sr-only">Next</span>
           <vk-icon name="chevron-right" />
         </div>

@@ -20,7 +20,7 @@ const emit = defineEmits(['click'])
 
 const slots = defineSlots<{ default(): Record<string, unknown>[] }>()
 
-const classes = styles({ ...props, class: props.styleSlots })
+const s = computed(() => styles({ ...props, class: props.styleSlots }))
 
 const hasImageSlot = computed(() => slots.default?.().some((node) => node.type === VkCardImage))
 
@@ -34,7 +34,7 @@ const onClick = (e: MouseEvent) => {
 <template>
   <component
     :is="element"
-    :class="classes"
+    :class="s"
     :data-layout="layout"
     :data-card-image="hasImageSlot"
     @click="onClick"

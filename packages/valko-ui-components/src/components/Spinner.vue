@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { SpinnerProps } from '#valkoui/types/Spinner'
 import styles from '#valkoui/styles/Spinner.styles.ts'
 import VkIcon from './Icon.vue'
@@ -11,14 +12,14 @@ const props = withDefaults(defineProps<SpinnerProps>(), {
   size: 'md'
 })
 
-const { container, icon } = styles(props)
+const s = computed(() => styles(props))
 </script>
 
 <template>
-  <div :class="container({ class: styleSlots?.container })">
+  <div :class="s.container({ class: styleSlots?.container })">
     <vk-icon
       :name="name"
-      :class="icon({ class: styleSlots?.icon })"
+      :class="s.icon({ class: styleSlots?.icon })"
     />
   </div>
 </template>

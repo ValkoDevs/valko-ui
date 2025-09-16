@@ -229,7 +229,7 @@ const extraProps = ':items="menuItems"'
 onMounted(() => {
   const setFirstItemActive = (options: SelectOption[], menuPrefix: string) => {
     options.forEach((_, index) => {
-      if (!options[0]) return
+      if (!options[0]?.value) return
       const firstItemKey = options[0].value
       const menuKey = `${menuPrefix}-${index}`
       activeItemsList.value[menuKey] = firstItemKey

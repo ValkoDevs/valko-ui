@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<TextareaProps>(), {
 
 const emit = defineEmits(['update:modelValue', 'leftIconClick', 'rightIconClick'])
 
-const { container, field, textarea, label, helper, counter, footer, leftIcon, rightIcon, icons } = styles(props)
+const s = computed(() => styles(props))
 
 const isFilled = ref(false)
 const inputValue = ref(props.modelValue || '')
@@ -55,12 +55,12 @@ watch(() => props.modelValue, (newValue) => {
 </script>
 
 <template>
-  <div :class="container({ class: styleSlots?.container })">
-    <div :class="field({ class: styleSlots?.field })">
+  <div :class="s.container({ class: styleSlots?.container })">
+    <div :class="s.field({ class: styleSlots?.field })">
       <textarea
         ref="inputRef"
         :id="inputId"
-        :class="textarea({ class: styleSlots?.textarea })"
+        :class="s.textarea({ class: styleSlots?.textarea })"
         :disabled="disabled"
         :readonly="readonly"
         :value="inputValue"
@@ -77,7 +77,7 @@ watch(() => props.modelValue, (newValue) => {
       />
       <span
         v-if="!!$slots['left-icon']"
-        :class="[icons({ class: styleSlots?.icons }), leftIcon({ class: styleSlots?.leftIcon })]"
+        :class="[s.icons({ class: styleSlots?.icons }), s.leftIcon({ class: styleSlots?.leftIcon })]"
         @click="handleIconClick('left')"
       >
         <slot name="left-icon" />
@@ -85,27 +85,27 @@ watch(() => props.modelValue, (newValue) => {
 
       <span
         v-if="!!$slots['right-icon']"
-        :class="[icons({ class: styleSlots?.icons }), rightIcon({ class: styleSlots?.rightIcon })]"
+        :class="[s.icons({ class: styleSlots?.icons }), s.rightIcon({ class: styleSlots?.rightIcon })]"
         @click="handleIconClick('right')"
       >
         <slot name="right-icon" />
       </span>
       <label
         :for="inputId"
-        :class="label({ class: styleSlots?.label })"
+        :class="s.label({ class: styleSlots?.label })"
       >
         {{ label }}
       </label>
     </div>
-    <div :class="footer({ class: styleSlots?.footer })">
+    <div :class="s.footer({ class: styleSlots?.footer })">
       <span
         v-if="helpertext"
         :id="helpertextId"
-        :class="helper({ class: styleSlots?.helper })"
+        :class="s.helper({ class: styleSlots?.helper })"
       > {{ helpertext }}</span>
       <span
         v-if="maxlength && maxlength > 0"
-        :class="counter({ class: styleSlots?.counter })"
+        :class="s.counter({ class: styleSlots?.counter })"
       >{{ `${inputValue.length} / ${maxlength}` }}</span>
     </div>
   </div>

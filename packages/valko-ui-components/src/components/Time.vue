@@ -18,7 +18,7 @@ const props = withDefaults(defineProps<TimeProps>(), {
 
 const emit = defineEmits(['onSelect'])
 
-const { container, grid, footer, unitContainer, unitButton, periodContainer, periodButton, okButton } = styles(props)
+const s = computed(() => styles(props))
 
 const onSelect = () => {
   props.adapter.onSelectTime()
@@ -49,11 +49,11 @@ const formatHour = (hour: number): number => {
 </script>
 
 <template>
-  <div :class="container({ class: styleSlots?.container })">
-    <div :class="grid({ class: styleSlots?.grid })">
+  <div :class="s.container({ class: styleSlots?.container })">
+    <div :class="s.grid({ class: styleSlots?.grid })">
       <div
         v-if="formatMap.hasHours"
-        :class="unitContainer({ class: styleSlots?.unitContainer })"
+        :class="s.unitContainer({ class: styleSlots?.unitContainer })"
       >
         <vk-button
           v-for="(_, H) in formatMap.hsColItems"
@@ -63,7 +63,7 @@ const formatHour = (hour: number): number => {
           :disabled="adapter.isTimeDisabled(H)"
           :variant="selectedTime.hours === formatHour(H) ? variant : 'link'"
           :color="selectedTime.hours === formatHour(H) ? color : 'surface'"
-          :class="unitButton({ class: styleSlots?.unitButton })"
+          :class="s.unitButton({ class: styleSlots?.unitButton })"
           @click="adapter.setDisplayUnit('h', formatHour(H))"
         >
           {{ `${formatHour(H)}`.padStart(2, '0') }}
@@ -71,7 +71,7 @@ const formatHour = (hour: number): number => {
       </div>
       <div
         v-if="formatMap.hasMinutes"
-        :class="unitContainer({ class: styleSlots?.unitContainer })"
+        :class="s.unitContainer({ class: styleSlots?.unitContainer })"
       >
         <vk-button
           v-for="m in 60 / minuteStep"
@@ -81,7 +81,7 @@ const formatHour = (hour: number): number => {
           :disabled="adapter.isTimeDisabled(selectedTime.hours, m - 1)"
           :variant="selectedTime.minutes === (m - 1) ? variant : 'link'"
           :color="selectedTime.minutes === (m - 1) ? color : 'surface'"
-          :class="unitButton({ class: styleSlots?.unitButton })"
+          :class="s.unitButton({ class: styleSlots?.unitButton })"
           @click="adapter.setDisplayUnit('m', m - 1)"
         >
           {{ `${(m - 1) * minuteStep}`.padStart(2, '0') }}
@@ -89,43 +89,43 @@ const formatHour = (hour: number): number => {
       </div>
       <div
         v-if="formatMap.hasSeconds && minuteStep === 1"
-        :class="unitContainer({ class: styleSlots?.unitContainer })"
+        :class="s.unitContainer({ class: styleSlots?.unitContainer })"
       >
         <vk-button
-          v-for="s in 60"
-          :key="`seconds-button-${s-1}`"
+          v-for="seconds in 60"
+          :key="`seconds-button-${seconds-1}`"
           :size="size"
           :shape="shape"
-          :variant="selectedTime.seconds === (s - 1) ? variant : 'link'"
-          :color="selectedTime.seconds === (s - 1) ? color : 'surface'"
-          :class="unitButton({ class: styleSlots?.unitButton })"
-          @click="adapter.setDisplayUnit('s', s - 1)"
+          :variant="selectedTime.seconds === (seconds - 1) ? variant : 'link'"
+          :color="selectedTime.seconds === (seconds - 1) ? color : 'surface'"
+          :class="s.unitButton({ class: styleSlots?.unitButton })"
+          @click="adapter.setDisplayUnit('s', seconds - 1)"
         >
-          {{ `${s-1}`.padStart(2, '0') }}
+          {{ `${seconds-1}`.padStart(2, '0') }}
         </vk-button>
       </div>
     </div>
-    <div :class="footer({ class: styleSlots?.footer })">
+    <div :class="s.footer({ class: styleSlots?.footer })">
       <vk-button
         size="xs"
         :shape="shape"
         :variant="variant"
         :color="color"
-        :class="okButton({ class: styleSlots?.okButton })"
+        :class="s.okButton({ class: styleSlots?.okButton })"
         @click="onSelect"
       >
         {{ okButtonLabel }}
       </vk-button>
       <div
         v-if="formatMap.hasAMPM"
-        :class="periodContainer({ class: styleSlots?.periodContainer })"
+        :class="s.periodContainer({ class: styleSlots?.periodContainer })"
       >
         <vk-button
           size="xs"
           :shape="shape"
           :variant="adapter.period.value === 'AM' ? variant : 'link'"
           :color="adapter.period.value === 'AM' ? color : 'surface'"
-          :class="periodButton({ class: styleSlots?.periodButton })"
+          :class="s.periodButton({ class: styleSlots?.periodButton })"
           @click="adapter.onSelectAMPM('AM')"
         >
           AM
@@ -135,7 +135,7 @@ const formatHour = (hour: number): number => {
           :shape="shape"
           :variant="adapter.period.value === 'PM' ? variant : 'link'"
           :color="adapter.period.value === 'PM' ? color : 'surface'"
-          :class="periodButton({ class: styleSlots?.periodButton })"
+          :class="s.periodButton({ class: styleSlots?.periodButton })"
           @click="adapter.onSelectAMPM('PM')"
         >
           PM

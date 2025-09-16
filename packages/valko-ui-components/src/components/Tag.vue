@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { TagProps } from '#valkoui/types/Tag'
 import styles from '#valkoui/styles/Tag.styles.ts'
 import VkIcon from './Icon.vue'
@@ -17,7 +18,7 @@ const props = withDefaults(defineProps<TagProps>(), {
 
 const emit = defineEmits(['click', 'close'])
 
-const { container, icons, content, closeButton, contentContainer, closeIcon } = styles(props)
+const s = computed(() => styles(props))
 
 const onClick = () => {
   if (!props.disabled && props.isPressable) {
@@ -34,27 +35,27 @@ const onClose = () => {
 
 <template>
   <div
-    :class="container({ class: styleSlots?.container })"
+    :class="s.container({ class: styleSlots?.container })"
     :role="isPressable ? 'button' : undefined"
     :tabindex="isPressable ? 0 : undefined"
     @click="onClick"
   >
-    <div :class="contentContainer({ class: styleSlots?.contentContainer })">
+    <div :class="s.contentContainer({ class: styleSlots?.contentContainer })">
       <vk-icon
         v-if="iconLeft"
         :name="iconLeft"
-        :class="icons({ class: styleSlots?.icons })"
+        :class="s.icons({ class: styleSlots?.icons })"
       />
-      <span :class="content({ class: styleSlots?.content })">{{ text }}</span>
+      <span :class="s.content({ class: styleSlots?.content })">{{ text }}</span>
       <vk-icon
         v-if="iconRight"
         :name="iconRight"
-        :class="icons({ class: styleSlots?.icons })"
+        :class="s.icons({ class: styleSlots?.icons })"
       />
     </div>
     <vk-button
       v-if="closable"
-      :class="closeButton({ class: styleSlots?.closeButton })"
+      :class="s.closeButton({ class: styleSlots?.closeButton })"
       color="surface"
       variant="link"
       shape="rounded"
@@ -65,7 +66,7 @@ const onClose = () => {
     >
       <vk-icon
         name="x"
-        :class="closeIcon({ class: styleSlots?.closeIcon })"
+        :class="s.closeIcon({ class: styleSlots?.closeIcon })"
       />
     </vk-button>
   </div>

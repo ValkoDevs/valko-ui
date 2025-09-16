@@ -10,7 +10,7 @@ defineOptions({ name: 'VkCalendarYearView' })
 const props = defineProps<CalendarYearViewProps>()
 const emit = defineEmits(['selectYear'])
 
-const { viewContainer, panel, gridButton } = styles(props)
+const s = computed(() => styles(props))
 
 const jumps = ref(0)
 
@@ -28,7 +28,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="viewContainer({ class: styleSlots?.viewContainer })">
+  <div :class="s.viewContainer({ class: styleSlots?.viewContainer })">
     <vk-calendar-header
       v-bind="props"
       :loaded-period="`${yearList[0]} - ${yearList[19]}`"
@@ -38,12 +38,12 @@ onMounted(() => {
       @previous-click="jumps--"
     />
 
-    <div :class="panel({ class: styleSlots?.panel })">
+    <div :class="s.panel({ class: styleSlots?.panel })">
       <vk-button
         v-for="(year, index) in yearList"
         :key="`year-cell-${index}`"
         :disabled="!!(minYear && year < minYear) || !!(maxYear && year > maxYear)"
-        :class="gridButton({ class: styleSlots?.gridButton })"
+        :class="s.gridButton({ class: styleSlots?.gridButton })"
         :size="size"
         :color="selected.year === year ? color : 'surface'"
         :variant="selected.year === year ? variant : 'link'"
