@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
-const { container, field, select, dropdown, item, icon } = styles(props)
+const s = computed(() => styles(props))
 
 const itemRefs: Ref<(HTMLElement | null)[]> = ref([])
 const selectRef = ref(null)
@@ -127,11 +127,11 @@ onUnmounted(() => {
 <template>
   <div
     ref="selectRef"
-    :class="container({ class: styleSlots?.container })"
+    :class="s.container({ class: styleSlots?.container })"
   >
     <select
       hidden
-      :class="select({ class: styleSlots?.select })"
+      :class="s.select({ class: styleSlots?.select })"
       :value="modelValue"
       :multiple="multiple"
       :readonly="readonly"
@@ -145,7 +145,7 @@ onUnmounted(() => {
         {{ option.label }}
       </option>
     </select>
-    <div :class="field({ class: styleSlots?.field })">
+    <div :class="s.field({ class: styleSlots?.field })">
       <vk-input
         readonly
         :helpertext="helpertext"
@@ -173,7 +173,7 @@ onUnmounted(() => {
           <vk-icon
             name="chevron-down"
             :data-open="isOpen"
-            :class="icon({ class: styleSlots?.icon })"
+            :class="s.icon({ class: styleSlots?.icon })"
             @click.stop="toggleDropdown(!isOpen)"
           />
         </template>
@@ -190,7 +190,7 @@ onUnmounted(() => {
           v-if="isOpen"
           role="listbox"
           :data-helper="!!helpertext"
-          :class="dropdown({ class: styleSlots?.dropdown })"
+          :class="s.dropdown({ class: styleSlots?.dropdown })"
           :data-shape="shape"
           :data-variant="variant"
           :aria-multiselectable="multiple || undefined"
@@ -205,7 +205,7 @@ onUnmounted(() => {
             :data-selected="isSelected(option.value)"
             :data-shape="shape"
             :data-variant="variant"
-            :class="item({ class: styleSlots?.item })"
+            :class="s.item({ class: styleSlots?.item })"
             :aria-selected="isSelected(option.value)"
             @click="multiple ? handleMultipleSelection(option.value) : handleSingleSelection(option.value)"
           >

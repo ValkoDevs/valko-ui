@@ -24,7 +24,7 @@ const props = withDefaults(defineProps<DropdownProps>(), {
 
 const emit = defineEmits(['itemClick', 'click'])
 
-const { container, icon, itemsMenu, triggerButton, itemsButton, itemsIcon } = styles(props)
+const s = computed(() => styles(props))
 
 const dropdownId = useId()
 const menuId = useId()
@@ -52,7 +52,7 @@ const onItemClick = (item: Item) => {
 
 <template>
   <vk-popover
-    :class="container({ class: props.styleSlots?.container })"
+    :class="s.container({ class: props.styleSlots?.container })"
     :is-open="open && !disabled"
     :shape="shape"
     :placement="placement"
@@ -74,7 +74,7 @@ const onItemClick = (item: Item) => {
         :id="dropdownId"
         :disabled="disabled"
         :elevated="elevated"
-        :class="triggerButton({ class: styleSlots?.triggerButton })"
+        :class="s.triggerButton({ class: styleSlots?.triggerButton })"
         :aria-haspopup="'menu'"
         :aria-expanded="open"
         :aria-controls="menuId"
@@ -82,7 +82,7 @@ const onItemClick = (item: Item) => {
       >
         {{ label }}
         <vk-icon
-          :class="icon({ class: styleSlots?.icon })"
+          :class="s.icon({ class: styleSlots?.icon })"
           :name="props.icon"
           :data-open="open"
         />
@@ -94,7 +94,7 @@ const onItemClick = (item: Item) => {
         :id="menuId"
         role="menu"
         :aria-labelledby="dropdownId"
-        :class="itemsMenu({ class: styleSlots?.itemsMenu })"
+        :class="s.itemsMenu({ class: styleSlots?.itemsMenu })"
       >
         <button
           v-for="item in items"
@@ -104,14 +104,14 @@ const onItemClick = (item: Item) => {
           :tabindex="item.disabled ? -1 : 0"
           :aria-disabled="item.disabled || undefined"
           :disabled="item.disabled"
-          :class="itemsButton({ class: styleSlots?.itemsButton })"
+          :class="s.itemsButton({ class: styleSlots?.itemsButton })"
           :data-disabled="item.disabled"
           :data-shape="shape"
           @click.prevent="onItemClick(item)"
         >
           <vk-icon
             v-if="item.icon"
-            :class="itemsIcon({ class: styleSlots?.itemsIcon })"
+            :class="s.itemsIcon({ class: styleSlots?.itemsIcon })"
             :name="item.icon"
           />
           {{ item.title }}

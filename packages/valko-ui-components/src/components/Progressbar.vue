@@ -17,7 +17,7 @@ const props = withDefaults(defineProps<ProgressbarProps>(), {
   indeterminate: false
 })
 
-const { container, background, buffer, content, progress, stripes } = styles(props)
+const s = computed(() => styles(props))
 
 const progressStyles = computed(() => {
   return {
@@ -46,15 +46,15 @@ const showContent = computed(() => props.shape !== 'line')
 
 <template>
   <div
-    :class="container({ class: styleSlots?.container })"
+    :class="s.container({ class: styleSlots?.container })"
   >
-    <div :class="background({ class: styleSlots?.background })">
+    <div :class="s.background({ class: styleSlots?.background })">
       <div
         v-if="!!props.buffer && !indeterminate"
-        :class="buffer()"
+        :class="s.buffer()"
         :style="bufferStyles"
       />
-      <div :class="content({ class: styleSlots?.content})">
+      <div :class="s.content({ class: styleSlots?.content})">
         <slot
           v-if="showContent"
           :progress="props.progress"
@@ -63,12 +63,12 @@ const showContent = computed(() => props.shape !== 'line')
       </div>
     </div>
     <div
-      :class="progress({ class: styleSlots?.progress })"
+      :class="s.progress({ class: styleSlots?.progress })"
       :style="progressStyles"
     >
       <div
         v-if="striped"
-        :class="stripes({ class: styleSlots?.stripes })"
+        :class="s.stripes({ class: styleSlots?.stripes })"
         :style="stripeStyles"
       />
       <slot

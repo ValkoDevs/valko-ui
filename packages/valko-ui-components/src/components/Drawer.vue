@@ -21,7 +21,7 @@ const props = withDefaults(defineProps<DrawerProps>(), {
 
 const emit = defineEmits(['close'])
 
-const { container, backdrop, dialog, content, panel, panelChild, slotContainer, title, closeButton, closeIcon } = styles(props)
+const s = computed(() => styles(props))
 
 const containerRef = ref(null)
 const descriptionId = useId()
@@ -86,7 +86,7 @@ const transitionClasses = computed(() => {
     as="template"
   >
     <Dialog
-      :class="dialog({ class: props.styleSlots?.dialog })"
+      :class="s.dialog({ class: props.styleSlots?.dialog })"
       :initial-focus="containerRef"
       :aria-modal="true"
       :aria-describedby="props['aria-description'] ? descriptionId : undefined"
@@ -104,16 +104,16 @@ const transitionClasses = computed(() => {
         leave-to="opacity-0"
       >
         <div
-          :class="backdrop({ class: props.styleSlots?.backdrop })"
+          :class="s.backdrop({ class: props.styleSlots?.backdrop })"
         />
       </transition-child>
 
       <div
-        :class="container({ class: props.styleSlots?.container })"
+        :class="s.container({ class: props.styleSlots?.container })"
         ref="containerRef"
       >
         <div
-          :class="content({ class: props.styleSlots?.content })"
+          :class="s.content({ class: props.styleSlots?.content })"
         >
           <transition-child
             as="template"
@@ -126,15 +126,15 @@ const transitionClasses = computed(() => {
             :leave-to="transitionClasses.leaveTo"
           >
             <dialog-panel
-              :class="panel({ class: props.styleSlots?.panel })"
+              :class="s.panel({ class: props.styleSlots?.panel })"
               :data-title="!!title"
             >
               <div
                 v-if="props.title || closable"
-                :class="panelChild({ class: props.styleSlots?.panelChild })"
+                :class="s.panelChild({ class: props.styleSlots?.panelChild })"
               >
                 <dialog-title
-                  :class="title({ class: props.styleSlots?.title })"
+                  :class="s.title({ class: props.styleSlots?.title })"
                   :id="props['aria-labelledby']"
                 >
                   {{ props.title }}
@@ -154,15 +154,15 @@ const transitionClasses = computed(() => {
                   shape="rounded"
                   color="surface"
                   condensed
-                  :class="closeButton({ class: props.styleSlots?.closeButton })"
+                  :class="s.closeButton({ class: props.styleSlots?.closeButton })"
                   @click="closeDrawer"
                 >
-                  <div :class="closeIcon({ class: props.styleSlots?.closeIcon })">
+                  <div :class="s.closeIcon({ class: props.styleSlots?.closeIcon })">
                     <vk-icon name="x" />
                   </div>
                 </vk-button>
               </div>
-              <div :class="slotContainer({ class: props.styleSlots?.slotContainer })">
+              <div :class="s.slotContainer({ class: props.styleSlots?.slotContainer })">
                 <slot />
               </div>
             </dialog-panel>

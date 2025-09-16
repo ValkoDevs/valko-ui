@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { CalendarHeaderProps } from '#valkoui/types/Calendar'
 import styles from '#valkoui/styles/Calendar.styles.ts'
 import VkButton from './Button.vue'
@@ -10,18 +11,18 @@ const props = defineProps<CalendarHeaderProps>()
 
 const emit = defineEmits(['previousClick', 'nextClick', 'viewChange'])
 
-const { headerContainer, arrows, periodButton } = styles(props)
+const s = computed(() => styles(props))
 </script>
 
 <template>
-  <div :class="headerContainer({ class: styleSlots?.headerContainer })">
+  <div :class="s.headerContainer({ class: styleSlots?.headerContainer })">
     <vk-button
       :size="size"
       :color="color"
       variant="link"
       condensed
       :shape="shape"
-      :class="arrows({ class: styleSlots?.arrows })"
+      :class="s.arrows({ class: styleSlots?.arrows })"
       :disabled="disabledLeft"
       @click="() => emit('previousClick')"
     >
@@ -34,7 +35,7 @@ const { headerContainer, arrows, periodButton } = styles(props)
       variant="link"
       condensed
       :shape="shape"
-      :class="periodButton({ class: styleSlots?.periodButton })"
+      :class="s.periodButton({ class: styleSlots?.periodButton })"
       @click="() => emit('viewChange')"
     >
       {{ loadedPeriod }}
@@ -46,7 +47,7 @@ const { headerContainer, arrows, periodButton } = styles(props)
       variant="link"
       condensed
       :shape="shape"
-      :class="arrows({ class: styleSlots?.arrows })"
+      :class="s.arrows({ class: styleSlots?.arrows })"
       :disabled="disabledRight"
       @click="() => emit('nextClick')"
     >

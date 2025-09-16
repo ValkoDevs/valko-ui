@@ -23,7 +23,7 @@ const props = withDefaults(defineProps<RangeProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
-const { container, progressContainer, progress, thumbContainer, thumb, stepMark, labelContainer, label } = styles(props)
+const s = computed(() => styles(props))
 
 const rangeId = useId()
 const isDragging = ref(false)
@@ -208,14 +208,14 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
 
 <template>
   <div
-    :class="container({ class: styleSlots?.container })"
+    :class="s.container({ class: styleSlots?.container })"
     ref="sliderRef"
     :id="rangeId"
     @mousedown="onSliderClick"
   >
-    <div :class="progressContainer({ class: styleSlots?.progressContainer })">
+    <div :class="s.progressContainer({ class: styleSlots?.progressContainer })">
       <div
-        :class="progress({ class: styleSlots?.progress })"
+        :class="s.progress({ class: styleSlots?.progress })"
         :style="inlineStyles"
       />
       <div v-if="showSteps">
@@ -223,14 +223,14 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
           v-for="(position, index) in stepMarks"
           :key="index"
           :style="`left:${position}%`"
-          :class="stepMark({ class: styleSlots?.stepMark })"
+          :class="s.stepMark({ class: styleSlots?.stepMark })"
         />
       </div>
     </div>
-    <div :class="thumbContainer({ class: styleSlots?.thumbContainer })">
+    <div :class="s.thumbContainer({ class: styleSlots?.thumbContainer })">
       <div
         v-if="isDouble"
-        :class="thumb({ class: styleSlots?.thumb })"
+        :class="s.thumb({ class: styleSlots?.thumb })"
         :style="thumbStyles.start"
         role="slider"
         tabindex="0"
@@ -245,7 +245,7 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
         @touchstart="(event) => onStart(event, 'min')"
       />
       <div
-        :class="thumb({ class: styleSlots?.thumb })"
+        :class="s.thumb({ class: styleSlots?.thumb })"
         :style="thumbStyles.end"
         role="slider"
         tabindex="0"
@@ -262,13 +262,13 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
     </div>
     <div
       v-if="labels.length > 0"
-      :class="labelContainer({ class: styleSlots?.labelContainer })"
+      :class="s.labelContainer({ class: styleSlots?.labelContainer })"
     >
       <span
         v-for="(el, index) in labels"
         :key="index"
         :style="`left:${el.value}%`"
-        :class="label({ class: styleSlots?.label })"
+        :class="s.label({ class: styleSlots?.label })"
         @click="() => onLabelClick(el.value)"
       >
         {{ el.label }}

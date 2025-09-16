@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<TabsProps>(), {
 
 const emit = defineEmits(['tabClick', 'update:modelValue'])
 
-const { container, group, list, tabSlot, content, cursor, cursorGradient, leftIcon, rightIcon } = styles(props)
+const s = computed(() => styles(props))
 
 const internalIndex = ref(0)
 const cursorRef: Ref<HTMLElement | null> = ref(null)
@@ -64,32 +64,32 @@ watch(
 </script>
 
 <template>
-  <div :class="container({ class: styleSlots?.container })">
+  <div :class="s.container({ class: styleSlots?.container })">
     <tab-group
       as="div"
       :vertical="vertical"
       :default-index="defaultIndex"
-      :class="group({ class: styleSlots?.group })"
+      :class="s.group({ class: styleSlots?.group })"
       :selected-index="selectedIndex"
       @change="onChange"
     >
       <tab-list
-        :class="list({ class: styleSlots?.list })"
+        :class="s.list({ class: styleSlots?.list })"
         as="nav"
         :aria-label="props['aria-label'] ?? 'Tab navigation'"
       >
         <div
-          :class="cursor({ class: styleSlots?.cursor })"
+          :class="s.cursor({ class: styleSlots?.cursor })"
           ref="cursorRef"
         >
           <div
             v-if="variant === 'gradient'"
-            :class="cursorGradient({ class: styleSlots?.cursorGradient })"
+            :class="s.cursorGradient({ class: styleSlots?.cursorGradient })"
           />
         </div>
         <tab
           v-for="item in tabs"
-          :class="tabSlot({ class: styleSlots?.tabSlot })"
+          :class="s.tabSlot({ class: styleSlots?.tabSlot })"
           :key="item.key"
           :disabled="item.disabled"
         >
@@ -97,24 +97,24 @@ watch(
             <vk-icon
               v-if="item.leftIcon"
               :name="item.leftIcon"
-              :class="leftIcon({ class: styleSlots?.leftIcon })"
+              :class="s.leftIcon({ class: styleSlots?.leftIcon })"
             />
             <span> {{ item.title }} </span>
             <vk-icon
               v-if="item.rightIcon"
               :name="item.rightIcon"
-              :class="rightIcon({ class: styleSlots?.rightIcon })"
+              :class="s.rightIcon({ class: styleSlots?.rightIcon })"
             />
           </slot>
         </tab>
       </tab-list>
 
-      <tab-panels :class="content({ class: styleSlots?.content })">
+      <tab-panels :class="s.content({ class: styleSlots?.content })">
         <tab-panel
           v-for="item in tabs"
           :key="item.key"
           :data-key="item.key"
-          :class="content({ class: styleSlots?.content })"
+          :class="s.content({ class: styleSlots?.content })"
         >
           <slot :name="`${item.key}-content`" />
         </tab-panel>

@@ -22,19 +22,7 @@ const props = withDefaults(defineProps<InputProps>(), {
 
 const emit = defineEmits(['update:modelValue', 'focus', 'clear', 'blur', 'leftIconClick', 'rightIconClick'])
 
-const {
-  container,
-  input,
-  label,
-  field,
-  helper,
-  icons,
-  rightIcon,
-  leftIcon,
-  clearIcon,
-  numberArrows,
-  chevrons
-} = styles(props)
+const s = computed(() => styles(props))
 
 const inputId = useId()
 const helpertextId = useId()
@@ -118,14 +106,14 @@ watch(() => props.modelValue, (newValue) => {
 </script>
 
 <template>
-  <div :class="container({ class: styleSlots?.container })">
-    <div :class="field({ class: styleSlots?.field })">
+  <div :class="s.container({ class: styleSlots?.container })">
+    <div :class="s.field({ class: styleSlots?.field })">
       <input
         ref="inputRef"
         :data-left-icon="!!$slots['left-icon']"
         :data-right-icon="!!$slots['right-icon']"
         :data-clear-icon="clearable"
-        :class="input({ class: styleSlots?.input })"
+        :class="s.input({ class: styleSlots?.input })"
         :readonly="readonly"
         :disabled="disabled"
         :type="type"
@@ -147,17 +135,17 @@ watch(() => props.modelValue, (newValue) => {
       >
       <label
         :for="inputId"
-        :class="label({ class: styleSlots?.label })"
+        :class="s.label({ class: styleSlots?.label })"
       >
         {{ props.label }}
       </label>
       <span
         v-if="type === 'number'"
-        :class="numberArrows({ class: styleSlots?.numberArrows })"
+        :class="s.numberArrows({ class: styleSlots?.numberArrows })"
       >
         <vk-icon
           name="chevron-up"
-          :class="chevrons({ class: styleSlots?.chevrons })"
+          :class="s.chevrons({ class: styleSlots?.chevrons })"
           @mousedown="handleNumericArrowHold('increment')"
           @mouseup="handleNumericArrowRelease"
           @mouseleave="handleNumericArrowRelease"
@@ -165,7 +153,7 @@ watch(() => props.modelValue, (newValue) => {
         />
         <vk-icon
           name="chevron-down"
-          :class="chevrons({ class: styleSlots?.chevrons })"
+          :class="s.chevrons({ class: styleSlots?.chevrons })"
           @mousedown="handleNumericArrowHold('decrement')"
           @mouseup="handleNumericArrowRelease"
           @mouseleave="handleNumericArrowRelease"
@@ -177,13 +165,13 @@ watch(() => props.modelValue, (newValue) => {
         name="x"
         :data-right-icon="!!$slots['right-icon']"
         :data-chevron-icons="type === 'number'"
-        :class="clearIcon({ class: styleSlots?.clearIcon })"
+        :class="s.clearIcon({ class: styleSlots?.clearIcon })"
         @click="clearInput"
         @touchend="clearInput"
       />
       <span
         v-if="$slots['left-icon']"
-        :class="[icons({ class: styleSlots?.icons }), leftIcon({ class: styleSlots?.leftIcon })]"
+        :class="[s.icons({ class: styleSlots?.icons }), s.leftIcon({ class: styleSlots?.leftIcon })]"
         @click="handleIconClick('left')"
         @touchend="handleIconClick('left')"
       >
@@ -192,7 +180,7 @@ watch(() => props.modelValue, (newValue) => {
       <span
         v-if="$slots['right-icon']"
         :data-chevron-icons="type === 'number'"
-        :class="[icons({ class: styleSlots?.icons }), rightIcon({ class: styleSlots?.rightIcon })]"
+        :class="[s.icons({ class: styleSlots?.icons }), s.rightIcon({ class: styleSlots?.rightIcon })]"
         @click="handleIconClick('right')"
         @touchend="handleIconClick('right')"
       >
@@ -202,7 +190,7 @@ watch(() => props.modelValue, (newValue) => {
     <span
       v-if="helpertext"
       :id="helpertextId"
-      :class="helper({ class: styleSlots?.helper })"
+      :class="s.helper({ class: styleSlots?.helper })"
     >
       {{ helpertext }}
     </span>

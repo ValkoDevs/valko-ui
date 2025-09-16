@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<PopoverProps>(), {
 
 const emit = defineEmits(['close'])
 
-const { container, slotContainer, panel } = styles(props)
+const s = computed(() => styles(props))
 
 const rootRef = ref<HTMLElement | null>(null)
 const slotRef = ref<HTMLElement | null>(null)
@@ -74,10 +74,10 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="rootRef"
-    :class="container({ class: styleSlots?.container })"
+    :class="s.container({ class: styleSlots?.container })"
   >
     <div
-      :class="slotContainer({ class: styleSlots?.slotContainer })"
+      :class="s.slotContainer({ class: styleSlots?.slotContainer })"
       ref="slotRef"
     >
       <slot name="default" />
@@ -99,7 +99,7 @@ onBeforeUnmount(() => {
         :aria-label="props['aria-label']"
         :aria-labelledby="props['aria-labelledby']"
         :aria-describedby="props['aria-describedby']"
-        :class="panel({ class: styleSlots?.panel })"
+        :class="s.panel({ class: styleSlots?.panel })"
         :data-text="!!text"
         :data-placement="placement"
       >
