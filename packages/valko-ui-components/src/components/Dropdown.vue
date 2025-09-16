@@ -83,7 +83,7 @@ const onItemClick = (item: Item) => {
         {{ label }}
         <vk-icon
           :class="icon({ class: styleSlots?.icon })"
-          :name="icon"
+          :name="props.icon"
           :data-open="open"
         />
       </vk-button>

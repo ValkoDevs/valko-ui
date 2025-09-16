@@ -259,6 +259,37 @@ const items: Item[] = [
 const generateSnippet = snippetGeneratorFactory('vk-dropdown')
 
 const extraProps = ':items="items"'
+
+const styles = generateStyles({
+  colors: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+    'xl:grid-cols-[repeat(6,_minmax(0,_max-content))]'
+  ],
+  variants: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
+  ],
+  shapes: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ],
+  sizes: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+  ],
+  placements: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
+  ],
+  alignments: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ]
+})
 </script>
 
 <template>
@@ -336,7 +367,7 @@ const extraProps = ':items="items"'
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] xl:grid-cols-[repeat(6,_minmax(0,_max-content))]"
+        :style-slots="styles.colors"
       >
         <vk-dropdown
           v-for="color in colorOptions.withSurface"
@@ -354,7 +385,7 @@ const extraProps = ':items="items"'
 
       <example-section
         title="Variants"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(5,_minmax(0,_max-content))]"
+        :style-slots="styles.variants"
       >
         <vk-dropdown
           v-for="variant in variantOptions.withGradientAndLink"
@@ -372,7 +403,7 @@ const extraProps = ':items="items"'
 
       <example-section
         title="Shapes"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        :style-slots="styles.shapes"
       >
         <vk-dropdown
           v-for="shape in shapeOptions.general"
@@ -390,7 +421,7 @@ const extraProps = ':items="items"'
 
       <example-section
         title="Sizes"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(4,_minmax(0,_max-content))]"
+        :style-slots="styles.sizes"
       >
         <vk-dropdown
           v-for="size in sizeOptions.general"
@@ -408,7 +439,7 @@ const extraProps = ':items="items"'
 
       <example-section
         title="Placements"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(5,_minmax(0,_max-content))]"
+        :style-slots="styles.placements"
       >
         <vk-dropdown
           v-for="placement in placementOptions.withAuto"
@@ -426,7 +457,7 @@ const extraProps = ':items="items"'
 
       <example-section
         title="Alignments"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        :style-slots="styles.alignments"
       >
         <vk-dropdown
           v-for="alignment in alignmentOptions"

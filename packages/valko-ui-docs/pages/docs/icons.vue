@@ -69,7 +69,7 @@ const generateSnippet = snippetGeneratorFactory('vk-icon')
     <template #examples>
       <example-section
         title="Names"
-        classes="grid-cols-2 md:grid-cols-4"
+        :style-slots="{ slotContainer: ['grid-cols-2 md:grid-cols-4'] }"
       >
         <vk-icon
           v-for="name in names"

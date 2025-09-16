@@ -283,7 +283,9 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs__separator').classes()).toContain('ti-minus')
+        const container = wrapper.find('.vk-breadcrumbs__separator')
+
+        expect(container.find('.vk-icon').classes()).toContain('ti-minus')
       })
 
       it('should not render a separator after the last crumb', () => {
@@ -307,7 +309,7 @@ describe('Breadcrumbs component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-breadcrumbs__separator').exists()).toBe(false)
+        expect(wrapper.find('.vk-icon').exists()).toBe(false)
       })
     })
   })

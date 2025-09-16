@@ -313,6 +313,16 @@ const tabs: Tab[] = [
 const generateSnippet = snippetGeneratorFactory('vk-tabs')
 
 const extraProps = ':tabs="tabs"'
+
+const styles = generateStyles({
+  grid: [
+    'xl:grid-cols-2',
+    'overflow-x-auto'
+  ],
+  gridAlt: [
+    'overflow-x-auto'
+  ]
+})
 </script>
 
 <template>
@@ -378,7 +388,7 @@ const extraProps = ':tabs="tabs"'
     <template #examples>
       <example-section
         title="Colors"
-        classes="xl:grid-cols-2 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="color in colorOptions.general"
@@ -398,7 +408,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="Variants"
-        classes="xl:grid-cols-2 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="variant in variantOptions.withGradient"
@@ -418,7 +428,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="Shapes"
-        classes="xl:grid-cols-2 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="shape in shapeOptions.withLine"
@@ -439,7 +449,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="Sizes"
-        classes="xl:grid-cols-2 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -459,7 +469,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="Grow"
-        class="overflow-x-auto"
+        :style-slots="styles.gridAlt"
       >
         <vk-tabs
           grow
@@ -473,7 +483,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="With Icons"
-        class="overflow-x-auto"
+        :style-slots="styles.gridAlt"
       >
         <vk-tabs
           :tabs="tabWithIcon"
@@ -486,7 +496,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="Disabled"
-        class="overflow-x-auto"
+        :style-slots="styles.gridAlt"
       >
         <vk-tabs
           :tabs="tabDisabled"

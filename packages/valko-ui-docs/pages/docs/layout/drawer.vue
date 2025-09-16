@@ -242,6 +242,21 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
     hasSlot: true, extraProps
   }).replace(/<vk-drawer/g, `${triggerSnippet}`)
 }`
+
+const styles = generateStyles({
+  default: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+  ],
+  shapes: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ],
+  backdrop: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ]
+})
 </script>
 
 <template>
@@ -315,7 +330,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
     <template #examples>
       <example-section
         title="Placement"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
+        :style-slots="styles.default"
       >
         <div
           v-for="placement in placementOptions.general"
@@ -343,8 +358,8 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
       </example-section>
 
       <example-section
-        title="Shape"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        title="Shapes"
+        :style-slots="styles.shapes"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -372,8 +387,8 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
       </example-section>
 
       <example-section
-        title="Size"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
+        title="Sizes"
+        :style-slots="styles.default"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -401,8 +416,8 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
       </example-section>
 
       <example-section
-        title="Backdrop"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        title="Backdrops"
+        :style-slots="styles.backdrop"
       >
         <div
           v-for="backdrop in backdropOptions"

@@ -130,14 +130,14 @@ const transitionClasses = computed(() => {
               :data-title="!!title"
             >
               <div
-                v-if="title || closable"
+                v-if="props.title || closable"
                 :class="panelChild({ class: props.styleSlots?.panelChild })"
               >
                 <dialog-title
                   :class="title({ class: props.styleSlots?.title })"
                   :id="props['aria-labelledby']"
                 >
-                  {{ title }}
+                  {{ props.title }}
                 </dialog-title>
                 <div
                   v-if="props['aria-description']"

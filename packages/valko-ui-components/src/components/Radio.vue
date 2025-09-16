@@ -79,7 +79,7 @@ const onClick = () => {
       </label>
     </div>
     <span
-      v-if="helpertext"
+      v-if="props.helpertext"
       :class="helpertext({ class: styleSlots?.helpertext })"
       :id="helpertextId"
     >

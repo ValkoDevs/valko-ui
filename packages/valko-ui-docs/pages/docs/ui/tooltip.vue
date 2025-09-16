@@ -105,6 +105,26 @@ const generateSnippet = snippetGeneratorFactory('vk-tooltip')
 
 const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
 const extraProps = 'content="Tooltip Content"'
+
+const styles = generateStyles({
+  shapes: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ],
+  sizes: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+  ],
+  placements: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
+  ],
+  alignments: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ]
+})
 </script>
 
 <template>
@@ -165,7 +185,7 @@ const extraProps = 'content="Tooltip Content"'
     <template #examples>
       <example-section
         title="Shapes"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        :style-slots="styles.shapes"
       >
         <vk-tooltip
           v-for="shape in shapeOptions.general"
@@ -185,7 +205,7 @@ const extraProps = 'content="Tooltip Content"'
 
       <example-section
         title="Sizes"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
+        :style-slots="styles.sizes"
       >
         <vk-tooltip
           v-for="size in sizeOptions.general"
@@ -205,7 +225,7 @@ const extraProps = 'content="Tooltip Content"'
 
       <example-section
         title="Placements"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(5,_minmax(0,_max-content))]"
+        :style-slots="styles.placements"
       >
         <vk-tooltip
           v-for="placement in placementOptions.withAuto"
@@ -225,7 +245,7 @@ const extraProps = 'content="Tooltip Content"'
 
       <example-section
         title="Alignments"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        :style-slots="styles.alignments"
       >
         <vk-tooltip
           v-for="alignment in alignmentOptions"

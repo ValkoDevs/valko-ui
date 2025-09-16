@@ -144,6 +144,18 @@ const progressbarSlots: TableItem[] = [
 ]
 
 const generateSnippet = snippetGeneratorFactory('vk-progressbar')
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  defaultAlt: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ]
+})
 </script>
 
 <template>
@@ -217,7 +229,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-progressbar
           v-for="color in colorOptions.general"
@@ -235,7 +247,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.defaultAlt"
       >
         <vk-progressbar
           v-for="variant in variantOptions.withGradient"
@@ -253,7 +265,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.defaultAlt"
       >
         <vk-progressbar
           v-for="shape in shapeOptions.withLine"
@@ -271,7 +283,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.defaultAlt"
       >
         <vk-progressbar
           v-for="size in sizeOptions.general"
@@ -299,7 +311,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
 
       <example-section
         title="Stripped"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-progressbar
           v-for="color in colorOptions.general"

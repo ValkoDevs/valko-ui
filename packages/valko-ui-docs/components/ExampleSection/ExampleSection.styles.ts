@@ -28,6 +28,7 @@ const exampleSection = tv({
       'rounded-t-lg'
     ],
     codeContainer: [
+      'w-full',
       'p-4',
       'bg-surface-container-lowest',
       'rounded-b-lg'

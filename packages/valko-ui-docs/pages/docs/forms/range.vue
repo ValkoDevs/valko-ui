@@ -255,6 +255,31 @@ watch([() => form.min, () => form.max, () => form.step], () => {
 form.labels = generateLabels()
 
 const generateSnippet = snippetGeneratorFactory('vk-range')
+
+const styles = generateStyles({
+  colors: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  variants: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  shapes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  stripes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ]
+})
 </script>
 
 <template>
@@ -347,7 +372,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.colors"
       >
         <div
           v-for="color in colorOptions.general"
@@ -367,7 +392,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.variants"
       >
         <div
           v-for="variant in variantOptions.withGradient"
@@ -384,7 +409,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.shapes"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -401,7 +426,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -437,7 +462,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
 
       <example-section
         title="Striped"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.stripes"
       >
         <div
           v-for="color in colorOptions.general"

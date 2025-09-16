@@ -220,6 +220,18 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
     hasSlot: true, extraProps
   }).replace(/<vk-modal/g, `${triggerSnippet}`)
 }`
+
+const styles = generateStyles({
+  default: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ],
+  sizes: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(6,_minmax(0,_max-content))]'
+  ]
+})
 </script>
 
 <template>
@@ -288,7 +300,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
     <template #examples>
       <example-section
         title="Shapes"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        :style-slots="styles.default"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -317,7 +329,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
 
       <example-section
         title="Sizes"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(6,_minmax(0,_max-content))]"
+        :style-slots="styles.sizes"
       >
         <div
           v-for="size in sizeOptions.withFull"
@@ -346,7 +358,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
 
       <example-section
         title="Backdrops"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        :style-slots="styles.default"
       >
         <div
           v-for="backdrop in backdropOptions"

@@ -185,6 +185,26 @@ const emitData: TableItem[] = [
 ]
 
 const generateSnippet = snippetGeneratorFactory('vk-switch')
+
+const styles = generateStyles({
+  default: [
+    'grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  colors: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-6'
+  ],
+  sizes: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  label: [
+    'grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -255,7 +275,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        :style-slots="styles.colors"
       >
         <vk-switch
           v-for="color in colorOptions.general"
@@ -272,7 +292,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
 
       <example-section
         title="Variants"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-switch
           v-for="variant in variantOptions.general"
@@ -289,7 +309,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
 
       <example-section
         title="Shape"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-switch
           v-for="shape in shapeOptions.general"
@@ -306,7 +326,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
 
       <example-section
         title="Size"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <vk-switch
           v-for="size in sizeOptions.general"
@@ -342,7 +362,7 @@ const generateSnippet = snippetGeneratorFactory('vk-switch')
 
       <example-section
         title="Label Position"
-        classes="grid-cols-2"
+        :style-slots="styles.label"
       >
         <vk-switch
           v-for="pos in position"

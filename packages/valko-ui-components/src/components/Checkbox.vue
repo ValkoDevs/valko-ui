@@ -62,7 +62,7 @@ const onClick = () => {
           <vk-icon
             v-if="modelValue !== false"
             :name="`${modelValue === null ? 'minus' : 'check'}`"
-            :class="icon"
+            :class="icon({ class: styleSlots?.icon })"
           />
         </div>
       </div>
@@ -87,7 +87,7 @@ const onClick = () => {
     </div>
 
     <span
-      v-if="helpertext"
+      v-if="props.helpertext"
       :class="helpertext({ class: styleSlots?.helpertext })"
       :id="helpertextId"
     >

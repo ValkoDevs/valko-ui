@@ -130,6 +130,17 @@ const paginationEmits: TableItem[] = [
 ]
 
 const generateSnippet = snippetGeneratorFactory('vk-pagination')
+
+const styles = generateStyles({
+  grid: [
+    'md:grid-cols-2',
+    'xl:grid-cols-3',
+    'overflow-x-auto'
+  ],
+  gridAlt: [
+    'overflow-x-auto'
+  ]
+})
 </script>
 
 <template>
@@ -194,7 +205,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
     <template #examples>
       <example-section
         title="Colors"
-        classes="md:grid-cols-2 xl:grid-cols-3 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -216,7 +227,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
       <example-section
         title="Variants"
-        classes="md:grid-cols-2 xl:grid-cols-3 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="variant in variantOptions.general"
@@ -238,7 +249,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
       <example-section
         title="Shapes"
-        classes="md:grid-cols-2 xl:grid-cols-3 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -260,7 +271,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
       <example-section
         title="Sizes"
-        classes="md:grid-cols-2 xl:grid-cols-3 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -281,7 +292,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
       <example-section
         title="Elevated"
-        class="overflow-x-auto"
+        :style-slots="styles.gridAlt"
       >
         <vk-pagination
           v-model="form.modelValue"
@@ -296,7 +307,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
       <example-section
         title="Disabled"
-        class="overflow-x-auto"
+        :style-slots="styles.gridAlt"
       >
         <vk-pagination
           v-model="form.modelValue"
