@@ -228,8 +228,8 @@ const extraProps = ':items="menuItems"'
 
 onMounted(() => {
   const setFirstItemActive = (options: SelectOption[], menuPrefix: string) => {
+    if (!options[0]?.value) return
     options.forEach((_, index) => {
-      if (!options[0]?.value) return
       const firstItemKey = options[0].value
       const menuKey = `${menuPrefix}-${index}`
       activeItemsList.value[menuKey] = firstItemKey
@@ -245,7 +245,7 @@ onMounted(() => {
   setFirstItemActive(sizeOptions.general, 'size-menu')
 
   const firstPlaygroundItemKey = menuItems[0]?.key
-  activeItem.value = firstPlaygroundItemKey ?? null
+  activeItem.value = firstPlaygroundItemKey
 
   const firstPlaygroundItem = menuItems.find(item => item.key === firstPlaygroundItemKey)
 

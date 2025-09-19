@@ -7,4 +7,4 @@ const icon = tv({
 })
 
 export default icon
-export type IconSlots = typeof icon.base
+export type IconBase = typeof icon.base

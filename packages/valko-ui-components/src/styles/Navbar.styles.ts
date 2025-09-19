@@ -420,4 +420,4 @@ const navbar = tv({
 })
 
 export default navbar
-export type NavbarSlots = typeof navbar.base
+export type NavbarBase = typeof navbar.base

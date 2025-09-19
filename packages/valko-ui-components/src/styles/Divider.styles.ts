@@ -267,4 +267,4 @@ const divider = tv({
 })
 
 export default divider
-export type DividerSlots = typeof divider.base
+export type DividerBase = typeof divider.base
