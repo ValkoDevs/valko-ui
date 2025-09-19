@@ -53,6 +53,7 @@ const onItemClick = (item: Item) => {
 <template>
   <vk-popover
     :class="s.container({ class: props.styleSlots?.container })"
+    :style-slots="{ panel: [s.panel({ class: props.styleSlots?.panel })] }"
     :is-open="open && !disabled"
     :shape="shape"
     :placement="placement"

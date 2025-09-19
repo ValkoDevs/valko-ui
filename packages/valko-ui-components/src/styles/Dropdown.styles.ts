@@ -16,6 +16,9 @@ const dropdown = tv({
       'ease-out',
       'data-[open=true]:rotate-180'
     ],
+    panel: [
+      'bg-surface-container'
+    ],
     itemsMenu: [
       'p-2'
     ],
@@ -39,7 +42,8 @@ const dropdown = tv({
       'data-[disabled=true]:border-transparent'
     ],
     itemsIcon: [
-      'mr-2'
+      'mr-2',
+      'text-on-surface-variant'
     ]
   },
   variants: {
@@ -170,7 +174,7 @@ const dropdown = tv({
       color: 'surface',
       class: {
         itemsButton: [
-          'hover:bg-surface-container-highest',
+          'hover:bg-on-surface/[.08]',
           'hover:text-on-surface'
         ]
       }
@@ -312,7 +316,7 @@ const dropdown = tv({
       color: 'surface',
       class: {
         itemsButton: [
-          'hover:bg-surface-container-highest/[.5]',
+          'hover:bg-on-surface/[.08]',
           'hover:text-on-surface-variant'
         ]
       }
