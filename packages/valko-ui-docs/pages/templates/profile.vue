@@ -76,8 +76,8 @@ const profileStats = [
           variant="ghost"
           color="primary"
         >
-          <template #account-settings>
-            <form class="flex flex-col gap-4 pt-4">
+          <template #account-settings-content>
+            <form class="flex flex-col gap-4 pt-4 w-full">
               <div class="grid grid-cols-2 gap-4">
                 <vk-input
                   label="First Name"
@@ -135,25 +135,25 @@ const profileStats = [
             </form>
           </template>
 
-          <template #company-settings>
+          <template #company-settings-content>
             <p class="mt-4">
               Placeholder content for Company Settings.
             </p>
           </template>
 
-          <template #documents>
+          <template #documents-content>
             <p class="mt-4">
               Placeholder content for Documents.
             </p>
           </template>
 
-          <template #billing>
+          <template #billing-content>
             <p class="mt-4">
               Placeholder content for Billing.
             </p>
           </template>
 
-          <template #notifications>
+          <template #notifications-content>
             <p class="mt-4">
               Placeholder content for Notifications.
             </p>
@@ -211,8 +211,8 @@ const profileStats = [
               variant="ghost"
               color="primary"
             >
-              <template #account-settings>
-                <form class="flex flex-col gap-4 pt-4">
+              <template #account-settings-content>
+                <form class="flex flex-col gap-4 pt-4 w-full">
                   <div class="grid grid-cols-2 gap-4">
                     <vk-input
                       label="First Name"
@@ -270,25 +270,25 @@ const profileStats = [
                 </form>
               </template>
 
-              <template #company-settings>
+              <template #company-settings-content>
                 <p class="mt-4">
                   Placeholder content for Company Settings.
                 </p>
               </template>
 
-              <template #documents>
+              <template #documents-content>
                 <p class="mt-4">
                   Placeholder content for Documents.
                 </p>
               </template>
 
-              <template #billing>
+              <template #billing-content>
                 <p class="mt-4">
                   Placeholder content for Billing.
                 </p>
               </template>
 
-              <template #notifications>
+              <template #notifications-content>
                 <p class="mt-4">
                   Placeholder content for Notifications.
                 </p>
