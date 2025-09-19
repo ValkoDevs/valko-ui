@@ -140,13 +140,13 @@ const tsconfig = `{
           grow
         >
           <template #npm-content>
-            <code-block code="npm install tailwindcss @tailwindcss/postcss tailwind-variants @headlessui/vue toastify-js" />
+            <code-block code="npm install tailwindcss @tailwindcss/postcss tailwind-variants tailwind-merge @headlessui/vue toastify-js" />
           </template>
           <template #yarn-content>
-            <code-block code="yarn add tailwindcss @tailwindcss/postcss tailwind-variants @headlessui/vue toastify-js" />
+            <code-block code="yarn add tailwindcss @tailwindcss/postcss tailwind-variants tailwind-merge @headlessui/vue toastify-js" />
           </template>
           <template #pnpm-content>
-            <code-block code="pnpm add tailwindcss @tailwindcss/postcss tailwind-variants @headlessui/vue toastify-js" />
+            <code-block code="pnpm add tailwindcss @tailwindcss/postcss tailwind-variants tailwind-merge @headlessui/vue toastify-js" />
           </template>
         </vk-tabs>
       </div>

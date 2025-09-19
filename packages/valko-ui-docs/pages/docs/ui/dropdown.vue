@@ -194,6 +194,13 @@ const styleSlotsInterface = [
     default: ''
   },
   {
+    key: 'panel',
+    prop: 'panel',
+    description: 'The panel element of the popover containing the dropdown items.',
+    values: 'string[]',
+    default: ''
+  },
+  {
     key: 'itemsMenu',
     prop: 'itemsMenu',
     description: 'Main container for the Dropdown items.',
