@@ -244,12 +244,12 @@ onMounted(() => {
   setFirstItemActive(shapeOptions.general, 'shape-menu')
   setFirstItemActive(sizeOptions.general, 'size-menu')
 
-  const firstPlaygroundItemKey = menuItems[0]?.key
-  activeItem.value = firstPlaygroundItemKey
-
-  const firstPlaygroundItem = menuItems.find(item => item.key === firstPlaygroundItemKey)
-
-  if (firstPlaygroundItem) firstPlaygroundItem.active = true
+  if (menuItems.length > 0) {
+    const firstPlaygroundItemKey = menuItems[0].key
+    activeItem.value = firstPlaygroundItemKey
+    const firstPlaygroundItem = menuItems.find(item => item.key === firstPlaygroundItemKey)
+    if (firstPlaygroundItem) firstPlaygroundItem.active = true
+  }
 })
 
 const styles = generateStyles({
