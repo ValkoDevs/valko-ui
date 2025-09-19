@@ -75,15 +75,15 @@ const onClick = () => {
         :for="inputId"
         :class="s.label({ class: styleSlots?.label })"
       >
-        {{ props.label }}
+        {{ label }}
       </label>
     </div>
     <span
-      v-if="props.helpertext"
+      v-if="helpertext"
       :class="s.helpertext({ class: styleSlots?.helpertext })"
       :id="helpertextId"
     >
-      {{ props.helpertext }}
+      {{ helpertext }}
     </span>
   </div>
 </template>
