@@ -35,10 +35,7 @@ const useRipple = (elementRef: Ref<HTMLElement | null> | HTMLElement | null) => 
       top: `${y}px`
     })
 
-    const events = ['mouseup', 'mouseleave', 'touchend', 'touchcancel']
-    events.forEach(eventType => {
-      normalizedElement.addEventListener(eventType, () => rippleContainer.remove(), { once: true })
-    })
+    ripple.addEventListener('animationend', () => rippleContainer.remove())
 
     // Append ripple to the initial element
     normalizedElement.appendChild(rippleContainer)
