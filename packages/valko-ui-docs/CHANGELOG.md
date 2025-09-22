@@ -1,5 +1,14 @@
 # @valko-ui/docs
 
+## 0.6.3
+
+### Patch Changes
+
+- 786a4cc: ## Valko-UI Docs
+
+  - Fixed template page cards not displaying correctly.
+  - Fixed layout issues with some template pages.
+
 ## 0.6.2
 
 ### Patch Changes
