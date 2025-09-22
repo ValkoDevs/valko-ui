@@ -144,7 +144,7 @@ const states: SelectOption[] = [
           />
         </div>
 
-        <div class="grid grid-cols-1 gap-6">
+        <div class="grid grid-cols-1 gap-6 bg-inherit">
           <vk-input
             variant="outlined"
             label="Full Name"

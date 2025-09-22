@@ -67,7 +67,7 @@ const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
 <template>
   <page-template>
     <template #example>
-      <div class="m-4 flex flex-col">
+      <div class="m-4 flex flex-col w-full">
         <vk-navbar
           shape="square"
           class="flex justify-between"

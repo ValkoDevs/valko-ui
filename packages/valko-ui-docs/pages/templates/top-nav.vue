@@ -23,7 +23,7 @@ const templateSnippet = `<template>
 <template>
   <page-template>
     <template #example>
-      <div class="m-4 bg-surface-container">
+      <div class="bg-surface-container">
         <vk-navbar class="flex justify-between">
           Brand-Name
 
