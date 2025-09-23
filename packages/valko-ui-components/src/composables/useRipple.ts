@@ -15,6 +15,10 @@ const useRipple = (elementRef: Ref<HTMLElement | null> | HTMLElement | null) => 
     const normalizedElement = toValue(elementRef)
     if (!normalizedElement) return
 
+    // initialize flags to track animation and interaction state
+    let animationEnded = false
+    let interactionEnded = false
+
     // Create and configure ripple elements
     const rippleContainer = document.createElement('div')
     rippleContainer.className = 'vk-ripple__container absolute inset-0 overflow-hidden pointer-events-none'
@@ -35,10 +39,24 @@ const useRipple = (elementRef: Ref<HTMLElement | null> | HTMLElement | null) => 
       top: `${y}px`
     })
 
+    const cleanupRipple = () => {
+      if (animationEnded && interactionEnded) {
+        rippleContainer.remove()
+      }
+    }
+
     const events = ['mouseup', 'mouseleave', 'touchend', 'touchcancel']
     events.forEach(eventType => {
-      normalizedElement.addEventListener(eventType, () => rippleContainer.remove(), { once: true })
+      normalizedElement.addEventListener(eventType, () => {
+        interactionEnded = true
+        cleanupRipple()
+      }, { once: true })
     })
+
+    ripple.addEventListener('animationend', () => {
+      animationEnded = true
+      cleanupRipple()
+    }, { once: true })
 
     // Append ripple to the initial element
     normalizedElement.appendChild(rippleContainer)
