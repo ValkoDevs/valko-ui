@@ -96,7 +96,7 @@ const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
         :aria-label="group !== 'default' ? group : 'Menu'"
       >
         <li
-          v-for="item in props.items.filter(i => i.group === group)"
+          v-for="item in items.filter(i => i.group === group)"
           :key="item.key"
           :class="s.item({ class: styleSlots?.item })"
           role="none"
@@ -107,7 +107,7 @@ const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
           >
             <button
               :class="s.content({ class: styleSlots?.content })"
-              :data-active="item.key === props.active"
+              :data-active="item.key === active"
               :data-disabled="item.disabled"
               :aria-disabled="item.disabled || undefined"
               role="menuitem"

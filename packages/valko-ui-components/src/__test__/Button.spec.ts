@@ -268,6 +268,174 @@ describe('Button component', () => {
 
         expect(wrapper.find('.vk-spinner').exists()).toBe(false)
       })
+
+      describe('should apply correct color to spinner based on variant and color', () => {
+        it('should be color surface when variant is filled', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'filled'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-surface')
+        })
+
+        it('should be color surface when variant is gradient', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'gradient'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-surface')
+        })
+
+        it('should be color primary when variant is outlined and color primary', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'outlined',
+              color: 'primary'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-primary')
+        })
+
+        it('should be color secondary when variant is outlined and color secondary', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'outlined',
+              color: 'secondary'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-secondary')
+        })
+
+        it('should be color accent when variant is outlined and color accent', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'outlined',
+              color: 'accent'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-accent')
+        })
+
+        it('should be color warning when variant is outlined and color warning', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'outlined',
+              color: 'warning'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-warning')
+        })
+
+        it('should be color negative when variant is outlined and color negative', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'outlined',
+              color: 'negative'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-negative')
+        })
+
+        it('should be color positive when variant is outlined and color positive', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'outlined',
+              color: 'positive'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-positive')
+        })
+
+        it('should be color primary when variant is ghost and color primary', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'ghost',
+              color: 'primary'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-primary')
+        })
+
+        it('should be color secondary when variant is ghost and color secondary', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'ghost',
+              color: 'secondary'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-secondary')
+        })
+
+        it('should be color accent when variant is ghost and color accent', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'ghost',
+              color: 'accent'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-accent')
+        })
+
+        it('should be color warning when variant is ghost and color warning', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'ghost',
+              color: 'warning'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-warning')
+        })
+
+        it('should be color negative when variant is ghost and color negative', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'ghost',
+              color: 'negative'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-negative')
+        })
+
+        it('should be color positive when variant is ghost and color positive', () => {
+          wrapper = mount(VkButton, {
+            props: {
+              loading: true,
+              variant: 'ghost',
+              color: 'positive'
+            }
+          })
+
+          expect(wrapper.find('.vk-spinner__icon').classes()).toContain('text-positive')
+        })
+      })
     })
 
     describe('When elevated prop changes', () => {

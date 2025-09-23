@@ -71,14 +71,14 @@ const closeModal = () => { if (props.closable) emit('close') }
           >
             <dialog-panel :class="s.panel({ class: styleSlots?.panel })">
               <div
-                v-if="props.title || closable"
+                v-if="title || closable"
                 :class="s.panelChild({ class: styleSlots?.panelChild })"
               >
                 <dialog-title
                   :class="s.title({ class: styleSlots?.title })"
                   :id="props['aria-labelledby']"
                 >
-                  {{ props.title }}
+                  {{ title }}
                 </dialog-title>
                 <div
                   v-if="props['aria-description']"

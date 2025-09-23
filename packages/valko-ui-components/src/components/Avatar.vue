@@ -11,8 +11,7 @@ const props = withDefaults(defineProps<AvatarProps>(), {
   variant: 'filled',
   size: 'md',
   shape: 'soft',
-  elevated: false,
-  styleSlots: undefined
+  elevated: false
 })
 
 const s = computed(() => styles(props))

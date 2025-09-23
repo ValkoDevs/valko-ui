@@ -35,10 +35,8 @@ const button = tv({
       'active:bg-state-active',
       'focus:bg-state-focus'
     ],
-    spinner: [
-      'data-[variant=filled]:text-surface',
-      'data-[variant=gradient]:text-surface'
-    ]
+    spinner: [],
+    spinnerIcon: []
   },
   variants: {
     color: {
@@ -173,6 +171,15 @@ const button = tv({
     }
   },
   compoundVariants: [
+    {
+      variant: ['filled', 'gradient'],
+      loading: true,
+      class: {
+        spinnerIcon: [
+          'text-surface'
+        ]
+      }
+    },
     {
       condensed: false,
       size: 'xs',

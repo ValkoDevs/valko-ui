@@ -8,8 +8,7 @@ defineOptions({ name: 'VkCardImage' })
 const props = withDefaults(defineProps<CardImageProps>(), {
   width: '100%',
   height: 'auto',
-  alt: 'card-image',
-  styleSlots: undefined
+  alt: 'card-image'
 })
 
 const s = computed(() => styles(props))

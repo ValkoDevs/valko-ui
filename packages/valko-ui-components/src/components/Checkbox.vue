@@ -15,8 +15,7 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
   modelValue: false,
   readonly: false,
   labelPosition: 'right',
-  disabled: false,
-  styleSlots: undefined
+  disabled: false
 })
 
 const emit = defineEmits(['update:modelValue'])
@@ -82,16 +81,16 @@ const onClick = () => {
         :class="s.label({ class: styleSlots?.label })"
         @click="onClick"
       >
-        {{ props.label }}
+        {{ label }}
       </label>
     </div>
 
     <span
-      v-if="props.helpertext"
+      v-if="helpertext"
       :class="s.helpertext({ class: styleSlots?.helpertext })"
       :id="helpertextId"
     >
-      {{ props.helpertext }}
+      {{ helpertext }}
     </span>
   </div>
 </template>

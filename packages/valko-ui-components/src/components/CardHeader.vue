@@ -5,9 +5,7 @@ import type { CardHeaderProps } from '#valkoui/types/Card'
 
 defineOptions({ name: 'VkCardHeader' })
 
-const props = withDefaults(defineProps<CardHeaderProps>(), {
-  styleSlots: undefined
-})
+const props = defineProps<CardHeaderProps>()
 
 const s = computed(() => styles({ ...props, class: props.styleSlots }))
 </script>

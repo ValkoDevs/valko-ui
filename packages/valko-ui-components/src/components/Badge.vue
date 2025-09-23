@@ -14,8 +14,7 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   placement: 'top',
   alignment: 'end',
   dot: false,
-  hidden: false,
-  styleSlots: undefined
+  hidden: false
 })
 
 const s = computed(() => styles(props))

@@ -11,7 +11,6 @@ const props = defineProps<CalendarDayViewProps>()
 
 const emit = defineEmits(['selectDay', 'viewChange', 'changeMonth'])
 
-
 const s = computed(() => styles(props))
 
 const gridCells = computed(() => {

@@ -10,8 +10,7 @@ const props = withDefaults(defineProps<CollapseProps>(), {
   size: 'md',
   separator: 'line',
   shape: 'soft',
-  multiple: false,
-  styleSlots: undefined
+  multiple: false
 })
 
 const s = computed(() => styles({ ...props, class: props.styleSlots }))
