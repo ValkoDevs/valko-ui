@@ -52,8 +52,8 @@ const onItemClick = (item: Item) => {
 
 <template>
   <vk-popover
-    :class="s.container({ class: props.styleSlots?.container })"
-    :style-slots="{ panel: [s.panel({ class: props.styleSlots?.panel })] }"
+    :class="s.container({ class: styleSlots?.container })"
+    :style-slots="{ panel: [s.panel({ class: styleSlots?.panel })] }"
     :is-open="open && !disabled"
     :shape="shape"
     :placement="placement"
@@ -84,7 +84,7 @@ const onItemClick = (item: Item) => {
         {{ label }}
         <vk-icon
           :class="s.icon({ class: styleSlots?.icon })"
-          :name="props.icon"
+          :name="icon"
           :data-open="open"
         />
       </vk-button>

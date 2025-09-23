@@ -50,15 +50,15 @@ const showContent = computed(() => props.shape !== 'line')
   >
     <div :class="s.background({ class: styleSlots?.background })">
       <div
-        v-if="!!props.buffer && !indeterminate"
+        v-if="!!buffer && !indeterminate"
         :class="s.buffer()"
         :style="bufferStyles"
       />
       <div :class="s.content({ class: styleSlots?.content})">
         <slot
           v-if="showContent"
-          :progress="props.progress"
-          :buffer="props.buffer"
+          :progress="progress"
+          :buffer="buffer"
         />
       </div>
     </div>
@@ -73,8 +73,8 @@ const showContent = computed(() => props.shape !== 'line')
       />
       <slot
         v-if="showContent"
-        :progress="props.progress"
-        :buffer="props.buffer"
+        :progress="progress"
+        :buffer="buffer"
       />
     </div>
   </div>

@@ -137,7 +137,7 @@ watch(() => props.modelValue, (newValue) => {
         :for="inputId"
         :class="s.label({ class: styleSlots?.label })"
       >
-        {{ props.label }}
+        {{ label }}
       </label>
       <span
         v-if="type === 'number'"

@@ -13,8 +13,7 @@ const props = withDefaults(defineProps<BreadcrumbsProps>(), {
   shape: 'soft',
   separator: '>',
   crumbs: () => [],
-  condensed: false,
-  styleSlots: undefined
+  condensed: false
 })
 
 const emit = defineEmits(['crumbClick'])
@@ -88,11 +87,11 @@ const selectIcon = (separator: string) => separator.length > 2
           :class="s.separator({ class: styleSlots?.separator })"
           aria-hidden="true"
         >
-          <template v-if="selectIcon(props.separator)">
-            <vk-icon :name="props.separator" />
+          <template v-if="selectIcon(separator)">
+            <vk-icon :name="separator" />
           </template>
           <template v-else>
-            {{ props.separator }}
+            {{ separator }}
           </template>
         </span>
       </li>

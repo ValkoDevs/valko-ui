@@ -228,12 +228,11 @@ const extraProps = ':items="menuItems"'
 
 onMounted(() => {
   const setFirstItemActive = (options: SelectOption[], menuPrefix: string) => {
-    if (!options[0]?.value) return
+    if (!Array.isArray(options) || options.length === 0 || !options[0]?.value) return
+    const firstItemKey = options[0].value
     options.forEach((_, index) => {
-      const firstItemKey = options[0].value
       const menuKey = `${menuPrefix}-${index}`
       activeItemsList.value[menuKey] = firstItemKey
-
       const menuItem = menuItems.find(item => item.key === firstItemKey)
       if (menuItem) menuItem.active = true
     })
@@ -244,7 +243,7 @@ onMounted(() => {
   setFirstItemActive(shapeOptions.general, 'shape-menu')
   setFirstItemActive(sizeOptions.general, 'size-menu')
 
-  if (menuItems.length > 0) {
+  if (Array.isArray(menuItems) && menuItems.length > 0 && menuItems[0]?.key) {
     const firstPlaygroundItemKey = menuItems[0].key
     activeItem.value = firstPlaygroundItemKey
     const firstPlaygroundItem = menuItems.find(item => item.key === firstPlaygroundItemKey)

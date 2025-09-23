@@ -13,8 +13,7 @@ const props = withDefaults(defineProps<AlertProps>(), {
   size: 'md',
   shape: 'soft',
   icon: '',
-  closable: false,
-  styleSlots: undefined
+  closable: false
 })
 
 const emit = defineEmits(['close'])
@@ -51,7 +50,7 @@ const ariaLive = computed(() => {
     :class="s.container({ class: styleSlots?.container })"
     :role="ariaRole"
     :aria-live="ariaLive"
-    :aria-label="props.title ? titleId : props['aria-label']"
+    :aria-label="title ? titleId : props['aria-label']"
     :aria-labelledby="props['aria-labelledby']"
   >
     <vk-icon
@@ -62,11 +61,11 @@ const ariaLive = computed(() => {
 
     <div :class="s.contentContainer({ class: styleSlots?.contentContainer })">
       <h6
-        v-if="props.title"
+        v-if="title"
         :id="titleId"
         :class="s.title({ class: styleSlots?.title })"
       >
-        {{ props.title }}
+        {{ title }}
       </h6>
 
       <p :class="s.content({ class: styleSlots?.content })">

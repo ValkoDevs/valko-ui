@@ -17,8 +17,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   disabled: false,
   condensed: false,
   loading: false,
-  type: 'button',
-  styleSlots: undefined
+  type: 'button'
 })
 
 const emit = defineEmits(['click'])
@@ -45,10 +44,10 @@ const onMouseDown = (event: MouseEvent | TouchEvent) => {
   <button
     ref="buttonRef"
     :class="s.button({ class: styleSlots?.button })"
-    :disabled="props.disabled"
-    :aria-disabled="props.disabled"
+    :disabled="disabled"
+    :aria-disabled="disabled"
     :aria-label="props['aria-label']"
-    :type="props.type"
+    :type="type"
     @click="onClick"
     @mousedown="onMouseDown"
     @touchstart="onMouseDown"
@@ -64,12 +63,14 @@ const onMouseDown = (event: MouseEvent | TouchEvent) => {
         leave-to-class="opacity-0"
       >
         <vk-spinner
-          v-if="props.loading"
+          v-if="loading"
           condensed
-          :data-variant="props.variant"
-          :style-slots="{ icon: [s.spinner({ class: styleSlots?.spinner })] }"
-          :size="props.size"
-          :color="props.color"
+          :style-slots="{
+            icon: [s.spinnerIcon({ class: styleSlots?.spinnerIcon })],
+            container: [s.spinner({ class: styleSlots?.spinner })]
+          }"
+          :size="size"
+          :color="color"
           role="status"
           aria-live="polite"
           aria-label="Loading..."

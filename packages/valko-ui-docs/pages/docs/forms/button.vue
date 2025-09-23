@@ -124,7 +124,7 @@ const styleSlotsInterface: TableItem[] = [
     key: 'spinnerContainer',
     prop: 'spinnerContainer',
     required: false,
-    description: 'Styles for the spinner container element.',
+    description: 'Styles for the div containing the spinner.',
     values: 'string[]',
     default: ''
   },
@@ -132,7 +132,15 @@ const styleSlotsInterface: TableItem[] = [
     key: 'spinner',
     prop: 'spinner',
     required: false,
-    description: 'Styles for the spinner component itself.',
+    description: 'Styles for the spinner itself.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'spinnerIcon',
+    prop: 'spinnerIcon',
+    required: false,
+    description: 'Styles for the spinner icon.',
     values: 'string[]',
     default: ''
   },
