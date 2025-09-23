@@ -4,4 +4,5 @@
 
 ## Valko-UI Components:
 
-- Fix `useRipple` composable to allow ripple animation to complete before cleanup.
+- Fix `useRipple` composable to remove ripple only after both animation and user interaction have ended.
+- Update and improve ripple tests.
