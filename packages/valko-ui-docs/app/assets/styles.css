@@ -1,4 +1,4 @@
-@import "../../../node_modules/@valko-ui/components/dist/valkoui.css";
+@import "../../../../node_modules/@valko-ui/components/dist/valkoui.css";
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
 
@@ -7,7 +7,7 @@
   --font-serif: "Crimson Pro", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
-@source "../../valko-ui-components/dist";
+@source "../../../valko-ui-components/dist";
 @custom-variant dark (&:where(.dark, .dark *));
 
 pre code.hljs {
