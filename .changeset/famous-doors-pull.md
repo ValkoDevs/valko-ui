@@ -4,4 +4,4 @@
 
 ## Valko-UI Docs
 
-- Updated Nuxt dependency to v4.
+- Migrate to Nuxt v4 with new `app/` directory structure.
