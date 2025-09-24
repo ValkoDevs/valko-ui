@@ -98,6 +98,38 @@ const popoverProps: TableItem[] = [
     description: 'ID of the element that describes the popover’s content.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Popover.',
+    values: 'PopoverSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the Popover.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'slotContainer',
+    prop: 'slotContainer',
+    description: 'Container for the trigger slot (the element that opens the popover).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panel',
+    prop: 'panel',
+    description: 'Panel element that displays the popover content.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -146,6 +178,21 @@ const generateSnippet = snippetGeneratorFactory('vk-popover')
 const customSlot = '<vk-button\n      @click="togglePopover(\'popoverId\')"\n    >\n      Slot Content\n    </vk-button>'
 
 const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(\'popoverId\')"'
+
+const styles = generateStyles({
+  shapes: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ],
+  placements: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(5,_minmax(0,_max-content))]'
+  ],
+  alignments: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ]
+})
 </script>
 
 <template>
@@ -202,7 +249,7 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
     <template #examples>
       <example-section
         title="Shapes"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        :style-slots="styles.shapes"
       >
         <vk-popover
           v-for="shape in shapeOptions.general"
@@ -223,8 +270,8 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
       </example-section>
 
       <example-section
-        title="Placement"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(5,_minmax(0,_max-content))]"
+        title="Placements"
+        :style-slots="styles.placements"
       >
         <vk-popover
           v-for="placement in placementOptions.withAuto"
@@ -245,8 +292,8 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
       </example-section>
 
       <example-section
-        title="Alignment"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        title="Alignments"
+        :style-slots="styles.alignments"
       >
         <vk-popover
           v-for="alignment in alignmentOptions"
@@ -289,6 +336,12 @@ const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(
       <vk-table
         :headers="propHeaders"
         :data="popoverProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Popover Emits</h3>

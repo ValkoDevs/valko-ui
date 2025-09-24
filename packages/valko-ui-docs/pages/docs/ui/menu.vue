@@ -71,6 +71,45 @@ const menuProps: TableItem[] = [
     description: 'The Menu items.',
     values: 'MenuItem[]',
     default: '[]'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Menu.',
+    values: 'MenuStyleSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'group',
+    prop: 'group',
+    description: 'Styles for the group label (if grouping is used).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'menu',
+    prop: 'menu',
+    description: 'Styles for the menu container (the <ul> element).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'item',
+    prop: 'item',
+    description: 'Styles for each menu item container (<li> element).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    description: 'Styles for the menu item content/button.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -189,11 +228,11 @@ const extraProps = ':items="menuItems"'
 
 onMounted(() => {
   const setFirstItemActive = (options: SelectOption[], menuPrefix: string) => {
+    if (!Array.isArray(options) || options.length === 0 || !options[0]?.value) return
+    const firstItemKey = options[0].value
     options.forEach((_, index) => {
-      const firstItemKey = options[0].value
       const menuKey = `${menuPrefix}-${index}`
       activeItemsList.value[menuKey] = firstItemKey
-
       const menuItem = menuItems.find(item => item.key === firstItemKey)
       if (menuItem) menuItem.active = true
     })
@@ -204,12 +243,19 @@ onMounted(() => {
   setFirstItemActive(shapeOptions.general, 'shape-menu')
   setFirstItemActive(sizeOptions.general, 'size-menu')
 
-  const firstPlaygroundItemKey = menuItems[0].key
-  activeItem.value = firstPlaygroundItemKey
+  if (Array.isArray(menuItems) && menuItems.length > 0 && menuItems[0]?.key) {
+    const firstPlaygroundItemKey = menuItems[0].key
+    activeItem.value = firstPlaygroundItemKey
+    const firstPlaygroundItem = menuItems.find(item => item.key === firstPlaygroundItemKey)
+    if (firstPlaygroundItem) firstPlaygroundItem.active = true
+  }
+})
 
-  const firstPlaygroundItem = menuItems.find(item => item.key === firstPlaygroundItemKey)
-
-  if (firstPlaygroundItem) firstPlaygroundItem.active = true
+const styles = generateStyles({
+  default: [
+    'grid-cols-2',
+    'md:grid-cols-3'
+  ]
 })
 </script>
 
@@ -264,14 +310,14 @@ onMounted(() => {
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-menu
           v-for="(color, index) in colorOptions.general"
           :key="`color-menu-${index}`"
           :items="generateMenuItems(colorOptions.general, color.label)"
           :color="color.value"
-          :active="activeItemsList[`color-menu-${index}`]"
+          :active="activeItemsList[`color-menu-${index}`] ?? ''"
           @item-click="(item: MenuItem) => onItemClick(item, `color-menu-${index}`)"
         />
 
@@ -282,14 +328,14 @@ onMounted(() => {
 
       <example-section
         title="Variants"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-menu
           v-for="(variant, index) in variantOptions.withGradientLinkAndLine"
           :key="`variant-menu-${index}`"
           :items="generateMenuItems(variantOptions.withGradientLinkAndLine, variant.label)"
           :variant="variant.value"
-          :active="activeItemsList[`variant-menu-${index}`]"
+          :active="activeItemsList[`variant-menu-${index}`] ?? ''"
           @item-click="(item: MenuItem) => onItemClick(item, `variant-menu-${index}`)"
         />
 
@@ -300,14 +346,14 @@ onMounted(() => {
 
       <example-section
         title="Shapes"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-menu
           v-for="(shape, index) in shapeOptions.general"
           :key="`shape-menu-${index}`"
           :items="generateMenuItems(shapeOptions.general, shape.label)"
           :shape="shape.value"
-          :active="activeItemsList[`shape-menu-${index}`]"
+          :active="activeItemsList[`shape-menu-${index}`] ?? ''"
           @item-click="(item: MenuItem) => onItemClick(item, `shape-menu-${index}`)"
         />
 
@@ -318,14 +364,14 @@ onMounted(() => {
 
       <example-section
         title="Sizes"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="{ slotContainer: ['grid-cols-2 md:grid-cols-3 lg:grid-cols-4'] }"
       >
         <vk-menu
           v-for="(size, index) in sizeOptions.general"
           :key="`size-menu-${index}`"
           :items="generateMenuItems(sizeOptions.general, size.label)"
           :size="size.value"
-          :active="activeItemsList[`size-menu-${index}`]"
+          :active="activeItemsList[`size-menu-${index}`] ?? ''"
           @item-click="(item: MenuItem) => onItemClick(item, `size-menu-${index}`)"
         />
 
@@ -371,6 +417,12 @@ onMounted(() => {
       <vk-table
         :headers="slotHeaders"
         :data="menuSlots"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

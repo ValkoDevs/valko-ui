@@ -72,6 +72,14 @@ const cardProps: TableItem[] = [
     description: 'Applies a shadow and lowers the background tone to emphasize interactive content inside the Card. Useful when the Card contains inputs or other elevated elements.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Root container.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -107,6 +115,74 @@ const cardImageProps: TableItem[] = [
     description: 'The height for the image.',
     values: 'string',
     default: 'auto'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for CardImage.',
+    values: 'CardImageSlots',
+    default: ''
+  }
+]
+
+const cardImageStyleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'imageTag',
+    prop: 'imageTag',
+    required: false,
+    description: 'Class shared with image slot and the image element itself.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'gradient',
+    prop: 'gradient',
+    required: false,
+    description: 'Styles for the gradient.',
+    values: 'string[]',
+    default: ''
+  }
+]
+
+const cardHeaderProps: TableItem[] = [
+  {
+    key: 'styleSlots',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Root container.',
+    values: 'string[]',
+    default: ''
+  }
+]
+
+const cardBodyProps: TableItem[] = [
+  {
+    key: 'styleSlots',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Root container.',
+    values: 'string[]',
+    default: ''
+  }
+]
+
+const cardFooterProps: TableItem[] = [
+  {
+    key: 'styleSlots',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Root container.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -145,7 +221,23 @@ const customSlot = `<vk-card-image :src="imgSrc" />
         Subtitle
       </h3>
       <p>Lorem</p>
-    </vk-card-body>`
+    </vk-card-body>
+`
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'xl:grid-cols-3'
+  ],
+  layout: [
+    'md:grid-cols-1',
+    'lg:grid-cols-2'
+  ],
+  sizes: [
+    'grid-cols-1',
+    'lg:grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -263,7 +355,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
     <template #examples>
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 xl:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-card
           v-for="variant in variantOptions.general"
@@ -293,7 +385,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 xl:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-card
           v-for="shape in shapeOptions.general"
@@ -322,7 +414,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
 
       <example-section
         title="Layout"
-        classes="md:grid-cols-1 lg:grid-cols-2"
+        :style-slots="styles.layout"
       >
         <vk-card
           v-for="layout in layoutOptions"
@@ -352,7 +444,7 @@ const customSlot = `<vk-card-image :src="imgSrc" />
 
       <example-section
         title="Sizes"
-        classes="grid-cols-1 lg:grid-cols-2"
+        :style-slots="styles.sizes"
       >
         <vk-card
           v-for="size in sizeOptions.general"
@@ -450,6 +542,30 @@ const customSlot = `<vk-card-image :src="imgSrc" />
       <vk-table
         :headers="propHeaders"
         :data="cardImageProps"
+      />
+
+      <h3>Card Image Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="cardImageStyleSlotsInterface"
+      />
+
+      <h3>Card Header Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="cardHeaderProps"
+      />
+
+      <h3>Card Body Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="cardBodyProps"
+      />
+
+      <h3>Card Footer Props</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="cardFooterProps"
       />
     </template>
   </doc-section>

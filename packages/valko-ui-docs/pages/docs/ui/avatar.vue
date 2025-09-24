@@ -80,6 +80,33 @@ const avatarProps: TableItem[] = [
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Avatar component.',
+    values: 'AvatarSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the avatar. Controls the overall layout and background.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'imageTag',
+    prop: 'imageTag',
+    required: false,
+    description: 'Styles for the avatar image element.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -101,6 +128,27 @@ const extraProps = {
   src: ':src="avatarSrc"'
 }
 
+const styles = generateStyles({
+  colors: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-7'
+  ],
+  variants: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  shapes: [
+    'grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ]
+})
 </script>
 
 <template>
@@ -158,7 +206,7 @@ const extraProps = {
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-7"
+        :style-slots="styles.colors"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -178,7 +226,7 @@ const extraProps = {
 
       <example-section
         title="Colors with Initials"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-7"
+        :style-slots="styles.colors"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -199,7 +247,7 @@ const extraProps = {
 
       <example-section
         title="Variants"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.variants"
       >
         <div
           v-for="variant in variantOptions.withGradient"
@@ -219,7 +267,7 @@ const extraProps = {
 
       <example-section
         title="Variants with Avatars"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.variants"
       >
         <div
           v-for="variant in variantOptions.withGradient"
@@ -240,7 +288,7 @@ const extraProps = {
 
       <example-section
         title="Shapes"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.shapes"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -260,7 +308,7 @@ const extraProps = {
 
       <example-section
         title="Sizes"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -295,10 +343,17 @@ const extraProps = {
         :headers="propHeaders"
         :data="avatarProps"
       />
+
       <h3>Avatar Slots</h3>
       <vk-table
         :headers="slotHeaders"
         :data="avatarSlots"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

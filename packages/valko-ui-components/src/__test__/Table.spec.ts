@@ -402,7 +402,7 @@ describe('Table component', () => {
         }
       })
 
-      wrapper.find('.vk-table__tr').trigger('click')
+      wrapper.find('.vk-table__td').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('onRowClick')
     })
 
@@ -415,7 +415,7 @@ describe('Table component', () => {
         }
       })
 
-      wrapper.find('.vk-table__tr').trigger('click')
+      wrapper.find('.vk-table__td').trigger('click')
       expect(wrapper.emitted()).not.toHaveProperty('onRowClick')
     })
   })
@@ -440,7 +440,7 @@ describe('Table component', () => {
         }
       })
 
-      const rows = wrapper.findAll('.vk-table__tr')
+      const rows = wrapper.findAll('.vk-table__td')
       const firstRow = rows[0]
       expect(firstRow.text()).toContain('headers')
     })

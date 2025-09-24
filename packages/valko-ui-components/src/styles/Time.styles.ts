@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const time = tv({
   slots: {
     container: [
       'vk-time',
@@ -76,4 +76,7 @@ export default tv({
       square: {}
     }
   }
-}) as unknown as ReturnType<TV>
+})
+
+export default time
+export type TimeSlots = typeof time.slots

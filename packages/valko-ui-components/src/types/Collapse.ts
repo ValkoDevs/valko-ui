@@ -1,4 +1,6 @@
 import type { DefaultComponent } from './common'
+import type { CollapseSlots } from '../styles/Collapse.styles'
+import type { CollapseItemSlots } from '../styles/CollapseItem.styles'
 
 export type Separator = 'line' | 'split' | 'none'
 
@@ -9,6 +11,7 @@ export type CollapseItemStates = {
 
 export interface CollapseItemProps {
   title?: string;
+  styleSlots?: Partial<CollapseItemSlots>;
 }
 
 export interface CollapseProps extends DefaultComponent {
@@ -16,4 +19,5 @@ export interface CollapseProps extends DefaultComponent {
   title?: string;
   compact?: boolean;
   multiple?: boolean;
+  styleSlots?: Partial<CollapseSlots>;
 }

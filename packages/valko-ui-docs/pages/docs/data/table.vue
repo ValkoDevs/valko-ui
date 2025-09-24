@@ -48,6 +48,80 @@ const tableProps: TableItem[] = [
     description: 'Allows rows to emit event onRowClick.',
     values: 'false, true',
     default: 'false'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Table component.',
+    values: 'TableSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the table component.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'table',
+    prop: 'table',
+    description: 'Styles for the <table> element.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'thead',
+    prop: 'thead',
+    description: 'Styles for the table header section.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'tr',
+    prop: 'tr',
+    description: 'Styles for table rows.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'th',
+    prop: 'th',
+    description: 'Styles for table header cells.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'body',
+    prop: 'body',
+    description: 'Styles for the table body section.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'td',
+    prop: 'td',
+    description: 'Styles for table data cells.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'noDataMessage',
+    prop: 'noDataMessage',
+    description: 'Styles for the no data message row.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'tableFooter',
+    prop: 'tableFooter',
+    description: 'Styles for the table footer section.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -342,6 +416,12 @@ const generateSnippet = snippetGeneratorFactory('vk-table')
       <vk-table
         :headers="propHeaders"
         :data="tableProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Table Item Props</h3>

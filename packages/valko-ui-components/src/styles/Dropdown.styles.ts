@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const dropdown = tv({
   slots: {
     container: [
       'vk-dropdown__container',
@@ -15,6 +15,9 @@ export default tv({
       'duration-200',
       'ease-out',
       'data-[open=true]:rotate-180'
+    ],
+    panel: [
+      'bg-surface-container'
     ],
     itemsMenu: [
       'p-2'
@@ -39,7 +42,8 @@ export default tv({
       'data-[disabled=true]:border-transparent'
     ],
     itemsIcon: [
-      'mr-2'
+      'mr-2',
+      'text-on-surface-variant'
     ]
   },
   variants: {
@@ -49,7 +53,8 @@ export default tv({
       positive: {},
       accent: {},
       warning: {},
-      negative: {}
+      negative: {},
+      surface: {}
     },
     size: {
       xs: {
@@ -164,6 +169,16 @@ export default tv({
         ]
       }
     },
+    {
+      variant: 'filled',
+      color: 'surface',
+      class: {
+        itemsButton: [
+          'hover:bg-on-surface/[.08]',
+          'hover:text-on-surface'
+        ]
+      }
+    },
     // outlined & color
     {
       variant: 'outlined',
@@ -222,6 +237,16 @@ export default tv({
         itemsButton: [
           'hover:text-negative',
           'hover:border-negative'
+        ]
+      }
+    },
+    {
+      variant: 'outlined',
+      color: 'surface',
+      class: {
+        itemsButton: [
+          'hover:text-on-surface-variant',
+          'hover:border-outlined'
         ]
       }
     },
@@ -286,6 +311,16 @@ export default tv({
         ]
       }
     },
+    {
+      variant: 'ghost',
+      color: 'surface',
+      class: {
+        itemsButton: [
+          'hover:bg-on-surface/[.08]',
+          'hover:text-on-surface-variant'
+        ]
+      }
+    },
     // link & color
     {
       variant: 'link',
@@ -338,6 +373,15 @@ export default tv({
       class: {
         itemsButton: [
           'hover:text-negative'
+        ]
+      }
+    },
+    {
+      variant: 'link',
+      color: 'surface',
+      class: {
+        itemsButton: [
+          'hover:text-on-surface'
         ]
       }
     },
@@ -407,6 +451,20 @@ export default tv({
           'hover:text-on-negative'
         ]
       }
+    },
+    {
+      variant: 'gradient',
+      color: 'surface',
+      class: {
+        itemsButton: [
+          'hover:from-surface-container',
+          'hover:to-surface-container-highest',
+          'hover:text-on-surface'
+        ]
+      }
     }
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default dropdown
+export type DropdownSlots = typeof dropdown.slots

@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, computed } from 'vue'
 import type { TimepickerProps } from '#valkoui/types/Timepicker'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Timepicker.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkInput from './Input.vue'
 import VkTime from './Time.vue'
 import VkIcon from './Icon.vue'
@@ -21,7 +19,7 @@ const props = withDefaults(defineProps<TimepickerProps>(), {
 
 const emit = defineEmits(['onSelect', 'open', 'close'])
 
-const classes = useStyle<TimepickerProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 
 const rootRef = ref<HTMLElement | null>(null)
 
@@ -38,13 +36,13 @@ onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside,
 <template>
   <div
     ref="rootRef"
-    :class="classes.container"
+    :class="s.container({ class: styleSlots?.container })"
   >
     <vk-input
       v-bind="props"
       :model-value="parsedModel"
       :label="label"
-      :class="classes.input"
+      :class="s.input({ class: styleSlots?.input })"
       readonly
       @focus="emit('open')"
       @right-icon-click="emit('open')"
@@ -64,7 +62,7 @@ onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside,
     >
       <div
         v-if="isOpen"
-        :class="classes.content"
+        :class="s.content({ class: styleSlots?.content })"
       >
         <vk-time
           v-if="isOpen"

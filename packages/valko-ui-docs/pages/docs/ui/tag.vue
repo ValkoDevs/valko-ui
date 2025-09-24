@@ -98,6 +98,59 @@ const tagProps: TableItem[] = [
     description: 'Disables interaction with the Tag.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Tag.',
+    values: 'TagSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the tag component.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'contentContainer',
+    prop: 'contentContainer',
+    description: 'Wrapper for the tag content and icons.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icons',
+    prop: 'icons',
+    description: 'Styles for left and right icons.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    description: 'Text content of the tag.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeButton',
+    prop: 'closeButton',
+    description: 'Styles for the close button container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeIcon',
+    prop: 'closeIcon',
+    description: 'Icon for the close button.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -152,6 +205,23 @@ const iconSnippet = `<template>
 `
 
 const extraProps = 'text="Content"'
+
+const styles = generateStyles({
+  colors: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-7'
+  ],
+  shapes: [
+    'grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  default: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ]
+})
 </script>
 
 <template>
@@ -241,7 +311,7 @@ const extraProps = 'text="Content"'
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-7"
+        :style-slots="styles.colors"
       >
         <vk-tag
           v-for="color in colorOptions.withSurface"
@@ -257,7 +327,7 @@ const extraProps = 'text="Content"'
 
       <example-section
         title="Variants"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.default"
       >
         <vk-tag
           v-for="variant in variantOptions.withGradient"
@@ -273,7 +343,7 @@ const extraProps = 'text="Content"'
 
       <example-section
         title="Shapes"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.shapes"
       >
         <vk-tag
           v-for="shape in shapeOptions.general"
@@ -289,7 +359,7 @@ const extraProps = 'text="Content"'
 
       <example-section
         title="Sizes"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.default"
       >
         <vk-tag
           v-for="size in sizeOptions.general"
@@ -305,7 +375,7 @@ const extraProps = 'text="Content"'
 
       <example-section
         title="Icons"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.default"
       >
         <vk-tag
           text="Without Icons"
@@ -380,6 +450,12 @@ const extraProps = 'text="Content"'
       <vk-table
         :headers="propHeaders"
         :data="tagProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Tag Emits</h3>

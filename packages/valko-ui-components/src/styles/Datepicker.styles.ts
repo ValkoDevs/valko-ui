@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const datePicker = tv({
   slots: {
     container: [
       'vk-datepicker',
@@ -56,4 +56,7 @@ export default tv({
       }
     }
   }
-}) as unknown as ReturnType<TV>
+})
+
+export default datePicker
+export type DatePickerSlots = typeof datePicker.slots

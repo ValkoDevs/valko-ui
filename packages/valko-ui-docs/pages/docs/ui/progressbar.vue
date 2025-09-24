@@ -78,6 +78,59 @@ const progressbarProps: TableItem[] = [
     description: 'Wheter the Progressbar is striped or not.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Progressbar.',
+    values: 'progressbarSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the Progressbar.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'background',
+    prop: 'background',
+    description: 'Background bar element.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'buffer',
+    prop: 'buffer',
+    description: 'Buffer bar element (shows buffered progress).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    description: 'Content area for slot content inside the bar.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'progress',
+    prop: 'progress',
+    description: 'Progress bar element (shows current progress).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'stripes',
+    prop: 'stripes',
+    description: 'Stripes overlay for striped progress bars.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -91,6 +144,18 @@ const progressbarSlots: TableItem[] = [
 ]
 
 const generateSnippet = snippetGeneratorFactory('vk-progressbar')
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  defaultAlt: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ]
+})
 </script>
 
 <template>
@@ -164,7 +229,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-progressbar
           v-for="color in colorOptions.general"
@@ -182,7 +247,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.defaultAlt"
       >
         <vk-progressbar
           v-for="variant in variantOptions.withGradient"
@@ -200,7 +265,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.defaultAlt"
       >
         <vk-progressbar
           v-for="shape in shapeOptions.withLine"
@@ -218,7 +283,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.defaultAlt"
       >
         <vk-progressbar
           v-for="size in sizeOptions.general"
@@ -246,7 +311,7 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
 
       <example-section
         title="Stripped"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-progressbar
           v-for="color in colorOptions.general"
@@ -301,6 +366,12 @@ const generateSnippet = snippetGeneratorFactory('vk-progressbar')
       <vk-table
         :headers="slotHeaders"
         :data="progressbarSlots"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

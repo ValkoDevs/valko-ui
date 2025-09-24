@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, computed } from 'vue'
 import type { DatepickerProps } from '#valkoui/types/Datepicker'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Datepicker.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkInput from './Input.vue'
 import VkCalendar from './Calendar.vue'
 import VkIcon from './Icon.vue'
@@ -21,7 +19,7 @@ const props = withDefaults(defineProps<DatepickerProps>(), {
 
 const emit = defineEmits(['update:modelValue', 'open', 'close'])
 
-const classes = useStyle<DatepickerProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 
 const rootRef = ref<HTMLElement | null>(null)
 
@@ -32,13 +30,13 @@ const handleClickOutside = (event: MouseEvent) => {
 }
 
 onMounted(() => nextTick(() => document.addEventListener('mousedown', handleClickOutside, true)))
-onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside, true))
+onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutside, true))
 </script>
 
 <template>
   <div
     ref="rootRef"
-    :class="classes.container"
+    :class="s.container({ class: styleSlots?.container })"
   >
     <vk-input
       v-bind="props"
@@ -64,7 +62,7 @@ onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside,
     >
       <div
         v-show="isOpen"
-        :class="classes.content"
+        :class="s.content({ class: styleSlots?.content })"
       >
         <vk-calendar
           v-if="isOpen"

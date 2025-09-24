@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import useStyle from '#valkoui/composables/useStyle.ts'
+import { computed } from 'vue'
 import styles from '#valkoui/styles/CardBody.styles.ts'
+import type { CardBodyProps } from '#valkoui/types/Card'
 
 defineOptions({ name: 'VkCardBody' })
 
-const classes = useStyle({}, styles)
+const props = defineProps<CardBodyProps>()
+
+const s = computed(() => styles({ ...props, class: props.styleSlots }))
 </script>
 
 <template>
-  <div
-    :class="classes"
-  >
+  <div :class="s">
     <slot />
   </div>
 </template>

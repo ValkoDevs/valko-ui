@@ -150,6 +150,14 @@ const rangeProps: TableItem[] = [
     description: 'ID reference to an element that further describes the range, such as helper or error text.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Range component.',
+    values: 'RangeSlots',
+    default: ''
   }
 ]
 
@@ -181,6 +189,65 @@ const labelsInterface: TableItem[] = [
   }
 ]
 
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the range slider.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'progressContainer',
+    prop: 'progressContainer',
+    description: 'Container for the progress bar and step marks.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'progress',
+    prop: 'progress',
+    description: 'Progress bar element showing the selected range.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'stepMark',
+    prop: 'stepMark',
+    description: 'Step mark indicator for each step on the slider.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'thumbContainer',
+    prop: 'thumbContainer',
+    description: 'Container for the slider thumbs.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'thumb',
+    prop: 'thumb',
+    description: 'Slider thumb element (draggable handle).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'labelContainer',
+    prop: 'labelContainer',
+    description: 'Container for custom labels below the slider.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'label',
+    prop: 'label',
+    description: 'Custom label element for the slider.',
+    values: 'string[]',
+    default: ''
+  }
+]
+
 watch([() => form.min, () => form.max, () => form.step], () => {
   form.labels = generateLabels()
 })
@@ -188,6 +255,31 @@ watch([() => form.min, () => form.max, () => form.step], () => {
 form.labels = generateLabels()
 
 const generateSnippet = snippetGeneratorFactory('vk-range')
+
+const styles = generateStyles({
+  colors: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  variants: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  shapes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  stripes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ]
+})
 </script>
 
 <template>
@@ -280,7 +372,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.colors"
       >
         <div
           v-for="color in colorOptions.general"
@@ -300,7 +392,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.variants"
       >
         <div
           v-for="variant in variantOptions.withGradient"
@@ -317,7 +409,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.shapes"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -334,7 +426,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -370,7 +462,7 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
 
       <example-section
         title="Striped"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.stripes"
       >
         <div
           v-for="color in colorOptions.general"
@@ -394,6 +486,12 @@ const generateSnippet = snippetGeneratorFactory('vk-range')
       <vk-table
         :headers="propHeaders"
         :data="rangeProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Label Interface</h3>

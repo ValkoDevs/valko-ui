@@ -149,6 +149,73 @@ const apiData: TableItem[] = [
     description: 'References the ID of the element that provides a description for the radio.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Radio component.',
+    values: 'RadioSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the radio component.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'radioContainer',
+    prop: 'radioContainer',
+    description: 'Container for the radio input and label.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'stateLayer',
+    prop: 'stateLayer',
+    description: 'Layer for visual state effects (focus, hover, etc).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'radio',
+    prop: 'radio',
+    description: 'The visual representation of the radio button.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    description: 'Icon shown when the radio is checked.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'input',
+    prop: 'input',
+    description: 'Native radio input element (hidden since we use a custom radio).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'label',
+    prop: 'label',
+    description: 'Label for the radio input.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'helpertext',
+    prop: 'helpertext',
+    description: 'Helper text displayed below the radio.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -169,6 +236,23 @@ const radios = [
 ]
 
 const generateSnippet = snippetGeneratorFactory('vk-radio')
+
+const styles = generateStyles({
+  colors: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-6'
+  ],
+  default: [
+    'grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ]
+})
 </script>
 
 <template>
@@ -246,7 +330,7 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        :style-slots="styles.colors"
       >
         <vk-radio
           v-for="color in colorOptions.general"
@@ -265,7 +349,7 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
 
       <example-section
         title="Variants"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-radio
           v-for="variant in variantOptions.general"
@@ -284,7 +368,7 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
 
       <example-section
         title="Shapes"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-radio
           v-for="shape in shapeOptions.general"
@@ -303,7 +387,7 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
 
       <example-section
         title="Sizes"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <vk-radio
           v-for="size in sizeOptions.general"
@@ -351,6 +435,12 @@ const generateSnippet = snippetGeneratorFactory('vk-radio')
       <vk-table
         :headers="propHeaders"
         :data="apiData"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Radio Emits</h3>

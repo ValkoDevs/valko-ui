@@ -84,6 +84,38 @@ const paginationProps: TableItem[] = [
     description: 'Accessible label for the pagination.',
     values: 'string',
     default: 'Pagination'
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Pagination component.',
+    values: 'PaginationSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'nav',
+    prop: 'nav',
+    description: 'Styles for the navigation container (<nav> element).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'button',
+    prop: 'button',
+    description: 'Styles for each page button.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'arrows',
+    prop: 'arrows',
+    description: 'Styles for the previous/next arrow icons.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -98,6 +130,17 @@ const paginationEmits: TableItem[] = [
 ]
 
 const generateSnippet = snippetGeneratorFactory('vk-pagination')
+
+const styles = generateStyles({
+  grid: [
+    'md:grid-cols-2',
+    'xl:grid-cols-3',
+    'overflow-x-auto'
+  ],
+  gridAlt: [
+    'overflow-x-auto'
+  ]
+})
 </script>
 
 <template>
@@ -162,7 +205,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
     <template #examples>
       <example-section
         title="Colors"
-        classes="md:grid-cols-2 xl:grid-cols-3 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -184,7 +227,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
       <example-section
         title="Variants"
-        classes="md:grid-cols-2 xl:grid-cols-3 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="variant in variantOptions.general"
@@ -206,7 +249,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
       <example-section
         title="Shapes"
-        classes="md:grid-cols-2 xl:grid-cols-3 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -228,7 +271,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
       <example-section
         title="Sizes"
-        classes="md:grid-cols-2 xl:grid-cols-3 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -249,7 +292,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
       <example-section
         title="Elevated"
-        class="overflow-x-auto"
+        :style-slots="styles.gridAlt"
       >
         <vk-pagination
           v-model="form.modelValue"
@@ -264,7 +307,7 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
       <example-section
         title="Disabled"
-        class="overflow-x-auto"
+        :style-slots="styles.gridAlt"
       >
         <vk-pagination
           v-model="form.modelValue"
@@ -283,6 +326,12 @@ const generateSnippet = snippetGeneratorFactory('vk-pagination')
       <vk-table
         :headers="propHeaders"
         :data="paginationProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Pagination Emits</h3>

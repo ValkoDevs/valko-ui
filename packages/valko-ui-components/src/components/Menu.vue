@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref, computed, watch, nextTick } from 'vue'
 import type { MenuProps, MenuItem } from '#valkoui/types/Menu'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Menu.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 
 defineOptions({ name: 'VkMenu' })
 
@@ -17,7 +15,7 @@ const props = withDefaults(defineProps<MenuProps>(), {
 
 const emit = defineEmits(['itemClick'])
 
-const classes = useStyle<MenuProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 
 const groups = props.items.reduce((acc: Set<string>, item: MenuItem) => {
   if (item.group) acc.add(item.group)
@@ -87,20 +85,20 @@ const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
     >
       <span
         v-if="group !== 'default'"
-        :class="classes.group"
+        :class="s.group({ class: styleSlots?.group })"
         role="presentation"
       >
         {{ group }}
       </span>
       <ul
-        :class="classes.menu"
+        :class="s.menu({ class: styleSlots?.menu })"
         role="menu"
         :aria-label="group !== 'default' ? group : 'Menu'"
       >
         <li
-          v-for="item in props.items.filter(i => i.group === group)"
+          v-for="item in items.filter(i => i.group === group)"
           :key="item.key"
-          :class="classes.item"
+          :class="s.item({ class: styleSlots?.item })"
           role="none"
         >
           <slot
@@ -108,8 +106,8 @@ const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
             :item="item"
           >
             <button
-              :class="classes.content"
-              :data-active="item.key === props.active"
+              :class="s.content({ class: styleSlots?.content })"
+              :data-active="item.key === active"
               :data-disabled="item.disabled"
               :aria-disabled="item.disabled || undefined"
               role="menuitem"

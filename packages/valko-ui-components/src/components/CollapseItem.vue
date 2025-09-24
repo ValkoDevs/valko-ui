@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { useId, inject } from 'vue'
+import { useId, inject, computed } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import type { CollapseItemProps, CollapseItemStates } from '#valkoui/types/Collapse'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/CollapseItem.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkIcon from './Icon.vue'
 
 defineOptions({ name: 'VkCollapseItem' })
 
 const props = defineProps<CollapseItemProps>()
 
-const classes = useStyle<CollapseItemProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 
 const {
   items = {},
@@ -25,10 +23,10 @@ const itemId = useId()
   <disclosure
     as="div"
     :key="itemId"
-    :class="classes.collapse"
+    :class="s.collapseItem({ class: styleSlots?.collapseItem })"
   >
     <disclosure-button
-      :class="classes.button"
+      :class="s.button({ class: styleSlots?.button })"
       @click="toggleItem(itemId)"
     >
       <slot name="title">
@@ -37,7 +35,8 @@ const itemId = useId()
         </div>
         <vk-icon
           name="chevron-left"
-          :class="`${classes.icon} ${itemId && items[itemId] ? classes.iconOpen : ''}`"
+          :data-open="itemId && items[itemId]"
+          :class="s.icon({ class: styleSlots?.icon })"
         />
       </slot>
     </disclosure-button>
@@ -52,7 +51,7 @@ const itemId = useId()
       <disclosure-panel
         v-if="itemId && items[itemId]"
         static
-        :class="classes.panel"
+        :class="s.panel({ class: styleSlots?.panel })"
       >
         <slot />
       </disclosure-panel>

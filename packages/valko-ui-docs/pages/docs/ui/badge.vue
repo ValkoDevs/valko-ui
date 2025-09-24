@@ -95,6 +95,14 @@ const badgeProps: TableItem[] = [
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Slots for applying custom styles to the Badge.',
+    values: 'BadgeSlots',
+    default: ''
   }
 ]
 
@@ -107,6 +115,25 @@ const badgeSlots: TableItem[] = [
   }
 ]
 
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the badge. Controls the overall layout and background.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'badge',
+    prop: 'badge',
+    required: false,
+    description: 'Styles for the badge element itself.',
+    values: 'string[]',
+    default: ''
+  }
+]
+
 const generateSnippet = snippetGeneratorFactory('vk-badge')
 
 const customSlot = '<vk-avatar\n      :src="src"\n      color="surface"\n    />'
@@ -114,6 +141,32 @@ const extraProps = {
   content: 'content="new"',
   dot: 'dot'
 }
+
+const styles = generateStyles({
+  colors: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-7'
+  ],
+  variants: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-6'
+  ],
+  shapes: [
+    'grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  default: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  alignments: [
+    'grid-cols-2',
+    'lg:grid-cols-3'
+  ]
+})
 </script>
 
 <template>
@@ -194,7 +247,7 @@ const extraProps = {
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-7"
+        :style-slots="styles.colors"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -220,7 +273,7 @@ const extraProps = {
 
       <example-section
         title="Variants"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        :style-slots="styles.variants"
       >
         <div
           v-for="variant in variantOptions.withGradient"
@@ -246,7 +299,7 @@ const extraProps = {
 
       <example-section
         title="Shapes"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.shapes"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -272,7 +325,7 @@ const extraProps = {
 
       <example-section
         title="Sizes"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.default"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -298,7 +351,7 @@ const extraProps = {
 
       <example-section
         title="Placements"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.default"
       >
         <div
           v-for="placement in placementOptions.general"
@@ -324,7 +377,7 @@ const extraProps = {
 
       <example-section
         title="Alignments"
-        classes="grid-cols-2 lg:grid-cols-3"
+        :style-slots="styles.alignments"
       >
         <div
           v-for="alignment in alignmentOptions"
@@ -366,7 +419,7 @@ const extraProps = {
 
       <example-section
         title="Dot"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.default"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -411,6 +464,12 @@ const extraProps = {
       <vk-table
         :headers="propHeaders"
         :data="badgeProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Badge Slots</h3>

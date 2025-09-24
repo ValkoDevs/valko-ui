@@ -265,6 +265,33 @@ const datepickerProps: TableItem[] = [
     description: 'Indicates that user input is required on the datepicker.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Datepicker component.',
+    values: 'DatepickerSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the datepicker.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    required: false,
+    description: 'Dropdown/calendar content container.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -554,6 +581,30 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
   />
 </template>
 `
+
+const styles = generateStyles({
+  colors: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-6'
+  ],
+  variants: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  shapes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  dates: [
+    'md:grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -639,7 +690,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        :style-slots="styles.colors"
       >
         <vk-datepicker
           v-for="color in colorOptions.withSurface"
@@ -650,7 +701,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
           :adapter="adapter"
           :color="color.value"
           :parsed-model="parsedModel"
-          :is-open="datePickerStates[color.value]"
+          :is-open="datePickerStates[color.value] ?? false"
           @open="() => datePickerStates[color.value] = true"
           @close="() => datePickerStates[color.value] = false"
         />
@@ -662,7 +713,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.variants"
       >
         <vk-datepicker
           v-for="variant in variantOptions.general"
@@ -673,7 +724,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
           :adapter="adapter"
           :variant="variant.value"
           :parsed-model="parsedModel"
-          :is-open="datePickerStates[variant.value]"
+          :is-open="datePickerStates[variant.value] ?? false"
           @open="() => datePickerStates[variant.value] = true"
           @close="() => datePickerStates[variant.value] = false"
         />
@@ -685,7 +736,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.shapes"
       >
         <vk-datepicker
           v-for="shape in shapeOptions.general"
@@ -696,7 +747,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
           :adapter="adapter"
           :shape="shape.value"
           :parsed-model="parsedModel"
-          :is-open="datePickerStates[shape.value]"
+          :is-open="datePickerStates[shape.value] ?? false"
           @open="() => datePickerStates[shape.value] = true"
           @close="() => datePickerStates[shape.value] = false"
         />
@@ -708,7 +759,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <vk-datepicker
           v-for="size in sizeOptions.general"
@@ -719,7 +770,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
           :adapter="adapter"
           :size="size.value"
           :parsed-model="parsedModel"
-          :is-open="datePickerStates[size.value]"
+          :is-open="datePickerStates[size.value] ?? false"
           @open="() => datePickerStates[size.value] = true"
           @close="() => datePickerStates[size.value] = false"
         />
@@ -735,7 +786,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
           label="Min Date"
           :adapter="minAdapter"
           :parsed-model="minParsedModel"
-          :is-open="datePickerStates['minDate']"
+          :is-open="datePickerStates['minDate'] ?? false"
           @open="() => datePickerStates['minDate'] = true"
           @close="() => datePickerStates['minDate'] = false"
         />
@@ -745,7 +796,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
           label="Max Date"
           :adapter="maxAdapter"
           :parsed-model="maxParsedModel"
-          :is-open="datePickerStates['maxDate']"
+          :is-open="datePickerStates['maxDate'] ?? false"
           @open="() => datePickerStates['maxDate'] = true"
           @close="() => datePickerStates['maxDate'] = false"
         />
@@ -762,7 +813,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
           :adapter="adapter"
           :parsed-model="parsedModel"
           disable-weekends
-          :is-open="datePickerStates['disable-weekends']"
+          :is-open="datePickerStates['disable-weekends'] ?? false"
           @open="() => datePickerStates['disable-weekends'] = true"
           @close="() => datePickerStates['disable-weekends'] = false"
         />
@@ -774,14 +825,14 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
 
       <example-section
         title="Disabled Dates"
-        classes="md:grid-cols-2"
+        :style-slots="styles.dates"
       >
         <vk-datepicker
           v-model="disabledModel"
           label="Disabled Dates"
           :adapter="disabledAdapter"
           :parsed-model="disabledParsedModel"
-          :is-open="datePickerStates['disabled']"
+          :is-open="datePickerStates['disabled'] ?? false"
           @open="() => datePickerStates['disabled'] = true"
           @close="() => datePickerStates['disabled'] = false"
         />
@@ -810,6 +861,12 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
       <vk-table
         :headers="propHeaders"
         :data="datepickerProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Datepicker Emits</h3>

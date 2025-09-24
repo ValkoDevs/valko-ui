@@ -2,8 +2,7 @@
 import { type Ref, computed, ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import type { DataTableProps } from '#valkoui/types/DataTable'
 import type { TableItem } from '#valkoui/types/Table'
-import type { SlotStyles, Sort } from '#valkoui/types/common'
-import useStyle from '#valkoui/composables/useStyle.ts'
+import type { Sort } from '#valkoui/types/common'
 import useDebounce from '#valkoui/composables/useDebounce.ts'
 import styles from '#valkoui/styles/DataTable.styles.ts'
 import VkCheckbox from './Checkbox.vue'
@@ -36,7 +35,7 @@ const props = withDefaults(defineProps<DataTableProps>(), {
 
 const emit = defineEmits(['onSelect', 'onPageChange', 'onLimitChange', 'onSort', 'onFilter', 'onSelectAll', 'onDragStart', 'onDragOver', 'onDrop'])
 
-const classes = useStyle<DataTableProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 
 const sortIconMap = {
   asc: 'arrow-up',
@@ -144,7 +143,7 @@ onBeforeUnmount(() => {
 <template>
   <div
     v-if="isDataReady"
-    :class="classes.table"
+    :class="s.table({ class: styleSlots?.table })"
   >
     <vk-table
       :headers="headers"
@@ -163,8 +162,8 @@ onBeforeUnmount(() => {
         #[`header-cell-${header.key}`]
         :key="header.key"
       >
-        <div :class="classes.headerContainer">
-          <div :class="classes.headerLabel">
+        <div :class="s.headerContainer({ class: styleSlots?.headerContainer })">
+          <div :class="s.headerCheckbox({ class: styleSlots?.headerCheckbox })">
             <vk-checkbox
               v-if="selectionMode === 'multiple' && header.key === 'selection'"
               :color="color"
@@ -185,7 +184,7 @@ onBeforeUnmount(() => {
                 <vk-icon
                   :size="size"
                   name="search"
-                  :class="classes.headerUtilities"
+                  :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
                   :data-active="activeFilters[header.key]"
                   @click="togglePopover(header.key)"
                 />
@@ -217,7 +216,7 @@ onBeforeUnmount(() => {
           </div>
           <div
             v-if="header.sortable"
-            :class="classes.headerUtilities"
+            :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
           >
             <vk-icon
               role="button"
@@ -225,7 +224,7 @@ onBeforeUnmount(() => {
               :aria-label="`Sort by ${header.label}`"
               :size="size"
               :name="sortIconMap[sort?.field === header.key && sort.direction ? sort.direction : 'none']"
-              :class="classes.headerUtilities"
+              :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
               :data-active="isSortActive(header.key)"
               @click="handleSort(header.field)"
             />
@@ -237,7 +236,7 @@ onBeforeUnmount(() => {
         <vk-icon
           name="grip-vertical"
           draggable="true"
-          :class="classes.dragIcon"
+          :class="s.dragIcon({ class: styleSlots?.dragIcon })"
           @dragstart="() => emit('onDragStart', rowIndex)"
           @dragover="(event: DragEvent) => emit('onDragOver', event)"
           @drop="(event: DragEvent) => emit('onDrop', event, rowIndex)"
@@ -264,7 +263,7 @@ onBeforeUnmount(() => {
       </template>
     </vk-table>
 
-    <div :class="classes.footer">
+    <div :class="s.footer({ class: styleSlots?.footer })">
       <div>
         <vk-pagination
           :color="color"
@@ -272,7 +271,7 @@ onBeforeUnmount(() => {
           :shape="shape"
           :size="size"
           :pages="totalPages"
-          :class="classes.footerNav"
+          :class="s.pagination({ class: styleSlots?.pagination })"
           v-model="currentPage"
         />
       </div>
@@ -285,7 +284,7 @@ onBeforeUnmount(() => {
           :variant="variant"
           :shape="shape"
           :size="size"
-          :class="classes.footerSelect"
+          :class="s.select({ class: styleSlots?.select })"
           :model-value="limit"
           @update:model-value="(newLimit: number) => emit('onLimitChange', newLimit)"
         />

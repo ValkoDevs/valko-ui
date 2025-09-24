@@ -94,6 +94,14 @@ const alertProps: TableItem[] = [
     description: 'ID reference to an element that labels the input (e.g. a visible <label>).',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Alert component.',
+    values: 'AlertSlots',
+    default: ''
   }
 ]
 
@@ -113,6 +121,65 @@ const alertSlots: TableItem[] = [
     name: 'default',
     description: 'Slot for the main content of the alert.',
     example: '<template #default>\n  <p>This is the main content of the alert.</p>\n</template>'
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the alert. Controls the overall layout and background.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'mainIcon',
+    prop: 'mainIcon',
+    required: false,
+    description: 'Styles for the main icon.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'title',
+    prop: 'title',
+    required: false,
+    description: 'Styles for the alert title text.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'contentContainer',
+    prop: 'contentContainer',
+    required: false,
+    description: 'Container for the title and content.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    required: false,
+    description: 'Container for the main content area (slot).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeButton',
+    prop: 'closeButton',
+    required: false,
+    description: 'Styles for the close button itself.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeIcon',
+    prop: 'closeIcon',
+    required: false,
+    description: 'Styles for the close icon itself.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -139,6 +206,18 @@ const iconSnippet = `
   />
 </template>
 `
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  defaultAlt: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ]
+})
 </script>
 
 <template>
@@ -223,7 +302,7 @@ const iconSnippet = `
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-alert
           v-for="color in colorOptions.withSurface"
@@ -241,7 +320,7 @@ const iconSnippet = `
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.defaultAlt"
       >
         <vk-alert
           v-for="variant in variantOptions.withGradient"
@@ -259,7 +338,7 @@ const iconSnippet = `
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-alert
           v-for="shape in shapeOptions.general"
@@ -277,7 +356,7 @@ const iconSnippet = `
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.defaultAlt"
       >
         <vk-alert
           v-for="size in sizeOptions.general"
@@ -307,7 +386,7 @@ const iconSnippet = `
 
       <example-section
         title="Icons"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-alert
           title="Default Icon"
@@ -359,6 +438,12 @@ const iconSnippet = `
       <vk-table
         :headers="propHeaders"
         :data="alertProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Alert Emits</h3>

@@ -212,14 +212,14 @@ html.dark {
       shape="line"
       grow
     >
-      <template #light>
+      <template #light-content>
         <code-block
           :code="themeLight"
           language="css"
         />
       </template>
 
-      <template #dark>
+      <template #dark-content>
         <code-block
           :code="themeDark"
           language="css"

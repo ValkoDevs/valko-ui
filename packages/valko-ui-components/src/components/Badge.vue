@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { BadgeProps } from '#valkoui/types/Badge'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Badge.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 
 defineOptions({ name: 'VkBadge' })
 
@@ -18,13 +17,13 @@ const props = withDefaults(defineProps<BadgeProps>(), {
   hidden: false
 })
 
-const classes = useStyle<BadgeProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 </script>
 
 <template>
-  <div :class="classes.container">
+  <div :class="s.container({ class: styleSlots?.container })">
     <span
-      :class="classes.badge"
+      :class="s.badge({ class: styleSlots?.badge })"
       :aria-hidden="(dot && !props['aria-label'] && !content) || undefined"
       :role="(dot && !props['aria-label'] && !content) ? undefined : 'status'"
       :aria-label="props['aria-label'] || (!dot ? String(content) : undefined)"

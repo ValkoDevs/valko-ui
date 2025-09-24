@@ -191,6 +191,94 @@ const apiData: TableItem[] = [
     description: 'Indicates that the current value entered into the input is invalid.',
     values: 'true, false',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Input component.',
+    values: 'InputSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the input component.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'field',
+    prop: 'field',
+    description: 'Wrapper for the input field and related elements.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'input',
+    prop: 'input',
+    description: 'The input element itself (hidden since we use a custom input).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'label',
+    prop: 'label',
+    description: 'Label element for the input.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'helper',
+    prop: 'helper',
+    description: 'Helper text displayed below the input.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icons',
+    prop: 'icons',
+    description: 'Base styles for icon containers.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'leftIcon',
+    prop: 'leftIcon',
+    description: 'Styles for the left icon slot.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'rightIcon',
+    prop: 'rightIcon',
+    description: 'Styles for the right icon slot.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'clearIcon',
+    prop: 'clearIcon',
+    description: 'Styles for the clear (reset) icon.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'numberArrows',
+    prop: 'numberArrows',
+    description: 'Container for number input increment/decrement arrows.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'chevrons',
+    prop: 'chevrons',
+    description: 'Styles for the chevron icons used in number input arrows.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -270,6 +358,25 @@ const iconSnippet = `<template>
   </vk-input>
 </template>
 `
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  types: [
+    'md:grid-cols-2',
+    'lg:grid-cols-4'
+  ],
+  icons: [
+    'sm:grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -398,7 +505,7 @@ const iconSnippet = `<template>
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-input
           v-for="color in colorOptions.withSurface"
@@ -414,7 +521,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-input
           v-for="variant in variantOptions.general"
@@ -430,7 +537,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-input
           v-for="shape in shapeOptions.general"
@@ -446,7 +553,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <vk-input
           v-for="size in sizeOptions.general"
@@ -462,7 +569,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Types"
-        classes="md:grid-cols-2 lg:grid-cols-4"
+        :style-slots="styles.types"
       >
         <vk-input
           v-for="type in typeOptions"
@@ -512,7 +619,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Icons"
-        classes="sm:grid-cols-2"
+        :style-slots="styles.icons"
       >
         <vk-input
           label="Left Icon"
@@ -541,6 +648,12 @@ const iconSnippet = `<template>
       <vk-table
         :headers="propHeaders"
         :data="apiData"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Input Emits</h3>

@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const card = tv({
   base: [
     'vk-card',
     'overflow-hidden',
@@ -99,4 +99,7 @@ export default tv({
       ]
     }
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default card
+export type CardSlots = typeof card.base

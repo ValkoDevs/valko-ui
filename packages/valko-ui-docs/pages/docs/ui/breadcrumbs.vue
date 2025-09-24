@@ -106,6 +106,14 @@ const breadcrumbsProps: TableItem[] = [
     description: 'Accessible label for the breadcrumb navigation.',
     values: 'string',
     default: 'Breadcrumb'
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Breadcrumbs component.',
+    values: 'BreadcrumbsSlots',
+    default: ''
   }
 ]
 
@@ -168,6 +176,65 @@ const crumbInterface: TableItem[] = [
   }
 ]
 
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'nav',
+    prop: 'nav',
+    required: false,
+    description: 'Root container for the breadcrumbs. Controls the overall layout and background.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'link',
+    prop: 'link',
+    required: false,
+    description: 'The crumb itself, which is typically a clickable link. (this includes the icons/title on the crumb.)',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'list',
+    prop: 'list',
+    required: false,
+    description: 'Container for the list items of crumbs.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'listItem',
+    prop: 'listItem',
+    required: false,
+    description: 'The container of the crumb.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'separator',
+    prop: 'separator',
+    required: false,
+    description: 'The separator between crumbs.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'iconLeft',
+    prop: 'iconLeft',
+    required: false,
+    description: 'The class for the left icon.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'iconRight',
+    prop: 'iconRight',
+    required: false,
+    description: 'The class for the right icon.',
+    values: 'string[]',
+    default: ''
+  }
+]
+
 const breadcrumbsEmits: TableItem[] = [
   {
     key: 'crumbClickEmit',
@@ -220,6 +287,18 @@ const crumbs: Crumb[] = [
 `
 
 const extraProps = ':crumbs="crumbs"'
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  defaultAlt: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ]
+})
 </script>
 
 <template>
@@ -272,7 +351,7 @@ const extraProps = ':crumbs="crumbs"'
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -293,7 +372,7 @@ const extraProps = ':crumbs="crumbs"'
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.defaultAlt"
       >
         <div
           v-for="variant in variantOptions.withLink"
@@ -314,7 +393,7 @@ const extraProps = ':crumbs="crumbs"'
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -335,7 +414,7 @@ const extraProps = ':crumbs="crumbs"'
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.defaultAlt"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -382,6 +461,12 @@ const extraProps = ':crumbs="crumbs"'
       <vk-table
         :headers="propHeaders"
         :data="crumbInterface"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Breadcrumbs Emits</h3>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { DividerProps } from '#valkoui/types/Divider'
 import styles from '#valkoui/styles/Divider.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 
 defineOptions({ name: 'VkDivider' })
 
@@ -13,12 +13,12 @@ const props = withDefaults(defineProps<DividerProps>(), {
   direction: 'horizontal'
 })
 
-const classes = useStyle<DividerProps>(props, styles)
+const s = computed(() => styles({ ...props, class: props.styleSlots }))
 </script>
 
 <template>
   <hr
-    :class="classes"
+    :class="s"
     role="separator"
     :aria-orientation="direction"
     :aria-label="props['aria-label']"

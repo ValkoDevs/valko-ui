@@ -70,10 +70,38 @@ const dividerProps: TableItem[] = [
     description: 'References the ID of another element that labels the divider. Useful for complex labeling.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Root container.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
 const generateSnippet = snippetGeneratorFactory('vk-divider')
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  colors: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-7'
+  ],
+  sizes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  direction: [
+    'sm:grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -138,7 +166,7 @@ const generateSnippet = snippetGeneratorFactory('vk-divider')
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7"
+        :style-slots="styles.colors"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -161,7 +189,7 @@ const generateSnippet = snippetGeneratorFactory('vk-divider')
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <div
           v-for="variant in variantOptions.general"
@@ -184,7 +212,7 @@ const generateSnippet = snippetGeneratorFactory('vk-divider')
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -207,7 +235,7 @@ const generateSnippet = snippetGeneratorFactory('vk-divider')
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -230,7 +258,7 @@ const generateSnippet = snippetGeneratorFactory('vk-divider')
 
       <example-section
         title="Direction"
-        classes="sm:grid-cols-2"
+        :style-slots="styles.direction"
       >
         <div>
           <span class="font-semibold">Horizontal</span>

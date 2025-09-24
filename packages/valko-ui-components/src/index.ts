@@ -8,7 +8,6 @@ export * from '#valkoui/components/index.ts'
 /////////////////////////
 export { default as useNotification } from '#valkoui/composables/useNotification.ts'
 export { default as useDarkMode } from '#valkoui/composables/useDarkMode.ts'
-export { default as useStyle } from '#valkoui/composables/useStyle.ts'
 export { default as useDebounce } from '#valkoui/composables/useDebounce.ts'
 export { default as useDataTable } from '#valkoui/composables/useDataTable.ts'
 export { default as useClientSidePagination } from '#valkoui/composables/useClientSidePagination.ts'

@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted, nextTick, Ref } from 'vue'
 import type { SelectProps, SelectOption } from '#valkoui/types/Select'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Select.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkIcon from './Icon.vue'
 import VkInput from './Input.vue'
 
@@ -23,10 +21,10 @@ const props = withDefaults(defineProps<SelectProps>(), {
 
 const emit = defineEmits(['update:modelValue'])
 
-const classes = useStyle<SelectProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 
-const select = ref(null)
 const itemRefs: Ref<(HTMLElement | null)[]> = ref([])
+const selectRef = ref(null)
 const isOpen = ref(false)
 
 const showMap: Record<string, string> = props.options.reduce((acc: Record<string, string>, opt: SelectOption) => ({
@@ -75,7 +73,7 @@ const isSelected = (value: string | number) => {
 
 const closeDropdownOnOutsideClick = (event: MouseEvent) => {
   const target = event.target as HTMLElement
-  if (target.closest('.vk-select__container') !== select.value) isOpen.value = false
+  if (target.closest('.vk-select__container') !== selectRef.value) isOpen.value = false
 }
 
 const toggleDropdown = (onFocus: boolean) => {
@@ -128,26 +126,26 @@ onUnmounted(() => {
 
 <template>
   <div
-    ref="select"
-    :class="classes.container"
+    ref="selectRef"
+    :class="s.container({ class: styleSlots?.container })"
   >
     <select
       hidden
-      :class="classes.select"
+      :class="s.select({ class: styleSlots?.select })"
       :value="modelValue"
       :multiple="multiple"
       :readonly="readonly"
       @update="updateValue"
     >
       <option
-        v-for="item in options"
-        :key="item.value"
-        :value="item.value"
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
       >
-        {{ item.label }}
+        {{ option.label }}
       </option>
     </select>
-    <div :class="classes.field">
+    <div :class="s.field({ class: styleSlots?.field })">
       <vk-input
         readonly
         :helpertext="helpertext"
@@ -175,7 +173,7 @@ onUnmounted(() => {
           <vk-icon
             name="chevron-down"
             :data-open="isOpen"
-            :class="classes.icon"
+            :class="s.icon({ class: styleSlots?.icon })"
             @click.stop="toggleDropdown(!isOpen)"
           />
         </template>
@@ -192,26 +190,26 @@ onUnmounted(() => {
           v-if="isOpen"
           role="listbox"
           :data-helper="!!helpertext"
-          :class="classes.dropdown"
+          :class="s.dropdown({ class: styleSlots?.dropdown })"
           :data-shape="shape"
           :data-variant="variant"
           :aria-multiselectable="multiple || undefined"
           :aria-label="label || 'Select options'"
         >
           <li
-            v-for="(item, index) in options"
+            v-for="(option, index) in options"
             role="option"
+            :key="option.value"
             :ref="el => itemRefs[index] = (el as HTMLElement | null)"
-            :key="item.value"
-            :data-selected="isSelected(item.value)"
             :data-highlighted="highlightedIndex === index"
+            :data-selected="isSelected(option.value)"
             :data-shape="shape"
             :data-variant="variant"
-            :class="classes.item"
-            :aria-selected="isSelected(item.value)"
-            @click="multiple ? handleMultipleSelection(item.value) : handleSingleSelection(item.value)"
+            :class="s.item({ class: styleSlots?.item })"
+            :aria-selected="isSelected(option.value)"
+            @click="multiple ? handleMultipleSelection(option.value) : handleSingleSelection(option.value)"
           >
-            {{ item.label }}
+            {{ option.label }}
           </li>
         </ul>
       </transition>

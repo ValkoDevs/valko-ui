@@ -131,6 +131,87 @@ const apiData: TableItem[] = [
     description: 'Indicates that the current value entered into the textarea is invalid.',
     values: 'true, false',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Textarea component.',
+    values: 'TextareaSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the textarea component.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'field',
+    prop: 'field',
+    description: 'Wrapper for the textarea and icons.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'textarea',
+    prop: 'textarea',
+    description: 'The textarea element itself.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'label',
+    prop: 'label',
+    description: 'Label for the textarea.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'helper',
+    prop: 'helper',
+    description: 'Helper text displayed below the textarea.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'counter',
+    prop: 'counter',
+    description: 'Character counter for the textarea.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'footer',
+    prop: 'footer',
+    description: 'Footer container for helper text and counter.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icons',
+    prop: 'icons',
+    description: 'Base styles for icon containers.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'leftIcon',
+    prop: 'leftIcon',
+    description: 'Styles for the left icon slot.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'rightIcon',
+    prop: 'rightIcon',
+    description: 'Styles for the right icon slot.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -189,6 +270,21 @@ const iconSnippet = `<template>
   </vk-textarea>
 </template>
 `
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  icons: [
+    'sm:grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -288,7 +384,7 @@ const iconSnippet = `<template>
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-textarea
           v-for="color in colorOptions.general"
@@ -304,7 +400,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-textarea
           v-for="variant in variantOptions.general"
@@ -320,7 +416,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-textarea
           v-for="shape in shapeOptions.general"
@@ -336,7 +432,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <vk-textarea
           v-for="size in sizeOptions.general"
@@ -375,7 +471,7 @@ const iconSnippet = `<template>
 
       <example-section
         title="Icons"
-        classes="sm:grid-cols-2"
+        :style-slots="styles.icons"
       >
         <vk-textarea
           label="Left Icon"
@@ -404,6 +500,12 @@ const iconSnippet = `<template>
       <vk-table
         :headers="propHeaders"
         :data="apiData"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Textarea Slots</h3>

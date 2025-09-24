@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import type { CalendarYearViewProps } from '#valkoui/types/Calendar'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Calendar.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkCalendarHeader from './CalendarHeader.vue'
 import VkButton from './Button.vue'
 
@@ -12,7 +10,7 @@ defineOptions({ name: 'VkCalendarYearView' })
 const props = defineProps<CalendarYearViewProps>()
 const emit = defineEmits(['selectYear'])
 
-const classes = useStyle<CalendarYearViewProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 
 const jumps = ref(0)
 
@@ -30,7 +28,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div :class="classes.viewContainer">
+  <div :class="s.viewContainer({ class: styleSlots?.viewContainer })">
     <vk-calendar-header
       v-bind="props"
       :loaded-period="`${yearList[0]} - ${yearList[19]}`"
@@ -40,12 +38,12 @@ onMounted(() => {
       @previous-click="jumps--"
     />
 
-    <div :class="classes.panel">
+    <div :class="s.panel({ class: styleSlots?.panel })">
       <vk-button
         v-for="(year, index) in yearList"
         :key="`year-cell-${index}`"
         :disabled="!!(minYear && year < minYear) || !!(maxYear && year > maxYear)"
-        :class="classes.gridButton"
+        :class="s.gridButton({ class: styleSlots?.gridButton })"
         :size="size"
         :color="selected.year === year ? color : 'surface'"
         :variant="selected.year === year ? variant : 'link'"

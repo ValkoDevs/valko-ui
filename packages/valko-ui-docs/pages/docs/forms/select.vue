@@ -184,6 +184,59 @@ const apiData: TableItem[] = [
     description: 'Indicates that the current value entered into the select is invalid.',
     values: 'true, false',
     default: ''
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Select component.',
+    values: 'SelectSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the select component.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'field',
+    prop: 'field',
+    description: 'Wrapper for the input and dropdown.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'select',
+    prop: 'select',
+    description: 'Hidden native select element.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'dropdown',
+    prop: 'dropdown',
+    description: 'Dropdown menu container for options.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'item',
+    prop: 'item',
+    description: 'Styles for each option item in the dropdown.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    description: 'Icon for dropdown toggle (chevron).',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -213,6 +266,18 @@ const people: SelectOption[] = [
 ]
 <\u002Fscript>
 `
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ]
+})
 </script>
 
 <template>
@@ -293,7 +358,7 @@ const people: SelectOption[] = [
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-select
           v-for="color in colorOptions.general"
@@ -311,7 +376,7 @@ const people: SelectOption[] = [
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-select
           v-for="variant in variantOptions.general"
@@ -329,7 +394,7 @@ const people: SelectOption[] = [
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-select
           v-for="shape in shapeOptions.general"
@@ -347,7 +412,7 @@ const people: SelectOption[] = [
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <vk-select
           v-for="size in sizeOptions.general"
@@ -393,6 +458,12 @@ const people: SelectOption[] = [
       <vk-table
         :headers="propHeaders"
         :data="apiData"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Select Emits</h3>
