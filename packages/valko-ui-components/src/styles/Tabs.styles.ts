@@ -36,6 +36,7 @@ export default tv({
       'z-20',
       'flex',
       'items-center',
+      'justify-center',
       'transition',
       'duration-200',
       'disabled:text-on-disabled',
@@ -192,6 +193,9 @@ export default tv({
         ],
         container: [
           'grow'
+        ],
+        tab: [
+          'flex-1'
         ]
       },
       false: {
