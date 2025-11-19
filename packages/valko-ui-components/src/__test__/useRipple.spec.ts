@@ -50,18 +50,6 @@ describe('useRipple composable', () => {
     expect(ripple?.className).toContain('animate-ripple')
   })
 
-  it('should remove the ripple container after mouseup on parent', () => {
-    const event = new MouseEvent('click', {
-      clientX: 50,
-      clientY: 50
-    })
-
-    rippleHandler(event)
-    element.dispatchEvent(new Event('mouseup'))
-
-    expect(element.querySelector('.vk-ripple__container')).toBeNull()
-  })
-
   it('should create a ripple container on touch', () => {
     const touch = {
       clientX: 50,
@@ -86,18 +74,54 @@ describe('useRipple composable', () => {
     expect(element.querySelector('.vk-ripple__ripple')).not.toBeNull()
   })
 
-  it('should remove the ripple container after touchend on parent', () => {
-    const touch = {
+  it('should remove the ripple container only after both interaction and animation ends (animation first, then interaction)', () => {
+    const event = new MouseEvent('click', {
       clientX: 50,
       clientY: 50
-    } as Touch
-
-    const event = new TouchEvent('touchstart', { touches: [touch] })
+    })
 
     rippleHandler(event)
-    element.dispatchEvent(new Event('touchend'))
+    element.querySelector('.vk-ripple__ripple')?.dispatchEvent(new Event('animationend'))
+    element.dispatchEvent(new MouseEvent('mouseup'))
 
     expect(element.querySelector('.vk-ripple__container')).toBeNull()
+  })
+
+  it('should remove the ripple container only after both interaction and animation ends (interaction first, then animation)', () => {
+    const event = new MouseEvent('click', {
+      clientX: 50,
+      clientY: 50
+    })
+
+    rippleHandler(event)
+    element.dispatchEvent(new MouseEvent('mouseup'))
+    element.querySelector('.vk-ripple__ripple')?.dispatchEvent(new Event('animationend'))
+
+    expect(element.querySelector('.vk-ripple__container')).toBeNull()
+  })
+
+  it('should not remove the ripple container if only animation ends', () => {
+    const event = new MouseEvent('click', {
+      clientX: 50,
+      clientY: 50
+    })
+
+    rippleHandler(event)
+    element.querySelector('.vk-ripple__ripple')?.dispatchEvent(new Event('animationend'))
+
+    expect(element.querySelector('.vk-ripple__container')).not.toBeNull()
+  })
+
+  it('should not remove the ripple container if only interaction ends', () => {
+    const event = new MouseEvent('click', {
+      clientX: 50,
+      clientY: 50
+    })
+
+    rippleHandler(event)
+    element.dispatchEvent(new MouseEvent('mouseup'))
+
+    expect(element.querySelector('.vk-ripple__container')).not.toBeNull()
   })
 
   it('should do nothing if element is null', () => {
