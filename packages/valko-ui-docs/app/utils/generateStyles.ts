@@ -1,9 +1,9 @@
-const generateStyles = (config: Record<string, string | string[]> = {}) => {
+const generateStyles = (config: Record<string, string | string[]>) => {
   const styles: Record<string, { slotContainer: string[] }> = {}
 
   Object.keys(config).forEach((key) => {
     styles[key] = {
-      slotContainer: Array.isArray(config[key]) ? config[key] : [config[key]]
+      slotContainer: [config[key]!].flat()
     }
   })
 
