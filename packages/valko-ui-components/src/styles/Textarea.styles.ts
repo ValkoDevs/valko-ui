@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const textarea = tv({
   slots: {
     container: [
       'vk-textarea__container',
@@ -561,4 +561,7 @@ export default tv({
       }
     }
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default textarea
+export type TextareaSlots = typeof textarea.slots

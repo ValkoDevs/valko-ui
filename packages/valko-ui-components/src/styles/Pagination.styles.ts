@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const pagination = tv({
   slots: {
     nav: [
       'vk-pagination__nav',
@@ -172,4 +172,7 @@ export default tv({
       }
     }
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default pagination
+export type PaginationSlots = typeof pagination.slots

@@ -80,6 +80,80 @@ const modalProps: TableItem[] = [
     description: 'Provides additional descriptive text for the Modal, improving context for screen readers. The text will be visually hidden but read by assistive technologies.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Modal.',
+    values: 'ModalSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'dialog',
+    prop: 'dialog',
+    description: 'Root dialog container for the Modal.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'backdrop',
+    prop: 'backdrop',
+    description: 'Backdrop overlay behind the Modal.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Outer container wrapping the Modal content.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    description: 'Content wrapper for transitions and layout.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panel',
+    prop: 'panel',
+    description: 'Main panel element of the Modal.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panelChild',
+    prop: 'panelChild',
+    description: 'Container for the title and close button at the top of the Modal.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'title',
+    prop: 'title',
+    description: 'Title text element inside the Modal.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeButton',
+    prop: 'closeButton',
+    description: 'Close button element for dismissing the Modal.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeIcon',
+    prop: 'closeIcon',
+    description: 'Icon inside the close button.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -146,6 +220,18 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
     hasSlot: true, extraProps
   }).replace(/<vk-modal/g, `${triggerSnippet}`)
 }`
+
+const styles = generateStyles({
+  default: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ],
+  sizes: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(6,_minmax(0,_max-content))]'
+  ]
+})
 </script>
 
 <template>
@@ -214,7 +300,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
     <template #examples>
       <example-section
         title="Shapes"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        :style-slots="styles.default"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -225,7 +311,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
           </vk-button>
           <vk-modal
             :shape="shape.value"
-            :is-open="modalStates[shape.value]"
+            :is-open="modalStates[shape.value] ?? false"
             :title="shape.label"
             @close="toggleModal(shape.value)"
           >
@@ -243,7 +329,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
 
       <example-section
         title="Sizes"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(6,_minmax(0,_max-content))]"
+        :style-slots="styles.sizes"
       >
         <div
           v-for="size in sizeOptions.withFull"
@@ -254,7 +340,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
           </vk-button>
           <vk-modal
             :size="size.value"
-            :is-open="modalStates[size.value]"
+            :is-open="modalStates[size.value] ?? false"
             :title="size.label"
             @close="toggleModal(size.value)"
           >
@@ -272,7 +358,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
 
       <example-section
         title="Backdrops"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        :style-slots="styles.default"
       >
         <div
           v-for="backdrop in backdropOptions"
@@ -283,7 +369,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
           </vk-button>
           <vk-modal
             :backdrop="backdrop.value"
-            :is-open="modalStates[backdrop.value]"
+            :is-open="modalStates[backdrop.value] ?? false"
             :title="backdrop.label"
             @close="toggleModal(backdrop.value)"
           >
@@ -304,7 +390,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
           Closable
         </vk-button>
         <vk-modal
-          :is-open="modalStates['closable']"
+          :is-open="modalStates['closable'] ?? false"
           title="Closable"
           :closable="false"
           @close="toggleModal('closable')"
@@ -335,6 +421,12 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
       <vk-table
         :headers="propHeaders"
         :data="modalProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Modal Emits</h3>

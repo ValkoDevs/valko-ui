@@ -53,10 +53,51 @@ const spinnerProps: TableItem[] = [
     description: 'Overrides the spinner\'s default colors, allowing you to fully customize its appearance.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Spinner.',
+    values: 'SpinnerSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container of the Spinner.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    description: 'Icon element of the Spinner.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
 const generateSnippet = snippetGeneratorFactory('vk-spinner')
+
+const styles = generateStyles({
+  colors: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-7'
+  ],
+  names: [
+    'grid-cols-2'
+  ],
+  sizes: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ]
+})
 </script>
 
 <template>
@@ -101,7 +142,7 @@ const generateSnippet = snippetGeneratorFactory('vk-spinner')
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-7"
+        :style-slots="styles.colors"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -121,7 +162,7 @@ const generateSnippet = snippetGeneratorFactory('vk-spinner')
 
       <example-section
         title="Names"
-        classes="grid-cols-2"
+        :style-slots="styles.names"
       >
         <div
           v-for="name in names"
@@ -141,7 +182,7 @@ const generateSnippet = snippetGeneratorFactory('vk-spinner')
 
       <example-section
         title="Sizes"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -165,6 +206,12 @@ const generateSnippet = snippetGeneratorFactory('vk-spinner')
       <vk-table
         :headers="propHeaders"
         :data="spinnerProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

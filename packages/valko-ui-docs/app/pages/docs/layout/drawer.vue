@@ -88,6 +88,87 @@ const drawerProps: TableItem[] = [
     description: 'Provides additional descriptive text for the Drawer, improving context for screen readers. The text will be visually hidden but read by assistive technologies.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Drawer.',
+    values: 'DrawerSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'dialog',
+    prop: 'dialog',
+    description: 'Root dialog container for the Drawer.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'backdrop',
+    prop: 'backdrop',
+    description: 'Backdrop overlay behind the Drawer.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Outer container wrapping the Drawer content.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    description: 'Content wrapper for transitions and layout.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panel',
+    prop: 'panel',
+    description: 'Main panel element of the Drawer.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panelChild',
+    prop: 'panelChild',
+    description: 'Container for the title and close button at the top of the Drawer.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'title',
+    prop: 'title',
+    description: 'Title text element inside the Drawer.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeButton',
+    prop: 'closeButton',
+    description: 'Close button element for dismissing the Drawer.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'closeIcon',
+    prop: 'closeIcon',
+    description: 'Icon inside the close button.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'slotContainer',
+    prop: 'slotContainer',
+    description: 'Container for Drawer slot content (main body).',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -161,6 +242,21 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
     hasSlot: true, extraProps
   }).replace(/<vk-drawer/g, `${triggerSnippet}`)
 }`
+
+const styles = generateStyles({
+  default: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+  ],
+  shapes: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ],
+  backdrop: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ]
+})
 </script>
 
 <template>
@@ -173,7 +269,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
         Open Drawer
       </vk-button>
       <vk-drawer
-        :is-open="drawerStates['playground-drawer']"
+        :is-open="drawerStates['playground-drawer'] ?? false"
         :placement="form.placement"
         :backdrop="form.backdrop"
         :shape="form.shape"
@@ -234,7 +330,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
     <template #examples>
       <example-section
         title="Placement"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
+        :style-slots="styles.default"
       >
         <div
           v-for="placement in placementOptions.general"
@@ -244,7 +340,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
             {{ placement.label }}
           </vk-button>
           <vk-drawer
-            :is-open="drawerStates[placement.value]"
+            :is-open="drawerStates[placement.value] ?? false"
             :placement="placement.value"
             :title="placement.label"
             @close="toggleDrawer(placement.value)"
@@ -262,8 +358,8 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
       </example-section>
 
       <example-section
-        title="Shape"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        title="Shapes"
+        :style-slots="styles.shapes"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -273,7 +369,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
             {{ shape.label }}
           </vk-button>
           <vk-drawer
-            :is-open="drawerStates[shape.value]"
+            :is-open="drawerStates[shape.value] ?? false"
             :shape="shape.value"
             :title="shape.label"
             @close="toggleDrawer(shape.value)"
@@ -291,8 +387,8 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
       </example-section>
 
       <example-section
-        title="Size"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
+        title="Sizes"
+        :style-slots="styles.default"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -302,7 +398,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
             {{ size.label }}
           </vk-button>
           <vk-drawer
-            :is-open="drawerStates[size.value]"
+            :is-open="drawerStates[size.value] ?? false"
             :size="size.value"
             :title="size.label"
             @close="toggleDrawer(size.value)"
@@ -320,8 +416,8 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
       </example-section>
 
       <example-section
-        title="Backdrop"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        title="Backdrops"
+        :style-slots="styles.backdrop"
       >
         <div
           v-for="backdrop in backdropOptions"
@@ -331,7 +427,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
             {{ backdrop.label }}
           </vk-button>
           <vk-drawer
-            :is-open="drawerStates[backdrop.value]"
+            :is-open="drawerStates[backdrop.value] ?? false"
             :backdrop="backdrop.value"
             :title="backdrop.label"
             @close="toggleDrawer(backdrop.value)"
@@ -353,7 +449,7 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
           Closable
         </vk-button>
         <vk-drawer
-          :is-open="drawerStates['closable']"
+          :is-open="drawerStates['closable'] ?? false"
           title="Closable"
           :closable="false"
           @close="toggleDrawer('closable')"
@@ -383,6 +479,12 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
       <vk-table
         :headers="propHeaders"
         :data="drawerProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Drawer Emits</h3>

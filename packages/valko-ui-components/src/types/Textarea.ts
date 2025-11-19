@@ -1,4 +1,5 @@
 import type { DefaultComponent, AriaAttributes } from './common'
+import type { TextareaSlots } from '../styles/Textarea.styles'
 
 export interface TextareaProps extends DefaultComponent, Omit<AriaAttributes, 'aria-description'>{
   disabled?: boolean;
@@ -8,4 +9,5 @@ export interface TextareaProps extends DefaultComponent, Omit<AriaAttributes, 'a
   helpertext?: string;
   label?: string;
   maxlength?: number;
+  styleSlots?: Partial<TextareaSlots>;
 }

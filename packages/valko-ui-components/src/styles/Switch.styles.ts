@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const switchStyles = tv({
   slots: {
     container: [
       'vk-switch__container',
@@ -9,7 +9,7 @@ export default tv({
       'justify-start',
       'items-center'
     ],
-    switch: [
+    switchSlot: [
       'border-2',
       'shrink-0',
       'cursor-pointer',
@@ -38,14 +38,14 @@ export default tv({
       'flex',
       'items-center'
     ],
-    label: [
+    labelSlot: [
       'vk-switch__label'
     ]
   },
   variants: {
     size: {
       xs: {
-        switch: [
+        switchSlot: [
           'h-[1rem]',
           'w-[2rem]'
         ],
@@ -53,12 +53,12 @@ export default tv({
           'h-[0.750rem]',
           'w-[0.750rem]'
         ],
-        label: [
+        labelSlot: [
           'text-xs'
         ]
       },
       sm: {
-        switch: [
+        switchSlot: [
           'h-[1.250rem]',
           'w-[2.5rem]'
         ],
@@ -66,12 +66,12 @@ export default tv({
           'h-[1rem]',
           'w-[1rem]'
         ],
-        label: [
+        labelSlot: [
           'text-sm'
         ]
       },
       md: {
-        switch: [
+        switchSlot: [
           'h-[1.5rem]',
           'w-[3rem]'
         ],
@@ -79,12 +79,12 @@ export default tv({
           'h-[1.250rem]',
           'w-[1.250rem]'
         ],
-        label: [
+        labelSlot: [
           'text-base'
         ]
       },
       lg: {
-        switch: [
+        switchSlot: [
           'h-[1.750rem]',
           'w-[3.5rem]'
         ],
@@ -92,14 +92,14 @@ export default tv({
           'h-[1.5rem]',
           'w-[1.5rem]'
         ],
-        label: [
+        labelSlot: [
           'text-lg'
         ]
       }
     },
     variant: {
       filled: {
-        switch: [
+        switchSlot: [
           'bg-surface-container-highest'
         ],
         thumb: [
@@ -108,7 +108,7 @@ export default tv({
         ]
       },
       outlined: {
-        switch: [
+        switchSlot: [
           'border-outlined'
         ],
         thumb: [
@@ -117,7 +117,7 @@ export default tv({
         ]
       },
       ghost: {
-        switch: [
+        switchSlot: [
           'border-transparent',
           'bg-surface-container-highest/[.5]'
         ],
@@ -136,7 +136,7 @@ export default tv({
     },
     shape: {
       rounded: {
-        switch: [
+        switchSlot: [
           'rounded-full'
         ],
         thumb: [
@@ -144,7 +144,7 @@ export default tv({
         ]
       },
       soft: {
-        switch: [
+        switchSlot: [
           'rounded-xs'
         ],
         thumb: [
@@ -152,7 +152,7 @@ export default tv({
         ]
       },
       square: {
-        switch: [
+        switchSlot: [
           'rounded-none'
         ],
         thumb: [
@@ -162,7 +162,7 @@ export default tv({
     },
     disabled: {
       true: {
-        switch: [
+        switchSlot: [
           'pointer-events-none',
           'bg-disabled/[.3]',
           'border-disabled-container'
@@ -177,12 +177,12 @@ export default tv({
         content: [
           'flex-row-reverse'
         ],
-        label: [
+        labelSlot: [
           'ml-2'
         ]
       },
       right: {
-        label: [
+        labelSlot: [
           'mr-2'
         ]
       }
@@ -195,7 +195,7 @@ export default tv({
       color: 'primary',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:bg-primary',
           'data-[active=true]:border-primary'
         ],
@@ -209,7 +209,7 @@ export default tv({
       color: 'secondary',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:bg-secondary',
           'data-[active=true]:border-secondary'
         ],
@@ -223,7 +223,7 @@ export default tv({
       color: 'positive',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:bg-positive',
           'data-[active=true]:border-positive'
         ],
@@ -237,7 +237,7 @@ export default tv({
       color: 'accent',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:bg-accent',
           'data-[active=true]:border-accent'
         ],
@@ -251,7 +251,7 @@ export default tv({
       color: 'warning',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:bg-warning',
           'data-[active=true]:border-warning'
         ],
@@ -265,7 +265,7 @@ export default tv({
       color: 'negative',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:bg-negative',
           'data-[active=true]:border-negative'
         ],
@@ -280,7 +280,7 @@ export default tv({
       color: 'primary',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:border-primary'
         ],
         thumb: [
@@ -293,7 +293,7 @@ export default tv({
       color: 'secondary',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:border-secondary'
         ],
         thumb: [
@@ -306,7 +306,7 @@ export default tv({
       color: 'positive',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:border-positive'
         ],
         thumb: [
@@ -319,7 +319,7 @@ export default tv({
       color: 'accent',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:border-accent'
         ],
         thumb: [
@@ -332,7 +332,7 @@ export default tv({
       color: 'warning',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:border-warning'
         ],
         thumb: [
@@ -345,7 +345,7 @@ export default tv({
       color: 'negative',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:border-negative'
         ],
         thumb: [
@@ -359,7 +359,7 @@ export default tv({
       color: 'primary',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:bg-primary-container'
         ],
         thumb: [
@@ -372,7 +372,7 @@ export default tv({
       color: 'secondary',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:bg-secondary-container'
         ],
         thumb: [
@@ -385,7 +385,7 @@ export default tv({
       color: 'positive',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:bg-positive-container'
         ],
         thumb: [
@@ -398,7 +398,7 @@ export default tv({
       color: 'accent',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:bg-accent-container'
         ],
         thumb: [
@@ -411,7 +411,7 @@ export default tv({
       color: 'warning',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:bg-warning-container'
         ],
         thumb: [
@@ -424,7 +424,7 @@ export default tv({
       color: 'negative',
       disabled: false,
       class: {
-        switch: [
+        switchSlot: [
           'data-[active=true]:bg-negative-container'
         ],
         thumb: [
@@ -433,4 +433,7 @@ export default tv({
       }
     }
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default switchStyles
+export type SwitchSlots = typeof switchStyles.slots

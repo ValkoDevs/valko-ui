@@ -1,7 +1,3 @@
-// style types
-export type BaseStyles = string
-export type SlotStyles = Record<string, string>
-
 // data types
 export type Sort = { field: string; direction?: 'asc' | 'desc'; }
 export type Filter = { field: string; value: string; }

@@ -1,8 +1,8 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const collapseItem = tv({
   slots: {
-    collapse: [
+    collapseItem: [
       'vk-collapse-item',
       'w-full',
       'group-data-[variant=ghost]:bg-transparent',
@@ -42,17 +42,18 @@ export default tv({
     ],
     icon: [
       'vk-collapse-item__icon',
+      'transform',
       'transition-all',
       'duration-300',
       'ease-out',
+      'data-[open=true]:-rotate-90',
       'group-data-[size=xs]:text-xs',
       'group-data-[size=sm]:text-sm',
       'group-data-[size=md]:text-base',
       'group-data-[size=lg]:text-lg'
-    ],
-    iconOpen: [
-      'transform',
-      '-rotate-90'
     ]
   }
-}) as unknown as ReturnType<TV>
+})
+
+export default collapseItem
+export type CollapseItemSlots = typeof collapseItem.slots

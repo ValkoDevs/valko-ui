@@ -60,6 +60,14 @@ const notificationProps: TableItem[] = [
     default: 'md'
   },
   {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Notification.',
+    values: 'object',
+    default: '{}'
+  },
+  {
     key: 'textProp',
     prop: 'text',
     required: true,
@@ -138,6 +146,37 @@ const notificationProps: TableItem[] = [
     description: 'Invoked when the Notification is clicked.',
     values: '() => void',
     default: 'null'
+  }
+]
+
+const styleSlotsInterface = [
+  {
+    key: 'root',
+    prop: 'root',
+    description: 'Root element of the Notification.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'icon',
+    prop: 'icon',
+    description: 'Icon section of the Notification.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'text',
+    prop: 'text',
+    description: 'Text/message section.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'close',
+    prop: 'close',
+    description: 'Close button element.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -247,6 +286,30 @@ const stopOnFocusSnippet = `
   </vk-button>
 </template>
 `
+
+const styles = generateStyles({
+  colors: [
+    'sm:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]',
+    'xl:grid-cols-[repeat(7,_minmax(0,_max-content))]'
+  ],
+  variants: [
+    'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(4,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
+  ],
+  shapes: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ],
+  sizes: [
+    'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+  ],
+  default: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]'
+  ]
+})
 </script>
 
 <template>
@@ -334,7 +397,7 @@ const stopOnFocusSnippet = `
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(4,_minmax(0,_max-content))] xl:grid-cols-[repeat(7,_minmax(0,_max-content))]"
+        :style-slots="styles.colors"
       >
         <vk-button
           v-for="color in colorOptions.withSurface"
@@ -352,7 +415,7 @@ const stopOnFocusSnippet = `
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))] lg:grid-cols-[repeat(5,_minmax(0,_max-content))]"
+        :style-slots="styles.variants"
       >
         <vk-button
           v-for="variant in variantOptions.withGradientAndLine"
@@ -369,7 +432,7 @@ const stopOnFocusSnippet = `
 
       <example-section
         title="Shapes"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] lg:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        :style-slots="styles.shapes"
       >
         <vk-button
           v-for="shape in shapeOptions.general"
@@ -387,7 +450,7 @@ const stopOnFocusSnippet = `
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-[repeat(2,_minmax(0,_max-content))] lg:grid-cols-[repeat(4,_minmax(0,_max-content))]"
+        :style-slots="styles.sizes"
       >
         <vk-button
           v-for="size in sizeOptions.general"
@@ -405,7 +468,7 @@ const stopOnFocusSnippet = `
 
       <example-section
         title="Gravity"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))]"
+        :style-slots="styles.default"
       >
         <vk-button
           v-for="gravity in gravityOptions"
@@ -423,7 +486,7 @@ const stopOnFocusSnippet = `
 
       <example-section
         title="Position"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))]"
+        :style-slots="styles.default"
       >
         <vk-button
           v-for="position in positionOptions"
@@ -465,6 +528,12 @@ const stopOnFocusSnippet = `
       <vk-table
         :headers="propHeaders"
         :data="notificationProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
     </template>
   </doc-section>

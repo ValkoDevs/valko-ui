@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const cardHeader = tv({
   base: [
     'vk-card__header',
     'h-fit',
@@ -19,4 +19,7 @@ export default tv({
     'group-data-[layout=horizontal]:group-data-[card-image=false]:order-1',
     'group-data-[layout=cover]:order-1'
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default cardHeader
+export type CardHeaderSlots = typeof cardHeader.base

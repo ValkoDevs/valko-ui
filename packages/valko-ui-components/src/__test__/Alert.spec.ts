@@ -23,7 +23,7 @@ describe('Alert component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-alert__filled').exists()).toBe(true)
+        expect(wrapper.find('.vk-alert__container').classes()).toContain('vk-alert__filled')
       })
 
       it('should be shape soft', () => {
@@ -39,7 +39,7 @@ describe('Alert component', () => {
       })
 
       it('should not have title', () => {
-        expect(wrapper.find('h6').exists()).toBe(false)
+        expect(wrapper.find('.vk-alert__title').exists()).toBe(false)
       })
 
       it('should not have shadow', () => {
@@ -201,7 +201,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-alert__filled').exists()).toBe(true)
+        expect(wrapper.find('.vk-alert__container').classes()).toContain('vk-alert__filled')
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -221,7 +221,7 @@ describe('Alert component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-alert__ghost').exists()).toBe(true)
+        expect(wrapper.find('.vk-alert__container').classes()).toContain('vk-alert__ghost')
       })
 
       it('should be gradient when props.variant is gradient', () => {

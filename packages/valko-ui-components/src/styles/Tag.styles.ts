@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const tag = tv({
   slots: {
     container: [
       'vk-tag',
@@ -18,7 +18,7 @@ export default tv({
       'font-semibold',
       'tracking-wider'
     ],
-    closable: [
+    closeButton: [
       'vk-tag__closable',
       'ml-1',
       'flex',
@@ -561,7 +561,7 @@ export default tv({
     {
       disabled: true,
       class: {
-        closable: [
+        closeButton: [
           'cursor-not-allowed'
         ]
       }
@@ -805,4 +805,7 @@ export default tv({
       }
     }
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default tag
+export type TagSlots = typeof tag.slots

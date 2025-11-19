@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { NavbarProps } from '#valkoui/types/Navbar'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Navbar.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 
 defineOptions({ name: 'VkNavbar' })
 
@@ -17,12 +16,12 @@ const props = withDefaults(defineProps<NavbarProps>(), {
   vertical: false
 })
 
-const classes = useStyle<NavbarProps, SlotStyles>(props, styles)
+const s = computed(() => styles({ ...props, class: props.styleSlots }))
 </script>
 
 <template>
   <nav
-    :class="classes"
+    :class="s"
     role="navigation"
     :aria-label="props['aria-label'] ?? 'Main navigation'"
   >

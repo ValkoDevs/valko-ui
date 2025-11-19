@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const timepicker = tv({
   slots: {
     container: [
       'vk-timepicker',
@@ -58,4 +58,7 @@ export default tv({
       }
     }
   }
-}) as unknown as ReturnType<TV>
+})
+
+export default timepicker
+export type TimepickerSlots = typeof timepicker.slots

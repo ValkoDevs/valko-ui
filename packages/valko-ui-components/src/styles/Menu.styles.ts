@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const menu = tv({
   slots: {
     group: [
       'vk-menu__group',
@@ -494,4 +494,7 @@ export default tv({
       }
     }
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default menu
+export type MenuSlots = typeof menu.slots

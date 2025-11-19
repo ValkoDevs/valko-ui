@@ -233,7 +233,7 @@ describe('Checkbox component', () => {
     it('should be empty', () => {
       const wrapper = mount(VkCheckbox, {})
 
-      expect(wrapper.find('span').exists()).toBe(false)
+      expect(wrapper.find('.vk-checkbox__helpertext').exists()).toBe(false)
     })
 
     it('should have a helpertext', () => {

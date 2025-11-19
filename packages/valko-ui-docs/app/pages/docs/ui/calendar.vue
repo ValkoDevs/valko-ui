@@ -229,6 +229,14 @@ const calendarProp: TableItem[] = [
     description: 'The maximum selectable date as an Epoch timestamp.',
     values: 'EpochTimeStamp',
     default: '[]'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Calendar.',
+    values: 'object',
+    default: '{}'
   }
 ]
 
@@ -416,6 +424,72 @@ const calendarEmits: TableItem[] = [
   }
 ]
 
+const styleSlotsInterface = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container (does not manage the layout).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'viewContainer',
+    prop: 'viewContainer',
+    description: 'Main container for all views (month, week, day) this manages the layout.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'panel',
+    prop: 'panel',
+    description: 'Panel section of the Calendar (grid of days/months/years).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'gridButton',
+    prop: 'gridButton',
+    description: 'The buttons on the grid panel (shared across all views).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'hiddenGridButton',
+    prop: 'hiddenGridButton',
+    description: 'The hidden buttons on the grid panel (only present on day view).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'weekdaySpan',
+    prop: 'weekdaySpan',
+    description: 'Span containing the weekdays (only present on day view).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'headerContainer',
+    prop: 'headerContainer',
+    description: 'Main container for the header (contains the month/year navigation and title).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'arrows',
+    prop: 'arrows',
+    description: 'Class shared for both navigation arrows.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'periodButton',
+    prop: 'periodButton',
+    description: 'The main button that shows the current period (month/year).',
+    values: 'string[]',
+    default: ''
+  }
+]
+
 const [ model, parsedModel, adapter ] = useDateAdapter(form)
 
 const generateSnippet = snippetGeneratorFactory('vk-calendar')
@@ -428,6 +502,20 @@ const [ model, _, adapter ] = useDateAdapter({ format: 'YYYY-MM-DD' })
 `
 
 const extraProps = 'v-model="model" :adapter="adapter"'
+
+const styles = generateStyles({
+  colors: [
+    'sm:grid-cols-2',
+    'xl:grid-cols-3'
+  ],
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  dates: [
+    'sm:grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -497,7 +585,7 @@ const extraProps = 'v-model="model" :adapter="adapter"'
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 xl:grid-cols-3"
+        :style-slots="styles.colors"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -519,7 +607,7 @@ const extraProps = 'v-model="model" :adapter="adapter"'
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <div
           v-for="variant in variantOptions.general"
@@ -541,7 +629,7 @@ const extraProps = 'v-model="model" :adapter="adapter"'
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -563,7 +651,7 @@ const extraProps = 'v-model="model" :adapter="adapter"'
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -597,7 +685,7 @@ const extraProps = 'v-model="model" :adapter="adapter"'
 
       <example-section
         title="Disabled Dates"
-        classes="sm:grid-cols-2"
+        :style-slots="styles.dates"
       >
         <vk-calendar
           v-model="model"
@@ -629,7 +717,11 @@ const extraProps = 'v-model="model" :adapter="adapter"'
         :headers="propHeaders"
         :data="calendarProp"
       />
-
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
+      />
       <h3>Calendar Emits</h3>
       <vk-table
         :headers="emitHeaders"

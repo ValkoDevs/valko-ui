@@ -100,6 +100,57 @@ const apiData: TableItem[] = [
     description: 'Defines a string label for the button when no visible text is present. Useful for icon-only buttons or when additional context is needed for assistive technologies.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Slots for applying custom styles to the Button.',
+    values: 'ButtonSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'button',
+    prop: 'button',
+    required: false,
+    description: 'Styles for the button element itself, this is the main container aswell.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'spinnerContainer',
+    prop: 'spinnerContainer',
+    required: false,
+    description: 'Styles for the div containing the spinner.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'spinner',
+    prop: 'spinner',
+    required: false,
+    description: 'Styles for the spinner itself.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'spinnerIcon',
+    prop: 'spinnerIcon',
+    required: false,
+    description: 'Styles for the spinner icon.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'stateLayer',
+    prop: 'stateLayer',
+    required: false,
+    description: 'Styles for the state layer element (e.g., hover, focus, active states).',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -125,6 +176,30 @@ const slotData: TableItem[] = [
 const onClick = () => useNotification({ text: 'Clicked' })
 
 const generateSnippet = snippetGeneratorFactory('vk-button')
+
+const styles = generateStyles({
+  colors: [
+    'sm:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]',
+    'xl:grid-cols-[repeat(7,_minmax(0,_max-content))]'
+  ],
+  variants: [
+    'sm:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
+  ],
+  shapes: [
+    'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ],
+  sizes: [
+    'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+  ],
+  types: [
+    'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+  ]
+})
 </script>
 
 <template>
@@ -206,7 +281,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(4,_minmax(0,_max-content))] xl:grid-cols-[repeat(7,_minmax(0,_max-content))]"
+        :style-slots="styles.colors"
       >
         <vk-button
           v-for="color in colorOptions.withSurface"
@@ -223,7 +298,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(5,_minmax(0,_max-content))]"
+        :style-slots="styles.variants"
       >
         <vk-button
           v-for="variant in variantOptions.withGradientAndLink"
@@ -240,7 +315,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-[repeat(2,_minmax(0,_max-content))] lg:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        :style-slots="styles.shapes"
       >
         <vk-button
           v-for="shape in shapeOptions.general"
@@ -257,7 +332,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-[repeat(2,_minmax(0,_max-content))] lg:grid-cols-[repeat(4,_minmax(0,_max-content))]"
+        :style-slots="styles.sizes"
       >
         <vk-button
           v-for="size in sizeOptions.general"
@@ -274,7 +349,7 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
 
       <example-section
         title="Types"
-        classes="sm:grid-cols-[repeat(2,_minmax(0,_max-content))] lg:grid-cols-[repeat(4,_minmax(0,_max-content))]"
+        :style-slots="styles.types"
       >
         <vk-button
           v-for="type in typeOptions"
@@ -345,6 +420,12 @@ const generateSnippet = snippetGeneratorFactory('vk-button')
       <vk-table
         :headers="propHeaders"
         :data="apiData"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Button Emits</h3>

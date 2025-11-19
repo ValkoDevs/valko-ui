@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const drawer = tv({
   slots: {
     container: [
       'vk-drawer__container',
@@ -56,7 +56,7 @@ export default tv({
       'group-data-[title=false]:col-start-2',
       'group-data-[title=false]:row-span-1'
     ],
-    slotContent:[
+    slotContainer:[
       'w-full',
       'group-data-[title=true]:row-start-2',
       'group-data-[title=false]:row-start-1',
@@ -302,4 +302,7 @@ export default tv({
       }
     }
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default drawer
+export type DrawerSlots = typeof drawer.slots

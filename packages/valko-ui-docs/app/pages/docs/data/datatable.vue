@@ -148,6 +148,81 @@ const tableProps: TableItem[] = [
     description: 'Specifies whether the table is in a loading state.',
     values: 'true, false',
     default: 'false'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the DataTable component.',
+    values: 'DataTableSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'table',
+    prop: 'table',
+    required: false,
+    description: 'Root container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'headerContainer',
+    prop: 'headerContainer',
+    required: false,
+    description: 'Styles for the header cell container of the table.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'headerCheckbox',
+    prop: 'headerCheckbox',
+    required: false,
+    description: 'Styles for the header checkbox container (only present when selectionMode is "multiple").',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'headerUtilities',
+    prop: 'headerUtilities',
+    required: false,
+    description: 'Styles for each utility element in the header of the table (filters, sort, etc.).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'footer',
+    prop: 'footer',
+    required: false,
+    description: 'Container for the footer content (pagination, select).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'pagination',
+    prop: 'pagination',
+    required: false,
+    description: 'Styles for the pagination component of the table.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'select',
+    prop: 'select',
+    required: false,
+    description: 'Styles for the select component of the table.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'dragIcon',
+    prop: 'dragIcon',
+    required: false,
+    description: 'Styles for the drag icon (only present when row dragging is enabled).',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -737,6 +812,12 @@ const generateSnippet = snippetGeneratorFactory('vk-data-table')
       <vk-table
         :headers="propHeaders"
         :data="tableProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Table Slots</h3>

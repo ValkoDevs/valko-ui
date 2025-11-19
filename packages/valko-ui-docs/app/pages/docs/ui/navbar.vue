@@ -84,6 +84,14 @@ const navbarProps: TableItem[] = [
     description: 'Accessible label for the navbar to describe its purpose to assistive technologies.',
     values: 'string',
     default: 'Main navigation'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Root container for the Navbar.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -99,6 +107,16 @@ const navbarSlots: TableItem[] = [
 const generateSnippet = snippetGeneratorFactory('vk-navbar')
 
 const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold ml-4">Title</span>'
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  defaultAlt: [
+    'sm:grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -170,7 +188,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-navbar
           v-for="color in colorOptions.withSurface"
@@ -191,7 +209,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2"
+        :style-slots="styles.defaultAlt"
       >
         <vk-navbar
           v-for="variant in variantOptions.withGradient"
@@ -212,7 +230,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <vk-navbar
           v-for="shape in shapeOptions.general"
@@ -234,7 +252,7 @@ const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2"
+        :style-slots="styles.defaultAlt"
       >
         <vk-navbar
           v-for="size in sizeOptions.general"

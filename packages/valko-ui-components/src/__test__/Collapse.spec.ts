@@ -134,7 +134,7 @@ describe('Collapse component', () => {
       const collapseItems = wrapper.findAll('.vk-collapse-item__icon')
       await collapseItems[0].trigger('click')
       await collapseItems[1].trigger('click')
-      expect(collapseItems[0].classes()).toContain('-rotate-90')
+      expect(collapseItems[0].attributes('data-open')).toBe('true')
     })
 
     it('should not allow multiple items to be opened when props.multiple is false', async () => {

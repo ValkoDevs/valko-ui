@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { CalendarDayViewProps } from '#valkoui/types/Calendar'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Calendar.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkCalendarHeader from './CalendarHeader.vue'
 import VkButton from './Button.vue'
 
@@ -13,7 +11,7 @@ const props = defineProps<CalendarDayViewProps>()
 
 const emit = defineEmits(['selectDay', 'viewChange', 'changeMonth'])
 
-const classes = useStyle<CalendarDayViewProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 
 const gridCells = computed(() => {
   const daysInMonth = [...new Array(props.daysInMonth).keys()].map((day) => day + 1)
@@ -39,7 +37,7 @@ const onArrowClick = (operation: 1 | -1) => emit('changeMonth', props.display.mo
 </script>
 
 <template>
-  <div :class="classes.viewContainer">
+  <div :class="s.viewContainer({ class: styleSlots?.viewContainer })">
     <vk-calendar-header
       v-bind="props"
       :loaded-period="`${monthNames[display.month]} - ${display.year}`"
@@ -50,11 +48,11 @@ const onArrowClick = (operation: 1 | -1) => emit('changeMonth', props.display.mo
       @view-change="emit('viewChange', 'months')"
     />
 
-    <div :class="classes.panel">
+    <div :class="s.panel({ class: styleSlots?.panel })">
       <span
         v-for="(weekday, index) in weekDays"
         :key="index"
-        :class="classes.weekdaySpan"
+        :class="s.weekdaySpan({ class: styleSlots?.weekdaySpan })"
       >
         {{ weekday }}
       </span>
@@ -63,13 +61,13 @@ const onArrowClick = (operation: 1 | -1) => emit('changeMonth', props.display.mo
         <span
           v-if="cell === null"
           :key="`empty-cell-${index}`"
-          :class="classes.hiddenGridButton"
+          :class="s.hiddenGridButton({ class: styleSlots?.hiddenGridButton })"
         />
 
         <vk-button
           v-else
           :key="`day-cell-${index}`"
-          :class="classes.gridButton"
+          :class="s.gridButton({ class: styleSlots?.gridButton })"
           :size="size"
           :disabled="disabledDays?.includes(cell) || (disableWeekends && isWeekend(index))"
           :color="isSelected(cell) ? color : 'surface'"

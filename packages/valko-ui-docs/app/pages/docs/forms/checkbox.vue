@@ -160,6 +160,73 @@ const apiData: TableItem[] = [
     description: 'Specifies the name of the checkbox input.',
     values: 'string',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Slots for applying custom styles to the Checkbox.',
+    values: 'CheckboxSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'The root container, controls layout between the checkbox and helpertext.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'checkboxContainer',
+    prop: 'checkboxContainer',
+    required: false,
+    description: 'The container for the checkbox (this includes the checkbox input and its label).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'stateLayer',
+    prop: 'stateLayer',
+    required: false,
+    description: 'The state layer for the checkbox (used to apply hover, focus, and active states).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'checkbox',
+    prop: 'checkbox',
+    required: false,
+    description: 'The visual representation of the checkbox (includes the icon inside the checkbox).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'input',
+    prop: 'input',
+    required: false,
+    description: 'The classes for the checkbox input element (this is hidden since we use a custom checkbox).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'label',
+    prop: 'label',
+    required: false,
+    description: 'The classes for the label.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'helpertext',
+    prop: 'helpertext',
+    required: false,
+    description: 'The classes for the helpertext.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -179,6 +246,30 @@ watchEffect(() => {
   if (indeterminateRef.value) form.modelValue = null
   if (form.modelValue !== null) indeterminateRef.value = false
   if (!indeterminateRef.value && form.modelValue === null) form.modelValue = false
+})
+
+const styles = generateStyles({
+  colors: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-6'
+  ],
+  variants: [
+    'grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  shapes: [
+    'grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  label: [
+    'sm:grid-cols-2'
+  ]
 })
 </script>
 
@@ -260,7 +351,7 @@ watchEffect(() => {
     <template #examples>
       <example-section
         title="Colors"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+        :style-slots="styles.colors"
       >
         <vk-checkbox
           v-for="color in colorOptions.general"
@@ -277,7 +368,7 @@ watchEffect(() => {
 
       <example-section
         title="Variants"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.variants"
       >
         <vk-checkbox
           v-for="variant in variantOptions.general"
@@ -294,7 +385,7 @@ watchEffect(() => {
 
       <example-section
         title="Shapes"
-        classes="grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.shapes"
       >
         <vk-checkbox
           v-for="shape in shapeOptions.general"
@@ -311,7 +402,7 @@ watchEffect(() => {
 
       <example-section
         title="Sizes"
-        classes="grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <vk-checkbox
           v-for="size in sizeOptions.general"
@@ -364,7 +455,7 @@ watchEffect(() => {
 
       <example-section
         title="Label Position"
-        classes="sm:grid-cols-2"
+        :style-slots="styles.label"
       >
         <vk-checkbox
           v-for="pos in position"
@@ -385,6 +476,12 @@ watchEffect(() => {
       <vk-table
         :headers="propHeaders"
         :data="apiData"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Checkbox Emits</h3>

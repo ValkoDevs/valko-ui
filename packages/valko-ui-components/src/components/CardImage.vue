@@ -1,7 +1,6 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { CardImageProps } from '#valkoui/types/Card'
-import type { SlotStyles } from '#valkoui/types/common'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import styles from '#valkoui/styles/CardImage.styles.ts'
 
 defineOptions({ name: 'VkCardImage' })
@@ -12,21 +11,21 @@ const props = withDefaults(defineProps<CardImageProps>(), {
   alt: 'card-image'
 })
 
-const classes = useStyle<CardImageProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 </script>
 
 <template>
   <div
     :style="`width:${width}; height:${height};`"
-    :class="classes.container"
+    :class="s.container({ class: styleSlots?.container })"
   >
-    <slot :classes="classes.img">
+    <slot :classes="s.imageTag({ class: styleSlots?.imageTag })">
       <img
         :src="src"
         :alt="alt"
-        :class="classes.img"
+        :class="s.imageTag({ class: styleSlots?.imageTag })"
       >
     </slot>
-    <div :class="classes.gradient" />
+    <div :class="s.gradient({ class: styleSlots?.gradient })" />
   </div>
 </template>

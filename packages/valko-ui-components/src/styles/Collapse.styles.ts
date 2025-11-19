@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const collapse = tv({
   base: [
     'vk-collapse',
     'w-full',
@@ -57,4 +57,7 @@ export default tv({
       ]
     }
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default collapse
+export type CollapseSlots = typeof collapse.base

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import type { TableProps, TableItem } from '#valkoui/types/Table'
-import type { SlotStyles } from '#valkoui/types/common'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import styles from '#valkoui/styles/Table.styles.ts'
 
 defineOptions({ name: 'VkTable' })
@@ -20,7 +18,7 @@ const props = withDefaults(defineProps<TableProps>(), {
 
 const emit = defineEmits(['onRowClick'])
 
-const classes = useStyle<TableProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 
 const items = computed<TableItem[]>(() => props.data.map((item, index) => ({
   ...item,
@@ -31,23 +29,23 @@ const headers = computed(() => props.headers)
 </script>
 
 <template>
-  <div :class="classes.container">
+  <div :class="s.container({ class: styleSlots?.container })">
     <table
-      :class="classes.table"
+      :class="s.table({ class: styleSlots?.table })"
       role="table"
     >
       <thead
-        :class="classes.thead"
+        :class="s.thead({ class: styleSlots?.thead })"
         role="rowgroup"
       >
         <tr
-          :class="classes.htr"
+          :class="s.tr({ class: styleSlots?.tr })"
           role="row"
         >
           <th
             v-for="header in headers"
             :key="header.key"
-            :class="classes.th"
+            :class="s.th({ class: styleSlots?.th })"
             role="columnheader"
             scope="col"
           >
@@ -62,14 +60,14 @@ const headers = computed(() => props.headers)
         </tr>
       </thead>
       <tbody
-        :class="classes.body"
+        :class="s.body({ class: styleSlots?.body })"
         role="rowgroup"
       >
         <tr
           v-for="(item, index) in items"
           :key="item.key"
           role="row"
-          :class="classes.tr"
+          :class="s.tr({ class: styleSlots?.tr })"
           :data-key="item.key"
           :data-row-events="rowEvents"
           :tabindex="rowEvents ? 0 : undefined"
@@ -89,7 +87,7 @@ const headers = computed(() => props.headers)
             v-for="{ field } in headers"
             :key="`cell-${field}`"
             role="cell"
-            :class="[classes.td, index === items.length - 1 ? classes.shape : '']"
+            :class="s.td({ class: styleSlots?.td })"
           >
             <slot
               :name="`cell-${field}`"
@@ -103,11 +101,11 @@ const headers = computed(() => props.headers)
         </tr>
         <tr
           v-if="items.length === 0"
-          :class="classes.tr"
+          :class="s.tr({ class: styleSlots?.tr })"
         >
           <td
             :colspan="headers.length"
-            :class="classes.noDataMessage"
+            :class="s.noDataMessage({ class: styleSlots?.noDataMessage })"
           >
             <slot name="no-data-message">
               No items found.
@@ -117,7 +115,7 @@ const headers = computed(() => props.headers)
       </tbody>
       <tfoot
         v-if="$slots['table-footer']"
-        :class="classes.tableFooter"
+        :class="s.tableFooter({ class: styleSlots?.tableFooter })"
       >
         <slot name="table-footer" />
       </tfoot>

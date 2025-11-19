@@ -1,5 +1,6 @@
 import type { Ref, ComputedRef } from 'vue'
 import type { DefaultComponent } from './common'
+import type { TimeSlots } from '../styles/Time.styles'
 
 export type TimeAdapterProps = Pick<TimeProps, 'format' | 'locale' | 'minTime' | 'maxTime' | 'disabledTimes' | 'modelValue'>
 
@@ -38,4 +39,5 @@ export interface TimeProps extends DefaultComponent {
   maxTime?: EpochTimeStamp;
   disabledTimes?: EpochTimeStamp[];
   minuteStep?: 1 | 5 | 10 | 15 | 20 | 30;
+  styleSlots?: Partial<TimeSlots>;
 }

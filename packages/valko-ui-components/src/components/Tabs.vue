@@ -2,9 +2,7 @@
 import { type Ref, ref, watch, nextTick, computed, onUpdated } from 'vue'
 import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
 import type { TabsProps } from '#valkoui/types/Tabs'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Tabs.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkIcon from './Icon.vue'
 
 defineOptions({ name: 'VkTabs' })
@@ -22,10 +20,10 @@ const props = withDefaults(defineProps<TabsProps>(), {
 
 const emit = defineEmits(['tabClick', 'update:modelValue'])
 
-const classes = useStyle<TabsProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 
 const internalIndex = ref(0)
-const cursor: Ref<HTMLElement | null> = ref(null)
+const cursorRef: Ref<HTMLElement | null> = ref(null)
 
 const selectedIndex = computed({
   get: () => (props.modelValue ?? internalIndex.value),
@@ -38,15 +36,15 @@ const selectedIndex = computed({
 const moveCursor = async () => {
   await nextTick()
   await nextTick()
-  if (cursor.value) {
+  if (cursorRef.value) {
     const extraHeight = props.shape === 'line' && props.variant === 'outlined' && !props.vertical ? 2 : 0
     const extraLeft = props.shape === 'line' && props.variant === 'outlined' && props.vertical ? 2 : 0
-    const selectedElement = cursor.value.closest('.tab-list')?.querySelector('button[data-headlessui-state=selected]') as HTMLElement
+    const selectedElement = cursorRef.value.closest('.tab-list')?.querySelector('button[data-headlessui-state=selected]') as HTMLElement
     if (selectedElement) {
-      cursor.value.style.width = `${selectedElement.clientWidth}px`
-      cursor.value.style.height = `${+selectedElement.clientHeight + extraHeight}px`
-      cursor.value.style.left = `${selectedElement.offsetLeft - extraLeft}px`
-      cursor.value.style.top = `${selectedElement.offsetTop}px`
+      cursorRef.value.style.width = `${selectedElement.clientWidth}px`
+      cursorRef.value.style.height = `${+selectedElement.clientHeight + extraHeight}px`
+      cursorRef.value.style.left = `${selectedElement.offsetLeft - extraLeft}px`
+      cursorRef.value.style.top = `${selectedElement.offsetTop}px`
     }
   }
 }
@@ -66,32 +64,32 @@ watch(
 </script>
 
 <template>
-  <div :class="classes.container">
+  <div :class="s.container({ class: styleSlots?.container })">
     <tab-group
       as="div"
       :vertical="vertical"
       :default-index="defaultIndex"
-      :class="classes.group"
+      :class="s.group({ class: styleSlots?.group })"
       :selected-index="selectedIndex"
       @change="onChange"
     >
       <tab-list
-        :class="classes.list"
+        :class="s.list({ class: styleSlots?.list })"
         as="nav"
         :aria-label="props['aria-label'] ?? 'Tab navigation'"
       >
         <div
-          :class="classes.cursor"
-          ref="cursor"
+          :class="s.cursor({ class: styleSlots?.cursor })"
+          ref="cursorRef"
         >
           <div
             v-if="variant === 'gradient'"
-            :class="classes.cursorGradient"
+            :class="s.cursorGradient({ class: styleSlots?.cursorGradient })"
           />
         </div>
         <tab
           v-for="item in tabs"
-          :class="classes.tab"
+          :class="s.tabSlot({ class: styleSlots?.tabSlot })"
           :key="item.key"
           :disabled="item.disabled"
         >
@@ -99,24 +97,24 @@ watch(
             <vk-icon
               v-if="item.leftIcon"
               :name="item.leftIcon"
-              :class="classes.leftIcon"
+              :class="s.leftIcon({ class: styleSlots?.leftIcon })"
             />
             <span> {{ item.title }} </span>
             <vk-icon
               v-if="item.rightIcon"
               :name="item.rightIcon"
-              :class="classes.rightIcon"
+              :class="s.rightIcon({ class: styleSlots?.rightIcon })"
             />
           </slot>
         </tab>
       </tab-list>
 
-      <tab-panels :class="classes.content">
+      <tab-panels :class="s.content({ class: styleSlots?.content })">
         <tab-panel
           v-for="item in tabs"
           :key="item.key"
           :data-key="item.key"
-          :class="classes.content"
+          :class="s.content({ class: styleSlots?.content })"
         >
           <slot :name="`${item.key}-content`" />
         </tab-panel>

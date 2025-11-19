@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const table = tv({
   slots: {
     container: [
       'w-full',
@@ -25,6 +25,7 @@ export default tv({
       'data-[row-events=true]:cursor-pointer'
     ],
     td: [
+      'vk-table__td',
       'px-4',
       'py-2',
       'text-left'
@@ -35,7 +36,6 @@ export default tv({
       'text-center'
     ],
     body: [],
-    shape: [],
     tableFooter: [
       'vk-table_footer'
     ]
@@ -260,4 +260,7 @@ export default tv({
       }
     }
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default table
+export type TableSlots = typeof table.slots

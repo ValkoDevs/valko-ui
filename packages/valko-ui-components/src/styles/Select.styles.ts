@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const select = tv({
   slots: {
     container: [
       'vk-select__container',
@@ -234,4 +234,7 @@ export default tv({
       }
     }
   }
-}) as unknown as ReturnType<TV>
+})
+
+export default select
+export type SelectSlots = typeof select.slots

@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { reactive, provide } from 'vue'
+import { reactive, provide, computed } from 'vue'
 import type { CollapseProps } from '#valkoui/types/Collapse'
 import styles from '#valkoui/styles/Collapse.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 
 defineOptions({ name: 'VkCollapse' })
 
@@ -14,7 +13,7 @@ const props = withDefaults(defineProps<CollapseProps>(), {
   multiple: false
 })
 
-const classes = useStyle<CollapseProps>(props, styles)
+const s = computed(() => styles({ ...props, class: props.styleSlots }))
 
 const items = reactive<Record<string, boolean>>({})
 
@@ -37,7 +36,7 @@ provide('itemStates', { items, toggleItem })
 
 <template>
   <div
-    :class="classes"
+    :class="s"
     :data-size="size"
     :data-compact="compact"
     :data-separator="separator"

@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const calendar = tv({
   slots: {
     container: [
       'vk-calendar'
@@ -168,4 +168,7 @@ export default tv({
       rounded: {}
     }
   }
-}) as unknown as ReturnType<TV>
+})
+
+export default calendar
+export type CalendarSlots = typeof calendar.slots

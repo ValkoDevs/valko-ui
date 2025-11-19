@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const cardImage = tv({
   slots: {
     container: [
       'vk-card__image',
@@ -18,7 +18,7 @@ export default tv({
       'group-data-[layout=cover]:absolute',
       'group-data-[layout=cover]:inset-0'
     ],
-    img: [
+    imageTag: [
       'w-full',
       'h-full',
       'object-cover',
@@ -35,4 +35,7 @@ export default tv({
       'opacity-50'
     ]
   }
-}) as unknown as ReturnType<TV>
+})
+
+export default cardImage
+export type CardImageSlots = typeof cardImage.slots

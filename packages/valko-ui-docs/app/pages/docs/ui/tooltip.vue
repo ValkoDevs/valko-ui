@@ -58,6 +58,31 @@ const tooltipProps: TableItem[] = [
     description: 'Elevates the tooltip by one level.',
     values: 'true, false',
     default: 'true'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Tooltip.',
+    values: 'TooltipSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the tooltip popover.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'tip',
+    prop: 'tip',
+    description: 'Styles for the tooltip content element.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -80,6 +105,26 @@ const generateSnippet = snippetGeneratorFactory('vk-tooltip')
 
 const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
 const extraProps = 'content="Tooltip Content"'
+
+const styles = generateStyles({
+  shapes: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ],
+  sizes: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+  ],
+  placements: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+    'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
+  ],
+  alignments: [
+    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+  ]
+})
 </script>
 
 <template>
@@ -140,7 +185,7 @@ const extraProps = 'content="Tooltip Content"'
     <template #examples>
       <example-section
         title="Shapes"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        :style-slots="styles.shapes"
       >
         <vk-tooltip
           v-for="shape in shapeOptions.general"
@@ -160,7 +205,7 @@ const extraProps = 'content="Tooltip Content"'
 
       <example-section
         title="Sizes"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(4,_minmax(0,_max-content))]"
+        :style-slots="styles.sizes"
       >
         <vk-tooltip
           v-for="size in sizeOptions.general"
@@ -180,7 +225,7 @@ const extraProps = 'content="Tooltip Content"'
 
       <example-section
         title="Placements"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))] lg:grid-cols-[repeat(5,_minmax(0,_max-content))]"
+        :style-slots="styles.placements"
       >
         <vk-tooltip
           v-for="placement in placementOptions.withAuto"
@@ -200,7 +245,7 @@ const extraProps = 'content="Tooltip Content"'
 
       <example-section
         title="Alignments"
-        classes="grid-cols-[repeat(2,_minmax(0,_max-content))] md:grid-cols-[repeat(3,_minmax(0,_max-content))]"
+        :style-slots="styles.alignments"
       >
         <vk-tooltip
           v-for="alignment in alignmentOptions"
@@ -239,6 +284,12 @@ const extraProps = 'content="Tooltip Content"'
       <vk-table
         :headers="propHeaders"
         :data="tooltipProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Tooltip Slots</h3>

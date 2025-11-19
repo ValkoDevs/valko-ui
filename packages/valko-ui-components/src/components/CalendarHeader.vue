@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { CalendarHeaderProps } from '#valkoui/types/Calendar'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Calendar.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkButton from './Button.vue'
 import VkIcon from './Icon.vue'
 
@@ -12,18 +11,18 @@ const props = defineProps<CalendarHeaderProps>()
 
 const emit = defineEmits(['previousClick', 'nextClick', 'viewChange'])
 
-const classes = useStyle<CalendarHeaderProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 </script>
 
 <template>
-  <div :class="classes.headerContainer">
+  <div :class="s.headerContainer({ class: styleSlots?.headerContainer })">
     <vk-button
       :size="size"
       :color="color"
       variant="link"
       condensed
       :shape="shape"
-      :class="classes.arrows"
+      :class="s.arrows({ class: styleSlots?.arrows })"
       :disabled="disabledLeft"
       @click="() => emit('previousClick')"
     >
@@ -36,7 +35,7 @@ const classes = useStyle<CalendarHeaderProps, SlotStyles>(props, styles)
       variant="link"
       condensed
       :shape="shape"
-      :class="classes.periodButton"
+      :class="s.periodButton({ class: styleSlots?.periodButton })"
       @click="() => emit('viewChange')"
     >
       {{ loadedPeriod }}
@@ -48,7 +47,7 @@ const classes = useStyle<CalendarHeaderProps, SlotStyles>(props, styles)
       variant="link"
       condensed
       :shape="shape"
-      :class="classes.arrows"
+      :class="s.arrows({ class: styleSlots?.arrows })"
       :disabled="disabledRight"
       @click="() => emit('nextClick')"
     >

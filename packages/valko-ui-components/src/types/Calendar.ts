@@ -1,5 +1,6 @@
 import type { ComputedRef, Ref } from 'vue'
 import type { Sizes, ColorsWithSurface, Variants, Shapes } from './common'
+import type { CalendarSlots } from '../styles/Calendar.styles'
 
 export type DisplayView = 'days' | 'months' | 'years'
 export type SelectionType = 'full' | 'month-only' | 'year-only' | 'day-month' | 'month-year'
@@ -30,6 +31,7 @@ export interface CalendarProps extends Sizes, ColorsWithSurface, Variants, Shape
   disableWeekends?: boolean;
   minDate?: EpochTimeStamp;
   maxDate?: EpochTimeStamp;
+  styleSlots?: Partial<CalendarSlots>;
 }
 
 export interface CalendarDayViewProps extends CalendarProps {

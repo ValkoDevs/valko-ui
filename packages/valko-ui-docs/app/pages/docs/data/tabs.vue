@@ -116,6 +116,80 @@ const tabsProps: TableItem[] = [
     description: 'Accessible label for the tab list. Used by assistive technologies when no visible heading is present.',
     values: 'string',
     default: 'Tab navigation'
+  },
+  {
+    key: 'styleSlotsProps',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Custom styles for different parts of the Tabs component.',
+    values: 'TabsSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the tabs component.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'group',
+    prop: 'group',
+    description: 'Tab group wrapper element.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'list',
+    prop: 'list',
+    description: 'Tab list navigation container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'tabSlot',
+    prop: 'tabSlot',
+    description: 'Styles for each individual tab button.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'cursor',
+    prop: 'cursor',
+    description: 'Cursor indicator for the active tab.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'cursorGradient',
+    prop: 'cursorGradient',
+    description: 'Gradient effect for the cursor indicator (if variant is gradient).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'leftIcon',
+    prop: 'leftIcon',
+    description: 'Styles for the left icon in a tab.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'rightIcon',
+    prop: 'rightIcon',
+    description: 'Styles for the right icon in a tab.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    description: 'Container for tab panels and their content.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -239,6 +313,16 @@ const tabs: Tab[] = [
 const generateSnippet = snippetGeneratorFactory('vk-tabs')
 
 const extraProps = ':tabs="tabs"'
+
+const styles = generateStyles({
+  grid: [
+    'xl:grid-cols-2',
+    'overflow-x-auto'
+  ],
+  gridAlt: [
+    'overflow-x-auto'
+  ]
+})
 </script>
 
 <template>
@@ -304,7 +388,7 @@ const extraProps = ':tabs="tabs"'
     <template #examples>
       <example-section
         title="Colors"
-        classes="xl:grid-cols-2 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="color in colorOptions.general"
@@ -324,7 +408,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="Variants"
-        classes="xl:grid-cols-2 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="variant in variantOptions.withGradient"
@@ -344,7 +428,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="Shapes"
-        classes="xl:grid-cols-2 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="shape in shapeOptions.withLine"
@@ -365,7 +449,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="Sizes"
-        classes="xl:grid-cols-2 overflow-x-auto"
+        :style-slots="styles.grid"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -385,7 +469,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="Grow"
-        class="overflow-x-auto"
+        :style-slots="styles.gridAlt"
       >
         <vk-tabs
           grow
@@ -399,7 +483,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="With Icons"
-        class="overflow-x-auto"
+        :style-slots="styles.gridAlt"
       >
         <vk-tabs
           :tabs="tabWithIcon"
@@ -412,7 +496,7 @@ const extraProps = ':tabs="tabs"'
 
       <example-section
         title="Disabled"
-        class="overflow-x-auto"
+        :style-slots="styles.gridAlt"
       >
         <vk-tabs
           :tabs="tabDisabled"
@@ -429,6 +513,12 @@ const extraProps = ':tabs="tabs"'
       <vk-table
         :headers="propHeaders"
         :data="tabsProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Tabs Slots</h3>

@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { ref, useId } from 'vue'
+import { ref, useId, computed } from 'vue'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
 import type { ModalProps } from '#valkoui/types/Modal'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Modal.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 
@@ -21,7 +19,7 @@ const props = withDefaults(defineProps<ModalProps>(), {
 
 const emit = defineEmits(['close'])
 
-const classes = useStyle<ModalProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 
 const containerRef = ref(null)
 const descriptionId = useId()
@@ -36,7 +34,7 @@ const closeModal = () => { if (props.closable) emit('close') }
     as="template"
   >
     <Dialog
-      :class="classes.dialog"
+      :class="s.dialog({ class: styleSlots?.dialog })"
       :initial-focus="containerRef"
       :aria-modal="true"
       :aria-describedby="props['aria-description'] ? descriptionId : undefined"
@@ -53,14 +51,14 @@ const closeModal = () => { if (props.closable) emit('close') }
         leave-from="opacity-100"
         leave-to="opacity-0"
       >
-        <div :class="classes.backdrop" />
+        <div :class="s.backdrop({ class: styleSlots?.backdrop })" />
       </transition-child>
 
       <div
-        :class="classes.container"
+        :class="s.container({ class: styleSlots?.container })"
         ref="containerRef"
       >
-        <div :class="classes.content">
+        <div :class="s.content({ class: styleSlots?.content })">
           <transition-child
             as="template"
             class="opacity-0"
@@ -71,13 +69,13 @@ const closeModal = () => { if (props.closable) emit('close') }
             leave-from="opacity-100 scale-100"
             leave-to="opacity-0 scale-95"
           >
-            <dialog-panel :class="classes.panel">
+            <dialog-panel :class="s.panel({ class: styleSlots?.panel })">
               <div
                 v-if="title || closable"
-                :class="classes.panelChild"
+                :class="s.panelChild({ class: styleSlots?.panelChild })"
               >
                 <dialog-title
-                  :class="classes.title"
+                  :class="s.title({ class: styleSlots?.title })"
                   :id="props['aria-labelledby']"
                 >
                   {{ title }}
@@ -97,10 +95,10 @@ const closeModal = () => { if (props.closable) emit('close') }
                   shape="rounded"
                   color="surface"
                   condensed
-                  :class="classes.closeButton"
+                  :class="s.closeButton({ class: styleSlots?.closeButton })"
                   @click="closeModal"
                 >
-                  <div :class="classes.closeIcon">
+                  <div :class="s.closeIcon({ class: styleSlots?.closeIcon })">
                     <vk-icon name="x" />
                   </div>
                 </vk-button>

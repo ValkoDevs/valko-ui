@@ -129,6 +129,73 @@ const timeProps: TableItem[] = [
     description: 'A composable that provides methods and computed properties for managing time selection and formatting. We provide a useTimeAdapter for the component.',
     values: 'TimeAdapterInterface',
     default: ''
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for Time.',
+    values: 'TimeSlots',
+    default: ''
+  }
+]
+
+const styleSlotsInterface: TableItem[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    description: 'Root container for the time picker.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'grid',
+    prop: 'grid',
+    description: 'Grid container for time unit selectors.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'unitContainer',
+    prop: 'unitContainer',
+    description: 'Container for each time unit (hours, minutes, seconds) selector.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'unitButton',
+    prop: 'unitButton',
+    description: 'Button for selecting a time unit value.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'footer',
+    prop: 'footer',
+    description: 'Footer container for OK button and AM/PM selector.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'okButton',
+    prop: 'okButton',
+    description: 'OK button to confirm time selection.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'periodContainer',
+    prop: 'periodContainer',
+    description: 'Container for AM/PM selector buttons.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'periodButton',
+    prop: 'periodButton',
+    description: 'Button for selecting AM or PM.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -383,6 +450,21 @@ const minmaxSnippet = `${scriptCode}
   />
 </template>
 `
+
+const styles = generateStyles({
+  default: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3'
+  ],
+  sizes: [
+    'sm:grid-cols-2',
+    'md:grid-cols-3',
+    'lg:grid-cols-4'
+  ],
+  times: [
+    'sm:grid-cols-2'
+  ]
+})
 </script>
 
 <template>
@@ -471,7 +553,7 @@ const minmaxSnippet = `${scriptCode}
     <template #examples>
       <example-section
         title="Colors"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <div
           v-for="color in colorOptions.general"
@@ -492,7 +574,7 @@ const minmaxSnippet = `${scriptCode}
 
       <example-section
         title="Variants"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <div
           v-for="variant in variantOptions.general"
@@ -513,7 +595,7 @@ const minmaxSnippet = `${scriptCode}
 
       <example-section
         title="Shapes"
-        classes="sm:grid-cols-2 md:grid-cols-3"
+        :style-slots="styles.default"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -534,7 +616,7 @@ const minmaxSnippet = `${scriptCode}
 
       <example-section
         title="Sizes"
-        classes="sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        :style-slots="styles.sizes"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -555,7 +637,7 @@ const minmaxSnippet = `${scriptCode}
 
       <example-section
         title="Min & Max Times"
-        classes="sm:grid-cols-2"
+        :style-slots="styles.times"
       >
         <div class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start">
           <span>Min</span>
@@ -594,6 +676,12 @@ const minmaxSnippet = `${scriptCode}
       <vk-table
         :headers="propHeaders"
         :data="timeProps"
+      />
+
+      <h3>Style Slots Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="styleSlotsInterface"
       />
 
       <h3>Time Adapter Props</h3>

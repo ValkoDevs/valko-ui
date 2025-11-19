@@ -19,7 +19,14 @@ const iconProps: TableItem[] = [
     prop: 'aria-label',
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
-    values: 'string',
+    values: 'string'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Root container.',
+    values: 'string[]',
     default: ''
   }
 ]
@@ -62,7 +69,7 @@ const generateSnippet = snippetGeneratorFactory('vk-icon')
     <template #examples>
       <example-section
         title="Names"
-        classes="grid-cols-2 md:grid-cols-4"
+        :style-slots="{ slotContainer: ['grid-cols-2 md:grid-cols-4'] }"
       >
         <vk-icon
           v-for="name in names"

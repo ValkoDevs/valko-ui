@@ -1,7 +1,5 @@
 import Toastify from 'toastify-js'
 import type { NotificationProps } from '#valkoui/types/Notification.ts'
-import type { SlotStyles } from '#valkoui/types/common'
-import useStyle from './useStyle.ts'
 import styles from '#valkoui/styles/Notification.styles.ts'
 
 const useNotification = (props: NotificationProps) => {
@@ -10,28 +8,34 @@ const useNotification = (props: NotificationProps) => {
   let notification: ReturnType<typeof Toastify> | null = null
 
   const defaultProps = {
-    color: props.color || 'primary',
-    variant: props.variant || 'filled',
-    shape: props.shape || 'soft',
-    size: props.size || 'md'
+    color: props.color ?? 'primary',
+    variant: props.variant ?? 'filled',
+    shape: props.shape ?? 'soft',
+    size: props.size ?? 'md'
   }
 
-  const combinedProps = { ...props, ...defaultProps }
+  const styleProps = {
+    color: defaultProps.color,
+    variant: defaultProps.variant,
+    shape: defaultProps.shape,
+    size: defaultProps.size,
+    styleSlots: props.styleSlots
+  }
 
-  const classes = useStyle<NotificationProps, SlotStyles>(combinedProps, styles)
+  const classes = styles(styleProps)
 
   const defaultOnClick = () => notification?.hideToast()
 
   const notificationNode = document.createElement('div')
-  notificationNode.className = classes.value.container
+  notificationNode.className = classes.container({ class: props.styleSlots?.container })
 
   const content = document.createElement('div')
-  content.className = classes.value.content
+  content.className = classes.content({ class: props.styleSlots?.content })
   content.innerText = props.text
   notificationNode.appendChild(content)
 
   const progressBarContainer = document.createElement('div')
-  progressBarContainer.className = classes.value.progressbar
+  progressBarContainer.className = classes.progressbar({ class: props.styleSlots?.progressbar })
   notificationNode.appendChild(progressBarContainer)
 
   if (props.close) {
@@ -39,7 +43,7 @@ const useNotification = (props: NotificationProps) => {
     closeButton.onclick = () => notification?.hideToast()
 
     const customIcon = document.createElement('i')
-    customIcon.className = classes.value.icon
+    customIcon.className = classes.icon({ class: props.styleSlots?.icon })
 
     closeButton.appendChild(customIcon)
     notificationNode.appendChild(closeButton)
@@ -47,7 +51,7 @@ const useNotification = (props: NotificationProps) => {
 
   notification = Toastify({
     node: notificationNode,
-    className: classes.value.notification,
+    className: classes.notification({ class: props.styleSlots?.notification }),
     duration: props.duration || 3000,
     destination: props.destination,
     newWindow: props.newWindow || false,

@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, computed } from 'vue'
 import type { PopoverProps } from '#valkoui/types/Popover'
-import type { SlotStyles } from '#valkoui/types/common'
 import styles from '#valkoui/styles/Popover.styles.ts'
-import useStyle from '#valkoui/composables/useStyle.ts'
 
 defineOptions({ name: 'VkPopover' })
 
@@ -12,13 +10,12 @@ const props = withDefaults(defineProps<PopoverProps>(), {
   shape: 'soft',
   text: '',
   placement: 'auto',
-  elevated: false,
-  panelClasses: () => []
+  elevated: false
 })
 
 const emit = defineEmits(['close'])
 
-const classes = useStyle<PopoverProps, SlotStyles>(props, styles)
+const s = computed(() => styles(props))
 
 const rootRef = ref<HTMLElement | null>(null)
 const slotRef = ref<HTMLElement | null>(null)
@@ -76,10 +73,10 @@ onBeforeUnmount(() => {
 <template>
   <div
     ref="rootRef"
-    :class="classes.popover"
+    :class="s.container({ class: styleSlots?.container })"
   >
     <div
-      :class="classes.slotContainer"
+      :class="s.slotContainer({ class: styleSlots?.slotContainer })"
       ref="slotRef"
     >
       <slot name="default" />
@@ -101,7 +98,7 @@ onBeforeUnmount(() => {
         :aria-label="props['aria-label']"
         :aria-labelledby="props['aria-labelledby']"
         :aria-describedby="props['aria-describedby']"
-        :class="[classes.panel, ...(Array.isArray(props.classes) ? props.classes : [props.classes])]"
+        :class="s.panel({ class: styleSlots?.panel })"
         :data-text="!!text"
         :data-placement="placement"
       >

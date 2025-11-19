@@ -1,6 +1,7 @@
 import type { Ref } from 'vue'
 import type { TableHeader, TableItem, TableProps } from './Table'
 import type { Pagination, Sort, Filter } from './common'
+import type { DataTableSlots } from '../styles/DataTable.styles'
 
 export type SelectionMode = 'single' | 'multiple' | 'rowSingle' | 'rowMultiple' | 'none'
 
@@ -46,6 +47,7 @@ export interface DataTableProps extends TableProps {
   page?: number;
   pageSizeOptions?: number[];
   label?: string;
+  styleSlots?: Partial<DataTableSlots>;
 }
 
 export interface ClientSideDataTable<T extends TableItem> {

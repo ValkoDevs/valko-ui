@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const tabs = tv({
   slots: {
     container: [
       'vk-tabs__container',
@@ -25,7 +25,7 @@ export default tv({
       'duration-200',
       'ease-out'
     ],
-    tab: [
+    tabSlot: [
       'vk-tabs__tab',
       'tracking-wider',
       'font-semibold',
@@ -89,7 +89,7 @@ export default tv({
         list: [
           'bg-transparent'
         ],
-        tab: [
+        tabSlot: [
           'bg-transparent'
         ],
         cursor: [
@@ -101,6 +101,7 @@ export default tv({
           'bg-surface-container'
         ],
         cursor: [
+          'vk-tabs__cursor',
           'bg-gradient-to-br'
         ]
       }
@@ -119,7 +120,7 @@ export default tv({
         list: [
           'rounded-full'
         ],
-        tab: [
+        tabSlot: [
           'rounded-full',
           'text-on-surface'
         ],
@@ -131,7 +132,7 @@ export default tv({
         list: [
           'rounded-none'
         ],
-        tab: [
+        tabSlot: [
           'text-on-surface'
         ]
       },
@@ -139,7 +140,7 @@ export default tv({
         list: [
           'rounded-lg'
         ],
-        tab: [
+        tabSlot: [
           'rounded-lg',
           'text-on-surface'
         ],
@@ -150,25 +151,25 @@ export default tv({
     },
     size: {
       xs: {
-        tab: [
+        tabSlot: [
           'p-1.5',
           'text-xs'
         ]
       },
       sm: {
-        tab: [
+        tabSlot: [
           'p-2',
           'text-sm'
         ]
       },
       md: {
-        tab: [
+        tabSlot: [
           'p-3',
           'text-base'
         ]
       },
       lg: {
-        tab: [
+        tabSlot: [
           'p-4',
           'text-lg'
         ]
@@ -217,7 +218,7 @@ export default tv({
         list: [
           'flex-col'
         ],
-        tab: [
+        tabSlot: [
           'w-full',
           'justify-center'
         ]
@@ -235,7 +236,7 @@ export default tv({
           'from-primary-gradient-start',
           'to-primary-gradient-end'
         ],
-        tab: [
+        tabSlot: [
           'data-[headlessui-state=selected]:text-on-primary'
         ]
       }
@@ -249,7 +250,7 @@ export default tv({
           'from-secondary-gradient-start',
           'to-secondary-gradient-end'
         ],
-        tab: [
+        tabSlot: [
           'data-[headlessui-state=selected]:text-on-secondary'
         ]
       }
@@ -263,7 +264,7 @@ export default tv({
           'from-positive-gradient-start',
           'to-positive-gradient-end'
         ],
-        tab: [
+        tabSlot: [
           'data-[headlessui-state=selected]:text-on-positive'
         ]
       }
@@ -277,7 +278,7 @@ export default tv({
           'from-accent-gradient-start',
           'to-accent-gradient-end'
         ],
-        tab: [
+        tabSlot: [
           'data-[headlessui-state=selected]:text-on-accent'
         ]
       }
@@ -291,7 +292,7 @@ export default tv({
           'from-warning-gradient-start',
           'to-warning-gradient-end'
         ],
-        tab: [
+        tabSlot: [
           'data-[headlessui-state=selected]:text-on-warning'
         ]
       }
@@ -305,7 +306,7 @@ export default tv({
           'from-negative-gradient-start',
           'to-negative-gradient-end'
         ],
-        tab: [
+        tabSlot: [
           'data-[headlessui-state=selected]:text-on-negative'
         ]
       }
@@ -374,7 +375,7 @@ export default tv({
         cursor: [
           'bg-primary'
         ],
-        tab: [
+        tabSlot: [
           'data-[headlessui-state=selected]:text-on-primary'
         ]
       }
@@ -387,7 +388,7 @@ export default tv({
         cursor: [
           'bg-secondary'
         ],
-        tab: [
+        tabSlot: [
           'data-[headlessui-state=selected]:text-on-secondary'
         ]
       }
@@ -400,7 +401,7 @@ export default tv({
         cursor: [
           'bg-positive'
         ],
-        tab: [
+        tabSlot: [
           'data-[headlessui-state=selected]:text-on-positive'
         ]
       }
@@ -413,7 +414,7 @@ export default tv({
         cursor: [
           'bg-accent'
         ],
-        tab: [
+        tabSlot: [
           'data-[headlessui-state=selected]:text-on-accent'
         ]
       }
@@ -426,7 +427,7 @@ export default tv({
         cursor: [
           'bg-warning'
         ],
-        tab: [
+        tabSlot: [
           'data-[headlessui-state=selected]:text-on-warning'
         ]
       }
@@ -439,7 +440,7 @@ export default tv({
         cursor: [
           'bg-negative'
         ],
-        tab: [
+        tabSlot: [
           'data-[headlessui-state=selected]:text-on-negative'
         ]
       }
@@ -574,4 +575,7 @@ export default tv({
       }
     }
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default tabs
+export type TabsSlots = typeof tabs.slots

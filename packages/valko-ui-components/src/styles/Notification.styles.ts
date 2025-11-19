@@ -1,6 +1,6 @@
-import { type TV, tv } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const notification = tv({
   slots: {
     notification: [
       'vk-notification',
@@ -561,4 +561,7 @@ export default tv({
       }
     }
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default notification
+export type NotificationSlots = typeof notification.slots

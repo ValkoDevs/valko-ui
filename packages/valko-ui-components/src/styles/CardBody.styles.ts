@@ -1,6 +1,6 @@
-import { tv, type TV } from 'tailwind-variants'
+import { tv } from 'tailwind-variants'
 
-export default tv({
+const cardBody = tv({
   base: [
     'vk-card__body',
     'px-4',
@@ -12,4 +12,7 @@ export default tv({
     'group-data-[card-image=true]:order-3',
     'group-data-[card-image=false]:order-2'
   ]
-}) as unknown as ReturnType<TV>
+})
+
+export default cardBody
+export type CardBodySlots = typeof cardBody.base
