@@ -1,6 +1,6 @@
 {
   "name": "@valko-ui/components",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "type": "module",
   "files": [
     "dist"
