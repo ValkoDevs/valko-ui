@@ -17,7 +17,8 @@ const props = withDefaults(defineProps<InputProps>(), {
   clearable: false,
   step: 1,
   min: -Infinity,
-  max: Infinity
+  max: Infinity,
+  iconClickFocus: true
 })
 
 const emit = defineEmits(['update:modelValue', 'focus', 'clear', 'blur', 'leftIconClick', 'rightIconClick'])
@@ -59,10 +60,10 @@ const clearInput = () => {
 }
 
 const handleIconClick = (icon: 'left' | 'right') => {
-  if (!props.disabled && !props.readonly) {
-    emit(`${icon}IconClick`)
-    inputRef.value?.focus()
-  }
+  if (props.disabled) return
+
+  emit(`${icon}IconClick`)
+  if (props.iconClickFocus) inputRef.value?.focus()
 }
 
 const changeNumericValue = (action: 'increment' | 'decrement') => {
@@ -170,7 +171,7 @@ watch(() => props.modelValue, (newValue) => {
         @touchend="clearInput"
       />
       <span
-        v-if="$slots['left-icon']"
+        v-if="$slots['left-icon'] && $slots['left-icon']().length"
         :class="[s.icons({ class: styleSlots?.icons }), s.leftIcon({ class: styleSlots?.leftIcon })]"
         @click="handleIconClick('left')"
         @touchend="handleIconClick('left')"
@@ -178,7 +179,7 @@ watch(() => props.modelValue, (newValue) => {
         <slot name="left-icon" />
       </span>
       <span
-        v-if="$slots['right-icon']"
+        v-if="$slots['right-icon'] && $slots['right-icon']().length"
         :data-chevron-icons="type === 'number'"
         :class="[s.icons({ class: styleSlots?.icons }), s.rightIcon({ class: styleSlots?.rightIcon })]"
         @click="handleIconClick('right')"

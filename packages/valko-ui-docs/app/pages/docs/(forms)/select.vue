@@ -22,6 +22,11 @@ const form = ref<SelectProps>({
   clearable: false
 })
 
+const iconsInForm = ref({
+  left: false,
+  right: false
+})
+
 const exampleSectionModel = reactive<Record<string, number>>({ readonly: 1 })
 
 const apiData: PropData[] = [
@@ -337,7 +342,22 @@ const styles = {
         :size="form.size"
         :multiple="form.multiple"
         :clearable="form.clearable"
-      />
+        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
+        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'surface' })"
+      >
+        <template
+          v-if="iconsInForm.left"
+          #left-icon
+        >
+          <vk-icon name="home" />
+        </template>
+        <template
+          v-if="iconsInForm.right"
+          #right-icon
+        >
+          <vk-icon name="home" />
+        </template>
+      </vk-select>
     </template>
 
     <template #playground-options>
@@ -390,6 +410,14 @@ const styles = {
       <vk-checkbox
         v-model="form.clearable"
         label="Clearable"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.left"
+        label="Left Icon"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.right"
+        label="Right Icon"
       />
     </template>
 

@@ -168,6 +168,14 @@ const apiData: PropData[] = [
     apiType: 'custom-string'
   },
   {
+    key: 'iconClickFocusProp',
+    prop: 'iconClickFocus',
+    required: false,
+    description: 'Whether the input should focus when the icon is clicked.',
+    values: 'true, false',
+    default: 'true'
+  },
+  {
     key: 'ariaLabelProp',
     prop: 'ariaLabel',
     required: false,
