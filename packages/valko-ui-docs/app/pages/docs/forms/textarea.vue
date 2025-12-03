@@ -271,7 +271,7 @@ const iconSnippet = `<template>
 </template>
 `
 
-const styles = generateStyles({
+const styles = {
   default: [
     'sm:grid-cols-2',
     'md:grid-cols-3'
@@ -284,7 +284,7 @@ const styles = generateStyles({
   icons: [
     'sm:grid-cols-2'
   ]
-})
+}
 </script>
 
 <template>
@@ -384,7 +384,7 @@ const styles = generateStyles({
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <vk-textarea
           v-for="color in colorOptions.general"
@@ -400,7 +400,7 @@ const styles = generateStyles({
 
       <example-section
         title="Variants"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <vk-textarea
           v-for="variant in variantOptions.general"
@@ -416,7 +416,7 @@ const styles = generateStyles({
 
       <example-section
         title="Shapes"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <vk-textarea
           v-for="shape in shapeOptions.general"
@@ -432,7 +432,7 @@ const styles = generateStyles({
 
       <example-section
         title="Sizes"
-        :style-slots="styles.sizes"
+        :style-slots="{ slotContainer: styles.sizes }"
       >
         <vk-textarea
           v-for="size in sizeOptions.general"
@@ -471,7 +471,7 @@ const styles = generateStyles({
 
       <example-section
         title="Icons"
-        :style-slots="styles.icons"
+        :style-slots="{ slotContainer: styles.icons }"
       >
         <vk-textarea
           label="Left Icon"

@@ -359,7 +359,7 @@ const iconSnippet = `<template>
 </template>
 `
 
-const styles = generateStyles({
+const styles = {
   default: [
     'sm:grid-cols-2',
     'md:grid-cols-3'
@@ -376,7 +376,7 @@ const styles = generateStyles({
   icons: [
     'sm:grid-cols-2'
   ]
-})
+}
 </script>
 
 <template>
@@ -505,7 +505,7 @@ const styles = generateStyles({
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <vk-input
           v-for="color in colorOptions.withSurface"
@@ -521,7 +521,7 @@ const styles = generateStyles({
 
       <example-section
         title="Variants"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <vk-input
           v-for="variant in variantOptions.general"
@@ -537,7 +537,7 @@ const styles = generateStyles({
 
       <example-section
         title="Shapes"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <vk-input
           v-for="shape in shapeOptions.general"
@@ -553,7 +553,7 @@ const styles = generateStyles({
 
       <example-section
         title="Sizes"
-        :style-slots="styles.sizes"
+        :style-slots="{ slotContainer: styles.sizes }"
       >
         <vk-input
           v-for="size in sizeOptions.general"
@@ -569,7 +569,7 @@ const styles = generateStyles({
 
       <example-section
         title="Types"
-        :style-slots="styles.types"
+        :style-slots="{ slotContainer: styles.types }"
       >
         <vk-input
           v-for="type in typeOptions"
@@ -619,7 +619,7 @@ const styles = generateStyles({
 
       <example-section
         title="Icons"
-        :style-slots="styles.icons"
+        :style-slots="{ slotContainer: styles.icons }"
       >
         <vk-input
           label="Left Icon"

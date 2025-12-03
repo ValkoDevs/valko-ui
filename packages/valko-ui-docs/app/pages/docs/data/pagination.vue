@@ -131,7 +131,7 @@ const paginationEmits: TableItem[] = [
 
 const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
-const styles = generateStyles({
+const styles = {
   grid: [
     'md:grid-cols-2',
     'xl:grid-cols-3',
@@ -140,7 +140,7 @@ const styles = generateStyles({
   gridAlt: [
     'overflow-x-auto'
   ]
-})
+}
 </script>
 
 <template>
@@ -205,7 +205,7 @@ const styles = generateStyles({
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="styles.grid"
+        :style-slots="{ slotContainer: styles.grid }"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -227,7 +227,7 @@ const styles = generateStyles({
 
       <example-section
         title="Variants"
-        :style-slots="styles.grid"
+        :style-slots="{ slotContainer: styles.grid }"
       >
         <div
           v-for="variant in variantOptions.general"
@@ -249,7 +249,7 @@ const styles = generateStyles({
 
       <example-section
         title="Shapes"
-        :style-slots="styles.grid"
+        :style-slots="{ slotContainer: styles.grid }"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -271,7 +271,7 @@ const styles = generateStyles({
 
       <example-section
         title="Sizes"
-        :style-slots="styles.grid"
+        :style-slots="{ slotContainer: styles.grid }"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -292,7 +292,7 @@ const styles = generateStyles({
 
       <example-section
         title="Elevated"
-        :style-slots="styles.gridAlt"
+        :style-slots="{ slotContainer: styles.gridAlt }"
       >
         <vk-pagination
           v-model="form.modelValue"
@@ -307,7 +307,7 @@ const styles = generateStyles({
 
       <example-section
         title="Disabled"
-        :style-slots="styles.gridAlt"
+        :style-slots="{ slotContainer: styles.gridAlt }"
       >
         <vk-pagination
           v-model="form.modelValue"

@@ -256,7 +256,7 @@ form.labels = generateLabels()
 
 const generateSnippet = snippetGeneratorFactory('vk-range')
 
-const styles = generateStyles({
+const styles = {
   colors: [
     'sm:grid-cols-2',
     'md:grid-cols-3'
@@ -279,7 +279,7 @@ const styles = generateStyles({
     'sm:grid-cols-2',
     'md:grid-cols-3'
   ]
-})
+}
 </script>
 
 <template>
@@ -372,7 +372,7 @@ const styles = generateStyles({
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="styles.colors"
+        :style-slots="{ slotContainer: styles.colors }"
       >
         <div
           v-for="color in colorOptions.general"
@@ -392,7 +392,7 @@ const styles = generateStyles({
 
       <example-section
         title="Variants"
-        :style-slots="styles.variants"
+        :style-slots="{ slotContainer: styles.variants }"
       >
         <div
           v-for="variant in variantOptions.withGradient"
@@ -409,7 +409,7 @@ const styles = generateStyles({
 
       <example-section
         title="Shapes"
-        :style-slots="styles.shapes"
+        :style-slots="{ slotContainer: styles.shapes }"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -426,7 +426,7 @@ const styles = generateStyles({
 
       <example-section
         title="Sizes"
-        :style-slots="styles.sizes"
+        :style-slots="{ slotContainer: styles.sizes }"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -462,7 +462,7 @@ const styles = generateStyles({
 
       <example-section
         title="Striped"
-        :style-slots="styles.stripes"
+        :style-slots="{ slotContainer: styles.stripes }"
       >
         <div
           v-for="color in colorOptions.general"

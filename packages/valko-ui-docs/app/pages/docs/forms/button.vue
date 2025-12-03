@@ -177,7 +177,7 @@ const onClick = () => useNotification({ text: 'Clicked' })
 
 const generateSnippet = snippetGeneratorFactory('vk-button')
 
-const styles = generateStyles({
+const styles = {
   colors: [
     'sm:grid-cols-[repeat(3,_minmax(0,_max-content))]',
     'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]',
@@ -199,7 +199,7 @@ const styles = generateStyles({
     'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
     'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]'
   ]
-})
+}
 </script>
 
 <template>
@@ -281,7 +281,7 @@ const styles = generateStyles({
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="styles.colors"
+        :style-slots="{ slotContainer: styles.colors }"
       >
         <vk-button
           v-for="color in colorOptions.withSurface"
@@ -298,7 +298,7 @@ const styles = generateStyles({
 
       <example-section
         title="Variants"
-        :style-slots="styles.variants"
+        :style-slots="{ slotContainer: styles.variants }"
       >
         <vk-button
           v-for="variant in variantOptions.withGradientAndLink"
@@ -315,7 +315,7 @@ const styles = generateStyles({
 
       <example-section
         title="Shapes"
-        :style-slots="styles.shapes"
+        :style-slots="{ slotContainer: styles.shapes }"
       >
         <vk-button
           v-for="shape in shapeOptions.general"
@@ -332,7 +332,7 @@ const styles = generateStyles({
 
       <example-section
         title="Sizes"
-        :style-slots="styles.sizes"
+        :style-slots="{ slotContainer: styles.sizes }"
       >
         <vk-button
           v-for="size in sizeOptions.general"
@@ -349,7 +349,7 @@ const styles = generateStyles({
 
       <example-section
         title="Types"
-        :style-slots="styles.types"
+        :style-slots="{ slotContainer: styles.types }"
       >
         <vk-button
           v-for="type in typeOptions"

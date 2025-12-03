@@ -288,7 +288,7 @@ const crumbs: Crumb[] = [
 
 const extraProps = ':crumbs="crumbs"'
 
-const styles = generateStyles({
+const styles = {
   default: [
     'sm:grid-cols-2',
     'md:grid-cols-3'
@@ -298,7 +298,7 @@ const styles = generateStyles({
     'md:grid-cols-3',
     'lg:grid-cols-4'
   ]
-})
+}
 </script>
 
 <template>
@@ -351,7 +351,7 @@ const styles = generateStyles({
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -372,7 +372,7 @@ const styles = generateStyles({
 
       <example-section
         title="Variants"
-        :style-slots="styles.defaultAlt"
+        :style-slots="{ slotContainer: styles.defaultAlt }"
       >
         <div
           v-for="variant in variantOptions.withLink"
@@ -393,7 +393,7 @@ const styles = generateStyles({
 
       <example-section
         title="Shapes"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -414,7 +414,7 @@ const styles = generateStyles({
 
       <example-section
         title="Sizes"
-        :style-slots="styles.defaultAlt"
+        :style-slots="{ slotContainer: styles.defaultAlt }"
       >
         <div
           v-for="size in sizeOptions.general"

@@ -251,12 +251,12 @@ onMounted(() => {
   }
 })
 
-const styles = generateStyles({
+const styles = {
   default: [
     'grid-cols-2',
     'md:grid-cols-3'
   ]
-})
+}
 </script>
 
 <template>
@@ -310,7 +310,7 @@ const styles = generateStyles({
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <vk-menu
           v-for="(color, index) in colorOptions.general"
@@ -328,7 +328,7 @@ const styles = generateStyles({
 
       <example-section
         title="Variants"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <vk-menu
           v-for="(variant, index) in variantOptions.withGradientLinkAndLine"
@@ -346,7 +346,7 @@ const styles = generateStyles({
 
       <example-section
         title="Shapes"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <vk-menu
           v-for="(shape, index) in shapeOptions.general"
