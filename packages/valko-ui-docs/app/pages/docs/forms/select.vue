@@ -22,6 +22,11 @@ const form = ref<SelectProps>({
   clearable: false
 })
 
+const iconsInForm = ref({
+  left: false,
+  right: false
+})
+
 const exampleSectionModel = reactive<Record<string, number>>({ readonly: 1 })
 
 const apiData: TableItem[] = [
@@ -78,8 +83,8 @@ const apiData: TableItem[] = [
     prop: 'options',
     required: false,
     description: 'An array of options for the Select',
-    values: 'array',
-    default: 'false'
+    values: 'SelectOption[]',
+    default: ''
   },
   {
     key: 'modelValueProp',
@@ -232,11 +237,57 @@ const styleSlotsInterface: TableItem[] = [
     default: ''
   },
   {
-    key: 'icon',
-    prop: 'icon',
-    description: 'Icon for dropdown toggle (chevron).',
+    key: 'chevronIcon',
+    prop: 'chevronIcon',
+    description: 'The chevron icon for the select component.',
     values: 'string[]',
     default: ''
+  },
+  {
+    key: 'rightIcon',
+    prop: 'rightIcon',
+    description: 'The right icon for the select component.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'clearIcon',
+    prop: 'clearIcon',
+    description: 'The clear icon for the select component.',
+    values: 'string[]',
+    default: ''
+  }
+]
+
+const optionsInterface: TableItem[] = [
+  {
+    key: 'valueOption',
+    prop: 'value',
+    description: 'The value of the option. By default, this is a string or number, but you can use any type by providing a generic type parameter to SelectOption<T>.',
+    values: 'string | number | T',
+    default: ''
+  },
+  {
+    key: 'labelOption',
+    prop: 'label',
+    description: 'The label displayed for the option.',
+    values: 'string',
+    default: ''
+  }
+]
+
+const slotData: TableItem[] = [
+  {
+    key: 'leftIconSlot',
+    name: 'left-icon',
+    description: 'Slot for placing an icon on the left side of the input field. This slot is typically used to include an icon for visual enhancement or to indicate input type.',
+    example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>'
+  },
+  {
+    key: 'rightIconSlot',
+    name: 'right-icon',
+    description: 'Slot for placing an icon on the right side of the input field. This slot is typically used to include an icon for actions like clear input or show/hide password.',
+    example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>'
   }
 ]
 
@@ -247,6 +298,20 @@ const emitData: TableItem[] = [
     description: 'Emitted when the selected value(s) in the Select component change.',
     values: 'any',
     type: '(value: any) => void'
+  },
+  {
+    key: 'leftIconClickEmit',
+    event: 'leftIconClick',
+    description: 'Emitted when the left icon of the input is clicked.',
+    values: '',
+    type: '() => void'
+  },
+  {
+    key: 'rightIconClickEmit',
+    event: 'rightIconClick',
+    description: 'Emitted when the right icon of the input is clicked.',
+    values: '',
+    type: '() => void'
   }
 ]
 
@@ -299,7 +364,22 @@ const styles = generateStyles({
         :size="form.size"
         :multiple="form.multiple"
         :clearable="form.clearable"
-      />
+        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
+        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'surface' })"
+      >
+        <template
+          v-if="iconsInForm.left"
+          #left-icon
+        >
+          <vk-icon name="home" />
+        </template>
+        <template
+          v-if="iconsInForm.right"
+          #right-icon
+        >
+          <vk-icon name="home" />
+        </template>
+      </vk-select>
     </template>
 
     <template #playground-options>
@@ -352,6 +432,14 @@ const styles = generateStyles({
       <vk-checkbox
         v-model="form.clearable"
         label="Clearable"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.left"
+        label="Left Icon"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.right"
+        label="Right Icon"
       />
     </template>
 
@@ -460,6 +548,12 @@ const styles = generateStyles({
         :data="apiData"
       />
 
+      <h3>Select Option Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="optionsInterface"
+      />
+
       <h3>Style Slots Interface</h3>
       <vk-table
         :headers="propHeaders"
@@ -470,6 +564,12 @@ const styles = generateStyles({
       <vk-table
         :headers="emitHeaders"
         :data="emitData"
+      />
+
+      <h3>Select Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="slotData"
       />
     </template>
   </doc-section>

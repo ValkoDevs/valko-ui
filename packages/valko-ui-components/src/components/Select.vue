@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   readonly: false
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'leftIconClick', 'rightIconClick'])
 
 const s = computed(() => styles(props))
 
@@ -157,27 +157,41 @@ onUnmounted(() => {
         :shape="shape"
         :model-value="showValue"
         :clearable="clearable"
+        :icon-click-focus="false"
         cursor="pointer"
         :aria-label="props['aria-label']"
         :aria-labelledby="props['aria-labelledby']"
         :aria-describedby="props['aria-describedby']"
         :aria-invalid="props['aria-invalid']"
         :aria-required="props['aria-required']"
+        :style-slots="{
+          rightIcon: [s.rightIcon({ class: styleSlots?.rightIcon })],
+          clearIcon: [s.clearIcon({ class: styleSlots?.clearIcon })]
+        }"
+        :data-right-icon="true"
         @focus="toggleDropdown(true)"
         @blur="toggleDropdown(false)"
         @clear="clearSelection"
         @keydown="handleKeyDown"
         @keydown.escape="toggleDropdown(false)"
+        @left-icon-click="emit('leftIconClick')"
+        @right-icon-click="emit('rightIconClick')"
       >
-        <template #right-icon>
-          <vk-icon
-            name="chevron-down"
-            :data-open="isOpen"
-            :class="s.icon({ class: styleSlots?.icon })"
-            @click.stop="toggleDropdown(!isOpen)"
-          />
+        <template
+          v-for="(_, slotName) in $slots"
+          #[slotName]
+        >
+          <slot :name="slotName" />
         </template>
       </vk-input>
+
+      <vk-icon
+        name="chevron-down"
+        :data-open="isOpen"
+        :class="s.chevronIcon({ class: styleSlots?.chevronIcon })"
+        @click.stop="toggleDropdown(!isOpen)"
+      />
+
       <transition
         enter-active-class="transition-all duration-200 ease-out origin-top"
         enter-from-class="opacity-50 scale-y-90"

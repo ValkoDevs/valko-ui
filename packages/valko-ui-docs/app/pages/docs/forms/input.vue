@@ -153,6 +153,14 @@ const apiData: TableItem[] = [
     default: 'soft'
   },
   {
+    key: 'iconClickFocusProp',
+    prop: 'iconClickFocus',
+    required: false,
+    description: 'Whether the input should focus when the icon is clicked.',
+    values: 'true, false',
+    default: 'true'
+  },
+  {
     key: 'ariaLabelProp',
     prop: 'aria-label',
     required: false,
