@@ -49,14 +49,19 @@ const select = tv({
       'data-[shape=soft]:rounded-lg',
       'data-[shape=square]:rounded-none'
     ],
-    icon: [
-      'block',
+    chevronIcon: [
+      'absolute',
+      'right-2',
+      'top-1/2',
+      '-translate-y-1/2',
       'transition-transform',
       'duration-200',
       'ease-out',
       'data-[open=true]:rotate-180',
       'cursor-pointer'
-    ]
+    ],
+    rightIcon: [],
+    clearIcon: []
   },
   variants: {
     color: {
@@ -215,25 +220,143 @@ const select = tv({
       xs: {
         item: [
           'text-xs'
+        ],
+        chevronIcon: [
+          'text-base'
         ]
       },
       sm: {
         item: [
           'text-sm'
+        ],
+        chevronIcon: [
+          'text-xl'
         ]
       },
       md: {
         item: [
           'text-md'
+        ],
+        chevronIcon: [
+          'text-2xl'
         ]
       },
       lg: {
         item: [
           'text-lg'
+        ],
+        chevronIcon: [
+          'text-[28px]'
         ]
       }
     }
-  }
+  },
+  compoundVariants: [
+    {
+      shape: ['soft', 'square'],
+      size: 'xs',
+      class: {
+        rightIcon: [
+          'right-7'
+        ],
+        clearIcon: [
+          'right-7',
+          'data-[right-icon=true]:right-13'
+        ]
+      }
+    },
+    {
+      shape: ['soft', 'square'],
+      size: 'sm',
+      class: {
+        rightIcon: [
+          'right-7.5'
+        ],
+        clearIcon: [
+          'right-7.5',
+          'data-[right-icon=true]:right-14.5'
+        ]
+      }
+    },
+    {
+      shape: ['soft', 'square'],
+      size: 'md',
+      class: {
+        rightIcon: [
+          'right-8'
+        ],
+        clearIcon: [
+          'right-8',
+          'data-[right-icon=true]:right-16'
+        ]
+      }
+    },
+    {
+      shape: ['soft', 'square'],
+      size: 'lg',
+      class: {
+        rightIcon: [
+          'right-8.5'
+        ],
+        clearIcon: [
+          'right-8.5',
+          'data-[right-icon=true]:right-17.5'
+        ]
+      }
+    },
+    {
+      shape: 'rounded',
+      size: 'xs',
+      class: {
+        rightIcon: [
+          'right-9'
+        ],
+        clearIcon: [
+          'right-9',
+          'data-[right-icon=true]:right-15'
+        ]
+      }
+    },
+    {
+      shape: 'rounded',
+      size: 'sm',
+      class: {
+        rightIcon: [
+          'right-9.5'
+        ],
+        clearIcon: [
+          'right-9.5',
+          'data-[right-icon=true]:right-16.5'
+        ]
+      }
+    },
+    {
+      shape: 'rounded',
+      size: 'md',
+      class: {
+        rightIcon: [
+          'right-10'
+        ],
+        clearIcon: [
+          'right-10',
+          'data-[right-icon=true]:right-18'
+        ]
+      }
+    },
+    {
+      shape: 'rounded',
+      size: 'lg',
+      class: {
+        rightIcon: [
+          'right-10.5'
+        ],
+        clearIcon: [
+          'right-10.5',
+          'data-[right-icon=true]:right-19.5'
+        ]
+      }
+    }
+  ]
 })
 
 export default select
