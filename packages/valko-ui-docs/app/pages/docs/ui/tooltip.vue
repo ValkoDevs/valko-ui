@@ -106,7 +106,7 @@ const generateSnippet = snippetGeneratorFactory('vk-tooltip')
 const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
 const extraProps = 'content="Tooltip Content"'
 
-const styles = generateStyles({
+const styles = {
   shapes: [
     'grid-cols-[repeat(2,_minmax(0,_max-content))]',
     'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
@@ -124,7 +124,7 @@ const styles = generateStyles({
     'grid-cols-[repeat(2,_minmax(0,_max-content))]',
     'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
   ]
-})
+}
 </script>
 
 <template>
@@ -185,7 +185,7 @@ const styles = generateStyles({
     <template #examples>
       <example-section
         title="Shapes"
-        :style-slots="styles.shapes"
+        :style-slots="{ slotContainer: styles.shapes }"
       >
         <vk-tooltip
           v-for="shape in shapeOptions.general"
@@ -205,7 +205,7 @@ const styles = generateStyles({
 
       <example-section
         title="Sizes"
-        :style-slots="styles.sizes"
+        :style-slots="{ slotContainer: styles.sizes }"
       >
         <vk-tooltip
           v-for="size in sizeOptions.general"
@@ -225,7 +225,7 @@ const styles = generateStyles({
 
       <example-section
         title="Placements"
-        :style-slots="styles.placements"
+        :style-slots="{ slotContainer: styles.placements }"
       >
         <vk-tooltip
           v-for="placement in placementOptions.withAuto"
@@ -245,7 +245,7 @@ const styles = generateStyles({
 
       <example-section
         title="Alignments"
-        :style-slots="styles.alignments"
+        :style-slots="{ slotContainer: styles.alignments }"
       >
         <vk-tooltip
           v-for="alignment in alignmentOptions"
