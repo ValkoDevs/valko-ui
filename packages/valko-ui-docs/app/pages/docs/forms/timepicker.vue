@@ -522,7 +522,7 @@ ${scriptCode}
 </template>
 `
 
-const styles = generateStyles({
+const styles = {
   colors: [
     'sm:grid-cols-2',
     'md:grid-cols-3',
@@ -540,7 +540,7 @@ const styles = generateStyles({
   minmax: [
     'sm:grid-cols-2'
   ]
-})
+}
 </script>
 
 <template>
@@ -635,7 +635,7 @@ const styles = generateStyles({
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="styles.colors"
+        :style-slots="{ slotContainer: styles.colors }"
       >
         <vk-timepicker
           v-for="color in colorOptions.general"
@@ -656,7 +656,7 @@ const styles = generateStyles({
 
       <example-section
         title="Variants"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <vk-timepicker
           v-for="variant in variantOptions.general"
@@ -677,7 +677,7 @@ const styles = generateStyles({
 
       <example-section
         title="Shapes"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <vk-timepicker
           v-for="shape in shapeOptions.general"
@@ -698,7 +698,7 @@ const styles = generateStyles({
 
       <example-section
         title="Sizes"
-        :style-slots="styles.sizes"
+        :style-slots="{ slotContainer: styles.sizes }"
       >
         <vk-timepicker
           v-for="size in sizeOptions.general"
@@ -719,7 +719,7 @@ const styles = generateStyles({
 
       <example-section
         title="Min & Max Times"
-        :style-slots="styles.minmax"
+        :style-slots="{ slotContainer: styles.minmax }"
       >
         <vk-timepicker
           label="Min"

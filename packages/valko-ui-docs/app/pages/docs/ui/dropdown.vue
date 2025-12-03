@@ -267,7 +267,7 @@ const generateSnippet = snippetGeneratorFactory('vk-dropdown')
 
 const extraProps = ':items="items"'
 
-const styles = generateStyles({
+const styles = {
   colors: [
     'grid-cols-[repeat(2,_minmax(0,_max-content))]',
     'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
@@ -296,7 +296,7 @@ const styles = generateStyles({
     'grid-cols-[repeat(2,_minmax(0,_max-content))]',
     'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
   ]
-})
+}
 </script>
 
 <template>
@@ -374,7 +374,7 @@ const styles = generateStyles({
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="styles.colors"
+        :style-slots="{ slotContainer: styles.colors }"
       >
         <vk-dropdown
           v-for="color in colorOptions.withSurface"
@@ -392,7 +392,7 @@ const styles = generateStyles({
 
       <example-section
         title="Variants"
-        :style-slots="styles.variants"
+        :style-slots="{ slotContainer: styles.variants }"
       >
         <vk-dropdown
           v-for="variant in variantOptions.withGradientAndLink"
@@ -410,7 +410,7 @@ const styles = generateStyles({
 
       <example-section
         title="Shapes"
-        :style-slots="styles.shapes"
+        :style-slots="{ slotContainer: styles.shapes }"
       >
         <vk-dropdown
           v-for="shape in shapeOptions.general"
@@ -428,7 +428,7 @@ const styles = generateStyles({
 
       <example-section
         title="Sizes"
-        :style-slots="styles.sizes"
+        :style-slots="{ slotContainer: styles.sizes }"
       >
         <vk-dropdown
           v-for="size in sizeOptions.general"
@@ -446,7 +446,7 @@ const styles = generateStyles({
 
       <example-section
         title="Placements"
-        :style-slots="styles.placements"
+        :style-slots="{ slotContainer: styles.placements }"
       >
         <vk-dropdown
           v-for="placement in placementOptions.withAuto"
@@ -464,7 +464,7 @@ const styles = generateStyles({
 
       <example-section
         title="Alignments"
-        :style-slots="styles.alignments"
+        :style-slots="{ slotContainer: styles.alignments }"
       >
         <vk-dropdown
           v-for="alignment in alignmentOptions"

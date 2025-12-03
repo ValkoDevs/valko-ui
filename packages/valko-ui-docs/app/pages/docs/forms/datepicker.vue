@@ -582,7 +582,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
 </template>
 `
 
-const styles = generateStyles({
+const styles = {
   colors: [
     'sm:grid-cols-2',
     'md:grid-cols-3',
@@ -604,7 +604,7 @@ const styles = generateStyles({
   dates: [
     'md:grid-cols-2'
   ]
-})
+}
 </script>
 
 <template>
@@ -690,7 +690,7 @@ const styles = generateStyles({
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="styles.colors"
+        :style-slots="{ slotContainer: styles.colors }"
       >
         <vk-datepicker
           v-for="color in colorOptions.withSurface"
@@ -713,7 +713,7 @@ const styles = generateStyles({
 
       <example-section
         title="Variants"
-        :style-slots="styles.variants"
+        :style-slots="{ slotContainer: styles.variants }"
       >
         <vk-datepicker
           v-for="variant in variantOptions.general"
@@ -736,7 +736,7 @@ const styles = generateStyles({
 
       <example-section
         title="Shapes"
-        :style-slots="styles.shapes"
+        :style-slots="{ slotContainer: styles.shapes }"
       >
         <vk-datepicker
           v-for="shape in shapeOptions.general"
@@ -759,7 +759,7 @@ const styles = generateStyles({
 
       <example-section
         title="Sizes"
-        :style-slots="styles.sizes"
+        :style-slots="{ slotContainer: styles.sizes }"
       >
         <vk-datepicker
           v-for="size in sizeOptions.general"
@@ -825,7 +825,7 @@ const styles = generateStyles({
 
       <example-section
         title="Disabled Dates"
-        :style-slots="styles.dates"
+        :style-slots="{ slotContainer: styles.dates }"
       >
         <vk-datepicker
           v-model="disabledModel"

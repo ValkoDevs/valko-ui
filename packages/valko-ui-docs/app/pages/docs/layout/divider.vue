@@ -83,7 +83,7 @@ const dividerProps: TableItem[] = [
 
 const generateSnippet = snippetGeneratorFactory('vk-divider')
 
-const styles = generateStyles({
+const styles = {
   default: [
     'sm:grid-cols-2',
     'md:grid-cols-3'
@@ -101,7 +101,7 @@ const styles = generateStyles({
   direction: [
     'sm:grid-cols-2'
   ]
-})
+}
 </script>
 
 <template>
@@ -166,7 +166,7 @@ const styles = generateStyles({
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="styles.colors"
+        :style-slots="{ slotContainer: styles.colors }"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -189,7 +189,7 @@ const styles = generateStyles({
 
       <example-section
         title="Variants"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <div
           v-for="variant in variantOptions.general"
@@ -212,7 +212,7 @@ const styles = generateStyles({
 
       <example-section
         title="Shapes"
-        :style-slots="styles.default"
+        :style-slots="{ slotContainer: styles.default }"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -235,7 +235,7 @@ const styles = generateStyles({
 
       <example-section
         title="Sizes"
-        :style-slots="styles.sizes"
+        :style-slots="{ slotContainer: styles.sizes }"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -258,7 +258,7 @@ const styles = generateStyles({
 
       <example-section
         title="Direction"
-        :style-slots="styles.direction"
+        :style-slots="{ slotContainer: styles.direction }"
       >
         <div>
           <span class="font-semibold">Horizontal</span>
