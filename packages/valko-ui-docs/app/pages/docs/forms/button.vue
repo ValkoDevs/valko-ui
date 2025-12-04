@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { ButtonProps, TableItem, SelectOption } from '@valko-ui/components'
 
+definePageMeta({
+  alias: ['/docs/button']
+})
+
 const form = ref<ButtonProps>({
   color: 'primary',
   variant: 'filled',

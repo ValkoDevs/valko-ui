@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { TabsProps, TableItem, Tab } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/tabs']
+})
+
 const tabs: Tab[] = [
   { key: 'photos', title: 'Photos' },
   { key: 'videos', title: 'Videos' },

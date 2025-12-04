@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { SpinnerProps, TableItem } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/spinner']
+})
+
 const names = [
   { value: 'loader', label: 'Loader' },
   { value: 'loader-2', label: 'Loader-2' }

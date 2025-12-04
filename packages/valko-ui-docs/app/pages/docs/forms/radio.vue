@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { SelectOption, LabelPosition, RadioProps, TableItem } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/radio']
+})
+
 const form = ref<RadioProps>({
   variant: 'filled',
   color: 'primary',

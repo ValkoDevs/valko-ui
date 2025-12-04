@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { TimeProps, TableItem, SelectOption } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/time']
+})
+
 const form = reactive<Partial<TimeProps>>({
   color: 'primary',
   variant: 'filled',

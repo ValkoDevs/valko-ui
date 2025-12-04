@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { DrawerProps, SelectOption, TableItem, Backdrop } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/drawer']
+})
+
 const form = ref<Omit<DrawerProps, 'isOpen'>>({
   shape: 'soft',
   size: 'md',

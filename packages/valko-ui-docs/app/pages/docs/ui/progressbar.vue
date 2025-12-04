@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { ProgressbarProps, TableItem } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/progressbar']
+})
+
 const form = ref<ProgressbarProps>({
   color: 'primary',
   variant: 'filled',

@@ -2,6 +2,10 @@
 import type { DataTableProps, SelectionMode, SelectOption, TableItem } from '#valkoui'
 import { useClientSideDataTable } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/datatable']
+})
+
 const form = ref<Partial<DataTableProps>>({
   color: 'primary',
   variant: 'filled',
