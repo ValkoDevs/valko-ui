@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { SelectProps, TableItem, SelectOption } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/select']
+})
+
 const people: SelectOption[] = [
   { value: 1, label: 'Wade Cooper' },
   { value: 2, label: 'Arlene Mccoy' },

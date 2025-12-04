@@ -2,6 +2,10 @@
 import type { TableItem, CardProps, Layout, SelectOption } from '#valkoui'
 import { useNotification } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/card']
+})
+
 const form = ref<CardProps>({
   variant: 'filled',
   shape: 'soft',

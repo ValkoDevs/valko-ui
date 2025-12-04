@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { CheckboxProps, SelectOption, TableItem, LabelPosition } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/checkbox']
+})
+
 const position: SelectOption<LabelPosition>[] = [
   { value: 'right', label:'Right' },
   { value: 'left', label:'Left' }

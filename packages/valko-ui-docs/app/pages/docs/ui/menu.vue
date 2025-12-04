@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { SelectOption, MenuItem, TableItem, MenuProps } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/menu']
+})
+
 const form = ref<Partial<MenuProps>>({
   color: 'primary',
   variant: 'filled',

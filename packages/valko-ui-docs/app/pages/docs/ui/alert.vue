@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { TableItem, AlertProps } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/alert']
+})
+
 const isShown = ref(true)
 
 const form = ref<AlertProps>({

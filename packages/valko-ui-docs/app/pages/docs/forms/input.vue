@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useNotification, type SelectOption, type InputProps, type TableItem, type InputType } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/input']
+})
+
 const typeOptions: SelectOption<InputType>[] = [
   { value:'text', label:'Text' },
   { value:'email', label:'Email' },

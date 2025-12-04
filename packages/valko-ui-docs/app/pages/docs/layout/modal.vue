@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { ModalProps, SelectOption, Backdrop, TableItem } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/modal']
+})
+
 const form = ref<ModalProps>({
   shape: 'soft',
   size: 'md',

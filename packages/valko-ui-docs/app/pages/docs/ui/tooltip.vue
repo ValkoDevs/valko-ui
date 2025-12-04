@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { TooltipProps, TableItem } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/tooltip']
+})
+
 const form = ref<TooltipProps>({
   shape: 'soft',
   size: 'md',

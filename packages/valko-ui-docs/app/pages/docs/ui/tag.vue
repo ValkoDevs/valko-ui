@@ -2,6 +2,10 @@
 import type { TagProps, TableItem } from '#valkoui'
 import { useNotification } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/tag']
+})
+
 const form = ref<TagProps>({
   color: 'primary',
   variant: 'filled',
