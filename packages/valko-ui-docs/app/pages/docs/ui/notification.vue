@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useNotification, type NotificationProps, type TableItem, type VerticalAlign, type HorizontalAlign, type SelectOption } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/notification']
+})
+
 const form = ref<NotificationProps>({
   color: 'primary',
   variant: 'filled',

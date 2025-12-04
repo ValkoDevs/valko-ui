@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { TableItem, TimepickerProps, SelectOption } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/timepicker']
+})
+
 const form = reactive<Partial<TimepickerProps>>({
   color: 'primary',
   variant: 'filled',

@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { SwitchProps, TableItem, LabelPosition, SelectOption } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/switch']
+})
+
 const form = ref<SwitchProps>({
   variant: 'filled',
   color: 'primary',

@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { TableItem, DatepickerProps, SelectOption } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/datepicker']
+})
+
 const form = ref<Partial<DatepickerProps>>({
   color: 'primary',
   variant: 'filled',

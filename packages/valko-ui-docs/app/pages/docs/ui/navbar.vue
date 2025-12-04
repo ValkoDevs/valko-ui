@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { NavbarProps, TableItem } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/navbar']
+})
+
 const form = ref<NavbarProps>({
   color: 'primary',
   variant: 'filled',

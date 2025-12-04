@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { DropdownProps, TableItem, Item } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/dropdown']
+})
+
 const form = ref<Partial<DropdownProps>>({
   color: 'primary',
   variant: 'filled',

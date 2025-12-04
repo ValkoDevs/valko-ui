@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { DividerProps, SelectOption, TableItem } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/divider']
+})
+
 const form = ref<DividerProps>({
   color: 'primary',
   variant: 'filled',

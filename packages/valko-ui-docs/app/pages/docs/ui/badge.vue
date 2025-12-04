@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { BadgeProps, TableItem } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/badge']
+})
+
 const form = ref<BadgeProps>({
   color: 'primary',
   variant: 'filled',

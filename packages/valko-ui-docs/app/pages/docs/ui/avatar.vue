@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { AvatarProps, TableItem } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/avatar']
+})
+
 const form = reactive<AvatarProps>({
   color: 'primary',
   variant: 'filled',

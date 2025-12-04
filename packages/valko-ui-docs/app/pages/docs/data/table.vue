@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { TableItem, TableProps } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/table']
+})
+
 const form = ref<Partial<TableProps>>({
   variant: 'filled',
   shape: 'soft',

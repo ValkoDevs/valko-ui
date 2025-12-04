@@ -2,6 +2,10 @@
 import type { TableItem, Crumb, BreadcrumbsProps } from '#valkoui'
 import { useNotification } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/breadcrumbs']
+})
+
 const form = ref<Partial<BreadcrumbsProps>>({
   color: 'primary',
   variant: 'filled',

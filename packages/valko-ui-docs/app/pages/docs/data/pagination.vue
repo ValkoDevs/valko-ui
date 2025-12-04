@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { PaginationProps, TableItem } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/pagination']
+})
+
 const form = ref<PaginationProps>({
   color: 'primary',
   variant: 'filled',

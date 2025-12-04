@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { useNotification, type TextareaProps, type TableItem } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/textarea']
+})
+
 const form = ref<TextareaProps>({
   color: 'primary',
   variant: 'filled',

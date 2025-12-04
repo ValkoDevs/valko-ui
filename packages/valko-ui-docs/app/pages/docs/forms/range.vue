@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { RangeProps, TableItem, Label } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/range']
+})
+
 const form = reactive<RangeProps>({
   color: 'primary',
   variant: 'filled',

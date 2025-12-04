@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { CollapseProps, TableItem } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/collapse']
+})
+
 const form = ref<CollapseProps>({
   variant: 'filled',
   shape: 'soft',

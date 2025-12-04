@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { PopoverProps, TableItem } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/popover']
+})
+
 const form = ref<PopoverProps>({
   shape: 'soft',
   placement: 'auto',

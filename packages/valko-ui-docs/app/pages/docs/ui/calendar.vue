@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import type { TableItem, CalendarProps, SelectOption } from '#valkoui'
 
+definePageMeta({
+  alias: ['/docs/calendar']
+})
+
 const form = ref<Partial<CalendarProps>>({
   color: 'primary',
   variant: 'filled',
