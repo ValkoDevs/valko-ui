@@ -534,16 +534,12 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Notification Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="notificationProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
+      <api-table
+        name="Notification"
+        :tables="[
+          { title: 'Props', data: notificationProps, headers: 'props' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

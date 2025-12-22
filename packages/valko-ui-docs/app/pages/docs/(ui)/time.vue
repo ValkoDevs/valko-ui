@@ -342,83 +342,63 @@ const timeAdapterProps: TableItem[] = [
 const timeFormats: TableItem[] = [
   {
     key: 'HH',
-    prop: 'HH',
-    required: true,
+    format: 'HH',
     description: 'Hour in 24-hour format, padded with leading zero (00 to 23).',
-    values: 'string',
-    default: ''
+    example: '12:00'
   },
   {
     key: 'H',
-    prop: 'H',
-    required: true,
+    format: 'H',
     description: 'Hour in 24-hour format without padding (0 to 23).',
-    values: 'number',
-    default: ''
+    example: '12'
   },
   {
     key: 'hh',
-    prop: 'hh',
-    required: true,
+    format: 'hh',
     description: 'Hour in 12-hour format, padded with leading zero (01 to 12).',
-    values: 'string',
-    default: ''
+    example: '01:00'
   },
   {
     key: 'h',
-    prop: 'h',
-    required: true,
+    format: 'h',
     description: 'Hour in 12-hour format without padding (1 to 12).',
-    values: 'number',
-    default: ''
+    example: '1'
   },
   {
     key: 'mm',
-    prop: 'mm',
-    required: true,
+    format: 'mm',
     description: 'Minutes, padded with leading zero (00 to 59).',
-    values: 'string',
-    default: ''
+    example: '01'
   },
   {
     key: 'm',
-    prop: 'm',
-    required: true,
+    format: 'm',
     description: 'Minutes without padding (0 to 59).',
-    values: 'number',
-    default: ''
+    example: '1'
   },
   {
     key: 'ss',
-    prop: 'ss',
-    required: true,
+    format: 'ss',
     description: 'Seconds, padded with leading zero (00 to 59).',
-    values: 'string',
-    default: ''
+    example: '01'
   },
   {
     key: 's',
-    prop: 's',
-    required: true,
+    format: 's',
     description: 'Seconds without padding (0 to 59).',
-    values: 'number',
-    default: ''
+    example: '1'
   },
   {
     key: 'A',
-    prop: 'A',
-    required: true,
+    format: 'A',
     description: 'Uppercase AM or PM based on the time.',
-    values: 'AM | PM',
-    default: ''
+    example: 'AM | PM'
   },
   {
     key: 'a',
-    prop: 'a',
-    required: true,
+    format: 'a',
     description: 'Lowercase am or pm based on the time.',
-    values: 'am | pm',
-    default: ''
+    example: 'am | pm'
   }
 ]
 
@@ -678,46 +658,17 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Time Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="timeProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Time Adapter Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="timeAdapterProps"
-      />
-
-      <h3>Time Adapter Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="timeAdapterInterface"
-      />
-
-      <h3>Time Adapter Result Type</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="timeAdapterResult"
-      />
-
-      <h3>FormattedTime Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="formattedTimeProps"
-      />
-
-      <h3>Available Time Formats</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="timeFormats"
+      <api-table
+        name="Time"
+        :tables="[
+          { title: 'Props', data: timeProps, headers: 'props' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' },
+          { title: 'Time Adapter', data: timeAdapterInterface, headers: 'interface' },
+          { title: 'Time Adapter Props', data: timeAdapterProps, headers: 'props' },
+          { title: 'Time Adapter Result', data: timeAdapterResult, headers: 'interface' },
+          { title: 'Formatted Time', data: formattedTimeProps, headers: 'interface' },
+          { title: 'Time Formats', data: timeFormats, headers: 'format' }
+        ]"
       />
     </template>
   </doc-section>

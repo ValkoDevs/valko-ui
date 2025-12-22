@@ -62,7 +62,7 @@ const cardProps: TableItem[] = [
     prop: 'isPressable',
     required: false,
     description: 'Wether the Card allows to be clicked.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -70,7 +70,7 @@ const cardProps: TableItem[] = [
     prop: 'elevated',
     required: false,
     description: 'Applies a shadow and lowers the background tone to emphasize interactive content inside the Card. Useful when the Card contains inputs or other elevated elements.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -526,52 +526,18 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Card Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="cardProps"
-      />
-
-      <h3>Card Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="cardEmits"
-      />
-
-      <h3>Card Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="cardSlots"
-      />
-
-      <h3>Card Image Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="cardImageProps"
-      />
-
-      <h3>Card Image Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="cardImageStyleSlotsInterface"
-      />
-
-      <h3>Card Header Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="cardHeaderProps"
-      />
-
-      <h3>Card Body Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="cardBodyProps"
-      />
-
-      <h3>Card Footer Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="cardFooterProps"
+      <api-table
+        name="Card"
+        :tables="[
+          { title: 'Props', data: cardProps, headers: 'props' },
+          { title: 'Emits', data: cardEmits, headers: 'emits' },
+          { title: 'Slots', data: cardSlots, headers: 'slots' },
+          { title: 'Image Props', data: cardImageProps, headers: 'props' },
+          { title: 'Card Image Style Slots', data: cardImageStyleSlotsInterface, headers: 'interface' },
+          { title: 'Header Props', data: cardHeaderProps, headers: 'props' },
+          { title: 'Body Props', data: cardBodyProps, headers: 'props' },
+          { title: 'Footer Props', data: cardFooterProps, headers: 'props' }
+        ]"
       />
     </template>
   </doc-section>

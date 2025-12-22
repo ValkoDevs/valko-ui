@@ -80,7 +80,7 @@ const tagProps: TableItem[] = [
     prop: 'closable',
     required: false,
     description: 'Displays a close button on the Tag.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -88,7 +88,7 @@ const tagProps: TableItem[] = [
     prop: 'isPressable',
     required: false,
     description: 'Whether the Tag should allow to be pressed.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -96,7 +96,7 @@ const tagProps: TableItem[] = [
     prop: 'disabled',
     required: false,
     description: 'Disables interaction with the Tag.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -452,22 +452,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Tag Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="tagProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Tag Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="tagEmits"
+      <api-table
+        name="Tag"
+        :tables="[
+          { title: 'Props', data: tagProps, headers: 'props' },
+          { title: 'Emits', data: tagEmits, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

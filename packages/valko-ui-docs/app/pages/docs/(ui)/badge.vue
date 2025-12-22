@@ -69,7 +69,7 @@ const badgeProps: TableItem[] = [
     prop: 'outlined',
     required: false,
     description: 'Displays an outline for the Badge.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -77,7 +77,7 @@ const badgeProps: TableItem[] = [
     prop: 'dot',
     required: false,
     description: 'If true the Badge will have smaller dimensions and not display content inside.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -85,7 +85,7 @@ const badgeProps: TableItem[] = [
     prop: 'hidden',
     required: false,
     description: 'If true the Badge will be hidden.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -470,22 +470,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Badge Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="badgeProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Badge Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="badgeSlots"
+      <api-table
+        name="Badge"
+        :tables="[
+          { title: 'Props', data: badgeProps, headers: 'props' },
+          { title: 'Slots', data: badgeSlots, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

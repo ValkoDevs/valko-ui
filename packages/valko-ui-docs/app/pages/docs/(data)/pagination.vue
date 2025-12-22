@@ -66,7 +66,7 @@ const paginationProps: TableItem[] = [
     prop: 'elevated',
     required: false,
     description: 'Wheter the Pagination is elevated or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -74,7 +74,7 @@ const paginationProps: TableItem[] = [
     prop: 'disabled',
     required: false,
     description: 'Wheter the Pagination is disabled or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -326,22 +326,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Pagination Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="paginationProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Pagination Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="paginationEmits"
+      <api-table
+        name="Pagination"
+        :tables="[
+          { title: 'Props', data: paginationProps, headers: 'props' },
+          { title: 'Emits', data: paginationEmits, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

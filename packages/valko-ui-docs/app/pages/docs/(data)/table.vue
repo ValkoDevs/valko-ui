@@ -46,7 +46,7 @@ const tableProps: TableItem[] = [
     prop: 'rowEvents',
     required: false,
     description: 'Allows rows to emit event onRowClick.',
-    values: 'false, true',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -138,7 +138,7 @@ const tableItem: TableItem[] = [
     prop: 'Any other property',
     required: false,
     description: 'Any other property specific to your data row.',
-    values: 'unknown'
+    values: 'string, number, boolean, null'
   }
 ]
 
@@ -169,7 +169,7 @@ const tableHeader: TableItem[] = [
     prop: 'sortable',
     required: false,
     description: 'Specifies whether the column is sortable.',
-    values: 'false, true',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -177,7 +177,7 @@ const tableHeader: TableItem[] = [
     prop: 'filterable',
     required: false,
     description: 'Specifies whether the column is filterable.',
-    values: 'false, true',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -279,7 +279,7 @@ const data: TableItem[] = [
     prop: 'sortable',
     required: false,
     description: 'Specifies whether the column is sortable.',
-    values: 'false, true',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -287,7 +287,7 @@ const data: TableItem[] = [
     prop: 'filterable',
     required: false,
     description: 'Specifies whether the column is filterable.',
-    values: 'false, true',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -412,40 +412,16 @@ const generateSnippet = snippetGeneratorFactory('vk-table')
     </template>
 
     <template #api>
-      <h3>Table Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="tableProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Table Item Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="tableItem"
-      />
-
-      <h3>Table Header Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="tableHeader"
-      />
-
-      <h3>Table Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="emitData"
-      />
-
-      <h3>Table Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="slotData"
+      <api-table
+        name="Table"
+        :tables="[
+          { title: 'Props', data: tableProps, headers: 'props' },
+          { title: 'Emits', data: emitData, headers: 'emits' },
+          { title: 'Slots', data: slotData, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' },
+          { title: 'Table Item', data: tableItem, headers: 'interface' },
+          { title: 'Table Header', data: tableHeader, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

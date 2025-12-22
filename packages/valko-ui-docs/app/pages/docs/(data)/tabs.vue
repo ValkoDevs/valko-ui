@@ -82,7 +82,7 @@ const tabsProps: TableItem[] = [
     prop: 'grow',
     required: false,
     description: 'Allow the Tabs to grow to fill any available space',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -98,7 +98,7 @@ const tabsProps: TableItem[] = [
     prop: 'vertical',
     required: false,
     description: 'Wheter the Tabs displays vertically or not',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -231,7 +231,7 @@ const tabInterface: TableItem[] = [
     prop: 'disabled',
     required: false,
     description: 'Wheter the Tab is disabled or not',
-    values: 'true, false',
+    values: 'boolean',
     default: ''
   }
 ]
@@ -513,34 +513,15 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Tabs Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="tabsProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Tabs Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="tabsSlots"
-      />
-
-      <h3>Tabs Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="tabsEmits"
-      />
-
-      <h3>Tab Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="tabInterface"
+      <api-table
+        name="Tabs"
+        :tables="[
+          { title: 'Props', data: tabsProps, headers: 'props' },
+          { title: 'Emits', data: tabsEmits, headers: 'emits' },
+          { title: 'Slots', data: tabsSlots, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' },
+          { title: 'Tab', data: tabInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

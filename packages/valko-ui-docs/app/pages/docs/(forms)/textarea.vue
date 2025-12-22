@@ -49,7 +49,7 @@ const apiData: TableItem[] = [
     prop: 'disabled',
     required: false,
     description: 'Whether the Textarea is disabled or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -65,7 +65,7 @@ const apiData: TableItem[] = [
     prop: 'readonly',
     required: false,
     description: 'Wheter the Textarea is readonly or not',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -121,7 +121,7 @@ const apiData: TableItem[] = [
     prop: 'ariaRequired',
     required: false,
     description: 'Marks the textarea as required for form submission.',
-    values: 'true, false',
+    values: 'boolean',
     default: ''
   },
   {
@@ -129,7 +129,7 @@ const apiData: TableItem[] = [
     prop: 'ariaInvalid',
     required: false,
     description: 'Indicates that the current value entered into the textarea is invalid.',
-    values: 'true, false',
+    values: 'boolean',
     default: ''
   },
   {
@@ -502,28 +502,14 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Textarea Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Textarea Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="slotData"
-      />
-
-      <h3>Textarea Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="emitData"
+      <api-table
+        name="Textarea"
+        :tables="[
+          { title: 'Props', data: apiData, headers: 'props' },
+          { title: 'Emits', data: emitData, headers: 'emits' },
+          { title: 'Slots', data: slotData, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

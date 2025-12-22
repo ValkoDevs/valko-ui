@@ -43,7 +43,7 @@ const spinnerProps: TableItem[] = [
     prop: 'condensed',
     required: false,
     description: 'Reduces the Spinner\'s size.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -208,16 +208,12 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Spinner Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="spinnerProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
+      <api-table
+        name="Spinner"
+        :tables="[
+          { title: 'Props', data: spinnerProps, headers: 'props' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

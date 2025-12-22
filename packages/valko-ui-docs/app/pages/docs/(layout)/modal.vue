@@ -38,7 +38,7 @@ const modalProps: TableItem[] = [
     prop: 'isOpen',
     required: true,
     description: 'Wheter the Modal is open or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -62,7 +62,7 @@ const modalProps: TableItem[] = [
     prop: 'closable',
     required: false,
     description: 'Displays a close button on the Modal and allows to close it by clicking outside or pressing esc',
-    values: 'true, false',
+    values: 'boolean',
     default: 'true'
   },
   {
@@ -421,28 +421,14 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Modal Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="modalProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Modal Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="modalEmits"
-      />
-
-      <h3>Modal Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="modalSlots"
+      <api-table
+        name="Modal"
+        :tables="[
+          { title: 'Props', data: modalProps, headers: 'props' },
+          { title: 'Emits', data: modalEmits, headers: 'emits' },
+          { title: 'Slots', data: modalSlots, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

@@ -62,7 +62,7 @@ const apiData: TableItem[] = [
     prop: 'disabled',
     required: false,
     description: 'Whether the Checkbox is disabled or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -70,7 +70,7 @@ const apiData: TableItem[] = [
     prop: 'rounded',
     required: false,
     description: 'Whether the Checkbox is rounded or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -86,7 +86,7 @@ const apiData: TableItem[] = [
     prop: 'readonly',
     required: false,
     description: 'Wheter the Checkbox is readonly or not',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -110,7 +110,7 @@ const apiData: TableItem[] = [
     prop: 'indeterminate',
     required: false,
     description: 'Checks all Checkbox children',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -482,22 +482,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Checkbox Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Checkbox Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="emitData"
+      <api-table
+        name="Checkbox"
+        :tables="[
+          { title: 'Props', data: apiData, headers: 'props' },
+          { title: 'Emits', data: emitData, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

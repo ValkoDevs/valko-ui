@@ -46,7 +46,7 @@ const drawerProps: TableItem[] = [
     prop: 'isOpen',
     required: true,
     description: 'Whether the Drawer is open or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -70,7 +70,7 @@ const drawerProps: TableItem[] = [
     prop: 'closable',
     required: false,
     description: 'Displays a close button on the Drawer and allows to close it by clicking outside or pressing esc',
-    values: 'true, false',
+    values: 'boolean',
     default: 'true'
   },
   {
@@ -481,28 +481,14 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Drawer Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="drawerProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Drawer Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="drawerEmits"
-      />
-
-      <h3>Drawer Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="drawerSlots"
+      <api-table
+        name="Drawer"
+        :tables="[
+          { title: 'Props', data: drawerProps, headers: 'props' },
+          { title: 'Emits', data: drawerEmits, headers: 'emits' },
+          { title: 'Slots', data: drawerSlots, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

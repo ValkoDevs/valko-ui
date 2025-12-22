@@ -82,7 +82,7 @@ const tableProps: TableItem[] = [
     prop: 'striped',
     required: false,
     description: 'Specifies whether the table rows are striped for better readability.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -146,7 +146,7 @@ const tableProps: TableItem[] = [
     prop: 'loading',
     required: false,
     description: 'Specifies whether the table is in a loading state.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -248,63 +248,63 @@ const tableEmits: TableItem[] = [
     key: 'emitSelect',
     event: 'onSelect',
     type: '(item: TableItem) => void',
-    values: '',
+    values: 'TableItem',
     description: 'Emitted when an item is selected.'
   },
   {
     key: 'emitSelectAll',
     event: 'onSelectAll',
     type: '(allSelected: boolean) => void',
-    values: '',
+    values: 'boolean',
     description: 'Emitted when all items are selected or deselected.'
   },
   {
     key: 'emitPageChange',
     event: 'onPageChange',
     type: '(page: number) => void',
-    values: '',
+    values: 'number',
     description: 'Emitted when the current page is changed.'
   },
   {
     key: 'emitLimitChange',
     event: 'onLimitChange',
     type: '(limit: number) => void',
-    values: '',
+    values: 'number',
     description: 'Emitted when the page size limit is changed.'
   },
   {
     key: 'emitSort',
     event: 'onSort',
     type: '(sort: Sort | null) => void',
-    values: '',
+    values: 'Sort, null',
     description: 'Emitted when the sort configuration is changed.'
   },
   {
     key: 'emitFilter',
     event: 'onFilter',
     type: '(data: TableItem[], key: string) => void',
-    values: '',
+    values: 'TableItem[], string',
     description: 'Emitted when a filter is applied.'
   },
   {
     key: 'dragStart',
     event: 'dragStart',
     type: '(index: number) => void',
-    values: '',
+    values: 'number',
     description: 'Emitted when dragging starts on an item.'
   },
   {
     key: 'dragOver',
     event: 'dragOver',
     type: '(event: DragEvent) => void',
-    values: '',
+    values: 'DragEvent',
     description: 'Emitted when dragging over an area.'
   },
   {
     key: 'dragDrop',
     event: 'dragDrop',
     type: '(event: DragEvent, index: number) => void',
-    values: '',
+    values: 'DragEvent, number',
     description: 'Emitted when an item is dropped.'
   }
 ]
@@ -808,64 +808,20 @@ const generateSnippet = snippetGeneratorFactory('vk-data-table')
     </template>
 
     <template #api>
-      <h3>Table Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="tableProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Table Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="tableSlots"
-      />
-
-      <h3>Table Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="tableEmits"
-      />
-
-      <h3>Table Item Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="tableItemInterface"
-      />
-
-      <h3>Table Header Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="tableHeaderInterface"
-      />
-
-      <h3>Table Sort Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="sortInterface"
-      />
-
-      <h3>Table Pagination Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="paginationInterface"
-      />
-
-      <h3>Table Filter Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="filterInterface"
-      />
-
-      <h3>Composable Client Side Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="clientSideDataTableProps"
+      <api-table
+        name="DataTable"
+        :tables="[
+          { title: 'Props', data: tableProps, headers: 'props' },
+          { title: 'Emits', data: tableEmits, headers: 'emits' },
+          { title: 'Slots', data: tableSlots, headers: 'slots' },
+          { title: 'StyleSlots', data: styleSlotsInterface, headers: 'interface' },
+          { title: 'TableItem', data: tableItemInterface, headers: 'interface' },
+          { title: 'TableHeader', data: tableHeaderInterface, headers: 'interface' },
+          { title: 'Sort', data: sortInterface, headers: 'interface' },
+          { title: 'Pagination', data: paginationInterface, headers: 'interface' },
+          { title: 'Filter', data: filterInterface, headers: 'interface' },
+          { title: 'Composable Client Side', data: clientSideDataTableProps, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

@@ -298,9 +298,11 @@ const styles = {
 
     <template #api>
       <h3>Divider</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="dividerProps"
+      <api-table
+        name="Divider"
+        :tables="[
+          { title: 'Props', data: dividerProps, headers: 'props' }
+        ]"
       />
     </template>
   </doc-section>

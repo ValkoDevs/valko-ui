@@ -76,7 +76,7 @@ const rangeProps: TableItem[] = [
     prop: 'striped',
     required: false,
     description: 'Adds a striped pattern to the Range slider.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -84,7 +84,7 @@ const rangeProps: TableItem[] = [
     prop: 'showSteps',
     required: false,
     description: 'Displays step marks at intervals along the Range slider.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -100,7 +100,7 @@ const rangeProps: TableItem[] = [
     prop: 'isDouble',
     required: false,
     description: 'Enables the Range slider to have two thumbs for selecting a range.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -492,28 +492,14 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Range Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="rangeProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Label Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="labelsInterface"
-      />
-
-      <h3>Range Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="rangeEmits"
+      <api-table
+        name="Range"
+        :tables="[
+          { title: 'Props', data: rangeProps, headers: 'props' },
+          { title: 'Emits', data: rangeEmits, headers: 'emits' },
+          { title: 'Labels', data: labelsInterface, headers: 'interface' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

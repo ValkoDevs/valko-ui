@@ -53,7 +53,7 @@ const menuProps: TableItem[] = [
     prop: 'floating',
     required: false,
     description: 'Changes the padding of the Menu.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -151,7 +151,7 @@ const menuItemsInterface: TableItem[] = [
     prop: 'disabled',
     required: false,
     description: 'Wheter the Item is disabled or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: ''
   },
   {
@@ -159,7 +159,7 @@ const menuItemsInterface: TableItem[] = [
     prop: 'active',
     required: false,
     description: 'Wheter the Item is active or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: ''
   },
   {
@@ -404,34 +404,15 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Menu Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="menuProps"
-      />
-
-      <h3>Menu Items Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="menuItemsInterface"
-      />
-
-      <h3>Menu Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="menuEmits"
-      />
-
-      <h3>Menu Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="menuSlots"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
+      <api-table
+        name="Menu"
+        :tables="[
+          { title: 'Props', data: menuProps, headers: 'props' },
+          { title: 'Emits', data: menuEmits, headers: 'emits' },
+          { title: 'Slots', data: menuSlots, headers: 'slots' },
+          { title: 'MenuItem Interface', data: menuItemsInterface, headers: 'interface' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

@@ -68,7 +68,7 @@ const progressbarProps: TableItem[] = [
     prop: 'indeterminate',
     required: false,
     description: 'Wheter the Progressbar is indeterminate or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -76,7 +76,7 @@ const progressbarProps: TableItem[] = [
     prop: 'striped',
     required: false,
     description: 'Wheter the Progressbar is striped or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -360,22 +360,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Progressbar Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="progressbarProps"
-      />
-
-      <h3>Progressbar Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="progressbarSlots"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
+      <api-table
+        name="Progressbar"
+        :tables="[
+          { title: 'Props', data: progressbarProps, headers: 'props' },
+          { title: 'Slots', data: progressbarSlots, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

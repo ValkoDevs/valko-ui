@@ -24,7 +24,7 @@ const popoverProps: TableItem[] = [
     prop: 'isOpen',
     required: false,
     description: 'The state of the Popover.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -48,7 +48,7 @@ const popoverProps: TableItem[] = [
     prop: 'elevated',
     required: false,
     description: 'Whether the Popover is elevated, this will increase the level of the shadow.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -64,7 +64,7 @@ const popoverProps: TableItem[] = [
     prop: 'condensed',
     required: false,
     description: 'Whether the Popover is condensed, this will remove the padding for the panel.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -338,28 +338,14 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Popover Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="popoverProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Popover Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="popoverEmits"
-      />
-
-      <h3>Popover Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="popoverSlots"
+      <api-table
+        name="Popover"
+        :tables="[
+          { title: 'Props', data: popoverProps, headers: 'props' },
+          { title: 'Emits', data: popoverEmits, headers: 'emits' },
+          { title: 'Slots', data: popoverSlots, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

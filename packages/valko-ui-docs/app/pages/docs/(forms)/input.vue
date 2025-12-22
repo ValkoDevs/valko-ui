@@ -77,7 +77,7 @@ const apiData: TableItem[] = [
     prop: 'disabled',
     required: false,
     description: 'Whether the Input is disabled or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -85,7 +85,7 @@ const apiData: TableItem[] = [
     prop: 'rounded',
     required: false,
     description: 'Whether the Input is rounded or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -93,8 +93,8 @@ const apiData: TableItem[] = [
     prop: 'modelValue',
     required: false,
     description: 'The v-model for the Input',
-    values: 'string',
-    default: 'false'
+    values: 'string, number',
+    default: ''
   },
   {
     key: 'minProp',
@@ -125,7 +125,7 @@ const apiData: TableItem[] = [
     prop: 'readonly',
     required: false,
     description: 'Wheter the Input is readonly or not',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -134,7 +134,7 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The label for the Input',
     values: 'string',
-    default: 'false'
+    default: ''
   },
   {
     key: 'helpertextProp',
@@ -142,7 +142,7 @@ const apiData: TableItem[] = [
     required: false,
     description: 'A hint for the Input',
     values: 'string',
-    default: 'false'
+    default: ''
   },
   {
     key: 'shapeProp',
@@ -181,7 +181,7 @@ const apiData: TableItem[] = [
     prop: 'ariaRequired',
     required: false,
     description: 'Marks the input as required for form submission.',
-    values: 'true, false',
+    values: 'boolean',
     default: ''
   },
   {
@@ -189,7 +189,7 @@ const apiData: TableItem[] = [
     prop: 'ariaInvalid',
     required: false,
     description: 'Indicates that the current value entered into the input is invalid.',
-    values: 'true, false',
+    values: 'boolean',
     default: ''
   },
   {
@@ -652,28 +652,14 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Input Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Input Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="emitData"
-      />
-
-      <h3>Input Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="slotData"
+      <api-table
+        name="Input"
+        :tables="[
+          { title: 'Props', data: apiData, headers: 'props' },
+          { title: 'Emits', data: emitData, headers: 'emits' },
+          { title: 'Slots', data: slotData, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

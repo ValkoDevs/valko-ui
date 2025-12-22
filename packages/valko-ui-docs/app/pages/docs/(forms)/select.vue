@@ -54,7 +54,7 @@ const apiData: TableItem[] = [
     prop: 'disabled',
     required: false,
     description: 'Whether the Select is disabled or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -62,7 +62,7 @@ const apiData: TableItem[] = [
     prop: 'rounded',
     required: false,
     description: 'Whether the Select is rounded or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -70,7 +70,7 @@ const apiData: TableItem[] = [
     prop: 'multiple',
     required: false,
     description: 'Wheter the Select is enabled to choose multiple options',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -94,7 +94,7 @@ const apiData: TableItem[] = [
     prop: 'readonly',
     required: false,
     description: 'Wheter the Select is readonly or not',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -142,7 +142,7 @@ const apiData: TableItem[] = [
     prop: 'clearable',
     required: false,
     description: 'Allows to leave the selection empty and displays an icon that clears the selection when clicked.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -174,7 +174,7 @@ const apiData: TableItem[] = [
     prop: 'ariaRequired',
     required: false,
     description: 'Marks the select as required for form submission.',
-    values: 'true, false',
+    values: 'boolean',
     default: ''
   },
   {
@@ -182,7 +182,7 @@ const apiData: TableItem[] = [
     prop: 'ariaInvalid',
     required: false,
     description: 'Indicates that the current value entered into the select is invalid.',
-    values: 'true, false',
+    values: 'boolean',
     default: ''
   },
   {
@@ -458,22 +458,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Select Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Select Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="emitData"
+      <api-table
+        name="Select"
+        :tables="[
+          { title: 'Props', data: apiData, headers: 'props' },
+          { title: 'Emits', data: emitData, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

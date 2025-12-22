@@ -59,7 +59,7 @@ const dropdownProps: TableItem[] = [
     prop: 'isOpen',
     required: false,
     description: 'Controls the open state of the Dropdown, if not provided it will be managed internally.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -67,7 +67,7 @@ const dropdownProps: TableItem[] = [
     prop: 'elevated',
     required: false,
     description: 'Wheter the Dropdown is elevated or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -91,7 +91,7 @@ const dropdownProps: TableItem[] = [
     prop: 'disabled',
     required: false,
     description: 'Wheter the Dropdown is disabled or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -158,7 +158,7 @@ const itemInterface: TableItem[] = [
     prop: 'disabled',
     required: false,
     description: 'Wheter the Item is disabled or not',
-    values: 'true, false',
+    values: 'boolean',
     default: ''
   },
   {
@@ -519,32 +519,15 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Dropdown Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="dropdownProps"
-      />
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-      <h3>Item interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="itemInterface"
-      />
-
-      <h3>Dropdown Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="dropdownEmits"
-      />
-
-      <h3>Dropdown Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="dropdownSlots"
+      <api-table
+        name="Dropdown"
+        :tables="[
+          { title: 'Props', data: dropdownProps, headers: 'props' },
+          { title: 'Emits', data: dropdownEmits, headers: 'emits' },
+          { title: 'Slots', data: dropdownSlots, headers: 'slots' },
+          { title: 'Item', data: itemInterface, headers: 'interface' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

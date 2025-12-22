@@ -56,7 +56,7 @@ const tooltipProps: TableItem[] = [
     prop: 'elevated',
     required: false,
     description: 'Elevates the tooltip by one level.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'true'
   },
   {
@@ -288,22 +288,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Tooltip Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="tooltipProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Tooltip Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="tooltipSlots"
+      <api-table
+        name="Tooltip"
+        :tables="[
+          { title: 'Props', data: tooltipProps, headers: 'props' },
+          { title: 'Slots', data: tooltipSlots, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

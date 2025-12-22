@@ -155,7 +155,7 @@ const crumbInterface: TableItem[] = [
     prop: 'disabled',
     required: false,
     description: 'Wheter the Crumb is disabled or not',
-    values: 'true, false',
+    values: 'boolean',
     default: ''
   },
   {
@@ -163,7 +163,7 @@ const crumbInterface: TableItem[] = [
     prop: 'active',
     required: false,
     description: 'Wheter the Crumb is active or not',
-    values: 'true, false',
+    values: 'boolean',
     default: ''
   },
   {
@@ -455,28 +455,14 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Breadcrumbs Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="breadcrumbsProps"
-      />
-
-      <h3>Crumb Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="crumbInterface"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Breadcrumbs Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="breadcrumbsEmits"
+      <api-table
+        name="Breadcrumbs"
+        :tables="[
+          { title: 'Props', data: breadcrumbsProps, headers: 'props' },
+          { title: 'Crumb', data: crumbInterface, headers: 'interface' },
+          { title: 'Emits', data: breadcrumbsEmits, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

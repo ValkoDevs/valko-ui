@@ -33,99 +33,75 @@ const locales: SelectOption[] = [
 const formats: TableItem[] = [
   {
     key: 'YY',
-    prop: 'YY',
-    required: false,
+    format: 'YY',
     description: 'Two-digit year (e.g., 18 for 2018)',
-    values: '18',
-    default: ''
+    example: '18'
   },
   {
     key: 'YYYY',
-    prop: 'YYYY',
-    required: false,
+    format: 'YYYY',
     description: 'Four-digit year (e.g., 2018)',
-    values: '2018',
-    default: ''
+    example: '2018'
   },
   {
     key: 'M',
-    prop: 'M',
-    required: false,
+    format: 'M',
     description: 'The month, beginning at 1 (1 = January)',
-    values: '1-12',
-    default: ''
+    example: '1-12'
   },
   {
     key: 'MM',
-    prop: 'MM',
-    required: false,
+    format: 'MM',
     description: 'The month, 2-digits (e.g., 01 for January)',
-    values: '01-12',
-    default: ''
+    example: '01-12'
   },
   {
     key: 'MMM',
-    prop: 'MMM',
-    required: false,
+    format: 'MMM',
     description: 'Abbreviated month name (e.g., Jan for January)',
-    values: 'Jan-Dec',
-    default: ''
+    example: 'Jan-Dec'
   },
   {
     key: 'MMMM',
-    prop: 'MMMM',
-    required: false,
+    format: 'MMMM',
     description: 'Full month name (e.g., January)',
-    values: 'January-December',
-    default: ''
+    example: 'January-December'
   },
   {
     key: 'D',
-    prop: 'D',
-    required: false,
+    format: 'D',
     description: 'Day of the month (1-31)',
-    values: '1-31',
-    default: ''
+    example: '1-31'
   },
   {
     key: 'DD',
-    prop: 'DD',
-    required: false,
+    format: 'DD',
     description: 'Day of the month, 2-digits (e.g., 01 for the 1st)',
-    values: '01-31',
-    default: ''
+    example: '01-31'
   },
   {
     key: 'd',
-    prop: 'd',
-    required: false,
+    format: 'd',
     description: 'Day of the week, with Sunday as 0 (0-6)',
-    values: '0-6',
-    default: ''
+    example: '0-6'
   },
   {
     key: 'dd',
-    prop: 'dd',
-    required: false,
+    format: 'dd',
     description: 'Minimum name of the day of the week (e.g., Su for Sunday)',
-    values: 'Su-Sa',
-    default: ''
+    example: 'Su-Sa'
   },
   {
     key: 'ddd',
-    prop: 'ddd',
-    required: false,
+    format: 'ddd',
     description: 'Short name of the day of the week (e.g., Sun for Sunday)',
-    values: 'Sun-Sat',
-    default: ''
+    example: 'Sun-Sat'
   },
   {
     key: 'dddd',
-    prop: 'dddd',
-    required: false,
+    format: 'dddd',
     description: 'Full name of the day of the week (e.g., Sunday)',
-    values: 'Sunday-Saturday',
-    default: ''
+    example: 'Sunday-Saturday'
   }
 ]
 
@@ -207,7 +183,7 @@ const datepickerProps: TableItem[] = [
     prop: 'disableWeekends',
     required: false,
     description: 'Allows to disable all weekends (sunday, saturday).',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -255,7 +231,7 @@ const datepickerProps: TableItem[] = [
     prop: 'ariaInvalid',
     required: false,
     description: 'Indicates that the current value of the datepicker is invalid.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -263,7 +239,7 @@ const datepickerProps: TableItem[] = [
     prop: 'ariaRequired',
     required: false,
     description: 'Indicates that user input is required on the datepicker.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -867,58 +843,19 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Datepicker Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="datepickerProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Datepicker Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="datepickerEmits"
-      />
-
-      <h3>Calendar Adapter Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="calendarAdapterProps"
-      />
-
-      <h3>Adapter Result Type</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="adapterResultProps"
-      />
-
-      <h3>FormattedDates Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="formattedDatesProps"
-      />
-
-      <h3>FormattedDate Type</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="formattedDateProps"
-      />
-
-      <h3>DayOfWeek Type</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="dayOfWeekProp"
-      />
-
-      <h3>Available Formats</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="formats"
+      <api-table
+        name="Datepicker"
+        :tables="[
+          { title: 'Props', data: datepickerProps, headers: 'props' },
+          { title: 'Emits', data: datepickerEmits, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface , headers: 'interface' },
+          { title: 'Calendar Adapter', data: calendarAdapterProps , headers: 'interface' },
+          { title: 'Adapter Result Type', data: adapterResultProps , headers: 'interface' },
+          { title: 'Formatted Dates', data: formattedDatesProps , headers: 'interface' },
+          { title: 'Formatted Date Type', data: formattedDateProps , headers: 'interface' },
+          { title: 'Day Of Week Type', data: dayOfWeekProp , headers: 'interface' },
+          { title: 'Available Formats', data: formats, headers: 'format' }
+        ]"
       />
     </template>
   </doc-section>

@@ -70,7 +70,7 @@ const avatarProps: TableItem[] = [
     prop: 'elevated',
     required: false,
     description: 'Applies a shadow to visually elevate the Avatar.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -346,22 +346,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Avatar Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="avatarProps"
-      />
-
-      <h3>Avatar Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="avatarSlots"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
+      <api-table
+        name="Avatar"
+        :tables="[
+          { title: 'Props', data: avatarProps, headers: 'props' },
+          { title: 'Slots', data: avatarSlots, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

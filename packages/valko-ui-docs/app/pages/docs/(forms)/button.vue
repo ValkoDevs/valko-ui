@@ -58,7 +58,7 @@ const apiData: TableItem[] = [
     prop: 'disabled',
     required: false,
     description: 'Whether the Button is disabled or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -74,7 +74,7 @@ const apiData: TableItem[] = [
     prop: 'elevated',
     required: false,
     description: 'Adds a subtle shadow to the button, giving it a slightly raised appearance. When false (default), the button appears flat with no shadow.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -82,7 +82,7 @@ const apiData: TableItem[] = [
     prop: 'block',
     required: false,
     description: 'Whether the Button width is equal to it\'s container.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -90,7 +90,7 @@ const apiData: TableItem[] = [
     prop: 'loading',
     required: false,
     description: 'Whether the Button is loading or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -426,28 +426,14 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Button Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Button Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="emitData"
-      />
-
-      <h3>Button Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="slotData"
+      <api-table
+        name="Button"
+        :tables="[
+          { title: 'Props', data: apiData, headers: 'props' },
+          { title: 'Emits', data: emitData, headers: 'emits' },
+          { title: 'Slots', data: slotData, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

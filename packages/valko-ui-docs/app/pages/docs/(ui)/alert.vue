@@ -52,7 +52,7 @@ const alertProps: TableItem[] = [
     prop: 'elevated',
     required: false,
     description: 'Adds a subtle shadow to the Alert, giving it a slightly raised appearance. When false (default), the alert appears flat with no shadow.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -60,8 +60,8 @@ const alertProps: TableItem[] = [
     prop: 'closable',
     required: false,
     description: 'Displays a button to close the Alert.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: false
   },
   {
     key: 'titleProp',
@@ -438,28 +438,14 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Alert Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="alertProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Alert Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="alertEmits"
-      />
-
-      <h3>Alert Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="alertSlots"
+      <api-table
+        name="Alert"
+        :tables="[
+          { title: 'Props', headers: 'props', data: alertProps },
+          { title: 'Emits', headers: 'emits', data: alertEmits },
+          { title: 'Slots', headers: 'slots', data: alertSlots },
+          { title: 'Style Slots', headers: 'interface', data: styleSlotsInterface }
+        ]"
       />
     </template>
   </doc-section>

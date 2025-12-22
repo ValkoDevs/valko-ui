@@ -50,7 +50,7 @@ const navbarProps: TableItem[] = [
     prop: 'elevated',
     required: false,
     description: 'Adds a subtle shadow to the Navbar (elevation level 1) when not fixed. If the Navbar is also fixed, the elevation is increased to level 2.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -58,7 +58,7 @@ const navbarProps: TableItem[] = [
     prop: 'fixed',
     required: false,
     description: 'Fixes the Navbar to the top of the viewport and increases its elevation to level 2, regardless of the "elevated" setting.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -66,7 +66,7 @@ const navbarProps: TableItem[] = [
     prop: 'floating',
     required: false,
     description: 'Determines if the Navbar is floating.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -74,7 +74,7 @@ const navbarProps: TableItem[] = [
     prop: 'vertical',
     required: false,
     description: 'Determines if the Navbar is vertical or not.',
-    values: 'true, false',
+    values: 'boolean',
     default: 'false'
   },
   {
@@ -350,16 +350,12 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Navbar Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="navbarProps"
-      />
-
-      <h3>Navbar Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="navbarSlots"
+      <api-table
+        name="Navbar"
+        :tables="[
+          { title: 'Props', data: navbarProps, headers: 'props' },
+          { title: 'Slots', data: navbarSlots, headers: 'slots' }
+        ]"
       />
     </template>
   </doc-section>
