@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants'
 const skeleton = tv({
   slots: {
     container: [
-      'vk-skeleton__container',
+      'vk-skeleton',
       'animate-pulse',
       'bg-gradient-to-br',
       'from-surface-container-low',
