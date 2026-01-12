@@ -5,7 +5,7 @@ export interface Label {
   value: number;
   label: string;
 }
-export interface RangeProps<R = boolean, T = R extends true ? number[] : number> extends VariantsAlt, Sizes, Colors, Shapes, Pick<AriaAttributes, 'aria-describedby'> {
+export interface RangeProps<R = boolean, T = R extends true ? number[] : number> extends VariantsAlt, Sizes, Colors, Shapes, Pick<AriaAttributes, 'ariaDescribedBy'> {
   modelValue?: T;
   isDouble?: R;
   labels?: Label[]

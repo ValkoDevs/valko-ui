@@ -1,7 +1,7 @@
 import type { Shapes, ColorsWithSurface, Sizes, VariantWithGradientAndLink, AriaAttributes } from './common'
 import type { ButtonSlots } from '../styles/Button.styles'
 
-export interface ButtonProps extends Shapes, Sizes, ColorsWithSurface, Pick<AriaAttributes, 'aria-label'> {
+export interface ButtonProps extends Shapes, Sizes, ColorsWithSurface, Pick<AriaAttributes, 'ariaLabel'> {
   variant?: VariantWithGradientAndLink;
   block?: boolean;
   disabled?: boolean;

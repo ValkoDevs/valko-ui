@@ -50,8 +50,8 @@ const ariaLive = computed(() => {
     :class="s.container({ class: styleSlots?.container })"
     :role="ariaRole"
     :aria-live="ariaLive"
-    :aria-label="title ? titleId : props['aria-label']"
-    :aria-labelledby="props['aria-labelledby']"
+    :aria-label="title ? titleId : ariaLabel"
+    :aria-labelledby="ariaLabelledBy"
   >
     <vk-icon
       v-if="icon !== null"

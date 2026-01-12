@@ -154,7 +154,7 @@ const apiData: TableItem[] = [
   },
   {
     key: 'ariaLabelProp',
-    prop: 'aria-label',
+    prop: 'ariaLabel',
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
@@ -162,7 +162,7 @@ const apiData: TableItem[] = [
   },
   {
     key: 'ariaLabelledByProp',
-    prop: 'aria-labelledby',
+    prop: 'ariaLabelledBy',
     required: false,
     description: 'ID reference to an element that labels the input (e.g. a visible <label>).',
     values: 'string',
@@ -170,7 +170,7 @@ const apiData: TableItem[] = [
   },
   {
     key: 'ariaDescribedByProp',
-    prop: 'aria-describedby',
+    prop: 'ariaDescribedBy',
     required: false,
     description: 'ID reference to an element that further describes the input, such as helper or error text.',
     values: 'string',
@@ -178,7 +178,7 @@ const apiData: TableItem[] = [
   },
   {
     key: 'ariaRequiredProp',
-    prop: 'aria-required',
+    prop: 'ariaRequired',
     required: false,
     description: 'Marks the input as required for form submission.',
     values: 'true, false',
@@ -186,7 +186,7 @@ const apiData: TableItem[] = [
   },
   {
     key: 'ariaInvalidProp',
-    prop: 'aria-invalid',
+    prop: 'ariaInvalid',
     required: false,
     description: 'Indicates that the current value entered into the input is invalid.',
     values: 'true, false',

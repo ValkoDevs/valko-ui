@@ -241,7 +241,7 @@ const timepickerProps: TableItem[] = [
   },
   {
     key: 'ariaLabelProp',
-    prop: 'aria-label',
+    prop: 'ariaLabel',
     required: false,
     description: 'Defines a string label for assistive technologies.',
     values: 'string',
@@ -249,7 +249,7 @@ const timepickerProps: TableItem[] = [
   },
   {
     key: 'ariaLabelledbyProp',
-    prop: 'aria-labelledby',
+    prop: 'ariaLabelledBy',
     required: false,
     description: 'References the ID of the element that labels the timepicker.',
     values: 'string',
@@ -257,7 +257,7 @@ const timepickerProps: TableItem[] = [
   },
   {
     key: 'ariaDescribedbyProp',
-    prop: 'aria-describedby',
+    prop: 'ariaDescribedBy',
     required: false,
     description: 'References the ID of the element that describes the timepicker.',
     values: 'string',
@@ -265,7 +265,7 @@ const timepickerProps: TableItem[] = [
   },
   {
     key: 'ariaInvalidProp',
-    prop: 'aria-invalid',
+    prop: 'ariaInvalid',
     required: false,
     description: 'Indicates whether the value entered in the timepicker is invalid.',
     values: 'true, false',
@@ -273,7 +273,7 @@ const timepickerProps: TableItem[] = [
   },
   {
     key: 'ariaRequiredProp',
-    prop: 'aria-required',
+    prop: 'ariaRequired',
     required: false,
     description: 'Indicates whether the timepicker is required.',
     values: 'true, false',

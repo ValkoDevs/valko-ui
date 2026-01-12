@@ -4,7 +4,7 @@ import type { InputSlots } from '../styles/Input.styles'
 export type InputType = 'text' | 'password' | 'email' | 'number'
 export type InputCursor = 'text' | 'pointer'
 
-export interface InputProps extends Sizes, ColorsWithSurface, Variants, Shapes, Omit<AriaAttributes, 'aria-description'> {
+export interface InputProps extends Sizes, ColorsWithSurface, Variants, Shapes, Omit<AriaAttributes, 'ariaDescription'> {
   type?: InputType;
   cursor?: InputCursor;
   modelValue?: string | number;

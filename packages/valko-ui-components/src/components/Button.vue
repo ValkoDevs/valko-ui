@@ -46,7 +46,7 @@ const onMouseDown = (event: MouseEvent | TouchEvent) => {
     :class="s.button({ class: styleSlots?.button })"
     :disabled="disabled"
     :aria-disabled="disabled"
-    :aria-label="props['aria-label']"
+    :aria-label="ariaLabel"
     :type="type"
     @click="onClick"
     @mousedown="onMouseDown"

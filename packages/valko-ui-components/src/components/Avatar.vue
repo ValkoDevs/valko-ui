@@ -31,7 +31,7 @@ const getInitials = (name: string): string => {
     :class="s.container({ class: styleSlots?.container })"
     :title="name"
     :role="src || name ? 'img' : 'presentation'"
-    :aria-label="props['aria-label'] ? props['aria-label'] : name"
+    :aria-label="ariaLabel ? ariaLabel : name"
     :aria-hidden="!(src || name) || undefined"
   >
     <slot>

@@ -24,9 +24,9 @@ const s = computed(() => styles(props))
   <div :class="s.container({ class: styleSlots?.container })">
     <span
       :class="s.badge({ class: styleSlots?.badge })"
-      :aria-hidden="(dot && !props['aria-label'] && !content) || undefined"
-      :role="(dot && !props['aria-label'] && !content) ? undefined : 'status'"
-      :aria-label="props['aria-label'] || (!dot ? String(content) : undefined)"
+      :aria-hidden="(dot && !ariaLabel && !content) || undefined"
+      :role="(dot && !ariaLabel && !content) ? undefined : 'status'"
+      :aria-label="ariaLabel || (!dot ? String(content) : undefined)"
     >
       {{ !dot ? content : '' }}
     </span>

@@ -111,7 +111,7 @@ const tabsProps: TableItem[] = [
   },
   {
     key: 'ariaLabelProp',
-    prop: 'aria-label',
+    prop: 'ariaLabel',
     required: false,
     description: 'Accessible label for the tab list. Used by assistive technologies when no visible heading is present.',
     values: 'string',

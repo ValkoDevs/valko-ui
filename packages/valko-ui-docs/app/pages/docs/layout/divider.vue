@@ -57,7 +57,7 @@ const dividerProps: TableItem[] = [
   },
   {
     key: 'ariaLabelProp',
-    prop: 'aria-label',
+    prop: 'ariaLabel',
     required: false,
     description: 'Defines a string label for the divider element. Used by screen readers when no visible text is provided.',
     values: 'string',
@@ -65,7 +65,7 @@ const dividerProps: TableItem[] = [
   },
   {
     key: 'ariaLabelledByProp',
-    prop: 'aria-labelledby',
+    prop: 'ariaLabelledBy',
     required: false,
     description: 'References the ID of another element that labels the divider. Useful for complex labeling.',
     values: 'string',

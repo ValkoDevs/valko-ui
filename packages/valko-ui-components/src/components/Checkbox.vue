@@ -28,7 +28,7 @@ const helpertextId = useId()
 const describedBy = computed(() => {
   const ids = []
   if (props.helpertext) ids.push(helpertextId)
-  if (props['aria-describedby']) ids.push(props['aria-describedby'])
+  if (props.ariaDescribedBy) ids.push(props.ariaDescribedBy)
   return ids.length > 0 ? ids.join(' ') : undefined
 })
 
@@ -44,8 +44,8 @@ const onClick = () => {
       :class="s.checkboxContainer({ class: styleSlots?.checkboxContainer })"
       :aria-checked="modelValue === null ? 'mixed' : !!modelValue"
       :aria-disabled="disabled"
-      :aria-label="props['aria-label']"
-      :aria-labelledby="props['aria-labelledby']"
+      :aria-label="ariaLabel"
+      :aria-labelledby="ariaLabelledBy"
       :aria-describedby="describedBy"
       :tabindex="disabled ? -1 : 0"
       @click="onClick"
@@ -74,7 +74,6 @@ const onClick = () => {
         :name="name"
         :disabled="disabled"
         :class="s.input({ class: styleSlots?.input })"
-        @click.prevent=""
       >
       <label
         :for="inputId"

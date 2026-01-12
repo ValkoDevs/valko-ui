@@ -228,7 +228,7 @@ const datepickerProps: TableItem[] = [
   },
   {
     key: 'ariaLabelProp',
-    prop: 'aria-label',
+    prop: 'ariaLabel',
     required: false,
     description: 'Defines a string value that labels the datepicker for assistive technologies.',
     values: 'string',
@@ -236,7 +236,7 @@ const datepickerProps: TableItem[] = [
   },
   {
     key: 'ariaLabelledbyProp',
-    prop: 'aria-labelledby',
+    prop: 'ariaLabelledBy',
     required: false,
     description: 'Identifies the element(s) that labels the datepicker.',
     values: 'string',
@@ -244,7 +244,7 @@ const datepickerProps: TableItem[] = [
   },
   {
     key: 'ariaDescribedbyProp',
-    prop: 'aria-describedby',
+    prop: 'ariaDescribedBy',
     required: false,
     description: 'Identifies the element(s) that describe the datepicker.',
     values: 'string',
@@ -252,7 +252,7 @@ const datepickerProps: TableItem[] = [
   },
   {
     key: 'ariaInvalidProp',
-    prop: 'aria-invalid',
+    prop: 'ariaInvalid',
     required: false,
     description: 'Indicates that the current value of the datepicker is invalid.',
     values: 'true, false',
@@ -260,7 +260,7 @@ const datepickerProps: TableItem[] = [
   },
   {
     key: 'ariaRequiredProp',
-    prop: 'aria-required',
+    prop: 'ariaRequired',
     required: false,
     description: 'Indicates that user input is required on the datepicker.',
     values: 'true, false',

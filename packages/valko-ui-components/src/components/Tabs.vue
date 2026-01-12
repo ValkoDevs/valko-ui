@@ -76,7 +76,7 @@ watch(
       <tab-list
         :class="s.list({ class: styleSlots?.list })"
         as="nav"
-        :aria-label="props['aria-label'] ?? 'Tab navigation'"
+        :aria-label="ariaLabel ?? 'Tab navigation'"
       >
         <div
           :class="s.cursor({ class: styleSlots?.cursor })"

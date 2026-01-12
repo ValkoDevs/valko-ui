@@ -13,8 +13,8 @@ const s = computed(() => styles({ ...props, class: props.styleSlots }))
 <template>
   <i
     :class="[s, `ti ti-${name}`]"
-    :role="props['aria-label'] ? 'img' : undefined"
-    :aria-label="props['aria-label']"
-    :aria-hidden="!props['aria-label'] || undefined"
+    :role="ariaLabel ? 'img' : undefined"
+    :aria-label="ariaLabel"
+    :aria-hidden="!ariaLabel || undefined"
   />
 </template>

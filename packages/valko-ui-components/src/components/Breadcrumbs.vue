@@ -34,7 +34,7 @@ const selectIcon = (separator: string) => separator.length > 2
 <template>
   <nav
     :class="s.nav({ class: styleSlots?.nav })"
-    :aria-label="props['aria-label'] ?? 'Breadcrumbs'"
+    :aria-label="ariaLabel ?? 'Breadcrumbs'"
   >
     <ol :class="s.list({ class: styleSlots?.list })">
       <li

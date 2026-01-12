@@ -1,7 +1,7 @@
 import type { ColorsWithSurface, Shapes, Sizes, Variants, AriaAttributes } from './common'
 import type { PaginationSlots } from '../styles/Pagination.styles'
 
-export interface PaginationProps extends ColorsWithSurface, Shapes, Sizes, Variants, Pick<AriaAttributes, 'aria-label'> {
+export interface PaginationProps extends ColorsWithSurface, Shapes, Sizes, Variants, Pick<AriaAttributes, 'ariaLabel'> {
   pages?: number;
   modelValue?: number;
   elevated?: boolean;
