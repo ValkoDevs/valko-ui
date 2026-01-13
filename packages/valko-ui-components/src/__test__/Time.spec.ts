@@ -1,5 +1,5 @@
 import { ref, computed, toValue } from 'vue'
-import { VueWrapper, mount } from '@vue/test-utils'
+import { DOMWrapper, VueWrapper, mount } from '@vue/test-utils'
 import VkTime from '#valkoui/components/Time.vue'
 import type { TimeAdapterResult } from '#valkoui/types/Time'
 
@@ -270,6 +270,300 @@ describe('Time component', () => {
         })
 
         expect(wrapper.find('.vk-time__ok-button').classes()).toContain('bg-primary-container')
+      })
+    })
+  })
+
+  describe('Methods', () => {
+    describe('formatMap', () => {
+      it('should render 12 hour buttons when format is 12-hour', () => {
+        const wrapper = mount(VkTime, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'hh:mm:ss'
+          }
+        })
+
+        expect(wrapper.findAll('.vk-time__unit-button').length).toBeGreaterThanOrEqual(12)
+      })
+
+      it('should render 24 hour buttons when format is 24-hour', () => {
+        const wrapper = mount(VkTime, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'HH:mm:ss'
+          }
+        })
+
+        expect(wrapper.findAll('.vk-time__unit-button').length).toBeGreaterThanOrEqual(24)
+      })
+    })
+
+    describe('selectedTime', () => {
+      describe('Using display values', () => {
+        let buttons: DOMWrapper<Element>[]
+
+        beforeEach(() => {
+          const wrapper = mount(VkTime, {
+            props: {
+              modelValue,
+              adapter,
+              format: 'HH:mm:ss'
+            }
+          })
+
+          buttons = wrapper.findAll('.vk-time__unit-button')
+        })
+
+        it('should highlight hour matching display values', () => {
+          // hours: index 0-23
+          const hourBtn = buttons[10]
+          expect(hourBtn?.classes()).toContain('bg-primary')
+        })
+
+        it('should highlight minute matching display values', () => {
+          // minutes: index 24-83
+          const minuteBtn = buttons[24 + 10]
+          expect(minuteBtn?.classes()).toContain('bg-primary')
+        })
+
+        it('should highlight second matching display values', () => {
+          // seconds: index 84-143
+          const secondBtn = buttons[84 + 10]
+          expect(secondBtn?.classes()).toContain('bg-primary')
+        })
+      })
+
+      describe('Fallback to selected values', () => {
+        let buttons: DOMWrapper<Element>[]
+        beforeEach(() => {
+
+          const mockAdapter = {
+            ...adapter,
+            formattedTime: computed(() => ({
+              selected: { hours: 1, minutes: 2, seconds: 3, obj: new Date() }
+              // display intentionally omitted
+            }))
+          }
+          const wrapper = mount(VkTime, {
+            props: {
+              modelValue,
+              // @ts-expect-error: Intentionally omitting display to test fallback to selected in selectedTime
+              adapter: mockAdapter
+            }
+          })
+
+          buttons = wrapper.findAll('.vk-time__unit-button')
+        })
+
+        it('should highlight hour matching selected value', () => {
+          expect(buttons[1]?.classes()).toContain('bg-primary')
+        })
+
+        it('should highlight minute matching selected value', () => {
+          expect(buttons[24 + 2]?.classes()).toContain('bg-primary')
+        })
+
+        it('should highlight second matching selected value', () => {
+          expect(buttons[84 + 3]?.classes()).toContain('bg-primary')
+        })
+      })
+    })
+
+    describe('formatHour', () => {
+      it('should render 12 for hour 0 in 12-hour format', () => {
+        const wrapper = mount(VkTime, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'hh:mm:ss'
+          }
+        })
+
+        const hourBtn = wrapper.findAll('.vk-time__unit-button').find(btn => btn.text() === '12')
+
+        expect(hourBtn).toBeTruthy()
+      })
+
+      it('should render 0 for hour 0 in 24-hour format', () => {
+        const wrapper = mount(VkTime, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'HH:mm:ss'
+          }
+        })
+
+        const hourBtn = wrapper.findAll('.vk-time__unit-button').find(btn => btn.text() === '00')
+
+        expect(hourBtn).toBeTruthy()
+      })
+    })
+  })
+
+  describe('Adapter methods', () => {
+    it('should call setDisplayUnit for hour button', async () => {
+      const wrapper = mount(VkTime, {
+        props: {
+          modelValue,
+          adapter
+        }
+      })
+
+      const hourContainers = wrapper.findAll('.vk-time__unitContainer')
+      const hourBtn = hourContainers[0]?.findAll('.vk-time__unit-button')[1]
+
+      if (hourBtn) {
+        await hourBtn.trigger('click')
+        expect(adapter.setDisplayUnit).toHaveBeenCalledWith('h', '01')
+      }
+    })
+
+    it('should call setDisplayUnit for minute button', async () => {
+      const wrapper = mount(VkTime, {
+        props: {
+          modelValue,
+          adapter
+        }
+      })
+
+      const unitContainers = wrapper.findAll('.vk-time__unitContainer')
+      const minuteBtn = unitContainers[1]?.findAll('.vk-time__unit-button')[2]
+
+      if (minuteBtn) {
+        await minuteBtn.trigger('click')
+        expect(adapter.setDisplayUnit).toHaveBeenCalledWith('m', '02')
+      }
+    })
+
+    it('should call setDisplayUnit for second button', async () => {
+      const wrapper = mount(VkTime, {
+        props: {
+          modelValue,
+          adapter
+        }
+      })
+
+      const unitContainers = wrapper.findAll('.vk-time__unitContainer')
+      const secondBtn = unitContainers[2]?.findAll('.vk-time__unit-button')[3]
+
+      if (secondBtn) {
+        await secondBtn.trigger('click')
+        expect(adapter.setDisplayUnit).toHaveBeenCalledWith('s', '03')
+      }
+    })
+  })
+
+  describe('Period buttons', () => {
+    describe('when period is AM', () => {
+      let wrapper: VueWrapper
+      let amBtn: DOMWrapper<Element> | undefined
+      let pmBtn: DOMWrapper<Element> | undefined
+
+      beforeEach(() => {
+        const amAdapter = {
+          ...adapter,
+          period: ref<'AM' | 'PM'>('AM'),
+          formattedTime: computed(() => ({
+            selected: { hours: 8, minutes: 0, seconds: 0, obj: new Date(1728950400 * 1000) },
+            display: { hours: 8, minutes: 0, seconds: 0, obj: new Date(1728950400 * 1000) }
+          }))
+        }
+
+        wrapper = mount(VkTime, {
+          props: {
+            modelValue,
+            adapter: amAdapter,
+            format: 'HH:mm:ss A'
+          }
+        })
+
+        const periodBtns = wrapper.findAll('button').filter(btn => btn.text() === 'AM' || btn.text() === 'PM')
+        amBtn = periodBtns.find(btn => btn.text() === 'AM')
+        pmBtn = periodBtns.find(btn => btn.text() === 'PM')
+      })
+
+      it('should render AM as selected', () => {
+        expect(amBtn?.classes()).toContain('bg-primary')
+      })
+
+      it('should render PM as unselected', () => {
+        expect(pmBtn?.classes()).toContain('text-on-surface')
+      })
+    })
+
+    describe('when period is PM', () => {
+      let wrapper: VueWrapper
+      let amBtn: DOMWrapper<Element> | undefined
+      let pmBtn: DOMWrapper<Element> | undefined
+
+      beforeEach(() => {
+        const pmAdapter = {
+          ...adapter,
+          period: ref<'AM' | 'PM'>('PM'),
+          formattedTime: computed(() => ({
+            selected: { hours: 15, minutes: 0, seconds: 0, obj: new Date(1728990000 * 1000) },
+            display: { hours: 15, minutes: 0, seconds: 0, obj: new Date(1728990000 * 1000) }
+          }))
+        }
+
+        wrapper = mount(VkTime, {
+          props: {
+            modelValue,
+            adapter: pmAdapter,
+            format: 'HH:mm:ss A'
+          }
+        })
+
+        const periodBtns = wrapper.findAll('button').filter(btn => btn.text() === 'AM' || btn.text() === 'PM')
+        amBtn = periodBtns.find(btn => btn.text() === 'AM')
+        pmBtn = periodBtns.find(btn => btn.text() === 'PM')
+      })
+
+      it('should render PM as selected', () => {
+        expect(pmBtn?.classes()).toContain('bg-primary')
+      })
+
+      it('should render AM as unselected', () => {
+        expect(amBtn?.classes()).toContain('text-on-surface')
+      })
+    })
+
+    describe('onSelectAMPM', () => {
+      it('should call onSelectAMPM when clicking AM button', async () => {
+        const wrapper = mount(VkTime, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'hh:mm:ss A'
+          }
+        })
+
+        const amBtn = wrapper.findAll('button').find(btn => btn.text() === 'AM')
+
+        if (amBtn) {
+          await amBtn.trigger('click')
+          expect(adapter.onSelectAMPM).toHaveBeenCalledWith('AM')
+        }
+      })
+
+      it('should call onSelectAMPM when clicking PM button', async () => {
+        const wrapper = mount(VkTime, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'hh:mm:ss A'
+          }
+        })
+
+        const pmBtn = wrapper.findAll('button').find(btn => btn.text() === 'PM')
+
+        if (pmBtn) {
+          await pmBtn.trigger('click')
+          expect(adapter.onSelectAMPM).toHaveBeenCalledWith('PM')
+        }
       })
     })
   })

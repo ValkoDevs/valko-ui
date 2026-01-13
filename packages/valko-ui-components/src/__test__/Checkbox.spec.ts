@@ -247,6 +247,61 @@ describe('Checkbox component', () => {
     })
   })
 
+  describe('Arias', () => {
+    it('should set aria-describedby when helpertext is present', () => {
+      wrapper = mount(VkCheckbox, {
+        props: {
+          helpertext: 'Help text'
+        }
+      })
+      const helpertextId = wrapper.find('.vk-checkbox__helpertext').attributes('id')
+      const describedby = wrapper.find('.vk-checkbox__container').attributes('aria-describedby')
+
+      expect(describedby).toContain(helpertextId)
+    })
+
+    it('should set aria-describedby when aria-describedby prop is present', () => {
+      wrapper = mount(VkCheckbox, {
+        props: {
+          ariaDescribedBy: 'external-id'
+        }
+      })
+
+      expect(wrapper.find('.vk-checkbox__container').attributes('aria-describedby')).toContain('external-id')
+    })
+
+    it('should set aria-describedby with both helpertext id and aria-describedby prop', () => {
+      wrapper = mount(VkCheckbox, {
+        props: {
+          helpertext: 'Help text',
+          ariaDescribedBy: 'external-id'
+        }
+      })
+      const helpertextId = wrapper.find('.vk-checkbox__helpertext').attributes('id')
+      const describedby = wrapper.find('.vk-checkbox__container').attributes('aria-describedby')
+
+      expect(describedby).toContain(`${helpertextId} external-id`)
+    })
+  })
+
+  describe('Tabindex', () => {
+    it('should set tabindex to -1 when disabled', () => {
+      wrapper = mount(VkCheckbox, {
+        props: { disabled: true }
+      })
+
+      expect(wrapper.find('.vk-checkbox__container').attributes('tabindex')).toBe('-1')
+    })
+
+    it('should set tabindex to 0 when not disabled', () => {
+      wrapper = mount(VkCheckbox, {
+        props: { disabled: false }
+      })
+
+      expect(wrapper.find('.vk-checkbox__container').attributes('tabindex')).toBe('0')
+    })
+  })
+
   describe('Emits', () => {
     it('should emit update event', () => {
       const wrapper = mount(VkCheckbox, {})

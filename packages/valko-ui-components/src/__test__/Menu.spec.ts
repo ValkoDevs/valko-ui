@@ -1,6 +1,7 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkMenu from '#valkoui/components/Menu.vue'
 import { MenuItem } from '#valkoui/types/Menu.ts'
+import { nextTick } from 'vue'
 
 describe('Menu component', () => {
   const onClickMock = vi.fn()
@@ -327,6 +328,239 @@ describe('Menu component', () => {
       await items[0].trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('itemClick')
+    })
+  })
+
+  describe('Items logic', () => {
+    describe('Groups', () => {
+      it('should set group to default is not group is provided', () => {
+        const items: MenuItem[] = [
+          { key: 'no-group', text: 'No Group' }
+        ]
+
+        wrapper = mount(VkMenu, {
+          props: {
+            items,
+            active: 0
+          }
+        })
+
+        expect(wrapper.find('.vk-menu__group').exists()).toBe(false)
+      })
+
+      it('should set group to provided group name', () => {
+        const items: MenuItem[] = [
+          { key: 'with-group', group: 'Custom Group', text: 'With Group' }
+        ]
+
+        wrapper = mount(VkMenu, {
+          props: {
+            items,
+            active: 0
+          }
+        })
+
+        expect(wrapper.find('.vk-menu__group').text()).toBe('Custom Group')
+      })
+    })
+
+    describe('Watcher DOM behavior', () => {
+      it('should focus the item matching active prop', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'button'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+
+        expect(buttons[2].attributes('tabindex')).toBe('0')
+      })
+
+      it('should focus the first item if active does not match any key', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'non-existent-key'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+
+        expect(buttons[0].attributes('tabindex')).toBe('0')
+      })
+
+      it('should not focus any item if all are disabled', async () => {
+        const items = [
+          { key: 'a', text: 'A', disabled: true },
+          { key: 'b', text: 'B', disabled: true }
+        ]
+
+        wrapper = mount(VkMenu, {
+          props: { items, active: 'a' }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+
+        buttons.forEach(button => {
+          expect(button.attributes('tabindex')).toBe('-1')
+        })
+      })
+    })
+
+    describe('onKeyDown', () => {
+      it('should move focus with ArrowDown', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'get-started'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+        await buttons[0].trigger('keydown', { key: 'ArrowDown' })
+        await nextTick()
+
+        expect(buttons[2].attributes('tabindex')).toBe('0')
+      })
+
+      it('should move focus with ArrowUp', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'get-started'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+        await buttons[0].trigger('keydown', { key: 'End' })
+        await nextTick()
+        await buttons[2].trigger('keydown', { key: 'ArrowUp' })
+        await nextTick()
+
+        expect(buttons[0].attributes('tabindex')).toBe('0')
+      })
+
+      it('should move focus with Home', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'get-started'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+        await buttons[0].trigger('keydown', { key: 'End' })
+        await nextTick()
+        await buttons[2].trigger('keydown', { key: 'Home' })
+        await nextTick()
+
+        expect(buttons[0].attributes('tabindex')).toBe('0')
+      })
+
+      it('should move focus with End', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'get-started'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+        await buttons[0].trigger('keydown', { key: 'End' })
+        await nextTick()
+
+        expect(buttons[2].attributes('tabindex')).toBe('0')
+      })
+
+      it('should trigger click with Enter if not disabled', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'get-started'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+        onClickMock.mockClear()
+        await buttons[0].trigger('keydown', { key: 'Enter' })
+
+        expect(onClickMock).toHaveBeenCalledTimes(1)
+      })
+
+      it('should trigger click with SpaceBar if not disabled', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'get-started'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+        onClickMock.mockClear()
+        await buttons[0].trigger('keydown', { key: 'SpaceBar' })
+
+        expect(onClickMock).toHaveBeenCalledTimes(1)
+      })
+
+      it('should not trigger click with Enter if disabled', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'divider'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+        onClickMock.mockClear()
+        await buttons[1].trigger('keydown', { key: 'Enter' })
+
+        expect(onClickMock).not.toHaveBeenCalled()
+      })
+
+      it('should not trigger click with SpaceBar if disabled', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'divider'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+        onClickMock.mockClear()
+        await buttons[1].trigger('keydown', { key: 'SpaceBar' })
+
+        expect(onClickMock).not.toHaveBeenCalled()
+      })
+
+      it('should do nothing for unrelated keys', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'get-started'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+        onClickMock.mockClear()
+        await buttons[0].trigger('keydown', { key: 'Tab' })
+        expect(onClickMock).not.toHaveBeenCalled()
+
+        expect(buttons[0].attributes('tabindex')).toBe('0')
+      })
     })
   })
 })

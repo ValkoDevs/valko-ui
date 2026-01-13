@@ -450,6 +450,40 @@ describe('Button component', () => {
     })
   })
 
+  describe('Ripple', () => {
+    it('should create ripple effect on mouse down', async () => {
+      wrapper = mount(VkButton, {})
+      const buttonElement = wrapper.find('.vk-button__base')
+      await buttonElement.trigger('mousedown')
+
+      expect(buttonElement.find('.vk-ripple__container').exists()).toBe(true)
+    })
+
+    it('should not create ripple effect when disabled is true', async () => {
+      wrapper = mount(VkButton, {
+        props: {
+          disabled: true
+        }
+      })
+      const buttonElement = wrapper.find('.vk-button__base')
+      await buttonElement.trigger('mousedown')
+
+      expect(buttonElement.find('.vk-ripple__container').exists()).toBe(false)
+    })
+
+    it('should not create ripple effect when loading is true', async () => {
+      wrapper = mount(VkButton, {
+        props: {
+          loading: true
+        }
+      })
+      const buttonElement = wrapper.find('.vk-button__base')
+      await buttonElement.trigger('mousedown')
+
+      expect(buttonElement.find('.vk-ripple__container').exists()).toBe(false)
+    })
+  })
+
   describe('With slots', () => {
     it('should be empty', () => {
       const wrapper = mount(VkButton, {})
