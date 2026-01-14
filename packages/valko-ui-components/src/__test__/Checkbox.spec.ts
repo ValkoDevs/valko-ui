@@ -309,5 +309,23 @@ describe('Checkbox component', () => {
       wrapper.find('.vk-checkbox__container').trigger('click')
       expect(wrapper.emitted('update:modelValue'))
     })
+
+    it('should not emit update event when disabled', () => {
+      const wrapper = mount(VkCheckbox, {
+        props: { disabled: true }
+      })
+
+      wrapper.find('.vk-checkbox__container').trigger('click')
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    })
+
+    it('should not emit update event when readonly', () => {
+      const wrapper = mount(VkCheckbox, {
+        props: { readonly: true }
+      })
+
+      wrapper.find('.vk-checkbox__container').trigger('click')
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    })
   })
 })

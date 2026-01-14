@@ -35,9 +35,9 @@ const { useDateAdapter } = vi.hoisted(() => ({
         1900249200000,
         2215004400000
       ]),
-      onSelectDay: () => 1728961200000,
-      onSelectMonth: () => 1727751600000,
-      onSelectYear: () => 1704078000000,
+      onSelectDay: vi.fn(() => 1728961200000),
+      onSelectMonth: vi.fn(() => 1727751600000),
+      onSelectYear: vi.fn(() => 1704078000000),
       getWeekdays: () => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       getMonths: () => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     }
@@ -324,8 +324,24 @@ describe('Calendar component', () => {
     })
   })
 
-  describe('Available views & changing beetwen them', () => {
-    describe('Available views inferred by format', () => {
+  describe('Adapter & Methods', () => {
+    describe('Watcher: format prop', () => {
+      it('should update view when format prop changes', async () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'YYYY-MM-DD'
+          }
+        })
+
+        await wrapper.setProps({ format: 'YYYY' })
+
+        expect(wrapper.find('.vk-calendar__view-container').attributes()).toHaveProperty('data-current-view', 'years')
+      })
+    })
+
+    describe('onSelectYear', () => {
       it('should only be in year view if format only contains Y', async () => {
         const wrapper = mount(VkCalendar, {
           props: {
@@ -333,18 +349,45 @@ describe('Calendar component', () => {
             adapter,
             format: 'YYYY'
           }
-
         })
 
-        const periodButton = wrapper.find('.vk-calendar__period-button')
-        const gridButton = wrapper.findAll('.vk-calendar__grid-button')[0]
-        await gridButton.trigger('click')
+        await wrapper.findAll('.vk-calendar__grid-button').at(0)?.trigger('click')
 
-        expect(periodButton.text()).toBe('2010 - 2029')
+        expect(wrapper.find('.vk-calendar__period-button').text()).toBe('2010 - 2029')
+      })
+
+      it('should show month view after selecting a year if selectionType is not year-only', async () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'YYYY-MM'
+          }
+        })
+
+        await wrapper.find('.vk-calendar__period-button').trigger('click')
+        await wrapper.findAll('.vk-calendar__grid-button').at(0)?.trigger('click')
+
+        expect(wrapper.find('.vk-calendar__view-container').attributes()).toHaveProperty('data-current-view', 'months')
+      })
+
+      it('should show month view after selecting a year if selectionType is not year-only', async () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'YYYY-MM'
+          }
+        })
+
+        await wrapper.find('.vk-calendar__period-button').trigger('click')
+        await wrapper.findAll('.vk-calendar__grid-button')[0].trigger('click')
+
+        expect(wrapper.find('.vk-calendar__view-container').attributes()).toHaveProperty('data-current-view', 'months')
       })
     })
 
-    describe('Cycling between views', () => {
+    describe('onSelectMonth', () => {
       it('should only cycle between month & year view if format not contains D', async () => {
         const wrapper = mount(VkCalendar, {
           props: {
@@ -352,16 +395,45 @@ describe('Calendar component', () => {
             adapter,
             format: 'YYYY-MM'
           }
-
         })
 
-        const periodButton = wrapper.find('.vk-calendar__period-button')
-        const gridButton = wrapper.findAll('.vk-calendar__grid-button')[0]
-        await gridButton.trigger('click')
+        await wrapper.findAll('.vk-calendar__grid-button').at(0)?.trigger('click')
 
-        expect(periodButton.text()).toBe('2024')
+        expect(wrapper.find('.vk-calendar__period-button').text()).toBe('2024')
       })
 
+      it('should show day view after selecting a month if selectionType is not month-only or month-year', async () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'YYYY-MM-DD'
+          }
+        })
+
+        await wrapper.find('.vk-calendar__period-button').trigger('click')
+        await wrapper.findAll('.vk-calendar__grid-button').at(0)?.trigger('click')
+
+        expect(wrapper.find('.vk-calendar__view-container').attributes()).toHaveProperty('data-current-view', 'days')
+      })
+
+      it('should show day view after selecting a month if selectionType is not month-only or month-year', async () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'YYYY-MM-DD'
+          }
+        })
+
+        await wrapper.find('.vk-calendar__period-button').trigger('click')
+        await wrapper.findAll('.vk-calendar__grid-button')[0].trigger('click')
+
+        expect(wrapper.find('.vk-calendar__view-container').attributes()).toHaveProperty('data-current-view', 'days')
+      })
+    })
+
+    describe('View logic', () => {
       it('should switch to month view when period button is clicked in day view', async () => {
         const wrapper = mount(VkCalendar, {
           props: {
@@ -370,12 +442,103 @@ describe('Calendar component', () => {
           }
         })
 
-        const periodButton = wrapper.find('.vk-calendar__period-button')
-        await periodButton.trigger('click')
+        await wrapper.find('.vk-calendar__period-button').trigger('click')
 
-        const gridButtons = wrapper.findAll('.vk-calendar__grid-button')[0]
-        expect(gridButtons.text()).toBe('Jan')
+        expect(wrapper.find('.vk-calendar__view-container').attributes()).toHaveProperty('data-current-view', 'months')
+      })
 
+      it('should render the day view if format does not include D, M, or Y', () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter,
+            format: ''
+          }
+        })
+
+        expect(wrapper.find('.vk-calendar__view-container').attributes()).toHaveProperty('data-current-view', 'days')
+      })
+
+      it('should return day-month if format contains D and M but not Y', async () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'DD-MM'
+          }
+        })
+
+        await wrapper.find('.vk-calendar__period-button').trigger('click')
+
+        expect(wrapper.attributes()).toHaveProperty('data-selection-type', 'day-month')
+      })
+    })
+
+    describe('onChangeMonth', () => {
+      it('should go to previous year and last month when clicking left arrow in January', async () => {
+        const customAdapter = {
+          ...adapter,
+          formattedDates: computed(() => ({
+            ...adapter.formattedDates.value,
+            display: {
+              ...adapter.formattedDates.value.display,
+              month: 0,
+              year: 2024
+            }
+          }))
+        }
+
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter: customAdapter,
+            format: 'YYYY-MM-DD'
+          }
+        })
+
+        await wrapper.findAll('.vk-calendar__arrows').at(0)?.trigger('click')
+
+        expect(customAdapter.onSelectMonth).toHaveBeenCalledWith(11)
+      })
+
+      it('should go to next year and first month when clicking right arrow in December', async () => {
+        const customAdapter = {
+          ...adapter,
+          formattedDates: computed(() => ({
+            ...adapter.formattedDates.value,
+            display: {
+              ...adapter.formattedDates.value.display,
+              month: 11,
+              year: 2024
+            }
+          }))
+        }
+
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter: customAdapter,
+            format: 'YYYY-MM-DD'
+          }
+        })
+
+        await wrapper.findAll('.vk-calendar__arrows').at(1)?.trigger('click')
+
+        expect(customAdapter.onSelectMonth).toHaveBeenCalledWith(0)
+      })
+
+      it('should go to the selected month when clicking right arrow in a non-edge month', async () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'YYYY-MM-DD'
+          }
+        })
+
+        await wrapper.findAll('.vk-calendar__arrows').at(1)?.trigger('click')
+
+        expect(adapter.onSelectMonth).toHaveBeenCalledWith(10)
       })
     })
   })

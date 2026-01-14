@@ -201,4 +201,14 @@ describe('CollapseItem component', () => {
       })
     })
   })
+
+  describe('Rendering', () => {
+    it('renders and uses fallback when not inside VkCollapse', () => {
+      const wrapper = mount(VkCollapseItem, {
+        props: { title: 'Test' }
+      })
+
+      expect(wrapper.exists()).toBe(true)
+    })
+  })
 })

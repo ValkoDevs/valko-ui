@@ -290,4 +290,28 @@ describe('Avatar component', () => {
       })
     })
   })
+
+  describe('Aria attributes', () => {
+    it('should have aria-label attribute when ariaLabel prop is provided', () => {
+      wrapper = mount(VkAvatar, {
+        props: {
+          src: 'example.url',
+          ariaLabel: 'User Avatar'
+        }
+      })
+
+      expect(wrapper.find('.vk-avatar').attributes('aria-label')).toBe('User Avatar')
+    })
+  })
+
+  it('should default to prop name if ariaLabel prop is not provided', () => {
+    wrapper = mount(VkAvatar, {
+      props: {
+        src: 'example.url',
+        name: 'Brandon Coper'
+      }
+    })
+
+    expect(wrapper.find('.vk-avatar').attributes('aria-label')).toBe('Brandon Coper')
+  })
 })

@@ -1,3 +1,4 @@
+import { inject } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkCollapse from '#valkoui/components/Collapse.vue'
 import VkCollapseItem from '#valkoui/components/CollapseItem.vue'
@@ -151,6 +152,54 @@ describe('Collapse component', () => {
       await collapseItems[0].trigger('click')
       await collapseItems[1].trigger('click')
       expect(collapseItems[0].classes()).not.toContain('-rotate-90')
+    })
+  })
+
+  describe('Methods', () => {
+    describe('toggleItem', () => {
+      const TestConsumer = {
+        template: '<div></div>',
+        setup() {
+          return { itemStates: inject('itemStates') }
+        }
+      }
+
+      it('should do nothing if id is undefined', () => {
+        wrapper = mount(VkCollapse, {
+          slots: { default: TestConsumer }
+        })
+
+        const consumer = wrapper.findComponent(TestConsumer)
+        const { toggleItem, items } = consumer.vm.itemStates
+
+        expect(() => toggleItem(undefined)).not.toThrow()
+        expect(Object.keys(items).length).toBe(0)
+      })
+
+      it('should open a closed item (not multiple)', () => {
+        wrapper = mount(VkCollapse, {
+          slots: { default: TestConsumer }
+        })
+
+        const consumer = wrapper.findComponent(TestConsumer)
+        const { toggleItem, items } = consumer.vm.itemStates
+        toggleItem('foo')
+
+        expect(items['foo']).toBe(true)
+      })
+
+      it('should close the item if already open (not multiple)', () => {
+        wrapper = mount(VkCollapse, {
+          slots: { default: TestConsumer }
+        })
+
+        const consumer = wrapper.findComponent(TestConsumer)
+        const { toggleItem, items } = consumer.vm.itemStates
+        toggleItem('foo')
+        toggleItem('foo')
+
+        expect(items['foo']).toBe(false)
+      })
     })
   })
 })

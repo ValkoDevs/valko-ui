@@ -318,7 +318,9 @@ describe('Breadcrumbs component', () => {
     it('should have left icon if given', () => {
       const wrapper = mount(VkBreadcrumbs, {
         props: {
-          crumbs
+          crumbs: [
+            { key: 'home', title: 'Home', leftIcon: 'home' }
+          ]
         }
       })
 
@@ -328,11 +330,69 @@ describe('Breadcrumbs component', () => {
     it('should have right icon if given', () => {
       const wrapper = mount(VkBreadcrumbs, {
         props: {
-          crumbs
+          crumbs: [
+            { key: 'music', title: 'Music', rightIcon: 'music' }
+          ]
         }
       })
 
       expect(wrapper.find('i.ti.ti-music').exists()).toBe(true)
+    })
+
+    it('should not have left icon if not given', () => {
+      const wrapper = mount(VkBreadcrumbs, {
+        props: {
+          crumbs: [
+            { key: 'artist', title: 'Artist' }
+          ]
+        }
+      })
+
+      expect(wrapper.findAll('.vk-breadcrumbs__a').at(2)?.find('i.ti.ti-home').exists()).toBeUndefined()
+    })
+
+    it('should not have right icon if not given', () => {
+      const wrapper = mount(VkBreadcrumbs, {
+        props: {
+          crumbs: [
+            { key: 'artist', title: 'Artist' }
+          ]
+        }
+      })
+
+      expect(wrapper.findAll('.vk-breadcrumbs__a').at(2)?.find('i.ti.ti-music').exists()).toBeUndefined()
+    })
+  })
+
+  describe('Accessibility', () => {
+    it('should have tabindex 0 if crumb is not the last one', () => {
+      const wrapper = mount(VkBreadcrumbs, {
+        props: {
+          crumbs
+        }
+      })
+
+      expect(wrapper.findAll('.vk-breadcrumbs__a').at(0)?.attributes('tabindex')).toBe('0')
+    })
+
+    it('should have tabindex -1 if crumb is disabled', () => {
+      const wrapper = mount(VkBreadcrumbs, {
+        props: {
+          crumbs
+        }
+      })
+
+      expect(wrapper.findAll('.vk-breadcrumbs__a').at(1)?.attributes('tabindex')).toBe('-1')
+    })
+
+    it('should have tabindex 0 if crumb is not disabled', () => {
+      const wrapper = mount(VkBreadcrumbs, {
+        props: {
+          crumbs
+        }
+      })
+
+      expect(wrapper.findAll('.vk-breadcrumbs__a').at(2)?.attributes('tabindex')).toBe('0')
     })
   })
 

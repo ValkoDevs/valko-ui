@@ -4,9 +4,13 @@
 
 ## Valko-UI Components:
 
-**Components:**
-- Added a guard clause in the `Select` component to prevent runtime errors during keyboard navigation and testing.
+### Components:
 
-**Tests:**
-- Enhanced and expanded test coverage for Button, Checkbox, Menu, Select, Tabs, Textarea, and Time components.
-- Coverage improvements include: keyboard navigation, ARIA attributes, composable interactions, rendering, and animations.
+- **Select:** Added a guard clause to prevent runtime errors during keyboard navigation and testing.
+- **Calendar:** Removed unreachable guard logic and added `data-selection-type` for reliable view switching tests.
+- **Breadcrumbs:** Updated `tabindex` logic to use `crumb disabled state`, improving accessibility and removing unreachable code.
+- **Popover:** Added `data-open` attribute for more reliable test assertions.
+
+### Tests:
+- Improved coverage for keyboard navigation, ARIA, composables, rendering, animations.
+- Added missing tests for Calendar child components (DayView, YearView, MonthView, Header).

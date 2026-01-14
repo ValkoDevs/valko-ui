@@ -183,5 +183,28 @@ describe('Card component', () => {
       wrapper.find('.vk-card').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('click')
     })
+
+    it('should not emit click event when isPressable is false', () => {
+      const wrapper = mount(VkCard, {
+        props: {
+          isPressable: false
+        }
+      })
+
+      wrapper.find('.vk-card').trigger('click')
+      expect(wrapper.emitted()).not.toHaveProperty('click')
+    })
+
+    it('should not emit click when disabled is true', () => {
+      const wrapper = mount(VkCard, {
+        props: {
+          isPressable: true,
+          disabled: true
+        }
+      })
+
+      wrapper.find('.vk-card').trigger('click')
+      expect(wrapper.emitted()).not.toHaveProperty('click')
+    })
   })
 })
