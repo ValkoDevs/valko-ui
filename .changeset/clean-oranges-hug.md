@@ -10,6 +10,9 @@
 - **Calendar:** Removed unreachable guard logic and added `data-selection-type` for reliable view switching tests.
 - **Breadcrumbs:** Updated `tabindex` logic to use `crumb disabled state`, improving accessibility and removing unreachable code.
 - **Popover:** Added `data-open` attribute for more reliable test assertions.
+- **Dropdown:** Removed unreachable guard clause in onItemClick.
+- **Timepicker:** Fixed unmount logic to remove event listener instead of adding; removed right-icon listener (cannot be triggered on readonly input).
+- **Datepicker:** Removed right-icon listener (cannot be triggered on readonly input).
 
 ### Tests:
 - Improved coverage for keyboard navigation, ARIA, composables, rendering, animations.

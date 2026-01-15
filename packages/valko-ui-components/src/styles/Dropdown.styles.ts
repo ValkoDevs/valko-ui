@@ -20,6 +20,7 @@ const dropdown = tv({
       'bg-surface-container'
     ],
     itemsMenu: [
+      'vk-dropdown__items-menu',
       'p-2'
     ],
     triggerButton: [

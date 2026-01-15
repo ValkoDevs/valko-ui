@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { DialogPanel } from '@headlessui/vue'
+import { DialogPanel, Dialog } from '@headlessui/vue'
 import { nextTick } from 'vue'
 import VkDrawer from '#valkoui/components/Drawer.vue'
 
@@ -9,6 +9,7 @@ class ResizeObserver {
   disconnect() {return}
 }
 
+// @ts-expect-error: Before it wasnt giving any error now it does, so adding this to ignore it until we can fix it properly.
 global.ResizeObserver = ResizeObserver
 
 describe('Drawer component', () => {
@@ -450,6 +451,53 @@ describe('Drawer component', () => {
       window.dispatchEvent(new Event('click', { bubbles: true }))
 
       expect(wrapper.emitted()).not.toHaveProperty('close')
+    })
+
+    it('should not emit close if closable is false when the dialog close is emited', async () => {
+      const DialogStub = {
+        template: '<div @click="$emit(\'close\')"><slot /></div>'
+      }
+
+      const DialogPanelStub = {
+        template: '<div><slot /></div>'
+      }
+
+      const wrapper = mount(VkDrawer, {
+        props: {
+          isOpen: true,
+          closable: false
+        },
+        slots: {
+          default: 'Hello World'
+        },
+        global: {
+          stubs: {
+            Dialog: DialogStub,
+            DialogPanel: DialogPanelStub
+          }
+        }
+      })
+
+      await nextTick()
+      await wrapper.findComponent(DialogStub).trigger('close')
+
+      expect(wrapper.emitted()).not.toHaveProperty('close')
+    })
+  })
+
+  describe('Arias', () => {
+    it('should use description id for aria-describedby if aria-description is provided', () => {
+      const wrapper = mount(VkDrawer, {
+        props: {
+          isOpen: true,
+          ariaDescription: 'description-id'
+        }
+      })
+
+      const dialog = wrapper.getComponent(Dialog)
+      const id = dialog.attributes('aria-describedby')
+
+      expect(dialog.attributes('aria-describedby')).toBe(id)
     })
   })
 

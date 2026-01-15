@@ -233,5 +233,17 @@ describe('Switch component', () => {
       wrapper.find('.cursor-pointer').trigger('click')
       expect(wrapper.emitted('update:modelValue'))
     })
+
+    it('should not emit update event when disabled', () => {
+      const wrapper = mount(VkSwitch, {
+        props: {
+          disabled: true
+        }
+      })
+
+      // @ts-expect-error: access internal since clicking the wrapper does not trigger the onClick method when disabled
+      wrapper.vm.onClick()
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    })
   })
 })

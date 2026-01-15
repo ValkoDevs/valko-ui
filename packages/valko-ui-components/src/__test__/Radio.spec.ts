@@ -231,12 +231,36 @@ describe('Radio component', () => {
     })
   })
 
+  describe('Arias', () => {
+    it('should have aria-describedby when ariaDescribedBy prop is set', () => {
+      const wrapper = mount(VkRadio, {
+        props: {
+          ariaDescribedBy: 'radio-helpertext'
+        }
+      })
+
+      expect(wrapper.find('.vk-radio__radio-container').attributes('aria-describedby')).toBe('radio-helpertext')
+    })
+  })
+
   describe('Emits', () => {
     it('should emit update event', () => {
       const wrapper = mount(VkRadio, {})
 
       wrapper.find('.vk-radio__radio-container').trigger('click')
       expect(wrapper.emitted('update:modelValue'))
+    })
+
+    it('should not emit update event when disabled', async () => {
+      const wrapper = mount(VkRadio, {
+        props: {
+          disabled: true
+        }
+      })
+
+      await wrapper.find('.vk-radio__radio-container').trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     })
   })
 })

@@ -372,5 +372,19 @@ describe('Tag component', () => {
       wrapper.find('.vk-tag').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('click')
     })
+
+    it('should not emit close event when disabled', () => {
+      const wrapper = mount(VkTag, {
+        props: {
+          text: 'Hello World',
+          closable: true,
+          disabled: true
+        }
+      })
+
+      // @ts-expect-error: access the internal method since clicking the wrapper does not trigger the onClose method when disabled
+      wrapper.vm.onClose()
+      expect(wrapper.emitted()).not.toHaveProperty('close')
+    })
   })
 })

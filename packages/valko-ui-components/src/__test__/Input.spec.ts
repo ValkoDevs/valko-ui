@@ -1,5 +1,5 @@
 import { nextTick } from 'vue'
-import { VueWrapper, mount } from '@vue/test-utils'
+import { VueWrapper, mount, shallowMount } from '@vue/test-utils'
 import VkInput from '#valkoui/components/Input.vue'
 
 describe('Input component', () => {
@@ -687,6 +687,268 @@ describe('Input component', () => {
         })
 
         expect(wrapper.find('.vk-input__number-arrows').exists()).toBe(false)
+      })
+    })
+  })
+
+  describe('Methods', () => {
+    describe('updateValue', () => {
+      it('emits a number when type is number', async () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: ''
+          }
+        })
+
+        const input = wrapper.find('input')
+        await input.setValue('42')
+
+        expect(wrapper.emitted('update:modelValue')?.[0][0]).toBe(42)
+      })
+
+      it('emits empty string when type is number and input is empty', async () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: ''
+          }
+        })
+
+        const input = wrapper.find('input')
+        await input.setValue('')
+
+        expect(wrapper.emitted('update:modelValue')?.[0][0]).toBe('')
+      })
+    })
+
+    describe('onFocus', () => {
+      it('should emit focus event when input is focused', async () => {
+        const wrapper = mount(VkInput, {})
+
+        await wrapper.find('.vk-input__input').trigger('focus')
+
+        expect(wrapper.emitted()).toHaveProperty('focus')
+      })
+
+      it('does not emit focus when disabled (direct call for coverage)', () => {
+        const wrapper = shallowMount(VkInput, {
+          props: { disabled: true }
+        })
+
+        // @ts-expect-error: access internal method for coverage since focus event cannot be triggered when native input is disabled
+        wrapper.vm.onFocus(new Event('focus'))
+
+        expect(wrapper.emitted('focus')).toBeFalsy()
+      })
+    })
+
+    describe('onBlur', () => {
+      it('should emit blur event when input is blurred', async () => {
+        const wrapper = mount(VkInput, {})
+
+        await wrapper.find('.vk-input__input').trigger('blur')
+
+        expect(wrapper.emitted()).toHaveProperty('blur')
+      })
+
+      it('should not emit blur when disabled (direct call for coverage)', () => {
+        const wrapper = shallowMount(VkInput, {
+          props: { disabled: true }
+        })
+
+        // @ts-expect-error: access internal method for coverage since blur event cannot be triggered when native input is disabled
+        wrapper.vm.onBlur(new Event('blur'))
+
+        expect(wrapper.emitted('blur')).toBeFalsy()
+      })
+    })
+
+    describe('handleIconClick', () => {
+      it('should do nothing when disabled is true', async () => {
+        const wrapper = shallowMount(VkInput, {
+          props: {
+            disabled: true
+          },
+          slots: {
+            'left-icon': '<i class="ti ti-brand-vue"></i>'
+          }
+        })
+
+        await wrapper.findAll('.vk-input__icons').at(0)?.trigger('click')
+
+        expect(wrapper.emitted('leftIconClick')).toBeFalsy()
+      })
+
+      it('should emit leftIconClick on touchend', async () => {
+        const wrapper = mount(VkInput, {
+          slots: {
+            'left-icon': '<i class="ti ti-brand-vue"></i>'
+          }
+        })
+
+        await wrapper.findAll('.vk-input__icons').at(0)?.trigger('touchend')
+
+        expect(wrapper.emitted('leftIconClick')).toBeTruthy()
+      })
+
+      it('should emit rightIconClick on touchend', async () => {
+        const wrapper = mount(VkInput, {
+          slots: {
+            'right-icon': '<i class="ti ti-brand-vue"></i>'
+          }
+        })
+
+        await wrapper.findAll('.vk-input__icons').at(0)?.trigger('touchend')
+
+        expect(wrapper.emitted('rightIconClick')).toBeTruthy()
+      })
+    })
+
+    describe('changeNumericValue', () => {
+      it('should not change value when type is not number', async () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'text',
+            modelValue: 'Hello'
+          }
+        })
+
+        // @ts-expect-error: access internal method for coverage since arrow buttons are not rendered when type is not number
+        wrapper.vm.changeNumericValue(1)
+        await nextTick()
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+
+      it('should not change value when readonly is true', async () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: 10,
+            readonly: true
+          }
+        })
+
+        await wrapper.findAll('.vk-input__number-arrows').at(0)?.trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+
+      it('should not change value when disabled is true', async () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: 10,
+            disabled: true
+          }
+        })
+
+        await wrapper.findAll('.vk-input__number-arrows').at(0)?.trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+
+      it('should not change value when the new value would be less than min', async () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: 0,
+            min: 0
+          }
+        })
+
+        // @ts-expect-error: access internal method for coverage
+        wrapper.vm.changeNumericValue(-1)
+        await nextTick()
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+
+      it('should not change value when the new value would be more than max', async () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: 10,
+            max: 10
+          }
+        })
+
+        await wrapper.findAll('.vk-input__number-arrows').at(0)?.trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+    })
+
+    describe('handleNumericArrowRelease', () => {
+      it('remove touchend listener on arrow release', async () => {
+        const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener')
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number'
+          }
+        })
+
+        await wrapper.find('i.ti.ti-chevron-up').trigger('mouseup')
+
+        expect(removeEventListenerSpy).toHaveBeenCalledWith('touchend', expect.any(Function))
+        removeEventListenerSpy.mockRestore()
+      })
+
+      it('remove touchcancel listener on arrow release', async () => {
+        const removeEventListenerSpy = vi.spyOn(window, 'removeEventListener')
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number'
+          }
+        })
+
+        await wrapper.find('i.ti.ti-chevron-up').trigger('mouseup')
+
+        expect(removeEventListenerSpy).toHaveBeenCalledWith('touchcancel', expect.any(Function))
+        removeEventListenerSpy.mockRestore()
+      })
+    })
+
+    describe('describedBy', () => {
+      it('should add aria-describedby when is given', () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            ariaDescribedBy: 'helper-text-id'
+          }
+        })
+
+        expect(wrapper.find('.vk-input__input').attributes('aria-describedby')).toBe('helper-text-id')
+      })
+    })
+
+    describe('handleNumericArrowHold', () => {
+      it('should trigger on touchstart (increment)', async () => {
+        vi.useFakeTimers()
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: 1
+          }
+        })
+
+        await wrapper.find('i.ti.ti-chevron-up').trigger('touchstart')
+        vi.advanceTimersByTime(300)
+        expect(wrapper.emitted('update:modelValue')?.[2]).toEqual([4])
+      })
+
+      it('should trigger on touchstart (decrement)', async () => {
+        vi.useFakeTimers()
+        const wrapper = mount(VkInput, {
+          props: {
+            type: 'number',
+            modelValue: 10
+          }
+        })
+
+        await wrapper.find('i.ti.ti-chevron-down').trigger('touchstart')
+        vi.advanceTimersByTime(300)
+        expect(wrapper.emitted('update:modelValue')?.[2]).toEqual([7])
       })
     })
   })

@@ -30,7 +30,7 @@ const handleClickOutside = (event: MouseEvent) => {
 }
 
 onMounted(() => nextTick(() => document.addEventListener('mousedown', handleClickOutside, true)))
-onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside, true))
+onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutside, true))
 </script>
 
 <template>
@@ -45,7 +45,6 @@ onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside,
       :class="s.input({ class: styleSlots?.input })"
       readonly
       @focus="emit('open')"
-      @right-icon-click="emit('open')"
     >
       <template #right-icon>
         <vk-icon name="clock-2" />
