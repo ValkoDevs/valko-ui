@@ -1,5 +1,5 @@
 import { nextTick } from 'vue'
-import { VueWrapper, mount } from '@vue/test-utils'
+import { VueWrapper, mount, DOMWrapper } from '@vue/test-utils'
 import VkRange from '#valkoui/components/Range.vue'
 
 describe('Range component', () => {
@@ -359,6 +359,17 @@ describe('Range component', () => {
 
         expect(wrapper.emitted()['update:modelValue']![0]).toEqual([50])
       })
+
+      it('getNewThumbPosition returns 0 when sliderRef is null', () => {
+        const wrapper = mount(VkRange, {
+          props: { min: 0, max: 100, step: 5, modelValue: 0 }
+        })
+        // @ts-expect-error: direct access for test
+        wrapper.vm.sliderRef = null
+        // @ts-expect-error: direct access for test
+        const result = wrapper.vm.getNewThumbPosition(50)
+        expect(result).toBe(0)
+      })
     })
 
     describe('updateThumbPosition', () => {
@@ -463,6 +474,307 @@ describe('Range component', () => {
         expect(wrapper.emitted()['update:modelValue']![0]).toEqual([[50, 80]])
       })
     })
+
+    describe('handleKeyDown', () => {
+      it('should increment the value by step on ArrowRight key press', async () => {
+        wrapper = mount(VkRange, {
+          props: {
+            modelValue: 50,
+            step: 10
+          }
+        })
+
+        const thumb = wrapper.find('.vk-range__thumb')
+
+        await thumb.trigger('keydown', { key: 'ArrowRight' })
+        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([60])
+      })
+
+      it('should decrement the value by step on ArrowLeft key press', async () => {
+        wrapper = mount(VkRange, {
+          props: {
+            modelValue: 50,
+            step: 10
+          }
+        })
+
+        const thumb = wrapper.find('.vk-range__thumb')
+
+        await thumb.trigger('keydown', { key: 'ArrowLeft' })
+        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([40])
+      })
+
+      it('should increment the value by step on ArrowUp key press', async () => {
+        wrapper = mount(VkRange, {
+          props: {
+            modelValue: 50,
+            step: 10
+          }
+        })
+
+        const thumb = wrapper.find('.vk-range__thumb')
+
+        await thumb.trigger('keydown', { key: 'ArrowUp' })
+        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([60])
+      })
+
+      it('should decrement the value by step on ArrowDown key press', async () => {
+        wrapper = mount(VkRange, {
+          props: {
+            modelValue: 50,
+            step: 10
+          }
+        })
+
+        const thumb = wrapper.find('.vk-range__thumb')
+
+        await thumb.trigger('keydown', { key: 'ArrowDown' })
+        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([40])
+      })
+
+      it('should set the value to min on Home key press', async () => {
+        wrapper = mount(VkRange, {
+          props: {
+            modelValue: 50,
+            step: 10,
+            min: 0
+          }
+        })
+
+        const thumb = wrapper.find('.vk-range__thumb')
+
+        await thumb.trigger('keydown', { key: 'Home' })
+        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([0])
+      })
+
+      it('should set the value to max on End key press', async () => {
+        wrapper = mount(VkRange, {
+          props: {
+            modelValue: 50,
+            step: 10,
+            max: 100
+          }
+        })
+
+        const thumb = wrapper.find('.vk-range__thumb')
+
+        await thumb.trigger('keydown', { key: 'End' })
+        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([100])
+      })
+
+      it('should not change the value on unsupported key press', async () => {
+        wrapper = mount(VkRange, {
+          props: {
+            modelValue: 50,
+            step: 10
+          }
+        })
+
+        const thumb = wrapper.find('.vk-range__thumb')
+
+        await thumb.trigger('keydown', { key: 'A' })
+        expect(wrapper.emitted()['update:modelValue']).toBeUndefined()
+      })
+
+      it('should change the value by step on Arrow keys press when isDouble is true', async () => {
+        wrapper = mount(VkRange, {
+          props: {
+            modelValue: [30, 70],
+            step: 10,
+            isDouble: true
+          }
+        })
+
+        const thumbs = wrapper.findAll('.vk-range__thumb')
+        const firstThumb = thumbs[0]
+
+        await firstThumb.trigger('keydown', { key: 'ArrowRight' })
+        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([[40, 70]])
+
+        await firstThumb.trigger('keydown', { key: 'ArrowLeft' })
+        expect(wrapper.emitted()['update:modelValue']![1]).toEqual([[30, 70]])
+      })
+    })
+
+    describe('onMove', () => {
+      it('should do nothing if isDragging is false', async () => {
+        wrapper = mount(VkRange, {
+          props: {
+            modelValue: 50
+          }
+        })
+
+        const vm = wrapper.vm as unknown as { isDragging: boolean; onMove: (event: MouseEvent) => void }
+
+        vm.isDragging = false
+
+        vm.onMove(new MouseEvent('mousemove', { clientX: 100 }))
+
+        expect(wrapper.emitted()['update:modelValue']).toBeUndefined()
+      })
+    })
+
+    describe('onSliderClick', () => {
+      it('should call handleMultipleThumbs when isDouble is true (else branch)', async () => {
+        const wrapper = mount(VkRange, {
+          props: {
+            modelValue: [10, 70],
+            isDouble: true,
+            min: 0,
+            max: 100,
+            step: 10
+          }
+        })
+
+        const slider = wrapper.find('.vk-range')
+        const sliderElement = slider.element as HTMLElement
+        sliderElement.getBoundingClientRect = () => ({
+          left: 0,
+          width: 100,
+          top: 0,
+          height: 10,
+          right: 100,
+          bottom: 10,
+          x: 0,
+          y: 0,
+          toJSON: () => {}
+        })
+
+        await slider.trigger('mousedown', { clientX: 20 })
+        await slider.trigger('mouseup')
+
+        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([[20, 70]])
+      })
+
+      it('should use event.touches[0].clientX for touch events', async () => {
+        const wrapper = mount(VkRange, {
+          props: { modelValue: 30 }
+        })
+
+        const slider = wrapper.find('.vk-range')
+        const sliderElement = slider.element as HTMLElement
+        sliderElement.getBoundingClientRect = () => ({
+          left: 0,
+          width: 100,
+          top: 0,
+          height: 10,
+          right: 100,
+          bottom: 10,
+          x: 0,
+          y: 0,
+          toJSON: () => {}
+        })
+
+        const touch = {
+          touches: [{ clientX: 50 }]
+        }
+
+        // @ts-expect-error: direct access for test
+        wrapper.vm.onSliderClick(touch)
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.emitted()['update:modelValue'][0]).toEqual([50])
+      })
+    })
+
+    describe('onLabelClick', () => {
+      it('should use handleMultipleThumbs to move the closest thumb to the label value if double is true', async () => {
+        const labels = [{ value: 25, label: 'Low' }, { value: 75, label: 'High' }]
+        const wrapper = mount(VkRange, {
+          props: {
+            modelValue: [20, 80],
+            isDouble: true,
+            labels,
+            showSteps: false
+          }
+        })
+
+        const label = wrapper.find('.vk-range__label')
+
+        await label.trigger('click')
+
+        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([[25, 80]])
+      })
+
+      it('should use handleSingleThumb to move the thumb to the label value if double is false', async () => {
+        const labels = [{ value: 25, label: 'Low' }, { value: 75, label: 'High' }]
+        const wrapper = mount(VkRange, {
+          props: {
+            modelValue: 20,
+            isDouble: false,
+            labels,
+            showSteps: false
+          }
+        })
+
+        const label = wrapper.find('.vk-range__label')
+
+        await label.trigger('click')
+
+        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([25])
+      })
+    })
+
+    describe('onStart', () => {
+      it('should trigger on mousedown when double is true', async () => {
+        const wrapper = mount(VkRange, {
+          props: {
+            modelValue: [20, 80],
+            isDouble: true
+          }
+        })
+
+        const thumb = wrapper.find('.vk-range__thumb')
+
+        await thumb.trigger('mousedown', { clientX: 50 })
+
+        expect(wrapper.vm).toHaveProperty('isDragging', true)
+      })
+
+      it('should trigger on touchstart when double is true', async () => {
+        const wrapper = mount(VkRange, {
+          props: {
+            modelValue: [20, 80],
+            isDouble: true
+          }
+        })
+
+        const thumb = wrapper.find('.vk-range__thumb')
+        const touch = { touches: [{ clientX: 50 }] }
+        await thumb.trigger('touchstart', touch)
+        expect(wrapper.vm).toHaveProperty('isDragging', true)
+      })
+    })
+  })
+
+  describe('Watchers', () => {
+    it('updates thumbRefMap.min.value when min changes', async () => {
+      const wrapper = mount(VkRange, { props: { min: 0, max: 100, isDouble: false, step: 1, modelValue: 0 } })
+      await wrapper.setProps({ min: 10 })
+      // @ts-expect-error: direct access for test
+      expect(wrapper.vm.thumbRefMap.min.value).toBe(10)
+    })
+
+    it('updates thumbRefMap.max.value when max changes', async () => {
+      const wrapper = mount(VkRange, { props: { min: 0, max: 100, isDouble: false, step: 1, modelValue: 0 } })
+      await wrapper.setProps({ max: 90 })
+      // @ts-expect-error: direct access for test
+      expect(wrapper.vm.thumbRefMap.max.value).toBe(90)
+    })
+
+    it('emits [min, max] when isDouble is true', async () => {
+      const wrapper = mount(VkRange, { props: { min: 0, max: 100, isDouble: false, step: 1, modelValue: 0 } })
+      await wrapper.setProps({ isDouble: true, min: 5, max: 15 })
+      const lastEmission = wrapper.emitted()['update:modelValue'].pop()
+      expect(lastEmission).toEqual([[5, 15]])
+    })
+
+    it('emits max when isDouble is false', async () => {
+      const wrapper = mount(VkRange, { props: { min: 0, max: 100, isDouble: true, step: 1, modelValue: [0, 100] } })
+      await wrapper.setProps({ isDouble: false, max: 42 })
+      const lastEmission = wrapper.emitted()['update:modelValue'].pop()
+      expect(lastEmission).toEqual([42])
+    })
   })
 
   describe('Computed properties', () => {
@@ -563,6 +875,80 @@ describe('Range component', () => {
         const marks = (wrapper.vm as unknown as { stepMarks: number[] }).stepMarks
         expect(marks[0]).toBe(10)
       })
+    })
+  })
+
+  describe('Listeners', () => {
+    let wrapper: VueWrapper
+    let thumb: DOMWrapper<Element>
+    let touch: Touch
+    let moveTouch: Touch
+    let removeSpy: ReturnType<typeof vi.spyOn>
+
+    beforeEach(() => {
+      removeSpy = vi.spyOn(document, 'removeEventListener')
+      wrapper = mount(VkRange, {
+        props: {
+          modelValue: 0
+        }
+      })
+
+      thumb = wrapper.find('.vk-range__thumb')
+
+      touch = {
+        identifier: 0,
+        target: thumb.element,
+        clientX: 50,
+        clientY: 0,
+        screenX: 50,
+        screenY: 0,
+        pageX: 50,
+        pageY: 0,
+        radiusX: 0,
+        radiusY: 0,
+        rotationAngle: 0,
+        force: 0.5
+      }
+
+      moveTouch = {
+        ...touch,
+        clientX: 60,
+        pageX: 60,
+        screenX: 60
+      }
+    })
+
+    afterEach(() => {
+      removeSpy.mockRestore()
+      wrapper.unmount()
+    })
+
+    it('should remove mousemove listener after mouse interaction', async () => {
+      await thumb.trigger('mousedown', { clientX: 50 })
+      await document.dispatchEvent(new MouseEvent('mousemove', { clientX: 60 }))
+      await document.dispatchEvent(new MouseEvent('mouseup', { clientX: 60 }))
+      expect(removeSpy).toHaveBeenCalledWith('mousemove', expect.any(Function))
+    })
+
+    it('should remove touchmove listener after touch interaction', async () => {
+      await thumb.trigger('touchstart', { touches: [touch] })
+      await document.dispatchEvent(new TouchEvent('touchmove', { touches: [moveTouch] }))
+      await document.dispatchEvent(new TouchEvent('touchend', { changedTouches: [moveTouch] }))
+      expect(removeSpy).toHaveBeenCalledWith('touchmove', expect.any(Function))
+    })
+
+    it('should remove mouseup listener after mouse interaction', async () => {
+      await thumb.trigger('mousedown', { clientX: 50 })
+      await document.dispatchEvent(new MouseEvent('mousemove', { clientX: 60 }))
+      await document.dispatchEvent(new MouseEvent('mouseup', { clientX: 60 }))
+      expect(removeSpy).toHaveBeenCalledWith('mouseup', expect.any(Function))
+    })
+
+    it('should remove touchend listener after touch interaction', async () => {
+      await thumb.trigger('touchstart', { touches: [touch] })
+      await document.dispatchEvent(new TouchEvent('touchmove', { touches: [moveTouch] }))
+      await document.dispatchEvent(new TouchEvent('touchend', { changedTouches: [moveTouch] }))
+      expect(removeSpy).toHaveBeenCalledWith('touchend', expect.any(Function))
     })
   })
 
