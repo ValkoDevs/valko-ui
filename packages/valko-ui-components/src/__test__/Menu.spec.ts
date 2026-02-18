@@ -561,6 +561,28 @@ describe('Menu component', () => {
 
         expect(buttons[0].attributes('tabindex')).toBe('0')
       })
+
+      it('focuses the correct menu item after keyboard navigation and activation', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'get-started'
+          },
+          attachTo: document.body
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('[role="menuitem"]')
+        await buttons[0].trigger('keydown', { key: 'ArrowDown' })
+        await nextTick()
+        const focused = buttons.find(b => b.attributes('tabindex') === '0')
+        await focused!.trigger('keydown', { key: 'Enter' })
+        const focusedIndex = buttons.findIndex(b => b === focused)
+        await wrapper.setProps({ active: menuItems[focusedIndex].key })
+        await nextTick()
+
+        expect(focused!.attributes('data-active')).toContain('true')
+      })
     })
   })
 })

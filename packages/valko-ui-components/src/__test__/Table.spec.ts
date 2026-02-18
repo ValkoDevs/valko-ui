@@ -326,6 +326,80 @@ describe('Table component', () => {
 
         expect(wrapper.find('.vk-table__tr').classes()).toContain('even:bg-surface-container')
       })
+
+      it('should not be striped when false', () => {
+        const wrapper = mount(VkTable, {
+          props: {
+            headers,
+            data,
+            striped: false
+          }
+        })
+
+        expect(wrapper.find('.vk-table__tr').classes()).not.toContain('even:bg-surface-container')
+      })
+    })
+  })
+
+  describe('Arias', () => {
+    it('should set aria-selected single selection', () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data,
+          rowEvents: true,
+          selection: { key: 'headersKey' }
+        }
+      })
+
+      const row = wrapper.find('[data-key="headersKey"]')
+
+      expect(row.attributes('aria-selected')).toBe('true')
+    })
+
+    it('should set data-selected single selection', () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data,
+          rowEvents: true,
+          selection: { key: 'headersKey' }
+        }
+      })
+
+      const row = wrapper.find('[data-key="headersKey"]')
+
+      expect(row.attributes('data-selected')).toBe('true')
+    })
+
+    it('should set aria-selected for array selection', () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data,
+          rowEvents: true,
+          selection: [{ key: 'headersKey' }, { key: 'dataKey' }]
+        }
+      })
+
+      const row1 = wrapper.find('[data-key="headersKey"]')
+
+      expect(row1.attributes('aria-selected')).toBe('true')
+    })
+
+    it('should set data-selected for array selection', () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data,
+          rowEvents: true,
+          selection: [{ key: 'headersKey' }, { key: 'dataKey' }]
+        }
+      })
+
+      const row2 = wrapper.find('[data-key="dataKey"]')
+
+      expect(row2.attributes('data-selected')).toBe('true')
     })
   })
 
@@ -364,6 +438,17 @@ describe('Table component', () => {
       })
 
       expect(wrapper.find('.vk-table__no_data_message').text()).toBe('no data message')
+    })
+
+    it('should display the default message when no-data-message slot is not provided', () => {
+      wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data: []
+        }
+      })
+
+      expect(wrapper.find('.vk-table__no_data_message').text()).toBe('No items found.')
     })
 
     it('should display the custom content in the table-footer slot', () => {
@@ -454,6 +539,25 @@ describe('Table component', () => {
       })
 
       expect(wrapper.find('.vk-table__no_data_message').text()).toBe('No items found.')
+    })
+
+    it('should use the index as key when item key is not provided', () => {
+      const dataWithoutKeys = data.map((item) => {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { key, ...rest } = item
+        return rest
+      })
+
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          //@ts-expect-error: key is required in TableItem but we are testing the behavior when it's not provided
+          data: dataWithoutKeys
+        }
+      })
+
+      const items = wrapper.findAll('[data-key]')
+      expect(items[0].attributes('data-key')).toBe('0')
     })
   })
 

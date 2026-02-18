@@ -211,4 +211,18 @@ describe('CollapseItem component', () => {
       expect(wrapper.exists()).toBe(true)
     })
   })
+
+  describe('Inject', () => {
+    it('should use fallback toggleItem when not injected', async () => {
+      const wrapper = mount(VkCollapseItem, {
+        props: {
+          title: 'Test'
+        }
+      })
+
+      await wrapper.find('button').trigger('click')
+
+      expect(wrapper.find('.vk-collapse-item__panel').exists()).toBe(false)
+    })
+  })
 })

@@ -412,13 +412,10 @@ describe('Time component', () => {
         }
       })
 
-      const hourContainers = wrapper.findAll('.vk-time__unitContainer')
-      const hourBtn = hourContainers[0]?.findAll('.vk-time__unit-button')[1]
+      const unitContainer = wrapper.findAll('.vk-time__unit-container').at(0)
+      await unitContainer?.findAll('.vk-time__unit-button').at(1)?.trigger('click')
 
-      if (hourBtn) {
-        await hourBtn.trigger('click')
-        expect(adapter.setDisplayUnit).toHaveBeenCalledWith('h', '01')
-      }
+      expect(adapter.setDisplayUnit).toHaveBeenCalledWith('h', 1)
     })
 
     it('should call setDisplayUnit for minute button', async () => {
@@ -429,13 +426,10 @@ describe('Time component', () => {
         }
       })
 
-      const unitContainers = wrapper.findAll('.vk-time__unitContainer')
-      const minuteBtn = unitContainers[1]?.findAll('.vk-time__unit-button')[2]
+      const unitContainer = wrapper.findAll('.vk-time__unit-container').at(1)
+      await unitContainer?.findAll('.vk-time__unit-button').at(2)?.trigger('click')
 
-      if (minuteBtn) {
-        await minuteBtn.trigger('click')
-        expect(adapter.setDisplayUnit).toHaveBeenCalledWith('m', '02')
-      }
+      expect(adapter.setDisplayUnit).toHaveBeenCalledWith('m', 2)
     })
 
     it('should call setDisplayUnit for second button', async () => {
@@ -446,13 +440,10 @@ describe('Time component', () => {
         }
       })
 
-      const unitContainers = wrapper.findAll('.vk-time__unitContainer')
-      const secondBtn = unitContainers[2]?.findAll('.vk-time__unit-button')[3]
+      const unitContainer = wrapper.findAll('.vk-time__unit-container').at(2)
+      await unitContainer?.findAll('.vk-time__unit-button').at(3)?.trigger('click')
 
-      if (secondBtn) {
-        await secondBtn.trigger('click')
-        expect(adapter.setDisplayUnit).toHaveBeenCalledWith('s', '03')
-      }
+      expect(adapter.setDisplayUnit).toHaveBeenCalledWith('s', 3)
     })
   })
 

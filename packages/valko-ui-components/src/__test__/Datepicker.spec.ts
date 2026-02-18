@@ -410,11 +410,7 @@ describe('Datepicker component', () => {
         }
       })
 
-      const input = wrapper.findAll('.vk-input__input')[0]
-      await input.trigger('focus')
-
-      const button = wrapper.findAll('.vk-calendar__grid-button')[14]
-      await button.trigger('click')
+      await wrapper.findAll('.vk-calendar__grid-button').at(14)?.trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('update:modelValue')
     })
@@ -422,7 +418,7 @@ describe('Datepicker component', () => {
     it('should emit open when the input is focused', async () => {
       const wrapper = mount(VkDatepicker, {
         props: {
-          isOpen: true,
+          isOpen: false,
           modelValue,
           parsedModel,
           adapter
@@ -437,16 +433,14 @@ describe('Datepicker component', () => {
     it('should emit close when a click occurs outside the root component', async () => {
       const wrapper = mount(VkDatepicker, {
         props: {
-          isOpen: true,
+          isOpen: false,
           modelValue,
           parsedModel,
           adapter
         }
       })
 
-      const input = wrapper.findAll('.vk-input__input')[0]
-      await input.trigger('focus')
-
+      await wrapper.findAll('.vk-input__input').at(0)?.trigger('focus')
       document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
       await nextTick()
 
@@ -463,10 +457,25 @@ describe('Datepicker component', () => {
         }
       })
 
-      await wrapper.findAll('.vk-input__input').at(0)?.trigger('focus')
       await wrapper.findAll('.vk-calendar__grid-button').at(0)?.trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('close')
+    })
+
+    it('should close the datepicker when finalize-selection event is emitted from the calendar', async () => {
+      const wrapper = mount(VkDatepicker, {
+        props: {
+          isOpen: false,
+          modelValue,
+          parsedModel,
+          adapter
+        }
+      })
+
+      await wrapper.findAll('.vk-input__input').at(0)?.trigger('focus')
+      await wrapper.findAll('.vk-calendar__grid-button').at(0)?.trigger('click')
+
+      expect(wrapper.findComponent({ name: 'VkCalendar' }).exists()).toBe(false)
     })
   })
 })

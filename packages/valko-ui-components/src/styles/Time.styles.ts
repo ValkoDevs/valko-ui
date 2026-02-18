@@ -24,6 +24,7 @@ const time = tv({
       'justify-between'
     ],
     unitContainer: [
+      'vk-time__unit-container',
       'border-r',
       'border-outlined',
       'last:border-r-0',

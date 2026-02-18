@@ -10,6 +10,7 @@ describe('Tabs component', () => {
     { key: 'friends', title: 'Friends' }
   ]
   let wrapper: VueWrapper
+
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(async () => {

@@ -678,13 +678,15 @@ describe('Select component', () => {
         const wrapper = mount(VkSelect, {
           props: {
             options,
+            multiple: true,
             attachTo: document.body
           }
         })
 
         await wrapper.find('.vk-input__input').trigger('focus')
         await wrapper.vm.$nextTick()
-        await wrapper.find('.vk-select__container').trigger('click')
+        const selectRefEl = wrapper.vm.$refs.selectRef as HTMLElement
+        selectRefEl.click()
         await wrapper.vm.$nextTick()
 
         expect(wrapper.find('.vk-select__dropdown').exists()).toBe(true)

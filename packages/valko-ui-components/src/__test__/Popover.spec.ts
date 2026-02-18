@@ -219,41 +219,17 @@ describe('Popover component', () => {
       removeSpy.mockRestore()
     })
 
-    // describe('placement', () => {
-    //   it('sets data-placement to left-start when no placement fits (auto)', async () => {
-    //     const wrapper = mount(VkPopover, {
-    //       props: { isOpen: true },
-    //       slots: { 'popover-content': 'Hello Content' }
-    //     })
-
-    //     // Wait for refs to be set
-    //     await wrapper.vm.$nextTick()
-    //     await wrapper.vm.$nextTick()
-
-    //     // Access refs
-    //     // @ts-expect-error: access internal refs for testing
-    //     const slot = wrapper.vm.slotRef
-    //     // @ts-expect-error: access internal refs for testing
-    //     const panel = wrapper.vm.panelRef
-
-    //     // Ensure refs are present
-    //     expect(slot).not.toBeNull()
-    //     expect(panel).not.toBeNull()
-
-    //     // Mock getBoundingClientRect
-    //     Object.defineProperty(slot, 'getBoundingClientRect', {
-    //       value: () => ({ bottom: 0, top: 0, left: 0, right: 0, height: 0, width: 0 })
-    //     })
-    //     Object.defineProperty(panel, 'getBoundingClientRect', {
-    //       value: () => ({ height: 1000, width: 1000 })
-    //     })
-
-    //     await wrapper.vm.$forceUpdate()
-    //     await wrapper.vm.$nextTick()
-
-    //     expect(wrapper.find('.vk-popover__panel').attributes('data-placement')).toBe('left-start')
-    //   })
-    // })
+    describe('placement', () => {
+      it('should use the passed aligment prop if present', () => {
+        wrapper = mount(VkPopover, {
+          props: {
+            isOpen: true,
+            alignment: 'start'
+          }
+        })
+        expect(wrapper.find('.vk-popover__panel').attributes('data-placement')).toContain('start')
+      })
+    })
   })
 
   describe('Emits', () => {
