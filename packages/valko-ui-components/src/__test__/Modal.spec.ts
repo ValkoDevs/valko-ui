@@ -9,7 +9,6 @@ class ResizeObserver {
   disconnect() {return}
 }
 
-// @ts-expect-error: Before it wasnt giving any error now it does, so adding this to ignore it until we can fix it properly.
 global.ResizeObserver = ResizeObserver
 
 describe('Modal component', () => {

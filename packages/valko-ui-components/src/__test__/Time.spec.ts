@@ -318,19 +318,16 @@ describe('Time component', () => {
         })
 
         it('should highlight hour matching display values', () => {
-          // hours: index 0-23
           const hourBtn = buttons[10]
           expect(hourBtn?.classes()).toContain('bg-primary')
         })
 
         it('should highlight minute matching display values', () => {
-          // minutes: index 24-83
           const minuteBtn = buttons[24 + 10]
           expect(minuteBtn?.classes()).toContain('bg-primary')
         })
 
         it('should highlight second matching display values', () => {
-          // seconds: index 84-143
           const secondBtn = buttons[84 + 10]
           expect(secondBtn?.classes()).toContain('bg-primary')
         })
@@ -344,7 +341,6 @@ describe('Time component', () => {
             ...adapter,
             formattedTime: computed(() => ({
               selected: { hours: 1, minutes: 2, seconds: 3, obj: new Date() }
-              // display intentionally omitted
             }))
           }
           const wrapper = mount(VkTime, {

@@ -364,9 +364,9 @@ describe('Range component', () => {
         const wrapper = mount(VkRange, {
           props: { min: 0, max: 100, step: 5, modelValue: 0 }
         })
-        // @ts-expect-error: direct access for test
+        // @ts-expect-error: forcing sliderRef to be null to test the fallback behavior
         wrapper.vm.sliderRef = null
-        // @ts-expect-error: direct access for test
+        // @ts-expect-error: forcing the call to getNewThumbPosition to test the fallback behavior when sliderRef is null
         const result = wrapper.vm.getNewThumbPosition(50)
         expect(result).toBe(0)
       })
@@ -669,7 +669,7 @@ describe('Range component', () => {
           touches: [{ clientX: 50 }]
         }
 
-        // @ts-expect-error: direct access for test
+        // @ts-expect-error: direct call to onSliderClick to simulate touch event
         wrapper.vm.onSliderClick(touch)
         await wrapper.vm.$nextTick()
 
@@ -751,14 +751,14 @@ describe('Range component', () => {
     it('updates thumbRefMap.min.value when min changes', async () => {
       const wrapper = mount(VkRange, { props: { min: 0, max: 100, isDouble: false, step: 1, modelValue: 0 } })
       await wrapper.setProps({ min: 10 })
-      // @ts-expect-error: direct access for test
+      // @ts-expect-error: accessing thumbRefMap for test purposes
       expect(wrapper.vm.thumbRefMap.min.value).toBe(10)
     })
 
     it('updates thumbRefMap.max.value when max changes', async () => {
       const wrapper = mount(VkRange, { props: { min: 0, max: 100, isDouble: false, step: 1, modelValue: 0 } })
       await wrapper.setProps({ max: 90 })
-      // @ts-expect-error: direct access for test
+      // @ts-expect-error: accessing thumbRefMap for test purposes
       expect(wrapper.vm.thumbRefMap.max.value).toBe(90)
     })
 
