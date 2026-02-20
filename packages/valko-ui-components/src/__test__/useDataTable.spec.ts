@@ -67,6 +67,16 @@ describe('useDataTable composable', () => {
   })
 
   describe('When selectionMode changes', () => {
+    it('should use none as default selectionMode', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        draggable: false
+      })
+
+      expect(dataTable.value.headers).toEqual(headers)
+    })
     it('should return headers without changes when selectionMode is none', () => {
       const dataTable = useDataTable({
         headers,
@@ -118,6 +128,17 @@ describe('useDataTable composable', () => {
   })
 
   describe('When draggable changes', () => {
+    it('should use false as default draggable', () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'none'
+      })
+
+      expect(dataTable.value.headers).toEqual(headers)
+    })
+
     it('should return headers without changes if draggable is false', () => {
       const dataTable = useDataTable({
         headers,
@@ -229,6 +250,26 @@ describe('useDataTable composable', () => {
 
       expect(dataTable.value.selection).toEqual([paginatedResult.value.records[0], paginatedResult.value.records[1]])
     })
+
+    it('should remove item from selection when it is already selected in multiple selection modes', async () => {
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult,
+        selectAllStatus: undefined,
+        selectionMode: 'multiple',
+        draggable: false
+      })
+
+      if (dataTable.value.onSelect) {
+        dataTable.value.onSelect(paginatedResult.value.records[0])
+        dataTable.value.onSelect(paginatedResult.value.records[1])
+        dataTable.value.onSelect(paginatedResult.value.records[0])
+      }
+
+      await nextTick()
+
+      expect(dataTable.value.selection).toEqual([paginatedResult.value.records[1]])
+    })
   })
 
   describe('When selectAllStatus changes', () => {
@@ -266,6 +307,27 @@ describe('useDataTable composable', () => {
       })
 
       expect(dataTable.value.isAllSelected).toEqual(true)
+    })
+
+    it('should return false when select all is called and data is empty', () => {
+      const paginatedResultLocal = ref({
+        records: [],
+        limit: 10,
+        offset: 0,
+        total: 0
+      })
+
+      const dataTable = useDataTable({
+        headers,
+        paginatedResult: paginatedResultLocal,
+        selectAllStatus: undefined,
+        selectionMode: 'multiple',
+        draggable: false
+      })
+
+      if (dataTable.value.onSelectAll) dataTable.value.onSelectAll(true)
+
+      expect(dataTable.value.isAllSelected).toEqual(false)
     })
   })
 

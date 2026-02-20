@@ -36,4 +36,15 @@ describe('useClientSideDragAndDrop composable', () => {
       { key: 'item1', name: 'John', age: 30 }
     ])
   })
+
+  it('should do nothing if dragStartIndex or draggedItem is null', async () => {
+    const { result, handleDrop } = useClientSideDragAndDrop(data)
+    const mockDragEvent = createMockDragEvent()
+
+    const original = [...result.value]
+    handleDrop(mockDragEvent, 1)
+    await nextTick()
+
+    expect(result.value).toEqual(original)
+  })
 })
