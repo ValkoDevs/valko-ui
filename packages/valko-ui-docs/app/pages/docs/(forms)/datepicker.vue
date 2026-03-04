@@ -112,7 +112,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Calendar.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'variantProp',
@@ -120,7 +121,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'The variant of the Calendar.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'shapeProp',
@@ -128,7 +130,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'The shape of the Calendar.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'sizeProp',
@@ -136,7 +139,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'The size of the Calendar.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'adapterProp',
@@ -144,7 +148,8 @@ const datepickerProps: TableItem[] = [
     required: true,
     description: 'As default we provide an adapter composable that uses native JS Date to provide the dates for the calendar.',
     values: 'CalendarAdapter',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.object
   },
   {
     key: 'modelValueProp',
@@ -152,7 +157,8 @@ const datepickerProps: TableItem[] = [
     required: true,
     description: 'The currently selected date, represented as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'localeProp',
@@ -160,7 +166,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'Defines the language and regional format to use in the calendar, affecting the display of weekdays, month names, etc.',
     values: 'string',
-    default: 'en-US'
+    default: 'en-US',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'formatProp',
@@ -168,7 +175,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'The format of the selected date, following day-month-year, etc.',
     values: 'string',
-    default: 'YYYY-MM-DD'
+    default: 'YYYY-MM-DD',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'disabledDatesProp',
@@ -176,7 +184,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'An array of specific dates to disable.',
     values: 'EpochTimeStamp[]',
-    default: '[]'
+    default: '[]',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'disableWeekendsProp',
@@ -184,7 +193,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'Allows to disable all weekends (sunday, saturday).',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'minDateProp',
@@ -192,7 +202,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'The minimum selectable date as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: '[]'
+    default: '[]',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'maxDateProp',
@@ -200,7 +211,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'The maximum selectable date as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: '[]'
+    default: '[]',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'ariaLabelProp',
@@ -208,7 +220,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'Defines a string value that labels the datepicker for assistive technologies.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaLabelledbyProp',
@@ -216,7 +229,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'Identifies the element(s) that labels the datepicker.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaDescribedbyProp',
@@ -224,7 +238,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'Identifies the element(s) that describe the datepicker.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaInvalidProp',
@@ -232,7 +247,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'Indicates that the current value of the datepicker is invalid.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'ariaRequiredProp',
@@ -240,7 +256,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'Indicates that user input is required on the datepicker.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'styleSlotsProps',
@@ -248,7 +265,8 @@ const datepickerProps: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Datepicker component.',
     values: 'DatepickerSlots',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.object
   }
 ]
 
@@ -259,7 +277,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Root container for the datepicker.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'content',
@@ -267,7 +286,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Dropdown/calendar content container.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   }
 ]
 
@@ -277,21 +297,24 @@ const datepickerEmits: TableItem[] = [
     event: 'update:modelValue',
     description: 'Emitted when the value of the input is updated, typically when the user selects a date.',
     values: 'string | Date',
-    type: '(value: string | Date) => void'
+    type: '(value: string | Date) => void',
+    apiType: apiTypeSchema.function
   },
   {
     key: 'openEmit',
     event: 'open',
     description: 'Emitted when the input is clicked or focused, indicating that the datepicker should open.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: apiTypeSchema.function
   },
   {
     key: 'closeEmit',
     event: 'close',
     description: 'Emitted when a click outside the root component is detected, or when the user closes the datepicker.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: apiTypeSchema.function
   }
 ]
 
@@ -301,7 +324,12 @@ const calendarAdapterProps: TableItem[] = [
     prop: 'formattedDates',
     required: true,
     description: 'Provides the currently selected, displayed, minimum, and maximum dates in a formatted structure.',
-    values: 'ComputedRef<{ selected: FormattedDate, display: FormattedDate, min?: FormattedDate, max?: FormattedDate }>',
+    values:`ComputedRef<{
+  selected: FormattedDate,
+  display: FormattedDate,
+  min?: FormattedDate,
+  max?: FormattedDate
+}>`,
     default: ''
   },
   {

@@ -97,7 +97,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Time.',
     values: 'primary, secondary, negative, warning, accent, positive',
-    default: 'primary'
+    default: 'primary',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'variantProp',
@@ -105,7 +106,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The variant of the Time.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'shapeProp',
@@ -113,7 +115,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The shape of the Time.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'sizeProp',
@@ -121,7 +124,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The size of the Time.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'labelProp',
@@ -129,7 +133,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The label for the input.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'okButtonLabelProp',
@@ -137,7 +142,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The text displayed in the OK button.',
     values: 'string',
-    default: 'OK'
+    default: 'OK',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'parsedModelProp',
@@ -145,7 +151,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The display model for the input.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'formatProp',
@@ -153,7 +160,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The format of the time to be displayed.',
     values: 'string',
-    default: 'HH:mm:ss'
+    default: 'HH:mm:ss',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'okButtonLabelProp',
@@ -161,7 +169,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The label of the default OK button on the time selector.',
     values: 'string',
-    default: 'OK'
+    default: 'OK',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'minuteStepProp',
@@ -169,7 +178,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The steps for the minutes.',
     values: '1 | 5 | 10 | 15 | 20 | 30',
-    default: '1'
+    default: '1',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'localeProp',
@@ -177,7 +187,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'Defines the language and regional format to use in the time picker, affecting the display of time formats.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'minTimeProp',
@@ -185,7 +196,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The minimum selectable time.',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'maxTimeProp',
@@ -193,7 +205,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The maximum selectable time.',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'disabledTimesProp',
@@ -201,7 +214,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'An array of specific times to disable.',
     values: 'number[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'modelValueProp',
@@ -209,7 +223,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The currently selected time as a Unix timestamp.',
     values: 'EpochTimeStamp',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'adapterProp',
@@ -217,7 +232,8 @@ const timepickerProps: TableItem[] = [
     required: true,
     description: 'A composable that provides methods and computed properties for managing time selection and formatting. We provide a useTimeAdapter for the component.',
     values: 'TimeAdapterInterface',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.object
   },
   {
     key: 'ariaLabelProp',
@@ -225,7 +241,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'Defines a string label for assistive technologies.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaLabelledbyProp',
@@ -233,7 +250,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'References the ID of the element that labels the timepicker.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaDescribedbyProp',
@@ -241,7 +259,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'References the ID of the element that describes the timepicker.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaInvalidProp',
@@ -249,7 +268,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'Indicates whether the value entered in the timepicker is invalid.',
     values: 'boolean',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'ariaRequiredProp',
@@ -257,7 +277,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'Indicates whether the timepicker is required.',
     values: 'boolean',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'styleSlotsProp',
@@ -265,7 +286,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for the timepicker.',
     values: 'TimeSlots',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.object
   }
 ]
 
@@ -275,21 +297,24 @@ const styleSlotsInterface: TableItem[] = [
     prop: 'container',
     description: 'Root container for the timepicker component.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'input',
     prop: 'input',
     description: 'Styles for the input field that triggers the timepicker.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'content',
     prop: 'content',
     description: 'Container for the timepicker dropdown/popup content.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   }
 ]
 
@@ -299,21 +324,24 @@ const timepickerEmits: TableItem[] = [
     event: 'onSelect',
     description: 'Emitted when the OK button is clicked.',
     values: 'string | Date',
-    type: '(value: string | Date) => void'
+    type: '(value: string | Date) => void',
+    apiType: apiTypeSchema.function
   },
   {
     key: 'openEmit',
     event: 'open',
     description: 'Emitted when the input is clicked or focused, indicating that the timepicker should open.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: apiTypeSchema.function
   },
   {
     key: 'closeEmit',
     event: 'close',
     description: 'Emitted when a click outside the root component is detected, or when the OK button is clicked.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: apiTypeSchema.function
   }
 ]
 

@@ -19,7 +19,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'The Pagination color theme.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: apiTypeSchema.custom.string
   },
   {
     key: 'variantProp',
@@ -27,7 +28,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'The Pagination variant.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: apiTypeSchema.custom.string
   },
   {
     key: 'shapeProp',
@@ -35,7 +37,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'The shape of the Pagination.',
     values: 'soft, rounded, square',
-    default: 'soft'
+    default: 'soft',
+    apiType: apiTypeSchema.custom.string
   },
   {
     key: 'sizeProp',
@@ -43,7 +46,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'The Pagination size.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: apiTypeSchema.custom.string
   },
   {
     key: 'pagesProp',
@@ -51,7 +55,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'The total number of pages.',
     values: 'number',
-    default: '1'
+    default: '1',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'modelValueProp',
@@ -59,7 +64,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'The current page.',
     values: 'number',
-    default: '1'
+    default: '1',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'elevatedProp',
@@ -67,7 +73,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'Wheter the Pagination is elevated or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'disabledProp',
@@ -75,7 +82,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'Wheter the Pagination is disabled or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'ariaLabelProp',
@@ -83,7 +91,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'Accessible label for the pagination.',
     values: 'string',
-    default: 'Pagination'
+    default: 'Pagination',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'styleSlotsProps',
@@ -91,7 +100,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Pagination component.',
     values: 'PaginationSlots',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.custom.type
   }
 ]
 
@@ -101,21 +111,24 @@ const styleSlotsInterface: TableItem[] = [
     prop: 'nav',
     description: 'Styles for the navigation container (<nav> element).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.primitive
   },
   {
     key: 'button',
     prop: 'button',
     description: 'Styles for each page button.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.primitive
   },
   {
     key: 'arrows',
     prop: 'arrows',
     description: 'Styles for the previous/next arrow icons.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.primitive
   }
 ]
 
@@ -125,7 +138,8 @@ const paginationEmits: TableItem[] = [
     event: 'update:modelValue',
     description: 'Emitted when the current page is changed.',
     values: 'number | string',
-    type: '(page: number | string) => void'
+    type: '(page: number | string) => void',
+    apiType: apiTypeSchema.function
   }
 ]
 

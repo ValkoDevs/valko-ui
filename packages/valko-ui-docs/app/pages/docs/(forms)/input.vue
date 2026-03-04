@@ -38,7 +38,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The color theme of the Input.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'variantProp',
@@ -46,7 +47,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The variant of the Input.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'typeProp',
@@ -54,7 +56,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The type of the Input.',
     values: 'text, email, password, number',
-    default: 'text'
+    default: 'text',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'cursorProp',
@@ -62,7 +65,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The displayed cursor type when hovering the input.',
     values: 'cursor | text',
-    default: 'text'
+    default: 'text',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'sizeProp',
@@ -70,7 +74,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The size of the Input.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'disabledProp',
@@ -78,7 +83,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Whether the Input is disabled or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'roundedProp',
@@ -86,7 +92,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Whether the Input is rounded or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'modelValueProp',
@@ -94,7 +101,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The v-model for the Input',
     values: 'string, number',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.any
   },
   {
     key: 'minProp',
@@ -102,7 +110,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The min value for the Input in type number',
     values: 'number',
-    default: '-Infinity'
+    default: '-Infinity',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'maxProp',
@@ -110,7 +119,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The max value for the Input in type number',
     values: 'number',
-    default: 'Infinity'
+    default: 'Infinity',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'stepProp',
@@ -118,7 +128,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The step value for the Input in type number',
     values: 'number',
-    default: '1'
+    default: '1',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'readonlyProp',
@@ -126,7 +137,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Wheter the Input is readonly or not',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'labelProp',
@@ -134,7 +146,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The label for the Input',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'helpertextProp',
@@ -142,7 +155,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'A hint for the Input',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'shapeProp',
@@ -150,7 +164,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The shape of the Input',
     values: 'rounded, soft, square',
-    default: 'soft'
+    default: 'soft',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaLabelProp',
@@ -158,7 +173,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaLabelledByProp',
@@ -166,7 +182,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'ID reference to an element that labels the input (e.g. a visible <label>).',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaDescribedByProp',
@@ -174,7 +191,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'ID reference to an element that further describes the input, such as helper or error text.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaRequiredProp',
@@ -182,7 +200,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Marks the input as required for form submission.',
     values: 'boolean',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'ariaInvalidProp',
@@ -190,7 +209,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Indicates that the current value entered into the input is invalid.',
     values: 'boolean',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'styleSlotsProps',
@@ -198,7 +218,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Input component.',
     values: 'InputSlots',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.object
   }
 ]
 
@@ -208,77 +229,88 @@ const styleSlotsInterface: TableItem[] = [
     prop: 'container',
     description: 'Root container for the input component.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'field',
     prop: 'field',
     description: 'Wrapper for the input field and related elements.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'input',
     prop: 'input',
     description: 'The input element itself (hidden since we use a custom input).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'label',
     prop: 'label',
     description: 'Label element for the input.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'helper',
     prop: 'helper',
     description: 'Helper text displayed below the input.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'icons',
     prop: 'icons',
     description: 'Base styles for icon containers.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'leftIcon',
     prop: 'leftIcon',
     description: 'Styles for the left icon slot.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'rightIcon',
     prop: 'rightIcon',
     description: 'Styles for the right icon slot.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'clearIcon',
     prop: 'clearIcon',
     description: 'Styles for the clear (reset) icon.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'numberArrows',
     prop: 'numberArrows',
     description: 'Container for number input increment/decrement arrows.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'chevrons',
     prop: 'chevrons',
     description: 'Styles for the chevron icons used in number input arrows.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   }
 ]
 
@@ -288,42 +320,48 @@ const emitData: TableItem[] = [
     event: 'update:modelValue',
     description: 'Emitted when the value of the input is updated.',
     values: 'string',
-    type: '(value: string) => void'
+    type: '(value: string) => void',
+    apiType: apiTypeSchema.function
   },
   {
     key: 'focusEmit',
     event: 'focus',
     description: 'Emitted when the input is focused.',
     values: 'FocusEvent',
-    type: '(event: FocusEvent) => void'
+    type: '(event: FocusEvent) => void',
+    apiType: apiTypeSchema.function
   },
   {
     key: 'blurEmit',
     event: 'blur',
     description: 'Emitted when the input loses focus.',
     values: 'FocusEvent',
-    type: '(event: FocusEvent) => void'
+    type: '(event: FocusEvent) => void',
+    apiType: apiTypeSchema.function
   },
   {
     key: 'clearEmit',
     event: 'clear',
     description: 'Emitted when the input is cleared using the clearable icon.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: apiTypeSchema.function
   },
   {
     key: 'leftIconClickEmit',
     event: 'leftIconClick',
     description: 'Emitted when the left icon of the input is clicked.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: apiTypeSchema.function
   },
   {
     key: 'rightIconClickEmit',
     event: 'rightIconClick',
     description: 'Emitted when the right icon of the input is clicked.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: apiTypeSchema.function
   }
 ]
 
@@ -332,13 +370,15 @@ const slotData: TableItem[] = [
     key: 'leftIconSlot',
     name: 'left-icon',
     description: 'Slot for placing an icon on the left side of the input field. This slot is typically used to include an icon for visual enhancement or to indicate input type.',
-    example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>'
+    example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>',
+    apiType: apiTypeSchema.custom.type
   },
   {
     key: 'rightIconSlot',
     name: 'right-icon',
     description: 'Slot for placing an icon on the right side of the input field. This slot is typically used to include an icon for actions like clear input or show/hide password.',
-    example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>'
+    example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>',
+    apiType: apiTypeSchema.custom.type
   }
 ]
 

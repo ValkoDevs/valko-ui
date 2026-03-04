@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ApiTableProps, HeaderKey } from './interfaces'
 import styles from './ApiTable.styles'
+import { apiTypeSchema } from '~/utils/apiTypeSchema'
 
 defineOptions({ name: 'ApiTable' })
 
@@ -16,72 +17,42 @@ const headerMap = {
   format: formatHeaders
 }
 
-const colorMap: Record<string, string> = {
-  string: 'text-secondary',
-  boolean: 'text-accent',
-  number: 'text-warning',
-  null: 'text-negative',
-  undefined: 'text-negative',
-  customArray: 'text-primary',
-  customString: 'text-positive',
-  primitiveArray: 'text-primary',
-  customType: 'text-primary'
+const colorMap: Partial<Record<string, string>> = {
+  [apiTypeSchema.primitives.string]: 'text-secondary',
+  [apiTypeSchema.primitives.number]: 'text-warning',
+  [apiTypeSchema.primitives.boolean]: 'text-accent',
+  [apiTypeSchema.primitives.null]: 'text-negative',
+  [apiTypeSchema.primitives.undefined]: 'text-negative',
+  [apiTypeSchema.custom.string]: 'text-positive'
 }
 
-const primitiveList = ['string', 'number', 'boolean', 'null', 'undefined']
-
+const getColor = (type: string) => colorMap[type] || 'text-primary'
 const getMainKey = (header: HeaderKey) => headerMap[header]?.[0]?.key || ''
 const getSlotName = (header: HeaderKey) => `cell-${getMainKey(header)}`
 
-const isNumber = (str: string) => {
-  const num = str.replace(/^'|'$/g, '')
-  return !isNaN(Number(num)) && num.trim() !== ''
-}
+const formatValues = (values: string, apiType: string) => {
+  const tokens = values.split(/[,|]/).map(t => t.trim())
 
-const isComplexType = (str: string) => /[<{(].*[>})]/.test(str)
+  if (apiType === apiTypeSchema.primitives.default) {
+    return tokens.map(token => {
+      const primitiveType = Object.values(apiTypeSchema.primitives).find(v => v === token)
 
-const classifyToken = (token: string): string => {
-  const isArray = token.endsWith('[]')
-  const base = isArray ? token.slice(0, -2) : token
-
-  if (isNumber(base)) return 'number'
-  if (primitiveList.includes(base)) return isArray ? 'primitiveArray' : base
-  if (/^[A-Z][A-Za-z0-9_]*$/.test(base)) return isArray ? 'customArray' : 'customType'
-  return 'customString'
-}
-
-const formatValues = (raw: string) => {
-  if (isComplexType(raw)) {
-    return [{
-      token: raw,
-      color: colorMap.customType
-    }]
+      return {
+        display: token,
+        color: getColor(primitiveType || token)
+      }
+    })
   }
 
-  const tokens = raw.split(/[,|]/).map(t => t.trim()).filter(Boolean)
-  const multiple = tokens.length > 1
-  const primitiveMode = multiple && hasAdjacentPrimitives(tokens)
-
-  return tokens.map(token => {
-    if (multiple && !primitiveMode) {
-      if (isNumber(token)) {
-        return { token, color: colorMap.number }
-      }
-      return { token: `"${token}"`, color: colorMap.customString }
-    }
-    const kind = classifyToken(token)
-    const display = kind === 'customString' && !isNumber(token) ? `"${token}"` : token
-    const color = colorMap[kind] ?? colorMap.customString
-    return { token: display, color }
-  })
+  return tokens.map(token => ({
+    display: apiType === apiTypeSchema.custom.string ? `"${token}"` : token,
+    color: getColor(apiType)
+  }))
 }
 
-const hasAdjacentPrimitives = (tokens: string[]) => {
-  return tokens.some((t, i) =>
-    i < tokens.length - 1 &&
-    primitiveList.includes(t) &&
-    primitiveList.includes(tokens[i + 1] as string)
-  )
+const formatDefaultValue = (value: string, type: string) => {
+  if (type === apiTypeSchema.custom.string) return `"${value.replace(/^'|'$/g, '')}"`
+  return value
 }
 </script>
 
@@ -129,7 +100,7 @@ const hasAdjacentPrimitives = (tokens: string[]) => {
         #cell-values="{ item }"
       >
         <code-block
-          v-if="isComplexType(`${item.values}`)"
+          v-if="item.apiType === apiTypeSchema.object || item.apiType === apiTypeSchema.function || item.apiType === apiTypeSchema.event"
           :has-copy-button="false"
           language="ts"
           :code="`${item.values}`"
@@ -141,13 +112,15 @@ const hasAdjacentPrimitives = (tokens: string[]) => {
         >
           <template v-if="item.values">
             <template
-              v-for="(t, i) in formatValues(`${item.values}`)"
-              :key="i"
+              v-for="(token, index) in formatValues(item.values as string, item.apiType as string)"
+              :key="index"
             >
-              <span :class="t.color">{{ t.token }}</span>
+              <span :class="token.color">
+                {{ token.display }}
+              </span>
 
               <span
-                v-if="i < formatValues(`${item.values}`).length - 1"
+                v-if="index < formatValues(item.values as string, item.apiType as string).length - 1"
                 class="text-outlined"
               >|</span>
             </template>
@@ -167,22 +140,11 @@ const hasAdjacentPrimitives = (tokens: string[]) => {
           v-if="item.default !== undefined && item.default !== null && item.default !== ''"
           :class="[
             'font-mono bg-surface-container rounded p-2 w-full flex justify-center items-center',
-            (formatValues(`${item.values}`)[0]?.color || 'text-primary')
+            getColor(item.apiType as string)
           ]"
         >
-          <template v-if="formatValues(`${item.values}`)[0]?.token === 'string' && typeof item.default === 'string'">
-            "{{ item.default.replace(/^'|'$/g, '') }}"
-          </template>
-
-          <template v-else-if="formatValues(`${item.values}`)[0]?.color === colorMap.customString && typeof item.default === 'string'">
-            "{{ item.default.replace(/^'|'$/g, '') }}"
-          </template>
-
-          <template v-else>
-            {{ item.default }}
-          </template>
+          {{ formatDefaultValue(item.default as string, item.apiType as string) }}
         </span>
-
         <span
           v-else
           class="text-on-surface-variant italic w-full flex p-2 rounded-lg bg-surface-container justify-center items-center"

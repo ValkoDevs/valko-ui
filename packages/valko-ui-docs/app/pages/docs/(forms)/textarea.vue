@@ -26,7 +26,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The color theme of the Textarea.',
     values: 'primary, secondary, negative, warning, accent, positive',
-    default: 'primary'
+    default: 'primary',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'variantProp',
@@ -34,7 +35,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The variant of the Textarea.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'sizeProp',
@@ -42,7 +44,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The size of the Textarea.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'disabledProp',
@@ -50,7 +53,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Whether the Textarea is disabled or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'modelValueProp',
@@ -58,7 +62,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The v-model for the Textarea',
     values: 'string',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'readonlyProp',
@@ -66,7 +71,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Wheter the Textarea is readonly or not',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'labelProp',
@@ -74,7 +80,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The label for the Textarea',
     values: 'string',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'helpertextProp',
@@ -82,7 +89,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'A hint for the Textarea',
     values: 'string',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'shapeProp',
@@ -90,7 +98,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The shape of the Textarea',
     values: 'soft, rounded, square',
-    default: 'soft'
+    default: 'soft',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaLabelProp',
@@ -98,7 +107,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaLabelledByProp',
@@ -106,7 +116,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'ID reference to an element that labels the textarea (e.g. a visible <label>).',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaDescribedByProp',
@@ -114,7 +125,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'ID reference to an element that further describes the textarea, such as helper or error text.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaRequiredProp',
@@ -122,7 +134,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Marks the textarea as required for form submission.',
     values: 'boolean',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'ariaInvalidProp',
@@ -130,7 +143,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Indicates that the current value entered into the textarea is invalid.',
     values: 'boolean',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'styleSlotsProps',
@@ -138,7 +152,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Textarea component.',
     values: 'TextareaSlots',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.object
   }
 ]
 
@@ -148,70 +163,80 @@ const styleSlotsInterface: TableItem[] = [
     prop: 'container',
     description: 'Root container for the textarea component.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'field',
     prop: 'field',
     description: 'Wrapper for the textarea and icons.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'textarea',
     prop: 'textarea',
     description: 'The textarea element itself.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'label',
     prop: 'label',
     description: 'Label for the textarea.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'helper',
     prop: 'helper',
     description: 'Helper text displayed below the textarea.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'counter',
     prop: 'counter',
     description: 'Character counter for the textarea.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'footer',
     prop: 'footer',
     description: 'Footer container for helper text and counter.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'icons',
     prop: 'icons',
     description: 'Base styles for icon containers.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'leftIcon',
     prop: 'leftIcon',
     description: 'Styles for the left icon slot.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'rightIcon',
     prop: 'rightIcon',
     description: 'Styles for the right icon slot.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   }
 ]
 
@@ -221,21 +246,24 @@ const emitData: TableItem [] = [
     event: 'update:modelValue',
     description: 'Emitted when the value of the textarea changes.',
     values: 'value: string',
-    type: '(value: string) => void'
+    type: '(value: string) => void',
+    apiType: apiTypeSchema.function
   },
   {
     key: 'leftIconClickEmit',
     event: 'leftIconClick',
     description: 'Emitted when the left icon of the textarea is clicked.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: apiTypeSchema.function
   },
   {
     key: 'rightIconClickEmit',
     event: 'rightIconClick',
     description: 'Emitted when the right icon of the textarea is clicked.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: apiTypeSchema.function
   }
 ]
 
@@ -244,13 +272,15 @@ const slotData: TableItem[] = [
     key: 'leftIconSlot',
     name: 'left-icon',
     description: 'Slot for placing an icon on the left side of the textarea field. This slot is typically used to include an icon for visual enhancement or to indicate textarea type.',
-    example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>'
+    example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>',
+    apiType: apiTypeSchema.custom.type
   },
   {
     key: 'rightIconSlot',
     name: 'right-icon',
     description: 'Slot for placing an icon on the right side of the textarea field. This slot is typically used to include an icon for actions like clear the textarea.',
-    example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>'
+    example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>',
+    apiType: apiTypeSchema.custom.type
   }
 ]
 

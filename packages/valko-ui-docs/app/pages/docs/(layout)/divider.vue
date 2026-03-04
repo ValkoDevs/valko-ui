@@ -120,6 +120,7 @@ const styles = {
     <template #playground-view>
       <div :class="`w-full h-full flex ${form.direction === 'vertical' ? 'flex-row' : 'flex-col'} justify-center items-center p-4`">
         Artist
+    {
         <vk-divider
           :color="form.color"
           :variant="form.variant"

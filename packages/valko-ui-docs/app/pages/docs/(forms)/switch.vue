@@ -36,7 +36,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The color theme of the Switch.',
     values: 'primary, secondary, negative, warning, accent, positive',
-    default: 'primary'
+    default: 'primary',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'variantProp',
@@ -44,7 +45,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The variant of the Switch.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'sizeProp',
@@ -52,7 +54,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The color theme of the Switch.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'disabledProp',
@@ -60,7 +63,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Wheter the Switch is disabled or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'readonlyProp',
@@ -68,7 +72,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Wheter the Switch is readonly or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'modelValueProp',
@@ -76,7 +81,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The current value of the Switch.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'positionProp',
@@ -84,7 +90,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Wheter the label is displayed on the right or left side of the Switch.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'labelProp',
@@ -92,7 +99,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The string that\'s gonna be displayed on the label',
     values: 'string',
-    default: 'Switch'
+    default: 'Switch',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'shapeProp',
@@ -100,7 +108,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The shape of the Switch.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaLabelProp',
@@ -108,7 +117,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Defines a string value that labels the switch element.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaLabelledByProp',
@@ -116,7 +126,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'ID reference to a label element that labels the switch.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'ariaDescribedByProp',
@@ -124,7 +135,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'ID reference to an element that describes the switch (e.g., helper text).',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'styleSlotsProps',
@@ -132,7 +144,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Switch component.',
     values: 'SwitchSlots',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.object
   }
 ]
 
@@ -142,35 +155,40 @@ const styleSlotsInterface: TableItem[] = [
     prop: 'container',
     description: 'Root container for the switch component.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'content',
     prop: 'content',
     description: 'Wrapper for the label and switch.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'labelSlot',
     prop: 'labelSlot',
     description: 'Styles for the label element.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'switchSlot',
     prop: 'switchSlot',
     description: 'Styles for the switch track.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'thumb',
     prop: 'thumb',
     description: 'Styles for the switch thumb (the moving part).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   }
 ]
 
@@ -180,7 +198,8 @@ const emitData: TableItem[] = [
     event: 'update:modelValue',
     description: 'Emitted when the value of the switch changes.',
     values: 'boolean',
-    type: '(value: boolean) => void'
+    type: '(value: boolean) => void',
+    apiType: apiTypeSchema.function
   }
 ]
 

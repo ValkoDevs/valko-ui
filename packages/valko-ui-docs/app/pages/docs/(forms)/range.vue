@@ -45,7 +45,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Range slider.',
     values: 'primary, secondary, positive, accent, warning, negative',
-    default: 'primary'
+    default: 'primary',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'variantProp',
@@ -53,7 +54,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'The variant style of the Range slider.',
     values: 'filled, outlined, ghost, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'shapeProp',
@@ -61,7 +63,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'The shape style of the Range slider.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'sizeProp',
@@ -69,7 +72,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'The size of the Range slider.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'stripedProp',
@@ -77,7 +81,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'Adds a striped pattern to the Range slider.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'showStepsProp',
@@ -85,7 +90,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'Displays step marks at intervals along the Range slider.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'stepProp',
@@ -93,7 +99,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'The distance between step marks.',
     values: 'number',
-    default: '10'
+    default: '10',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'isDoubleProp',
@@ -101,7 +108,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'Enables the Range slider to have two thumbs for selecting a range.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: apiTypeSchema.primitives.boolean
   },
   {
     key: 'minProp',
@@ -109,7 +117,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'The minimum value of the Range slider.',
     values: 'number',
-    default: '0'
+    default: '0',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'maxProp',
@@ -117,7 +126,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'The maximum value of the Range slider.',
     values: 'number',
-    default: '100'
+    default: '100',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'offsetProp',
@@ -125,7 +135,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'The offset value for the Range slider.',
     values: 'number',
-    default: '0'
+    default: '0',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'modelValueProp',
@@ -133,7 +144,8 @@ const rangeProps: TableItem[] = [
     required: true,
     description: 'The value of the Range slider.',
     values: 'number | number[]',
-    default: '50'
+    default: '50',
+    apiType: apiTypeSchema.primitives.any
   },
   {
     key: 'labelsProp',
@@ -141,7 +153,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'The labels for the stepmarks in the slider.',
     values: 'Label[]',
-    default: '[]'
+    default: '[]',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'ariaDescribedByProp',
@@ -149,7 +162,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'ID reference to an element that further describes the range, such as helper or error text.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   },
   {
     key: 'styleSlotsProps',
@@ -157,7 +171,8 @@ const rangeProps: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Range component.',
     values: 'RangeSlots',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.object
   }
 ]
 
@@ -166,7 +181,8 @@ const rangeEmits: TableItem[] = [
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     type: '(value: number | [number, number]) => void',
-    description: 'Emitted when the value of the slider is updated.'
+    description: 'Emitted when the value of the slider is updated.',
+    apiType: apiTypeSchema.function
   }
 ]
 
@@ -177,7 +193,8 @@ const labelsInterface: TableItem[] = [
     required: true,
     description: 'The value where the label is gonna be displayed on the slider.',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.number
   },
   {
     key: 'labelProp',
@@ -185,7 +202,8 @@ const labelsInterface: TableItem[] = [
     required: true,
     description: 'The displayed name of the label.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.primitives.string
   }
 ]
 
@@ -195,56 +213,64 @@ const styleSlotsInterface: TableItem[] = [
     prop: 'container',
     description: 'Root container for the range slider.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'progressContainer',
     prop: 'progressContainer',
     description: 'Container for the progress bar and step marks.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'progress',
     prop: 'progress',
     description: 'Progress bar element showing the selected range.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'stepMark',
     prop: 'stepMark',
     description: 'Step mark indicator for each step on the slider.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'thumbContainer',
     prop: 'thumbContainer',
     description: 'Container for the slider thumbs.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'thumb',
     prop: 'thumb',
     description: 'Slider thumb element (draggable handle).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'labelContainer',
     prop: 'labelContainer',
     description: 'Container for custom labels below the slider.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   },
   {
     key: 'label',
     prop: 'label',
     description: 'Custom label element for the slider.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: apiTypeSchema.arrays.default
   }
 ]
 
