@@ -58,7 +58,8 @@ const select = tv({
       'duration-200',
       'ease-out',
       'data-[open=true]:rotate-180',
-      'cursor-pointer'
+      'cursor-pointer',
+      'data-[helpertext=true]:top-[35%]'
     ],
     rightIcon: [],
     clearIcon: []

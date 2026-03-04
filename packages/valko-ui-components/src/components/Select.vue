@@ -183,6 +183,7 @@ onUnmounted(() => {
       <vk-icon
         name="chevron-down"
         :data-open="isOpen"
+        :data-helpertext="!!helpertext"
         :class="s.chevronIcon({ class: styleSlots?.chevronIcon })"
         @click.stop="toggleDropdown(!isOpen)"
       />

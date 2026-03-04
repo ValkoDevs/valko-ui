@@ -171,7 +171,7 @@ watch(() => props.modelValue, (newValue) => {
         @touchend="clearInput"
       />
       <span
-        v-if="$slots['left-icon'] && $slots['left-icon']().length"
+        v-if="$slots['left-icon']"
         :class="[s.icons({ class: styleSlots?.icons }), s.leftIcon({ class: styleSlots?.leftIcon })]"
         @click="handleIconClick('left')"
         @touchend="handleIconClick('left')"
@@ -179,7 +179,7 @@ watch(() => props.modelValue, (newValue) => {
         <slot name="left-icon" />
       </span>
       <span
-        v-if="$slots['right-icon'] && $slots['right-icon']().length"
+        v-if="$slots['right-icon']"
         :data-chevron-icons="type === 'number'"
         :class="[s.icons({ class: styleSlots?.icons }), s.rightIcon({ class: styleSlots?.rightIcon })]"
         @click="handleIconClick('right')"
