@@ -296,8 +296,8 @@ const emitData: TableItem[] = [
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the selected value(s) in the Select component change.',
-    values: 'any',
-    type: '(value: any) => void'
+    values: 'string | number | Array<string | number>',
+    type: '(value: string | number | Array<string | number>) => void'
   },
   {
     key: 'leftIconClickEmit',
