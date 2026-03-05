@@ -220,7 +220,7 @@ const cardSlots: TableItem[] = [
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for the main content of the Card.',
-    example: '<template #default>\n<vk-card-body>This is the main content of the Card.</vk-card-body>\n</template>'
+    example: '<template #default>\n <vk-card-body>\n  This is the main content of the Card.\n </vk-card-body>\n</template>'
   }
 ]
 

@@ -126,7 +126,7 @@ const avatarSlots: TableItem[] = [
     key: 'defaultSlot',
     name: 'default',
     description: 'Default slot for the Avatar, this would replace any existing content.',
-    example: '<vk-avatar>\n  <template #default>\n Your custom content goes here!\n  </template>\n</vk-avatar>'
+    example: '<vk-avatar>\n  <template #default>\n    Your custom content goes here!\n  </template>\n</vk-avatar>'
   }
 ]
 

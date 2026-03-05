@@ -227,9 +227,9 @@ const timeAdapterInterface: TableItem[] = [
     prop: 'formattedTime',
     required: true,
     description: 'The selected and displayed time as formatted objects.',
-    values: 'ComputedRef<{ selected: FormattedTime, display: FormattedTime }>',
+    values: 'ComputedRef<{\n selected: FormattedTime,\n display: FormattedTime\n}>',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.OBJECT
   },
   {
     key: 'setDisplayUnitProp',
@@ -274,7 +274,7 @@ const timeAdapterInterface: TableItem[] = [
     description: 'Current time period, either AM or PM.',
     values: 'Ref<"AM" | "PM">',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.OBJECT
   }
 ]
 
@@ -284,9 +284,9 @@ const timeAdapterResult: TableItem[] = [
     prop: 'TimeAdapterResult',
     required: true,
     description: 'The return type result of the Time Adapter containing the model, parsed model, and an object with the methods, properties required.',
-    values: '[Ref<EpochTimeStamp>, ComputedRef<string>, TimeAdapterInterface]',
+    values: '[\n Ref<EpochTimeStamp>, \n ComputedRef<string>, \n TimeAdapterInterface\n]',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.OBJECT
   }
 ]
 

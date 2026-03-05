@@ -147,7 +147,7 @@ const apiData: TableItem[] = [
     description: 'The label for the Input',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'helpertextProp',
@@ -156,7 +156,7 @@ const apiData: TableItem[] = [
     description: 'A hint for the Input',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'shapeProp',

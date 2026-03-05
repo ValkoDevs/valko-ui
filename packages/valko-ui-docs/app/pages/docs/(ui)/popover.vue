@@ -164,13 +164,13 @@ const popoverSlots: TableItem[] = [
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for the component that will display the Popover.',
-    example: '<template #default>\n  <vk-button>Click Me.</vk-button>\n</template>'
+    example: '<template #default>\n  <vk-button>\n    Click Me.\n  </vk-button>\n</template>'
   },
   {
     key: 'popoverContentSlot',
     name: 'popover-content',
     description: 'Slot for the main content of the Popover.',
-    example: '<template #popover-content>\n  <p>This is the main content of the Popover.</p>\n</template>'
+    example: '<template #popover-content>\n  <p>\n    This is the main content of the Popover.\n  </p>\n</template>'
   }
 ]
 

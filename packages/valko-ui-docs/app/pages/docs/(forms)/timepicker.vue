@@ -137,15 +137,6 @@ const timepickerProps: TableItem[] = [
     apiType: ApiTypeCategory.PRIMITIVE
   },
   {
-    key: 'okButtonLabelProp',
-    prop: 'okButtonLabel',
-    required: false,
-    description: 'The text displayed in the OK button.',
-    values: 'string',
-    default: 'OK',
-    apiType: ApiTypeCategory.PRIMITIVE
-  },
-  {
     key: 'parsedModelProp',
     prop: 'parsedModel',
     required: false,
@@ -351,9 +342,9 @@ const timeAdapterInterface: TableItem[] = [
     prop: 'formattedTime',
     required: true,
     description: 'The selected and displayed time as formatted objects.',
-    values: 'ComputedRef<{ selected: FormattedTime, display: FormattedTime }>',
+    values: 'ComputedRef<{\n selected: FormattedTime,\n display: FormattedTime\n}>',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.OBJECT
   },
   {
     key: 'setDisplayUnitProp',
@@ -362,7 +353,7 @@ const timeAdapterInterface: TableItem[] = [
     description: 'Sets a specific time unit (hours, minutes, seconds) for display.',
     values: '(unit: "h" | "m" | "s", value: number) => void',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.FUNCTION
   },
   {
     key: 'onSelectAMPMProp',
@@ -371,7 +362,7 @@ const timeAdapterInterface: TableItem[] = [
     description: 'Handles AM/PM selection.',
     values: '(period: "AM" | "PM") => void',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.FUNCTION
   },
   {
     key: 'onSelectTimeProp',
@@ -380,7 +371,7 @@ const timeAdapterInterface: TableItem[] = [
     description: 'Sets the selected time and confirms selection.',
     values: '() => void',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.FUNCTION
   },
   {
     key: 'isTimeDisabledProp',
@@ -389,7 +380,7 @@ const timeAdapterInterface: TableItem[] = [
     description: 'Checks if a time (hours and optional minutes) is disabled based on `minTime`, `maxTime`, or `disabledTimes`.',
     values: '(hours: number, minutes?: number) => boolean | undefined',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.FUNCTION
   },
   {
     key: 'periodProp',
@@ -398,7 +389,7 @@ const timeAdapterInterface: TableItem[] = [
     description: 'Current time period, either AM or PM.',
     values: 'Ref<"AM" | "PM">',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.OBJECT
   }
 ]
 
@@ -408,9 +399,9 @@ const timeAdapterResult: TableItem[] = [
     prop: 'TimeAdapterResult',
     required: true,
     description: 'The return type result of the Time Adapter containing the model, parsed model, and an object with the methods, properties required.',
-    values: '[Ref<EpochTimeStamp>, ComputedRef<string>, TimeAdapterInterface]',
+    values: '[\n Ref<EpochTimeStamp>, \n ComputedRef<string>, \n TimeAdapterInterface\n]',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.OBJECT
   }
 ]
 

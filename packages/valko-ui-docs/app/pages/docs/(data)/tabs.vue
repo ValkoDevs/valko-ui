@@ -44,7 +44,7 @@ const tabsProps: TableItem[] = [
     description: 'The color theme of the Tabs.',
     values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -53,7 +53,7 @@ const tabsProps: TableItem[] = [
     description: 'The type of the Tabs',
     values: 'filled, outlined, ghost, gradient',
     default: 'filled',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -62,7 +62,7 @@ const tabsProps: TableItem[] = [
     description: 'The Tabs shape.',
     values: 'line, rounded, soft, square',
     default: 'soft',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -71,7 +71,7 @@ const tabsProps: TableItem[] = [
     description: 'The Tabs size.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'modelValueProp',
@@ -266,14 +266,14 @@ const tabsSlots: TableItem[] = [
     key: 'tabKeyTabSlot',
     name: '[key: Tab["key"]]-tab',
     description: 'Slot for customizing the tab button itself. Use this slot to replace the default tab rendering (title and icons) with your own custom tab content. The slot name should match the tab key followed by "-tab".',
-    example: '<template #photos-tab><!-- Custom tab button for "Photos" --></template>',
+    example: '<template #photos-tab>\n <!-- Custom tab button for "Photos" -->\n</template>',
     apiType: ApiTypeCategory.SLOT
   },
   {
     key: 'tabKeyContentSlot',
     name: '[key: Tab["key"]]-content',
     description: 'Slot for the content panel associated with a specific tab. The slot name should match the tab key followed by "-content".',
-    example: '<template #photos-content><!-- Content for "Photos" tab --></template>',
+    example: '<template #photos-content>\n <!-- Content for "Photos" tab -->\n</template>',
     apiType: ApiTypeCategory.SLOT
   }
 ]

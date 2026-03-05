@@ -81,15 +81,6 @@ const breadcrumbsProps: TableItem[] = [
     apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
-    key: 'sizeProp',
-    prop: 'size',
-    required: false,
-    description: 'The size of the Breadcrumbs.',
-    values: 'xs, sm, md, lg',
-    default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
-  },
-  {
     key: 'crumbsProp',
     prop: 'crumbs',
     required: true,

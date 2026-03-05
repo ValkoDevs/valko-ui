@@ -84,11 +84,13 @@ const tableProps: TableItem[] = [
     prop: 'striped',
     required: false,
     description: 'Specifies whether the table rows are striped for better readability.',
+    values: 'boolean',
     default: 'false',
     apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'selectionMode',
+    prop: 'selectionMode',
     required: false,
     description: 'Controls the selection behavior of the table.',
     values: 'single, multiple, row, none',
@@ -145,7 +147,7 @@ const tableProps: TableItem[] = [
     prop: 'isAllSelected',
     required: false,
     description: 'Specifies if all items are selected.',
-    values: 'true, false | null',
+    values: 'boolean | null',
     default: 'null',
     apiType: ApiTypeCategory.PRIMITIVE
   },
@@ -343,7 +345,7 @@ const tableSlots: TableItem[] = [
     key: 'filterContentSlot',
     name: 'filter-content-${header.key}',
     description: 'Slot for customizing the popover displayed when clicking the filter icon.',
-    example: '<template #filter-content-${header-key}><div class="custom-header-filter">Filter here!</div></template>'
+    example: '<template #filter-content-${header-key}>\n  <div class="custom-header-filter">\n    Filter here!\n  </div>\n</template>'
   }
 ]
 

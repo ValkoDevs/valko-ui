@@ -14,3 +14,4 @@
 
 #### Utils
 - Added a new `formatHeaders` array, similar to other header utilities, for use in tables that display available formats (e.g., in calendar/time components).
+- Added a new `enums` file with corresponding enums and types to support API table categorization and coloring.

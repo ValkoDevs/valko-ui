@@ -68,9 +68,9 @@ const notificationProps: TableItem[] = [
     prop: 'styleSlots',
     required: false,
     description: 'Customizes style slots for Notification.',
-    values: 'object',
-    default: '{}',
-    apiType: ApiTypeCategory.OBJECT
+    values: 'NotificationSlots',
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'textProp',
@@ -150,7 +150,7 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'Ability to add some offset to axis.',
     values: '{y: number, x: number}',
-    default: 'undefined',
+    default: '',
     apiType: ApiTypeCategory.OBJECT
   },
   {
@@ -159,7 +159,7 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'Invoked when the Notification is clicked.',
     values: '() => void',
-    default: 'null',
+    default: 'close()',
     apiType: ApiTypeCategory.FUNCTION
   }
 ]

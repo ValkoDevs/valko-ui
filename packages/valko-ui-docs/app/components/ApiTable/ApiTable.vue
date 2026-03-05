@@ -27,30 +27,47 @@ const colorMap: Partial<Record<string, string>> = {
   any: 'text-negative',
   unknown: 'text-negative',
   Date: 'text-primary',
-  object: 'text-surface',
-  function: 'text-surface',
-  event: 'text-surface',
+  object: 'text-on-surface',
+  function: 'text-on-surface',
+  event: 'text-on-surface',
   'custom-string': 'text-positive',
   'custom-type': 'text-primary',
   'custom-number': 'text-warning'
 }
 
-const getColor = (type: string) => colorMap[type] || 'text-surface'
+const isNumberList = (input: string | undefined | null) => {
+  if (typeof input !== 'string') return false
+  const tokens = input.split(/[,|]/).map(t => t.trim())
+
+  return tokens.length > 0 && tokens.every(token => token !== '' && !isNaN(Number(token)))
+}
+
+const getColor = (input: string | undefined | null) => {
+  if (typeof input !== 'string') return 'text-on-surface'
+  if (isNumberList(input)) return colorMap['number'] || 'text-on-surface'
+
+  const match = input.match(/^\s*([a-zA-Z0-9_]+)(?:\[\])?(?:\s*[|,].*)?$/)
+  const baseType = match ? match[1] : input.trim()
+
+  return colorMap[`${baseType}`] || 'text-on-surface'
+}
+
 const getMainKey = (header: HeaderKey) => headerMap[header]?.[0]?.key || ''
 const getSlotName = (header: HeaderKey) => `cell-${getMainKey(header)}`
 
 const formatTokens = ({ input, apiType }: { input: string, apiType: ApiType }) => {
   const tokens = input.split(/[,|]/).map(t => t.trim())
+  const isNumber = isNumberList(input)
 
   return tokens.map(token => {
     let baseType = token
     if (token.endsWith('[]')) baseType = token.replace(/\[\]$/, '')
     else baseType = token.replace(/^[[]|[\]]$/g, '').trim()
 
-    if (apiType === ApiTypeCategory.PRIMITIVE) {
+    if (apiType === ApiTypeCategory.PRIMITIVE || isNumber) {
       return {
         display: token,
-        color: getColor(baseType)
+        color: getColor(isNumber ? 'number' : baseType)
       }
     }
 
@@ -158,9 +175,11 @@ const formatTokens = ({ input, apiType }: { input: string, apiType: ApiType }) =
           v-if="item.default !== undefined && item.default !== null && item.default !== ''"
           :class="[
             'font-mono bg-surface-container rounded p-2 w-full flex justify-center items-center',
-            item.apiType === ApiTypeCategory.PRIMITIVE
-              ? getColor(item.values as string)
-              : getColor(item.apiType as string)
+            getColor(
+              item.apiType === ApiTypeCategory.PRIMITIVE
+                ? item.values as string
+                : item.apiType as string
+            )
           ]"
         >
           {{ item.apiType === ApiTypeCategory.CUSTOM_STRING ? `"${item.default}"` : item.default }}

@@ -324,14 +324,9 @@ const calendarAdapterProps: TableItem[] = [
     prop: 'formattedDates',
     required: true,
     description: 'Provides the currently selected, displayed, minimum, and maximum dates in a formatted structure.',
-    values:`ComputedRef<{
-  selected: FormattedDate,
-  display: FormattedDate,
-  min?: FormattedDate,
-  max?: FormattedDate
-}>`,
+    values:'ComputedRef<{\n selected: FormattedDate,\n display: FormattedDate,\n min?: FormattedDate,\n max?: FormattedDate\n}>',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.OBJECT
   },
   {
     key: 'disabledDatesProp',
@@ -340,7 +335,7 @@ const calendarAdapterProps: TableItem[] = [
     description: 'An array of disabled dates represented as timestamps.',
     values: 'ComputedRef<number[]>',
     default: '[]',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.OBJECT
   },
   {
     key: 'onSelectDayProp',
@@ -349,7 +344,7 @@ const calendarAdapterProps: TableItem[] = [
     description: 'Function to handle day selection. Receives the selected day as a parameter and returns the updated timestamp.',
     values: '(day: number) => number',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.FUNCTION
   },
   {
     key: 'onSelectMonthProp',
@@ -358,7 +353,7 @@ const calendarAdapterProps: TableItem[] = [
     description: 'Function to handle month selection. Receives the selected month as a parameter and returns the updated timestamp.',
     values: '(month: number) => number',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.FUNCTION
   },
   {
     key: 'onSelectYearProp',
@@ -367,7 +362,7 @@ const calendarAdapterProps: TableItem[] = [
     description: 'Function to handle year selection. Receives the selected year as a parameter and returns the updated timestamp.',
     values: '(year: number) => number',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.FUNCTION
   },
   {
     key: 'getWeekdaysMethod',
@@ -376,7 +371,7 @@ const calendarAdapterProps: TableItem[] = [
     description: 'Returns an array of localized names for the weekdays based on the current locale.',
     values: '() => string[]',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.FUNCTION
   },
   {
     key: 'getMonthsMethod',
@@ -385,7 +380,7 @@ const calendarAdapterProps: TableItem[] = [
     description: 'Returns an array of localized names for the months based on the current locale.',
     values: '() => string[]',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.FUNCTION
   }
 ]
 
@@ -395,9 +390,9 @@ const adapterResultProps: TableItem[] = [
     prop: 'AdapterResult',
     required: true,
     description: 'The return type result of the Adapter containing the model, parsed model, and adapter methods.',
-    values: '[Ref<EpochTimeStamp>, ComputedRef<string>, CalendarAdapter]',
+    values: '[\n Ref<EpochTimeStamp>,\n ComputedRef<string>,\n CalendarAdapter\n]',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: ApiTypeCategory.OBJECT
   }
 ]
 

@@ -20,7 +20,7 @@ const paginationProps: TableItem[] = [
     description: 'The Pagination color theme.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -29,7 +29,7 @@ const paginationProps: TableItem[] = [
     description: 'The Pagination variant.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -38,7 +38,7 @@ const paginationProps: TableItem[] = [
     description: 'The shape of the Pagination.',
     values: 'soft, rounded, square',
     default: 'soft',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -47,7 +47,7 @@ const paginationProps: TableItem[] = [
     description: 'The Pagination size.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'pagesProp',

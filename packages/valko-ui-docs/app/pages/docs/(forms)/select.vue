@@ -94,7 +94,7 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The v-model for the Select',
     values: 'string, number, Array<string | number>',
-    default: 'false',
+    default: '',
     apiType: ApiTypeCategory.PRIMITIVE
   },
   {
@@ -112,7 +112,7 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The label for the Select',
     values: 'string',
-    default: 'false',
+    default: '',
     apiType: ApiTypeCategory.PRIMITIVE
   },
   {
@@ -121,7 +121,7 @@ const apiData: TableItem[] = [
     required: false,
     description: 'A hint for the Select',
     values: 'string',
-    default: 'false',
+    default: '',
     apiType: ApiTypeCategory.PRIMITIVE
   },
   {

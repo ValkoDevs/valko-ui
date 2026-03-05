@@ -100,13 +100,7 @@ const tooltipSlots: TableItem[] = [
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for the content to trigger the tooltip.',
-    example: `
-      <template #default>
-        <button>
-          Hover over me to show the tooltip
-        </button>
-      </template>
-    `
+    example: '<template #default>\n  <button>\n    Hover over me to show the tooltip\n  </button>\n</template>'
   }
 ]
 
