@@ -1,5 +1,5 @@
 ---
-"@valko-ui/components": patch
+"@valko-ui/components": minor
 "@valko-ui/docs": patch
 ---
 

@@ -278,14 +278,59 @@ const styleSlotsInterface: PropData[] = [
   }
 ]
 
-const emitData: EmitData[] = [
+const optionsInterface: TableItem[] = [
+  {
+    key: 'valueOption',
+    prop: 'value',
+    description: 'The value of the option, which will be used as the modelValue when the option is selected.',
+    values: 'string | number',
+    default: ''
+  },
+  {
+    key: 'labelOption',
+    prop: 'label',
+    description: 'The label displayed for the option.',
+    values: 'string',
+    default: ''
+  }
+]
+
+const slotData: TableItem[] = [
+  {
+    key: 'leftIconSlot',
+    name: 'left-icon',
+    description: 'Slot for placing an icon on the left side of the input field. This slot is typically used to include an icon for visual enhancement or to indicate input type.',
+    example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>'
+  },
+  {
+    key: 'rightIconSlot',
+    name: 'right-icon',
+    description: 'Slot for placing an icon on the right side of the input field. This slot is typically used to include an icon for actions like clear input or show/hide password.',
+    example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>'
+  }
+]
+
+const emitData: TableItem[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the selected value(s) in the Select component change.',
-    values: 'any',
-    type: '(value: any) => void',
-    apiType: 'primitive'
+    values: 'string | number | undefined | Array<string | number>',
+    type: '(value: string | number | undefined | Array<string | number>) => void'
+  },
+  {
+    key: 'leftIconClickEmit',
+    event: 'leftIconClick',
+    description: 'Emitted when the left icon of the input is clicked.',
+    values: '',
+    type: '() => void'
+  },
+  {
+    key: 'rightIconClickEmit',
+    event: 'rightIconClick',
+    description: 'Emitted when the right icon of the input is clicked.',
+    values: '',
+    type: '() => void'
   }
 ]
 
