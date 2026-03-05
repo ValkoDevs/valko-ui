@@ -19,7 +19,8 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Navbar.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -27,7 +28,8 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'The variant of the Navbar.',
     values: 'filled, outlined, ghost, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -35,7 +37,8 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'The shape of the Navbar.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -43,7 +46,8 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'The size of the Navbar.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'elevatedProp',
@@ -51,7 +55,8 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'Adds a subtle shadow to the Navbar (elevation level 1) when not fixed. If the Navbar is also fixed, the elevation is increased to level 2.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'fixedProp',
@@ -59,7 +64,8 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'Fixes the Navbar to the top of the viewport and increases its elevation to level 2, regardless of the "elevated" setting.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'floatingProp',
@@ -67,7 +73,8 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'Determines if the Navbar is floating.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'verticalProp',
@@ -75,7 +82,8 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'Determines if the Navbar is vertical or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelProp',
@@ -83,7 +91,8 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'Accessible label for the navbar to describe its purpose to assistive technologies.',
     values: 'string',
-    default: 'Main navigation'
+    default: 'Main navigation',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
@@ -91,7 +100,8 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'Root container for the Navbar.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

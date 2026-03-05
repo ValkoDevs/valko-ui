@@ -22,7 +22,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Badge.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -30,7 +31,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'The shape of the Badge.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -38,7 +40,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'The size of the Badge.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'placementProp',
@@ -46,7 +49,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'The placement of the Badge.',
     values: 'bottom, top, right, left',
-    default: 'top'
+    default: 'top',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'alignmentProp',
@@ -54,7 +58,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'The alignment of the Badge.',
     values: 'start, center, end',
-    default: 'end'
+    default: 'end',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'contentProp',
@@ -62,7 +67,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'The content displayed inside of the Badge.',
     values: 'number | string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'outlinedProp',
@@ -70,7 +76,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'Displays an outline for the Badge.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'dotProp',
@@ -78,7 +85,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'If true the Badge will have smaller dimensions and not display content inside.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'hiddenProp',
@@ -86,7 +94,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'If true the Badge will be hidden.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelProp',
@@ -94,7 +103,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
@@ -102,7 +112,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'Slots for applying custom styles to the Badge.',
     values: 'BadgeSlots',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -122,7 +133,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Root container for the badge. Controls the overall layout and background.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'badge',
@@ -130,7 +142,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the badge element itself.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

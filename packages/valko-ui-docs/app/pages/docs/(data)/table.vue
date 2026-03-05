@@ -16,7 +16,7 @@ const tableProps: TableItem[] = [
     description: 'An array of objects defining the headers of the table.',
     values: 'TableHeader[]',
     default: '[]',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'dataKey',
@@ -25,7 +25,7 @@ const tableProps: TableItem[] = [
     description: 'An array of objects representing the data rows of the table.',
     values: 'TableItem[]',
     default: '[]',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'stripedKey',
@@ -34,7 +34,7 @@ const tableProps: TableItem[] = [
     description: 'Specifies whether the table rows are striped for better readability.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'selectedItemKey',
@@ -43,7 +43,7 @@ const tableProps: TableItem[] = [
     description: 'Helper prop to determine if a row is being selected using the key of the item pass by, only for styles purposes.',
     values: 'TableItem, TableItem[], undefined',
     default: 'undefined',
-    apiType: apiTypeSchema.primitives.any
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'rowEventsKey',
@@ -52,7 +52,7 @@ const tableProps: TableItem[] = [
     description: 'Allows rows to emit event onRowClick.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
@@ -61,7 +61,7 @@ const tableProps: TableItem[] = [
     description: 'Custom styles for different parts of the Table component.',
     values: 'TableSlots',
     default: '',
-    apiType: apiTypeSchema.object
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -72,7 +72,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Root container for the table component.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'table',
@@ -80,7 +80,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the <table> element.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'thead',
@@ -88,7 +88,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the table header section.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'tr',
@@ -96,7 +96,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for table rows.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'th',
@@ -104,7 +104,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for table header cells.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'body',
@@ -112,7 +112,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the table body section.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'td',
@@ -120,7 +120,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for table data cells.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'noDataMessage',
@@ -128,7 +128,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the no data message row.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'tableFooter',
@@ -136,7 +136,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the table footer section.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -147,7 +147,7 @@ const tableItem: TableItem[] = [
     required: true,
     description: 'The unique identifier for the data row.',
     values: 'string',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'anyProp',
@@ -155,7 +155,7 @@ const tableItem: TableItem[] = [
     required: false,
     description: 'Any other property specific to your data row.',
     values: 'string, number, boolean, null',
-    apiType: apiTypeSchema.primitives.any
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -166,7 +166,7 @@ const tableHeader: TableItem[] = [
     required: true,
     description: 'The unique identifier for the column.',
     values: 'string',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'headerLabel',
@@ -174,7 +174,7 @@ const tableHeader: TableItem[] = [
     required: true,
     description: 'The label to display for the column header.',
     values: 'string',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'headerField',
@@ -182,7 +182,7 @@ const tableHeader: TableItem[] = [
     required: true,
     description: 'The property of TableItem that this column should display.',
     values: 'keyof TableItem',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'headerSort',
@@ -191,7 +191,7 @@ const tableHeader: TableItem[] = [
     description: 'Specifies whether the column is sortable.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'headerFilter',
@@ -200,7 +200,7 @@ const tableHeader: TableItem[] = [
     description: 'Specifies whether the column is filterable.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'headerClass',
@@ -208,7 +208,7 @@ const tableHeader: TableItem[] = [
     required: false,
     description: 'Additional classes for the column.',
     values: 'string',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -219,7 +219,7 @@ const emitData: TableItem[] = [
     type: '(item: TableItem) => void',
     values: '',
     description: 'Emitted when a row is clicked, only if prop rowEvents is true.',
-    apiType: apiTypeSchema.function
+    apiType: ApiTypeCategory.FUNCTION
   }
 ]
 
@@ -229,21 +229,21 @@ const slotData: TableItem[] = [
     name: 'header-cell-${header.key}',
     description: 'Slot that displays by default the header label value.',
     example: '<template #header-cell-propKey>\n  <p>Properties</p>\n</template>',
-    apiType: apiTypeSchema.custom.type
+    apiType: ApiTypeCategory.SLOT
   },
   {
     key: 'cellSlot',
     name: 'cell-${field}',
     description: 'Slot that displays by default the item field value.',
     example: '<template #cell-prop-propKey>\n  <p>Data</p>\n</template>',
-    apiType: apiTypeSchema.custom.type
+    apiType: ApiTypeCategory.SLOT
   },
   {
     key: 'noDataMessageSlot',
     name: 'no-data-message',
     description: 'Slot that display the message when no data is found.',
     example: '<template #no-data-message>\n  <p>No items found.</p>\n</template>',
-    apiType: apiTypeSchema.custom.type
+    apiType: ApiTypeCategory.SLOT
   }
 ]
 

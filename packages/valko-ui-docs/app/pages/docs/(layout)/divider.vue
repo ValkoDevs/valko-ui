@@ -21,7 +21,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Divider.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -29,7 +30,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'The variant of the Divider.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -37,7 +39,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'The shape of the Divider.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -45,7 +48,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'The size of the Divider.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'directionProp',
@@ -53,7 +57,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'The direction of the Divider.',
     values: 'vertical, horizontal',
-    default: 'horizontal'
+    default: 'horizontal',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'ariaLabelProp',
@@ -61,7 +66,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'Defines a string label for the divider element. Used by screen readers when no visible text is provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelledByProp',
@@ -69,7 +75,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'References the ID of another element that labels the divider. Useful for complex labeling.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
@@ -77,7 +84,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'Root container.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -120,7 +128,6 @@ const styles = {
     <template #playground-view>
       <div :class="`w-full h-full flex ${form.direction === 'vertical' ? 'flex-row' : 'flex-col'} justify-center items-center p-4`">
         Artist
-    {
         <vk-divider
           :color="form.color"
           :variant="form.variant"

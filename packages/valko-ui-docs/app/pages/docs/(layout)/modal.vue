@@ -23,7 +23,8 @@ const modalProps: TableItem[] = [
     required: false,
     description: 'The shape of the Modal.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -31,7 +32,8 @@ const modalProps: TableItem[] = [
     required: false,
     description: 'The size of the Modal.',
     values: 'xs, sm, md, lg, full',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'isOpenProp',
@@ -39,7 +41,8 @@ const modalProps: TableItem[] = [
     required: true,
     description: 'Wheter the Modal is open or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'titleProp',
@@ -47,7 +50,8 @@ const modalProps: TableItem[] = [
     required: false,
     description: 'The title of the Modal',
     values: 'string',
-    default: 'Modal'
+    default: 'Modal',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'backdropProp',
@@ -55,7 +59,8 @@ const modalProps: TableItem[] = [
     required: false,
     description: 'The background backdrop displayed behind the Modal',
     values: 'opaque, blur, transparent',
-    default: 'opaque'
+    default: 'opaque',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'closableProp',
@@ -63,7 +68,8 @@ const modalProps: TableItem[] = [
     required: false,
     description: 'Displays a close button on the Modal and allows to close it by clicking outside or pressing esc',
     values: 'boolean',
-    default: 'true'
+    default: 'true',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelledByProp',
@@ -71,7 +77,8 @@ const modalProps: TableItem[] = [
     required: false,
     description: 'Specifies the ID of the element that labels the Modal. Required for accessibility to associate the title with the dialog.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaDescriptionProp',
@@ -79,7 +86,8 @@ const modalProps: TableItem[] = [
     required: false,
     description: 'Provides additional descriptive text for the Modal, improving context for screen readers. The text will be visually hidden but read by assistive technologies.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
@@ -87,7 +95,8 @@ const modalProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Modal.',
     values: 'ModalSlots',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -97,63 +106,72 @@ const styleSlotsInterface: TableItem[] = [
     prop: 'dialog',
     description: 'Root dialog container for the Modal.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'backdrop',
     prop: 'backdrop',
     description: 'Backdrop overlay behind the Modal.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'container',
     prop: 'container',
     description: 'Outer container wrapping the Modal content.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'content',
     prop: 'content',
     description: 'Content wrapper for transitions and layout.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'panel',
     prop: 'panel',
     description: 'Main panel element of the Modal.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'panelChild',
     prop: 'panelChild',
     description: 'Container for the title and close button at the top of the Modal.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'title',
     prop: 'title',
     description: 'Title text element inside the Modal.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'closeButton',
     prop: 'closeButton',
     description: 'Close button element for dismissing the Modal.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'closeIcon',
     prop: 'closeIcon',
     description: 'Icon inside the close button.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -163,7 +181,8 @@ const modalEmits: TableItem[] = [
     event: 'close',
     description: 'Emitted when the modal is closed.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: ApiTypeCategory.EVENT
   }
 ]
 

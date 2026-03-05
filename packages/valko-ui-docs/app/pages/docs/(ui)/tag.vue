@@ -25,7 +25,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Tag.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -33,7 +34,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'The variant style of the Tag.',
     values: 'filled, outlined, ghost, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -41,7 +43,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'The shape style of the Tag.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -49,7 +52,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'The size of the Tag.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'textProp',
@@ -57,7 +61,8 @@ const tagProps: TableItem[] = [
     required: true,
     description: 'The text displayed in the Tag.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'iconLeftProp',
@@ -65,7 +70,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'The icon displayed on the left side of the Tag.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'iconRightProp',
@@ -73,7 +79,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'The icon displayed on the right side of the Tag.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'closableProp',
@@ -81,7 +88,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'Displays a close button on the Tag.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'isPressableProp',
@@ -89,7 +97,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'Whether the Tag should allow to be pressed.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'disabledProp',
@@ -97,7 +106,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'Disables interaction with the Tag.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
@@ -105,7 +115,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Tag.',
     values: 'TagSlots',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -115,42 +126,48 @@ const styleSlotsInterface: TableItem[] = [
     prop: 'container',
     description: 'Root container for the tag component.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'contentContainer',
     prop: 'contentContainer',
     description: 'Wrapper for the tag content and icons.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'icons',
     prop: 'icons',
     description: 'Styles for left and right icons.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'content',
     prop: 'content',
     description: 'Text content of the tag.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'closeButton',
     prop: 'closeButton',
     description: 'Styles for the close button container.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'closeIcon',
     prop: 'closeIcon',
     description: 'Icon for the close button.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -160,14 +177,16 @@ const tagEmits: TableItem[] = [
     event: 'click',
     type: '() => void',
     values: '',
-    description: 'Emitted when the Tag is clicked.'
+    description: 'Emitted when the Tag is clicked.',
+    apiType: ApiTypeCategory.EVENT
   },
   {
     key: 'closeEmit',
     event: 'close',
     type: '() => void',
     values: '',
-    description: 'Emitted when the close button on the Tag is clicked.'
+    description: 'Emitted when the close button on the Tag is clicked.',
+    apiType: ApiTypeCategory.EVENT
   }
 ]
 

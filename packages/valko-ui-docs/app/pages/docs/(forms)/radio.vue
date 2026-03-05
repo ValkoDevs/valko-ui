@@ -37,7 +37,7 @@ const apiData: TableItem[] = [
     description: 'The color theme of the Radio.',
     values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -46,7 +46,7 @@ const apiData: TableItem[] = [
     description: 'The variant of the Radio.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -55,7 +55,7 @@ const apiData: TableItem[] = [
     description: 'The size of the Radio.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'disabledProp',
@@ -64,7 +64,7 @@ const apiData: TableItem[] = [
     description: 'Wheter the Radio is disabled or not.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'readonlyProp',
@@ -73,7 +73,7 @@ const apiData: TableItem[] = [
     description: 'Wheter the Radio is readonly or not.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'helpertextProp',
@@ -82,7 +82,7 @@ const apiData: TableItem[] = [
     description: 'Displays a hint under the Radio.',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'positionProp',
@@ -91,7 +91,7 @@ const apiData: TableItem[] = [
     description: 'Wheter the label is displayed left or right.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'nameProp',
@@ -100,7 +100,7 @@ const apiData: TableItem[] = [
     description: 'The name of the Radio, used when submitting an HTML form.',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'modelValueProp',
@@ -109,7 +109,7 @@ const apiData: TableItem[] = [
     description: 'The value used to identify wich Radio is selected.',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'valueProp',
@@ -118,7 +118,7 @@ const apiData: TableItem[] = [
     description: 'The current selected value. (controlled).',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'labelProp',
@@ -127,7 +127,7 @@ const apiData: TableItem[] = [
     description: 'The label of the Radio.',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'shapeProp',
@@ -136,7 +136,7 @@ const apiData: TableItem[] = [
     description: 'The shape of the Radio.',
     values: 'soft, rounded, square',
     default: 'rounded',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'ariaLabelProp',
@@ -145,7 +145,7 @@ const apiData: TableItem[] = [
     description: 'Defines a string value that labels the radio for screen readers.',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelledByProp',
@@ -154,7 +154,7 @@ const apiData: TableItem[] = [
     description: 'References the ID of the element that labels the radio.',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaDescribedByProp',
@@ -163,7 +163,7 @@ const apiData: TableItem[] = [
     description: 'References the ID of the element that provides a description for the radio.',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProps',
@@ -172,7 +172,7 @@ const apiData: TableItem[] = [
     description: 'Custom styles for different parts of the Radio component.',
     values: 'RadioSlots',
     default: '',
-    apiType: apiTypeSchema.object
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -183,7 +183,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Root container for the radio component.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'radioContainer',
@@ -191,7 +191,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Container for the radio input and label.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'stateLayer',
@@ -199,7 +199,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Layer for visual state effects (focus, hover, etc).',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'radio',
@@ -207,7 +207,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'The visual representation of the radio button.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'icon',
@@ -215,7 +215,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Icon shown when the radio is checked.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'input',
@@ -223,7 +223,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Native radio input element (hidden since we use a custom radio).',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'label',
@@ -231,7 +231,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Label for the radio input.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'helpertext',
@@ -239,7 +239,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Helper text displayed below the radio.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -250,7 +250,7 @@ const emitData: TableItem[] = [
     description: 'Emitted when this radio button is selected.',
     values: 'any',
     type: '(value: any) => void',
-    apiType: apiTypeSchema.function
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

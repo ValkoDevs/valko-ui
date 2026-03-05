@@ -17,7 +17,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'The shape of the Popover.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'isOpenProp',
@@ -25,7 +26,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'The state of the Popover.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'placementProp',
@@ -33,7 +35,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Defines where the Popover should appear relative to the reference element. If set to "auto", the Popover will automatically choose the best placement based on available space.',
     values: 'bottom, top, left, right, auto',
-    default: 'auto'
+    default: 'auto',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'alignmentProp',
@@ -41,7 +44,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Specifies how the Popover is aligned within its placement. If not set, it defaults to the best fit based on available space.',
     values: 'start, center, end',
-    default: 'undefined'
+    default: 'undefined',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'elevatedProp',
@@ -49,7 +53,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Whether the Popover is elevated, this will increase the level of the shadow.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'textProp',
@@ -57,7 +62,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Text displayed instead of the slot popover-content if the slot is not provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'condensedProp',
@@ -65,7 +71,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Whether the Popover is condensed, this will remove the padding for the panel.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'classesProp',
@@ -73,7 +80,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Allows you to apply custom CSS classes to the popover content for further customization (e.g., for styling the background, padding, borders, etc.). Accepts a single string or an array of strings.',
     values: 'string | string[]',
-    default: '[]'
+    default: '[]',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelProp',
@@ -81,7 +89,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Accessible label for the popover panel when no visible heading is provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelledbyProp',
@@ -89,7 +98,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'ID of the element that labels the popover.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaDescribedbyProp',
@@ -97,7 +107,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'ID of the element that describes the popover’s content.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
@@ -105,7 +116,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Popover.',
     values: 'PopoverSlots',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -115,21 +127,24 @@ const styleSlotsInterface: TableItem[] = [
     prop: 'container',
     description: 'Root container for the Popover.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'slotContainer',
     prop: 'slotContainer',
     description: 'Container for the trigger slot (the element that opens the popover).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'panel',
     prop: 'panel',
     description: 'Panel element that displays the popover content.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -139,7 +154,8 @@ const popoverEmits: TableItem[] = [
     event: 'close',
     description: 'Emitted when a click is detected outside the popover.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: ApiTypeCategory.EVENT
   }
 ]
 

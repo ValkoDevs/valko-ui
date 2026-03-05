@@ -28,7 +28,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'The Dropdown color theme.',
     values: 'primary, secondary, negative, warning, accent, positive',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -36,7 +37,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'The Dropdown variant.',
     values: 'filled, outlined, ghost, gradient, link',
-    default: 'filled'
+    default: 'filled',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -44,7 +46,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'The Dropdown shape.',
     values: 'rounded, soft, square',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -52,7 +55,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'The Dropdown size.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'isOpenProp',
@@ -60,7 +64,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'Controls the open state of the Dropdown, if not provided it will be managed internally.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'elevatedProp',
@@ -68,7 +73,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'Wheter the Dropdown is elevated or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'placementProp',
@@ -76,7 +82,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'Defines where the Dropdown should appear relative to the reference element. If set to "auto", the Dropdown will automatically choose the best placement based on available space.',
     values: 'bottom, top, left, right, auto',
-    default: 'auto'
+    default: 'auto',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'alignmentProp',
@@ -84,7 +91,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'Specifies how the Dropdown is aligned within its placement. If not set, it defaults to the best fit based on available space.',
     values: 'start, center, end',
-    default: 'undefined'
+    default: 'undefined',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'disabledProp',
@@ -92,7 +100,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'Wheter the Dropdown is disabled or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'labelProp',
@@ -100,7 +109,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'The default slot button label.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'iconProp',
@@ -108,7 +118,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'The default slot button icon.',
     values: 'string',
-    default: 'chevron-down'
+    default: 'chevron-down',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'itemsProp',
@@ -116,7 +127,8 @@ const dropdownProps: TableItem[] = [
     required: true,
     description: 'The Dropdown items displayed on the menu.',
     values: 'item[]',
-    default: '[]'
+    default: '[]',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'styleSlotsProp',
@@ -124,7 +136,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Dropdown.',
     values: 'DropdownStyleSlots',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -135,7 +148,8 @@ const itemInterface: TableItem[] = [
     required: true,
     description: 'The key of the Item',
     values: 'string | number',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'titleInterfaceProp',
@@ -143,7 +157,8 @@ const itemInterface: TableItem[] = [
     required: true,
     description: 'The title for the Item',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'iconInterfaceProp',
@@ -151,7 +166,8 @@ const itemInterface: TableItem[] = [
     required: false,
     description: 'The name of the icon to display on the left side of the title',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'disabledInterfaceProp',
@@ -159,7 +175,8 @@ const itemInterface: TableItem[] = [
     required: false,
     description: 'Wheter the Item is disabled or not',
     values: 'boolean',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'onClickInterfaceProp',
@@ -167,7 +184,8 @@ const itemInterface: TableItem[] = [
     required: false,
     description: 'Emit for the Item',
     values: '() => void',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.FUNCTION
   }
 ]
 
@@ -177,49 +195,56 @@ const styleSlotsInterface = [
     prop: 'container',
     description: 'Root element of the Dropdown (vk-popover).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'triggerButton',
     prop: 'triggerButton',
     description: 'Styles for the default trigger button.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'icon',
     prop: 'icon',
     description: 'Styles for the default icon on the trigger.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'panel',
     prop: 'panel',
     description: 'The panel element of the popover containing the dropdown items.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'itemsMenu',
     prop: 'itemsMenu',
     description: 'Main container for the Dropdown items.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'itemsButton',
     prop: 'itemsButton',
     description: 'Styles for the Dropdown items buttons.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'itemsIcon',
     prop: 'itemsIcon',
     description: 'Styles for the Dropdown items icons.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -229,14 +254,16 @@ const dropdownEmits: TableItem[] = [
     event: 'itemClick',
     description: 'Emitted when an item in the dropdown menu is clicked.',
     values: 'Item',
-    type: '(item: Item) => void'
+    type: '(item: Item) => void',
+    apiType: ApiTypeCategory.EVENT
   },
   {
     key: 'clickEmit',
     event: 'click',
     description: 'Emitted when the dropdown trigger is clicked.',
     values: 'MouseEvent',
-    type: '(event: MouseEvent) => void'
+    type: '(event: MouseEvent) => void',
+    apiType: ApiTypeCategory.EVENT
   }
 ]
 

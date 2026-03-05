@@ -21,7 +21,8 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Progressbar.',
     values: 'primary, secondary, positive, accent, warning, negative',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -29,7 +30,8 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'The variant of the Progressbar.',
     values: 'filled, outlined, ghost, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -37,7 +39,8 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'The shape of the Progressbar.',
     values: 'line, rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -45,7 +48,8 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'The size of the Progressbar.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'progressProp',
@@ -53,7 +57,8 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'The value of the Progressbar.',
     values: 'number',
-    default: '0'
+    default: '0',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'bufferProp',
@@ -61,7 +66,8 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'The buffer value of the Progressbar.',
     values: 'number',
-    default: '0'
+    default: '0',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'indeterminateProp',
@@ -69,7 +75,8 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'Wheter the Progressbar is indeterminate or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'stripedProp',
@@ -77,7 +84,8 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'Wheter the Progressbar is striped or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
@@ -85,7 +93,8 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Progressbar.',
     values: 'progressbarSlots',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -95,42 +104,48 @@ const styleSlotsInterface: TableItem[] = [
     prop: 'container',
     description: 'Root container for the Progressbar.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'background',
     prop: 'background',
     description: 'Background bar element.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'buffer',
     prop: 'buffer',
     description: 'Buffer bar element (shows buffered progress).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'content',
     prop: 'content',
     description: 'Content area for slot content inside the bar.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'progress',
     prop: 'progress',
     description: 'Progress bar element (shows current progress).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'stripes',
     prop: 'stripes',
     description: 'Stripes overlay for striped progress bars.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

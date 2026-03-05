@@ -33,7 +33,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Notification.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -41,7 +42,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'The variant of the Notification.',
     values: 'filled, outlined, ghost, line, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -49,7 +51,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'The shape of the Notification.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -57,7 +60,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'The size of the Notification.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'styleSlotsProp',
@@ -65,7 +69,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Notification.',
     values: 'object',
-    default: '{}'
+    default: '{}',
+    apiType: ApiTypeCategory.OBJECT
   },
   {
     key: 'textProp',
@@ -73,7 +78,8 @@ const notificationProps: TableItem[] = [
     required: true,
     description: 'Message to be displayed in the Notification.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'durationProp',
@@ -81,7 +87,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'Duration for which the Notification should be displayed. -1 for permanent Notification.',
     values: 'number',
-    default: '3000'
+    default: '3000',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'destinationProp',
@@ -89,7 +96,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'URL to which the browser should be navigated on click of the Notification.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'newWindowProp',
@@ -97,7 +105,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'Decides whether the destination should be opened in a new window or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'closeProp',
@@ -105,7 +114,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'To show the close icon or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'gravityProp',
@@ -113,7 +123,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'To show the Notification from top or bottom.',
     values: 'top, bottom',
-    default: 'top'
+    default: 'top',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'positionProp',
@@ -121,7 +132,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'To show the Notification on left or right.',
     values: 'left, right',
-    default: 'right'
+    default: 'right',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'stopOnFocusProp',
@@ -129,7 +141,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'To stop timer when hovered over the Notification (Only if duration is set).',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'offsetProp',
@@ -137,7 +150,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'Ability to add some offset to axis.',
     values: '{y: number, x: number}',
-    default: 'undefined'
+    default: 'undefined',
+    apiType: ApiTypeCategory.OBJECT
   },
   {
     key: 'onClickProp',
@@ -145,7 +159,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'Invoked when the Notification is clicked.',
     values: '() => void',
-    default: 'null'
+    default: 'null',
+    apiType: ApiTypeCategory.FUNCTION
   }
 ]
 
@@ -155,28 +170,32 @@ const styleSlotsInterface = [
     prop: 'root',
     description: 'Root element of the Notification.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'icon',
     prop: 'icon',
     description: 'Icon section of the Notification.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'text',
     prop: 'text',
     description: 'Text/message section.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'close',
     prop: 'close',
     description: 'Close button element.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

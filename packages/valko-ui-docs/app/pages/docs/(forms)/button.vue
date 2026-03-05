@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { ButtonProps, TableItem, SelectOption } from '@valko-ui/components'
-import { apiTypeSchema } from '../../../utils/apiTypeSchema'
 
 const form = ref<ButtonProps>({
   color: 'primary',
@@ -29,7 +28,7 @@ const apiData: TableItem[] = [
     description: 'The color theme of the Button.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary',
-    apiType: apiTypeSchema.custom.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variant',
@@ -38,7 +37,7 @@ const apiData: TableItem[] = [
     description: 'The variant of the Button.',
     values: 'filled, outlined, ghost, link, gradient',
     default: 'filled',
-    apiType: apiTypeSchema.custom.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shape',
@@ -47,7 +46,7 @@ const apiData: TableItem[] = [
     description: 'The shape of the Button.',
     values: 'rounded, square, soft',
     default: 'soft',
-    apiType: apiTypeSchema.custom.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'size',
@@ -56,7 +55,7 @@ const apiData: TableItem[] = [
     description: 'The size of the Button.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: apiTypeSchema.custom.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'disabled',
@@ -65,7 +64,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Button is disabled or not.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'type',
@@ -74,7 +73,7 @@ const apiData: TableItem[] = [
     description: 'The type of the button.',
     values: 'button, submit, reset',
     default: 'button',
-    apiType: apiTypeSchema.custom.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'elevated',
@@ -83,7 +82,7 @@ const apiData: TableItem[] = [
     description: 'Adds a subtle shadow to the button, giving it a slightly raised appearance. When false (default), the button appears flat with no shadow.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'block',
@@ -92,7 +91,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Button width is equal to it\'s container.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'loading',
@@ -101,7 +100,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Button is loading or not.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelProp',
@@ -110,7 +109,7 @@ const apiData: TableItem[] = [
     description: 'Defines a string label for the button when no visible text is present. Useful for icon-only buttons or when additional context is needed for assistive technologies.',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
@@ -119,7 +118,7 @@ const apiData: TableItem[] = [
     description: 'Slots for applying custom styles to the Button.',
     values: 'ButtonSlots',
     default: '',
-    apiType: apiTypeSchema.custom.type
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -131,7 +130,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the button element itself, this is the main container aswell.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.primitive
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'spinnerContainer',
@@ -140,7 +139,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the div containing the spinner.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.primitive
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'spinner',
@@ -149,7 +148,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the spinner itself.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.primitive
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'spinnerIcon',
@@ -158,7 +157,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the spinner icon.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.primitive
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'stateLayer',
@@ -167,7 +166,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the state layer element (e.g., hover, focus, active states).',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.primitive
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -178,7 +177,7 @@ const emitData: TableItem[] = [
     description: 'Emitted when the button is clicked.',
     values: 'MouseEvent',
     type: '(event: MouseEvent) => void',
-    apiType: apiTypeSchema.event
+    apiType: ApiTypeCategory.EVENT
   }
 ]
 

@@ -20,7 +20,8 @@ const spinnerProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Spinner.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'nameProp',
@@ -28,7 +29,8 @@ const spinnerProps: TableItem[] = [
     required: false,
     description: 'The icon of the Spinner.',
     values: 'string',
-    default: 'loader-2'
+    default: 'loader-2',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'sizeProp',
@@ -36,7 +38,8 @@ const spinnerProps: TableItem[] = [
     required: false,
     description: 'The size of the Spinner.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'condensedProp',
@@ -44,7 +47,8 @@ const spinnerProps: TableItem[] = [
     required: false,
     description: 'Reduces the Spinner\'s size.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'classesProp',
@@ -52,7 +56,8 @@ const spinnerProps: TableItem[] = [
     required: false,
     description: 'Overrides the spinner\'s default colors, allowing you to fully customize its appearance.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
@@ -60,7 +65,8 @@ const spinnerProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Spinner.',
     values: 'SpinnerSlots',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -70,14 +76,16 @@ const styleSlotsInterface = [
     prop: 'container',
     description: 'Root container of the Spinner.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'icon',
     prop: 'icon',
     description: 'Icon element of the Spinner.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

@@ -44,7 +44,7 @@ const tabsProps: TableItem[] = [
     description: 'The color theme of the Tabs.',
     values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'variantProp',
@@ -53,7 +53,7 @@ const tabsProps: TableItem[] = [
     description: 'The type of the Tabs',
     values: 'filled, outlined, ghost, gradient',
     default: 'filled',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'shapeProp',
@@ -62,7 +62,7 @@ const tabsProps: TableItem[] = [
     description: 'The Tabs shape.',
     values: 'line, rounded, soft, square',
     default: 'soft',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'sizeProp',
@@ -71,7 +71,7 @@ const tabsProps: TableItem[] = [
     description: 'The Tabs size.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'modelValueProp',
@@ -80,7 +80,7 @@ const tabsProps: TableItem[] = [
     description: 'Represents the controlled value for the selected tab index. If provided, the component becomes a controlled component and uses this value to manage the selected tab externally. A numeric value indicating the active tab index is expected. If not provided, the component will manage the selected tab index internally.',
     values: 'number',
     default: 'undefined',
-    apiType: apiTypeSchema.primitives.number
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'growProp',
@@ -89,7 +89,7 @@ const tabsProps: TableItem[] = [
     description: 'Allow the Tabs to grow to fill any available space',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'tabsProp',
@@ -98,7 +98,7 @@ const tabsProps: TableItem[] = [
     description: 'The list of tabs',
     values: 'Tab[]',
     default: '[]',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'verticalProp',
@@ -107,7 +107,7 @@ const tabsProps: TableItem[] = [
     description: 'Wheter the Tabs displays vertically or not',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'defaultIndexProp',
@@ -116,7 +116,7 @@ const tabsProps: TableItem[] = [
     description: 'The default selected tab',
     values: 'number',
     default: '0',
-    apiType: apiTypeSchema.primitives.number
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelProp',
@@ -125,7 +125,7 @@ const tabsProps: TableItem[] = [
     description: 'Accessible label for the tab list. Used by assistive technologies when no visible heading is present.',
     values: 'string',
     default: 'Tab navigation',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProps',
@@ -134,7 +134,7 @@ const tabsProps: TableItem[] = [
     description: 'Custom styles for different parts of the Tabs component.',
     values: 'TabsSlots',
     default: '',
-    apiType: apiTypeSchema.object
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -145,7 +145,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Root container for the tabs component.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'group',
@@ -153,7 +153,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Tab group wrapper element.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'list',
@@ -161,7 +161,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Tab list navigation container.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'tabSlot',
@@ -169,7 +169,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for each individual tab button.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'cursor',
@@ -177,7 +177,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Cursor indicator for the active tab.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'cursorGradient',
@@ -185,7 +185,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Gradient effect for the cursor indicator (if variant is gradient).',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'leftIcon',
@@ -193,7 +193,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the left icon in a tab.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'rightIcon',
@@ -201,7 +201,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the right icon in a tab.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'content',
@@ -209,7 +209,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Container for tab panels and their content.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -221,7 +221,7 @@ const tabInterface: TableItem[] = [
     description: 'The key of the Tab who grants the name for the content panel',
     values: 'string | number',
     default: '',
-    apiType: apiTypeSchema.primitives.any
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'titleInterfaceProp',
@@ -230,7 +230,7 @@ const tabInterface: TableItem[] = [
     description: 'The title for the Tab',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'leftIconInterfaceProp',
@@ -239,7 +239,7 @@ const tabInterface: TableItem[] = [
     description: 'The name of the icon to display on the left side of the title',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'rightIconInterfaceProp',
@@ -248,7 +248,7 @@ const tabInterface: TableItem[] = [
     description: 'The name of the icon to display on the right side of the title',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'disabledInterfaceProp',
@@ -257,7 +257,7 @@ const tabInterface: TableItem[] = [
     description: 'Wheter the Tab is disabled or not',
     values: 'boolean',
     default: '',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -267,14 +267,14 @@ const tabsSlots: TableItem[] = [
     name: '[key: Tab["key"]]-tab',
     description: 'Slot for customizing the tab button itself. Use this slot to replace the default tab rendering (title and icons) with your own custom tab content. The slot name should match the tab key followed by "-tab".',
     example: '<template #photos-tab><!-- Custom tab button for "Photos" --></template>',
-    apiType: apiTypeSchema.custom.type
+    apiType: ApiTypeCategory.SLOT
   },
   {
     key: 'tabKeyContentSlot',
     name: '[key: Tab["key"]]-content',
     description: 'Slot for the content panel associated with a specific tab. The slot name should match the tab key followed by "-content".',
     example: '<template #photos-content><!-- Content for "Photos" tab --></template>',
-    apiType: apiTypeSchema.custom.type
+    apiType: ApiTypeCategory.SLOT
   }
 ]
 
@@ -285,7 +285,7 @@ const tabsEmits: TableItem[] = [
     description: 'Emitted when a tab is clicked. This event notifies the parent component about the tab change.',
     values: 'number',
     type: '(index: number) => void',
-    apiType: apiTypeSchema.function
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'updateModelValueEmit',
@@ -293,7 +293,7 @@ const tabsEmits: TableItem[] = [
     description: 'Emitted when the selected tab index changes. This event allows the parent to control the selected tab index.',
     values: 'number',
     type: '(value: number) => void',
-    apiType: apiTypeSchema.function
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

@@ -32,7 +32,8 @@ const timeProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Time.',
     values: 'primary, secondary, negative, warning, accent, positive',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -40,7 +41,8 @@ const timeProps: TableItem[] = [
     required: false,
     description: 'The variant of the Time.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -48,7 +50,8 @@ const timeProps: TableItem[] = [
     required: false,
     description: 'The shape of the Time.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -56,7 +59,8 @@ const timeProps: TableItem[] = [
     required: false,
     description: 'The size of the Time.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'formatProp',
@@ -64,7 +68,8 @@ const timeProps: TableItem[] = [
     required: false,
     description: 'The format of the time to be displayed.',
     values: 'string',
-    default: 'HH:mm:ss'
+    default: 'HH:mm:ss',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'okButtonLabelProp',
@@ -72,7 +77,8 @@ const timeProps: TableItem[] = [
     required: false,
     description: 'The label of the default OK button on the time selector.',
     values: 'string',
-    default: 'OK'
+    default: 'OK',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'minuteStepProp',
@@ -80,7 +86,8 @@ const timeProps: TableItem[] = [
     required: false,
     description: 'The steps for the minutes.',
     values: '1 | 5 | 10 | 15 | 20 | 30',
-    default: '1'
+    default: '1',
+    apiType: ApiTypeCategory.CUSTOM_NUMBER
   },
   {
     key: 'localeProp',
@@ -88,7 +95,8 @@ const timeProps: TableItem[] = [
     required: false,
     description: 'Defines the language and regional format to use in the time picker, affecting the display of time formats.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'minTimeProp',
@@ -96,7 +104,8 @@ const timeProps: TableItem[] = [
     required: false,
     description: 'The minimum selectable time.',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'maxTimeProp',
@@ -104,7 +113,8 @@ const timeProps: TableItem[] = [
     required: false,
     description: 'The maximum selectable time.',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'disabledTimesProp',
@@ -112,7 +122,8 @@ const timeProps: TableItem[] = [
     required: false,
     description: 'An array of specific times to disable.',
     values: 'number[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'modelValueProp',
@@ -120,7 +131,8 @@ const timeProps: TableItem[] = [
     required: false,
     description: 'The currently selected time as a Unix timestamp.',
     values: 'EpochTimeStamp',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'adapterProp',
@@ -128,7 +140,8 @@ const timeProps: TableItem[] = [
     required: true,
     description: 'A composable that provides methods and computed properties for managing time selection and formatting. We provide a useTimeAdapter for the component.',
     values: 'TimeAdapterInterface',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'styleSlotsProp',
@@ -136,7 +149,8 @@ const timeProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Time.',
     values: 'TimeSlots',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -146,56 +160,64 @@ const styleSlotsInterface: TableItem[] = [
     prop: 'container',
     description: 'Root container for the time picker.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'grid',
     prop: 'grid',
     description: 'Grid container for time unit selectors.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'unitContainer',
     prop: 'unitContainer',
     description: 'Container for each time unit (hours, minutes, seconds) selector.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'unitButton',
     prop: 'unitButton',
     description: 'Button for selecting a time unit value.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'footer',
     prop: 'footer',
     description: 'Footer container for OK button and AM/PM selector.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'okButton',
     prop: 'okButton',
     description: 'OK button to confirm time selection.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'periodContainer',
     prop: 'periodContainer',
     description: 'Container for AM/PM selector buttons.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'periodButton',
     prop: 'periodButton',
     description: 'Button for selecting AM or PM.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -206,7 +228,8 @@ const timeAdapterInterface: TableItem[] = [
     required: true,
     description: 'The selected and displayed time as formatted objects.',
     values: 'ComputedRef<{ selected: FormattedTime, display: FormattedTime }>',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'setDisplayUnitProp',
@@ -214,7 +237,8 @@ const timeAdapterInterface: TableItem[] = [
     required: true,
     description: 'Sets a specific time unit (hours, minutes, seconds) for display.',
     values: '(unit: "h" | "m" | "s", value: number) => void',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.FUNCTION
   },
   {
     key: 'onSelectAMPMProp',
@@ -222,7 +246,8 @@ const timeAdapterInterface: TableItem[] = [
     required: true,
     description: 'Handles AM/PM selection.',
     values: '(period: "AM" | "PM") => void',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.FUNCTION
   },
   {
     key: 'onSelectTimeProp',
@@ -230,7 +255,8 @@ const timeAdapterInterface: TableItem[] = [
     required: true,
     description: 'Sets the selected time and confirms selection.',
     values: '() => void',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.FUNCTION
   },
   {
     key: 'isTimeDisabledProp',
@@ -238,7 +264,8 @@ const timeAdapterInterface: TableItem[] = [
     required: true,
     description: 'Checks if a time (hours and optional minutes) is disabled based on `minTime`, `maxTime`, or `disabledTimes`.',
     values: '(hours: number, minutes?: number) => boolean | undefined',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.FUNCTION
   },
   {
     key: 'periodProp',
@@ -246,7 +273,8 @@ const timeAdapterInterface: TableItem[] = [
     required: true,
     description: 'Current time period, either AM or PM.',
     values: 'Ref<"AM" | "PM">',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -257,7 +285,8 @@ const timeAdapterResult: TableItem[] = [
     required: true,
     description: 'The return type result of the Time Adapter containing the model, parsed model, and an object with the methods, properties required.',
     values: '[Ref<EpochTimeStamp>, ComputedRef<string>, TimeAdapterInterface]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -268,7 +297,8 @@ const formattedTimeProps: TableItem[] = [
     required: true,
     description: 'Hour part of the formatted time.',
     values: 'number',
-    default: '0'
+    default: '0',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'minutesProp',
@@ -276,7 +306,8 @@ const formattedTimeProps: TableItem[] = [
     required: true,
     description: 'Minute part of the formatted time.',
     values: 'number',
-    default: '0'
+    default: '0',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'secondsProp',
@@ -284,7 +315,8 @@ const formattedTimeProps: TableItem[] = [
     required: true,
     description: 'Second part of the formatted time.',
     values: 'number',
-    default: '0'
+    default: '0',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'objProp',
@@ -292,7 +324,8 @@ const formattedTimeProps: TableItem[] = [
     required: true,
     description: 'Date object representing the formatted time.',
     values: 'Date',
-    default: 'new Date()'
+    default: 'new Date()',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -303,7 +336,8 @@ const timeAdapterProps: TableItem[] = [
     required: false,
     description: 'The format of the selected time, following hour-minute-second format.',
     values: 'string',
-    default: 'HH:mm:ss'
+    default: 'HH:mm:ss',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'localeProp',
@@ -311,7 +345,8 @@ const timeAdapterProps: TableItem[] = [
     required: false,
     description: 'Defines the language and regional format to use in the time display.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'minTimeProp',
@@ -319,7 +354,8 @@ const timeAdapterProps: TableItem[] = [
     required: false,
     description: 'The minimum selectable time represented as a timestamp or Date object.',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'maxTimeProp',
@@ -327,7 +363,8 @@ const timeAdapterProps: TableItem[] = [
     required: false,
     description: 'The maximum selectable time represented as a timestamp or Date object.',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'disabledTimesProp',
@@ -335,7 +372,8 @@ const timeAdapterProps: TableItem[] = [
     required: false,
     description: 'An array of specific times to disable, represented as timestamps or Date objects.',
     values: 'number[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

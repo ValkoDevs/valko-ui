@@ -41,7 +41,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Breadcrumbs.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -49,7 +50,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'The variant of the Breadcrumbs.',
     values: 'filled, outlined, ghost, link',
-    default: 'filled'
+    default: 'filled',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -57,7 +59,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'The shape of the Breadcrumbs.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -65,7 +68,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'The size of the Breadcrumbs.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -73,7 +77,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'The shape of the Breadcrumbs.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -81,7 +86,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'The size of the Breadcrumbs.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'crumbsProp',
@@ -89,7 +95,8 @@ const breadcrumbsProps: TableItem[] = [
     required: true,
     description: 'The list of Crumbs.',
     values: 'Crumb[]',
-    default: '[]'
+    default: '[]',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'separatorProp',
@@ -97,7 +104,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'The separator for the Breadcrumbs. Up to 2 character or an icon if passed the name.',
     values: 'string',
-    default: '>'
+    default: '>',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelProp',
@@ -105,7 +113,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'Accessible label for the breadcrumb navigation.',
     values: 'string',
-    default: 'Breadcrumb'
+    default: 'Breadcrumb',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProps',
@@ -113,7 +122,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Breadcrumbs component.',
     values: 'BreadcrumbsSlots',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -124,7 +134,8 @@ const crumbInterface: TableItem[] = [
     required: true,
     description: 'The key of the Crumb',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'titleCrumb',
@@ -132,7 +143,8 @@ const crumbInterface: TableItem[] = [
     required: true,
     description: 'The title for the Crumb',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'leftIconCrumb',
@@ -140,7 +152,8 @@ const crumbInterface: TableItem[] = [
     required: false,
     description: 'The name of the icon to display on the left side of the title',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'rightIconCrumb',
@@ -148,7 +161,8 @@ const crumbInterface: TableItem[] = [
     required: false,
     description: 'The name of the icon to display on the right side of the title',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'disabledCrumb',
@@ -156,7 +170,8 @@ const crumbInterface: TableItem[] = [
     required: false,
     description: 'Wheter the Crumb is disabled or not',
     values: 'boolean',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'activeCrumb',
@@ -164,7 +179,8 @@ const crumbInterface: TableItem[] = [
     required: false,
     description: 'Wheter the Crumb is active or not',
     values: 'boolean',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'onClickCrumb',
@@ -172,7 +188,8 @@ const crumbInterface: TableItem[] = [
     required: true,
     description: 'The function for the Crumb',
     values: '() => void',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.FUNCTION
   }
 ]
 
@@ -183,7 +200,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Root container for the breadcrumbs. Controls the overall layout and background.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'link',
@@ -191,7 +209,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The crumb itself, which is typically a clickable link. (this includes the icons/title on the crumb.)',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'list',
@@ -199,7 +218,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Container for the list items of crumbs.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'listItem',
@@ -207,7 +227,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The container of the crumb.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'separator',
@@ -215,7 +236,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The separator between crumbs.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'iconLeft',
@@ -223,7 +245,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The class for the left icon.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'iconRight',
@@ -231,7 +254,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The class for the right icon.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -241,7 +265,8 @@ const breadcrumbsEmits: TableItem[] = [
     event: 'crumbClick',
     description: 'Emitted when a breadcrumb is clicked.',
     values: 'Crumb',
-    type: 'Crumb => void'
+    type: 'Crumb => void',
+    apiType: ApiTypeCategory.EVENT
   }
 ]
 

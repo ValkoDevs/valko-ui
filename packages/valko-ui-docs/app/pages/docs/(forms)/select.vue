@@ -32,7 +32,7 @@ const apiData: TableItem[] = [
     description: 'The color theme of the Select.',
     values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -41,7 +41,7 @@ const apiData: TableItem[] = [
     description: 'The variant of the Select.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -50,7 +50,7 @@ const apiData: TableItem[] = [
     description: 'The size of the Select.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'disabledProp',
@@ -59,7 +59,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Select is disabled or not.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'roundedProp',
@@ -68,7 +68,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Select is rounded or not.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'multipleProp',
@@ -77,16 +77,16 @@ const apiData: TableItem[] = [
     description: 'Wheter the Select is enabled to choose multiple options',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'optionsProp',
     prop: 'options',
     required: false,
     description: 'An array of options for the Select',
-    values: 'array',
-    default: 'false',
-    apiType: apiTypeSchema.arrays.default
+    values: 'SelectOption[]',
+    default: '[]',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'modelValueProp',
@@ -95,7 +95,7 @@ const apiData: TableItem[] = [
     description: 'The v-model for the Select',
     values: 'string, number, Array<string | number>',
     default: 'false',
-    apiType: apiTypeSchema.primitives.any
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'readonlyProp',
@@ -104,7 +104,7 @@ const apiData: TableItem[] = [
     description: 'Wheter the Select is readonly or not',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'labelProp',
@@ -113,7 +113,7 @@ const apiData: TableItem[] = [
     description: 'The label for the Select',
     values: 'string',
     default: 'false',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'helpertextProp',
@@ -122,7 +122,7 @@ const apiData: TableItem[] = [
     description: 'A hint for the Select',
     values: 'string',
     default: 'false',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'iconLeftProp',
@@ -131,7 +131,7 @@ const apiData: TableItem[] = [
     description: 'A icon on the left side for the Select',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'iconRightProp',
@@ -140,7 +140,7 @@ const apiData: TableItem[] = [
     description: 'A icon on the right side for the Select',
     values: 'string',
     default: 'chevron-down',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'shapeProp',
@@ -149,7 +149,7 @@ const apiData: TableItem[] = [
     description: 'The shape of the Button.',
     values: 'rounded, square, soft',
     default: 'soft',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'clearableProp',
@@ -158,7 +158,7 @@ const apiData: TableItem[] = [
     description: 'Allows to leave the selection empty and displays an icon that clears the selection when clicked.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelProp',
@@ -167,7 +167,7 @@ const apiData: TableItem[] = [
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelledByProp',
@@ -176,7 +176,7 @@ const apiData: TableItem[] = [
     description: 'ID reference to an element that labels the select (e.g. a visible <label>).',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaDescribedByProp',
@@ -185,7 +185,7 @@ const apiData: TableItem[] = [
     description: 'ID reference to an element that further describes the select, such as helper or error text.',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaRequiredProp',
@@ -194,7 +194,7 @@ const apiData: TableItem[] = [
     description: 'Marks the select as required for form submission.',
     values: 'boolean',
     default: '',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaInvalidProp',
@@ -203,7 +203,7 @@ const apiData: TableItem[] = [
     description: 'Indicates that the current value entered into the select is invalid.',
     values: 'boolean',
     default: '',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProps',
@@ -212,7 +212,7 @@ const apiData: TableItem[] = [
     description: 'Custom styles for different parts of the Select component.',
     values: 'SelectSlots',
     default: '',
-    apiType: apiTypeSchema.object
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -223,7 +223,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Root container for the select component.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'field',
@@ -231,7 +231,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Wrapper for the input and dropdown.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'select',
@@ -239,7 +239,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Hidden native select element.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'dropdown',
@@ -247,7 +247,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Dropdown menu container for options.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'item',
@@ -255,7 +255,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for each option item in the dropdown.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'icon',
@@ -263,7 +263,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Icon for dropdown toggle (chevron).',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.default
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -274,7 +274,7 @@ const emitData: TableItem[] = [
     description: 'Emitted when the selected value(s) in the Select component change.',
     values: 'any',
     type: '(value: any) => void',
-    apiType: apiTypeSchema.function
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

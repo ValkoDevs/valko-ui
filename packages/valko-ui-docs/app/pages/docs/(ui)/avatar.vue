@@ -23,7 +23,8 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Avatar.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -31,7 +32,8 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'The variant of the Avatar.',
     values: 'filled, outlined, ghost, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -39,7 +41,8 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'The shape of the Avatar.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -47,7 +50,8 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'The size of the Avatar.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'srcProp',
@@ -55,7 +59,8 @@ const avatarProps: TableItem[] = [
     required: true,
     description: 'The src of the image for the Avatar.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'nameProp',
@@ -63,7 +68,8 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'The name of the user for the Avatar..',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'elevatedProp',
@@ -71,7 +77,8 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'Applies a shadow to visually elevate the Avatar.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelProp',
@@ -79,7 +86,8 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProps',
@@ -87,7 +95,8 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Avatar component.',
     values: 'AvatarSlots',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -98,7 +107,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Root container for the avatar. Controls the overall layout and background.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'imageTag',
@@ -106,7 +116,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the avatar image element.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

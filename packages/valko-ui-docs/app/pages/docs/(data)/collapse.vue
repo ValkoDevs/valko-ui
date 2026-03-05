@@ -18,7 +18,7 @@ const collapseProps: TableItem[] = [
     description: 'The variant of the Collapse.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: apiTypeSchema.custom.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -27,7 +27,7 @@ const collapseProps: TableItem[] = [
     description: 'The shape of the Collapse.',
     values: 'soft, rounded, square',
     default: 'soft',
-    apiType: apiTypeSchema.custom.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -36,7 +36,7 @@ const collapseProps: TableItem[] = [
     description: 'The size of the Collapse.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: apiTypeSchema.custom.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'separatorProp',
@@ -45,7 +45,7 @@ const collapseProps: TableItem[] = [
     description: 'The separator of the Collapse.',
     values: 'line, split, none',
     default: 'line',
-    apiType: apiTypeSchema.custom.string
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'compactProp',
@@ -54,7 +54,7 @@ const collapseProps: TableItem[] = [
     description: 'Whether all Collapse items should be smaller.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'multipleProp',
@@ -63,7 +63,7 @@ const collapseProps: TableItem[] = [
     description: 'Allow multiple items to be expanded at the same time.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProps',
@@ -72,7 +72,7 @@ const collapseProps: TableItem[] = [
     description: 'Root container.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.primitive
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -107,7 +107,7 @@ const collapseItemProps: TableItem[] = [
     description: 'Title of the collapse item (this is replaced by the title slot).',
     values: 'string',
     default: '',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlots',
@@ -115,7 +115,7 @@ const collapseItemProps: TableItem[] = [
     description: 'Custom styles for different parts of the Collapse Item.',
     values: 'CollapseItemSlots',
     default: '',
-    apiType: apiTypeSchema.custom.type
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -127,7 +127,7 @@ const collapseItemStyleSlotsInterface: TableItem[] = [
     description: 'Root container of the Collapse Item.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.primitive
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'button',
@@ -136,7 +136,7 @@ const collapseItemStyleSlotsInterface: TableItem[] = [
     description: 'Button element in the Collapse Item header (title & icon).',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.primitive
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'icon',
@@ -145,7 +145,7 @@ const collapseItemStyleSlotsInterface: TableItem[] = [
     description: 'Icon element in the Collapse Item header (this is replaced when the title slot is used).',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.primitive
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'panel',
@@ -154,7 +154,7 @@ const collapseItemStyleSlotsInterface: TableItem[] = [
     description: 'Panel container that holds the content of the Collapse Item.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.primitive
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

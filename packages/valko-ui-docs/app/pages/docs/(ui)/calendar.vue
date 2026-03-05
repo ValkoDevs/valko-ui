@@ -116,7 +116,8 @@ const calendarProp: TableItem[] = [
     required: false,
     description: 'The color theme of the Calendar.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -124,7 +125,8 @@ const calendarProp: TableItem[] = [
     required: false,
     description: 'The variant of the Calendar.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -132,7 +134,8 @@ const calendarProp: TableItem[] = [
     required: false,
     description: 'The shape of the Calendar.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -140,7 +143,8 @@ const calendarProp: TableItem[] = [
     required: false,
     description: 'The size of the Calendar.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'adapterProp',
@@ -148,7 +152,8 @@ const calendarProp: TableItem[] = [
     required: true,
     description: 'As default we provide an adapter composable that uses native JS Date to provide the dates for the calendar.',
     values: 'CalendarAdapter',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'modelValueProp',
@@ -156,7 +161,8 @@ const calendarProp: TableItem[] = [
     required: true,
     description: 'The currently selected date, represented as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'localeProp',
@@ -164,7 +170,8 @@ const calendarProp: TableItem[] = [
     required: false,
     description: 'Defines the language and regional format to use in the calendar, affecting the display of weekdays, month names, etc.',
     values: 'string',
-    default: 'en-US'
+    default: 'en-US',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'formatProp',
@@ -172,7 +179,8 @@ const calendarProp: TableItem[] = [
     required: false,
     description: 'The format of the selected date, following day-month-year, etc.',
     values: 'string',
-    default: 'YYYY-MM-DD'
+    default: 'YYYY-MM-DD',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'disabledDatesProp',
@@ -180,7 +188,8 @@ const calendarProp: TableItem[] = [
     required: false,
     description: 'An array of specific dates to disable.',
     values: 'EpochTimeStamp[]',
-    default: '[]'
+    default: '[]',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'disableWeekendsProp',
@@ -188,7 +197,8 @@ const calendarProp: TableItem[] = [
     required: false,
     description: 'Allows to disable all weekends (sunday, saturday).',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'minDateProp',
@@ -196,7 +206,8 @@ const calendarProp: TableItem[] = [
     required: false,
     description: 'The minimum selectable date as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: '[]'
+    default: '[]',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'maxDateProp',
@@ -204,15 +215,17 @@ const calendarProp: TableItem[] = [
     required: false,
     description: 'The maximum selectable date as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: '[]'
+    default: '[]',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
     prop: 'styleSlots',
     required: false,
     description: 'Customizes style slots for Calendar.',
-    values: 'object',
-    default: '{}'
+    values: 'CalendarSlots',
+    default: '{}',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -223,7 +236,8 @@ const calendarAdapterProps: TableItem[] = [
     required: true,
     description: 'Provides the currently selected, displayed, minimum, and maximum dates in a formatted structure.',
     values: 'ComputedRef<{ selected: FormattedDate, display: FormattedDate, min?: FormattedDate, max?: FormattedDate }>',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'disabledDatesProp',
@@ -231,7 +245,8 @@ const calendarAdapterProps: TableItem[] = [
     required: true,
     description: 'An array of disabled dates represented as timestamps.',
     values: 'ComputedRef<number[]>',
-    default: '[]'
+    default: '[]',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'onSelectDayProp',
@@ -239,7 +254,8 @@ const calendarAdapterProps: TableItem[] = [
     required: true,
     description: 'Function to handle day selection. Receives the selected day as a parameter and returns the updated timestamp.',
     values: '(day: number) => number',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'onSelectMonthProp',
@@ -247,7 +263,8 @@ const calendarAdapterProps: TableItem[] = [
     required: true,
     description: 'Function to handle month selection. Receives the selected month as a parameter and returns the updated timestamp.',
     values: '(month: number) => number',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'onSelectYearProp',
@@ -255,7 +272,8 @@ const calendarAdapterProps: TableItem[] = [
     required: true,
     description: 'Function to handle year selection. Receives the selected year as a parameter and returns the updated timestamp.',
     values: '(year: number) => number',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'getWeekdaysMethod',
@@ -263,7 +281,8 @@ const calendarAdapterProps: TableItem[] = [
     required: true,
     description: 'Returns an array of localized names for the weekdays based on the current locale.',
     values: '() => string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'getMonthsMethod',
@@ -271,7 +290,8 @@ const calendarAdapterProps: TableItem[] = [
     required: true,
     description: 'Returns an array of localized names for the months based on the current locale.',
     values: '() => string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -282,7 +302,8 @@ const adapterResultProps: TableItem[] = [
     required: true,
     description: 'The return type result of the Adapter containing the model, parsed model, and adapter methods.',
     values: '[Ref<EpochTimeStamp>, ComputedRef<string>, CalendarAdapter]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -293,7 +314,8 @@ const formattedDatesProps: TableItem[] = [
     required: true,
     description: 'The currently selected date, formatted as a `FormattedDate` object.',
     values: 'FormattedDate',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'displayProp',
@@ -301,7 +323,8 @@ const formattedDatesProps: TableItem[] = [
     required: true,
     description: 'The date that is currently being displayed on the calendar, formatted as a `FormattedDate` object.',
     values: 'FormattedDate',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'minProp',
@@ -309,7 +332,8 @@ const formattedDatesProps: TableItem[] = [
     required: false,
     description: 'The minimum date allowed for selection, formatted as a `FormattedDate` object.',
     values: 'FormattedDate',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'maxProp',
@@ -317,7 +341,8 @@ const formattedDatesProps: TableItem[] = [
     required: false,
     description: 'The maximum date allowed for selection, formatted as a `FormattedDate` object.',
     values: 'FormattedDate',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -328,7 +353,8 @@ const formattedDateProps: TableItem[] = [
     required: true,
     description: 'The day of the month (1-31 depending on the month).',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'monthProp',
@@ -336,7 +362,8 @@ const formattedDateProps: TableItem[] = [
     required: true,
     description: 'The month of the year. (0-based index, 0 = January).',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'yearProp',
@@ -344,7 +371,8 @@ const formattedDateProps: TableItem[] = [
     required: true,
     description: 'The year in full (e.g., 2024).',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'lastDayOfMonthProp',
@@ -352,7 +380,8 @@ const formattedDateProps: TableItem[] = [
     required: true,
     description: 'The last day of the month (28-31 depending on the month).',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'firstWeekDayProp',
@@ -360,7 +389,8 @@ const formattedDateProps: TableItem[] = [
     required: true,
     description: 'The day of the week the month starts on (0-based index, 0 = Sunday, 6 = Saturday).',
     values: 'DayOfWeek',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'objProp',
@@ -368,7 +398,8 @@ const formattedDateProps: TableItem[] = [
     required: true,
     description: 'The raw JavaScript Date object.',
     values: 'T (defaults to any).',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -379,7 +410,8 @@ const dayOfWeekProp: TableItem[] = [
     required: true,
     description: 'Represents the day of the week as a number. 0 for Sunday, 1 for Monday, and so on until 6 for Saturday.',
     values: '0 | 1 | 2 | 3 | 4 | 5 | 6',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_NUMBER
   }
 ]
 
@@ -389,14 +421,16 @@ const calendarEmits: TableItem[] = [
     event: 'update:modelValue',
     description: 'Emitted when a date is selected or changed, usually to update the model with the selected date.',
     values: 'string | Date',
-    type: '(value: string | Date) => void'
+    type: '(value: string | Date) => void',
+    apiType: ApiTypeCategory.EVENT
   },
   {
     key: 'finalizeSelectionEmit',
     event: 'finalizeSelection',
     description: 'Emitted when the final selection of a date is confirmed, completing the date selection process.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: ApiTypeCategory.EVENT
   }
 ]
 
@@ -406,63 +440,72 @@ const styleSlotsInterface = [
     prop: 'container',
     description: 'Root container (does not manage the layout).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'viewContainer',
     prop: 'viewContainer',
     description: 'Main container for all views (month, week, day) this manages the layout.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'panel',
     prop: 'panel',
     description: 'Panel section of the Calendar (grid of days/months/years).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'gridButton',
     prop: 'gridButton',
     description: 'The buttons on the grid panel (shared across all views).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'hiddenGridButton',
     prop: 'hiddenGridButton',
     description: 'The hidden buttons on the grid panel (only present on day view).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'weekdaySpan',
     prop: 'weekdaySpan',
     description: 'Span containing the weekdays (only present on day view).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'headerContainer',
     prop: 'headerContainer',
     description: 'Main container for the header (contains the month/year navigation and title).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'arrows',
     prop: 'arrows',
     description: 'Class shared for both navigation arrows.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'periodButton',
     prop: 'periodButton',
     description: 'The main button that shows the current period (month/year).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

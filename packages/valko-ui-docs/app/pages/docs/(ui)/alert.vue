@@ -21,7 +21,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Alert.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -29,7 +30,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'The variant of the Alert.',
     values: 'filled, outlined, ghost, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -37,7 +39,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'The shape of the Alert.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -45,7 +48,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'The size of the Alert.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'elevatedProp',
@@ -53,7 +57,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'Adds a subtle shadow to the Alert, giving it a slightly raised appearance. When false (default), the alert appears flat with no shadow.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'closableProp',
@@ -61,7 +66,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'Displays a button to close the Alert.',
     values: 'boolean',
-    default: false
+    default: false,
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'titleProp',
@@ -69,7 +75,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'The title of the Alert.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'iconProp',
@@ -77,7 +84,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'The icon of the Alert.',
     values: 'string | null',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelProp',
@@ -85,7 +93,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelledByProp',
@@ -93,7 +102,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'ID reference to an element that labels the input (e.g. a visible <label>).',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProps',
@@ -101,7 +111,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Alert component.',
     values: 'AlertSlots',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -111,7 +122,8 @@ const alertEmits: TableItem[] = [
     event: 'close',
     type: '() => void',
     values: '',
-    description: 'Emitted when the alert is closed by the user.'
+    description: 'Emitted when the alert is closed by the user.',
+    apiType: ApiTypeCategory.EVENT
   }
 ]
 
@@ -131,7 +143,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Root container for the alert. Controls the overall layout and background.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'mainIcon',
@@ -139,7 +152,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the main icon.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'title',
@@ -147,7 +161,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the alert title text.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'contentContainer',
@@ -155,7 +170,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Container for the title and content.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'content',
@@ -163,7 +179,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Container for the main content area (slot).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'closeButton',
@@ -171,7 +188,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the close button itself.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'closeIcon',
@@ -179,7 +197,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the close icon itself.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

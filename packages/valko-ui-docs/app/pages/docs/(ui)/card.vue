@@ -31,7 +31,8 @@ const cardProps: TableItem[] = [
     required: false,
     description: 'The variant of the Card.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -39,7 +40,8 @@ const cardProps: TableItem[] = [
     required: false,
     description: 'The shape of the Card.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -47,7 +49,8 @@ const cardProps: TableItem[] = [
     required: false,
     description: 'The size of the Card.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'layoutProp',
@@ -55,7 +58,8 @@ const cardProps: TableItem[] = [
     required: false,
     description: 'The layout of the elements inside the Card.',
     values: 'vertical, horizontal, cover',
-    default: 'vertical'
+    default: 'vertical',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'isPressableProp',
@@ -63,7 +67,8 @@ const cardProps: TableItem[] = [
     required: false,
     description: 'Wether the Card allows to be clicked.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'elevatedProp',
@@ -71,7 +76,8 @@ const cardProps: TableItem[] = [
     required: false,
     description: 'Applies a shadow and lowers the background tone to emphasize interactive content inside the Card. Useful when the Card contains inputs or other elevated elements.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
@@ -79,7 +85,8 @@ const cardProps: TableItem[] = [
     required: false,
     description: 'Root container.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -90,7 +97,8 @@ const cardImageProps: TableItem[] = [
     required: true,
     description: 'The src for the image.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'altImageProp',
@@ -98,7 +106,8 @@ const cardImageProps: TableItem[] = [
     required: false,
     description: 'The alt for the image.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'widthImageProp',
@@ -106,7 +115,8 @@ const cardImageProps: TableItem[] = [
     required: false,
     description: 'The widht for the image.',
     values: 'string',
-    default: '100%'
+    default: '100%',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'heightImageProp',
@@ -114,7 +124,8 @@ const cardImageProps: TableItem[] = [
     required: false,
     description: 'The height for the image.',
     values: 'string',
-    default: 'auto'
+    default: 'auto',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
@@ -122,7 +133,8 @@ const cardImageProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for CardImage.',
     values: 'CardImageSlots',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -133,7 +145,8 @@ const cardImageStyleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Root container.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'imageTag',
@@ -141,7 +154,8 @@ const cardImageStyleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Class shared with image slot and the image element itself.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'gradient',
@@ -149,7 +163,8 @@ const cardImageStyleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the gradient.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -160,7 +175,8 @@ const cardHeaderProps: TableItem[] = [
     required: false,
     description: 'Root container.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -171,7 +187,8 @@ const cardBodyProps: TableItem[] = [
     required: false,
     description: 'Root container.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -182,7 +199,8 @@ const cardFooterProps: TableItem[] = [
     required: false,
     description: 'Root container.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -192,7 +210,8 @@ const cardEmits: TableItem[] = [
     event: 'click',
     type: '(event: MouseEvent) => void',
     values: 'MouseEvent',
-    description: 'Emitted when the Card is clicked by the user.'
+    description: 'Emitted when the Card is clicked by the user.',
+    apiType: ApiTypeCategory.EVENT
   }
 ]
 

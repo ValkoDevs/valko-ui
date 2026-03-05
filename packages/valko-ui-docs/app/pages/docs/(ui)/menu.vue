@@ -22,7 +22,8 @@ const menuProps: TableItem[] = [
     required: false,
     description: 'The color theme of the Menu.',
     values: 'primary, secondary, negative, warning, accent, positive',
-    default: 'primary'
+    default: 'primary',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'variantProp',
@@ -30,7 +31,8 @@ const menuProps: TableItem[] = [
     required: false,
     description: 'The variant of the Menu.',
     values: 'filled, outlined, ghost, link, line, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'shapeProp',
@@ -38,7 +40,8 @@ const menuProps: TableItem[] = [
     required: false,
     description: 'The shape of the Menu buttons.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'sizeProp',
@@ -46,7 +49,8 @@ const menuProps: TableItem[] = [
     required: false,
     description: 'The size of the Menu.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: ApiTypeCategory.CUSTOM_STRING
   },
   {
     key: 'floatingProp',
@@ -54,7 +58,8 @@ const menuProps: TableItem[] = [
     required: false,
     description: 'Changes the padding of the Menu.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'activeProp',
@@ -62,7 +67,8 @@ const menuProps: TableItem[] = [
     required: true,
     description: 'The active element of the Menu.',
     values: 'null, string, number',
-    default: 'null'
+    default: 'null',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'itemsProp',
@@ -70,7 +76,8 @@ const menuProps: TableItem[] = [
     required: true,
     description: 'The Menu items.',
     values: 'MenuItem[]',
-    default: '[]'
+    default: '[]',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   },
   {
     key: 'styleSlotsProp',
@@ -78,7 +85,8 @@ const menuProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Menu.',
     values: 'MenuStyleSlots',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -88,28 +96,32 @@ const styleSlotsInterface: TableItem[] = [
     prop: 'group',
     description: 'Styles for the group label (if grouping is used).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'menu',
     prop: 'menu',
     description: 'Styles for the menu container (the <ul> element).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'item',
     prop: 'item',
     description: 'Styles for each menu item container (<li> element).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'content',
     prop: 'content',
     description: 'Styles for the menu item content/button.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -120,7 +132,8 @@ const menuItemsInterface: TableItem[] = [
     required: true,
     description: 'The key of the Item.',
     values: 'string | number',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'textInterfaceMenu',
@@ -128,7 +141,8 @@ const menuItemsInterface: TableItem[] = [
     required: true,
     description: 'The displayed name of the Item.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'groupInterfaceMenu',
@@ -136,7 +150,8 @@ const menuItemsInterface: TableItem[] = [
     required: false,
     description: 'The displayed name of the wrapper for the Items.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'iconInterfaceMenu',
@@ -144,7 +159,8 @@ const menuItemsInterface: TableItem[] = [
     required: false,
     description: 'The icon name for the Menu item.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'disabledInterfaceMenu',
@@ -152,7 +168,8 @@ const menuItemsInterface: TableItem[] = [
     required: false,
     description: 'Wheter the Item is disabled or not.',
     values: 'boolean',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'activeInterfaceMenu',
@@ -160,7 +177,8 @@ const menuItemsInterface: TableItem[] = [
     required: false,
     description: 'Wheter the Item is active or not.',
     values: 'boolean',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'onClickInterfaceMenu',
@@ -168,7 +186,8 @@ const menuItemsInterface: TableItem[] = [
     required: false,
     description: 'Emit for the Item.',
     values: '() => void',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.FUNCTION
   }
 ]
 
@@ -178,7 +197,8 @@ const menuEmits: TableItem[] = [
     event: 'itemClick',
     description: 'Emitted when an item in the Menu is clicked.',
     values: 'Item',
-    type: '(item: MenuItem) => void'
+    type: '(item: MenuItem) => void',
+    apiType: ApiTypeCategory.FUNCTION
   }
 ]
 

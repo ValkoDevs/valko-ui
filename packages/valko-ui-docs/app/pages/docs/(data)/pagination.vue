@@ -20,7 +20,7 @@ const paginationProps: TableItem[] = [
     description: 'The Pagination color theme.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary',
-    apiType: apiTypeSchema.custom.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'variantProp',
@@ -29,7 +29,7 @@ const paginationProps: TableItem[] = [
     description: 'The Pagination variant.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: apiTypeSchema.custom.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'shapeProp',
@@ -38,7 +38,7 @@ const paginationProps: TableItem[] = [
     description: 'The shape of the Pagination.',
     values: 'soft, rounded, square',
     default: 'soft',
-    apiType: apiTypeSchema.custom.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'sizeProp',
@@ -47,7 +47,7 @@ const paginationProps: TableItem[] = [
     description: 'The Pagination size.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: apiTypeSchema.custom.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'pagesProp',
@@ -56,7 +56,7 @@ const paginationProps: TableItem[] = [
     description: 'The total number of pages.',
     values: 'number',
     default: '1',
-    apiType: apiTypeSchema.primitives.number
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'modelValueProp',
@@ -65,7 +65,7 @@ const paginationProps: TableItem[] = [
     description: 'The current page.',
     values: 'number',
     default: '1',
-    apiType: apiTypeSchema.primitives.number
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'elevatedProp',
@@ -74,7 +74,7 @@ const paginationProps: TableItem[] = [
     description: 'Wheter the Pagination is elevated or not.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'disabledProp',
@@ -83,7 +83,7 @@ const paginationProps: TableItem[] = [
     description: 'Wheter the Pagination is disabled or not.',
     values: 'boolean',
     default: 'false',
-    apiType: apiTypeSchema.primitives.boolean
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelProp',
@@ -92,7 +92,7 @@ const paginationProps: TableItem[] = [
     description: 'Accessible label for the pagination.',
     values: 'string',
     default: 'Pagination',
-    apiType: apiTypeSchema.primitives.string
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProps',
@@ -101,7 +101,7 @@ const paginationProps: TableItem[] = [
     description: 'Custom styles for different parts of the Pagination component.',
     values: 'PaginationSlots',
     default: '',
-    apiType: apiTypeSchema.custom.type
+    apiType: ApiTypeCategory.CUSTOM_TYPE
   }
 ]
 
@@ -112,7 +112,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the navigation container (<nav> element).',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.primitive
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'button',
@@ -120,7 +120,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for each page button.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.primitive
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'arrows',
@@ -128,7 +128,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the previous/next arrow icons.',
     values: 'string[]',
     default: '',
-    apiType: apiTypeSchema.arrays.primitive
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -139,7 +139,7 @@ const paginationEmits: TableItem[] = [
     description: 'Emitted when the current page is changed.',
     values: 'number | string',
     type: '(page: number | string) => void',
-    apiType: apiTypeSchema.function
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 

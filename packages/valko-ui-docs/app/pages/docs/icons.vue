@@ -12,14 +12,16 @@ const iconProps: TableItem[] = [
     required: true,
     description: 'The name of the icon to display. It must match a valid Tabler Icons name.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'ariaLabelProp',
     prop: 'ariaLabel',
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
-    values: 'string'
+    values: 'string',
+    apiType: ApiTypeCategory.PRIMITIVE
   },
   {
     key: 'styleSlotsProp',
@@ -27,7 +29,8 @@ const iconProps: TableItem[] = [
     required: false,
     description: 'Root container.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: ApiTypeCategory.PRIMITIVE
   }
 ]
 
@@ -93,10 +96,11 @@ const generateSnippet = snippetGeneratorFactory('vk-icon')
     </template>
 
     <template #api>
-      <h3>Icons Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="iconProps"
+      <api-table
+        name="Icon"
+        :tables="[
+          { title: 'Props', headers: 'props', data: iconProps }
+        ]"
       />
     </template>
   </doc-section>
