@@ -263,8 +263,8 @@ const optionsInterface: TableItem[] = [
   {
     key: 'valueOption',
     prop: 'value',
-    description: 'The value of the option. By default, this is a string or number, but you can use any type by providing a generic type parameter to SelectOption<T>.',
-    values: 'string | number | T',
+    description: 'The value of the option, which will be used as the modelValue when the option is selected.',
+    values: 'string | number',
     default: ''
   },
   {
@@ -296,8 +296,8 @@ const emitData: TableItem[] = [
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the selected value(s) in the Select component change.',
-    values: 'string | number | Array<string | number>',
-    type: '(value: string | number | Array<string | number>) => void'
+    values: 'string | number | undefined | Array<string | number>',
+    type: '(value: string | number | undefined | Array<string | number>) => void'
   },
   {
     key: 'leftIconClickEmit',
