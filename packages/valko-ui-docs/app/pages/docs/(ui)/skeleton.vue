@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { TableItem, SkeletonProps } from '#valkoui'
 
-const isShown = ref(true)
-
 const form = ref<SkeletonProps>({
   width: 200,
   height: 200,
@@ -56,7 +54,6 @@ const generateSnippet = snippetGeneratorFactory('vk-skeleton')
   >
     <template #playground-view>
       <vk-skeleton
-        v-if="isShown"
         :width="form.width"
         :height="form.height"
         :shape="form.shape"
