@@ -6,11 +6,7 @@
 
 ### Routing
 
-- Added route aliases for all documentation pages, enabling flat URLs (e.g., `/docs/divider` instead of `/docs/layout/divider`).
-
-### Middleware
-
-- Introduced the `flattenUrl` middleware to automatically redirect nested documentation routes to their flat equivalents.
+- Updated documentation routing to use Nuxt4's group folder syntax (parentheses), enabling flat URLs (e.g., `/docs/divider` instead of `/docs/layout/divider`).
 
 ### Menu Navigation
 
