@@ -74,6 +74,7 @@ const onClick = () => {
         :name="name"
         :disabled="disabled"
         :class="s.input({ class: styleSlots?.input })"
+        @click.prevent=""
       >
       <label
         :for="inputId"
