@@ -79,7 +79,11 @@ watch(
 
     scrollToActiveMenuItem(desktopRef.value)
     if (isOpen) setTimeout(() => scrollToActiveMenuItem(mobileRef.value), 300)
-  }, { immediate: true }
+  },
+  {
+    immediate: true,
+    flush: 'post'
+  }
 )
 
 onMounted(() => scrollToActiveMenuItem(desktopRef.value))
