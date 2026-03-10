@@ -25,7 +25,7 @@ const helpertextId = useId()
 const describedBy = computed(() => {
   const ids = []
   if (props.helpertext) ids.push(helpertextId)
-  if (props['aria-describedby']) ids.push(props['aria-describedby'])
+  if (props.ariaDescribedBy) ids.push(props.ariaDescribedBy)
   return ids.length > 0 ? ids.join(' ') : undefined
 })
 
@@ -42,8 +42,8 @@ const onClick = () => {
       :tabindex="disabled ? -1 : 0"
       :aria-checked="modelValue === value"
       :aria-disabled="disabled"
-      :aria-label="props['aria-label']"
-      :aria-labelledby="props['aria-labelledby']"
+      :aria-label="ariaLabel"
+      :aria-labelledby="ariaLabelledBy"
       :aria-describedby="describedBy"
       @click="onClick"
       @keydown.enter.prevent="onClick"

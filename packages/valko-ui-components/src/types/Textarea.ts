@@ -1,7 +1,7 @@
 import type { DefaultComponent, AriaAttributes } from './common'
 import type { TextareaSlots } from '../styles/Textarea.styles'
 
-export interface TextareaProps extends DefaultComponent, Omit<AriaAttributes, 'aria-description'>{
+export interface TextareaProps extends DefaultComponent, Omit<AriaAttributes, 'ariaDescription'>{
   disabled?: boolean;
   loading?: boolean;
   readonly?: boolean;

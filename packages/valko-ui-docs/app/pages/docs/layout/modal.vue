@@ -67,7 +67,7 @@ const modalProps: TableItem[] = [
   },
   {
     key: 'ariaLabelledByProp',
-    prop: 'aria-labelledby',
+    prop: 'ariaLabelledBy',
     required: false,
     description: 'Specifies the ID of the element that labels the Modal. Required for accessibility to associate the title with the dialog.',
     values: 'string',
@@ -75,7 +75,7 @@ const modalProps: TableItem[] = [
   },
   {
     key: 'ariaDescriptionProp',
-    prop: 'aria-description',
+    prop: 'ariaDescription',
     required: false,
     description: 'Provides additional descriptive text for the Modal, improving context for screen readers. The text will be visually hidden but read by assistive technologies.',
     values: 'string',

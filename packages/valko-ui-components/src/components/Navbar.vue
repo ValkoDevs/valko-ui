@@ -23,7 +23,7 @@ const s = computed(() => styles({ ...props, class: props.styleSlots }))
   <nav
     :class="s"
     role="navigation"
-    :aria-label="props['aria-label'] ?? 'Main navigation'"
+    :aria-label="ariaLabel ?? 'Main navigation'"
   >
     <slot />
   </nav>

@@ -104,7 +104,7 @@ const apiData: TableItem[] = [
   },
   {
     key: 'ariaLabelProp',
-    prop: 'aria-label',
+    prop: 'ariaLabel',
     required: false,
     description: 'Defines a string value that labels the switch element.',
     values: 'string',
@@ -112,7 +112,7 @@ const apiData: TableItem[] = [
   },
   {
     key: 'ariaLabelledByProp',
-    prop: 'aria-labelledby',
+    prop: 'ariaLabelledBy',
     required: false,
     description: 'ID reference to a label element that labels the switch.',
     values: 'string',
@@ -120,7 +120,7 @@ const apiData: TableItem[] = [
   },
   {
     key: 'ariaDescribedByProp',
-    prop: 'aria-describedby',
+    prop: 'ariaDescribedBy',
     required: false,
     description: 'ID reference to an element that describes the switch (e.g., helper text).',
     values: 'string',

@@ -11,7 +11,7 @@ export interface Crumb {
   onClick?: () => void;
 }
 
-export interface BreadcrumbsProps extends Shapes, Sizes, ColorsWithSurface, Pick<AriaAttributes, 'aria-label'> {
+export interface BreadcrumbsProps extends Shapes, Sizes, ColorsWithSurface, Pick<AriaAttributes, 'ariaLabel'> {
   variant?: VariantWithLink;
   crumbs: Crumb[];
   separator?: string;

@@ -101,7 +101,7 @@ const breadcrumbsProps: TableItem[] = [
   },
   {
     key: 'ariaLabelProp',
-    prop: 'aria-label',
+    prop: 'ariaLabel',
     required: false,
     description: 'Accessible label for the breadcrumb navigation.',
     values: 'string',

@@ -13,7 +13,7 @@ export interface TabKeymap {
   [key: string]: string
 }
 
-export interface TabsProps extends Sizes, VariantsAlt, Colors, Pick<AriaAttributes, 'aria-label'> {
+export interface TabsProps extends Sizes, VariantsAlt, Colors, Pick<AriaAttributes, 'ariaLabel'> {
   tabs: Tab[];
   modelValue?: number;
   shape?: ShapeWithLine;

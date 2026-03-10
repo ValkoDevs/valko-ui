@@ -131,7 +131,7 @@ const apiData: TableItem[] = [
   },
   {
     key: 'ariaLabelProp',
-    prop: 'aria-label',
+    prop: 'ariaLabel',
     required: false,
     description: 'Defines a string value that labels the checkbox for screen readers.',
     values: 'string',
@@ -139,7 +139,7 @@ const apiData: TableItem[] = [
   },
   {
     key: 'ariaLabelledByProp',
-    prop: 'aria-labelledby',
+    prop: 'ariaLabelledBy',
     required: false,
     description: 'References the ID of the element that labels the checkbox.',
     values: 'string',
@@ -147,7 +147,7 @@ const apiData: TableItem[] = [
   },
   {
     key: 'ariaDescribedByProp',
-    prop: 'aria-describedby',
+    prop: 'ariaDescribedBy',
     required: false,
     description: 'References the ID of the element that provides a description for the checkbox.',
     values: 'string',

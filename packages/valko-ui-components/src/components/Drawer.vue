@@ -89,8 +89,8 @@ const transitionClasses = computed(() => {
       :class="s.dialog({ class: styleSlots?.dialog })"
       :initial-focus="containerRef"
       :aria-modal="true"
-      :aria-describedby="props['aria-description'] ? descriptionId : undefined"
-      :aria-labelledby="props['aria-labelledby']"
+      :aria-describedby="ariaDescription ? descriptionId : undefined"
+      :aria-labelledby="ariaLabelledBy"
       @close="closeDrawer"
     >
       <transition-child
@@ -135,16 +135,16 @@ const transitionClasses = computed(() => {
               >
                 <dialog-title
                   :class="s.title({ class: styleSlots?.title })"
-                  :id="props['aria-labelledby']"
+                  :id="ariaLabelledBy"
                 >
                   {{ title }}
                 </dialog-title>
                 <div
-                  v-if="props['aria-description']"
+                  v-if="ariaDescription"
                   class="sr-only"
                   :id="descriptionId"
                 >
-                  {{ props['aria-description'] }}
+                  {{ ariaDescription }}
                 </div>
                 <vk-button
                   v-if="closable"

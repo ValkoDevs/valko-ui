@@ -77,7 +77,7 @@ const popoverProps: TableItem[] = [
   },
   {
     key: 'ariaLabelProp',
-    prop: 'aria-label',
+    prop: 'ariaLabel',
     required: false,
     description: 'Accessible label for the popover panel when no visible heading is provided.',
     values: 'string',
@@ -85,7 +85,7 @@ const popoverProps: TableItem[] = [
   },
   {
     key: 'ariaLabelledbyProp',
-    prop: 'aria-labelledby',
+    prop: 'ariaLabelledBy',
     required: false,
     description: 'ID of the element that labels the popover.',
     values: 'string',
@@ -93,7 +93,7 @@ const popoverProps: TableItem[] = [
   },
   {
     key: 'ariaDescribedbyProp',
-    prop: 'aria-describedby',
+    prop: 'ariaDescribedBy',
     required: false,
     description: 'ID of the element that describes the popover’s content.',
     values: 'string',

@@ -41,10 +41,10 @@ export interface Placements { placement?: Placement; }
 export interface PlacementsWithAuto { placement?: PlacementWithAuto; }
 export interface DefaultComponent extends Shapes, Variants, Colors, Sizes { }
 export interface AriaAttributes {
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  'aria-describedby'?: string;
-  'aria-description'?: string;
-  'aria-required'?: boolean;
-  'aria-invalid'?: boolean;
+  ariaLabel?: string;
+  ariaLabelledBy?: string;
+  ariaDescribedBy?: string;
+  ariaDescription?: string;
+  ariaRequired?: boolean;
+  ariaInvalid?: boolean;
 }

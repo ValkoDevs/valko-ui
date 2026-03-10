@@ -145,7 +145,7 @@ const rangeProps: TableItem[] = [
   },
   {
     key: 'ariaDescribedByProp',
-    prop: 'aria-describedby',
+    prop: 'ariaDescribedBy',
     required: false,
     description: 'ID reference to an element that further describes the range, such as helper or error text.',
     values: 'string',

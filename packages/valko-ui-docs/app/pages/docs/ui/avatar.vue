@@ -75,7 +75,7 @@ const avatarProps: TableItem[] = [
   },
   {
     key: 'ariaLabelProp',
-    prop: 'aria-label',
+    prop: 'ariaLabel',
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',

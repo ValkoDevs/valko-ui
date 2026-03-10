@@ -21,7 +21,7 @@ const s = computed(() => styles({ ...props, class: props.styleSlots }))
     :class="s"
     role="separator"
     :aria-orientation="direction"
-    :aria-label="props['aria-label']"
-    :aria-labelledby="props['aria-labelledby']"
+    :aria-label="ariaLabel"
+    :aria-labelledby="ariaLabelledBy"
   >
 </template>
