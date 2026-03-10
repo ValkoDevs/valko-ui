@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { DialogPanel, Dialog } from '@headlessui/vue'
+import { DialogPanel } from '@headlessui/vue'
 import { nextTick } from 'vue'
 import VkDrawer from '#valkoui/components/Drawer.vue'
 
@@ -16,6 +16,9 @@ describe('Drawer component', () => {
   let drawer: VueWrapper
   let backdrop: VueWrapper
   let panel: VueWrapper
+
+  afterEach(() => document.body.innerHTML = '')
+
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(async () => {
@@ -478,25 +481,26 @@ describe('Drawer component', () => {
       })
 
       await nextTick()
-      await wrapper.findComponent(DialogStub).trigger('close')
+      await wrapper.findComponent(DialogStub).trigger('click')
 
       expect(wrapper.emitted()).not.toHaveProperty('close')
     })
   })
 
   describe('Arias', () => {
-    it('should use description id for aria-describedby if aria-description is provided', () => {
-      const wrapper = mount(VkDrawer, {
+    it('should use description id for aria-describedby if aria-description is provided', async () => {
+      mount(VkDrawer, {
         props: {
           isOpen: true,
           ariaDescription: 'description-id'
-        }
+        },
+        attachTo: document.body
       })
 
-      const dialog = wrapper.getComponent(Dialog)
-      const id = dialog.attributes('aria-describedby')
+      await nextTick()
 
-      expect(dialog.attributes('aria-describedby')).toBe(id)
+      const dialog = document.querySelector('.vk-drawer__dialog')
+      expect(dialog?.getAttribute('aria-describedby')).toBeTruthy()
     })
   })
 

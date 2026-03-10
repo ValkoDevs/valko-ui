@@ -39,7 +39,7 @@ const { useDateAdapter } = vi.hoisted(() => ({
       onSelectMonth: vi.fn(() => 1727751600000),
       onSelectYear: vi.fn(() => 1704078000000),
       getWeekdays: () => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      getMonths: () => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      getMonths: () => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     }
   ] as AdapterResult))
 }))
@@ -78,7 +78,7 @@ describe('CalendarMonthView Component', () => {
 
     it('should render month buttons', () => {
       const monthButtons = wrapper.findAll('.vk-calendar__grid-button')
-      expect(monthButtons.length).toBe(11)
+      expect(monthButtons.length).toBe(12)
     })
 
     describe('disabled months', () => {

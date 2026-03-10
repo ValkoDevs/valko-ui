@@ -18,6 +18,7 @@ const drawer = tv({
       'inset-0'
     ],
     dialog: [
+      'vk-drawer__dialog',
       'relative',
       'z-50'
     ],

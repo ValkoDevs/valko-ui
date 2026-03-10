@@ -348,7 +348,7 @@ describe('Breadcrumbs component', () => {
         }
       })
 
-      expect(wrapper.findAll('.vk-breadcrumbs__a').at(2)?.find('i.ti.ti-home').exists()).toBeUndefined()
+      expect(wrapper.find('i.ti.ti-home').exists()).toBe(false)
     })
 
     it('should not have right icon if not given', () => {

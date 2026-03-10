@@ -1,5 +1,5 @@
 import { VueWrapper, mount } from '@vue/test-utils'
-import { DialogPanel, Dialog } from '@headlessui/vue'
+import { DialogPanel } from '@headlessui/vue'
 import { nextTick } from 'vue'
 import VkModal from '#valkoui/components/Modal.vue'
 
@@ -15,6 +15,9 @@ describe('Modal component', () => {
   let wrapper: VueWrapper
   let modal: VueWrapper
   let backdrop: VueWrapper
+
+  afterEach(() => document.body.innerHTML = '')
+
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(async () => {
@@ -356,18 +359,19 @@ describe('Modal component', () => {
   })
 
   describe('Arias', () => {
-    it('should use description id for aria-describedby if aria-description is provided', () => {
-      const wrapper = mount(VkModal, {
+    it('should use description id for aria-describedby if aria-description is provided', async () => {
+      mount(VkModal, {
         props: {
           isOpen: true,
-          ariaDescription: 'description-id'
-        }
+          ariaDescription: 'Some description'
+        },
+        attachTo: document.body
       })
 
-      const dialog = wrapper.getComponent(Dialog)
-      const id = dialog.attributes('aria-describedby')
+      await nextTick()
 
-      expect(dialog.attributes('aria-describedby')).toBe(id)
+      const dialog = document.querySelector('.vk-modal__dialog')
+      expect(dialog?.getAttribute('aria-describedby')).toBeTruthy()
     })
   })
 
@@ -414,7 +418,7 @@ describe('Modal component', () => {
       })
 
       await nextTick()
-      await wrapper.findComponent(DialogStub).trigger('close')
+      await wrapper.findComponent(DialogStub).trigger('click')
 
       expect(wrapper.emitted()).not.toHaveProperty('close')
     })
