@@ -33,6 +33,15 @@ const iconProps: TableItem[] = [
 
 const names = ['home', 'search', 'settings', 'check', 'x', 'user', 'bell', 'star']
 
+const styles = {
+  names: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-4'
+    ]
+  }
+}
+
 const generateSnippet = snippetGeneratorFactory('vk-icon')
 </script>
 
@@ -69,7 +78,7 @@ const generateSnippet = snippetGeneratorFactory('vk-icon')
     <template #examples>
       <example-section
         title="Names"
-        :style-slots="{ slotContainer: ['grid-cols-2 md:grid-cols-4'] }"
+        :style-slots="styles.names"
       >
         <vk-icon
           v-for="name in names"

@@ -251,12 +251,21 @@ onMounted(() => {
   }
 })
 
-const styles = generateStyles({
-  default: [
-    'grid-cols-2',
-    'md:grid-cols-3'
-  ]
-})
+const styles = {
+  default: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  }
+}
 </script>
 
 <template>
@@ -364,7 +373,7 @@ const styles = generateStyles({
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: ['grid-cols-2 md:grid-cols-3 lg:grid-cols-4'] }"
+        :style-slots="styles.sizes"
       >
         <vk-menu
           v-for="(size, index) in sizeOptions.general"

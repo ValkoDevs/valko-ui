@@ -267,17 +267,21 @@ const people: SelectOption[] = [
 <\u002Fscript>
 `
 
-const styles = generateStyles({
-  default: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  sizes: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ]
-})
+const styles = {
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  }
+}
 </script>
 
 <template>

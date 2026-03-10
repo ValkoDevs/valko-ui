@@ -206,22 +206,28 @@ const iconSnippet = `<template>
 
 const extraProps = 'text="Content"'
 
-const styles = generateStyles({
-  colors: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-7'
-  ],
-  shapes: [
-    'grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  default: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ]
-})
+const styles = {
+  colors: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-7'
+    ]
+  },
+  shapes: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  default: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  }
+}
 </script>
 
 <template>

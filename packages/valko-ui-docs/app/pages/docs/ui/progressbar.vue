@@ -145,17 +145,21 @@ const progressbarSlots: TableItem[] = [
 
 const generateSnippet = snippetGeneratorFactory('vk-progressbar')
 
-const styles = generateStyles({
-  default: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  defaultAlt: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ]
-})
+const styles = {
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  defaultAlt: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  }
+}
 </script>
 
 <template>

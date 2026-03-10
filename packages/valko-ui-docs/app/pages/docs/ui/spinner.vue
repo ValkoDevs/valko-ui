@@ -83,21 +83,27 @@ const styleSlotsInterface = [
 
 const generateSnippet = snippetGeneratorFactory('vk-spinner')
 
-const styles = generateStyles({
-  colors: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-7'
-  ],
-  names: [
-    'grid-cols-2'
-  ],
-  sizes: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ]
-})
+const styles = {
+  colors: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-7'
+    ]
+  },
+  names: {
+    slotContainer: [
+      'grid-cols-2'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  }
+}
 </script>
 
 <template>

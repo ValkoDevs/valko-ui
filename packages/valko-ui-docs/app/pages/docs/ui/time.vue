@@ -451,20 +451,26 @@ const minmaxSnippet = `${scriptCode}
 </template>
 `
 
-const styles = generateStyles({
-  default: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  sizes: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ],
-  times: [
-    'sm:grid-cols-2'
-  ]
-})
+const styles = {
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  },
+  times: {
+    slotContainer: [
+      'sm:grid-cols-2'
+    ]
+  }
+}
 </script>
 
 <template>

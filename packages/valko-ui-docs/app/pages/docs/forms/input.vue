@@ -359,24 +359,32 @@ const iconSnippet = `<template>
 </template>
 `
 
-const styles = generateStyles({
-  default: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  sizes: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ],
-  types: [
-    'md:grid-cols-2',
-    'lg:grid-cols-4'
-  ],
-  icons: [
-    'sm:grid-cols-2'
-  ]
-})
+const styles = {
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  },
+  types: {
+    slotContainer: [
+      'md:grid-cols-2',
+      'lg:grid-cols-4'
+    ]
+  },
+  icons: {
+    slotContainer: [
+      'sm:grid-cols-2'
+    ]
+  }
+}
 </script>
 
 <template>

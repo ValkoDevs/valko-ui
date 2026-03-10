@@ -131,16 +131,20 @@ const paginationEmits: TableItem[] = [
 
 const generateSnippet = snippetGeneratorFactory('vk-pagination')
 
-const styles = generateStyles({
-  grid: [
-    'md:grid-cols-2',
-    'xl:grid-cols-3',
-    'overflow-x-auto'
-  ],
-  gridAlt: [
-    'overflow-x-auto'
-  ]
-})
+const styles = {
+  grid: {
+    slotContainer: [
+      'md:grid-cols-2',
+      'xl:grid-cols-3',
+      'overflow-x-auto'
+    ]
+  },
+  gridAlt: {
+    slotContainer: [
+      'overflow-x-auto'
+    ]
+  }
+}
 </script>
 
 <template>

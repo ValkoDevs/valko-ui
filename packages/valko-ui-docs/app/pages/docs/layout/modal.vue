@@ -221,17 +221,21 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
   }).replace(/<vk-modal/g, `${triggerSnippet}`)
 }`
 
-const styles = generateStyles({
-  default: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
-  ],
-  sizes: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(6,_minmax(0,_max-content))]'
-  ]
-})
+const styles = {
+  default: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(6,_minmax(0,_max-content))]'
+    ]
+  }
+}
 </script>
 
 <template>

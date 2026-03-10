@@ -503,19 +503,25 @@ const [ model, _, adapter ] = useDateAdapter({ format: 'YYYY-MM-DD' })
 
 const extraProps = 'v-model="model" :adapter="adapter"'
 
-const styles = generateStyles({
-  colors: [
-    'sm:grid-cols-2',
-    'xl:grid-cols-3'
-  ],
-  default: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  dates: [
-    'sm:grid-cols-2'
-  ]
-})
+const styles = {
+  colors: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'xl:grid-cols-3'
+    ]
+  },
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  dates: {
+    slotContainer: [
+      'sm:grid-cols-2'
+    ]
+  }
+}
 </script>
 
 <template>

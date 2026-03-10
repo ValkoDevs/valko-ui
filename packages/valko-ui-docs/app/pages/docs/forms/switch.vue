@@ -186,25 +186,33 @@ const emitData: TableItem[] = [
 
 const generateSnippet = snippetGeneratorFactory('vk-switch')
 
-const styles = generateStyles({
-  default: [
-    'grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  colors: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-6'
-  ],
-  sizes: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ],
-  label: [
-    'grid-cols-2'
-  ]
-})
+const styles = {
+  default: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  colors: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-6'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  },
+  label: {
+    slotContainer: [
+      'grid-cols-2'
+    ]
+  }
+}
 </script>
 
 <template>

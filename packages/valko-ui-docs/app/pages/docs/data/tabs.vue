@@ -314,15 +314,19 @@ const generateSnippet = snippetGeneratorFactory('vk-tabs')
 
 const extraProps = ':tabs="tabs"'
 
-const styles = generateStyles({
-  grid: [
-    'xl:grid-cols-2',
-    'overflow-x-auto'
-  ],
-  gridAlt: [
-    'overflow-x-auto'
-  ]
-})
+const styles = {
+  grid: {
+    slotContainer: [
+      'xl:grid-cols-2',
+      'overflow-x-auto'
+    ]
+  },
+  gridAlt: {
+    slotContainer: [
+      'overflow-x-auto'
+    ]
+  }
+}
 </script>
 
 <template>

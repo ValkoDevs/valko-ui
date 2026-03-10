@@ -177,29 +177,39 @@ const onClick = () => useNotification({ text: 'Clicked' })
 
 const generateSnippet = snippetGeneratorFactory('vk-button')
 
-const styles = generateStyles({
-  colors: [
-    'sm:grid-cols-[repeat(3,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]',
-    'xl:grid-cols-[repeat(7,_minmax(0,_max-content))]'
-  ],
-  variants: [
-    'sm:grid-cols-[repeat(3,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
-  ],
-  shapes: [
-    'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(3,_minmax(0,_max-content))]'
-  ],
-  sizes: [
-    'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]'
-  ],
-  types: [
-    'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]'
-  ]
-})
+const styles = {
+  colors: {
+    slotContainer: [
+      'sm:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]',
+      'xl:grid-cols-[repeat(7,_minmax(0,_max-content))]'
+    ]
+  },
+  variants: {
+    slotContainer: [
+      'sm:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
+    ]
+  },
+  shapes: {
+    slotContainer: [
+      'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+    ]
+  },
+  types: {
+    slotContainer: [
+      'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+    ]
+  }
+}
 </script>
 
 <template>

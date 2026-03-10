@@ -224,20 +224,26 @@ const customSlot = `<vk-card-image :src="imgSrc" />
     </vk-card-body>
 `
 
-const styles = generateStyles({
-  default: [
-    'sm:grid-cols-2',
-    'xl:grid-cols-3'
-  ],
-  layout: [
-    'md:grid-cols-1',
-    'lg:grid-cols-2'
-  ],
-  sizes: [
-    'grid-cols-1',
-    'lg:grid-cols-2'
-  ]
-})
+const styles = {
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'xl:grid-cols-3'
+    ]
+  },
+  layout: {
+    slotContainer: [
+      'md:grid-cols-1',
+      'lg:grid-cols-2'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'grid-cols-1',
+      'lg:grid-cols-2'
+    ]
+  }
+}
 </script>
 
 <template>

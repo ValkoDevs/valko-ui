@@ -256,30 +256,40 @@ form.labels = generateLabels()
 
 const generateSnippet = snippetGeneratorFactory('vk-range')
 
-const styles = generateStyles({
-  colors: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  variants: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ],
-  shapes: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  sizes: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ],
-  stripes: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ]
-})
+const styles = {
+  colors: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  variants: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  },
+  shapes: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  },
+  stripes: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  }
+}
 </script>
 
 <template>

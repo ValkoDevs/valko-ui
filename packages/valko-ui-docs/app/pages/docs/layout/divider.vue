@@ -83,25 +83,33 @@ const dividerProps: TableItem[] = [
 
 const generateSnippet = snippetGeneratorFactory('vk-divider')
 
-const styles = generateStyles({
-  default: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  colors: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-7'
-  ],
-  sizes: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ],
-  direction: [
-    'sm:grid-cols-2'
-  ]
-})
+const styles = {
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  colors: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-7'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  },
+  direction: {
+    slotContainer: [
+      'sm:grid-cols-2'
+    ]
+  }
+}
 </script>
 
 <template>

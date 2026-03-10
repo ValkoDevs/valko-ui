@@ -108,15 +108,19 @@ const generateSnippet = snippetGeneratorFactory('vk-navbar')
 
 const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold ml-4">Title</span>'
 
-const styles = generateStyles({
-  default: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  defaultAlt: [
-    'sm:grid-cols-2'
-  ]
-})
+const styles = {
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  defaultAlt: {
+    slotContainer: [
+      'sm:grid-cols-2'
+    ]
+  }
+}
 </script>
 
 <template>
