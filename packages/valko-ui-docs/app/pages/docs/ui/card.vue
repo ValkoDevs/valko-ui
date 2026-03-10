@@ -225,18 +225,24 @@ const customSlot = `<vk-card-image :src="imgSrc" />
 `
 
 const styles = {
-  default: [
-    'sm:grid-cols-2',
-    'xl:grid-cols-3'
-  ],
-  layout: [
-    'md:grid-cols-1',
-    'lg:grid-cols-2'
-  ],
-  sizes: [
-    'grid-cols-1',
-    'lg:grid-cols-2'
-  ]
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'xl:grid-cols-3'
+    ]
+  },
+  layout: {
+    slotContainer: [
+      'md:grid-cols-1',
+      'lg:grid-cols-2'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'grid-cols-1',
+      'lg:grid-cols-2'
+    ]
+  }
 }
 </script>
 
@@ -355,7 +361,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-card
           v-for="variant in variantOptions.general"
@@ -385,7 +391,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-card
           v-for="shape in shapeOptions.general"
@@ -414,7 +420,7 @@ const styles = {
 
       <example-section
         title="Layout"
-        :style-slots="{ slotContainer: styles.layout }"
+        :style-slots="styles.layout"
       >
         <vk-card
           v-for="layout in layoutOptions"
@@ -444,7 +450,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.sizes }"
+        :style-slots="styles.sizes"
       >
         <vk-card
           v-for="size in sizeOptions.general"

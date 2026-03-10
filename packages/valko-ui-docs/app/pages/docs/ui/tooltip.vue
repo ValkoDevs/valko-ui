@@ -107,23 +107,31 @@ const customSlot = '<vk-button>\n      Slot Content\n    </vk-button>'
 const extraProps = 'content="Tooltip Content"'
 
 const styles = {
-  shapes: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
-  ],
-  sizes: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(4,_minmax(0,_max-content))]'
-  ],
-  placements: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
-  ],
-  alignments: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
-  ]
+  shapes: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+    ]
+  },
+  placements: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
+    ]
+  },
+  alignments: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+    ]
+  }
 }
 </script>
 
@@ -185,7 +193,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.shapes }"
+        :style-slots="styles.shapes"
       >
         <vk-tooltip
           v-for="shape in shapeOptions.general"
@@ -205,7 +213,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.sizes }"
+        :style-slots="styles.sizes"
       >
         <vk-tooltip
           v-for="size in sizeOptions.general"
@@ -225,7 +233,7 @@ const styles = {
 
       <example-section
         title="Placements"
-        :style-slots="{ slotContainer: styles.placements }"
+        :style-slots="styles.placements"
       >
         <vk-tooltip
           v-for="placement in placementOptions.withAuto"
@@ -245,7 +253,7 @@ const styles = {
 
       <example-section
         title="Alignments"
-        :style-slots="{ slotContainer: styles.alignments }"
+        :style-slots="styles.alignments"
       >
         <vk-tooltip
           v-for="alignment in alignmentOptions"

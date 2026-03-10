@@ -315,13 +315,17 @@ const generateSnippet = snippetGeneratorFactory('vk-tabs')
 const extraProps = ':tabs="tabs"'
 
 const styles = {
-  grid: [
-    'xl:grid-cols-2',
-    'overflow-x-auto'
-  ],
-  gridAlt: [
-    'overflow-x-auto'
-  ]
+  grid: {
+    slotContainer: [
+      'xl:grid-cols-2',
+      'overflow-x-auto'
+    ]
+  },
+  gridAlt: {
+    slotContainer: [
+      'overflow-x-auto'
+    ]
+  }
 }
 </script>
 
@@ -388,7 +392,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.grid }"
+        :style-slots="styles.grid"
       >
         <div
           v-for="color in colorOptions.general"
@@ -408,7 +412,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.grid }"
+        :style-slots="styles.grid"
       >
         <div
           v-for="variant in variantOptions.withGradient"
@@ -428,7 +432,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.grid }"
+        :style-slots="styles.grid"
       >
         <div
           v-for="shape in shapeOptions.withLine"
@@ -449,7 +453,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.grid }"
+        :style-slots="styles.grid"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -469,7 +473,7 @@ const styles = {
 
       <example-section
         title="Grow"
-        :style-slots="{ slotContainer: styles.gridAlt }"
+        :style-slots="styles.gridAlt"
       >
         <vk-tabs
           grow
@@ -483,7 +487,7 @@ const styles = {
 
       <example-section
         title="With Icons"
-        :style-slots="{ slotContainer: styles.gridAlt }"
+        :style-slots="styles.gridAlt"
       >
         <vk-tabs
           :tabs="tabWithIcon"
@@ -496,7 +500,7 @@ const styles = {
 
       <example-section
         title="Disabled"
-        :style-slots="{ slotContainer: styles.gridAlt }"
+        :style-slots="styles.gridAlt"
       >
         <vk-tabs
           :tabs="tabDisabled"

@@ -288,27 +288,37 @@ const stopOnFocusSnippet = `
 `
 
 const styles = {
-  colors: [
-    'sm:grid-cols-[repeat(3,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]',
-    'xl:grid-cols-[repeat(7,_minmax(0,_max-content))]'
-  ],
-  variants: [
-    'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(4,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
-  ],
-  shapes: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(3,_minmax(0,_max-content))]'
-  ],
-  sizes: [
-    'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]'
-  ],
-  default: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]'
-  ]
+  colors: {
+    slotContainer: [
+      'sm:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]',
+      'xl:grid-cols-[repeat(7,_minmax(0,_max-content))]'
+    ]
+  },
+  variants: {
+    slotContainer: [
+      'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(4,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
+    ]
+  },
+  shapes: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'sm:grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+    ]
+  },
+  default: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]'
+    ]
+  }
 }
 </script>
 
@@ -397,7 +407,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.colors }"
+        :style-slots="styles.colors"
       >
         <vk-button
           v-for="color in colorOptions.withSurface"
@@ -415,7 +425,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.variants }"
+        :style-slots="styles.variants"
       >
         <vk-button
           v-for="variant in variantOptions.withGradientAndLine"
@@ -432,7 +442,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.shapes }"
+        :style-slots="styles.shapes"
       >
         <vk-button
           v-for="shape in shapeOptions.general"
@@ -450,7 +460,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.sizes }"
+        :style-slots="styles.sizes"
       >
         <vk-button
           v-for="size in sizeOptions.general"
@@ -468,7 +478,7 @@ const styles = {
 
       <example-section
         title="Gravity"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-button
           v-for="gravity in gravityOptions"
@@ -486,7 +496,7 @@ const styles = {
 
       <example-section
         title="Position"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-button
           v-for="position in positionOptions"

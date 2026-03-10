@@ -244,18 +244,24 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
 }`
 
 const styles = {
-  default: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(4,_minmax(0,_max-content))]'
-  ],
-  shapes: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
-  ],
-  backdrop: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
-  ]
+  default: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+    ]
+  },
+  shapes: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+    ]
+  },
+  backdrop: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+    ]
+  }
 }
 </script>
 
@@ -330,7 +336,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Placement"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <div
           v-for="placement in placementOptions.general"
@@ -359,7 +365,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.shapes }"
+        :style-slots="styles.shapes"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -388,7 +394,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -417,7 +423,7 @@ const styles = {
 
       <example-section
         title="Backdrops"
-        :style-slots="{ slotContainer: styles.backdrop }"
+        :style-slots="styles.backdrop"
       >
         <div
           v-for="backdrop in backdropOptions"

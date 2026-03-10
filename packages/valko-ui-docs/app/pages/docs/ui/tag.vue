@@ -207,20 +207,26 @@ const iconSnippet = `<template>
 const extraProps = 'text="Content"'
 
 const styles = {
-  colors: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-7'
-  ],
-  shapes: [
-    'grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  default: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ]
+  colors: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-7'
+    ]
+  },
+  shapes: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  default: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  }
 }
 </script>
 
@@ -311,7 +317,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.colors }"
+        :style-slots="styles.colors"
       >
         <vk-tag
           v-for="color in colorOptions.withSurface"
@@ -327,7 +333,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-tag
           v-for="variant in variantOptions.withGradient"
@@ -343,7 +349,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.shapes }"
+        :style-slots="styles.shapes"
       >
         <vk-tag
           v-for="shape in shapeOptions.general"
@@ -359,7 +365,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-tag
           v-for="size in sizeOptions.general"
@@ -375,7 +381,7 @@ const styles = {
 
       <example-section
         title="Icons"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-tag
           text="Without Icons"

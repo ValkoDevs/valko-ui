@@ -257,28 +257,38 @@ form.labels = generateLabels()
 const generateSnippet = snippetGeneratorFactory('vk-range')
 
 const styles = {
-  colors: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  variants: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ],
-  shapes: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  sizes: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ],
-  stripes: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ]
+  colors: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  variants: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  },
+  shapes: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  },
+  stripes: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  }
 }
 </script>
 
@@ -372,7 +382,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.colors }"
+        :style-slots="styles.colors"
       >
         <div
           v-for="color in colorOptions.general"
@@ -392,7 +402,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.variants }"
+        :style-slots="styles.variants"
       >
         <div
           v-for="variant in variantOptions.withGradient"
@@ -409,7 +419,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.shapes }"
+        :style-slots="styles.shapes"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -426,7 +436,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.sizes }"
+        :style-slots="styles.sizes"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -462,7 +472,7 @@ const styles = {
 
       <example-section
         title="Striped"
-        :style-slots="{ slotContainer: styles.stripes }"
+        :style-slots="styles.stripes"
       >
         <div
           v-for="color in colorOptions.general"

@@ -143,29 +143,39 @@ const extraProps = {
 }
 
 const styles = {
-  colors: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-7'
-  ],
-  variants: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-6'
-  ],
-  shapes: [
-    'grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  default: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ],
-  alignments: [
-    'grid-cols-2',
-    'lg:grid-cols-3'
-  ]
+  colors: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-7'
+    ]
+  },
+  variants: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-6'
+    ]
+  },
+  shapes: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  default: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  },
+  alignments: {
+    slotContainer: [
+      'grid-cols-2',
+      'lg:grid-cols-3'
+    ]
+  }
 }
 </script>
 
@@ -247,7 +257,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.colors }"
+        :style-slots="styles.colors"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -273,7 +283,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.variants }"
+        :style-slots="styles.variants"
       >
         <div
           v-for="variant in variantOptions.withGradient"
@@ -299,7 +309,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.shapes }"
+        :style-slots="styles.shapes"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -325,7 +335,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -351,7 +361,7 @@ const styles = {
 
       <example-section
         title="Placements"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <div
           v-for="placement in placementOptions.general"
@@ -377,7 +387,7 @@ const styles = {
 
       <example-section
         title="Alignments"
-        :style-slots="{ slotContainer: styles.alignments }"
+        :style-slots="styles.alignments"
       >
         <div
           v-for="alignment in alignmentOptions"
@@ -419,7 +429,7 @@ const styles = {
 
       <example-section
         title="Dot"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <div
           v-for="size in sizeOptions.general"

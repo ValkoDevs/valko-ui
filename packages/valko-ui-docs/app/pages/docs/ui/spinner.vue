@@ -84,19 +84,25 @@ const styleSlotsInterface = [
 const generateSnippet = snippetGeneratorFactory('vk-spinner')
 
 const styles = {
-  colors: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-7'
-  ],
-  names: [
-    'grid-cols-2'
-  ],
-  sizes: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ]
+  colors: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-7'
+    ]
+  },
+  names: {
+    slotContainer: [
+      'grid-cols-2'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  }
 }
 </script>
 
@@ -142,7 +148,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.colors }"
+        :style-slots="styles.colors"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -162,7 +168,7 @@ const styles = {
 
       <example-section
         title="Names"
-        :style-slots="{ slotContainer: styles.names }"
+        :style-slots="styles.names"
       >
         <div
           v-for="name in names"
@@ -182,7 +188,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.sizes }"
+        :style-slots="styles.sizes"
       >
         <div
           v-for="size in sizeOptions.general"

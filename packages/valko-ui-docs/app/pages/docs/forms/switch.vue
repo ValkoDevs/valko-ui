@@ -187,23 +187,31 @@ const emitData: TableItem[] = [
 const generateSnippet = snippetGeneratorFactory('vk-switch')
 
 const styles = {
-  default: [
-    'grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  colors: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-6'
-  ],
-  sizes: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ],
-  label: [
-    'grid-cols-2'
-  ]
+  default: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  colors: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-6'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  },
+  label: {
+    slotContainer: [
+      'grid-cols-2'
+    ]
+  }
 }
 </script>
 
@@ -275,7 +283,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.colors }"
+        :style-slots="styles.colors"
       >
         <vk-switch
           v-for="color in colorOptions.general"
@@ -292,7 +300,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-switch
           v-for="variant in variantOptions.general"
@@ -309,7 +317,7 @@ const styles = {
 
       <example-section
         title="Shape"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-switch
           v-for="shape in shapeOptions.general"
@@ -326,7 +334,7 @@ const styles = {
 
       <example-section
         title="Size"
-        :style-slots="{ slotContainer: styles.sizes }"
+        :style-slots="styles.sizes"
       >
         <vk-switch
           v-for="size in sizeOptions.general"
@@ -362,7 +370,7 @@ const styles = {
 
       <example-section
         title="Label Position"
-        :style-slots="{ slotContainer: styles.label }"
+        :style-slots="styles.label"
       >
         <vk-switch
           v-for="pos in position"

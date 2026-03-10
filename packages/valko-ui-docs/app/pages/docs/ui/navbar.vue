@@ -109,13 +109,17 @@ const generateSnippet = snippetGeneratorFactory('vk-navbar')
 const customSlot = '<vk-icon name="brand-vue" />\n    <span class="font-semibold ml-4">Title</span>'
 
 const styles = {
-  default: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  defaultAlt: [
-    'sm:grid-cols-2'
-  ]
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  defaultAlt: {
+    slotContainer: [
+      'sm:grid-cols-2'
+    ]
+  }
 }
 </script>
 
@@ -188,7 +192,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-navbar
           v-for="color in colorOptions.withSurface"
@@ -209,7 +213,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.defaultAlt }"
+        :style-slots="styles.defaultAlt"
       >
         <vk-navbar
           v-for="variant in variantOptions.withGradient"
@@ -230,7 +234,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-navbar
           v-for="shape in shapeOptions.general"
@@ -252,7 +256,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.defaultAlt }"
+        :style-slots="styles.defaultAlt"
       >
         <vk-navbar
           v-for="size in sizeOptions.general"

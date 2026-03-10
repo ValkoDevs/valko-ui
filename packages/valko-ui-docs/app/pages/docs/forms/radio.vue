@@ -238,20 +238,26 @@ const radios = [
 const generateSnippet = snippetGeneratorFactory('vk-radio')
 
 const styles = {
-  colors: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-6'
-  ],
-  default: [
-    'grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  sizes: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ]
+  colors: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-6'
+    ]
+  },
+  default: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  }
 }
 </script>
 
@@ -330,7 +336,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.colors }"
+        :style-slots="styles.colors"
       >
         <vk-radio
           v-for="color in colorOptions.general"
@@ -349,7 +355,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-radio
           v-for="variant in variantOptions.general"
@@ -368,7 +374,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-radio
           v-for="shape in shapeOptions.general"
@@ -387,7 +393,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.sizes }"
+        :style-slots="styles.sizes"
       >
         <vk-radio
           v-for="size in sizeOptions.general"

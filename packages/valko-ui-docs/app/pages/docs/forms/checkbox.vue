@@ -249,27 +249,37 @@ watchEffect(() => {
 })
 
 const styles = {
-  colors: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-6'
-  ],
-  variants: [
-    'grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  shapes: [
-    'grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  sizes: [
-    'grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ],
-  label: [
-    'sm:grid-cols-2'
-  ]
+  colors: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-6'
+    ]
+  },
+  variants: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  shapes: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  },
+  label: {
+    slotContainer: [
+      'sm:grid-cols-2'
+    ]
+  }
 }
 </script>
 
@@ -351,7 +361,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.colors }"
+        :style-slots="styles.colors"
       >
         <vk-checkbox
           v-for="color in colorOptions.general"
@@ -368,7 +378,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.variants }"
+        :style-slots="styles.variants"
       >
         <vk-checkbox
           v-for="variant in variantOptions.general"
@@ -385,7 +395,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.shapes }"
+        :style-slots="styles.shapes"
       >
         <vk-checkbox
           v-for="shape in shapeOptions.general"
@@ -402,7 +412,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.sizes }"
+        :style-slots="styles.sizes"
       >
         <vk-checkbox
           v-for="size in sizeOptions.general"
@@ -455,7 +465,7 @@ const styles = {
 
       <example-section
         title="Label Position"
-        :style-slots="{ slotContainer: styles.label }"
+        :style-slots="styles.label"
       >
         <vk-checkbox
           v-for="pos in position"

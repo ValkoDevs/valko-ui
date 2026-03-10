@@ -208,15 +208,19 @@ const iconSnippet = `
 `
 
 const styles = {
-  default: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  defaultAlt: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ]
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  defaultAlt: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  }
 }
 </script>
 
@@ -302,7 +306,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-alert
           v-for="color in colorOptions.withSurface"
@@ -320,7 +324,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.defaultAlt }"
+        :style-slots="styles.defaultAlt"
       >
         <vk-alert
           v-for="variant in variantOptions.withGradient"
@@ -338,7 +342,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-alert
           v-for="shape in shapeOptions.general"
@@ -356,7 +360,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.defaultAlt }"
+        :style-slots="styles.defaultAlt"
       >
         <vk-alert
           v-for="size in sizeOptions.general"
@@ -386,7 +390,7 @@ const styles = {
 
       <example-section
         title="Icons"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-alert
           title="Default Icon"

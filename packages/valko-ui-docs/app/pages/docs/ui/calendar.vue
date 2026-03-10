@@ -504,17 +504,23 @@ const [ model, _, adapter ] = useDateAdapter({ format: 'YYYY-MM-DD' })
 const extraProps = 'v-model="model" :adapter="adapter"'
 
 const styles = {
-  colors: [
-    'sm:grid-cols-2',
-    'xl:grid-cols-3'
-  ],
-  default: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  dates: [
-    'sm:grid-cols-2'
-  ]
+  colors: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'xl:grid-cols-3'
+    ]
+  },
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  dates: {
+    slotContainer: [
+      'sm:grid-cols-2'
+    ]
+  }
 }
 </script>
 
@@ -585,7 +591,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.colors }"
+        :style-slots="styles.colors"
       >
         <div
           v-for="color in colorOptions.withSurface"
@@ -607,7 +613,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <div
           v-for="variant in variantOptions.general"
@@ -629,7 +635,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -651,7 +657,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <div
           v-for="size in sizeOptions.general"
@@ -685,7 +691,7 @@ const styles = {
 
       <example-section
         title="Disabled Dates"
-        :style-slots="{ slotContainer: styles.dates }"
+        :style-slots="styles.dates"
       >
         <vk-calendar
           v-model="model"

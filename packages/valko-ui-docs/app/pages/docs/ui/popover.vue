@@ -180,18 +180,24 @@ const customSlot = '<vk-button\n      @click="togglePopover(\'popoverId\')"\n   
 const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(\'popoverId\')"'
 
 const styles = {
-  shapes: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
-  ],
-  placements: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(5,_minmax(0,_max-content))]'
-  ],
-  alignments: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
-  ]
+  shapes: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+    ]
+  },
+  placements: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(5,_minmax(0,_max-content))]'
+    ]
+  },
+  alignments: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+    ]
+  }
 }
 </script>
 
@@ -249,7 +255,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.shapes }"
+        :style-slots="styles.shapes"
       >
         <vk-popover
           v-for="shape in shapeOptions.general"
@@ -271,7 +277,7 @@ const styles = {
 
       <example-section
         title="Placements"
-        :style-slots="{ slotContainer: styles.placements }"
+        :style-slots="styles.placements"
       >
         <vk-popover
           v-for="placement in placementOptions.withAuto"
@@ -293,7 +299,7 @@ const styles = {
 
       <example-section
         title="Alignments"
-        :style-slots="{ slotContainer: styles.alignments }"
+        :style-slots="styles.alignments"
       >
         <vk-popover
           v-for="alignment in alignmentOptions"

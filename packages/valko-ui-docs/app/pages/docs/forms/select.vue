@@ -268,15 +268,19 @@ const people: SelectOption[] = [
 `
 
 const styles = {
-  default: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  sizes: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ]
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  }
 }
 </script>
 
@@ -358,7 +362,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-select
           v-for="color in colorOptions.general"
@@ -376,7 +380,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-select
           v-for="variant in variantOptions.general"
@@ -394,7 +398,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-select
           v-for="shape in shapeOptions.general"
@@ -412,7 +416,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.sizes }"
+        :style-slots="styles.sizes"
       >
         <vk-select
           v-for="size in sizeOptions.general"

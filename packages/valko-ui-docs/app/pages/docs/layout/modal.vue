@@ -222,15 +222,19 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
 }`
 
 const styles = {
-  default: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
-  ],
-  sizes: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(6,_minmax(0,_max-content))]'
-  ]
+  default: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(6,_minmax(0,_max-content))]'
+    ]
+  }
 }
 </script>
 
@@ -300,7 +304,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <div
           v-for="shape in shapeOptions.general"
@@ -329,7 +333,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.sizes }"
+        :style-slots="styles.sizes"
       >
         <div
           v-for="size in sizeOptions.withFull"
@@ -358,7 +362,7 @@ const styles = {
 
       <example-section
         title="Backdrops"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <div
           v-for="backdrop in backdropOptions"

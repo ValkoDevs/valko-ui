@@ -523,23 +523,31 @@ ${scriptCode}
 `
 
 const styles = {
-  colors: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-6'
-  ],
-  default: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3'
-  ],
-  sizes: [
-    'sm:grid-cols-2',
-    'md:grid-cols-3',
-    'lg:grid-cols-4'
-  ],
-  minmax: [
-    'sm:grid-cols-2'
-  ]
+  colors: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-6'
+    ]
+  },
+  default: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'sm:grid-cols-2',
+      'md:grid-cols-3',
+      'lg:grid-cols-4'
+    ]
+  },
+  minmax: {
+    slotContainer: [
+      'sm:grid-cols-2'
+    ]
+  }
 }
 </script>
 
@@ -635,7 +643,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.colors }"
+        :style-slots="styles.colors"
       >
         <vk-timepicker
           v-for="color in colorOptions.general"
@@ -656,7 +664,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-timepicker
           v-for="variant in variantOptions.general"
@@ -677,7 +685,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.default }"
+        :style-slots="styles.default"
       >
         <vk-timepicker
           v-for="shape in shapeOptions.general"
@@ -698,7 +706,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.sizes }"
+        :style-slots="styles.sizes"
       >
         <vk-timepicker
           v-for="size in sizeOptions.general"
@@ -719,7 +727,7 @@ const styles = {
 
       <example-section
         title="Min & Max Times"
-        :style-slots="{ slotContainer: styles.minmax }"
+        :style-slots="styles.minmax"
       >
         <vk-timepicker
           label="Min"

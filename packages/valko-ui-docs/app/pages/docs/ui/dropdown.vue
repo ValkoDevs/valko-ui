@@ -268,34 +268,46 @@ const generateSnippet = snippetGeneratorFactory('vk-dropdown')
 const extraProps = ':items="items"'
 
 const styles = {
-  colors: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
-    'xl:grid-cols-[repeat(6,_minmax(0,_max-content))]'
-  ],
-  variants: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
-  ],
-  shapes: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
-  ],
-  sizes: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]'
-  ],
-  placements: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
-    'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
-  ],
-  alignments: [
-    'grid-cols-[repeat(2,_minmax(0,_max-content))]',
-    'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
-  ]
+  colors: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+      'xl:grid-cols-[repeat(6,_minmax(0,_max-content))]'
+    ]
+  },
+  variants: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
+    ]
+  },
+  shapes: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+    ]
+  },
+  sizes: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(4,_minmax(0,_max-content))]'
+    ]
+  },
+  placements: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]',
+      'lg:grid-cols-[repeat(5,_minmax(0,_max-content))]'
+    ]
+  },
+  alignments: {
+    slotContainer: [
+      'grid-cols-[repeat(2,_minmax(0,_max-content))]',
+      'md:grid-cols-[repeat(3,_minmax(0,_max-content))]'
+    ]
+  }
 }
 </script>
 
@@ -374,7 +386,7 @@ const styles = {
     <template #examples>
       <example-section
         title="Colors"
-        :style-slots="{ slotContainer: styles.colors }"
+        :style-slots="styles.colors"
       >
         <vk-dropdown
           v-for="color in colorOptions.withSurface"
@@ -392,7 +404,7 @@ const styles = {
 
       <example-section
         title="Variants"
-        :style-slots="{ slotContainer: styles.variants }"
+        :style-slots="styles.variants"
       >
         <vk-dropdown
           v-for="variant in variantOptions.withGradientAndLink"
@@ -410,7 +422,7 @@ const styles = {
 
       <example-section
         title="Shapes"
-        :style-slots="{ slotContainer: styles.shapes }"
+        :style-slots="styles.shapes"
       >
         <vk-dropdown
           v-for="shape in shapeOptions.general"
@@ -428,7 +440,7 @@ const styles = {
 
       <example-section
         title="Sizes"
-        :style-slots="{ slotContainer: styles.sizes }"
+        :style-slots="styles.sizes"
       >
         <vk-dropdown
           v-for="size in sizeOptions.general"
@@ -446,7 +458,7 @@ const styles = {
 
       <example-section
         title="Placements"
-        :style-slots="{ slotContainer: styles.placements }"
+        :style-slots="styles.placements"
       >
         <vk-dropdown
           v-for="placement in placementOptions.withAuto"
@@ -464,7 +476,7 @@ const styles = {
 
       <example-section
         title="Alignments"
-        :style-slots="{ slotContainer: styles.alignments }"
+        :style-slots="styles.alignments"
       >
         <vk-dropdown
           v-for="alignment in alignmentOptions"
