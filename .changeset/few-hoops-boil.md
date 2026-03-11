@@ -25,3 +25,6 @@
 
 #### Utils:
 - Added `formatHeaders` array containing table header definitions for format reference tables (e.g., showing HH, mm, ss format options in date/time components).
+
+#### Configuration:
+- Added auto-import configuration for `ApiTable` types (`PropData`, `EmitData`, `SlotData`, `FormatData`, `ApiType`, etc.) to eliminate the need for manual imports across documentation pages.
