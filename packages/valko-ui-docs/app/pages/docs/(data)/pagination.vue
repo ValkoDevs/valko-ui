@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PaginationProps, TableItem } from '#valkoui'
+import type { PaginationProps } from '#valkoui'
 
 const form = ref<PaginationProps>({
   color: 'primary',
@@ -12,7 +12,7 @@ const form = ref<PaginationProps>({
   disabled: false
 })
 
-const paginationProps: TableItem[] = [
+const paginationProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
@@ -20,7 +20,7 @@ const paginationProps: TableItem[] = [
     description: 'The Pagination color theme.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -29,7 +29,7 @@ const paginationProps: TableItem[] = [
     description: 'The Pagination variant.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -38,7 +38,7 @@ const paginationProps: TableItem[] = [
     description: 'The shape of the Pagination.',
     values: 'soft, rounded, square',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -47,7 +47,7 @@ const paginationProps: TableItem[] = [
     description: 'The Pagination size.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'pagesProp',
@@ -56,7 +56,7 @@ const paginationProps: TableItem[] = [
     description: 'The total number of pages.',
     values: 'number',
     default: '1',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'modelValueProp',
@@ -65,7 +65,7 @@ const paginationProps: TableItem[] = [
     description: 'The current page.',
     values: 'number',
     default: '1',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'elevatedProp',
@@ -74,7 +74,7 @@ const paginationProps: TableItem[] = [
     description: 'Wheter the Pagination is elevated or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'disabledProp',
@@ -83,7 +83,7 @@ const paginationProps: TableItem[] = [
     description: 'Wheter the Pagination is disabled or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -92,7 +92,7 @@ const paginationProps: TableItem[] = [
     description: 'Accessible label for the pagination.',
     values: 'string',
     default: 'Pagination',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -101,45 +101,48 @@ const paginationProps: TableItem[] = [
     description: 'Custom styles for different parts of the Pagination component.',
     values: 'PaginationSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'nav',
     prop: 'nav',
+    required: false,
     description: 'Styles for the navigation container (<nav> element).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'button',
     prop: 'button',
+    required: false,
     description: 'Styles for each page button.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'arrows',
     prop: 'arrows',
+    required: false,
     description: 'Styles for the previous/next arrow icons.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const paginationEmits: TableItem[] = [
+const paginationEmits: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the current page is changed.',
     values: 'number | string',
     type: '(page: number | string) => void',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 

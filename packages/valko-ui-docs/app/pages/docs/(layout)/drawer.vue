@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DrawerProps, SelectOption, TableItem, Backdrop } from '#valkoui'
+import type { DrawerProps, SelectOption, Backdrop } from '#valkoui'
 
 const form = ref<Omit<DrawerProps, 'isOpen'>>({
   shape: 'soft',
@@ -16,7 +16,7 @@ const backdropOptions: SelectOption<Backdrop>[] = [
   { value: 'transparent', label: 'Transparent' }
 ]
 
-const drawerProps: TableItem[] = [
+const drawerProps: PropData[] = [
   {
     key: 'propShape',
     prop: 'shape',
@@ -24,7 +24,7 @@ const drawerProps: TableItem[] = [
     description: 'The shape of the Drawer.',
     values: 'soft, square, rounded',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'propSize',
@@ -33,7 +33,7 @@ const drawerProps: TableItem[] = [
     description: 'The size of the Drawer.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'propPlacement',
@@ -42,7 +42,7 @@ const drawerProps: TableItem[] = [
     description: 'The placement of the Drawer.',
     values: 'top, bottom, left, right',
     default: 'right',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'propIsOpen',
@@ -51,7 +51,7 @@ const drawerProps: TableItem[] = [
     description: 'Whether the Drawer is open or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'propTitle',
@@ -60,7 +60,7 @@ const drawerProps: TableItem[] = [
     description: 'The title of the Drawer',
     values: 'string',
     default: 'Drawer',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'propBackdrop',
@@ -69,7 +69,7 @@ const drawerProps: TableItem[] = [
     description: 'The background backdrop displayed behind the Drawer',
     values: 'opaque, blur, transparent',
     default: 'opaque',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'closableProp',
@@ -78,7 +78,7 @@ const drawerProps: TableItem[] = [
     description: 'Displays a close button on the Drawer and allows to close it by clicking outside or pressing esc',
     values: 'boolean',
     default: 'true',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledByProp',
@@ -87,7 +87,7 @@ const drawerProps: TableItem[] = [
     description: 'Specifies the ID of the element that labels the Drawer. Required for accessibility to associate the title with the dialog.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaDescriptionProp',
@@ -96,7 +96,7 @@ const drawerProps: TableItem[] = [
     description: 'Provides additional descriptive text for the Drawer, improving context for screen readers. The text will be visually hidden but read by assistive technologies.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -105,110 +105,121 @@ const drawerProps: TableItem[] = [
     description: 'Customizes style slots for Drawer.',
     values: 'DrawerSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'dialog',
     prop: 'dialog',
+    required: false,
     description: 'Root dialog container for the Drawer.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'backdrop',
     prop: 'backdrop',
+    required: false,
     description: 'Backdrop overlay behind the Drawer.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Outer container wrapping the Drawer content.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'content',
     prop: 'content',
+    required: false,
     description: 'Content wrapper for transitions and layout.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'panel',
     prop: 'panel',
+    required: false,
     description: 'Main panel element of the Drawer.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'panelChild',
     prop: 'panelChild',
+    required: false,
     description: 'Container for the title and close button at the top of the Drawer.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'title',
     prop: 'title',
+    required: false,
     description: 'Title text element inside the Drawer.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'closeButton',
     prop: 'closeButton',
+    required: false,
     description: 'Close button element for dismissing the Drawer.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'closeIcon',
     prop: 'closeIcon',
+    required: false,
     description: 'Icon inside the close button.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'slotContainer',
     prop: 'slotContainer',
+    required: false,
     description: 'Container for Drawer slot content (main body).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const drawerEmits: TableItem[] = [
+const drawerEmits: EmitData[] = [
   {
     key: 'closeEmit',
     event: 'close',
     description: 'Emitted when the drawer is closed.',
     values: '',
     type: '() => void',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   }
 ]
 
-const drawerSlots: TableItem[] = [
+const drawerSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for the main content of the drawer. This slot is typically used to include additional content inside the drawer.',
-    example: '<template #default>\n  <!-- Your main content goes here -->\n</template>'
+    example: '<template #default>\n  <!-- Your main content goes here -->\n</template>',
+    apiType: 'slot'
   }
 ]
 

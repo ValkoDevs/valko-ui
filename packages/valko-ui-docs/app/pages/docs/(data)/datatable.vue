@@ -19,22 +19,24 @@ const selectionOptions: SelectOption<SelectionMode>[] = [
 ]
 
 // API
-const tableProps: TableItem[] = [
+const tableProps: PropData[] = [
   {
     key: 'header',
     prop: 'headers',
     required: true,
     description: 'An array of objects defining the headers of the table.',
     values: 'TableHeader[]',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    default: '[]',
+    apiType: 'custom-type'
   },
   {
     key: 'data',
     prop: 'data',
+    required: true,
     description: 'An array of objects representing the data rows of the table.',
     values: 'TableItem[]',
     default: '[]',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'color',
@@ -43,15 +45,16 @@ const tableProps: TableItem[] = [
     description: 'The color theme of the table.',
     values: 'primary, secondary, positive, accent, warning, negative, surface',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'variant',
+    prop: 'variant',
     required: false,
     description: 'The variant of the table.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'shape',
@@ -60,7 +63,7 @@ const tableProps: TableItem[] = [
     description: 'The shape of the table.',
     values: 'soft, rounded, square',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'size',
@@ -69,15 +72,16 @@ const tableProps: TableItem[] = [
     description: 'The size of the table.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'labelProp',
     prop: 'labelProp',
+    required: false,
     description: 'The label for the select size.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'striped',
@@ -86,7 +90,7 @@ const tableProps: TableItem[] = [
     description: 'Specifies whether the table rows are striped for better readability.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'selectionMode',
@@ -95,7 +99,7 @@ const tableProps: TableItem[] = [
     description: 'Controls the selection behavior of the table.',
     values: 'single, multiple, row, none',
     default: 'none',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sort',
@@ -104,7 +108,7 @@ const tableProps: TableItem[] = [
     description: 'The sorting configuration of the table.',
     values: 'Sort',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'pagination',
@@ -113,7 +117,7 @@ const tableProps: TableItem[] = [
     description: 'The pagination configuration of the table.',
     values: 'Pagination<TableItem>',
     default: '() => ({ records: [], total: 0, limit: 10, offset: 0 })',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'filters',
@@ -122,7 +126,7 @@ const tableProps: TableItem[] = [
     description: 'The filters applied to the table.',
     values: 'Filter[]',
     default: '() => []',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'pageSizeOptions',
@@ -131,7 +135,7 @@ const tableProps: TableItem[] = [
     description: 'Options for page size selection.',
     values: 'number[]',
     default: '() => [10, 20, 50, 100]',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'selection',
@@ -140,7 +144,7 @@ const tableProps: TableItem[] = [
     description: 'The selected items in the table.',
     values: 'TableItem[] | TableItem',
     default: 'undefined',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'isAllSelected',
@@ -149,7 +153,7 @@ const tableProps: TableItem[] = [
     description: 'Specifies if all items are selected.',
     values: 'boolean | null',
     default: 'null',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'loading',
@@ -158,7 +162,7 @@ const tableProps: TableItem[] = [
     description: 'Specifies whether the table is in a loading state.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -167,11 +171,11 @@ const tableProps: TableItem[] = [
     description: 'Custom styles for different parts of the DataTable component.',
     values: 'DataTableSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'table',
     prop: 'table',
@@ -179,7 +183,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Root container.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'headerContainer',
@@ -188,7 +192,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the header cell container of the table.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'headerCheckbox',
@@ -197,7 +201,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the header checkbox container (only present when selectionMode is "multiple").',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'headerUtilities',
@@ -206,7 +210,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for each utility element in the header of the table (filters, sort, etc.).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'footer',
@@ -215,7 +219,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Container for the footer content (pagination, select).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'pagination',
@@ -224,7 +228,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the pagination component of the table.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'select',
@@ -233,7 +237,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the select component of the table.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'dragIcon',
@@ -242,37 +246,39 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the drag icon (only present when row dragging is enabled).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const tableItemInterface: TableItem[] = [
+const tableItemInterface: PropData[] = [
   {
     key: 'key',
     prop: 'key',
     required: true,
     description: 'The unique identifier for the data row.',
     values: 'string',
-    apiType: ApiTypeCategory.PRIMITIVE
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'customProp',
-    prop: 'Any other property',
+    prop: '[\'string\']',
     required: false,
     description: 'Any other property specific to your data row.',
-    values: 'unknown',
-    apiType: ApiTypeCategory.PRIMITIVE
+    values: 'string, number, boolean, null',
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const tableEmits: TableItem[] = [
+const tableEmits: EmitData[] = [
   {
     key: 'emitSelect',
     event: 'onSelect',
     type: '(item: TableItem) => void',
     values: 'TableItem',
     description: 'Emitted when an item is selected.',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   },
   {
     key: 'emitSelectAll',
@@ -280,7 +286,7 @@ const tableEmits: TableItem[] = [
     type: '(allSelected: boolean) => void',
     values: 'boolean',
     description: 'Emitted when all items are selected or deselected.',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   },
   {
     key: 'emitPageChange',
@@ -288,7 +294,7 @@ const tableEmits: TableItem[] = [
     type: '(page: number) => void',
     values: 'number',
     description: 'Emitted when the current page is changed.',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   },
   {
     key: 'emitLimitChange',
@@ -296,7 +302,7 @@ const tableEmits: TableItem[] = [
     type: '(limit: number) => void',
     values: 'number',
     description: 'Emitted when the page size limit is changed.',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   },
   {
     key: 'emitSort',
@@ -304,7 +310,7 @@ const tableEmits: TableItem[] = [
     type: '(sort: Sort | null) => void',
     values: 'Sort, null',
     description: 'Emitted when the sort configuration is changed.',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   },
   {
     key: 'emitFilter',
@@ -312,7 +318,7 @@ const tableEmits: TableItem[] = [
     type: '(data: TableItem[], key: string) => void',
     values: 'TableItem[], string',
     description: 'Emitted when a filter is applied.',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   },
   {
     key: 'dragStart',
@@ -320,7 +326,7 @@ const tableEmits: TableItem[] = [
     type: '(index: number) => void',
     values: 'number',
     description: 'Emitted when dragging starts on an item.',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   },
   {
     key: 'dragOver',
@@ -328,7 +334,7 @@ const tableEmits: TableItem[] = [
     type: '(event: DragEvent) => void',
     values: 'DragEvent',
     description: 'Emitted when dragging over an area.',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   },
   {
     key: 'dragDrop',
@@ -336,20 +342,21 @@ const tableEmits: TableItem[] = [
     type: '(event: DragEvent, index: number) => void',
     values: 'DragEvent, number',
     description: 'Emitted when an item is dropped.',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   }
 ]
 
-const tableSlots: TableItem[] = [
+const tableSlots: SlotData[] = [
   {
     key: 'filterContentSlot',
     name: 'filter-content-${header.key}',
     description: 'Slot for customizing the popover displayed when clicking the filter icon.',
-    example: '<template #filter-content-${header-key}>\n  <div class="custom-header-filter">\n    Filter here!\n  </div>\n</template>'
+    example: '<template #filter-content-${header-key}>\n  <div class="custom-header-filter">\n    Filter here!\n  </div>\n</template>',
+    apiType: 'slot'
   }
 ]
 
-const sortInterface: TableItem[] = [
+const sortInterface: PropData[] = [
   {
     key: 'sortField',
     prop: 'field',
@@ -357,7 +364,7 @@ const sortInterface: TableItem[] = [
     description: 'The key of the field to be sorted.',
     values: 'string',
     default: 'undefined',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'sortDirection',
@@ -366,11 +373,11 @@ const sortInterface: TableItem[] = [
     description: 'The direction of the sort. Can be ascending ("asc") or descending ("desc").',
     values: 'asc | desc | undefined',
     default: 'undefined',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   }
 ]
 
-const filterInterface: TableItem[] = [
+const filterInterface: PropData[] = [
   {
     key: 'filterField',
     prop: 'field',
@@ -378,7 +385,7 @@ const filterInterface: TableItem[] = [
     description: 'The key of the field to be filtered.',
     values: 'string',
     default: 'undefined',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'filterValue',
@@ -387,11 +394,11 @@ const filterInterface: TableItem[] = [
     description: 'The value to filter by. This can be of any type depending on the field being filtered.',
     values: 'unknown',
     default: 'undefined',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const paginationInterface: TableItem[] = [
+const paginationInterface: PropData[] = [
   {
     key: 'pagRecords',
     prop: 'records',
@@ -399,7 +406,7 @@ const paginationInterface: TableItem[] = [
     description: 'The records for the current page.',
     values: 'T[]',
     default: '[]',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'pagTotal',
@@ -408,7 +415,7 @@ const paginationInterface: TableItem[] = [
     description: 'The total number of records.',
     values: 'number',
     default: '0',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'pagLimit',
@@ -417,7 +424,7 @@ const paginationInterface: TableItem[] = [
     description: 'The number of records per page.',
     values: 'number',
     default: '10',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'pagOffset',
@@ -426,18 +433,19 @@ const paginationInterface: TableItem[] = [
     description: 'The offset for the current page. Indicates the starting point for the records on the current page.',
     values: 'number',
     default: '0',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const tableHeaderInterface: TableItem[] = [
+const tableHeaderInterface: PropData[] = [
   {
     key: 'headerKey',
     prop: 'key',
     required: true,
     description: 'The unique identifier for the column.',
     values: 'string',
-    apiType: ApiTypeCategory.PRIMITIVE
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'headerLabel',
@@ -445,7 +453,8 @@ const tableHeaderInterface: TableItem[] = [
     required: true,
     description: 'The label to display for the column header.',
     values: 'string',
-    apiType: ApiTypeCategory.PRIMITIVE
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'headerField',
@@ -453,7 +462,8 @@ const tableHeaderInterface: TableItem[] = [
     required: true,
     description: 'The property of TableItem that this column should display.',
     values: 'keyof TableItem',
-    apiType: ApiTypeCategory.PRIMITIVE
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'headerSort',
@@ -462,7 +472,7 @@ const tableHeaderInterface: TableItem[] = [
     description: 'Specifies whether the column is sortable.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'headerFilter',
@@ -471,7 +481,7 @@ const tableHeaderInterface: TableItem[] = [
     description: 'Specifies whether the column is filterable.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'headerClass',
@@ -479,11 +489,12 @@ const tableHeaderInterface: TableItem[] = [
     required: false,
     description: 'Additional classes for the column.',
     values: 'string',
-    apiType: ApiTypeCategory.PRIMITIVE
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const clientSideDataTableProps: TableItem[] = [
+const clientSideDataTableProps: PropData[] = [
   {
     key: 'data',
     prop: 'data',
@@ -491,7 +502,7 @@ const clientSideDataTableProps: TableItem[] = [
     description: 'An array of objects representing the data rows of the table.',
     values: 'T[] | Ref<T[]>',
     default: '[]',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'headers',
@@ -500,7 +511,7 @@ const clientSideDataTableProps: TableItem[] = [
     description: 'An array of objects defining the headers of the table.',
     values: 'TableHeader[]',
     default: '[]',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'selectionMode',
@@ -509,7 +520,7 @@ const clientSideDataTableProps: TableItem[] = [
     description: 'The mode of selection (single, multiple, or none).',
     values: 'SelectionMode | Ref<SelectionMode>',
     default: 'none',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'pageSizeOptions',
@@ -518,7 +529,7 @@ const clientSideDataTableProps: TableItem[] = [
     description: 'An array of page size options for pagination.',
     values: 'number[]',
     default: '[10, 20, 50, 100]',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'draggable',
@@ -527,7 +538,7 @@ const clientSideDataTableProps: TableItem[] = [
     description: 'Determines if table rows are draggable.',
     values: 'boolean | Ref<boolean>',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 // API END
@@ -536,7 +547,7 @@ const draggableRef = ref<boolean>(false)
 
 const dataTable = useClientSideDataTable({
   headers: propHeaders,
-  data: tableProps,
+  data: tableProps as unknown as TableItem[],
   selectionMode: selectionModeRef,
   pageSizeOptions: [2, 5, 10, 20],
   draggable: draggableRef
@@ -544,7 +555,7 @@ const dataTable = useClientSideDataTable({
 
 const exampleTables = useClientSideDataTable({
   headers: propHeaders,
-  data: tableHeaderInterface,
+  data: tableHeaderInterface as unknown as TableItem[],
   selectionMode: 'none',
   pageSizeOptions: [10],
   draggable: false

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useNotification, type TextareaProps, type TableItem } from '#valkoui'
+import { useNotification, type TextareaProps } from '#valkoui'
 
 const form = ref<TextareaProps>({
   color: 'primary',
@@ -19,7 +19,7 @@ const iconsInForm = ref({
   right: false
 })
 
-const apiData: TableItem[] = [
+const apiData: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
@@ -27,7 +27,7 @@ const apiData: TableItem[] = [
     description: 'The color theme of the Textarea.',
     values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -36,7 +36,7 @@ const apiData: TableItem[] = [
     description: 'The variant of the Textarea.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -45,7 +45,7 @@ const apiData: TableItem[] = [
     description: 'The size of the Textarea.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'disabledProp',
@@ -54,7 +54,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Textarea is disabled or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'modelValueProp',
@@ -63,7 +63,7 @@ const apiData: TableItem[] = [
     description: 'The v-model for the Textarea',
     values: 'string',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'readonlyProp',
@@ -72,7 +72,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Textarea is readonly or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'labelProp',
@@ -81,7 +81,7 @@ const apiData: TableItem[] = [
     description: 'The label for the Textarea',
     values: 'string',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'helpertextProp',
@@ -90,7 +90,7 @@ const apiData: TableItem[] = [
     description: 'A hint for the Textarea',
     values: 'string',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'shapeProp',
@@ -99,7 +99,7 @@ const apiData: TableItem[] = [
     description: 'The shape of the Textarea',
     values: 'soft, rounded, square',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'ariaLabelProp',
@@ -108,7 +108,7 @@ const apiData: TableItem[] = [
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledByProp',
@@ -117,7 +117,7 @@ const apiData: TableItem[] = [
     description: 'ID reference to an element that labels the textarea (e.g. a visible <label>).',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaDescribedByProp',
@@ -126,7 +126,7 @@ const apiData: TableItem[] = [
     description: 'ID reference to an element that further describes the textarea, such as helper or error text.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaRequiredProp',
@@ -135,7 +135,7 @@ const apiData: TableItem[] = [
     description: 'Marks the textarea as required for form submission.',
     values: 'boolean',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaInvalidProp',
@@ -144,7 +144,7 @@ const apiData: TableItem[] = [
     description: 'Indicates that the current value entered into the textarea is invalid.',
     values: 'boolean',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -153,101 +153,111 @@ const apiData: TableItem[] = [
     description: 'Custom styles for different parts of the Textarea component.',
     values: 'TextareaSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container for the textarea component.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'field',
     prop: 'field',
+    required: false,
     description: 'Wrapper for the textarea and icons.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'textarea',
     prop: 'textarea',
+    required: false,
     description: 'The textarea element itself.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'label',
     prop: 'label',
+    required: false,
     description: 'Label for the textarea.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'helper',
     prop: 'helper',
+    required: false,
     description: 'Helper text displayed below the textarea.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'counter',
     prop: 'counter',
+    required: false,
     description: 'Character counter for the textarea.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'footer',
     prop: 'footer',
+    required: false,
     description: 'Footer container for helper text and counter.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'icons',
     prop: 'icons',
+    required: false,
     description: 'Base styles for icon containers.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'leftIcon',
     prop: 'leftIcon',
+    required: false,
     description: 'Styles for the left icon slot.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'rightIcon',
     prop: 'rightIcon',
+    required: false,
     description: 'Styles for the right icon slot.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const emitData: TableItem [] = [
+const emitData: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the value of the textarea changes.',
     values: 'value: string',
     type: '(value: string) => void',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'leftIconClickEmit',
@@ -255,7 +265,7 @@ const emitData: TableItem [] = [
     description: 'Emitted when the left icon of the textarea is clicked.',
     values: '',
     type: '() => void',
-    apiType: ApiTypeCategory.FUNCTION
+    apiType: 'function'
   },
   {
     key: 'rightIconClickEmit',
@@ -263,24 +273,24 @@ const emitData: TableItem [] = [
     description: 'Emitted when the right icon of the textarea is clicked.',
     values: '',
     type: '() => void',
-    apiType: ApiTypeCategory.FUNCTION
+    apiType: 'function'
   }
 ]
 
-const slotData: TableItem[] = [
+const slotData: SlotData[] = [
   {
     key: 'leftIconSlot',
     name: 'left-icon',
     description: 'Slot for placing an icon on the left side of the textarea field. This slot is typically used to include an icon for visual enhancement or to indicate textarea type.',
     example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>',
-    apiType: ApiTypeCategory.SLOT
+    apiType: 'slot'
   },
   {
     key: 'rightIconSlot',
     name: 'right-icon',
     description: 'Slot for placing an icon on the right side of the textarea field. This slot is typically used to include an icon for actions like clear the textarea.',
     example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>',
-    apiType: ApiTypeCategory.SLOT
+    apiType: 'slot'
   }
 ]
 

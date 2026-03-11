@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AvatarProps, TableItem } from '#valkoui'
+import type { AvatarProps } from '#valkoui'
 
 const form = reactive<AvatarProps>({
   color: 'primary',
@@ -16,7 +16,7 @@ const extraForm = reactive({
   user: ''
 })
 
-const avatarProps: TableItem[] = [
+const avatarProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
@@ -24,7 +24,7 @@ const avatarProps: TableItem[] = [
     description: 'The color theme of the Avatar.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -33,7 +33,7 @@ const avatarProps: TableItem[] = [
     description: 'The variant of the Avatar.',
     values: 'filled, outlined, ghost, gradient',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -42,7 +42,7 @@ const avatarProps: TableItem[] = [
     description: 'The shape of the Avatar.',
     values: 'rounded, square, soft',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -51,7 +51,7 @@ const avatarProps: TableItem[] = [
     description: 'The size of the Avatar.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'srcProp',
@@ -60,7 +60,7 @@ const avatarProps: TableItem[] = [
     description: 'The src of the image for the Avatar.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'nameProp',
@@ -69,7 +69,7 @@ const avatarProps: TableItem[] = [
     description: 'The name of the user for the Avatar..',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'elevatedProp',
@@ -78,7 +78,7 @@ const avatarProps: TableItem[] = [
     description: 'Applies a shadow to visually elevate the Avatar.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -87,7 +87,7 @@ const avatarProps: TableItem[] = [
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -96,11 +96,11 @@ const avatarProps: TableItem[] = [
     description: 'Custom styles for different parts of the Avatar component.',
     values: 'AvatarSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
@@ -108,7 +108,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Root container for the avatar. Controls the overall layout and background.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'imageTag',
@@ -117,16 +117,17 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the avatar image element.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const avatarSlots: TableItem[] = [
+const avatarSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Default slot for the Avatar, this would replace any existing content.',
-    example: '<vk-avatar>\n  <template #default>\n    Your custom content goes here!\n  </template>\n</vk-avatar>'
+    example: '<vk-avatar>\n  <template #default>\n    Your custom content goes here!\n  </template>\n</vk-avatar>',
+    apiType: 'slot'
   }
 ]
 

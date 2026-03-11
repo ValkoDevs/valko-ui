@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CollapseProps, TableItem } from '#valkoui'
+import type { CollapseProps } from '#valkoui'
 
 const form = ref<CollapseProps>({
   variant: 'filled',
@@ -10,7 +10,7 @@ const form = ref<CollapseProps>({
   multiple: false
 })
 
-const collapseProps: TableItem[] = [
+const collapseProps: PropData[] = [
   {
     key: 'variantProp',
     prop: 'variant',
@@ -18,7 +18,7 @@ const collapseProps: TableItem[] = [
     description: 'The variant of the Collapse.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -27,7 +27,7 @@ const collapseProps: TableItem[] = [
     description: 'The shape of the Collapse.',
     values: 'soft, rounded, square',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -36,7 +36,7 @@ const collapseProps: TableItem[] = [
     description: 'The size of the Collapse.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'separatorProp',
@@ -45,7 +45,7 @@ const collapseProps: TableItem[] = [
     description: 'The separator of the Collapse.',
     values: 'line, split, none',
     default: 'line',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'compactProp',
@@ -54,7 +54,7 @@ const collapseProps: TableItem[] = [
     description: 'Whether all Collapse items should be smaller.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'multipleProp',
@@ -63,7 +63,7 @@ const collapseProps: TableItem[] = [
     description: 'Allow multiple items to be expanded at the same time.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -72,54 +72,59 @@ const collapseProps: TableItem[] = [
     description: 'Root container.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const collapseSlots: TableItem[] = [
+const collapseSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for containing VkCollapseItem components. This slot is used to wrap VkCollapseItem components inside VkCollapse.',
-    example: '<template #default>\n  <!-- Your VkCollapseItem components go here -->\n</template>'
+    example: '<template #default>\n  <!-- Your VkCollapseItem components go here -->\n</template>',
+    apiType: 'slot'
   }
 ]
 
-const itemSlots: TableItem[] = [
+const itemSlots: SlotData[] = [
   {
     key: 'itemTitleSlot',
     name: 'title',
     description: 'Slot for the title content of the collapse item. This slot is typically used to provide a custom title for the collapse item.',
-    example: '<template #title>\n  <!-- Your custom title content goes here -->\n</template>'
+    example: '<template #title>\n  <!-- Your custom title content goes here -->\n</template>',
+    apiType: 'slot'
   },
   {
     key: 'itemDefaultSlot',
     name: 'default',
     description: 'Slot for the main content of the collapse item. This slot is typically used to include additional content inside the collapse item.',
-    example: '<template #default>\n  <!-- Your main content goes here -->\n</template>'
+    example: '<template #default>\n  <!-- Your main content goes here -->\n</template>',
+    apiType: 'slot'
   }
 ]
 
-const collapseItemProps: TableItem[] = [
+const collapseItemProps: PropData[] = [
   {
     key: 'title',
     prop: 'title',
+    required: false,
     description: 'Title of the collapse item (this is replaced by the title slot).',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlots',
     prop: 'styleSlots',
+    required: false,
     description: 'Custom styles for different parts of the Collapse Item.',
     values: 'CollapseItemSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const collapseItemStyleSlotsInterface: TableItem[] = [
+const collapseItemStyleSlotsInterface: PropData[] = [
   {
     key: 'collapseItem',
     prop: 'collapseItem',
@@ -127,7 +132,7 @@ const collapseItemStyleSlotsInterface: TableItem[] = [
     description: 'Root container of the Collapse Item.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'button',
@@ -136,7 +141,7 @@ const collapseItemStyleSlotsInterface: TableItem[] = [
     description: 'Button element in the Collapse Item header (title & icon).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'icon',
@@ -145,7 +150,7 @@ const collapseItemStyleSlotsInterface: TableItem[] = [
     description: 'Icon element in the Collapse Item header (this is replaced when the title slot is used).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'panel',
@@ -154,7 +159,7 @@ const collapseItemStyleSlotsInterface: TableItem[] = [
     description: 'Panel container that holds the content of the Collapse Item.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 

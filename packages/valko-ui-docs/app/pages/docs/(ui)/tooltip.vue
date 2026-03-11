@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TooltipProps, TableItem } from '#valkoui'
+import type { TooltipProps } from '#valkoui'
 
 const form = ref<TooltipProps>({
   shape: 'soft',
@@ -10,7 +10,7 @@ const form = ref<TooltipProps>({
   elevated: true
 })
 
-const tooltipProps: TableItem[] = [
+const tooltipProps: PropData[] = [
   {
     key: 'shapeProp',
     prop: 'shape',
@@ -18,7 +18,7 @@ const tooltipProps: TableItem[] = [
     description: 'The shape of the Tooltip.',
     values: 'rounded, square, soft',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -27,7 +27,7 @@ const tooltipProps: TableItem[] = [
     description: 'The size of the Tooltip.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'placementProp',
@@ -36,7 +36,7 @@ const tooltipProps: TableItem[] = [
     description: 'Defines where the Tooltip should appear relative to the reference element. If set to "auto", the Tooltip will automatically choose the best placement based on available space.',
     values: 'bottom, top, left, right, auto',
     default: 'auto',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'alignmentProp',
@@ -45,7 +45,7 @@ const tooltipProps: TableItem[] = [
     description: 'Specifies how the Tooltip is aligned within its placement. If not set, it defaults to the best fit based on available space.',
     values: 'start, center, end',
     default: 'undefined',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'contentProp',
@@ -54,7 +54,7 @@ const tooltipProps: TableItem[] = [
     description: 'The content of the Tooltip.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'elevatedProp',
@@ -63,7 +63,7 @@ const tooltipProps: TableItem[] = [
     description: 'Elevates the tooltip by one level.',
     values: 'boolean',
     default: 'true',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -72,35 +72,38 @@ const tooltipProps: TableItem[] = [
     description: 'Customizes style slots for Tooltip.',
     values: 'TooltipSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container for the tooltip popover.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'tip',
     prop: 'tip',
+    required: false,
     description: 'Styles for the tooltip content element.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const tooltipSlots: TableItem[] = [
+const tooltipSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for the content to trigger the tooltip.',
-    example: '<template #default>\n  <button>\n    Hover over me to show the tooltip\n  </button>\n</template>'
+    example: '<template #default>\n  <button>\n    Hover over me to show the tooltip\n  </button>\n</template>',
+    apiType: 'slot'
   }
 ]
 

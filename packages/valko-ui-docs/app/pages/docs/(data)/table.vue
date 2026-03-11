@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableItem, TableProps } from '#valkoui'
+import type { TableProps, TableItem } from '#valkoui'
 
 const form = ref<Partial<TableProps>>({
   variant: 'filled',
@@ -8,7 +8,7 @@ const form = ref<Partial<TableProps>>({
   striped: false
 })
 
-const tableProps: TableItem[] = [
+const tableProps: PropData[] = [
   {
     key: 'headersKey',
     prop: 'headers',
@@ -16,7 +16,7 @@ const tableProps: TableItem[] = [
     description: 'An array of objects defining the headers of the table.',
     values: 'TableHeader[]',
     default: '[]',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'dataKey',
@@ -25,7 +25,7 @@ const tableProps: TableItem[] = [
     description: 'An array of objects representing the data rows of the table.',
     values: 'TableItem[]',
     default: '[]',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'stripedKey',
@@ -34,7 +34,7 @@ const tableProps: TableItem[] = [
     description: 'Specifies whether the table rows are striped for better readability.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'selectedItemKey',
@@ -43,7 +43,7 @@ const tableProps: TableItem[] = [
     description: 'Helper prop to determine if a row is being selected using the key of the item pass by, only for styles purposes.',
     values: 'TableItem, TableItem[], undefined',
     default: 'undefined',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'rowEventsKey',
@@ -52,7 +52,7 @@ const tableProps: TableItem[] = [
     description: 'Allows rows to emit event onRowClick.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -61,112 +61,124 @@ const tableProps: TableItem[] = [
     description: 'Custom styles for different parts of the Table component.',
     values: 'TableSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container for the table component.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'table',
     prop: 'table',
+    required: false,
     description: 'Styles for the <table> element.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'thead',
     prop: 'thead',
+    required: false,
     description: 'Styles for the table header section.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'tr',
     prop: 'tr',
+    required: false,
     description: 'Styles for table rows.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'th',
     prop: 'th',
+    required: false,
     description: 'Styles for table header cells.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'body',
     prop: 'body',
+    required: false,
     description: 'Styles for the table body section.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'td',
     prop: 'td',
+    required: false,
     description: 'Styles for table data cells.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'noDataMessage',
     prop: 'noDataMessage',
+    required: false,
     description: 'Styles for the no data message row.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'tableFooter',
     prop: 'tableFooter',
+    required: false,
     description: 'Styles for the table footer section.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const tableItem: TableItem[] = [
+const tableItem: PropData[] = [
   {
     key: 'itemKey',
     prop: 'key',
     required: true,
     description: 'The unique identifier for the data row.',
     values: 'string',
-    apiType: ApiTypeCategory.PRIMITIVE
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'anyProp',
-    prop: 'Any other property',
+    prop: '[\'string\']',
     required: false,
     description: 'Any other property specific to your data row.',
     values: 'string, number, boolean, null',
-    apiType: ApiTypeCategory.PRIMITIVE
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const tableHeader: TableItem[] = [
+const tableHeader: PropData[] = [
   {
     key: 'headerKey',
     prop: 'key',
     required: true,
     description: 'The unique identifier for the column.',
     values: 'string',
-    apiType: ApiTypeCategory.PRIMITIVE
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'headerLabel',
@@ -174,7 +186,8 @@ const tableHeader: TableItem[] = [
     required: true,
     description: 'The label to display for the column header.',
     values: 'string',
-    apiType: ApiTypeCategory.PRIMITIVE
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'headerField',
@@ -182,7 +195,8 @@ const tableHeader: TableItem[] = [
     required: true,
     description: 'The property of TableItem that this column should display.',
     values: 'keyof TableItem',
-    apiType: ApiTypeCategory.PRIMITIVE
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'headerSort',
@@ -191,7 +205,7 @@ const tableHeader: TableItem[] = [
     description: 'Specifies whether the column is sortable.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'headerFilter',
@@ -200,50 +214,42 @@ const tableHeader: TableItem[] = [
     description: 'Specifies whether the column is filterable.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
-  },
-  {
-    key: 'headerClass',
-    prop: 'class',
-    required: false,
-    description: 'Additional classes for the column.',
-    values: 'string',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const emitData: TableItem[] = [
+const emitData: EmitData[] = [
   {
     key: 'onRowClickEmit',
     event: 'onRowClick',
     type: '(item: TableItem) => void',
     values: '',
     description: 'Emitted when a row is clicked, only if prop rowEvents is true.',
-    apiType: ApiTypeCategory.FUNCTION
+    apiType: 'function'
   }
 ]
 
-const slotData: TableItem[] = [
+const slotData: SlotData[] = [
   {
     key: 'headerCellSlot',
     name: 'header-cell-${header.key}',
     description: 'Slot that displays by default the header label value.',
     example: '<template #header-cell-propKey>\n  <p>Properties</p>\n</template>',
-    apiType: ApiTypeCategory.SLOT
+    apiType: 'slot'
   },
   {
     key: 'cellSlot',
     name: 'cell-${field}',
     description: 'Slot that displays by default the item field value.',
     example: '<template #cell-prop-propKey>\n  <p>Data</p>\n</template>',
-    apiType: ApiTypeCategory.SLOT
+    apiType: 'slot'
   },
   {
     key: 'noDataMessageSlot',
     name: 'no-data-message',
     description: 'Slot that display the message when no data is found.',
     example: '<template #no-data-message>\n  <p>No items found.</p>\n</template>',
-    apiType: ApiTypeCategory.SLOT
+    apiType: 'slot'
   }
 ]
 
@@ -344,7 +350,7 @@ const generateSnippet = snippetGeneratorFactory('vk-table')
         :shape="form.shape"
         :size="form.size"
         :striped="form.striped"
-        :data="tableHeader"
+        :data="tableHeader as unknown as TableItem[]"
         :headers="propHeaders"
       />
     </template>
@@ -385,7 +391,7 @@ const generateSnippet = snippetGeneratorFactory('vk-table')
           <vk-table
             :variant="variant.value"
             :headers="propHeaders"
-            :data="tableHeader"
+            :data="tableHeader as unknown as TableItem[]"
             class="mt-4"
           />
         </div>
@@ -406,7 +412,7 @@ const generateSnippet = snippetGeneratorFactory('vk-table')
           <vk-table
             :shape="shape.value"
             :headers="propHeaders"
-            :data="tableHeader"
+            :data="tableHeader as unknown as TableItem[]"
             class="mt-4"
           />
         </div>
@@ -427,7 +433,7 @@ const generateSnippet = snippetGeneratorFactory('vk-table')
           <vk-table
             :size="size.value"
             :headers="propHeaders"
-            :data="tableHeader"
+            :data="tableHeader as unknown as TableItem[]"
             class="mt-4"
           />
         </div>

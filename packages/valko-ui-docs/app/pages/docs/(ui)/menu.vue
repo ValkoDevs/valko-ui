@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SelectOption, MenuItem, TableItem, MenuProps } from '#valkoui'
+import type { SelectOption, MenuItem, MenuProps } from '#valkoui'
 
 const form = ref<Partial<MenuProps>>({
   color: 'primary',
@@ -15,7 +15,7 @@ const menuItems: MenuItem[] = [
   { key: 'checkbox', group: 'Forms', text: 'Checkbox' }
 ]
 
-const menuProps: TableItem[] = [
+const menuProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
@@ -23,7 +23,7 @@ const menuProps: TableItem[] = [
     description: 'The color theme of the Menu.',
     values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -32,7 +32,7 @@ const menuProps: TableItem[] = [
     description: 'The variant of the Menu.',
     values: 'filled, outlined, ghost, link, line, gradient',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -41,7 +41,7 @@ const menuProps: TableItem[] = [
     description: 'The shape of the Menu buttons.',
     values: 'rounded, square, soft',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -50,7 +50,7 @@ const menuProps: TableItem[] = [
     description: 'The size of the Menu.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'floatingProp',
@@ -59,7 +59,7 @@ const menuProps: TableItem[] = [
     description: 'Changes the padding of the Menu.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'activeProp',
@@ -68,7 +68,7 @@ const menuProps: TableItem[] = [
     description: 'The active element of the Menu.',
     values: 'null, string, number',
     default: 'null',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'itemsProp',
@@ -77,7 +77,7 @@ const menuProps: TableItem[] = [
     description: 'The Menu items.',
     values: 'MenuItem[]',
     default: '[]',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'styleSlotsProp',
@@ -86,46 +86,50 @@ const menuProps: TableItem[] = [
     description: 'Customizes style slots for Menu.',
     values: 'MenuStyleSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'group',
     prop: 'group',
+    required: false,
     description: 'Styles for the group label (if grouping is used).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'menu',
     prop: 'menu',
+    required: false,
     description: 'Styles for the menu container (the <ul> element).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'item',
     prop: 'item',
+    required: false,
     description: 'Styles for each menu item container (<li> element).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'content',
     prop: 'content',
+    required: false,
     description: 'Styles for the menu item content/button.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const menuItemsInterface: TableItem[] = [
+const menuItemsInterface: PropData[] = [
   {
     key: 'keyInterfaceMenu',
     prop: 'key',
@@ -133,7 +137,7 @@ const menuItemsInterface: TableItem[] = [
     description: 'The key of the Item.',
     values: 'string | number',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'textInterfaceMenu',
@@ -142,7 +146,7 @@ const menuItemsInterface: TableItem[] = [
     description: 'The displayed name of the Item.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'groupInterfaceMenu',
@@ -151,7 +155,7 @@ const menuItemsInterface: TableItem[] = [
     description: 'The displayed name of the wrapper for the Items.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'iconInterfaceMenu',
@@ -160,7 +164,7 @@ const menuItemsInterface: TableItem[] = [
     description: 'The icon name for the Menu item.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'disabledInterfaceMenu',
@@ -169,7 +173,7 @@ const menuItemsInterface: TableItem[] = [
     description: 'Wheter the Item is disabled or not.',
     values: 'boolean',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'activeInterfaceMenu',
@@ -178,7 +182,7 @@ const menuItemsInterface: TableItem[] = [
     description: 'Wheter the Item is active or not.',
     values: 'boolean',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'onClickInterfaceMenu',
@@ -187,27 +191,28 @@ const menuItemsInterface: TableItem[] = [
     description: 'Emit for the Item.',
     values: '() => void',
     default: '',
-    apiType: ApiTypeCategory.FUNCTION
+    apiType: 'function'
   }
 ]
 
-const menuEmits: TableItem[] = [
+const menuEmits: EmitData[] = [
   {
     key: 'itemClickEmit',
     event: 'itemClick',
     description: 'Emitted when an item in the Menu is clicked.',
     values: 'Item',
     type: '(item: MenuItem) => void',
-    apiType: ApiTypeCategory.FUNCTION
+    apiType: 'event'
   }
 ]
 
-const menuSlots: TableItem[] = [
+const menuSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for the main content of the menu item.',
-    example: '<template #default>\n  <p>This is the main content of the menu item.</p>\n</template>'
+    example: '<template #default>\n  <p>This is the main content of the menu item.</p>\n</template>',
+    apiType: 'slot'
   }
 ]
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableItem, CardProps, Layout, SelectOption } from '#valkoui'
+import type { CardProps, Layout, SelectOption } from '#valkoui'
 import { useNotification } from '#valkoui'
 
 const form = ref<CardProps>({
@@ -24,7 +24,7 @@ const layoutOptions: SelectOption<Layout>[] = [
   { value: 'horizontal', label: 'Horizontal' }
 ]
 
-const cardProps: TableItem[] = [
+const cardProps: PropData[] = [
   {
     key: 'variantProp',
     prop: 'variant',
@@ -32,7 +32,7 @@ const cardProps: TableItem[] = [
     description: 'The variant of the Card.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -41,7 +41,7 @@ const cardProps: TableItem[] = [
     description: 'The shape of the Card.',
     values: 'rounded, square, soft',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -50,7 +50,7 @@ const cardProps: TableItem[] = [
     description: 'The size of the Card.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'layoutProp',
@@ -59,7 +59,7 @@ const cardProps: TableItem[] = [
     description: 'The layout of the elements inside the Card.',
     values: 'vertical, horizontal, cover',
     default: 'vertical',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'isPressableProp',
@@ -68,7 +68,7 @@ const cardProps: TableItem[] = [
     description: 'Wether the Card allows to be clicked.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'elevatedProp',
@@ -77,7 +77,7 @@ const cardProps: TableItem[] = [
     description: 'Applies a shadow and lowers the background tone to emphasize interactive content inside the Card. Useful when the Card contains inputs or other elevated elements.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -86,11 +86,11 @@ const cardProps: TableItem[] = [
     description: 'Root container.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const cardImageProps: TableItem[] = [
+const cardImageProps: PropData[] = [
   {
     key: 'srcImageProp',
     prop: 'src',
@@ -98,7 +98,7 @@ const cardImageProps: TableItem[] = [
     description: 'The src for the image.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'altImageProp',
@@ -107,7 +107,7 @@ const cardImageProps: TableItem[] = [
     description: 'The alt for the image.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'widthImageProp',
@@ -116,7 +116,7 @@ const cardImageProps: TableItem[] = [
     description: 'The widht for the image.',
     values: 'string',
     default: '100%',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'heightImageProp',
@@ -125,7 +125,7 @@ const cardImageProps: TableItem[] = [
     description: 'The height for the image.',
     values: 'string',
     default: 'auto',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -134,11 +134,11 @@ const cardImageProps: TableItem[] = [
     description: 'Customizes style slots for CardImage.',
     values: 'CardImageSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const cardImageStyleSlotsInterface: TableItem[] = [
+const cardImageStyleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
@@ -146,7 +146,7 @@ const cardImageStyleSlotsInterface: TableItem[] = [
     description: 'Root container.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'imageTag',
@@ -155,7 +155,7 @@ const cardImageStyleSlotsInterface: TableItem[] = [
     description: 'Class shared with image slot and the image element itself.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'gradient',
@@ -164,11 +164,11 @@ const cardImageStyleSlotsInterface: TableItem[] = [
     description: 'Styles for the gradient.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const cardHeaderProps: TableItem[] = [
+const cardHeaderProps: PropData[] = [
   {
     key: 'styleSlots',
     prop: 'styleSlots',
@@ -176,11 +176,11 @@ const cardHeaderProps: TableItem[] = [
     description: 'Root container.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const cardBodyProps: TableItem[] = [
+const cardBodyProps: PropData[] = [
   {
     key: 'styleSlots',
     prop: 'styleSlots',
@@ -188,11 +188,11 @@ const cardBodyProps: TableItem[] = [
     description: 'Root container.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const cardFooterProps: TableItem[] = [
+const cardFooterProps: PropData[] = [
   {
     key: 'styleSlots',
     prop: 'styleSlots',
@@ -200,27 +200,28 @@ const cardFooterProps: TableItem[] = [
     description: 'Root container.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const cardEmits: TableItem[] = [
+const cardEmits: EmitData[] = [
   {
     key: 'clickEmit',
     event: 'click',
     type: '(event: MouseEvent) => void',
     values: 'MouseEvent',
     description: 'Emitted when the Card is clicked by the user.',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   }
 ]
 
-const cardSlots: TableItem[] = [
+const cardSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for the main content of the Card.',
-    example: '<template #default>\n <vk-card-body>\n  This is the main content of the Card.\n </vk-card-body>\n</template>'
+    example: '<template #default>\n <vk-card-body>\n  This is the main content of the Card.\n </vk-card-body>\n</template>',
+    apiType: 'slot'
   }
 ]
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ButtonProps, TableItem, SelectOption } from '@valko-ui/components'
+import type { ButtonProps, SelectOption } from '@valko-ui/components'
 
 const form = ref<ButtonProps>({
   color: 'primary',
@@ -20,7 +20,7 @@ const typeOptions: SelectOption<'button' | 'submit' | 'reset'>[] = [
   { value: 'reset', label: 'Reset' }
 ]
 
-const apiData: TableItem[] = [
+const apiData: PropData[] = [
   {
     key: 'color',
     prop: 'color',
@@ -28,7 +28,7 @@ const apiData: TableItem[] = [
     description: 'The color theme of the Button.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'variant',
@@ -37,7 +37,7 @@ const apiData: TableItem[] = [
     description: 'The variant of the Button.',
     values: 'filled, outlined, ghost, link, gradient',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'shape',
@@ -46,7 +46,7 @@ const apiData: TableItem[] = [
     description: 'The shape of the Button.',
     values: 'rounded, square, soft',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'size',
@@ -55,7 +55,7 @@ const apiData: TableItem[] = [
     description: 'The size of the Button.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'disabled',
@@ -64,7 +64,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Button is disabled or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'type',
@@ -73,7 +73,7 @@ const apiData: TableItem[] = [
     description: 'The type of the button.',
     values: 'button, submit, reset',
     default: 'button',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'elevated',
@@ -82,7 +82,7 @@ const apiData: TableItem[] = [
     description: 'Adds a subtle shadow to the button, giving it a slightly raised appearance. When false (default), the button appears flat with no shadow.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'block',
@@ -91,7 +91,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Button width is equal to it\'s container.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'loading',
@@ -100,7 +100,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Button is loading or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -109,7 +109,7 @@ const apiData: TableItem[] = [
     description: 'Defines a string label for the button when no visible text is present. Useful for icon-only buttons or when additional context is needed for assistive technologies.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -118,11 +118,11 @@ const apiData: TableItem[] = [
     description: 'Slots for applying custom styles to the Button.',
     values: 'ButtonSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'button',
     prop: 'button',
@@ -130,7 +130,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the button element itself, this is the main container aswell.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'spinnerContainer',
@@ -139,7 +139,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the div containing the spinner.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'spinner',
@@ -148,7 +148,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the spinner itself.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'spinnerIcon',
@@ -157,7 +157,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the spinner icon.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'stateLayer',
@@ -166,27 +166,28 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the state layer element (e.g., hover, focus, active states).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const emitData: TableItem[] = [
+const emitData: EmitData[] = [
   {
     key: 'click',
     event: 'click',
     description: 'Emitted when the button is clicked.',
     values: 'MouseEvent',
     type: '(event: MouseEvent) => void',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   }
 ]
 
-const slotData: TableItem[] = [
+const slotData: SlotData[] = [
   {
     key: 'default',
     name: 'default',
     description: 'Slot for the content of the button. This slot is typically used to include text or other components inside the button.',
-    example: '<template #default>\n  <!-- Your button content goes here -->\n</template>'
+    example: '<template #default>\n  <!-- Your button content goes here -->\n</template>',
+    apiType: 'slot'
   }
 ]
 

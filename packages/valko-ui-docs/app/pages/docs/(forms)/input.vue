@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useNotification, type SelectOption, type InputProps, type TableItem, type InputType } from '#valkoui'
+import { useNotification, type SelectOption, type InputProps, type InputType } from '#valkoui'
 
 const typeOptions: SelectOption<InputType>[] = [
   { value:'text', label:'Text' },
@@ -31,7 +31,7 @@ const inputStates = reactive<Record<string, string>>({
   readonly: 'Example readonly.'
 })
 
-const apiData: TableItem[] = [
+const apiData: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
@@ -39,7 +39,7 @@ const apiData: TableItem[] = [
     description: 'The color theme of the Input.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -48,7 +48,7 @@ const apiData: TableItem[] = [
     description: 'The variant of the Input.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'typeProp',
@@ -57,7 +57,7 @@ const apiData: TableItem[] = [
     description: 'The type of the Input.',
     values: 'text, email, password, number',
     default: 'text',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'cursorProp',
@@ -66,7 +66,7 @@ const apiData: TableItem[] = [
     description: 'The displayed cursor type when hovering the input.',
     values: 'cursor | text',
     default: 'text',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -75,7 +75,7 @@ const apiData: TableItem[] = [
     description: 'The size of the Input.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'disabledProp',
@@ -84,7 +84,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Input is disabled or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'roundedProp',
@@ -93,7 +93,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Input is rounded or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'modelValueProp',
@@ -102,7 +102,7 @@ const apiData: TableItem[] = [
     description: 'The v-model for the Input',
     values: 'string, number',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'minProp',
@@ -111,7 +111,7 @@ const apiData: TableItem[] = [
     description: 'The min value for the Input in type number',
     values: 'number',
     default: '-Infinity',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'maxProp',
@@ -120,7 +120,7 @@ const apiData: TableItem[] = [
     description: 'The max value for the Input in type number',
     values: 'number',
     default: 'Infinity',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'stepProp',
@@ -129,7 +129,7 @@ const apiData: TableItem[] = [
     description: 'The step value for the Input in type number',
     values: 'number',
     default: '1',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'readonlyProp',
@@ -138,7 +138,7 @@ const apiData: TableItem[] = [
     description: 'Wheter the Input is readonly or not',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'labelProp',
@@ -147,7 +147,7 @@ const apiData: TableItem[] = [
     description: 'The label for the Input',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'helpertextProp',
@@ -156,7 +156,7 @@ const apiData: TableItem[] = [
     description: 'A hint for the Input',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'shapeProp',
@@ -165,7 +165,7 @@ const apiData: TableItem[] = [
     description: 'The shape of the Input',
     values: 'rounded, soft, square',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'ariaLabelProp',
@@ -174,7 +174,7 @@ const apiData: TableItem[] = [
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledByProp',
@@ -183,7 +183,7 @@ const apiData: TableItem[] = [
     description: 'ID reference to an element that labels the input (e.g. a visible <label>).',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaDescribedByProp',
@@ -192,7 +192,7 @@ const apiData: TableItem[] = [
     description: 'ID reference to an element that further describes the input, such as helper or error text.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaRequiredProp',
@@ -201,7 +201,7 @@ const apiData: TableItem[] = [
     description: 'Marks the input as required for form submission.',
     values: 'boolean',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaInvalidProp',
@@ -210,7 +210,7 @@ const apiData: TableItem[] = [
     description: 'Indicates that the current value entered into the input is invalid.',
     values: 'boolean',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -219,109 +219,120 @@ const apiData: TableItem[] = [
     description: 'Custom styles for different parts of the Input component.',
     values: 'InputSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container for the input component.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'field',
     prop: 'field',
+    required: false,
     description: 'Wrapper for the input field and related elements.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'input',
     prop: 'input',
+    required: false,
     description: 'The input element itself (hidden since we use a custom input).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'label',
     prop: 'label',
+    required: false,
     description: 'Label element for the input.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'helper',
     prop: 'helper',
+    required: false,
     description: 'Helper text displayed below the input.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'icons',
     prop: 'icons',
+    required: false,
     description: 'Base styles for icon containers.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'leftIcon',
     prop: 'leftIcon',
+    required: false,
     description: 'Styles for the left icon slot.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'rightIcon',
     prop: 'rightIcon',
+    required: false,
     description: 'Styles for the right icon slot.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'clearIcon',
     prop: 'clearIcon',
+    required: false,
     description: 'Styles for the clear (reset) icon.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'numberArrows',
     prop: 'numberArrows',
+    required: false,
     description: 'Container for number input increment/decrement arrows.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'chevrons',
     prop: 'chevrons',
+    required: false,
     description: 'Styles for the chevron icons used in number input arrows.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const emitData: TableItem[] = [
+const emitData: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the value of the input is updated.',
     values: 'string',
     type: '(value: string) => void',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'focusEmit',
@@ -329,7 +340,7 @@ const emitData: TableItem[] = [
     description: 'Emitted when the input is focused.',
     values: 'FocusEvent',
     type: '(event: FocusEvent) => void',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   },
   {
     key: 'blurEmit',
@@ -337,7 +348,7 @@ const emitData: TableItem[] = [
     description: 'Emitted when the input loses focus.',
     values: 'FocusEvent',
     type: '(event: FocusEvent) => void',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   },
   {
     key: 'clearEmit',
@@ -345,7 +356,7 @@ const emitData: TableItem[] = [
     description: 'Emitted when the input is cleared using the clearable icon.',
     values: '',
     type: '() => void',
-    apiType: ApiTypeCategory.FUNCTION
+    apiType: 'function'
   },
   {
     key: 'leftIconClickEmit',
@@ -353,7 +364,7 @@ const emitData: TableItem[] = [
     description: 'Emitted when the left icon of the input is clicked.',
     values: '',
     type: '() => void',
-    apiType: ApiTypeCategory.FUNCTION
+    apiType: 'function'
   },
   {
     key: 'rightIconClickEmit',
@@ -361,24 +372,24 @@ const emitData: TableItem[] = [
     description: 'Emitted when the right icon of the input is clicked.',
     values: '',
     type: '() => void',
-    apiType: ApiTypeCategory.FUNCTION
+    apiType: 'function'
   }
 ]
 
-const slotData: TableItem[] = [
+const slotData: SlotData[] = [
   {
     key: 'leftIconSlot',
     name: 'left-icon',
     description: 'Slot for placing an icon on the left side of the input field. This slot is typically used to include an icon for visual enhancement or to indicate input type.',
     example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>',
-    apiType: ApiTypeCategory.SLOT
+    apiType: 'slot'
   },
   {
     key: 'rightIconSlot',
     name: 'right-icon',
     description: 'Slot for placing an icon on the right side of the input field. This slot is typically used to include an icon for actions like clear input or show/hide password.',
     example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>',
-    apiType: ApiTypeCategory.SLOT
+    apiType: 'slot'
   }
 ]
 

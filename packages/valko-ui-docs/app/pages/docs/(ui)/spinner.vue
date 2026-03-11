@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SpinnerProps, TableItem } from '#valkoui'
+import type { SpinnerProps } from '#valkoui'
 
 const names = [
   { value: 'loader', label: 'Loader' },
@@ -13,7 +13,7 @@ const form = ref<SpinnerProps>({
   condensed: false
 })
 
-const spinnerProps: TableItem[] = [
+const spinnerProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
@@ -21,7 +21,7 @@ const spinnerProps: TableItem[] = [
     description: 'The color theme of the Spinner.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'nameProp',
@@ -30,7 +30,7 @@ const spinnerProps: TableItem[] = [
     description: 'The icon of the Spinner.',
     values: 'string',
     default: 'loader-2',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'sizeProp',
@@ -39,7 +39,7 @@ const spinnerProps: TableItem[] = [
     description: 'The size of the Spinner.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'condensedProp',
@@ -48,7 +48,7 @@ const spinnerProps: TableItem[] = [
     description: 'Reduces the Spinner\'s size.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'classesProp',
@@ -57,7 +57,7 @@ const spinnerProps: TableItem[] = [
     description: 'Overrides the spinner\'s default colors, allowing you to fully customize its appearance.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -66,26 +66,28 @@ const spinnerProps: TableItem[] = [
     description: 'Customizes style slots for Spinner.',
     values: 'SpinnerSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container of the Spinner.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'icon',
     prop: 'icon',
+    required: false,
     description: 'Icon element of the Spinner.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 

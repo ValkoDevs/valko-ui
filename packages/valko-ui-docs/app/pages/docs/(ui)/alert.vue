@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableItem, AlertProps } from '#valkoui'
+import type { AlertProps } from '#valkoui'
 
 const isShown = ref(true)
 
@@ -14,7 +14,7 @@ const form = ref<AlertProps>({
 
 const iconsForm = ref<Record<string, boolean>>({})
 
-const alertProps: TableItem[] = [
+const alertProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
@@ -22,7 +22,7 @@ const alertProps: TableItem[] = [
     description: 'The color theme of the Alert.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -31,7 +31,7 @@ const alertProps: TableItem[] = [
     description: 'The variant of the Alert.',
     values: 'filled, outlined, ghost, gradient',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -40,7 +40,7 @@ const alertProps: TableItem[] = [
     description: 'The shape of the Alert.',
     values: 'rounded, square, soft',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -49,7 +49,7 @@ const alertProps: TableItem[] = [
     description: 'The size of the Alert.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'elevatedProp',
@@ -58,7 +58,7 @@ const alertProps: TableItem[] = [
     description: 'Adds a subtle shadow to the Alert, giving it a slightly raised appearance. When false (default), the alert appears flat with no shadow.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'closableProp',
@@ -67,7 +67,7 @@ const alertProps: TableItem[] = [
     description: 'Displays a button to close the Alert.',
     values: 'boolean',
     default: false,
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'titleProp',
@@ -76,7 +76,7 @@ const alertProps: TableItem[] = [
     description: 'The title of the Alert.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'iconProp',
@@ -85,7 +85,7 @@ const alertProps: TableItem[] = [
     description: 'The icon of the Alert.',
     values: 'string | null',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -94,7 +94,7 @@ const alertProps: TableItem[] = [
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledByProp',
@@ -103,7 +103,7 @@ const alertProps: TableItem[] = [
     description: 'ID reference to an element that labels the input (e.g. a visible <label>).',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -112,31 +112,32 @@ const alertProps: TableItem[] = [
     description: 'Custom styles for different parts of the Alert component.',
     values: 'AlertSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const alertEmits: TableItem[] = [
+const alertEmits: EmitData[] = [
   {
     key: 'closeEmit',
     event: 'close',
     type: '() => void',
     values: '',
     description: 'Emitted when the alert is closed by the user.',
-    apiType: ApiTypeCategory.EVENT
+    apiType: 'event'
   }
 ]
 
-const alertSlots: TableItem[] = [
+const alertSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for the main content of the alert.',
-    example: '<template #default>\n  <p>This is the main content of the alert.</p>\n</template>'
+    example: '<template #default>\n  <p>This is the main content of the alert.</p>\n</template>',
+    apiType: 'slot'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
@@ -144,7 +145,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Root container for the alert. Controls the overall layout and background.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'mainIcon',
@@ -153,7 +154,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the main icon.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'title',
@@ -162,7 +163,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the alert title text.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'contentContainer',
@@ -171,7 +172,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Container for the title and content.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'content',
@@ -180,7 +181,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Container for the main content area (slot).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'closeButton',
@@ -189,7 +190,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the close button itself.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'closeIcon',
@@ -198,7 +199,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the close icon itself.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 

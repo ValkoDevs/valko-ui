@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DividerProps, SelectOption, TableItem } from '#valkoui'
+import type { DividerProps, SelectOption } from '#valkoui'
 
 const form = ref<DividerProps>({
   color: 'primary',
@@ -14,7 +14,7 @@ const directionOptions: SelectOption[] = [
   { value: 'horizontal', label: 'Horizontal' }
 ]
 
-const dividerProps: TableItem[] = [
+const dividerProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
@@ -22,7 +22,7 @@ const dividerProps: TableItem[] = [
     description: 'The color theme of the Divider.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -31,7 +31,7 @@ const dividerProps: TableItem[] = [
     description: 'The variant of the Divider.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -40,7 +40,7 @@ const dividerProps: TableItem[] = [
     description: 'The shape of the Divider.',
     values: 'rounded, square, soft',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -49,7 +49,7 @@ const dividerProps: TableItem[] = [
     description: 'The size of the Divider.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'directionProp',
@@ -58,7 +58,7 @@ const dividerProps: TableItem[] = [
     description: 'The direction of the Divider.',
     values: 'vertical, horizontal',
     default: 'horizontal',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'ariaLabelProp',
@@ -67,7 +67,7 @@ const dividerProps: TableItem[] = [
     description: 'Defines a string label for the divider element. Used by screen readers when no visible text is provided.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledByProp',
@@ -76,7 +76,7 @@ const dividerProps: TableItem[] = [
     description: 'References the ID of another element that labels the divider. Useful for complex labeling.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -85,7 +85,7 @@ const dividerProps: TableItem[] = [
     description: 'Root container.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 

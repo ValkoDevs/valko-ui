@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CheckboxProps, SelectOption, TableItem, LabelPosition } from '#valkoui'
+import type { CheckboxProps, SelectOption, LabelPosition } from '#valkoui'
 
 const position: SelectOption<LabelPosition>[] = [
   { value: 'right', label:'Right' },
@@ -32,7 +32,7 @@ const checkboxStates = reactive(
   ].map(opt => [opt.value, true]))
 )
 
-const apiData: TableItem[] = [
+const apiData: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
@@ -40,7 +40,7 @@ const apiData: TableItem[] = [
     description: 'The color theme of the Checkbox.',
     values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -49,7 +49,7 @@ const apiData: TableItem[] = [
     description: 'The variant of the Checkbox.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -58,7 +58,7 @@ const apiData: TableItem[] = [
     description: 'The size of the Checkbox.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'disabledProp',
@@ -67,7 +67,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Checkbox is disabled or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'roundedProp',
@@ -76,7 +76,7 @@ const apiData: TableItem[] = [
     description: 'Whether the Checkbox is rounded or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'modelValueProp',
@@ -85,7 +85,7 @@ const apiData: TableItem[] = [
     description: 'The v-model for the Checkbox',
     values: 'boolean, null',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'readonlyProp',
@@ -94,7 +94,7 @@ const apiData: TableItem[] = [
     description: 'Wheter the Checkbox is readonly or not',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'labelProp',
@@ -103,7 +103,7 @@ const apiData: TableItem[] = [
     description: 'The label for the Checkbox',
     values: 'string',
     default: 'Checkbox',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'helpertextProp',
@@ -112,7 +112,7 @@ const apiData: TableItem[] = [
     description: 'Displays a hint under the Checkbox',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'indeterminateProp',
@@ -121,7 +121,7 @@ const apiData: TableItem[] = [
     description: 'Checks all Checkbox children',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'labelPositionProp',
@@ -130,7 +130,7 @@ const apiData: TableItem[] = [
     description: 'Moves the label of the Checkbox to left or right',
     values: 'left, right',
     default: 'right',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -139,7 +139,7 @@ const apiData: TableItem[] = [
     description: 'The shape of the Checkbox',
     values: 'soft, rounded, square',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'ariaLabelProp',
@@ -148,7 +148,7 @@ const apiData: TableItem[] = [
     description: 'Defines a string value that labels the checkbox for screen readers.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledByProp',
@@ -157,7 +157,7 @@ const apiData: TableItem[] = [
     description: 'References the ID of the element that labels the checkbox.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaDescribedByProp',
@@ -166,7 +166,7 @@ const apiData: TableItem[] = [
     description: 'References the ID of the element that provides a description for the checkbox.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'nameProp',
@@ -175,7 +175,7 @@ const apiData: TableItem[] = [
     description: 'Specifies the name of the checkbox input.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -184,11 +184,11 @@ const apiData: TableItem[] = [
     description: 'Slots for applying custom styles to the Checkbox.',
     values: 'CheckboxSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
@@ -196,7 +196,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'The root container, controls layout between the checkbox and helpertext.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'checkboxContainer',
@@ -205,7 +205,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'The container for the checkbox (this includes the checkbox input and its label).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'stateLayer',
@@ -214,7 +214,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'The state layer for the checkbox (used to apply hover, focus, and active states).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'checkbox',
@@ -223,7 +223,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'The visual representation of the checkbox (includes the icon inside the checkbox).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'input',
@@ -232,7 +232,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'The classes for the checkbox input element (this is hidden since we use a custom checkbox).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'label',
@@ -241,7 +241,7 @@ const styleSlotsInterface: TableItem[] = [
     description: 'The classes for the label.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'helpertext',
@@ -250,18 +250,18 @@ const styleSlotsInterface: TableItem[] = [
     description: 'The classes for the helpertext.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const emitData: TableItem[] = [
+const emitData: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the checkbox value is updated.',
     values: 'boolean',
     type: '(value: boolean) => void',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 

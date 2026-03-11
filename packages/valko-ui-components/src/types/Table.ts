@@ -12,7 +12,6 @@ export interface TableHeader {
   field: keyof TableItem;
   sortable?: boolean;
   filterable?: boolean;
-  class?: string;
 }
 
 export interface TableProps extends DefaultComponent {

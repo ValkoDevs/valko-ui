@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import type { TableItem, IconProps } from '#valkoui'
+import type { IconProps } from '#valkoui'
 
 const form = ref<IconProps>({
   name: 'home'
 })
 
-const iconProps: TableItem[] = [
+const iconProps: PropData[] = [
   {
     key: 'nameProp',
     prop: 'name',
@@ -13,7 +13,7 @@ const iconProps: TableItem[] = [
     description: 'The name of the icon to display. It must match a valid Tabler Icons name.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -21,7 +21,8 @@ const iconProps: TableItem[] = [
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
-    apiType: ApiTypeCategory.PRIMITIVE
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -30,7 +31,7 @@ const iconProps: TableItem[] = [
     description: 'Root container.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 

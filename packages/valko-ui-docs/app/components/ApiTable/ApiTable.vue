@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { ApiTableProps, HeaderKey } from './interfaces'
+import type { ApiTableProps, HeaderKey, ApiType } from './interfaces'
+import type { TableItem } from '#valkoui'
 import styles from './ApiTable.styles'
-import { type ApiType, ApiTypeCategory } from '~/utils/enums'
 
 defineOptions({ name: 'ApiTable' })
 
@@ -17,7 +17,7 @@ const headerMap = {
   format: formatHeaders
 }
 
-const colorMap: Partial<Record<string, string>> = {
+const colorMap: Partial<Record<ApiType, string>> = {
   string: 'text-secondary',
   number: 'text-warning',
   EpochTimeStamp: 'text-warning',
@@ -27,9 +27,11 @@ const colorMap: Partial<Record<string, string>> = {
   any: 'text-negative',
   unknown: 'text-negative',
   Date: 'text-primary',
+  primitive: 'text-secondary',
   object: 'text-on-surface',
   function: 'text-on-surface',
   event: 'text-on-surface',
+  slot: 'text-on-surface',
   'custom-string': 'text-positive',
   'custom-type': 'text-primary',
   'custom-number': 'text-warning'
@@ -42,14 +44,17 @@ const isNumberList = (input: string | undefined | null) => {
   return tokens.length > 0 && tokens.every(token => token !== '' && !isNaN(Number(token)))
 }
 
-const getColor = (input: string | undefined | null) => {
+const getColor = (input: string | ApiType | undefined | null): string => {
   if (typeof input !== 'string') return 'text-on-surface'
-  if (isNumberList(input)) return colorMap['number'] || 'text-on-surface'
+  if (isNumberList(input)) return colorMap.number || 'text-on-surface'
 
-  const match = input.match(/^\s*([a-zA-Z0-9_]+)(?:\[\])?(?:\s*[|,].*)?$/)
+  // Direct ApiType lookup first
+  if (colorMap[input as ApiType]) return colorMap[input as ApiType]!
+
+  const match = input.match(/^\s*([a-zA-Z0-9_-]+)(?:\[\])?(?:\s*[|,].*)?$/)
   const baseType = match ? match[1] : input.trim()
 
-  return colorMap[`${baseType}`] || 'text-on-surface'
+  return colorMap[baseType as ApiType] || 'text-on-surface'
 }
 
 const getMainKey = (header: HeaderKey) => headerMap[header]?.[0]?.key || ''
@@ -64,17 +69,17 @@ const formatTokens = ({ input, apiType }: { input: string, apiType: ApiType }) =
     if (token.endsWith('[]')) baseType = token.replace(/\[\]$/, '')
     else baseType = token.replace(/^[[]|[\]]$/g, '').trim()
 
-    if (apiType === ApiTypeCategory.PRIMITIVE || isNumber) {
+    if (apiType === 'primitive' || isNumber) {
       return {
         display: token,
         color: getColor(isNumber ? 'number' : baseType)
       }
     }
 
-    if (apiType === ApiTypeCategory.CUSTOM_STRING) {
+    if (apiType === 'custom-string') {
       return {
         display: `"${token}"`,
-        color: getColor(ApiTypeCategory.CUSTOM_STRING)
+        color: getColor('custom-string')
       }
     }
 
@@ -97,7 +102,7 @@ const formatTokens = ({ input, apiType }: { input: string, apiType: ApiType }) =
 
     <vk-table
       :headers="headerMap[section.headers]"
-      :data="section.data"
+      :data="section.data as unknown as TableItem[]"
     >
       <template
         v-if="getMainKey(section.headers)"
@@ -130,7 +135,7 @@ const formatTokens = ({ input, apiType }: { input: string, apiType: ApiType }) =
         #cell-values="{ item }"
       >
         <code-block
-          v-if="item.values !== undefined && item.values !==null && item.values !== '' && (item.apiType === ApiTypeCategory.OBJECT || item.apiType === ApiTypeCategory.FUNCTION || item.apiType === ApiTypeCategory.EVENT)"
+          v-if="item.values !== undefined && item.values !==null && item.values !== '' && (item.apiType === 'object' || item.apiType === 'function' || item.apiType === 'event')"
           :has-copy-button="false"
           language="ts"
           :code="`${item.values}`"
@@ -176,13 +181,13 @@ const formatTokens = ({ input, apiType }: { input: string, apiType: ApiType }) =
           :class="[
             'font-mono bg-surface-container rounded p-2 w-full flex justify-center items-center',
             getColor(
-              item.apiType === ApiTypeCategory.PRIMITIVE
+              item.apiType === 'primitive'
                 ? item.values as string
                 : item.apiType as string
             )
           ]"
         >
-          {{ item.apiType === ApiTypeCategory.CUSTOM_STRING ? `"${item.default}"` : item.default }}
+          {{ item.apiType === 'custom-string' ? `"${item.default}"` : item.default }}
         </span>
         <span
           v-else

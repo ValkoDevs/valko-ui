@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { RangeProps, TableItem, Label } from '#valkoui'
+import type { RangeProps, Label } from '#valkoui'
 
 const form = reactive<RangeProps>({
   color: 'primary',
@@ -38,7 +38,7 @@ const generateLabels = () => {
   return labels
 }
 
-const rangeProps: TableItem[] = [
+const rangeProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
@@ -46,7 +46,7 @@ const rangeProps: TableItem[] = [
     description: 'The color theme of the Range slider.',
     values: 'primary, secondary, positive, accent, warning, negative',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -55,7 +55,7 @@ const rangeProps: TableItem[] = [
     description: 'The variant style of the Range slider.',
     values: 'filled, outlined, ghost, gradient',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -64,7 +64,7 @@ const rangeProps: TableItem[] = [
     description: 'The shape style of the Range slider.',
     values: 'rounded, square, soft',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -73,7 +73,7 @@ const rangeProps: TableItem[] = [
     description: 'The size of the Range slider.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'stripedProp',
@@ -82,7 +82,7 @@ const rangeProps: TableItem[] = [
     description: 'Adds a striped pattern to the Range slider.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'showStepsProp',
@@ -91,7 +91,7 @@ const rangeProps: TableItem[] = [
     description: 'Displays step marks at intervals along the Range slider.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'stepProp',
@@ -100,7 +100,7 @@ const rangeProps: TableItem[] = [
     description: 'The distance between step marks.',
     values: 'number',
     default: '10',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'isDoubleProp',
@@ -109,7 +109,7 @@ const rangeProps: TableItem[] = [
     description: 'Enables the Range slider to have two thumbs for selecting a range.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'minProp',
@@ -118,7 +118,7 @@ const rangeProps: TableItem[] = [
     description: 'The minimum value of the Range slider.',
     values: 'number',
     default: '0',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'maxProp',
@@ -127,7 +127,7 @@ const rangeProps: TableItem[] = [
     description: 'The maximum value of the Range slider.',
     values: 'number',
     default: '100',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'offsetProp',
@@ -136,7 +136,7 @@ const rangeProps: TableItem[] = [
     description: 'The offset value for the Range slider.',
     values: 'number',
     default: '0',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'modelValueProp',
@@ -145,7 +145,7 @@ const rangeProps: TableItem[] = [
     description: 'The value of the Range slider.',
     values: 'number | number[]',
     default: '50',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'labelsProp',
@@ -154,7 +154,7 @@ const rangeProps: TableItem[] = [
     description: 'The labels for the stepmarks in the slider.',
     values: 'Label[]',
     default: '[]',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   },
   {
     key: 'ariaDescribedByProp',
@@ -163,7 +163,7 @@ const rangeProps: TableItem[] = [
     description: 'ID reference to an element that further describes the range, such as helper or error text.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -172,21 +172,22 @@ const rangeProps: TableItem[] = [
     description: 'Custom styles for different parts of the Range component.',
     values: 'RangeSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const rangeEmits: TableItem[] = [
+const rangeEmits: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     type: '(value: number | [number, number]) => void',
     description: 'Emitted when the value of the slider is updated.',
-    apiType: ApiTypeCategory.PRIMITIVE
+    values: 'number | [number, number]',
+    apiType: 'primitive'
   }
 ]
 
-const labelsInterface: TableItem[] = [
+const labelsInterface: PropData[] = [
   {
     key: 'valueProp',
     prop: 'value',
@@ -194,7 +195,7 @@ const labelsInterface: TableItem[] = [
     description: 'The value where the label is gonna be displayed on the slider.',
     values: 'number',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'labelProp',
@@ -203,74 +204,82 @@ const labelsInterface: TableItem[] = [
     description: 'The displayed name of the label.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container for the range slider.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'progressContainer',
     prop: 'progressContainer',
+    required: false,
     description: 'Container for the progress bar and step marks.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'progress',
     prop: 'progress',
+    required: false,
     description: 'Progress bar element showing the selected range.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'stepMark',
     prop: 'stepMark',
+    required: false,
     description: 'Step mark indicator for each step on the slider.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'thumbContainer',
     prop: 'thumbContainer',
+    required: false,
     description: 'Container for the slider thumbs.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'thumb',
     prop: 'thumb',
+    required: false,
     description: 'Slider thumb element (draggable handle).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'labelContainer',
     prop: 'labelContainer',
+    required: false,
     description: 'Container for custom labels below the slider.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'label',
     prop: 'label',
+    required: false,
     description: 'Custom label element for the slider.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 

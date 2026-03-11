@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SwitchProps, TableItem, LabelPosition, SelectOption } from '#valkoui'
+import type { SwitchProps, LabelPosition, SelectOption } from '#valkoui'
 
 const form = ref<SwitchProps>({
   variant: 'filled',
@@ -29,7 +29,7 @@ const switchStates = reactive(
   ].map(opt => [opt.value, true]))
 )
 
-const apiData: TableItem[] = [
+const apiData: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
@@ -37,7 +37,7 @@ const apiData: TableItem[] = [
     description: 'The color theme of the Switch.',
     values: 'primary, secondary, negative, warning, accent, positive',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -46,7 +46,7 @@ const apiData: TableItem[] = [
     description: 'The variant of the Switch.',
     values: 'filled, outlined, ghost',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -55,7 +55,7 @@ const apiData: TableItem[] = [
     description: 'The color theme of the Switch.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'disabledProp',
@@ -64,7 +64,7 @@ const apiData: TableItem[] = [
     description: 'Wheter the Switch is disabled or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'readonlyProp',
@@ -73,7 +73,7 @@ const apiData: TableItem[] = [
     description: 'Wheter the Switch is readonly or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'modelValueProp',
@@ -82,7 +82,7 @@ const apiData: TableItem[] = [
     description: 'The current value of the Switch.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'positionProp',
@@ -91,7 +91,7 @@ const apiData: TableItem[] = [
     description: 'Wheter the label is displayed on the right or left side of the Switch.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'labelProp',
@@ -100,7 +100,7 @@ const apiData: TableItem[] = [
     description: 'The string that\'s gonna be displayed on the label',
     values: 'string',
     default: 'Switch',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'shapeProp',
@@ -109,7 +109,7 @@ const apiData: TableItem[] = [
     description: 'The shape of the Switch.',
     values: 'rounded, square, soft',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'ariaLabelProp',
@@ -118,7 +118,7 @@ const apiData: TableItem[] = [
     description: 'Defines a string value that labels the switch element.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledByProp',
@@ -127,7 +127,7 @@ const apiData: TableItem[] = [
     description: 'ID reference to a label element that labels the switch.',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaDescribedByProp',
@@ -136,7 +136,7 @@ const apiData: TableItem[] = [
     description: 'ID reference to an element that describes the switch (e.g., helper text).',
     values: 'string',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -145,61 +145,66 @@ const apiData: TableItem[] = [
     description: 'Custom styles for different parts of the Switch component.',
     values: 'SwitchSlots',
     default: '',
-    apiType: ApiTypeCategory.CUSTOM_TYPE
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container for the switch component.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'content',
     prop: 'content',
+    required: false,
     description: 'Wrapper for the label and switch.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'labelSlot',
     prop: 'labelSlot',
+    required: false,
     description: 'Styles for the label element.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'switchSlot',
     prop: 'switchSlot',
+    required: false,
     description: 'Styles for the switch track.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'thumb',
     prop: 'thumb',
+    required: false,
     description: 'Styles for the switch thumb (the moving part).',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const emitData: TableItem[] = [
+const emitData: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the value of the switch changes.',
     values: 'boolean',
     type: '(value: boolean) => void',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 

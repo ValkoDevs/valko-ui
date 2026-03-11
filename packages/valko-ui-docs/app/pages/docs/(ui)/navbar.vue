@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavbarProps, TableItem } from '#valkoui'
+import type { NavbarProps } from '#valkoui'
 
 const form = ref<NavbarProps>({
   color: 'primary',
@@ -12,7 +12,7 @@ const form = ref<NavbarProps>({
   vertical: false
 })
 
-const navbarProps: TableItem[] = [
+const navbarProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
@@ -20,7 +20,7 @@ const navbarProps: TableItem[] = [
     description: 'The color theme of the Navbar.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -29,7 +29,7 @@ const navbarProps: TableItem[] = [
     description: 'The variant of the Navbar.',
     values: 'filled, outlined, ghost, gradient',
     default: 'filled',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -38,7 +38,7 @@ const navbarProps: TableItem[] = [
     description: 'The shape of the Navbar.',
     values: 'rounded, square, soft',
     default: 'soft',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -47,7 +47,7 @@ const navbarProps: TableItem[] = [
     description: 'The size of the Navbar.',
     values: 'xs, sm, md, lg',
     default: 'md',
-    apiType: ApiTypeCategory.CUSTOM_STRING
+    apiType: 'custom-string'
   },
   {
     key: 'elevatedProp',
@@ -56,7 +56,7 @@ const navbarProps: TableItem[] = [
     description: 'Adds a subtle shadow to the Navbar (elevation level 1) when not fixed. If the Navbar is also fixed, the elevation is increased to level 2.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'fixedProp',
@@ -65,7 +65,7 @@ const navbarProps: TableItem[] = [
     description: 'Fixes the Navbar to the top of the viewport and increases its elevation to level 2, regardless of the "elevated" setting.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'floatingProp',
@@ -74,7 +74,7 @@ const navbarProps: TableItem[] = [
     description: 'Determines if the Navbar is floating.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'verticalProp',
@@ -83,7 +83,7 @@ const navbarProps: TableItem[] = [
     description: 'Determines if the Navbar is vertical or not.',
     values: 'boolean',
     default: 'false',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -92,7 +92,7 @@ const navbarProps: TableItem[] = [
     description: 'Accessible label for the navbar to describe its purpose to assistive technologies.',
     values: 'string',
     default: 'Main navigation',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -101,16 +101,17 @@ const navbarProps: TableItem[] = [
     description: 'Root container for the Navbar.',
     values: 'string[]',
     default: '',
-    apiType: ApiTypeCategory.PRIMITIVE
+    apiType: 'primitive'
   }
 ]
 
-const navbarSlots: TableItem[] = [
+const navbarSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for the main content of the Navbar.',
-    example: '<template #default>\n  <p>This is the main content of the Navbar.</p>\n</template>'
+    example: '<template #default>\n  <p>This is the main content of the Navbar.</p>\n</template>',
+    apiType: 'slot'
   }
 ]
 
