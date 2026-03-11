@@ -8,7 +8,7 @@ export type ApiComplex =
   | 'object'
   | 'function'
   | 'event'
-  | 'slot';
+  | 'slot'
 
 export type ApiPrimitive =
   | 'string'
@@ -19,7 +19,7 @@ export type ApiPrimitive =
   | 'Date'
   | 'any'
   | 'unknown'
-  | 'EpochTimeStamp';
+  | 'EpochTimeStamp'
 
 export type ApiType = ApiComplex | ApiPrimitive
 
@@ -51,7 +51,7 @@ export interface FormatData extends Pick<BaseData, 'key' | 'description'> {
   example: string;
 }
 
-export type TableConfig = 
+export type TableConfig =
   | { title: string; headers: 'props'; data: PropData[] }
   | { title: string; headers: 'emits'; data: EmitData[] }
   | { title: string; headers: 'slots'; data: SlotData[] }
