@@ -28,7 +28,7 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
     size="md"
     shape="square"
     fixed
-    class="flex justify-between !bg-surface-container !border-surface-dim"
+    class="flex justify-between !bg-surface-container !border-none"
   >
     <vk-button
       variant="link"
@@ -72,27 +72,37 @@ const toggleMenu = () => menuOpen.value = !menuOpen.value
     </vk-drawer>
   </vk-navbar>
 
-  <div class="flex flex-col items-center justify-center p-6 h-[80vh]">
-    <h1 class="text-4xl font-bold text-center mb-4">
-      Welcome to <span class="text-primary">ValkoUI</span>
-    </h1>
-    <p class="text-center mb-6">
-      A modern library for building sleek, responsive user interfaces with ease.
-    </p>
+  <div class="flex w-full h-full bg-gradient-to-b from-primary/[.2] to-surface relative">
+    <vk-divider
+      color="secondary"
+      class="absolute top-0 my-0!"
+    />
+    <div class="relative z-1 flex flex-col w-full h-full bg-gradient-to-r from-surface from-10% via-transparent via-50% to-surface to-90%">
+      <div class="w-full grid grid-cols-2 gap-3">
+        <div class="flex flex-col items-center justify-center p-6 h-[80vh]">
+          <h1 class="text-4xl font-bold text-center mb-4">
+            Welcome to <span class="text-primary">ValkoUI</span>
+          </h1>
+          <p class="text-center mb-6">
+            A modern library for building sleek, responsive user interfaces with ease.
+          </p>
 
-    <div class="flex flex-col md:flex-row gap-2 max-w-full items-stretch">
-      <code-block
-        code="npm install @valko-ui/components"
-        class="md:order-2"
-      />
-      <nuxt-link to="/docs">
-        <vk-button class="h-full gap-2 items-center">
-          <span class="text-nowrap">Get Started</span>  <vk-icon
-            name="arrow-right"
-            class="text-xl"
-          />
-        </vk-button>
-      </nuxt-link>
+          <div class="flex flex-col md:flex-row gap-2 max-w-full items-stretch">
+            <code-block
+              code="npm install @valko-ui/components"
+              class="md:order-2"
+            />
+            <nuxt-link to="/docs">
+              <vk-button class="h-full gap-2 items-center">
+                <span class="text-nowrap">Get Started</span>  <vk-icon
+                  name="arrow-right"
+                  class="text-xl"
+                />
+              </vk-button>
+            </nuxt-link>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
