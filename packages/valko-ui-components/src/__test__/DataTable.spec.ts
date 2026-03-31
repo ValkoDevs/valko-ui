@@ -543,6 +543,10 @@ describe('DataTable component', () => {
         })
       })
 
+      afterEach(() => {
+        vi.useRealTimers()
+      })
+
       it('should display the search icon in the header when true', () => {
         expect(wrapper.find('i.ti.ti-search').exists()).toBe(true)
       })
@@ -556,9 +560,12 @@ describe('DataTable component', () => {
       })
 
       it('should emit onFilter when the filter is being used', async () => {
-        wrapper.find('i.ti.ti-search').trigger('click')
-        wrapper.findComponent(VkInput).trigger('input')
-        await new Promise(resolve => setTimeout(resolve, 500))
+        vi.useFakeTimers()
+        await wrapper.find('i.ti.ti-search').trigger('click')
+        await wrapper.findComponent(VkInput).setValue('some filter')
+        await nextTick()
+        vi.advanceTimersByTime(500)
+        await nextTick()
 
         expect(wrapper.emitted()).toHaveProperty('onFilter')
       })
@@ -567,7 +574,7 @@ describe('DataTable component', () => {
         await wrapper.find('i.ti.ti-search').trigger('click')
         await document.body.click()
 
-        expect(wrapper.find('[data-isOpen-state=true]').exists()).toBe(false)
+        expect(wrapper.find('.vk-popover[data-open="true"]').exists()).toBe(false)
       })
     })
 

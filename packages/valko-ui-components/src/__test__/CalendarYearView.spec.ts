@@ -76,7 +76,7 @@ describe('CalendarYearView Component', () => {
     })
 
     describe('Years Grid', () => {
-      it('should render 12 year buttons', () => {
+      it('should render 20 year buttons', () => {
         const yearButtons = wrapper.findAll('.vk-calendar__grid-button')
 
         expect(yearButtons.length).toBe(20)

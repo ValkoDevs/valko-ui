@@ -360,7 +360,7 @@ describe('Breadcrumbs component', () => {
         }
       })
 
-      expect(wrapper.findAll('.vk-breadcrumbs__a').at(2)?.find('i.ti.ti-music').exists()).toBeUndefined()
+      expect(wrapper.find('i.ti.ti-music').exists()).toBe(false)
     })
   })
 

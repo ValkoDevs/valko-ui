@@ -4,6 +4,11 @@ import VkInput from '#valkoui/components/Input.vue'
 
 describe('Input component', () => {
   let wrapper: VueWrapper
+
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(() => {
@@ -497,7 +502,6 @@ describe('Input component', () => {
 
     describe('startHolding and stopHolding functionality', () => {
       it('should emit update:modelValue with a higher value when holding the up arrow', async () => {
-        vi.clearAllTimers()
         vi.useFakeTimers()
         const wrapper = mount(VkInput, {
           props: {
@@ -535,7 +539,6 @@ describe('Input component', () => {
         const emittedAfter = wrapper.emitted('update:modelValue') as string[][]
 
         expect(emittedAfter[emittedAfter.length - 1]).toEqual([lastValue])
-        vi.useRealTimers()
       })
     })
 

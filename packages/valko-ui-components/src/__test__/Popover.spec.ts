@@ -220,7 +220,7 @@ describe('Popover component', () => {
     })
 
     describe('placement', () => {
-      it('should use the passed aligment prop if present', () => {
+      it('should use the passed alignment prop if present', () => {
         wrapper = mount(VkPopover, {
           props: {
             isOpen: true,

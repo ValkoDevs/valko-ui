@@ -302,11 +302,16 @@ describe('Select component', () => {
 
   describe('Methods', () => {
     describe('handleKeyDown', () => {
-      let wrapper: VueWrapper
       let input: DOMWrapper<HTMLInputElement>
+      let originalScrollIntoView: typeof window.HTMLElement.prototype.scrollIntoView
 
       beforeAll(() => {
+        originalScrollIntoView = window.HTMLElement.prototype.scrollIntoView
         window.HTMLElement.prototype.scrollIntoView = function () {}
+      })
+
+      afterAll(() => {
+        window.HTMLElement.prototype.scrollIntoView = originalScrollIntoView
       })
 
       beforeEach(async () => {
