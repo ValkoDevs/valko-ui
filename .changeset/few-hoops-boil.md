@@ -1,5 +1,5 @@
 ---
-"@valko-ui/components": patch
+"@valko-ui/components": minor
 "@valko-ui/docs": minor
 ---
 
@@ -25,6 +25,7 @@
 
 #### Utils:
 - Added `formatHeaders` array containing table header definitions for format reference tables (e.g., showing HH, mm, ss format options in date/time components).
+- Added `apiTable` barrel file to re-export ApiTable types, enabling Nuxt auto-import across all documentation pages.
 
 #### Configuration:
 - Added auto-import configuration for `ApiTable` types (`PropData`, `EmitData`, `SlotData`, `FormatData`, `ApiType`, etc.) to eliminate the need for manual imports across documentation pages.

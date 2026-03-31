@@ -73,7 +73,7 @@ const progressbarProps: PropData[] = [
     key: 'indeterminateProp',
     prop: 'indeterminate',
     required: false,
-    description: 'Wheter the Progressbar is indeterminate or not.',
+    description: 'Whether the Progressbar is indeterminate or not.',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'

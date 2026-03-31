@@ -62,7 +62,7 @@ const apiData: PropData[] = [
     required: false,
     description: 'The v-model for the Textarea',
     values: 'string',
-    default: 'false',
+    default: '',
     apiType: 'primitive'
   },
   {
@@ -80,7 +80,7 @@ const apiData: PropData[] = [
     required: false,
     description: 'The label for the Textarea',
     values: 'string',
-    default: 'false',
+    default: '',
     apiType: 'primitive'
   },
   {
@@ -89,7 +89,7 @@ const apiData: PropData[] = [
     required: false,
     description: 'A hint for the Textarea',
     values: 'string',
-    default: 'false',
+    default: '',
     apiType: 'primitive'
   },
   {

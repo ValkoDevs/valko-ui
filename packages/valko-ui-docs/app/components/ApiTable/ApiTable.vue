@@ -48,7 +48,6 @@ const getColor = (input: string | ApiType | undefined | null): string => {
   if (typeof input !== 'string') return 'text-on-surface'
   if (isNumberList(input)) return colorMap.number || 'text-on-surface'
 
-  // Direct ApiType lookup first
   if (colorMap[input as ApiType]) return colorMap[input as ApiType]!
 
   const match = input.match(/^\s*([a-zA-Z0-9_-]+)(?:\[\])?(?:\s*[|,].*)?$/)
@@ -152,17 +151,14 @@ const formatTokens = ({ input, apiType }: { input: string, apiType: ApiType }) =
             })"
             :key="index"
           >
+            <span
+              v-if="index > 0"
+              class="text-outlined"
+            >|</span>
+
             <span :class="token.color">
               {{ token.display }}
             </span>
-
-            <span
-              v-if="index < formatTokens({
-                input: item.values as string,
-                apiType: item.apiType as ApiType
-              }).length - 1"
-              class="text-outlined"
-            >|</span>
           </template>
         </div>
 

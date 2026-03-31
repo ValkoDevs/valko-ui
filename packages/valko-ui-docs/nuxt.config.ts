@@ -19,10 +19,5 @@ export default defineNuxtConfig({
       '@tailwindcss/postcss': {}
     }
   },
-  imports: {
-    dirs: [
-      'components/ApiTable/interfaces.ts'
-    ]
-  },
   compatibilityDate: '2024-09-24'
 })
