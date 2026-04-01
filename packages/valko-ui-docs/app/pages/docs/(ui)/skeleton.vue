@@ -31,6 +31,14 @@ const skeletonProps: TableItem[] = [
     description: 'The height of the Skeleton.',
     values: 'number',
     default: '200'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Root container.',
+    values: 'SkeletonSlots',
+    default: ''
   }
 ]
 
@@ -40,7 +48,8 @@ const styleSlotsInterface: TableItem[] = [
     prop: 'container',
     required: false,
     description: 'Root container for the Skeleton. Controls the overall layout and background.',
-    values: 'string[]'
+    values: 'string[]',
+    default: ''
   }
 ]
 
