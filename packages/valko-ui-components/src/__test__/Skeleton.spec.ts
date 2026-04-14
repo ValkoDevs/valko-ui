@@ -45,5 +45,47 @@ describe('Skeleton component', () => {
         expect(wrapper.find('.rounded-none').exists()).toBe(true)
       })
     })
+
+    describe('When styleSlots prop is set', () => {
+      it('should apply custom classes to the container', () => {
+        wrapper = mount(VkSkeleton, {
+          props: { styleSlots: { container: ['custom-class'] } }
+        })
+
+        expect(wrapper.find('.custom-class').exists()).toBe(true)
+      })
+
+      it('should preserve base classes when custom classes are added', () => {
+        wrapper = mount(VkSkeleton, {
+          props: { styleSlots: { container: ['custom-class'] } }
+        })
+
+        expect(wrapper.find('.vk-skeleton').exists()).toBe(true)
+      })
+
+      it('should compose custom classes with variant classes', () => {
+        wrapper = mount(VkSkeleton, {
+          props: { shape: 'rounded', styleSlots: { container: ['custom-class'] } }
+        })
+
+        expect(wrapper.find('.rounded-full.custom-class').exists()).toBe(true)
+      })
+
+      it('should allow overriding the default width', () => {
+        wrapper = mount(VkSkeleton, {
+          props: { styleSlots: { container: ['w-48'] } }
+        })
+
+        expect(wrapper.find('.w-48').exists()).toBe(true)
+      })
+
+      it('should allow overriding the default height', () => {
+        wrapper = mount(VkSkeleton, {
+          props: { styleSlots: { container: ['h-12'] } }
+        })
+
+        expect(wrapper.find('.h-12').exists()).toBe(true)
+      })
+    })
   })
 })
