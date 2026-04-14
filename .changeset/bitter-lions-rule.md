@@ -3,25 +3,46 @@
 "@valko-ui/docs": patch
 ---
 
-## Valko-UI Components
+## Valko-UI Components:
 
 ### Components
 
-- Added `iconClickFocus` prop to `Input` (default: true), allowing users to control whether icon clicks focus the input field.
-- Improved event forwarding in `Select` by forwarding both left and right icon slots and their respective emits from `Input`.
-- Chevron icon in `Select` is now rendered independently and no longer occupies the right icon slot of `Input`.
+- **Input:** 
+  - Added `disableIconClickFocus` prop to `Input` (default: false), allowing users to control whether icon clicks focus the input field.
+  - Added `suffix-icon` slot, this is commonly used as a complement icon, for (eg. Select component uses it for the chevron.)
+  - Added `suffixIconClick` emit allowing user to trigger custom behavior on icon click.
+- **Select:** 
+  - Improved event forwarding in `Select` by forwarding both left and right icon slots and their respective emits from `Input`.
+  - Chevron icon in `Select` has now it's own dedicated slot and no longer occupies the right icon slot of `Input`.
+  - Added `disableIconClickFocus` prop to `Select` (default: true), allowing users to control wheter icon clicks focus the input field.
+  - Added `suffix-icon` slot, this defaults to the chevron icon, we're fowarding `is-open` and `toggleDropdown` allowing it to be customizable and dynamic.
 
 ### Styles
 
-- Introduced `rightIcon` and `clearIcon` style slots in `Select.styles.ts` to enable custom padding and spacing for icons.
-- Renamed the `icon` slot to `chevronIcon` in `Select.styles.ts` for clarity and consistency.
+- **Input:**
+  - Replaced individual icon positioning (`right-N` with data-attribute compound variants) with a flex-based `rightIconsContainer` that manages spacing via `gap`.
+  - Replaced per-icon boolean data attributes (`data-right-icon`, `data-clear-icon`, `data-suffix-icon`, `data-chevron-icons`) on the `<input>` element with a single numeric `data-right-icon-count` attribute for padding calculation.
+  - Added `rightIconsContainer` style slot for the right-side icons wrapper.
+  - All right-side icons (clear, right, suffix, chevrons) are now rendered inside a single flex container with consistent gap-based spacing per size.
 
 ---
 
-## Valko-UI Docs
+## Valko-UI Docs:
 
-### Components
-- Documented the `SelectOption` interface in the Select API section.
-- Added documentation for left and right icon emits in the Select API section.
-- Included documentation for left and right icon slots in the Select API section.
-- Added the `iconClickFocus` prop to the Input API documentation.
+### Pages
+- **Input:**
+  - Added the `disableIconClickFocus` prop to the API documentation.
+  - Added missing `clearable` prop to the API documentation.
+  - Removed stale `rounded` prop from API docs (replaced by `shape`).
+  - Fixed `cursor` values from `cursor | text` to `pointer, text`.
+  - Fixed incorrect default values for `modelValue`, `label`, and `helpertext`.
+  - Added `@suffix-icon-click` listener to playground.
+- **Select:**
+  - Documented the `SelectOption` interface in the API section.
+  - Added documentation for left, right, suffix icon emits in the API section.
+  - Included documentation for left, right, and suffix icon slots in the API section.
+  - Added the `disableIconClickFocus` prop to the API documentation.
+  - Added the `suffixIcon` style slot to the API documentation.
+  - Removed stale `rounded`, `iconLeft`, and `iconRight` props from API docs.
+  - Fixed `shape` description from "Button" to "Select".
+  - Fixed incorrect default values for `modelValue`, `label`, and `helpertext`.

@@ -24,7 +24,8 @@ const form = ref<SelectProps>({
 
 const iconsInForm = ref({
   left: false,
-  right: false
+  right: false,
+  suffix: false
 })
 
 const exampleSectionModel = reactive<Record<string, number>>({ readonly: 1 })
@@ -67,8 +68,8 @@ const apiData: PropData[] = [
     apiType: 'primitive'
   },
   {
-    key: 'roundedProp',
-    prop: 'rounded',
+    key: 'disableIconClickFocusProp',
+    prop: 'disableIconClickFocus',
     required: false,
     description: 'Whether the Select is rounded or not.',
     values: 'boolean',
@@ -97,7 +98,7 @@ const apiData: PropData[] = [
     key: 'modelValueProp',
     prop: 'modelValue',
     required: false,
-    description: 'The v-model for the Select',
+    description: 'The v-model for the Select.',
     values: 'string, number, Array<string | number>',
     default: '',
     apiType: 'primitive'
@@ -115,7 +116,7 @@ const apiData: PropData[] = [
     key: 'labelProp',
     prop: 'label',
     required: false,
-    description: 'The label for the Select',
+    description: 'The label for the Select.',
     values: 'string',
     default: '',
     apiType: 'primitive'
@@ -151,7 +152,7 @@ const apiData: PropData[] = [
     key: 'shapeProp',
     prop: 'shape',
     required: false,
-    description: 'The shape of the Button.',
+    description: 'The shape of the Select.',
     values: 'rounded, square, soft',
     default: 'soft',
     apiType: 'custom-string'
@@ -307,6 +308,12 @@ const slotData: TableItem[] = [
     name: 'right-icon',
     description: 'Slot for placing an icon on the right side of the input field. This slot is typically used to include an icon for actions like clear input or show/hide password.',
     example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>'
+  },
+  {
+    key: 'suffixIconSlot',
+    name: 'suffix-icon',
+    description: 'Slot for placing an icon after the right icon. Defaults to chevron icon, provides isOpen and toggleDropdown slot props for dynamic behavior.',
+    example: '<template #suffix-icon>\n  <!-- Your icon component goes here -->\n</template>'
   }
 ]
 
@@ -329,6 +336,13 @@ const emitData: TableItem[] = [
     key: 'rightIconClickEmit',
     event: 'rightIconClick',
     description: 'Emitted when the right icon of the input is clicked.',
+    values: '',
+    type: '() => void'
+  },
+  {
+    key: 'suffixIconClickEmit',
+    event: 'suffixIconClick',
+    description: 'Emitted when the suffix icon of the input is clicked.',
     values: '',
     type: '() => void'
   }
@@ -402,6 +416,12 @@ const styles = {
         >
           <vk-icon name="home" />
         </template>
+        <template
+          v-if="iconsInForm.suffix"
+          #suffix-icon
+        >
+          <vk-icon name="brand-vue" />
+        </template>
       </vk-select>
     </template>
 
@@ -463,6 +483,10 @@ const styles = {
       <vk-checkbox
         v-model="iconsInForm.right"
         label="Right Icon"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.suffix"
+        label="Suffix Icon"
       />
     </template>
 

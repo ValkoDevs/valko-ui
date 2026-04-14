@@ -24,7 +24,8 @@ const form = ref<InputProps>({
 
 const iconsInForm = ref({
   left: false,
-  right: false
+  right: false,
+  suffix: false
 })
 
 const inputStates = reactive<Record<string, string>>({
@@ -87,8 +88,8 @@ const apiData: PropData[] = [
     apiType: 'primitive'
   },
   {
-    key: 'roundedProp',
-    prop: 'rounded',
+    key: 'clearableProp',
+    prop: 'clearable',
     required: false,
     description: 'Whether the Input is rounded or not.',
     values: 'boolean',
@@ -144,7 +145,7 @@ const apiData: PropData[] = [
     key: 'labelProp',
     prop: 'label',
     required: false,
-    description: 'The label for the Input',
+    description: 'The label for the Input.',
     values: 'string',
     default: '',
     apiType: 'primitive'
@@ -153,7 +154,7 @@ const apiData: PropData[] = [
     key: 'helpertextProp',
     prop: 'helpertext',
     required: false,
-    description: 'A hint for the Input',
+    description: 'A hint for the Input.',
     values: 'string',
     default: '',
     apiType: 'primitive'
@@ -168,12 +169,13 @@ const apiData: PropData[] = [
     apiType: 'custom-string'
   },
   {
-    key: 'iconClickFocusProp',
-    prop: 'iconClickFocus',
+    key: 'disableIconClickFocusProp',
+    prop: 'disableIconClickFocus',
     required: false,
-    description: 'Whether the input should focus when the icon is clicked.',
-    values: 'true, false',
-    default: 'true'
+    description: 'Whether to prevent the input from focusing when an icon is clicked.',
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -291,6 +293,15 @@ const styleSlotsInterface: PropData[] = [
     prop: 'leftIcon',
     required: false,
     description: 'Styles for the left icon slot.',
+    values: 'string[]',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'rightIconsContainer',
+    prop: 'rightIconsContainer',
+    required: false,
+    description: 'Container for right icons, this includes clear, suffix, right-icon and chevrons from number input.',
     values: 'string[]',
     default: '',
     apiType: 'primitive'
@@ -469,6 +480,7 @@ const styles = {
         :clearable="form.clearable"
         @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
         @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'surface' })"
+        @suffix-icon-click="useNotification({ text: 'Suffix Icon!!', color: 'surface' })"
       >
         <template
           v-if="iconsInForm.left"
@@ -479,6 +491,12 @@ const styles = {
         <template
           v-if="iconsInForm.right"
           #right-icon
+        >
+          <vk-icon name="home" />
+        </template>
+        <template
+          v-if="iconsInForm.suffix"
+          #suffix-icon
         >
           <vk-icon name="home" />
         </template>
@@ -566,6 +584,10 @@ const styles = {
       <vk-checkbox
         v-model="iconsInForm.right"
         label="Right Icon"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.suffix"
+        label="Suffix Icon"
       />
     </template>
 
