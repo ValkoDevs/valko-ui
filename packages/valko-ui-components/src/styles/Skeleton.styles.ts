@@ -7,7 +7,9 @@ const skeleton = tv({
       'animate-pulse',
       'bg-gradient-to-br',
       'from-surface-container-low',
-      'to-surface-container-highest'
+      'to-surface-container-highest',
+      'w-full',
+      'h-full'
     ]
   },
   variants: {

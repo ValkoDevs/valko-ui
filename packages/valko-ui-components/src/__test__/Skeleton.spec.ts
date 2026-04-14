@@ -14,30 +14,12 @@ describe('Skeleton component', () => {
         expect(wrapper.find('.vk-skeleton').exists()).toBe(true)
       })
 
-      it('should have default width', () => {
-        expect(wrapper.find('.vk-skeleton').attributes('style')).toContain('width: 200px;')
+      it('should be full width by default', () => {
+        expect(wrapper.find('.w-full').exists()).toBe(true)
       })
 
-      it('should have default height', () => {
-        expect(wrapper.find('.vk-skeleton').attributes('style')).toContain('height: 200px;')
-      })
-    })
-
-    describe('When width and height props change', () => {
-      it('should apply custom width', () => {
-        wrapper = mount(VkSkeleton, {
-          props: { width: 400 }
-        })
-        const skeletonElement = wrapper.find('.vk-skeleton')
-        expect(skeletonElement.attributes('style')).toContain('width: 400px;')
-      })
-
-      it('should apply custom height', () => {
-        wrapper = mount(VkSkeleton, {
-          props: { height: 400 }
-        })
-        const skeletonElement = wrapper.find('.vk-skeleton')
-        expect(skeletonElement.attributes('style')).toContain('height: 400px;')
+      it('should be full height by default', () => {
+        expect(wrapper.find('.h-full').exists()).toBe(true)
       })
     })
 
