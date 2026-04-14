@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useId, ref, watch, computed } from 'vue'
+import { useId, useSlots, ref, watch, computed } from 'vue'
 import type { InputProps } from '#valkoui/types/Input'
 import styles from '#valkoui/styles/Input.styles.ts'
 import VkIcon from './Icon.vue'
@@ -18,13 +18,14 @@ const props = withDefaults(defineProps<InputProps>(), {
   step: 1,
   min: -Infinity,
   max: Infinity,
-  iconClickFocus: true
+  disableIconClickFocus: false
 })
 
-const emit = defineEmits(['update:modelValue', 'focus', 'clear', 'blur', 'leftIconClick', 'rightIconClick'])
+const emit = defineEmits(['update:modelValue', 'focus', 'clear', 'blur', 'leftIconClick', 'rightIconClick', 'suffixIconClick'])
 
 const s = computed(() => styles(props))
 
+const slots = useSlots()
 const inputId = useId()
 const helpertextId = useId()
 const isFilled = ref(false)
@@ -59,11 +60,11 @@ const clearInput = () => {
   isFilled.value = false
 }
 
-const handleIconClick = (icon: 'left' | 'right') => {
+const handleIconClick = (icon: 'left' | 'right' | 'suffix') => {
   if (props.disabled) return
 
   emit(`${icon}IconClick`)
-  if (props.iconClickFocus) inputRef.value?.focus()
+  if (!props.disableIconClickFocus) inputRef.value?.focus()
 }
 
 const changeNumericValue = (action: 'increment' | 'decrement') => {
@@ -100,6 +101,15 @@ const describedBy = computed(() => {
   return ids.length > 0 ? ids.join(' ') : undefined
 })
 
+const rightIconCount = computed(() => {
+  let count = 0
+  if (props.clearable) count++
+  if (slots['right-icon']) count++
+  if (slots['suffix-icon']) count++
+  if (props.type === 'number') count++
+  return count
+})
+
 watch(() => props.modelValue, (newValue) => {
   inputValue.value = newValue
   isFilled.value = newValue !== null && newValue !== undefined && newValue !== ''
@@ -112,8 +122,7 @@ watch(() => props.modelValue, (newValue) => {
       <input
         ref="inputRef"
         :data-left-icon="!!$slots['left-icon']"
-        :data-right-icon="!!$slots['right-icon']"
-        :data-clear-icon="clearable"
+        :data-right-icon-count="rightIconCount"
         :class="s.input({ class: styleSlots?.input })"
         :readonly="readonly"
         :disabled="disabled"
@@ -141,36 +150,6 @@ watch(() => props.modelValue, (newValue) => {
         {{ label }}
       </label>
       <span
-        v-if="type === 'number'"
-        :class="s.numberArrows({ class: styleSlots?.numberArrows })"
-      >
-        <vk-icon
-          name="chevron-up"
-          :class="s.chevrons({ class: styleSlots?.chevrons })"
-          @mousedown="handleNumericArrowHold('increment')"
-          @mouseup="handleNumericArrowRelease"
-          @mouseleave="handleNumericArrowRelease"
-          @touchstart="handleNumericArrowHold('increment')"
-        />
-        <vk-icon
-          name="chevron-down"
-          :class="s.chevrons({ class: styleSlots?.chevrons })"
-          @mousedown="handleNumericArrowHold('decrement')"
-          @mouseup="handleNumericArrowRelease"
-          @mouseleave="handleNumericArrowRelease"
-          @touchstart="handleNumericArrowHold('decrement')"
-        />
-      </span>
-      <vk-icon
-        v-if="clearable && !!inputValue"
-        name="x"
-        :data-right-icon="!!$slots['right-icon']"
-        :data-chevron-icons="type === 'number'"
-        :class="s.clearIcon({ class: styleSlots?.clearIcon })"
-        @click="clearInput"
-        @touchend="clearInput"
-      />
-      <span
         v-if="$slots['left-icon']"
         :class="[s.icons({ class: styleSlots?.icons }), s.leftIcon({ class: styleSlots?.leftIcon })]"
         @click="handleIconClick('left')"
@@ -178,15 +157,55 @@ watch(() => props.modelValue, (newValue) => {
       >
         <slot name="left-icon" />
       </span>
-      <span
-        v-if="$slots['right-icon']"
-        :data-chevron-icons="type === 'number'"
-        :class="[s.icons({ class: styleSlots?.icons }), s.rightIcon({ class: styleSlots?.rightIcon })]"
-        @click="handleIconClick('right')"
-        @touchend="handleIconClick('right')"
+      <div
+        v-if="rightIconCount > 0"
+        :class="s.rightIconsContainer({ class: styleSlots?.rightIconsContainer })"
       >
-        <slot name="right-icon" />
-      </span>
+        <vk-icon
+          v-if="clearable && !!inputValue"
+          name="x"
+          :class="s.clearIcon({ class: styleSlots?.clearIcon })"
+          @click="clearInput"
+          @touchend="clearInput"
+        />
+        <span
+          v-if="$slots['right-icon']"
+          :class="s.icons({ class: styleSlots?.icons })"
+          @click="handleIconClick('right')"
+          @touchend="handleIconClick('right')"
+        >
+          <slot name="right-icon" />
+        </span>
+        <span
+          v-if="$slots['suffix-icon']"
+          :class="s.icons({ class: styleSlots?.icons })"
+          @click="handleIconClick('suffix')"
+          @touchend="handleIconClick('suffix')"
+        >
+          <slot name="suffix-icon" />
+        </span>
+        <span
+          v-if="type === 'number'"
+          :class="s.numberArrows({ class: styleSlots?.numberArrows })"
+        >
+          <vk-icon
+            name="chevron-up"
+            :class="s.chevrons({ class: styleSlots?.chevrons })"
+            @mousedown="handleNumericArrowHold('increment')"
+            @mouseup="handleNumericArrowRelease"
+            @mouseleave="handleNumericArrowRelease"
+            @touchstart="handleNumericArrowHold('increment')"
+          />
+          <vk-icon
+            name="chevron-down"
+            :class="s.chevrons({ class: styleSlots?.chevrons })"
+            @mousedown="handleNumericArrowHold('decrement')"
+            @mouseup="handleNumericArrowRelease"
+            @mouseleave="handleNumericArrowRelease"
+            @touchstart="handleNumericArrowHold('decrement')"
+          />
+        </span>
+      </div>
     </div>
     <span
       v-if="helpertext"

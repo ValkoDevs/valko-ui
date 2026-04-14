@@ -16,7 +16,8 @@ const props = withDefaults(defineProps<SelectProps>(), {
   clearable: false,
   multiple: false,
   disabled: false,
-  readonly: false
+  readonly: false,
+  disableIconClickFocus: true
 })
 
 const emit = defineEmits(['update:modelValue', 'leftIconClick', 'rightIconClick'])
@@ -157,13 +158,13 @@ onUnmounted(() => {
         :shape="shape"
         :model-value="showValue"
         :clearable="clearable"
-        :icon-click-focus="false"
         cursor="pointer"
         :aria-label="ariaLabel"
         :aria-labelledby="ariaLabelledBy"
         :aria-describedby="ariaDescribedBy"
         :aria-invalid="ariaInvalid"
         :aria-required="ariaRequired"
+        :disable-icon-click-focus="disableIconClickFocus"
         @focus="toggleDropdown(true)"
         @blur="toggleDropdown(false)"
         @clear="clearSelection"
@@ -173,20 +174,34 @@ onUnmounted(() => {
         @right-icon-click="emit('rightIconClick')"
       >
         <template
-          v-for="(_, slotName) in $slots"
-          #[slotName]
+          v-if="$slots['left-icon']"
+          #left-icon
         >
-          <slot :name="slotName" />
+          <slot name="left-icon" />
+        </template>
+
+        <template
+          v-if="$slots['right-icon']"
+          #right-icon
+        >
+          <slot name="right-icon" />
+        </template>
+
+        <template #suffix-icon>
+          <slot
+            name="suffix-icon"
+            :toggle-dropdown="toggleDropdown"
+            :is-open="isOpen"
+          >
+            <vk-icon
+              name="chevron-down"
+              :data-open="isOpen"
+              :class="s.suffixIcon({ class: styleSlots?.suffixIcon })"
+              @click.stop="toggleDropdown(!isOpen)"
+            />
+          </slot>
         </template>
       </vk-input>
-
-      <vk-icon
-        name="chevron-down"
-        :data-open="isOpen"
-        :data-helpertext="!!helpertext"
-        :class="s.chevronIcon({ class: styleSlots?.chevronIcon })"
-        @click.stop="toggleDropdown(!isOpen)"
-      />
 
       <transition
         enter-active-class="transition-all duration-200 ease-out origin-top"

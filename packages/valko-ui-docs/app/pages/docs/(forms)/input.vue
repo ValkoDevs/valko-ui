@@ -24,7 +24,8 @@ const form = ref<InputProps>({
 
 const iconsInForm = ref({
   left: false,
-  right: false
+  right: false,
+  suffix: false
 })
 
 const inputStates = reactive<Record<string, string>>({
@@ -61,7 +62,7 @@ const apiData: TableItem[] = [
     prop: 'cursor',
     required: false,
     description: 'The displayed cursor type when hovering the input.',
-    values: 'cursor | text',
+    values: 'pointer, text',
     default: 'text'
   },
   {
@@ -81,10 +82,10 @@ const apiData: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'roundedProp',
-    prop: 'rounded',
+    key: 'clearableProp',
+    prop: 'clearable',
     required: false,
-    description: 'Whether the Input is rounded or not.',
+    description: 'Whether the Input displays a clear icon that resets the value when clicked.',
     values: 'true, false',
     default: 'false'
   },
@@ -92,9 +93,9 @@ const apiData: TableItem[] = [
     key: 'modelValueProp',
     prop: 'modelValue',
     required: false,
-    description: 'The v-model for the Input',
+    description: 'The v-model for the Input.',
     values: 'string',
-    default: 'false'
+    default: ''
   },
   {
     key: 'minProp',
@@ -132,17 +133,17 @@ const apiData: TableItem[] = [
     key: 'labelProp',
     prop: 'label',
     required: false,
-    description: 'The label for the Input',
+    description: 'The label for the Input.',
     values: 'string',
-    default: 'false'
+    default: ''
   },
   {
     key: 'helpertextProp',
     prop: 'helpertext',
     required: false,
-    description: 'A hint for the Input',
+    description: 'A hint for the Input.',
     values: 'string',
-    default: 'false'
+    default: ''
   },
   {
     key: 'shapeProp',
@@ -153,12 +154,12 @@ const apiData: TableItem[] = [
     default: 'soft'
   },
   {
-    key: 'iconClickFocusProp',
-    prop: 'iconClickFocus',
+    key: 'disableIconClickFocusProp',
+    prop: 'disableIconClickFocus',
     required: false,
-    description: 'Whether the input should focus when the icon is clicked.',
+    description: 'Whether to prevent the input from focusing when an icon is clicked.',
     values: 'true, false',
-    default: 'true'
+    default: 'false'
   },
   {
     key: 'ariaLabelProp',
@@ -261,6 +262,13 @@ const styleSlotsInterface: TableItem[] = [
     default: ''
   },
   {
+    key: 'rightIconsContainer',
+    prop: 'rightIconsContainer',
+    description: 'Container for right icons, this includes clear, suffix, right-icon and chevrons from number input.',
+    values: 'string[]',
+    default: ''
+  },
+  {
     key: 'rightIcon',
     prop: 'rightIcon',
     description: 'Styles for the right icon slot.',
@@ -285,6 +293,13 @@ const styleSlotsInterface: TableItem[] = [
     key: 'chevrons',
     prop: 'chevrons',
     description: 'Styles for the chevron icons used in number input arrows.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'suffixIcon',
+    prop: 'suffixIcon',
+    description: 'Styles for the suffix icon used in the input.',
     values: 'string[]',
     default: ''
   }
@@ -332,6 +347,13 @@ const emitData: TableItem[] = [
     description: 'Emitted when the right icon of the input is clicked.',
     values: '',
     type: '() => void'
+  },
+  {
+    key: 'suffixIconClickEmit',
+    event: 'suffixIconClick',
+    description: 'Emitted when the suffix icon of the input is clicked.',
+    values: '',
+    type: '() => void'
   }
 ]
 
@@ -347,6 +369,12 @@ const slotData: TableItem[] = [
     name: 'right-icon',
     description: 'Slot for placing an icon on the right side of the input field. This slot is typically used to include an icon for actions like clear input or show/hide password.',
     example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>'
+  },
+  {
+    key: 'suffixIconSlot',
+    name: 'suffix-icon',
+    description: 'Slot for placing an icon at the end of the input field, after the right icon. This slot can be used for additional actions or indicators related to the input.',
+    example: '<template #suffix-icon>\n  <!-- Your icon component goes here -->\n</template>'
   }
 ]
 
@@ -418,6 +446,7 @@ const styles = {
         :clearable="form.clearable"
         @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
         @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'surface' })"
+        @suffix-icon-click="useNotification({ text: 'Suffix Icon!!', color: 'surface' })"
       >
         <template
           v-if="iconsInForm.left"
@@ -428,6 +457,12 @@ const styles = {
         <template
           v-if="iconsInForm.right"
           #right-icon
+        >
+          <vk-icon name="home" />
+        </template>
+        <template
+          v-if="iconsInForm.suffix"
+          #suffix-icon
         >
           <vk-icon name="home" />
         </template>
@@ -515,6 +550,10 @@ const styles = {
       <vk-checkbox
         v-model="iconsInForm.right"
         label="Right Icon"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.suffix"
+        label="Suffix Icon"
       />
     </template>
 

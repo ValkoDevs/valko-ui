@@ -24,7 +24,8 @@ const form = ref<SelectProps>({
 
 const iconsInForm = ref({
   left: false,
-  right: false
+  right: false,
+  suffix: false
 })
 
 const exampleSectionModel = reactive<Record<string, number>>({ readonly: 1 })
@@ -63,12 +64,12 @@ const apiData: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'roundedProp',
-    prop: 'rounded',
+    key: 'disableIconClickFocusProp',
+    prop: 'disableIconClickFocus',
     required: false,
-    description: 'Whether the Select is rounded or not.',
+    description: 'Whether to prevent the input from focusing when an icon is clicked.',
     values: 'true, false',
-    default: 'false'
+    default: 'true'
   },
   {
     key: 'multipleProp',
@@ -84,15 +85,15 @@ const apiData: TableItem[] = [
     required: false,
     description: 'An array of options for the Select',
     values: 'SelectOption[]',
-    default: ''
+    default: '[]'
   },
   {
     key: 'modelValueProp',
     prop: 'modelValue',
     required: false,
-    description: 'The v-model for the Select',
+    description: 'The v-model for the Select.',
     values: 'string, number, Array<string | number>',
-    default: 'false'
+    default: ''
   },
   {
     key: 'readonlyProp',
@@ -106,39 +107,23 @@ const apiData: TableItem[] = [
     key: 'labelProp',
     prop: 'label',
     required: false,
-    description: 'The label for the Select',
+    description: 'The label for the Select.',
     values: 'string',
-    default: 'false'
+    default: ''
   },
   {
     key: 'helpertextProp',
     prop: 'helpertext',
     required: false,
-    description: 'A hint for the Select',
-    values: 'string',
-    default: 'false'
-  },
-  {
-    key: 'iconLeftProp',
-    prop: 'iconLeft',
-    required: false,
-    description: 'A icon on the left side for the Select',
+    description: 'A hint for the Select.',
     values: 'string',
     default: ''
-  },
-  {
-    key: 'iconRightProp',
-    prop: 'iconRight',
-    required: false,
-    description: 'A icon on the right side for the Select',
-    values: 'string',
-    default: 'chevron-down'
   },
   {
     key: 'shapeProp',
     prop: 'shape',
     required: false,
-    description: 'The shape of the Button.',
+    description: 'The shape of the Select.',
     values: 'rounded, square, soft',
     default: 'soft'
   },
@@ -237,23 +222,9 @@ const styleSlotsInterface: TableItem[] = [
     default: ''
   },
   {
-    key: 'chevronIcon',
-    prop: 'chevronIcon',
-    description: 'The chevron icon for the select component.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'rightIcon',
-    prop: 'rightIcon',
-    description: 'The right icon for the select component.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'clearIcon',
-    prop: 'clearIcon',
-    description: 'The clear icon for the select component.',
+    key: 'suffixIcon',
+    prop: 'suffixIcon',
+    description: 'Styles for the suffix icon (defaults to the chevron indicator).',
     values: 'string[]',
     default: ''
   }
@@ -288,6 +259,12 @@ const slotData: TableItem[] = [
     name: 'right-icon',
     description: 'Slot for placing an icon on the right side of the input field. This slot is typically used to include an icon for actions like clear input or show/hide password.',
     example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>'
+  },
+  {
+    key: 'suffixIconSlot',
+    name: 'suffix-icon',
+    description: 'Slot for placing an icon after the right icon. Defaults to chevron icon, provides isOpen and toggleDropdown slot props for dynamic behavior.',
+    example: '<template #suffix-icon>\n  <!-- Your icon component goes here -->\n</template>'
   }
 ]
 
@@ -310,6 +287,13 @@ const emitData: TableItem[] = [
     key: 'rightIconClickEmit',
     event: 'rightIconClick',
     description: 'Emitted when the right icon of the input is clicked.',
+    values: '',
+    type: '() => void'
+  },
+  {
+    key: 'suffixIconClickEmit',
+    event: 'suffixIconClick',
+    description: 'Emitted when the suffix icon of the input is clicked.',
     values: '',
     type: '() => void'
   }
@@ -383,6 +367,12 @@ const styles = {
         >
           <vk-icon name="home" />
         </template>
+        <template
+          v-if="iconsInForm.suffix"
+          #suffix-icon
+        >
+          <vk-icon name="brand-vue" />
+        </template>
       </vk-select>
     </template>
 
@@ -444,6 +434,10 @@ const styles = {
       <vk-checkbox
         v-model="iconsInForm.right"
         label="Right Icon"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.suffix"
+        label="Suffix Icon"
       />
     </template>
 
