@@ -723,6 +723,22 @@ describe('Input component', () => {
 
       expect(wrapper.find('.right-icon').exists()).toBe(false)
     })
+
+    it('should render suffix-icon when slot suffix-icon is set', () => {
+      wrapper = mount(VkInput, {
+        slots: {
+          'suffix-icon': '<i class="ti ti-chevron-down"></i>'
+        }
+      })
+
+      expect(wrapper.find('i.ti.ti-chevron-down').exists()).toBe(true)
+    })
+
+    it('should not render suffix-icon when not provided', () => {
+      const wrapper = mount(VkInput)
+
+      expect(wrapper.find('.suffix-icon').exists()).toBe(false)
+    })
   })
 
   describe('Emits', () => {
@@ -800,6 +816,61 @@ describe('Input component', () => {
       await wrapper.find('i.ti.ti-home').trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('rightIconClick')
+    })
+
+    it('should emit suffixIconClick when slot suffix-icon is clicked', async () => {
+      wrapper = mount(VkInput, {
+        slots: {
+          'suffix-icon': '<i class="ti ti-chevron-down"></i>'
+        }
+      })
+
+      await wrapper.find('i.ti.ti-chevron-down').trigger('click')
+
+      expect(wrapper.emitted()).toHaveProperty('suffixIconClick')
+    })
+
+    it('should not emit suffixIconClick when disabled', async () => {
+      wrapper = mount(VkInput, {
+        props: { disabled: true },
+        slots: {
+          'suffix-icon': '<i class="ti ti-chevron-down"></i>'
+        }
+      })
+
+      await wrapper.find('i.ti.ti-chevron-down').trigger('click')
+
+      expect(wrapper.emitted()).not.toHaveProperty('suffixIconClick')
+    })
+
+    it('should focus input after icon click when disableIconClickFocus is false', async () => {
+      wrapper = mount(VkInput, {
+        props: { disableIconClickFocus: false },
+        slots: {
+          'suffix-icon': '<i class="ti ti-chevron-down"></i>'
+        },
+        attachTo: document.body
+      })
+
+      await wrapper.find('i.ti.ti-chevron-down').trigger('click')
+
+      expect(wrapper.find('.vk-input__input').element).toBe(document.activeElement)
+      wrapper.unmount()
+    })
+
+    it('should not focus input after icon click when disableIconClickFocus is true', async () => {
+      wrapper = mount(VkInput, {
+        props: { disableIconClickFocus: true },
+        slots: {
+          'suffix-icon': '<i class="ti ti-chevron-down"></i>'
+        },
+        attachTo: document.body
+      })
+
+      await wrapper.find('i.ti.ti-chevron-down').trigger('click')
+
+      expect(wrapper.find('.vk-input__input').element).not.toBe(document.activeElement)
+      wrapper.unmount()
     })
 
     it('Should emit clear when the clear icon is clickled', () => {

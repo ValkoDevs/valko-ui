@@ -198,7 +198,7 @@ onUnmounted(() => {
               name="chevron-down"
               :data-open="isOpen"
               :class="s.suffixIcon({ class: styleSlots?.suffixIcon })"
-              @click.stop="toggleDropdown(!isOpen)"
+              @click="toggleDropdown(!isOpen)"
             />
           </slot>
         </template>

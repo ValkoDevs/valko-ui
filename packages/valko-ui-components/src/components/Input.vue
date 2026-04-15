@@ -54,6 +54,7 @@ const onBlur = (event: Event) => {
 }
 
 const clearInput = () => {
+  if (props.disabled) return
   inputValue.value = ''
   emit('update:modelValue', '')
   emit('clear')
