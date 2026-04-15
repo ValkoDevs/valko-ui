@@ -101,14 +101,14 @@ const describedBy = computed(() => {
   return ids.length > 0 ? ids.join(' ') : undefined
 })
 
-const rightIconCount = computed(() => {
+const rightIconCount = () => {
   let count = 0
   if (props.clearable) count++
   if (slots['right-icon']) count++
   if (slots['suffix-icon']) count++
   if (props.type === 'number') count++
   return count
-})
+}
 
 watch(() => props.modelValue, (newValue) => {
   inputValue.value = newValue
@@ -122,7 +122,7 @@ watch(() => props.modelValue, (newValue) => {
       <input
         ref="inputRef"
         :data-left-icon="!!$slots['left-icon']"
-        :data-right-icon-count="rightIconCount"
+        :data-right-icon-count="rightIconCount()"
         :class="s.input({ class: styleSlots?.input })"
         :readonly="readonly"
         :disabled="disabled"
@@ -158,7 +158,7 @@ watch(() => props.modelValue, (newValue) => {
         <slot name="left-icon" />
       </span>
       <div
-        v-if="rightIconCount > 0"
+        v-if="rightIconCount() > 0"
         :class="s.rightIconsContainer({ class: styleSlots?.rightIconsContainer })"
       >
         <vk-icon
