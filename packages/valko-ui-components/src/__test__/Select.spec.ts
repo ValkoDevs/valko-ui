@@ -1,4 +1,4 @@
-import { nextTick } from 'vue'
+import { nextTick, h } from 'vue'
 import { VueWrapper, mount, DOMWrapper } from '@vue/test-utils'
 import VkSelect from '#valkoui/components/Select.vue'
 
@@ -9,7 +9,9 @@ describe('Select component', () => {
     { value: 3, label: 'Devon Webb' },
     { value: 4, label: 'Tom Cook' }
   ]
+
   let wrapper: VueWrapper
+
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(async () => {
@@ -762,6 +764,106 @@ describe('Select component', () => {
     })
   })
 
+  describe('Slots', () => {
+    it('should render left-icon slot content when provided', () => {
+      const wrapper = mount(VkSelect, {
+        props: { options },
+        slots: {
+          'left-icon': '<i class="test-left-icon"></i>'
+        }
+      })
+
+      expect(wrapper.find('i.test-left-icon').exists()).toBe(true)
+    })
+
+    it('should render right-icon slot content when provided', () => {
+      const wrapper = mount(VkSelect, {
+        props: { options },
+        slots: {
+          'right-icon': '<i class="test-right-icon"></i>'
+        }
+      })
+
+      expect(wrapper.find('i.test-right-icon').exists()).toBe(true)
+    })
+
+    it('should render default chevron-down icon when no suffix-icon slot is provided', () => {
+      const wrapper = mount(VkSelect, {
+        props: { options }
+      })
+
+      expect(wrapper.find('i.ti.ti-chevron-down').exists()).toBe(true)
+    })
+
+    it('should render custom suffix-icon slot content when provided', () => {
+      const wrapper = mount(VkSelect, {
+        props: { options },
+        slots: {
+          'suffix-icon': '<i class="test-suffix-icon"></i>'
+        }
+      })
+
+      expect(wrapper.find('i.test-suffix-icon').exists()).toBe(true)
+    })
+
+    it('should not render default chevron-down when custom suffix-icon is provided', () => {
+      const wrapper = mount(VkSelect, {
+        props: { options },
+        slots: {
+          'suffix-icon': '<i class="test-suffix-icon"></i>'
+        }
+      })
+
+      expect(wrapper.find('i.ti.ti-chevron-down').exists()).toBe(false)
+    })
+
+    it('should pass is-open as false to suffix-icon slot when dropdown is closed', () => {
+      const wrapper = mount(VkSelect, {
+        props: { options },
+        slots: {
+          'suffix-icon': (props: Record<string, unknown>) => h('span', {
+            class: 'custom-suffix', 'data-open': String(props.isOpen)
+          })
+        }
+      })
+
+      expect(wrapper.find('.custom-suffix').attributes('data-open')).toBe('false')
+    })
+
+    it('should pass is-open as true to suffix-icon slot when dropdown is open', async () => {
+      const wrapper = mount(VkSelect, {
+        props: { options },
+        slots: {
+          'suffix-icon': (props: Record<string, unknown>) => h('span', {
+            class: 'custom-suffix', 'data-open': String(props.isOpen)
+          })
+        }
+      })
+
+      await wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.custom-suffix').attributes('data-open')).toBe('true')
+    })
+
+    it('should pass toggle-dropdown function to suffix-icon slot', async () => {
+      const wrapper = mount(VkSelect, {
+        props: { options },
+        slots: {
+          'suffix-icon': (props: Record<string, unknown>) => h('button', {
+            class: 'custom-toggle',
+            onClick: () => (props.toggleDropdown as (open: boolean) => void)(true)
+          })
+        }
+      })
+
+      await wrapper.find('.custom-toggle').trigger('click')
+      await nextTick()
+
+      expect(wrapper.find('.vk-select__dropdown').exists()).toBe(true)
+    })
+  })
+
   describe('Emits', () => {
     it('should emit update event', async () => {
       const wrapper = mount(VkSelect, {
@@ -775,6 +877,58 @@ describe('Select component', () => {
       wrapper.find('.vk-select__item:first-child').trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('update:modelValue')
+    })
+
+    it('should emit leftIconClick when left-icon slot content is clicked', async () => {
+      const wrapper = mount(VkSelect, {
+        props: { options },
+        slots: {
+          'left-icon': '<i class="test-left-icon"></i>'
+        }
+      })
+
+      await wrapper.find('i.test-left-icon').trigger('click')
+
+      expect(wrapper.emitted()).toHaveProperty('leftIconClick')
+    })
+
+    it('should emit rightIconClick when right-icon slot content is clicked', async () => {
+      const wrapper = mount(VkSelect, {
+        props: { options },
+        slots: {
+          'right-icon': '<i class="test-right-icon"></i>'
+        }
+      })
+
+      await wrapper.find('i.test-right-icon').trigger('click')
+
+      expect(wrapper.emitted()).toHaveProperty('rightIconClick')
+    })
+
+    it('should emit suffixIconClick when suffix-icon slot content is clicked', async () => {
+      const wrapper = mount(VkSelect, {
+        props: { options },
+        slots: {
+          'suffix-icon': '<i class="test-suffix-icon"></i>'
+        }
+      })
+
+      await wrapper.find('i.test-suffix-icon').trigger('click')
+
+      expect(wrapper.emitted()).toHaveProperty('suffixIconClick')
+    })
+
+    it('should not emit leftIconClick when component is disabled', async () => {
+      const wrapper = mount(VkSelect, {
+        props: { options, disabled: true },
+        slots: {
+          'left-icon': '<i class="test-left-icon"></i>'
+        }
+      })
+
+      await wrapper.find('i.test-left-icon').trigger('click')
+
+      expect(wrapper.emitted()).not.toHaveProperty('leftIconClick')
     })
   })
 })

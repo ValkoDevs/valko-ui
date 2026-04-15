@@ -93,7 +93,7 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The v-model for the Select.',
     values: 'string, number, Array<string | number>',
-    default: ''
+    default: 'undefined'
   },
   {
     key: 'readonlyProp',

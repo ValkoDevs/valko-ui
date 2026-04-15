@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   disableIconClickFocus: true
 })
 
-const emit = defineEmits(['update:modelValue', 'leftIconClick', 'rightIconClick'])
+const emit = defineEmits(['update:modelValue', 'leftIconClick', 'rightIconClick', 'suffixIconClick'])
 
 const s = computed(() => styles(props))
 
@@ -171,6 +171,7 @@ onUnmounted(() => {
         @keydown="handleKeyDown"
         @keydown.escape="toggleDropdown(false)"
         @left-icon-click="emit('leftIconClick')"
+        @suffix-icon-click="emit('suffixIconClick')"
         @right-icon-click="emit('rightIconClick')"
       >
         <template

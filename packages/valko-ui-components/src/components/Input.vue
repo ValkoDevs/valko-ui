@@ -170,7 +170,7 @@ watch(() => props.modelValue, (newValue) => {
         />
         <span
           v-if="$slots['right-icon']"
-          :class="s.icons({ class: styleSlots?.icons })"
+          :class="[s.icons({ class: styleSlots?.icons }), s.rightIcon({ class: styleSlots?.rightIcon })]"
           @click="handleIconClick('right')"
           @touchend="handleIconClick('right')"
         >
@@ -178,7 +178,7 @@ watch(() => props.modelValue, (newValue) => {
         </span>
         <span
           v-if="$slots['suffix-icon']"
-          :class="s.icons({ class: styleSlots?.icons })"
+          :class="[s.icons({ class: styleSlots?.icons }), s.suffixIcon({ class: styleSlots?.suffixIcon })]"
           @click="handleIconClick('suffix')"
           @touchend="handleIconClick('suffix')"
         >
