@@ -373,6 +373,53 @@ describe('Input component', () => {
       })
     })
 
+    describe('When forceClearable prop changes', () => {
+      it('should not clear the input when readonly and forceClearable is false', async () => {
+        wrapper = mount(VkInput, {
+          props: {
+            clearable: true,
+            readonly: true,
+            forceClearable: false,
+            modelValue: 'Hello World'
+          }
+        })
+
+        await wrapper.find('i.ti.ti-x').trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+
+      it('should clear the input when readonly and forceClearable is true', async () => {
+        wrapper = mount(VkInput, {
+          props: {
+            clearable: true,
+            readonly: true,
+            forceClearable: true,
+            modelValue: 'Hello World'
+          }
+        })
+
+        await wrapper.find('i.ti.ti-x').trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toStrictEqual([['']])
+      })
+
+      it('should not clear the input when disabled even if forceClearable is true', async () => {
+        wrapper = mount(VkInput, {
+          props: {
+            clearable: true,
+            disabled: true,
+            forceClearable: true,
+            modelValue: 'Hello World'
+          }
+        })
+
+        await wrapper.find('i.ti.ti-x').trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+    })
+
     describe('When modelValue changes', () => {
       it('should emit update:modelValue when input value changes', async () => {
         wrapper = mount(VkInput, {

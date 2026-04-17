@@ -16,8 +16,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   clearable: false,
   multiple: false,
   disabled: false,
-  readonly: false,
-  disableIconClickFocus: true
+  readonly: false
 })
 
 const emit = defineEmits(['update:modelValue', 'leftIconClick', 'rightIconClick', 'suffixIconClick'])
@@ -149,6 +148,7 @@ onUnmounted(() => {
     <div :class="s.field({ class: styleSlots?.field })">
       <vk-input
         readonly
+        disable-icon-click-focus
         :helpertext="helpertext"
         :label="label"
         :disabled="disabled"
@@ -158,13 +158,13 @@ onUnmounted(() => {
         :shape="shape"
         :model-value="showValue"
         :clearable="clearable"
+        :force-clearable="clearable"
         cursor="pointer"
         :aria-label="ariaLabel"
         :aria-labelledby="ariaLabelledBy"
         :aria-describedby="ariaDescribedBy"
         :aria-invalid="ariaInvalid"
         :aria-required="ariaRequired"
-        :disable-icon-click-focus="disableIconClickFocus"
         @focus="toggleDropdown(true)"
         @blur="toggleDropdown(false)"
         @clear="clearSelection"
