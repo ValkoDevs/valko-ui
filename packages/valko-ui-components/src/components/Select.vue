@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   readonly: false
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'leftIconClick', 'rightIconClick', 'suffixIconClick'])
 
 const s = computed(() => styles(props))
 
@@ -148,6 +148,7 @@ onUnmounted(() => {
     <div :class="s.field({ class: styleSlots?.field })">
       <vk-input
         readonly
+        disable-icon-click-focus
         :helpertext="helpertext"
         :label="label"
         :disabled="disabled"
@@ -157,6 +158,7 @@ onUnmounted(() => {
         :shape="shape"
         :model-value="showValue"
         :clearable="clearable"
+        :force-clearable="clearable"
         cursor="pointer"
         :aria-label="ariaLabel"
         :aria-labelledby="ariaLabelledBy"
@@ -168,16 +170,40 @@ onUnmounted(() => {
         @clear="clearSelection"
         @keydown="handleKeyDown"
         @keydown.escape="toggleDropdown(false)"
+        @left-icon-click="emit('leftIconClick')"
+        @suffix-icon-click="emit('suffixIconClick')"
+        @right-icon-click="emit('rightIconClick')"
       >
-        <template #right-icon>
-          <vk-icon
-            name="chevron-down"
-            :data-open="isOpen"
-            :class="s.icon({ class: styleSlots?.icon })"
-            @click.stop="toggleDropdown(!isOpen)"
-          />
+        <template
+          v-if="$slots['left-icon']"
+          #left-icon
+        >
+          <slot name="left-icon" />
+        </template>
+
+        <template
+          v-if="$slots['right-icon']"
+          #right-icon
+        >
+          <slot name="right-icon" />
+        </template>
+
+        <template #suffix-icon>
+          <slot
+            name="suffix-icon"
+            :toggle-dropdown="toggleDropdown"
+            :is-open="isOpen"
+          >
+            <vk-icon
+              name="chevron-down"
+              :data-open="isOpen"
+              :class="s.suffixIcon({ class: styleSlots?.suffixIcon })"
+              @click="toggleDropdown(!isOpen)"
+            />
+          </slot>
         </template>
       </vk-input>
+
       <transition
         enter-active-class="transition-all duration-200 ease-out origin-top"
         enter-from-class="opacity-50 scale-y-90"

@@ -19,17 +19,26 @@ const form = ref<InputProps>({
   helpertext: 'Helpertext',
   disabled: false,
   readonly: false,
-  clearable: false
+  clearable: false,
+  forceClearable: false
 })
 
 const iconsInForm = ref({
   left: false,
-  right: false
+  right: false,
+  suffix: false
 })
 
 const inputStates = reactive<Record<string, string>>({
-  readonly: 'Example readonly.'
+  readonly: 'Example readonly.',
+  forceClearable: 'Try clearing me!'
 })
+
+const resetForceClearable = () => {
+  setTimeout(() => {
+    inputStates.forceClearable = 'Try clearing me!'
+  }, 2000)
+}
 
 const apiData: TableItem[] = [
   {
@@ -61,7 +70,7 @@ const apiData: TableItem[] = [
     prop: 'cursor',
     required: false,
     description: 'The displayed cursor type when hovering the input.',
-    values: 'cursor | text',
+    values: 'pointer, text',
     default: 'text'
   },
   {
@@ -81,10 +90,18 @@ const apiData: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'roundedProp',
-    prop: 'rounded',
+    key: 'clearableProp',
+    prop: 'clearable',
     required: false,
-    description: 'Whether the Input is rounded or not.',
+    description: 'Whether the Input displays a clear icon that resets the value when clicked.',
+    values: 'true, false',
+    default: 'false'
+  },
+  {
+    key: 'forceClearableProp',
+    prop: 'forceClearable',
+    required: false,
+    description: 'Allows clearing the input even when readonly is true. Used by components like Select that set the input as readonly but still need clear functionality.',
     values: 'true, false',
     default: 'false'
   },
@@ -92,9 +109,9 @@ const apiData: TableItem[] = [
     key: 'modelValueProp',
     prop: 'modelValue',
     required: false,
-    description: 'The v-model for the Input',
-    values: 'string',
-    default: 'false'
+    description: 'The v-model for the Input.',
+    values: 'string, number',
+    default: ''
   },
   {
     key: 'minProp',
@@ -124,7 +141,7 @@ const apiData: TableItem[] = [
     key: 'readonlyProp',
     prop: 'readonly',
     required: false,
-    description: 'Wheter the Input is readonly or not',
+    description: 'Whether the Input is readonly or not.',
     values: 'true, false',
     default: 'false'
   },
@@ -132,17 +149,17 @@ const apiData: TableItem[] = [
     key: 'labelProp',
     prop: 'label',
     required: false,
-    description: 'The label for the Input',
+    description: 'The label for the Input.',
     values: 'string',
-    default: 'false'
+    default: ''
   },
   {
     key: 'helpertextProp',
     prop: 'helpertext',
     required: false,
-    description: 'A hint for the Input',
+    description: 'A hint for the Input.',
     values: 'string',
-    default: 'false'
+    default: ''
   },
   {
     key: 'shapeProp',
@@ -151,6 +168,14 @@ const apiData: TableItem[] = [
     description: 'The shape of the Input',
     values: 'rounded, soft, square',
     default: 'soft'
+  },
+  {
+    key: 'disableIconClickFocusProp',
+    prop: 'disableIconClickFocus',
+    required: false,
+    description: 'Whether to prevent the input from focusing when an icon is clicked.',
+    values: 'true, false',
+    default: 'false'
   },
   {
     key: 'ariaLabelProp',
@@ -220,7 +245,7 @@ const styleSlotsInterface: TableItem[] = [
   {
     key: 'input',
     prop: 'input',
-    description: 'The input element itself (hidden since we use a custom input).',
+    description: 'The actual input element.',
     values: 'string[]',
     default: ''
   },
@@ -253,6 +278,13 @@ const styleSlotsInterface: TableItem[] = [
     default: ''
   },
   {
+    key: 'rightIconsContainer',
+    prop: 'rightIconsContainer',
+    description: 'Container for right icons, this includes clear, suffix, right-icon and chevrons from number input.',
+    values: 'string[]',
+    default: ''
+  },
+  {
     key: 'rightIcon',
     prop: 'rightIcon',
     description: 'Styles for the right icon slot.',
@@ -279,6 +311,13 @@ const styleSlotsInterface: TableItem[] = [
     description: 'Styles for the chevron icons used in number input arrows.',
     values: 'string[]',
     default: ''
+  },
+  {
+    key: 'suffixIcon',
+    prop: 'suffixIcon',
+    description: 'Styles for the suffix icon used in the input.',
+    values: 'string[]',
+    default: ''
   }
 ]
 
@@ -287,22 +326,22 @@ const emitData: TableItem[] = [
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the value of the input is updated.',
-    values: 'string',
-    type: '(value: string) => void'
+    values: 'string | number',
+    type: '(value: string | number) => void'
   },
   {
     key: 'focusEmit',
     event: 'focus',
     description: 'Emitted when the input is focused.',
-    values: 'FocusEvent',
-    type: '(event: FocusEvent) => void'
+    values: 'Event',
+    type: '(event: Event) => void'
   },
   {
     key: 'blurEmit',
     event: 'blur',
     description: 'Emitted when the input loses focus.',
-    values: 'FocusEvent',
-    type: '(event: FocusEvent) => void'
+    values: 'Event',
+    type: '(event: Event) => void'
   },
   {
     key: 'clearEmit',
@@ -324,6 +363,13 @@ const emitData: TableItem[] = [
     description: 'Emitted when the right icon of the input is clicked.',
     values: '',
     type: '() => void'
+  },
+  {
+    key: 'suffixIconClickEmit',
+    event: 'suffixIconClick',
+    description: 'Emitted when the suffix icon of the input is clicked.',
+    values: '',
+    type: '() => void'
   }
 ]
 
@@ -339,6 +385,12 @@ const slotData: TableItem[] = [
     name: 'right-icon',
     description: 'Slot for placing an icon on the right side of the input field. This slot is typically used to include an icon for actions like clear input or show/hide password.',
     example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>'
+  },
+  {
+    key: 'suffixIconSlot',
+    name: 'suffix-icon',
+    description: 'Slot for placing an icon at the end of the input field, after the right icon. This slot can be used for additional actions or indicators related to the input.',
+    example: '<template #suffix-icon>\n  <!-- Your icon component goes here -->\n</template>'
   }
 ]
 
@@ -408,8 +460,11 @@ const styles = {
         :max="form.max"
         :step="form.step"
         :clearable="form.clearable"
+        :force-clearable="form.forceClearable"
+        :disable-icon-click-focus="form.disableIconClickFocus"
         @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
         @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'surface' })"
+        @suffix-icon-click="useNotification({ text: 'Suffix Icon!!', color: 'surface' })"
       >
         <template
           v-if="iconsInForm.left"
@@ -420,6 +475,12 @@ const styles = {
         <template
           v-if="iconsInForm.right"
           #right-icon
+        >
+          <vk-icon name="home" />
+        </template>
+        <template
+          v-if="iconsInForm.suffix"
+          #suffix-icon
         >
           <vk-icon name="home" />
         </template>
@@ -501,12 +562,20 @@ const styles = {
         label="Clearable"
       />
       <vk-checkbox
+        v-model="form.forceClearable"
+        label="Force Clearable"
+      />
+      <vk-checkbox
         v-model="iconsInForm.left"
         label="Left Icon"
       />
       <vk-checkbox
         v-model="iconsInForm.right"
         label="Right Icon"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.suffix"
+        label="Suffix Icon"
       />
     </template>
 
@@ -602,6 +671,17 @@ const styles = {
         </template>
       </example-section>
 
+      <example-section title="Helpertext">
+        <vk-input
+          label="With Helpertext"
+          helpertext="This is a helpful hint."
+        />
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('helpertext', { values: ['This is a helpful hint.'] })" />
+        </template>
+      </example-section>
+
       <example-section title="Readonly">
         <vk-input
           v-model="inputStates['readonly']"
@@ -622,6 +702,36 @@ const styles = {
 
         <template #code>
           <code-block :code="generateSnippet<boolean>('clearable', { values: [true] })" />
+        </template>
+      </example-section>
+
+      <example-section title="Force Clearable">
+        <vk-input
+          v-model="inputStates['forceClearable']"
+          readonly
+          force-clearable
+          clearable
+          label="Force Clearable"
+          @clear="resetForceClearable"
+        />
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('forceClearable', { values: [true], extraProps: 'readonly clearable' })" />
+        </template>
+      </example-section>
+
+      <example-section title="Disable Icon Click Focus">
+        <vk-input
+          disable-icon-click-focus
+          label="Disable Icon Click Focus"
+        >
+          <template #left-icon>
+            <vk-icon name="home" />
+          </template>
+        </vk-input>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('disableIconClickFocus', { values: [true] })" />
         </template>
       </example-section>
 

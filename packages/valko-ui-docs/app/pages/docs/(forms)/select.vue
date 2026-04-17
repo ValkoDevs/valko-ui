@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SelectProps, TableItem, SelectOption } from '#valkoui'
+import { useNotification, type SelectProps, type TableItem, type SelectOption } from '#valkoui'
 
 const people: SelectOption[] = [
   { value: 1, label: 'Wade Cooper' },
@@ -20,6 +20,12 @@ const form = ref<SelectProps>({
   readonly: false,
   multiple: false,
   clearable: false
+})
+
+const iconsInForm = ref({
+  left: false,
+  right: false,
+  suffix: false
 })
 
 const exampleSectionModel = reactive<Record<string, number>>({ readonly: 1 })
@@ -58,18 +64,10 @@ const apiData: TableItem[] = [
     default: 'false'
   },
   {
-    key: 'roundedProp',
-    prop: 'rounded',
-    required: false,
-    description: 'Whether the Select is rounded or not.',
-    values: 'true, false',
-    default: 'false'
-  },
-  {
     key: 'multipleProp',
     prop: 'multiple',
     required: false,
-    description: 'Wheter the Select is enabled to choose multiple options',
+    description: 'Whether the Select is enabled to choose multiple options.',
     values: 'true, false',
     default: 'false'
   },
@@ -78,22 +76,22 @@ const apiData: TableItem[] = [
     prop: 'options',
     required: false,
     description: 'An array of options for the Select',
-    values: 'array',
-    default: 'false'
+    values: 'SelectOption[]',
+    default: '[]'
   },
   {
     key: 'modelValueProp',
     prop: 'modelValue',
     required: false,
-    description: 'The v-model for the Select',
+    description: 'The v-model for the Select.',
     values: 'string, number, Array<string | number>',
-    default: 'false'
+    default: 'undefined'
   },
   {
     key: 'readonlyProp',
     prop: 'readonly',
     required: false,
-    description: 'Wheter the Select is readonly or not',
+    description: 'Whether the Select is readonly or not.',
     values: 'true, false',
     default: 'false'
   },
@@ -101,39 +99,23 @@ const apiData: TableItem[] = [
     key: 'labelProp',
     prop: 'label',
     required: false,
-    description: 'The label for the Select',
+    description: 'The label for the Select.',
     values: 'string',
-    default: 'false'
+    default: ''
   },
   {
     key: 'helpertextProp',
     prop: 'helpertext',
     required: false,
-    description: 'A hint for the Select',
-    values: 'string',
-    default: 'false'
-  },
-  {
-    key: 'iconLeftProp',
-    prop: 'iconLeft',
-    required: false,
-    description: 'A icon on the left side for the Select',
+    description: 'A hint for the Select.',
     values: 'string',
     default: ''
-  },
-  {
-    key: 'iconRightProp',
-    prop: 'iconRight',
-    required: false,
-    description: 'A icon on the right side for the Select',
-    values: 'string',
-    default: 'chevron-down'
   },
   {
     key: 'shapeProp',
     prop: 'shape',
     required: false,
-    description: 'The shape of the Button.',
+    description: 'The shape of the Select.',
     values: 'rounded, square, soft',
     default: 'soft'
   },
@@ -232,11 +214,49 @@ const styleSlotsInterface: TableItem[] = [
     default: ''
   },
   {
-    key: 'icon',
-    prop: 'icon',
-    description: 'Icon for dropdown toggle (chevron).',
+    key: 'suffixIcon',
+    prop: 'suffixIcon',
+    description: 'Styles for the suffix icon (defaults to the chevron indicator).',
     values: 'string[]',
     default: ''
+  }
+]
+
+const optionsInterface: TableItem[] = [
+  {
+    key: 'valueOption',
+    prop: 'value',
+    description: 'The value of the option, which will be used as the modelValue when the option is selected.',
+    values: 'string | number',
+    default: ''
+  },
+  {
+    key: 'labelOption',
+    prop: 'label',
+    description: 'The label displayed for the option.',
+    values: 'string',
+    default: ''
+  }
+]
+
+const slotData: TableItem[] = [
+  {
+    key: 'leftIconSlot',
+    name: 'left-icon',
+    description: 'Slot for placing an icon on the left side of the input field. This slot is typically used to include an icon for visual enhancement or to indicate input type.',
+    example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>'
+  },
+  {
+    key: 'rightIconSlot',
+    name: 'right-icon',
+    description: 'Slot for placing an icon on the right side of the input field. This slot is typically used to include an icon for actions like clear input or show/hide password.',
+    example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>'
+  },
+  {
+    key: 'suffixIconSlot',
+    name: 'suffix-icon',
+    description: 'Slot for placing an icon after the right icon. Defaults to chevron icon, provides isOpen and toggleDropdown slot props for dynamic behavior.',
+    example: '<template #suffix-icon>\n  <!-- Your icon component goes here -->\n</template>'
   }
 ]
 
@@ -245,8 +265,29 @@ const emitData: TableItem[] = [
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the selected value(s) in the Select component change.',
-    values: 'any',
-    type: '(value: any) => void'
+    values: 'string | number | undefined | Array<string | number>',
+    type: '(value: string | number | undefined | Array<string | number>) => void'
+  },
+  {
+    key: 'leftIconClickEmit',
+    event: 'leftIconClick',
+    description: 'Emitted when the left icon of the input is clicked.',
+    values: '',
+    type: '() => void'
+  },
+  {
+    key: 'rightIconClickEmit',
+    event: 'rightIconClick',
+    description: 'Emitted when the right icon of the input is clicked.',
+    values: '',
+    type: '() => void'
+  },
+  {
+    key: 'suffixIconClickEmit',
+    event: 'suffixIconClick',
+    description: 'Emitted when the suffix icon of the input is clicked.',
+    values: '',
+    type: '() => void'
   }
 ]
 
@@ -303,7 +344,36 @@ const styles = {
         :size="form.size"
         :multiple="form.multiple"
         :clearable="form.clearable"
-      />
+        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
+        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'surface' })"
+        @suffix-icon-click="useNotification({ text: 'Suffix Icon!!', color: 'surface' })"
+      >
+        <template
+          v-if="iconsInForm.left"
+          #left-icon
+        >
+          <vk-icon name="home" />
+        </template>
+        <template
+          v-if="iconsInForm.right"
+          #right-icon
+        >
+          <vk-icon name="home" />
+        </template>
+        <template
+          v-if="iconsInForm.suffix"
+          #suffix-icon="{ toggleDropdown, isOpen }"
+        >
+          <vk-icon
+            name="brand-vue"
+            :class="[
+              'block transition-transform  duration-200 ease-in-out',
+              { 'rotate-180': isOpen }
+            ]"
+            @click="toggleDropdown(!isOpen)"
+          />
+        </template>
+      </vk-select>
     </template>
 
     <template #playground-options>
@@ -356,6 +426,18 @@ const styles = {
       <vk-checkbox
         v-model="form.clearable"
         label="Clearable"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.left"
+        label="Left Icon"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.right"
+        label="Right Icon"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.suffix"
+        label="Suffix Icon"
       />
     </template>
 
@@ -455,6 +537,70 @@ const styles = {
           <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('readonly', { values: [true], extraProps })}`" />
         </template>
       </example-section>
+
+      <example-section title="Multiple">
+        <vk-select
+          multiple
+          clearable
+          :options="people"
+          label="Multiple"
+        />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('multiple', { values: [true], extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section title="Clearable">
+        <vk-select
+          clearable
+          :options="people"
+          label="Clearable"
+        />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('clearable', { values: [true], extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section title="Helpertext">
+        <vk-select
+          :options="people"
+          label="With Helpertext"
+          helpertext="Pick a person from the list."
+        />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('helpertext', { values: ['Pick a person from the list.'], extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Icons"
+        :style-slots="styles.default"
+      >
+        <vk-select
+          :options="people"
+          label="Left Icon"
+        >
+          <template #left-icon>
+            <vk-icon name="home" />
+          </template>
+        </vk-select>
+
+        <vk-select
+          :options="people"
+          label="Right Icon"
+        >
+          <template #right-icon>
+            <vk-icon name="home" />
+          </template>
+        </vk-select>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n<template>\n  <vk-select :options=&quot;people&quot;>\n    <template #left-icon>\n      <vk-icon name=&quot;home&quot; />\n    </template>\n  </vk-select>\n\n  <vk-select :options=&quot;people&quot;>\n    <template #right-icon>\n      <vk-icon name=&quot;home&quot; />\n    </template>\n  </vk-select>\n</template>`" />
+        </template>
+      </example-section>
     </template>
 
     <template #api>
@@ -462,6 +608,12 @@ const styles = {
       <vk-table
         :headers="propHeaders"
         :data="apiData"
+      />
+
+      <h3>Select Option Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="optionsInterface"
       />
 
       <h3>Style Slots Interface</h3>
@@ -474,6 +626,12 @@ const styles = {
       <vk-table
         :headers="emitHeaders"
         :data="emitData"
+      />
+
+      <h3>Select Slots</h3>
+      <vk-table
+        :headers="slotHeaders"
+        :data="slotData"
       />
     </template>
   </doc-section>
