@@ -19,7 +19,8 @@ const form = ref<SelectProps>({
   disabled: false,
   readonly: false,
   multiple: false,
-  clearable: false
+  clearable: false,
+  disableIconClickFocus: true
 })
 
 const iconsInForm = ref({
@@ -352,8 +353,10 @@ const styles = {
         :size="form.size"
         :multiple="form.multiple"
         :clearable="form.clearable"
+        :disable-icon-click-focus="form.disableIconClickFocus"
         @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
         @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'surface' })"
+        @suffix-icon-click="useNotification({ text: 'Suffix Icon!!', color: 'surface' })"
       >
         <template
           v-if="iconsInForm.left"
@@ -369,9 +372,16 @@ const styles = {
         </template>
         <template
           v-if="iconsInForm.suffix"
-          #suffix-icon
+          #suffix-icon="{ toggleDropdown, isOpen }"
         >
-          <vk-icon name="brand-vue" />
+          <vk-icon
+            name="brand-vue"
+            :class="[
+              'block transition-transform  duration-200 ease-in-out',
+              { 'rotate-180': isOpen }
+            ]"
+            @click="toggleDropdown(!isOpen)"
+          />
         </template>
       </vk-select>
     </template>
@@ -426,6 +436,10 @@ const styles = {
       <vk-checkbox
         v-model="form.clearable"
         label="Clearable"
+      />
+      <vk-checkbox
+        v-model="form.disableIconClickFocus"
+        label="Disable Icon Click Focus"
       />
       <vk-checkbox
         v-model="iconsInForm.left"

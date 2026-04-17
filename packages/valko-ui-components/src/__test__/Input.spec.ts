@@ -737,7 +737,7 @@ describe('Input component', () => {
     it('should not render suffix-icon when not provided', () => {
       const wrapper = mount(VkInput)
 
-      expect(wrapper.find('.suffix-icon').exists()).toBe(false)
+      expect(wrapper.find('.vk-input__right-icons').exists()).toBe(false)
     })
   })
 
