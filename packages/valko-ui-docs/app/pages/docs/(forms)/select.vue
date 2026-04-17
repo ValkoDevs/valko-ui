@@ -19,8 +19,7 @@ const form = ref<SelectProps>({
   disabled: false,
   readonly: false,
   multiple: false,
-  clearable: false,
-  disableIconClickFocus: true
+  clearable: false
 })
 
 const iconsInForm = ref({
@@ -402,7 +401,6 @@ const styles = {
         :size="form.size"
         :multiple="form.multiple"
         :clearable="form.clearable"
-        :disable-icon-click-focus="form.disableIconClickFocus"
         @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
         @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'surface' })"
         @suffix-icon-click="useNotification({ text: 'Suffix Icon!!', color: 'surface' })"
@@ -485,10 +483,6 @@ const styles = {
       <vk-checkbox
         v-model="form.clearable"
         label="Clearable"
-      />
-      <vk-checkbox
-        v-model="form.disableIconClickFocus"
-        label="Disable Icon Click Focus"
       />
       <vk-checkbox
         v-model="iconsInForm.left"
@@ -598,6 +592,70 @@ const styles = {
 
         <template #code>
           <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('readonly', { values: [true], extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section title="Multiple">
+        <vk-select
+          multiple
+          clearable
+          :options="people"
+          label="Multiple"
+        />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('multiple', { values: [true], extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section title="Clearable">
+        <vk-select
+          clearable
+          :options="people"
+          label="Clearable"
+        />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('clearable', { values: [true], extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section title="Helpertext">
+        <vk-select
+          :options="people"
+          label="With Helpertext"
+          helpertext="Pick a person from the list."
+        />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('helpertext', { values: ['Pick a person from the list.'], extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Icons"
+        :style-slots="styles.default"
+      >
+        <vk-select
+          :options="people"
+          label="Left Icon"
+        >
+          <template #left-icon>
+            <vk-icon name="home" />
+          </template>
+        </vk-select>
+
+        <vk-select
+          :options="people"
+          label="Right Icon"
+        >
+          <template #right-icon>
+            <vk-icon name="home" />
+          </template>
+        </vk-select>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n<template>\n  <vk-select :options=&quot;people&quot;>\n    <template #left-icon>\n      <vk-icon name=&quot;home&quot; />\n    </template>\n  </vk-select>\n\n  <vk-select :options=&quot;people&quot;>\n    <template #right-icon>\n      <vk-icon name=&quot;home&quot; />\n    </template>\n  </vk-select>\n</template>`" />
         </template>
       </example-section>
     </template>

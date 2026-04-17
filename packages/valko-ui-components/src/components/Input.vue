@@ -15,6 +15,7 @@ const props = withDefaults(defineProps<InputProps>(), {
   cursor: 'text',
   modelValue: '',
   clearable: false,
+  forceClearable: false,
   step: 1,
   min: -Infinity,
   max: Infinity,
@@ -54,7 +55,7 @@ const onBlur = (event: Event) => {
 }
 
 const clearInput = () => {
-  if (props.disabled) return
+  if (props.disabled || (props.readonly && !props.forceClearable)) return
   inputValue.value = ''
   emit('update:modelValue', '')
   emit('clear')

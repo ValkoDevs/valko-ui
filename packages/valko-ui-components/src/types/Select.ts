@@ -15,6 +15,5 @@ export interface SelectProps extends DefaultComponent, Omit<AriaAttributes, 'ari
   disabled?: boolean;
   readonly?: boolean;
   clearable?: boolean;
-  disableIconClickFocus?: boolean;
   styleSlots?: Partial<SelectSlots>;
 }
