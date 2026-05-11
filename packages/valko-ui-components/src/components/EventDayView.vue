@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { DayViewProps } from '#valkoui/types/EventCalendar'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
+import type { DayViewProps, CalendarEvent } from '#valkoui/types/EventCalendar'
 import styles from '#valkoui/styles/EventCalendar.styles.ts'
 
 defineOptions({ name: 'VkEventDayView' })
@@ -12,67 +12,242 @@ const props = withDefaults(defineProps<DayViewProps>(), {
   shape: 'soft'
 })
 
-const emit = defineEmits(['eventClick'])
+const emit = defineEmits<{
+  eventClick: [event: CalendarEvent]
+}>()
 
 const s = computed(() => styles(props))
+
+const hourRange = computed(() => props.adapter.hourRange)
+const hours = computed(() => {
+  const [start, end] = hourRange.value
+  return Array.from({ length: end - start + 1 }, (_, i) => start + i)
+})
+
+const tzCount = computed(() => 1 + (props.adapter.timezones.extras?.length || 0))
+
+const isSameDay = (a: Date, b: Date): boolean =>
+  a.getFullYear() === b.getFullYear() &&
+  a.getMonth() === b.getMonth() &&
+  a.getDate() === b.getDate()
+
+const currentDate = computed(() => props.modelValue ? new Date(props.modelValue) : new Date())
+
+const filteredEvents = computed(() =>
+  props.events.filter(event => isSameDay(event.start, currentDate.value))
+)
+
+const hoveredEventId = ref<string | null>(null)
+
+// Current time marker
+const now = ref(new Date())
+let timerId: ReturnType<typeof setInterval> | null = null
+
+onMounted(() => {
+  timerId = setInterval(() => { now.value = new Date() }, 60_000)
+})
+
+onUnmounted(() => {
+  if (timerId !== null) clearInterval(timerId)
+})
+
+const currentTimePosition = computed(() => {
+  const [start, end] = hourRange.value
+  const totalHours = end - start + 1
+  const currentHour = now.value.getHours() + now.value.getMinutes() / 60
+  return ((currentHour - start) / totalHours) * 100
+})
+
+const isCurrentTimeVisible = computed(() => {
+  const pos = currentTimePosition.value
+  return pos >= 0 && pos <= 100 && isSameDay(currentDate.value, now.value)
+})
+
+// Pre-compute event positions as a map keyed by event id
+const eventPlacements = computed(() => {
+  const placements = new Map<string, {
+    topPercent: number;
+    heightPercent: number;
+    leftRem: number;
+    topRem: number;
+    zIndex: number;
+    isOverlapping: boolean;
+  }>()
+
+  const [start, end] = hourRange.value
+  const totalHours = end - start + 1
+
+  for (const event of filteredEvents.value) {
+    const eventStartHour = event.start.getHours() + event.start.getMinutes() / 60
+    const eventEndHour = event.end.getHours() + event.end.getMinutes() / 60
+
+    // Clamp to visible range
+    const clampedStart = Math.max(eventStartHour, start)
+    const clampedEnd = Math.min(eventEndHour, end + 1)
+
+    if (clampedStart >= clampedEnd) continue
+
+    const topPercent = ((clampedStart - start) / totalHours) * 100
+    const heightPercent = ((clampedEnd - clampedStart) / totalHours) * 100
+
+    // Calculate overlap offset
+    const overlapping = filteredEvents.value
+      .filter(e => e.start < event.end && e.end > event.start)
+      .sort((a, b) => a.start.getTime() - b.start.getTime())
+
+    const offsetIdx = overlapping.findIndex(e => e.id === event.id)
+    const isOverlapping = overlapping.length > 1
+
+    placements.set(event.id, {
+      topPercent,
+      heightPercent,
+      leftRem: isOverlapping ? offsetIdx * 1.5 : 0,
+      topRem: isOverlapping ? offsetIdx * 0.5 : 0,
+      zIndex: 10 + offsetIdx,
+      isOverlapping
+    })
+  }
+
+  return placements
+})
+
+const getEventStyle = (event: CalendarEvent): Record<string, string | number | undefined> => {
+  const placement = eventPlacements.value.get(event.id)
+  if (!placement) return {}
+
+  const isHovered = hoveredEventId.value === event.id
+
+  return {
+    top: `calc(${placement.topPercent}% + ${placement.topRem}rem)`,
+    height: `${placement.heightPercent}%`,
+    left: `${placement.leftRem}rem`,
+    right: '0',
+    zIndex: isHovered ? 99 : placement.zIndex,
+    transform: isHovered ? 'scale(1.03)' : undefined
+  }
+}
+
+const onEventClick = (event: CalendarEvent) => {
+  emit('eventClick', event)
+}
 </script>
 
 <template>
   <div
     :class="s.dayViewContainer({ class: styleSlots?.dayViewContainer })"
     :style="{
-      gridTemplateColumns: `${adapter.timezones.extras.length + 1}fr ${10 - (adapter.timezones.extras.length + 1)}fr`
+      gridTemplateColumns: `repeat(${tzCount}, minmax(4rem, auto)) 1fr`,
+      gridTemplateRows: `auto repeat(${hours.length}, minmax(2.5rem, 1fr))`
     }"
+    role="grid"
+    :aria-label="placeholder || 'Day view calendar'"
   >
-    <div
-      :class="s.timezoneContainer({ class: styleSlots?.timezoneContainer })"
-      :style="{ gridColumn: `span ${adapter.timezones.extras.length + 1} / span ${adapter.timezones.extras.length + 1}` }"
+    <!-- Row 1: Extra timezone headers -->
+    <span
+      v-for="(tz, tzIdx) in adapter.timezones.extras"
+      :key="'tz-header-' + tz.id"
+      :class="s.timezoneHeader({ class: styleSlots?.timezoneHeader })"
+      :style="{ gridColumn: tzIdx + 1, gridRow: 1 }"
     >
-      <div :class="s.timezone({ class: styleSlots?.timezone })">
-        <span>{{ adapter.timezones.locale.name }}</span>
+      {{ tz.name || tz.id }}
+    </span>
 
-        <span
-          v-for="hour in adapter.timezones.locale.display"
-          :key="hour"
-        >
-          {{ hour }}
-        </span>
-      </div>
+    <!-- Row 1: Locale timezone header -->
+    <span
+      :class="s.timezoneHeader({ class: styleSlots?.timezoneHeader })"
+      :style="{ gridColumn: tzCount, gridRow: 1 }"
+    >
+      {{ adapter.timezones.locale.name || adapter.timezones.locale.id }}
+    </span>
 
+    <!-- Row 1: Events column header -->
+    <span
+      :class="s.eventColumnHeader({ class: styleSlots?.eventColumnHeader })"
+      :style="{ gridColumn: tzCount + 1, gridRow: 1 }"
+    >
+      Events
+    </span>
+
+    <!-- Rows 2+: Extra timezone hour labels -->
+    <template
+      v-for="(tz, tzIdx) in adapter.timezones.extras"
+      :key="'tz-hours-' + tz.id"
+    >
+      <span
+        v-for="(displayHour, idx) in tz.display"
+        :key="tz.id + '-' + idx"
+        :class="s.timezoneHourLabel({ class: styleSlots?.timezoneHourLabel })"
+        :style="{ gridColumn: tzIdx + 1, gridRow: idx + 2 }"
+      >
+        {{ displayHour }}:00
+      </span>
+    </template>
+
+    <!-- Rows 2+: Locale timezone hour labels -->
+    <span
+      v-for="(displayHour, idx) in adapter.timezones.locale.display"
+      :key="'locale-' + idx"
+      :class="s.timezoneHourLabel({ class: styleSlots?.timezoneHourLabel })"
+      :style="{ gridColumn: tzCount, gridRow: idx + 2 }"
+    >
+      {{ displayHour }}:00
+    </span>
+
+    <!-- Rows 2+: Hour cells in events column (visual grid lines / separators) -->
+    <div
+      v-for="(hour, idx) in hours"
+      :key="'hour-cell-' + hour"
+      :class="s.hourCell({ class: styleSlots?.hourCell })"
+      :style="{ gridColumn: tzCount + 1, gridRow: idx + 2 }"
+    />
+
+    <!-- Events overlay area: spans all hour rows in the last column -->
+    <div
+      :class="s.eventsArea({ class: styleSlots?.eventsArea })"
+      :style="{ gridColumn: tzCount + 1, gridRow: `2 / ${hours.length + 2}` }"
+      aria-label="Events"
+    >
+      <!-- Current time marker -->
       <div
-        v-for="tz in adapter.timezones.extras"
-        :key="tz.id"
-        :class="s.timezone({ class: styleSlots?.timezone })"
+        v-if="isCurrentTimeVisible"
+        :class="s.currentTimeMarker({ class: styleSlots?.currentTimeMarker })"
+        :style="{ top: currentTimePosition + '%' }"
+        :data-color="color"
+        aria-hidden="true"
       >
-        <span>{{ tz.name }}</span>
-
         <span
-          v-for="hour in tz.display"
-          :key="hour"
-        >
-          {{ hour }}
-        </span>
+          :class="s.currentTimeDot({ class: styleSlots?.currentTimeDot })"
+          :data-color="color"
+        />
       </div>
-    </div>
 
-    <div
-      :class="s.eventContainer({ class: styleSlots?.eventContainer })"
-      :style="{ gridColumn: `span ${10 - (adapter.timezones.extras.length + 1)} / span ${10 - (adapter.timezones.extras.length + 1)}` }"
-    >
-      <slot
-        name="event"
-        v-bind="{ event: {} }"
+      <!-- Event items -->
+      <template
+        v-for="event in filteredEvents"
+        :key="event.id"
       >
-        <div
-          v-for="event in events"
-          :key="event.id"
-          :class="s.event({ class: styleSlots?.event })"
-          :data-color="event.color"
-          @click="emit('eventClick', event)"
+        <slot
+          name="event"
+          :event="event"
+          :style="getEventStyle(event)"
         >
-          {{ event.title }}
-        </div>
-      </slot>
+          <div
+            :class="s.event({ class: styleSlots?.event })"
+            :data-color="event.color || color"
+            :style="getEventStyle(event)"
+            :aria-label="`${event.title || 'Event'}, ${event.start.toLocaleTimeString()} to ${event.end.toLocaleTimeString()}`"
+            role="button"
+            tabindex="0"
+            @mouseenter="hoveredEventId = event.id"
+            @mouseleave="hoveredEventId = null"
+            @click="onEventClick(event)"
+            @keydown.enter="onEventClick(event)"
+            @keydown.space.prevent="onEventClick(event)"
+          >
+            {{ event.title }} - {{ event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }} - {{ event.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}
+          </div>
+        </slot>
+      </template>
     </div>
   </div>
 </template>

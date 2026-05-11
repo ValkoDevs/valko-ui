@@ -4,24 +4,24 @@ import type { EventCalendarSlots } from '../styles/EventCalendar.styles'
 export type ViewMode = 'day' | 'week' | 'month'
 
 export interface Timezone {
-  id: string; // IANA timezone identifier, e.g., "America/New_York"
-  name?: string; // Human-readable name, e.g., "Eastern Time (US & Canada)"
-  abbreviation?: string; // Short abbreviation, e.g., "EST" maybe if needed for display purposes
-  offset?: number; // UTC offset in minutes, e.g., -300 for EST (UTC-5) maybe could be calculated from the id but could be useful to have it directly for sorting or display purposes
+  id: string;
+  name?: string;
+  abbreviation?: string;
+  offset?: number;
   display?: string[];
 }
 
-export interface Event {
-  id?: string,
-  start: Date,
-  end: Date,
-  title?: string,
-  color?: string,
-  location?: string,
-  custom?: Record<string, string>
+export interface CalendarEvent {
+  id: string;
+  start: Date;
+  end: Date;
+  title?: string;
+  color?: string;
+  location?: string;
+  custom?: Record<string, unknown>;
 }
 
-export interface EventCalendarAdapter {
+export interface EventCalendarAdapterOptions {
   currentDate?: Date;
   timezones?: {
     locale?: Timezone;
@@ -35,20 +35,43 @@ export interface EventAdapterResult {
     locale: Timezone;
     extras: Timezone[];
   };
-  hourRange?: [number, number];
+  hourRange: [number, number];
 }
 
 export interface EventCalendarProps extends Variants, ColorsWithSurface, Sizes, Shapes {
   adapter: EventAdapterResult;
-  events: Event[];
+  events: CalendarEvent[];
   modelValue?: Date;
   showWeekends?: boolean;
   currentView?: ViewMode;
   styleSlots?: Partial<EventCalendarSlots>;
-  onEventClick?: (event: Event) => void;
-  onViewChange?: (view: ViewMode) => void;
 }
 
-export interface DayViewProps extends EventCalendarProps {
+export interface EventCalendarEmits {
+  (e: 'eventClick', event: CalendarEvent): void;
+  (e: 'viewChange', view: ViewMode): void;
+}
+
+export interface DayViewProps extends Omit<EventCalendarProps, 'currentView'> {
   placeholder?: string;
+}
+
+export interface DayViewEmits {
+  (e: 'eventClick', event: CalendarEvent): void;
+}
+
+export interface WeekViewProps extends Omit<EventCalendarProps, 'currentView'> {
+  placeholder?: string;
+}
+
+export interface WeekViewEmits {
+  (e: 'eventClick', event: CalendarEvent): void;
+}
+
+export interface MonthViewProps extends Omit<EventCalendarProps, 'currentView'> {
+  placeholder?: string;
+}
+
+export interface MonthViewEmits {
+  (e: 'eventClick', event: CalendarEvent): void;
 }
