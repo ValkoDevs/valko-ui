@@ -2,6 +2,7 @@
 import { computed, ref, onMounted, onUnmounted } from 'vue'
 import type { MonthViewProps, CalendarEvent } from '#valkoui/types/EventCalendar'
 import styles from '#valkoui/styles/EventCalendar.styles.ts'
+import VkPopover from './Popover.vue'
 
 defineOptions({ name: 'VkEventMonthView' })
 
@@ -132,6 +133,21 @@ const getDayCellClass = (day: MonthDay, dayIdx: number, weekIdx: number): string
 const onEventClick = (event: CalendarEvent) => {
   emit('eventClick', event)
 }
+
+const expandedDay = ref<string | null>(null)
+
+const toggleMorePopover = (day: Date) => {
+  const key = day.toISOString()
+  expandedDay.value = expandedDay.value === key ? null : key
+}
+
+const closeMorePopover = () => {
+  expandedDay.value = null
+}
+
+const isMoreOpen = (day: Date): boolean => {
+  return expandedDay.value === day.toISOString()
+}
 </script>
 
 <template>
@@ -193,12 +209,42 @@ const onEventClick = (event: CalendarEvent) => {
         </template>
 
         <!-- "+N more" indicator -->
-        <span
+        <vk-popover
           v-if="getEventsForDay(day.date).length > MAX_VISIBLE_EVENTS"
-          class="text-xs text-on-surface/60 cursor-default"
+          :is-open="isMoreOpen(day.date)"
+          placement="bottom"
+          :shape="shape"
+          @close="closeMorePopover"
         >
-          +{{ getEventsForDay(day.date).length - MAX_VISIBLE_EVENTS }} more
-        </span>
+          <span
+            :class="s.moreIndicator({ class: styleSlots?.moreIndicator })"
+            role="button"
+            tabindex="0"
+            @click.stop="toggleMorePopover(day.date)"
+            @keydown.enter.stop="toggleMorePopover(day.date)"
+            @keydown.space.prevent.stop="toggleMorePopover(day.date)"
+          >
+            +{{ getEventsForDay(day.date).length - MAX_VISIBLE_EVENTS }} more
+          </span>
+
+          <template #popover-content>
+            <div class="flex flex-col gap-1 p-2 min-w-48 max-h-64 overflow-y-auto">
+              <div
+                v-for="event in getEventsForDay(day.date).slice(MAX_VISIBLE_EVENTS)"
+                :key="event.id"
+                :class="s.monthEvent({ class: styleSlots?.monthEvent })"
+                :data-color="event.color || color"
+                role="button"
+                tabindex="0"
+                @click.stop="onEventClick(event)"
+                @keydown.enter="onEventClick(event)"
+                @keydown.space.prevent="onEventClick(event)"
+              >
+                {{ event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }} {{ event.title }}
+              </div>
+            </div>
+          </template>
+        </vk-popover>
       </div>
     </template>
   </div>

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from 'vue'
-import type { DayViewProps, CalendarEvent } from '#valkoui/types/EventCalendar'
+import type { DayViewProps, CalendarEvent, Timezone } from '#valkoui/types/EventCalendar'
 import styles from '#valkoui/styles/EventCalendar.styles.ts'
+import VkTooltip from './Tooltip.vue'
 
 defineOptions({ name: 'VkEventDayView' })
 
@@ -68,8 +69,8 @@ const eventPlacements = computed(() => {
   const placements = new Map<string, {
     topPercent: number;
     heightPercent: number;
-    leftRem: number;
-    topRem: number;
+    leftPercent: number;
+    widthPercent: number;
     zIndex: number;
     isOverlapping: boolean;
   }>()
@@ -90,7 +91,7 @@ const eventPlacements = computed(() => {
     const topPercent = ((clampedStart - start) / totalHours) * 100
     const heightPercent = ((clampedEnd - clampedStart) / totalHours) * 100
 
-    // Calculate overlap offset
+    // Calculate overlap column layout
     const overlapping = filteredEvents.value
       .filter(e => e.start < event.end && e.end > event.start)
       .sort((a, b) => a.start.getTime() - b.start.getTime())
@@ -101,8 +102,8 @@ const eventPlacements = computed(() => {
     placements.set(event.id, {
       topPercent,
       heightPercent,
-      leftRem: isOverlapping ? offsetIdx * 1.5 : 0,
-      topRem: isOverlapping ? offsetIdx * 0.5 : 0,
+      leftPercent: (offsetIdx / overlapping.length) * 100,
+      widthPercent: (1 / overlapping.length) * 100,
       zIndex: 10 + offsetIdx,
       isOverlapping
     })
@@ -118,17 +119,28 @@ const getEventStyle = (event: CalendarEvent): Record<string, string | number | u
   const isHovered = hoveredEventId.value === event.id
 
   return {
-    top: `calc(${placement.topPercent}% + ${placement.topRem}rem)`,
+    top: `${placement.topPercent}%`,
     height: `${placement.heightPercent}%`,
-    left: `${placement.leftRem}rem`,
-    right: '0',
+    left: `${placement.leftPercent}%`,
+    width: `${placement.widthPercent}%`,
     zIndex: isHovered ? 99 : placement.zIndex,
-    transform: isHovered ? 'scale(1.03)' : undefined
+    transform: isHovered ? 'translateY(-6px)' : undefined,
+    boxShadow: isHovered ? '0 8px 25px rgba(0,0,0,0.15)' : undefined
   }
 }
 
 const onEventClick = (event: CalendarEvent) => {
   emit('eventClick', event)
+}
+
+const getTimezoneLabel = (tz: Timezone): string => {
+  if (tz.abbreviation) return tz.abbreviation
+  const city = tz.id.split('/').pop()?.replace(/_/g, ' ') || tz.id
+  return city.split(' ').map(w => w[0]?.toUpperCase()).join('')
+}
+
+const getTimezoneFullName = (tz: Timezone): string => {
+  return tz.name || tz.id.split('/').pop()?.replace(/_/g, ' ') || tz.id
 }
 </script>
 
@@ -149,7 +161,9 @@ const onEventClick = (event: CalendarEvent) => {
       :class="s.timezoneHeader({ class: styleSlots?.timezoneHeader })"
       :style="{ gridColumn: tzIdx + 1, gridRow: 1 }"
     >
-      {{ tz.name || tz.id }}
+      <vk-tooltip :content="getTimezoneFullName(tz)" placement="top" size="sm">
+        {{ getTimezoneLabel(tz) }}
+      </vk-tooltip>
     </span>
 
     <!-- Row 1: Locale timezone header -->
@@ -157,7 +171,9 @@ const onEventClick = (event: CalendarEvent) => {
       :class="s.timezoneHeader({ class: styleSlots?.timezoneHeader })"
       :style="{ gridColumn: tzCount, gridRow: 1 }"
     >
-      {{ adapter.timezones.locale.name || adapter.timezones.locale.id }}
+      <vk-tooltip :content="getTimezoneFullName(adapter.timezones.locale)" placement="top" size="sm">
+        {{ getTimezoneLabel(adapter.timezones.locale) }}
+      </vk-tooltip>
     </span>
 
     <!-- Row 1: Events column header -->
