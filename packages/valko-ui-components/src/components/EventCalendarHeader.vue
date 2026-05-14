@@ -17,12 +17,7 @@ const props = withDefaults(defineProps<EventCalendarHeaderProps>(), {
   currentView: 'day'
 })
 
-const emit = defineEmits<{
-  previousClick: []
-  nextClick: []
-  todayClick: []
-  viewChange: [view: ViewMode]
-}>()
+const emit = defineEmits(['previousClick', 'nextClick', 'todayClick', 'viewChange'])
 
 const s = computed(() => styles(props))
 
@@ -32,53 +27,13 @@ const views: Item[] = [
   { title: 'Month', key: 'month' }
 ]
 
-const getMonday = (date: Date): Date => {
-  const d = new Date(date)
-  const day = d.getDay()
-  const diff = day === 0 ? -6 : 1 - day
-  d.setDate(d.getDate() + diff)
-  return d
-}
-
-const dateLabel = computed(() => {
-  const date = props.modelValue ?? new Date()
-
-  if (props.currentView === 'day') {
-    return date.toLocaleDateString('en-US', {
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric'
-    })
-  }
-
-  if (props.currentView === 'week') {
-    const monday = getMonday(date)
-    const lastDay = new Date(monday)
-    lastDay.setDate(monday.getDate() + (props.showWeekends === false ? 4 : 6))
-
-    const sameMonth = monday.getMonth() === lastDay.getMonth()
-    const sameYear = monday.getFullYear() === lastDay.getFullYear()
-
-    if (sameMonth && sameYear) {
-      const month = monday.toLocaleDateString('en-US', { month: 'long' })
-      return `${month} ${monday.getDate()} – ${lastDay.getDate()}, ${lastDay.getFullYear()}`
-    }
-
-    if (sameYear) {
-      const start = monday.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-      const end = lastDay.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-      return `${start} – ${end}, ${lastDay.getFullYear()}`
-    }
-
-    const start = monday.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-    const end = lastDay.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
-    return `${start} – ${end}`
-  }
-
-  // month view
-  return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
-})
+const dateLabel = computed(() =>
+  props.adapter.getDateLabel(
+    props.modelValue ?? new Date(),
+    props.currentView ?? 'day',
+    props.showWeekends !== false
+  )
+)
 </script>
 
 <template>
@@ -92,7 +47,6 @@ const dateLabel = computed(() => {
       :date-label="dateLabel"
       :current-view="currentView"
     >
-      <!-- Navigation: prev, today, next -->
       <div :class="s.headerNavGroup({ class: styleSlots?.headerNavGroup })">
         <vk-button
           :color="color"
@@ -128,7 +82,6 @@ const dateLabel = computed(() => {
         </vk-button>
       </div>
 
-      <!-- Current date / range label -->
       <span
         :class="s.headerTitle({ class: styleSlots?.headerTitle })"
         aria-live="polite"
@@ -137,7 +90,6 @@ const dateLabel = computed(() => {
         {{ dateLabel }}
       </span>
 
-      <!-- View switcher -->
       <vk-dropdown
         :color="color"
         :size="size"
