@@ -3,7 +3,8 @@ import { tv } from 'tailwind-variants'
 const eventCalendar = tv({
   slots: {
     container: [
-      'vk-event-calendar'
+      'vk-event-calendar',
+      'overflow-hidden'
     ],
     headerContainer: [
       'vk-event-calendar-header',
@@ -111,7 +112,7 @@ const eventCalendar = tv({
       'flex',
       'flex-col',
       'gap-0.5',
-      'overflow-hidden'
+      'min-w-0'
     ],
     monthDayCellToday: [
       'vk-event-month-day-cell-today',
@@ -123,7 +124,7 @@ const eventCalendar = tv({
       'flex',
       'flex-col',
       'gap-0.5',
-      'overflow-hidden',
+      'min-w-0',
       'bg-surface'
     ],
     monthDayCellOutside: [
@@ -136,7 +137,7 @@ const eventCalendar = tv({
       'flex',
       'flex-col',
       'gap-0.5',
-      'overflow-hidden',
+      'min-w-0',
       'opacity-40'
     ],
     monthDayNumber: [
@@ -152,21 +153,7 @@ const eventCalendar = tv({
       'truncate',
       'cursor-pointer',
       'transition-colors',
-      'duration-150',
-      'data-[color=primary]:bg-primary',
-      'data-[color=primary]:text-on-primary',
-      'data-[color=secondary]:bg-secondary',
-      'data-[color=secondary]:text-on-secondary',
-      'data-[color=positive]:bg-positive',
-      'data-[color=positive]:text-on-positive',
-      'data-[color=accent]:bg-accent',
-      'data-[color=accent]:text-on-accent',
-      'data-[color=warning]:bg-warning',
-      'data-[color=warning]:text-on-warning',
-      'data-[color=negative]:bg-negative',
-      'data-[color=negative]:text-on-negative',
-      'data-[color=surface]:bg-surface',
-      'data-[color=surface]:text-on-surface'
+      'duration-150'
     ],
     moreIndicator: [
       'vk-event-more-indicator',
@@ -195,9 +182,8 @@ const eventCalendar = tv({
       'vk-event-tz-hour-label',
       'flex',
       'justify-end',
-      'items-start',
+      'items-center',
       'text-on-surface',
-      'border-b',
       'border-r',
       'border-outlined',
       'px-2',
@@ -207,7 +193,6 @@ const eventCalendar = tv({
       'vk-event-column-header',
       'text-on-surface',
       'font-semibold',
-      'border-b',
       'border-outlined',
       'flex',
       'items-center',
@@ -217,183 +202,361 @@ const eventCalendar = tv({
     ],
     hourCell: [
       'vk-event-hour-cell',
-      'border-b',
-      'border-outlined'
+      'relative',
+      'before:content-[\'\']',
+      'before:absolute',
+      'before:inset-x-0',
+      'before:top-1/2',
+      'before:border-t',
+      'before:border-outlined'
     ],
     eventsArea: [
       'vk-event-events-area',
-      'relative',
-      'px-2'
+      'relative'
     ],
     currentTimeMarker: [
       'vk-event-time-marker',
+      'shadow-el1',
       'absolute',
       'left-0',
       'right-0',
       'h-0.5',
       'z-30',
-      'pointer-events-none',
-      'data-[color=primary]:bg-primary',
-      'data-[color=secondary]:bg-secondary',
-      'data-[color=positive]:bg-positive',
-      'data-[color=accent]:bg-accent',
-      'data-[color=warning]:bg-warning',
-      'data-[color=negative]:bg-negative',
-      'data-[color=surface]:bg-surface'
+      'pointer-events-none'
     ],
     currentTimeDot: [
       'vk-event-time-dot',
+      'shadow-el1',
       'absolute',
       '-left-1.5',
       '-top-1',
       'size-2.5',
-      'rounded-full',
-      'data-[color=primary]:bg-primary',
-      'data-[color=secondary]:bg-secondary',
-      'data-[color=positive]:bg-positive',
-      'data-[color=accent]:bg-accent',
-      'data-[color=warning]:bg-warning',
-      'data-[color=negative]:bg-negative',
-      'data-[color=surface]:bg-surface'
+      'rounded-full'
     ],
     event: [
       'vk-event-event',
       'absolute',
-      'p-2',
-      'mx-1',
+      'px-2',
+      'py-1',
+      'font-semibold',
       'cursor-pointer',
       'transition-all',
       'duration-200',
       'ease-in-out',
       'overflow-hidden',
-      'truncate',
-      'shadow-md',
-      'border',
-      'border-white/20',
-      'data-[color=primary]:bg-primary',
-      'data-[color=primary]:text-on-primary',
-      'data-[color=secondary]:bg-secondary',
-      'data-[color=secondary]:text-on-secondary',
-      'data-[color=positive]:bg-positive',
-      'data-[color=positive]:text-on-positive',
-      'data-[color=accent]:bg-accent',
-      'data-[color=accent]:text-on-accent',
-      'data-[color=warning]:bg-warning',
-      'data-[color=warning]:text-on-warning',
-      'data-[color=negative]:bg-negative',
-      'data-[color=negative]:text-on-negative',
-      'data-[color=surface]:bg-surface',
-      'data-[color=surface]:text-on-surface'
+      'line-clamp-2'
+    ],
+    dragGhost: [
+      'vk-event-drag-ghost',
+      'absolute',
+      'pointer-events-none',
+      'z-50',
+      'opacity-60',
+      'border-2',
+      'transition-none'
+    ],
+    resizeHandle: [
+      'vk-event-resize-handle',
+      'absolute',
+      'left-0',
+      'right-0',
+      'h-0.75',
+      'cursor-ns-resize',
+      'z-10',
+      'opacity-0',
+      'hover:opacity-100',
+      'transition-opacity',
+      'duration-150'
     ]
   },
   variants: {
     variant: {
       filled: {
-        dayViewContainer: ['bg-surface-container'],
-        weekViewContainer: ['bg-surface-container'],
-        monthViewContainer: ['bg-surface-container']
-      },
-      outlined: {
-        container: ['border', 'border-outlined', 'rounded-lg'],
+        dayViewContainer: [
+          'bg-surface-container'
+        ],
+        weekViewContainer: [
+          'bg-surface-container'
+        ],
+        monthViewContainer: [
+          'bg-surface-container'
+        ],
+        headerContainer: [
+          'bg-surface-container-high'
+        ],
+        eventColumnHeader: [
+          'border-b'
+        ],
         event: [
-          'bg-transparent',
-          'shadow-none',
-          'border-2',
-          'data-[color=primary]:!bg-transparent',
-          'data-[color=primary]:border-primary',
-          'data-[color=primary]:!text-primary',
-          'data-[color=secondary]:!bg-transparent',
-          'data-[color=secondary]:border-secondary',
-          'data-[color=secondary]:!text-secondary',
-          'data-[color=positive]:!bg-transparent',
-          'data-[color=positive]:border-positive',
-          'data-[color=positive]:!text-positive',
-          'data-[color=accent]:!bg-transparent',
-          'data-[color=accent]:border-accent',
-          'data-[color=accent]:!text-accent',
-          'data-[color=warning]:!bg-transparent',
-          'data-[color=warning]:border-warning',
-          'data-[color=warning]:!text-warning',
-          'data-[color=negative]:!bg-transparent',
-          'data-[color=negative]:border-negative',
-          'data-[color=negative]:!text-negative',
-          'data-[color=surface]:!bg-transparent',
-          'data-[color=surface]:border-surface',
-          'data-[color=surface]:!text-on-surface'
+          'shadow-el2',
+          'border-l-4',
+          'data-[color=primary]:bg-primary',
+          'data-[color=primary]:text-on-primary',
+          'data-[color=primary]:border-primary-container',
+          'data-[color=secondary]:bg-secondary',
+          'data-[color=secondary]:text-on-secondary',
+          'data-[color=secondary]:border-secondary-container',
+          'data-[color=positive]:bg-positive',
+          'data-[color=positive]:text-on-positive',
+          'data-[color=positive]:border-positive-container',
+          'data-[color=accent]:bg-accent',
+          'data-[color=accent]:text-on-accent',
+          'data-[color=accent]:border-accent-container',
+          'data-[color=warning]:bg-warning',
+          'data-[color=warning]:text-on-warning',
+          'data-[color=warning]:border-warning-container',
+          'data-[color=negative]:bg-negative',
+          'data-[color=negative]:text-on-negative',
+          'data-[color=negative]:border-negative-container',
+          'data-[color=surface]:bg-surface',
+          'data-[color=surface]:text-on-surface'
         ],
         monthEvent: [
-          'bg-transparent',
-          'border-l-2',
-          'data-[color=primary]:!bg-transparent',
+          'data-[color=primary]:bg-primary',
+          'data-[color=primary]:text-on-primary',
+          'data-[color=secondary]:bg-secondary',
+          'data-[color=secondary]:text-on-secondary',
+          'data-[color=positive]:bg-positive',
+          'data-[color=positive]:text-on-positive',
+          'data-[color=accent]:bg-accent',
+          'data-[color=accent]:text-on-accent',
+          'data-[color=warning]:bg-warning',
+          'data-[color=warning]:text-on-warning',
+          'data-[color=negative]:bg-negative',
+          'data-[color=negative]:text-on-negative',
+          'data-[color=surface]:bg-surface',
+          'data-[color=surface]:text-on-surface'
+        ],
+        currentTimeMarker: [
+          'data-[color=primary]:bg-primary',
+          'data-[color=secondary]:bg-secondary',
+          'data-[color=positive]:bg-positive',
+          'data-[color=accent]:bg-accent',
+          'data-[color=warning]:bg-warning',
+          'data-[color=negative]:bg-negative',
+          'data-[color=surface]:bg-surface'
+        ],
+        currentTimeDot: [
+          'data-[color=primary]:bg-primary',
+          'data-[color=secondary]:bg-secondary',
+          'data-[color=positive]:bg-positive',
+          'data-[color=accent]:bg-accent',
+          'data-[color=warning]:bg-warning',
+          'data-[color=negative]:bg-negative',
+          'data-[color=surface]:bg-on-surface-container'
+        ],
+        dragGhost: [
+          'data-[color=primary]:bg-primary/20',
           'data-[color=primary]:border-primary',
-          'data-[color=primary]:!text-primary',
-          'data-[color=secondary]:!bg-transparent',
+          'data-[color=secondary]:bg-secondary/20',
           'data-[color=secondary]:border-secondary',
-          'data-[color=secondary]:!text-secondary',
-          'data-[color=positive]:!bg-transparent',
+          'data-[color=positive]:bg-positive/20',
           'data-[color=positive]:border-positive',
-          'data-[color=positive]:!text-positive',
-          'data-[color=accent]:!bg-transparent',
+          'data-[color=accent]:bg-accent/20',
           'data-[color=accent]:border-accent',
-          'data-[color=accent]:!text-accent',
-          'data-[color=warning]:!bg-transparent',
+          'data-[color=warning]:bg-warning/20',
           'data-[color=warning]:border-warning',
-          'data-[color=warning]:!text-warning',
-          'data-[color=negative]:!bg-transparent',
+          'data-[color=negative]:bg-negative/20',
           'data-[color=negative]:border-negative',
-          'data-[color=negative]:!text-negative',
-          'data-[color=surface]:!bg-transparent',
+          'data-[color=surface]:bg-surface/20',
+          'data-[color=surface]:border-surface'
+        ],
+        resizeHandle: [
+          'data-[color=primary]:bg-primary-container',
+          'data-[color=secondary]:bg-secondary-container',
+          'data-[color=positive]:bg-positive-container',
+          'data-[color=accent]:bg-accent-container',
+          'data-[color=warning]:bg-warning-container',
+          'data-[color=negative]:bg-negative-container',
+          'data-[color=surface]:bg-surface'
+        ]
+      },
+      outlined: {
+        container: [
+          'border',
+          'border-outlined'
+        ],
+        event: [
+          'border-2',
+          'data-[color=primary]:bg-primary-container',
+          'data-[color=primary]:border-primary',
+          'data-[color=primary]:text-on-primary-container',
+          'data-[color=secondary]:bg-secondary-container',
+          'data-[color=secondary]:border-secondary',
+          'data-[color=secondary]:text-on-secondary-container',
+          'data-[color=positive]:bg-positive-container',
+          'data-[color=positive]:border-positive',
+          'data-[color=positive]:text-on-positive-container',
+          'data-[color=accent]:bg-accent-container',
+          'data-[color=accent]:border-accent',
+          'data-[color=accent]:text-on-accent-container',
+          'data-[color=warning]:bg-warning-container',
+          'data-[color=warning]:border-warning',
+          'data-[color=warning]:text-on-warning-container',
+          'data-[color=negative]:bg-negative-container',
+          'data-[color=negative]:border-negative',
+          'data-[color=negative]:text-on-negative-container',
           'data-[color=surface]:border-surface',
-          'data-[color=surface]:!text-on-surface'
+          'data-[color=surface]:text-on-surface-container'
+        ],
+        monthEvent: [
+          'border-l-2',
+          'data-[color=primary]:bg-primary-container',
+          'data-[color=primary]:border-primary',
+          'data-[color=primary]:text-on-primary-container',
+          'data-[color=secondary]:bg-secondary-container',
+          'data-[color=secondary]:border-secondary',
+          'data-[color=secondary]:text-on-secondary-container',
+          'data-[color=positive]:bg-positive-container',
+          'data-[color=positive]:border-positive',
+          'data-[color=positive]:text-on-positive-container',
+          'data-[color=accent]:bg-accent-container',
+          'data-[color=accent]:border-accent',
+          'data-[color=accent]:text-on-accent-container',
+          'data-[color=warning]:bg-warning-container',
+          'data-[color=warning]:border-warning',
+          'data-[color=warning]:text-on-warning-container',
+          'data-[color=negative]:bg-negative-container',
+          'data-[color=negative]:border-negative',
+          'data-[color=negative]:text-on-negative-container',
+          'data-[color=surface]:border-surface',
+          'data-[color=surface]:text-on-surface-container'
+        ],
+        dragGhost: [
+          'data-[color=primary]:bg-primary-container/30',
+          'data-[color=primary]:border-primary',
+          'data-[color=secondary]:bg-secondary-container/30',
+          'data-[color=secondary]:border-secondary',
+          'data-[color=positive]:bg-positive-container/30',
+          'data-[color=positive]:border-positive',
+          'data-[color=accent]:bg-accent-container/30',
+          'data-[color=accent]:border-accent',
+          'data-[color=warning]:bg-warning-container/30',
+          'data-[color=warning]:border-warning',
+          'data-[color=negative]:bg-negative-container/30',
+          'data-[color=negative]:border-negative',
+          'data-[color=surface]:bg-surface-container/30',
+          'data-[color=surface]:border-surface'
+        ],
+        resizeHandle: [
+          'data-[color=primary]:bg-primary',
+          'data-[color=secondary]:bg-secondary',
+          'data-[color=positive]:bg-positive',
+          'data-[color=accent]:bg-accent',
+          'data-[color=warning]:bg-warning',
+          'data-[color=negative]:bg-negative',
+          'data-[color=surface]:bg-on-surface-container'
         ]
       },
       ghost: {
-        headerContainer: ['border-none'],
+        headerContainer: [
+          'border-dashed'
+        ],
         event: [
-          'bg-transparent',
-          'shadow-none',
-          'border-none',
-          'data-[color=primary]:!bg-transparent',
-          'data-[color=primary]:!text-primary',
-          'data-[color=secondary]:!bg-transparent',
-          'data-[color=secondary]:!text-secondary',
-          'data-[color=positive]:!bg-transparent',
-          'data-[color=positive]:!text-positive',
-          'data-[color=accent]:!bg-transparent',
-          'data-[color=accent]:!text-accent',
-          'data-[color=warning]:!bg-transparent',
-          'data-[color=warning]:!text-warning',
-          'data-[color=negative]:!bg-transparent',
-          'data-[color=negative]:!text-negative',
-          'data-[color=surface]:!bg-transparent',
-          'data-[color=surface]:!text-on-surface'
+          'data-[color=primary]:bg-primary-container',
+          'data-[color=primary]:text-on-primary-container',
+          'data-[color=secondary]:bg-secondary-container',
+          'data-[color=secondary]:text-on-secondary-container',
+          'data-[color=positive]:bg-positive-container',
+          'data-[color=positive]:text-on-positive-container',
+          'data-[color=accent]:bg-accent-container',
+          'data-[color=accent]:text-on-accent-container',
+          'data-[color=warning]:bg-warning-container',
+          'data-[color=warning]:text-on-warning-container',
+          'data-[color=negative]:bg-negative-container',
+          'data-[color=negative]:text-on-negative-container',
+          'data-[color=surface]:bg-surface-container',
+          'data-[color=surface]:text-on-surface-container'
         ],
         monthEvent: [
-          'bg-transparent',
-          'data-[color=primary]:!bg-transparent',
-          'data-[color=primary]:!text-primary',
-          'data-[color=secondary]:!bg-transparent',
-          'data-[color=secondary]:!text-secondary',
-          'data-[color=positive]:!bg-transparent',
-          'data-[color=positive]:!text-positive',
-          'data-[color=accent]:!bg-transparent',
-          'data-[color=accent]:!text-accent',
-          'data-[color=warning]:!bg-transparent',
-          'data-[color=warning]:!text-warning',
-          'data-[color=negative]:!bg-transparent',
-          'data-[color=negative]:!text-negative',
-          'data-[color=surface]:!bg-transparent',
-          'data-[color=surface]:!text-on-surface'
+          'data-[color=primary]:bg-primary-container',
+          'data-[color=primary]:text-on-primary-container',
+          'data-[color=secondary]:bg-secondary-container',
+          'data-[color=secondary]:text-on-secondary-container',
+          'data-[color=positive]:bg-positive-container',
+          'data-[color=positive]:text-on-positive-container',
+          'data-[color=accent]:bg-accent-container',
+          'data-[color=accent]:text-on-accent-container',
+          'data-[color=warning]:bg-warning-container',
+          'data-[color=warning]:text-on-warning-container',
+          'data-[color=negative]:bg-negative-container',
+          'data-[color=negative]:text-on-negative-container',
+          'data-[color=surface]:bg-surface-container',
+          'data-[color=surface]:text-on-surface-container'
         ],
-        hourCell: ['border-dashed'],
-        monthDayCell: ['border-dashed'],
-        monthDayCellToday: ['border-dashed'],
-        monthDayCellOutside: ['border-dashed'],
-        weekDayHeader: ['border-dashed'],
-        weekDayHeaderToday: ['border-dashed'],
-        monthWeekdayHeader: ['border-dashed'],
-        timezoneHeader: ['border-dashed'],
-        timezoneHourLabel: ['border-dashed']
+        hourCell: [
+          'before:border-dashed'
+        ],
+        monthDayCell: [
+          'border-dashed'
+        ],
+        monthDayCellToday: [
+          'border-dashed'
+        ],
+        monthDayCellOutside: [
+          'border-dashed'
+        ],
+        weekDayHeader: [
+          'border-dashed'
+        ],
+        weekDayHeaderToday: [
+          'border-dashed'
+        ],
+        monthWeekdayHeader: [
+          'border-dashed'
+        ],
+        timezoneHeader: [
+          'border-dashed'
+        ],
+        timezoneHourLabel: [
+          'border-dashed'
+        ],
+        eventColumnHeader: [
+          'border-b-dashed'
+        ],
+        currentTimeDot: [
+          'data-[color=primary]:bg-primary-container',
+          'data-[color=secondary]:bg-secondary-container',
+          'data-[color=positive]:bg-positive-container',
+          'data-[color=accent]:bg-accent-container',
+          'data-[color=warning]:bg-warning-container',
+          'data-[color=negative]:bg-negative-container',
+          'data-[color=surface]:bg-surface-container'
+        ],
+        currentTimeMarker: [
+          'data-[color=primary]:bg-primary-container',
+          'data-[color=secondary]:bg-secondary-container',
+          'data-[color=positive]:bg-positive-container',
+          'data-[color=accent]:bg-accent-container',
+          'data-[color=warning]:bg-warning-container',
+          'data-[color=negative]:bg-negative-container',
+          'data-[color=surface]:bg-surface-container'
+        ],
+        dragGhost: [
+          'data-[color=primary]:bg-primary-container/30',
+          'data-[color=primary]:border-primary-container',
+          'data-[color=secondary]:bg-secondary-container/30',
+          'data-[color=secondary]:border-secondary-container',
+          'data-[color=positive]:bg-positive-container/30',
+          'data-[color=positive]:border-positive-container',
+          'data-[color=accent]:bg-accent-container/30',
+          'data-[color=accent]:border-accent-container',
+          'data-[color=warning]:bg-warning-container/30',
+          'data-[color=warning]:border-warning-container',
+          'data-[color=negative]:bg-negative-container/30',
+          'data-[color=negative]:border-negative-container',
+          'data-[color=surface]:bg-surface-container/30',
+          'data-[color=surface]:border-surface-container'
+        ],
+        resizeHandle: [
+          'data-[color=primary]:bg-primary',
+          'data-[color=secondary]:bg-secondary',
+          'data-[color=positive]:bg-positive',
+          'data-[color=accent]:bg-accent',
+          'data-[color=warning]:bg-warning',
+          'data-[color=negative]:bg-negative',
+          'data-[color=surface]:bg-on-surface-container'
+        ]
       }
     },
     color: {
@@ -407,66 +570,173 @@ const eventCalendar = tv({
     },
     size: {
       xs: {
-        headerTitle: ['text-[10px]'],
-        weekDayHeader: ['text-[10px]'],
-        weekDayHeaderToday: ['text-[10px]'],
-        monthWeekdayHeader: ['text-[10px]'],
-        monthDayNumber: ['text-[9px]'],
-        monthEvent: ['text-[9px]'],
-        moreIndicator: ['text-[8px]'],
-        timezoneHeader: ['text-[10px]'],
-        timezoneHourLabel: ['text-[9px]'],
-        eventColumnHeader: ['text-[10px]'],
-        event: ['text-[9px]']
+        headerTitle: [
+          'text-[10px]'
+        ],
+        weekDayHeader: [
+          'text-[10px]'
+        ],
+        weekDayHeaderToday: [
+          'text-[10px]'
+        ],
+        monthWeekdayHeader: [
+          'text-[10px]'
+        ],
+        monthDayNumber: [
+          'text-[9px]'
+        ],
+        monthEvent: [
+          'text-[9px]'
+        ],
+        moreIndicator: [
+          'text-[8px]'
+        ],
+        timezoneHeader: [
+          'text-[10px]'
+        ],
+        timezoneHourLabel: [
+          'text-[9px]'
+        ],
+        eventColumnHeader: [
+          'text-[10px]'
+        ],
+        event: [
+          'text-[9px]']
       },
       sm: {
-        headerTitle: ['text-xs'],
-        weekDayHeader: ['text-xs'],
-        weekDayHeaderToday: ['text-xs'],
-        monthWeekdayHeader: ['text-xs'],
-        monthDayNumber: ['text-[10px]'],
-        monthEvent: ['text-[10px]'],
-        moreIndicator: ['text-[10px]'],
-        timezoneHeader: ['text-xs'],
-        timezoneHourLabel: ['text-[10px]'],
-        eventColumnHeader: ['text-xs'],
-        event: ['text-[10px]']
+        headerTitle: [
+          'text-xs'
+        ],
+        weekDayHeader: [
+          'text-xs'
+        ],
+        weekDayHeaderToday: [
+          'text-xs'
+        ],
+        monthWeekdayHeader: [
+          'text-xs'
+        ],
+        monthDayNumber: [
+          'text-[10px]'
+        ],
+        monthEvent: [
+          'text-[10px]'
+        ],
+        moreIndicator: [
+          'text-[10px]'
+        ],
+        timezoneHeader: [
+          'text-xs'
+        ],
+        timezoneHourLabel: [
+          'text-[10px]'
+        ],
+        eventColumnHeader: [
+          'text-xs'
+        ],
+        event: [
+          'text-[10px]'
+        ]
       },
       md: {
-        headerTitle: ['text-sm'],
-        weekDayHeader: ['text-sm'],
-        weekDayHeaderToday: ['text-sm'],
-        monthWeekdayHeader: ['text-sm'],
-        monthDayNumber: ['text-xs'],
-        monthEvent: ['text-xs'],
-        moreIndicator: ['text-xs'],
-        timezoneHeader: ['text-sm'],
-        timezoneHourLabel: ['text-xs'],
-        eventColumnHeader: ['text-sm'],
-        event: ['text-xs']
+        headerTitle: [
+          'text-sm'
+        ],
+        weekDayHeader: [
+          'text-sm'
+        ],
+        weekDayHeaderToday: [
+          'text-sm'
+        ],
+        monthWeekdayHeader: [
+          'text-sm'
+        ],
+        monthDayNumber: [
+          'text-xs'
+        ],
+        monthEvent: [
+          'text-xs'
+        ],
+        moreIndicator: [
+          'text-xs'
+        ],
+        timezoneHeader: [
+          'text-sm'
+        ],
+        timezoneHourLabel: [
+          'text-xs'
+        ],
+        eventColumnHeader: [
+          'text-sm'
+        ],
+        event: [
+          'text-xs'
+        ]
       },
       lg: {
-        headerTitle: ['text-base'],
-        weekDayHeader: ['text-base'],
-        weekDayHeaderToday: ['text-base'],
-        monthWeekdayHeader: ['text-base'],
-        monthDayNumber: ['text-sm'],
-        monthEvent: ['text-sm'],
-        moreIndicator: ['text-sm'],
-        timezoneHeader: ['text-base'],
-        timezoneHourLabel: ['text-sm'],
-        eventColumnHeader: ['text-base'],
-        event: ['text-sm']
+        headerTitle: [
+          'text-base'
+        ],
+        weekDayHeader: [
+          'text-base'
+        ],
+        weekDayHeaderToday: [
+          'text-base'
+        ],
+        monthWeekdayHeader: [
+          'text-base'
+        ],
+        monthDayNumber: [
+          'text-sm'
+        ],
+        monthEvent: [
+          'text-sm'
+        ],
+        moreIndicator: [
+          'text-sm'
+        ],
+        timezoneHeader: [
+          'text-base'
+        ],
+        timezoneHourLabel: [
+          'text-sm'
+        ],
+        eventColumnHeader: [
+          'text-base'
+        ],
+        event: [
+          'text-sm'
+        ]
       }
     },
     shape: {
       rounded: {
-        event: ['rounded-xl'],
-        monthEvent: ['rounded-xl']
+        event: [
+          'rounded-xl'
+        ],
+        container: [
+          'rounded-xl'
+        ],
+        monthEvent: [
+          'rounded-xl'
+        ],
+        dragGhost: [
+          'rounded-xl'
+        ]
       },
       soft: {
-        event: ['rounded-lg'],
-        monthEvent: ['rounded-md']
+        container: [
+          'rounded-lg'
+        ],
+        event: [
+          'rounded-lg'
+        ],
+        monthEvent: [
+          'rounded-lg'
+        ],
+        dragGhost: [
+          'rounded-lg'
+        ]
       },
       square: {}
     }
