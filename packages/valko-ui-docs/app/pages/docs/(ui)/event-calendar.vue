@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableItem, EventCalendarProps, CalendarEvent, CSSProperties } from '#valkoui'
+import type { TableItem, EventCalendarProps, CalendarEvent, EventDropPayload, EventResizePayload } from '#valkoui'
 
 const form = ref<Partial<EventCalendarProps>>({
   color: 'primary',
@@ -8,7 +8,9 @@ const form = ref<Partial<EventCalendarProps>>({
   shape: 'soft',
   currentView: 'day',
   showWeekends: true,
-  hideHeader: false
+  hideHeader: false,
+  draggable: true,
+  resizable: true
 })
 
 const eventCalendarProps: TableItem[] = [
@@ -93,6 +95,22 @@ const eventCalendarProps: TableItem[] = [
     default: 'false'
   },
   {
+    key: 'draggableProp',
+    prop: 'draggable',
+    required: false,
+    description: 'Enables drag-and-drop event repositioning in all views.',
+    values: 'true, false',
+    default: 'true'
+  },
+  {
+    key: 'resizableProp',
+    prop: 'resizable',
+    required: false,
+    description: 'Enables edge-resize to expand or shrink events by dragging their top or bottom border. Only applies to day and week views.',
+    values: 'true, false',
+    default: 'true'
+  },
+  {
     key: 'styleSlotsProp',
     prop: 'styleSlots',
     required: false,
@@ -144,6 +162,20 @@ const eventCalendarEmits: TableItem[] = [
     description: 'Emitted when the Today button is clicked.',
     values: '-',
     type: '() => void'
+  },
+  {
+    key: 'eventDropEmit',
+    event: 'eventDrop',
+    description: 'Emitted when an event is dropped onto a new time slot after dragging.',
+    values: 'EventDropPayload',
+    type: '(payload: EventDropPayload) => void'
+  },
+  {
+    key: 'eventResizeEmit',
+    event: 'eventResize',
+    description: 'Emitted when an event is resized by dragging its top or bottom edge.',
+    values: 'EventResizePayload',
+    type: '(payload: EventResizePayload) => void'
   }
 ]
 
@@ -157,67 +189,438 @@ const eventCalendarSlots: TableItem[] = [
   {
     key: 'eventSlot',
     name: 'event',
-    description: 'Custom rendering for each event item. Scoped slot providing the event object and its computed CSS style.',
-    example: '<template #event="{ event, style }"><div :style="style">{{ event.title }}</div></template>'
+    description: 'Custom inner content for each event item. The positioning wrapper is always rendered by the component. Scoped slot providing the event object.',
+    example: '<template #event="{ event }"><span>{{ event.title }}</span></template>'
+  },
+  {
+    key: 'moreEventsSlot',
+    name: 'more-events',
+    description: 'Custom content for the "+N more" indicator in month view. Scoped slot providing day and events.',
+    example: '<template #more-events="{ day, events }"><span>{{ events.length }} more</span></template>'
   }
 ]
 
 const styleSlotsInterface: TableItem[] = [
-  { key: 'containerSlot', prop: 'container', description: 'Root wrapper of the calendar.', values: 'string[]', default: '' },
-  { key: 'headerContainerSlot', prop: 'headerContainer', description: 'Header toolbar container.', values: 'string[]', default: '' },
-  { key: 'headerNavGroupSlot', prop: 'headerNavGroup', description: 'Navigation buttons group (prev / today / next).', values: 'string[]', default: '' },
-  { key: 'headerTitleSlot', prop: 'headerTitle', description: 'Date label displayed in the header.', values: 'string[]', default: '' },
-  { key: 'headerViewSwitcherSlot', prop: 'headerViewSwitcher', description: 'View switcher area in the header.', values: 'string[]', default: '' },
-  { key: 'dayViewContainerSlot', prop: 'dayViewContainer', description: 'Day view grid container.', values: 'string[]', default: '' },
-  { key: 'weekViewContainerSlot', prop: 'weekViewContainer', description: 'Week view grid container.', values: 'string[]', default: '' },
-  { key: 'weekDayHeaderSlot', prop: 'weekDayHeader', description: 'Week day column header (non-today).', values: 'string[]', default: '' },
-  { key: 'weekDayHeaderTodaySlot', prop: 'weekDayHeaderToday', description: 'Week day column header for today (highlighted).', values: 'string[]', default: '' },
-  { key: 'weekDayColumnSlot', prop: 'weekDayColumn', description: 'Week day column layout helper.', values: 'string[]', default: '' },
-  { key: 'monthViewContainerSlot', prop: 'monthViewContainer', description: 'Month view grid container.', values: 'string[]', default: '' },
-  { key: 'monthWeekdayHeaderSlot', prop: 'monthWeekdayHeader', description: 'Month weekday name header.', values: 'string[]', default: '' },
-  { key: 'monthDayCellSlot', prop: 'monthDayCell', description: 'Standard month day cell.', values: 'string[]', default: '' },
-  { key: 'monthDayCellTodaySlot', prop: 'monthDayCellToday', description: "Today's month day cell (highlighted).", values: 'string[]', default: '' },
-  { key: 'monthDayCellOutsideSlot', prop: 'monthDayCellOutside', description: 'Out-of-month day cell (dimmed).', values: 'string[]', default: '' },
-  { key: 'monthDayNumberSlot', prop: 'monthDayNumber', description: 'Day number inside a month cell.', values: 'string[]', default: '' },
-  { key: 'monthEventSlot', prop: 'monthEvent', description: 'Event chip in month view.', values: 'string[]', default: '' },
-  { key: 'timezoneHeaderSlot', prop: 'timezoneHeader', description: 'Timezone column header.', values: 'string[]', default: '' },
-  { key: 'timezoneHourLabelSlot', prop: 'timezoneHourLabel', description: 'Per-hour label in the timezone column.', values: 'string[]', default: '' },
-  { key: 'eventColumnHeaderSlot', prop: 'eventColumnHeader', description: 'Events column header (day view).', values: 'string[]', default: '' },
-  { key: 'hourCellSlot', prop: 'hourCell', description: 'Per-hour grid cell.', values: 'string[]', default: '' },
-  { key: 'eventsAreaSlot', prop: 'eventsArea', description: 'Absolute-positioned event overlay area.', values: 'string[]', default: '' },
-  { key: 'currentTimeMarkerSlot', prop: 'currentTimeMarker', description: 'Current time horizontal line.', values: 'string[]', default: '' },
-  { key: 'currentTimeDotSlot', prop: 'currentTimeDot', description: 'Dot on the current time marker.', values: 'string[]', default: '' },
-  { key: 'eventSlotStyle', prop: 'event', description: 'Event chip in day/week views.', values: 'string[]', default: '' }
+  {
+    key: 'containerSlot',
+    prop: 'container',
+    description: 'Root wrapper of the calendar.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'headerContainerSlot',
+    prop: 'headerContainer',
+    description: 'Header toolbar container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'headerNavGroupSlot',
+    prop: 'headerNavGroup',
+    description: 'Navigation buttons group (prev / today / next).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'headerTitleSlot',
+    prop: 'headerTitle',
+    description: 'Date label displayed in the header.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'headerViewSwitcherSlot',
+    prop: 'headerViewSwitcher',
+    description: 'View switcher area in the header.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'dayViewContainerSlot',
+    prop: 'dayViewContainer',
+    description: 'Day view grid container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'weekViewContainerSlot',
+    prop: 'weekViewContainer',
+    description: 'Week view grid container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'weekDayHeaderSlot',
+    prop: 'weekDayHeader',
+    description: 'Week day column header (non-today).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'weekDayHeaderTodaySlot',
+    prop: 'weekDayHeaderToday',
+    description: 'Week day column header for today (highlighted).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'weekDayColumnSlot',
+    prop: 'weekDayColumn',
+    description: 'Week day column layout helper.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'monthViewContainerSlot',
+    prop: 'monthViewContainer',
+    description: 'Month view grid container.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'monthWeekdayHeaderSlot',
+    prop: 'monthWeekdayHeader',
+    description: 'Month weekday name header.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'monthDayCellSlot',
+    prop: 'monthDayCell',
+    description: 'Standard month day cell.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'monthDayCellTodaySlot',
+    prop: 'monthDayCellToday',
+    description: 'Today\'s month day cell (highlighted).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'monthDayCellOutsideSlot',
+    prop: 'monthDayCellOutside',
+    description: 'Out-of-month day cell (dimmed).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'monthDayNumberSlot',
+    prop: 'monthDayNumber',
+    description: 'Day number inside a month cell.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'monthEventSlot',
+    prop: 'monthEvent',
+    description: 'Event chip in month view.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'moreIndicatorSlot',
+    prop: 'moreIndicator',
+    description: 'The "+N more" indicator in month view cells.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'dragGhostSlot',
+    prop: 'dragGhost',
+    description: 'Semi-transparent ghost element shown at the drop target during drag.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'resizeHandleSlot',
+    prop: 'resizeHandle',
+    description: 'Invisible handle zones at the top and bottom edges of events for resize interaction.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'timezoneHeaderSlot',
+    prop: 'timezoneHeader',
+    description: 'Timezone column header.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'timezoneHourLabelSlot',
+    prop: 'timezoneHourLabel',
+    description: 'Per-hour label in the timezone column.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'eventColumnHeaderSlot',
+    prop: 'eventColumnHeader',
+    description: 'Events column header (day view).',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'hourCellSlot',
+    prop: 'hourCell',
+    description: 'Per-hour grid cell.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'eventsAreaSlot',
+    prop: 'eventsArea',
+    description: 'Absolute-positioned event overlay area.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'currentTimeMarkerSlot',
+    prop: 'currentTimeMarker',
+    description: 'Current time horizontal line.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'currentTimeDotSlot',
+    prop: 'currentTimeDot',
+    description: 'Dot on the current time marker.',
+    values: 'string[]',
+    default: ''
+  },
+  {
+    key: 'eventSlotStyle',
+    prop: 'event',
+    description: 'Event chip in day/week views.',
+    values: 'string[]',
+    default: ''
+  }
 ]
 
 const calendarEventInterface: TableItem[] = [
-  { key: 'idProp', prop: 'id', required: true, description: 'Unique event identifier.', values: 'string', default: '-' },
-  { key: 'startProp', prop: 'start', required: true, description: 'Event start time.', values: 'Date', default: '-' },
-  { key: 'endProp', prop: 'end', required: true, description: 'Event end time.', values: 'Date', default: '-' },
-  { key: 'titleProp', prop: 'title', required: false, description: 'Event title.', values: 'string', default: '-' },
-  { key: 'colorPropEvent', prop: 'color', required: false, description: 'Event color override (e.g. primary, secondary, etc.).', values: 'string', default: '-' },
-  { key: 'locationProp', prop: 'location', required: false, description: 'Event location.', values: 'string', default: '-' },
-  { key: 'customProp', prop: 'custom', required: false, description: 'Custom data payload for the event.', values: 'Record<string, unknown>', default: '-' }
+  {
+    key: 'idProp',
+    prop: 'id',
+    required: true,
+    description: 'Unique event identifier.',
+    values: 'string',
+    default: '-'
+  },
+  {
+    key: 'startProp',
+    prop: 'start',
+    required: true,
+    description: 'Event start time.',
+    values: 'Date',
+    default: '-'
+  },
+  {
+    key: 'endProp',
+    prop: 'end',
+    required: true,
+    description: 'Event end time.',
+    values: 'Date',
+    default: '-'
+  },
+  {
+    key: 'titleProp',
+    prop: 'title',
+    required: false,
+    description: 'Event title.',
+    values: 'string',
+    default: '-'
+  },
+  {
+    key: 'colorPropEvent',
+    prop: 'color',
+    required: false,
+    description: 'Event color override (e.g. primary, secondary, etc.).',
+    values: 'string',
+    default: '-'
+  },
+  {
+    key: 'locationProp',
+    prop: 'location',
+    required: false,
+    description: 'Event location.',
+    values: 'string',
+    default: '-'
+  },
+  {
+    key: 'customProp',
+    prop: 'custom',
+    required: false,
+    description: 'Custom data payload for the event.',
+    values: 'Record<string, unknown>',
+    default: '-'
+  }
 ]
 
 const eventAdapterResultInterface: TableItem[] = [
-  { key: 'timezonesProp', prop: 'timezones', required: true, description: 'Timezone configuration containing the locale timezone and any extra timezones to display.', values: '{ locale: Timezone; extras: Timezone[] }', default: '-' },
-  { key: 'hourRangeProp', prop: 'hourRange', required: true, description: 'Visible hour range for day and week views, expressed as a tuple of [startHour, endHour].', values: '[number, number]', default: '-' }
+  {
+    key: 'timezonesProp',
+    prop: 'timezones',
+    required: true,
+    description: 'Timezone configuration containing the locale timezone and any extra timezones to display.',
+    values: '{ locale: Timezone; extras: Timezone[] }',
+    default: '-'
+  },
+  {
+    key: 'hourRangeProp',
+    prop: 'hourRange',
+    required: true,
+    description: 'Visible hour range for day and week views, expressed as a tuple of [startHour, endHour].',
+    values: '[number, number]',
+    default: '-'
+  }
 ]
 
 const timezoneInterface: TableItem[] = [
-  { key: 'timezoneIdProp', prop: 'id', required: true, description: 'IANA timezone identifier (e.g. "America/New_York").', values: 'string', default: '-' },
-  { key: 'timezoneNameProp', prop: 'name', required: false, description: 'Human-readable display name for the timezone.', values: 'string', default: '-' },
-  { key: 'timezoneAbbreviationProp', prop: 'abbreviation', required: false, description: 'Timezone abbreviation (e.g. "EST").', values: 'string', default: '-' },
-  { key: 'timezoneOffsetProp', prop: 'offset', required: false, description: 'Offset in minutes from UTC.', values: 'number', default: '-' },
-  { key: 'timezoneDisplayProp', prop: 'display', required: false, description: 'Pre-computed display hours, populated by the adapter.', values: 'string[]', default: '-' }
+  {
+    key: 'timezoneIdProp',
+    prop: 'id',
+    required: true,
+    description: 'IANA timezone identifier (e.g. "America/New_York").',
+    values: 'string',
+    default: '-'
+  },
+  {
+    key: 'timezoneNameProp',
+    prop: 'name',
+    required: false,
+    description: 'Human-readable display name for the timezone.',
+    values: 'string',
+    default: '-'
+  },
+  {
+    key: 'timezoneAbbreviationProp',
+    prop: 'abbreviation',
+    required: false,
+    description: 'Timezone abbreviation (e.g. "EST").',
+    values: 'string',
+    default: '-'
+  },
+  {
+    key: 'timezoneOffsetProp',
+    prop: 'offset',
+    required: false,
+    description: 'Offset in minutes from UTC.',
+    values: 'number',
+    default: '-'
+  },
+  {
+    key: 'timezoneDisplayProp',
+    prop: 'display',
+    required: false,
+    description: 'Pre-computed display hours, populated by the adapter.',
+    values: 'string[]',
+    default: '-'
+  }
 ]
 
 const viewModeType: TableItem[] = [
-  { key: 'viewModeProp', prop: 'ViewMode', required: true, description: 'Represents the active view of the Event Calendar.', values: "'day' | 'week' | 'month'", default: '-' }
+  {
+    key: 'viewModeProp',
+    prop: 'ViewMode',
+    required: true,
+    description: 'Represents the active view of the Event Calendar.',
+    values: 'day, week, month',
+    default: '-'
+  }
 ]
 
-const adapter = useEventCalendarAdapter({
+const eventDropPayloadInterface: TableItem[] = [
+  {
+    key: 'eventProp',
+    prop: 'event',
+    required: true,
+    description: 'The calendar event that was dragged.',
+    values: 'CalendarEvent',
+    default: '-'
+  },
+  {
+    key: 'originalStartProp',
+    prop: 'originalStart',
+    required: true,
+    description: 'The original start time before the drop.',
+    values: 'Date',
+    default: '-'
+  },
+  {
+    key: 'originalEndProp',
+    prop: 'originalEnd',
+    required: true,
+    description: 'The original end time before the drop.',
+    values: 'Date',
+    default: '-'
+  },
+  {
+    key: 'newStartProp',
+    prop: 'newStart',
+    required: true,
+    description: 'The new start time after the drop.',
+    values: 'Date',
+    default: '-'
+  },
+  {
+    key: 'newEndProp',
+    prop: 'newEnd',
+    required: true,
+    description: 'The new end time after the drop.',
+    values: 'Date',
+    default: '-'
+  }
+]
+
+const eventResizePayloadInterface: TableItem[] = [
+  {
+    key: 'eventProp',
+    prop: 'event',
+    required: true,
+    description: 'The calendar event that was resized.',
+    values: 'CalendarEvent',
+    default: '-'
+  },
+  {
+    key: 'originalStartProp',
+    prop: 'originalStart',
+    required: true,
+    description: 'The original start time before the resize.',
+    values: 'Date',
+    default: '-'
+  },
+  {
+    key: 'originalEndProp',
+    prop: 'originalEnd',
+    required: true,
+    description: 'The original end time before the resize.',
+    values: 'Date',
+    default: '-'
+  },
+  {
+    key: 'newStartProp',
+    prop: 'newStart',
+    required: true,
+    description: 'The new start time after the resize.',
+    values: 'Date',
+    default: '-'
+  },
+  {
+    key: 'newEndProp',
+    prop: 'newEnd',
+    required: true,
+    description: 'The new end time after the resize.',
+    values: 'Date',
+    default: '-'
+  }
+]
+
+const hourStart = ref(9)
+const hourEnd = ref(18)
+
+const adapter = computed(() => useEventCalendarAdapter({
   timezones: {
     locale: {
       id: 'America/Buenos_Aires',
@@ -236,8 +639,8 @@ const adapter = useEventCalendarAdapter({
       }
     ]
   },
-  hourRange: [9, 18]
-})
+  hourRange: [hourStart.value, hourEnd.value]
+}))
 
 const [selectedDate, parsedModel, calendarAdapter] = useDateAdapter({})
 
@@ -247,24 +650,35 @@ const today = new Date()
 const year = today.getFullYear()
 const month = today.getMonth()
 const day = today.getDate()
+const dayOfWeek = today.getDay()
+const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek
+const monday = day + mondayOffset
 const isDateOpen = ref(false)
 
-const events: CalendarEvent[] = [
-  { id: 'event1', title: 'Meeting with Team', start: new Date(year, month, day, 9, 0), end: new Date(year, month, day, 10, 0), color: 'primary' },
-  { id: 'event2', title: 'Lunch with Sarah', start: new Date(year, month, day, 11, 0), end: new Date(year, month, day, 14, 0), color: 'secondary' },
-  { id: 'event3', title: 'Overlapping Meeting', start: new Date(year, month, day, 11, 30), end: new Date(year, month, day, 13, 0), color: 'warning' },
-  { id: 'event4', title: 'Project Deadline', start: new Date(year, month, day, 17, 0), end: new Date(year, month, day, 18, 0), color: 'negative' },
-  { id: 'event5', title: 'Code Review', start: new Date(year, month, day, 17, 0), end: new Date(year, month, day, 18, 0), color: 'accent' },
-  { id: 'event6', title: 'Quick Sync', start: new Date(year, month, day, 17, 0), end: new Date(year, month, day, 18, 0), color: 'positive' },
-  { id: 'event6b', title: 'Quick Sync', start: new Date(year, month, day, 15, 0), end: new Date(year, month, day, 16, 0), color: 'positive' },
-  { id: 'event7', title: 'Sprint Planning', start: new Date(year, month, day + 1, 9, 30), end: new Date(year, month, day + 1, 11, 0), color: 'primary' },
-  { id: 'event8', title: 'Design Review', start: new Date(year, month, day + 1, 14, 0), end: new Date(year, month, day + 1, 15, 30), color: 'accent' },
-  { id: 'event9', title: 'Standup', start: new Date(year, month, day + 2, 10, 0), end: new Date(year, month, day + 2, 10, 30), color: 'secondary' },
-  { id: 'event10', title: 'Client Call', start: new Date(year, month, day + 2, 13, 0), end: new Date(year, month, day + 2, 14, 0), color: 'warning' },
-  { id: 'event11', title: 'QA Testing', start: new Date(year, month, day + 3, 11, 0), end: new Date(year, month, day + 3, 13, 0), color: 'negative' },
-  { id: 'event12', title: 'Team Retrospective', start: new Date(year, month, day + 3, 16, 0), end: new Date(year, month, day + 3, 17, 0), color: 'positive' },
-  { id: 'event13', title: 'Release Planning', start: new Date(year, month, day + 4, 9, 0), end: new Date(year, month, day + 4, 10, 30), color: 'primary' }
-]
+const events = ref<CalendarEvent[]>([
+  { id: 'mon1', title: 'Sprint Planning', start: new Date(year, month, monday, 9, 0), end: new Date(year, month, monday, 10, 30), color: 'primary' },
+  { id: 'mon2', title: 'Backend Sync', start: new Date(year, month, monday, 9, 30), end: new Date(year, month, monday, 11, 0), color: 'secondary' },
+  { id: 'mon3', title: 'Lunch & Learn: Docker', start: new Date(year, month, monday, 12, 0), end: new Date(year, month, monday, 13, 0), color: 'accent' },
+  { id: 'tue1', title: 'Standup', start: new Date(year, month, monday + 1, 10, 0), end: new Date(year, month, monday + 1, 10, 30), color: 'positive' },
+  { id: 'tue2', title: 'Code Review: Auth Module', start: new Date(year, month, monday + 1, 11, 0), end: new Date(year, month, monday + 1, 13, 0), color: 'primary' },
+  { id: 'tue3', title: 'API Design Session', start: new Date(year, month, monday + 1, 11, 0), end: new Date(year, month, monday + 1, 12, 30), color: 'warning' },
+  { id: 'tue4', title: 'UX Feedback Round', start: new Date(year, month, monday + 1, 11, 0), end: new Date(year, month, monday + 1, 14, 0), color: 'secondary' },
+  { id: 'tue5', title: 'Deploy to Staging', start: new Date(year, month, monday + 1, 16, 0), end: new Date(year, month, monday + 1, 17, 0), color: 'negative' },
+  { id: 'wed1', title: 'Architecture Review', start: new Date(year, month, monday + 2, 9, 0), end: new Date(year, month, monday + 2, 11, 0), color: 'accent' },
+  { id: 'wed2', title: 'Database Migration Plan', start: new Date(year, month, monday + 2, 9, 30), end: new Date(year, month, monday + 2, 11, 30), color: 'primary' },
+  { id: 'wed3', title: 'CI/CD Pipeline Fix', start: new Date(year, month, monday + 2, 10, 0), end: new Date(year, month, monday + 2, 12, 0), color: 'negative' },
+  { id: 'wed4', title: 'Security Audit Prep', start: new Date(year, month, monday + 2, 10, 30), end: new Date(year, month, monday + 2, 12, 30), color: 'warning' },
+  { id: 'wed5', title: 'Product Demo', start: new Date(year, month, monday + 2, 15, 0), end: new Date(year, month, monday + 2, 16, 0), color: 'positive' },
+  { id: 'thu1', title: 'Client Onboarding Call', start: new Date(year, month, monday + 3, 9, 0), end: new Date(year, month, monday + 3, 10, 0), color: 'secondary' },
+  { id: 'thu2', title: 'Feature Refinement', start: new Date(year, month, monday + 3, 11, 0), end: new Date(year, month, monday + 3, 14, 0), color: 'primary' },
+  { id: 'thu3', title: 'QA Testing Session', start: new Date(year, month, monday + 3, 12, 30), end: new Date(year, month, monday + 3, 15, 0), color: 'accent' },
+  { id: 'thu4', title: 'Performance Profiling', start: new Date(year, month, monday + 3, 13, 30), end: new Date(year, month, monday + 3, 16, 0), color: 'warning' },
+  { id: 'fri1', title: 'Team Retrospective', start: new Date(year, month, monday + 4, 9, 0), end: new Date(year, month, monday + 4, 10, 30), color: 'positive' },
+  { id: 'fri2', title: '1:1 with Manager', start: new Date(year, month, monday + 4, 9, 30), end: new Date(year, month, monday + 4, 10, 0), color: 'secondary' },
+  { id: 'fri3', title: 'Release Candidate Build', start: new Date(year, month, monday + 4, 14, 0), end: new Date(year, month, monday + 4, 16, 0), color: 'negative' },
+  { id: 'sat1', title: 'Hackathon Project', start: new Date(year, month, monday + 5, 10, 0), end: new Date(year, month, monday + 5, 14, 0), color: 'accent' },
+  { id: 'sun1', title: 'Week Planning & Prep', start: new Date(year, month, monday + 6, 11, 0), end: new Date(year, month, monday + 6, 12, 30), color: 'primary' }
+])
 
 const isModalOpen = ref(false)
 const clickedEvent = ref<CalendarEvent | null>(null)
@@ -272,6 +686,13 @@ const clickedEvent = ref<CalendarEvent | null>(null)
 const onEventClick = (event: CalendarEvent) => {
   clickedEvent.value = event
   isModalOpen.value = true
+}
+
+const onEventUpdate = (payload: EventDropPayload | EventResizePayload) => {
+  const idx = events.value.findIndex(e => e.id === payload.event.id)
+  if (idx === -1 || !events.value[idx]) return
+  events.value[idx].start = payload.newStart
+  events.value[idx].end = payload.newEnd
 }
 
 const generateSnippet = snippetGeneratorFactory('vk-event-calendar')
@@ -304,7 +725,7 @@ const events: CalendarEvent[] = [
   { id: '5', title: 'Sprint Planning', start: new Date(y, m, d + 1, 9, 30), end: new Date(y, m, d + 1, 11, 0), color: 'primary' },
   { id: '6', title: 'Design Review', start: new Date(y, m, d + 1, 14, 0), end: new Date(y, m, d + 1, 15, 30), color: 'accent' }
 ]
-<\/script>
+<\u002Fscript>
 `
 
 const extraProps = ':adapter="adapter" :events="events"'
@@ -318,18 +739,16 @@ const exampleStyles = {
   }
 }
 
-const customSlotCode = [
-  scriptCode,
-  '<template>',
-  '  <vk-event-calendar ' + extraProps + '>',
-  '    <template #event="{ event, style }">',
-  '      <div :style="style" class="rounded px-1 py-0.5 text-xs font-semibold truncate border-l-4 border-current">',
-  '        🗓 ' + '{{ event.title }}',
-  '      </div>',
-  '    </template>',
-  '  </vk-event-calendar>',
-  '</template>'
-].join('\n')
+const customSlotCode = `${scriptCode}
+<template>
+  <vk-event-calendar ${extraProps}>
+    <template #event="{ event }">
+      <span class="font-semibold truncate">
+        🗓 {{ event.title }}
+      </span>
+    </template>
+  </vk-event-calendar>
+</template>`
 </script>
 
 <template>
@@ -351,8 +770,12 @@ const customSlotCode = [
         :current-view="form.currentView"
         :show-weekends="form.showWeekends"
         :hide-header="form.hideHeader"
+        :draggable="form.draggable"
+        :resizable="form.resizable"
         :model-value="selectedDateObject"
         @event-click="onEventClick"
+        @event-drop="onEventUpdate"
+        @event-resize="onEventUpdate"
         @update:current-view="(v) => form.currentView = v"
       />
       <vk-modal
@@ -417,6 +840,7 @@ const customSlotCode = [
         :options="sizeOptions.general"
       />
       <vk-select
+        v-if="form.hideHeader"
         v-model="form.currentView"
         label="Current View"
         size="sm"
@@ -436,6 +860,22 @@ const customSlotCode = [
         @open="isDateOpen = true"
         @close="isDateOpen = false"
       />
+      <vk-input
+        v-model="hourStart"
+        label="Hour Start"
+        size="sm"
+        type="number"
+        :min="0"
+        :max="hourEnd - 1"
+      />
+      <vk-input
+        v-model="hourEnd"
+        label="Hour End"
+        size="sm"
+        type="number"
+        :min="hourStart + 1"
+        :max="23"
+      />
       <vk-checkbox
         v-if="form.currentView !== 'day'"
         v-model="form.showWeekends"
@@ -445,6 +885,16 @@ const customSlotCode = [
       <vk-checkbox
         v-model="form.hideHeader"
         label="Hide Header"
+        size="sm"
+      />
+      <vk-checkbox
+        v-model="form.draggable"
+        label="Draggable"
+        size="sm"
+      />
+      <vk-checkbox
+        v-model="form.resizable"
+        label="Resizable"
         size="sm"
       />
     </template>
@@ -466,6 +916,8 @@ const customSlotCode = [
             :events
             :adapter
             :color="color.value"
+            @event-drop="onEventUpdate"
+            @event-resize="onEventUpdate"
           />
         </div>
 
@@ -490,6 +942,8 @@ const customSlotCode = [
             :events
             :adapter
             :variant="variant.value"
+            @event-drop="onEventUpdate"
+            @event-resize="onEventUpdate"
           />
         </div>
 
@@ -514,6 +968,8 @@ const customSlotCode = [
             :events
             :adapter
             :shape="shape.value"
+            @event-drop="onEventUpdate"
+            @event-resize="onEventUpdate"
           />
         </div>
 
@@ -538,6 +994,8 @@ const customSlotCode = [
             :events
             :adapter
             :size="size.value"
+            @event-drop="onEventUpdate"
+            @event-resize="onEventUpdate"
           />
         </div>
 
@@ -558,6 +1016,8 @@ const customSlotCode = [
             :events
             :adapter
             current-view="day"
+            @event-drop="onEventUpdate"
+            @event-resize="onEventUpdate"
           />
         </div>
         <div class="flex flex-col gap-4">
@@ -568,6 +1028,8 @@ const customSlotCode = [
             :events
             :adapter
             current-view="week"
+            @event-drop="onEventUpdate"
+            @event-resize="onEventUpdate"
           />
         </div>
         <div class="flex flex-col gap-4">
@@ -578,6 +1040,8 @@ const customSlotCode = [
             :events
             :adapter
             current-view="month"
+            @event-drop="onEventUpdate"
+            @event-resize="onEventUpdate"
           />
         </div>
 
@@ -597,6 +1061,8 @@ const customSlotCode = [
           <vk-event-calendar
             :events
             :adapter
+            @event-drop="onEventUpdate"
+            @event-resize="onEventUpdate"
           />
         </div>
         <div class="flex flex-col gap-4">
@@ -607,6 +1073,8 @@ const customSlotCode = [
             :events
             :adapter
             hide-header
+            @event-drop="onEventUpdate"
+            @event-resize="onEventUpdate"
           />
         </div>
 
@@ -619,26 +1087,22 @@ const customSlotCode = [
         title="Show Weekends"
         :style-slots="exampleStyles.single"
       >
-        <div class="flex flex-col gap-4">
+        <div
+          v-for="i in 2"
+          :key="i"
+          class="flex flex-col gap-4"
+        >
           <span class="text-lg font-semibold">
-            show-weekends: true (default)
+            {{ "show-weekends: " + (i === 1 ? 'true (default)' : 'false') }}
           </span>
+
           <vk-event-calendar
             :events
             :adapter
             current-view="week"
-            :show-weekends="true"
-          />
-        </div>
-        <div class="flex flex-col gap-4">
-          <span class="text-lg font-semibold">
-            show-weekends: false
-          </span>
-          <vk-event-calendar
-            :events
-            :adapter
-            current-view="week"
-            :show-weekends="false"
+            :show-weekends="i === 1"
+            @event-drop="onEventUpdate"
+            @event-resize="onEventUpdate"
           />
         </div>
 
@@ -654,19 +1118,62 @@ const customSlotCode = [
         <vk-event-calendar
           :events
           :adapter
+          @event-drop="onEventUpdate"
+          @event-resize="onEventUpdate"
         >
-          <template #event="{ event, style }">
-            <div
-              :style="(style as CSSProperties)"
-              class="rounded px-1 py-0.5 text-xs font-semibold truncate border-l-4 border-current bg-surface-container text-on-surface"
-            >
-              🗓 {{ event.title }}
-            </div>
+          <template #event="{ event }">
+            <span class="font-semibold truncate">
+              🗓 {{ event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }} - {{ event.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }} / {{ event.title }}
+            </span>
           </template>
         </vk-event-calendar>
 
         <template #code>
           <code-block :code="customSlotCode" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Draggable"
+        :style-slots="exampleStyles.single"
+      >
+        <div class="flex flex-col gap-4">
+          <span class="text-lg font-semibold">
+            draggable: true,
+            resizable: true
+          </span>
+          <vk-event-calendar
+            :events
+            :adapter
+            draggable
+            @event-drop="onEventUpdate"
+            @event-resize="onEventUpdate"
+          />
+        </div>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('draggable', { values: [true], extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Resizable"
+        :style-slots="exampleStyles.single"
+      >
+        <div class="flex flex-col gap-4">
+          <span class="text-lg font-semibold">
+            resizable: true
+          </span>
+          <vk-event-calendar
+            :events
+            :adapter
+            resizable
+            @event-resize="onEventUpdate"
+          />
+        </div>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('resizable', { values: [true], extraProps })}`" />
         </template>
       </example-section>
     </template>
@@ -694,6 +1201,18 @@ const customSlotCode = [
       <vk-table
         :headers="slotHeaders"
         :data="eventCalendarSlots"
+      />
+
+      <h3>EventDropPayload Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="eventDropPayloadInterface"
+      />
+
+      <h3>EventResizePayload Interface</h3>
+      <vk-table
+        :headers="propHeaders"
+        :data="eventResizePayloadInterface"
       />
 
       <h3>CalendarEvent Interface</h3>

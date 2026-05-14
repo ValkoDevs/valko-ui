@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
-import type { EventCalendarProps, CalendarEvent, ViewMode } from '#valkoui/types/EventCalendar'
+import type { EventCalendarProps, ViewMode } from '#valkoui/types/EventCalendar'
 import styles from '#valkoui/styles/EventCalendar.styles.ts'
 import EventCalendarHeader from './EventCalendarHeader.vue'
 import EventDayView from './EventDayView.vue'
@@ -15,26 +15,18 @@ const props = withDefaults(defineProps<EventCalendarProps>(), {
   size: 'md',
   shape: 'soft',
   currentView: 'day',
-  hideHeader: false
+  hideHeader: false,
+  showWeekends: true,
+  draggable: true,
+  resizable: true
 })
 
-const emit = defineEmits<{
-  eventClick: [event: CalendarEvent]
-  'update:currentView': [view: ViewMode]
-  'update:modelValue': [date: Date]
-  previousClick: []
-  nextClick: []
-  todayClick: []
-}>()
+const emit = defineEmits(['eventClick', 'eventDrop', 'eventResize', 'update:currentView', 'update:modelValue', 'previousClick', 'nextClick', 'todayClick'])
 
 const s = computed(() => styles(props))
 
-// Internal state synced with props via v-model pattern
 const internalView = ref<ViewMode>(props.currentView ?? 'day')
 const internalDate = ref<Date>(props.modelValue ? new Date(props.modelValue) : new Date())
-
-watch(() => props.currentView, (v) => { if (v) internalView.value = v })
-watch(() => props.modelValue, (v) => { if (v) internalDate.value = new Date(v) })
 
 const setView = (view: ViewMode) => {
   internalView.value = view
@@ -52,59 +44,56 @@ const goToToday = () => {
 }
 
 const goToPrevious = () => {
-  const d = new Date(internalDate.value)
-  if (internalView.value === 'day') {
-    d.setDate(d.getDate() - 1)
-  } else if (internalView.value === 'week') {
-    d.setDate(d.getDate() - 7)
-  } else {
-    d.setMonth(d.getMonth() - 1)
-  }
-  setDate(d)
+  setDate(props.adapter.getPreviousDate(internalDate.value, internalView.value))
   emit('previousClick')
 }
 
 const goToNext = () => {
-  const d = new Date(internalDate.value)
-  if (internalView.value === 'day') {
-    d.setDate(d.getDate() + 1)
-  } else if (internalView.value === 'week') {
-    d.setDate(d.getDate() + 7)
-  } else {
-    d.setMonth(d.getMonth() + 1)
-  }
-  setDate(d)
+  setDate(props.adapter.getNextDate(internalDate.value, internalView.value))
   emit('nextClick')
 }
+
+watch(() => props.currentView, (v) => { if (v) internalView.value = v })
+watch(() => props.modelValue, (v) => { if (v) internalDate.value = new Date(v) })
 </script>
 
 <template>
   <div :class="s.container({ class: props.styleSlots?.container })">
-    <event-calendar-header
-      v-if="!hideHeader"
-      :model-value="internalDate"
-      :current-view="internalView"
-      :show-weekends="showWeekends"
-      :color="color"
-      :variant="variant"
-      :size="size"
-      :shape="shape"
-      :style-slots="styleSlots"
-      @previous-click="goToPrevious()"
-      @next-click="goToNext()"
-      @today-click="goToToday()"
-      @view-change="setView($event)"
+    <Transition
+      enter-active-class="transition-all duration-300 ease-out overflow-hidden"
+      enter-from-class="max-h-0 opacity-0"
+      enter-to-class="max-h-16 opacity-100"
+      leave-active-class="transition-all duration-200 ease-in overflow-hidden"
+      leave-from-class="max-h-16 opacity-100"
+      leave-to-class="max-h-0 opacity-0"
     >
-      <template
-        v-if="$slots.header"
-        #header="slotProps"
+      <event-calendar-header
+        v-if="!hideHeader"
+        :model-value="internalDate"
+        :current-view="internalView"
+        :show-weekends="showWeekends"
+        :adapter="adapter"
+        :color="color"
+        :variant="variant"
+        :size="size"
+        :shape="shape"
+        :style-slots="styleSlots"
+        @previous-click="goToPrevious()"
+        @next-click="goToNext()"
+        @today-click="goToToday()"
+        @view-change="setView($event)"
       >
-        <slot
-          name="header"
-          v-bind="slotProps"
-        />
-      </template>
-    </event-calendar-header>
+        <template
+          v-if="$slots.header"
+          #header="slotProps"
+        >
+          <slot
+            name="header"
+            v-bind="slotProps"
+          />
+        </template>
+      </event-calendar-header>
+    </Transition>
 
     <event-day-view
       v-if="internalView === 'day'"
@@ -116,7 +105,11 @@ const goToNext = () => {
       :size="size"
       :shape="shape"
       :style-slots="styleSlots"
+      :draggable="draggable"
+      :resizable="resizable"
       @event-click="emit('eventClick', $event)"
+      @event-drop="emit('eventDrop', $event)"
+      @event-resize="emit('eventResize', $event)"
     >
       <template
         v-if="$slots.event"
@@ -140,7 +133,11 @@ const goToNext = () => {
       :size="size"
       :shape="shape"
       :style-slots="styleSlots"
+      :draggable="draggable"
+      :resizable="resizable"
       @event-click="emit('eventClick', $event)"
+      @event-drop="emit('eventDrop', $event)"
+      @event-resize="emit('eventResize', $event)"
     >
       <template
         v-if="$slots.event"
@@ -164,7 +161,9 @@ const goToNext = () => {
       :size="size"
       :shape="shape"
       :style-slots="styleSlots"
+      :draggable="draggable"
       @event-click="emit('eventClick', $event)"
+      @event-drop="emit('eventDrop', $event)"
     >
       <template
         v-if="$slots.event"
@@ -172,6 +171,15 @@ const goToNext = () => {
       >
         <slot
           name="event"
+          v-bind="slotProps"
+        />
+      </template>
+      <template
+        v-if="$slots['more-events']"
+        #more-events="slotProps"
+      >
+        <slot
+          name="more-events"
           v-bind="slotProps"
         />
       </template>

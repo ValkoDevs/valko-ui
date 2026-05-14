@@ -21,6 +21,21 @@ export interface CalendarEvent {
   custom?: Record<string, unknown>;
 }
 
+export interface EventPlacement {
+  topPercent: number;
+  heightPercent: number;
+  leftPercent: number;
+  widthPercent: number;
+  zIndex: number;
+  isOverlapping: boolean;
+}
+
+export interface MonthDay {
+  date: Date;
+  isCurrentMonth: boolean;
+  isToday: boolean;
+}
+
 export interface EventCalendarAdapterOptions {
   currentDate?: Date;
   timezones?: {
@@ -36,20 +51,33 @@ export interface EventAdapterResult {
     extras: Timezone[];
   };
   hourRange: [number, number];
+  isSameDay: (a: Date, b: Date) => boolean;
+  getMonday: (date: Date) => Date;
+  getTimezoneLabel: (tz: Timezone) => string;
+  getTimezoneFullName: (tz: Timezone) => string;
+  formatDayHeader: (date: Date) => string;
+  isToday: (date: Date, now: Date) => boolean;
+  getHours: () => number[];
+  getWeekDays: (date: Date, showWeekends: boolean) => Date[];
+  getEventsForDay: (events: CalendarEvent[], day: Date) => CalendarEvent[];
+  getMonthGrid: (date: Date, today: Date, showWeekends: boolean) => MonthDay[][];
+  getEventPlacements: (events: CalendarEvent[]) => Map<string, EventPlacement>;
+  getStackedEventPlacements: (events: CalendarEvent[]) => Map<string, EventPlacement>;
+  getCurrentTimePosition: (now: Date) => number;
+  isCurrentTimeInRange: (now: Date) => boolean;
+  getDateLabel: (date: Date, view: ViewMode, showWeekends: boolean) => string;
+  getPreviousDate: (date: Date, view: ViewMode) => Date;
+  getNextDate: (date: Date, view: ViewMode) => Date;
+  snapToQuarterHour: (date: Date) => Date;
+  getTimeFromPosition: (positionPercent: number) => { hour: number; minute: number };
 }
 
 export interface EventCalendarHeaderProps extends Variants, ColorsWithSurface, Sizes, Shapes {
   modelValue?: Date;
   currentView?: ViewMode;
   showWeekends?: boolean;
+  adapter: EventAdapterResult;
   styleSlots?: Partial<EventCalendarSlots>;
-}
-
-export interface EventCalendarHeaderEmits {
-  (e: 'previousClick'): void;
-  (e: 'nextClick'): void;
-  (e: 'todayClick'): void;
-  (e: 'viewChange', view: ViewMode): void;
 }
 
 export interface EventCalendarProps extends Variants, ColorsWithSurface, Sizes, Shapes {
@@ -59,38 +87,25 @@ export interface EventCalendarProps extends Variants, ColorsWithSurface, Sizes, 
   showWeekends?: boolean;
   currentView?: ViewMode;
   hideHeader?: boolean;
+  draggable?: boolean;
+  resizable?: boolean;
   styleSlots?: Partial<EventCalendarSlots>;
 }
 
-export interface EventCalendarEmits {
-  (e: 'eventClick', event: CalendarEvent): void;
-  (e: 'update:currentView', view: ViewMode): void;
-  (e: 'update:modelValue', date: Date): void;
-  (e: 'previousClick'): void;
-  (e: 'nextClick'): void;
-  (e: 'todayClick'): void;
+export type ViewProps = Omit<EventCalendarProps, 'currentView' | 'hideHeader'>
+
+export interface EventDropPayload {
+  event: CalendarEvent;
+  originalStart: Date;
+  originalEnd: Date;
+  newStart: Date;
+  newEnd: Date;
 }
 
-export interface DayViewProps extends Omit<EventCalendarProps, 'currentView' | 'hideHeader'> {
-  placeholder?: string;
-}
-
-export interface DayViewEmits {
-  (e: 'eventClick', event: CalendarEvent): void;
-}
-
-export interface WeekViewProps extends Omit<EventCalendarProps, 'currentView' | 'hideHeader'> {
-  placeholder?: string;
-}
-
-export interface WeekViewEmits {
-  (e: 'eventClick', event: CalendarEvent): void;
-}
-
-export interface MonthViewProps extends Omit<EventCalendarProps, 'currentView' | 'hideHeader'> {
-  placeholder?: string;
-}
-
-export interface MonthViewEmits {
-  (e: 'eventClick', event: CalendarEvent): void;
+export interface EventResizePayload {
+  event: CalendarEvent;
+  originalStart: Date;
+  originalEnd: Date;
+  newStart: Date;
+  newEnd: Date;
 }
