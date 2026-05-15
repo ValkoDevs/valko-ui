@@ -94,6 +94,23 @@ export interface EventCalendarProps extends Variants, ColorsWithSurface, Sizes, 
 
 export type ViewProps = Omit<EventCalendarProps, 'currentView' | 'hideHeader'>
 
+export interface DragContext {
+  event: CalendarEvent;
+  originalStart: Date;
+  originalEnd: Date;
+  durationMs: number;
+  originDay: Date;
+}
+
+export interface ResizeContext {
+  event: CalendarEvent;
+  edge: 'top' | 'bottom';
+  originalStart: Date;
+  originalEnd: Date;
+  eventsAreaRect: DOMRect;
+  dayDate: Date;
+}
+
 export interface EventDropPayload {
   event: CalendarEvent;
   originalStart: Date;
