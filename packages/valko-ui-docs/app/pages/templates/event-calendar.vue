@@ -60,7 +60,14 @@ const [createDateModel, createDateParsed, createDateAdapter] = useDateAdapter({ 
 const [createStartModel, createStartParsed, createStartAdapter] = useTimeAdapter({ format: 'HH:mm' })
 const [createEndModel, createEndParsed, createEndAdapter] = useTimeAdapter({ format: 'HH:mm' })
 
-const pickerStates = reactive<Record<string, boolean>>({})
+const pickerStates = reactive({
+  editDate: false,
+  editStart: false,
+  editEnd: false,
+  createDate: false,
+  createStart: false,
+  createEnd: false
+})
 
 let nextId = 13
 
@@ -104,6 +111,9 @@ const saveEdit = () => {
   const endTime = new Date(editEndModel.value)
   const newStart = new Date(dateBase.getFullYear(), dateBase.getMonth(), dateBase.getDate(), startTime.getHours(), startTime.getMinutes())
   const newEnd = new Date(dateBase.getFullYear(), dateBase.getMonth(), dateBase.getDate(), endTime.getHours(), endTime.getMinutes())
+
+  if (!events.value[idx]) return
+
   events.value[idx] = {
     ...events.value[idx],
     title: editForm.title,
@@ -111,6 +121,7 @@ const saveEdit = () => {
     end: newEnd,
     color: String(editForm.color)
   }
+
   closeDetail()
 }
 
@@ -244,7 +255,14 @@ const [createDateModel, createDateParsed, createDateAdapter] = useDateAdapter({ 
 const [createStartModel, createStartParsed, createStartAdapter] = useTimeAdapter({ format: 'HH:mm' })
 const [createEndModel, createEndParsed, createEndAdapter] = useTimeAdapter({ format: 'HH:mm' })
 
-const pickerStates = reactive<Record<string, boolean>>({})
+const pickerStates = reactive({
+  editDate: false,
+  editStart: false,
+  editEnd: false,
+  createDate: false,
+  createStart: false,
+  createEnd: false
+})
 
 let nextId = 13
 
@@ -363,8 +381,8 @@ const onEventUpdate = (payload: EventDropPayload | EventResizePayload) => {
 }
 
 const onItemClick = (item: MenuItem) => activeItem.value = \`\${item.key}\`
-<\/script>
-
+<\u002Fscript>
+  
 <template>
   <div class="flex h-full">
     <aside class="w-[12vw] border-r border-outlined bg-surface-container">
