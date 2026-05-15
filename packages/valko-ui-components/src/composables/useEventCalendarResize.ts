@@ -1,14 +1,5 @@
 import { ref, computed, onUnmounted } from 'vue'
-import type { CalendarEvent, EventResizePayload, EventAdapterResult } from '#valkoui/types/EventCalendar'
-
-interface ResizeContext {
-  event: CalendarEvent
-  edge: 'top' | 'bottom'
-  originalStart: Date
-  originalEnd: Date
-  eventsAreaRect: DOMRect
-  dayDate: Date
-}
+import type { CalendarEvent, ResizeContext, EventResizePayload, EventAdapterResult } from '#valkoui/types/EventCalendar'
 
 const useEventCalendarResize = (
   adapter: EventAdapterResult,
@@ -35,19 +26,6 @@ const useEventCalendarResize = (
     }
   })
 
-  // Returns 'top', 'bottom', or null based on mouse position relative to the event element
-  // Uses a 6px detection zone at each edge
-  const getResizeEdge = (mouseEvent: MouseEvent, eventEl: HTMLElement): 'top' | 'bottom' | null => {
-    if (!enabled()) return null
-    const rect = eventEl.getBoundingClientRect()
-    const y = mouseEvent.clientY
-    const edgeZone = 6
-    if (y - rect.top <= edgeZone) return 'top'
-    if (rect.bottom - y <= edgeZone) return 'bottom'
-    return null
-  }
-
-  // Computes hour position from mouse Y coordinate
   const getHourFromY = (clientY: number, areaRect: DOMRect): number => {
     const relativeY = clientY - areaRect.top
     const percent = Math.max(0, Math.min(100, (relativeY / areaRect.height) * 100))
@@ -55,7 +33,6 @@ const useEventCalendarResize = (
     return hour + minute / 60
   }
 
-  // Updates ghost position during resize
   const updateGhost = (clientY: number) => {
     if (!resizeCtx) return
     const rawHour = getHourFromY(clientY, resizeCtx.eventsAreaRect)
@@ -65,7 +42,7 @@ const useEventCalendarResize = (
 
     let newStartHour: number
     let newEndHour: number
-    const minDuration = 0.25 // 15 minutes minimum
+    const minDuration = 0.25
 
     if (resizeCtx.edge === 'top') {
       newStartHour = Math.max(start, Math.min(rawHour, origEndHour - minDuration))
@@ -83,6 +60,17 @@ const useEventCalendarResize = (
     if (!resizeCtx) return
     e.preventDefault()
     updateGhost(e.clientY)
+  }
+
+  const resetState = () => {
+    isResizing.value = false
+    resizingEventId.value = null
+    resizingEventColor.value = null
+    ghostTopPercent.value = 0
+    ghostHeightPercent.value = 0
+    resizeCtx = null
+    document.removeEventListener('mousemove', onMouseMove)
+    document.removeEventListener('mouseup', onMouseUp)
   }
 
   const onMouseUp = (e: MouseEvent) => {
@@ -105,7 +93,6 @@ const useEventCalendarResize = (
       newEndHour = Math.min(end + 1, Math.max(rawHour, origStartHour + minDuration))
     }
 
-    // Snap to quarter hour
     const snappedStartMinutes = Math.round((newStartHour % 1) * 60 / 15) * 15
     const snappedEndMinutes = Math.round((newEndHour % 1) * 60 / 15) * 15
 
@@ -115,7 +102,6 @@ const useEventCalendarResize = (
     const finalEnd = new Date(ctx.dayDate)
     finalEnd.setHours(Math.floor(newEndHour), snappedEndMinutes, 0, 0)
 
-    // Only emit if something actually changed
     if (finalStart.getTime() !== ctx.originalStart.getTime() || finalEnd.getTime() !== ctx.originalEnd.getTime()) {
       onResize({
         event: ctx.event,
@@ -129,18 +115,6 @@ const useEventCalendarResize = (
     resetState()
   }
 
-  const resetState = () => {
-    isResizing.value = false
-    resizingEventId.value = null
-    resizingEventColor.value = null
-    ghostTopPercent.value = 0
-    ghostHeightPercent.value = 0
-    resizeCtx = null
-    document.removeEventListener('mousemove', onMouseMove)
-    document.removeEventListener('mouseup', onMouseUp)
-  }
-
-  // Called on the resize handle's @mousedown
   const handleResizeStart = (
     event: CalendarEvent,
     edge: 'top' | 'bottom',
@@ -167,7 +141,6 @@ const useEventCalendarResize = (
     resizingEventId.value = event.id
     resizingEventColor.value = event.color || null
 
-    // Set initial ghost position
     const startHour = event.start.getHours() + event.start.getMinutes() / 60
     const endHour = event.end.getHours() + event.end.getMinutes() / 60
     ghostTopPercent.value = ((startHour - start + 0.5) / hourCount) * 100
@@ -177,7 +150,6 @@ const useEventCalendarResize = (
     document.addEventListener('mouseup', onMouseUp)
   }
 
-  // Cleanup on unmount
   onUnmounted(() => {
     document.removeEventListener('mousemove', onMouseMove)
     document.removeEventListener('mouseup', onMouseUp)
@@ -190,9 +162,7 @@ const useEventCalendarResize = (
     ghostTopPercent,
     ghostHeightPercent,
     ghostStyle,
-    getResizeEdge,
-    handleResizeStart,
-    resetState
+    handleResizeStart
   }
 }
 

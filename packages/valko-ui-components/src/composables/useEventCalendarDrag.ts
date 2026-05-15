@@ -1,13 +1,5 @@
 import { ref, computed } from 'vue'
-import type { CalendarEvent, EventDropPayload, EventAdapterResult } from '#valkoui/types/EventCalendar'
-
-interface DragContext {
-  event: CalendarEvent
-  originalStart: Date
-  originalEnd: Date
-  durationMs: number
-  originDay: Date
-}
+import type { CalendarEvent, DragContext, EventDropPayload, EventAdapterResult } from '#valkoui/types/EventCalendar'
 
 const useEventCalendarDrag = (
   adapter: EventAdapterResult,
@@ -64,7 +56,6 @@ const useEventCalendarDrag = (
     dragCtx = null
   }
 
-  // Called on event elements: @dragstart
   const handleDragStart = (event: CalendarEvent, dragEvent: DragEvent, dayDate: Date) => {
     if (!enabled()) {
       dragEvent.preventDefault()
@@ -96,12 +87,10 @@ const useEventCalendarDrag = (
     ghostHeightPercent.value = ((endHour - startHour) / hourCount) * 100
   }
 
-  // Called on event elements: @dragend
   const handleDragEnd = () => {
     resetState()
   }
 
-  // Day/Week eventsArea: @dragover.prevent — compute ghost position from clientY
   const handleEventsAreaDragOver = (dragEvent: DragEvent, dayDate: Date, dayIdx?: number) => {
     if (!dragCtx) return
     dragEvent.preventDefault()
@@ -113,7 +102,6 @@ const useEventCalendarDrag = (
     computeGhostFromY(dragEvent.clientY, areaRect)
   }
 
-  // Day/Week eventsArea: @drop — compute final time and emit
   const handleEventsAreaDrop = (dragEvent: DragEvent, dayDate: Date) => {
     dragEvent.preventDefault()
     if (!dragCtx) return
@@ -149,14 +137,12 @@ const useEventCalendarDrag = (
     onDrop(payload)
   }
 
-  // Month day cells: @dragover.prevent — just highlight target day
   const handleMonthCellDragOver = (dragEvent: DragEvent, dayDate: Date) => {
     if (!dragCtx) return
     dragEvent.preventDefault()
     targetDay.value = dayDate
   }
 
-  // Month day cells: @drop — shift by day diff, keep original time
   const handleMonthCellDrop = (dragEvent: DragEvent, dayDate: Date) => {
     dragEvent.preventDefault()
     if (!dragCtx) return
@@ -192,10 +178,9 @@ const useEventCalendarDrag = (
     }
   }
 
-  // @dragleave on eventsArea or month cells
   const handleDragLeave = () => {
-    // Only reset visual indicators, not the entire drag state
-    // (drag is still in progress, user just left this particular area)
+    dragOverDayIdx.value = -1
+    targetDay.value = null
   }
 
   return {
