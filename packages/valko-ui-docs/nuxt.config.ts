@@ -20,5 +20,20 @@ export default defineNuxtConfig({
     }
   },
 
+  vite: {
+    optimizeDeps: {
+      include: [
+        '@vue/devtools-core',
+        '@vue/devtools-kit',
+        'tailwind-variants',
+        'toastify-js',
+        'highlight.js/lib/core',
+        'highlight.js/lib/languages/xml',
+        'highlight.js/lib/languages/typescript',
+        'highlight.js/lib/languages/css'
+      ]
+    }
+  },
+
   compatibilityDate: '2024-09-24'
 })
