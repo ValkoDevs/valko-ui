@@ -10,6 +10,7 @@ describe('useDebounce composable', () => {
   })
 
   afterEach(() => {
+    callback.mockClear()
     vi.restoreAllMocks()
     vi.clearAllTimers()
   })
