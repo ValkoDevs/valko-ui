@@ -38,3 +38,8 @@
 
 ### Dependencies
 - Updated all dependencies to their latest versions.
+
+---
+
+## CI/CD
+- Updated GitHub Actions workflows (`pr-check.yml`, `release.yml`) to use Node.js 22, required by newer `eslint-flat-config-utils`.
