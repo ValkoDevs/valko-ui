@@ -1,5 +1,5 @@
 const useDebounce = <T = unknown>(callback: () => T, timeout: number): () => Promise<T> => {
-  let timer: ReturnType<typeof setTimeout>
+  let timer: ReturnType<typeof setTimeout> | undefined
 
   return () => {
     if (timer) clearTimeout(timer)

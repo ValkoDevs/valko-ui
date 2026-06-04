@@ -7,12 +7,11 @@
 ## Valko-UI Components
 
 ### Breaking Changes
-- Dropped Nuxt 3 support. The library now requires Nuxt 4 (`^4.0.0`) or higher.
+- Dropped Nuxt 3 support. The library now requires Nuxt 4 (`^4.0.0`).
 
 ### Dependencies
 - Updated all dependencies to their latest versions.
-- Added `@vue/language-core` as explicit dev dependency to satisfy `unplugin-dts` peer requirement.
-- Pinned `vue-tsc` to `^3.1.8` for compatibility with `unplugin-dts`.
+- Added `@vue/language-core` as explicit root dev dependency to satisfy `unplugin-dts` peer requirement.
 
 ### Tests
 - Fixed `useDebounce` test not clearing callback mock between test cases.

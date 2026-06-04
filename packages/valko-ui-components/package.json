@@ -36,7 +36,6 @@
     "@valko-ui/eslint-config": "*",
     "@vitejs/plugin-vue": "^6.0.7",
     "@vitest/coverage-istanbul": "^4.1.8",
-    "@vue/language-core": "~3.1.8",
     "@vue/test-utils": "^2.4.10",
     "clean-css": "^5.3.3",
     "jsdom": "^29.1.1",
@@ -50,7 +49,7 @@
     "vite": "^8.0.16",
     "vite-plugin-dts": "^5.0.2",
     "vitest": "^4.1.8",
-    "vue-tsc": "^3.1.8"
+    "vue-tsc": "^3.3.3"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
