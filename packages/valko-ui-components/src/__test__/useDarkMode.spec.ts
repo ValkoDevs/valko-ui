@@ -12,6 +12,7 @@ describe('useDarkMode composable', () => {
 
   afterEach(() => {
     vi.clearAllMocks()
+    vi.unstubAllGlobals()
   })
 
   it('should initialize with dark mode off if no dark class is present', () => {
