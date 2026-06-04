@@ -25,8 +25,7 @@
 
 ### Dependencies
 - Updated all dependencies to their latest versions.
-
-### Configuration
+- Removed `vue-router` explicit dependency, relying on Nuxt's transitive dependency instead.
 - Added `vite.optimizeDeps.include` to `nuxt.config.ts` to pre-bundle CJS and transitive dependencies, preventing page reloads during development.
 
 ### Pages
@@ -43,3 +42,5 @@
 
 ## CI/CD
 - Updated GitHub Actions workflows (`pr-check.yml`, `release.yml`) to use Node.js 22, required by newer `eslint-flat-config-utils`.
+- Updated `actions/checkout` and `actions/setup-node` from v2 to v4.
+- Enabled npm caching in CI for faster dependency installation.
