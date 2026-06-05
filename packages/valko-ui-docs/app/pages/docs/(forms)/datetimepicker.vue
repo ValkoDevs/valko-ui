@@ -434,22 +434,6 @@ const dateTimePickerProps: TableItem[] = [
 
 const styleSlotsInterface: TableItem[] = [
   {
-    key: 'container',
-    prop: 'container',
-    required: false,
-    description: 'Root container for the DateTimePicker.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'content',
-    prop: 'content',
-    required: false,
-    description: 'Dropdown content container.',
-    values: 'string[]',
-    default: ''
-  },
-  {
     key: 'dateSection',
     prop: 'dateSection',
     required: false,

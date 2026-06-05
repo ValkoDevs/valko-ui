@@ -291,23 +291,9 @@ const timepickerProps: TableItem[] = [
 
 const styleSlotsInterface: TableItem[] = [
   {
-    key: 'container',
-    prop: 'container',
-    description: 'Root container for the timepicker component.',
-    values: 'string[]',
-    default: ''
-  },
-  {
     key: 'input',
     prop: 'input',
     description: 'Styles for the input field that triggers the timepicker.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'content',
-    prop: 'content',
-    description: 'Container for the timepicker dropdown/popup content.',
     values: 'string[]',
     default: ''
   }

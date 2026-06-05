@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick, computed } from 'vue'
 import type { DatepickerProps } from '#valkoui/types/Datepicker'
-import styles from '#valkoui/styles/Datepicker.styles.ts'
+import VkPopover from './Popover.vue'
 import VkInput from './Input.vue'
 import VkCalendar from './Calendar.vue'
 import VkIcon from './Icon.vue'
@@ -18,25 +17,15 @@ const props = withDefaults(defineProps<DatepickerProps>(), {
 })
 
 const emit = defineEmits(['update:modelValue', 'open', 'close'])
-
-const s = computed(() => styles(props))
-
-const rootRef = ref<HTMLElement | null>(null)
-
-const handleClickOutside = (event: MouseEvent) => {
-  const target = event.target as HTMLElement
-
-  if (rootRef.value && !rootRef.value.contains(target) && !target.closest('.vk-datepicker__content')) emit('close')
-}
-
-onMounted(() => nextTick(() => document.addEventListener('mousedown', handleClickOutside, true)))
-onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutside, true))
 </script>
 
 <template>
-  <div
-    ref="rootRef"
-    :class="s.container({ class: styleSlots?.container })"
+  <vk-popover
+    class="vk-datepicker"
+    :is-open="isOpen"
+    :shape="shape"
+    :style-slots="{ panel: ['p-2'] }"
+    @close="emit('close')"
   >
     <vk-input
       v-bind="props"
@@ -52,32 +41,20 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutsi
       </template>
     </vk-input>
 
-    <transition
-      enter-active-class="transition-opacity duration-200 ease-out"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-150 ease-in"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div
-        v-show="isOpen"
-        :class="s.content({ class: styleSlots?.content })"
-      >
-        <vk-calendar
-          v-if="isOpen"
-          v-bind="props"
-          :adapter="adapter"
-          :disabled-dates="disabledDates"
-          :locale="locale"
-          :format="format"
-          :min-date="minDate"
-          :max-date="maxDate"
-          :disable-weekends="disableWeekends"
-          @update:model-value="(value) => emit('update:modelValue', value)"
-          @finalize-selection="emit('close')"
-        />
-      </div>
-    </transition>
-  </div>
+    <template #popover-content>
+      <vk-calendar
+        v-if="isOpen"
+        v-bind="props"
+        :adapter="adapter"
+        :disabled-dates="disabledDates"
+        :locale="locale"
+        :format="format"
+        :min-date="minDate"
+        :max-date="maxDate"
+        :disable-weekends="disableWeekends"
+        @update:model-value="(value) => emit('update:modelValue', value)"
+        @finalize-selection="emit('close')"
+      />
+    </template>
+  </vk-popover>
 </template>

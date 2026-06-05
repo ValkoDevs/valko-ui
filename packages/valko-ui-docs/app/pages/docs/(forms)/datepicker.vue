@@ -265,33 +265,6 @@ const datepickerProps: TableItem[] = [
     description: 'Indicates that user input is required on the datepicker.',
     values: 'true, false',
     default: 'false'
-  },
-  {
-    key: 'styleSlotsProps',
-    prop: 'styleSlots',
-    required: false,
-    description: 'Custom styles for different parts of the Datepicker component.',
-    values: 'DatepickerSlots',
-    default: ''
-  }
-]
-
-const styleSlotsInterface: TableItem[] = [
-  {
-    key: 'container',
-    prop: 'container',
-    required: false,
-    description: 'Root container for the datepicker.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'content',
-    prop: 'content',
-    required: false,
-    description: 'Dropdown/calendar content container.',
-    values: 'string[]',
-    default: ''
   }
 ]
 
@@ -871,12 +844,6 @@ const styles = {
       <vk-table
         :headers="propHeaders"
         :data="datepickerProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
       />
 
       <h3>Datepicker Emits</h3>

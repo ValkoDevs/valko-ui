@@ -2,21 +2,6 @@ import { tv } from 'tailwind-variants'
 
 const dateTimePicker = tv({
   slots: {
-    container: [
-      'vk-datetimepicker',
-      'relative',
-      'bg-inherit'
-    ],
-    content: [
-      'vk-datetimepicker__content',
-      'p-2',
-      'bg-surface-container-high',
-      'shadow-el2',
-      'absolute',
-      'z-50',
-      'mt-1',
-      'left-0'
-    ],
     dateSection: [
       'vk-datetimepicker__date-section'
     ],
@@ -64,21 +49,9 @@ const dateTimePicker = tv({
       lg: {}
     },
     shape: {
-      rounded: {
-        content: [
-          'rounded-2xl'
-        ]
-      },
-      soft: {
-        content: [
-          'rounded-lg'
-        ]
-      },
-      square: {
-        content: [
-          'rounded-none'
-        ]
-      }
+      rounded: {},
+      soft: {},
+      square: {}
     }
   }
 })

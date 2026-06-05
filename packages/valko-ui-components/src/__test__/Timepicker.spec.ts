@@ -72,7 +72,7 @@ describe('Time component', () => {
       })
 
       it('should be shape soft', () => {
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-lg')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
     })
 
@@ -174,7 +174,7 @@ describe('Time component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-2xl')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-2xl')
       })
 
       it('should be soft when props.shape is soft', () => {
@@ -190,7 +190,7 @@ describe('Time component', () => {
 
         const input = wrapper.find('.vk-timepicker__input')
         input.trigger('focus')
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-lg')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
 
       it('should be square when props.shape is square', () => {
@@ -206,7 +206,7 @@ describe('Time component', () => {
 
         const input = wrapper.find('.vk-timepicker__input')
         input.trigger('focus')
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-none')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-none')
       })
     })
 
@@ -375,7 +375,7 @@ describe('Time component', () => {
       const input = wrapper.findAll('.vk-input__input')[0]
       await input.trigger('focus')
 
-      document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
       await nextTick()
 
       expect(wrapper.emitted()).toHaveProperty('close')

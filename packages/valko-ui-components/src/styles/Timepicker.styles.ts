@@ -2,23 +2,8 @@ import { tv } from 'tailwind-variants'
 
 const timepicker = tv({
   slots: {
-    container: [
-      'vk-timepicker',
-      'relative',
-      'bg-inherit'
-    ],
     input: [
       'vk-timepicker__input'
-    ],
-    content: [
-      'vk-timepicker__content',
-      'p-4',
-      'bg-surface-container-high',
-      'shadow-el2',
-      'absolute',
-      'z-50',
-      'mt-1',
-      'left-0'
     ]
   },
   variants: {
@@ -42,21 +27,9 @@ const timepicker = tv({
       lg: {}
     },
     shape: {
-      rounded: {
-        content: [
-          'rounded-2xl'
-        ]
-      },
-      soft: {
-        content: [
-          'rounded-lg'
-        ]
-      },
-      square: {
-        content: [
-          'rounded-none'
-        ]
-      }
+      rounded: {},
+      soft: {},
+      square: {}
     }
   }
 })
