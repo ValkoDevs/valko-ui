@@ -1,73 +1,75 @@
 import { ref, computed, toValue, nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkDateTimePicker from '#valkoui/components/DateTimePicker.vue'
-import type { DateTimeAdapterResult } from '#valkoui/composables/useDateTimeAdapter'
+import type { DateTimeAdapterResult } from '#valkoui/types/DateTimePicker'
 
 const { useDateTimeAdapter } = vi.hoisted(() => ({
-  useDateTimeAdapter: vi.fn(() => ([
-    ref(1729017518),
-    computed(() => '2024-10-15 10:10'),
-    {
-      formattedDates: computed(() => ({
-        selected: {
-          day: 15,
-          month: 9,
-          year: 2024,
-          lastDayOfMonth: 31,
-          firstWeekDay: 2,
-          obj: new Date(2024, 9, 15)
-        },
-        display: {
-          day: 15,
-          month: 9,
-          year: 2024,
-          lastDayOfMonth: 31,
-          firstWeekDay: 2,
-          obj: new Date(2024, 9, 15)
-        }
-      })),
-      disabledDates: computed(() => []),
-      onSelectDay: () => 1728961200000,
-      onSelectMonth: () => 1727751600000,
-      onSelectYear: () => 1704078000000,
-      getWeekdays: () => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      getMonths: () => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+  useDateTimeAdapter: vi.fn(() => ({
+    model: ref(1729017518),
+    displayValue: computed(() => '2024-10-15 10:10'),
+    adapter: {
+      date: {
+        formattedDates: computed(() => ({
+          selected: {
+            day: 15,
+            month: 9,
+            year: 2024,
+            lastDayOfMonth: 31,
+            firstWeekDay: 2,
+            obj: new Date(2024, 9, 15)
+          },
+          display: {
+            day: 15,
+            month: 9,
+            year: 2024,
+            lastDayOfMonth: 31,
+            firstWeekDay: 2,
+            obj: new Date(2024, 9, 15)
+          }
+        })),
+        disabledDates: computed(() => []),
+        onSelectDay: () => 1728961200000,
+        onSelectMonth: () => 1727751600000,
+        onSelectYear: () => 1704078000000,
+        getWeekdays: () => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        getMonths: () => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      },
+      time: {
+        formattedTime: computed(() => ({
+          selected: {
+            hours: 10,
+            minutes: 10,
+            seconds: 0,
+            obj: new Date(1729017518)
+          },
+          display: {
+            hours: 10,
+            minutes: 10,
+            seconds: 0,
+            obj: new Date(1729017518)
+          }
+        })),
+        setDisplayUnit: vi.fn(),
+        onSelectAMPM: vi.fn(),
+        onSelectTime: vi.fn(),
+        isTimeDisabled: vi.fn(),
+        period: ref('AM')
+      }
     },
-    {
-      formattedTime: computed(() => ({
-        selected: {
-          hours: 10,
-          minutes: 10,
-          seconds: 0,
-          obj: new Date(1729017518)
-        },
-        display: {
-          hours: 10,
-          minutes: 10,
-          seconds: 0,
-          obj: new Date(1729017518)
-        }
-      })),
-      setDisplayUnit: vi.fn(),
-      onSelectAMPM: vi.fn(),
-      onSelectTime: vi.fn(),
-      isTimeDisabled: vi.fn(),
-      period: ref('AM')
-    },
-    {
+    controls: {
       commitSelection: vi.fn(() => 1729017518),
       resetSelection: vi.fn()
     }
-  ] as DateTimeAdapterResult))
+  } as DateTimeAdapterResult))
 }))
 
 vi.mock('#valkoui/composables/useDateTimeAdapter.ts', () => ({
   default: useDateTimeAdapter
 }))
 
-const [model, parsedModelValue, calendarAdapter, timeAdapter, controls] = useDateTimeAdapter()
+const { model, displayValue: displayValueRef, adapter, controls } = useDateTimeAdapter()
 const modelValue = toValue(model)
-const parsedModel = toValue(parsedModelValue)
+const displayValue = toValue(displayValueRef)
 
 describe('DateTimePicker component', () => {
   let wrapper: VueWrapper
@@ -79,9 +81,8 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             modelValue,
-            parsedModel,
-            calendarAdapter,
-            timeAdapter,
+            displayValue,
+            adapter,
             controls
           }
         })
@@ -122,10 +123,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             color: 'primary',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -138,10 +138,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             color: 'secondary',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -154,10 +153,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             color: 'positive',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -170,10 +168,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             color: 'accent',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -186,10 +183,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             color: 'warning',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -202,10 +198,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             color: 'negative',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -218,10 +213,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             color: 'surface',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -236,10 +230,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             shape: 'rounded',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -251,10 +244,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             shape: 'soft',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -266,10 +258,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             shape: 'square',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -283,10 +274,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             size: 'xs',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -299,10 +289,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             size: 'sm',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -315,10 +304,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             size: 'md',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -331,10 +319,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             size: 'lg',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -349,10 +336,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             variant: 'filled',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -365,10 +351,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             variant: 'outlined',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -381,10 +366,9 @@ describe('DateTimePicker component', () => {
           props: {
             isOpen: true,
             variant: 'ghost',
-            parsedModel,
+            displayValue,
             modelValue,
-            calendarAdapter,
-            timeAdapter,
+            adapter,
             controls
           }
         })
@@ -400,9 +384,8 @@ describe('DateTimePicker component', () => {
         props: {
           isOpen: true,
           modelValue,
-          parsedModel,
-          calendarAdapter,
-          timeAdapter,
+          displayValue,
+          adapter,
           controls
         }
       })
@@ -423,9 +406,8 @@ describe('DateTimePicker component', () => {
         props: {
           isOpen: true,
           modelValue,
-          parsedModel,
-          calendarAdapter,
-          timeAdapter,
+          displayValue,
+          adapter,
           controls
         }
       })
@@ -442,9 +424,8 @@ describe('DateTimePicker component', () => {
         props: {
           isOpen: true,
           modelValue,
-          parsedModel,
-          calendarAdapter,
-          timeAdapter,
+          displayValue,
+          adapter,
           controls
         }
       })
@@ -468,9 +449,8 @@ describe('DateTimePicker component', () => {
         props: {
           isOpen: true,
           modelValue,
-          parsedModel,
-          calendarAdapter,
-          timeAdapter,
+          displayValue,
+          adapter,
           controls
         }
       })
@@ -494,9 +474,8 @@ describe('DateTimePicker component', () => {
         props: {
           isOpen: false,
           modelValue,
-          parsedModel,
-          calendarAdapter,
-          timeAdapter,
+          displayValue,
+          adapter,
           controls
         }
       })
@@ -514,9 +493,8 @@ describe('DateTimePicker component', () => {
         props: {
           isOpen: true,
           modelValue,
-          parsedModel,
-          calendarAdapter,
-          timeAdapter,
+          displayValue,
+          adapter,
           controls
         }
       })
@@ -532,9 +510,8 @@ describe('DateTimePicker component', () => {
         props: {
           isOpen: true,
           modelValue,
-          parsedModel,
-          calendarAdapter,
-          timeAdapter,
+          displayValue,
+          adapter,
           controls
         }
       })
@@ -553,9 +530,8 @@ describe('DateTimePicker component', () => {
         props: {
           isOpen: true,
           modelValue,
-          parsedModel,
-          calendarAdapter,
-          timeAdapter,
+          displayValue,
+          adapter,
           controls
         }
       })

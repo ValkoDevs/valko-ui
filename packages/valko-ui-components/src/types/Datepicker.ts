@@ -3,7 +3,7 @@ import type { CalendarProps } from './Calendar'
 import type { DatePickerSlots } from '../styles/Datepicker.styles'
 
 export interface DatepickerProps extends CalendarProps, Omit<AriaAttributes, 'ariaDescription'> {
-  parsedModel: string;
+  displayValue: string;
   isOpen: boolean;
   label?: string;
   styleSlots?: Partial<DatePickerSlots>;

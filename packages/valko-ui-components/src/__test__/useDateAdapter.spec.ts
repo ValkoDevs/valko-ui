@@ -13,83 +13,83 @@ describe('useDateAdapter composable', () => {
 
   describe('Model prop', () => {
     it('should return model as an EpochTimeStamp', () => {
-      const [model] = useDateAdapter({ format: 'YYYY-MM-DD' })
+      const { model } = useDateAdapter({ format: 'YYYY-MM-DD' })
       expect(model.value).toBe(new Date(2024, 9, 18).getTime())
     })
   })
 
-  describe('ParsedModel prop', () => {
+  describe('DisplayValue prop', () => {
     it('should format the year as YYYY (full year)', () => {
-      const [, parsedModel] = useDateAdapter({ format: 'YYYY' })
+      const { displayValue } = useDateAdapter({ format: 'YYYY' })
       const currentYear = new Date().getFullYear()
-      expect(parsedModel.value).toBe(`${currentYear}`)
+      expect(displayValue.value).toBe(`${currentYear}`)
     })
 
     it('should format the year as YY (last two digits)', () => {
-      const [, parsedModel] = useDateAdapter({ format: 'YY' })
+      const { displayValue } = useDateAdapter({ format: 'YY' })
       const currentYear = new Date().getFullYear().toString().slice(-2)
-      expect(parsedModel.value).toBe(currentYear)
+      expect(displayValue.value).toBe(currentYear)
     })
 
     it('should format the month as MMMM (full month name)', () => {
-      const [, parsedModel] = useDateAdapter({ format: 'MMMM' })
+      const { displayValue } = useDateAdapter({ format: 'MMMM' })
       const expectedMonth = new Date().toLocaleDateString(undefined, { month: 'long' })
-      expect(parsedModel.value).toBe(expectedMonth)
+      expect(displayValue.value).toBe(expectedMonth)
     })
 
     it('should format the month as MMM (abbreviated month name)', () => {
-      const [, parsedModel] = useDateAdapter({ format: 'MMM' })
+      const { displayValue } = useDateAdapter({ format: 'MMM' })
       const expectedMonth = new Date().toLocaleDateString(undefined, { month: 'short' })
-      expect(parsedModel.value).toBe(expectedMonth)
+      expect(displayValue.value).toBe(expectedMonth)
     })
 
     it('should format the month as MM (two-digit month)', () => {
-      const [, parsedModel] = useDateAdapter({ format: 'MM' })
+      const { displayValue } = useDateAdapter({ format: 'MM' })
       const expectedMonth = `${(new Date().getMonth() + 1).toString().padStart(2, '0')}`
-      expect(parsedModel.value).toBe(expectedMonth)
+      expect(displayValue.value).toBe(expectedMonth)
     })
 
     it('should format the month as M (single-digit month)', () => {
-      const [, parsedModel] = useDateAdapter({ format: 'M' })
+      const { displayValue } = useDateAdapter({ format: 'M' })
       const expectedMonth = `${new Date().getMonth() + 1}`
-      expect(parsedModel.value).toBe(expectedMonth)
+      expect(displayValue.value).toBe(expectedMonth)
     })
 
     it('should format the day as DD (two-digit day)', () => {
-      const [, parsedModel] = useDateAdapter({ format: 'DD' })
+      const { displayValue } = useDateAdapter({ format: 'DD' })
       const expectedDay = `${new Date().getDate().toString().padStart(2, '0')}`
-      expect(parsedModel.value).toBe(expectedDay)
+      expect(displayValue.value).toBe(expectedDay)
     })
 
     it('should format the day as D (single-digit day)', () => {
-      const [, parsedModel] = useDateAdapter({ format: 'D' })
+      const { displayValue } = useDateAdapter({ format: 'D' })
       const expectedDay = `${new Date().getDate()}`
-      expect(parsedModel.value).toBe(expectedDay)
+      expect(displayValue.value).toBe(expectedDay)
     })
 
     it('should format the day as dddd (full weekday name)', () => {
-      const [, parsedModel] = useDateAdapter({ format: 'dddd' })
+      const { displayValue } = useDateAdapter({ format: 'dddd' })
       const expectedWeekday = new Date().toLocaleDateString(undefined, { weekday: 'long' })
-      expect(parsedModel.value).toBe(expectedWeekday)
+      expect(displayValue.value).toBe(expectedWeekday)
     })
 
     it('should format the day as ddd (abbreviated weekday name)', () => {
-      const [, parsedModel] = useDateAdapter({ format: 'ddd' })
+      const { displayValue } = useDateAdapter({ format: 'ddd' })
       const expectedWeekday = new Date().toLocaleDateString(undefined, { weekday: 'short' })
-      expect(parsedModel.value).toBe(expectedWeekday)
+      expect(displayValue.value).toBe(expectedWeekday)
     })
 
     it('should format the day as dd (narrow weekday)', () => {
-      const [, parsedModel] = useDateAdapter({ format: 'dd' })
+      const { displayValue } = useDateAdapter({ format: 'dd' })
       const expectedWeekday = new Date().toLocaleDateString(undefined, { weekday: 'narrow' })
-      expect(parsedModel.value).toBe(expectedWeekday)
+      expect(displayValue.value).toBe(expectedWeekday)
     })
   })
 
   describe('Date interaction and helper functions', () => {
     describe('GetWeekdays', () => {
       it('should return correct weekdays based on locale', () => {
-        const [, , adapter] = useDateAdapter({ locale: 'en-US', format: 'YYYY-MM-DD' })
+        const { adapter } = useDateAdapter({ locale: 'en-US', format: 'YYYY-MM-DD' })
         const weekdays = adapter.getWeekdays()
 
         expect(weekdays).toEqual(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'])
@@ -98,7 +98,7 @@ describe('useDateAdapter composable', () => {
 
     describe('GetMonths', () => {
       it('should return correct months based on locale', () => {
-        const [, , adapter] = useDateAdapter({ locale: 'en-US', format: 'YYYY-MM-DD' })
+        const { adapter } = useDateAdapter({ locale: 'en-US', format: 'YYYY-MM-DD' })
         const months = adapter.getMonths()
 
         expect(months).toEqual([
@@ -110,7 +110,7 @@ describe('useDateAdapter composable', () => {
     describe('onSelectDay', () => {
       it('should correctly select a day using onSelectDay', () => {
         const selectedDay = 18
-        const [, , adapter] = useDateAdapter({
+        const { adapter } = useDateAdapter({
           format: 'DD'
         })
 
@@ -123,7 +123,7 @@ describe('useDateAdapter composable', () => {
     describe('onSelectMonth', () => {
       it('should correctly select a month using onSelectMonth', () => {
         const selectedMonth = 9
-        const [, , adapter] = useDateAdapter({
+        const { adapter } = useDateAdapter({
           format: 'MM'
         })
 
@@ -136,7 +136,7 @@ describe('useDateAdapter composable', () => {
     describe('onSelectYear', () => {
       it('should correctly select a year using onSelectYear', () => {
         const selectedYear = 2024
-        const [, , adapter] = useDateAdapter({
+        const { adapter } = useDateAdapter({
           format: 'YYYY'
         })
 
@@ -150,7 +150,7 @@ describe('useDateAdapter composable', () => {
   describe('When DisabledDates funcionality is added or not', () => {
     it('should return the correct disabled date for a single day', () => {
       const disabledTimestamp = new Date(2024, 9, 17).getTime()
-      const [, , adapter] = useDateAdapter({
+      const { adapter } = useDateAdapter({
         format: 'YYYY-MM-DD',
         disabledDates: [disabledTimestamp]
       })
@@ -162,7 +162,7 @@ describe('useDateAdapter composable', () => {
 
     it('should not disable a day that is not in the disabledDates array', () => {
       const disabledTimestamp = new Date(2024, 9, 17).getTime()
-      const [, , adapter] = useDateAdapter({
+      const { adapter } = useDateAdapter({
         format: 'YYYY-MM-DD',
         disabledDates: [disabledTimestamp]
       })
@@ -174,7 +174,7 @@ describe('useDateAdapter composable', () => {
 
     it('should return the correct disabled date for another day', () => {
       const disabledTimestamp = new Date(2024, 9, 19).getTime()
-      const [, , adapter] = useDateAdapter({
+      const { adapter } = useDateAdapter({
         format: 'YYYY-MM-DD',
         disabledDates: [disabledTimestamp]
       })
@@ -185,7 +185,7 @@ describe('useDateAdapter composable', () => {
     })
 
     it('should handle an empty disabledDates array', () => {
-      const [, , adapter] = useDateAdapter({
+      const { adapter } = useDateAdapter({
         format: 'YYYY-MM-DD',
         disabledDates: []
       })
@@ -198,7 +198,7 @@ describe('useDateAdapter composable', () => {
     it('should disable today\'s date correctly', () => {
       const today = new Date()
       const todayTimestamp = today.getTime()
-      const [, , adapter] = useDateAdapter({
+      const { adapter } = useDateAdapter({
         format: 'YYYY-MM-DD',
         disabledDates: [todayTimestamp]
       })
@@ -213,7 +213,7 @@ describe('useDateAdapter composable', () => {
     it('should correctly format minDate in formattedDates', () => {
       const minDate = new Date(2024, 0, 1) // 1 de enero de 2024
       const minTimestamp = minDate.getTime()
-      const [, , adapter] = useDateAdapter({
+      const { adapter } = useDateAdapter({
         format: 'YYYY-MM-DD',
         minDate: minTimestamp
       })
@@ -231,7 +231,7 @@ describe('useDateAdapter composable', () => {
     })
 
     it('should not set minDate in formattedDates when not provided', () => {
-      const [, , adapter] = useDateAdapter({
+      const { adapter } = useDateAdapter({
         format: 'YYYY-MM-DD'
       })
 
@@ -243,7 +243,7 @@ describe('useDateAdapter composable', () => {
     it('should correctly format maxDate in formattedDates', () => {
       const maxDate = new Date(2024, 11, 31)
       const maxTimestamp = maxDate.getTime()
-      const [, , adapter] = useDateAdapter({
+      const { adapter } = useDateAdapter({
         format: 'YYYY-MM-DD',
         maxDate: maxTimestamp
       })
@@ -261,7 +261,7 @@ describe('useDateAdapter composable', () => {
     })
 
     it('should not set maxDate in formattedDates when not provided', () => {
-      const [, , adapter] = useDateAdapter({
+      const { adapter } = useDateAdapter({
         format: 'YYYY-MM-DD'
       })
 

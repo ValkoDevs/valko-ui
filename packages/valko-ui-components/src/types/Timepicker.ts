@@ -3,7 +3,7 @@ import type { TimeProps } from './Time'
 import type { TimepickerSlots } from '../styles/Timepicker.styles'
 export interface TimepickerProps extends DefaultComponent, TimeProps, Omit<AriaAttributes, 'ariaDescription'> {
   isOpen: boolean;
-  parsedModel: string;
+  displayValue: string;
   label?: string;
   okButtonLabel?: string;
   styleSlots?: Partial<TimepickerSlots>;

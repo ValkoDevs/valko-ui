@@ -40,7 +40,7 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutsi
   >
     <vk-input
       v-bind="props"
-      :model-value="parsedModel"
+      :model-value="displayValue"
       :label="label"
       readonly
       cursor="pointer"

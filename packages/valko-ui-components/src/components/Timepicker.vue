@@ -40,7 +40,7 @@ onBeforeUnmount(() => document.addEventListener('mousedown', handleClickOutside,
   >
     <vk-input
       v-bind="props"
-      :model-value="parsedModel"
+      :model-value="displayValue"
       :label="label"
       :class="s.input({ class: styleSlots?.input })"
       readonly

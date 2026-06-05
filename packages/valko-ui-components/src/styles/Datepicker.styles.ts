@@ -4,7 +4,8 @@ const datePicker = tv({
   slots: {
     container: [
       'vk-datepicker',
-      'relative'
+      'relative',
+      'bg-inherit'
     ],
     content: [
       'vk-datepicker__content',
@@ -12,7 +13,7 @@ const datePicker = tv({
       'bg-surface-container-high',
       'shadow-el2',
       'absolute',
-      'z-10',
+      'z-50',
       'mt-1',
       'left-0'
     ]

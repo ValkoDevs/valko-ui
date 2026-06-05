@@ -13,93 +13,93 @@ describe('useTimeAdapter composable', () => {
 
   describe('Model', () => {
     it('should return model as an EpochTimeStamp', () => {
-      const [ model ] = useTimeAdapter({ format: 'HH:mm:ss' })
+      const { model } = useTimeAdapter({ format: 'HH:mm:ss' })
       expect(model.value).toBe(mockTime.getTime())
     })
   })
 
-  describe('ParsedModel', () => {
+  describe('DisplayValue', () => {
     it('should format time as HH (24-hour padded)', () => {
-      const [ , parsedModel ] = useTimeAdapter({ format: 'HH' })
-      expect(parsedModel.value).toBe('14')
+      const { displayValue } = useTimeAdapter({ format: 'HH' })
+      expect(displayValue.value).toBe('14')
     })
 
     it('should format time as H (24-hour without padding)', () => {
-      const [ , parsedModel ] = useTimeAdapter({ format: 'H' })
-      expect(parsedModel.value).toBe('14')
+      const { displayValue } = useTimeAdapter({ format: 'H' })
+      expect(displayValue.value).toBe('14')
     })
 
     it('should format time as hh (12-hour padded)', () => {
-      const [ , parsedModel ] = useTimeAdapter({ format: 'hh' })
-      expect(parsedModel.value).toBe('02')
+      const { displayValue } = useTimeAdapter({ format: 'hh' })
+      expect(displayValue.value).toBe('02')
     })
 
     it('should format time as h (12-hour without padding)', () => {
-      const [ , parsedModel ] = useTimeAdapter({ format: 'h' })
-      expect(parsedModel.value).toBe('2')
+      const { displayValue } = useTimeAdapter({ format: 'h' })
+      expect(displayValue.value).toBe('2')
     })
 
     it('should format minutes as mm (padded)', () => {
-      const [ , parsedModel ] = useTimeAdapter({ format: 'mm' })
-      expect(parsedModel.value).toBe('05')
+      const { displayValue } = useTimeAdapter({ format: 'mm' })
+      expect(displayValue.value).toBe('05')
     })
 
     it('should format minutes as m (without padding)', () => {
-      const [ , parsedModel ] = useTimeAdapter({ format: 'm' })
-      expect(parsedModel.value).toBe('5')
+      const { displayValue } = useTimeAdapter({ format: 'm' })
+      expect(displayValue.value).toBe('5')
     })
 
     it('should format seconds as ss (padded)', () => {
-      const [ , parsedModel ] = useTimeAdapter({ format: 'ss' })
-      expect(parsedModel.value).toBe('09')
+      const { displayValue } = useTimeAdapter({ format: 'ss' })
+      expect(displayValue.value).toBe('09')
     })
 
     it('should format seconds as s (without padding)', () => {
-      const [ , parsedModel ] = useTimeAdapter({ format: 's' })
-      expect(parsedModel.value).toBe('9')
+      const { displayValue } = useTimeAdapter({ format: 's' })
+      expect(displayValue.value).toBe('9')
     })
 
     it('should format period as A (uppercase AM/PM)', () => {
-      const [ , parsedModel ] = useTimeAdapter({ format: 'A' })
-      expect(parsedModel.value).toBe('PM')
+      const { displayValue } = useTimeAdapter({ format: 'A' })
+      expect(displayValue.value).toBe('PM')
     })
 
     it('should format period as a (lowercase am/pm)', () => {
-      const [ , parsedModel ] = useTimeAdapter({ format: 'a' })
-      expect(parsedModel.value).toBe('pm')
+      const { displayValue } = useTimeAdapter({ format: 'a' })
+      expect(displayValue.value).toBe('pm')
     })
   })
 
   describe('Adapter methods', () => {
     describe('setDisplayUnit', () => {
-      it('should correctly update the parsed model when setting hours', () => {
-        const [, parsedModel, { setDisplayUnit }] = useTimeAdapter({ format: 'HH:mm:ss' })
+      it('should correctly update the display value when setting hours', () => {
+        const { displayValue, adapter: { setDisplayUnit } } = useTimeAdapter({ format: 'HH:mm:ss' })
         setDisplayUnit('h', 14)
-        expect(parsedModel.value).toContain('14')
+        expect(displayValue.value).toContain('14')
       })
 
-      it('should correctly update the parsed model when setting minutes', () => {
-        const [, parsedModel, { setDisplayUnit }] = useTimeAdapter({ format: 'HH:mm:ss' })
+      it('should correctly update the display value when setting minutes', () => {
+        const { displayValue, adapter: { setDisplayUnit } } = useTimeAdapter({ format: 'HH:mm:ss' })
         setDisplayUnit('m', 5)
-        expect(parsedModel.value).toContain('05')
+        expect(displayValue.value).toContain('05')
       })
 
-      it('should correctly update the parsed model when setting seconds', () => {
-        const [, parsedModel, { setDisplayUnit }] = useTimeAdapter({ format: 'HH:mm:ss' })
+      it('should correctly update the display value when setting seconds', () => {
+        const { displayValue, adapter: { setDisplayUnit } } = useTimeAdapter({ format: 'HH:mm:ss' })
         setDisplayUnit('s', 9)
-        expect(parsedModel.value).toContain('09')
+        expect(displayValue.value).toContain('09')
       })
     })
 
     describe('onSelectAMPM', () => {
       it('should switch to AM', () => {
-        const [, , { onSelectAMPM, period }] = useTimeAdapter({ format: 'hh:mm:ss A' })
+        const { adapter: { onSelectAMPM, period } } = useTimeAdapter({ format: 'hh:mm:ss A' })
         onSelectAMPM('AM')
         expect(period.value).toBe('AM')
       })
 
       it('should switch to PM', () => {
-        const [, , { onSelectAMPM, period }] = useTimeAdapter({ format: 'hh:mm:ss A' })
+        const { adapter: { onSelectAMPM, period } } = useTimeAdapter({ format: 'hh:mm:ss A' })
         onSelectAMPM('PM')
         expect(period.value).toBe('PM')
       })
@@ -107,7 +107,7 @@ describe('useTimeAdapter composable', () => {
 
     describe('onSelectTime', () => {
       it('should correctly update the model with a selected hour', () => {
-        const [model, , { setDisplayUnit, onSelectTime }] = useTimeAdapter({ format: 'HH:mm:ss' })
+        const { model, adapter: { setDisplayUnit, onSelectTime } } = useTimeAdapter({ format: 'HH:mm:ss' })
 
         setDisplayUnit('h', 15)
         onSelectTime()
@@ -119,7 +119,7 @@ describe('useTimeAdapter composable', () => {
       })
 
       it('should correctly update the model with a selected minute', () => {
-        const [model, , { setDisplayUnit, onSelectTime }] = useTimeAdapter({ format: 'HH:mm:ss' })
+        const { model, adapter: { setDisplayUnit, onSelectTime } } = useTimeAdapter({ format: 'HH:mm:ss' })
 
         setDisplayUnit('m', 45)
         onSelectTime()
@@ -131,7 +131,7 @@ describe('useTimeAdapter composable', () => {
       })
 
       it('should correctly update the model with a selected second', () => {
-        const [model, , { setDisplayUnit, onSelectTime }] = useTimeAdapter({ format: 'HH:mm:ss' })
+        const { model, adapter: { setDisplayUnit, onSelectTime } } = useTimeAdapter({ format: 'HH:mm:ss' })
 
         setDisplayUnit('s', 30)
         onSelectTime()
@@ -147,14 +147,14 @@ describe('useTimeAdapter composable', () => {
       let isTimeDisabled: (hours: number, minutes?: number) => boolean | undefined
 
       beforeEach(() => {
-        [, , { isTimeDisabled }] = useTimeAdapter({
+        ({ adapter: { isTimeDisabled } } = useTimeAdapter({
           format: 'HH:mm:ss',
           disabledTimes: [
             new Date(2024, 10, 21, 14, 0).getTime(), // 14:00
             new Date(2024, 10, 21, 15, 30).getTime(), // 15:30
             new Date(2024, 10, 21, 23, 45).getTime() // 23:45
           ]
-        })
+        }))
       })
 
       it('should disable a specific hour', () => {
@@ -170,10 +170,10 @@ describe('useTimeAdapter composable', () => {
       // })
 
       it('should work when no disabledTimes are provided', () => {
-        [, , { isTimeDisabled }] = useTimeAdapter({
+        ({ adapter: { isTimeDisabled } } = useTimeAdapter({
           format: 'HH:mm:ss',
           disabledTimes: []
-        })
+        }))
 
         expect(isTimeDisabled(14)).toBe(false)
       })

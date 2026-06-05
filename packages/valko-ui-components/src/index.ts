@@ -61,6 +61,11 @@ export * from '#valkoui/types/Time'
 export * from '#valkoui/types/Timepicker'
 export * from '#valkoui/types/Tooltip'
 
+///////////////////
+////// UTILS //////
+///////////////////
+export { default as formatDateTime } from '#valkoui/utils/formatDateTime.ts'
+
 /////////////////////
 ////// SCRIPTS //////
 /////////////////////

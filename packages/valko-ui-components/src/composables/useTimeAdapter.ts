@@ -1,8 +1,9 @@
 import { type Ref, ref, computed, toValue } from 'vue'
 import type { TimeAdapterProps, TimeAdapterResult } from '#valkoui/types/Time'
+import formatDateTime from '#valkoui/utils/formatDateTime.ts'
 
-const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAdapterResult => {
-  const model = ref<EpochTimeStamp>(+new Date())
+const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>, externalModel?: Ref<EpochTimeStamp>): TimeAdapterResult => {
+  const model = externalModel ?? ref<EpochTimeStamp>(+new Date())
   const tempTime = ref<Date | null>(null)
 
   const formatTime = (epoch: number) => {
@@ -39,22 +40,8 @@ const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAd
   })
 
   const parsedModel = computed(() => {
-    const { format } = toValue(props)
-    const time = formattedTime.value.selected
-    const formatted = format || 'HH:mm:ss'
-    const hours12 = time.hours % 12 || 12
-
-    return formatted
-      .replace('HH', String(time.hours).padStart(2, '0'))
-      .replace('H', String(time.hours))
-      .replace('hh', String(hours12).padStart(2, '0'))
-      .replace('h', String(hours12))
-      .replace('mm', String(time.minutes).padStart(2, '0'))
-      .replace('m', String(time.minutes))
-      .replace('ss', String(time.seconds).padStart(2, '0'))
-      .replace('s', String(time.seconds))
-      .replace('A', parsedPeriod.value)
-      .replace('a', parsedPeriod.value.toLowerCase())
+    const { format, locale } = toValue(props)
+    return formatDateTime(new Date(model.value), format || 'HH:mm:ss', locale)
   })
 
   const isTimeDisabled = (hours: number, minutes = 0) => {
@@ -131,18 +118,19 @@ const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAd
     tempTime.value = null
   }
 
-  return [
+  return {
     model,
-    parsedModel,
-    {
+    displayValue: parsedModel,
+    adapter: {
       formattedTime,
       setDisplayUnit,
       onSelectAMPM,
       onSelectTime,
       isTimeDisabled,
-      period: userPeriod
+      period: userPeriod,
+      resetTempState: () => { tempTime.value = null }
     }
-  ]
+  }
 }
 
 export default useTimeAdapter

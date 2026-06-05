@@ -11,6 +11,8 @@ const form = ref<Partial<DateTimePickerProps>>({
   disabledDates: undefined,
   minDate: undefined,
   maxDate: undefined,
+  minTime: undefined,
+  maxTime: undefined,
   disableWeekends: false,
   locale: 'en-US',
   label: 'Date & Time',
@@ -237,19 +239,11 @@ const dateTimePickerProps: TableItem[] = [
     default: 'md'
   },
   {
-    key: 'calendarAdapterProp',
-    prop: 'calendarAdapter',
+    key: 'adapterProp',
+    prop: 'adapter',
     required: true,
-    description: 'The calendar adapter providing date selection logic and formatted date data.',
-    values: 'CalendarAdapter',
-    default: ''
-  },
-  {
-    key: 'timeAdapterProp',
-    prop: 'timeAdapter',
-    required: true,
-    description: 'The time adapter providing time selection logic and formatted time data.',
-    values: 'TimeAdapterInterface',
+    description: 'The combined adapter providing both date and time selection logic, containing a date (CalendarAdapter) and time (TimeAdapterInterface) sub-adapter.',
+    values: 'DateTimeAdapter',
     default: ''
   },
   {
@@ -269,8 +263,8 @@ const dateTimePickerProps: TableItem[] = [
     default: ''
   },
   {
-    key: 'parsedModelProp',
-    prop: 'parsedModel',
+    key: 'displayValueProp',
+    prop: 'displayValue',
     required: true,
     description: 'The formatted string representation of the selected date and time, shown in the input field.',
     values: 'string',
@@ -526,13 +520,13 @@ const adapterResultProps: TableItem[] = [
     key: 'adapterResult',
     prop: 'DateTimeAdapterResult',
     required: true,
-    description: 'The return type of useDateTimeAdapter containing the model, parsed model, calendar adapter, time adapter, and controls.',
-    values: '[Ref<EpochTimeStamp>, ComputedRef<string>, CalendarAdapter, TimeAdapterInterface, DateTimeControls]',
+    description: 'The return type of useDateTimeAdapter containing the model, display value, combined adapter, and controls.',
+    values: '{ model: Ref<EpochTimeStamp>, displayValue: Ref<string>, adapter: DateTimeAdapter, controls: DateTimeControls }',
     default: ''
   }
 ]
 
-const [ model, parsedModel, calendarAdapter, timeAdapter, controls ] = useDateTimeAdapter(form)
+const { model, displayValue, adapter, controls } = useDateTimeAdapter(form)
 
 const dateTimePickerStates = reactive<Record<string, boolean>>({})
 
@@ -544,14 +538,13 @@ import { useDateTimeAdapter } from '#valkoui'
 
 const dateTimePickerStates = reactive<Record<string, boolean>>({})
 
-const [ model, parsedModel, calendarAdapter, timeAdapter, controls ] = useDateTimeAdapter({ format: 'YYYY-MM-DD HH:mm' })
+const { model, displayValue, adapter, controls } = useDateTimeAdapter({ format: 'YYYY-MM-DD HH:mm' })
 <\u002Fscript>
 `
 
 const extraProps = `v-model="model"
-:parsed-model="parsedModel"
-:calendar-adapter="calendarAdapter"
-:time-adapter="timeAdapter"
+:display-value="displayValue"
+:adapter="adapter"
 :controls="controls"
 :is-open="dateTimePickerStates['dateTimePickerId']"
 @open="() => dateTimePickerStates['dateTimePickerId'] = true"
@@ -597,17 +590,21 @@ const styles = {
       <vk-date-time-picker
         v-model="model"
         :label="form.label"
-        :parsed-model="parsedModel"
-        :calendar-adapter="calendarAdapter"
-        :time-adapter="timeAdapter"
+        :display-value="displayValue"
+        :adapter="adapter"
         :controls="controls"
         :color="form.color"
         :variant="form.variant"
         :size="form.size"
         :shape="form.shape"
         :format="form.format"
+        :min-date="form.minDate"
+        :max-date="form.maxDate"
+        :min-time="form.minTime"
+        :max-time="form.maxTime"
         :disable-weekends="form.disableWeekends"
         :ok-button-label="form.okButtonLabel"
+        :back-button-label="form.backButtonLabel"
         :is-open="form.isOpen!"
         @open="() => form.isOpen = true"
         @close="() => form.isOpen = false"
@@ -675,6 +672,18 @@ const styles = {
         size="sm"
         label="Max Date"
       />
+      <vk-input
+        v-model="form.minTime"
+        type="number"
+        size="sm"
+        label="Min Time"
+      />
+      <vk-input
+        v-model="form.maxTime"
+        type="number"
+        size="sm"
+        label="Max Time"
+      />
       <vk-checkbox
         v-model="form.disableWeekends"
         label="Disable Weekends"
@@ -692,11 +701,10 @@ const styles = {
           v-model="model"
           :label="color.label"
           class="mt-2"
-          :calendar-adapter="calendarAdapter"
-          :time-adapter="timeAdapter"
+          :adapter="adapter"
           :controls="controls"
           :color="color.value"
-          :parsed-model="parsedModel"
+          :display-value="displayValue"
           :is-open="dateTimePickerStates[color.value] ?? false"
           @open="() => dateTimePickerStates[color.value] = true"
           @close="() => dateTimePickerStates[color.value] = false"
@@ -717,11 +725,10 @@ const styles = {
           v-model="model"
           :label="variant.label"
           class="mt-2"
-          :calendar-adapter="calendarAdapter"
-          :time-adapter="timeAdapter"
+          :adapter="adapter"
           :controls="controls"
           :variant="variant.value"
-          :parsed-model="parsedModel"
+          :display-value="displayValue"
           :is-open="dateTimePickerStates[variant.value] ?? false"
           @open="() => dateTimePickerStates[variant.value] = true"
           @close="() => dateTimePickerStates[variant.value] = false"
@@ -742,11 +749,10 @@ const styles = {
           v-model="model"
           :label="shape.label"
           class="mt-2"
-          :calendar-adapter="calendarAdapter"
-          :time-adapter="timeAdapter"
+          :adapter="adapter"
           :controls="controls"
           :shape="shape.value"
-          :parsed-model="parsedModel"
+          :display-value="displayValue"
           :is-open="dateTimePickerStates[shape.value] ?? false"
           @open="() => dateTimePickerStates[shape.value] = true"
           @close="() => dateTimePickerStates[shape.value] = false"
@@ -767,11 +773,10 @@ const styles = {
           v-model="model"
           :label="size.label"
           class="mt-2"
-          :calendar-adapter="calendarAdapter"
-          :time-adapter="timeAdapter"
+          :adapter="adapter"
           :controls="controls"
           :size="size.value"
-          :parsed-model="parsedModel"
+          :display-value="displayValue"
           :is-open="dateTimePickerStates[size.value] ?? false"
           @open="() => dateTimePickerStates[size.value] = true"
           @close="() => dateTimePickerStates[size.value] = false"

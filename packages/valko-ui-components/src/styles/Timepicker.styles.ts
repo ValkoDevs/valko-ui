@@ -4,7 +4,8 @@ const timepicker = tv({
   slots: {
     container: [
       'vk-timepicker',
-      'relative'
+      'relative',
+      'bg-inherit'
     ],
     input: [
       'vk-timepicker__input'
@@ -15,7 +16,7 @@ const timepicker = tv({
       'bg-surface-container-high',
       'shadow-el2',
       'absolute',
-      'z-10',
+      'z-50',
       'mt-1',
       'left-0'
     ]

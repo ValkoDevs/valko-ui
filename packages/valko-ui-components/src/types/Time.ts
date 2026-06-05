@@ -13,7 +13,8 @@ export type TimeAdapterInterface = {
   onSelectAMPM: (period: 'AM' | 'PM') => void,
   onSelectTime: () => void,
   isTimeDisabled: (hours: number, minutes?: number) => boolean | undefined,
-  period: Ref<'AM' | 'PM'>
+  period: Ref<'AM' | 'PM'>,
+  resetTempState?: () => void
 }
 
 export interface FormattedTime {
@@ -23,11 +24,11 @@ export interface FormattedTime {
   obj: Date;
 }
 
-export type TimeAdapterResult = [
-  Ref<EpochTimeStamp>,
-  ComputedRef<string>,
-  TimeAdapterInterface
-]
+export interface TimeAdapterResult {
+  model: Ref<EpochTimeStamp>;
+  displayValue: ComputedRef<string>;
+  adapter: TimeAdapterInterface;
+}
 
 export interface TimeProps extends DefaultComponent {
   adapter: TimeAdapterInterface;
