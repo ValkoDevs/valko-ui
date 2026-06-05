@@ -1,16 +1,9 @@
 import formatDateTime from '#valkoui/utils/formatDateTime.ts'
 
 describe('formatDateTime', () => {
-  // March 5, 2024 at 09:03:07 (single-digit month, day, hour, minute, second — good for padding tests)
   const singleDigitDate = new Date(2024, 2, 5, 9, 3, 7)
-
-  // November 15, 2024 at 14:30:45 (double-digit everything, PM)
   const doubleDigitDate = new Date(2024, 10, 15, 14, 30, 45)
-
-  // Midnight
   const midnight = new Date(2024, 0, 1, 0, 0, 0)
-
-  // Noon
   const noon = new Date(2024, 5, 15, 12, 0, 0)
 
   describe('Date tokens', () => {
@@ -175,9 +168,6 @@ describe('formatDateTime', () => {
     })
 
     it('should not cross-contaminate locale output with time tokens', () => {
-      // MMMM for March contains 'h', which should NOT be matched by the 'h' token.
-      // If contaminated, the 'h' in "March" would be replaced by the 12-hour value "8",
-      // producing "Marc8 15, 2024" instead of the correct "March 15, 2024".
       const marchDate = new Date(2024, 2, 15, 8, 0, 0)
       const result = formatDateTime(marchDate, 'MMMM DD, YYYY', 'en-US')
       expect(result).toContain('March')

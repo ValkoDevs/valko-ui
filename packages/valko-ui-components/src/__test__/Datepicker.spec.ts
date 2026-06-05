@@ -404,7 +404,7 @@ describe('Datepicker component', () => {
         props: {
           isOpen: false,
           modelValue,
-          parsedModel,
+          displayValue,
           adapter
         }
       })
@@ -440,7 +440,7 @@ describe('Datepicker component', () => {
         props: {
           isOpen: true,
           modelValue,
-          parsedModel,
+          displayValue,
           adapter
         },
         global: {

@@ -30,7 +30,7 @@ const emit = defineEmits(['onSelect', 'update:isOpen'])
     <template #trigger="{ setOpen }">
       <vk-input
         v-bind="props"
-        :model-value="parsedModel"
+        :model-value="displayValue"
         :label="label"
         readonly
         @focus="setOpen(true)"

@@ -30,7 +30,7 @@ const emit = defineEmits(['update:modelValue', 'update:isOpen'])
     <template #trigger="{ setOpen }">
       <vk-input
         v-bind="props"
-        :model-value="parsedModel"
+        :model-value="displayValue"
         :label="label"
         readonly
         cursor="pointer"
