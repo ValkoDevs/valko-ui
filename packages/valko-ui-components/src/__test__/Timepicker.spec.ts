@@ -4,10 +4,10 @@ import VkTimepicker from '#valkoui/components/Timepicker.vue'
 import type { TimeAdapterResult } from '#valkoui/types/Time'
 
 const { useTimeAdapter } = vi.hoisted(() => ({
-  useTimeAdapter: vi.fn(() => ([
-    ref(1728987010),
-    computed(() => '10:10:10'),
-    {
+  useTimeAdapter: vi.fn(() => ({
+    model: ref(1728987010),
+    displayValue: computed(() => '10:10:10'),
+    adapter: {
       formattedTime: computed(() => ({
         selected: {
           hours: 10,
@@ -28,21 +28,21 @@ const { useTimeAdapter } = vi.hoisted(() => ({
       isTimeDisabled: vi.fn(),
       period: ref('AM')
     }
-  ] as TimeAdapterResult))
+  } as TimeAdapterResult))
 }))
 
 vi.mock('#valkoui/composables/useTimeAdapter.ts', () => ({
   default: useTimeAdapter
 }))
 
-const [ model, parModel, adapter ] = useTimeAdapter()
+const { model, displayValue: displayValueRef, adapter } = useTimeAdapter()
 const modelValue = toValue(model)
-const parsedModel = toValue(parModel)
+const displayValue = toValue(displayValueRef)
 const mountTimepicker = (props = {}, stubs = {}) =>
   mount(VkTimepicker, {
     props: {
       modelValue,
-      parsedModel,
+      displayValue,
       adapter,
       isOpen: true,
       ...props
@@ -117,7 +117,7 @@ describe('Time component', () => {
             color: 'primary',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -131,7 +131,7 @@ describe('Time component', () => {
             color: 'secondary',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -145,7 +145,7 @@ describe('Time component', () => {
             color: 'positive',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -159,7 +159,7 @@ describe('Time component', () => {
             color: 'accent',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -173,7 +173,7 @@ describe('Time component', () => {
             color: 'warning',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -187,7 +187,7 @@ describe('Time component', () => {
             color: 'negative',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -203,7 +203,7 @@ describe('Time component', () => {
             size: 'xs',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -217,7 +217,7 @@ describe('Time component', () => {
             size: 'sm',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -231,7 +231,7 @@ describe('Time component', () => {
             size: 'md',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -245,7 +245,7 @@ describe('Time component', () => {
             size: 'lg',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -261,7 +261,7 @@ describe('Time component', () => {
             variant: 'filled',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -275,7 +275,7 @@ describe('Time component', () => {
             variant: 'outlined',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -289,7 +289,7 @@ describe('Time component', () => {
             variant: 'ghost',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -306,7 +306,7 @@ describe('Time component', () => {
         props: {
           isOpen: true,
           modelValue,
-          parsedModel,
+          displayValue,
           adapter
         }
       })
@@ -323,7 +323,7 @@ describe('Time component', () => {
         props: {
           modelValue,
           isOpen: false,
-          parsedModel,
+          displayValue,
           adapter
         }
       })
@@ -338,7 +338,7 @@ describe('Time component', () => {
         props: {
           modelValue,
           isOpen: true,
-          parsedModel,
+          displayValue,
           adapter
         }
       })
@@ -354,7 +354,7 @@ describe('Time component', () => {
         props: {
           modelValue,
           isOpen: true,
-          parsedModel,
+          displayValue,
           adapter
         }
       })
@@ -372,7 +372,7 @@ describe('Time component', () => {
         props: {
           modelValue,
           isOpen: true,
-          parsedModel,
+          displayValue,
           adapter
         },
         global: {

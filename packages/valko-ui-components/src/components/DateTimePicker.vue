@@ -66,7 +66,7 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutsi
   >
     <vk-input
       v-bind="props"
-      :model-value="parsedModel"
+      :model-value="displayValue"
       :label="label"
       readonly
       cursor="pointer"
@@ -97,7 +97,7 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutsi
           >
             <vk-calendar
               v-bind="props"
-              :adapter="calendarAdapter"
+              :adapter="adapter.date"
               :disabled-dates="disabledDates"
               :locale="locale"
               :format="format"
@@ -114,10 +114,10 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutsi
           >
             <div :class="s.backAction({ class: styleSlots?.backAction })">
               <vk-button
-                size="xs"
+                :size="size"
                 :shape="shape"
-                variant="link"
-                :color="color === 'surface' ? 'primary' : color"
+                :variant="variant"
+                color="surface"
                 :class="s.backButton({ class: styleSlots?.backButton })"
                 @click="onBackToDate"
               >
@@ -127,7 +127,7 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutsi
             </div>
 
             <vk-time
-              :adapter="timeAdapter"
+              :adapter="adapter.time"
               :color="color === 'surface' ? 'primary' : color"
               :variant="variant"
               :size="size"

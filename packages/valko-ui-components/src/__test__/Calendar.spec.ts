@@ -4,10 +4,10 @@ import VkCalendar from '#valkoui/components/Calendar.vue'
 import type { AdapterResult } from '#valkoui/types/Calendar'
 
 const { useDateAdapter } = vi.hoisted(() => ({
-  useDateAdapter: vi.fn(() => ([
-    ref(1729017518),
-    computed(() => '2024-10-15'),
-    {
+  useDateAdapter: vi.fn(() => ({
+    model: ref(1729017518),
+    displayValue: computed(() => '2024-10-15'),
+    adapter: {
       formattedDates: computed(() => ({
         selected: {
           day: 15,
@@ -41,14 +41,14 @@ const { useDateAdapter } = vi.hoisted(() => ({
       getWeekdays: () => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       getMonths: () => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     }
-  ] as AdapterResult))
+  } as AdapterResult))
 }))
 
 vi.mock('#valkoui/composables/useDateAdapter.ts', () => ({
   default: useDateAdapter
 }))
 
-const [ model, , adapter ] = useDateAdapter()
+const { model, adapter } = useDateAdapter()
 const modelValue = toValue(model)
 
 describe('Calendar component', () => {

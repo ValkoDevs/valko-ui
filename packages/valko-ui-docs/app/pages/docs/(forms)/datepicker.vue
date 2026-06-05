@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DatepickerProps, SelectOption } from '#valkoui'
+import type { TableItem, DatepickerProps, SelectOption } from '#valkoui'
 
 const form = ref<Partial<DatepickerProps>>({
   color: 'primary',
@@ -31,90 +31,113 @@ const locales: SelectOption[] = [
   { value: 'ar-EG', label: 'العربية (Arabic)' }
 ]
 
-const formats: FormatData[] = [
+const formats: TableItem[] = [
   {
     key: 'YY',
-    format: 'YY',
+    prop: 'YY',
+    required: false,
     description: 'Two-digit year (e.g., 18 for 2018)',
-    example: '18'
+    values: '18',
+    default: ''
   },
   {
     key: 'YYYY',
-    format: 'YYYY',
+    prop: 'YYYY',
+    required: false,
     description: 'Four-digit year (e.g., 2018)',
-    example: '2018'
+    values: '2018',
+    default: ''
   },
   {
     key: 'M',
-    format: 'M',
+    prop: 'M',
+    required: false,
     description: 'The month, beginning at 1 (1 = January)',
-    example: '1-12'
+    values: '1-12',
+    default: ''
   },
   {
     key: 'MM',
-    format: 'MM',
+    prop: 'MM',
+    required: false,
     description: 'The month, 2-digits (e.g., 01 for January)',
-    example: '01-12'
+    values: '01-12',
+    default: ''
   },
   {
     key: 'MMM',
-    format: 'MMM',
+    prop: 'MMM',
+    required: false,
     description: 'Abbreviated month name (e.g., Jan for January)',
-    example: 'Jan-Dec'
+    values: 'Jan-Dec',
+    default: ''
   },
   {
     key: 'MMMM',
-    format: 'MMMM',
+    prop: 'MMMM',
+    required: false,
     description: 'Full month name (e.g., January)',
-    example: 'January-December'
+    values: 'January-December',
+    default: ''
   },
   {
     key: 'D',
-    format: 'D',
+    prop: 'D',
+    required: false,
     description: 'Day of the month (1-31)',
-    example: '1-31'
+    values: '1-31',
+    default: ''
   },
   {
     key: 'DD',
-    format: 'DD',
+    prop: 'DD',
+    required: false,
     description: 'Day of the month, 2-digits (e.g., 01 for the 1st)',
-    example: '01-31'
+    values: '01-31',
+    default: ''
   },
   {
     key: 'd',
-    format: 'd',
+    prop: 'd',
+    required: false,
     description: 'Day of the week, with Sunday as 0 (0-6)',
-    example: '0-6'
+    values: '0-6',
+    default: ''
   },
   {
     key: 'dd',
-    format: 'dd',
+    prop: 'dd',
+    required: false,
     description: 'Minimum name of the day of the week (e.g., Su for Sunday)',
-    example: 'Su-Sa'
+    values: 'Su-Sa',
+    default: ''
   },
   {
     key: 'ddd',
-    format: 'ddd',
+    prop: 'ddd',
+    required: false,
     description: 'Short name of the day of the week (e.g., Sun for Sunday)',
-    example: 'Sun-Sat'
+    values: 'Sun-Sat',
+    default: ''
   },
   {
     key: 'dddd',
-    format: 'dddd',
+    prop: 'dddd',
+    required: false,
     description: 'Full name of the day of the week (e.g., Sunday)',
-    example: 'Sunday-Saturday'
+    values: 'Sunday-Saturday',
+    default: ''
   }
 ]
 
-const datepickerProps: PropData[] = [
+const datepickerProps: TableItem[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Datepicker.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary',
-    apiType: 'custom-string'
+    default: 'primary'
   },
   {
     key: 'variantProp',
@@ -122,8 +145,7 @@ const datepickerProps: PropData[] = [
     required: false,
     description: 'The variant of the Datepicker.',
     values: 'filled, outlined, ghost',
-    default: 'filled',
-    apiType: 'custom-string'
+    default: 'filled'
   },
   {
     key: 'shapeProp',
@@ -131,8 +153,7 @@ const datepickerProps: PropData[] = [
     required: false,
     description: 'The shape of the Datepicker.',
     values: 'rounded, square, soft',
-    default: 'soft',
-    apiType: 'custom-string'
+    default: 'soft'
   },
   {
     key: 'sizeProp',
@@ -140,8 +161,7 @@ const datepickerProps: PropData[] = [
     required: false,
     description: 'The size of the Datepicker.',
     values: 'xs, sm, md, lg',
-    default: 'md',
-    apiType: 'custom-string'
+    default: 'md'
   },
   {
     key: 'isOpenProp',
@@ -158,8 +178,7 @@ const datepickerProps: PropData[] = [
     required: true,
     description: 'As default we provide an adapter composable that uses native JS Date to provide the dates for the calendar.',
     values: 'CalendarAdapter',
-    default: '',
-    apiType: 'custom-type'
+    default: ''
   },
   {
     key: 'modelValueProp',
@@ -167,8 +186,15 @@ const datepickerProps: PropData[] = [
     required: true,
     description: 'The currently selected date, represented as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: '',
-    apiType: 'primitive'
+    default: ''
+  },
+  {
+    key: 'isOpenProp',
+    prop: 'isOpen',
+    required: false,
+    description: 'Controls whether the Datepicker dropdown is visible. When omitted, the component manages its own open/close state (uncontrolled mode). When provided, the consumer must manage the state via open/close events (controlled mode).',
+    values: 'true, false',
+    default: 'undefined'
   },
   {
     key: 'localeProp',
@@ -176,8 +202,7 @@ const datepickerProps: PropData[] = [
     required: false,
     description: 'Defines the locale used to display month names, weekday names, and other localized date values.',
     values: 'string',
-    default: 'en-US',
-    apiType: 'primitive'
+    default: 'en-US'
   },
   {
     key: 'formatProp',
@@ -185,8 +210,7 @@ const datepickerProps: PropData[] = [
     required: false,
     description: 'Defines how the selected date is displayed using formatting tokens (for example YYYY-MM-DD or DD/MM/YYYY).',
     values: 'string',
-    default: 'YYYY-MM-DD',
-    apiType: 'primitive'
+    default: 'YYYY-MM-DD'
   },
   {
     key: 'disabledDatesProp',
@@ -194,8 +218,7 @@ const datepickerProps: PropData[] = [
     required: false,
     description: 'An array of specific dates to disable.',
     values: 'EpochTimeStamp[]',
-    default: '[]',
-    apiType: 'primitive'
+    default: '[]'
   },
   {
     key: 'disableWeekendsProp',
@@ -212,8 +235,7 @@ const datepickerProps: PropData[] = [
     required: false,
     description: 'The minimum selectable date as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: '[]',
-    apiType: 'primitive'
+    default: '[]'
   },
   {
     key: 'maxDateProp',
@@ -221,8 +243,7 @@ const datepickerProps: PropData[] = [
     required: false,
     description: 'The maximum selectable date as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: '[]',
-    apiType: 'primitive'
+    default: '[]'
   },
   {
     key: 'ariaLabelProp',
@@ -230,8 +251,7 @@ const datepickerProps: PropData[] = [
     required: false,
     description: 'Defines a string value that labels the datepicker for assistive technologies.',
     values: 'string',
-    default: '',
-    apiType: 'primitive'
+    default: ''
   },
   {
     key: 'ariaLabelledbyProp',
@@ -239,8 +259,7 @@ const datepickerProps: PropData[] = [
     required: false,
     description: 'Identifies the element(s) that labels the datepicker.',
     values: 'string',
-    default: '',
-    apiType: 'primitive'
+    default: ''
   },
   {
     key: 'ariaDescribedbyProp',
@@ -248,17 +267,15 @@ const datepickerProps: PropData[] = [
     required: false,
     description: 'Identifies the element(s) that describe the datepicker.',
     values: 'string',
-    default: '',
-    apiType: 'primitive'
+    default: ''
   },
   {
     key: 'ariaInvalidProp',
     prop: 'ariaInvalid',
     required: false,
     description: 'Indicates that the current value of the datepicker is invalid.',
-    values: 'boolean',
-    default: 'false',
-    apiType: 'primitive'
+    values: 'true, false',
+    default: 'false'
   },
   {
     key: 'ariaRequiredProp',
@@ -290,15 +307,14 @@ const datepickerEmits: EmitData[] = [
   }
 ]
 
-const calendarAdapterProps: PropData[] = [
+const calendarAdapterProps: TableItem[] = [
   {
     key: 'formattedDatesProp',
     prop: 'formattedDates',
     required: true,
     description: 'Provides the currently selected, displayed, minimum, and maximum dates in a formatted structure.',
-    values:'ComputedRef<{\n selected: FormattedDate,\n display: FormattedDate,\n min?: FormattedDate,\n max?: FormattedDate\n}>',
-    default: '',
-    apiType: 'object'
+    values: 'ComputedRef<{ selected: FormattedDate, display: FormattedDate, min?: FormattedDate, max?: FormattedDate }>',
+    default: ''
   },
   {
     key: 'disabledDatesProp',
@@ -306,8 +322,7 @@ const calendarAdapterProps: PropData[] = [
     required: true,
     description: 'An array of disabled dates represented as timestamps.',
     values: 'ComputedRef<number[]>',
-    default: '[]',
-    apiType: 'object'
+    default: '[]'
   },
   {
     key: 'onSelectDayProp',
@@ -315,8 +330,7 @@ const calendarAdapterProps: PropData[] = [
     required: true,
     description: 'Function to handle day selection. Receives the selected day as a parameter and returns the updated timestamp.',
     values: '(day: number) => number',
-    default: '',
-    apiType: 'function'
+    default: ''
   },
   {
     key: 'onSelectMonthProp',
@@ -324,8 +338,7 @@ const calendarAdapterProps: PropData[] = [
     required: true,
     description: 'Function to handle month selection. Receives the selected month as a parameter and returns the updated timestamp.',
     values: '(month: number) => number',
-    default: '',
-    apiType: 'function'
+    default: ''
   },
   {
     key: 'onSelectYearProp',
@@ -333,8 +346,7 @@ const calendarAdapterProps: PropData[] = [
     required: true,
     description: 'Function to handle year selection. Receives the selected year as a parameter and returns the updated timestamp.',
     values: '(year: number) => number',
-    default: '',
-    apiType: 'function'
+    default: ''
   },
   {
     key: 'getWeekdaysMethod',
@@ -342,8 +354,7 @@ const calendarAdapterProps: PropData[] = [
     required: true,
     description: 'Returns an array of localized names for the weekdays based on the current locale.',
     values: '() => string[]',
-    default: '',
-    apiType: 'function'
+    default: ''
   },
   {
     key: 'getMonthsMethod',
@@ -351,32 +362,29 @@ const calendarAdapterProps: PropData[] = [
     required: true,
     description: 'Returns an array of localized names for the months based on the current locale.',
     values: '() => string[]',
-    default: '',
-    apiType: 'function'
+    default: ''
   }
 ]
 
-const adapterResultProps: PropData[] = [
+const adapterResultProps: TableItem[] = [
   {
     key: 'adapterResult',
     prop: 'AdapterResult',
     required: true,
-    description: 'The return type result of the Adapter containing the model, parsed model, and adapter methods.',
-    values: '[\n Ref<EpochTimeStamp>,\n ComputedRef<string>,\n CalendarAdapter\n]',
-    default: '',
-    apiType: 'object'
+    description: 'The return type result of the Adapter containing the model, display value, and adapter methods.',
+    values: '{ model: Ref<EpochTimeStamp>, displayValue: ComputedRef<string>, adapter: CalendarAdapter }',
+    default: ''
   }
 ]
 
-const formattedDatesProps: PropData[] = [
+const formattedDatesProps: TableItem[] = [
   {
     key: 'selectedProp',
     prop: 'selected',
     required: true,
     description: 'The currently selected date, formatted as a `FormattedDate` object.',
     values: 'FormattedDate',
-    default: '',
-    apiType: 'custom-type'
+    default: ''
   },
   {
     key: 'displayProp',
@@ -384,8 +392,7 @@ const formattedDatesProps: PropData[] = [
     required: true,
     description: 'The date that is currently being displayed on the calendar, formatted as a `FormattedDate` object.',
     values: 'FormattedDate',
-    default: '',
-    apiType: 'custom-type'
+    default: ''
   },
   {
     key: 'minProp',
@@ -393,8 +400,7 @@ const formattedDatesProps: PropData[] = [
     required: false,
     description: 'The minimum date allowed for selection, formatted as a `FormattedDate` object.',
     values: 'FormattedDate',
-    default: '',
-    apiType: 'custom-type'
+    default: ''
   },
   {
     key: 'maxProp',
@@ -402,20 +408,18 @@ const formattedDatesProps: PropData[] = [
     required: false,
     description: 'The maximum date allowed for selection, formatted as a `FormattedDate` object.',
     values: 'FormattedDate',
-    default: '',
-    apiType: 'custom-type'
+    default: ''
   }
 ]
 
-const formattedDateProps: PropData[] = [
+const formattedDateProps: TableItem[] = [
   {
     key: 'dayProp',
     prop: 'day',
     required: true,
     description: 'The day of the month (1-31 depending on the month).',
     values: 'number',
-    default: '',
-    apiType: 'primitive'
+    default: ''
   },
   {
     key: 'monthProp',
@@ -423,8 +427,7 @@ const formattedDateProps: PropData[] = [
     required: true,
     description: 'The month of the year. (0-based index, 0 = January).',
     values: 'number',
-    default: '',
-    apiType: 'primitive'
+    default: ''
   },
   {
     key: 'yearProp',
@@ -432,8 +435,7 @@ const formattedDateProps: PropData[] = [
     required: true,
     description: 'The year in full (e.g., 2024).',
     values: 'number',
-    default: '',
-    apiType: 'primitive'
+    default: ''
   },
   {
     key: 'lastDayOfMonthProp',
@@ -441,8 +443,7 @@ const formattedDateProps: PropData[] = [
     required: true,
     description: 'The last day of the month (28-31 depending on the month).',
     values: 'number',
-    default: '',
-    apiType: 'primitive'
+    default: ''
   },
   {
     key: 'firstWeekDayProp',
@@ -450,8 +451,7 @@ const formattedDateProps: PropData[] = [
     required: true,
     description: 'The day of the week the month starts on (0-based index, 0 = Sunday, 6 = Saturday).',
     values: 'DayOfWeek',
-    default: '',
-    apiType: 'custom-type'
+    default: ''
   },
   {
     key: 'objProp',
@@ -459,26 +459,24 @@ const formattedDateProps: PropData[] = [
     required: true,
     description: 'The raw JavaScript Date object.',
     values: 'T (defaults to any).',
-    default: '',
-    apiType: 'custom-type'
+    default: ''
   }
 ]
 
-const dayOfWeekProp: PropData[] = [
+const dayOfWeekProp: TableItem[] = [
   {
     key: 'dayOfWeekProp',
     prop: 'DayOfWeek',
     required: true,
     description: 'Represents the day of the week as a number. 0 for Sunday, 1 for Monday, and so on until 6 for Saturday.',
     values: '0 | 1 | 2 | 3 | 4 | 5 | 6',
-    default: '',
-    apiType: 'custom-number'
+    default: ''
   }
 ]
 
-const [ minModel, minParsedModel, minAdapter ] = useDateAdapter({ minDate: 1736953200000 })
-const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 1736953200000 })
-const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({ disabledDates: [
+const { model: minModel, displayValue: minDisplayValue, adapter: minAdapter } = useDateAdapter({ minDate: 1736953200000 })
+const { model: maxModel, displayValue: maxDisplayValue, adapter: maxAdapter } = useDateAdapter({ maxDate: 1736953200000 })
+const { model: disabledModel, displayValue: disabledDisplayValue, adapter: disabledAdapter } = useDateAdapter({ disabledDates: [
   1705320000000,
   1710936000000,
   1717545600000,
@@ -487,7 +485,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
   1900249200000,
   2215004400000
 ] })
-const [ model, parsedModel, adapter ] = useDateAdapter(form)
+const { model, displayValue, adapter } = useDateAdapter(form)
 
 const generateSnippet = snippetGeneratorFactory('vk-datepicker')
 
@@ -495,20 +493,20 @@ const scriptCode = `
 <script setup lang="ts">
 import { useDateAdapter } from '#valkoui'
 
-const [ model, parsedModel, adapter ] = useDateAdapter()
+const { model, displayValue, adapter } = useDateAdapter({ format: 'YYYY-MM-DD' })
 <\u002Fscript>
 `
 
 const extraProps = `v-model="model"
-:parsed-model="parsedModel"
+:display-value="displayValue"
 :adapter="adapter"
 `
 
 const minmaxSnippet = `<script setup lang="ts">
 import { useDateAdapter } from '#valkoui'
 
-const [ minModel, minParsedModel, minAdapter ] = useDateAdapter({ minDate: 1736953200000 })
-const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 1736953200000 })
+const { model: minModel, displayValue: minDisplayValue, adapter: minAdapter } = useDateAdapter({ minDate: 1736953200000 })
+const { model: maxModel, displayValue: maxDisplayValue, adapter: maxAdapter } = useDateAdapter({ maxDate: 1736953200000 })
 <\u002Fscript>
 
 <template>
@@ -516,14 +514,14 @@ const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 173695
     v-model="minModel"
     label="Min Date"
     :adapter="minAdapter"
-    :parsed-model="minParsedModel"
+    :display-value="minDisplayValue"
   />
 
   <vk-datepicker
     v-model="maxModel"
     label="Max Date"
     :adapter="maxAdapter"
-    :parsed-model="maxParsedModel"
+    :display-value="maxDisplayValue"
   />
 </template>
 `
@@ -549,7 +547,7 @@ const [ model, parsedModel, adapter ] = useDateAdapter()
 const disabledSnippet = `<script setup lang="ts">
 import { useDateAdapter } from '#valkoui'
 
-const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({ disabledDates: [
+const { model: disabledModel, displayValue: disabledDisplayValue, adapter: disabledAdapter } = useDateAdapter({ disabledDates: [
   1705320000000,
   1710936000000,
   1717545600000,
@@ -565,7 +563,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
     v-model="disabledModel"
     label="Disabled Dates"
     :adapter="disabledAdapter"
-    :parsed-model="disabledParsedModel"
+    :display-value="disabledDisplayValue"
   />
 </template>
 `
@@ -614,7 +612,7 @@ const styles = {
       <vk-datepicker
         v-model="model"
         :label="form.label"
-        :parsed-model="parsedModel"
+        :display-value="displayValue"
         :adapter="adapter"
         :color="form.color"
         :variant="form.variant"
@@ -698,7 +696,7 @@ const styles = {
           class="mt-2"
           :adapter="adapter"
           :color="color.value"
-          :parsed-model="parsedModel"
+          :display-value="displayValue"
         />
 
         <template #code>
@@ -718,7 +716,7 @@ const styles = {
           class="mt-2"
           :adapter="adapter"
           :variant="variant.value"
-          :parsed-model="parsedModel"
+          :display-value="displayValue"
         />
 
         <template #code>
@@ -738,7 +736,7 @@ const styles = {
           class="mt-2"
           :adapter="adapter"
           :shape="shape.value"
-          :parsed-model="parsedModel"
+          :display-value="displayValue"
         />
 
         <template #code>
@@ -758,7 +756,7 @@ const styles = {
           class="mt-2"
           :adapter="adapter"
           :size="size.value"
-          :parsed-model="parsedModel"
+          :display-value="displayValue"
         />
 
         <template #code>
@@ -771,14 +769,14 @@ const styles = {
           v-model="minModel"
           label="Min Date"
           :adapter="minAdapter"
-          :parsed-model="minParsedModel"
+          :display-value="minDisplayValue"
         />
 
         <vk-datepicker
           v-model="maxModel"
           label="Max Date"
           :adapter="maxAdapter"
-          :parsed-model="maxParsedModel"
+          :display-value="maxDisplayValue"
         />
 
         <template #code>
@@ -791,7 +789,7 @@ const styles = {
           v-model="model"
           label="Disable Weekends"
           :adapter="adapter"
-          :parsed-model="parsedModel"
+          :display-value="displayValue"
           disable-weekends
         />
 
@@ -808,11 +806,11 @@ const styles = {
           v-model="disabledModel"
           label="Disabled Dates"
           :adapter="disabledAdapter"
-          :parsed-model="disabledParsedModel"
+          :display-value="disabledDisplayValue"
         />
 
         <div class="flex flex-col">
-          <strong class="wrap-break-words">The following dates are disabled in this example:</strong>
+          <strong class="break-words">The following dates are disabled in this example:</strong>
           <ul class="list-disc list-inside mb-4">
             <li>2024-01-15</li>
             <li>2024-03-20</li>
