@@ -3,6 +3,7 @@ import type { DefaultComponent } from './common'
 import type { TimeSlots } from '../styles/Time.styles'
 
 export type TimeAdapterProps = Pick<TimeProps, 'format' | 'locale' | 'minTime' | 'maxTime' | 'disabledTimes' | 'modelValue'>
+export type MinuteStep = 1 | 5 | 10 | 15 | 20 | 30
 
 export type TimeAdapterInterface = {
   formattedTime: ComputedRef<{
@@ -39,6 +40,6 @@ export interface TimeProps extends DefaultComponent {
   minTime?: EpochTimeStamp;
   maxTime?: EpochTimeStamp;
   disabledTimes?: EpochTimeStamp[];
-  minuteStep?: 1 | 5 | 10 | 15 | 20 | 30;
+  minuteStep?: MinuteStep;
   styleSlots?: Partial<TimeSlots>;
 }

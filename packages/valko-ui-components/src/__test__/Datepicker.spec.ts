@@ -436,4 +436,107 @@ describe('Datepicker component', () => {
       expect(wrapper.emitted()).toHaveProperty('close')
     })
   })
+
+  describe('Uncontrolled mode', () => {
+    it('should render closed by default when isOpen is not passed', () => {
+      wrapper = mount(VkDatepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        }
+      })
+
+      expect(wrapper.find('.vk-datepicker').exists()).toBe(true)
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should open when the input is focused', async () => {
+      wrapper = mount(VkDatepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        },
+        attachTo: document.body
+      })
+
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+    })
+
+    it('should close when clicking outside', async () => {
+      wrapper = mount(VkDatepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        },
+        attachTo: document.body
+      })
+
+      // Open first
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+
+      // Click outside
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should close when a date is finalized', async () => {
+      wrapper = mount(VkDatepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        },
+        attachTo: document.body
+      })
+
+      // Open first
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+
+      // Click a day button to finalize selection
+      const button = wrapper.findAll('.vk-calendar__grid-button')[14]
+      await button.trigger('click')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should emit open and close events in uncontrolled mode', async () => {
+      wrapper = mount(VkDatepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        },
+        attachTo: document.body
+      })
+
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('open')
+
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('close')
+    })
+  })
 })

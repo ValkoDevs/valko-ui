@@ -152,6 +152,14 @@ const timepickerProps: TableItem[] = [
     default: ''
   },
   {
+    key: 'isOpenProp',
+    prop: 'isOpen',
+    required: false,
+    description: 'Controls whether the Timepicker dropdown is visible. When omitted, the component manages its own open/close state (uncontrolled mode). When provided, the consumer must manage the state via open/close events (controlled mode).',
+    values: 'true, false',
+    default: 'undefined'
+  },
+  {
     key: 'okButtonLabelProp',
     prop: 'okButtonLabel',
     required: false,
@@ -467,8 +475,6 @@ watch(disabledRef, (newVal) => form.disabledTimes = newVal ? [1730721658, 173072
 
 const { model, displayValue, adapter } = useTimeAdapter(form)
 
-const timepickerStates = reactive<Record<string, boolean>>({})
-
 const generateSnippet = snippetGeneratorFactory('vk-timepicker')
 
 const scriptCode = `
@@ -638,9 +644,6 @@ const styles = {
           :adapter="adapter"
           :display-value="displayValue"
           :color="color.value"
-          :is-open="timepickerStates[color.value] ?? false"
-          @open="() => timepickerStates[color.value] = true"
-          @close="() => timepickerStates[color.value] = false"
         />
 
         <template #code>
@@ -658,10 +661,7 @@ const styles = {
           :adapter="adapter"
           :display-value="displayValue"
           :variant="variant.value"
-          :is-open="timepickerStates[variant.value] ?? false"
           :label="variant.label"
-          @open="() => timepickerStates[variant.value] = true"
-          @close="() => timepickerStates[variant.value] = false"
         />
 
         <template #code>
@@ -680,9 +680,6 @@ const styles = {
           :adapter="adapter"
           :display-value="displayValue"
           :shape="shape.value"
-          :is-open="timepickerStates[shape.value] ?? false"
-          @open="() => timepickerStates[shape.value] = true"
-          @close="() => timepickerStates[shape.value] = false"
         />
 
         <template #code>
@@ -701,9 +698,6 @@ const styles = {
           :adapter="adapter"
           :display-value="displayValue"
           :size="size.value"
-          :is-open="timepickerStates[size.value] ?? false"
-          @open="() => timepickerStates[size.value] = true"
-          @close="() => timepickerStates[size.value] = false"
         />
 
         <template #code>
@@ -720,18 +714,12 @@ const styles = {
           :adapter="adapter"
           :display-value="displayValue"
           :min-time="1730710858"
-          :is-open="timepickerStates['min'] ?? false"
-          @open="() => timepickerStates['min'] = true"
-          @close="() => timepickerStates['min'] = false"
         />
         <vk-timepicker
           label="Max"
           :adapter="adapter"
           :display-value="displayValue"
           :max-time="1730739658"
-          :is-open="timepickerStates['max'] ?? false"
-          @open="() => timepickerStates['max'] = true"
-          @close="() => timepickerStates['max'] = false"
         />
 
         <template #code>
@@ -745,9 +733,6 @@ const styles = {
           :adapter="adapter"
           :display-value="displayValue"
           :disabled-times="form.disabledTimes"
-          :is-open="timepickerStates['disabledTimes'] ?? false"
-          @open="() => timepickerStates['disabledTimes'] = true"
-          @close="() => timepickerStates['disabledTimes'] = false"
         />
 
         <template #code>

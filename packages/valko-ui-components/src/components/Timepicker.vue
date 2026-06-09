@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import type { TimepickerProps } from '#valkoui/types/Timepicker'
 import styles from '#valkoui/styles/Timepicker.styles.ts'
 import VkPopover from './Popover.vue'
@@ -15,21 +15,41 @@ const props = withDefaults(defineProps<TimepickerProps>(), {
   size: 'md',
   shape: 'soft',
   format: 'HH:mm:ss',
-  okButtonLabel: 'OK'
+  okButtonLabel: 'OK',
+  isOpen: undefined
 })
 
 const emit = defineEmits(['onSelect', 'open', 'close'])
 
 const s = computed(() => styles(props))
+
+const internalOpen = ref(false)
+
+const open = computed({
+  get: () => props.isOpen ?? internalOpen.value,
+  set: (val: boolean) => {
+    if (props.isOpen === undefined) internalOpen.value = val
+  }
+})
+
+const handleOpen = () => {
+  open.value = true
+  emit('open')
+}
+
+const handleClose = () => {
+  open.value = false
+  emit('close')
+}
 </script>
 
 <template>
   <vk-popover
     class="vk-timepicker"
-    :is-open="isOpen"
+    :is-open="open"
     :shape="shape"
     :condensed="false"
-    @close="emit('close')"
+    @close="handleClose"
   >
     <vk-input
       v-bind="props"
@@ -37,8 +57,8 @@ const s = computed(() => styles(props))
       :label="label"
       :class="s.input({ class: styleSlots?.input })"
       readonly
-      @focus="emit('open')"
-      @right-icon-click="emit('open')"
+      @focus="handleOpen"
+      @right-icon-click="handleOpen"
     >
       <template #right-icon>
         <vk-icon name="clock-2" />
@@ -47,7 +67,7 @@ const s = computed(() => styles(props))
 
     <template #popover-content>
       <vk-time
-        v-if="isOpen"
+        v-if="open"
         v-bind="props"
         :style-slots="undefined"
         :adapter="adapter"
@@ -59,7 +79,7 @@ const s = computed(() => styles(props))
         :ok-button-label="okButtonLabel"
         @on-select="() => {
           emit('onSelect')
-          emit('close')
+          handleClose()
         }"
       />
     </template>

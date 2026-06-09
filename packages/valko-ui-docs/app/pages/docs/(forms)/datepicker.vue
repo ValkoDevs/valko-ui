@@ -179,6 +179,14 @@ const datepickerProps: TableItem[] = [
     default: ''
   },
   {
+    key: 'isOpenProp',
+    prop: 'isOpen',
+    required: false,
+    description: 'Controls whether the Datepicker dropdown is visible. When omitted, the component manages its own open/close state (uncontrolled mode). When provided, the consumer must manage the state via open/close events (controlled mode).',
+    values: 'true, false',
+    default: 'undefined'
+  },
+  {
     key: 'localeProp',
     prop: 'locale',
     required: false,
@@ -472,15 +480,11 @@ const { model: disabledModel, displayValue: disabledDisplayValue, adapter: disab
 ] })
 const { model, displayValue, adapter } = useDateAdapter(form)
 
-const datePickerStates = reactive<Record<string, boolean>>({})
-
 const generateSnippet = snippetGeneratorFactory('vk-datepicker')
 
 const scriptCode = `
 <script setup lang="ts">
 import { useDateAdapter } from '#valkoui'
-
-const datePickerStates = reactive<Record<string, boolean>>({})
 
 const { model, displayValue, adapter } = useDateAdapter({ format: 'YYYY-MM-DD' })
 <\u002Fscript>
@@ -489,15 +493,10 @@ const { model, displayValue, adapter } = useDateAdapter({ format: 'YYYY-MM-DD' }
 const extraProps = `v-model="model"
 :display-value="displayValue"
 :adapter="adapter"
-:is-open="datePickerStates['datepickerId']"
-@open="() => datePickerStates['datepickerId'] = true"
-@close="() => datePickerStates['datepickerId'] = false"
 `
 
 const minmaxSnippet = `<script setup lang="ts">
 import { useDateAdapter } from '#valkoui'
-
-const datePickerStates = reactive<Record<string, boolean>>({})
 
 const { model: minModel, displayValue: minDisplayValue, adapter: minAdapter } = useDateAdapter({ minDate: 1736953200000 })
 const { model: maxModel, displayValue: maxDisplayValue, adapter: maxAdapter } = useDateAdapter({ maxDate: 1736953200000 })
@@ -509,9 +508,6 @@ const { model: maxModel, displayValue: maxDisplayValue, adapter: maxAdapter } = 
     label="Min Date"
     :adapter="minAdapter"
     :display-value="minDisplayValue"
-    :is-open="datePickerStates['minDate']"
-    @open="() => datePickerStates['minDate'] = true"
-    @close="() => datePickerStates['minDate'] = false"
   />
 
   <vk-datepicker
@@ -519,17 +515,12 @@ const { model: maxModel, displayValue: maxDisplayValue, adapter: maxAdapter } = 
     label="Max Date"
     :adapter="maxAdapter"
     :display-value="maxDisplayValue"
-    :is-open="datePickerStates['maxDate']"
-    @open="() => datePickerStates['maxDate'] = true"
-    @close="() => datePickerStates['maxDate'] = false"
   />
 </template>
 `
 
 const disabledSnippet = `<script setup lang="ts">
 import { useDateAdapter } from '#valkoui'
-
-const isOpen = ref(false)
 
 const { model: disabledModel, displayValue: disabledDisplayValue, adapter: disabledAdapter } = useDateAdapter({ disabledDates: [
   1705320000000,
@@ -548,9 +539,6 @@ const { model: disabledModel, displayValue: disabledDisplayValue, adapter: disab
     label="Disabled Dates"
     :adapter="disabledAdapter"
     :display-value="disabledDisplayValue"
-    :is-open="isOpen"
-    @open="() => isOpen = true"
-    @close="() => isOpen = false"
   />
 </template>
 `
@@ -684,9 +672,6 @@ const styles = {
           :adapter="adapter"
           :color="color.value"
           :display-value="displayValue"
-          :is-open="datePickerStates[color.value] ?? false"
-          @open="() => datePickerStates[color.value] = true"
-          @close="() => datePickerStates[color.value] = false"
         />
 
         <template #code>
@@ -707,9 +692,6 @@ const styles = {
           :adapter="adapter"
           :variant="variant.value"
           :display-value="displayValue"
-          :is-open="datePickerStates[variant.value] ?? false"
-          @open="() => datePickerStates[variant.value] = true"
-          @close="() => datePickerStates[variant.value] = false"
         />
 
         <template #code>
@@ -730,9 +712,6 @@ const styles = {
           :adapter="adapter"
           :shape="shape.value"
           :display-value="displayValue"
-          :is-open="datePickerStates[shape.value] ?? false"
-          @open="() => datePickerStates[shape.value] = true"
-          @close="() => datePickerStates[shape.value] = false"
         />
 
         <template #code>
@@ -753,9 +732,6 @@ const styles = {
           :adapter="adapter"
           :size="size.value"
           :display-value="displayValue"
-          :is-open="datePickerStates[size.value] ?? false"
-          @open="() => datePickerStates[size.value] = true"
-          @close="() => datePickerStates[size.value] = false"
         />
 
         <template #code>
@@ -769,9 +745,6 @@ const styles = {
           label="Min Date"
           :adapter="minAdapter"
           :display-value="minDisplayValue"
-          :is-open="datePickerStates['minDate'] ?? false"
-          @open="() => datePickerStates['minDate'] = true"
-          @close="() => datePickerStates['minDate'] = false"
         />
 
         <vk-datepicker
@@ -779,9 +752,6 @@ const styles = {
           label="Max Date"
           :adapter="maxAdapter"
           :display-value="maxDisplayValue"
-          :is-open="datePickerStates['maxDate'] ?? false"
-          @open="() => datePickerStates['maxDate'] = true"
-          @close="() => datePickerStates['maxDate'] = false"
         />
 
         <template #code>
@@ -796,9 +766,6 @@ const styles = {
           :adapter="adapter"
           :display-value="displayValue"
           disable-weekends
-          :is-open="datePickerStates['disable-weekends'] ?? false"
-          @open="() => datePickerStates['disable-weekends'] = true"
-          @close="() => datePickerStates['disable-weekends'] = false"
         />
 
         <template #code>
@@ -815,9 +782,6 @@ const styles = {
           label="Disabled Dates"
           :adapter="disabledAdapter"
           :display-value="disabledDisplayValue"
-          :is-open="datePickerStates['disabled'] ?? false"
-          @open="() => datePickerStates['disabled'] = true"
-          @close="() => datePickerStates['disabled'] = false"
         />
 
         <div class="flex flex-col">

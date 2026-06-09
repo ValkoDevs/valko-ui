@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import type { DatepickerProps } from '#valkoui/types/Datepicker'
 import VkPopover from './Popover.vue'
 import VkInput from './Input.vue'
@@ -13,19 +14,38 @@ const props = withDefaults(defineProps<DatepickerProps>(), {
   size: 'md',
   shape: 'soft',
   format: 'YYYY-MM-DD',
-  isOpen: false
+  isOpen: undefined
 })
 
 const emit = defineEmits(['update:modelValue', 'open', 'close'])
+
+const internalOpen = ref(false)
+
+const open = computed({
+  get: () => props.isOpen ?? internalOpen.value,
+  set: (val: boolean) => {
+    if (props.isOpen === undefined) internalOpen.value = val
+  }
+})
+
+const handleOpen = () => {
+  open.value = true
+  emit('open')
+}
+
+const handleClose = () => {
+  open.value = false
+  emit('close')
+}
 </script>
 
 <template>
   <vk-popover
     class="vk-datepicker"
-    :is-open="isOpen"
+    :is-open="open"
     :shape="shape"
     :style-slots="{ panel: ['p-2'] }"
-    @close="emit('close')"
+    @close="handleClose"
   >
     <vk-input
       v-bind="props"
@@ -33,8 +53,8 @@ const emit = defineEmits(['update:modelValue', 'open', 'close'])
       :label="label"
       readonly
       cursor="pointer"
-      @focus="emit('open')"
-      @right-icon-click="emit('open')"
+      @focus="handleOpen"
+      @right-icon-click="handleOpen"
     >
       <template #right-icon>
         <vk-icon name="calendar" />
@@ -43,7 +63,7 @@ const emit = defineEmits(['update:modelValue', 'open', 'close'])
 
     <template #popover-content>
       <vk-calendar
-        v-if="isOpen"
+        v-if="open"
         v-bind="props"
         :adapter="adapter"
         :disabled-dates="disabledDates"
@@ -53,7 +73,7 @@ const emit = defineEmits(['update:modelValue', 'open', 'close'])
         :max-date="maxDate"
         :disable-weekends="disableWeekends"
         @update:model-value="(value) => emit('update:modelValue', value)"
-        @finalize-selection="emit('close')"
+        @finalize-selection="handleClose"
       />
     </template>
   </vk-popover>

@@ -23,9 +23,9 @@ const popoverProps: TableItem[] = [
     key: 'isOpenProp',
     prop: 'isOpen',
     required: false,
-    description: 'The state of the Popover.',
+    description: 'Controls whether the Popover is visible. When omitted, the component manages its own open/close state (uncontrolled mode). When provided, the consumer must manage the state via open/close events (controlled mode).',
     values: 'true, false',
-    default: 'false'
+    default: 'undefined'
   },
   {
     key: 'placementProp',
@@ -134,6 +134,13 @@ const styleSlotsInterface: TableItem[] = [
 ]
 
 const popoverEmits: TableItem[] = [
+  {
+    key: 'openEmit',
+    event: 'open',
+    description: 'Emitted when the trigger slot is clicked, indicating the popover should open.',
+    values: '',
+    type: '() => void'
+  },
   {
     key: 'closeEmit',
     event: 'close',

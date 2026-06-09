@@ -1,7 +1,7 @@
 import type { Ref } from 'vue'
 import type { ColorsWithSurface, Shapes, Variants, Sizes, AriaAttributes } from './common'
 import type { CalendarAdapter } from './Calendar'
-import type { TimeAdapterInterface } from './Time'
+import type { TimeAdapterInterface, MinuteStep } from './Time'
 import type { DateTimePickerSlots } from '../styles/DateTimePicker.styles'
 
 export interface DateTimeAdapterProps {
@@ -37,7 +37,7 @@ export interface DateTimePickerProps extends Shapes, Variants, ColorsWithSurface
   controls: DateTimeControls;
   modelValue: EpochTimeStamp;
   displayValue: string;
-  isOpen: boolean;
+  isOpen?: boolean;
   label?: string;
   format?: string;
   locale?: string;
@@ -50,6 +50,6 @@ export interface DateTimePickerProps extends Shapes, Variants, ColorsWithSurface
   minTime?: EpochTimeStamp;
   maxTime?: EpochTimeStamp;
   disabledTimes?: EpochTimeStamp[];
-  minuteStep?: 1 | 5 | 10 | 15 | 20 | 30;
+  minuteStep?: MinuteStep;
   styleSlots?: Partial<DateTimePickerSlots>;
 }
