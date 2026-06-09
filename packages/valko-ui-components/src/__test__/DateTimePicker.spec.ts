@@ -551,4 +551,155 @@ describe('DateTimePicker component', () => {
       expect(wrapper.emitted()).toHaveProperty('close')
     })
   })
+
+  describe('Uncontrolled mode', () => {
+    it('should render closed by default when isOpen is not passed', () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        }
+      })
+
+      expect(wrapper.find('.vk-datetimepicker').exists()).toBe(true)
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should open when the input is focused', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        },
+        attachTo: document.body
+      })
+
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+    })
+
+    it('should close when clicking outside', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        },
+        attachTo: document.body
+      })
+
+      // Open first
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+
+      // Click outside
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should close when OK is clicked after selecting date and time', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        },
+        attachTo: document.body
+      })
+
+      // Open first
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+
+      // Select a date to go to time step
+      const dayButton = wrapper.findAll('.vk-calendar__grid-button')[14]
+      await dayButton.trigger('click')
+      await nextTick()
+
+      // Click OK to confirm
+      const okButton = wrapper.find('.vk-time__ok-button')
+      await okButton.trigger('click')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should emit open and close events in uncontrolled mode', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        },
+        attachTo: document.body
+      })
+
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('open')
+
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('close')
+    })
+
+    it('should reset to date step when reopened in uncontrolled mode', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        },
+        attachTo: document.body
+      })
+
+      // Open
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      // Navigate to time step
+      const dayButton = wrapper.findAll('.vk-calendar__grid-button')[14]
+      await dayButton.trigger('click')
+      await nextTick()
+
+      expect(wrapper.find('.vk-datetimepicker__time-section').exists()).toBe(true)
+
+      // Close by clicking outside
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+
+      // Reopen
+      await input.trigger('focus')
+      await nextTick()
+
+      // Should be back to date step
+      expect(wrapper.find('.vk-datetimepicker__date-section').exists()).toBe(true)
+      expect(wrapper.find('.vk-datetimepicker__time-section').exists()).toBe(false)
+    })
+  })
 })

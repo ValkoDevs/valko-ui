@@ -31,6 +31,13 @@ const setOpen = (value: boolean) => {
   emit('update:isOpen', value)
 }
 
+const open = computed({
+  get: () => props.isOpen ?? internalOpen.value,
+  set: (val: boolean) => {
+    if (props.isOpen === undefined) internalOpen.value = val
+  }
+})
+
 const handleClickOutside = (event: MouseEvent) => {
   if (rootRef.value && event.composedPath().includes(rootRef.value)) return
 
@@ -88,6 +95,7 @@ onBeforeUnmount(() => {
     <div
       :class="s.slotContainer({ class: styleSlots?.slotContainer })"
       ref="slotRef"
+      @click="setOpen(true)"
     >
       <slot
         name="trigger"
@@ -105,7 +113,7 @@ onBeforeUnmount(() => {
       leave-to-class="opacity-0"
     >
       <div
-        v-if="isOpen"
+        v-if="open"
         ref="panelRef"
         role="dialog"
         :aria-modal="false"

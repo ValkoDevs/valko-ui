@@ -273,10 +273,10 @@ const dateTimePickerProps: TableItem[] = [
   {
     key: 'isOpenProp',
     prop: 'isOpen',
-    required: true,
-    description: 'Controls whether the DateTimePicker dropdown is visible.',
+    required: false,
+    description: 'Controls whether the DateTimePicker dropdown is visible. When omitted, the component manages its own open/close state (uncontrolled mode). When provided, the consumer must manage the state via open/close events (controlled mode).',
     values: 'true, false',
-    default: 'false'
+    default: 'undefined'
   },
   {
     key: 'labelProp',
@@ -512,15 +512,11 @@ const adapterResultProps: TableItem[] = [
 
 const { model, displayValue, adapter, controls } = useDateTimeAdapter(form)
 
-const dateTimePickerStates = reactive<Record<string, boolean>>({})
-
 const generateSnippet = snippetGeneratorFactory('vk-date-time-picker')
 
 const scriptCode = `
 <script setup lang="ts">
 import { useDateTimeAdapter } from '#valkoui'
-
-const dateTimePickerStates = reactive<Record<string, boolean>>({})
 
 const { model, displayValue, adapter, controls } = useDateTimeAdapter({ format: 'YYYY-MM-DD HH:mm' })
 <\u002Fscript>
@@ -530,9 +526,6 @@ const extraProps = `v-model="model"
 :display-value="displayValue"
 :adapter="adapter"
 :controls="controls"
-:is-open="dateTimePickerStates['dateTimePickerId']"
-@open="() => dateTimePickerStates['dateTimePickerId'] = true"
-@close="() => dateTimePickerStates['dateTimePickerId'] = false"
 `
 
 const styles = {
@@ -689,9 +682,6 @@ const styles = {
           :controls="controls"
           :color="color.value"
           :display-value="displayValue"
-          :is-open="dateTimePickerStates[color.value] ?? false"
-          @open="() => dateTimePickerStates[color.value] = true"
-          @close="() => dateTimePickerStates[color.value] = false"
         />
 
         <template #code>
@@ -713,9 +703,6 @@ const styles = {
           :controls="controls"
           :variant="variant.value"
           :display-value="displayValue"
-          :is-open="dateTimePickerStates[variant.value] ?? false"
-          @open="() => dateTimePickerStates[variant.value] = true"
-          @close="() => dateTimePickerStates[variant.value] = false"
         />
 
         <template #code>
@@ -737,9 +724,6 @@ const styles = {
           :controls="controls"
           :shape="shape.value"
           :display-value="displayValue"
-          :is-open="dateTimePickerStates[shape.value] ?? false"
-          @open="() => dateTimePickerStates[shape.value] = true"
-          @close="() => dateTimePickerStates[shape.value] = false"
         />
 
         <template #code>
@@ -761,9 +745,6 @@ const styles = {
           :controls="controls"
           :size="size.value"
           :display-value="displayValue"
-          :is-open="dateTimePickerStates[size.value] ?? false"
-          @open="() => dateTimePickerStates[size.value] = true"
-          @close="() => dateTimePickerStates[size.value] = false"
         />
 
         <template #code>

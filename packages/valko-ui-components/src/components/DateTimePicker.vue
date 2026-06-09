@@ -19,12 +19,31 @@ const props = withDefaults(defineProps<DateTimePickerProps>(), {
   format: 'YYYY-MM-DD HH:mm',
   okButtonLabel: 'OK',
   backButtonLabel: 'Back',
-  isOpen: false
+  isOpen: undefined
 })
 
 const emit = defineEmits(['update:modelValue', 'open', 'close'])
 
 const s = computed(() => styles(props))
+
+const internalOpen = ref(false)
+
+const open = computed({
+  get: () => props.isOpen ?? internalOpen.value,
+  set: (val: boolean) => {
+    if (props.isOpen === undefined) internalOpen.value = val
+  }
+})
+
+const handleOpen = () => {
+  open.value = true
+  emit('open')
+}
+
+const handleClose = () => {
+  open.value = false
+  emit('close')
+}
 
 const step = ref<'date' | 'time'>('date')
 
@@ -39,10 +58,10 @@ const onBackToDate = () => {
 const onConfirm = () => {
   const value = props.controls.commitSelection()
   emit('update:modelValue', value)
-  emit('close')
+  handleClose()
 }
 
-watch(() => props.isOpen, (isOpen) => {
+watch(open, (isOpen) => {
   if (isOpen) {
     step.value = 'date'
     props.controls.resetSelection()
@@ -53,10 +72,10 @@ watch(() => props.isOpen, (isOpen) => {
 <template>
   <vk-popover
     class="vk-datetimepicker"
-    :is-open="isOpen"
+    :is-open="open"
     :shape="shape"
     :style-slots="{ panel: ['p-2'] }"
-    @close="emit('close')"
+    @close="handleClose"
   >
     <vk-input
       v-bind="props"
@@ -65,8 +84,8 @@ watch(() => props.isOpen, (isOpen) => {
       :label="label"
       readonly
       cursor="pointer"
-      @focus="emit('open')"
-      @right-icon-click="emit('open')"
+      @focus="handleOpen"
+      @right-icon-click="handleOpen"
     >
       <template #right-icon>
         <vk-icon name="calendar-clock" />
@@ -74,7 +93,7 @@ watch(() => props.isOpen, (isOpen) => {
     </vk-input>
 
     <template #popover-content>
-      <div v-if="isOpen">
+      <div v-if="open" @click.stop>
         <div
           v-if="step === 'date'"
           :class="s.dateSection({ class: styleSlots?.dateSection })"
