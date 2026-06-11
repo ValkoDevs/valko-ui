@@ -93,60 +93,51 @@ watch(open, (isOpen) => {
     </vk-input>
 
     <template #popover-content>
-      <div v-if="open" @click.stop>
-        <div
-          v-if="step === 'date'"
-          :class="s.dateSection({ class: styleSlots?.dateSection })"
-        >
-          <vk-calendar
-            v-bind="props"
-            :style-slots="undefined"
-            :adapter="adapter.date"
-            :disabled-dates="disabledDates"
-            :locale="locale"
-            :format="format"
-            :min-date="minDate"
-            :max-date="maxDate"
-            :disable-weekends="disableWeekends"
-            @finalize-selection="onDateFinalized"
-          />
-        </div>
+      <vk-calendar
+        v-if="step === 'date'"
+        v-bind="props"
+        :style-slots="undefined"
+        :class="s.dateSection({ class: styleSlots?.dateSection })"
+        :adapter="adapter.date"
+        :disabled-dates="disabledDates"
+        :locale="locale"
+        :format="format"
+        :min-date="minDate"
+        :max-date="maxDate"
+        :disable-weekends="disableWeekends"
+        @finalize-selection="onDateFinalized"
+      />
 
-        <div
-          v-if="step === 'time'"
+      <template v-if="step === 'time'">
+        <vk-button
+          :size="size"
+          :shape="shape"
+          :variant="variant"
+          color="surface"
+          :class="s.backButton({ class: styleSlots?.backButton })"
+          @click="onBackToDate"
+        >
+          <vk-icon name="arrow-left" />
+          {{ backButtonLabel }}
+        </vk-button>
+
+        <vk-time
           :class="s.timeSection({ class: styleSlots?.timeSection })"
-        >
-          <div :class="s.backAction({ class: styleSlots?.backAction })">
-            <vk-button
-              :size="size"
-              :shape="shape"
-              :variant="variant"
-              color="surface"
-              :class="s.backButton({ class: styleSlots?.backButton })"
-              @click="onBackToDate"
-            >
-              <vk-icon name="arrow-left" />
-              {{ backButtonLabel }}
-            </vk-button>
-          </div>
-
-          <vk-time
-            :adapter="adapter.time"
-            :color="color === 'surface' ? 'primary' : color"
-            :variant="variant"
-            :size="size"
-            :shape="shape"
-            :locale="locale"
-            :format="format"
-            :min-time="minTime"
-            :max-time="maxTime"
-            :disabled-times="disabledTimes"
-            :minute-step="minuteStep"
-            :ok-button-label="okButtonLabel"
-            @on-select="onConfirm"
-          />
-        </div>
-      </div>
+          :adapter="adapter.time"
+          :color="color === 'surface' ? 'primary' : color"
+          :variant="variant"
+          :size="size"
+          :shape="shape"
+          :locale="locale"
+          :format="format"
+          :min-time="minTime"
+          :max-time="maxTime"
+          :disabled-times="disabledTimes"
+          :minute-step="minuteStep"
+          :ok-button-label="okButtonLabel"
+          @on-select="onConfirm"
+        />
+      </template>
     </template>
   </vk-popover>
 </template>

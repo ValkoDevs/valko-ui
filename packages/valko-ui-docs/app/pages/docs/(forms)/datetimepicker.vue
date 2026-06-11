@@ -450,22 +450,6 @@ const styleSlotsInterface: TableItem[] = [
     default: ''
   },
   {
-    key: 'actions',
-    prop: 'actions',
-    required: false,
-    description: 'Container for action buttons.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'backAction',
-    prop: 'backAction',
-    required: false,
-    description: 'Container for the back button on the time selection step.',
-    values: 'string[]',
-    default: ''
-  },
-  {
     key: 'backButton',
     prop: 'backButton',
     required: false,

@@ -188,7 +188,7 @@ describe('Time component', () => {
           }
         })
 
-        const input = wrapper.find('.vk-timepicker__input')
+        const input = wrapper.find('.vk-input__input')
         input.trigger('focus')
         expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
@@ -204,7 +204,7 @@ describe('Time component', () => {
           }
         })
 
-        const input = wrapper.find('.vk-timepicker__input')
+        const input = wrapper.find('.vk-input__input')
         input.trigger('focus')
         expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-none')
       })

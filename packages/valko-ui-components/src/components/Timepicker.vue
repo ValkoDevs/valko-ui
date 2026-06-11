@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { TimepickerProps } from '#valkoui/types/Timepicker'
-import styles from '#valkoui/styles/Timepicker.styles.ts'
 import VkPopover from './Popover.vue'
 import VkInput from './Input.vue'
 import VkTime from './Time.vue'
@@ -20,8 +19,6 @@ const props = withDefaults(defineProps<TimepickerProps>(), {
 })
 
 const emit = defineEmits(['onSelect', 'open', 'close'])
-
-const s = computed(() => styles(props))
 
 const internalOpen = ref(false)
 
@@ -55,7 +52,6 @@ const handleClose = () => {
       v-bind="props"
       :model-value="displayValue"
       :label="label"
-      :class="s.input({ class: styleSlots?.input })"
       readonly
       @focus="handleOpen"
       @right-icon-click="handleOpen"

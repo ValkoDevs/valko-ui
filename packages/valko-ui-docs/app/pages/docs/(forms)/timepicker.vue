@@ -286,24 +286,6 @@ const timepickerProps: TableItem[] = [
     description: 'Indicates whether the timepicker is required.',
     values: 'true, false',
     default: ''
-  },
-  {
-    key: 'styleSlotsProp',
-    prop: 'styleSlots',
-    required: false,
-    description: 'Customizes style slots for the timepicker.',
-    values: 'TimeSlots',
-    default: ''
-  }
-]
-
-const styleSlotsInterface: TableItem[] = [
-  {
-    key: 'input',
-    prop: 'input',
-    description: 'Styles for the input field that triggers the timepicker.',
-    values: 'string[]',
-    default: ''
   }
 ]
 
@@ -746,12 +728,6 @@ const styles = {
       <vk-table
         :headers="propHeaders"
         :data="timepickerProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
       />
 
       <h3>Timepicker Emits</h3>
