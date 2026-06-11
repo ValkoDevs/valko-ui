@@ -4,10 +4,10 @@ import VkTimepicker from '#valkoui/components/Timepicker.vue'
 import type { TimeAdapterResult } from '#valkoui/types/Time'
 
 const { useTimeAdapter } = vi.hoisted(() => ({
-  useTimeAdapter: vi.fn(() => ([
-    ref(1728987010),
-    computed(() => '10:10:10'),
-    {
+  useTimeAdapter: vi.fn(() => ({
+    model: ref(1728987010),
+    displayValue: computed(() => '10:10:10'),
+    adapter: {
       formattedTime: computed(() => ({
         selected: {
           hours: 10,
@@ -28,16 +28,16 @@ const { useTimeAdapter } = vi.hoisted(() => ({
       isTimeDisabled: vi.fn(),
       period: ref('AM')
     }
-  ] as TimeAdapterResult))
+  } as TimeAdapterResult))
 }))
 
 vi.mock('#valkoui/composables/useTimeAdapter.ts', () => ({
   default: useTimeAdapter
 }))
 
-const [ model, parModel, adapter ] = useTimeAdapter()
+const { model, displayValue: displayValueRef, adapter } = useTimeAdapter()
 const modelValue = toValue(model)
-const parsedModel = toValue(parModel)
+const displayValue = toValue(displayValueRef)
 
 describe('Time component', () => {
   let wrapper: VueWrapper
@@ -49,7 +49,7 @@ describe('Time component', () => {
           props: {
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -72,7 +72,7 @@ describe('Time component', () => {
       })
 
       it('should be shape soft', () => {
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-lg')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
     })
 
@@ -83,7 +83,7 @@ describe('Time component', () => {
             color: 'primary',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -97,7 +97,7 @@ describe('Time component', () => {
             color: 'secondary',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -111,7 +111,7 @@ describe('Time component', () => {
             color: 'positive',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -125,7 +125,7 @@ describe('Time component', () => {
             color: 'accent',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -139,7 +139,7 @@ describe('Time component', () => {
             color: 'warning',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -153,7 +153,7 @@ describe('Time component', () => {
             color: 'negative',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -169,12 +169,12 @@ describe('Time component', () => {
             shape: 'rounded',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-2xl')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-2xl')
       })
 
       it('should be soft when props.shape is soft', () => {
@@ -183,14 +183,14 @@ describe('Time component', () => {
             shape: 'soft',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
 
-        const input = wrapper.find('.vk-timepicker__input')
+        const input = wrapper.find('.vk-input__input')
         input.trigger('focus')
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-lg')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
 
       it('should be square when props.shape is square', () => {
@@ -199,14 +199,14 @@ describe('Time component', () => {
             shape: 'square',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
 
-        const input = wrapper.find('.vk-timepicker__input')
+        const input = wrapper.find('.vk-input__input')
         input.trigger('focus')
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-none')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-none')
       })
     })
 
@@ -217,7 +217,7 @@ describe('Time component', () => {
             size: 'xs',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -231,7 +231,7 @@ describe('Time component', () => {
             size: 'sm',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -245,7 +245,7 @@ describe('Time component', () => {
             size: 'md',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -259,7 +259,7 @@ describe('Time component', () => {
             size: 'lg',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -275,7 +275,7 @@ describe('Time component', () => {
             variant: 'filled',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -289,7 +289,7 @@ describe('Time component', () => {
             variant: 'outlined',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -303,7 +303,7 @@ describe('Time component', () => {
             variant: 'ghost',
             modelValue,
             isOpen: true,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -319,7 +319,7 @@ describe('Time component', () => {
         props: {
           modelValue,
           isOpen: true,
-          parsedModel,
+          displayValue,
           adapter
         }
       })
@@ -335,7 +335,7 @@ describe('Time component', () => {
         props: {
           modelValue,
           isOpen: true,
-          parsedModel,
+          displayValue,
           adapter
         }
       })
@@ -351,7 +351,7 @@ describe('Time component', () => {
         props: {
           modelValue,
           isOpen: true,
-          parsedModel,
+          displayValue,
           adapter
         }
       })
@@ -367,7 +367,7 @@ describe('Time component', () => {
         props: {
           isOpen: true,
           modelValue,
-          parsedModel,
+          displayValue,
           adapter
         }
       })
@@ -375,7 +375,110 @@ describe('Time component', () => {
       const input = wrapper.findAll('.vk-input__input')[0]
       await input.trigger('focus')
 
-      document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('close')
+    })
+  })
+
+  describe('Uncontrolled mode', () => {
+    it('should render closed by default when isOpen is not passed', () => {
+      wrapper = mount(VkTimepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        }
+      })
+
+      expect(wrapper.find('.vk-timepicker').exists()).toBe(true)
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should open when the input is focused', async () => {
+      wrapper = mount(VkTimepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        },
+        attachTo: document.body
+      })
+
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+    })
+
+    it('should close when clicking outside', async () => {
+      wrapper = mount(VkTimepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        },
+        attachTo: document.body
+      })
+
+      // Open first
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+
+      // Click outside
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should close when OK button is clicked', async () => {
+      wrapper = mount(VkTimepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        },
+        attachTo: document.body
+      })
+
+      // Open first
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+
+      // Click OK
+      const button = wrapper.find('.vk-time__ok-button')
+      await button.trigger('click')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should emit open and close events in uncontrolled mode', async () => {
+      wrapper = mount(VkTimepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        },
+        attachTo: document.body
+      })
+
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('open')
+
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
       await nextTick()
 
       expect(wrapper.emitted()).toHaveProperty('close')

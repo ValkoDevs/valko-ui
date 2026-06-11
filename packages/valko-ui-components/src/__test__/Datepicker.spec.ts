@@ -4,10 +4,10 @@ import VkDatepicker from '#valkoui/components/Datepicker.vue'
 import type { AdapterResult } from '#valkoui/types/Calendar'
 
 const { useDateAdapter } = vi.hoisted(() => ({
-  useDateAdapter: vi.fn(() => ([
-    ref(1729017518),
-    computed(() => '2024-10-15'),
-    {
+  useDateAdapter: vi.fn(() => ({
+    model: ref(1729017518),
+    displayValue: computed(() => '2024-10-15'),
+    adapter: {
       formattedDates: computed(() => ({
         selected: {
           day: 15,
@@ -41,16 +41,16 @@ const { useDateAdapter } = vi.hoisted(() => ({
       getWeekdays: () => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       getMonths: () => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     }
-  ] as AdapterResult))
+  } as AdapterResult))
 }))
 
 vi.mock('#valkoui/composables/useDateAdapter.ts', () => ({
   default: useDateAdapter
 }))
 
-const [ model, parsedModelValue, adapter ] = useDateAdapter()
+const { model, displayValue: displayValueRef, adapter } = useDateAdapter()
 const modelValue = toValue(model)
-const parsedModel = toValue(parsedModelValue)
+const displayValue = toValue(displayValueRef)
 describe('Datepicker component', () => {
   let wrapper: VueWrapper
 
@@ -61,7 +61,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             modelValue,
-            parsedModel,
+            displayValue,
             adapter
           }
         })
@@ -93,7 +93,7 @@ describe('Datepicker component', () => {
         const input = wrapper.findAll('.vk-input__input')[0]
         await input.trigger('focus')
 
-        expect(wrapper.find('.vk-datepicker__content').classes()).toContain('rounded-lg')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
     })
 
@@ -103,7 +103,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             color: 'primary',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -119,7 +119,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             color: 'secondary',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -135,7 +135,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             color: 'positive',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -151,7 +151,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             color: 'accent',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -167,7 +167,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             color: 'warning',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -183,7 +183,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             color: 'negative',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -199,7 +199,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             color: 'surface',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -217,7 +217,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             shape: 'rounded',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -226,7 +226,7 @@ describe('Datepicker component', () => {
         const input = wrapper.findAll('.vk-input__input')[0]
         await input.trigger('focus')
 
-        expect(wrapper.find('.vk-datepicker__content').classes()).toContain('rounded-2xl')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-2xl')
       })
 
       it('should be soft when props.shape is soft', async () => {
@@ -234,7 +234,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             shape: 'soft',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -243,7 +243,7 @@ describe('Datepicker component', () => {
         const input = wrapper.findAll('.vk-input__input')[0]
         await input.trigger('focus')
 
-        expect(wrapper.find('.vk-datepicker__content').classes()).toContain('rounded-lg')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
 
       it('should be square when props.shape is square', async () => {
@@ -251,7 +251,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             shape: 'square',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -260,7 +260,7 @@ describe('Datepicker component', () => {
         const input = wrapper.findAll('.vk-input__input')[0]
         await input.trigger('focus')
 
-        expect(wrapper.find('.vk-datepicker__content').classes()).toContain('rounded-none')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-none')
       })
     })
 
@@ -270,7 +270,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             size: 'xs',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -286,7 +286,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             size: 'sm',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -302,7 +302,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             size: 'md',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -318,7 +318,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             size: 'lg',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -336,7 +336,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             variant: 'filled',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -352,7 +352,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             variant: 'outlined',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -368,7 +368,7 @@ describe('Datepicker component', () => {
           props: {
             isOpen: true,
             variant: 'ghost',
-            parsedModel,
+            displayValue,
             modelValue,
             adapter
           }
@@ -387,7 +387,7 @@ describe('Datepicker component', () => {
         props: {
           isOpen: true,
           modelValue,
-          parsedModel,
+          displayValue,
           adapter
         }
       })
@@ -406,7 +406,7 @@ describe('Datepicker component', () => {
         props: {
           isOpen: true,
           modelValue,
-          parsedModel,
+          displayValue,
           adapter
         }
       })
@@ -422,7 +422,7 @@ describe('Datepicker component', () => {
         props: {
           isOpen: true,
           modelValue,
-          parsedModel,
+          displayValue,
           adapter
         }
       })
@@ -430,7 +430,110 @@ describe('Datepicker component', () => {
       const input = wrapper.findAll('.vk-input__input')[0]
       await input.trigger('focus')
 
-      document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('close')
+    })
+  })
+
+  describe('Uncontrolled mode', () => {
+    it('should render closed by default when isOpen is not passed', () => {
+      wrapper = mount(VkDatepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        }
+      })
+
+      expect(wrapper.find('.vk-datepicker').exists()).toBe(true)
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should open when the input is focused', async () => {
+      wrapper = mount(VkDatepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        },
+        attachTo: document.body
+      })
+
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+    })
+
+    it('should close when clicking outside', async () => {
+      wrapper = mount(VkDatepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        },
+        attachTo: document.body
+      })
+
+      // Open first
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+
+      // Click outside
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should close when a date is finalized', async () => {
+      wrapper = mount(VkDatepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        },
+        attachTo: document.body
+      })
+
+      // Open first
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+
+      // Click a day button to finalize selection
+      const button = wrapper.findAll('.vk-calendar__grid-button')[14]
+      await button.trigger('click')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should emit open and close events in uncontrolled mode', async () => {
+      wrapper = mount(VkDatepicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter
+        },
+        attachTo: document.body
+      })
+
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('open')
+
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
       await nextTick()
 
       expect(wrapper.emitted()).toHaveProperty('close')

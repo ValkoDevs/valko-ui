@@ -179,6 +179,14 @@ const datepickerProps: TableItem[] = [
     default: ''
   },
   {
+    key: 'isOpenProp',
+    prop: 'isOpen',
+    required: false,
+    description: 'Controls whether the Datepicker dropdown is visible. When omitted, the component manages its own open/close state (uncontrolled mode). When provided, the consumer must manage the state via open/close events (controlled mode).',
+    values: 'true, false',
+    default: 'undefined'
+  },
+  {
     key: 'localeProp',
     prop: 'locale',
     required: false,
@@ -265,33 +273,6 @@ const datepickerProps: TableItem[] = [
     description: 'Indicates that user input is required on the datepicker.',
     values: 'true, false',
     default: 'false'
-  },
-  {
-    key: 'styleSlotsProps',
-    prop: 'styleSlots',
-    required: false,
-    description: 'Custom styles for different parts of the Datepicker component.',
-    values: 'DatepickerSlots',
-    default: ''
-  }
-]
-
-const styleSlotsInterface: TableItem[] = [
-  {
-    key: 'container',
-    prop: 'container',
-    required: false,
-    description: 'Root container for the datepicker.',
-    values: 'string[]',
-    default: ''
-  },
-  {
-    key: 'content',
-    prop: 'content',
-    required: false,
-    description: 'Dropdown/calendar content container.',
-    values: 'string[]',
-    default: ''
   }
 ]
 
@@ -383,8 +364,8 @@ const adapterResultProps: TableItem[] = [
     key: 'adapterResult',
     prop: 'AdapterResult',
     required: true,
-    description: 'The return type result of the Adapter containing the model, parsed model, and adapter methods.',
-    values: '[Ref<EpochTimeStamp>, ComputedRef<string>, CalendarAdapter]',
+    description: 'The return type result of the Adapter containing the model, display value, and adapter methods.',
+    values: '{ model: Ref<EpochTimeStamp>, displayValue: ComputedRef<string>, adapter: CalendarAdapter }',
     default: ''
   }
 ]
@@ -486,9 +467,9 @@ const dayOfWeekProp: TableItem[] = [
   }
 ]
 
-const [ minModel, minParsedModel, minAdapter ] = useDateAdapter({ minDate: 1736953200000 })
-const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 1736953200000 })
-const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({ disabledDates: [
+const { model: minModel, displayValue: minDisplayValue, adapter: minAdapter } = useDateAdapter({ minDate: 1736953200000 })
+const { model: maxModel, displayValue: maxDisplayValue, adapter: maxAdapter } = useDateAdapter({ maxDate: 1736953200000 })
+const { model: disabledModel, displayValue: disabledDisplayValue, adapter: disabledAdapter } = useDateAdapter({ disabledDates: [
   1705320000000,
   1710936000000,
   1717545600000,
@@ -497,9 +478,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
   1900249200000,
   2215004400000
 ] })
-const [ model, parsedModel, adapter ] = useDateAdapter(form)
-
-const datePickerStates = reactive<Record<string, boolean>>({})
+const { model, displayValue, adapter } = useDateAdapter(form)
 
 const generateSnippet = snippetGeneratorFactory('vk-datepicker')
 
@@ -507,27 +486,20 @@ const scriptCode = `
 <script setup lang="ts">
 import { useDateAdapter } from '#valkoui'
 
-const datePickerStates = reactive<Record<string, boolean>>({})
-
-const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM-DD' })
+const { model, displayValue, adapter } = useDateAdapter({ format: 'YYYY-MM-DD' })
 <\u002Fscript>
 `
 
 const extraProps = `v-model="model"
-:parsed-model="parsedModel"
+:display-value="displayValue"
 :adapter="adapter"
-:is-open="datePickerStates['datepickerId']"
-@open="() => datePickerStates['datepickerId'] = true"
-@close="() => datePickerStates['datepickerId'] = false"
 `
 
 const minmaxSnippet = `<script setup lang="ts">
 import { useDateAdapter } from '#valkoui'
 
-const datePickerStates = reactive<Record<string, boolean>>({})
-
-const [ minModel, minParsedModel, minAdapter ] = useDateAdapter({ minDate: 1736953200000 })
-const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 1736953200000 })
+const { model: minModel, displayValue: minDisplayValue, adapter: minAdapter } = useDateAdapter({ minDate: 1736953200000 })
+const { model: maxModel, displayValue: maxDisplayValue, adapter: maxAdapter } = useDateAdapter({ maxDate: 1736953200000 })
 <\u002Fscript>
 
 <template>
@@ -535,20 +507,14 @@ const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 173695
     v-model="minModel"
     label="Min Date"
     :adapter="minAdapter"
-    :parsed-model="minParsedModel"
-    :is-open="datePickerStates['minDate']"
-    @open="() => datePickerStates['minDate'] = true"
-    @close="() => datePickerStates['minDate'] = false"
+    :display-value="minDisplayValue"
   />
 
   <vk-datepicker
     v-model="maxModel"
     label="Max Date"
     :adapter="maxAdapter"
-    :parsed-model="maxParsedModel"
-    :is-open="datePickerStates['maxDate']"
-    @open="() => datePickerStates['maxDate'] = true"
-    @close="() => datePickerStates['maxDate'] = false"
+    :display-value="maxDisplayValue"
   />
 </template>
 `
@@ -556,9 +522,7 @@ const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 173695
 const disabledSnippet = `<script setup lang="ts">
 import { useDateAdapter } from '#valkoui'
 
-const isOpen = ref(false)
-
-const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({ disabledDates: [
+const { model: disabledModel, displayValue: disabledDisplayValue, adapter: disabledAdapter } = useDateAdapter({ disabledDates: [
   1705320000000,
   1710936000000,
   1717545600000,
@@ -574,10 +538,7 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
     v-model="disabledModel"
     label="Disabled Dates"
     :adapter="disabledAdapter"
-    :parsed-model="disabledParsedModel"
-    :is-open="isOpen"
-    @open="() => isOpen = true"
-    @close="() => isOpen = false"
+    :display-value="disabledDisplayValue"
   />
 </template>
 `
@@ -626,7 +587,7 @@ const styles = {
       <vk-datepicker
         v-model="model"
         :label="form.label"
-        :parsed-model="parsedModel"
+        :display-value="displayValue"
         :adapter="adapter"
         :color="form.color"
         :variant="form.variant"
@@ -710,10 +671,7 @@ const styles = {
           class="mt-2"
           :adapter="adapter"
           :color="color.value"
-          :parsed-model="parsedModel"
-          :is-open="datePickerStates[color.value] ?? false"
-          @open="() => datePickerStates[color.value] = true"
-          @close="() => datePickerStates[color.value] = false"
+          :display-value="displayValue"
         />
 
         <template #code>
@@ -733,10 +691,7 @@ const styles = {
           class="mt-2"
           :adapter="adapter"
           :variant="variant.value"
-          :parsed-model="parsedModel"
-          :is-open="datePickerStates[variant.value] ?? false"
-          @open="() => datePickerStates[variant.value] = true"
-          @close="() => datePickerStates[variant.value] = false"
+          :display-value="displayValue"
         />
 
         <template #code>
@@ -756,10 +711,7 @@ const styles = {
           class="mt-2"
           :adapter="adapter"
           :shape="shape.value"
-          :parsed-model="parsedModel"
-          :is-open="datePickerStates[shape.value] ?? false"
-          @open="() => datePickerStates[shape.value] = true"
-          @close="() => datePickerStates[shape.value] = false"
+          :display-value="displayValue"
         />
 
         <template #code>
@@ -779,10 +731,7 @@ const styles = {
           class="mt-2"
           :adapter="adapter"
           :size="size.value"
-          :parsed-model="parsedModel"
-          :is-open="datePickerStates[size.value] ?? false"
-          @open="() => datePickerStates[size.value] = true"
-          @close="() => datePickerStates[size.value] = false"
+          :display-value="displayValue"
         />
 
         <template #code>
@@ -795,20 +744,14 @@ const styles = {
           v-model="minModel"
           label="Min Date"
           :adapter="minAdapter"
-          :parsed-model="minParsedModel"
-          :is-open="datePickerStates['minDate'] ?? false"
-          @open="() => datePickerStates['minDate'] = true"
-          @close="() => datePickerStates['minDate'] = false"
+          :display-value="minDisplayValue"
         />
 
         <vk-datepicker
           v-model="maxModel"
           label="Max Date"
           :adapter="maxAdapter"
-          :parsed-model="maxParsedModel"
-          :is-open="datePickerStates['maxDate'] ?? false"
-          @open="() => datePickerStates['maxDate'] = true"
-          @close="() => datePickerStates['maxDate'] = false"
+          :display-value="maxDisplayValue"
         />
 
         <template #code>
@@ -821,11 +764,8 @@ const styles = {
           v-model="model"
           label="Disable Weekends"
           :adapter="adapter"
-          :parsed-model="parsedModel"
+          :display-value="displayValue"
           disable-weekends
-          :is-open="datePickerStates['disable-weekends'] ?? false"
-          @open="() => datePickerStates['disable-weekends'] = true"
-          @close="() => datePickerStates['disable-weekends'] = false"
         />
 
         <template #code>
@@ -841,10 +781,7 @@ const styles = {
           v-model="disabledModel"
           label="Disabled Dates"
           :adapter="disabledAdapter"
-          :parsed-model="disabledParsedModel"
-          :is-open="datePickerStates['disabled'] ?? false"
-          @open="() => datePickerStates['disabled'] = true"
-          @close="() => datePickerStates['disabled'] = false"
+          :display-value="disabledDisplayValue"
         />
 
         <div class="flex flex-col">
@@ -871,12 +808,6 @@ const styles = {
       <vk-table
         :headers="propHeaders"
         :data="datepickerProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
       />
 
       <h3>Datepicker Emits</h3>

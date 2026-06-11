@@ -6,14 +6,13 @@ import styles from '#valkoui/styles/Popover.styles.ts'
 defineOptions({ name: 'VkPopover' })
 
 const props = withDefaults(defineProps<PopoverProps>(), {
-  isOpen: false,
   shape: 'soft',
   text: '',
   placement: 'auto',
   elevated: false
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['open', 'close'])
 
 const s = computed(() => styles(props))
 
@@ -21,10 +20,29 @@ const rootRef = ref<HTMLElement | null>(null)
 const slotRef = ref<HTMLElement | null>(null)
 const panelRef = ref<HTMLElement | null>(null)
 
+const internalOpen = ref(false)
+
+const open = computed({
+  get: () => props.isOpen ?? internalOpen.value,
+  set: (val: boolean) => {
+    if (props.isOpen === undefined) internalOpen.value = val
+  }
+})
+
+const handleOpen = () => {
+  open.value = true
+  emit('open')
+}
+
+const handleClose = () => {
+  open.value = false
+  emit('close')
+}
+
 const handleClickOutside = (event: MouseEvent) => {
   const target = event.target as HTMLElement
   if (rootRef.value && !rootRef.value.contains(target) && panelRef.value && !panelRef.value.contains(target)) {
-    emit('close')
+    handleClose()
   }
 }
 
@@ -78,6 +96,7 @@ onBeforeUnmount(() => {
     <div
       :class="s.slotContainer({ class: styleSlots?.slotContainer })"
       ref="slotRef"
+      @click="handleOpen"
     >
       <slot name="default" />
     </div>
@@ -91,7 +110,7 @@ onBeforeUnmount(() => {
       leave-to-class="opacity-0"
     >
       <div
-        v-if="isOpen"
+        v-if="open"
         ref="panelRef"
         role="dialog"
         :aria-modal="false"

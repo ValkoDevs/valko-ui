@@ -6,11 +6,11 @@ export type DisplayView = 'days' | 'months' | 'years'
 export type SelectionType = 'full' | 'month-only' | 'year-only' | 'day-month' | 'month-year'
 export type DayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6
 export type AdapterProps = Pick<CalendarProps, 'minDate' | 'maxDate' | 'format' | 'disabledDates' | 'locale'>
-export type AdapterResult = [
-  Ref<EpochTimeStamp>,
-  ComputedRef<string>,
-  CalendarAdapter
-]
+export interface AdapterResult {
+  model: Ref<EpochTimeStamp>;
+  displayValue: ComputedRef<string>;
+  adapter: CalendarAdapter;
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface FormattedDate<T = any> {
@@ -81,4 +81,5 @@ export interface CalendarAdapter<T = any> {
   onSelectYear: (year: number) => number;
   getWeekdays: () => string[];
   getMonths: () => string[];
+  resetTempState?: () => void;
 }

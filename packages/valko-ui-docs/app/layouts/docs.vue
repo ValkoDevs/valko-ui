@@ -13,6 +13,7 @@ const baseMenuItems: MenuItem[] = [
   { key: '/docs/button', group: 'Forms', text: 'Button' },
   { key: '/docs/checkbox', group: 'Forms', text: 'Checkbox' },
   { key: '/docs/datepicker', group: 'Forms', text: 'Datepicker' },
+  { key: '/docs/datetimepicker', group: 'Forms', text: 'DateTimePicker' },
   { key: '/docs/input', group: 'Forms',  text: 'Input' },
   { key: '/docs/radio', group: 'Forms', text: 'Radio' },
   { key: '/docs/range', group: 'Forms', text: 'Range' },

@@ -42,6 +42,7 @@ export default defineConfig({
         { src: 'src/composables/*.ts', dest: 'dist/composables', ignore: ['**/*.map'] },
         { src: 'src/styles/*.ts', dest: 'dist/styles', ignore: ['**/*.map'] },
         { src: 'src/types/*.ts', dest: 'dist/types', ignore: ['**/*.map'] },
+        { src: 'src/utils/*.ts', dest: 'dist/utils', ignore: ['**/*.map'] },
         { src: 'src/img/*', dest: 'dist/img', ignore: ['**/*.map'] }
       ]
     })
