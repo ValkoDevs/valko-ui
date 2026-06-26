@@ -20,7 +20,8 @@ const skeletonProps: TableItem[] = [
     required: false,
     description: 'The shape of the Skeleton.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'styleSlotsProp',
@@ -28,7 +29,8 @@ const skeletonProps: TableItem[] = [
     required: false,
     description: 'Accepts an object of Tailwind class arrays to override styles on each slot.',
     values: 'SkeletonSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
@@ -39,7 +41,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Root container for the Skeleton. Accepts Tailwind classes to control size, colors, animation, and any other visual aspect.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
@@ -151,6 +154,15 @@ const exampleSnippets = {
       <vk-skeleton shape="soft" :style-slots="{ container: ['w-1/2', 'h-3'] }" />
       <vk-skeleton shape="soft" :style-slots="{ container: ['w-2/3', 'h-8'] }" />
       <vk-skeleton shape="soft" :style-slots="{ container: ['w-3/4', 'h-3'] }" />
+    </div>
+  </div>
+</template>`,
+  statCardColors: `<template>
+  <div class="grid grid-cols-2 gap-4 w-96">
+    <div v-for="i in 4" :key="i" class="flex flex-col gap-3 p-4 rounded-lg border border-surface-container-highest">
+      <vk-skeleton shape="soft" :style-slots="{ container: ['w-1/2', 'h-3', 'from-primary/[.2]', 'to-secondary/[.7]'] }" />
+      <vk-skeleton shape="soft" :style-slots="{ container: ['w-2/3', 'h-8', 'from-primary/[.2]', 'to-secondary/[.7]'] }" />
+      <vk-skeleton shape="soft" :style-slots="{ container: ['w-3/4', 'h-3', 'from-primary/[.2]', 'to-secondary/[.7]'] }" />
     </div>
   </div>
 </template>`
@@ -520,19 +532,48 @@ const exampleSnippets = {
           />
         </template>
       </example-section>
+
+      <example-section
+        title="Stat Card (Can change colors via style slots)"
+        :style-slots="{ slotContainer: ['flex', 'justify-center', 'md:justify-start'] }"
+      >
+        <div class="flex flex-col w-full gap-4 md:w-xl md:grid md:grid-cols-2">
+          <div
+            v-for="i in 4"
+            :key="i"
+            class="flex flex-col gap-3 p-4 rounded-lg border border-surface-container-highest"
+          >
+            <vk-skeleton
+              shape="soft"
+              :style-slots="{ container: ['w-1/2', 'h-3', 'from-primary/[.2]', 'to-secondary/[.7]'] }"
+            />
+            <vk-skeleton
+              shape="soft"
+              :style-slots="{ container: ['w-2/3', 'h-8', 'from-primary/[.2]', 'to-secondary/[.7]'] }"
+            />
+            <vk-skeleton
+              shape="soft"
+              :style-slots="{ container: ['w-3/4', 'h-3', 'from-primary/[.2]', 'to-secondary/[.7]'] }"
+            />
+          </div>
+        </div>
+
+        <template #code>
+          <code-block
+            language="vue"
+            :code="exampleSnippets.statCardColors"
+          />
+        </template>
+      </example-section>
     </template>
 
     <template #api>
-      <h3>Skeleton Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="skeletonProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
+      <api-table
+        name="Skeleton"
+        :tables="[
+          { title: 'Props', headers: 'props', data: skeletonProps },
+          { title: 'Style Slots', headers: 'interface', data: styleSlotsInterface }
+        ]"
       />
     </template>
   </doc-section>
