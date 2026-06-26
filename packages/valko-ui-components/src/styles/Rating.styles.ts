@@ -14,13 +14,16 @@ const rating = tv({
       'cursor-pointer'
     ],
     iconBase: [
-      'vk-rating_icon'
+      'vk-rating_icon',
+      'text-on-surface'
     ],
     iconOverlay: [
       'absolute',
-      'inset-0',
+      'left-0',
+      'top-0',
       'overflow-hidden',
-      'pointer-events-none'
+      'pointer-events-none',
+      'whitespace-nowrap'
     ]
   },
   variants: {
@@ -49,58 +52,56 @@ const rating = tv({
     color: {
       primary: {
         iconBase: [
-          'group-hover:text-on-primary'
+          'group-hover:text-on-primary-container'
         ],
         iconOverlay: [
-          'text-primary'
+          'text-primary',
+          'group-data-[hovering=true]:text-on-primary-container'
         ]
       },
       secondary: {
         iconBase: [
-          'group-hover:text-on-secondary'
+          'group-hover:text-on-secondary-container'
         ],
         iconOverlay: [
-          'text-secondary'
+          'text-secondary',
+          'group-data-[hovering=true]:text-on-secondary-container'
         ]
       },
       positive: {
         iconBase: [
-          'group-hover:text-on-positive'
+          'group-hover:text-on-positive-container'
         ],
         iconOverlay: [
-          'text-positive'
+          'text-positive',
+          'group-data-[hovering=true]:text-on-positive-container'
         ]
       },
       warning: {
         iconBase: [
-          'group-hover:text-on-warning'
+          'group-hover:text-on-warning-container'
         ],
         iconOverlay: [
-          'text-warning'
+          'text-warning',
+          'group-data-[hovering=true]:text-warning-container'
         ]
       },
       negative: {
         iconBase: [
-          'group-hover:text-on-negative'
+          'group-hover:text-on-negative-container'
         ],
         iconOverlay: [
-          'text-negative'
+          'text-negative',
+          'group-data-[hovering=true]:text-on-negative-container'
         ]
       },
       accent: {
         iconBase: [
-          'group-hover:text-on-accent'
+          'group-hover:text-on-accent-container'
         ],
         iconOverlay: [
-          'text-accent'
-        ]
-      },
-      surface: {
-        iconBase: [
-          'group-hover:text-on-surface'
-        ],
-        iconOverlay: [
-          'text-surface'
+          'text-accent',
+          'group-data-[hovering=true]:text-on-accent-container'
         ]
       }
     },

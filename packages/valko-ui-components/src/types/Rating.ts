@@ -1,7 +1,7 @@
-import type { ColorsWithSurface, Sizes, AriaAttributes } from './common'
+import type { Colors, Sizes, AriaAttributes } from './common'
 import type { RatingSlots } from '../styles/Rating.styles'
 
-export interface RatingProps extends ColorsWithSurface, Sizes, Omit<AriaAttributes, 'ariaDescription' | 'ariaRequired' | 'ariaInvalid'> {
+export interface RatingProps extends Colors, Sizes, Omit<AriaAttributes, 'ariaDescription' | 'ariaRequired' | 'ariaInvalid'> {
   modelValue: number;
   iconName?: string;
   max?: number;

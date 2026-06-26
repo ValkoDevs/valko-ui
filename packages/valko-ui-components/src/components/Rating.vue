@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 
 import type { RatingProps } from '#valkoui/types/Rating.ts'
 import styles from '#valkoui/styles/Rating.styles.ts'
@@ -23,31 +23,47 @@ const emit = defineEmits(['update:modelValue'])
 
 const s = computed(() => styles(props))
 
-const stars = computed(() => {
-  const value = Math.max( 0, Math.min(props.modelValue, props.max))
+const hoverValue = ref<number | null>(null)
+const isHovering = computed(() => hoverValue.value !== null)
 
-  return Array.from({ length: props.max }, (_, i) => ({
-    index: i + 1,
-    fill: Math.max(0, Math.min(100, (value - i) * 100))
-  }))
-})
+const getValueFromEvent = (event: MouseEvent, index: number) => {
+  if (!props.half) return index
+
+  const target = event.currentTarget as HTMLElement
+  const rect = target.getBoundingClientRect()
+
+  return event.clientX - rect.left <= rect.width / 2 ? index - 0.5 : index
+}
 
 const setValue = (event: MouseEvent, index: number) => {
   if (props.disabled || props.readonly) return
 
+  const value = getValueFromEvent(event, index)
+
+  emit('update:modelValue', props.modelValue === value ? 0 : value)
+}
+
+const displayValue = computed(() => hoverValue.value ?? props.modelValue)
+
+const onHover = (event: MouseEvent, index: number) => {
+  if (props.disabled || props.readonly) return
   if (!props.half) {
-    emit('update:modelValue', index)
+    hoverValue.value = index
     return
   }
 
-  const target = event.currentTarget as HTMLElement
-
-  const rect = target.getBoundingClientRect()
-
-  const isLeftHalf = event.clientX - rect.left < rect.width / 2
-
-  emit('update:modelValue', isLeftHalf ? index - 0.5 : index)
+  hoverValue.value = getValueFromEvent(event, index)
 }
+
+const stars = computed(() => {
+  const value = Math.max(0, Math.min(displayValue.value, props.max))
+
+  return Array.from({ length: props.max }, (_, i) => ({
+    index: i + 1,
+    fill: Math.max(0, Math.min(100, (value - i) * 100)),
+    hovering: isHovering.value
+  }))
+})
 </script>
 
 <template>
@@ -72,8 +88,11 @@ const setValue = (event: MouseEvent, index: number) => {
         :key="star.index"
         :class="s.iconContainer({ class: styleSlots?.iconContainer })"
         role="radio"
-        :aria-checked="modelValue >= star.index"
+        :aria-checked="star.fill > 0"
         :aria-label="`${star.index} of ${max}`"
+        :data-hovering="star.hovering"
+        @mousemove="(e) => onHover(e, star.index)"
+        @mouseleave="hoverValue = null"
         @click="(e) => setValue(e, star.index)"
       >
         <vk-icon

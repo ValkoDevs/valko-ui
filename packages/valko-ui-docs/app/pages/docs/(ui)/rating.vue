@@ -1,13 +1,9 @@
 <script setup lang="ts">
 import type { TableItem, RatingProps } from '#valkoui'
 
-const isShown = ref(true)
-
 const form = ref<RatingProps>({
   color: 'primary',
-  variant: 'filled',
   size: 'md',
-  shape: 'soft',
   iconName: 'star',
   max: 5,
   modelValue: 0,
@@ -147,6 +143,19 @@ const styleSlotsInterface: TableItem[] = [
 
 const generateSnippet = snippetGeneratorFactory('vk-rating')
 
+const exampleValues = reactive<Record<string, number>>({
+  primary: 3,
+  secondary: 3,
+  accent: 3,
+  positive: 3,
+  negative: 3,
+  surface: 3,
+  warning: 3,
+  half: 3,
+  readonly: 3,
+  disabled: 3
+})
+
 const styles = {
   default: {
     slotContainer: [
@@ -165,32 +174,35 @@ const styles = {
 </script>
 
 <template>
-  <doc-section
-    title="Rating"
-    description="Visual component that allows users to provide feedback by selecting a rating value. Ratings are commonly used to evaluate products, services, or content."
-  >
+  <doc-section title="Rating">
+    <template #description>
+      <div class="flex flex-col gap-2">
+        <span>Visual component that allows users to provide feedback by selecting a rating value. Ratings are commonly used to evaluate products, services, or content.</span>
+        <span>
+          See the
+          <a
+            href="https://tabler.io/icons"
+            class="text-primary underline"
+            target="_blank"
+          >
+            Tabler Icons
+          </a>
+          catalog for available icon names.
+        </span>
+      </div>
+    </template>
+
     <template #playground-view>
-      <transition
-        enter-active-class="transition ease-out duration-200"
-        enter-from-class="opacity-0 scale-90"
-        enter-to-class="opacity-100 scale-100"
-        leave-active-class="transition ease-out duration-200"
-        leave-from-class="opacity-100 scale-100"
-        leave-to-class="opacity-0 scale-90"
-      >
-        <vk-rating
-          v-model="form.modelValue"
-          :color="form.color"
-          :variant="form.variant"
-          :shape="form.shape"
-          :size="form.size"
-          :icon-name="form.iconName"
-          :max="form.max"
-          :half="form.half"
-          :disabled="form.disabled"
-          :readonly="form.readonly"
-        />
-      </transition>
+      <vk-rating
+        v-model="form.modelValue"
+        :color="form.color"
+        :size="form.size"
+        :icon-name="form.iconName"
+        :max="form.max"
+        :half="form.half"
+        :disabled="form.disabled"
+        :readonly="form.readonly"
+      />
     </template>
 
     <template #playground-options>
@@ -199,18 +211,6 @@ const styles = {
         label="Color"
         size="sm"
         :options="colorOptions.general"
-      />
-      <vk-select
-        v-model="form.variant"
-        label="Variant"
-        size="sm"
-        :options="variantOptions.general"
-      />
-      <vk-select
-        v-model="form.shape"
-        label="Shape"
-        size="sm"
-        :options="shapeOptions.general"
       />
       <vk-select
         v-model="form.size"
@@ -237,7 +237,79 @@ const styles = {
       />
     </template>
 
-    <template #examples />
+    <template #examples>
+      <example-section
+        title="Colors"
+        :style-slots="styles.default"
+      >
+        <div
+          v-for="color in colorOptions.general"
+          :key="color"
+          class="flex flex-col gap-2"
+        >
+          <span>{{ color.label }}</span>
+          <vk-rating
+            v-model="exampleValues[`${color.value}`]"
+            :color="color.value"
+          />
+        </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value) })" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Half"
+        :style-slots="styles.default"
+      >
+        <div class="flex flex-col gap-2">
+          <span>Half</span>
+          <vk-rating
+            v-model="exampleValues['half']"
+            half
+          />
+        </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('half', { values: [true] })" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Readonly"
+        :style-slots="styles.default"
+      >
+        <div class="flex flex-col gap-2">
+          <span>Readonly</span>
+          <vk-rating
+            v-model="exampleValues['readonly']"
+            readonly
+          />
+        </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('readonly', { values: [true] })" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Disabled"
+        :style-slots="styles.default"
+      >
+        <div class="flex flex-col gap-2">
+          <span>Disabled</span>
+          <vk-rating
+            v-model="exampleValues['disabled']"
+            disabled
+          />
+        </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('disabled', { values: [true] })" />
+        </template>
+      </example-section>
+    </template>
 
     <template #api>
       <h3>Rating Props</h3>
