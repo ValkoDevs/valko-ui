@@ -32,6 +32,7 @@ const baseMenuItems: MenuItem[] = [
   { key: '/docs/notification', group: 'Ui', text: 'Notification' },
   { key: '/docs/popover', group: 'Ui', text: 'Popover' },
   { key: '/docs/progressbar', group: 'Ui', text: 'Progressbar' },
+  { key: '/docs/skeleton', group: 'Ui', text: 'Skeleton' },
   { key: '/docs/spinner', group: 'Ui', text: 'Spinner' },
   { key: '/docs/tag', group: 'Ui', text: 'Tag' },
   { key: '/docs/time', group: 'Ui', text: 'Time' },
