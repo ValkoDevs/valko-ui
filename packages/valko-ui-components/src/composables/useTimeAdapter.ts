@@ -114,13 +114,7 @@ const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAd
       s: 'setSeconds'
     }
 
-    const helperDate = new Date(
-      tempTime.value
-        ? tempTime.value
-        : model.value
-          ? model.value
-          : 0
-    )
+    const helperDate = new Date(tempTime.value || model.value)
     helperDate[unitMap[unit]](value)
 
     tempTime.value = helperDate

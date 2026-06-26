@@ -1,5 +1,5 @@
 import { ref, computed, toValue } from 'vue'
-import { VueWrapper, mount } from '@vue/test-utils'
+import { VueWrapper, mount, shallowMount } from '@vue/test-utils'
 import VkCalendar from '#valkoui/components/Calendar.vue'
 import type { AdapterResult } from '#valkoui/types/Calendar'
 
@@ -322,6 +322,44 @@ describe('Calendar component', () => {
         expect(wrapper.find('.vk-calendar__ghost').exists()).toBe(true)
       })
     })
+
+    describe('When format prop changes', () => {
+      it('should render the correct view when format prop is YYYY', () => {
+        wrapper = shallowMount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'YYYY'
+          }
+        })
+
+        expect(wrapper.find('vk-calendar-year-view-stub').exists()).toBe(true)
+      })
+
+      it('should render the correct view when format prop is MM', () => {
+        wrapper = shallowMount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'MM'
+          }
+        })
+
+        expect(wrapper.find('vk-calendar-month-view-stub').exists()).toBe(true)
+      })
+
+      it('should render the correct view when format prop is DD', () => {
+        wrapper = shallowMount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter,
+            format: 'DD'
+          }
+        })
+
+        expect(wrapper.find('vk-calendar-day-view-stub').exists()).toBe(true)
+      })
+    })
   })
 
   describe('Adapter & Methods', () => {
@@ -342,7 +380,7 @@ describe('Calendar component', () => {
     })
 
     describe('onSelectYear', () => {
-      it('should only be in year view if format only contains Y', async () => {
+      it('should directly emit the value if the format is year-only', async () => {
         const wrapper = mount(VkCalendar, {
           props: {
             modelValue,

@@ -435,4 +435,16 @@ describe('useTimeAdapter composable', () => {
       vi.useRealTimers()
     })
   })
+
+  describe('Time selection flow', () => {
+    it('should use temp time to form dates while updating time', () => {
+      const [,parsedModel, { setDisplayUnit, onSelectAMPM, onSelectTime }] = useTimeAdapter({ format: 'h:mm A' })
+      onSelectAMPM('AM')
+      setDisplayUnit('h', 1)
+      setDisplayUnit('m', 30)
+      onSelectTime()
+
+      expect(parsedModel.value).toBe('1:30 AM')
+    })
+  })
 })
