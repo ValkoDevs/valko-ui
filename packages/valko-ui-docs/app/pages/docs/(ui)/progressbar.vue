@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ProgressbarProps, TableItem } from '#valkoui'
+import type { ProgressbarProps } from '#valkoui'
 
 const form = ref<ProgressbarProps>({
   color: 'primary',
@@ -14,14 +14,15 @@ const form = ref<ProgressbarProps>({
 
 const slotText = ref('Progress')
 
-const progressbarProps: TableItem[] = [
+const progressbarProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Progressbar.',
     values: 'primary, secondary, positive, accent, warning, negative',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -29,7 +30,8 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'The variant of the Progressbar.',
     values: 'filled, outlined, ghost, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -37,7 +39,8 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'The shape of the Progressbar.',
     values: 'line, rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -45,7 +48,8 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'The size of the Progressbar.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'progressProp',
@@ -53,7 +57,8 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'The value of the Progressbar.',
     values: 'number',
-    default: '0'
+    default: '0',
+    apiType: 'primitive'
   },
   {
     key: 'bufferProp',
@@ -61,23 +66,26 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'The buffer value of the Progressbar.',
     values: 'number',
-    default: '0'
+    default: '0',
+    apiType: 'primitive'
   },
   {
     key: 'indeterminateProp',
     prop: 'indeterminate',
     required: false,
-    description: 'Wheter the Progressbar is indeterminate or not.',
-    values: 'true, false',
-    default: 'false'
+    description: 'Whether the Progressbar is indeterminate or not.',
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'stripedProp',
     prop: 'striped',
     required: false,
     description: 'Wheter the Progressbar is striped or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -85,61 +93,75 @@ const progressbarProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Progressbar.',
     values: 'progressbarSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container for the Progressbar.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'background',
     prop: 'background',
+    required: false,
     description: 'Background bar element.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'buffer',
     prop: 'buffer',
+    required: false,
     description: 'Buffer bar element (shows buffered progress).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'content',
     prop: 'content',
+    required: false,
     description: 'Content area for slot content inside the bar.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'progress',
     prop: 'progress',
+    required: false,
     description: 'Progress bar element (shows current progress).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'stripes',
     prop: 'stripes',
+    required: false,
     description: 'Stripes overlay for striped progress bars.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const progressbarSlots: TableItem[] = [
+const progressbarSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for custom content to be placed inside the progress bar. This slot is typically used to include additional elements or text inside the progress bar.',
-    example: '<template #default>\n  <!-- Your custom content goes here -->\n</template>'
+    example: '<template #default>\n  <!-- Your custom content goes here -->\n</template>',
+    apiType: 'slot'
   }
 ]
 
@@ -360,22 +382,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Progressbar Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="progressbarProps"
-      />
-
-      <h3>Progressbar Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="progressbarSlots"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
+      <api-table
+        name="Progressbar"
+        :tables="[
+          { title: 'Props', data: progressbarProps, headers: 'props' },
+          { title: 'Slots', data: progressbarSlots, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

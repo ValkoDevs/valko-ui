@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useNotification, type NotificationProps, type TableItem, type VerticalAlign, type HorizontalAlign, type SelectOption } from '#valkoui'
+import { useNotification, type NotificationProps, type VerticalAlign, type HorizontalAlign, type SelectOption } from '#valkoui'
 
 const form = ref<NotificationProps>({
   color: 'primary',
@@ -26,14 +26,15 @@ const gravityOptions: SelectOption<VerticalAlign>[] = [
   { value: 'bottom', label: 'Bottom' }
 ]
 
-const notificationProps: TableItem[] = [
+const notificationProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Notification.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -41,7 +42,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'The variant of the Notification.',
     values: 'filled, outlined, ghost, line, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -49,7 +51,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'The shape of the Notification.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -57,15 +60,17 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'The size of the Notification.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'styleSlotsProp',
     prop: 'styleSlots',
     required: false,
     description: 'Customizes style slots for Notification.',
-    values: 'object',
-    default: '{}'
+    values: 'NotificationSlots',
+    default: '',
+    apiType: 'custom-type'
   },
   {
     key: 'textProp',
@@ -73,7 +78,8 @@ const notificationProps: TableItem[] = [
     required: true,
     description: 'Message to be displayed in the Notification.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'durationProp',
@@ -81,7 +87,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'Duration for which the Notification should be displayed. -1 for permanent Notification.',
     values: 'number',
-    default: '3000'
+    default: '3000',
+    apiType: 'primitive'
   },
   {
     key: 'destinationProp',
@@ -89,7 +96,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'URL to which the browser should be navigated on click of the Notification.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'newWindowProp',
@@ -97,7 +105,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'Decides whether the destination should be opened in a new window or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'closeProp',
@@ -105,7 +114,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'To show the close icon or not.',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'gravityProp',
@@ -113,7 +123,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'To show the Notification from top or bottom.',
     values: 'top, bottom',
-    default: 'top'
+    default: 'top',
+    apiType: 'custom-string'
   },
   {
     key: 'positionProp',
@@ -121,7 +132,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'To show the Notification on left or right.',
     values: 'left, right',
-    default: 'right'
+    default: 'right',
+    apiType: 'custom-string'
   },
   {
     key: 'stopOnFocusProp',
@@ -129,7 +141,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'To stop timer when hovered over the Notification (Only if duration is set).',
     values: 'boolean',
-    default: 'false'
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'offsetProp',
@@ -137,7 +150,8 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'Ability to add some offset to axis.',
     values: '{y: number, x: number}',
-    default: 'undefined'
+    default: '',
+    apiType: 'object'
   },
   {
     key: 'onClickProp',
@@ -145,38 +159,47 @@ const notificationProps: TableItem[] = [
     required: false,
     description: 'Invoked when the Notification is clicked.',
     values: '() => void',
-    default: 'null'
+    default: 'close()',
+    apiType: 'function'
   }
 ]
 
-const styleSlotsInterface = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'root',
     prop: 'root',
+    required: false,
     description: 'Root element of the Notification.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'icon',
     prop: 'icon',
+    required: false,
     description: 'Icon section of the Notification.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'text',
     prop: 'text',
+    required: false,
     description: 'Text/message section.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'close',
     prop: 'close',
+    required: false,
     description: 'Close button element.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
@@ -534,16 +557,12 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Notification Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="notificationProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
+      <api-table
+        name="Notification"
+        :tables="[
+          { title: 'Props', data: notificationProps, headers: 'props' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

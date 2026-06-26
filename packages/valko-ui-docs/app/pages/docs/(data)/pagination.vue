@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PaginationProps, TableItem } from '#valkoui'
+import type { PaginationProps } from '#valkoui'
 
 const form = ref<PaginationProps>({
   color: 'primary',
@@ -12,14 +12,15 @@ const form = ref<PaginationProps>({
   disabled: false
 })
 
-const paginationProps: TableItem[] = [
+const paginationProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The Pagination color theme.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -27,7 +28,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'The Pagination variant.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -35,7 +37,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'The shape of the Pagination.',
     values: 'soft, rounded, square',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -43,7 +46,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'The Pagination size.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'pagesProp',
@@ -51,7 +55,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'The total number of pages.',
     values: 'number',
-    default: '1'
+    default: '1',
+    apiType: 'primitive'
   },
   {
     key: 'modelValueProp',
@@ -59,23 +64,26 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'The current page.',
     values: 'number',
-    default: '1'
+    default: '1',
+    apiType: 'primitive'
   },
   {
     key: 'elevatedProp',
     prop: 'elevated',
     required: false,
     description: 'Wheter the Pagination is elevated or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'disabledProp',
     prop: 'disabled',
     required: false,
     description: 'Wheter the Pagination is disabled or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -83,7 +91,8 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'Accessible label for the pagination.',
     values: 'string',
-    default: 'Pagination'
+    default: 'Pagination',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -91,41 +100,49 @@ const paginationProps: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Pagination component.',
     values: 'PaginationSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'nav',
     prop: 'nav',
+    required: false,
     description: 'Styles for the navigation container (<nav> element).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'button',
     prop: 'button',
+    required: false,
     description: 'Styles for each page button.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'arrows',
     prop: 'arrows',
+    required: false,
     description: 'Styles for the previous/next arrow icons.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const paginationEmits: TableItem[] = [
+const paginationEmits: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the current page is changed.',
     values: 'number | string',
-    type: '(page: number | string) => void'
+    type: '(page: number | string) => void',
+    apiType: 'primitive'
   }
 ]
 
@@ -326,22 +343,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Pagination Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="paginationProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Pagination Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="paginationEmits"
+      <api-table
+        name="Pagination"
+        :tables="[
+          { title: 'Props', data: paginationProps, headers: 'props' },
+          { title: 'Emits', data: paginationEmits, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SwitchProps, TableItem, LabelPosition, SelectOption } from '#valkoui'
+import type { SwitchProps, LabelPosition, SelectOption } from '#valkoui'
 
 const form = ref<SwitchProps>({
   variant: 'filled',
@@ -29,14 +29,15 @@ const switchStates = reactive(
   ].map(opt => [opt.value, true]))
 )
 
-const apiData: TableItem[] = [
+const apiData: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Switch.',
     values: 'primary, secondary, negative, warning, accent, positive',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -44,7 +45,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The variant of the Switch.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -52,39 +54,44 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The color theme of the Switch.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'disabledProp',
     prop: 'disabled',
     required: false,
     description: 'Wheter the Switch is disabled or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'readonlyProp',
     prop: 'readonly',
     required: false,
     description: 'Wheter the Switch is readonly or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'modelValueProp',
     prop: 'modelValue',
     required: false,
     description: 'The current value of the Switch.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'positionProp',
     prop: 'position',
     required: false,
     description: 'Wheter the label is displayed on the right or left side of the Switch.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'labelProp',
@@ -92,7 +99,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The string that\'s gonna be displayed on the label',
     values: 'string',
-    default: 'Switch'
+    default: 'Switch',
+    apiType: 'primitive'
   },
   {
     key: 'shapeProp',
@@ -100,7 +108,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The shape of the Switch.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'ariaLabelProp',
@@ -108,7 +117,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Defines a string value that labels the switch element.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledByProp',
@@ -116,7 +126,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'ID reference to a label element that labels the switch.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaDescribedByProp',
@@ -124,7 +135,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'ID reference to an element that describes the switch (e.g., helper text).',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -132,55 +144,67 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Switch component.',
     values: 'SwitchSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container for the switch component.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'content',
     prop: 'content',
+    required: false,
     description: 'Wrapper for the label and switch.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'labelSlot',
     prop: 'labelSlot',
+    required: false,
     description: 'Styles for the label element.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'switchSlot',
     prop: 'switchSlot',
+    required: false,
     description: 'Styles for the switch track.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'thumb',
     prop: 'thumb',
+    required: false,
     description: 'Styles for the switch thumb (the moving part).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const emitData: TableItem[] = [
+const emitData: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the value of the switch changes.',
     values: 'boolean',
-    type: '(value: boolean) => void'
+    type: '(value: boolean) => void',
+    apiType: 'primitive'
   }
 ]
 
@@ -387,22 +411,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Switch Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Switch Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="emitData"
+      <api-table
+        name="Switch"
+        :tables="[
+          { title: 'Props', data: apiData, headers: 'props' },
+          { title: 'Emits', data: emitData, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

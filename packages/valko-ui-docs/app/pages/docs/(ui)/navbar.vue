@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { NavbarProps, TableItem } from '#valkoui'
+import type { NavbarProps } from '#valkoui'
 
 const form = ref<NavbarProps>({
   color: 'primary',
@@ -12,14 +12,15 @@ const form = ref<NavbarProps>({
   vertical: false
 })
 
-const navbarProps: TableItem[] = [
+const navbarProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Navbar.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -27,7 +28,8 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'The variant of the Navbar.',
     values: 'filled, outlined, ghost, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -35,7 +37,8 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'The shape of the Navbar.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -43,39 +46,44 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'The size of the Navbar.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'elevatedProp',
     prop: 'elevated',
     required: false,
     description: 'Adds a subtle shadow to the Navbar (elevation level 1) when not fixed. If the Navbar is also fixed, the elevation is increased to level 2.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'fixedProp',
     prop: 'fixed',
     required: false,
     description: 'Fixes the Navbar to the top of the viewport and increases its elevation to level 2, regardless of the "elevated" setting.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'floatingProp',
     prop: 'floating',
     required: false,
     description: 'Determines if the Navbar is floating.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'verticalProp',
     prop: 'vertical',
     required: false,
     description: 'Determines if the Navbar is vertical or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -83,7 +91,8 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'Accessible label for the navbar to describe its purpose to assistive technologies.',
     values: 'string',
-    default: 'Main navigation'
+    default: 'Main navigation',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -91,16 +100,18 @@ const navbarProps: TableItem[] = [
     required: false,
     description: 'Root container for the Navbar.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const navbarSlots: TableItem[] = [
+const navbarSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for the main content of the Navbar.',
-    example: '<template #default>\n  <p>This is the main content of the Navbar.</p>\n</template>'
+    example: '<template #default>\n  <p>This is the main content of the Navbar.</p>\n</template>',
+    apiType: 'slot'
   }
 ]
 
@@ -350,16 +361,12 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Navbar Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="navbarProps"
-      />
-
-      <h3>Navbar Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="navbarSlots"
+      <api-table
+        name="Navbar"
+        :tables="[
+          { title: 'Props', data: navbarProps, headers: 'props' },
+          { title: 'Slots', data: navbarSlots, headers: 'slots' }
+        ]"
       />
     </template>
   </doc-section>

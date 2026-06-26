@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SelectOption, LabelPosition, RadioProps, TableItem } from '#valkoui'
+import type { SelectOption, LabelPosition, RadioProps } from '#valkoui'
 
 const form = ref<RadioProps>({
   variant: 'filled',
@@ -29,14 +29,15 @@ const radioStates = reactive(
   ].map(opt => [opt.value, opt.value]))
 )
 
-const apiData: TableItem[] = [
+const apiData: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Radio.',
     values: 'primary, secondary, negative, warning, accent, positive',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -44,7 +45,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The variant of the Radio.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -52,23 +54,26 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The size of the Radio.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'disabledProp',
     prop: 'disabled',
     required: false,
     description: 'Wheter the Radio is disabled or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'readonlyProp',
     prop: 'readonly',
     required: false,
     description: 'Wheter the Radio is readonly or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'helpertextProp',
@@ -76,15 +81,17 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Displays a hint under the Radio.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'positionProp',
     prop: 'position',
     required: false,
     description: 'Wheter the label is displayed left or right.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'nameProp',
@@ -92,7 +99,8 @@ const apiData: TableItem[] = [
     required: true,
     description: 'The name of the Radio, used when submitting an HTML form.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'modelValueProp',
@@ -100,7 +108,8 @@ const apiData: TableItem[] = [
     required: true,
     description: 'The value used to identify wich Radio is selected.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'valueProp',
@@ -108,7 +117,8 @@ const apiData: TableItem[] = [
     required: true,
     description: 'The current selected value. (controlled).',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'labelProp',
@@ -116,7 +126,8 @@ const apiData: TableItem[] = [
     required: true,
     description: 'The label of the Radio.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'shapeProp',
@@ -124,7 +135,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The shape of the Radio.',
     values: 'soft, rounded, square',
-    default: 'rounded'
+    default: 'rounded',
+    apiType: 'custom-string'
   },
   {
     key: 'ariaLabelProp',
@@ -132,7 +144,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Defines a string value that labels the radio for screen readers.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledByProp',
@@ -140,7 +153,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'References the ID of the element that labels the radio.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaDescribedByProp',
@@ -148,7 +162,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'References the ID of the element that provides a description for the radio.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -156,76 +171,94 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Radio component.',
     values: 'RadioSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container for the radio component.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'radioContainer',
     prop: 'radioContainer',
+    required: false,
     description: 'Container for the radio input and label.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'stateLayer',
     prop: 'stateLayer',
+    required: false,
     description: 'Layer for visual state effects (focus, hover, etc).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'radio',
     prop: 'radio',
+    required: false,
     description: 'The visual representation of the radio button.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'icon',
     prop: 'icon',
+    required: false,
     description: 'Icon shown when the radio is checked.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'input',
     prop: 'input',
+    required: false,
     description: 'Native radio input element (hidden since we use a custom radio).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'label',
     prop: 'label',
+    required: false,
     description: 'Label for the radio input.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'helpertext',
     prop: 'helpertext',
+    required: false,
     description: 'Helper text displayed below the radio.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const emitData: TableItem[] = [
+const emitData: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when this radio button is selected.',
     values: 'any',
-    type: '(value: any) => void'
+    type: '(value: any) => void',
+    apiType: 'primitive'
   }
 ]
 
@@ -437,22 +470,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Radio Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Radio Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="emitData"
+      <api-table
+        name="Radio"
+        :tables="[
+          { title: 'Props', data: apiData, headers: 'props' },
+          { title: 'Emits', data: emitData, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

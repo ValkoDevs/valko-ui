@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ButtonProps, TableItem, SelectOption } from '@valko-ui/components'
+import type { ButtonProps, SelectOption } from '@valko-ui/components'
 
 const form = ref<ButtonProps>({
   color: 'primary',
@@ -20,14 +20,15 @@ const typeOptions: SelectOption<'button' | 'submit' | 'reset'>[] = [
   { value: 'reset', label: 'Reset' }
 ]
 
-const apiData: TableItem[] = [
+const apiData: PropData[] = [
   {
     key: 'color',
     prop: 'color',
     required: false,
     description: 'The color theme of the Button.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variant',
@@ -35,7 +36,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The variant of the Button.',
     values: 'filled, outlined, ghost, link, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'shape',
@@ -43,7 +45,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The shape of the Button.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'size',
@@ -51,15 +54,17 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The size of the Button.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'disabled',
     prop: 'disabled',
     required: false,
     description: 'Whether the Button is disabled or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'type',
@@ -67,31 +72,35 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The type of the button.',
     values: 'button, submit, reset',
-    default: 'button'
+    default: 'button',
+    apiType: 'custom-string'
   },
   {
     key: 'elevated',
     prop: 'elevated',
     required: false,
     description: 'Adds a subtle shadow to the button, giving it a slightly raised appearance. When false (default), the button appears flat with no shadow.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'block',
     prop: 'block',
     required: false,
     description: 'Whether the Button width is equal to it\'s container.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'loading',
     prop: 'loading',
     required: false,
     description: 'Whether the Button is loading or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -99,7 +108,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Defines a string label for the button when no visible text is present. Useful for icon-only buttons or when additional context is needed for assistive technologies.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -107,18 +117,20 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Slots for applying custom styles to the Button.',
     values: 'ButtonSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'button',
     prop: 'button',
     required: false,
     description: 'Styles for the button element itself, this is the main container aswell.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'spinnerContainer',
@@ -126,7 +138,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the div containing the spinner.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'spinner',
@@ -134,7 +147,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the spinner itself.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'spinnerIcon',
@@ -142,7 +156,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the spinner icon.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'stateLayer',
@@ -150,26 +165,29 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the state layer element (e.g., hover, focus, active states).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const emitData: TableItem[] = [
+const emitData: EmitData[] = [
   {
     key: 'click',
     event: 'click',
     description: 'Emitted when the button is clicked.',
     values: 'MouseEvent',
-    type: '(event: MouseEvent) => void'
+    type: '(event: MouseEvent) => void',
+    apiType: 'event'
   }
 ]
 
-const slotData: TableItem[] = [
+const slotData: SlotData[] = [
   {
     key: 'default',
     name: 'default',
     description: 'Slot for the content of the button. This slot is typically used to include text or other components inside the button.',
-    example: '<template #default>\n  <!-- Your button content goes here -->\n</template>'
+    example: '<template #default>\n  <!-- Your button content goes here -->\n</template>',
+    apiType: 'slot'
   }
 ]
 
@@ -426,28 +444,14 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Button Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Button Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="emitData"
-      />
-
-      <h3>Button Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="slotData"
+      <api-table
+        name="Button"
+        :tables="[
+          { title: 'Props', data: apiData, headers: 'props' },
+          { title: 'Emits', data: emitData, headers: 'emits' },
+          { title: 'Slots', data: slotData, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

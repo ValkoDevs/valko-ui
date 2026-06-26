@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { CheckboxProps, SelectOption, TableItem, LabelPosition } from '#valkoui'
+import type { CheckboxProps, SelectOption, LabelPosition } from '#valkoui'
 
 const position: SelectOption<LabelPosition>[] = [
   { value: 'right', label:'Right' },
@@ -32,14 +32,15 @@ const checkboxStates = reactive(
   ].map(opt => [opt.value, true]))
 )
 
-const apiData: TableItem[] = [
+const apiData: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Checkbox.',
     values: 'primary, secondary, negative, warning, accent, positive',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -47,7 +48,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The variant of the Checkbox.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -55,39 +57,44 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The size of the Checkbox.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'disabledProp',
     prop: 'disabled',
     required: false,
     description: 'Whether the Checkbox is disabled or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'roundedProp',
     prop: 'rounded',
     required: false,
     description: 'Whether the Checkbox is rounded or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'modelValueProp',
     prop: 'modelValue',
     required: false,
     description: 'The v-model for the Checkbox',
-    values: 'boolean | null',
-    default: 'false'
+    values: 'boolean, null',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'readonlyProp',
     prop: 'readonly',
     required: false,
     description: 'Wheter the Checkbox is readonly or not',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'labelProp',
@@ -95,7 +102,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The label for the Checkbox',
     values: 'string',
-    default: 'Checkbox'
+    default: 'Checkbox',
+    apiType: 'primitive'
   },
   {
     key: 'helpertextProp',
@@ -103,15 +111,17 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Displays a hint under the Checkbox',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'indeterminateProp',
     prop: 'indeterminate',
     required: false,
     description: 'Checks all Checkbox children',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'labelPositionProp',
@@ -119,7 +129,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Moves the label of the Checkbox to left or right',
     values: 'left, right',
-    default: 'right'
+    default: 'right',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -127,7 +138,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The shape of the Checkbox',
     values: 'soft, rounded, square',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'ariaLabelProp',
@@ -135,7 +147,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Defines a string value that labels the checkbox for screen readers.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledByProp',
@@ -143,7 +156,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'References the ID of the element that labels the checkbox.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaDescribedByProp',
@@ -151,7 +165,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'References the ID of the element that provides a description for the checkbox.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'nameProp',
@@ -159,7 +174,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Specifies the name of the checkbox input.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -167,18 +183,20 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Slots for applying custom styles to the Checkbox.',
     values: 'CheckboxSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
     required: false,
     description: 'The root container, controls layout between the checkbox and helpertext.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'checkboxContainer',
@@ -186,7 +204,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The container for the checkbox (this includes the checkbox input and its label).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'stateLayer',
@@ -194,7 +213,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The state layer for the checkbox (used to apply hover, focus, and active states).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'checkbox',
@@ -202,7 +222,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The visual representation of the checkbox (includes the icon inside the checkbox).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'input',
@@ -210,7 +231,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The classes for the checkbox input element (this is hidden since we use a custom checkbox).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'label',
@@ -218,7 +240,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The classes for the label.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'helpertext',
@@ -226,17 +249,19 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The classes for the helpertext.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const emitData: TableItem[] = [
+const emitData: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the checkbox value is updated.',
     values: 'boolean',
-    type: '(value: boolean) => void'
+    type: '(value: boolean) => void',
+    apiType: 'primitive'
   }
 ]
 
@@ -482,22 +507,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Checkbox Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Checkbox Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="emitData"
+      <api-table
+        name="Checkbox"
+        :tables="[
+          { title: 'Props', data: apiData, headers: 'props' },
+          { title: 'Emits', data: emitData, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DividerProps, SelectOption, TableItem } from '#valkoui'
+import type { DividerProps, SelectOption } from '#valkoui'
 
 const form = ref<DividerProps>({
   color: 'primary',
@@ -14,14 +14,15 @@ const directionOptions: SelectOption[] = [
   { value: 'horizontal', label: 'Horizontal' }
 ]
 
-const dividerProps: TableItem[] = [
+const dividerProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Divider.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -29,7 +30,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'The variant of the Divider.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -37,7 +39,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'The shape of the Divider.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -45,7 +48,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'The size of the Divider.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'directionProp',
@@ -53,7 +57,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'The direction of the Divider.',
     values: 'vertical, horizontal',
-    default: 'horizontal'
+    default: 'horizontal',
+    apiType: 'custom-string'
   },
   {
     key: 'ariaLabelProp',
@@ -61,7 +66,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'Defines a string label for the divider element. Used by screen readers when no visible text is provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledByProp',
@@ -69,7 +75,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'References the ID of another element that labels the divider. Useful for complex labeling.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -77,7 +84,8 @@ const dividerProps: TableItem[] = [
     required: false,
     description: 'Root container.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
@@ -298,9 +306,11 @@ const styles = {
 
     <template #api>
       <h3>Divider</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="dividerProps"
+      <api-table
+        name="Divider"
+        :tables="[
+          { title: 'Props', data: dividerProps, headers: 'props' }
+        ]"
       />
     </template>
   </doc-section>

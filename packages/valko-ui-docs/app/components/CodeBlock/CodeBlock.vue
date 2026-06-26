@@ -27,7 +27,8 @@ hljs.registerLanguage('vue', (hljs) => ({
 defineOptions({ name: 'CodeBlock' })
 
 const props = withDefaults(defineProps<CodeBlockProps>(), {
-  language: 'vue'
+  language: 'vue',
+  hasCopyButton: true
 })
 
 const btnIcon = ref('copy')
@@ -59,6 +60,7 @@ const copyToClipboard = async () => {
 <template>
   <div class="relative group w-full h-full flex p-5 justify-start items-center bg-surface-container rounded">
     <vk-button
+      v-if="hasCopyButton"
       variant="link"
       shape="rounded"
       color="surface"
@@ -71,6 +73,6 @@ const copyToClipboard = async () => {
         class="text-2xl p-2"
       />
     </vk-button>
-    <pre class="overflow-auto flex w-full h-full items-center justify-start mr-10"><code v-html="highlightedCode" /></pre>
+    <pre :class="`overflow-auto flex w-full h-full items-center justify-start ${hasCopyButton ? 'mr-10' : ''}`"><code v-html="highlightedCode" /></pre>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TooltipProps, TableItem } from '#valkoui'
+import type { TooltipProps } from '#valkoui'
 
 const form = ref<TooltipProps>({
   shape: 'soft',
@@ -10,14 +10,15 @@ const form = ref<TooltipProps>({
   elevated: true
 })
 
-const tooltipProps: TableItem[] = [
+const tooltipProps: PropData[] = [
   {
     key: 'shapeProp',
     prop: 'shape',
     required: false,
     description: 'The shape of the Tooltip.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -25,7 +26,8 @@ const tooltipProps: TableItem[] = [
     required: false,
     description: 'The size of the Tooltip.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'placementProp',
@@ -33,7 +35,8 @@ const tooltipProps: TableItem[] = [
     required: false,
     description: 'Defines where the Tooltip should appear relative to the reference element. If set to "auto", the Tooltip will automatically choose the best placement based on available space.',
     values: 'bottom, top, left, right, auto',
-    default: 'auto'
+    default: 'auto',
+    apiType: 'custom-string'
   },
   {
     key: 'alignmentProp',
@@ -41,7 +44,8 @@ const tooltipProps: TableItem[] = [
     required: false,
     description: 'Specifies how the Tooltip is aligned within its placement. If not set, it defaults to the best fit based on available space.',
     values: 'start, center, end',
-    default: 'undefined'
+    default: 'undefined',
+    apiType: 'custom-string'
   },
   {
     key: 'contentProp',
@@ -49,15 +53,17 @@ const tooltipProps: TableItem[] = [
     required: true,
     description: 'The content of the Tooltip.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'elevatedProp',
     prop: 'elevated',
     required: false,
     description: 'Elevates the tooltip by one level.',
-    values: 'true, false',
-    default: 'true'
+    values: 'boolean',
+    default: 'true',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -65,39 +71,39 @@ const tooltipProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Tooltip.',
     values: 'TooltipSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container for the tooltip popover.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'tip',
     prop: 'tip',
+    required: false,
     description: 'Styles for the tooltip content element.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const tooltipSlots: TableItem[] = [
+const tooltipSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for the content to trigger the tooltip.',
-    example: `
-      <template #default>
-        <button>
-          Hover over me to show the tooltip
-        </button>
-      </template>
-    `
+    example: '<template #default>\n  <button>\n    Hover over me to show the tooltip\n  </button>\n</template>',
+    apiType: 'slot'
   }
 ]
 
@@ -288,22 +294,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Tooltip Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="tooltipProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Tooltip Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="tooltipSlots"
+      <api-table
+        name="Tooltip"
+        :tables="[
+          { title: 'Props', data: tooltipProps, headers: 'props' },
+          { title: 'Slots', data: tooltipSlots, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

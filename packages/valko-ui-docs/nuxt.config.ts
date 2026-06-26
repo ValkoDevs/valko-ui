@@ -19,6 +19,5 @@ export default defineNuxtConfig({
       '@tailwindcss/postcss': {}
     }
   },
-
   compatibilityDate: '2024-09-24'
 })

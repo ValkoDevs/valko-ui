@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SpinnerProps, TableItem } from '#valkoui'
+import type { SpinnerProps } from '#valkoui'
 
 const names = [
   { value: 'loader', label: 'Loader' },
@@ -13,14 +13,15 @@ const form = ref<SpinnerProps>({
   condensed: false
 })
 
-const spinnerProps: TableItem[] = [
+const spinnerProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Spinner.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'nameProp',
@@ -28,7 +29,8 @@ const spinnerProps: TableItem[] = [
     required: false,
     description: 'The icon of the Spinner.',
     values: 'string',
-    default: 'loader-2'
+    default: 'loader-2',
+    apiType: 'primitive'
   },
   {
     key: 'sizeProp',
@@ -36,15 +38,17 @@ const spinnerProps: TableItem[] = [
     required: false,
     description: 'The size of the Spinner.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'condensedProp',
     prop: 'condensed',
     required: false,
     description: 'Reduces the Spinner\'s size.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'classesProp',
@@ -52,7 +56,8 @@ const spinnerProps: TableItem[] = [
     required: false,
     description: 'Overrides the spinner\'s default colors, allowing you to fully customize its appearance.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -60,24 +65,29 @@ const spinnerProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Spinner.',
     values: 'SpinnerSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container of the Spinner.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'icon',
     prop: 'icon',
+    required: false,
     description: 'Icon element of the Spinner.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
@@ -208,16 +218,12 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Spinner Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="spinnerProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
+      <api-table
+        name="Spinner"
+        :tables="[
+          { title: 'Props', data: spinnerProps, headers: 'props' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

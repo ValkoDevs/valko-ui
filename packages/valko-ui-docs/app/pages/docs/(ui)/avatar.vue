@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AvatarProps, TableItem } from '#valkoui'
+import type { AvatarProps } from '#valkoui'
 
 const form = reactive<AvatarProps>({
   color: 'primary',
@@ -16,14 +16,15 @@ const extraForm = reactive({
   user: ''
 })
 
-const avatarProps: TableItem[] = [
+const avatarProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Avatar.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -31,7 +32,8 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'The variant of the Avatar.',
     values: 'filled, outlined, ghost, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -39,7 +41,8 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'The shape of the Avatar.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -47,7 +50,8 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'The size of the Avatar.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'srcProp',
@@ -55,7 +59,8 @@ const avatarProps: TableItem[] = [
     required: true,
     description: 'The src of the image for the Avatar.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'nameProp',
@@ -63,15 +68,17 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'The name of the user for the Avatar..',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'elevatedProp',
     prop: 'elevated',
     required: false,
     description: 'Applies a shadow to visually elevate the Avatar.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -79,7 +86,8 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -87,18 +95,20 @@ const avatarProps: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Avatar component.',
     values: 'AvatarSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
     required: false,
     description: 'Root container for the avatar. Controls the overall layout and background.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'imageTag',
@@ -106,16 +116,18 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the avatar image element.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const avatarSlots: TableItem[] = [
+const avatarSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Default slot for the Avatar, this would replace any existing content.',
-    example: '<vk-avatar>\n  <template #default>\n Your custom content goes here!\n  </template>\n</vk-avatar>'
+    example: '<vk-avatar>\n  <template #default>\n    Your custom content goes here!\n  </template>\n</vk-avatar>',
+    apiType: 'slot'
   }
 ]
 
@@ -346,22 +358,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Avatar Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="avatarProps"
-      />
-
-      <h3>Avatar Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="avatarSlots"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
+      <api-table
+        name="Avatar"
+        :tables="[
+          { title: 'Props', data: avatarProps, headers: 'props' },
+          { title: 'Slots', data: avatarSlots, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableItem, AlertProps } from '#valkoui'
+import type { AlertProps } from '#valkoui'
 
 const isShown = ref(true)
 
@@ -14,14 +14,15 @@ const form = ref<AlertProps>({
 
 const iconsForm = ref<Record<string, boolean>>({})
 
-const alertProps: TableItem[] = [
+const alertProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Alert.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -29,7 +30,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'The variant of the Alert.',
     values: 'filled, outlined, ghost, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -37,7 +39,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'The shape of the Alert.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -45,23 +48,26 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'The size of the Alert.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'elevatedProp',
     prop: 'elevated',
     required: false,
     description: 'Adds a subtle shadow to the Alert, giving it a slightly raised appearance. When false (default), the alert appears flat with no shadow.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'closableProp',
     prop: 'closable',
     required: false,
     description: 'Displays a button to close the Alert.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: false,
+    apiType: 'primitive'
   },
   {
     key: 'titleProp',
@@ -69,7 +75,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'The title of the Alert.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'iconProp',
@@ -77,7 +84,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'The icon of the Alert.',
     values: 'string | null',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -85,7 +93,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledByProp',
@@ -93,7 +102,8 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'ID reference to an element that labels the input (e.g. a visible <label>).',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -101,37 +111,41 @@ const alertProps: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Alert component.',
     values: 'AlertSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const alertEmits: TableItem[] = [
+const alertEmits: EmitData[] = [
   {
     key: 'closeEmit',
     event: 'close',
     type: '() => void',
     values: '',
-    description: 'Emitted when the alert is closed by the user.'
+    description: 'Emitted when the alert is closed by the user.',
+    apiType: 'event'
   }
 ]
 
-const alertSlots: TableItem[] = [
+const alertSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for the main content of the alert.',
-    example: '<template #default>\n  <p>This is the main content of the alert.</p>\n</template>'
+    example: '<template #default>\n  <p>This is the main content of the alert.</p>\n</template>',
+    apiType: 'slot'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
     required: false,
     description: 'Root container for the alert. Controls the overall layout and background.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'mainIcon',
@@ -139,7 +153,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the main icon.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'title',
@@ -147,7 +162,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the alert title text.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'contentContainer',
@@ -155,7 +171,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Container for the title and content.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'content',
@@ -163,7 +180,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Container for the main content area (slot).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'closeButton',
@@ -171,7 +189,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the close button itself.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'closeIcon',
@@ -179,7 +198,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the close icon itself.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
@@ -438,28 +458,14 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Alert Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="alertProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Alert Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="alertEmits"
-      />
-
-      <h3>Alert Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="alertSlots"
+      <api-table
+        name="Alert"
+        :tables="[
+          { title: 'Props', headers: 'props', data: alertProps },
+          { title: 'Emits', headers: 'emits', data: alertEmits },
+          { title: 'Slots', headers: 'slots', data: alertSlots },
+          { title: 'Style Slots', headers: 'interface', data: styleSlotsInterface }
+        ]"
       />
     </template>
   </doc-section>

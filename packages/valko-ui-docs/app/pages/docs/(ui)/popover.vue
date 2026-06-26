@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PopoverProps, TableItem } from '#valkoui'
+import type { PopoverProps } from '#valkoui'
 
 const form = ref<PopoverProps>({
   shape: 'soft',
@@ -10,22 +10,24 @@ const form = ref<PopoverProps>({
   condensed: false
 })
 
-const popoverProps: TableItem[] = [
+const popoverProps: PropData[] = [
   {
     key: 'shapeProp',
     prop: 'shape',
     required: false,
     description: 'The shape of the Popover.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'isOpenProp',
     prop: 'isOpen',
     required: false,
     description: 'The state of the Popover.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'placementProp',
@@ -33,7 +35,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Defines where the Popover should appear relative to the reference element. If set to "auto", the Popover will automatically choose the best placement based on available space.',
     values: 'bottom, top, left, right, auto',
-    default: 'auto'
+    default: 'auto',
+    apiType: 'custom-string'
   },
   {
     key: 'alignmentProp',
@@ -41,15 +44,17 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Specifies how the Popover is aligned within its placement. If not set, it defaults to the best fit based on available space.',
     values: 'start, center, end',
-    default: 'undefined'
+    default: 'undefined',
+    apiType: 'custom-string'
   },
   {
     key: 'elevatedProp',
     prop: 'elevated',
     required: false,
     description: 'Whether the Popover is elevated, this will increase the level of the shadow.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'textProp',
@@ -57,15 +62,17 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Text displayed instead of the slot popover-content if the slot is not provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'condensedProp',
     prop: 'condensed',
     required: false,
     description: 'Whether the Popover is condensed, this will remove the padding for the panel.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'classesProp',
@@ -73,7 +80,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Allows you to apply custom CSS classes to the popover content for further customization (e.g., for styling the background, padding, borders, etc.). Accepts a single string or an array of strings.',
     values: 'string | string[]',
-    default: '[]'
+    default: '[]',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -81,7 +89,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Accessible label for the popover panel when no visible heading is provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledbyProp',
@@ -89,7 +98,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'ID of the element that labels the popover.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaDescribedbyProp',
@@ -97,7 +107,8 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'ID of the element that describes the popover’s content.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -105,56 +116,66 @@ const popoverProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Popover.',
     values: 'PopoverSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container for the Popover.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'slotContainer',
     prop: 'slotContainer',
+    required: false,
     description: 'Container for the trigger slot (the element that opens the popover).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'panel',
     prop: 'panel',
+    required: false,
     description: 'Panel element that displays the popover content.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const popoverEmits: TableItem[] = [
+const popoverEmits: EmitData[] = [
   {
     key: 'closeEmit',
     event: 'close',
     description: 'Emitted when a click is detected outside the popover.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: 'event'
   }
 ]
 
-const popoverSlots: TableItem[] = [
+const popoverSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
     description: 'Slot for the component that will display the Popover.',
-    example: '<template #default>\n  <vk-button>Click Me.</vk-button>\n</template>'
+    example: '<template #default>\n  <vk-button>\n    Click Me.\n  </vk-button>\n</template>',
+    apiType: 'slot'
   },
   {
     key: 'popoverContentSlot',
     name: 'popover-content',
     description: 'Slot for the main content of the Popover.',
-    example: '<template #popover-content>\n  <p>This is the main content of the Popover.</p>\n</template>'
+    example: '<template #popover-content>\n  <p>\n    This is the main content of the Popover.\n  </p>\n</template>',
+    apiType: 'slot'
   }
 ]
 
@@ -338,28 +359,14 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Popover Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="popoverProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Popover Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="popoverEmits"
-      />
-
-      <h3>Popover Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="popoverSlots"
+      <api-table
+        name="Popover"
+        :tables="[
+          { title: 'Props', data: popoverProps, headers: 'props' },
+          { title: 'Emits', data: popoverEmits, headers: 'emits' },
+          { title: 'Slots', data: popoverSlots, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { SelectProps, TableItem, SelectOption } from '#valkoui'
+import type { SelectProps, SelectOption } from '#valkoui'
 
 const people: SelectOption[] = [
   { value: 1, label: 'Wade Cooper' },
@@ -24,14 +24,15 @@ const form = ref<SelectProps>({
 
 const exampleSectionModel = reactive<Record<string, number>>({ readonly: 1 })
 
-const apiData: TableItem[] = [
+const apiData: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Select.',
     values: 'primary, secondary, negative, warning, accent, positive',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -39,7 +40,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The variant of the Select.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -47,39 +49,44 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The size of the Select.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'disabledProp',
     prop: 'disabled',
     required: false,
     description: 'Whether the Select is disabled or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'roundedProp',
     prop: 'rounded',
     required: false,
     description: 'Whether the Select is rounded or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'multipleProp',
     prop: 'multiple',
     required: false,
     description: 'Wheter the Select is enabled to choose multiple options',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'optionsProp',
     prop: 'options',
     required: false,
     description: 'An array of options for the Select',
-    values: 'array',
-    default: 'false'
+    values: 'SelectOption[]',
+    default: '[]',
+    apiType: 'custom-type'
   },
   {
     key: 'modelValueProp',
@@ -87,15 +94,17 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The v-model for the Select',
     values: 'string, number, Array<string | number>',
-    default: 'false'
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'readonlyProp',
     prop: 'readonly',
     required: false,
     description: 'Wheter the Select is readonly or not',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'labelProp',
@@ -103,7 +112,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The label for the Select',
     values: 'string',
-    default: 'false'
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'helpertextProp',
@@ -111,7 +121,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'A hint for the Select',
     values: 'string',
-    default: 'false'
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'iconLeftProp',
@@ -119,7 +130,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'A icon on the left side for the Select',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'iconRightProp',
@@ -127,7 +139,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'A icon on the right side for the Select',
     values: 'string',
-    default: 'chevron-down'
+    default: 'chevron-down',
+    apiType: 'primitive'
   },
   {
     key: 'shapeProp',
@@ -135,15 +148,17 @@ const apiData: TableItem[] = [
     required: false,
     description: 'The shape of the Button.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'clearableProp',
     prop: 'clearable',
     required: false,
     description: 'Allows to leave the selection empty and displays an icon that clears the selection when clicked.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -151,7 +166,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledByProp',
@@ -159,7 +175,8 @@ const apiData: TableItem[] = [
     required: false,
     description: 'ID reference to an element that labels the select (e.g. a visible <label>).',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaDescribedByProp',
@@ -167,23 +184,26 @@ const apiData: TableItem[] = [
     required: false,
     description: 'ID reference to an element that further describes the select, such as helper or error text.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaRequiredProp',
     prop: 'ariaRequired',
     required: false,
     description: 'Marks the select as required for form submission.',
-    values: 'true, false',
-    default: ''
+    values: 'boolean',
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaInvalidProp',
     prop: 'ariaInvalid',
     required: false,
     description: 'Indicates that the current value entered into the select is invalid.',
-    values: 'true, false',
-    default: ''
+    values: 'boolean',
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -191,62 +211,76 @@ const apiData: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Select component.',
     values: 'SelectSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container for the select component.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'field',
     prop: 'field',
+    required: false,
     description: 'Wrapper for the input and dropdown.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'select',
     prop: 'select',
+    required: false,
     description: 'Hidden native select element.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'dropdown',
     prop: 'dropdown',
+    required: false,
     description: 'Dropdown menu container for options.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'item',
     prop: 'item',
+    required: false,
     description: 'Styles for each option item in the dropdown.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'icon',
     prop: 'icon',
+    required: false,
     description: 'Icon for dropdown toggle (chevron).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const emitData: TableItem[] = [
+const emitData: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the selected value(s) in the Select component change.',
     values: 'any',
-    type: '(value: any) => void'
+    type: '(value: any) => void',
+    apiType: 'primitive'
   }
 ]
 
@@ -458,22 +492,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Select Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="apiData"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Select Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="emitData"
+      <api-table
+        name="Select"
+        :tables="[
+          { title: 'Props', data: apiData, headers: 'props' },
+          { title: 'Emits', data: emitData, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

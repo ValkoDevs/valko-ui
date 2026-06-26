@@ -1,25 +1,28 @@
 <script setup lang="ts">
-import type { TableItem, IconProps } from '#valkoui'
+import type { IconProps } from '#valkoui'
 
 const form = ref<IconProps>({
   name: 'home'
 })
 
-const iconProps: TableItem[] = [
+const iconProps: PropData[] = [
   {
     key: 'nameProp',
     prop: 'name',
     required: true,
     description: 'The name of the icon to display. It must match a valid Tabler Icons name.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
     prop: 'ariaLabel',
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
-    values: 'string'
+    values: 'string',
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -27,7 +30,8 @@ const iconProps: TableItem[] = [
     required: false,
     description: 'Root container.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
@@ -93,10 +97,11 @@ const generateSnippet = snippetGeneratorFactory('vk-icon')
     </template>
 
     <template #api>
-      <h3>Icons Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="iconProps"
+      <api-table
+        name="Icon"
+        :tables="[
+          { title: 'Props', headers: 'props', data: iconProps }
+        ]"
       />
     </template>
   </doc-section>

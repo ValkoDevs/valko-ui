@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { DropdownProps, TableItem, Item } from '#valkoui'
+import type { DropdownProps, Item } from '#valkoui'
 
 const form = ref<Partial<DropdownProps>>({
   color: 'primary',
@@ -21,14 +21,15 @@ const items: Item[] = [
   { key: 'delete', title: 'Delete', icon: 'trash', onClick: () => useNotification({ text: 'Item Deleted' }) }
 ]
 
-const dropdownProps: TableItem[] = [
+const dropdownProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The Dropdown color theme.',
     values: 'primary, secondary, negative, warning, accent, positive',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -36,7 +37,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'The Dropdown variant.',
     values: 'filled, outlined, ghost, gradient, link',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -44,7 +46,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'The Dropdown shape.',
     values: 'rounded, soft, square',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -52,23 +55,26 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'The Dropdown size.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'isOpenProp',
     prop: 'isOpen',
     required: false,
     description: 'Controls the open state of the Dropdown, if not provided it will be managed internally.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'elevatedProp',
     prop: 'elevated',
     required: false,
     description: 'Wheter the Dropdown is elevated or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'placementProp',
@@ -76,7 +82,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'Defines where the Dropdown should appear relative to the reference element. If set to "auto", the Dropdown will automatically choose the best placement based on available space.',
     values: 'bottom, top, left, right, auto',
-    default: 'auto'
+    default: 'auto',
+    apiType: 'custom-string'
   },
   {
     key: 'alignmentProp',
@@ -84,15 +91,17 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'Specifies how the Dropdown is aligned within its placement. If not set, it defaults to the best fit based on available space.',
     values: 'start, center, end',
-    default: 'undefined'
+    default: 'undefined',
+    apiType: 'custom-string'
   },
   {
     key: 'disabledProp',
     prop: 'disabled',
     required: false,
     description: 'Wheter the Dropdown is disabled or not.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'labelProp',
@@ -100,7 +109,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'The default slot button label.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'iconProp',
@@ -108,7 +118,8 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'The default slot button icon.',
     values: 'string',
-    default: 'chevron-down'
+    default: 'chevron-down',
+    apiType: 'primitive'
   },
   {
     key: 'itemsProp',
@@ -116,7 +127,8 @@ const dropdownProps: TableItem[] = [
     required: true,
     description: 'The Dropdown items displayed on the menu.',
     values: 'item[]',
-    default: '[]'
+    default: '[]',
+    apiType: 'custom-type'
   },
   {
     key: 'styleSlotsProp',
@@ -124,18 +136,20 @@ const dropdownProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Dropdown.',
     values: 'DropdownStyleSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const itemInterface: TableItem[] = [
+const itemInterface: PropData[] = [
   {
     key: 'keyInterfaceProp',
     prop: 'key',
     required: true,
     description: 'The key of the Item',
     values: 'string | number',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'titleInterfaceProp',
@@ -143,7 +157,8 @@ const itemInterface: TableItem[] = [
     required: true,
     description: 'The title for the Item',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'iconInterfaceProp',
@@ -151,15 +166,17 @@ const itemInterface: TableItem[] = [
     required: false,
     description: 'The name of the icon to display on the left side of the title',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'disabledInterfaceProp',
     prop: 'disabled',
     required: false,
     description: 'Wheter the Item is disabled or not',
-    values: 'true, false',
-    default: ''
+    values: 'boolean',
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'onClickInterfaceProp',
@@ -167,85 +184,103 @@ const itemInterface: TableItem[] = [
     required: false,
     description: 'Emit for the Item',
     values: '() => void',
-    default: ''
+    default: '',
+    apiType: 'function'
   }
 ]
 
-const styleSlotsInterface = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root element of the Dropdown (vk-popover).',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'triggerButton',
     prop: 'triggerButton',
+    required: false,
     description: 'Styles for the default trigger button.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'icon',
     prop: 'icon',
+    required: false,
     description: 'Styles for the default icon on the trigger.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'panel',
     prop: 'panel',
+    required: false,
     description: 'The panel element of the popover containing the dropdown items.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'itemsMenu',
     prop: 'itemsMenu',
+    required: false,
     description: 'Main container for the Dropdown items.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'itemsButton',
     prop: 'itemsButton',
+    required: false,
     description: 'Styles for the Dropdown items buttons.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'itemsIcon',
     prop: 'itemsIcon',
+    required: false,
     description: 'Styles for the Dropdown items icons.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const dropdownEmits: TableItem[] = [
+const dropdownEmits: EmitData[] = [
   {
     key: 'itemClickEmit',
     event: 'itemClick',
     description: 'Emitted when an item in the dropdown menu is clicked.',
     values: 'Item',
-    type: '(item: Item) => void'
+    type: '(item: Item) => void',
+    apiType: 'event'
   },
   {
     key: 'clickEmit',
     event: 'click',
     description: 'Emitted when the dropdown trigger is clicked.',
     values: 'MouseEvent',
-    type: '(event: MouseEvent) => void'
+    type: '(event: MouseEvent) => void',
+    apiType: 'event'
   }
 ]
 
-const dropdownSlots: TableItem[] = [
+const dropdownSlots: SlotData[] = [
   {
     key: 'dropdownTriggerSlot',
     name: 'dropdown-trigger',
     description: 'The dropdown-trigger slot for the Dropdown. By default, it renders a `VkButton`.\nIf you use a custom component within this slot, you can access the `props` for binding attributes like color, variant, and size.\nAdditionally, the slot exposes:\n- `toggle`: a function to open or close the dropdown.\n- `open`: a boolean indicating the current open state.\nThis lets you integrate any custom component as the trigger while reacting to the dropdown’s state.',
-    example: '<template #dropdown-trigger="{ toggle }">\n  <!-- Your custom dropdown trigger component here -->\n</template>'
+    example: '<template #dropdown-trigger="{ toggle }">\n  <!-- Your custom dropdown trigger component here -->\n</template>',
+    apiType: 'slot'
   }
 ]
 
@@ -519,32 +554,15 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Dropdown Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="dropdownProps"
-      />
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-      <h3>Item interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="itemInterface"
-      />
-
-      <h3>Dropdown Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="dropdownEmits"
-      />
-
-      <h3>Dropdown Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="dropdownSlots"
+      <api-table
+        name="Dropdown"
+        :tables="[
+          { title: 'Props', data: dropdownProps, headers: 'props' },
+          { title: 'Emits', data: dropdownEmits, headers: 'emits' },
+          { title: 'Slots', data: dropdownSlots, headers: 'slots' },
+          { title: 'Item', data: itemInterface, headers: 'interface' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableItem, Crumb, BreadcrumbsProps } from '#valkoui'
+import type { Crumb, BreadcrumbsProps } from '#valkoui'
 import { useNotification } from '#valkoui'
 
 const form = ref<Partial<BreadcrumbsProps>>({
@@ -34,14 +34,15 @@ const crumbsIcons: Crumb[] = [
   { key: 'song', title: 'Song', leftIcon: 'music' }
 ]
 
-const breadcrumbsProps: TableItem[] = [
+const breadcrumbsProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Breadcrumbs.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -49,7 +50,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'The variant of the Breadcrumbs.',
     values: 'filled, outlined, ghost, link',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -57,7 +59,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'The shape of the Breadcrumbs.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -65,7 +68,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'The size of the Breadcrumbs.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -73,15 +77,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'The shape of the Breadcrumbs.',
     values: 'rounded, square, soft',
-    default: 'soft'
-  },
-  {
-    key: 'sizeProp',
-    prop: 'size',
-    required: false,
-    description: 'The size of the Breadcrumbs.',
-    values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'crumbsProp',
@@ -89,7 +86,8 @@ const breadcrumbsProps: TableItem[] = [
     required: true,
     description: 'The list of Crumbs.',
     values: 'Crumb[]',
-    default: '[]'
+    default: '[]',
+    apiType: 'custom-type'
   },
   {
     key: 'separatorProp',
@@ -97,7 +95,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'The separator for the Breadcrumbs. Up to 2 character or an icon if passed the name.',
     values: 'string',
-    default: '>'
+    default: '>',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -105,7 +104,8 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'Accessible label for the breadcrumb navigation.',
     values: 'string',
-    default: 'Breadcrumb'
+    default: 'Breadcrumb',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -113,18 +113,20 @@ const breadcrumbsProps: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Breadcrumbs component.',
     values: 'BreadcrumbsSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const crumbInterface: TableItem[] = [
+const crumbInterface: PropData[] = [
   {
     key: 'keyCrumb',
     prop: 'key',
     required: true,
     description: 'The key of the Crumb',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'titleCrumb',
@@ -132,7 +134,8 @@ const crumbInterface: TableItem[] = [
     required: true,
     description: 'The title for the Crumb',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'leftIconCrumb',
@@ -140,7 +143,8 @@ const crumbInterface: TableItem[] = [
     required: false,
     description: 'The name of the icon to display on the left side of the title',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'rightIconCrumb',
@@ -148,23 +152,26 @@ const crumbInterface: TableItem[] = [
     required: false,
     description: 'The name of the icon to display on the right side of the title',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'disabledCrumb',
     prop: 'disabled',
     required: false,
     description: 'Wheter the Crumb is disabled or not',
-    values: 'true, false',
-    default: ''
+    values: 'boolean',
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'activeCrumb',
     prop: 'active',
     required: false,
     description: 'Wheter the Crumb is active or not',
-    values: 'true, false',
-    default: ''
+    values: 'boolean',
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'onClickCrumb',
@@ -172,18 +179,20 @@ const crumbInterface: TableItem[] = [
     required: true,
     description: 'The function for the Crumb',
     values: '() => void',
-    default: ''
+    default: '',
+    apiType: 'function'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'nav',
     prop: 'nav',
     required: false,
     description: 'Root container for the breadcrumbs. Controls the overall layout and background.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'link',
@@ -191,7 +200,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The crumb itself, which is typically a clickable link. (this includes the icons/title on the crumb.)',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'list',
@@ -199,7 +209,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Container for the list items of crumbs.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'listItem',
@@ -207,7 +218,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The container of the crumb.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'separator',
@@ -215,7 +227,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The separator between crumbs.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'iconLeft',
@@ -223,7 +236,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The class for the left icon.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'iconRight',
@@ -231,17 +245,19 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The class for the right icon.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const breadcrumbsEmits: TableItem[] = [
+const breadcrumbsEmits: EmitData[] = [
   {
     key: 'crumbClickEmit',
     event: 'crumbClick',
     description: 'Emitted when a breadcrumb is clicked.',
     values: 'Crumb',
-    type: 'Crumb => void'
+    type: 'Crumb => void',
+    apiType: 'event'
   }
 ]
 
@@ -455,28 +471,14 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Breadcrumbs Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="breadcrumbsProps"
-      />
-
-      <h3>Crumb Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="crumbInterface"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Breadcrumbs Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="breadcrumbsEmits"
+      <api-table
+        name="Breadcrumbs"
+        :tables="[
+          { title: 'Props', data: breadcrumbsProps, headers: 'props' },
+          { title: 'Crumb', data: crumbInterface, headers: 'interface' },
+          { title: 'Emits', data: breadcrumbsEmits, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

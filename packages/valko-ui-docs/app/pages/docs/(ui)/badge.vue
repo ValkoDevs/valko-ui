@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { BadgeProps, TableItem } from '#valkoui'
+import type { BadgeProps } from '#valkoui'
 
 const form = ref<BadgeProps>({
   color: 'primary',
@@ -15,14 +15,15 @@ const form = ref<BadgeProps>({
 
 const src = '/assets/badge.jpg'
 
-const badgeProps: TableItem[] = [
+const badgeProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Badge.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -30,7 +31,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'The shape of the Badge.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -38,7 +40,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'The size of the Badge.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'placementProp',
@@ -46,7 +49,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'The placement of the Badge.',
     values: 'bottom, top, right, left',
-    default: 'top'
+    default: 'top',
+    apiType: 'custom-string'
   },
   {
     key: 'alignmentProp',
@@ -54,7 +58,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'The alignment of the Badge.',
     values: 'start, center, end',
-    default: 'end'
+    default: 'end',
+    apiType: 'custom-string'
   },
   {
     key: 'contentProp',
@@ -62,31 +67,35 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'The content displayed inside of the Badge.',
     values: 'number | string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'outlinedProp',
     prop: 'outlined',
     required: false,
     description: 'Displays an outline for the Badge.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'dotProp',
     prop: 'dot',
     required: false,
     description: 'If true the Badge will have smaller dimensions and not display content inside.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'hiddenProp',
     prop: 'hidden',
     required: false,
     description: 'If true the Badge will be hidden.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -94,7 +103,8 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'Accessible text label read by assistive technologies when no visible label is provided.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -102,27 +112,30 @@ const badgeProps: TableItem[] = [
     required: false,
     description: 'Slots for applying custom styles to the Badge.',
     values: 'BadgeSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const badgeSlots: TableItem[] = [
+const badgeSlots: SlotData[] = [
   {
     key: 'defaultSlots',
     name: 'default',
     description: 'Slot for additional content to be placed inside the badge. This slot is typically used to include custom elements like icons, text, or other components.',
-    example: '<template #default>\n  <!-- Your custom content goes here -->\n</template>'
+    example: '<template #default>\n  <!-- Your custom content goes here -->\n</template>',
+    apiType: 'slot'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
     required: false,
     description: 'Root container for the badge. Controls the overall layout and background.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'badge',
@@ -130,7 +143,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the badge element itself.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
@@ -470,22 +484,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Badge Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="badgeProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Badge Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="badgeSlots"
+      <api-table
+        name="Badge"
+        :tables="[
+          { title: 'Props', data: badgeProps, headers: 'props' },
+          { title: 'Slots', data: badgeSlots, headers: 'slots' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>

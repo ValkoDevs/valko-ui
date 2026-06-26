@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TagProps, TableItem } from '#valkoui'
+import type { TagProps } from '#valkoui'
 import { useNotification } from '#valkoui'
 
 const form = ref<TagProps>({
@@ -18,14 +18,15 @@ const iconsForm = ref({
   right: false
 })
 
-const tagProps: TableItem[] = [
+const tagProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Tag.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -33,7 +34,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'The variant style of the Tag.',
     values: 'filled, outlined, ghost, gradient',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -41,7 +43,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'The shape style of the Tag.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -49,7 +52,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'The size of the Tag.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'textProp',
@@ -57,7 +61,8 @@ const tagProps: TableItem[] = [
     required: true,
     description: 'The text displayed in the Tag.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'iconLeftProp',
@@ -65,7 +70,8 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'The icon displayed on the left side of the Tag.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'iconRightProp',
@@ -73,31 +79,35 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'The icon displayed on the right side of the Tag.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'closableProp',
     prop: 'closable',
     required: false,
     description: 'Displays a close button on the Tag.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'isPressableProp',
     prop: 'isPressable',
     required: false,
     description: 'Whether the Tag should allow to be pressed.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'disabledProp',
     prop: 'disabled',
     required: false,
     description: 'Disables interaction with the Tag.',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProp',
@@ -105,69 +115,84 @@ const tagProps: TableItem[] = [
     required: false,
     description: 'Customizes style slots for Tag.',
     values: 'TagSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
+    required: false,
     description: 'Root container for the tag component.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'contentContainer',
     prop: 'contentContainer',
+    required: false,
     description: 'Wrapper for the tag content and icons.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'icons',
     prop: 'icons',
+    required: false,
     description: 'Styles for left and right icons.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'content',
     prop: 'content',
+    required: false,
     description: 'Text content of the tag.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'closeButton',
     prop: 'closeButton',
+    required: false,
     description: 'Styles for the close button container.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'closeIcon',
     prop: 'closeIcon',
+    required: false,
     description: 'Icon for the close button.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const tagEmits: TableItem[] = [
+const tagEmits: EmitData[] = [
   {
     key: 'clickEmit',
     event: 'click',
     type: '() => void',
     values: '',
-    description: 'Emitted when the Tag is clicked.'
+    description: 'Emitted when the Tag is clicked.',
+    apiType: 'event'
   },
   {
     key: 'closeEmit',
     event: 'close',
     type: '() => void',
     values: '',
-    description: 'Emitted when the close button on the Tag is clicked.'
+    description: 'Emitted when the close button on the Tag is clicked.',
+    apiType: 'event'
   }
 ]
 
@@ -452,22 +477,13 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Tag Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="tagProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Tag Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="tagEmits"
+      <api-table
+        name="Tag"
+        :tables="[
+          { title: 'Props', data: tagProps, headers: 'props' },
+          { title: 'Emits', data: tagEmits, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+        ]"
       />
     </template>
   </doc-section>
