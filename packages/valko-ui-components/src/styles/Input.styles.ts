@@ -59,6 +59,7 @@ const input = tv({
       'px-4'
     ],
     icons: [
+      'vk-input__icons',
       'cursor-pointer',
       'text-on-surface-variant',
       'absolute',

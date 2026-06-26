@@ -43,7 +43,6 @@ const onClick = (event: MouseEvent) => {
 }
 
 const onItemClick = (item: Item) => {
-  if (item.disabled) return
   emit('itemClick', item)
   item.onClick?.()
   open.value = false

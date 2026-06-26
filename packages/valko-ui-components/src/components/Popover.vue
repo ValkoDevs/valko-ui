@@ -74,6 +74,7 @@ onBeforeUnmount(() => {
   <div
     ref="rootRef"
     :class="s.container({ class: styleSlots?.container })"
+    :data-open="isOpen"
   >
     <div
       :class="s.slotContainer({ class: styleSlots?.slotContainer })"

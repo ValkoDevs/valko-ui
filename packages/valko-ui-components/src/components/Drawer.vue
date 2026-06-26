@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, useId } from 'vue'
-import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
+import { ref, computed } from 'vue'
+import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
 import type { DrawerProps } from '#valkoui/types/Drawer'
 import styles from '#valkoui/styles/Drawer.styles.ts'
 import VkIcon from './Icon.vue'
@@ -24,7 +24,6 @@ const emit = defineEmits(['close'])
 const s = computed(() => styles(props))
 
 const containerRef = ref(null)
-const descriptionId = useId()
 
 const closeDrawer = () => { if (props.closable) emit('close') }
 
@@ -89,7 +88,6 @@ const transitionClasses = computed(() => {
       :class="s.dialog({ class: styleSlots?.dialog })"
       :initial-focus="containerRef"
       :aria-modal="true"
-      :aria-describedby="ariaDescription ? descriptionId : undefined"
       :aria-labelledby="ariaLabelledBy"
       @close="closeDrawer"
     >
@@ -139,13 +137,12 @@ const transitionClasses = computed(() => {
                 >
                   {{ title }}
                 </dialog-title>
-                <div
+                <dialog-description
                   v-if="ariaDescription"
                   class="sr-only"
-                  :id="descriptionId"
                 >
                   {{ ariaDescription }}
-                </div>
+                </dialog-description>
                 <vk-button
                   v-if="closable"
                   tabindex="-1"

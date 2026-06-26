@@ -52,9 +52,7 @@ const availableViews = ref<DisplayView[]>(getAvailableViews())
 const currentView = ref<DisplayView>(availableViews.value[0])
 const selectionType = ref<SelectionType>(getSelectionType())
 
-const onViewChange = (view: DisplayView) => {
-  if (availableViews.value.includes(view)) currentView.value = view
-}
+const onViewChange = (view: DisplayView) => currentView.value = view
 
 const onSelectYear = (year: number) => {
   const result = props.adapter.onSelectYear(year)
@@ -104,7 +102,10 @@ watch(() => props.format, () => {
 </script>
 
 <template>
-  <div :class="s.container({ class: styleSlots?.container })">
+  <div
+    :class="s.container({ class: styleSlots?.container })"
+    :data-selection-type="selectionType"
+  >
     <vk-calendar-day-view
       v-if="currentView === 'days'"
       v-bind="props"

@@ -410,6 +410,23 @@ describe('Dropdown component', () => {
     })
   })
 
+  describe('Computeds', () => {
+    describe('open computed', () => {
+      it('should not update internalOpen when isOpen prop is set (controlled)', async () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            isOpen: true,
+            items: []
+          }
+        })
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
+        expect(wrapper.props('isOpen')).toBe(true)
+      })
+    })
+  })
+
   describe('Emits', () => {
     it('should emit click event', async () => {
       const wrapper = mount(VkDropdown, {
@@ -434,6 +451,18 @@ describe('Dropdown component', () => {
       await wrapper.find('.vk-dropdown__item-button').trigger('click')
 
       expect(wrapper.emitted()).not.toHaveProperty('itemClick')
+    })
+
+    it('should close the dropdown when popover emits close', async () => {
+      const wrapper = mount(VkDropdown, {
+        props: { items }
+      })
+
+      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+      await wrapper.findComponent({ name: 'VkPopover' }).vm.$emit('close')
+      await flushPromises()
+
+      expect(wrapper.find('.vk-dropdown__items-menu').exists()).toBe(false)
     })
   })
 })

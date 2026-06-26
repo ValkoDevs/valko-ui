@@ -45,7 +45,7 @@ const selectIcon = (separator: string) => separator.length > 2
         <a
           v-if="crumb.key !== lastCrumbKey"
           role="link"
-          :tabindex="crumb.key !== lastCrumbKey ? 0 : -1"
+          :tabindex="crumb.disabled ? -1 : 0"
           :class="s.link({ class: styleSlots?.link })"
           :data-disabled="crumb.disabled"
           :aria-disabled="crumb.disabled || undefined"

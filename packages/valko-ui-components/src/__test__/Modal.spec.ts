@@ -15,6 +15,9 @@ describe('Modal component', () => {
   let wrapper: VueWrapper
   let modal: VueWrapper
   let backdrop: VueWrapper
+
+  afterEach(() => document.body.innerHTML = '')
+
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(async () => {
@@ -355,6 +358,23 @@ describe('Modal component', () => {
     })
   })
 
+  describe('Arias', () => {
+    it('should use description id for aria-describedby if aria-description is provided', async () => {
+      mount(VkModal, {
+        props: {
+          isOpen: true,
+          ariaDescription: 'Some description'
+        },
+        attachTo: document.body
+      })
+
+      await nextTick()
+
+      const dialog = document.querySelector('.vk-modal__dialog')
+      expect(dialog?.getAttribute('aria-describedby')).toBeTruthy()
+    })
+  })
+
   describe('Emits', () => {
     it('should emit close event', async () => {
       const wrapper = mount(VkModal, {
@@ -370,6 +390,37 @@ describe('Modal component', () => {
       modal = wrapper.getComponent(DialogPanel) as unknown as VueWrapper
       modal.find('i.ti.ti-x').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('close')
+    })
+
+    it('should not emit close if closable is false when the dialog close is emited', async () => {
+      const DialogStub = {
+        template: '<div @click="$emit(\'close\')"><slot /></div>'
+      }
+
+      const DialogPanelStub = {
+        template: '<div><slot /></div>'
+      }
+
+      const wrapper = mount(VkModal, {
+        props: {
+          isOpen: true,
+          closable: false
+        },
+        slots: {
+          default: 'Hello World'
+        },
+        global: {
+          stubs: {
+            Dialog: DialogStub,
+            DialogPanel: DialogPanelStub
+          }
+        }
+      })
+
+      await nextTick()
+      await wrapper.findComponent(DialogStub).trigger('click')
+
+      expect(wrapper.emitted()).not.toHaveProperty('close')
     })
   })
 })

@@ -205,7 +205,34 @@ describe('Popover component', () => {
     })
   })
 
-  describe('Events', () => {
+  describe('Methods & Listeners', () => {
+    it('should remove event listeners when the component is unmounted', async () => {
+      const removeSpy = vi.spyOn(document, 'removeEventListener')
+      const wrapper = mount(VkPopover, {
+        props: {
+          isOpen: true
+        }
+      })
+
+      wrapper.unmount()
+      expect(removeSpy).toHaveBeenCalledWith('click', expect.any(Function))
+      removeSpy.mockRestore()
+    })
+
+    describe('placement', () => {
+      it('should use the passed alignment prop if present', () => {
+        wrapper = mount(VkPopover, {
+          props: {
+            isOpen: true,
+            alignment: 'start'
+          }
+        })
+        expect(wrapper.find('.vk-popover__panel').attributes('data-placement')).toContain('start')
+      })
+    })
+  })
+
+  describe('Emits', () => {
     it('should emit close when clicking outside', async () => {
       wrapper = mount(VkPopover, {
         props: { isOpen: true },

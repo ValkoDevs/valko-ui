@@ -10,6 +10,7 @@ describe('Tabs component', () => {
     { key: 'friends', title: 'Friends' }
   ]
   let wrapper: VueWrapper
+
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(async () => {
@@ -251,6 +252,64 @@ describe('Tabs component', () => {
   })
 
   describe('Methods', () => {
+    describe('selectedIndex computed', () => {
+      it('should emit update:modelValue when modelValue is defined and tab changes', async () => {
+        const wrapper = mount(VkTabs, {
+          props: {
+            tabs,
+            modelValue: 0
+          }
+        })
+        const tabButtons = wrapper.findAll('[role="tab"]')
+        await tabButtons[1].trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toBeDefined()
+      })
+    })
+
+    describe('moveCursor', () => {
+      it('should set cursorRef style.left with extraLeft when shape is line, variant is outlined, and vertical is true', async () => {
+        const wrapper = mount(VkTabs, {
+          props: {
+            tabs,
+            shape: 'line',
+            variant: 'outlined',
+            vertical: true
+          },
+          attachTo: document.body
+        })
+
+        await flushPromises()
+        const tabButtons = wrapper.findAll('[role="tab"]')
+        await tabButtons[1].trigger('click')
+        await flushPromises()
+        const cursorEl = wrapper.vm.$refs.cursorRef as HTMLElement
+        expect(cursorEl.style.left).not.toBe('')
+
+        wrapper.unmount()
+      })
+
+      it('should set cursorRef style properties when shape is line, variant is outlined, and vertical is false', async () => {
+        const wrapper = mount(VkTabs, {
+          props: {
+            tabs,
+            shape: 'line',
+            variant: 'outlined',
+            vertical: false
+          },
+          attachTo: document.body
+        })
+        await flushPromises()
+        const tabButtons = wrapper.findAll('[role="tab"]')
+        await tabButtons[1].trigger('click')
+        await flushPromises()
+        const cursorEl = wrapper.vm.$refs.cursorRef as HTMLElement
+        expect(cursorEl.style.width).not.toBe('')
+
+        wrapper.unmount()
+      })
+    })
+
     describe('onChange', () => {
       it('should not emit tabClick event if the tab is disabled', async () => {
         const wrapper = mount(VkTabs, {
@@ -262,10 +321,21 @@ describe('Tabs component', () => {
           }
         })
 
-        const tabList = wrapper.findComponent({ name: 'TabList' })
-        await tabList.find('button').trigger('click')
+        const tabButtons = wrapper.findAll('[role="tab"]')
+        await tabButtons[0].trigger('click')
 
         expect(wrapper.emitted('tabClick')).toBeUndefined()
+      })
+
+      it('should emit tabClick event with tab key when a tab is clicked', async () => {
+        const wrapper = mount(VkTabs, {
+          props: { tabs }
+        })
+
+        const tabButtons = wrapper.findAll('[role="tab"]')
+        await tabButtons[1].trigger('click')
+
+        expect(wrapper.emitted('tabClick')).toBeDefined()
       })
     })
   })

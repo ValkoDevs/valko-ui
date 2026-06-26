@@ -313,6 +313,24 @@ describe('Time component', () => {
     })
   })
 
+  describe('Listeners', () => {
+    it('should remove event listeners when the component is unmounted', async () => {
+      const removeSpy = vi.spyOn(document, 'removeEventListener')
+      const wrapper = mount(VkTimepicker, {
+        props: {
+          isOpen: true,
+          modelValue,
+          parsedModel,
+          adapter
+        }
+      })
+
+      wrapper.unmount()
+      expect(removeSpy).toHaveBeenCalledWith('mousedown', expect.any(Function), true)
+      removeSpy.mockRestore()
+    })
+  })
+
   describe('Emits', () => {
     it('should emit open event', async () => {
       const wrapper = mount(VkTimepicker, {

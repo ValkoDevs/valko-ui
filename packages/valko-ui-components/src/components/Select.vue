@@ -111,7 +111,10 @@ const handleKeyDown = (e: KeyboardEvent) => {
     else handleSingleSelection(item.value)
   }
 
-  highlightedIndex.value = formulaMap[currentKey as keyof typeof formulaMap]()
+  const move = formulaMap[currentKey as keyof typeof formulaMap]
+  if (!move) return
+
+  highlightedIndex.value = move()
   nextTick(() => itemRefs.value[highlightedIndex.value]?.scrollIntoView({ block: 'nearest' }))
 }
 

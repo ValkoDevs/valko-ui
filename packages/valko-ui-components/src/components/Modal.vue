@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, useId, computed } from 'vue'
-import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle } from '@headlessui/vue'
+import { ref, computed } from 'vue'
+import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
 import type { ModalProps } from '#valkoui/types/Modal'
 import styles from '#valkoui/styles/Modal.styles.ts'
 import VkIcon from './Icon.vue'
@@ -22,7 +22,6 @@ const emit = defineEmits(['close'])
 const s = computed(() => styles(props))
 
 const containerRef = ref(null)
-const descriptionId = useId()
 
 const closeModal = () => { if (props.closable) emit('close') }
 </script>
@@ -37,7 +36,6 @@ const closeModal = () => { if (props.closable) emit('close') }
       :class="s.dialog({ class: styleSlots?.dialog })"
       :initial-focus="containerRef"
       :aria-modal="true"
-      :aria-describedby="ariaDescription ? descriptionId : undefined"
       :aria-labelledby="ariaLabelledBy"
       @close="closeModal"
     >
@@ -80,13 +78,12 @@ const closeModal = () => { if (props.closable) emit('close') }
                 >
                   {{ title }}
                 </dialog-title>
-                <div
+                <dialog-description
                   v-if="ariaDescription"
                   class="sr-only"
-                  :id="descriptionId"
                 >
                   {{ ariaDescription }}
-                </div>
+                </dialog-description>
                 <vk-button
                   v-if="closable"
                   tabindex="-1"

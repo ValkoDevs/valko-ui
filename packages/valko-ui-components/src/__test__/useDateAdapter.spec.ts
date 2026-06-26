@@ -1,4 +1,5 @@
 import useDateAdapter from '#valkoui/composables/useDateAdapter'
+import type { CalendarAdapter } from '#valkoui/types/Calendar'
 
 describe('useDateAdapter composable', () => {
   const mockDate = new Date(2024, 9, 18)
@@ -11,14 +12,26 @@ describe('useDateAdapter composable', () => {
     vi.useRealTimers()
   })
 
-  describe('Model prop', () => {
+  describe('model', () => {
     it('should return model as an EpochTimeStamp', () => {
-      const [model] = useDateAdapter({ format: 'YYYY-MM-DD' })
+      const [ model ] = useDateAdapter({ format: 'YYYY-MM-DD' })
       expect(model.value).toBe(new Date(2024, 9, 18).getTime())
     })
   })
 
-  describe('ParsedModel prop', () => {
+  describe('parsedModel', () => {
+    it('should fallback to default format YYYY-MM-DD if format is missing', () => {
+      const [, parsedModel] = useDateAdapter({})
+      const today = new Date()
+      const expected = [
+        today.getFullYear(),
+        String(today.getMonth() + 1).padStart(2, '0'),
+        String(today.getDate()).padStart(2, '0')
+      ].join('-')
+
+      expect(parsedModel.value).toBe(expected)
+    })
+
     it('should format the year as YYYY (full year)', () => {
       const [, parsedModel] = useDateAdapter({ format: 'YYYY' })
       const currentYear = new Date().getFullYear()
@@ -86,68 +99,137 @@ describe('useDateAdapter composable', () => {
     })
   })
 
-  describe('Date interaction and helper functions', () => {
-    describe('GetWeekdays', () => {
-      it('should return correct weekdays based on locale', () => {
-        const [, , adapter] = useDateAdapter({ locale: 'en-US', format: 'YYYY-MM-DD' })
-        const weekdays = adapter.getWeekdays()
-
-        expect(weekdays).toEqual(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'])
-      })
+  describe('formattedDates', () => {
+    it('should fallback to today for day if model is falsy', () => {
+      const [model, , adapter] = useDateAdapter({})
+      model.value = 0
+      const today = new Date()
+      expect(adapter.formattedDates.value.selected.day).toBe(today.getDate())
     })
-
-    describe('GetMonths', () => {
-      it('should return correct months based on locale', () => {
-        const [, , adapter] = useDateAdapter({ locale: 'en-US', format: 'YYYY-MM-DD' })
-        const months = adapter.getMonths()
-
-        expect(months).toEqual([
-          'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-        ])
-      })
+    it('should fallback to today for month if model is falsy', () => {
+      const [model, , adapter] = useDateAdapter({})
+      model.value = 0
+      const today = new Date()
+      expect(adapter.formattedDates.value.selected.month).toBe(today.getMonth())
     })
-
-    describe('onSelectDay', () => {
-      it('should correctly select a day using onSelectDay', () => {
-        const selectedDay = 18
-        const [, , adapter] = useDateAdapter({
-          format: 'DD'
-        })
-
-        adapter.onSelectDay(selectedDay)
-
-        expect(adapter.formattedDates.value.selected.day).toBe(selectedDay)
-      })
-    })
-
-    describe('onSelectMonth', () => {
-      it('should correctly select a month using onSelectMonth', () => {
-        const selectedMonth = 9
-        const [, , adapter] = useDateAdapter({
-          format: 'MM'
-        })
-
-        adapter.onSelectMonth(selectedMonth)
-
-        expect(adapter.formattedDates.value.selected.month).toBe(selectedMonth)
-      })
-    })
-
-    describe('onSelectYear', () => {
-      it('should correctly select a year using onSelectYear', () => {
-        const selectedYear = 2024
-        const [, , adapter] = useDateAdapter({
-          format: 'YYYY'
-        })
-
-        adapter.onSelectYear(selectedYear)
-
-        expect(adapter.formattedDates.value.selected.year).toBe(selectedYear)
-      })
+    it('should fallback to today for year if model is falsy', () => {
+      const [model, , adapter] = useDateAdapter({})
+      model.value = 0
+      const today = new Date()
+      expect(adapter.formattedDates.value.selected.year).toBe(today.getFullYear())
     })
   })
 
-  describe('When DisabledDates funcionality is added or not', () => {
+  describe('getWeekdays', () => {
+    it('should return correct weekdays based on locale', () => {
+      const [, , adapter] = useDateAdapter({ locale: 'en-US', format: 'YYYY-MM-DD' })
+      const weekdays = adapter.getWeekdays()
+      expect(weekdays).toEqual(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'])
+    })
+  })
+
+  describe('getMonths', () => {
+    it('should return correct months based on locale', () => {
+      const [, , adapter] = useDateAdapter({ locale: 'en-US', format: 'YYYY-MM-DD' })
+      const months = adapter.getMonths()
+      expect(months).toEqual([
+        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      ])
+    })
+  })
+
+  describe('onSelectDay', () => {
+    describe('with YYYY-MM-DD format and known model', () => {
+      let model
+      let adapter: CalendarAdapter
+
+      beforeEach(() => {
+        [model, , adapter] = useDateAdapter({ format: 'YYYY-MM-DD' })
+        model.value = new Date(2022, 5, 1).getTime()
+      })
+
+      it('should set the selected day from tempDate', () => {
+        adapter.onSelectYear(2022)
+        adapter.onSelectMonth(5)
+        adapter.onSelectDay(10)
+        expect(adapter.formattedDates.value.display.day).toBe(10)
+      })
+
+      it('should set the selected month from tempDate', () => {
+        adapter.onSelectYear(2022)
+        adapter.onSelectMonth(5)
+        adapter.onSelectDay(10)
+        expect(adapter.formattedDates.value.display.month).toBe(5)
+      })
+
+      it('should set the selected year from tempDate', () => {
+        adapter.onSelectYear(2022)
+        adapter.onSelectMonth(5)
+        adapter.onSelectDay(10)
+        expect(adapter.formattedDates.value.display.year).toBe(2022)
+      })
+    })
+
+    it('should set year to default when format is MM-DD', () => {
+      const mockYear = new Date().getFullYear()
+      const [model, , adapter] = useDateAdapter({ format: 'MM-DD' })
+      model.value = new Date(mockYear, 5, 1).getTime()
+      adapter.onSelectMonth(5)
+      adapter.onSelectDay(10)
+      expect(adapter.formattedDates.value.display.year).toBe(mockYear)
+    })
+
+    it('should use the actual year if format is DD and tempDate is not set', () => {
+      const [, , adapter] = useDateAdapter({ format: 'DD' })
+      adapter.onSelectDay(15)
+      expect(adapter.formattedDates.value.display.year).toBe(new Date().getFullYear())
+    })
+  })
+
+  describe('onSelectMonth', () => {
+    describe('with YYYY-MM format and known model', () => {
+      let model
+      let adapter: CalendarAdapter
+
+      beforeEach(() => {
+        [model, , adapter] = useDateAdapter({ format: 'YYYY-MM' })
+        model.value = new Date(2022, 7, 1).getTime()
+      })
+
+      it('should set the selected year from tempDate', () => {
+        adapter.onSelectYear(2022)
+        adapter.onSelectMonth(7)
+        expect(adapter.formattedDates.value.display.year).toBe(2022)
+      })
+
+      it('should set the selected month from tempDate', () => {
+        adapter.onSelectYear(2022)
+        adapter.onSelectMonth(7)
+        expect(adapter.formattedDates.value.display.month).toBe(7)
+      })
+
+      it('should set the year after selecting year and month', () => {
+        adapter.onSelectYear(2022)
+        adapter.onSelectMonth(7)
+        expect(adapter.formattedDates.value.display.year).toBe(2022)
+      })
+    })
+
+    it('should set year to default when format is MM', () => {
+      const mockYear = new Date().getFullYear()
+      const [model, , adapter] = useDateAdapter({ format: 'MM' })
+      model.value = new Date(mockYear, 7, 1).getTime()
+      adapter.onSelectMonth(7)
+      expect(adapter.formattedDates.value.display.year).toBe(mockYear)
+    })
+  })
+
+  describe('disabledDates', () => {
+    it('should return an empty array if disabledDates is not provided', () => {
+      const [, , adapter] = useDateAdapter({ format: 'YYYY-MM-DD' })
+      expect(adapter.disabledDates.value).toEqual([])
+    })
+
     it('should return the correct disabled date for a single day', () => {
       const disabledTimestamp = new Date(2024, 9, 17).getTime()
       const [, , adapter] = useDateAdapter({
@@ -211,7 +293,7 @@ describe('useDateAdapter composable', () => {
 
   describe('When min & max date funcionality is added or not', () => {
     it('should correctly format minDate in formattedDates', () => {
-      const minDate = new Date(2024, 0, 1) // 1 de enero de 2024
+      const minDate = new Date(2024, 0, 1)
       const minTimestamp = minDate.getTime()
       const [, , adapter] = useDateAdapter({
         format: 'YYYY-MM-DD',

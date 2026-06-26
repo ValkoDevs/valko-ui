@@ -333,6 +333,31 @@ describe('Progressbar component', () => {
         const progress = wrapper.find('.vk-progressbar__stripes')
         expect(progress.attributes('style')).toContain('background-image')
       })
+
+      it('stripeStyles returns undefined for backgroundImage when striped is false', () => {
+        const wrapper = mount(VkProgressbar, {
+          props: {
+            striped: false,
+            size: 'md'
+          }
+        })
+
+        // @ts-expect-error: access internal computed since stripes doesn't render when false
+        const styles = wrapper.vm.stripeStyles
+
+        expect(styles.backgroundImage).toBeUndefined()
+      })
+
+      it('stripeStyles returns undefined for backgroundSize when striped is false and size is xs', () => {
+        const wrapper = mount(VkProgressbar, {
+          props: { striped: false, size: 'xs' }
+        })
+
+        // @ts-expect-error: access internal computed since stripes doesn't render when false
+        const styles = wrapper.vm.stripeStyles
+
+        expect(styles.backgroundSize).toBeUndefined()
+      })
     })
   })
 

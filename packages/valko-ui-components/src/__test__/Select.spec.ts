@@ -301,6 +301,120 @@ describe('Select component', () => {
   })
 
   describe('Methods', () => {
+    describe('handleKeyDown', () => {
+      let input: DOMWrapper<HTMLInputElement>
+      let originalScrollIntoView: typeof window.HTMLElement.prototype.scrollIntoView
+
+      beforeAll(() => {
+        originalScrollIntoView = window.HTMLElement.prototype.scrollIntoView
+        window.HTMLElement.prototype.scrollIntoView = function () {}
+      })
+
+      afterAll(() => {
+        window.HTMLElement.prototype.scrollIntoView = originalScrollIntoView
+      })
+
+      beforeEach(async () => {
+        wrapper = mount(VkSelect, {
+          props: { options }
+        })
+
+        input = wrapper.find('.vk-input__input')
+        await input.trigger('focus')
+        await nextTick()
+      })
+
+      afterEach(() => wrapper.unmount())
+
+      it('should move highlight with ArrowDown', async () => {
+        await input.trigger('keydown', { key: 'ArrowDown' })
+        await nextTick()
+        const items = wrapper.findAll('.vk-select__item')
+
+        expect(items[0].attributes('data-highlighted')).toBe('true')
+      })
+
+      it('should move highlight with ArrowUp', async () => {
+        await input.trigger('keydown', { key: 'ArrowDown' })
+        await input.trigger('keydown', { key: 'ArrowDown' })
+        await nextTick()
+        await input.trigger('keydown', { key: 'ArrowUp' })
+        await nextTick()
+        const items = wrapper.findAll('.vk-select__item')
+
+        expect(items[0].attributes('data-highlighted')).toBe('true')
+      })
+
+      it('should move highlight to first with Home', async () => {
+        await input.trigger('keydown', { key: 'ArrowDown' })
+        await input.trigger('keydown', { key: 'ArrowDown' })
+        await nextTick()
+        await input.trigger('keydown', { key: 'Home' })
+        await nextTick()
+        const items = wrapper.findAll('.vk-select__item')
+
+        expect(items[0].attributes('data-highlighted')).toBe('true')
+      })
+
+      it('should move highlight to last with End', async () => {
+        await input.trigger('keydown', { key: 'End' })
+        await nextTick()
+        const items = wrapper.findAll('.vk-select__item')
+
+        expect(items[items.length - 1].attributes('data-highlighted')).toBe('true')
+      })
+
+      it('should select item with Enter if highlighted', async () => {
+        await input.trigger('keydown', { key: 'ArrowDown' })
+        await nextTick()
+        await input.trigger('keydown', { key: 'Enter' })
+
+        expect(wrapper.emitted('update:modelValue')).toBeDefined()
+      })
+
+      it('should select item with SpaceBar if highlighted', async () => {
+        await input.trigger('keydown', { key: 'ArrowDown' })
+        await input.trigger('keydown', { key: 'ArrowDown' })
+        await nextTick()
+        await input.trigger('keydown', { key: 'SpaceBar' })
+
+        expect(wrapper.emitted('update:modelValue')).toBeDefined()
+      })
+
+      it('should do nothing for unrelated keys', async () => {
+        await input.trigger('keydown', { key: 'Tab' })
+        await nextTick()
+
+        const items = wrapper.findAll('.vk-select__item')
+        const highlighted = items.filter(i => i.attributes('data-highlighted') === 'true')
+
+        expect(highlighted.length).toBe(0)
+      })
+
+      it('should select item with Enter if highlighted and multiple is true', async () => {
+        wrapper.setProps({ multiple: true })
+
+        await input.trigger('keydown', { key: 'ArrowDown' })
+        await nextTick()
+        await input.trigger('keydown', { key: 'Enter' })
+        await nextTick()
+
+        expect(wrapper.emitted('update:modelValue')?.[0][0]).toEqual([1])
+      })
+
+      it('should select item with SpaceBar if highlighted and multiple is true', async () => {
+        wrapper.setProps({ multiple: true })
+
+        await input.trigger('keydown', { key: 'ArrowDown' })
+        await input.trigger('keydown', { key: 'ArrowDown' })
+        await nextTick()
+        await input.trigger('keydown', { key: ' ' })
+        await nextTick()
+
+        expect(wrapper.emitted('update:modelValue')?.[0][0]).toEqual([2])
+      })
+    })
+
     describe('SelectItem functionality', () => {
       let items: DOMWrapper<HTMLElement>[]
 
@@ -474,6 +588,26 @@ describe('Select component', () => {
 
         expect(wrapper.find('.vk-select__dropdown').exists()).toBe(false)
       })
+
+      it('should close dropdown on blur', async () => {
+        await wrapper.find('.vk-input__input').trigger('blur')
+        await nextTick()
+        expect(wrapper.find('.vk-select__dropdown').exists()).toBe(false)
+      })
+
+      it('should close dropdown on Escape keydown', async () => {
+        await wrapper.find('.vk-input__input').trigger('keydown', { key: 'Escape' })
+        await nextTick()
+        expect(wrapper.find('.vk-select__dropdown').exists()).toBe(false)
+      })
+
+      it('should open dropdown when icon is clicked', async () => {
+        const icon = wrapper.findComponent({ name: 'VkIcon' })
+        await icon.trigger('click')
+        await nextTick()
+
+        expect(wrapper.find('.vk-select__dropdown').exists()).toBe(true)
+      })
     })
 
     describe('clearSelection', () => {
@@ -543,6 +677,24 @@ describe('Select component', () => {
         await wrapper.vm.$nextTick()
 
         expect(wrapper.find('.vk-select__dropdown').exists()).toBe(false)
+      })
+
+      it('should not close the dropdown when clicked inside', async () => {
+        const wrapper = mount(VkSelect, {
+          props: {
+            options,
+            multiple: true,
+            attachTo: document.body
+          }
+        })
+
+        await wrapper.find('.vk-input__input').trigger('focus')
+        await wrapper.vm.$nextTick()
+        const selectRefEl = wrapper.vm.$refs.selectRef as HTMLElement
+        selectRefEl.click()
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.find('.vk-select__dropdown').exists()).toBe(true)
       })
     })
 

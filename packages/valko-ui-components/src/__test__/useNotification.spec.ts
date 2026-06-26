@@ -312,4 +312,13 @@ describe('useNotification composable', () => {
       expect(notification?.className).toContain('w-52')
     })
   })
+
+  describe('When text prop changes', () => {
+    it('should throw an error if text prop is not provided', () => {
+      // @ts-expect-error: Text is required, we are forcing it to be missing to test error handling
+      expect(() => useNotification({ duration: 3000 })).toThrow('Property "text" is required')
+    })
+  })
 })
+
+

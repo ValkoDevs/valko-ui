@@ -45,7 +45,6 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutsi
       readonly
       cursor="pointer"
       @focus="emit('open')"
-      @right-icon-click="emit('open')"
     >
       <template #right-icon>
         <vk-icon name="calendar" />

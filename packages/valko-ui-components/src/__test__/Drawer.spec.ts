@@ -16,6 +16,9 @@ describe('Drawer component', () => {
   let drawer: VueWrapper
   let backdrop: VueWrapper
   let panel: VueWrapper
+
+  afterEach(() => document.body.innerHTML = '')
+
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(async () => {
@@ -450,6 +453,54 @@ describe('Drawer component', () => {
       window.dispatchEvent(new Event('click', { bubbles: true }))
 
       expect(wrapper.emitted()).not.toHaveProperty('close')
+    })
+
+    it('should not emit close if closable is false when the dialog close is emited', async () => {
+      const DialogStub = {
+        template: '<div @click="$emit(\'close\')"><slot /></div>'
+      }
+
+      const DialogPanelStub = {
+        template: '<div><slot /></div>'
+      }
+
+      const wrapper = mount(VkDrawer, {
+        props: {
+          isOpen: true,
+          closable: false
+        },
+        slots: {
+          default: 'Hello World'
+        },
+        global: {
+          stubs: {
+            Dialog: DialogStub,
+            DialogPanel: DialogPanelStub
+          }
+        }
+      })
+
+      await nextTick()
+      await wrapper.findComponent(DialogStub).trigger('click')
+
+      expect(wrapper.emitted()).not.toHaveProperty('close')
+    })
+  })
+
+  describe('Arias', () => {
+    it('should use description id for aria-describedby if aria-description is provided', async () => {
+      mount(VkDrawer, {
+        props: {
+          isOpen: true,
+          ariaDescription: 'description-id'
+        },
+        attachTo: document.body
+      })
+
+      await nextTick()
+
+      const dialog = document.querySelector('.vk-drawer__dialog')
+      expect(dialog?.getAttribute('aria-describedby')).toBeTruthy()
     })
   })
 

@@ -10,6 +10,22 @@ describe('useClientSidePagination composable', () => {
     { id: 5, name: 'Eve' }
   ]
 
+  it('should use default limit of 10 when not provided', () => {
+    const { result } = useClientSidePagination(data)
+    expect(result.value).toEqual({
+      records: [
+        { id: 1, name: 'Alice' },
+        { id: 2, name: 'Bob' },
+        { id: 3, name: 'Charlie' },
+        { id: 4, name: 'David' },
+        { id: 5, name: 'Eve' }
+      ],
+      total: 5,
+      limit: 10,
+      offset: 0
+    })
+  })
+
   it('should initialize with the correct default pagination', () => {
     const { result } = useClientSidePagination(data, 2)
     expect(result.value).toEqual({

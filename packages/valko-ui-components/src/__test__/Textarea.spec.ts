@@ -245,6 +245,169 @@ describe('Textarea component', () => {
     })
   })
 
+  describe('Arias', () => {
+    it('should set aria-describedby when helpertext is present', () => {
+      wrapper = mount(VkTextarea, {
+        props: {
+          helpertext: 'Help text'
+        }
+      })
+      const helpertextId = wrapper.find('.vk-textarea__helper').attributes('id')
+      const describedby = wrapper.find('textarea').attributes('aria-describedby')
+      expect(describedby).toContain(helpertextId)
+    })
+
+    it('should set aria-describedby when ariaDescribedBy prop is present', () => {
+      wrapper = mount(VkTextarea, {
+        props: {
+          ariaDescribedBy: 'external-id'
+        }
+      })
+      expect(wrapper.find('textarea').attributes('aria-describedby')).toContain('external-id')
+    })
+
+    it('should set aria-describedby with both helpertext id and aria-describedby prop', () => {
+      wrapper = mount(VkTextarea, {
+        props: {
+          helpertext: 'Help text',
+          ariaDescribedBy: 'external-id'
+        }
+      })
+      const helpertextId = wrapper.find('.vk-textarea__helper').attributes('id')
+      const describedby = wrapper.find('textarea').attributes('aria-describedby')
+      expect(describedby).toContain(helpertextId)
+      expect(describedby).toContain('external-id')
+    })
+  })
+
+  describe('Methods', () => {
+    describe('updateValue', () => {
+      it('should update modelValue when input event is triggered', async () => {
+        wrapper = mount(VkTextarea, {
+          props: {
+            modelValue: ''
+          }
+        })
+
+        const textarea = wrapper.find('textarea')
+        await textarea.setValue('Hello World')
+        expect(wrapper.emitted()['update:modelValue'][0]).toEqual(['Hello World'])
+      })
+
+      it('should not emit update:modelValue when readonly is true', async () => {
+        wrapper = mount(VkTextarea, {
+          props: {
+            modelValue: '',
+            readonly: true
+          }
+        })
+
+        const textarea = wrapper.find('textarea')
+        await textarea.setValue('Hello World')
+        expect(wrapper.emitted()['update:modelValue']).toBeUndefined()
+      })
+
+      it('should not emit update:modelValue when disabled is true', async () => {
+        wrapper = mount(VkTextarea, {
+          props: {
+            modelValue: '',
+            disabled: true
+          }
+        })
+
+        const textarea = wrapper.find('textarea')
+        await textarea.setValue('Hello World')
+        expect(wrapper.emitted()['update:modelValue']).toBeUndefined()
+      })
+    })
+
+    describe('handleIconClick', () => {
+      it('should emit leftIconClick event when the left icon is clicked', async () => {
+        wrapper = mount(VkTextarea, {
+          slots: {
+            'left-icon': '<span>Left Icon</span>'
+          }
+        })
+
+        const icon = wrapper.find('.vk-textarea__left-icon')
+        await icon.trigger('click')
+        expect(wrapper.emitted()).toHaveProperty('leftIconClick')
+      })
+
+      it('should not emit leftIconClick event when the textarea is disabled', async () => {
+        wrapper = mount(VkTextarea, {
+          props: {
+            disabled: true
+          },
+          slots: {
+            'left-icon': '<span>Left Icon</span>'
+          }
+        })
+
+        const icon = wrapper.find('.vk-textarea__left-icon')
+        await icon.trigger('click')
+        expect(wrapper.emitted()).not.toHaveProperty('leftIconClick')
+      })
+
+      it('should not emit leftIconClick event when the textarea is readonly', async () => {
+        wrapper = mount(VkTextarea, {
+          props: {
+            readonly: true
+          },
+          slots: {
+            'left-icon': '<span>Left Icon</span>'
+          }
+        })
+
+        const icon = wrapper.find('.vk-textarea__left-icon')
+        await icon.trigger('click')
+        expect(wrapper.emitted()).not.toHaveProperty('leftIconClick')
+      })
+
+      it('should emit rightIconClick event when the right icon is clicked', async () => {
+        wrapper = mount(VkTextarea, {
+          slots: {
+            'right-icon': '<span>Right Icon</span>'
+          }
+        })
+
+        const icon = wrapper.find('.vk-textarea__right-icon')
+        await icon.trigger('click')
+        expect(wrapper.emitted()).toHaveProperty('rightIconClick')
+      })
+
+      it('should not emit rightIconClick event when the textarea is disabled', async () => {
+        wrapper = mount(VkTextarea, {
+          props: {
+            disabled: true
+          },
+          slots: {
+            'right-icon': '<span>Right Icon</span>'
+          }
+        })
+
+        const icon = wrapper.find('.vk-textarea__right-icon')
+        await icon.trigger('click')
+        expect(wrapper.emitted()).not.toHaveProperty('rightIconClick')
+      })
+
+      it('should not emit rightIconClick event when the textarea is readonly', async () => {
+        wrapper = mount(VkTextarea, {
+          props: {
+            readonly: true
+          },
+          slots: {
+            'right-icon': '<span>Right Icon</span>'
+          }
+        })
+
+        const icon = wrapper.find('.vk-textarea__right-icon')
+        await icon.trigger('click')
+        expect(wrapper.emitted()).not.toHaveProperty('rightIconClick')
+      })
+    })
+  })
+
   describe('Emits', () => {
     it('should emit focus event', () => {
       const wrapper = mount(VkTextarea, {})

@@ -76,9 +76,11 @@ const textarea = tv({
       'px-4'
     ],
     leftIcon: [
+      'vk-textarea__left-icon',
       'left-3'
     ],
     rightIcon: [
+      'vk-textarea__right-icon',
       'right-3'
     ],
     icons: [

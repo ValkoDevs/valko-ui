@@ -14,6 +14,7 @@ const modal = tv({
       'inset-0'
     ],
     dialog: [
+      'vk-modal__dialog',
       'relative',
       'z-50'
     ],

@@ -4,6 +4,7 @@ import VkDataTable from '#valkoui/components/DataTable.vue'
 import VkInput from '#valkoui/components/Input.vue'
 import VkSelect from '#valkoui/components/Select.vue'
 import VkPagination from '#valkoui/components/Pagination.vue'
+import type { Sort } from '#valkoui/types/common'
 
 const headers = [
   {
@@ -39,398 +40,602 @@ const data = [
 describe('DataTable component', () => {
   let wrapper: VueWrapper
 
-  describe('When no extra functionality is added', () => {
-    describe('Props', () => {
-      describe('With default props', () => {
+  describe('Props', () => {
+    describe('With default props', () => {
+      beforeEach(() => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers,
+            data
+          }
+        })
+      })
+
+      it('should render', () => {
+        expect(wrapper.find('.vk-data-table').exists()).toBe(true)
+      })
+
+      it('should be size md', () => {
+        expect(wrapper.find('.text-base').exists()).toBe(true)
+      })
+
+      it('should be variant filled', () => {
+        expect(wrapper.find('.bg-surface-container-low').exists()).toBe(true)
+      })
+
+      it('should be shape soft', () => {
+        expect(wrapper.find('.rounded-lg').exists()).toBe(true)
+      })
+    })
+
+    describe('When shape prop changes', () => {
+      it('should be rounded when props.shape is rounded', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers,
+            data,
+            shape: 'rounded'
+          }
+        })
+
+        expect(wrapper.find('.rounded-xl').exists()).toBe(true)
+      })
+
+      it('should be soft when props.shape is soft', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers,
+            data,
+            shape: 'soft'
+          }
+        })
+
+        expect(wrapper.find('.rounded-lg').exists()).toBe(true)
+      })
+
+      it('should be square when props.shape is square', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers,
+            data,
+            shape: 'square'
+          }
+        })
+
+        expect(wrapper.find('.rounded-none').exists()).toBe(true)
+      })
+    })
+
+    describe('When size prop changes', () => {
+      it('should be xs when props.size is xs', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers,
+            data,
+            size: 'xs'
+          }
+        })
+
+        expect(wrapper.find('.text-xs').exists()).toBe(true)
+      })
+
+      it('should be sm when props.size is sm', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers,
+            data,
+            size: 'sm'
+          }
+        })
+
+        expect(wrapper.find('.text-sm').exists()).toBe(true)
+      })
+
+      it('should be md when props.size is md', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers,
+            data,
+            size: 'md'
+          }
+        })
+
+        expect(wrapper.find('.text-base').exists()).toBe(true)
+      })
+
+      it('should be lg when props.size is lg', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers,
+            data,
+            size: 'lg'
+          }
+        })
+
+        expect(wrapper.find('.text-lg').exists()).toBe(true)
+      })
+    })
+
+    describe('When variant prop changes', () => {
+      it('should be filled when props.variant is filled', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers,
+            data,
+            variant: 'filled'
+          }
+        })
+
+        expect(wrapper.find('.bg-surface-container-low').exists()).toBe(true)
+      })
+
+      it('should be outlined when props.variant is outlined', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers,
+            data,
+            variant: 'outlined'
+          }
+        })
+
+        expect(wrapper.find('.border-b').exists()).toBe(true)
+      })
+
+      it('should be ghost when props.variant is ghost', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers,
+            data,
+            variant: 'ghost'
+          }
+        })
+
+        expect(wrapper.find('.vk-table__thead').classes()).toContain('bg-surface-container-highest/[.5]')
+      })
+    })
+
+    describe('When striped prop changes', () => {
+      it('should be striped when true', () => {
+        const wrapper = mount(VkDataTable, {
+          props: {
+            headers,
+            data,
+            striped: true
+          }
+        })
+
+        expect(wrapper.find('.vk-table__tr').classes()).toContain('even:bg-surface-container')
+      })
+    })
+  })
+
+  describe('Methods', () => {
+    describe('selectedItems', () => {
+      it('checks the correct checkboxes when selection is an array', () => {
+        const selectHeaders = [{ key: 'selection', field: 'selection', label: 'Selection' }, ...headers]
+        const wrapper = mount(VkDataTable, {
+          props: {
+            headers: selectHeaders,
+            data,
+            selectionMode: 'multiple',
+            selection: [
+              { key: 'headersKey' },
+              { key: 'dataKey' }
+            ]
+          }
+        })
+
+        expect(wrapper.findAll('.vk-checkbox__container').at(1)?.attributes('aria-checked')).toBe('true')
+      })
+
+      it('checks the correct radio when selection is a single object', () => {
+        const selectHeaders = [{ key: 'selection', field: 'selection', label: 'Selection' }, ...headers]
+        const wrapper = mount(VkDataTable, {
+          props: {
+            headers: selectHeaders,
+            data,
+            selectionMode: 'single',
+            selection: {
+              key: 'headersKey'
+            }
+          }
+        })
+
+        expect(wrapper.findAll('.vk-radio__radio-container').at(0)?.attributes('aria-checked')).toBe('true')
+      })
+    })
+
+    describe('togglePopover', () => {
+      it('should toggle open a popover when a filter inside a header is clicked', async () => {
+        const filterableHeaders = headers.map(header => ({ ...header, filterable: true }))
+        const wrapper = mount(VkDataTable, {
+          props: {
+            headers: filterableHeaders,
+            data
+          }
+        })
+
+        await wrapper.findAll('.vk-data-table__utilities').at(0)?.trigger('click')
+
+        expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+      })
+
+      it('should toggle close a popover when a filter inside a header is clicked again', async () => {
+        const filterableHeaders = headers.map(header => ({ ...header, filterable: true }))
+        const wrapper = mount(VkDataTable, {
+          props: {
+            headers: filterableHeaders,
+            data
+          }
+        })
+
+        await wrapper.findAll('.vk-data-table__utilities').at(0)?.trigger('click')
+        await wrapper.findAll('.vk-data-table__utilities').at(0)?.trigger('click')
+
+        expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+      })
+    })
+
+    describe('setActiveFilter', () => {
+      it('should set active state to true when a filter input is used', async () => {
+        const filterableHeaders = headers.map(header => ({ ...header, filterable: true }))
+        const wrapper = mount(VkDataTable, {
+          props: {
+            headers: filterableHeaders,
+            data
+          }
+        })
+
+        await wrapper.findAll('.vk-data-table__utilities').at(0)?.trigger('click')
+        await wrapper.findComponent(VkInput).setValue('some filter')
+
+        expect(wrapper.findAll('.vk-data-table__utilities').at(0)?.attributes('data-active')).toBe('true')
+      })
+    })
+
+    describe('isSortActive', () => {
+      it('should set data-active to true for sorted header after click and prop update', async () => {
+        const sortableHeaders = headers.map(header => ({ ...header, sortable: true }))
+        const wrapper = mount(VkDataTable, {
+          props: {
+            headers: sortableHeaders,
+            data,
+            sort: {
+              field: 'required',
+              direction: undefined
+            }
+          }
+        })
+
+        await wrapper.findAll('.vk-data-table__utilities').at(1)?.trigger('click')
+        const newSort = wrapper.emitted('onSort')?.[0]?.[0] as Sort
+        await wrapper.setProps({ sort: newSort })
+        await wrapper.vm.$nextTick()
+
+        expect(wrapper.findAll('.vk-data-table__utilities').at(1)?.attributes('data-active')).toBe('true')
+      })
+    })
+
+    describe('handleSort', () => {
+      it('emits correct sort direction', async () => {
+        const sortableHeaders = headers.map(header => ({ ...header, sortable: true }))
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers: sortableHeaders,
+            data,
+            sort: {
+              field: 'prop',
+              direction: 'asc'
+            }
+          }
+        })
+
+        await wrapper.findAll('.vk-data-table__utilities').at(1)?.trigger('click')
+
+        expect(wrapper.emitted('onSort')?.[0]?.[0]).toEqual({ field: 'prop', direction: 'desc' })
+      })
+
+      it('should emit asc when clicking desc sorted header', async () => {
+        const sortableHeaders = headers.map(header => ({ ...header, sortable: true }))
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers: sortableHeaders,
+            data,
+            sort: {
+              field: 'prop',
+              direction: undefined
+            }
+          }
+        })
+
+        await wrapper.findAll('.vk-data-table__utilities').at(1)?.trigger('click')
+
+        expect(wrapper.emitted('onSort')?.[0]?.[0]).toEqual({ field: 'prop', direction: 'asc' })
+      })
+
+      it('should emit null when clicking desc sorted header', async () => {
+        const sortableHeaders = headers.map(header => ({ ...header, sortable: true }))
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers: sortableHeaders,
+            data,
+            sort: {
+              field: 'prop',
+              direction: 'desc'
+            }
+          }
+        })
+
+        await wrapper.findAll('.vk-data-table__utilities').at(1)?.trigger('click')
+
+        expect(wrapper.emitted('onSort')?.[0]?.[0]).toEqual(null)
+      })
+    })
+  })
+
+  describe('Watchers & Others', () => {
+    it('should reset to first page when data is loaded', async () => {
+      wrapper = mount(VkDataTable, {
+        props: {
+          headers,
+          data: [],
+          limit: 10,
+          offset: 10
+        }
+      })
+
+      await wrapper.setProps({ data })
+      await nextTick()
+
+      expect(wrapper.emitted('onPageChange')?.[0]?.[0]).toBe(0)
+    })
+
+    it('should remove event listeners when the component is unmounted', async () => {
+      const removeSpy = vi.spyOn(document, 'removeEventListener')
+      const wrapper = mount(VkDataTable, {
+        props: {
+          headers,
+          data
+        }
+      })
+
+      wrapper.unmount()
+      expect(removeSpy).toHaveBeenCalledWith('click', expect.any(Function))
+      removeSpy.mockRestore()
+    })
+  })
+
+  describe('Extended features', () => {
+    describe('Drag and Drop', () => {
+      let wrapper: VueWrapper
+      const dragHeaders = [{ key: 'draggable', field: 'draggable', label: '' }, ...headers]
+      beforeEach(() => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers: dragHeaders,
+            data
+          }
+        })
+      })
+
+      it('should display the draggable icon for the rows when true', () => {
+        expect(wrapper.find('i.ti.ti-grip-vertical').exists()).toBe(true)
+      })
+
+      it('should emit onDragStart when a row is dragged', () => {
+        wrapper.find('i.ti.ti-grip-vertical').trigger('dragstart')
+        expect(wrapper.emitted()).toHaveProperty('onDragStart')
+      })
+
+      it('should emit onDragOver when a row is dragged over', () => {
+        wrapper.find('i.ti.ti-grip-vertical').trigger('dragover')
+        expect(wrapper.emitted()).toHaveProperty('onDragOver')
+      })
+
+      it('should emit onDrop when a row is dropped over', () => {
+        wrapper.find('i.ti.ti-grip-vertical').trigger('drop')
+        expect(wrapper.emitted()).toHaveProperty('onDrop')
+      })
+    })
+
+    describe('Selection Mode', () => {
+      describe('When selectionMode is single', () => {
+        let wrapper: VueWrapper
+        const selectionHeaders = [{ key: 'selection', field: 'selection', label: 'Selection' }, ...headers]
+        beforeEach(() => {
+          wrapper = mount(VkDataTable, {
+            props: {
+              headers: selectionHeaders,
+              data,
+              selectionMode: 'single'
+            }
+          })
+        })
+
+        it('should display the radio buttons on the rows', () => {
+          expect(wrapper.find('.vk-radio__radio-container').exists()).toBe(true)
+        })
+
+        it('should emit onSelect when a row radio is clicked', () => {
+          wrapper.find('.vk-radio__radio-container').trigger('click')
+          expect(wrapper.emitted()).toHaveProperty('onSelect')
+        })
+      })
+
+      describe('When selectionMode is multiple', () => {
+        let wrapper: VueWrapper
+        const selectionHeaders = [{ key: 'selection', field: 'selection', label: 'Selection' }, ...headers]
+        beforeEach(() => {
+          wrapper = mount(VkDataTable, {
+            props: {
+              headers: selectionHeaders,
+              data,
+              selectionMode: 'multiple'
+            }
+          })
+        })
+
+        it('should display the checkbox buttons on the rows', () => {
+          expect(wrapper.find('.vk-checkbox__container').exists()).toBe(true)
+        })
+
+        it('should emit onSelectAll when the header checkbox is clicked', () => {
+          wrapper.find('.vk-checkbox__container').trigger('click')
+          expect(wrapper.emitted()).toHaveProperty('onSelectAll')
+        })
+
+        it('should emit onSelect when a row checkbox is clicked', () => {
+          const checkboxs = wrapper.findAll('.vk-checkbox__container')
+          checkboxs[1].trigger('click')
+          expect(wrapper.emitted()).toHaveProperty('onSelect')
+        })
+      })
+
+      describe('When selectionMode is rowSingle', () => {
+        let wrapper: VueWrapper
         beforeEach(() => {
           wrapper = mount(VkDataTable, {
             props: {
               headers,
-              data
+              data,
+              rowEvents: true,
+              selectionMode: 'rowSingle'
             }
           })
         })
 
-        it('should render', () => {
-          expect(wrapper.find('.vk-data-table').exists()).toBe(true)
-        })
-
-        it('should be size md', () => {
-          expect(wrapper.find('.text-base').exists()).toBe(true)
-        })
-
-        it('should be variant filled', () => {
-          expect(wrapper.find('.bg-surface-container-low').exists()).toBe(true)
-        })
-
-        it('should be shape soft', () => {
-          expect(wrapper.find('.rounded-lg').exists()).toBe(true)
+        it('should emit onSelect when a row is clicked', () => {
+          wrapper.find('.vk-table__td').trigger('click')
+          expect(wrapper.emitted()).toHaveProperty('onSelect')
         })
       })
 
-      describe('When shape prop changes', () => {
-        it('should be rounded when props.shape is rounded', () => {
+      describe('When selectionMode is rowMultiple', () => {
+        let wrapper: VueWrapper
+        beforeEach(() => {
           wrapper = mount(VkDataTable, {
             props: {
               headers,
               data,
-              shape: 'rounded'
+              rowEvents: true,
+              selectionMode: 'rowMultiple'
             }
           })
-
-          expect(wrapper.find('.rounded-xl').exists()).toBe(true)
         })
 
-        it('should be soft when props.shape is soft', () => {
-          wrapper = mount(VkDataTable, {
-            props: {
-              headers,
-              data,
-              shape: 'soft'
-            }
-          })
-
-          expect(wrapper.find('.rounded-lg').exists()).toBe(true)
-        })
-
-        it('should be square when props.shape is square', () => {
-          wrapper = mount(VkDataTable, {
-            props: {
-              headers,
-              data,
-              shape: 'square'
-            }
-          })
-
-          expect(wrapper.find('.rounded-none').exists()).toBe(true)
-        })
-      })
-
-      describe('When size prop changes', () => {
-        it('should be xs when props.size is xs', () => {
-          wrapper = mount(VkDataTable, {
-            props: {
-              headers,
-              data,
-              size: 'xs'
-            }
-          })
-
-          expect(wrapper.find('.text-xs').exists()).toBe(true)
-        })
-
-        it('should be sm when props.size is sm', () => {
-          wrapper = mount(VkDataTable, {
-            props: {
-              headers,
-              data,
-              size: 'sm'
-            }
-          })
-
-          expect(wrapper.find('.text-sm').exists()).toBe(true)
-        })
-
-        it('should be md when props.size is md', () => {
-          wrapper = mount(VkDataTable, {
-            props: {
-              headers,
-              data,
-              size: 'md'
-            }
-          })
-
-          expect(wrapper.find('.text-base').exists()).toBe(true)
-        })
-
-        it('should be lg when props.size is lg', () => {
-          wrapper = mount(VkDataTable, {
-            props: {
-              headers,
-              data,
-              size: 'lg'
-            }
-          })
-
-          expect(wrapper.find('.text-lg').exists()).toBe(true)
-        })
-      })
-
-      describe('When variant prop changes', () => {
-        it('should be filled when props.variant is filled', () => {
-          wrapper = mount(VkDataTable, {
-            props: {
-              headers,
-              data,
-              variant: 'filled'
-            }
-          })
-
-          expect(wrapper.find('.bg-surface-container-low').exists()).toBe(true)
-        })
-
-        it('should be outlined when props.variant is outlined', () => {
-          wrapper = mount(VkDataTable, {
-            props: {
-              headers,
-              data,
-              variant: 'outlined'
-            }
-          })
-
-          expect(wrapper.find('.border-b').exists()).toBe(true)
-        })
-
-        it('should be ghost when props.variant is ghost', () => {
-          wrapper = mount(VkDataTable, {
-            props: {
-              headers,
-              data,
-              variant: 'ghost'
-            }
-          })
-
-          expect(wrapper.find('.vk-table__thead').classes()).toContain('bg-surface-container-highest/[.5]')
-        })
-      })
-
-      describe('When striped prop changes', () => {
-        it('should be striped when true', () => {
-          const wrapper = mount(VkDataTable, {
-            props: {
-              headers,
-              data,
-              striped: true
-            }
-          })
-
-          expect(wrapper.find('.vk-table__tr').classes()).toContain('even:bg-surface-container')
+        it('should emit onSelect when a row is clicked', () => {
+          wrapper.find('.vk-table__td').trigger('click')
+          expect(wrapper.emitted()).toHaveProperty('onSelect')
         })
       })
     })
-  })
 
-  describe('When drag and drop functionality is added', () => {
-    let wrapper: VueWrapper
-    const dragHeaders = [{ key: 'draggable', field: 'draggable', label: '' }, ...headers]
-    beforeEach(() => {
-      wrapper = mount(VkDataTable, {
-        props: {
-          headers: dragHeaders,
-          data
-        }
-      })
-    })
-    it('should display the draggable icon for the rows when true', () => {
-      expect(wrapper.find('i.ti.ti-grip-vertical').exists()).toBe(true)
-    })
-
-    it('should emit onDragStart when a row is dragged', () => {
-      wrapper.find('i.ti.ti-grip-vertical').trigger('dragstart')
-      expect(wrapper.emitted()).toHaveProperty('onDragStart')
-    })
-
-    it('should emit onDragOver when a row is dragged over', () => {
-      wrapper.find('i.ti.ti-grip-vertical').trigger('dragover')
-      expect(wrapper.emitted()).toHaveProperty('onDragOver')
-    })
-
-    it('should emit onDrop when a row is dropped over', () => {
-      wrapper.find('i.ti.ti-grip-vertical').trigger('drop')
-      expect(wrapper.emitted()).toHaveProperty('onDrop')
-    })
-  })
-
-  describe('When selectionMode functionality is added', () => {
-    describe('When selectionMode is single', () => {
+    describe('Filterable', () => {
       let wrapper: VueWrapper
-      const selectionHeaders = [{ key: 'selection', field: 'selection', label: 'Selection' }, ...headers]
+      const filterHeaders = headers.map(header => ({ ...header, filterable: true }))
+
       beforeEach(() => {
         wrapper = mount(VkDataTable, {
           props: {
-            headers: selectionHeaders,
-            data,
-            selectionMode: 'single'
+            headers: filterHeaders,
+            data
           }
         })
       })
 
-      it('should display the radio buttons on the rows', () => {
-        expect(wrapper.find('.vk-radio__radio-container').exists()).toBe(true)
+      afterEach(() => {
+        vi.useRealTimers()
       })
 
-      it('should emit onSelect when a row radio is clicked', () => {
-        wrapper.find('.vk-radio__radio-container').trigger('click')
-        expect(wrapper.emitted()).toHaveProperty('onSelect')
+      it('should display the search icon in the header when true', () => {
+        expect(wrapper.find('i.ti.ti-search').exists()).toBe(true)
+      })
+
+      it('should apply the active filter style when input is used', async () => {
+        wrapper.find('i.ti.ti-search').trigger('click')
+        const input = wrapper.findComponent(VkInput)
+        await input.setValue('some filter')
+
+        expect(wrapper.find('i.ti.ti-search').classes()).toContain('data-[active=true]:text-primary')
+      })
+
+      it('should emit onFilter when the filter is being used', async () => {
+        vi.useFakeTimers()
+        await wrapper.find('i.ti.ti-search').trigger('click')
+        await wrapper.findComponent(VkInput).setValue('some filter')
+        await nextTick()
+        vi.advanceTimersByTime(500)
+        await nextTick()
+
+        expect(wrapper.emitted()).toHaveProperty('onFilter')
+      })
+
+      it('should close all popovers when a click is done outside', async () => {
+        await wrapper.find('i.ti.ti-search').trigger('click')
+        await document.body.click()
+
+        expect(wrapper.find('.vk-popover[data-open="true"]').exists()).toBe(false)
       })
     })
 
-    describe('When selectionMode is multiple', () => {
+    describe('Sortable', () => {
       let wrapper: VueWrapper
-      const selectionHeaders = [{ key: 'selection', field: 'selection', label: 'Selection' }, ...headers]
-      beforeEach(() => {
+      const sortHeaders = headers.map(header => ({ ...header, sortable: true }))
+
+      it('should display the sort icon in the header when true', () => {
         wrapper = mount(VkDataTable, {
           props: {
-            headers: selectionHeaders,
-            data,
-            selectionMode: 'multiple'
+            headers: sortHeaders,
+            data
           }
         })
+
+        expect(wrapper.find('i.ti.ti-arrows-sort').exists()).toBe(true)
       })
 
-      it('should display the checkbox buttons on the rows', () => {
-        expect(wrapper.find('.vk-checkbox__container').exists()).toBe(true)
-      })
+      it('should emit onSort when the sort icon is clicked', async () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers: sortHeaders,
+            data
+          }
+        })
 
-      it('should emit onSelectAll when the header checkbox is clicked', () => {
-        wrapper.find('.vk-checkbox__container').trigger('click')
-        expect(wrapper.emitted()).toHaveProperty('onSelectAll')
-      })
-
-      it('should emit onSelect when a row checkbox is clicked', () => {
-        const checkboxs = wrapper.findAll('.vk-checkbox__container')
-        checkboxs[1].trigger('click')
-        expect(wrapper.emitted()).toHaveProperty('onSelect')
+        wrapper.find('i.ti.ti-arrows-sort').trigger('click')
+        expect(wrapper.emitted()).toHaveProperty('onSort')
       })
     })
 
-    describe('When selectionMode is rowSingle', () => {
+    describe('Pagination', () => {
       let wrapper: VueWrapper
       beforeEach(() => {
         wrapper = mount(VkDataTable, {
           props: {
             headers,
             data,
-            rowEvents: true,
-            selectionMode: 'rowSingle'
+            total: 10,
+            limit: 2
           }
         })
       })
 
-      it('should emit onSelect when a row is clicked', () => {
-        wrapper.find('.vk-table__td').trigger('click')
-        expect(wrapper.emitted()).toHaveProperty('onSelect')
-      })
-    })
+      it('should emit onLimitChange when the limit is changed using the select', async () => {
+        const select = wrapper.findComponent(VkSelect)
+        select.find('.vk-input__input').trigger('focus')
+        await nextTick()
+        select.find('.vk-select__item:first-child').trigger('click')
+        await nextTick()
 
-    describe('When selectionMode is rowMultiple', () => {
-      let wrapper: VueWrapper
-      beforeEach(() => {
-        wrapper = mount(VkDataTable, {
-          props: {
-            headers,
-            data,
-            rowEvents: true,
-            selectionMode: 'rowMultiple'
-          }
-        })
+        expect(wrapper.emitted()).toHaveProperty('onLimitChange')
       })
 
-      it('should emit onSelect when a row is clicked', () => {
-        wrapper.find('.vk-table__td').trigger('click')
-        expect(wrapper.emitted()).toHaveProperty('onSelect')
+      it('should emit onPageChange when the page is changed', async () => {
+        const pagination = wrapper.findComponent(VkPagination)
+        pagination.find('.vk-pagination__right').trigger('click')
+        await nextTick()
+
+        expect(wrapper.emitted()).toHaveProperty('onPageChange')
       })
-    })
-  })
-
-  describe('When filterable functionality is added', () => {
-    let wrapper: VueWrapper
-    const filterHeaders = headers.map(header => ({ ...header, filterable: true }))
-
-    beforeEach(() => {
-      wrapper = mount(VkDataTable, {
-        props: {
-          headers: filterHeaders,
-          data
-        }
-      })
-    })
-
-    it('should display the search icon in the header when true', () => {
-      expect(wrapper.find('i.ti.ti-search').exists()).toBe(true)
-    })
-
-    it('should apply the active filter style when input is used', async () => {
-      wrapper.find('i.ti.ti-search').trigger('click')
-      const input = wrapper.findComponent(VkInput)
-      await input.setValue('some filter')
-
-      expect(wrapper.find('i.ti.ti-search').classes()).toContain('data-[active=true]:text-primary')
-    })
-
-    it('should emit onFilter when the filter is being used', async () => {
-      wrapper.find('i.ti.ti-search').trigger('click')
-      wrapper.findComponent(VkInput).trigger('input')
-      await new Promise(resolve => setTimeout(resolve, 500))
-
-      expect(wrapper.emitted()).toHaveProperty('onFilter')
-    })
-
-    it('should close all popovers when a click is done outside', async () => {
-      await wrapper.find('i.ti.ti-search').trigger('click')
-      await document.body.click()
-
-      expect(wrapper.find('[data-isOpen-state=true]').exists()).toBe(false)
-    })
-  })
-
-  describe('When sortable functionality is added', () => {
-    let wrapper: VueWrapper
-    const sortHeaders = headers.map(header => ({ ...header, sortable: true }))
-
-    it('should display the sort icon in the header when true', () => {
-      wrapper = mount(VkDataTable, {
-        props: {
-          headers: sortHeaders,
-          data
-        }
-      })
-
-      expect(wrapper.find('i.ti.ti-arrows-sort').exists()).toBe(true)
-    })
-
-    it('should emit onSort when the sort icon is clicked', async () => {
-      wrapper = mount(VkDataTable, {
-        props: {
-          headers: sortHeaders,
-          data
-        }
-      })
-
-      wrapper.find('i.ti.ti-arrows-sort').trigger('click')
-      expect(wrapper.emitted()).toHaveProperty('onSort')
-    })
-  })
-
-  describe('When pagination functionality is added', () => {
-    let wrapper: VueWrapper
-    beforeEach(() => {
-      wrapper = mount(VkDataTable, {
-        props: {
-          headers,
-          data,
-          total: 10,
-          limit: 2
-        }
-      })
-    })
-
-    it('should emit onLimitChange when the limit is changed using the select', async () => {
-      const select = wrapper.findComponent(VkSelect)
-      select.find('.vk-input__input').trigger('focus')
-      await nextTick()
-      select.find('.vk-select__item:first-child').trigger('click')
-      await nextTick()
-
-      expect(wrapper.emitted()).toHaveProperty('onLimitChange')
-    })
-
-    it('should emit onPageChange when the page is changed', async () => {
-      const pagination = wrapper.findComponent(VkPagination)
-      pagination.find('.vk-pagination__right').trigger('click')
-      await nextTick()
-
-      expect(wrapper.emitted()).toHaveProperty('onPageChange')
     })
   })
 })
