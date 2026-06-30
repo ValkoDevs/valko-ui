@@ -30,6 +30,7 @@ const baseMenuItems: MenuItem[] = [
   { key: '/docs/menu', group: 'Ui', text: 'Menu' },
   { key: '/docs/navbar', group: 'Ui', text: 'Navbar' },
   { key: '/docs/notification', group: 'Ui', text: 'Notification' },
+  { key: '/docs/rating', group: 'Ui', text: 'Rating' },
   { key: '/docs/popover', group: 'Ui', text: 'Popover' },
   { key: '/docs/progressbar', group: 'Ui', text: 'Progressbar' },
   { key: '/docs/skeleton', group: 'Ui', text: 'Skeleton' },
