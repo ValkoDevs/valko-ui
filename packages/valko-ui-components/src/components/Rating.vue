@@ -13,7 +13,6 @@ const props = withDefaults(defineProps<RatingProps>(), {
   shape: 'soft',
   iconName: 'star',
   max: 5,
-  modelValue: 0,
   half: false,
   disabled: false,
   readonly: false
@@ -78,8 +77,11 @@ const stars = computed(() => {
   >
     <slot
       :value="modelValue"
+      :display-value="displayValue"
       :items="stars"
       :set-value="setValue"
+      :hover="onHover"
+      :clear-hover="() => (hoverValue = null)"
       :is-disabled="disabled"
       :is-readonly="readonly"
     >

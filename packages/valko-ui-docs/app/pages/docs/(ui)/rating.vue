@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableItem, RatingProps } from '#valkoui'
+import type { RatingProps } from '#valkoui'
 
 const form = ref<RatingProps>({
   color: 'primary',
@@ -12,30 +12,15 @@ const form = ref<RatingProps>({
   readonly: false
 })
 
-const ratingProps: TableItem[] = [
+const ratingProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Rating.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
-  },
-  {
-    key: 'variantProp',
-    prop: 'variant',
-    required: false,
-    description: 'The variant of the Rating.',
-    values: 'filled, outlined, ghost, gradient',
-    default: 'filled'
-  },
-  {
-    key: 'shapeProp',
-    prop: 'shape',
-    required: false,
-    description: 'The shape of the Rating.',
-    values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -43,15 +28,17 @@ const ratingProps: TableItem[] = [
     required: false,
     description: 'The size of the Rating.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'iconNameProp',
     prop: 'iconName',
     required: false,
     description: 'The name of the icon to use for the rating items. Should correspond to an icon in the ValkoUI icon set.',
-    values: 'string (icon name) or null',
-    default: 'star'
+    values: 'string',
+    default: 'star',
+    apiType: 'primitive'
   },
   {
     key: 'maxProp',
@@ -59,7 +46,8 @@ const ratingProps: TableItem[] = [
     required: false,
     description: 'The maximum rating value, which determines how many rating items are displayed.',
     values: 'number',
-    default: 5
+    default: '5',
+    apiType: 'primitive'
   },
   {
     key: 'modelValueProp',
@@ -67,7 +55,8 @@ const ratingProps: TableItem[] = [
     required: false,
     description: 'The current rating value. Can be a whole number or a half value if the "half" prop is true.',
     values: 'number',
-    default: 0
+    default: '0',
+    apiType: 'primitive'
   },
   {
     key: 'halfProp',
@@ -75,7 +64,8 @@ const ratingProps: TableItem[] = [
     required: false,
     description: 'Whether to allow half ratings. If true, users can select half values (e.g., 2.5).',
     values: 'boolean',
-    default: false
+    default: false,
+    apiType: 'primitive'
   },
   {
     key: 'disabledProp',
@@ -83,7 +73,8 @@ const ratingProps: TableItem[] = [
     required: false,
     description: 'Whether the Rating is disabled. Disabled ratings cannot be interacted with and are typically styled differently to indicate their state.',
     values: 'boolean',
-    default: false
+    default: false,
+    apiType: 'primitive'
   },
   {
     key: 'readonlyProp',
@@ -91,7 +82,8 @@ const ratingProps: TableItem[] = [
     required: false,
     description: 'Whether the Rating is read-only. Read-only ratings display the current value but do not allow user interaction.',
     values: 'boolean',
-    default: false
+    default: false,
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -99,37 +91,148 @@ const ratingProps: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the Rating component.',
     values: 'RatingSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const ratingEmits: TableItem[] = [
+const ratingEmits: EmitData[] = [
   {
     key: 'update:modelValue',
     event: 'update:modelValue',
     type: '(value: number) => void',
     values: '',
-    description: 'Emitted when the rating value changes.'
+    description: 'Emitted when the rating value changes.',
+    apiType: 'event'
   }
 ]
 
-const ratingSlots: TableItem[] = [
+const ratingSlots: SlotData[] = [
   {
     key: 'defaultSlot',
     name: 'default',
-    description: 'Slot for the main content of the rating.',
-    example: '<template #default>\n  <p>This is the main content of the rating.</p>\n</template>'
+    description: 'Scoped slot for customizing the rating content.',
+    example: `<template #default="{ items, setValue, hover, clearHover }">
+  <!-- Custom rating content -->
+</template>`,
+    apiType: 'slot'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const ratingSlotPropsInterface: PropData[] = [
+  {
+    key: 'items',
+    prop: 'items',
+    required: false,
+    description: 'Array of rating items used to render the custom slot. Each item exposes its position, fill percentage, and whether the rating is currently displaying a hover preview.',
+    values: 'RatingItem[]',
+    default: '',
+    apiType: 'custom-type'
+  },
+  {
+    key: 'value',
+    prop: 'value',
+    required: false,
+    description: 'The current rating value.',
+    values: 'number',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'displayValue',
+    prop: 'displayValue',
+    required: false,
+    description: 'The value currently displayed by the component. While hovering, this reflects the hovered value instead of the selected value.',
+    values: 'number',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'setValue',
+    prop: 'setValue',
+    required: false,
+    description: 'Function that updates the rating value. Pass the mouse event and the rating item index.',
+    values: '(event: MouseEvent, index: number) => void',
+    default: '',
+    apiType: 'function'
+  },
+  {
+    key: 'hover',
+    prop: 'hover',
+    required: false,
+    description: 'Function that updates the hover preview. Pass the mouse event and the rating item index.',
+    values: '(event: MouseEvent, index: number) => void',
+    default: '',
+    apiType: 'function'
+  },
+  {
+    key: 'clearHover',
+    prop: 'clearHover',
+    required: false,
+    description: 'Function that clears the current hover preview.',
+    values: '() => void',
+    default: '',
+    apiType: 'function'
+  },
+  {
+    key: 'isDisabled',
+    prop: 'isDisabled',
+    required: false,
+    description: 'Whether the Rating component is disabled.',
+    values: 'boolean',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'isReadonly',
+    prop: 'isReadonly',
+    required: false,
+    description: 'Whether the Rating component is read-only.',
+    values: 'boolean',
+    default: '',
+    apiType: 'primitive'
+  }
+]
+
+const ratingItemInterface: PropData[] = [
+  {
+    key: 'index',
+    prop: 'index',
+    required: false,
+    description: 'The 1-based position of the rating item.',
+    values: 'number',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'fill',
+    prop: 'fill',
+    required: false,
+    description: 'The fill percentage of the rating item, ranging from 0 to 100. Useful for rendering full, partial, or empty rating items.',
+    values: 'number',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'hovering',
+    prop: 'hovering',
+    required: false,
+    description: 'Whether the rating is currently displaying a hover preview.',
+    values: 'boolean',
+    default: '',
+    apiType: 'primitive'
+  }
+]
+
+const styleSlotsInterface: PropData[] = [
   {
     key: 'container',
     prop: 'container',
     required: false,
     description: 'Root container for the rating. Controls the overall layout and background.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'icon',
@@ -137,7 +240,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Styles for the icons in the rating.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
@@ -153,7 +257,8 @@ const exampleValues = reactive<Record<string, number>>({
   warning: 3,
   half: 3,
   readonly: 3,
-  disabled: 3
+  disabled: 3,
+  slot: 3
 })
 
 const styles = {
@@ -170,6 +275,26 @@ const styles = {
       'lg:grid-cols-4'
     ]
   }
+}
+
+const exampleSnippets = {
+  customSlot: `<vk-rating v-model="exampleValues['slot']">
+  <template #default="{ items, setValue, hover, clearHover }">
+    <div class="flex gap-2">
+      <vk-button
+        v-for="item in items"
+        :key="item.index"
+        :variant="item.fill > 0 ? 'filled' : 'link'"
+        color="primary"
+        @mousemove="(e: MouseEvent) => hover(e, item.index)"
+        @mouseleave="clearHover"
+        @click="(e: MouseEvent) => setValue(e, item.index)"
+      >
+        {{ item.index }}
+      </vk-button>
+    </div>
+  </template>
+</vk-rating>`
 }
 </script>
 
@@ -244,7 +369,7 @@ const styles = {
       >
         <div
           v-for="color in colorOptions.general"
-          :key="color"
+          :key="color.value"
           class="flex flex-col gap-2"
         >
           <span>{{ color.label }}</span>
@@ -309,31 +434,49 @@ const styles = {
           <code-block :code="generateSnippet<boolean>('disabled', { values: [true] })" />
         </template>
       </example-section>
+
+      <example-section
+        title="Custom Slot"
+        :style-slots="{ slotContainer: ['flex', 'justify-center'] }"
+      >
+        <vk-rating v-model="exampleValues['slot']">
+          <template #default="{ items, setValue, hover, clearHover }">
+            <div class="flex gap-2">
+              <vk-button
+                v-for="item in items"
+                :key="item.index"
+                :variant="item.fill > 0 ? 'filled' : 'link'"
+                color="primary"
+                @mousemove="(e: MouseEvent) => hover(e, item.index)"
+                @mouseleave="clearHover"
+                @click="(e: MouseEvent) => setValue(e, item.index)"
+              >
+                {{ item.index }}
+              </vk-button>
+            </div>
+          </template>
+        </vk-rating>
+
+        <template #code>
+          <code-block
+            language="vue"
+            :code="exampleSnippets.customSlot"
+          />
+        </template>
+      </example-section>
     </template>
 
     <template #api>
-      <h3>Rating Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="ratingProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>Rating Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="ratingEmits"
-      />
-
-      <h3>Rating Slots</h3>
-      <vk-table
-        :headers="slotHeaders"
-        :data="ratingSlots"
+      <api-table
+        name="Rating"
+        :tables="[
+          { title: 'Props', headers: 'props', data: ratingProps },
+          { title: 'Emits', headers: 'emits', data: ratingEmits },
+          { title: 'Slots', headers: 'slots', data: ratingSlots },
+          { title: 'Default Slot Props', headers: 'props', data: ratingSlotPropsInterface },
+          { title: 'Rating Item', headers: 'interface', data: ratingItemInterface },
+          { title: 'Style Slots', headers: 'interface', data: styleSlotsInterface }
+        ]"
       />
     </template>
   </doc-section>
