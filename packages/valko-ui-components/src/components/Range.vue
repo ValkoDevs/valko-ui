@@ -240,9 +240,9 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
         :aria-labelledby="rangeId"
         :aria-describedby="props.ariaDescribedBy"
         aria-label="Minimum value"
-        @mousedown="(event) => onStart(event, 'min')"
-        @keydown="(event) => handleKeyDown(event, 'min')"
-        @touchstart="(event) => onStart(event, 'min')"
+        @mousedown="(event: MouseEvent) => onStart(event, 'min')"
+        @keydown="(event: KeyboardEvent) => handleKeyDown(event, 'min')"
+        @touchstart="(event: TouchEvent) => onStart(event, 'min')"
       />
       <div
         :class="s.thumb({ class: styleSlots?.thumb })"
@@ -255,9 +255,9 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
         :aria-labelledby="rangeId"
         :aria-describedby="props.ariaDescribedBy"
         :aria-label="isDouble ? 'Maximum value' : 'Value'"
-        @mousedown="(event) => onStart(event, 'max')"
-        @keydown="(event) => handleKeyDown(event, 'max')"
-        @touchstart="(event) => onStart(event, 'max')"
+        @mousedown="(event: MouseEvent) => onStart(event, 'max')"
+        @keydown="(event: KeyboardEvent) => handleKeyDown(event, 'max')"
+        @touchstart="(event: TouchEvent) => onStart(event, 'max')"
       />
     </div>
     <div

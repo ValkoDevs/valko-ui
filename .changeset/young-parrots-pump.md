@@ -13,6 +13,10 @@
 - Updated all dependencies to their latest versions.
 - Added `@vue/language-core` as dev dependency, required by `unplugin-dts` (used via `vite-plugin-dts`).
 
+### Type Fixes
+- Fixed Vue template callback parameters with implicit `any` types in `DataTable`, `Datepicker`, `Menu`, `Range`, `Select`, and `Table`.
+- Adjusted callback parameter typings to satisfy stricter checks introduced by the TypeScript/tooling upgrade.
+
 ### Tests
 - Fixed `useDebounce` test not clearing callback mock between test cases.
 - Fixed `useDarkMode` test using non-constructable `MutationObserver` mock, replaced `vi.spyOn` with `vi.stubGlobal`.

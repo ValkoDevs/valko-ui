@@ -73,12 +73,12 @@ const headers = computed(() => props.headers)
           :tabindex="rowEvents ? 0 : undefined"
           :aria-selected="!!selection && rowEvents && (
             Array.isArray(selection)
-              ? selection.some(row => row?.key === item.key)
+              ? selection.some((row: TableItem) => row?.key === item.key)
               : selection?.key === item.key
           )"
           :data-selected="!!selection && rowEvents && (
             Array.isArray(selection)
-              ? selection.some(row => row?.key === item.key)
+              ? selection.some((row: TableItem) => row?.key === item.key)
               : selection?.key === item.key
           )"
           @click="rowEvents && emit('onRowClick', item)"
