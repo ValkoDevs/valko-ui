@@ -35,6 +35,7 @@
     "@types/toastify-js": "^1.12.4",
     "@valko-ui/eslint-config": "*",
     "@vitejs/plugin-vue": "^6.0.7",
+    "@vue/language-core": "~3.1.8",
     "@vitest/coverage-istanbul": "^4.1.8",
     "@vue/test-utils": "^2.4.10",
     "clean-css": "^5.3.3",

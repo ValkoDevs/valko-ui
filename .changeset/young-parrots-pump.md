@@ -11,7 +11,7 @@
 
 ### Dependencies
 - Updated all dependencies to their latest versions.
-- Added `@vue/language-core` as explicit root dev dependency to satisfy `unplugin-dts` peer requirement.
+- Added `@vue/language-core` as dev dependency, required by `unplugin-dts` (used via `vite-plugin-dts`).
 
 ### Tests
 - Fixed `useDebounce` test not clearing callback mock between test cases.
