@@ -96,7 +96,7 @@ const tsconfig = `{
 
     <div class="flex flex-col gap-8">
       <h2 class="text-2xl font-semibold">
-        Quick Start with Nuxt 3 or 4
+        Quick Start with Nuxt 4
       </h2>
 
       <div class="flex flex-col gap-4">
@@ -120,12 +120,6 @@ const tsconfig = `{
             <code-block code="pnpm create nuxt@latest <project-name>" />
           </template>
         </vk-tabs>
-        <vk-alert
-          color="accent"
-          variant="ghost"
-        >
-          If you want to use Nuxt 3 instead of 4, add <span class="bg-black/[.2] px-2">-- -t v3</span> at the end of the create command.
-        </vk-alert>
       </div>
 
       <div class="flex flex-col gap-4">
@@ -187,14 +181,7 @@ const tsconfig = `{
           language="ts"
         />
 
-        <vk-alert
-          color="warning"
-          variant="ghost"
-          title="If you use Nuxt 4 or newer"
-        >
-          <p>Nuxt 4 relies a lot more on Vite compiler so we need to add aliases to <span class="underline">tsconfig.json</span> for the library to work correctly.</p>
-        </vk-alert>
-
+        <p>Nuxt 4 relies on Vite's module resolution, so you need to add aliases to your <span class="text-primary">tsconfig.json</span> for the library to work correctly:</p>
         <code-block
           :code="tsconfig"
           language="ts"

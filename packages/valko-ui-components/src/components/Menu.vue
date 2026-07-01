@@ -96,7 +96,7 @@ const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
         :aria-label="group !== 'default' ? group : 'Menu'"
       >
         <li
-          v-for="item in items.filter(i => i.group === group)"
+          v-for="item in items.filter((i: MenuItem) => i.group === group)"
           :key="item.key"
           :class="s.item({ class: styleSlots?.item })"
           role="none"
@@ -113,7 +113,7 @@ const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
               role="menuitem"
               :tabindex="focusedKey === item.key ? 0 : -1"
               @click.prevent="onItemClick(item)"
-              @keydown="(e) => handleKeyDown(e, item)"
+              @keydown="(e: KeyboardEvent) => handleKeyDown(e, item)"
             >
               {{ item.text }}
             </button>

@@ -64,9 +64,9 @@ const formatTokens = ({ input, apiType }: { input: string, apiType: ApiType }) =
   const isNumber = isNumberList(input)
 
   return tokens.map(token => {
-    let baseType = token
-    if (token.endsWith('[]')) baseType = token.replace(/\[\]$/, '')
-    else baseType = token.replace(/^[[]|[\]]$/g, '').trim()
+    const baseType = token.endsWith('[]')
+      ? token.replace(/\[\]$/, '')
+      : token.replace(/^[[]|[\]]$/g, '').trim()
 
     if (apiType === 'primitive' || isNumber) {
       return {

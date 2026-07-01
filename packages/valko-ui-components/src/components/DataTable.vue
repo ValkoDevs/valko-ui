@@ -155,7 +155,7 @@ onBeforeUnmount(() => {
       :striped="striped"
       :selection="selection"
       :row-events="selectionMode === 'rowSingle' || selectionMode === 'rowMultiple'"
-      @on-row-click="(item) => emit('onSelect', item)"
+      @on-row-click="(item: TableItem) => emit('onSelect', item)"
     >
       <template
         v-for="header in headers"
@@ -169,7 +169,7 @@ onBeforeUnmount(() => {
               :color="color"
               :size="size"
               :model-value="isAllSelected"
-              @update:model-value="(val) => emit('onSelectAll', val)"
+              @update:model-value="(val: boolean) => emit('onSelectAll', val)"
             />
             {{ header.key === 'selection' ? '' : header.label }}
           </div>

@@ -9,7 +9,7 @@ class ResizeObserver {
   disconnect() {return}
 }
 
-global.ResizeObserver = ResizeObserver
+globalThis.ResizeObserver = ResizeObserver
 
 describe('Drawer component', () => {
   let wrapper: VueWrapper
