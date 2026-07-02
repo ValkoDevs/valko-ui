@@ -2,6 +2,8 @@
 import { ref, computed, watch, nextTick } from 'vue'
 import type { MenuProps, MenuItem } from '#valkoui/types/Menu'
 import styles from '#valkoui/styles/Menu.styles.ts'
+import useKeyboardNavigation from '#valkoui/composables/useKeyboardNavigation.ts'
+import { createIndexedAdapter } from '#valkoui/keyboard-navigation/index.ts'
 
 defineOptions({ name: 'VkMenu' })
 
@@ -52,29 +54,18 @@ const focusItem = (index: number) => {
 
 const focusedKey = computed(() => navigableItems.value[focusedIndex.value]?.key)
 
-const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
-  type AllowedKeys = 'ArrowDown' | 'ArrowUp' | 'Home' | 'End' | 'Enter' | 'SpaceBar'
-  const allowedKeys: AllowedKeys[] = ['ArrowDown', 'ArrowUp', 'Home', 'End', 'Enter', 'SpaceBar']
-  const currentKey = e.key as AllowedKeys
-
-  if (!allowedKeys.includes(currentKey)) return
-
-  e.preventDefault()
-
-  const formulaMap = {
-    ArrowDown: () => (focusedIndex.value + 1) % navigableItems.value.length,
-    ArrowUp: () => (focusedIndex.value - 1 + navigableItems.value.length) % navigableItems.value.length,
-    Home: () => 0,
-    End: () => navigableItems.value.length - 1
-  }
-
-  if (!['Enter', 'SpaceBar'].includes(currentKey)) {
-    const newIndex = formulaMap[currentKey as keyof typeof formulaMap]()
-    focusItem(newIndex)
-  } else if (!item.disabled) {
-    onItemClick(item)
-  }
-}
+const handleKeyDown = useKeyboardNavigation(
+  createIndexedAdapter({
+    currentIndex: focusedIndex,
+    itemCount: () => navigableItems.value.length,
+    loop: true,
+    onMove: (index) => focusItem(index),
+    onSelect: (index) => {
+      const item = navigableItems.value[index]
+      if (item && !item.disabled) onItemClick(item)
+    }
+  })
+)
 </script>
 
 <template>
@@ -113,7 +104,7 @@ const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
               role="menuitem"
               :tabindex="focusedKey === item.key ? 0 : -1"
               @click.prevent="onItemClick(item)"
-              @keydown="(e) => handleKeyDown(e, item)"
+              @keydown="(e) => !item.disabled && handleKeyDown(e)"
             >
               {{ item.text }}
             </button>
