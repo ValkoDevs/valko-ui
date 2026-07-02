@@ -4,6 +4,8 @@ import type { SelectProps, SelectOption } from '#valkoui/types/Select'
 import styles from '#valkoui/styles/Select.styles.ts'
 import VkIcon from './Icon.vue'
 import VkInput from './Input.vue'
+import useKeyboardNavigation from '#valkoui/composables/useKeyboardNavigation.ts'
+import { createIndexedAdapter } from '#valkoui/keyboard-navigation/index.ts'
 
 defineOptions({ name: 'VkSelect' })
 
@@ -89,34 +91,23 @@ const clearSelection = () => {
 
 const highlightedIndex = ref(-1)
 
-const handleKeyDown = (e: KeyboardEvent) => {
-  type AllowedKeys = 'ArrowDown' | 'ArrowUp' | 'Home' | 'End' | 'Enter' | 'SpaceBar'
-  const allowedKeys: AllowedKeys[] = ['ArrowDown', 'ArrowUp', 'Home', 'End', 'Enter', 'SpaceBar']
-  const currentKey = e.key === ' ' ? 'SpaceBar' : (e.key as AllowedKeys)
-
-  if (!isOpen.value || !allowedKeys.includes(currentKey)) return
-
-  e.preventDefault()
-
-  const formulaMap = {
-    ArrowDown: () => (highlightedIndex.value + 1) % props.options.length,
-    ArrowUp: () => (highlightedIndex.value - 1 + props.options.length) % props.options.length,
-    Home: () => 0,
-    End: () => props.options.length - 1
-  }
-
-  if (['Enter', 'SpaceBar'].includes(currentKey) && highlightedIndex.value >= 0) {
-    const item = props.options[highlightedIndex.value]
-    if (props.multiple) handleMultipleSelection(item.value)
-    else handleSingleSelection(item.value)
-  }
-
-  const move = formulaMap[currentKey as keyof typeof formulaMap]
-  if (!move) return
-
-  highlightedIndex.value = move()
-  nextTick(() => itemRefs.value[highlightedIndex.value]?.scrollIntoView({ block: 'nearest' }))
-}
+const handleKeyDown = useKeyboardNavigation(
+  createIndexedAdapter({
+    currentIndex: highlightedIndex,
+    itemCount: () => props.options.length,
+    loop: true,
+    onMove: (index) => {
+      highlightedIndex.value = index
+      nextTick(() => itemRefs.value[index]?.scrollIntoView({ block: 'nearest' }))
+    },
+    onSelect: (index) => {
+      const item = props.options[index]
+      if (props.multiple) handleMultipleSelection(item.value)
+      else handleSingleSelection(item.value)
+    }
+  }),
+  { enabled: () => isOpen.value }
+)
 
 onMounted(() => {
   document.addEventListener('click', closeDropdownOnOutsideClick)
