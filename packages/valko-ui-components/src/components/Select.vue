@@ -4,8 +4,7 @@ import type { SelectProps, SelectOption } from '#valkoui/types/Select'
 import styles from '#valkoui/styles/Select.styles.ts'
 import VkIcon from './Icon.vue'
 import VkInput from './Input.vue'
-import useKeyboardNavigation from '#valkoui/composables/useKeyboardNavigation.ts'
-import { createIndexedAdapter } from '#valkoui/keyboard-navigation/index.ts'
+import handleKeyboardNavigation from '#valkoui/keyboard-navigation/handleKeyboardNavigation.ts'
 
 defineOptions({ name: 'VkSelect' })
 
@@ -95,23 +94,22 @@ const setItemRef = (index: number) => (el: Element | ComponentPublicInstance | n
   itemRefs.value[index] = el instanceof HTMLElement ? el : null
 }
 
-const handleKeyDown = useKeyboardNavigation(
-  createIndexedAdapter({
-    currentIndex: highlightedIndex,
-    itemCount: () => props.options.length,
-    loop: true,
-    onMove: (index) => {
-      highlightedIndex.value = index
-      nextTick(() => itemRefs.value[index]?.scrollIntoView({ block: 'nearest' }))
-    },
-    onSelect: (index) => {
-      const item = props.options[index]
-      if (props.multiple) handleMultipleSelection(item.value)
-      else handleSingleSelection(item.value)
-    }
-  }),
-  { enabled: () => isOpen.value }
-)
+const handleKeyDown = handleKeyboardNavigation({
+  strategy: 'indexed',
+  currentIndex: highlightedIndex,
+  itemCount: () => props.options.length,
+  loop: true,
+  enabled: () => isOpen.value,
+  onMove: (index) => {
+    highlightedIndex.value = index
+    nextTick(() => itemRefs.value[index]?.scrollIntoView({ block: 'nearest' }))
+  },
+  onSelect: (index) => {
+    const item = props.options[index]
+    if (props.multiple) handleMultipleSelection(item.value)
+    else handleSingleSelection(item.value)
+  }
+})
 
 onMounted(() => {
   document.addEventListener('click', closeDropdownOnOutsideClick)

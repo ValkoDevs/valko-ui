@@ -1,22 +1,27 @@
 import { toValue } from 'vue'
-import type { NavigationAction, NavigationHandler, ValueAdapterConfig } from '../types'
+import type { KeyMap, ValueStrategyConfig } from '../types'
 
-const createValueAdapter = (config: ValueAdapterConfig): NavigationHandler => {
-  return (action: NavigationAction) => {
-    const current = toValue(config.currentValue)
-    const min = toValue(config.min)
-    const max = toValue(config.max)
-    const step = toValue(config.step)
+const createValueAdapter = (config: ValueStrategyConfig): KeyMap => {
+  const increment = () => {
+    const value = Math.min(toValue(config.max), toValue(config.currentValue) + toValue(config.step))
+    config.onUpdate(value)
+  }
 
-    const valueMap: Partial<Record<NavigationAction, number>> = {
-      previous: Math.max(min, current - step),
-      next: Math.min(max, current + step),
-      first: min,
-      last: max
-    }
+  const decrement = () => {
+    const value = Math.max(toValue(config.min), toValue(config.currentValue) - toValue(config.step))
+    config.onUpdate(value)
+  }
 
-    const newValue = valueMap[action]
-    if (newValue !== undefined) config.onUpdate(newValue)
+  const toMin = () => config.onUpdate(toValue(config.min))
+  const toMax = () => config.onUpdate(toValue(config.max))
+
+  return {
+    ArrowRight: increment,
+    ArrowUp: increment,
+    ArrowLeft: decrement,
+    ArrowDown: decrement,
+    Home: toMin,
+    End: toMax
   }
 }
 

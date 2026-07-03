@@ -1,17 +1,20 @@
 import type { MaybeRefOrGetter } from 'vue'
 
-export type NavigationAction =
-  | 'previous'
-  | 'next'
-  | 'first'
-  | 'last'
-  | 'select'
+export type NavigationKey =
+  | 'ArrowUp'
+  | 'ArrowDown'
+  | 'ArrowLeft'
+  | 'ArrowRight'
+  | 'Home'
+  | 'End'
+  | 'Enter'
+  | ' '
+  | 'SpaceBar'
 
-export type NavigationHandler = (action: NavigationAction) => void
-
-export type Orientation = 'vertical' | 'horizontal'
-
-export interface IndexedAdapterConfig {
+export type KeyMap = Partial<Record<NavigationKey, () => void>>
+export interface IndexedStrategyConfig {
+  strategy: 'indexed'
+  enabled?: MaybeRefOrGetter<boolean>
   currentIndex: MaybeRefOrGetter<number>
   itemCount: MaybeRefOrGetter<number>
   loop?: boolean
@@ -19,14 +22,9 @@ export interface IndexedAdapterConfig {
   onSelect?: (index: number) => void
 }
 
-export interface SelectionAdapterConfig {
-  currentIndex: MaybeRefOrGetter<number>
-  itemCount: MaybeRefOrGetter<number>
-  loop?: boolean
-  onSelect: (index: number) => void
-}
-
-export interface ValueAdapterConfig {
+export interface ValueStrategyConfig {
+  strategy: 'value'
+  enabled?: MaybeRefOrGetter<boolean>
   currentValue: MaybeRefOrGetter<number>
   min: MaybeRefOrGetter<number>
   max: MaybeRefOrGetter<number>
@@ -34,7 +32,18 @@ export interface ValueAdapterConfig {
   onUpdate: (value: number) => void
 }
 
-export interface KeyboardNavigationOptions {
+export interface GridStrategyConfig {
+  strategy: 'grid'
   enabled?: MaybeRefOrGetter<boolean>
-  orientation?: Orientation
+  currentIndex: MaybeRefOrGetter<number>
+  itemCount: MaybeRefOrGetter<number>
+  columnCount: MaybeRefOrGetter<number>
+  onMove: (index: number) => void
+  onSelect?: (index: number) => void
+  isDisabled?: (index: number) => boolean
 }
+
+export type KeyboardNavigationConfig =
+  | IndexedStrategyConfig
+  | ValueStrategyConfig
+  | GridStrategyConfig

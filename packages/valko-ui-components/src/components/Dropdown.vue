@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, useId, computed } from 'vue'
+import { type ComponentPublicInstance, ref, useId, computed, watch, nextTick } from 'vue'
 import type { DropdownProps, Item } from '#valkoui/types/Dropdown'
 import styles from '#valkoui/styles/Dropdown.styles.ts'
+import handleKeyboardNavigation from '#valkoui/keyboard-navigation/handleKeyboardNavigation.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 import VkPopover from './Popover.vue'
@@ -29,6 +30,8 @@ const s = computed(() => styles(props))
 const dropdownId = useId()
 const menuId = useId()
 const internalOpen = ref(false)
+const focusedIndex = ref(-1)
+const itemRefs = ref<(HTMLElement | null)[]>([])
 
 const open = computed({
   get: () => props.isOpen ?? internalOpen.value,
@@ -36,6 +39,53 @@ const open = computed({
     if (props.isOpen === undefined) internalOpen.value = val
   }
 })
+
+const navigableItems = computed(() => props.items.filter(item => !item.disabled))
+const focusedKey = computed(() => navigableItems.value[focusedIndex.value]?.key)
+
+const setItemRef = (index: number) => (el: Element | ComponentPublicInstance | null) => {
+  itemRefs.value[index] = el instanceof HTMLElement ? el : null
+}
+
+const focusItem = (index: number) => {
+  focusedIndex.value = index
+
+  nextTick(() => {
+    const item = navigableItems.value[index]
+    if (!item) return
+
+    const domIndex = props.items.findIndex(option => option.key === item.key)
+    if (domIndex >= 0) itemRefs.value[domIndex]?.focus()
+  })
+}
+
+const handleItemKeyDown = handleKeyboardNavigation({
+  strategy: 'indexed',
+  currentIndex: focusedIndex,
+  itemCount: () => navigableItems.value.length,
+  loop: true,
+  enabled: () => open.value && !props.disabled,
+  onMove: focusItem,
+  onSelect: (index: number) => {
+    const item = navigableItems.value[index]
+    if (item) onItemClick(item)
+  }
+})
+
+const onTriggerKeyDown = (event: KeyboardEvent) => {
+  if (props.disabled || !['ArrowDown', 'ArrowUp'].includes(event.key)) return
+  event.preventDefault()
+  if (!open.value) open.value = true
+  focusItem(event.key === 'ArrowDown' ? 0 : navigableItems.value.length - 1)
+}
+
+watch(
+  () => [open.value, props.items],
+  () => {
+    focusedIndex.value = open.value && navigableItems.value.length ? 0 : -1
+  },
+  { immediate: true }
+)
 
 const onClick = (event: MouseEvent) => {
   open.value = !open.value
@@ -79,6 +129,7 @@ const onItemClick = (item: Item) => {
         :aria-expanded="open"
         :aria-controls="menuId"
         @click.stop="onClick"
+        @keydown="onTriggerKeyDown"
       >
         {{ label }}
         <vk-icon
@@ -97,17 +148,20 @@ const onItemClick = (item: Item) => {
         :class="s.itemsMenu({ class: styleSlots?.itemsMenu })"
       >
         <button
-          v-for="item in items"
+          v-for="(item, index) in items"
           :key="item.key"
+          :ref="setItemRef(index)"
           role="menuitem"
           type="button"
-          :tabindex="item.disabled ? -1 : 0"
+          :tabindex="item.disabled ? -1 : (focusedKey === item.key ? 0 : -1)"
           :aria-disabled="item.disabled || undefined"
           :disabled="item.disabled"
           :class="s.itemsButton({ class: styleSlots?.itemsButton })"
           :data-disabled="item.disabled"
+          :data-focused="focusedKey === item.key"
           :data-shape="shape"
           @click.prevent="onItemClick(item)"
+          @keydown="!item.disabled && handleItemKeyDown($event)"
         >
           <vk-icon
             v-if="item.icon"

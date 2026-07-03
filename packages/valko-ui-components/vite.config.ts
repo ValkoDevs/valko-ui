@@ -23,7 +23,8 @@ export default defineConfig({
         'src/components/**/*.{vue, ts}',
         'src/types/**/*.ts',
         'src/composables/**/*.ts',
-        'src/styles/**/*.ts'
+        'src/styles/**/*.ts',
+        'src/keyboard-navigation/**/*.ts'
       ],
       tsconfigOverride: {
         compilerOptions: {
@@ -40,6 +41,8 @@ export default defineConfig({
       targets: [
         { src: 'src/components/*.vue', dest: 'dist/components', ignore: ['**/*.map'] },
         { src: 'src/composables/*.ts', dest: 'dist/composables', ignore: ['**/*.map'] },
+        { src: 'src/keyboard-navigation/*.ts', dest: 'dist/keyboard-navigation', ignore: ['**/*.map'] },
+        { src: 'src/keyboard-navigation/adapters/*.ts', dest: 'dist/keyboard-navigation/adapters', ignore: ['**/*.map'] },
         { src: 'src/styles/*.ts', dest: 'dist/styles', ignore: ['**/*.map'] },
         { src: 'src/types/*.ts', dest: 'dist/types', ignore: ['**/*.map'] },
         { src: 'src/img/*', dest: 'dist/img', ignore: ['**/*.map'] }

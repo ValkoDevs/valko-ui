@@ -1,29 +1,35 @@
 import { toValue } from 'vue'
-import type { NavigationAction, NavigationHandler, IndexedAdapterConfig } from '../types'
+import type { KeyMap, IndexedStrategyConfig } from '../types'
 
-const createIndexedAdapter = (config: IndexedAdapterConfig): NavigationHandler => {
-  return (action: NavigationAction) => {
+const createIndexedAdapter = (config: IndexedStrategyConfig): KeyMap => {
+  const move = (delta: number) => {
     const current = toValue(config.currentIndex)
     const count = toValue(config.itemCount)
-
     if (count === 0) return
 
-    if (action === 'select') {
-      if (config.onSelect && current >= 0) config.onSelect(current)
-      return
-    }
-
     const loop = config.loop ?? true
+    const next = loop
+      ? (current + delta + count) % count
+      : Math.max(0, Math.min(count - 1, current + delta))
 
-    const indexMap: Partial<Record<NavigationAction, number>> = {
-      previous: loop ? (current - 1 + count) % count : Math.max(0, current - 1),
-      next: loop ? (current + 1) % count : Math.min(count - 1, current + 1),
-      first: 0,
-      last: count - 1
-    }
+    config.onMove(next)
+  }
 
-    const newIndex = indexMap[action]
-    if (newIndex !== undefined) config.onMove(newIndex)
+  const select = () => {
+    const current = toValue(config.currentIndex)
+    if (config.onSelect && current >= 0) config.onSelect(current)
+  }
+
+  return {
+    ArrowUp: () => move(-1),
+    ArrowDown: () => move(1),
+    ArrowLeft: () => move(-1),
+    ArrowRight: () => move(1),
+    Home: () => config.onMove(0),
+    End: () => config.onMove(toValue(config.itemCount) - 1),
+    Enter: select,
+    ' ': select,
+    SpaceBar: select
   }
 }
 

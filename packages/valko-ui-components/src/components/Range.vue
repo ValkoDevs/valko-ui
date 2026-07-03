@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { computed, ref, watch, toValue, useId } from 'vue'
-import type { RangeProps } from '#valkoui/types/Range'
+import type { RangeProps, Thumb, ThumbHandlers } from '#valkoui/types/Range'
 import styles from '#valkoui/styles/Range.styles.ts'
 import diagonalStripes from '#valkoui/img/diagonal-stripes.svg'
-import useKeyboardNavigation from '#valkoui/composables/useKeyboardNavigation.ts'
-import { createValueAdapter } from '#valkoui/keyboard-navigation/index.ts'
+import handleKeyboardNavigation from '#valkoui/keyboard-navigation/handleKeyboardNavigation'
 
 defineOptions({ name: 'VkRange' })
 
@@ -30,7 +29,7 @@ const s = computed(() => styles(props))
 const rangeId = useId()
 const isDragging = ref(false)
 const sliderRef = ref<HTMLElement | null>(null)
-const draggingThumb = ref<'min' | 'max'>('min')
+const draggingThumb = ref<Thumb>('min')
 const thumbRefMap = {
   min: ref(Array.isArray(props.modelValue) ? props.modelValue[0] : 0),
   max: ref(Array.isArray(props.modelValue) ? props.modelValue[1] : props.modelValue)
@@ -46,7 +45,7 @@ const getNewThumbPosition = (clientX: number): number => {
   return Math.min(props.max, Math.max(props.min, newPosition))
 }
 
-const updateThumbPosition = (newPosition: number, thumb: 'min' | 'max') => {
+const updateThumbPosition = (newPosition: number, thumb: Thumb) => {
   const primaryThumb = thumb === 'min' ? 'min' : 'max'
   const secondaryThumb = thumb === 'max' ? 'min' : 'max'
   thumbRefMap[primaryThumb].value = newPosition
@@ -78,7 +77,7 @@ const removeListeners = () => {
   document.removeEventListener('touchend', onEnd)
 }
 
-const onStart = (event: MouseEvent | TouchEvent, thumb: 'min' | 'max') => {
+const onStart = (event: MouseEvent | TouchEvent, thumb: Thumb) => {
   isDragging.value = true
   draggingThumb.value = thumb
 
@@ -154,7 +153,7 @@ const inlineStyles = computed(() => {
 })
 
 const thumbStyles = computed(() => {
-  const calculateStyles = (thumb: 'min' | 'max') => {
+  const calculateStyles = (thumb: Thumb) => {
     const range = props.max - props.min
     const position = ((thumbRefMap[thumb].value - props.min) / range) * 100
     const clampedPosition = Math.min(100, Math.max(0, position))
@@ -179,16 +178,23 @@ const onLabelClick = (newPosition: number) => {
   else handleMultipleThumbs(newPosition)
 }
 
-const handleKeydown = (thumb: 'min' | 'max') => useKeyboardNavigation(
-  createValueAdapter({
+const buildThumbHandlers = (thumb: Thumb): ThumbHandlers => ({
+  onMouseDown: (event: MouseEvent) => onStart(event, thumb),
+  onTouchStart: (event: TouchEvent) => onStart(event, thumb),
+  onKeyDown: handleKeyboardNavigation({
+    strategy: 'value',
     currentValue: thumbRefMap[thumb],
     min: () => props.min,
     max: () => props.max,
     step: () => props.step,
     onUpdate: (value) => updateThumbPosition(value, thumb)
-  }),
-  { orientation: 'horizontal' }
-)
+  })
+})
+
+const thumbHandlers: Record<Thumb, ThumbHandlers> = {
+  min: buildThumbHandlers('min'),
+  max: buildThumbHandlers('max')
+}
 
 watch([() => props.min, () => props.max, () => props.isDouble, () => props.step], ([min, max, isDouble]) => {
   thumbRefMap.min.value = min
@@ -231,9 +237,9 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
         :aria-labelledby="rangeId"
         :aria-describedby="props.ariaDescribedBy"
         aria-label="Minimum value"
-        @mousedown="(event: MouseEvent) => onStart(event, 'min')"
-        @keydown="handleKeydown('min')"
-        @touchstart="(event: TouchEvent) => onStart(event, 'min')"
+        @mousedown="thumbHandlers.min.onMouseDown"
+        @keydown="thumbHandlers.min.onKeyDown"
+        @touchstart="thumbHandlers.min.onTouchStart"
       />
       <div
         :class="s.thumb({ class: styleSlots?.thumb })"
@@ -246,9 +252,9 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
         :aria-labelledby="rangeId"
         :aria-describedby="props.ariaDescribedBy"
         :aria-label="isDouble ? 'Maximum value' : 'Value'"
-        @mousedown="(event: MouseEvent) => onStart(event, 'max')"
-        @keydown="handleKeydown('max')"
-        @touchstart="(event: TouchEvent) => onStart(event, 'max')"
+        @mousedown="thumbHandlers.max.onMouseDown"
+        @keydown="thumbHandlers.max.onKeyDown"
+        @touchstart="thumbHandlers.max.onTouchStart"
       />
     </div>
     <div

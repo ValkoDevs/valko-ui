@@ -2,8 +2,7 @@
 import { ref, computed, watch, nextTick } from 'vue'
 import type { MenuProps, MenuItem } from '#valkoui/types/Menu'
 import styles from '#valkoui/styles/Menu.styles.ts'
-import useKeyboardNavigation from '#valkoui/composables/useKeyboardNavigation.ts'
-import { createIndexedAdapter } from '#valkoui/keyboard-navigation/index.ts'
+import handleKeyboardNavigation from '#valkoui/keyboard-navigation/handleKeyboardNavigation'
 
 defineOptions({ name: 'VkMenu' })
 
@@ -54,18 +53,17 @@ const focusItem = (index: number) => {
 
 const focusedKey = computed(() => navigableItems.value[focusedIndex.value]?.key)
 
-const handleKeyDown = useKeyboardNavigation(
-  createIndexedAdapter({
-    currentIndex: focusedIndex,
-    itemCount: () => navigableItems.value.length,
-    loop: true,
-    onMove: (index) => focusItem(index),
-    onSelect: (index) => {
-      const item = navigableItems.value[index]
-      if (item && !item.disabled) onItemClick(item)
-    }
-  })
-)
+const handleKeyDown = handleKeyboardNavigation({
+  strategy: 'indexed',
+  currentIndex: focusedIndex,
+  itemCount: () => navigableItems.value.length,
+  loop: true,
+  onMove: (index) => focusItem(index),
+  onSelect: (index) => {
+    const item = navigableItems.value[index]
+    if (item && !item.disabled) onItemClick(item)
+  }
+})
 </script>
 
 <template>
