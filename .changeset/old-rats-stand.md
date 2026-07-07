@@ -4,25 +4,37 @@
 
 ## Valko-UI Components
 
-### Keyboard Navigation Module
+### Composables
 
-- Introduced a new `keyboard-navigation` module that extracts and centralizes keyboard navigation logic previously duplicated across components.
-- Components now configure navigation through a single `handleKeyboardNavigation` function using a strategy-based discriminated union (`indexed`, `value`, `grid`).
-- Added `indexed` adapter for list-based navigation with looping and selection support.
-- Added `value` adapter for increment/decrement navigation with min/max clamping.
-- Added `grid` adapter with 2D row/column navigation and disabled-cell skipping.
-- Defined a `NavigationKey` union type to restrict key maps to valid keyboard keys, preventing arbitrary string access.
+- Added `useListKeyboardNav` composable for list-based navigation with looping, Home/End, and Enter/Space selection support.
+- Added `useGridKeyboardNav` composable for 2D row/column navigation with disabled-cell skipping.
+- Added `useRangeKeyboardNav` composable for increment/decrement navigation with min/max clamping.
 
 ### Components
 
-- **Menu, Select:** Migrated inline keyboard handlers to the new `handleKeyboardNavigation` API.
-- **Dropdown:** Added full keyboard navigation for menu items (arrow keys, Home/End, Enter/Space) and trigger arrow key support to open and focus.
-- **Pagination:** Added keyboard navigation with value adapter for page increment/decrement.
-- **CalendarDayView, CalendarMonthView, CalendarYearView:** Added grid-based keyboard navigation with roving tabindex, focus sync to selected value, and `data-kb-index` attributes.
-- **Range:** Added `Thumb` union type and `ThumbHandlers` interface, replacing magic strings with a `buildThumbHandlers` factory and `thumbHandlers` record.
+- **Menu, Select, Dropdown:** Replaced inline keyboard handlers with the `useListKeyboardNav` composable.
+- **Dropdown:** Added keyboard navigation for menu items (arrow keys, Home/End, Enter/Space) and trigger arrow key support to open and focus.
+- **Pagination:** Added keyboard navigation with `useRangeKeyboardNav` for page increment/decrement.
+- **CalendarDayView, CalendarMonthView, CalendarYearView:** Added grid-based keyboard navigation with `useGridKeyboardNav`, roving tabindex, focus sync to selected value, and `data-kb-index` attributes.
+- **Range:** Replaced inline keyboard handlers with the `useRangeKeyboardNav` composable. Replaced magic strings with a `buildThumbHandlers` factory and `thumbHandlers` record.
+
+### Types
+
+- Added `keyboardNavigation` types file containing:
+  - `NavigationKey` union type to restrict key maps to valid keyboard keys.
+  - `KeyMap`, `ListNavigationConfig`, `GridNavigationConfig`, and `RangeNavigationConfig` interfaces.
+- **Range:**
+  - Added `Thumb` union type to replace magic strings.
+  - Added `ThumbHandlers` interface.
+
+### Tests
+
+- Added dedicated test suites covering boundary conditions, disabled cells, looping, and reactive values for:
+  - `useListKeyboardNav`
+  - `useGridKeyboardNav`
+  - `useRangeKeyboardNav`
+- Refactored `Menu`, `Select`, `Range`, `Dropdown`, `Pagination`, and `Calendar` component tests to mock their respective composables and verify integration instead of duplicating navigation behavior tests.
 
 ### Build & Module Config
 
-- Updated Nuxt module to register the `keyboard-navigation` directory via `addImportsDir`.
-- Updated Vite config to include `keyboard-navigation` source files in `rollup-plugin-copy` targets and `rollup-plugin-typescript2` include patterns.
-- Exported `handleKeyboardNavigation` and strategy config types from the package entry point.
+- Exported `useListKeyboardNav`, `useGridKeyboardNav`, `useRangeKeyboardNav`, and keyboard navigation types from the package entry point.
