@@ -2,7 +2,7 @@
 import { type ComponentPublicInstance, ref, useId, computed, watch, nextTick } from 'vue'
 import type { DropdownProps, Item } from '#valkoui/types/Dropdown'
 import styles from '#valkoui/styles/Dropdown.styles.ts'
-import handleKeyboardNavigation from '#valkoui/keyboard-navigation/handleKeyboardNavigation.ts'
+import useListKeyboardNav from '#valkoui/composables/useListKeyboardNav.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 import VkPopover from './Popover.vue'
@@ -59,8 +59,7 @@ const focusItem = (index: number) => {
   })
 }
 
-const handleItemKeyDown = handleKeyboardNavigation({
-  strategy: 'indexed',
+const handleItemKeyDown = useListKeyboardNav({
   currentIndex: focusedIndex,
   itemCount: () => navigableItems.value.length,
   loop: true,

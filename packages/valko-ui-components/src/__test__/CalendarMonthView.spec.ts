@@ -1,7 +1,14 @@
 import VkCalendarMonthView from '#valkoui/components/CalendarMonthView.vue'
-import { ref, computed, toValue } from 'vue'
+import { ref, computed, toValue, nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import type { AdapterResult } from '#valkoui/types/Calendar'
+import useGridKeyboardNav from '#valkoui/composables/useGridKeyboardNav.ts'
+
+vi.mock('#valkoui/composables/useGridKeyboardNav.ts', () => ({
+  default: vi.fn(() => vi.fn())
+}))
+
+const useGridKeyboardNavMock = vi.mocked(useGridKeyboardNav)
 
 const { useDateAdapter } = vi.hoisted(() => ({
   useDateAdapter: vi.fn(() => ([
@@ -143,6 +150,82 @@ describe('CalendarMonthView Component', () => {
       await wrapper.findAll('.vk-calendar__arrows').at(1)?.trigger('click')
 
       expect(wrapper.emitted('changeYear')?.at(0)).toEqual([2025])
+    })
+  })
+
+  describe('Keyboard Navigation', () => {
+    let wrapper: VueWrapper
+
+    beforeEach(() => {
+      useGridKeyboardNavMock.mockClear()
+
+      wrapper = mount(VkCalendarMonthView, {
+        props: { ...baseProps }
+      })
+    })
+
+    it('should call useGridKeyboardNav with columnCount', () => {
+      expect(useGridKeyboardNavMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          columnCount: expect.any(Function)
+        })
+      )
+    })
+
+    it('should pass onMove and onSelect callbacks', () => {
+      const config = useGridKeyboardNavMock.mock.calls[0][0]
+
+      expect(config).toHaveProperty('onMove')
+      expect(config).toHaveProperty('onSelect')
+    })
+
+    it('should update focusedIndex when onMove is called', async () => {
+      const config = useGridKeyboardNavMock.mock.calls[0][0] as { onMove: (index: number) => void }
+      config.onMove(3)
+      await nextTick()
+
+      const buttons = wrapper.findAll('.vk-calendar__grid-button')
+      const focusedButton = buttons.find(btn => btn.attributes('tabindex') === '0')
+
+      expect(focusedButton).toBeDefined()
+    })
+
+    it('should emit selectMonth when onSelect is called with a valid index', () => {
+      const config = useGridKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
+      config.onSelect(0)
+
+      expect(wrapper.emitted('selectMonth')).toBeTruthy()
+    })
+
+    it('should not emit selectMonth when onSelect is called with an invalid index', () => {
+      const config = useGridKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
+      config.onSelect(999)
+
+      expect(wrapper.emitted('selectMonth')).toBeFalsy()
+    })
+
+    it('should attach the handler to month buttons via keydown', async () => {
+      const mockHandler = vi.fn()
+      useGridKeyboardNavMock.mockReturnValue(mockHandler)
+
+      wrapper = mount(VkCalendarMonthView, {
+        props: { ...baseProps }
+      })
+
+      const monthButton = wrapper.find('.vk-calendar__grid-button')
+      await monthButton.trigger('keydown', { key: 'ArrowDown' })
+
+      expect(mockHandler).toHaveBeenCalled()
+    })
+
+    it('should update focusedIndex when a month button receives focus', async () => {
+      const buttons = wrapper.findAll('.vk-calendar__grid-button')
+
+      await buttons[5]?.trigger('focus')
+      await nextTick()
+
+      const focusedButton = wrapper.findAll('.vk-calendar__grid-button').find(btn => btn.attributes('tabindex') === '0')
+      expect(focusedButton).toBeDefined()
     })
   })
 })

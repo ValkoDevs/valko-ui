@@ -1,7 +1,7 @@
 import { toValue } from 'vue'
-import type { KeyMap, ValueStrategyConfig } from '../types'
+import type { KeyMap, RangeNavigationConfig, NavigationKey } from '../types/keyboardNavigation'
 
-const createValueAdapter = (config: ValueStrategyConfig): KeyMap => {
+const useRangeKeyboardNav = (config: RangeNavigationConfig) => {
   const increment = () => {
     const value = Math.min(toValue(config.max), toValue(config.currentValue) + toValue(config.step))
     config.onUpdate(value)
@@ -15,7 +15,7 @@ const createValueAdapter = (config: ValueStrategyConfig): KeyMap => {
   const toMin = () => config.onUpdate(toValue(config.min))
   const toMax = () => config.onUpdate(toValue(config.max))
 
-  return {
+  const keyMap: KeyMap = {
     ArrowRight: increment,
     ArrowUp: increment,
     ArrowLeft: decrement,
@@ -23,6 +23,16 @@ const createValueAdapter = (config: ValueStrategyConfig): KeyMap => {
     Home: toMin,
     End: toMax
   }
+
+  return (event: KeyboardEvent) => {
+    if (config.enabled !== undefined && !toValue(config.enabled)) return
+
+    const action = keyMap[event.key as NavigationKey]
+    if (!action) return
+
+    event.preventDefault()
+    action()
+  }
 }
 
-export default createValueAdapter
+export default useRangeKeyboardNav

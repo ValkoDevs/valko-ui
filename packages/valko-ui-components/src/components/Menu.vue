@@ -2,7 +2,7 @@
 import { ref, computed, watch, nextTick } from 'vue'
 import type { MenuProps, MenuItem } from '#valkoui/types/Menu'
 import styles from '#valkoui/styles/Menu.styles.ts'
-import handleKeyboardNavigation from '#valkoui/keyboard-navigation/handleKeyboardNavigation'
+import useListKeyboardNav from '#valkoui/composables/useListKeyboardNav'
 
 defineOptions({ name: 'VkMenu' })
 
@@ -53,13 +53,12 @@ const focusItem = (index: number) => {
 
 const focusedKey = computed(() => navigableItems.value[focusedIndex.value]?.key)
 
-const handleKeyDown = handleKeyboardNavigation({
-  strategy: 'indexed',
+const handleKeyDown = useListKeyboardNav({
   currentIndex: focusedIndex,
   itemCount: () => navigableItems.value.length,
   loop: true,
-  onMove: (index) => focusItem(index),
-  onSelect: (index) => {
+  onMove: (index: number) => focusItem(index),
+  onSelect: (index: number) => {
     const item = navigableItems.value[index]
     if (item && !item.disabled) onItemClick(item)
   }

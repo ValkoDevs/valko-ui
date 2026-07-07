@@ -12,18 +12,22 @@ export type NavigationKey =
   | 'SpaceBar'
 
 export type KeyMap = Partial<Record<NavigationKey, () => void>>
-export interface IndexedStrategyConfig {
-  strategy: 'indexed'
+
+export interface ListNavigationConfig {
   enabled?: MaybeRefOrGetter<boolean>
   currentIndex: MaybeRefOrGetter<number>
   itemCount: MaybeRefOrGetter<number>
   loop?: boolean
   onMove: (index: number) => void
   onSelect?: (index: number) => void
+  isItemDisabled?: (index: number) => boolean
 }
 
-export interface ValueStrategyConfig {
-  strategy: 'value'
+export interface GridNavigationConfig extends ListNavigationConfig{
+  columnCount: MaybeRefOrGetter<number>
+}
+
+export interface RangeNavigationConfig {
   enabled?: MaybeRefOrGetter<boolean>
   currentValue: MaybeRefOrGetter<number>
   min: MaybeRefOrGetter<number>
@@ -31,19 +35,3 @@ export interface ValueStrategyConfig {
   step: MaybeRefOrGetter<number>
   onUpdate: (value: number) => void
 }
-
-export interface GridStrategyConfig {
-  strategy: 'grid'
-  enabled?: MaybeRefOrGetter<boolean>
-  currentIndex: MaybeRefOrGetter<number>
-  itemCount: MaybeRefOrGetter<number>
-  columnCount: MaybeRefOrGetter<number>
-  onMove: (index: number) => void
-  onSelect?: (index: number) => void
-  isDisabled?: (index: number) => boolean
-}
-
-export type KeyboardNavigationConfig =
-  | IndexedStrategyConfig
-  | ValueStrategyConfig
-  | GridStrategyConfig

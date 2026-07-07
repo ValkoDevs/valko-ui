@@ -1,8 +1,8 @@
 import { toValue } from 'vue'
-import type { GridStrategyConfig, KeyMap } from '../types'
+import type { GridNavigationConfig, KeyMap, NavigationKey } from '../types/keyboardNavigation'
 
-const createGridAdapter = (config: GridStrategyConfig): KeyMap => {
-  const isDisabled = (index: number) => config.isDisabled?.(index) ?? false
+const useGridKeyboardNav = (config: GridNavigationConfig) => {
+  const isDisabled = (index: number) => config.isItemDisabled?.(index) ?? false
 
   const findEnabled = (start: number, step: number) => {
     const count = toValue(config.itemCount)
@@ -52,7 +52,7 @@ const createGridAdapter = (config: GridStrategyConfig): KeyMap => {
     if (currentIndex >= 0 && !isDisabled(currentIndex)) config.onSelect?.(currentIndex)
   }
 
-  return {
+  const keyMap: KeyMap = {
     ArrowLeft: () => moveBy(() => -1),
     ArrowRight: () => moveBy(() => 1),
     ArrowUp: () => moveBy((cols) => -cols),
@@ -63,6 +63,16 @@ const createGridAdapter = (config: GridStrategyConfig): KeyMap => {
     ' ': select,
     SpaceBar: select
   }
+
+  return (event: KeyboardEvent) => {
+    if (config.enabled !== undefined && !toValue(config.enabled)) return
+
+    const action = keyMap[event.key as NavigationKey]
+    if (!action) return
+
+    event.preventDefault()
+    action()
+  }
 }
 
-export default createGridAdapter
+export default useGridKeyboardNav

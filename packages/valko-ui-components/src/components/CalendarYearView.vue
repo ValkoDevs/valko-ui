@@ -2,7 +2,7 @@
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import type { CalendarYearViewProps } from '#valkoui/types/Calendar'
 import styles from '#valkoui/styles/Calendar.styles.ts'
-import handleKeyboardNavigation from '#valkoui/keyboard-navigation/handleKeyboardNavigation.ts'
+import useGridKeyboardNav from '#valkoui/composables/useGridKeyboardNav.ts'
 import VkCalendarHeader from './CalendarHeader.vue'
 import VkButton from './Button.vue'
 
@@ -61,8 +61,7 @@ watch(
   { immediate: true }
 )
 
-const handleGridKeyDown = handleKeyboardNavigation({
-  strategy: 'grid',
+const handleGridKeyDown = useGridKeyboardNav({
   currentIndex: focusedIndex,
   itemCount: () => navigableYears.value.length,
   columnCount: () => 4,

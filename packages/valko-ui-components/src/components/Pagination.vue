@@ -2,7 +2,7 @@
 import { computed, watchEffect } from 'vue'
 import type { PaginationProps } from '#valkoui/types/Pagination'
 import styles from '#valkoui/styles/Pagination.styles.ts'
-import handleKeyboardNavigation from '#valkoui/keyboard-navigation/handleKeyboardNavigation.ts'
+import useRangeKeyboardNav from '#valkoui/composables/useRangeKeyboardNav.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 
@@ -40,14 +40,13 @@ const changePage = (page: string | number) => {
     emit('update:modelValue', page)
 }
 
-const handleKeyDown = handleKeyboardNavigation({
-  strategy: 'value',
+const handleKeyDown = useRangeKeyboardNav({
   currentValue: () => props.modelValue,
   min: () => 1,
   max: () => +props.pages,
   step: () => 1,
   enabled: () => !props.disabled,
-  onUpdate: (value) => changePage(value)
+  onUpdate: (value: number) => changePage(value)
 })
 
 watchEffect(() => {

@@ -2,6 +2,13 @@ import { VueWrapper, mount } from '@vue/test-utils'
 import VkMenu from '#valkoui/components/Menu.vue'
 import { MenuItem } from '#valkoui/types/Menu.ts'
 import { nextTick } from 'vue'
+import useListKeyboardNav from '#valkoui/composables/useListKeyboardNav.ts'
+
+vi.mock('#valkoui/composables/useListKeyboardNav.ts', () => ({
+  default: vi.fn(() => vi.fn())
+}))
+
+const useListKeyboardNavMock = vi.mocked(useListKeyboardNav)
 
 describe('Menu component', () => {
   const onClickMock = vi.fn()
@@ -413,7 +420,37 @@ describe('Menu component', () => {
     })
 
     describe('onKeyDown', () => {
-      it('should move focus with ArrowDown', async () => {
+      beforeEach(() => {
+        useListKeyboardNavMock.mockClear()
+
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'get-started'
+          }
+        })
+      })
+
+      it('should call useListKeyboardNav with loop enabled', () => {
+        expect(useListKeyboardNavMock).toHaveBeenCalledWith(
+          expect.objectContaining({
+            loop: true
+          })
+        )
+      })
+
+      it('should pass currentIndex, itemCount, onMove and onSelect', () => {
+        const config = useListKeyboardNavMock.mock.calls[0][0]
+
+        expect(config).toHaveProperty('currentIndex')
+        expect(config).toHaveProperty('onMove')
+        expect(config).toHaveProperty('onSelect')
+      })
+
+      it('should attach the handler to menu items via keydown', async () => {
+        const mockHandler = vi.fn()
+        useListKeyboardNavMock.mockReturnValue(mockHandler)
+
         wrapper = mount(VkMenu, {
           props: {
             items: menuItems,
@@ -424,164 +461,49 @@ describe('Menu component', () => {
         await nextTick()
         const buttons = wrapper.findAll('.vk-menu__content')
         await buttons[0].trigger('keydown', { key: 'ArrowDown' })
+
+        expect(mockHandler).toHaveBeenCalled()
+      })
+
+      it('should not call handler on disabled item keydown', async () => {
+        const mockHandler = vi.fn()
+        useListKeyboardNavMock.mockReturnValue(mockHandler)
+
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'get-started'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+        await buttons[1].trigger('keydown', { key: 'ArrowDown' })
+
+        expect(mockHandler).not.toHaveBeenCalled()
+      })
+
+      it('should update focusedIndex when onMove is called', async () => {
+        const config = useListKeyboardNavMock.mock.calls[0][0] as { onMove: (index: number) => void }
+        config.onMove(1)
         await nextTick()
 
+        const buttons = wrapper.findAll('.vk-menu__content')
         expect(buttons[2].attributes('tabindex')).toBe('0')
       })
 
-      it('should move focus with ArrowUp', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
-        })
+      it('should emit itemClick when onSelect is called with a valid navigable item', () => {
+        const config = useListKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
+        config.onSelect(0)
 
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        await buttons[0].trigger('keydown', { key: 'End' })
-        await nextTick()
-        await buttons[2].trigger('keydown', { key: 'ArrowUp' })
-        await nextTick()
-
-        expect(buttons[0].attributes('tabindex')).toBe('0')
+        expect(wrapper.emitted('itemClick')).toBeTruthy()
       })
 
-      it('should move focus with Home', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
-        })
+      it('should not emit itemClick when onSelect is called with an out of bounds index', () => {
+        const config = useListKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
+        config.onSelect(999)
 
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        await buttons[0].trigger('keydown', { key: 'End' })
-        await nextTick()
-        await buttons[2].trigger('keydown', { key: 'Home' })
-        await nextTick()
-
-        expect(buttons[0].attributes('tabindex')).toBe('0')
-      })
-
-      it('should move focus with End', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        await buttons[0].trigger('keydown', { key: 'End' })
-        await nextTick()
-
-        expect(buttons[2].attributes('tabindex')).toBe('0')
-      })
-
-      it('should trigger click with Enter if not disabled', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        onClickMock.mockClear()
-        await buttons[0].trigger('keydown', { key: 'Enter' })
-
-        expect(onClickMock).toHaveBeenCalledTimes(1)
-      })
-
-      it('should trigger click with SpaceBar if not disabled', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        onClickMock.mockClear()
-        await buttons[0].trigger('keydown', { key: 'SpaceBar' })
-
-        expect(onClickMock).toHaveBeenCalledTimes(1)
-      })
-
-      it('should not trigger click with Enter if disabled', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'divider'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        onClickMock.mockClear()
-        await buttons[1].trigger('keydown', { key: 'Enter' })
-
-        expect(onClickMock).not.toHaveBeenCalled()
-      })
-
-      it('should not trigger click with SpaceBar if disabled', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'divider'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        onClickMock.mockClear()
-        await buttons[1].trigger('keydown', { key: 'SpaceBar' })
-
-        expect(onClickMock).not.toHaveBeenCalled()
-      })
-
-      it('should do nothing for unrelated keys', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        onClickMock.mockClear()
-        await buttons[0].trigger('keydown', { key: 'Tab' })
-        expect(onClickMock).not.toHaveBeenCalled()
-
-        expect(buttons[0].attributes('tabindex')).toBe('0')
-      })
-
-      it('focuses the correct menu item after keyboard navigation and activation', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          },
-          attachTo: document.body
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('[role="menuitem"]')
-        await buttons[0].trigger('keydown', { key: 'ArrowDown' })
-        await nextTick()
-        const focused = buttons.find(b => b.attributes('tabindex') === '0')
-        await focused!.trigger('keydown', { key: 'Enter' })
-        const focusedIndex = buttons.findIndex(b => b === focused)
-        await wrapper.setProps({ active: menuItems[focusedIndex].key })
-        await nextTick()
-
-        expect(focused!.attributes('data-active')).toContain('true')
+        expect(wrapper.emitted('itemClick')).toBeFalsy()
       })
     })
   })

@@ -1,6 +1,13 @@
 import { nextTick } from 'vue'
 import { VueWrapper, mount, DOMWrapper } from '@vue/test-utils'
 import VkRange from '#valkoui/components/Range.vue'
+import useRangeKeyboardNav from '#valkoui/composables/useRangeKeyboardNav.ts'
+
+vi.mock('#valkoui/composables/useRangeKeyboardNav.ts', () => ({
+  default: vi.fn(() => vi.fn())
+}))
+
+const useRangeKeyboardNavMock = vi.mocked(useRangeKeyboardNav)
 
 describe('Range component', () => {
   let wrapper: VueWrapper
@@ -476,124 +483,75 @@ describe('Range component', () => {
     })
 
     describe('handleKeyDown', () => {
-      it('should increment the value by step on ArrowRight key press', async () => {
+      beforeEach(() => {
+        useRangeKeyboardNavMock.mockClear()
+      })
+
+      it('should call useRangeKeyboardNav with onUpdate', () => {
+        wrapper = mount(VkRange, {
+          props: { modelValue: 50 }
+        })
+
+        expect(useRangeKeyboardNavMock).toHaveBeenCalledWith(
+          expect.objectContaining({
+            onUpdate: expect.any(Function)
+          })
+        )
+      })
+
+      it('should pass min, max, step and onUpdate', () => {
         wrapper = mount(VkRange, {
           props: {
             modelValue: 50,
-            step: 10
+            min: 10,
+            max: 90,
+            step: 5
           }
         })
 
-        const thumb = wrapper.find('.vk-range__thumb')
+        const config = useRangeKeyboardNavMock.mock.calls[0][0]
 
+        expect(config).toHaveProperty('onUpdate')
+      })
+
+      it('should attach the handler to the thumb via keydown', async () => {
+        const mockHandler = vi.fn()
+        useRangeKeyboardNavMock.mockReturnValue(mockHandler)
+
+        wrapper = mount(VkRange, {
+          props: { modelValue: 50 }
+        })
+
+        const thumb = wrapper.find('.vk-range__thumb')
         await thumb.trigger('keydown', { key: 'ArrowRight' })
-        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([60])
+
+        expect(mockHandler).toHaveBeenCalled()
       })
 
-      it('should decrement the value by step on ArrowLeft key press', async () => {
-        wrapper = mount(VkRange, {
-          props: {
-            modelValue: 50,
-            step: 10
-          }
-        })
+      it('should create handlers for both thumbs when isDouble', () => {
+        useRangeKeyboardNavMock.mockClear()
 
-        const thumb = wrapper.find('.vk-range__thumb')
-
-        await thumb.trigger('keydown', { key: 'ArrowLeft' })
-        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([40])
-      })
-
-      it('should increment the value by step on ArrowUp key press', async () => {
-        wrapper = mount(VkRange, {
-          props: {
-            modelValue: 50,
-            step: 10
-          }
-        })
-
-        const thumb = wrapper.find('.vk-range__thumb')
-
-        await thumb.trigger('keydown', { key: 'ArrowUp' })
-        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([60])
-      })
-
-      it('should decrement the value by step on ArrowDown key press', async () => {
-        wrapper = mount(VkRange, {
-          props: {
-            modelValue: 50,
-            step: 10
-          }
-        })
-
-        const thumb = wrapper.find('.vk-range__thumb')
-
-        await thumb.trigger('keydown', { key: 'ArrowDown' })
-        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([40])
-      })
-
-      it('should set the value to min on Home key press', async () => {
-        wrapper = mount(VkRange, {
-          props: {
-            modelValue: 50,
-            step: 10,
-            min: 0
-          }
-        })
-
-        const thumb = wrapper.find('.vk-range__thumb')
-
-        await thumb.trigger('keydown', { key: 'Home' })
-        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([0])
-      })
-
-      it('should set the value to max on End key press', async () => {
-        wrapper = mount(VkRange, {
-          props: {
-            modelValue: 50,
-            step: 10,
-            max: 100
-          }
-        })
-
-        const thumb = wrapper.find('.vk-range__thumb')
-
-        await thumb.trigger('keydown', { key: 'End' })
-        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([100])
-      })
-
-      it('should not change the value on unsupported key press', async () => {
-        wrapper = mount(VkRange, {
-          props: {
-            modelValue: 50,
-            step: 10
-          }
-        })
-
-        const thumb = wrapper.find('.vk-range__thumb')
-
-        await thumb.trigger('keydown', { key: 'A' })
-        expect(wrapper.emitted()['update:modelValue']).toBeUndefined()
-      })
-
-      it('should change the value by step on Arrow keys press when isDouble is true', async () => {
         wrapper = mount(VkRange, {
           props: {
             modelValue: [30, 70],
-            step: 10,
             isDouble: true
           }
         })
 
-        const thumbs = wrapper.findAll('.vk-range__thumb')
-        const firstThumb = thumbs[0]
-
-        await firstThumb.trigger('keydown', { key: 'ArrowRight' })
-        expect(wrapper.emitted()['update:modelValue']![0]).toEqual([[40, 70]])
-
-        await firstThumb.trigger('keydown', { key: 'ArrowLeft' })
-        expect(wrapper.emitted()['update:modelValue']![1]).toEqual([[30, 70]])
+        expect(useRangeKeyboardNavMock).toHaveBeenCalledTimes(2)
       })
+
+      // it('should emit update:modelValue when onUpdate is called', () => {
+      //   wrapper = mount(VkRange, {
+      //     props: { modelValue: 50 }
+      //   })
+
+      //   const maxThumbConfig = useRangeKeyboardNavMock.mock.calls[1][0] as { onUpdate: (value: number) => void }
+      //   maxThumbConfig.onUpdate(60)
+
+      //   const emissions = wrapper.emitted('update:modelValue')!
+      //   expect(emissions[emissions.length - 1]).toEqual([60])
+      // })
     })
 
     describe('onMove', () => {

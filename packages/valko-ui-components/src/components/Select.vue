@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted, nextTick, type ComponentPublicInstance, type Ref } from 'vue'
+import { computed, ref, onMounted, onUnmounted, nextTick, type Ref } from 'vue'
 import type { SelectProps, SelectOption } from '#valkoui/types/Select'
 import styles from '#valkoui/styles/Select.styles.ts'
 import VkIcon from './Icon.vue'
 import VkInput from './Input.vue'
-import handleKeyboardNavigation from '#valkoui/keyboard-navigation/handleKeyboardNavigation.ts'
+import useListKeyboardNav from '#valkoui/composables/useListKeyboardNav.ts'
 
 defineOptions({ name: 'VkSelect' })
 
@@ -90,21 +90,16 @@ const clearSelection = () => {
 
 const highlightedIndex = ref(-1)
 
-const setItemRef = (index: number) => (el: Element | ComponentPublicInstance | null) => {
-  itemRefs.value[index] = el instanceof HTMLElement ? el : null
-}
-
-const handleKeyDown = handleKeyboardNavigation({
-  strategy: 'indexed',
+const handleKeyDown = useListKeyboardNav({
   currentIndex: highlightedIndex,
   itemCount: () => props.options.length,
   loop: true,
   enabled: () => isOpen.value,
-  onMove: (index) => {
+  onMove: (index: number) => {
     highlightedIndex.value = index
     nextTick(() => itemRefs.value[index]?.scrollIntoView({ block: 'nearest' }))
   },
-  onSelect: (index) => {
+  onSelect: (index: number) => {
     const item = props.options[index]
     if (props.multiple) handleMultipleSelection(item.value)
     else handleSingleSelection(item.value)
@@ -196,7 +191,7 @@ onUnmounted(() => {
             v-for="(option, index) in options"
             role="option"
             :key="option.value"
-            :ref="setItemRef(index)"
+            :ref="el => itemRefs[index] = (el as HTMLElement | null)"
             :data-highlighted="highlightedIndex === index"
             :data-selected="isSelected(option.value)"
             :data-shape="shape"

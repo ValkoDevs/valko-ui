@@ -1,7 +1,7 @@
 import { toValue } from 'vue'
-import type { KeyMap, IndexedStrategyConfig } from '../types'
+import type { KeyMap, ListNavigationConfig, NavigationKey } from '../types/keyboardNavigation.ts'
 
-const createIndexedAdapter = (config: IndexedStrategyConfig): KeyMap => {
+const useListKeyboardNav = (config: ListNavigationConfig) => {
   const move = (delta: number) => {
     const current = toValue(config.currentIndex)
     const count = toValue(config.itemCount)
@@ -20,7 +20,7 @@ const createIndexedAdapter = (config: IndexedStrategyConfig): KeyMap => {
     if (config.onSelect && current >= 0) config.onSelect(current)
   }
 
-  return {
+  const keyMap: KeyMap = {
     ArrowUp: () => move(-1),
     ArrowDown: () => move(1),
     ArrowLeft: () => move(-1),
@@ -31,6 +31,16 @@ const createIndexedAdapter = (config: IndexedStrategyConfig): KeyMap => {
     ' ': select,
     SpaceBar: select
   }
+
+  return (event: KeyboardEvent) => {
+    if (config.enabled !== undefined && !toValue(config.enabled)) return
+
+    const action = keyMap[event.key as NavigationKey]
+    if (!action) return
+
+    event.preventDefault()
+    action()
+  }
 }
 
-export default createIndexedAdapter
+export default useListKeyboardNav

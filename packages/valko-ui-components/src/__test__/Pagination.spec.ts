@@ -1,6 +1,13 @@
 import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkPagination from '#valkoui/components/Pagination.vue'
+import useRangeKeyboardNav from '#valkoui/composables/useRangeKeyboardNav.ts'
+
+vi.mock('#valkoui/composables/useRangeKeyboardNav.ts', () => ({
+  default: vi.fn(() => vi.fn())
+}))
+
+const useRangeKeyboardNavMock = vi.mocked(useRangeKeyboardNav)
 
 describe('Pagination component', () => {
   let wrapper: VueWrapper
@@ -317,6 +324,70 @@ describe('Pagination component', () => {
       await nextTick()
       wrapper.find('.vk-pagination__right').trigger('click')
       expect(wrapper.emitted('update:modelValue'))
+    })
+  })
+
+  describe('Keyboard Navigation', () => {
+    beforeEach(() => {
+      useRangeKeyboardNavMock.mockClear()
+    })
+
+    it('should call useRangeKeyboardNav with onUpdate', () => {
+      mount(VkPagination, {
+        props: { pages: 10, modelValue: 5 }
+      })
+
+      expect(useRangeKeyboardNavMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          onUpdate: expect.any(Function)
+        })
+      )
+    })
+
+    it('should pass enabled, min, max, step and onUpdate', () => {
+      mount(VkPagination, {
+        props: { pages: 10, modelValue: 5 }
+      })
+
+      const config = useRangeKeyboardNavMock.mock.calls[0][0]
+
+      expect(config).toHaveProperty('enabled')
+      expect(config).toHaveProperty('onUpdate')
+    })
+
+    it('should attach the handler to the nav via keydown', async () => {
+      const mockHandler = vi.fn()
+      useRangeKeyboardNavMock.mockReturnValue(mockHandler)
+
+      const wrapper = mount(VkPagination, {
+        props: { pages: 10, modelValue: 5 }
+      })
+
+      await wrapper.find('.vk-pagination__nav').trigger('keydown', { key: 'ArrowRight' })
+
+      expect(mockHandler).toHaveBeenCalled()
+    })
+
+    it('should emit update:modelValue when onUpdate is called', () => {
+      const wrapper = mount(VkPagination, {
+        props: { pages: 10, modelValue: 5 }
+      })
+
+      const config = useRangeKeyboardNavMock.mock.calls[0][0] as { onUpdate: (value: number) => void }
+      config.onUpdate(6)
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([6])
+    })
+
+    it('should not emit update:modelValue when onUpdate is called with the same value', () => {
+      const wrapper = mount(VkPagination, {
+        props: { pages: 10, modelValue: 5 }
+      })
+
+      const config = useRangeKeyboardNavMock.mock.calls[0][0] as { onUpdate: (value: number) => void }
+      config.onUpdate(5)
+
+      expect(wrapper.emitted('update:modelValue')).toBeFalsy()
     })
   })
 })

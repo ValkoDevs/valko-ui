@@ -1,6 +1,15 @@
 import { nextTick } from 'vue'
 import { VueWrapper, mount, DOMWrapper } from '@vue/test-utils'
 import VkSelect from '#valkoui/components/Select.vue'
+import useListKeyboardNav from '#valkoui/composables/useListKeyboardNav.ts'
+
+vi.mock('#valkoui/composables/useListKeyboardNav.ts', () => ({
+  default: vi.fn(() => vi.fn())
+}))
+
+const useListKeyboardNavMock = vi.mocked(useListKeyboardNav)
+
+HTMLElement.prototype.scrollIntoView = vi.fn()
 
 describe('Select component', () => {
   const options = [
@@ -302,116 +311,82 @@ describe('Select component', () => {
 
   describe('Methods', () => {
     describe('handleKeyDown', () => {
-      let input: DOMWrapper<HTMLInputElement>
-      let originalScrollIntoView: typeof window.HTMLElement.prototype.scrollIntoView
-
-      beforeAll(() => {
-        originalScrollIntoView = window.HTMLElement.prototype.scrollIntoView
-        window.HTMLElement.prototype.scrollIntoView = function () {}
-      })
-
-      afterAll(() => {
-        window.HTMLElement.prototype.scrollIntoView = originalScrollIntoView
-      })
-
       beforeEach(async () => {
+        useListKeyboardNavMock.mockClear()
+
         wrapper = mount(VkSelect, {
           props: { options }
         })
 
-        input = wrapper.find('.vk-input__input')
-        await input.trigger('focus')
+        await wrapper.find('.vk-input__input').trigger('focus')
         await nextTick()
       })
 
       afterEach(() => wrapper.unmount())
 
-      it('should move highlight with ArrowDown', async () => {
-        await input.trigger('keydown', { key: 'ArrowDown' })
-        await nextTick()
-        const items = wrapper.findAll('.vk-select__item')
-
-        expect(items[0].attributes('data-highlighted')).toBe('true')
+      it('should call useListKeyboardNav with loop enabled', () => {
+        expect(useListKeyboardNavMock).toHaveBeenCalledWith(
+          expect.objectContaining({
+            loop: true
+          })
+        )
       })
 
-      it('should move highlight with ArrowUp', async () => {
-        await input.trigger('keydown', { key: 'ArrowDown' })
-        await input.trigger('keydown', { key: 'ArrowDown' })
-        await nextTick()
-        await input.trigger('keydown', { key: 'ArrowUp' })
-        await nextTick()
-        const items = wrapper.findAll('.vk-select__item')
+      it('should pass enabled as a function', () => {
+        const config = useListKeyboardNavMock.mock.calls[0][0]
 
-        expect(items[0].attributes('data-highlighted')).toBe('true')
+        expect(config).toHaveProperty('enabled')
       })
 
-      it('should move highlight to first with Home', async () => {
-        await input.trigger('keydown', { key: 'ArrowDown' })
-        await input.trigger('keydown', { key: 'ArrowDown' })
-        await nextTick()
-        await input.trigger('keydown', { key: 'Home' })
-        await nextTick()
-        const items = wrapper.findAll('.vk-select__item')
+      it('should pass onMove and onSelect callbacks', () => {
+        const config = useListKeyboardNavMock.mock.calls[0][0]
 
-        expect(items[0].attributes('data-highlighted')).toBe('true')
+        expect(config).toHaveProperty('onMove')
+        expect(config).toHaveProperty('onSelect')
       })
 
-      it('should move highlight to last with End', async () => {
-        await input.trigger('keydown', { key: 'End' })
-        await nextTick()
-        const items = wrapper.findAll('.vk-select__item')
+      it('should attach the handler to the input via keydown', async () => {
+        const mockHandler = vi.fn()
+        useListKeyboardNavMock.mockReturnValue(mockHandler)
 
-        expect(items[items.length - 1].attributes('data-highlighted')).toBe('true')
+        wrapper = mount(VkSelect, {
+          props: { options }
+        })
+
+        const input = wrapper.find('.vk-input__input')
+        await input.trigger('focus')
+        await nextTick()
+        await input.trigger('keydown', { key: 'ArrowDown' })
+
+        expect(mockHandler).toHaveBeenCalled()
       })
 
-      it('should select item with Enter if highlighted', async () => {
-        await input.trigger('keydown', { key: 'ArrowDown' })
-        await nextTick()
-        await input.trigger('keydown', { key: 'Enter' })
-
-        expect(wrapper.emitted('update:modelValue')).toBeDefined()
-      })
-
-      it('should select item with SpaceBar if highlighted', async () => {
-        await input.trigger('keydown', { key: 'ArrowDown' })
-        await input.trigger('keydown', { key: 'ArrowDown' })
-        await nextTick()
-        await input.trigger('keydown', { key: 'SpaceBar' })
-
-        expect(wrapper.emitted('update:modelValue')).toBeDefined()
-      })
-
-      it('should do nothing for unrelated keys', async () => {
-        await input.trigger('keydown', { key: 'Tab' })
+      it('should update highlightedIndex when onMove is called', async () => {
+        const config = useListKeyboardNavMock.mock.calls[0][0] as { onMove: (index: number) => void }
+        config.onMove(2)
         await nextTick()
 
         const items = wrapper.findAll('.vk-select__item')
-        const highlighted = items.filter(i => i.attributes('data-highlighted') === 'true')
-
-        expect(highlighted.length).toBe(0)
+        expect(items[2].attributes('data-highlighted')).toBe('true')
       })
 
-      it('should select item with Enter if highlighted and multiple is true', async () => {
-        wrapper.setProps({ multiple: true })
-
-        await input.trigger('keydown', { key: 'ArrowDown' })
-        await nextTick()
-        await input.trigger('keydown', { key: 'Enter' })
+      it('should emit update:modelValue when onSelect is called (single selection)', async () => {
+        const config = useListKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
+        config.onSelect(0)
         await nextTick()
 
-        expect(wrapper.emitted('update:modelValue')?.[0][0]).toEqual([1])
+        expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([1])
       })
 
-      it('should select item with SpaceBar if highlighted and multiple is true', async () => {
-        wrapper.setProps({ multiple: true })
-
-        await input.trigger('keydown', { key: 'ArrowDown' })
-        await input.trigger('keydown', { key: 'ArrowDown' })
-        await nextTick()
-        await input.trigger('keydown', { key: ' ' })
+      it('should handle multiple selection when onSelect is called', async () => {
+        await wrapper.setProps({ multiple: true, modelValue: [] })
         await nextTick()
 
-        expect(wrapper.emitted('update:modelValue')?.[0][0]).toEqual([2])
+        const config = useListKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
+        config.onSelect(0)
+        await nextTick()
+
+        expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([[1]])
       })
     })
 

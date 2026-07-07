@@ -3,7 +3,7 @@ import { computed, ref, watch, toValue, useId } from 'vue'
 import type { RangeProps, Thumb, ThumbHandlers } from '#valkoui/types/Range'
 import styles from '#valkoui/styles/Range.styles.ts'
 import diagonalStripes from '#valkoui/img/diagonal-stripes.svg'
-import handleKeyboardNavigation from '#valkoui/keyboard-navigation/handleKeyboardNavigation'
+import useRangeKeyboardNav from '#valkoui/composables/useRangeKeyboardNav.ts'
 
 defineOptions({ name: 'VkRange' })
 
@@ -181,13 +181,12 @@ const onLabelClick = (newPosition: number) => {
 const buildThumbHandlers = (thumb: Thumb): ThumbHandlers => ({
   onMouseDown: (event: MouseEvent) => onStart(event, thumb),
   onTouchStart: (event: TouchEvent) => onStart(event, thumb),
-  onKeyDown: handleKeyboardNavigation({
-    strategy: 'value',
+  onKeyDown: useRangeKeyboardNav({
     currentValue: thumbRefMap[thumb],
     min: () => props.min,
     max: () => props.max,
     step: () => props.step,
-    onUpdate: (value) => updateThumbPosition(value, thumb)
+    onUpdate: (value: number) => updateThumbPosition(value, thumb)
   })
 })
 
