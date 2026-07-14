@@ -49,12 +49,13 @@ const select = tv({
       'data-[shape=soft]:rounded-lg',
       'data-[shape=square]:rounded-none'
     ],
-    suffixIcon: [
+    icon: [
       'block',
       'transition-transform',
       'duration-200',
       'ease-out',
-      'data-[open=true]:rotate-180'
+      'data-[open=true]:rotate-180',
+      'cursor-pointer'
     ]
   },
   variants: {

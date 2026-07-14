@@ -62,29 +62,26 @@ const input = tv({
       'vk-input__icons',
       'cursor-pointer',
       'text-on-surface-variant',
-      'transition-all'
-    ],
-    rightIconsContainer: [
-      'vk-input__right-icons',
       'absolute',
-      'right-3',
+      'transition-all',
       'top-1/2',
-      '-translate-y-1/2',
-      'flex',
-      'items-center'
+      '-translate-y-1/2'
     ],
-    rightIcon: [],
+    rightIcon: [
+      'right-3'
+    ],
     leftIcon: [
-      'absolute',
-      'top-1/2',
-      '-translate-y-1/2',
       'left-3'
     ],
     clearIcon: [
       'vk-input__clear-icon',
       'text-on-surface-variant',
       'cursor-pointer',
-      'transition-all'
+      'absolute',
+      'transition-all',
+      'top-1/2',
+      '-translate-y-1/2',
+      'right-3'
     ],
     numberArrows: [
       'vk-input__number-arrows',
@@ -92,10 +89,13 @@ const input = tv({
       'flex',
       'flex-col',
       'gap-1',
+      'absolute',
+      'right-3',
+      'top-1/2',
+      '-translate-y-1/2',
       'cursor-pointer'
     ],
-    chevrons: [],
-    suffixIcon: []
+    chevrons: []
   },
   variants: {
     variant: {
@@ -301,10 +301,9 @@ const input = tv({
           'pt-2',
           'text-xs',
           'data-[left-icon=true]:pl-11',
-          'data-[right-icon-count="1"]:pr-11',
-          'data-[right-icon-count="2"]:pr-17',
-          'data-[right-icon-count="3"]:pr-23',
-          'data-[right-icon-count="4"]:pr-29'
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-11',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-17',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-11'
         ],
         label: [
           'text-xs',
@@ -316,11 +315,9 @@ const input = tv({
         icons: [
           'text-base'
         ],
-        rightIconsContainer: [
-          'gap-1'
-        ],
         clearIcon: [
-          'text-xs'
+          'text-xs',
+          'data-[right-icon=true]:right-11'
         ],
         chevrons: [
           'text-xs',
@@ -333,10 +330,9 @@ const input = tv({
           'pt-2.5',
           'text-sm',
           'data-[left-icon=true]:pl-12',
-          'data-[right-icon-count="1"]:pr-12',
-          'data-[right-icon-count="2"]:pr-19',
-          'data-[right-icon-count="3"]:pr-26',
-          'data-[right-icon-count="4"]:pr-33'
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-12',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-19',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-12'
         ],
         label: [
           'text-sm',
@@ -348,11 +344,9 @@ const input = tv({
         icons: [
           'text-xl'
         ],
-        rightIconsContainer: [
-          'gap-1.5'
-        ],
         clearIcon: [
-          'text-sm'
+          'text-sm',
+          'data-[right-icon=true]:right-12'
         ],
         chevrons: [
           'text-sm',
@@ -365,10 +359,9 @@ const input = tv({
           'pt-3',
           'text-base',
           'data-[left-icon=true]:pl-13',
-          'data-[right-icon-count="1"]:pr-13',
-          'data-[right-icon-count="2"]:pr-21',
-          'data-[right-icon-count="3"]:pr-29',
-          'data-[right-icon-count="4"]:pr-37'
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-13',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-21',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-13'
         ],
         label: [
           'text-base',
@@ -380,11 +373,9 @@ const input = tv({
         icons: [
           'text-2xl'
         ],
-        rightIconsContainer: [
-          'gap-2'
-        ],
         clearIcon: [
-          'text-base'
+          'text-base',
+          'data-[right-icon=true]:right-13'
         ],
         chevrons: [
           'text-base',
@@ -397,10 +388,9 @@ const input = tv({
           'pt-4',
           'text-lg',
           'data-[left-icon=true]:pl-14',
-          'data-[right-icon-count="1"]:pr-14',
-          'data-[right-icon-count="2"]:pr-23',
-          'data-[right-icon-count="3"]:pr-32',
-          'data-[right-icon-count="4"]:pr-41'
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-14',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-23',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-14'
         ],
         label: [
           'text-lg',
@@ -412,11 +402,9 @@ const input = tv({
         icons: [
           'text-[28px]'
         ],
-        rightIconsContainer: [
-          'gap-2.5'
-        ],
         clearIcon: [
-          'text-lg'
+          'text-lg',
+          'data-[right-icon=true]:right-14'
         ],
         chevrons: [
           'text-lg',
@@ -440,7 +428,13 @@ const input = tv({
         leftIcon: [
           'left-4'
         ],
-        rightIconsContainer: [
+        rightIcon: [
+          'right-4'
+        ],
+        clearIcon: [
+          'right-4'
+        ],
+        numberArrows: [
           'right-4'
         ],
         helper: [
@@ -493,13 +487,15 @@ const input = tv({
       class: {
         input: [
           'data-[left-icon=true]:pl-13',
-          'data-[right-icon-count="1"]:pr-13',
-          'data-[right-icon-count="2"]:pr-19',
-          'data-[right-icon-count="3"]:pr-25',
-          'data-[right-icon-count="4"]:pr-31'
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-13',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-19',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-13'
         ],
         label: [
           'peer-data-[left-icon=true]:left-13'
+        ],
+        clearIcon: [
+          'data-[right-icon=true]:right-13'
         ]
       }
     },
@@ -510,13 +506,15 @@ const input = tv({
       class: {
         input: [
           'data-[left-icon=true]:pl-14',
-          'data-[right-icon-count="1"]:pr-14',
-          'data-[right-icon-count="2"]:pr-21',
-          'data-[right-icon-count="3"]:pr-28',
-          'data-[right-icon-count="4"]:pr-35'
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-14',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-21',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-14'
         ],
         label: [
           'peer-data-[left-icon=true]:left-14'
+        ],
+        clearIcon: [
+          'data-[right-icon=true]:right-14'
         ]
       }
     },
@@ -527,13 +525,15 @@ const input = tv({
       class: {
         input: [
           'data-[left-icon=true]:pl-15',
-          'data-[right-icon-count="1"]:pr-15',
-          'data-[right-icon-count="2"]:pr-23',
-          'data-[right-icon-count="3"]:pr-31',
-          'data-[right-icon-count="4"]:pr-39'
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-15',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-23',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-15'
         ],
         label: [
           'peer-data-[left-icon=true]:left-15'
+        ],
+        clearIcon: [
+          'data-[right-icon=true]:right-15'
         ]
       }
     },
@@ -544,13 +544,127 @@ const input = tv({
       class: {
         input: [
           'data-[left-icon=true]:pl-16',
-          'data-[right-icon-count="1"]:pr-16',
-          'data-[right-icon-count="2"]:pr-25',
-          'data-[right-icon-count="3"]:pr-34',
-          'data-[right-icon-count="4"]:pr-43'
+          'data-[right-icon=true]:data-[clear-icon=false]:pr-16',
+          'data-[right-icon=true]:data-[clear-icon=true]:pr-25',
+          'data-[clear-icon=true]:data-[right-icon=false]:pr-16'
         ],
         label: [
           'peer-data-[left-icon=true]:left-16'
+        ],
+        clearIcon: [
+          'data-[right-icon=true]:right-16'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: ['soft', 'square'],
+      size: 'xs',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-7'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-13',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-7'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: ['soft', 'square'],
+      size: 'sm',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-7.5'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-14.5',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-7.5'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: ['soft', 'square'],
+      size: 'md',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-8'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-16',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-8'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: ['soft', 'square'],
+      size: 'lg',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-8.5'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-17.5',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-8.5'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: 'rounded',
+      size: 'xs',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-9'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-15',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-9'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: 'rounded',
+      size: 'sm',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-9.5'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-16.5',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-9.5'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: 'rounded',
+      size: 'md',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-10'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-18',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-10'
+        ]
+      }
+    },
+    {
+      type: 'number',
+      shape: 'rounded',
+      size: 'lg',
+      class: {
+        rightIcon: [
+          'data-[chevron-icons=true]:right-10.5'
+        ],
+        clearIcon: [
+          'data-[chevron-icons=true]:data-[right-icon=true]:right-19.5',
+          'data-[right-icon=false]:data-[chevron-icons=true]:right-10.5'
         ]
       }
     },
