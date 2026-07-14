@@ -23,9 +23,7 @@ const form = ref<SelectProps>({
 })
 
 const iconsInForm = ref({
-  left: false,
-  right: false,
-  suffix: false
+  left: false
 })
 
 const exampleSectionModel = reactive<Record<string, number>>({ readonly: 1 })
@@ -63,15 +61,6 @@ const apiData: PropData[] = [
     prop: 'disabled',
     required: false,
     description: 'Whether the Select is disabled or not.',
-    values: 'boolean',
-    default: 'false',
-    apiType: 'primitive'
-  },
-  {
-    key: 'disableIconClickFocusProp',
-    prop: 'disableIconClickFocus',
-    required: false,
-    description: 'Whether the Select is rounded or not.',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
@@ -128,24 +117,6 @@ const apiData: PropData[] = [
     description: 'A hint for the Select',
     values: 'string',
     default: '',
-    apiType: 'primitive'
-  },
-  {
-    key: 'iconLeftProp',
-    prop: 'iconLeft',
-    required: false,
-    description: 'A icon on the left side for the Select',
-    values: 'string',
-    default: '',
-    apiType: 'primitive'
-  },
-  {
-    key: 'iconRightProp',
-    prop: 'iconRight',
-    required: false,
-    description: 'A icon on the right side for the Select',
-    values: 'string',
-    default: 'chevron-down',
     apiType: 'primitive'
   },
   {
@@ -279,72 +250,53 @@ const styleSlotsInterface: PropData[] = [
   }
 ]
 
-const optionsInterface: TableItem[] = [
+const optionsInterface: PropData[] = [
   {
     key: 'valueOption',
     prop: 'value',
+    required: true,
     description: 'The value of the option, which will be used as the modelValue when the option is selected.',
     values: 'string | number',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'labelOption',
     prop: 'label',
+    required: true,
     description: 'The label displayed for the option.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const slotData: TableItem[] = [
+const slotData: SlotData[] = [
   {
     key: 'leftIconSlot',
     name: 'left-icon',
     description: 'Slot for placing an icon on the left side of the input field. This slot is typically used to include an icon for visual enhancement or to indicate input type.',
-    example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>'
-  },
-  {
-    key: 'rightIconSlot',
-    name: 'right-icon',
-    description: 'Slot for placing an icon on the right side of the input field. This slot is typically used to include an icon for actions like clear input or show/hide password.',
-    example: '<template #right-icon>\n  <!-- Your icon component goes here -->\n</template>'
-  },
-  {
-    key: 'suffixIconSlot',
-    name: 'suffix-icon',
-    description: 'Slot for placing an icon after the right icon. Defaults to chevron icon, provides isOpen and toggleDropdown slot props for dynamic behavior.',
-    example: '<template #suffix-icon>\n  <!-- Your icon component goes here -->\n</template>'
+    example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>',
+    apiType: 'slot'
   }
 ]
 
-const emitData: TableItem[] = [
+const emitData: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the selected value(s) in the Select component change.',
     values: 'string | number | undefined | Array<string | number>',
-    type: '(value: string | number | undefined | Array<string | number>) => void'
+    type: '(value: string | number | undefined | Array<string | number>) => void',
+    apiType: 'event'
   },
   {
     key: 'leftIconClickEmit',
     event: 'leftIconClick',
     description: 'Emitted when the left icon of the input is clicked.',
     values: '',
-    type: '() => void'
-  },
-  {
-    key: 'rightIconClickEmit',
-    event: 'rightIconClick',
-    description: 'Emitted when the right icon of the input is clicked.',
-    values: '',
-    type: '() => void'
-  },
-  {
-    key: 'suffixIconClickEmit',
-    event: 'suffixIconClick',
-    description: 'Emitted when the suffix icon of the input is clicked.',
-    values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: 'event'
   }
 ]
 
@@ -402,33 +354,12 @@ const styles = {
         :multiple="form.multiple"
         :clearable="form.clearable"
         @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
-        @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'surface' })"
-        @suffix-icon-click="useNotification({ text: 'Suffix Icon!!', color: 'surface' })"
       >
         <template
           v-if="iconsInForm.left"
           #left-icon
         >
           <vk-icon name="home" />
-        </template>
-        <template
-          v-if="iconsInForm.right"
-          #right-icon
-        >
-          <vk-icon name="home" />
-        </template>
-        <template
-          v-if="iconsInForm.suffix"
-          #suffix-icon="{ toggleDropdown, isOpen }"
-        >
-          <vk-icon
-            name="brand-vue"
-            :class="[
-              'block transition-transform  duration-200 ease-in-out',
-              { 'rotate-180': isOpen }
-            ]"
-            @click="toggleDropdown(!isOpen)"
-          />
         </template>
       </vk-select>
     </template>
@@ -487,14 +418,6 @@ const styles = {
       <vk-checkbox
         v-model="iconsInForm.left"
         label="Left Icon"
-      />
-      <vk-checkbox
-        v-model="iconsInForm.right"
-        label="Right Icon"
-      />
-      <vk-checkbox
-        v-model="iconsInForm.suffix"
-        label="Suffix Icon"
       />
     </template>
 
@@ -645,17 +568,8 @@ const styles = {
           </template>
         </vk-select>
 
-        <vk-select
-          :options="people"
-          label="Right Icon"
-        >
-          <template #right-icon>
-            <vk-icon name="home" />
-          </template>
-        </vk-select>
-
         <template #code>
-          <code-block :code="`${scriptCode}\n<template>\n  <vk-select :options=&quot;people&quot;>\n    <template #left-icon>\n      <vk-icon name=&quot;home&quot; />\n    </template>\n  </vk-select>\n\n  <vk-select :options=&quot;people&quot;>\n    <template #right-icon>\n      <vk-icon name=&quot;home&quot; />\n    </template>\n  </vk-select>\n</template>`" />
+          <code-block :code="`${scriptCode}\n<template>\n  <vk-select :options=&quot;people&quot;>\n    <template #left-icon>\n      <vk-icon name=&quot;home&quot; />`" />
         </template>
       </example-section>
     </template>
@@ -666,7 +580,9 @@ const styles = {
         :tables="[
           { title: 'Props', data: apiData, headers: 'props' },
           { title: 'Emits', data: emitData, headers: 'emits' },
-          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' },
+          { title: 'Options', data: optionsInterface, headers: 'interface' },
+          { title: 'Slots', data: slotData, headers: 'slots' }
         ]"
       />
     </template>

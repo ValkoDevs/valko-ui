@@ -172,6 +172,12 @@ onUnmounted(() => {
         @keydown="handleKeyDown"
         @keydown.escape="toggleDropdown(false)"
       >
+        <template
+          #left-icon
+          v-if="$slots['left-icon']"
+        >
+          <slot name="left-icon" />
+        </template>
         <template #right-icon>
           <vk-icon
             name="chevron-down"

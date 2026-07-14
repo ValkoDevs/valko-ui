@@ -25,8 +25,7 @@ const form = ref<InputProps>({
 
 const iconsInForm = ref({
   left: false,
-  right: false,
-  suffix: false
+  right: false
 })
 
 const inputStates = reactive<Record<string, string>>({
@@ -180,15 +179,6 @@ const apiData: PropData[] = [
     apiType: 'custom-string'
   },
   {
-    key: 'disableIconClickFocusProp',
-    prop: 'disableIconClickFocus',
-    required: false,
-    description: 'Whether to prevent the input from focusing when an icon is clicked.',
-    values: 'boolean',
-    default: 'false',
-    apiType: 'primitive'
-  },
-  {
     key: 'ariaLabelProp',
     prop: 'ariaLabel',
     required: false,
@@ -304,15 +294,6 @@ const styleSlotsInterface: PropData[] = [
     prop: 'leftIcon',
     required: false,
     description: 'Styles for the left icon slot.',
-    values: 'string[]',
-    default: '',
-    apiType: 'primitive'
-  },
-  {
-    key: 'rightIconsContainer',
-    prop: 'rightIconsContainer',
-    required: false,
-    description: 'Container for right icons, this includes clear, suffix, right-icon and chevrons from number input.',
     values: 'string[]',
     default: '',
     apiType: 'primitive'
@@ -466,6 +447,8 @@ const styles = {
     ]
   }
 }
+
+const resetForceClearableInput = () => setTimeout(() => { inputStates.forceClearable = 'Try clearing me!' }, 1000)
 </script>
 
 <template>
@@ -490,10 +473,8 @@ const styles = {
         :step="form.step"
         :clearable="form.clearable"
         :force-clearable="form.forceClearable"
-        :disable-icon-click-focus="form.disableIconClickFocus"
         @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
         @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'surface' })"
-        @suffix-icon-click="useNotification({ text: 'Suffix Icon!!', color: 'surface' })"
       >
         <template
           v-if="iconsInForm.left"
@@ -504,12 +485,6 @@ const styles = {
         <template
           v-if="iconsInForm.right"
           #right-icon
-        >
-          <vk-icon name="home" />
-        </template>
-        <template
-          v-if="iconsInForm.suffix"
-          #suffix-icon
         >
           <vk-icon name="home" />
         </template>
@@ -601,10 +576,6 @@ const styles = {
       <vk-checkbox
         v-model="iconsInForm.right"
         label="Right Icon"
-      />
-      <vk-checkbox
-        v-model="iconsInForm.suffix"
-        label="Suffix Icon"
       />
     </template>
 
@@ -741,26 +712,11 @@ const styles = {
           force-clearable
           clearable
           label="Force Clearable"
-          @clear="resetForceClearable"
+          @clear="resetForceClearableInput"
         />
 
         <template #code>
           <code-block :code="generateSnippet<boolean>('forceClearable', { values: [true], extraProps: 'readonly clearable' })" />
-        </template>
-      </example-section>
-
-      <example-section title="Disable Icon Click Focus">
-        <vk-input
-          disable-icon-click-focus
-          label="Disable Icon Click Focus"
-        >
-          <template #left-icon>
-            <vk-icon name="home" />
-          </template>
-        </vk-input>
-
-        <template #code>
-          <code-block :code="generateSnippet<boolean>('disableIconClickFocus', { values: [true] })" />
         </template>
       </example-section>
 
