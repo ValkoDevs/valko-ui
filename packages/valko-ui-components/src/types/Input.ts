@@ -18,6 +18,5 @@ export interface InputProps extends Sizes, ColorsWithSurface, Variants, Shapes, 
   readonly?: boolean;
   clearable?: boolean;
   forceClearable?: boolean;
-  disableIconClickFocus?: boolean;
   styleSlots?: Partial<InputSlots>;
 }

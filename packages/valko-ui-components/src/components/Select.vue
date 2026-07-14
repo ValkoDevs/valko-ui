@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   readonly: false
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'leftIconClick'])
 
 const s = computed(() => styles(props))
 
@@ -171,6 +171,7 @@ onUnmounted(() => {
         @clear="clearSelection"
         @keydown="handleKeyDown"
         @keydown.escape="toggleDropdown(false)"
+        @left-icon-click="emit('leftIconClick', $event)"
       >
         <template
           #left-icon
