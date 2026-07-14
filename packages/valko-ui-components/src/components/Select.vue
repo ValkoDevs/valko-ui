@@ -161,6 +161,7 @@ onUnmounted(() => {
         :model-value="showValue"
         :clearable="clearable"
         cursor="pointer"
+        :disable-icon-click-focus="disableIconClickFocus"
         :aria-label="ariaLabel"
         :aria-labelledby="ariaLabelledBy"
         :aria-describedby="ariaDescribedBy"

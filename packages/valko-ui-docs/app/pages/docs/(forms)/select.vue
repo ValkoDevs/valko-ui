@@ -69,7 +69,7 @@ const apiData: PropData[] = [
     key: 'multipleProp',
     prop: 'multiple',
     required: false,
-    description: 'Wheter the Select is enabled to choose multiple options',
+    description: 'Whether the Select is enabled to choose multiple options.',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
@@ -78,7 +78,7 @@ const apiData: PropData[] = [
     key: 'optionsProp',
     prop: 'options',
     required: false,
-    description: 'An array of options for the Select',
+    description: 'An array of options for the Select.',
     values: 'SelectOption[]',
     default: '[]',
     apiType: 'custom-type'
@@ -96,7 +96,7 @@ const apiData: PropData[] = [
     key: 'readonlyProp',
     prop: 'readonly',
     required: false,
-    description: 'Wheter the Select is readonly or not',
+    description: 'Whether the Select is readonly or not.',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
@@ -114,7 +114,7 @@ const apiData: PropData[] = [
     key: 'helpertextProp',
     prop: 'helpertext',
     required: false,
-    description: 'A hint for the Select',
+    description: 'A hint for the Select.',
     values: 'string',
     default: '',
     apiType: 'primitive'
@@ -132,7 +132,16 @@ const apiData: PropData[] = [
     key: 'clearableProp',
     prop: 'clearable',
     required: false,
-    description: 'Allows to leave the selection empty and displays an icon that clears the selection when clicked.',
+    description: 'Allows the selection to be empty and displays an icon to clear the current selection.',
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
+  },
+  {
+    key: 'disableIconClickFocusProp',
+    prop: 'disableIconClickFocus',
+    required: false,
+    description: 'Prevents the input from receiving focus when an icon is clicked.',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
@@ -183,7 +192,7 @@ const apiData: PropData[] = [
     apiType: 'primitive'
   },
   {
-    key: 'styleSlotsProps',
+    key: 'styleSlotsProp',
     prop: 'styleSlots',
     required: false,
     description: 'Custom styles for different parts of the Select component.',
@@ -275,7 +284,7 @@ const slotData: SlotData[] = [
   {
     key: 'leftIconSlot',
     name: 'left-icon',
-    description: 'Slot for placing an icon on the left side of the input field. This slot is typically used to include an icon for visual enhancement or to indicate input type.',
+    description: 'Slot for rendering an icon on the left side of the Select.',
     example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>',
     apiType: 'slot'
   }
@@ -293,7 +302,7 @@ const emitData: EmitData[] = [
   {
     key: 'leftIconClickEmit',
     event: 'leftIconClick',
-    description: 'Emitted when the left icon of the input is clicked.',
+    description: 'Emitted when the Select left icon is clicked.',
     values: '',
     type: '() => void',
     apiType: 'event'
@@ -569,7 +578,7 @@ const styles = {
         </vk-select>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n<template>\n  <vk-select :options=&quot;people&quot;>\n    <template #left-icon>\n      <vk-icon name=&quot;home&quot; />`" />
+          <code-block :code="`${scriptCode}\n<template>\n  <vk-select :options=&quot;people&quot;>\n    <template #left-icon>\n      <vk-icon name=&quot;home&quot; />\n    </template>\n  </vk-select>\n</template>`" />
         </template>
       </example-section>
     </template>

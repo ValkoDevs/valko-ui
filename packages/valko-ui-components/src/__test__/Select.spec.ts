@@ -300,6 +300,44 @@ describe('Select component', () => {
         expect(wrapper.find('.vk-input__helper').text()).toContain('Hello World')
       })
     })
+
+    describe('When disableIconClickFocus prop changes', () => {
+      it('should not focus the input when left icon is clicked and disableIconClickFocus is true', async () => {
+        const wrapper = mount(VkSelect, {
+          attachTo: document.body,
+          props: {
+            disableIconClickFocus: true
+          },
+          slots: {
+            'left-icon': '<i class="ti ti-home"></i>'
+          }
+        })
+
+        await wrapper.find('.vk-left-icon').trigger('click')
+
+        expect(wrapper.find('.vk-input__input').element).not.toBe(document.activeElement)
+
+        wrapper.unmount()
+      })
+
+      it('should focus the input when left icon is clicked and disableIconClickFocus is false', async () => {
+        const wrapper = mount(VkSelect, {
+          attachTo: document.body,
+          props: {
+            disableIconClickFocus: false
+          },
+          slots: {
+            'left-icon': '<i class="ti ti-home"></i>'
+          }
+        })
+
+        await wrapper.find('.vk-left-icon').trigger('click')
+
+        expect(wrapper.find('.vk-input__input').element).toBe(document.activeElement)
+
+        wrapper.unmount()
+      })
+    })
   })
 
   describe('Methods', () => {

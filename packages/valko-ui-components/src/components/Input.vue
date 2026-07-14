@@ -60,10 +60,11 @@ const clearInput = () => {
 }
 
 const handleIconClick = (icon: 'left' | 'right') => {
-  if (!props.disabled) {
-    emit(`${icon}IconClick`)
-    inputRef.value?.focus()
-  }
+  if (props.disabled) return
+
+  emit(`${icon}IconClick`)
+
+  if (!props.disableIconClickFocus) inputRef.value?.focus()
 }
 
 const changeNumericValue = (action: 'increment' | 'decrement') => {

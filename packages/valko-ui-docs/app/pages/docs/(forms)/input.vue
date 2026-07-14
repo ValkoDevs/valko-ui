@@ -20,7 +20,8 @@ const form = ref<InputProps>({
   disabled: false,
   readonly: false,
   clearable: false,
-  forceClearable: false
+  forceClearable: false,
+  disableIconClickFocus: false
 })
 
 const iconsInForm = ref({
@@ -66,7 +67,7 @@ const apiData: PropData[] = [
     prop: 'cursor',
     required: false,
     description: 'The displayed cursor type when hovering the input.',
-    values: 'cursor | text',
+    values: 'pointer | text',
     default: 'text',
     apiType: 'custom-string'
   },
@@ -92,7 +93,7 @@ const apiData: PropData[] = [
     key: 'clearableProp',
     prop: 'clearable',
     required: false,
-    description: 'Whether the Input is rounded or not.',
+    description: 'Displays a clear icon that resets the input value when clicked.',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
@@ -110,7 +111,7 @@ const apiData: PropData[] = [
     key: 'modelValueProp',
     prop: 'modelValue',
     required: false,
-    description: 'The v-model for the Input',
+    description: 'The v-model for the Input.',
     values: 'string, number',
     default: '',
     apiType: 'primitive'
@@ -119,7 +120,7 @@ const apiData: PropData[] = [
     key: 'minProp',
     prop: 'min',
     required: false,
-    description: 'The min value for the Input in type number',
+    description: 'The minimum value for number inputs.',
     values: 'number',
     default: '-Infinity',
     apiType: 'primitive'
@@ -128,7 +129,7 @@ const apiData: PropData[] = [
     key: 'maxProp',
     prop: 'max',
     required: false,
-    description: 'The max value for the Input in type number',
+    description: 'The maximum value for number inputs.',
     values: 'number',
     default: 'Infinity',
     apiType: 'primitive'
@@ -137,7 +138,7 @@ const apiData: PropData[] = [
     key: 'stepProp',
     prop: 'step',
     required: false,
-    description: 'The step value for the Input in type number',
+    description: 'The increment/decrement step for number inputs.',
     values: 'number',
     default: '1',
     apiType: 'primitive'
@@ -146,7 +147,7 @@ const apiData: PropData[] = [
     key: 'readonlyProp',
     prop: 'readonly',
     required: false,
-    description: 'Wheter the Input is readonly or not',
+    description: 'Whether the Input is readonly or not.',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
@@ -173,10 +174,19 @@ const apiData: PropData[] = [
     key: 'shapeProp',
     prop: 'shape',
     required: false,
-    description: 'The shape of the Input',
+    description: 'The shape of the Input.',
     values: 'rounded, soft, square',
     default: 'soft',
     apiType: 'custom-string'
+  },
+  {
+    key: 'disableIconClickFocusProp',
+    prop: 'disableIconClickFocus',
+    required: false,
+    description: 'Disables focusing the input when clicking on the icons.',
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -341,8 +351,8 @@ const emitData: EmitData[] = [
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the value of the input is updated.',
-    values: 'string',
-    type: '(value: string) => void',
+    values: 'string | number',
+    type: '(value: string | number) => void',
     apiType: 'primitive'
   },
   {
@@ -367,7 +377,7 @@ const emitData: EmitData[] = [
     description: 'Emitted when the input is cleared using the clearable icon.',
     values: '',
     type: '() => void',
-    apiType: 'function'
+    apiType: 'event'
   },
   {
     key: 'leftIconClickEmit',
@@ -375,7 +385,7 @@ const emitData: EmitData[] = [
     description: 'Emitted when the left icon of the input is clicked.',
     values: '',
     type: '() => void',
-    apiType: 'function'
+    apiType: 'event'
   },
   {
     key: 'rightIconClickEmit',
@@ -383,7 +393,7 @@ const emitData: EmitData[] = [
     description: 'Emitted when the right icon of the input is clicked.',
     values: '',
     type: '() => void',
-    apiType: 'function'
+    apiType: 'event'
   }
 ]
 
@@ -473,6 +483,7 @@ const resetForceClearableInput = () => setTimeout(() => { inputStates.forceClear
         :step="form.step"
         :clearable="form.clearable"
         :force-clearable="form.forceClearable"
+        :disable-icon-click-focus="form.disableIconClickFocus"
         @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
         @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'surface' })"
       >
@@ -568,6 +579,10 @@ const resetForceClearableInput = () => setTimeout(() => { inputStates.forceClear
       <vk-checkbox
         v-model="form.forceClearable"
         label="Force Clearable"
+      />
+      <vk-checkbox
+        v-model="form.disableIconClickFocus"
+        label="Disable Icon Click Focus"
       />
       <vk-checkbox
         v-model="iconsInForm.left"
@@ -717,6 +732,25 @@ const resetForceClearableInput = () => setTimeout(() => { inputStates.forceClear
 
         <template #code>
           <code-block :code="generateSnippet<boolean>('forceClearable', { values: [true], extraProps: 'readonly clearable' })" />
+        </template>
+      </example-section>
+
+      <example-section title="Disable Icon Click Focus">
+        <vk-input
+          label="Disable Icon Click Focus"
+          clearable
+          disable-icon-click-focus
+        >
+          <template #left-icon>
+            <vk-icon name="home" />
+          </template>
+          <template #right-icon>
+            <vk-icon name="home" />
+          </template>
+        </vk-input>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('disableIconClickFocus', { values: [true], extraProps: 'clearable' })" />
         </template>
       </example-section>
 
