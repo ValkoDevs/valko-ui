@@ -18,15 +18,19 @@ const emit = defineEmits(['itemClick'])
 
 const s = computed(() => styles(props))
 
-const groups = props.items.reduce((acc: Set<string>, item: MenuItem) => {
-  if (item.group) acc.add(item.group)
-  else acc.add('default')
-  return acc
-}, new Set(['default']) as Set<string>)
-
 const focusedIndex = ref(-1)
 
 const navigableItems = computed(() => props.items.filter(item => !item.disabled))
+
+const groupedItems = computed(() =>
+  props.items.reduce<Record<string, MenuItem[]>>((groups, item) => {
+    const group = item.group ?? 'default'
+
+    ;(groups[group] ??= []).push(item)
+
+    return groups
+  }, {})
+)
 
 watch(
   () => [props.active, props.items],
@@ -44,10 +48,14 @@ const onItemClick = (item: MenuItem) => {
 }
 
 const focusItem = (index: number) => {
+  const item = navigableItems.value[index]
+  if (!item) return
+
   focusedIndex.value = index
+
   nextTick(() => {
-    const allButtons = document.querySelectorAll('[role="menuitem"]')
-    if (allButtons[index]) (allButtons[index] as HTMLElement).focus()
+    const allButtons = document.querySelectorAll<HTMLElement>('[role="menuitem"]')
+    allButtons[index]?.focus()
   })
 }
 
@@ -57,57 +65,56 @@ const handleKeyDown = useListKeyboardNav({
   currentIndex: focusedIndex,
   itemCount: () => navigableItems.value.length,
   loop: true,
-  onMove: (index: number) => focusItem(index),
+  onMove: focusItem,
   onSelect: (index: number) => {
     const item = navigableItems.value[index]
-    if (item && !item.disabled) onItemClick(item)
+    if (item) onItemClick(item)
   }
 })
 </script>
 
 <template>
-  <div>
-    <div
-      v-for="group in groups"
-      :key="group"
+  <div
+    v-for="(items, group) in groupedItems"
+    :key="group"
+  >
+    <span
+      v-if="group !== 'default'"
+      :class="s.group({ class: styleSlots?.group })"
+      role="presentation"
     >
-      <span
-        v-if="group !== 'default'"
-        :class="s.group({ class: styleSlots?.group })"
-        role="presentation"
+      {{ group }}
+    </span>
+
+    <ul
+      :class="s.menu({ class: styleSlots?.menu })"
+      role="menu"
+      :aria-label="group !== 'default' ? group : 'Menu'"
+    >
+      <li
+        v-for="item in items"
+        :key="item.key"
+        :class="s.item({ class: styleSlots?.item })"
+        role="none"
       >
-        {{ group }}
-      </span>
-      <ul
-        :class="s.menu({ class: styleSlots?.menu })"
-        role="menu"
-        :aria-label="group !== 'default' ? group : 'Menu'"
-      >
-        <li
-          v-for="item in items.filter((i: MenuItem) => i.group === group)"
-          :key="item.key"
-          :class="s.item({ class: styleSlots?.item })"
-          role="none"
+        <slot
+          name="item"
+          :item="item"
         >
-          <slot
-            name="item"
-            :item="item"
+          <button
+            :class="s.content({ class: styleSlots?.content })"
+            :data-active="item.key === active"
+            :data-disabled="item.disabled"
+            :aria-disabled="item.disabled || undefined"
+            role="menuitem"
+            :tabindex="focusedKey === item.key ? 0 : -1"
+            @click.prevent="onItemClick(item)"
+            @keydown="!item.disabled && handleKeyDown($event)"
           >
-            <button
-              :class="s.content({ class: styleSlots?.content })"
-              :data-active="item.key === active"
-              :data-disabled="item.disabled"
-              :aria-disabled="item.disabled || undefined"
-              role="menuitem"
-              :tabindex="focusedKey === item.key ? 0 : -1"
-              @click.prevent="onItemClick(item)"
-              @keydown="(e: KeyboardEvent) => !item.disabled && handleKeyDown(e)"
-            >
-              {{ item.text }}
-            </button>
-          </slot>
-        </li>
-      </ul>
-    </div>
+            {{ item.text }}
+          </button>
+        </slot>
+      </li>
+    </ul>
   </div>
 </template>

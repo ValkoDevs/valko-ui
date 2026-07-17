@@ -419,7 +419,7 @@ describe('Menu component', () => {
       })
     })
 
-    describe('onKeyDown', () => {
+    describe('Keyboard navigation', () => {
       beforeEach(() => {
         useListKeyboardNavMock.mockClear()
 
@@ -431,79 +431,124 @@ describe('Menu component', () => {
         })
       })
 
-      it('should call useListKeyboardNav with loop enabled', () => {
-        expect(useListKeyboardNavMock).toHaveBeenCalledWith(
-          expect.objectContaining({
-            loop: true
+      describe('useListKeyboardNav configuration', () => {
+        it('should configure list keyboard navigation', () => {
+          expect(useListKeyboardNavMock).toHaveBeenCalledWith(
+            expect.objectContaining({
+              currentIndex: expect.any(Object),
+              itemCount: expect.any(Function),
+              loop: true,
+              onMove: expect.any(Function),
+              onSelect: expect.any(Function)
+            })
+          )
+        })
+
+        it('should return the number of navigable items', () => {
+          const config = useListKeyboardNavMock.mock.calls[0][0] as {
+            itemCount: () => number
+          }
+
+          expect(config.itemCount()).toBe(2)
+        })
+      })
+
+      describe('focusItem', () => {
+        it('should focus the selected navigable item', async () => {
+          const config = useListKeyboardNavMock.mock.calls[0][0] as {
+            onMove: (index: number) => void
+          }
+
+          config.onMove(1)
+
+          await nextTick()
+
+          const buttons = wrapper.findAll('.vk-menu__content')
+
+          expect(buttons[2].attributes('tabindex')).toBe('0')
+        })
+
+        it('should ignore invalid indexes', async () => {
+          const focusSpy = vi.spyOn(HTMLElement.prototype, 'focus')
+
+          const config = useListKeyboardNavMock.mock.calls[0][0] as {
+            onMove: (index: number) => void
+          }
+
+          config.onMove(999)
+
+          await nextTick()
+
+          expect(focusSpy).not.toHaveBeenCalled()
+
+          focusSpy.mockRestore()
+        })
+      })
+
+      describe('item selection', () => {
+        it('should emit itemClick when selecting a valid item', () => {
+          const config = useListKeyboardNavMock.mock.calls[0][0] as {
+            onSelect: (index: number) => void
+          }
+
+          config.onSelect(0)
+
+          expect(wrapper.emitted('itemClick')).toBeTruthy()
+        })
+
+        it('should ignore invalid indexes', () => {
+          const config = useListKeyboardNavMock.mock.calls[0][0] as {
+            onSelect: (index: number) => void
+          }
+
+          config.onSelect(999)
+
+          expect(wrapper.emitted('itemClick')).toBeFalsy()
+        })
+      })
+
+      describe('item keyboard events', () => {
+        it('should attach the keyboard handler to enabled items', async () => {
+          const mockHandler = vi.fn()
+
+          useListKeyboardNavMock.mockReturnValue(mockHandler)
+
+          wrapper = mount(VkMenu, {
+            props: {
+              items: menuItems,
+              active: 'get-started'
+            }
           })
-        )
-      })
 
-      it('should pass currentIndex, itemCount, onMove and onSelect', () => {
-        const config = useListKeyboardNavMock.mock.calls[0][0]
+          await nextTick()
 
-        expect(config).toHaveProperty('currentIndex')
-        expect(config).toHaveProperty('onMove')
-        expect(config).toHaveProperty('onSelect')
-      })
+          const buttons = wrapper.findAll('.vk-menu__content')
 
-      it('should attach the handler to menu items via keydown', async () => {
-        const mockHandler = vi.fn()
-        useListKeyboardNavMock.mockReturnValue(mockHandler)
+          await buttons[0].trigger('keydown', { key: 'ArrowDown' })
 
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
+          expect(mockHandler).toHaveBeenCalled()
         })
 
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        await buttons[0].trigger('keydown', { key: 'ArrowDown' })
+        it('should not attach the keyboard handler to disabled items', async () => {
+          const mockHandler = vi.fn()
 
-        expect(mockHandler).toHaveBeenCalled()
-      })
+          useListKeyboardNavMock.mockReturnValue(mockHandler)
 
-      it('should not call handler on disabled item keydown', async () => {
-        const mockHandler = vi.fn()
-        useListKeyboardNavMock.mockReturnValue(mockHandler)
+          wrapper = mount(VkMenu, {
+            props: {
+              items: menuItems,
+              active: 'get-started'
+            }
+          })
 
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
+          await nextTick()
+
+          const buttons = wrapper.findAll('.vk-menu__content')
+
+          await buttons[1].trigger('keydown', { key: 'ArrowDown' })
+
+          expect(mockHandler).not.toHaveBeenCalled()
         })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        await buttons[1].trigger('keydown', { key: 'ArrowDown' })
-
-        expect(mockHandler).not.toHaveBeenCalled()
-      })
-
-      it('should update focusedIndex when onMove is called', async () => {
-        const config = useListKeyboardNavMock.mock.calls[0][0] as { onMove: (index: number) => void }
-        config.onMove(1)
-        await nextTick()
-
-        const buttons = wrapper.findAll('.vk-menu__content')
-        expect(buttons[2].attributes('tabindex')).toBe('0')
-      })
-
-      it('should emit itemClick when onSelect is called with a valid navigable item', () => {
-        const config = useListKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
-        config.onSelect(0)
-
-        expect(wrapper.emitted('itemClick')).toBeTruthy()
-      })
-
-      it('should not emit itemClick when onSelect is called with an out of bounds index', () => {
-        const config = useListKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
-        config.onSelect(999)
-
-        expect(wrapper.emitted('itemClick')).toBeFalsy()
       })
     })
   })
