@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue'
-import type { PaginationProps } from '#valkoui/types/Pagination'
+import { computed, watch } from 'vue'
+import type { PaginationProps, Page } from '#valkoui/types/Pagination'
 import styles from '#valkoui/styles/Pagination.styles.ts'
 import useRangeKeyboardNav from '#valkoui/composables/useRangeKeyboardNav.ts'
 import VkIcon from './Icon.vue'
@@ -21,8 +21,10 @@ const emit = defineEmits(['update:modelValue'])
 
 const s = computed(() => styles(props))
 
-const visiblePages = computed(() => {
-  const total = +props.pages
+const totalPages = computed(() => +props.pages)
+
+const visiblePages = computed<Page[]>(() => {
+  const total = totalPages.value
   const current = props.modelValue
 
   if (total <= 7)
@@ -35,24 +37,30 @@ const visiblePages = computed(() => {
   return [1, '...', current - 1, current, current + 1, '...', total]
 })
 
-const changePage = (page: string | number) => {
-  if (+page !== props.modelValue && page !== '...' && !props.disabled)
+const changePage = (page: Page) => {
+  if (props.disabled || page === '...') return
+
+  if (page !== props.modelValue)
     emit('update:modelValue', page)
 }
 
 const handleKeyDown = useRangeKeyboardNav({
   currentValue: () => props.modelValue,
   min: () => 1,
-  max: () => +props.pages,
+  max: () => totalPages.value,
   step: () => 1,
   enabled: () => !props.disabled,
-  onUpdate: (value: number) => changePage(value)
+  onUpdate: changePage
 })
 
-watchEffect(() => {
-  if (props.modelValue > +props.pages)
-    emit('update:modelValue', +props.pages)
-})
+watch(
+  [() => props.modelValue, totalPages],
+  () => {
+    if (props.modelValue > totalPages.value)
+      emit('update:modelValue', totalPages.value)
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
@@ -70,13 +78,14 @@ watchEffect(() => {
         :size="size"
         condensed
         :disabled="modelValue === 1 || disabled"
-        @click="() => changePage(modelValue - 1)"
+        @click="changePage(modelValue - 1)"
       >
         <div :class="s.arrows({ class: styleSlots?.arrows })">
           <span class="sr-only">Previous</span>
           <vk-icon name="chevron-left" />
         </div>
       </vk-button>
+
       <vk-button
         v-for="page in visiblePages"
         :key="page"
@@ -86,12 +95,13 @@ watchEffect(() => {
         :shape="shape"
         condensed
         :disabled="disabled"
-        @click="() => changePage(page)"
+        @click="changePage(page)"
       >
         <div :class="s.button({ class: styleSlots?.button })">
           {{ page }}
         </div>
       </vk-button>
+
       <vk-button
         variant="link"
         class="vk-pagination__right"
@@ -99,8 +109,8 @@ watchEffect(() => {
         :shape="shape"
         :size="size"
         condensed
-        :disabled="modelValue === +pages || disabled"
-        @click="() => changePage(modelValue + 1)"
+        :disabled="modelValue === totalPages || disabled"
+        @click="changePage(modelValue + 1)"
       >
         <div :class="s.arrows({ class: styleSlots?.arrows })">
           <span class="sr-only">Next</span>
