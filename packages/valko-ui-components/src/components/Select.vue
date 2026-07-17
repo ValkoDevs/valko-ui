@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted, nextTick, type Ref } from 'vue'
-import type { SelectProps, SelectOption } from '#valkoui/types/Select'
+import type { SelectProps } from '#valkoui/types/Select'
 import styles from '#valkoui/styles/Select.styles.ts'
 import VkIcon from './Icon.vue'
 import VkInput from './Input.vue'
@@ -25,26 +25,29 @@ const emit = defineEmits(['update:modelValue'])
 const s = computed(() => styles(props))
 
 const itemRefs: Ref<(HTMLElement | null)[]> = ref([])
-const selectRef = ref(null)
+const selectRef = ref<HTMLElement | null>(null)
 const isOpen = ref(false)
 
-const showMap: Record<string, string> = props.options.reduce((acc: Record<string, string>, opt: SelectOption) => ({
-  ...acc,
-  [`${opt.value}`]: opt.label
-}), { 'undefined': '' })
-
-const showValue = computed(
-  () => Array.isArray(props.modelValue)
-    ? props.modelValue.map(
-      (val: string | number) => showMap[`${val}`]
-    ).join(', ')
-    : showMap[`${props.modelValue}`]
+const showMap = computed(() =>
+  props.options.reduce<Record<string, string>>((acc, option) => {
+    acc[String(option.value)] = option.label
+    return acc
+  }, {})
 )
 
-const updateValue = (value: SelectProps['modelValue']) => {
-  if (!props.disabled && !props.readonly) {
-    emit('update:modelValue', value)
+const showValue = computed(() => {
+  if (Array.isArray(props.modelValue)) {
+    return props.modelValue
+      .map(value => showMap.value[String(value)])
+      .join(', ')
   }
+
+  return showMap.value[String(props.modelValue)]
+})
+
+const updateValue = (value: SelectProps['modelValue']) => {
+  if (props.disabled || props.readonly) return
+  emit('update:modelValue', value)
 }
 
 const handleMultipleSelection = (value: string | number) => {
@@ -74,11 +77,14 @@ const isSelected = (value: string | number) => {
 
 const closeDropdownOnOutsideClick = (event: MouseEvent) => {
   const target = event.target as HTMLElement
-  if (target.closest('.vk-select__container') !== selectRef.value) isOpen.value = false
+
+  if (!selectRef.value?.contains(target)) isOpen.value = false
 }
 
 const toggleDropdown = (onFocus: boolean) => {
   isOpen.value = onFocus && !props.disabled && !props.readonly
+
+  if (!isOpen.value) highlightedIndex.value = -1
 }
 
 const clearSelection = () => {
@@ -101,6 +107,8 @@ const handleKeyDown = useListKeyboardNav({
   },
   onSelect: (index: number) => {
     const item = props.options[index]
+    if (!item) return
+
     if (props.multiple) handleMultipleSelection(item.value)
     else handleSingleSelection(item.value)
   }
@@ -126,7 +134,6 @@ onUnmounted(() => {
       :value="modelValue"
       :multiple="multiple"
       :readonly="readonly"
-      @update="updateValue"
     >
       <option
         v-for="option in options"
