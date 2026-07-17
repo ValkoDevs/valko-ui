@@ -12,28 +12,32 @@
 
 ### Components
 
-- **Menu, Select, Dropdown:** Replaced inline keyboard handlers with the `useListKeyboardNav` composable.
-- **Dropdown:** Added keyboard navigation for menu items (arrow keys, Home/End, Enter/Space) and trigger arrow key support to open and focus.
+- **Menu, Select, Dropdown:** Replaced inline keyboard navigation logic with the `useListKeyboardNav` composable and simplified component implementations.
+- **Dropdown:** Added keyboard navigation for menu items (arrow keys, Home/End, Enter/Space) and trigger arrow key support to open the menu and focus the first or last item.
 - **Pagination:** Added keyboard navigation with `useRangeKeyboardNav` for page increment/decrement.
-- **CalendarDayView, CalendarMonthView, CalendarYearView:** Added grid-based keyboard navigation with `useGridKeyboardNav`, roving tabindex, focus sync to selected value, and `data-kb-index` attributes.
-- **Range:** Replaced inline keyboard handlers with the `useRangeKeyboardNav` composable. Replaced magic strings with a `buildThumbHandlers` factory and `thumbHandlers` record.
+- **CalendarDayView, CalendarMonthView, CalendarYearView:** Added grid-based keyboard navigation with `useGridKeyboardNav`, roving tabindex, focus synchronization, and `data-kb-index` attributes.
+- **Range:** Replaced inline keyboard navigation logic with the `useRangeKeyboardNav` composable and simplified thumb event handling through a shared factory.
 
 ### Types
 
-- Added `keyboardNavigation` types file containing:
-  - `NavigationKey` union type to restrict key maps to valid keyboard keys.
-  - `KeyMap`, `ListNavigationConfig`, `GridNavigationConfig`, and `RangeNavigationConfig` interfaces.
+- Added `keyboardNavigation` types containing:
+  - `NavigationKey`
+  - `KeyMap`
+  - `ListNavigationConfig`
+  - `GridNavigationConfig`
+  - `RangeNavigationConfig`
 - **Range:**
-  - Added `Thumb` union type to replace magic strings.
+  - Added `Thumb` union type.
   - Added `ThumbHandlers` interface.
 
 ### Tests
 
-- Added dedicated test suites covering boundary conditions, disabled cells, looping, and reactive values for:
+- Added dedicated test suites for:
   - `useListKeyboardNav`
   - `useGridKeyboardNav`
   - `useRangeKeyboardNav`
-- Refactored `Menu`, `Select`, `Range`, `Dropdown`, `Pagination`, and `Calendar` component tests to mock their respective composables and verify integration instead of duplicating navigation behavior tests.
+- Added coverage for boundary conditions, looping, disabled items/cells, and reactive state handling.
+- Refactored `Menu`, `Select`, `Dropdown`, `Range`, `Pagination`, and `Calendar` tests to mock the keyboard navigation composables and verify component integration instead of duplicating navigation behavior.
 
 ### Build & Module Config
 
