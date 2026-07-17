@@ -41,21 +41,27 @@ const open = computed({
 })
 
 const navigableItems = computed(() => props.items.filter(item => !item.disabled))
+
 const focusedKey = computed(() => navigableItems.value[focusedIndex.value]?.key)
 
 const setItemRef = (index: number) => (el: Element | ComponentPublicInstance | null) => {
   itemRefs.value[index] = el instanceof HTMLElement ? el : null
 }
 
+const getItemIndex = (item: Item) =>
+  props.items.findIndex(option => option.key === item.key)
+
 const focusItem = (index: number) => {
+  const item = navigableItems.value[index]
+
+  if (!item) return
+
   focusedIndex.value = index
 
   nextTick(() => {
-    const item = navigableItems.value[index]
-    if (!item) return
+    const domIndex = getItemIndex(item)
 
-    const domIndex = props.items.findIndex(option => option.key === item.key)
-    if (domIndex >= 0) itemRefs.value[domIndex]?.focus()
+    itemRefs.value[domIndex]?.focus()
   })
 }
 
@@ -67,24 +73,24 @@ const handleItemKeyDown = useListKeyboardNav({
   onMove: focusItem,
   onSelect: (index: number) => {
     const item = navigableItems.value[index]
+
     if (item) onItemClick(item)
   }
 })
 
 const onTriggerKeyDown = (event: KeyboardEvent) => {
-  if (props.disabled || !['ArrowDown', 'ArrowUp'].includes(event.key)) return
+  if (
+    props.disabled ||
+    !['ArrowDown', 'ArrowUp'].includes(event.key) ||
+    !navigableItems.value.length
+  ) return
+
   event.preventDefault()
-  if (!open.value) open.value = true
+
+  open.value = true
+
   focusItem(event.key === 'ArrowDown' ? 0 : navigableItems.value.length - 1)
 }
-
-watch(
-  () => [open.value, props.items],
-  () => {
-    focusedIndex.value = open.value && navigableItems.value.length ? 0 : -1
-  },
-  { immediate: true }
-)
 
 const onClick = (event: MouseEvent) => {
   open.value = !open.value
@@ -93,9 +99,17 @@ const onClick = (event: MouseEvent) => {
 
 const onItemClick = (item: Item) => {
   emit('itemClick', item)
+
   item.onClick?.()
+
   open.value = false
 }
+
+watch(
+  [open, () => props.items.length],
+  () => { focusedIndex.value = open.value && navigableItems.value.length ? 0 : -1 },
+  { immediate: true }
+)
 </script>
 
 <template>
@@ -111,7 +125,7 @@ const onItemClick = (item: Item) => {
   >
     <slot
       name="dropdown-trigger"
-      :v-bind="props"
+      v-bind="props"
       :open="open"
       :toggle="onClick"
     >
@@ -131,6 +145,7 @@ const onItemClick = (item: Item) => {
         @keydown="onTriggerKeyDown"
       >
         {{ label }}
+
         <vk-icon
           :class="s.icon({ class: styleSlots?.icon })"
           :name="icon"
@@ -167,6 +182,7 @@ const onItemClick = (item: Item) => {
             :class="s.itemsIcon({ class: styleSlots?.itemsIcon })"
             :name="item.icon"
           />
+
           {{ item.title }}
         </button>
       </div>

@@ -14,7 +14,7 @@ describe('Dropdown component', () => {
   const items = [
     { key: 'image', title: 'Upload Image', icon: 'photo' },
     { key: 'edit', title: 'Edit', icon: 'edit' },
-    { key: 'disabled', title: 'Disabled', icon: 'negative' },
+    { key: 'disabled', title: 'Disabled', icon: 'negative', disabled: true },
     { key: 'video', title: 'Upload Video', icon: 'video' },
     { key: 'delete', title: 'Delete', icon: 'trash' }
   ]
@@ -435,6 +435,35 @@ describe('Dropdown component', () => {
     })
   })
 
+  describe('Methods', () => {
+    describe('focusItem handler', () => {
+      it('should focus the navigable item when moving through keyboard navigation', async () => {
+        const focusSpy = vi.spyOn(HTMLElement.prototype, 'focus')
+
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items
+          }
+        })
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+        await nextTick()
+
+        const config = useListKeyboardNavMock.mock.calls[0][0] as {
+          onMove: (index: number) => void
+        }
+
+        config.onMove(1)
+
+        await nextTick()
+
+        expect(focusSpy).toHaveBeenCalled()
+
+        focusSpy.mockRestore()
+      })
+    })
+  })
+
   describe('Emits', () => {
     it('should emit click event', async () => {
       const wrapper = mount(VkDropdown, {
@@ -479,107 +508,274 @@ describe('Dropdown component', () => {
       useListKeyboardNavMock.mockClear()
     })
 
-    it('should call useListKeyboardNav with loop enabled', () => {
-      mount(VkDropdown, { props: { items } })
+    describe('useListKeyboardNav configuration', () => {
+      it('should configure list keyboard navigation', () => {
+        mount(VkDropdown, { props: { items } })
 
-      expect(useListKeyboardNavMock).toHaveBeenCalledWith(
-        expect.objectContaining({
-          loop: true
+        expect(useListKeyboardNavMock).toHaveBeenCalledWith(
+          expect.objectContaining({
+            loop: true,
+            enabled: expect.any(Function),
+            onMove: expect.any(Function),
+            onSelect: expect.any(Function)
+          })
+        )
+      })
+
+      it('should return the correct item count', () => {
+        mount(VkDropdown, { props: { items } })
+
+        const config = useListKeyboardNavMock.mock.calls[0][0] as {
+          itemCount: () => number
+        }
+
+        expect(config.itemCount()).toBe(4)
+      })
+
+      it('should enable keyboard navigation only when dropdown is open and enabled', async () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items
+          }
         })
-      )
+
+        const config = useListKeyboardNavMock.mock.calls[0][0] as {
+          enabled: () => boolean
+        }
+
+        expect(config.enabled()).toBe(false)
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
+        expect(config.enabled()).toBe(true)
+      })
+
+      it('should disable keyboard navigation when dropdown is disabled', () => {
+        mount(VkDropdown, {
+          props: {
+            items,
+            disabled: true
+          }
+        })
+
+        const config = useListKeyboardNavMock.mock.calls[0][0] as {
+          enabled: () => boolean
+        }
+
+        expect(config.enabled()).toBe(false)
+      })
     })
 
-    it('should pass enabled, onMove and onSelect callbacks', () => {
-      mount(VkDropdown, { props: { items } })
+    describe('focusItem handler', () => {
+      it('should focus the navigable item when moving through keyboard navigation', async () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items
+          }
+        })
 
-      const config = useListKeyboardNavMock.mock.calls[0][0]
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
 
-      expect(config).toHaveProperty('enabled')
-      expect(config).toHaveProperty('onMove')
-      expect(config).toHaveProperty('onSelect')
+        const config = useListKeyboardNavMock.mock.calls[0][0] as {
+          onMove: (index: number) => void
+        }
+
+        config.onMove(1)
+
+        await nextTick()
+
+        expect(
+          wrapper.findAll('.vk-dropdown__item-button')[1]
+            .attributes('tabindex')
+        ).toBe('0')
+      })
+
+      it('should not focus an item when moving to an invalid index', async () => {
+        const focusSpy = vi.spyOn(HTMLElement.prototype, 'focus')
+
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items
+          }
+        })
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
+        const config = useListKeyboardNavMock.mock.calls[0][0] as {
+          onMove: (index: number) => void
+        }
+
+        config.onMove(999)
+
+        await nextTick()
+
+        expect(focusSpy).not.toHaveBeenCalled()
+
+        focusSpy.mockRestore()
+      })
     })
 
-    it('should emit itemClick when onSelect is called with a valid index', async () => {
-      const wrapper = mount(VkDropdown, { props: { items } })
+    describe('item selection', () => {
+      it('should emit itemClick when onSelect receives a valid index', async () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items
+          }
+        })
 
-      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
 
-      const config = useListKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
-      config.onSelect(0)
+        const config = useListKeyboardNavMock.mock.calls[0][0] as {
+          onSelect: (index: number) => void
+        }
 
-      expect(wrapper.emitted('itemClick')).toBeTruthy()
+        config.onSelect(0)
+
+        expect(wrapper.emitted('itemClick')).toBeTruthy()
+      })
+
+      it('should not emit itemClick when onSelect receives an invalid index', async () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items
+          }
+        })
+
+        const config = useListKeyboardNavMock.mock.calls[0][0] as {
+          onSelect: (index: number) => void
+        }
+
+        config.onSelect(999)
+
+        expect(wrapper.emitted('itemClick')).toBeFalsy()
+      })
+
+      it('should not emit itemClick when selected item is disabled', () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items: [
+              {
+                key: 'disabled',
+                title: 'Disabled',
+                disabled: true
+              }
+            ]
+          }
+        })
+
+        const config = useListKeyboardNavMock.mock.calls[0][0] as {
+          onSelect: (index: number) => void
+        }
+
+        config.onSelect(0)
+
+        expect(wrapper.emitted('itemClick')).toBeFalsy()
+      })
     })
 
-    it('should not emit itemClick when onSelect is called with an invalid index', async () => {
-      const wrapper = mount(VkDropdown, { props: { items } })
+    describe('item keyboard events', () => {
+      it('should attach the keyboard handler to enabled items', async () => {
+        const mockHandler = vi.fn()
 
-      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+        useListKeyboardNavMock.mockReturnValue(mockHandler)
 
-      const config = useListKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
-      config.onSelect(999)
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items
+          }
+        })
 
-      expect(wrapper.emitted('itemClick')).toBeFalsy()
-    })
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
 
-    it('should attach the handler to item buttons via keydown', async () => {
-      const mockHandler = vi.fn()
-      useListKeyboardNavMock.mockReturnValue(mockHandler)
+        await wrapper.find('.vk-dropdown__item-button')
+          .trigger('keydown', { key: 'ArrowDown' })
 
-      const wrapper = mount(VkDropdown, { props: { items } })
+        expect(mockHandler).toHaveBeenCalled()
+      })
 
-      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-      const itemButton = wrapper.find('.vk-dropdown__item-button')
-      await itemButton.trigger('keydown', { key: 'ArrowDown' })
+      it('should not attach the keyboard handler to disabled items', async () => {
+        const mockHandler = vi.fn()
 
-      expect(mockHandler).toHaveBeenCalled()
-    })
+        useListKeyboardNavMock.mockReturnValue(mockHandler)
 
-    it('should not call handler on disabled item keydown', async () => {
-      const mockHandler = vi.fn()
-      useListKeyboardNavMock.mockReturnValue(mockHandler)
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items: [
+              {
+                key: 'disabled',
+                title: 'Disabled',
+                disabled: true
+              }
+            ]
+          }
+        })
 
-      const disabledItems = [{ key: 'edit', title: 'Edit', disabled: true }]
-      const wrapper = mount(VkDropdown, { props: { items: disabledItems } })
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
 
-      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-      const itemButton = wrapper.find('.vk-dropdown__item-button')
-      await itemButton.trigger('keydown', { key: 'ArrowDown' })
+        await wrapper.find('.vk-dropdown__item-button')
+          .trigger('keydown', { key: 'ArrowDown' })
 
-      expect(mockHandler).not.toHaveBeenCalled()
+        expect(mockHandler).not.toHaveBeenCalled()
+      })
     })
 
     describe('onTriggerKeyDown', () => {
-      it('should open the dropdown and focus first item on ArrowDown', async () => {
-        const wrapper = mount(VkDropdown, { props: { items } })
+      it('should open dropdown and focus first item on ArrowDown', async () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items
+          }
+        })
 
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('keydown', { key: 'ArrowDown' })
+        await wrapper.find('.vk-dropdown__trigger-button')
+          .trigger('keydown', { key: 'ArrowDown' })
+
         await nextTick()
 
         expect(wrapper.find('.vk-dropdown__items-menu').exists()).toBe(true)
       })
 
-      it('should open the dropdown and focus last item on ArrowUp', async () => {
-        const wrapper = mount(VkDropdown, { props: { items } })
+      it('should open dropdown and focus last item on ArrowUp', async () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items
+          }
+        })
 
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('keydown', { key: 'ArrowUp' })
+        await wrapper.find('.vk-dropdown__trigger-button')
+          .trigger('keydown', { key: 'ArrowUp' })
+
         await nextTick()
 
         expect(wrapper.find('.vk-dropdown__items-menu').exists()).toBe(true)
       })
 
-      it('should not open the dropdown on non-arrow keys', async () => {
-        const wrapper = mount(VkDropdown, { props: { items } })
+      it('should ignore non arrow keys', async () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items
+          }
+        })
 
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('keydown', { key: 'Enter' })
+        await wrapper.find('.vk-dropdown__trigger-button')
+          .trigger('keydown', { key: 'Enter' })
+
         await nextTick()
 
         expect(wrapper.find('.vk-dropdown__items-menu').exists()).toBe(false)
       })
 
-      it('should not open the dropdown when disabled', async () => {
-        const wrapper = mount(VkDropdown, { props: { items, disabled: true } })
+      it('should not open when dropdown is disabled', async () => {
+        const wrapper = mount(VkDropdown, {
+          props: {
+            items,
+            disabled: true
+          }
+        })
 
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('keydown', { key: 'ArrowDown' })
+        await wrapper.find('.vk-dropdown__trigger-button')
+          .trigger('keydown', { key: 'ArrowDown' })
+
         await nextTick()
 
         expect(wrapper.find('.vk-dropdown__items-menu').exists()).toBe(false)
