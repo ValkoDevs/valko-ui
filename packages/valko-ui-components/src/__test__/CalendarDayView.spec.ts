@@ -88,19 +88,9 @@ describe('CalendarDayView Component', () => {
     })
   })
 
-  describe('Methods and computeds', () => {
-    let wrapper: VueWrapper
-
-    beforeEach(() => {
-      wrapper = mount(VkCalendarDayView, {
-        props: {
-          ...baseProps
-        }
-      })
-    })
-
+  describe('Computed Properties', () => {
     describe('gridCells', () => {
-      it.each([28, 29, 30, 31])('renders %i day cells for a month with %i days', (days) => {
+      it.each([28, 29, 30, 31])('should render %i day cells for a month with %i days', (days) => {
         const wrapper = mount(VkCalendarDayView, {
           props: {
             ...baseProps,
@@ -109,37 +99,52 @@ describe('CalendarDayView Component', () => {
           }
         })
 
-        const dayButtons = wrapper.findAll('.vk-calendar__grid-button').filter(btn => !isNaN(Number(btn.text())))
+        const dayButtons = wrapper
+          .findAll('.vk-calendar__grid-button')
+          .filter(btn => !isNaN(Number(btn.text())))
 
         expect(dayButtons.length).toBe(days)
       })
     })
 
     describe('isSelected', () => {
-      it('should grid button render with correct variant if selected', () => {
-        const selectedDayButton = wrapper.findAll('.vk-calendar__grid-button').find(btn => btn.text() === '15')
-        const isSelected = selectedDayButton?.classes().includes('bg-primary')
+      let wrapper: VueWrapper
 
-        expect(isSelected).toBe(true)
+      beforeEach(() => {
+        wrapper = mount(VkCalendarDayView, {
+          props: {
+            ...baseProps
+          }
+        })
       })
 
-      it('should grid button render with correct variant if not selected', () => {
-        const selectedDayButton = wrapper.findAll('.vk-calendar__grid-button').find(btn => btn.text() === '10')
-        const isSelected = selectedDayButton?.classes().includes('bg-primary')
+      it('should render the selected day with the active color', () => {
+        const selectedButton = wrapper
+          .findAll('.vk-calendar__grid-button')
+          .find(btn => btn.text() === '15')
 
-        expect(isSelected).toBe(false)
+        expect(selectedButton?.classes()).toContain('bg-primary')
       })
 
-      it('should grid button render with correct variant if not selected', () => {
-        const unselectedDayButton = wrapper.findAll('.vk-calendar__grid-button').find(btn => btn.text() === '10')
-        const isSelected = unselectedDayButton?.classes().includes('text-on-surface')
+      it('should render unselected days without the active color', () => {
+        const unselectedButton = wrapper
+          .findAll('.vk-calendar__grid-button')
+          .find(btn => btn.text() === '10')
 
-        expect(isSelected).toBe(true)
+        expect(unselectedButton?.classes()).not.toContain('bg-primary')
+      })
+
+      it('should render unselected days using the surface color', () => {
+        const unselectedButton = wrapper
+          .findAll('.vk-calendar__grid-button')
+          .find(btn => btn.text() === '10')
+
+        expect(unselectedButton?.classes()).toContain('text-on-surface')
       })
     })
 
     describe('isArrowDisabled', () => {
-      it('should disable previous month arrow if min date is reached', () => {
+      it('should disable the previous month arrow when the minimum month is reached', () => {
         const wrapper = mount(VkCalendarDayView, {
           props: {
             ...baseProps,
@@ -154,12 +159,12 @@ describe('CalendarDayView Component', () => {
           }
         })
 
-        const isDisabled = wrapper.findAll('.vk-calendar__arrows').at(0)?.attributes('aria-disabled') === 'true'
-
-        expect(isDisabled).toBe(true)
+        expect(
+          wrapper.findAll('.vk-calendar__arrows').at(0)?.attributes('aria-disabled')
+        ).toBe('true')
       })
 
-      it('should disable next month arrow if max date is reached', () => {
+      it('should disable the next month arrow when the maximum month is reached', () => {
         const wrapper = mount(VkCalendarDayView, {
           props: {
             ...baseProps,
@@ -174,14 +179,14 @@ describe('CalendarDayView Component', () => {
           }
         })
 
-        const isDisabled = wrapper.findAll('.vk-calendar__arrows').at(1)?.attributes('aria-disabled') === 'true'
-
-        expect(isDisabled).toBe(true)
+        expect(
+          wrapper.findAll('.vk-calendar__arrows').at(1)?.attributes('aria-disabled')
+        ).toBe('true')
       })
     })
 
-    describe('isWeekend and disable weekends', () => {
-      it('should disable weekend days if disableWeekends is true', () => {
+    describe('isWeekend', () => {
+      it('should disable weekend days when disableWeekends is enabled', () => {
         const wrapper = mount(VkCalendarDayView, {
           props: {
             ...baseProps,
@@ -189,30 +194,107 @@ describe('CalendarDayView Component', () => {
           }
         })
 
-        const weekendDayButtons = wrapper.findAll('.vk-calendar__grid-button').filter(btn => {
-          const day = Number(btn.text())
-          const date = new Date(2024, 9, day)
-          const dayOfWeek = date.getDay()
-          return dayOfWeek === 0 || dayOfWeek === 6
-        })
+        const weekendButtons = wrapper
+          .findAll('.vk-calendar__grid-button')
+          .filter(btn => {
+            const date = new Date(2024, 9, Number(btn.text()))
+            return [0, 6].includes(date.getDay())
+          })
 
-        weekendDayButtons.forEach(btn => {
-          expect(btn.attributes('aria-disabled')).toBe('true')
-        })
+        expect(
+          weekendButtons.every(btn => btn.attributes('aria-disabled') === 'true')
+        ).toBe(true)
       })
     })
+  })
 
+  describe('Methods', () => {
     describe('onArrowClick', () => {
-      it('should emit changeMonth with correct value when previous arrow is clicked', async () => {
+      let wrapper: VueWrapper
+
+      beforeEach(() => {
+        wrapper = mount(VkCalendarDayView, {
+          props: {
+            ...baseProps
+          }
+        })
+      })
+
+      it('should emit the previous month when the left arrow is clicked', async () => {
         await wrapper.findAll('.vk-calendar__arrows').at(0)?.trigger('click')
 
         expect(wrapper.emitted('changeMonth')?.at(0)).toEqual([8])
       })
 
-      it('should emit changeMonth with correct value when next arrow is clicked', async () => {
+      it('should emit the next month when the right arrow is clicked', async () => {
         await wrapper.findAll('.vk-calendar__arrows').at(1)?.trigger('click')
 
         expect(wrapper.emitted('changeMonth')?.at(0)).toEqual([10])
+      })
+    })
+
+    describe('syncFocusedCell', () => {
+      it('should focus the first available day when the selected day is disabled', async () => {
+        const wrapper = mount(VkCalendarDayView, {
+          props: {
+            ...baseProps,
+            selected: {
+              ...baseProps.selected,
+              day: 15
+            },
+            disabledDays: [15]
+          }
+        })
+
+        await nextTick()
+
+        const focusedButton = wrapper
+          .findAll('.vk-calendar__grid-button')
+          .find(btn => btn.attributes('tabindex') === '0')
+
+        expect(focusedButton?.text()).toBe('1')
+      })
+
+      it('should clear focus when no navigable days exist', async () => {
+        const wrapper = mount(VkCalendarDayView, {
+          props: {
+            ...baseProps,
+            disabledDays: Array.from({ length: 31 }, (_, i) => i + 1)
+          }
+        })
+
+        await nextTick()
+
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')
+            .some(btn => btn.attributes('tabindex') === '0')
+        ).toBe(false)
+      })
+    })
+
+    describe('onCellFocus', () => {
+      let wrapper: VueWrapper
+
+      beforeEach(() => {
+        wrapper = mount(VkCalendarDayView, {
+          props: {
+            ...baseProps
+          }
+        })
+      })
+
+      it('should update the focused cell when a navigable day receives focus', async () => {
+        const dayButtons = wrapper
+          .findAll('.vk-calendar__grid-button')
+          .filter(btn => !isNaN(Number(btn.text())))
+
+        await dayButtons[5]?.trigger('focus')
+        await nextTick()
+
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')
+            .find(btn => btn.attributes('tabindex') === '0')
+        ).toBeDefined()
       })
     })
   })
@@ -228,13 +310,13 @@ describe('CalendarDayView Component', () => {
       })
     })
 
-    it('should emit selectDay when a day is selected', async () => {
+    it('should emit selectDay when a day is clicked', async () => {
       await wrapper.findAll('.vk-calendar__grid-button').at(14)?.trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('selectDay')
     })
 
-    it('should emit viewChange when period button is clicked', async () => {
+    it('should emit viewChange when the period button is clicked', async () => {
       await wrapper.find('.vk-calendar__period-button').trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('viewChange')
@@ -254,69 +336,162 @@ describe('CalendarDayView Component', () => {
       })
     })
 
-    it('should call useGridKeyboardNav with columnCount', () => {
-      expect(useGridKeyboardNavMock).toHaveBeenCalledWith(
-        expect.objectContaining({
-          columnCount: expect.any(Function)
-        })
-      )
-    })
-
-    it('should pass onMove and onSelect callbacks', () => {
-      const config = useGridKeyboardNavMock.mock.calls[0][0]
-
-      expect(config).toHaveProperty('onMove')
-      expect(config).toHaveProperty('onSelect')
-    })
-
-    it('should update focusedIndex when onMove is called', async () => {
-      const config = useGridKeyboardNavMock.mock.calls[0][0] as { onMove: (index: number) => void }
-      config.onMove(3)
-      await nextTick()
-
-      const buttons = wrapper.findAll('.vk-calendar__grid-button')
-      const focusedButton = buttons.find(btn => btn.attributes('tabindex') === '0')
-
-      expect(focusedButton).toBeDefined()
-    })
-
-    it('should emit selectDay when onSelect is called with a valid index', async () => {
-      const config = useGridKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
-      config.onSelect(0)
-
-      expect(wrapper.emitted('selectDay')).toBeTruthy()
-    })
-
-    it('should not emit selectDay when onSelect is called with an invalid index', async () => {
-      const config = useGridKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
-      config.onSelect(999)
-
-      expect(wrapper.emitted('selectDay')).toBeFalsy()
-    })
-
-    it('should attach the handler to grid buttons via keydown', async () => {
-      const mockHandler = vi.fn()
-      useGridKeyboardNavMock.mockReturnValue(mockHandler)
-
-      wrapper = mount(VkCalendarDayView, {
-        props: { ...baseProps }
+    describe('useGridKeyboardNav', () => {
+      it('should provide the required configuration', () => {
+        expect(useGridKeyboardNavMock).toHaveBeenCalledWith(
+          expect.objectContaining({
+            currentIndex: expect.any(Object),
+            itemCount: expect.any(Function),
+            columnCount: expect.any(Function),
+            onMove: expect.any(Function),
+            onSelect: expect.any(Function)
+          })
+        )
       })
 
-      const dayButton = wrapper.findAll('.vk-calendar__grid-button').find(btn => !isNaN(Number(btn.text())))
-      await dayButton?.trigger('keydown', { key: 'ArrowDown' })
+      it('should provide the correct itemCount', () => {
+        const config = useGridKeyboardNavMock.mock.calls[0][0]
 
-      expect(mockHandler).toHaveBeenCalled()
+        expect(toValue(config.itemCount)).toBe(baseProps.daysInMonth)
+      })
+
+      it('should provide the correct columnCount', () => {
+        const config = useGridKeyboardNavMock.mock.calls[0][0]
+
+        expect(toValue(config.columnCount)).toBe(7)
+      })
     })
 
-    it('should update focusedIndex when a grid button receives focus', async () => {
-      const buttons = wrapper.findAll('.vk-calendar__grid-button')
-      const dayButtons = buttons.filter(btn => !isNaN(Number(btn.text())))
+    describe('focusCellByKeyboardIndex', () => {
+      it('should update the focused cell when onMove is called', async () => {
+        const config = useGridKeyboardNavMock.mock.calls[0][0] as {
+          onMove: (index: number) => void
+        }
 
-      await dayButtons[5]?.trigger('focus')
-      await nextTick()
+        config.onMove(3)
+        await nextTick()
 
-      const focusedButton = wrapper.findAll('.vk-calendar__grid-button').find(btn => btn.attributes('tabindex') === '0')
-      expect(focusedButton).toBeDefined()
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')
+            .some(btn => btn.attributes('tabindex') === '0')
+        ).toBe(true)
+      })
+    })
+
+    describe('onSelect callback', () => {
+      it('should emit selectDay for a valid keyboard index', () => {
+        const config = useGridKeyboardNavMock.mock.calls[0][0] as {
+          onSelect: (index: number) => void
+        }
+
+        config.onSelect(0)
+
+        expect(wrapper.emitted()).toHaveProperty('selectDay')
+      })
+
+      it('should ignore an invalid keyboard index', () => {
+        const config = useGridKeyboardNavMock.mock.calls[0][0] as {
+          onSelect: (index: number) => void
+        }
+
+        config.onSelect(999)
+
+        expect(wrapper.emitted('selectDay')).toBeFalsy()
+      })
+    })
+
+    describe('handleGridKeyDown', () => {
+      it('should attach the keyboard handler to grid buttons', async () => {
+        const mockHandler = vi.fn()
+        useGridKeyboardNavMock.mockReturnValue(mockHandler)
+
+        wrapper = mount(VkCalendarDayView, {
+          props: {
+            ...baseProps
+          }
+        })
+
+        const dayButton = wrapper.findAll('.vk-calendar__grid-button')
+          .find(btn => !isNaN(Number(btn.text())))
+
+        await dayButton?.trigger('keydown', { key: 'ArrowDown' })
+
+        expect(mockHandler).toHaveBeenCalledTimes(1)
+      })
+    })
+
+    describe('syncFocusedCell', () => {
+      it('should focus the first navigable day when the selected day is disabled', async () => {
+        wrapper = mount(VkCalendarDayView, {
+          props: {
+            ...baseProps,
+            selected: {
+              ...baseProps.selected,
+              day: 15
+            },
+            disabledDays: [15]
+          }
+        })
+
+        await nextTick()
+
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')
+            .find(btn => btn.attributes('tabindex') === '0')
+            ?.text()
+        ).toBe('1')
+      })
+
+      it('should not focus any day when there are no navigable cells', async () => {
+        wrapper = mount(VkCalendarDayView, {
+          props: {
+            ...baseProps,
+            disabledDays: Array.from({ length: 31 }, (_, i) => i + 1)
+          }
+        })
+
+        await nextTick()
+
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')
+            .find(btn => btn.attributes('tabindex') === '0')
+        ).toBeUndefined()
+      })
+    })
+
+    describe('onCellFocus', () => {
+      it('should update the focused cell when a navigable day receives focus', async () => {
+        const dayButtons = wrapper.findAll('.vk-calendar__grid-button')
+          .filter(btn => !isNaN(Number(btn.text())))
+
+        await dayButtons[5]?.trigger('focus')
+        await nextTick()
+
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')
+            .some(btn => btn.attributes('tabindex') === '0')
+        ).toBe(true)
+      })
+
+      it('should ignore focus events from disabled cells', async () => {
+        wrapper = mount(VkCalendarDayView, {
+          props: {
+            ...baseProps,
+            disabledDays: [15]
+          }
+        })
+
+        const disabledButton = wrapper.findAll('.vk-calendar__grid-button')
+          .find(btn => btn.text() === '15')
+
+        await disabledButton?.trigger('focus')
+
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')
+            .find(btn => btn.attributes('tabindex') === '0')
+            ?.text()
+        ).not.toBe('15')
+      })
     })
   })
 })

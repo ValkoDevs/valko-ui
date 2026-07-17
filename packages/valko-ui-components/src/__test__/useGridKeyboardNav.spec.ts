@@ -75,11 +75,10 @@ describe('useGridKeyboardNav', () => {
       })
 
       handler(createKeyboardEvent('ArrowDown'))
-      expect(onMove).not.toHaveBeenCalled()
-
       enabled.value = true
       handler(createKeyboardEvent('ArrowDown'))
-      expect(onMove).toHaveBeenCalled()
+
+      expect(onMove).toHaveBeenCalledTimes(1)
     })
   })
 

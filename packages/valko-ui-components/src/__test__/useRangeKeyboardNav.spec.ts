@@ -80,11 +80,10 @@ describe('useRangeKeyboardNav', () => {
       })
 
       handler(createKeyboardEvent('ArrowRight'))
-      expect(onUpdate).not.toHaveBeenCalled()
-
       enabled.value = true
       handler(createKeyboardEvent('ArrowRight'))
-      expect(onUpdate).toHaveBeenCalled()
+
+      expect(onUpdate).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -227,11 +226,10 @@ describe('useRangeKeyboardNav', () => {
       })
 
       handler(createKeyboardEvent('ArrowRight'))
-      expect(onUpdate).toHaveBeenCalledWith(60)
-
-      currentValue.value = 90
+      currentValue.value = 80
       handler(createKeyboardEvent('ArrowRight'))
-      expect(onUpdate).toHaveBeenCalledWith(100)
+
+      expect(onUpdate.mock.calls).toEqual([[60], [90]])
     })
   })
 

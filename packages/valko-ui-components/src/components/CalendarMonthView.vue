@@ -19,10 +19,9 @@ const isSelected = (index: number) => props.selected.year === props.display.year
 const onSelectMonth = (month: number) => emit('selectMonth', month)
 const onArrowClick = (operation: 1 | -1) => emit('changeYear', props.display.year + operation)
 
-const isMonthDisabled = (monthIndex: number) => {
-  return !!((props.min && props.display.year === props.min.year && monthIndex < props.min.month)
-    || (props.max && props.display.year === props.max.year && monthIndex > props.max.month))
-}
+const isMonthDisabled = (monthIndex: number) =>
+  (props.min && props.display.year === props.min.year && monthIndex < props.min.month)
+  || (props.max && props.display.year === props.max.year && monthIndex > props.max.month)
 
 const navigableMonths = computed(() => {
   return props.monthNames.reduce<Array<{ monthIndex: number }>>((acc, _, monthIndex) => {
@@ -53,12 +52,6 @@ const syncFocusedMonth = () => {
   focusedIndex.value = selectedIndex >= 0 ? selectedIndex : (navigableMonths.value.length ? 0 : -1)
 }
 
-watch(
-  () => [props.display.year, props.selected.month, props.min, props.max],
-  syncFocusedMonth,
-  { immediate: true }
-)
-
 const handleGridKeyDown = useGridKeyboardNav({
   currentIndex: focusedIndex,
   itemCount: () => navigableMonths.value.length,
@@ -71,9 +64,10 @@ const handleGridKeyDown = useGridKeyboardNav({
 })
 
 const onMonthFocus = (monthIndex: number) => {
-  const keyboardIndex = keyboardIndexByMonth.value[monthIndex]
-  if (keyboardIndex !== undefined) focusedIndex.value = keyboardIndex
+  focusedIndex.value = keyboardIndexByMonth.value[monthIndex]!
 }
+
+watch([navigableMonths, () => props.selected.month], syncFocusedMonth, { immediate: true })
 </script>
 
 <template>

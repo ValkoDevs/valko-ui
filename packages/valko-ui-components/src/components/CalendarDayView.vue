@@ -15,30 +15,37 @@ const emit = defineEmits(['selectDay', 'viewChange', 'changeMonth'])
 const s = computed(() => styles(props))
 const panelRef = ref<HTMLElement | null>(null)
 
-const gridCells = computed(() => {
-  const daysInMonth = [...new Array(props.daysInMonth).keys()].map((day) => day + 1)
-  const result = new Array(42).fill(null).map((_, index) => index < props.startsOn ? null : daysInMonth[index - props.startsOn] || null)
-
-  return result
-})
+const gridCells = computed(() =>
+  Array.from({ length: 42 }, (_, index) => {
+    const day = index - props.startsOn + 1
+    return day > 0 && day <= props.daysInMonth ? day : null
+  })
+)
 
 const isSelected = (day: number) =>
   props.selected.year === props.display.year
   && props.selected.month === props.display.month
   && props.selected.day === day
 
-const isArrowDisabled = computed(() => (direction: 'min' | 'max') =>
-  props[direction]
-  && props[direction].year === props.display.year
-  && props[direction].month === props.display.month
-)
+const isArrowDisabled = (direction: 'min' | 'max') => {
+  const limit = props[direction]
 
-const isWeekend = (index: number) => [0, 6].includes(index - Math.floor(index / 7) * 7)
+  return !!(
+    limit &&
+    limit.year === props.display.year &&
+    limit.month === props.display.month
+  )
+}
+
+const isWeekend = (index: number) => {
+  const weekday = index % 7
+  return weekday === 0 || weekday === 6
+}
 const onSelectDate = (day: number) => emit('selectDay', day)
 const onArrowClick = (operation: 1 | -1) => emit('changeMonth', props.display.month + operation)
 
 const isCellDisabled = (day: number, index: number) => {
-  return !!props.disabledDays?.includes(day) || !!(props.disableWeekends && isWeekend(index))
+  return props.disabledDays?.includes(day) || !!(props.disableWeekends && isWeekend(index))
 }
 
 const navigableCells = computed(() => {
@@ -73,8 +80,7 @@ const syncFocusedCell = () => {
   focusedIndex.value = selectedIndex >= 0 ? selectedIndex : (navigableCells.value.length ? 0 : -1)
 }
 
-watch(
-  () => [props.display.year, props.display.month, props.selected.day, props.disabledDays, props.disableWeekends],
+watch([navigableCells, () => props.selected.day],
   syncFocusedCell,
   { immediate: true }
 )
@@ -91,8 +97,7 @@ const handleGridKeyDown = useGridKeyboardNav({
 })
 
 const onCellFocus = (gridIndex: number) => {
-  const keyboardIndex = keyboardIndexByGridIndex.value[gridIndex]
-  if (keyboardIndex !== undefined) focusedIndex.value = keyboardIndex
+  focusedIndex.value = keyboardIndexByGridIndex.value[gridIndex]!
 }
 </script>
 

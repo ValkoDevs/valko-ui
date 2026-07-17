@@ -1,5 +1,5 @@
 import VkCalendarMonthView from '#valkoui/components/CalendarMonthView.vue'
-import { ref, computed, toValue, nextTick } from 'vue'
+import { ref, computed, toValue } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import type { AdapterResult } from '#valkoui/types/Calendar'
 import useGridKeyboardNav from '#valkoui/composables/useGridKeyboardNav.ts'
@@ -68,164 +68,326 @@ const baseProps = {
 }
 
 describe('CalendarMonthView Component', () => {
-  let wrapper: VueWrapper
-
-  beforeEach(() => {
-    wrapper = mount(VkCalendarMonthView, {
-      props: {
-        ...baseProps
-      }
-    })
-  })
-
   describe('Rendering', () => {
+    let wrapper: VueWrapper
+
+    beforeEach(() => {
+      wrapper = mount(VkCalendarMonthView, {
+        props: {
+          ...baseProps
+        }
+      })
+    })
+
     it('should render the component', () => {
       expect(wrapper.exists()).toBe(true)
     })
 
-    it('should render month buttons', () => {
-      const monthButtons = wrapper.findAll('.vk-calendar__grid-button')
-      expect(monthButtons.length).toBe(12)
+    it('should render all month buttons', () => {
+      expect(wrapper.findAll('.vk-calendar__grid-button')).toHaveLength(12)
     })
+  })
 
-    describe('disabled months', () => {
-      it('should disable months before min month', async () => {
-        await wrapper.setProps({
-          min: {
-            day: 1,
-            month: 4,
-            year: 2024,
-            lastDayOfMonth: 30,
-            firstWeekDay: 1,
-            obj: new Date(2024, 4, 1)
+  describe('Methods & Computed', () => {
+    describe('isSelected', () => {
+      let wrapper: VueWrapper
+
+      beforeEach(() => {
+        wrapper = mount(VkCalendarMonthView, {
+          props: {
+            ...baseProps
           }
-        })
-
-        const monthButtons = wrapper.findAll('.vk-calendar__grid-button')
-        monthButtons.slice(0, 4).forEach((button) => {
-          expect(button.attributes('aria-disabled') === 'true').toBe(true)
         })
       })
 
-      it('should disable months after max month', async () => {
-        await wrapper.setProps({
-          max: {
-            day: 1,
-            month: 7,
-            year: 2024,
-            lastDayOfMonth: 31,
-            firstWeekDay: 1,
-            obj: new Date(2024, 7, 1)
+      it('should render the selected month with the selected variant', () => {
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')[9]?.classes()
+        ).toContain('bg-primary')
+      })
+
+      it('should render unselected months with the default variant', () => {
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')[0]?.classes()
+        ).toContain('text-on-surface')
+      })
+    })
+
+    describe('isMonthDisabled', () => {
+      it('should disable months before the minimum month', () => {
+        const wrapper = mount(VkCalendarMonthView, {
+          props: {
+            ...baseProps,
+            min: {
+              day: 1,
+              month: 4,
+              year: 2024,
+              lastDayOfMonth: 30,
+              firstWeekDay: 1,
+              obj: new Date(2024, 4, 1)
+            }
           }
         })
 
-        const monthButtons = wrapper.findAll('.vk-calendar__grid-button')
-        monthButtons.slice(8).forEach((button) => {
-          expect(button.attributes('aria-disabled') === 'true').toBe(true)
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')
+            .slice(0, 4)
+            .every(btn => btn.attributes('aria-disabled') === 'true')
+        ).toBe(true)
+      })
+
+      it('should disable months after the maximum month', () => {
+        const wrapper = mount(VkCalendarMonthView, {
+          props: {
+            ...baseProps,
+            max: {
+              day: 1,
+              month: 7,
+              year: 2024,
+              lastDayOfMonth: 31,
+              firstWeekDay: 1,
+              obj: new Date(2024, 7, 1)
+            }
+          }
         })
+
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')
+            .slice(8)
+            .every(btn => btn.attributes('aria-disabled') === 'true')
+        ).toBe(true)
+      })
+    })
+
+    describe('onArrowClick', () => {
+      let wrapper: VueWrapper
+
+      beforeEach(() => {
+        wrapper = mount(VkCalendarMonthView, {
+          props: {
+            ...baseProps
+          }
+        })
+      })
+
+      it('should emit the previous year', async () => {
+        await wrapper.findAll('.vk-calendar__arrows')[0]?.trigger('click')
+
+        expect(wrapper.emitted('changeYear')?.[0]).toEqual([2023])
+      })
+
+      it('should emit the next year', async () => {
+        await wrapper.findAll('.vk-calendar__arrows')[1]?.trigger('click')
+
+        expect(wrapper.emitted('changeYear')?.[0]).toEqual([2025])
       })
     })
   })
 
   describe('Emits', () => {
-    it('should emit selectMonth with correct value when a month is clicked', async () => {
-      await wrapper.findAll('.vk-calendar__grid-button').at(4)?.trigger('click')
+    let wrapper: VueWrapper
 
-      expect(wrapper.emitted('selectMonth')?.at(0)).toEqual([4])
+    beforeEach(() => {
+      wrapper = mount(VkCalendarMonthView, {
+        props: {
+          ...baseProps
+        }
+      })
     })
 
-    it('should emit viewChange when period button is clicked', async () => {
+    it('should emit selectMonth when a month is clicked', async () => {
+      await wrapper.findAll('.vk-calendar__grid-button')[4]?.trigger('click')
+
+      expect(wrapper.emitted('selectMonth')?.[0]).toEqual([4])
+    })
+
+    it('should emit viewChange when the period button is clicked', async () => {
       await wrapper.find('.vk-calendar__period-button').trigger('click')
 
-      expect(wrapper.emitted('viewChange')?.at(0)).toEqual(['years'])
-    })
-
-    it('should emit changeYear when previous arrow is clicked', async () => {
-      await wrapper.findAll('.vk-calendar__arrows').at(0)?.trigger('click')
-
-      expect(wrapper.emitted('changeYear')?.at(0)).toEqual([2023])
-    })
-
-    it('should emit changeYear when next arrow is clicked', async () => {
-      await wrapper.findAll('.vk-calendar__arrows').at(1)?.trigger('click')
-
-      expect(wrapper.emitted('changeYear')?.at(0)).toEqual([2025])
+      expect(wrapper.emitted('viewChange')?.[0]).toEqual(['years'])
     })
   })
 
   describe('Keyboard Navigation', () => {
-    let wrapper: VueWrapper
+    describe('useGridKeyboardNav', () => {
+      beforeEach(() => {
+        useGridKeyboardNavMock.mockClear()
 
-    beforeEach(() => {
-      useGridKeyboardNavMock.mockClear()
-
-      wrapper = mount(VkCalendarMonthView, {
-        props: { ...baseProps }
-      })
-    })
-
-    it('should call useGridKeyboardNav with columnCount', () => {
-      expect(useGridKeyboardNavMock).toHaveBeenCalledWith(
-        expect.objectContaining({
-          columnCount: expect.any(Function)
+        mount(VkCalendarMonthView, {
+          props: {
+            ...baseProps
+          }
         })
-      )
-    })
-
-    it('should pass onMove and onSelect callbacks', () => {
-      const config = useGridKeyboardNavMock.mock.calls[0][0]
-
-      expect(config).toHaveProperty('onMove')
-      expect(config).toHaveProperty('onSelect')
-    })
-
-    it('should update focusedIndex when onMove is called', async () => {
-      const config = useGridKeyboardNavMock.mock.calls[0][0] as { onMove: (index: number) => void }
-      config.onMove(3)
-      await nextTick()
-
-      const buttons = wrapper.findAll('.vk-calendar__grid-button')
-      const focusedButton = buttons.find(btn => btn.attributes('tabindex') === '0')
-
-      expect(focusedButton).toBeDefined()
-    })
-
-    it('should emit selectMonth when onSelect is called with a valid index', () => {
-      const config = useGridKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
-      config.onSelect(0)
-
-      expect(wrapper.emitted('selectMonth')).toBeTruthy()
-    })
-
-    it('should not emit selectMonth when onSelect is called with an invalid index', () => {
-      const config = useGridKeyboardNavMock.mock.calls[0][0] as { onSelect: (index: number) => void }
-      config.onSelect(999)
-
-      expect(wrapper.emitted('selectMonth')).toBeFalsy()
-    })
-
-    it('should attach the handler to month buttons via keydown', async () => {
-      const mockHandler = vi.fn()
-      useGridKeyboardNavMock.mockReturnValue(mockHandler)
-
-      wrapper = mount(VkCalendarMonthView, {
-        props: { ...baseProps }
       })
 
-      const monthButton = wrapper.find('.vk-calendar__grid-button')
-      await monthButton.trigger('keydown', { key: 'ArrowDown' })
+      it('should configure the keyboard navigation callbacks', () => {
+        expect(useGridKeyboardNavMock).toHaveBeenCalledWith(
+          expect.objectContaining({
+            onMove: expect.any(Function),
+            onSelect: expect.any(Function)
+          })
+        )
+      })
 
-      expect(mockHandler).toHaveBeenCalled()
+      it('should provide the correct itemCount', () => {
+        const config = useGridKeyboardNavMock.mock.calls[0][0]
+
+        expect(toValue(config.itemCount)).toBe(baseProps.monthNames.length)
+      })
+
+      it('should provide the correct columnCount', () => {
+        const config = useGridKeyboardNavMock.mock.calls[0][0]
+
+        expect(toValue(config.columnCount)).toBe(3)
+      })
     })
 
-    it('should update focusedIndex when a month button receives focus', async () => {
-      const buttons = wrapper.findAll('.vk-calendar__grid-button')
+    describe('focusMonthByKeyboardIndex', () => {
+      let wrapper: VueWrapper
 
-      await buttons[5]?.trigger('focus')
-      await nextTick()
+      beforeEach(() => {
+        useGridKeyboardNavMock.mockClear()
 
-      const focusedButton = wrapper.findAll('.vk-calendar__grid-button').find(btn => btn.attributes('tabindex') === '0')
-      expect(focusedButton).toBeDefined()
+        wrapper = mount(VkCalendarMonthView, {
+          props: {
+            ...baseProps
+          }
+        })
+      })
+
+      it('should update the focused month when onMove is called', () => {
+        const config = useGridKeyboardNavMock.mock.calls[0][0] as {
+          onMove: (index: number) => void
+        }
+
+        config.onMove(3)
+
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')
+            .find(btn => btn.attributes('tabindex') === '0')
+        ).toBeDefined()
+      })
+    })
+
+    describe('handleGridKeyDown', () => {
+      let wrapper: VueWrapper
+
+      beforeEach(() => {
+        useGridKeyboardNavMock.mockClear()
+
+        wrapper = mount(VkCalendarMonthView, {
+          props: {
+            ...baseProps
+          }
+        })
+      })
+
+      it('should emit selectMonth when onSelect is called with a valid index', () => {
+        const config = useGridKeyboardNavMock.mock.calls[0][0] as {
+          onSelect: (index: number) => void
+        }
+
+        config.onSelect(0)
+
+        expect(wrapper.emitted()).toHaveProperty('selectMonth')
+      })
+
+      it('should not emit selectMonth when onSelect is called with an invalid index', () => {
+        const config = useGridKeyboardNavMock.mock.calls[0][0] as {
+          onSelect: (index: number) => void
+        }
+
+        config.onSelect(999)
+
+        expect(wrapper.emitted('selectMonth')).toBeFalsy()
+      })
+
+      it('should attach the keyboard handler to month buttons', async () => {
+        const mockHandler = vi.fn()
+
+        useGridKeyboardNavMock.mockReturnValue(mockHandler)
+
+        wrapper = mount(VkCalendarMonthView, {
+          props: {
+            ...baseProps
+          }
+        })
+
+        await wrapper.find('.vk-calendar__grid-button').trigger('keydown', {
+          key: 'ArrowDown'
+        })
+
+        expect(mockHandler).toHaveBeenCalled()
+      })
+    })
+
+    describe('syncFocusedMonth', () => {
+      it('should focus the first navigable month when the selected month is disabled', () => {
+        const wrapper = mount(VkCalendarMonthView, {
+          props: {
+            ...baseProps,
+            selected: {
+              ...baseProps.selected,
+              month: 9
+            },
+            min: {
+              ...baseProps.selected,
+              day: 1,
+              month: 10
+            }
+          }
+        })
+
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')
+            .find(btn => btn.attributes('tabindex') === '0')
+            ?.text()
+        ).toBe('Nov')
+      })
+
+      it('should not focus any month when there are no navigable months', () => {
+        const wrapper = mount(VkCalendarMonthView, {
+          props: {
+            ...baseProps,
+            min: {
+              ...baseProps.selected,
+              day: 1,
+              month: 11
+            },
+            max: {
+              ...baseProps.selected,
+              day: 1,
+              month: 0
+            }
+          }
+        })
+
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')
+            .find(btn => btn.attributes('tabindex') === '0')
+        ).toBeUndefined()
+      })
+    })
+
+    describe('onMonthFocus', () => {
+      let wrapper: VueWrapper
+
+      beforeEach(() => {
+        wrapper = mount(VkCalendarMonthView, {
+          props: {
+            ...baseProps
+          }
+        })
+      })
+
+      it('should update the focused month when a navigable month receives focus', async () => {
+        await wrapper.findAll('.vk-calendar__grid-button')[5]?.trigger('focus')
+
+        expect(
+          wrapper.findAll('.vk-calendar__grid-button')
+            .find(btn => btn.attributes('tabindex') === '0')
+        ).toBeDefined()
+      })
     })
   })
 })

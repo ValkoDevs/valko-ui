@@ -24,21 +24,22 @@ const yearList = computed(() => {
 
 const onSelectYear = (year: number) => emit('selectYear', year)
 
-const isYearDisabled = (year: number) => !!(props.minYear && year < props.minYear) || !!(props.maxYear && year > props.maxYear)
+const isYearDisabled = (year: number) =>
+  (props.minYear !== undefined && year < props.minYear)
+  || (props.maxYear !== undefined && year > props.maxYear)
 
-const navigableYears = computed(() => {
-  return yearList.value.reduce<Array<{ year: number, yearIndex: number }>>((acc, year, yearIndex) => {
-    if (!isYearDisabled(year)) acc.push({ year, yearIndex })
-    return acc
-  }, [])
-})
+const navigableYears = computed(() =>
+  yearList.value
+    .map((year, yearIndex) => ({ year, yearIndex }))
+    .filter(({ year }) => !isYearDisabled(year))
+)
 
-const keyboardIndexByYear = computed<Record<number, number>>(() => {
-  return navigableYears.value.reduce<Record<number, number>>((acc, item, index) => {
-    acc[item.year] = index
+const keyboardIndexByYear = computed<Record<number, number>>(() =>
+  navigableYears.value.reduce<Record<number, number>>((acc, { year }, index) => {
+    acc[year] = index
     return acc
   }, {})
-})
+)
 
 const focusedIndex = ref(-1)
 
@@ -55,12 +56,6 @@ const syncFocusedYear = () => {
   focusedIndex.value = selectedIndex >= 0 ? selectedIndex : (navigableYears.value.length ? 0 : -1)
 }
 
-watch(
-  () => [jumps.value, props.selected.year, props.minYear, props.maxYear],
-  syncFocusedYear,
-  { immediate: true }
-)
-
 const handleGridKeyDown = useGridKeyboardNav({
   currentIndex: focusedIndex,
   itemCount: () => navigableYears.value.length,
@@ -73,9 +68,10 @@ const handleGridKeyDown = useGridKeyboardNav({
 })
 
 const onYearFocus = (year: number) => {
-  const keyboardIndex = keyboardIndexByYear.value[year]
-  if (keyboardIndex !== undefined) focusedIndex.value = keyboardIndex
+  focusedIndex.value = keyboardIndexByYear.value[year] ?? focusedIndex.value
 }
+
+watch([navigableYears, () => props.selected.year], syncFocusedYear, { immediate: true })
 
 onMounted(() => {
   jumps.value = Math.floor((props.startsOn - 1970) / 20)
@@ -87,8 +83,8 @@ onMounted(() => {
     <vk-calendar-header
       v-bind="props"
       :loaded-period="`${yearList[0]} - ${yearList[19]}`"
-      :disabled-left="!!(minYear && yearList.includes(minYear))"
-      :disabled-right="!!(maxYear && yearList.includes(maxYear))"
+      :disabled-left="minYear !== undefined && yearList.includes(minYear)"
+      :disabled-right="maxYear !== undefined && yearList.includes(maxYear)"
       @next-click="jumps++"
       @previous-click="jumps--"
     />

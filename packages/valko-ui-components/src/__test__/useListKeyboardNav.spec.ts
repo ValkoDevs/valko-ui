@@ -70,11 +70,10 @@ describe('useListKeyboardNav', () => {
       })
 
       handler(createKeyboardEvent('ArrowDown'))
-      expect(onMove).not.toHaveBeenCalled()
-
       enabled.value = true
       handler(createKeyboardEvent('ArrowDown'))
-      expect(onMove).toHaveBeenCalled()
+
+      expect(onMove).toHaveBeenCalledTimes(1)
     })
 
     it('should respect enabled as getter function', () => {
@@ -88,11 +87,10 @@ describe('useListKeyboardNav', () => {
       })
 
       handler(createKeyboardEvent('ArrowDown'))
-      expect(onMove).not.toHaveBeenCalled()
-
       isEnabled = true
       handler(createKeyboardEvent('ArrowDown'))
-      expect(onMove).toHaveBeenCalled()
+
+      expect(onMove).toHaveBeenCalledTimes(1)
     })
   })
 
@@ -185,11 +183,10 @@ describe('useListKeyboardNav', () => {
       })
 
       handler(createKeyboardEvent('ArrowDown'))
-      expect(onMove).toHaveBeenCalledWith(3)
-
       currentIndex.value = 4
       handler(createKeyboardEvent('ArrowDown'))
-      expect(onMove).toHaveBeenCalledWith(0)
+
+      expect(onMove.mock.calls).toEqual([[3], [0]])
     })
 
     it('should read reactive itemCount', () => {
@@ -202,11 +199,10 @@ describe('useListKeyboardNav', () => {
       })
 
       handler(createKeyboardEvent('End'))
-      expect(onMove).toHaveBeenCalledWith(2)
-
       itemCount.value = 10
       handler(createKeyboardEvent('End'))
-      expect(onMove).toHaveBeenCalledWith(9)
+
+      expect(onMove.mock.calls).toEqual([[2], [9]])
     })
   })
 
