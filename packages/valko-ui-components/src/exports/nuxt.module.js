@@ -46,6 +46,5 @@ export default defineNuxtModule({
     })
 
     addImportsDir(resolve(runtimeDir, 'composables'))
-    addImportsDir(resolve(runtimeDir, 'keyboard-navigation'))
   }
 })
