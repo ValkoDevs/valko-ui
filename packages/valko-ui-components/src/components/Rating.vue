@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-
+import { reactive, computed, onBeforeUnmount } from 'vue'
 import type { RatingProps } from '#valkoui/types/Rating.ts'
 import styles from '#valkoui/styles/Rating.styles.ts'
 
@@ -22,8 +21,13 @@ const emit = defineEmits(['update:modelValue'])
 
 const s = computed(() => styles(props))
 
-const hoverValue = ref<number | null>(null)
-const isHovering = computed(() => hoverValue.value !== null)
+const state = reactive<{ hover: number | null; animated: number }>({
+  hover: null,
+  animated: 0
+})
+let animationTimeout: ReturnType<typeof setTimeout> | undefined
+
+const isHovering = computed(() => state.hover !== null)
 
 const getValueFromEvent = (event: MouseEvent, index: number) => {
   if (!props.half) return index
@@ -34,24 +38,34 @@ const getValueFromEvent = (event: MouseEvent, index: number) => {
   return event.clientX - rect.left <= rect.width / 2 ? index - 0.5 : index
 }
 
+const playAnimation = (value: number) => {
+  state.animated = value
+
+  clearTimeout(animationTimeout)
+
+  animationTimeout = setTimeout(() => state.animated = 0, 300)
+}
+
 const setValue = (event: MouseEvent, index: number) => {
   if (props.disabled || props.readonly) return
 
   const value = getValueFromEvent(event, index)
 
+  playAnimation(value)
+
   emit('update:modelValue', props.modelValue === value ? 0 : value)
 }
 
-const displayValue = computed(() => hoverValue.value ?? props.modelValue)
+const displayValue = computed(() => state.hover ?? props.modelValue)
 
 const onHover = (event: MouseEvent, index: number) => {
   if (props.disabled || props.readonly) return
   if (!props.half) {
-    hoverValue.value = index
+    state.hover = index
     return
   }
 
-  hoverValue.value = getValueFromEvent(event, index)
+  state.hover = getValueFromEvent(event, index)
 }
 
 const stars = computed(() => {
@@ -60,9 +74,13 @@ const stars = computed(() => {
   return Array.from({ length: props.max }, (_, i) => ({
     index: i + 1,
     fill: Math.max(0, Math.min(100, (value - i) * 100)),
-    hovering: isHovering.value
+    hovering: isHovering.value,
+    active: value >= i + 1,
+    delay: isHovering.value ? 0 : i * 40
   }))
 })
+
+onBeforeUnmount(() => clearTimeout(animationTimeout))
 </script>
 
 <template>
@@ -81,7 +99,7 @@ const stars = computed(() => {
       :items="stars"
       :set-value="setValue"
       :hover="onHover"
-      :clear-hover="() => (hoverValue = null)"
+      :clear-hover="() => (state.hover = 0)"
       :is-disabled="disabled"
       :is-readonly="readonly"
     >
@@ -90,11 +108,11 @@ const stars = computed(() => {
         :key="star.index"
         :class="s.iconContainer({ class: styleSlots?.iconContainer })"
         role="radio"
-        :aria-checked="star.fill > 0"
+        :aria-checked="star.active"
         :aria-label="`${star.index} of ${max}`"
         :data-hovering="star.hovering"
         @mousemove="(e) => onHover(e, star.index)"
-        @mouseleave="hoverValue = null"
+        @mouseleave="state.hover = 0"
         @click="(e) => setValue(e, star.index)"
       >
         <vk-icon
@@ -104,8 +122,8 @@ const stars = computed(() => {
 
         <vk-icon
           :name="iconName"
-          :class="s.iconOverlay({ class: styleSlots?.iconOverlay })"
-          :style="{ width: `${star.fill}%` }"
+          :class="s.iconOverlay({ class: styleSlots?.iconOverlay, animate: star.index <= state.animated })"
+          :style="{ width: `${star.fill}%`, transitionDelay: `${star.delay}ms` }"
         />
       </div>
     </slot>

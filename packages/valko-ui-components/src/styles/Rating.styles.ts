@@ -15,7 +15,11 @@ const rating = tv({
     ],
     iconBase: [
       'vk-rating_icon',
-      'text-on-surface'
+      'text-on-surface',
+      'group-hover:scale-130',
+      'transition-transform',
+      'duration-200',
+      'ease-in-out'
     ],
     iconOverlay: [
       'absolute',
@@ -23,7 +27,13 @@ const rating = tv({
       'top-0',
       'overflow-hidden',
       'pointer-events-none',
-      'whitespace-nowrap'
+      'whitespace-nowrap',
+      'group-hover:scale-130',
+      'opacity-100',
+      'transition-[width,transform,color,opacity]',
+      'group-data-[hovering=true]:opacity-75',
+      'duration-200',
+      'ease-in-out'
     ]
   },
   variants: {
@@ -31,20 +41,32 @@ const rating = tv({
       xs: {
         iconBase: [
           'text-xs'
+        ],
+        iconOverlay: [
+          'text-xs'
         ]
       },
       sm: {
         iconBase: [
+          'text-sm'
+        ],
+        iconOverlay: [
           'text-sm'
         ]
       },
       md: {
         iconBase: [
           'text-base'
+        ],
+        iconOverlay: [
+          'text-base'
         ]
       },
       lg: {
         iconBase: [
+          'text-lg'
+        ],
+        iconOverlay: [
           'text-lg'
         ]
       }
@@ -113,6 +135,13 @@ const rating = tv({
         ]
       },
       false: {}
+    },
+    animate: {
+      true: {
+        iconOverlay: [
+          'animate-pop'
+        ]
+      }
     }
   }
 })

@@ -385,6 +385,27 @@ const exampleSnippets = {
       </example-section>
 
       <example-section
+        title="Sizes"
+        :style-slots="styles.default"
+      >
+        <div
+          v-for="size in sizeOptions.general"
+          :key="size.value"
+          class="flex flex-col gap-2"
+        >
+          <span>{{ size.label }}</span>
+          <vk-rating
+            v-model="exampleValues[`${size.value}`]"
+            :size="size.value"
+          />
+        </div>
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('size', { values: sizeOptions.general.map(o => o.value) })" />
+        </template>
+      </example-section>
+
+      <example-section
         title="Half"
         :style-slots="styles.default"
       >
