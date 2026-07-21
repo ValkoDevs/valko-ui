@@ -810,7 +810,7 @@ const styles = {
         />
 
         <div class="flex flex-col">
-          <strong class="break-words">The following dates are disabled in this example:</strong>
+          <strong class="wrap-break-word">The following dates are disabled in this example:</strong>
           <ul class="list-disc list-inside mb-4">
             <li>2024-01-15</li>
             <li>2024-03-20</li>
