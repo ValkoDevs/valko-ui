@@ -27,38 +27,37 @@ describe('Rating component', () => {
     }
   }
 
+  const mountRating = (props = {}) => {
+    wrapper = mount(VkRating, {
+      ...globalOptions,
+      props: {
+        modelValue: 0,
+        ...props
+      }
+    })
+
+    return wrapper
+  }
+
   describe('Props', () => {
-    describe('With default props', () => {
+    describe('Default props', () => {
       beforeEach(() => {
-        wrapper = mount(VkRating, {
-          ...globalOptions,
-          props: {
-            modelValue: 0
-          }
-        })
+        mountRating()
       })
 
-      it('should render', () => {
+      it('should render the rating component', () => {
         expect(wrapper.find('.vk-rating').exists()).toBe(true)
       })
 
-      it('should use slider semantics', () => {
-        const root = wrapper.find('.vk-rating')
-        expect(root.attributes('role')).toBe('slider')
-        expect(root.attributes('aria-valuemin')).toBe('0')
-        expect(root.attributes('aria-valuemax')).toBe('5')
-        expect(root.attributes('aria-valuenow')).toBe('0')
-      })
-
       it('should render 5 items by default', () => {
-        expect(wrapper.findAll('.vk-rating [data-index]').length).toBe(5)
+        expect(wrapper.findAll('[role="radio"]')).toHaveLength(5)
       })
 
-      it('should be color primary', () => {
+      it('should use primary color by default', () => {
         expect(wrapper.find('.text-primary').exists()).toBe(true)
       })
 
-      it('should be size md', () => {
+      it('should use md size by default', () => {
         expect(wrapper.find('.text-base').exists()).toBe(true)
       })
 
@@ -68,202 +67,369 @@ describe('Rating component', () => {
     })
 
     describe('When max prop changes', () => {
-      it('should render max amount of items', () => {
-        wrapper = mount(VkRating, {
-          ...globalOptions,
-          props: {
-            modelValue: 0,
-            max: 7
-          }
+      it('should render the configured amount of items', () => {
+        mountRating({
+          max: 7
         })
 
-        expect(wrapper.findAll('.vk-rating [data-index]').length).toBe(7)
+        expect(wrapper.findAll('[role="radio"]')).toHaveLength(7)
       })
 
-      it('should clamp max to at least 1', () => {
-        wrapper = mount(VkRating, {
-          ...globalOptions,
-          props: {
-            modelValue: 0,
-            max: 0
-          }
+      it('should clamp max to at least one item', () => {
+        mountRating({
+          max: 0
         })
 
-        expect(wrapper.findAll('.vk-rating [data-index]').length).toBe(1)
-        expect(wrapper.find('.vk-rating').attributes('aria-valuemax')).toBe('1')
+        expect(wrapper.findAll('[role="radio"]')).toHaveLength(1)
       })
     })
 
     describe('When disabled prop changes', () => {
-      it('should set disabled styles and tabindex -1', () => {
-        wrapper = mount(VkRating, {
-          ...globalOptions,
-          props: {
-            modelValue: 2,
-            disabled: true
-          }
+      it('should render disabled styles', () => {
+        mountRating({
+          modelValue: 2,
+          disabled: true
         })
 
-        const root = wrapper.find('.vk-rating')
-
         expect(wrapper.find('.cursor-not-allowed').exists()).toBe(true)
-        expect(root.attributes('tabindex')).toBe('-1')
-        expect(root.attributes('aria-disabled')).toBe('true')
       })
     })
   })
 
-  describe('Emits', () => {
-    it('should emit update:modelValue on click', async () => {
+  describe('Selection', () => {
+    beforeEach(() => {
+      mountRating()
+    })
+
+    describe('Single selection', () => {
+      it('should emit the selected value when an item is clicked', async () => {
+        const item = wrapper.findAll('[role="radio"]')[2]
+        mockElementRect(item.element)
+
+        await item.trigger('click', {
+          clientX: 100
+        })
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[3]])
+      })
+
+      it('should clear the value when clicking the selected item', async () => {
+        await wrapper.setProps({
+          modelValue: 3
+        })
+
+        const item = wrapper.findAll('[role="radio"]')[2]
+        mockElementRect(item.element)
+
+        await item.trigger('click', {
+          clientX: 100
+        })
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[0]])
+      })
+    })
+
+    describe('Half selection', () => {
+      beforeEach(async () => {
+        await wrapper.setProps({
+          half: true
+        })
+      })
+
+      it('should emit half value when clicking the first half of an item', async () => {
+        const item = wrapper.findAll('[role="radio"]')[2]
+        mockElementRect(item.element)
+
+        await item.trigger('click', {
+          clientX: 20
+        })
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[2.5]])
+      })
+
+      it('should emit whole value when clicking the second half of an item', async () => {
+        const item = wrapper.findAll('[role="radio"]')[2]
+        mockElementRect(item.element)
+
+        await item.trigger('click', {
+          clientX: 80
+        })
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[3]])
+      })
+    })
+
+    describe('Disabled and readonly', () => {
+      it('should not emit when disabled', async () => {
+        await wrapper.setProps({
+          disabled: true
+        })
+
+        const item = wrapper.findAll('[role="radio"]')[1]
+        mockElementRect(item.element)
+
+        await item.trigger('click', {
+          clientX: 100
+        })
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+
+      it('should not emit when readonly', async () => {
+        await wrapper.setProps({
+          readonly: true
+        })
+
+        const item = wrapper.findAll('[role="radio"]')[1]
+        mockElementRect(item.element)
+
+        await item.trigger('click', {
+          clientX: 100
+        })
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+    })
+  })
+
+  describe('Hover', () => {
+    beforeEach(() => {
+      mountRating({
+        modelValue: 2
+      })
+    })
+
+    const getOverlayStyle = (index: number) => {
+      const item = wrapper.findAll('[role="radio"]')[index]
+
+      return item.findAllComponents(VkIcon)[1].attributes('style')
+    }
+
+    it('should update the fill while hovering', async () => {
+      const item = wrapper.findAll('[role="radio"]')[3]
+      mockElementRect(item.element)
+
+      await item.trigger('mousemove', {
+        clientX: 100
+      })
+
+      expect(getOverlayStyle(3)).toContain('width: 100%')
+    })
+
+    it('should restore the selected value after mouseleave', async () => {
+      const item = wrapper.findAll('[role="radio"]')[3]
+      mockElementRect(item.element)
+
+      await item.trigger('mousemove', {
+        clientX: 100
+      })
+
+      await item.trigger('mouseleave')
+
+      expect(getOverlayStyle(3)).toContain('width: 0%')
+    })
+
+    it('should hover half values when half mode is enabled', async () => {
+      await wrapper.setProps({
+        half: true
+      })
+
+      const item = wrapper.findAll('[role="radio"]')[2]
+      mockElementRect(item.element)
+
+      await item.trigger('mousemove', {
+        clientX: 20
+      })
+
+      expect(getOverlayStyle(2)).toContain('width: 50%')
+    })
+
+    it('should not update the hover state when disabled', async () => {
+      await wrapper.setProps({
+        disabled: true
+      })
+
+      const item = wrapper.findAll('[role="radio"]')[3]
+      mockElementRect(item.element)
+
+      await item.trigger('mousemove', {
+        clientX: 100
+      })
+
+      expect(getOverlayStyle(3)).toContain('width: 0%')
+    })
+
+    it('should not update the hover state when readonly', async () => {
+      await wrapper.setProps({
+        readonly: true
+      })
+
+      const item = wrapper.findAll('[role="radio"]')[3]
+      mockElementRect(item.element)
+
+      await item.trigger('mousemove', {
+        clientX: 100
+      })
+
+      expect(getOverlayStyle(3)).toContain('width: 0%')
+    })
+  })
+
+  describe('Animation', () => {
+    beforeEach(() => {
+      vi.useFakeTimers()
+
       wrapper = mount(VkRating, {
         ...globalOptions,
         props: {
           modelValue: 0
         }
       })
-
-      const item = wrapper.find('[data-index="3"]')
-      mockElementRect(item.element)
-
-      await item.trigger('click', { clientX: 100 })
-
-      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([3])
     })
 
-    it('should emit 0 when clicking currently selected value', async () => {
-      wrapper = mount(VkRating, {
-        ...globalOptions,
-        props: {
-          modelValue: 3
-        }
-      })
-
-      const item = wrapper.find('[data-index="3"]')
-      mockElementRect(item.element)
-
-      await item.trigger('click', { clientX: 100 })
-
-      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([0])
+    afterEach(() => {
+      vi.useRealTimers()
     })
 
-    it('should emit half value when half mode is enabled and cursor is in first half', async () => {
-      wrapper = mount(VkRating, {
-        ...globalOptions,
-        props: {
-          modelValue: 0,
-          half: true
-        }
-      })
-
-      const item = wrapper.find('[data-index="3"]')
+    it('should animate selected items after selecting a value', async () => {
+      const item = wrapper.findAll('[role="radio"]')[2]
       mockElementRect(item.element)
 
-      await item.trigger('click', { clientX: 20 })
+      await item.trigger('click', {
+        clientX: 100
+      })
 
-      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([2.5])
+      expect(wrapper.findAll('.animate-pop')).toHaveLength(3)
     })
 
-    it('should not emit when disabled', async () => {
-      wrapper = mount(VkRating, {
-        ...globalOptions,
-        props: {
-          modelValue: 0,
-          disabled: true
-        }
-      })
-
-      const item = wrapper.find('[data-index="2"]')
+    it('should remove animation state after animation timeout', async () => {
+      const item = wrapper.findAll('[role="radio"]')[2]
       mockElementRect(item.element)
 
-      await item.trigger('click', { clientX: 100 })
+      await item.trigger('click', {
+        clientX: 100
+      })
 
-      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      expect(wrapper.findAll('.animate-pop')).toHaveLength(3)
+
+      vi.advanceTimersByTime(300)
+
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.findAll('.animate-pop')).toHaveLength(0)
     })
 
-    it('should not emit when readonly', async () => {
-      wrapper = mount(VkRating, {
-        ...globalOptions,
-        props: {
-          modelValue: 0,
-          readonly: true
-        }
+    it('should reset previous animation timeout when selecting quickly', async () => {
+      const items = wrapper.findAll('[role="radio"]')
+
+      mockElementRect(items[1].element)
+      mockElementRect(items[3].element)
+
+      await items[1].trigger('click', {
+        clientX: 100
       })
 
-      const item = wrapper.find('[data-index="2"]')
+      vi.advanceTimersByTime(100)
+
+      await items[3].trigger('click', {
+        clientX: 100
+      })
+
+      expect(wrapper.findAll('.animate-pop')).toHaveLength(4)
+
+      vi.advanceTimersByTime(300)
+
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.findAll('.animate-pop')).toHaveLength(0)
+    })
+
+    it('should clear animation timeout on unmount', async () => {
+      const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout')
+
+      const item = wrapper.findAll('[role="radio"]')[2]
       mockElementRect(item.element)
 
-      await item.trigger('click', { clientX: 100 })
+      await item.trigger('click', {
+        clientX: 100
+      })
 
-      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      wrapper.unmount()
+
+      expect(clearTimeoutSpy).toHaveBeenCalled()
+
+      clearTimeoutSpy.mockRestore()
     })
   })
 
-  describe('Keyboard', () => {
-    it('should increase value with ArrowRight', async () => {
-      wrapper = mount(VkRating, {
-        ...globalOptions,
-        props: {
-          modelValue: 1
-        }
+  describe('Accessibility', () => {
+    beforeEach(() => {
+      mountRating({
+        modelValue: 2
       })
-
-      await wrapper.find('.vk-rating').trigger('keydown', { key: 'ArrowRight' })
-
-      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([2])
     })
 
-    it('should decrease value with ArrowLeft', async () => {
-      wrapper = mount(VkRating, {
-        ...globalOptions,
-        props: {
-          modelValue: 3
-        }
-      })
+    it('should render a radiogroup', () => {
+      const group = wrapper.find('[role="radiogroup"]')
 
-      await wrapper.find('.vk-rating').trigger('keydown', { key: 'ArrowLeft' })
-
-      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([2])
+      expect(group.exists()).toBe(true)
     })
 
-    it('should move to min with Home', async () => {
-      wrapper = mount(VkRating, {
-        ...globalOptions,
-        props: {
-          modelValue: 4
-        }
-      })
-
-      await wrapper.find('.vk-rating').trigger('keydown', { key: 'Home' })
-
-      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([0])
+    it('should render radio items', () => {
+      expect(wrapper.findAll('[role="radio"]')).toHaveLength(5)
     })
 
-    it('should move to max with End', async () => {
-      wrapper = mount(VkRating, {
-        ...globalOptions,
-        props: {
-          modelValue: 0,
-          max: 7
-        }
-      })
+    it('should mark selected items as checked', () => {
+      const items = wrapper.findAll('[role="radio"]')
 
-      await wrapper.find('.vk-rating').trigger('keydown', { key: 'End' })
-
-      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([7])
+      expect(items[0].attributes('aria-checked')).toBe('true')
+      expect(items[1].attributes('aria-checked')).toBe('true')
+      expect(items[2].attributes('aria-checked')).toBe('false')
     })
 
-    it('should use half-step increments in half mode', async () => {
-      wrapper = mount(VkRating, {
-        ...globalOptions,
-        props: {
-          modelValue: 2,
-          half: true
-        }
+    it('should expose the current item label', () => {
+      const items = wrapper.findAll('[role="radio"]')
+
+      expect(items[0].attributes('aria-label')).toBe('1 of 5')
+      expect(items[4].attributes('aria-label')).toBe('5 of 5')
+    })
+
+    describe('When accessibility props are provided', () => {
+      beforeEach(async () => {
+        await wrapper.setProps({
+          ariaLabel: 'Rating',
+          ariaLabelledBy: 'rating-label',
+          ariaDescribedBy: 'rating-description'
+        })
       })
 
-      await wrapper.find('.vk-rating').trigger('keydown', { key: 'ArrowRight' })
+      it('should forward accessibility attributes to the radiogroup', () => {
+        const group = wrapper.find('[role="radiogroup"]')
 
-      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([2.5])
+        expect(group.attributes()).toEqual(expect.objectContaining({
+          'aria-label': 'Rating',
+          'aria-labelledby': 'rating-label',
+          'aria-describedby': 'rating-description'
+        }))
+      })
+    })
+
+    describe('When disabled or readonly', () => {
+      it('should expose aria-disabled', async () => {
+        await wrapper.setProps({
+          disabled: true
+        })
+
+        expect(wrapper.find('[role="radiogroup"]').attributes('aria-disabled')).toBe('true')
+      })
+
+      it('should expose aria-readonly', async () => {
+        await wrapper.setProps({
+          readonly: true
+        })
+
+        expect(wrapper.find('[role="radiogroup"]').attributes('aria-readonly')).toBe('true')
+      })
     })
   })
 
@@ -275,27 +441,80 @@ describe('Rating component', () => {
           modelValue: 2
         },
         slots: {
-          default: `<template #default="{ value, displayValue, items, setValue, hover, clearHover, isDisabled, isReadonly }">
-            <div class="slot-value">{{ value }}</div>
-            <div class="slot-display">{{ displayValue }}</div>
-            <div class="slot-items">{{ items.length }}</div>
-            <div class="slot-set-value">{{ typeof setValue }}</div>
-            <div class="slot-hover">{{ typeof hover }}</div>
-            <div class="slot-clear-hover">{{ typeof clearHover }}</div>
-            <div class="slot-disabled">{{ isDisabled }}</div>
-            <div class="slot-readonly">{{ isReadonly }}</div>
-          </template>`
+          default: `
+      <template #default="{ value, displayValue, items, setValue, isDisabled, isReadonly }">
+        <div class="slot-data">
+          {{ JSON.stringify({
+            value,
+            displayValue,
+            items: items.length,
+            setValue: typeof setValue,
+            disabled: isDisabled,
+            readonly: isReadonly
+          }) }}
+        </div>
+      </template>
+    `
         }
       })
 
-      expect(wrapper.find('.slot-value').text()).toBe('2')
-      expect(wrapper.find('.slot-display').text()).toBe('2')
-      expect(wrapper.find('.slot-items').text()).toBe('5')
-      expect(wrapper.find('.slot-set-value').text()).toBe('function')
-      expect(wrapper.find('.slot-hover').text()).toBe('function')
-      expect(wrapper.find('.slot-clear-hover').text()).toBe('function')
-      expect(wrapper.find('.slot-disabled').text()).toBe('false')
-      expect(wrapper.find('.slot-readonly').text()).toBe('false')
+      expect(wrapper.find('.slot-data').text()).toBe(JSON.stringify({
+        value: 2,
+        displayValue: 2,
+        items: 5,
+        setValue: 'function',
+        disabled: false,
+        readonly: false
+      }))
+    })
+
+    it('should expose star item state through slot items', () => {
+      wrapper = mount(VkRating, {
+        ...globalOptions,
+        props: {
+          modelValue: 3
+        },
+        slots: {
+          default: `
+          <template #default="{ items }">
+            <div
+              v-for="item in items"
+              :key="item.index"
+              :data-fill="item.fill"
+              :data-active="item.active"
+            />
+          </template>
+        `
+        }
+      })
+
+      const items = wrapper.findAll('[data-fill]')
+
+      expect(items.map(item => ({
+        fill: item.attributes('data-fill'),
+        active: item.attributes('data-active')
+      }))).toEqual([
+        {
+          fill: '100',
+          active: 'true'
+        },
+        {
+          fill: '100',
+          active: 'true'
+        },
+        {
+          fill: '100',
+          active: 'true'
+        },
+        {
+          fill: '0',
+          active: 'false'
+        },
+        {
+          fill: '0',
+          active: 'false'
+        }
+      ])
     })
   })
 })

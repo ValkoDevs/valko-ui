@@ -68,10 +68,13 @@ const onHover = (event: MouseEvent, index: number) => {
   state.hover = getValueFromEvent(event, index)
 }
 
-const stars = computed(() => {
-  const value = Math.max(0, Math.min(displayValue.value, props.max))
+const clearHover = () => state.hover = null
 
-  return Array.from({ length: props.max }, (_, i) => ({
+const stars = computed(() => {
+  const max = Math.max(1, props.max)
+  const value = Math.max(0, Math.min(displayValue.value, max))
+
+  return Array.from({ length: max }, (_, i) => ({
     index: i + 1,
     fill: Math.max(0, Math.min(100, (value - i) * 100)),
     hovering: isHovering.value,
@@ -98,10 +101,9 @@ onBeforeUnmount(() => clearTimeout(animationTimeout))
       :display-value="displayValue"
       :items="stars"
       :set-value="setValue"
-      :hover="onHover"
-      :clear-hover="() => (state.hover = 0)"
       :is-disabled="disabled"
       :is-readonly="readonly"
+      :clear-hover="clearHover"
     >
       <div
         v-for="star in stars"
@@ -112,15 +114,17 @@ onBeforeUnmount(() => clearTimeout(animationTimeout))
         :aria-label="`${star.index} of ${max}`"
         :data-hovering="star.hovering"
         @mousemove="(e) => onHover(e, star.index)"
-        @mouseleave="state.hover = 0"
+        @mouseleave="clearHover()"
         @click="(e) => setValue(e, star.index)"
       >
         <vk-icon
+          :key="`base-${iconName}-${star.index}`"
           :name="iconName"
           :class="s.iconBase({ class: styleSlots?.iconBase })"
         />
 
         <vk-icon
+          :key="`overlay-${iconName}-${star.index}`"
           :name="iconName"
           :class="s.iconOverlay({ class: styleSlots?.iconOverlay, animate: star.index <= state.animated })"
           :style="{ width: `${star.fill}%`, transitionDelay: `${star.delay}ms` }"

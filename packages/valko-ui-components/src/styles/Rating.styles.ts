@@ -16,7 +16,6 @@ const rating = tv({
     iconBase: [
       'vk-rating_icon',
       'text-on-surface',
-      'group-hover:scale-130',
       'transition-transform',
       'duration-200',
       'ease-in-out'
@@ -27,10 +26,8 @@ const rating = tv({
       'top-0',
       'overflow-hidden',
       'pointer-events-none',
-      'whitespace-nowrap',
-      'group-hover:scale-130',
-      'opacity-100',
-      'transition-[width,transform,color,opacity]',
+      'transition-[width,transform]',
+      'transition-colors',
       'group-data-[hovering=true]:opacity-75',
       'duration-200',
       'ease-in-out'
@@ -74,7 +71,7 @@ const rating = tv({
     color: {
       primary: {
         iconBase: [
-          'group-hover:text-on-primary-container'
+          'group-data-[hovering=true]:text-on-primary-container'
         ],
         iconOverlay: [
           'text-primary',
@@ -83,7 +80,7 @@ const rating = tv({
       },
       secondary: {
         iconBase: [
-          'group-hover:text-on-secondary-container'
+          'group-data-[hovering=true]:text-on-secondary-container'
         ],
         iconOverlay: [
           'text-secondary',
@@ -92,7 +89,7 @@ const rating = tv({
       },
       positive: {
         iconBase: [
-          'group-hover:text-on-positive-container'
+          'group-data-[hovering=true]:text-on-positive-container'
         ],
         iconOverlay: [
           'text-positive',
@@ -101,7 +98,7 @@ const rating = tv({
       },
       warning: {
         iconBase: [
-          'group-hover:text-on-warning-container'
+          'group-data-[hovering=true]:text-on-warning-container'
         ],
         iconOverlay: [
           'text-warning',
@@ -110,7 +107,7 @@ const rating = tv({
       },
       negative: {
         iconBase: [
-          'group-hover:text-on-negative-container'
+          'group-data-[hovering=true]:text-on-negative-container'
         ],
         iconOverlay: [
           'text-negative',
@@ -119,7 +116,7 @@ const rating = tv({
       },
       accent: {
         iconBase: [
-          'group-hover:text-on-accent-container'
+          'group-data-[hovering=true]:text-on-accent-container'
         ],
         iconOverlay: [
           'text-accent',
@@ -142,8 +139,29 @@ const rating = tv({
           'animate-pop'
         ]
       }
+    },
+    readonly: {
+      true: {
+        iconContainer: [
+          'cursor-default'
+        ]
+      }
     }
-  }
+  },
+  compoundVariants: [
+    {
+      disabled: false,
+      readonly: false,
+      class: {
+        iconBase: [
+          'group-hover:scale-130'
+        ],
+        iconOverlay: [
+          'group-hover:scale-130'
+        ]
+      }
+    }
+  ]
 })
 
 export default rating
