@@ -46,6 +46,10 @@
 - **Tooltip**
   - Updated internal Popover usage to match the new slot API.
 
+### Styles
+
+- Removed the `datepicker` and `timepicker` style files since their popover-related styles are now handled by the shared `popover` component.
+
 ### Composables
 
 - **useClientSideDragAndDrop**

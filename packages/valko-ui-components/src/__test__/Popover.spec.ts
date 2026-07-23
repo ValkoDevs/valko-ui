@@ -1,4 +1,4 @@
-import { nextTick } from 'vue'
+import { h, nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkPopover from '#valkoui/components/Popover.vue'
 
@@ -152,57 +152,57 @@ describe('Popover component', () => {
   })
 
   describe('Slots', () => {
-    it('should render content in default', () => {
+    it('should render content in trigger', () => {
       wrapper = mount(VkPopover, {
         props: {
           isOpen: true
         },
         slots: {
-          default: 'Hello World'
+          trigger: 'Hello World'
         }
       })
 
       expect(wrapper.find('.vk-popover').text()).toBe('Hello World')
     })
 
-    it('should not have content in default slot', () => {
+    it('should not have content in trigger slot', () => {
       wrapper = mount(VkPopover, {
         props: {
           isOpen: true
         },
         slots: {
-          default: ''
+          trigger: ''
         }
       })
 
       expect(wrapper.find('.vk-popover').text()).toBe('')
     })
 
-    it('should render content in popover-content', () => {
+    it('should render content in panel', () => {
       wrapper = mount(VkPopover, {
         props: {
           isOpen: true
         },
         slots: {
-          'popover-content': 'Hello World'
+          panel: 'Hello World'
         }
       })
 
       expect(wrapper.find('.vk-popover__panel').text()).toBe('Hello World')
     })
 
-    it('should override text prop with content in popover-content', () => {
+    it('should override text prop with panel content', () => {
       wrapper = mount(VkPopover, {
         props: {
           isOpen: true,
           text: 'Hello Text'
         },
         slots: {
-          'popover-content': 'Hello Content'
+          panel: 'Hello Content'
         }
       })
 
-      expect(wrapper.find('.vk-popover__panel').text()).not.toContain('Hello Text')
+      expect(wrapper.find('.vk-popover__panel').text()).toBe('Hello Content')
     })
   })
 
@@ -234,9 +234,11 @@ describe('Popover component', () => {
   })
 
   describe('Emits', () => {
-    it('should emit close when clicking outside', async () => {
+    it('should emit update:isOpen false when clicking outside', async () => {
       wrapper = mount(VkPopover, {
-        props: { isOpen: true },
+        props: {
+          isOpen: true
+        },
         attachTo: document.body
       })
 
@@ -244,12 +246,14 @@ describe('Popover component', () => {
       document.body.click()
       await nextTick()
 
-      expect(wrapper.emitted()).toHaveProperty('close')
+      expect(wrapper.emitted('update:isOpen')).toEqual([[false]])
     })
 
-    it('should not emit close when clicking outside if isOpen is false', async () => {
+    it('should not emit update:isOpen when clicking outside if isOpen is false', async () => {
       wrapper = mount(VkPopover, {
-        props: { isOpen: false },
+        props: {
+          isOpen: false
+        },
         attachTo: document.body
       })
 
@@ -257,12 +261,14 @@ describe('Popover component', () => {
       document.body.click()
       await nextTick()
 
-      expect(wrapper.emitted('close')).toBeUndefined()
+      expect(wrapper.emitted('update:isOpen')).toBeUndefined()
     })
 
-    it('should not emit close when clicking inside the popover', async () => {
+    it('should not emit update:isOpen when clicking inside the popover', async () => {
       wrapper = mount(VkPopover, {
-        props: { isOpen: true },
+        props: {
+          isOpen: true
+        },
         attachTo: document.body
       })
 
@@ -271,129 +277,142 @@ describe('Popover component', () => {
       popoverElement.click()
       await nextTick()
 
-      expect(wrapper.emitted('close')).toBeUndefined()
+      expect(wrapper.emitted('update:isOpen')).toBeUndefined()
     })
 
+    it('should emit update:isOpen true when setOpen is called from trigger slot', async () => {
+      wrapper = mount(VkPopover, {
+        slots: {
+          trigger: ({ setOpen }) => h('button', {
+            class: 'trigger-btn',
+            onClick: () => setOpen(true)
+          }, 'Trigger')
+        },
+        attachTo: document.body
+      })
+
+      const trigger = wrapper.find('.trigger-btn')
+      await trigger.trigger('click')
+      await nextTick()
+
+      expect(wrapper.emitted('update:isOpen')).toEqual([[true]])
+    })
+
+    it('should emit update:isOpen false when setOpen is called from panel slot', async () => {
+      wrapper = mount(VkPopover, {
+        slots: {
+          panel: ({ setOpen }) => h('button', {
+            class: 'close-btn',
+            onClick: () => setOpen(false)
+          }, 'Close')
+        },
+        props: {
+          isOpen: true
+        },
+        attachTo: document.body
+      })
+
+      const closeButton = wrapper.find('.close-btn')
+      await closeButton.trigger('click')
+      await nextTick()
+
+      expect(wrapper.emitted('update:isOpen')).toEqual([[false]])
+    })
   })
 
-  describe('Uncontrolled mode', () => {
+  describe('Controlled & Uncontrolled State', () => {
     it('should render closed by default when isOpen is not passed', () => {
       wrapper = mount(VkPopover, {
-        props: {},
         slots: {
-          default: '<button>Trigger</button>'
+          trigger: 'Trigger'
         }
       })
 
-      expect(wrapper.find('.vk-popover').exists()).toBe(true)
       expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
     })
 
-    it('should open when the trigger slot is clicked', async () => {
+    it('should open when setOpen is called in uncontrolled mode', async () => {
       wrapper = mount(VkPopover, {
-        props: {},
         slots: {
-          default: '<button class="trigger-btn">Trigger</button>',
-          'popover-content': 'Popover Content'
+          trigger: ({ setOpen }) => h('button', {
+            class: 'trigger-btn',
+            onClick: () => setOpen(true)
+          }, 'Trigger'),
+          panel: 'Popover Content'
         },
         attachTo: document.body
       })
-
-      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
 
       const trigger = wrapper.find('.trigger-btn')
       await trigger.trigger('click')
       await nextTick()
 
       expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
-      expect(wrapper.find('.vk-popover__panel').text()).toBe('Popover Content')
     })
 
-    it('should close when clicking outside', async () => {
+    it('should close when clicking outside in uncontrolled mode', async () => {
       wrapper = mount(VkPopover, {
-        props: {},
         slots: {
-          default: '<button class="trigger-btn">Trigger</button>',
-          'popover-content': 'Popover Content'
+          trigger: ({ setOpen }) => h('button', {
+            class: 'trigger-btn',
+            onClick: () => setOpen(true)
+          }, 'Trigger'),
+          panel: 'Popover Content'
         },
         attachTo: document.body
       })
 
-      // Open first
       const trigger = wrapper.find('.trigger-btn')
       await trigger.trigger('click')
       await nextTick()
-
-      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
-
-      // Click outside
       document.body.click()
       await nextTick()
 
       expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
-    })
-
-    it('should emit open when trigger is clicked', async () => {
-      wrapper = mount(VkPopover, {
-        props: {},
-        slots: {
-          default: '<button class="trigger-btn">Trigger</button>'
-        },
-        attachTo: document.body
-      })
-
-      const trigger = wrapper.find('.trigger-btn')
-      await trigger.trigger('click')
-      await nextTick()
-
-      expect(wrapper.emitted()).toHaveProperty('open')
-    })
-
-    it('should emit close when clicking outside in uncontrolled mode', async () => {
-      wrapper = mount(VkPopover, {
-        props: {},
-        slots: {
-          default: '<button class="trigger-btn">Trigger</button>',
-          'popover-content': 'Content'
-        },
-        attachTo: document.body
-      })
-
-      // Open first
-      const trigger = wrapper.find('.trigger-btn')
-      await trigger.trigger('click')
-      await nextTick()
-
-      // Click outside
-      document.body.click()
-      await nextTick()
-
-      expect(wrapper.emitted()).toHaveProperty('close')
     })
 
     it('should not close when clicking inside the popover in uncontrolled mode', async () => {
       wrapper = mount(VkPopover, {
-        props: {},
         slots: {
-          default: '<button class="trigger-btn">Trigger</button>',
-          'popover-content': '<div class="popover-inner">Inner Content</div>'
+          trigger: ({ setOpen }) => h('button', {
+            class: 'trigger-btn',
+            onClick: () => setOpen(true)
+          }, 'Trigger'),
+          panel: '<div class="popover-inner">Inner Content</div>'
         },
         attachTo: document.body
       })
 
-      // Open first
       const trigger = wrapper.find('.trigger-btn')
       await trigger.trigger('click')
       await nextTick()
-
-      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
-
-      // Click inside the popover root (not outside)
       const popoverElement = wrapper.find('.vk-popover').element as HTMLElement
       popoverElement.click()
       await nextTick()
 
       expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+    })
+
+    it('should keep controlled state when trigger calls setOpen', async () => {
+      wrapper = mount(VkPopover, {
+        props: {
+          isOpen: false
+        },
+        slots: {
+          trigger: ({ setOpen }) => h('button', {
+            class: 'trigger-btn',
+            onClick: () => setOpen(true)
+          }, 'Trigger'),
+          panel: 'Popover Content'
+        },
+        attachTo: document.body
+      })
+
+      const trigger = wrapper.find('.trigger-btn')
+      await trigger.trigger('click')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
     })
   })
 })
