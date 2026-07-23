@@ -9,8 +9,8 @@ const useClientSidePagination = <T>(data: T[] | Ref<T[]>, initialLimit = 10) => 
   const setOffset = (newOffset: number) => offset.value = newOffset
 
   const result: Ref<Pagination<T>> = shallowRef({
-    records: [],
-    total: 0,
+    records: toValue(data).slice(0, initialLimit),
+    total: toValue(data).length,
     limit: limit.value,
     offset: offset.value
   })

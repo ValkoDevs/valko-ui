@@ -20,27 +20,28 @@ const s = computed(() => styles(props))
 
 const isShown = ref(false)
 const tooltipId = useId()
-
-const showTooltip = (value: boolean) => {
-  isShown.value = value
-}
 </script>
 
 <template>
   <vk-popover
-    :is-open="isShown"
+    :v-model:is-open="isShown"
     :placement="placement"
     :alignment="alignment"
     :shape="shape"
     :elevated="elevated"
     :class="s.container({ class: styleSlots?.container })"
     condensed
-    @mouseenter="() => showTooltip(true)"
-    @mouseleave="() => showTooltip(false)"
   >
-    <slot :aria-describedby="tooltipId" />
+    <template #trigger="{ setOpen }">
+      <div
+        @mouseenter="setOpen(true)"
+        @mouseleave="setOpen(false)"
+      >
+        <slot :aria-describedby="tooltipId" />
+      </div>
+    </template>
 
-    <template #popover-content>
+    <template #panel>
       <div
         :id="tooltipId"
         role="tooltip"

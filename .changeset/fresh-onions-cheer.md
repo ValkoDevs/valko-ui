@@ -39,6 +39,26 @@
 
 - **DataTable**
   - Updated internal Popover usage to match the new slot API.
+  - Improved client-side filtering initialization to prevent unnecessary reactive loops.
+  - Updated drag and drop handling to support disabled states without affecting the data pipeline.
+  - Fixed cases where disabled drag and drop could cause empty datasets and prevent table records from rendering.
+
+- **Tooltip**
+  - Updated internal Popover usage to match the new slot API.
+
+### Composables
+
+- **useClientSideDragAndDrop**
+  - Added support for an `enabled` parameter to control drag and drop behavior.
+  - Improved disabled state handling by preserving the original data flow when drag and drop is not enabled.
+
+- **useClientSideFilter**
+  - Improved filter state initialization and filtering behavior.
+  - Fixed unnecessary reactive updates caused by filter watchers.
+
+- **useClientSideDataTable**
+  - Simplified the data processing pipeline by delegating drag and drop enable/disable logic to `useClientSideDragAndDrop`.
+  - Maintained a consistent composable flow while avoiding unnecessary drag and drop processing.
 
 ### Tests
 
