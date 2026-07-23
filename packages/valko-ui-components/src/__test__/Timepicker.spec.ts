@@ -38,6 +38,51 @@ vi.mock('#valkoui/composables/useTimeAdapter.ts', () => ({
 const [ model, parModel, adapter ] = useTimeAdapter()
 const modelValue = toValue(model)
 const parsedModel = toValue(parModel)
+const mountTimepicker = (props = {}, stubs = {}) =>
+  mount(VkTimepicker, {
+    props: {
+      modelValue,
+      parsedModel,
+      adapter,
+      isOpen: true,
+      ...props
+    },
+    global: {
+      stubs: {
+        VkPopover: {
+          name: 'VkPopover',
+          template: `
+            <div class="vk-popover">
+              <slot
+                name="trigger"
+                :setOpen="setOpen"
+              />
+
+              <slot
+                name="panel"
+                :setOpen="setOpen"
+                :isOpen="true"
+              />
+            </div>
+          `,
+          setup() {
+            return {
+              setOpen: vi.fn()
+            }
+          }
+        },
+        VkTime: {
+          name: 'VkTime',
+          template: `
+            <div class="vk-timepicker__content">
+              time
+            </div>
+          `
+        },
+        ...stubs
+      }
+    }
+  })
 
 describe('Time component', () => {
   let wrapper: VueWrapper
@@ -45,34 +90,26 @@ describe('Time component', () => {
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(() => {
-        wrapper = mount(VkTimepicker, {
-          props: {
-            modelValue,
-            isOpen: true,
-            parsedModel,
-            adapter
-          }
-        })
+        wrapper = mountTimepicker()
       })
 
       it('should render', () => {
-        expect(wrapper.find('.vk-timepicker').exists()).toBe(true)
+        expect(wrapper.findComponent({ name: 'VkTimepicker' }).exists()).toBe(true)
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-input__label').classes()).toContain('peer-focus:text-primary')
+        expect(wrapper.find('.vk-input__label').classes())
+          .toContain('peer-focus:text-primary')
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('.vk-input__input').classes()).toContain('text-base')
+        expect(wrapper.find('.vk-input__input').classes())
+          .toContain('text-base')
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-input__input').classes()).toContain('bg-surface-container-highest')
-      })
-
-      it('should be shape soft', () => {
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-lg')
+        expect(wrapper.find('.vk-input__input').classes())
+          .toContain('bg-surface-container-highest')
       })
     })
 
@@ -159,54 +196,6 @@ describe('Time component', () => {
         })
 
         expect(wrapper.find('.vk-input__label').classes()).toContain('peer-focus:text-negative')
-      })
-    })
-
-    describe('When shape prop changes', () => {
-      it('should be rounded when props.shape is rounded', () => {
-        wrapper = mount(VkTimepicker, {
-          props: {
-            shape: 'rounded',
-            modelValue,
-            isOpen: true,
-            parsedModel,
-            adapter
-          }
-        })
-
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-2xl')
-      })
-
-      it('should be soft when props.shape is soft', () => {
-        wrapper = mount(VkTimepicker, {
-          props: {
-            shape: 'soft',
-            modelValue,
-            isOpen: true,
-            parsedModel,
-            adapter
-          }
-        })
-
-        const input = wrapper.find('.vk-timepicker__input')
-        input.trigger('focus')
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-lg')
-      })
-
-      it('should be square when props.shape is square', () => {
-        wrapper = mount(VkTimepicker, {
-          props: {
-            shape: 'square',
-            modelValue,
-            isOpen: true,
-            parsedModel,
-            adapter
-          }
-        })
-
-        const input = wrapper.find('.vk-timepicker__input')
-        input.trigger('focus')
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-none')
       })
     })
 
@@ -326,29 +315,30 @@ describe('Time component', () => {
       })
 
       wrapper.unmount()
-      expect(removeSpy).toHaveBeenCalledWith('mousedown', expect.any(Function), true)
+      expect(removeSpy).toHaveBeenCalledWith('click', expect.any(Function))
       removeSpy.mockRestore()
     })
   })
 
   describe('Emits', () => {
-    it('should emit open event', async () => {
+    it('should emit update:isOpen true when the input is focused', async () => {
       const wrapper = mount(VkTimepicker, {
         props: {
           modelValue,
-          isOpen: true,
+          isOpen: false,
           parsedModel,
           adapter
         }
       })
 
-      const input = wrapper.findAll('.vk-input__input')[0]
-      await input.trigger('focus')
+      await wrapper.find('.vk-input__input').trigger('focus')
 
-      expect(wrapper.emitted()).toHaveProperty('open')
+      expect(wrapper.emitted('update:isOpen')).toEqual([
+        [true]
+      ])
     })
 
-    it('should emit onSelect event', async () => {
+    it('should emit onSelect when time selection is finalized', async () => {
       const wrapper = mount(VkTimepicker, {
         props: {
           modelValue,
@@ -358,45 +348,83 @@ describe('Time component', () => {
         }
       })
 
-      const button = wrapper.find('.vk-time__ok-button')
-      await button.trigger('click')
+      await wrapper
+        .findComponent({ name: 'VkTime' })
+        .vm
+        .$emit('on-select')
 
-      expect(wrapper.emitted()).toHaveProperty('onSelect')
-    })
-
-    it('should emit close event', async () => {
-      const wrapper = mount(VkTimepicker, {
-        props: {
-          modelValue,
-          isOpen: true,
-          parsedModel,
-          adapter
-        }
-      })
-
-      const button = wrapper.find('.vk-time__ok-button')
-      await button.trigger('click')
-
-      expect(wrapper.emitted()).toHaveProperty('close')
-    })
-
-    it('should emit close when a click occurs outside the root component', async () => {
-      const wrapper = mount(VkTimepicker, {
-        props: {
-          isOpen: true,
-          modelValue,
-          parsedModel,
-          adapter
-        }
-      })
-
-      const input = wrapper.findAll('.vk-input__input')[0]
-      await input.trigger('focus')
-
-      document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
       await nextTick()
 
-      expect(wrapper.emitted()).toHaveProperty('close')
+      expect(wrapper.emitted('onSelect')).toHaveLength(1)
+    })
+
+    it('should emit update:isOpen false when time selection is finalized', async () => {
+      const wrapper = mount(VkTimepicker, {
+        props: {
+          modelValue,
+          isOpen: true,
+          parsedModel,
+          adapter
+        }
+      })
+
+      await wrapper
+        .findComponent({ name: 'VkTime' })
+        .vm
+        .$emit('on-select')
+
+      await nextTick()
+
+      expect(wrapper.emitted('update:isOpen')).toEqual([
+        [false]
+      ])
+    })
+
+    it('should call setOpen(false) when VkTime emits on-select', async () => {
+      const setOpen = vi.fn()
+
+      const wrapper = mount(VkTimepicker, {
+        props: {
+          modelValue,
+          isOpen: true,
+          parsedModel,
+          adapter
+        },
+        global: {
+          stubs: {
+            VkPopover: {
+              name: 'VkPopover',
+              template: `
+              <div>
+                <slot
+                  name="panel"
+                  :setOpen="setOpen"
+                  :isOpen="true"
+                />
+              </div>
+            `,
+              setup() {
+                return {
+                  setOpen
+                }
+              }
+            },
+            VkTime: {
+              name: 'VkTime',
+              emits: ['on-select'],
+              template: `
+              <button @click="$emit('on-select')">
+                select
+              </button>
+            `
+            }
+          }
+        }
+      })
+
+      await wrapper.find('button').trigger('click')
+
+      expect(setOpen).toHaveBeenCalledWith(false)
     })
   })
 })

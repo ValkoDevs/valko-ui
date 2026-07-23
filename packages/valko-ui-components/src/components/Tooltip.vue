@@ -24,7 +24,7 @@ const tooltipId = useId()
 
 <template>
   <vk-popover
-    :v-model:is-open="isShown"
+    v-model:is-open="isShown"
     :placement="placement"
     :alignment="alignment"
     :shape="shape"
@@ -34,6 +34,7 @@ const tooltipId = useId()
   >
     <template #trigger="{ setOpen }">
       <div
+        :class="s.triggerContainer({ class: styleSlots?.triggerContainer})"
         @mouseenter="setOpen(true)"
         @mouseleave="setOpen(false)"
       >

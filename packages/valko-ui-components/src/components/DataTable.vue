@@ -170,7 +170,7 @@ watch(isDataReady, (dataUpdate) => {
                   :size="size"
                   name="search"
                   :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
-                  :data-active="activeFilters[header.key]"
+                  :data-active="activeFilters[header.key] ? 'true' : undefined"
                   @click="setOpen(!isOpen)"
                 />
               </template>
