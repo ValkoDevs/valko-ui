@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Ref, computed, ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import type { DataTableProps } from '#valkoui/types/DataTable'
 import type { TableItem } from '#valkoui/types/Table'
 import type { Sort } from '#valkoui/types/common'
@@ -43,7 +43,7 @@ const sortIconMap = {
   none: 'arrows-sort'
 }
 
-const localFilters: Ref<Record<keyof TableItem, string>> = ref({})
+const localFilters = ref<Partial<Record<keyof TableItem, string>>>({})
 const activePopover = ref<string | null>(null)
 const activeFilters = ref<Record<string, boolean>>({})
 
@@ -59,15 +59,14 @@ const selectedItems = computed(
 )
 
 const setActiveFilter = (headerKey: string, isActive: boolean) => {
-  if (localFilters.value[headerKey] && localFilters.value[headerKey].trim() !== '') activeFilters.value[headerKey] = isActive
-  else activeFilters.value[headerKey] = false
+  activeFilters.value[headerKey] = isActive
 }
 
 const isSortActive = (field: string) => {
   return props.sort?.field === field && !!props.sort.direction
 }
 
-const isDataReady = computed(() => Array.isArray(props.data) && props.data.length > 0)
+const isDataReady = computed(() => Array.isArray(props.data))
 const totalPages = computed(() => Math.ceil(props.total / props.limit))
 const currentPage = computed({
   get: () => isDataReady.value ? props.offset / props.limit + 1 : 1,
@@ -98,28 +97,29 @@ const debouncedFilters = useDebounce(() => {
   emit('onFilter', mappedFilters)
 }, 500)
 
-watch(localFilters, debouncedFilters, { deep: true })
+const initializeFilters = () => {
+  props.headers.forEach(({ field }) => {
+    if (!(field in localFilters.value)) {
+      localFilters.value[field] = ''
+    }
+  })
+}
 
-watch(localFilters, (newFilters) => {
-  for (const key in newFilters) {
-    setActiveFilter(key, !!newFilters[key].trim())
-  }
-}, { deep: true })
+const headerFields = computed(() =>
+  props.headers.map(({ field }) => field).join('|')
+)
+
+watch(
+  headerFields,
+  initializeFilters,
+  { immediate: true }
+)
+
+watch(localFilters, debouncedFilters, { deep: true })
 
 watch(isDataReady, (dataUpdate) => {
   if (dataUpdate && currentPage.value !== 1) currentPage.value = 1
 }, { immediate: true })
-
-watch(
-  () => props.headers,
-  (headers) => {
-    localFilters.value = headers.reduce((acc, { field }) => {
-      acc[field] = ''
-      return acc
-    }, {} as Record<keyof TableItem, string>)
-  },
-  { immediate: true }
-)
 </script>
 
 <template>
@@ -192,7 +192,7 @@ watch(
                       label="Search..."
                       clearable
                       v-model="localFilters[header.key]"
-                      @input="() => setActiveFilter(header.key, !!localFilters[header.key].trim())"
+                      @input="setActiveFilter(header.key, !!localFilters[header.key]?.trim())"
                     />
                   </div>
                 </slot>
