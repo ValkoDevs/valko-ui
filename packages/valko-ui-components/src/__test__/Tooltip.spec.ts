@@ -16,10 +16,7 @@ describe('Tooltip component', () => {
           }
         })
 
-        await wrapper
-          .find('.vk-tooltip_trigger-container')
-          .trigger('mouseenter')
-
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
       })
 
@@ -28,13 +25,11 @@ describe('Tooltip component', () => {
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('.vk-tooltip_tip').classes())
-          .toContain('text-base')
+        expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('text-base')
       })
 
       it('should be shape soft', () => {
-        expect(wrapper.find('.vk-popover__panel').classes())
-          .toContain('rounded-lg')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
     })
 
@@ -50,14 +45,10 @@ describe('Tooltip component', () => {
           }
         })
 
-        await wrapper
-          .find('.vk-tooltip_trigger-container')
-          .trigger('mouseenter')
-
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
 
-        expect(wrapper.find('.vk-popover__panel').classes())
-          .toContain('rounded-2xl')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-2xl')
       })
 
       it('should be soft when props.shape is soft', async () => {
@@ -71,14 +62,10 @@ describe('Tooltip component', () => {
           }
         })
 
-        await wrapper
-          .find('.vk-tooltip_trigger-container')
-          .trigger('mouseenter')
-
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
 
-        expect(wrapper.find('.vk-popover__panel').classes())
-          .toContain('rounded-lg')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
 
       it('should be square when props.shape is square', async () => {
@@ -92,14 +79,10 @@ describe('Tooltip component', () => {
           }
         })
 
-        await wrapper
-          .find('.vk-tooltip_trigger-container')
-          .trigger('mouseenter')
-
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
 
-        expect(wrapper.find('.vk-popover__panel').classes())
-          .toContain('rounded-none')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-none')
       })
     })
 
@@ -115,14 +98,10 @@ describe('Tooltip component', () => {
           }
         })
 
-        await wrapper
-          .find('.vk-tooltip_trigger-container')
-          .trigger('mouseenter')
-
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
 
-        expect(wrapper.find('.vk-tooltip_tip').classes())
-          .toContain('text-xs')
+        expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('text-xs')
       })
 
       it('should be sm when props.size is sm', async () => {
@@ -136,14 +115,10 @@ describe('Tooltip component', () => {
           }
         })
 
-        await wrapper
-          .find('.vk-tooltip_trigger-container')
-          .trigger('mouseenter')
-
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
 
-        expect(wrapper.find('.vk-tooltip_tip').classes())
-          .toContain('text-sm')
+        expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('text-sm')
       })
 
       it('should be md when props.size is md', async () => {
@@ -157,14 +132,10 @@ describe('Tooltip component', () => {
           }
         })
 
-        await wrapper
-          .find('.vk-tooltip_trigger-container')
-          .trigger('mouseenter')
-
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
 
-        expect(wrapper.find('.vk-tooltip_tip').classes())
-          .toContain('text-base')
+        expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('text-base')
       })
 
       it('should be lg when props.size is lg', async () => {
@@ -178,14 +149,10 @@ describe('Tooltip component', () => {
           }
         })
 
-        await wrapper
-          .find('.vk-tooltip_trigger-container')
-          .trigger('mouseenter')
-
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
 
-        expect(wrapper.find('.vk-tooltip_tip').classes())
-          .toContain('text-lg')
+        expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('text-lg')
       })
     })
   })
@@ -226,10 +193,7 @@ describe('Tooltip component', () => {
         }
       })
 
-      await wrapper
-        .find('.vk-tooltip_trigger-container')
-        .trigger('mouseenter')
-
+      await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
       await nextTick()
 
       expect(wrapper.find('.vk-tooltip_tip').exists()).toBe(true)

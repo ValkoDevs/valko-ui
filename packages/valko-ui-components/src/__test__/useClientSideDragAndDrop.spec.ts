@@ -22,11 +22,7 @@ describe('useClientSideDragAndDrop composable', () => {
     it('should not reorder items', async () => {
       const data = createData()
 
-      const {
-        result,
-        handleDragStart,
-        handleDrop
-      } = useClientSideDragAndDrop(data)
+      const { result, handleDragStart, handleDrop } = useClientSideDragAndDrop(data)
 
       const event = createMockDragEvent()
 
@@ -41,9 +37,7 @@ describe('useClientSideDragAndDrop composable', () => {
     it('should not prevent default on drag over', () => {
       const data = createData()
 
-      const {
-        handleDragOver
-      } = useClientSideDragAndDrop(data)
+      const { handleDragOver } = useClientSideDragAndDrop(data)
 
       const event = createMockDragEvent()
 
@@ -57,11 +51,7 @@ describe('useClientSideDragAndDrop composable', () => {
     it('should reorder items after dropping', async () => {
       const data = createData()
 
-      const {
-        result,
-        handleDragStart,
-        handleDrop
-      } = useClientSideDragAndDrop(data, true)
+      const { result, handleDragStart, handleDrop } = useClientSideDragAndDrop(data, true)
 
       const event = createMockDragEvent()
 
@@ -81,9 +71,7 @@ describe('useClientSideDragAndDrop composable', () => {
     it('should prevent default on drag over', () => {
       const data = createData()
 
-      const {
-        handleDragOver
-      } = useClientSideDragAndDrop(data, true)
+      const { handleDragOver } = useClientSideDragAndDrop(data, true)
 
       const event = createMockDragEvent()
 
@@ -95,10 +83,7 @@ describe('useClientSideDragAndDrop composable', () => {
     it('should do nothing when dropping without starting a drag', async () => {
       const data = createData()
 
-      const {
-        result,
-        handleDrop
-      } = useClientSideDragAndDrop(data, true)
+      const { result, handleDrop } = useClientSideDragAndDrop(data, true)
 
       const event = createMockDragEvent()
 
