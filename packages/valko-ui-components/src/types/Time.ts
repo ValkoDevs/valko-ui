@@ -1,5 +1,5 @@
 import type { Ref, ComputedRef } from 'vue'
-import type { DefaultComponent } from './common'
+import type { Sizes, Variants, Shapes, ColorsWithSurface } from './common'
 import type { TimeSlots } from '../styles/Time.styles'
 
 export type TimeAdapterProps = Pick<TimeProps, 'format' | 'locale' | 'minTime' | 'maxTime' | 'disabledTimes' | 'modelValue'>
@@ -31,7 +31,7 @@ export interface TimeAdapterResult {
   adapter: TimeAdapterInterface;
 }
 
-export interface TimeProps extends DefaultComponent {
+export interface TimeProps extends ColorsWithSurface, Sizes, Variants, Shapes {
   adapter: TimeAdapterInterface;
   modelValue?: EpochTimeStamp;
   okButtonLabel?: string;

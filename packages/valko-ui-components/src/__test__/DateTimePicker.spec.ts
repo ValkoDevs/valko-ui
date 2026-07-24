@@ -113,7 +113,6 @@ describe('DateTimePicker component', () => {
 
       it('should show the date section by default', () => {
         expect(wrapper.find('.vk-datetimepicker__date-section').exists()).toBe(true)
-        expect(wrapper.find('.vk-datetimepicker__time-section').exists()).toBe(false)
       })
     })
 
@@ -378,8 +377,8 @@ describe('DateTimePicker component', () => {
     })
   })
 
-  describe('Step navigation', () => {
-    it('should transition from date to time step when a day is selected', async () => {
+  describe('View navigation', () => {
+    it('should show the time view when a day is selected', async () => {
       wrapper = mount(VkDateTimePicker, {
         props: {
           isOpen: true,
@@ -390,18 +389,13 @@ describe('DateTimePicker component', () => {
         }
       })
 
-      expect(wrapper.find('.vk-datetimepicker__date-section').exists()).toBe(true)
-      expect(wrapper.find('.vk-datetimepicker__time-section').exists()).toBe(false)
-
-      const button = wrapper.findAll('.vk-calendar__grid-button')[14]
-      await button.trigger('click')
+      await wrapper.findAll('.vk-calendar__grid-button')[14].trigger('click')
       await nextTick()
 
-      expect(wrapper.find('.vk-datetimepicker__date-section').exists()).toBe(false)
       expect(wrapper.find('.vk-datetimepicker__time-section').exists()).toBe(true)
     })
 
-    it('should not emit update:modelValue when a date is selected', async () => {
+    it('should not emit update:modelValue when a day is selected', async () => {
       wrapper = mount(VkDateTimePicker, {
         props: {
           isOpen: true,
@@ -412,14 +406,13 @@ describe('DateTimePicker component', () => {
         }
       })
 
-      const button = wrapper.findAll('.vk-calendar__grid-button')[14]
-      await button.trigger('click')
+      await wrapper.findAll('.vk-calendar__grid-button')[14].trigger('click')
       await nextTick()
 
       expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     })
 
-    it('should transition back to date step when back button is clicked', async () => {
+    it('should show the date view when the back button is clicked', async () => {
       wrapper = mount(VkDateTimePicker, {
         props: {
           isOpen: true,
@@ -430,21 +423,16 @@ describe('DateTimePicker component', () => {
         }
       })
 
-      const dayButton = wrapper.findAll('.vk-calendar__grid-button')[14]
-      await dayButton.trigger('click')
+      await wrapper.findAll('.vk-calendar__grid-button')[14].trigger('click')
       await nextTick()
 
-      expect(wrapper.find('.vk-datetimepicker__time-section').exists()).toBe(true)
-
-      const backButton = wrapper.find('.vk-datetimepicker__back-button')
-      await backButton.trigger('click')
+      await wrapper.find('.vk-datetimepicker__back-button').trigger('click')
       await nextTick()
 
       expect(wrapper.find('.vk-datetimepicker__date-section').exists()).toBe(true)
-      expect(wrapper.find('.vk-datetimepicker__time-section').exists()).toBe(false)
     })
 
-    it('should reset to date step when picker reopens', async () => {
+    it('should show the date view when reopened after closing', async () => {
       wrapper = mount(VkDateTimePicker, {
         props: {
           isOpen: true,
@@ -455,24 +443,22 @@ describe('DateTimePicker component', () => {
         }
       })
 
-      const dayButton = wrapper.findAll('.vk-calendar__grid-button')[14]
-      await dayButton.trigger('click')
+      await wrapper.findAll('.vk-calendar__grid-button')[14].trigger('click')
       await nextTick()
-
-      expect(wrapper.find('.vk-datetimepicker__time-section').exists()).toBe(true)
 
       await wrapper.setProps({ isOpen: false })
+      await nextTick()
+
       await wrapper.setProps({ isOpen: true })
       await nextTick()
 
       expect(wrapper.find('.vk-datetimepicker__date-section').exists()).toBe(true)
-      expect(wrapper.find('.vk-datetimepicker__time-section').exists()).toBe(false)
     })
 
-    it('should call resetSelection when picker opens', async () => {
+    it('should call resetSelection when the picker closes', async () => {
       wrapper = mount(VkDateTimePicker, {
         props: {
-          isOpen: false,
+          isOpen: true,
           modelValue,
           displayValue,
           adapter,
@@ -480,7 +466,7 @@ describe('DateTimePicker component', () => {
         }
       })
 
-      await wrapper.setProps({ isOpen: true })
+      await wrapper.setProps({ isOpen: false })
       await nextTick()
 
       expect(controls.resetSelection).toHaveBeenCalled()
@@ -488,67 +474,79 @@ describe('DateTimePicker component', () => {
   })
 
   describe('Emits', () => {
-    it('should emit open when the input is focused', async () => {
+    it('should emit update:isOpen when the input is focused', async () => {
       wrapper = mount(VkDateTimePicker, {
         props: {
-          isOpen: true,
+          isOpen: undefined,
           modelValue,
           displayValue,
           adapter,
           controls
-        }
+        },
+        attachTo: document.body
       })
 
-      const input = wrapper.findAll('.vk-input__input')[0]
+      const input = wrapper.find('.vk-input__input')
       await input.trigger('focus')
+      await nextTick()
 
-      expect(wrapper.emitted()).toHaveProperty('open')
+      expect(wrapper.emitted('update:isOpen')).toEqual([[true]])
     })
 
-    it('should emit close when a click occurs outside the root component', async () => {
+    it('should emit update:isOpen when a click occurs outside the component', async () => {
       wrapper = mount(VkDateTimePicker, {
         props: {
-          isOpen: true,
           modelValue,
           displayValue,
           adapter,
           controls
-        }
+        },
+        attachTo: document.body
       })
 
-      const input = wrapper.findAll('.vk-input__input')[0]
+      const input = wrapper.find('.vk-input__input')
+
       await input.trigger('focus')
+      await nextTick()
 
       document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
       await nextTick()
 
-      expect(wrapper.emitted()).toHaveProperty('close')
+      expect(wrapper.emitted('update:isOpen')).toEqual([
+        [true],
+        [false]
+      ])
     })
 
-    it('should call commitSelection and emit update:modelValue and close when OK is clicked', async () => {
+    it('should call commitSelection, emit update:modelValue and close when OK is clicked', async () => {
       wrapper = mount(VkDateTimePicker, {
         props: {
-          isOpen: true,
           modelValue,
           displayValue,
           adapter,
           controls
-        }
+        },
+        attachTo: document.body
       })
 
-      // Navigate to time step
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
       const dayButton = wrapper.findAll('.vk-calendar__grid-button')[14]
       await dayButton.trigger('click')
       await nextTick()
 
-      // Click OK
       const okButton = wrapper.find('.vk-time__ok-button')
       await okButton.trigger('click')
+      await nextTick()
 
       expect(controls.commitSelection).toHaveBeenCalled()
-      expect(wrapper.emitted('update:modelValue')).toBeTruthy()
-      expect(wrapper.emitted('update:modelValue')![0]).toEqual([1729017518])
-      expect(wrapper.emitted()).toHaveProperty('close')
+      expect(wrapper.emitted('update:modelValue')).toEqual([[1729017518]])
+      expect(wrapper.emitted('update:isOpen')).toEqual([
+        [true],
+        [false]
+      ])
     })
   })
 
@@ -563,7 +561,6 @@ describe('DateTimePicker component', () => {
         }
       })
 
-      expect(wrapper.find('.vk-datetimepicker').exists()).toBe(true)
       expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
     })
 
@@ -578,8 +575,7 @@ describe('DateTimePicker component', () => {
         attachTo: document.body
       })
 
-      const input = wrapper.find('.vk-input__input')
-      await input.trigger('focus')
+      await wrapper.find('.vk-input__input').trigger('focus')
       await nextTick()
 
       expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
@@ -596,52 +592,16 @@ describe('DateTimePicker component', () => {
         attachTo: document.body
       })
 
-      // Open first
-      const input = wrapper.find('.vk-input__input')
-      await input.trigger('focus')
+      await wrapper.find('.vk-input__input').trigger('focus')
       await nextTick()
 
-      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
-
-      // Click outside
       document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
       await nextTick()
 
       expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
     })
 
-    it('should close when OK is clicked after selecting date and time', async () => {
-      wrapper = mount(VkDateTimePicker, {
-        props: {
-          modelValue,
-          displayValue,
-          adapter,
-          controls
-        },
-        attachTo: document.body
-      })
-
-      // Open first
-      const input = wrapper.find('.vk-input__input')
-      await input.trigger('focus')
-      await nextTick()
-
-      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
-
-      // Select a date to go to time step
-      const dayButton = wrapper.findAll('.vk-calendar__grid-button')[14]
-      await dayButton.trigger('click')
-      await nextTick()
-
-      // Click OK to confirm
-      const okButton = wrapper.find('.vk-time__ok-button')
-      await okButton.trigger('click')
-      await nextTick()
-
-      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
-    })
-
-    it('should emit open and close events in uncontrolled mode', async () => {
+    it('should reset the view when the picker closes', async () => {
       wrapper = mount(VkDateTimePicker, {
         props: {
           modelValue,
@@ -653,53 +613,40 @@ describe('DateTimePicker component', () => {
       })
 
       const input = wrapper.find('.vk-input__input')
+
       await input.trigger('focus')
       await nextTick()
 
-      expect(wrapper.emitted()).toHaveProperty('open')
+      await wrapper.findAll('.vk-calendar__grid-button')[14].trigger('click')
+      await nextTick()
 
       document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
       await nextTick()
 
-      expect(wrapper.emitted()).toHaveProperty('close')
-    })
-
-    it('should reset to date step when reopened in uncontrolled mode', async () => {
-      wrapper = mount(VkDateTimePicker, {
-        props: {
-          modelValue,
-          displayValue,
-          adapter,
-          controls
-        },
-        attachTo: document.body
-      })
-
-      // Open
-      const input = wrapper.find('.vk-input__input')
       await input.trigger('focus')
       await nextTick()
 
-      // Navigate to time step
-      const dayButton = wrapper.findAll('.vk-calendar__grid-button')[14]
-      await dayButton.trigger('click')
-      await nextTick()
-
-      expect(wrapper.find('.vk-datetimepicker__time-section').exists()).toBe(true)
-
-      // Close by clicking outside
-      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
-      await nextTick()
-
-      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
-
-      // Reopen
-      await input.trigger('focus')
-      await nextTick()
-
-      // Should be back to date step
       expect(wrapper.find('.vk-datetimepicker__date-section').exists()).toBe(true)
-      expect(wrapper.find('.vk-datetimepicker__time-section').exists()).toBe(false)
+    })
+
+    it('should call resetSelection when the picker closes', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        },
+        attachTo: document.body
+      })
+
+      await wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      expect(controls.resetSelection).toHaveBeenCalled()
     })
   })
 })

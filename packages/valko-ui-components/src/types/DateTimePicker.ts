@@ -4,6 +4,8 @@ import type { CalendarAdapter } from './Calendar'
 import type { TimeAdapterInterface, MinuteStep } from './Time'
 import type { DateTimePickerSlots } from '../styles/DateTimePicker.styles'
 
+export type View = 'date' | 'time'
+
 export interface DateTimeAdapterProps {
   format?: string;
   locale?: string;

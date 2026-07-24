@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
-import type { DateTimePickerProps } from '#valkoui/types/DateTimePicker'
+import { ref, computed, watch } from 'vue'
+import type { DateTimePickerProps, View } from '#valkoui/types/DateTimePicker'
 import styles from '#valkoui/styles/DateTimePicker.styles.ts'
 import VkPopover from './Popover.vue'
 import VkInput from './Input.vue'
@@ -22,79 +22,65 @@ const props = withDefaults(defineProps<DateTimePickerProps>(), {
   isOpen: undefined
 })
 
-const emit = defineEmits(['update:modelValue', 'open', 'close'])
+const emit = defineEmits(['update:modelValue', 'update:isOpen'])
 
 const s = computed(() => styles(props))
 
-const internalOpen = ref(false)
+const view = ref<View>('date')
 
-const open = computed({
-  get: () => props.isOpen ?? internalOpen.value,
-  set: (val: boolean) => {
-    if (props.isOpen === undefined) internalOpen.value = val
-  }
-})
-
-const handleOpen = () => {
-  open.value = true
-  emit('open')
-}
-
-const handleClose = () => {
-  open.value = false
-  emit('close')
-}
-
-const step = ref<'date' | 'time'>('date')
-
-const onDateFinalized = () => {
-  step.value = 'time'
-}
-
-const onBackToDate = () => {
-  step.value = 'date'
-}
-
-const onConfirm = () => {
+const onConfirmSelection = () => {
   const value = props.controls.commitSelection()
   emit('update:modelValue', value)
-  handleClose()
 }
 
-watch(open, (isOpen) => {
-  if (isOpen) {
-    step.value = 'date'
+const handleOpenChange = (open: boolean) => {
+  emit('update:isOpen', open)
+
+  if (props.isOpen === undefined && !open) {
+    view.value = 'date'
     props.controls.resetSelection()
   }
-})
+}
+
+watch(
+  () => props.isOpen,
+  (open) => {
+    if (open === false) {
+      view.value = 'date'
+      props.controls.resetSelection()
+    }
+  }
+)
 </script>
 
 <template>
   <vk-popover
     class="vk-datetimepicker"
-    :is-open="open"
+    :is-open="isOpen"
     :shape="shape"
     :style-slots="{ panel: ['p-2'] }"
-    @close="handleClose"
+    @update:is-open="handleOpenChange"
   >
-    <vk-input
-      v-bind="props"
-      :style-slots="undefined"
-      :model-value="displayValue"
-      :label="label"
-      readonly
-      cursor="pointer"
-      @focus="handleOpen"
-      @right-icon-click="handleOpen"
-    >
-      <template #right-icon>
-        <vk-icon name="calendar-clock" />
-      </template>
-    </vk-input>
+    <template #trigger="{ setOpen, isOpen }">
+      <vk-input
+        v-bind="props"
+        :style-slots="undefined"
+        :model-value="displayValue"
+        :label="label"
+        readonly
+        cursor="pointer"
+        @focus="setOpen(true)"
+        @right-icon-click="setOpen(!isOpen)"
+      >
+        <template #right-icon>
+          <vk-icon name="calendar-clock" />
+        </template>
+      </vk-input>
+    </template>
 
-    <template #popover-content>
+    <template #panel="{ setOpen }">
       <vk-calendar
-        v-if="step === 'date'"
+        v-if="view === 'date'"
         v-bind="props"
         :style-slots="undefined"
         :class="s.dateSection({ class: styleSlots?.dateSection })"
@@ -105,17 +91,17 @@ watch(open, (isOpen) => {
         :min-date="minDate"
         :max-date="maxDate"
         :disable-weekends="disableWeekends"
-        @finalize-selection="onDateFinalized"
+        @finalize-selection="view = 'time'"
       />
 
-      <template v-if="step === 'time'">
+      <template v-if="view === 'time'">
         <vk-button
           :size="size"
           :shape="shape"
           :variant="variant"
           color="surface"
           :class="s.backButton({ class: styleSlots?.backButton })"
-          @click="onBackToDate"
+          @click="view = 'date'"
         >
           <vk-icon name="arrow-left" />
           {{ backButtonLabel }}
@@ -124,7 +110,7 @@ watch(open, (isOpen) => {
         <vk-time
           :class="s.timeSection({ class: styleSlots?.timeSection })"
           :adapter="adapter.time"
-          :color="color === 'surface' ? 'primary' : color"
+          :color="color"
           :variant="variant"
           :size="size"
           :shape="shape"
@@ -135,7 +121,7 @@ watch(open, (isOpen) => {
           :disabled-times="disabledTimes"
           :minute-step="minuteStep"
           :ok-button-label="okButtonLabel"
-          @on-select="onConfirm"
+          @on-select="() => { onConfirmSelection(); setOpen(false); }"
         />
       </template>
     </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableItem, TimepickerProps, SelectOption } from '#valkoui'
+import type { TimepickerProps, SelectOption } from '#valkoui'
 
 const form = reactive<Partial<TimepickerProps>>({
   color: 'primary',
@@ -27,97 +27,78 @@ const steps: SelectOption[] = [
   { value: 30, label: '30' }
 ]
 
-const timeFormats: TableItem[] = [
+const timeFormats: FormatData[] = [
   {
     key: 'HH',
-    prop: 'HH',
-    required: true,
+    format: 'HH',
     description: 'Hour in 24-hour format, padded with leading zero (00 to 23).',
-    values: 'string',
-    default: ''
+    example: '12:00'
   },
   {
     key: 'H',
-    prop: 'H',
-    required: true,
+    format: 'H',
     description: 'Hour in 24-hour format without padding (0 to 23).',
-    values: 'number',
-    default: ''
+    example: '12'
   },
   {
     key: 'hh',
-    prop: 'hh',
-    required: true,
+    format: 'hh',
     description: 'Hour in 12-hour format, padded with leading zero (01 to 12).',
-    values: 'string',
-    default: ''
+    example: '01:00'
   },
   {
     key: 'h',
-    prop: 'h',
-    required: true,
+    format: 'h',
     description: 'Hour in 12-hour format without padding (1 to 12).',
-    values: 'number',
-    default: ''
+    example: '1'
   },
   {
     key: 'mm',
-    prop: 'mm',
-    required: true,
+    format: 'mm',
     description: 'Minutes, padded with leading zero (00 to 59).',
-    values: 'string',
-    default: ''
+    example: '01'
   },
   {
     key: 'm',
-    prop: 'm',
-    required: true,
+    format: 'm',
     description: 'Minutes without padding (0 to 59).',
-    values: 'number',
-    default: ''
+    example: '1'
   },
   {
     key: 'ss',
-    prop: 'ss',
-    required: true,
+    format: 'ss',
     description: 'Seconds, padded with leading zero (00 to 59).',
-    values: 'string',
-    default: ''
+    example: '01'
   },
   {
     key: 's',
-    prop: 's',
-    required: true,
+    format: 's',
     description: 'Seconds without padding (0 to 59).',
-    values: 'number',
-    default: ''
+    example: '1'
   },
   {
     key: 'A',
-    prop: 'A',
-    required: true,
+    format: 'A',
     description: 'Uppercase AM or PM based on the time.',
-    values: 'AM | PM',
-    default: ''
+    example: 'AM | PM'
   },
   {
     key: 'a',
-    prop: 'a',
-    required: true,
+    format: 'a',
     description: 'Lowercase am or pm based on the time.',
-    values: 'am | pm',
-    default: ''
+    example: 'am | pm'
   }
 ]
 
-const timepickerProps: TableItem[] = [
+const timepickerProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the Time.',
-    values: 'primary, secondary, negative, warning, accent, positive',
-    default: 'primary'
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -125,7 +106,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The variant of the Time.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -133,7 +115,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The shape of the Time.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -141,7 +124,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The size of the Time.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
   },
   {
     key: 'isOpenProp',
@@ -158,31 +142,17 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The label for the input.',
     values: 'string',
-    default: ''
-  },
-  {
-    key: 'isOpenProp',
-    prop: 'isOpen',
-    required: false,
-    description: 'Controls whether the Timepicker dropdown is visible. When omitted, the component manages its own open/close state (uncontrolled mode). When provided, the consumer must manage the state via open/close events (controlled mode).',
-    values: 'true, false',
-    default: 'undefined'
-  },
-  {
-    key: 'okButtonLabelProp',
-    prop: 'okButtonLabel',
-    required: false,
-    description: 'The text displayed in the OK button.',
-    values: 'string',
-    default: 'OK'
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'displayValueProp',
     prop: 'displayValue',
     required: false,
-    description: 'The display value for the input.',
+    description: 'The display model for the input.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'formatProp',
@@ -190,7 +160,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The format of the time to be displayed.',
     values: 'string',
-    default: 'HH:mm:ss'
+    default: 'HH:mm:ss',
+    apiType: 'primitive'
   },
   {
     key: 'okButtonLabelProp',
@@ -198,7 +169,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The label of the default OK button on the time selector.',
     values: 'string',
-    default: 'OK'
+    default: 'OK',
+    apiType: 'primitive'
   },
   {
     key: 'minuteStepProp',
@@ -206,7 +178,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The steps for the minutes.',
     values: '1 | 5 | 10 | 15 | 20 | 30',
-    default: '1'
+    default: '1',
+    apiType: 'primitive'
   },
   {
     key: 'localeProp',
@@ -214,7 +187,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'Defines the language and regional format to use in the time picker, affecting the display of time formats.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'minTimeProp',
@@ -222,7 +196,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The minimum selectable time as an Epoch timestamp.',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'maxTimeProp',
@@ -230,7 +205,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The maximun selectable time as an Epoch timestamp.',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'disabledTimesProp',
@@ -238,7 +214,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'An array of disabled times represented as Epoch timestamps.',
     values: 'number[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'modelValueProp',
@@ -246,7 +223,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'The currently selected time, represented as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'adapterProp',
@@ -254,7 +232,8 @@ const timepickerProps: TableItem[] = [
     required: true,
     description: 'A composable that provides the methods and state required by the Timepicker. ValkoUI provides the `useTimeAdapter` composable for this purpose.',
     values: 'TimeAdapterInterface',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   },
   {
     key: 'ariaLabelProp',
@@ -262,7 +241,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'Defines a string label for assistive technologies.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledbyProp',
@@ -270,7 +250,8 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'References the ID of the element that labels the timepicker.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaDescribedbyProp',
@@ -278,27 +259,69 @@ const timepickerProps: TableItem[] = [
     required: false,
     description: 'References the ID of the element that describes the timepicker.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaInvalidProp',
     prop: 'ariaInvalid',
     required: false,
     description: 'Indicates whether the value entered in the timepicker is invalid.',
-    values: 'true, false',
-    default: ''
+    values: 'boolean',
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaRequiredProp',
     prop: 'ariaRequired',
     required: false,
     description: 'Indicates whether the timepicker is required.',
-    values: 'true, false',
-    default: ''
+    values: 'boolean',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'styleSlotsProp',
+    prop: 'styleSlots',
+    required: false,
+    description: 'Customizes style slots for the timepicker.',
+    values: 'TimeSlots',
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const timepickerEmits: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
+  {
+    key: 'container',
+    prop: 'container',
+    required: false,
+    description: 'Root container for the timepicker component.',
+    values: 'string[]',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'input',
+    prop: 'input',
+    required: false,
+    description: 'Styles for the input field that triggers the timepicker.',
+    values: 'string[]',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'content',
+    prop: 'content',
+    required: false,
+    description: 'Container for the timepicker dropdown/popup content.',
+    values: 'string[]',
+    default: '',
+    apiType: 'primitive'
+  }
+]
+
+const timepickerEmits: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
@@ -317,14 +340,15 @@ const timepickerEmits: TableItem[] = [
   }
 ]
 
-const timeAdapterInterface: TableItem[] = [
+const timeAdapterInterface: PropData[] = [
   {
     key: 'formattedTimeProp',
     prop: 'formattedTime',
     required: true,
     description: 'The selected and displayed time as formatted objects.',
-    values: 'ComputedRef<{ selected: FormattedTime, display: FormattedTime }>',
-    default: ''
+    values: 'ComputedRef<{\n selected: FormattedTime,\n display: FormattedTime\n}>',
+    default: '',
+    apiType: 'object'
   },
   {
     key: 'setDisplayUnitProp',
@@ -332,7 +356,8 @@ const timeAdapterInterface: TableItem[] = [
     required: true,
     description: 'Sets a specific time unit (hours, minutes, seconds) for display.',
     values: '(unit: "h" | "m" | "s", value: number) => void',
-    default: ''
+    default: '',
+    apiType: 'function'
   },
   {
     key: 'onSelectAMPMProp',
@@ -340,7 +365,8 @@ const timeAdapterInterface: TableItem[] = [
     required: true,
     description: 'Handles AM/PM selection.',
     values: '(period: "AM" | "PM") => void',
-    default: ''
+    default: '',
+    apiType: 'function'
   },
   {
     key: 'onSelectTimeProp',
@@ -348,7 +374,8 @@ const timeAdapterInterface: TableItem[] = [
     required: true,
     description: 'Sets the selected time and confirms selection.',
     values: '() => void',
-    default: ''
+    default: '',
+    apiType: 'function'
   },
   {
     key: 'isTimeDisabledProp',
@@ -356,7 +383,8 @@ const timeAdapterInterface: TableItem[] = [
     required: true,
     description: 'Checks if a time (hours and optional minutes) is disabled based on `minTime`, `maxTime`, or `disabledTimes`.',
     values: '(hours: number, minutes?: number) => boolean | undefined',
-    default: ''
+    default: '',
+    apiType: 'function'
   },
   {
     key: 'periodProp',
@@ -364,29 +392,32 @@ const timeAdapterInterface: TableItem[] = [
     required: true,
     description: 'Current time period, either AM or PM.',
     values: 'Ref<"AM" | "PM">',
-    default: ''
+    default: '',
+    apiType: 'object'
   }
 ]
 
-const timeAdapterResult: TableItem[] = [
+const timeAdapterResult: PropData[] = [
   {
     key: 'timeAdapterResult',
     prop: 'TimeAdapterResult',
     required: true,
-    description: 'The return type result of the Time Adapter containing the model, display value, and an object with the methods, properties required.',
-    values: '{ model: Ref<EpochTimeStamp>, displayValue: ComputedRef<string>, adapter: TimeAdapterInterface }',
-    default: ''
+    description: 'The return type result of the Time Adapter containing the model, parsed model, and an object with the methods, properties required.',
+    values: '[\n Ref<EpochTimeStamp>, \n ComputedRef<string>, \n TimeAdapterInterface\n]',
+    default: '',
+    apiType: 'object'
   }
 ]
 
-const formattedTimeProps: TableItem[] = [
+const formattedTimeProps: PropData[] = [
   {
     key: 'hoursProp',
     prop: 'hours',
     required: true,
     description: 'Hour part of the formatted time.',
     values: 'number',
-    default: '0'
+    default: '0',
+    apiType: 'primitive'
   },
   {
     key: 'minutesProp',
@@ -394,7 +425,8 @@ const formattedTimeProps: TableItem[] = [
     required: true,
     description: 'Minute part of the formatted time.',
     values: 'number',
-    default: '0'
+    default: '0',
+    apiType: 'primitive'
   },
   {
     key: 'secondsProp',
@@ -402,7 +434,8 @@ const formattedTimeProps: TableItem[] = [
     required: true,
     description: 'Second part of the formatted time.',
     values: 'number',
-    default: '0'
+    default: '0',
+    apiType: 'primitive'
   },
   {
     key: 'objProp',
@@ -410,18 +443,20 @@ const formattedTimeProps: TableItem[] = [
     required: true,
     description: 'Native JavaScript Date object representing the selected time.',
     values: 'Date',
-    default: 'new Date()'
+    default: 'new Date()',
+    apiType: 'primitive'
   }
 ]
 
-const timeAdapterProps: TableItem[] = [
+const timeAdapterProps: PropData[] = [
   {
     key: 'formatProp',
     prop: 'format',
     required: false,
     description: 'The format of the selected time, following hour-minute-second format.',
     values: 'string',
-    default: 'HH:mm:ss'
+    default: 'HH:mm:ss',
+    apiType: 'primitive'
   },
   {
     key: 'localeProp',
@@ -429,7 +464,8 @@ const timeAdapterProps: TableItem[] = [
     required: false,
     description: 'Defines the language and regional format to use in the time display.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'minTimeProp',
@@ -437,7 +473,8 @@ const timeAdapterProps: TableItem[] = [
     required: false,
     description: 'The minimum selectable time represented as a timestamp or Date object.',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'maxTimeProp',
@@ -445,7 +482,8 @@ const timeAdapterProps: TableItem[] = [
     required: false,
     description: 'The maximum selectable time represented as a timestamp or Date object.',
     values: 'number',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'disabledTimesProp',
@@ -453,7 +491,8 @@ const timeAdapterProps: TableItem[] = [
     required: false,
     description: 'An array of specific times to disable, represented as timestamps or Date objects.',
     values: 'number[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
@@ -467,7 +506,7 @@ const scriptCode = `
 <script setup lang="ts">
 import { useTimeAdapter } from '#valkoui'
 
-const { model, displayValue, adapter } = useTimeAdapter({ format: 'HH:mm:ss' })
+const [ model, displayValue, adapter ] = useTimeAdapter()
 <\u002Fscript>
 `
 
@@ -495,7 +534,7 @@ import { useTimeAdapter } from '#valkoui'
 
 const open = ref(false)
 
-const [ model, parsedModel, adapter ] = useTimeAdapter()
+const [ model, displayValue, adapter ] = useTimeAdapter()
 <\u002Fscript>
 
 <template>
@@ -504,7 +543,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter()
     v-model:is-open="open"
     label="Controlled Timepicker"
     :adapter="adapter"
-    :parsed-model="parsedModel"
+    :display-value="displayValue"
   />
 </template>`
 
@@ -524,7 +563,7 @@ const styles = {
     slotContainer: [
       'sm:grid-cols-2',
       'md:grid-cols-3',
-      'lg:grid-cols-6'
+      'lg:grid-cols-4'
     ]
   },
   default: {
@@ -608,7 +647,7 @@ const styles = {
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions.general"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -640,7 +679,7 @@ const styles = {
         :style-slots="styles.colors"
       >
         <vk-timepicker
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           :label="color.label"
           :adapter="adapter"
@@ -649,7 +688,7 @@ const styles = {
         />
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.general.map(o => o.value), extraProps})}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', { values: colorOptions.withSurface.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 
@@ -748,7 +787,7 @@ const styles = {
           v-model:is-open="open"
           label="Controlled Timepicker"
           :adapter="adapter"
-          :parsed-model="parsedModel"
+          :display-value="displayValue"
         />
 
         <template #code>
@@ -758,46 +797,18 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>Timepicker Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="timepickerProps"
-      />
-
-      <h3>Timepicker Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="timepickerEmits"
-      />
-
-      <h3>Time Adapter Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="timeAdapterInterface"
-      />
-
-      <h3>Adapter Result Type</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="timeAdapterResult"
-      />
-
-      <h3>Formatted Time Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="formattedTimeProps"
-      />
-
-      <h3>Time Adapter Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="timeAdapterProps"
-      />
-
-      <h3>Available Formats</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="timeFormats"
+      <api-table
+        name="Timepicker"
+        :tables="[
+          { title: 'Props', data: timepickerProps, headers: 'props' },
+          { title: 'Emits', data: timepickerEmits, headers: 'emits' },
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' },
+          { title: 'Time Adapter', data: timeAdapterInterface, headers: 'interface' },
+          { title: 'Time Adapter Result Type', data: timeAdapterResult, headers: 'interface' },
+          { title: 'Formatted Time Type', data: formattedTimeProps, headers: 'interface' },
+          { title: 'Time Adapter Props', data: timeAdapterProps, headers: 'interface' },
+          { title: 'Available Formats', data: timeFormats, headers: 'format' }
+        ]"
       />
     </template>
   </doc-section>

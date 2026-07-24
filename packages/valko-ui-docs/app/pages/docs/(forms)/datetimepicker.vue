@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TableItem, DateTimePickerProps, SelectOption } from '#valkoui'
+import type { DateTimePickerProps, SelectOption } from '#valkoui'
 
 const form = ref<Partial<DateTimePickerProps>>({
   color: 'primary',
@@ -16,7 +16,6 @@ const form = ref<Partial<DateTimePickerProps>>({
   disableWeekends: false,
   locale: 'en-US',
   label: 'Date & Time',
-  isOpen: false,
   okButtonLabel: 'OK',
   backButtonLabel: 'Back'
 })
@@ -34,185 +33,150 @@ const locales: SelectOption[] = [
   { value: 'ar-EG', label: 'العربية (Arabic)' }
 ]
 
-const formats: TableItem[] = [
+const formats: FormatData[] = [
   {
     key: 'YY',
-    prop: 'YY',
-    required: false,
+    format: 'YY',
     description: 'Two-digit year (e.g., 18 for 2018)',
-    values: '18',
-    default: ''
+    example: '18'
   },
   {
     key: 'YYYY',
-    prop: 'YYYY',
-    required: false,
+    format: 'YYYY',
     description: 'Four-digit year (e.g., 2018)',
-    values: '2018',
-    default: ''
+    example: '2018'
   },
   {
     key: 'M',
-    prop: 'M',
-    required: false,
+    format: 'M',
     description: 'The month, beginning at 1 (1 = January)',
-    values: '1-12',
-    default: ''
+    example: '1-12'
   },
   {
     key: 'MM',
-    prop: 'MM',
-    required: false,
+    format: 'MM',
     description: 'The month, 2-digits (e.g., 01 for January)',
-    values: '01-12',
-    default: ''
+    example: '01-12'
   },
   {
     key: 'MMM',
-    prop: 'MMM',
-    required: false,
+    format: 'MMM',
     description: 'Abbreviated month name (e.g., Jan for January)',
-    values: 'Jan-Dec',
-    default: ''
+    example: 'Jan-Dec'
   },
   {
     key: 'MMMM',
-    prop: 'MMMM',
-    required: false,
+    format: 'MMMM',
     description: 'Full month name (e.g., January)',
-    values: 'January-December',
-    default: ''
+    example: 'January-December'
   },
   {
     key: 'D',
-    prop: 'D',
-    required: false,
+    format: 'D',
     description: 'Day of the month (1-31)',
-    values: '1-31',
-    default: ''
+    example: '1-31'
   },
   {
     key: 'DD',
-    prop: 'DD',
-    required: false,
+    format: 'DD',
     description: 'Day of the month, 2-digits (e.g., 01 for the 1st)',
-    values: '01-31',
-    default: ''
+    example: '01-31'
+  },
+  {
+    key: 'd',
+    format: 'd',
+    description: 'Day of the week, with Sunday as 0 (0-6)',
+    example: '0-6'
   },
   {
     key: 'dd',
-    prop: 'dd',
-    required: false,
+    format: 'dd',
     description: 'Minimum name of the day of the week (e.g., Su for Sunday)',
-    values: 'Su-Sa',
-    default: ''
+    example: 'Su-Sa'
   },
   {
     key: 'ddd',
-    prop: 'ddd',
-    required: false,
+    format: 'ddd',
     description: 'Short name of the day of the week (e.g., Sun for Sunday)',
-    values: 'Sun-Sat',
-    default: ''
+    example: 'Sun-Sat'
   },
   {
     key: 'dddd',
-    prop: 'dddd',
-    required: false,
+    format: 'dddd',
     description: 'Full name of the day of the week (e.g., Sunday)',
-    values: 'Sunday-Saturday',
-    default: ''
-  },
-  {
-    key: 'H',
-    prop: 'H',
-    required: false,
-    description: '24-hour format hour (0-23)',
-    values: '0-23',
-    default: ''
+    example: 'Sunday-Saturday'
   },
   {
     key: 'HH',
-    prop: 'HH',
-    required: false,
-    description: '24-hour format hour, 2-digits (e.g., 09)',
-    values: '00-23',
-    default: ''
+    format: 'HH',
+    description: 'Hour in 24-hour format, padded with leading zero (00 to 23).',
+    example: '12:00'
   },
   {
-    key: 'h',
-    prop: 'h',
-    required: false,
-    description: '12-hour format hour (1-12)',
-    values: '1-12',
-    default: ''
+    key: 'H',
+    format: 'H',
+    description: 'Hour in 24-hour format without padding (0 to 23).',
+    example: '12'
   },
   {
     key: 'hh',
-    prop: 'hh',
-    required: false,
-    description: '12-hour format hour, 2-digits (e.g., 09)',
-    values: '01-12',
-    default: ''
+    format: 'hh',
+    description: 'Hour in 12-hour format, padded with leading zero (01 to 12).',
+    example: '01:00'
   },
   {
-    key: 'm',
-    prop: 'm',
-    required: false,
-    description: 'Minutes (0-59)',
-    values: '0-59',
-    default: ''
+    key: 'h',
+    format: 'h',
+    description: 'Hour in 12-hour format without padding (1 to 12).',
+    example: '1'
   },
   {
     key: 'mm',
-    prop: 'mm',
-    required: false,
-    description: 'Minutes, 2-digits (e.g., 05)',
-    values: '00-59',
-    default: ''
+    format: 'mm',
+    description: 'Minutes, padded with leading zero (00 to 59).',
+    example: '01'
   },
   {
-    key: 's',
-    prop: 's',
-    required: false,
-    description: 'Seconds (0-59)',
-    values: '0-59',
-    default: ''
+    key: 'm',
+    format: 'm',
+    description: 'Minutes without padding (0 to 59).',
+    example: '1'
   },
   {
     key: 'ss',
-    prop: 'ss',
-    required: false,
-    description: 'Seconds, 2-digits (e.g., 05)',
-    values: '00-59',
-    default: ''
+    format: 'ss',
+    description: 'Seconds, padded with leading zero (00 to 59).',
+    example: '01'
+  },
+  {
+    key: 's',
+    format: 's',
+    description: 'Seconds without padding (0 to 59).',
+    example: '1'
   },
   {
     key: 'A',
-    prop: 'A',
-    required: false,
-    description: 'AM/PM meridiem (uppercase)',
-    values: 'AM, PM',
-    default: ''
+    format: 'A',
+    description: 'Uppercase AM or PM based on the time.',
+    example: 'AM | PM'
   },
   {
     key: 'a',
-    prop: 'a',
-    required: false,
-    description: 'am/pm meridiem (lowercase)',
-    values: 'am, pm',
-    default: ''
+    format: 'a',
+    description: 'Lowercase am or pm based on the time.',
+    example: 'am | pm'
   }
 ]
 
-const dateTimePickerProps: TableItem[] = [
+const dateTimePickerProps: PropData[] = [
   {
     key: 'colorProp',
     prop: 'color',
     required: false,
     description: 'The color theme of the DateTimePicker.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
-    default: 'primary'
+    default: 'primary',
+    apiType: 'custom-string'
   },
   {
     key: 'variantProp',
@@ -220,7 +184,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'The variant of the DateTimePicker.',
     values: 'filled, outlined, ghost',
-    default: 'filled'
+    default: 'filled',
+    apiType: 'custom-string'
   },
   {
     key: 'shapeProp',
@@ -228,7 +193,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'The shape of the DateTimePicker dropdown.',
     values: 'rounded, square, soft',
-    default: 'soft'
+    default: 'soft',
+    apiType: 'custom-string'
   },
   {
     key: 'sizeProp',
@@ -236,7 +202,17 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'The size of the DateTimePicker.',
     values: 'xs, sm, md, lg',
-    default: 'md'
+    default: 'md',
+    apiType: 'custom-string'
+  },
+  {
+    key: 'isOpenProp',
+    prop: 'isOpen',
+    required: false,
+    description: 'Controls whether the DateTimePicker is visible. When omitted, the component manages its own open state internally (uncontrolled mode). When provided, the component becomes controlled and the state must be updated through the update:isOpen event.',
+    values: 'boolean',
+    default: 'undefined',
+    apiType: 'primitive'
   },
   {
     key: 'adapterProp',
@@ -244,7 +220,8 @@ const dateTimePickerProps: TableItem[] = [
     required: true,
     description: 'The combined adapter providing both date and time selection logic, containing a date (CalendarAdapter) and time (TimeAdapterInterface) sub-adapter.',
     values: 'DateTimeAdapter',
-    default: ''
+    default: '',
+    apiType: 'object'
   },
   {
     key: 'controlsProp',
@@ -252,7 +229,8 @@ const dateTimePickerProps: TableItem[] = [
     required: true,
     description: 'Controls object providing commitSelection and resetSelection methods for managing the pending date and time state.',
     values: 'DateTimeControls',
-    default: ''
+    default: '',
+    apiType: 'object'
   },
   {
     key: 'modelValueProp',
@@ -260,7 +238,8 @@ const dateTimePickerProps: TableItem[] = [
     required: true,
     description: 'The currently selected date and time, represented as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'displayValueProp',
@@ -268,15 +247,17 @@ const dateTimePickerProps: TableItem[] = [
     required: true,
     description: 'The formatted string representation of the selected date and time, shown in the input field.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'isOpenProp',
     prop: 'isOpen',
     required: false,
     description: 'Controls whether the DateTimePicker dropdown is visible. When omitted, the component manages its own open/close state (uncontrolled mode). When provided, the consumer must manage the state via open/close events (controlled mode).',
-    values: 'true, false',
-    default: 'undefined'
+    values: 'boolean',
+    default: 'undefined',
+    apiType: 'primitive'
   },
   {
     key: 'labelProp',
@@ -284,7 +265,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'The label text displayed above the input field.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'formatProp',
@@ -292,7 +274,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'The format of the selected date and time display.',
     values: 'string',
-    default: 'YYYY-MM-DD HH:mm'
+    default: 'YYYY-MM-DD HH:mm',
+    apiType: 'primitive'
   },
   {
     key: 'localeProp',
@@ -300,7 +283,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'Defines the language and regional format to use, affecting the display of weekdays and month names.',
     values: 'string',
-    default: 'en-US'
+    default: 'en-US',
+    apiType: 'primitive'
   },
   {
     key: 'okButtonLabelProp',
@@ -308,7 +292,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'The label for the confirmation button in the time picker.',
     values: 'string',
-    default: 'OK'
+    default: 'OK',
+    apiType: 'primitive'
   },
   {
     key: 'backButtonLabelProp',
@@ -316,7 +301,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'The label for the back button displayed on the time selection step, allowing the user to return to date selection.',
     values: 'string',
-    default: 'Back'
+    default: 'Back',
+    apiType: 'primitive'
   },
   {
     key: 'disabledDatesProp',
@@ -324,15 +310,17 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'An array of specific dates to disable.',
     values: 'EpochTimeStamp[]',
-    default: '[]'
+    default: '[]',
+    apiType: 'primitive'
   },
   {
     key: 'disableWeekendsProp',
     prop: 'disableWeekends',
     required: false,
     description: 'Allows to disable all weekends (sunday, saturday).',
-    values: 'true, false',
-    default: 'false'
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'minDateProp',
@@ -340,7 +328,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'The minimum selectable date as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'maxDateProp',
@@ -348,7 +337,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'The maximum selectable date as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'minTimeProp',
@@ -356,7 +346,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'The minimum selectable time as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'maxTimeProp',
@@ -364,7 +355,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'The maximum selectable time as an Epoch timestamp.',
     values: 'EpochTimeStamp',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'disabledTimesProp',
@@ -372,7 +364,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'An array of specific times to disable.',
     values: 'EpochTimeStamp[]',
-    default: '[]'
+    default: '[]',
+    apiType: 'primitive'
   },
   {
     key: 'minuteStepProp',
@@ -380,7 +373,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'The step interval for minute selection.',
     values: '1, 5, 10, 15, 20, 30',
-    default: '1'
+    default: '1',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -388,7 +382,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'Defines a string value that labels the DateTimePicker for assistive technologies.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelledbyProp',
@@ -396,7 +391,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'Identifies the element(s) that labels the DateTimePicker.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaDescribedbyProp',
@@ -404,7 +400,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'Identifies the element(s) that describe the DateTimePicker.',
     values: 'string',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'ariaInvalidProp',
@@ -412,7 +409,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'Indicates that the current value of the DateTimePicker is invalid.',
     values: 'true, false',
-    default: 'false'
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'ariaRequiredProp',
@@ -420,7 +418,8 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'Indicates that user input is required on the DateTimePicker.',
     values: 'true, false',
-    default: 'false'
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'styleSlotsProps',
@@ -428,18 +427,20 @@ const dateTimePickerProps: TableItem[] = [
     required: false,
     description: 'Custom styles for different parts of the DateTimePicker component.',
     values: 'DateTimePickerSlots',
-    default: ''
+    default: '',
+    apiType: 'custom-type'
   }
 ]
 
-const styleSlotsInterface: TableItem[] = [
+const styleSlotsInterface: PropData[] = [
   {
     key: 'dateSection',
     prop: 'dateSection',
     required: false,
     description: 'Container wrapping the Calendar component.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'timeSection',
@@ -447,7 +448,8 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'Container wrapping the Time component.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   },
   {
     key: 'backButton',
@@ -455,42 +457,47 @@ const styleSlotsInterface: TableItem[] = [
     required: false,
     description: 'The back button element itself.',
     values: 'string[]',
-    default: ''
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
-const dateTimePickerEmits: TableItem[] = [
+const dateTimePickerEmits: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the value is updated, typically when the user selects a date or confirms the time.',
     values: 'EpochTimeStamp',
-    type: '(value: EpochTimeStamp) => void'
+    type: '(value: EpochTimeStamp) => void',
+    apiType: 'event'
   },
   {
     key: 'openEmit',
     event: 'open',
     description: 'Emitted when the input is clicked or focused, indicating that the DateTimePicker should open.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: 'event'
   },
   {
     key: 'closeEmit',
     event: 'close',
     description: 'Emitted when a click outside the root component is detected or when the user confirms the selection.',
     values: '',
-    type: '() => void'
+    type: '() => void',
+    apiType: 'event'
   }
 ]
 
-const adapterResultProps: TableItem[] = [
+const adapterResultProps: PropData[] = [
   {
     key: 'adapterResult',
     prop: 'DateTimeAdapterResult',
     required: true,
     description: 'The return type of useDateTimeAdapter containing the model, display value, combined adapter, and controls.',
     values: '{ model: Ref<EpochTimeStamp>, displayValue: Ref<string>, adapter: DateTimeAdapter, controls: DateTimeControls }',
-    default: ''
+    default: '',
+    apiType: 'object'
   }
 ]
 
@@ -566,9 +573,6 @@ const styles = {
         :disable-weekends="form.disableWeekends"
         :ok-button-label="form.okButtonLabel"
         :back-button-label="form.backButtonLabel"
-        :is-open="form.isOpen!"
-        @open="() => form.isOpen = true"
-        @close="() => form.isOpen = false"
       />
     </template>
     <template #playground-options>
@@ -738,34 +742,15 @@ const styles = {
     </template>
 
     <template #api>
-      <h3>DateTimePicker Props</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="dateTimePickerProps"
-      />
-
-      <h3>Style Slots Interface</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="styleSlotsInterface"
-      />
-
-      <h3>DateTimePicker Emits</h3>
-      <vk-table
-        :headers="emitHeaders"
-        :data="dateTimePickerEmits"
-      />
-
-      <h3>Adapter Result Type</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="adapterResultProps"
-      />
-
-      <h3>Available Formats</h3>
-      <vk-table
-        :headers="propHeaders"
-        :data="formats"
+      <api-table
+        name="DateTimePicker"
+        :tables="[
+          { title: 'Props', headers: 'props', data: dateTimePickerProps },
+          { title: 'Style Slots Interface', headers: 'props', data: styleSlotsInterface },
+          { title: 'Emits', headers: 'emits', data: dateTimePickerEmits },
+          { title: 'Adapter Result Type', headers: 'props', data: adapterResultProps },
+          { title: 'Available Formats', headers: 'format', data: formats }
+        ]"
       />
     </template>
   </doc-section>

@@ -4,11 +4,13 @@ const popover = tv({
   slots: {
     container: [
       'vk-popover',
+      'bg-inherit',
       'w-fit',
       'h-fit',
       'relative'
     ],
     slotContainer: [
+      'bg-inherit',
       'h-auto',
       'w-auto',
       'relative',
@@ -18,7 +20,7 @@ const popover = tv({
       'vk-popover__panel',
       'h-auto',
       'w-auto',
-      'bg-surface-container-highest',
+      'bg-surface-container',
       'absolute',
       'z-40',
       'data-[text=true]:max-w-xs',
