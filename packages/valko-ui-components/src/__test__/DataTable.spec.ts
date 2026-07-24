@@ -278,10 +278,7 @@ describe('DataTable component', () => {
 
     describe('setActiveFilter', () => {
       it('should set active state to true when a filter input is used', async () => {
-        const filterableHeaders = headers.map(header => ({
-          ...header,
-          filterable: true
-        }))
+        const filterableHeaders = headers.map(header => ({ ...header, filterable: true }))
 
         const wrapper = mount(VkDataTable, {
           props: {
@@ -290,24 +287,13 @@ describe('DataTable component', () => {
           }
         })
 
-        await wrapper
-          .findAll('.vk-data-table__utilities')
-          .at(0)
-          ?.trigger('click')
-
+        await wrapper.findAll('.vk-data-table__utilities').at(0)?.trigger('click')
         const input = wrapper.findComponent(VkInput)
-
-        await input.vm.$emit('update:modelValue', 'some filter')
-        await input.vm.$emit('input')
-
+        input.vm.$emit('update:modelValue', 'some filter')
+        input.vm.$emit('input')
         await nextTick()
 
-        expect(
-          wrapper
-            .findAll('.vk-data-table__utilities')
-            .at(0)
-            ?.attributes('data-active')
-        ).toBe('true')
+        expect(wrapper.findAll('.vk-data-table__utilities').at(0)?.attributes('data-active')).toBe('true')
       })
     })
 

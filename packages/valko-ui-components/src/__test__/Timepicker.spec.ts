@@ -98,18 +98,15 @@ describe('Time component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-input__label').classes())
-          .toContain('peer-focus:text-primary')
+        expect(wrapper.find('.vk-input__label').classes()).toContain('peer-focus:text-primary')
       })
 
       it('should be size md', () => {
-        expect(wrapper.find('.vk-input__input').classes())
-          .toContain('text-base')
+        expect(wrapper.find('.vk-input__input').classes()).toContain('text-base')
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-input__input').classes())
-          .toContain('bg-surface-container-highest')
+        expect(wrapper.find('.vk-input__input').classes()).toContain('bg-surface-container-highest')
       })
     })
 
@@ -333,9 +330,7 @@ describe('Time component', () => {
 
       await wrapper.find('.vk-input__input').trigger('focus')
 
-      expect(wrapper.emitted('update:isOpen')).toEqual([
-        [true]
-      ])
+      expect(wrapper.emitted('update:isOpen')).toEqual([[true]])
     })
 
     it('should emit onSelect when time selection is finalized', async () => {
@@ -348,11 +343,7 @@ describe('Time component', () => {
         }
       })
 
-      await wrapper
-        .findComponent({ name: 'VkTime' })
-        .vm
-        .$emit('on-select')
-
+      await wrapper.findComponent({ name: 'VkTime' }).vm.$emit('on-select')
       await nextTick()
 
       expect(wrapper.emitted('onSelect')).toHaveLength(1)
@@ -368,16 +359,10 @@ describe('Time component', () => {
         }
       })
 
-      await wrapper
-        .findComponent({ name: 'VkTime' })
-        .vm
-        .$emit('on-select')
-
+      await wrapper.findComponent({ name: 'VkTime' }).vm.$emit('on-select')
       await nextTick()
 
-      expect(wrapper.emitted('update:isOpen')).toEqual([
-        [false]
-      ])
+      expect(wrapper.emitted('update:isOpen')).toEqual([[false]])
     })
 
     it('should call setOpen(false) when VkTime emits on-select', async () => {

@@ -396,9 +396,7 @@ describe('Datepicker component', () => {
 
       await wrapper.find('.vk-input__input').trigger('focus')
 
-      expect(wrapper.emitted('update:isOpen')).toEqual([
-        [true]
-      ])
+      expect(wrapper.emitted('update:isOpen')).toEqual([[true]])
     })
 
     it('should emit update:isOpen true when the chevron icon is clicked', async () => {
@@ -416,9 +414,7 @@ describe('Datepicker component', () => {
         .vm
         .$emit('right-icon-click')
 
-      expect(wrapper.emitted('update:isOpen')).toEqual([
-        [true]
-      ])
+      expect(wrapper.emitted('update:isOpen')).toEqual([[true]])
     })
 
     it('should emit update:isOpen false when selection is finalized', async () => {
@@ -431,16 +427,10 @@ describe('Datepicker component', () => {
         }
       })
 
-      await wrapper
-        .findComponent({ name: 'VkCalendar' })
-        .vm
-        .$emit('finalize-selection')
-
+      await wrapper.findComponent({ name: 'VkCalendar' }).vm.$emit('finalize-selection')
       await nextTick()
 
-      expect(wrapper.emitted('update:isOpen')).toEqual([
-        [false]
-      ])
+      expect(wrapper.emitted('update:isOpen')).toEqual([[false]])
     })
 
     it('should call setOpen(false) when calendar finalizes selection', async () => {
