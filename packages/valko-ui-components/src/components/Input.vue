@@ -113,6 +113,7 @@ watch(() => props.modelValue, (newValue) => {
         :data-left-icon="!!$slots['left-icon']"
         :data-right-icon="!!$slots['right-icon']"
         :data-clear-icon="clearable"
+        :data-variant="variant"
         :class="s.input({ class: styleSlots?.input })"
         :readonly="readonly"
         :disabled="disabled"

@@ -279,6 +279,28 @@ html.dark {
     margin: 0;
     -moz-appearance: textfield !important;
   }
+
+  input.vk-input__input[data-variant="filled"]:-webkit-autofill,
+  input.vk-input__input[data-variant="filled"]:-webkit-autofill:hover,
+  input.vk-input__input[data-variant="filled"]:-webkit-autofill:focus,
+  input.vk-input__input[data-variant="filled"]:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px var(--color-surface-container-highest) inset !important;
+    -webkit-text-fill-color: var(--color-on-surface) !important;
+    caret-color: var(--color-on-surface);
+  }
+
+  input.vk-input__input[data-variant="ghost"]:-webkit-autofill,
+  input.vk-input__input[data-variant="ghost"]:-webkit-autofill:hover,
+  input.vk-input__input[data-variant="ghost"]:-webkit-autofill:focus,
+  input.vk-input__input[data-variant="ghost"]:-webkit-autofill:active,
+  input.vk-input__input[data-variant="outlined"]:-webkit-autofill,
+  input.vk-input__input[data-variant="outlined"]:-webkit-autofill:hover,
+  input.vk-input__input[data-variant="outlined"]:-webkit-autofill:focus,
+  input.vk-input__input[data-variant="outlined"]:-webkit-autofill:active {
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: var(--color-on-surface) !important;
+    caret-color: var(--color-on-surface);
+  }
 }
 
 @layer components {

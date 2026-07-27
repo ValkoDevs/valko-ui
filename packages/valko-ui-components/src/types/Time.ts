@@ -1,8 +1,9 @@
 import type { Ref, ComputedRef } from 'vue'
-import type { DefaultComponent } from './common'
+import type { Sizes, Variants, Shapes, ColorsWithSurface } from './common'
 import type { TimeSlots } from '../styles/Time.styles'
 
 export type TimeAdapterProps = Pick<TimeProps, 'format' | 'locale' | 'minTime' | 'maxTime' | 'disabledTimes' | 'modelValue'>
+export type MinuteStep = 1 | 5 | 10 | 15 | 20 | 30
 
 export type TimeAdapterInterface = {
   formattedTime: ComputedRef<{
@@ -13,7 +14,8 @@ export type TimeAdapterInterface = {
   onSelectAMPM: (period: 'AM' | 'PM') => void,
   onSelectTime: () => void,
   isTimeDisabled: (hours: number, minutes?: number) => boolean | undefined,
-  period: Ref<'AM' | 'PM'>
+  period: Ref<'AM' | 'PM'>,
+  resetTempState?: () => void
 }
 
 export interface FormattedTime {
@@ -23,13 +25,13 @@ export interface FormattedTime {
   obj: Date;
 }
 
-export type TimeAdapterResult = [
-  Ref<EpochTimeStamp>,
-  ComputedRef<string>,
-  TimeAdapterInterface
-]
+export interface TimeAdapterResult {
+  model: Ref<EpochTimeStamp>;
+  displayValue: ComputedRef<string>;
+  adapter: TimeAdapterInterface;
+}
 
-export interface TimeProps extends DefaultComponent {
+export interface TimeProps extends ColorsWithSurface, Sizes, Variants, Shapes {
   adapter: TimeAdapterInterface;
   modelValue?: EpochTimeStamp;
   okButtonLabel?: string;
@@ -38,6 +40,6 @@ export interface TimeProps extends DefaultComponent {
   minTime?: EpochTimeStamp;
   maxTime?: EpochTimeStamp;
   disabledTimes?: EpochTimeStamp[];
-  minuteStep?: 1 | 5 | 10 | 15 | 20 | 30;
+  minuteStep?: MinuteStep;
   styleSlots?: Partial<TimeSlots>;
 }

@@ -5,7 +5,6 @@ const form = ref<PopoverProps>({
   shape: 'soft',
   placement: 'auto',
   alignment: undefined,
-  isOpen: false,
   elevated: false,
   condensed: false
 })
@@ -24,9 +23,9 @@ const popoverProps: PropData[] = [
     key: 'isOpenProp',
     prop: 'isOpen',
     required: false,
-    description: 'The state of the Popover.',
+    description: 'Controls whether the Popover is visible. When omitted, the component manages its own open state internally (uncontrolled mode). When provided, the component becomes controlled and the state must be updated through the update:isOpen event.',
     values: 'boolean',
-    default: 'false',
+    default: 'undefined',
     apiType: 'primitive'
   },
   {
@@ -60,7 +59,7 @@ const popoverProps: PropData[] = [
     key: 'textProp',
     prop: 'text',
     required: false,
-    description: 'Text displayed instead of the slot popover-content if the slot is not provided.',
+    description: 'Text displayed inside the Popover panel when the panel slot is not provided.',
     values: 'string',
     default: '',
     apiType: 'primitive'
@@ -72,15 +71,6 @@ const popoverProps: PropData[] = [
     description: 'Whether the Popover is condensed, this will remove the padding for the panel.',
     values: 'boolean',
     default: 'false',
-    apiType: 'primitive'
-  },
-  {
-    key: 'classesProp',
-    prop: 'classes',
-    required: false,
-    description: 'Allows you to apply custom CSS classes to the popover content for further customization (e.g., for styling the background, padding, borders, etc.). Accepts a single string or an array of strings.',
-    values: 'string | string[]',
-    default: '[]',
     apiType: 'primitive'
   },
   {
@@ -153,52 +143,82 @@ const styleSlotsInterface: PropData[] = [
 
 const popoverEmits: EmitData[] = [
   {
-    key: 'closeEmit',
-    event: 'close',
-    description: 'Emitted when a click is detected outside the popover.',
-    values: '',
-    type: '() => void',
+    key: 'update:isOpen',
+    event: 'update:isOpen',
+    description: 'Emitted when the open state changes. Provides the new open state value.',
+    values: 'boolean',
+    type: '(value: boolean) => void',
     apiType: 'event'
   }
 ]
 
 const popoverSlots: SlotData[] = [
   {
-    key: 'defaultSlot',
-    name: 'default',
-    description: 'Slot for the component that will display the Popover.',
-    example: '<template #default>\n  <vk-button>\n    Click Me.\n  </vk-button>\n</template>',
+    key: 'triggerSlot',
+    name: 'trigger',
+    description: 'Slot for the element that triggers the Popover. Exposes the current open state and a function to update it.',
+    example: `<template #trigger="{ isOpen, setOpen }">
+  <vk-button @click="setOpen(!isOpen)">
+    Click Me
+  </vk-button>
+</template>`,
     apiType: 'slot'
   },
   {
-    key: 'popoverContentSlot',
-    name: 'popover-content',
-    description: 'Slot for the main content of the Popover.',
-    example: '<template #popover-content>\n  <p>\n    This is the main content of the Popover.\n  </p>\n</template>',
+    key: 'panelSlot',
+    name: 'panel',
+    description: 'Slot for the Popover content. Exposes the current open state and a function to update it.',
+    example: `<template #panel="{ isOpen, setOpen }">
+  <div>
+    Popover content
+  </div>
+</template>`,
     apiType: 'slot'
   }
 ]
 
-const popoverStates = reactive<Record<string, boolean>>({})
-
-const togglePopover = (popoverId: string) => popoverStates[popoverId] = !popoverStates[popoverId]
-
-const handleClose = (popoverId: string) => popoverStates[popoverId] = false
-
-const scriptCode = `<script setup lang="ts">
-const popoverStates = reactive<Record<string, boolean>>({})
-
-const togglePopover = (popoverId: string) => popoverStates[popoverId] = !popoverStates[popoverId]
-
-const handleClose = (popoverId: string) => popoverStates[popoverId] = false
-<\u002Fscript>
-`
+const slotPropsInterface: PropData[] = [
+  {
+    key: 'isOpen',
+    prop: 'isOpen',
+    required: false,
+    description: 'Current open state of the Popover.',
+    values: 'boolean',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'setOpen',
+    prop: 'setOpen',
+    required: false,
+    description: 'Function used to update the Popover open state.',
+    values: '(value: boolean) => void',
+    default: '',
+    apiType: 'function'
+  }
+]
 
 const generateSnippet = snippetGeneratorFactory('vk-popover')
+const open = ref(false)
 
-const customSlot = '<vk-button\n      @click="togglePopover(\'popoverId\')"\n    >\n      Slot Content\n    </vk-button>'
+const triggerUncontrolled = `<template #trigger="{ isOpen, setOpen }">
+      <vk-button @click="setOpen(!isOpen)">
+        Slot Content
+      </vk-button>
+    </template>`
 
-const extraProps = ':is-open="popoverStates[\'popoverId\']" @close="handleClose(\'popoverId\')"'
+const triggerControlled = `<script>
+const open = ref(false)
+<\u002Fscript>
+
+<vk-popover v-model:is-open="open">
+  <template #trigger>
+    <vk-button @click="open = !open">
+      Slot Content
+    </vk-button>
+  </template>
+</vk-popover>
+`
 
 const styles = {
   shapes: {
@@ -230,17 +250,17 @@ const styles = {
     <template #playground-view>
       <vk-popover
         :shape="form.shape"
-        :is-open="form.isOpen"
         :elevated="form.elevated"
         :condensed="form.condensed"
         :placement="form.placement"
         :alignment="form.alignment"
         text="Popover Content"
-        @close="form.isOpen = false"
       >
-        <vk-button @click="() => { form.isOpen = !form.isOpen }">
-          Click Me
-        </vk-button>
+        <template #trigger="{ isOpen, setOpen }">
+          <vk-button @click="setOpen(!isOpen)">
+            Click Me
+          </vk-button>
+        </template>
       </vk-popover>
     </template>
 
@@ -282,17 +302,17 @@ const styles = {
           v-for="shape in shapeOptions.general"
           :key="shape.value"
           :shape="shape.value"
-          :is-open="popoverStates[shape.value]"
           :text="shape.label"
-          @close="handleClose(shape.value)"
         >
-          <vk-button @click="togglePopover(shape.value)">
-            {{ shape.label }}
-          </vk-button>
+          <template #trigger="{ setOpen, isOpen }">
+            <vk-button @click="setOpen(!isOpen)">
+              {{ shape.label }}
+            </vk-button>
+          </template>
         </vk-popover>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), customSlot, extraProps })}`" />
+          <code-block :code="generateSnippet<string>('shape', { values: shapeOptions.general.map(o => o.value), customSlot: triggerUncontrolled })" />
         </template>
       </example-section>
 
@@ -304,17 +324,17 @@ const styles = {
           v-for="placement in placementOptions.withAuto"
           :key="placement.value"
           :placement="placement.value"
-          :is-open="popoverStates[placement.value]"
           :text="placement.label"
-          @close="handleClose(placement.value)"
         >
-          <vk-button @click="togglePopover(placement.value)">
-            {{ placement.label }}
-          </vk-button>
+          <template #trigger="{ setOpen, isOpen }">
+            <vk-button @click="setOpen(!isOpen)">
+              {{ placement.label }}
+            </vk-button>
+          </template>
         </vk-popover>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('placement', { values: placementOptions.withAuto.map(o => o.value), customSlot, extraProps })}`" />
+          <code-block :code="generateSnippet<string>('placement', { values: placementOptions.withAuto.map(o => o.value), customSlot: triggerUncontrolled })" />
         </template>
       </example-section>
 
@@ -326,34 +346,51 @@ const styles = {
           v-for="alignment in alignmentOptions"
           :key="alignment.value"
           :alignment="alignment.value"
-          :is-open="popoverStates[alignment.value]"
           :text="alignment.label"
-          @close="handleClose(alignment.value)"
         >
-          <vk-button @click="togglePopover(alignment.value)">
-            {{ alignment.label }}
-          </vk-button>
+          <template #trigger="{ setOpen, isOpen }">
+            <vk-button @click="setOpen(!isOpen)">
+              {{ alignment.label }}
+            </vk-button>
+          </template>
         </vk-popover>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('alignment', { values: alignmentOptions.map(o => o.value), customSlot, extraProps })}`" />
+          <code-block :code="generateSnippet<string>('alignment', { values: alignmentOptions.map(o => o.value), customSlot: triggerUncontrolled })" />
         </template>
       </example-section>
 
       <example-section title="Elevated">
         <vk-popover
           elevated
-          :is-open="popoverStates.elevated"
           text="Elevated"
-          @close="handleClose('elevated')"
         >
-          <vk-button @click="togglePopover('elevated')">
-            Elevated
-          </vk-button>
+          <template #trigger="{ setOpen, isOpen }">
+            <vk-button @click="setOpen(!isOpen)">
+              Elevated
+            </vk-button>
+          </template>
         </vk-popover>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('elevated', { values: [true], customSlot, extraProps })}`" />
+          <code-block :code="generateSnippet<boolean>('elevated', { values: [true], customSlot: triggerUncontrolled })" />
+        </template>
+      </example-section>
+
+      <example-section title="Controlled">
+        <vk-popover
+          v-model:is-open="open"
+          text="Controlled"
+        >
+          <template #trigger>
+            <vk-button @click="open = !open">
+              Controlled
+            </vk-button>
+          </template>
+        </vk-popover>
+
+        <template #code>
+          <code-block :code="triggerControlled" />
         </template>
       </example-section>
     </template>
@@ -365,6 +402,7 @@ const styles = {
           { title: 'Props', data: popoverProps, headers: 'props' },
           { title: 'Emits', data: popoverEmits, headers: 'emits' },
           { title: 'Slots', data: popoverSlots, headers: 'slots' },
+          { title: 'Slot Props', data: slotPropsInterface, headers: 'interface' },
           { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
         ]"
       />

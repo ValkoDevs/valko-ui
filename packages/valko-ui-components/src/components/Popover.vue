@@ -6,26 +6,42 @@ import styles from '#valkoui/styles/Popover.styles.ts'
 defineOptions({ name: 'VkPopover' })
 
 const props = withDefaults(defineProps<PopoverProps>(), {
-  isOpen: false,
   shape: 'soft',
   text: '',
   placement: 'auto',
-  elevated: false
+  elevated: false,
+  isOpen: undefined
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['update:isOpen'])
 
 const s = computed(() => styles(props))
 
 const rootRef = ref<HTMLElement | null>(null)
 const slotRef = ref<HTMLElement | null>(null)
 const panelRef = ref<HTMLElement | null>(null)
+const internalOpen = ref<boolean>(false)
+
+const isOpen = computed(() => props.isOpen ?? internalOpen.value)
+
+const setOpen = (value: boolean) => {
+  if (isOpen.value === value) return
+  if (props.isOpen === undefined) internalOpen.value = value
+
+  emit('update:isOpen', value)
+}
+
+const open = computed({
+  get: () => props.isOpen ?? internalOpen.value,
+  set: (val: boolean) => {
+    if (props.isOpen === undefined) internalOpen.value = val
+  }
+})
 
 const handleClickOutside = (event: MouseEvent) => {
-  const target = event.target as HTMLElement
-  if (rootRef.value && !rootRef.value.contains(target) && panelRef.value && !panelRef.value.contains(target)) {
-    emit('close')
-  }
+  if (rootRef.value && event.composedPath().includes(rootRef.value)) return
+
+  setOpen(false)
 }
 
 const placement = computed(() => {
@@ -79,8 +95,13 @@ onBeforeUnmount(() => {
     <div
       :class="s.slotContainer({ class: styleSlots?.slotContainer })"
       ref="slotRef"
+      @click="setOpen(true)"
     >
-      <slot name="default" />
+      <slot
+        name="trigger"
+        :is-open="isOpen"
+        :set-open="setOpen"
+      />
     </div>
 
     <transition
@@ -92,7 +113,7 @@ onBeforeUnmount(() => {
       leave-to-class="opacity-0"
     >
       <div
-        v-if="isOpen"
+        v-if="open"
         ref="panelRef"
         role="dialog"
         :aria-modal="false"
@@ -103,7 +124,11 @@ onBeforeUnmount(() => {
         :data-text="!!text"
         :data-placement="placement"
       >
-        <slot name="popover-content">
+        <slot
+          name="panel"
+          :is-open="isOpen"
+          :set-open="setOpen"
+        >
           {{ text }}
         </slot>
       </div>

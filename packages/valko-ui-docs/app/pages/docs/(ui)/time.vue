@@ -31,7 +31,7 @@ const timeProps: PropData[] = [
     prop: 'color',
     required: false,
     description: 'The color theme of the Time.',
-    values: 'primary, secondary, negative, warning, accent, positive',
+    values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary',
     apiType: 'custom-string'
   },
@@ -450,14 +450,14 @@ const timeFormats: FormatData[] = [
 
 watch(disabledRef, (newVal) => form.disabledTimes = newVal ? [1730721658, 1730725258] : undefined)
 
-const [ model, parsedModel, adapter ] = useTimeAdapter(form)
+const { model, displayValue, adapter } = useTimeAdapter(form)
 
 const generateSnippet = snippetGeneratorFactory('vk-time')
 
 const scriptCode = `<script setup lang="ts">
 import { useTimeAdapter } from '#valkoui'
 
-const [ model, _, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
+const { model, adapter } = useTimeAdapter()
 <\u002Fscript>
 `
 
@@ -506,7 +506,7 @@ const styles = {
   >
     <template #playground-view>
       <div class="w-full flex justify-center items-center flex-col gap-4">
-        <strong class="">Selected Time: {{ parsedModel }}</strong>
+        <strong class="">Selected Time: {{ displayValue }}</strong>
         <vk-time
           v-model="model"
           :format="form.format"
@@ -556,7 +556,7 @@ const styles = {
         v-model="form.color"
         label="Color"
         size="sm"
-        :options="colorOptions.general"
+        :options="colorOptions.withSurface"
       />
       <vk-select
         v-model="form.variant"
@@ -588,7 +588,7 @@ const styles = {
         :style-slots="styles.default"
       >
         <div
-          v-for="color in colorOptions.general"
+          v-for="color in colorOptions.withSurface"
           :key="color.value"
           class="flex flex-col gap-2 items-center justify-center md:items-start md:justify-start"
         >
@@ -600,7 +600,7 @@ const styles = {
         </div>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', {values: colorOptions.general.map(o => o.value), extraProps})}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('color', {values: colorOptions.withSurface.map(o => o.value), extraProps})}`" />
         </template>
       </example-section>
 

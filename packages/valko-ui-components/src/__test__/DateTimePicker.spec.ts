@@ -1,0 +1,652 @@
+import { ref, computed, toValue, nextTick } from 'vue'
+import { VueWrapper, mount } from '@vue/test-utils'
+import VkDateTimePicker from '#valkoui/components/DateTimePicker.vue'
+import type { DateTimeAdapterResult } from '#valkoui/types/DateTimePicker'
+
+const { useDateTimeAdapter } = vi.hoisted(() => ({
+  useDateTimeAdapter: vi.fn(() => ({
+    model: ref(1729017518),
+    displayValue: computed(() => '2024-10-15 10:10'),
+    adapter: {
+      date: {
+        formattedDates: computed(() => ({
+          selected: {
+            day: 15,
+            month: 9,
+            year: 2024,
+            lastDayOfMonth: 31,
+            firstWeekDay: 2,
+            obj: new Date(2024, 9, 15)
+          },
+          display: {
+            day: 15,
+            month: 9,
+            year: 2024,
+            lastDayOfMonth: 31,
+            firstWeekDay: 2,
+            obj: new Date(2024, 9, 15)
+          }
+        })),
+        disabledDates: computed(() => []),
+        onSelectDay: () => 1728961200000,
+        onSelectMonth: () => 1727751600000,
+        onSelectYear: () => 1704078000000,
+        getWeekdays: () => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        getMonths: () => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      },
+      time: {
+        formattedTime: computed(() => ({
+          selected: {
+            hours: 10,
+            minutes: 10,
+            seconds: 0,
+            obj: new Date(1729017518)
+          },
+          display: {
+            hours: 10,
+            minutes: 10,
+            seconds: 0,
+            obj: new Date(1729017518)
+          }
+        })),
+        setDisplayUnit: vi.fn(),
+        onSelectAMPM: vi.fn(),
+        onSelectTime: vi.fn(),
+        isTimeDisabled: vi.fn(),
+        period: ref('AM')
+      }
+    },
+    controls: {
+      commitSelection: vi.fn(() => 1729017518),
+      resetSelection: vi.fn()
+    }
+  } as DateTimeAdapterResult))
+}))
+
+vi.mock('#valkoui/composables/useDateTimeAdapter.ts', () => ({
+  default: useDateTimeAdapter
+}))
+
+const { model, displayValue: displayValueRef, adapter, controls } = useDateTimeAdapter()
+const modelValue = toValue(model)
+const displayValue = toValue(displayValueRef)
+
+describe('DateTimePicker component', () => {
+  let wrapper: VueWrapper
+
+  describe('Props', () => {
+    describe('With default props', () => {
+      beforeEach(() => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            modelValue,
+            displayValue,
+            adapter,
+            controls
+          }
+        })
+      })
+
+      it('should render', () => {
+        expect(wrapper.find('.vk-datetimepicker').exists()).toBe(true)
+      })
+
+      it('should be color primary', () => {
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('focus:border-primary')
+      })
+
+      it('should be size md', () => {
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('text-base')
+      })
+
+      it('should be variant filled', () => {
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('bg-surface-container-highest')
+      })
+
+      it('should be shape soft', () => {
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
+      })
+
+      it('should show the date section by default', () => {
+        expect(wrapper.find('.vk-datetimepicker__date-section').exists()).toBe(true)
+      })
+    })
+
+    describe('When color prop changes', () => {
+      it('should be color primary when props.color is primary', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            color: 'primary',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('focus:border-primary')
+      })
+
+      it('should be color secondary when props.color is secondary', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            color: 'secondary',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('focus:border-secondary')
+      })
+
+      it('should be color positive when props.color is positive', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            color: 'positive',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('focus:border-positive')
+      })
+
+      it('should be color accent when props.color is accent', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            color: 'accent',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('focus:border-accent')
+      })
+
+      it('should be color warning when props.color is warning', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            color: 'warning',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('focus:border-warning')
+      })
+
+      it('should be color negative when props.color is negative', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            color: 'negative',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('focus:border-negative')
+      })
+
+      it('should be color surface when props.color is surface', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            color: 'surface',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('focus:border-on-surface')
+      })
+    })
+
+    describe('When shape prop changes', () => {
+      it('should be rounded when props.shape is rounded', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            shape: 'rounded',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-2xl')
+      })
+
+      it('should be soft when props.shape is soft', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            shape: 'soft',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
+      })
+
+      it('should be square when props.shape is square', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            shape: 'square',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-none')
+      })
+    })
+
+    describe('When size prop changes', () => {
+      it('should be xs when props.size is xs', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            size: 'xs',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('text-xs')
+      })
+
+      it('should be sm when props.size is sm', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            size: 'sm',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('text-sm')
+      })
+
+      it('should be md when props.size is md', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            size: 'md',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('text-base')
+      })
+
+      it('should be lg when props.size is lg', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            size: 'lg',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('text-lg')
+      })
+    })
+
+    describe('When variant prop changes', () => {
+      it('should be filled when props.variant is filled', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            variant: 'filled',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('bg-surface-container-highest')
+      })
+
+      it('should be outlined when props.variant is outlined', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            variant: 'outlined',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('border-2')
+      })
+
+      it('should be ghost when props.variant is ghost', () => {
+        wrapper = mount(VkDateTimePicker, {
+          props: {
+            isOpen: true,
+            variant: 'ghost',
+            displayValue,
+            modelValue,
+            adapter,
+            controls
+          }
+        })
+        const input = wrapper.find('.vk-input__input')
+        expect(input.classes()).toContain('bg-transparent')
+      })
+    })
+  })
+
+  describe('View navigation', () => {
+    it('should show the time view when a day is selected', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          isOpen: true,
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        }
+      })
+
+      await wrapper.findAll('.vk-calendar__grid-button')[14].trigger('click')
+      await nextTick()
+
+      expect(wrapper.find('.vk-datetimepicker__time-section').exists()).toBe(true)
+    })
+
+    it('should not emit update:modelValue when a day is selected', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          isOpen: true,
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        }
+      })
+
+      await wrapper.findAll('.vk-calendar__grid-button')[14].trigger('click')
+      await nextTick()
+
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    })
+
+    it('should show the date view when the back button is clicked', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          isOpen: true,
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        }
+      })
+
+      await wrapper.findAll('.vk-calendar__grid-button')[14].trigger('click')
+      await nextTick()
+
+      await wrapper.find('.vk-datetimepicker__back-button').trigger('click')
+      await nextTick()
+
+      expect(wrapper.find('.vk-datetimepicker__date-section').exists()).toBe(true)
+    })
+
+    it('should show the date view when reopened after closing', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          isOpen: true,
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        }
+      })
+
+      await wrapper.findAll('.vk-calendar__grid-button')[14].trigger('click')
+      await nextTick()
+
+      await wrapper.setProps({ isOpen: false })
+      await nextTick()
+
+      await wrapper.setProps({ isOpen: true })
+      await nextTick()
+
+      expect(wrapper.find('.vk-datetimepicker__date-section').exists()).toBe(true)
+    })
+
+    it('should call resetSelection when the picker closes', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          isOpen: true,
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        }
+      })
+
+      await wrapper.setProps({ isOpen: false })
+      await nextTick()
+
+      expect(controls.resetSelection).toHaveBeenCalled()
+    })
+  })
+
+  describe('Emits', () => {
+    it('should emit update:isOpen when the input is focused', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          isOpen: undefined,
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        },
+        attachTo: document.body
+      })
+
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.emitted('update:isOpen')).toEqual([[true]])
+    })
+
+    it('should emit update:isOpen when a click occurs outside the component', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        },
+        attachTo: document.body
+      })
+
+      const input = wrapper.find('.vk-input__input')
+
+      await input.trigger('focus')
+      await nextTick()
+
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      expect(wrapper.emitted('update:isOpen')).toEqual([
+        [true],
+        [false]
+      ])
+    })
+
+    it('should call commitSelection, emit update:modelValue and close when OK is clicked', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        },
+        attachTo: document.body
+      })
+
+      const input = wrapper.find('.vk-input__input')
+      await input.trigger('focus')
+      await nextTick()
+
+      const dayButton = wrapper.findAll('.vk-calendar__grid-button')[14]
+      await dayButton.trigger('click')
+      await nextTick()
+
+      const okButton = wrapper.find('.vk-time__ok-button')
+      await okButton.trigger('click')
+      await nextTick()
+
+      expect(controls.commitSelection).toHaveBeenCalled()
+      expect(wrapper.emitted('update:modelValue')).toEqual([[1729017518]])
+      expect(wrapper.emitted('update:isOpen')).toEqual([
+        [true],
+        [false]
+      ])
+    })
+  })
+
+  describe('Uncontrolled mode', () => {
+    it('should render closed by default when isOpen is not passed', () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        }
+      })
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should open when the input is focused', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        },
+        attachTo: document.body
+      })
+
+      await wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+    })
+
+    it('should close when clicking outside', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        },
+        attachTo: document.body
+      })
+
+      await wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+    })
+
+    it('should reset the view when the picker closes', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        },
+        attachTo: document.body
+      })
+
+      const input = wrapper.find('.vk-input__input')
+
+      await input.trigger('focus')
+      await nextTick()
+
+      await wrapper.findAll('.vk-calendar__grid-button')[14].trigger('click')
+      await nextTick()
+
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      await input.trigger('focus')
+      await nextTick()
+
+      expect(wrapper.find('.vk-datetimepicker__date-section').exists()).toBe(true)
+    })
+
+    it('should call resetSelection when the picker closes', async () => {
+      wrapper = mount(VkDateTimePicker, {
+        props: {
+          modelValue,
+          displayValue,
+          adapter,
+          controls
+        },
+        attachTo: document.body
+      })
+
+      await wrapper.find('.vk-input__input').trigger('focus')
+      await nextTick()
+
+      document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      await nextTick()
+
+      expect(controls.resetSelection).toHaveBeenCalled()
+    })
+  })
+})

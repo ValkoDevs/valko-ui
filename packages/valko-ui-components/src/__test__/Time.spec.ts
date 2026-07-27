@@ -4,10 +4,10 @@ import VkTime from '#valkoui/components/Time.vue'
 import type { TimeAdapterResult } from '#valkoui/types/Time'
 
 const { useTimeAdapter } = vi.hoisted(() => ({
-  useTimeAdapter: vi.fn(() => ([
-    ref(1728987010),
-    computed(() => '10:10:10'),
-    {
+  useTimeAdapter: vi.fn(() => ({
+    model: ref(1728987010),
+    displayValue: computed(() => '10:10:10'),
+    adapter: {
       formattedTime: computed(() => ({
         selected: {
           hours: 10,
@@ -28,14 +28,14 @@ const { useTimeAdapter } = vi.hoisted(() => ({
       isTimeDisabled: vi.fn(),
       period: ref('AM')
     }
-  ] as TimeAdapterResult))
+  } as TimeAdapterResult))
 }))
 
 vi.mock('#valkoui/composables/useTimeAdapter.ts', () => ({
   default: useTimeAdapter
 }))
 
-const [ model, , adapter ] = useTimeAdapter()
+const { model, adapter } = useTimeAdapter()
 const modelValue = toValue(model)
 
 describe('Time component', () => {

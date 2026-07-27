@@ -1,9 +1,10 @@
 import { type Ref, computed, ref, toValue } from 'vue'
 import type { AdapterProps, DayOfWeek, AdapterResult } from '#valkoui/types/Calendar'
+import formatDateTime from '#valkoui/utils/formatDateTime.ts'
 
-const useDateAdapter = (props: AdapterProps | Ref<AdapterProps>): AdapterResult => {
+const useDateAdapter = (props: AdapterProps | Ref<AdapterProps>, externalModel?: Ref<EpochTimeStamp>): AdapterResult => {
   const tempDate = ref<Date | null>(null)
-  const model = ref<EpochTimeStamp>(+new Date())
+  const model = externalModel ?? ref<EpochTimeStamp>(+new Date())
 
   const formatDate = (normalizedDate: Date) => {
     const helperDate = new Date(normalizedDate.getFullYear(), normalizedDate.getMonth() + 1, 0)
@@ -38,23 +39,8 @@ const useDateAdapter = (props: AdapterProps | Ref<AdapterProps>): AdapterResult 
   })
 
   const parsedModel = computed(() => {
-    const { format } = toValue(props)
-    const date = formattedDates.value.selected
-
-    const result = format || 'YYYY-MM-DD'
-
-    return result
-      .replace('YYYY', `${date.year}`)
-      .replace('YY', `${date.year}`.slice(-2))
-      .replace('MMMM', date.obj.toLocaleDateString(undefined, { month: 'long' }))
-      .replace('MMM', date.obj.toLocaleDateString(undefined, { month: 'short' }))
-      .replace('MM', `${date.month + 1}`.padStart(2, '0'))
-      .replace('M', `${date.month + 1}`)
-      .replace('DD', `${date.day}`.padStart(2, '0'))
-      .replace('D', `${date.day}`)
-      .replace('dddd', date.obj.toLocaleDateString(undefined, { weekday: 'long' }))
-      .replace('ddd', date.obj.toLocaleDateString(undefined, { weekday: 'short' }))
-      .replace('dd', date.obj.toLocaleDateString(undefined, { weekday: 'narrow' }))
+    const { format, locale } = toValue(props)
+    return formatDateTime(new Date(model.value), format || 'YYYY-MM-DD', locale)
   })
 
   const disabledDates = computed(() =>{
@@ -113,19 +99,20 @@ const useDateAdapter = (props: AdapterProps | Ref<AdapterProps>): AdapterResult 
     return months
   }
 
-  return [
+  return {
     model,
-    parsedModel,
-    {
+    displayValue: parsedModel,
+    adapter: {
       formattedDates,
       disabledDates,
       onSelectDay,
       onSelectMonth,
       onSelectYear,
       getWeekdays,
-      getMonths
+      getMonths,
+      resetTempState: () => { tempDate.value = null }
     }
-  ]
+  }
 }
 
 export default useDateAdapter
