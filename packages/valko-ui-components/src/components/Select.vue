@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted, nextTick, Ref } from 'vue'
+import { computed, ref, onMounted, onUnmounted, nextTick, type ComponentPublicInstance, type Ref } from 'vue'
 import type { SelectProps, SelectOption } from '#valkoui/types/Select'
 import styles from '#valkoui/styles/Select.styles.ts'
 import VkIcon from './Icon.vue'
@@ -88,6 +88,10 @@ const clearSelection = () => {
 }
 
 const highlightedIndex = ref(-1)
+
+const setItemRef = (index: number) => (el: Element | ComponentPublicInstance | null) => {
+  itemRefs.value[index] = el instanceof HTMLElement ? el : null
+}
 
 const handleKeyDown = (e: KeyboardEvent) => {
   type AllowedKeys = 'ArrowDown' | 'ArrowUp' | 'Home' | 'End' | 'Enter' | 'SpaceBar'
@@ -203,7 +207,7 @@ onUnmounted(() => {
             v-for="(option, index) in options"
             role="option"
             :key="option.value"
-            :ref="el => itemRefs[index] = (el as HTMLElement | null)"
+            :ref="setItemRef(index)"
             :data-highlighted="highlightedIndex === index"
             :data-selected="isSelected(option.value)"
             :data-shape="shape"

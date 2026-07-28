@@ -12,6 +12,7 @@ describe('useDarkMode composable', () => {
 
   afterEach(() => {
     vi.clearAllMocks()
+    vi.unstubAllGlobals()
   })
 
   it('should initialize with dark mode off if no dark class is present', () => {
@@ -75,12 +76,10 @@ describe('useDarkMode composable', () => {
 
   it('should disconnect the observer on unmounted', () => {
     const disconnectSpy = vi.fn()
-    vi.spyOn(window, 'MutationObserver').mockImplementation(() => {
-      return {
-        observe: vi.fn(),
-        disconnect: disconnectSpy,
-        takeRecords: vi.fn()
-      } as unknown as MutationObserver
+    vi.stubGlobal('MutationObserver', class {
+      observe = vi.fn()
+      disconnect = disconnectSpy
+      takeRecords = vi.fn()
     })
 
     const wrapper = mount({

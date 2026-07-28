@@ -1,8 +1,8 @@
 const useDebounce = <T = unknown>(callback: () => T, timeout: number): () => Promise<T> => {
-  let timer: NodeJS.Timeout
+  let timer: ReturnType<typeof setTimeout> | undefined
 
   return () => {
-    if (timer) clearTimeout(timer)
+    if (timer !== undefined) clearTimeout(timer)
 
     return new Promise((resolve) => {
       timer = setTimeout(() => resolve(callback()), timeout)
