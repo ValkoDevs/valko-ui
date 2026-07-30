@@ -450,7 +450,7 @@ const eventCalendar = tv({
       },
       ghost: {
         headerContainer: [
-          'border-dashed'
+          'border-none'
         ],
         event: [
           'data-[color=primary]:bg-primary-container',
@@ -485,34 +485,34 @@ const eventCalendar = tv({
           'data-[color=surface]:text-on-surface-container'
         ],
         hourCell: [
-          'before:border-dashed'
+          'before:border'
         ],
         monthDayCell: [
-          'border-dashed'
+          'border-none'
         ],
         monthDayCellToday: [
-          'border-dashed'
+          'border-none'
         ],
         monthDayCellOutside: [
-          'border-dashed'
+          'border-none'
         ],
         weekDayHeader: [
-          'border-dashed'
+          'border-none'
         ],
         weekDayHeaderToday: [
-          'border-dashed'
+          'border-none'
         ],
         monthWeekdayHeader: [
-          'border-dashed'
+          'border-none'
         ],
         timezoneHeader: [
-          'border-dashed'
+          'border-none'
         ],
         timezoneHourLabel: [
-          'border-dashed'
+          'border-none'
         ],
         eventColumnHeader: [
-          'border-b-dashed'
+          'border-b-none'
         ],
         currentTimeDot: [
           'data-[color=primary]:bg-primary-container',
