@@ -1,5 +1,215 @@
 # @valko-ui/docs
 
+## 0.7.0
+
+### Minor Changes
+
+- bf09255: ## Valko-UI Components
+
+  ### Components
+
+  - Added new component `Skeleton`.
+
+  ## Valko-UI Docs
+
+  ### Pages
+
+  - Added new documentation page for the `Skeleton` component.
+
+- 1c52a30: ## Valko-UI Components:
+
+  ### Components:
+
+  - **Table:** Removed deprecated `class` property from `TableHeader` interface. This property is no longer needed with the new tailwind-variants slot-based styling architecture.
+
+  ## Valko-UI Docs:
+
+  #### Components:
+
+  - Introduced the `ApiTable` component, which builds on `VkTable` to provide a visually enhanced and more readable API documentation table. This component features:
+
+    - **Type-safe data structures**: Implements discriminated union types for better type safety and IntelliSense support.
+    - **Intelligent color-coding**: Uses an `apiType` system to automatically color-code values based on their type (primitives, custom types, objects, functions, etc.).
+    - **Enhanced formatting**: Renders complex types as code blocks while displaying simple types with appropriate syntax highlighting.
+    - **Header-data correlation**: Ensures data types match their corresponding table headers through TypeScript constraints.
+
+  - Enhanced the `Code-block` component with an option to hide the copy button.
+
+  #### Pages:
+
+  - Refactored all documentation pages to utilize the new `ApiTable` component, providing consistent and improved API documentation across all components.
+  - Updated table data structures to use the new type-safe interfaces.
+
+  #### Utils:
+
+  - Added `formatHeaders` array containing table header definitions for format reference tables (e.g., showing HH, mm, ss format options in date/time components).
+  - Added `apiTable` barrel file to re-export ApiTable types, enabling Nuxt auto-import across all documentation pages.
+
+  #### Configuration:
+
+  - Added auto-import configuration for `ApiTable` types (`PropData`, `EmitData`, `SlotData`, `FormatData`, `ApiType`, etc.) to eliminate the need for manual imports across documentation pages.
+
+- 6f57de5: ## Valko-UI Components
+
+  ### Breaking Changes
+
+  - Dropped Nuxt 3 support. The library now requires Nuxt 4 (`^4.0.0`).
+
+  ### Dependencies
+
+  - Updated all dependencies to their latest versions.
+  - Added `@vue/language-core` as dev dependency, required by `unplugin-dts` (used via `vite-plugin-dts`).
+
+  ### Type Fixes
+
+  - Fixed Vue template callback parameters with implicit `any` types in `DataTable`, `Datepicker`, `Menu`, `Range`, `Select`, and `Table`.
+  - Adjusted callback parameter typings to satisfy stricter checks introduced by the TypeScript/tooling upgrade.
+
+  ### Tests
+
+  - Fixed `useDebounce` test not clearing callback mock between test cases.
+  - Fixed `useDarkMode` test using non-constructable `MutationObserver` mock, replaced `vi.spyOn` with `vi.stubGlobal`.
+  - Fixed `useDarkMode` test not restoring global stubs after the suite.
+
+  ***
+
+  ## Valko-UI Docs
+
+  ### Dependencies
+
+  - Updated all dependencies to their latest versions.
+  - Removed `vue-router` explicit dependency, relying on Nuxt's transitive dependency instead.
+  - Added `vite.optimizeDeps.include` to `nuxt.config.ts` to pre-bundle CJS and transitive dependencies, preventing page reloads during development.
+
+  ### Pages
+
+  - Updated the Get Started guide to reflect Nuxt 4 as the only supported version, removing all Nuxt 3 references.
+
+  ***
+
+  ## Valko-UI ESLint Config
+
+  ### Dependencies
+
+  - Updated all dependencies to their latest versions.
+
+  ***
+
+  ## CI/CD
+
+  - Updated GitHub Actions workflows (`pr-check.yml`, `release.yml`) to use Node.js 22, required by newer `eslint-flat-config-utils`.
+  - Updated `actions/checkout` and `actions/setup-node` from v2 to v4.
+  - Enabled npm caching in CI for faster dependency installation.
+
+### Patch Changes
+
+- 36e6d8b: ## Valko-UI Components:
+
+  **Types:**
+
+  - Changed all aria attributes to camelCase (from kebab-case) to ensure proper functionality.
+
+  **Components:**
+
+  - Updated all components to use camelCase aria attributes.
+
+  ***
+
+  ## Valko-UI Docs:
+
+  **Pages:**
+
+  - Updated component API documentation to reflect the aria attribute changes.
+
+- 305d717: ## Valko-UI Docs:
+
+  ### Utils
+
+  - Removed `generateStyles`.
+
+  ### Pages
+
+  - Updated all documentation pages to pass style slot objects directly, instead of using the removed utility.
+
+- 2e0391b: ## Valko-UI Docs
+
+  ### Routing
+
+  - Updated documentation routing to use Nuxt4's group folder syntax (parentheses), enabling flat URLs (e.g., `/docs/divider` instead of `/docs/layout/divider`).
+
+  ### Menu Navigation
+
+  - The menu now automatically scrolls to the active item on page reload.
+  - Scrolls to the active item when navigating between pages.
+  - Scrolls to the active item when opening the mobile menu.
+
+- 4fa44ec: ## Valko-UI Docs
+
+  - Migrate to Nuxt v4 with new `app/` directory structure.
+
+- e1d6080: ## Valko-UI Components
+
+  ### Style System
+
+  - Refactored style management: removed the custom `useStyle` composable and now use the `tv` function from `tailwind-variants` directly in all components.
+  - Added a new `styleSlots` prop to every component, typed with the corresponding `ComponentNameSlots` type exported from each styles file. This enables users to customize classes for any slot in a component.
+  - Renamed several style slots to be more self-explanatory and consistent across components.
+
+  ### Composables
+
+  - Removed `useStyle` composable, including all related tests and types.
+
+  ### Dependencies
+
+  - Updated `tailwind-variants` dependency to the latest version (v3.1.1).
+  - Installed `tailwind-merge`, a required peer dependency for `tailwind-variants` v3.x.
+
+  ### Tests
+
+  - Fixed test issues related to the migration from the custom `useStyle` hook to the `tv` function from `tailwind-variants`.
+
+  ### Components & Templates
+
+  - Updated template code to avoid naming collisions between props and style slot variables (e.g., using `props.title` instead of `title`).
+
+  ***
+
+  ## Valko-UI Docs
+
+  ### API & Documentation
+
+  - Updated all component API documentation to include the new `styleSlots` interface, listing available slot names for customization.
+  - Updated all documentation pages to use the new `style-slots` prop instead of `class` for customizing example sections.
+
+  ### Components
+
+  - Refactored custom doc components to use the `tv` function instead of the deprecated `useStyle` hook.
+
+  ### Utilities
+
+  - Added a utility function to reduce repetition when applying `style-slots` in example sections.
+
+  ### Dependencies
+
+  - Installed `tailwind-variants` in the docs package to support these changes.
+
+- e046952: - Update development dependencies across the components library, documentation site, and ESLint configuration.
+- 786a4cc: ## Valko-UI Docs
+
+  - Fixed template page cards not displaying correctly.
+  - Fixed layout issues with some template pages.
+
+- Updated dependencies [36e6d8b]
+- Updated dependencies [bf09255]
+- Updated dependencies [5ef90af]
+- Updated dependencies [1c52a30]
+- Updated dependencies [e1d6080]
+- Updated dependencies [e046952]
+- Updated dependencies [2469c63]
+- Updated dependencies [6f57de5]
+  - @valko-ui/components@0.6.0
+  - @valko-ui/eslint-config@0.3.0
+
 ## 0.6.2
 
 ### Patch Changes
