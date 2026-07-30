@@ -1,6 +1,6 @@
 {
   "name": "@valko-ui/components",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "type": "module",
   "files": [
     "dist"
@@ -34,12 +34,12 @@
     "@types/node": "^25.9.1",
     "@types/toastify-js": "^1.12.4",
     "@valko-ui/eslint-config": "*",
-    "@vitejs/plugin-vue": "^6.0.7",
+    "@vitejs/plugin-vue": "^6.0.8",
+    "@vitest/coverage-istanbul": "^4.1.10",
     "@vue/language-core": "~3.1.8",
-    "@vitest/coverage-istanbul": "^4.1.8",
-    "@vue/test-utils": "^2.4.10",
+    "@vue/test-utils": "^2.4.11",
     "clean-css": "^5.3.3",
-    "jsdom": "^29.1.1",
+    "jsdom": "^30.0.1",
     "path": "^0.12.7",
     "postcss": "^8.5.15",
     "rollup-plugin-copy": "^3.5.0",
@@ -48,9 +48,9 @@
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3",
     "vite": "^8.0.16",
-    "vite-plugin-dts": "^5.0.2",
-    "vitest": "^4.1.8",
-    "vue-tsc": "^3.3.3"
+    "vite-plugin-dts": "^5.0.3",
+    "vitest": "^4.1.10",
+    "vue-tsc": "^3.3.8"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
