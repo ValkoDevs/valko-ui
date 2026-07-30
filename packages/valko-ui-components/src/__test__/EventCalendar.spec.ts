@@ -354,7 +354,7 @@ describe('EventCalendar component', () => {
       const wrapper = mount(VkEventCalendar, {
         props: { adapter: createMockAdapter(), events: sampleEvents, modelValue: new Date(2025, 4, 15), variant: 'ghost' }
       })
-      expect(wrapper.find('.border-dashed').exists()).toBe(true)
+      expect(wrapper.find('.vk-event-calendar__ghost').exists()).toBe(true)
     })
   })
 

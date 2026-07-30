@@ -449,6 +449,9 @@ const eventCalendar = tv({
         ]
       },
       ghost: {
+        container: [
+          'vk-event-calendar__ghost'
+        ],
         headerContainer: [
           'border-none'
         ],
