@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick, computed } from 'vue'
 import type { TimepickerProps } from '#valkoui/types/Timepicker'
-import styles from '#valkoui/styles/Timepicker.styles.ts'
+import VkPopover from './Popover.vue'
 import VkInput from './Input.vue'
 import VkTime from './Time.vue'
 import VkIcon from './Icon.vue'
@@ -14,71 +13,50 @@ const props = withDefaults(defineProps<TimepickerProps>(), {
   size: 'md',
   shape: 'soft',
   format: 'HH:mm:ss',
-  okButtonLabel: 'OK'
+  okButtonLabel: 'OK',
+  isOpen: undefined
 })
 
-const emit = defineEmits(['onSelect', 'open', 'close'])
-
-const s = computed(() => styles(props))
-
-const rootRef = ref<HTMLElement | null>(null)
-
-const handleClickOutside = (event: MouseEvent) => {
-  const target = event.target as HTMLElement
-
-  if (rootRef.value && !rootRef.value.contains(target) && !target.closest('.vk-timepicker__content')) emit('close')
-}
-
-onMounted(() => nextTick(() => document.addEventListener('mousedown', handleClickOutside, true)))
-onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutside, true))
+const emit = defineEmits(['onSelect', 'update:isOpen'])
 </script>
 
 <template>
-  <div
-    ref="rootRef"
-    :class="s.container({ class: styleSlots?.container })"
+  <vk-popover
+    :is-open="isOpen"
+    :shape="shape"
+    :style-slots="{ panel: ['p-2'] }"
+    @update:is-open="emit('update:isOpen', $event)"
   >
-    <vk-input
-      v-bind="props"
-      :model-value="parsedModel"
-      :label="label"
-      :class="s.input({ class: styleSlots?.input })"
-      readonly
-      @focus="emit('open')"
-    >
-      <template #right-icon>
-        <vk-icon name="clock-2" />
-      </template>
-    </vk-input>
-
-    <transition
-      enter-active-class="transition-opacity duration-200 ease-out"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-150 ease-in"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div
-        v-if="isOpen"
-        :class="s.content({ class: styleSlots?.content })"
+    <template #trigger="{ setOpen }">
+      <vk-input
+        v-bind="props"
+        :model-value="parsedModel"
+        :label="label"
+        readonly
+        @focus="setOpen(true)"
       >
-        <vk-time
-          v-if="isOpen"
-          v-bind="props"
-          :adapter="adapter"
-          :locale="locale"
-          :format="format"
-          :min-time="minTime"
-          :max-time="maxTime"
-          :disabled-times="disabledTimes"
-          :ok-button-label="okButtonLabel"
-          @on-select="() => {
-            emit('onSelect')
-            emit('close')
-          }"
-        />
-      </div>
-    </transition>
-  </div>
+        <template #right-icon>
+          <vk-icon name="clock-2" />
+        </template>
+      </vk-input>
+    </template>
+
+    <template #panel="{ setOpen, isOpen }">
+      <vk-time
+        v-if="isOpen"
+        v-bind="props"
+        :adapter="adapter"
+        :locale="locale"
+        :format="format"
+        :min-time="minTime"
+        :max-time="maxTime"
+        :disabled-times="disabledTimes"
+        :ok-button-label="okButtonLabel"
+        @on-select="() => {
+          emit('onSelect')
+          setOpen(false)
+        }"
+      />
+    </template>
+  </vk-popover>
 </template>

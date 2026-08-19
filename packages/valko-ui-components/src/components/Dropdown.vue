@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, useId, computed } from 'vue'
+import { useId, computed } from 'vue'
 import type { DropdownProps, Item } from '#valkoui/types/Dropdown'
 import styles from '#valkoui/styles/Dropdown.styles.ts'
 import VkIcon from './Icon.vue'
@@ -22,30 +22,17 @@ const props = withDefaults(defineProps<DropdownProps>(), {
   items: () => []
 })
 
-const emit = defineEmits(['itemClick', 'click'])
+const emit = defineEmits(['itemClick', 'update:isOpen'])
 
 const s = computed(() => styles(props))
 
 const dropdownId = useId()
 const menuId = useId()
-const internalOpen = ref(false)
 
-const open = computed({
-  get: () => props.isOpen ?? internalOpen.value,
-  set: (val: boolean) => {
-    if (props.isOpen === undefined) internalOpen.value = val
-  }
-})
-
-const onClick = (event: MouseEvent) => {
-  open.value = !open.value
-  emit('click', event)
-}
-
-const onItemClick = (item: Item) => {
+const onItemClick = (item: Item, setOpen: (value: boolean) => void) => {
   emit('itemClick', item)
   item.onClick?.()
-  open.value = false
+  setOpen(false)
 }
 </script>
 
@@ -53,43 +40,46 @@ const onItemClick = (item: Item) => {
   <vk-popover
     :class="s.container({ class: styleSlots?.container })"
     :style-slots="{ panel: [s.panel({ class: styleSlots?.panel })] }"
-    :is-open="open && !disabled"
+    :is-open="disabled ? false : isOpen"
     :shape="shape"
     :placement="placement"
     :alignment="alignment"
     condensed
-    @close="open = false"
+    @update:is-open="emit('update:isOpen', $event)"
   >
-    <slot
-      name="dropdown-trigger"
-      :v-bind="props"
-      :open="open"
-      :toggle="onClick"
-    >
-      <vk-button
-        :variant="variant"
-        :shape="shape"
-        :color="color"
-        :size="size"
-        :id="dropdownId"
+    <template #trigger="{ isOpen, setOpen }">
+      <slot
+        name="trigger"
+        :is-open="isOpen"
+        :set-open="setOpen"
         :disabled="disabled"
-        :elevated="elevated"
-        :class="s.triggerButton({ class: styleSlots?.triggerButton })"
-        :aria-haspopup="'menu'"
-        :aria-expanded="open"
-        :aria-controls="menuId"
-        @click.stop="onClick"
       >
-        {{ label }}
-        <vk-icon
-          :class="s.icon({ class: styleSlots?.icon })"
-          :name="icon"
-          :data-open="open"
-        />
-      </vk-button>
-    </slot>
+        <vk-button
+          :variant="variant"
+          :shape="shape"
+          :color="color"
+          :size="size"
+          :id="dropdownId"
+          :disabled="disabled"
+          :elevated="elevated"
+          :class="s.triggerButton({ class: styleSlots?.triggerButton })"
+          :aria-haspopup="'menu'"
+          :aria-expanded="isOpen"
+          :aria-controls="menuId"
+          @click="setOpen(!isOpen)"
+        >
+          {{ label }}
 
-    <template #popover-content>
+          <vk-icon
+            :class="s.icon({ class: styleSlots?.icon })"
+            :name="icon"
+            :data-open="isOpen"
+          />
+        </vk-button>
+      </slot>
+    </template>
+
+    <template #panel="{ setOpen }">
       <div
         :id="menuId"
         role="menu"
@@ -107,7 +97,7 @@ const onItemClick = (item: Item) => {
           :class="s.itemsButton({ class: styleSlots?.itemsButton })"
           :data-disabled="item.disabled"
           :data-shape="shape"
-          @click.prevent="onItemClick(item)"
+          @click.prevent="onItemClick(item, setOpen)"
         >
           <vk-icon
             v-if="item.icon"

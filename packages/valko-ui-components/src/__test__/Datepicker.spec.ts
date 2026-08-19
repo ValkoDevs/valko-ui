@@ -88,13 +88,6 @@ describe('Datepicker component', () => {
 
         expect(input.classes()).toContain('bg-surface-container-highest')
       })
-
-      it('should be shape soft', async () => {
-        const input = wrapper.findAll('.vk-input__input')[0]
-        await input.trigger('focus')
-
-        expect(wrapper.find('.vk-datepicker__content').classes()).toContain('rounded-lg')
-      })
     })
 
     describe('When color prop changes', () => {
@@ -215,7 +208,6 @@ describe('Datepicker component', () => {
       it('should be rounded when props.shape is rounded', async () => {
         wrapper = mount(VkDatepicker, {
           props: {
-            isOpen: true,
             shape: 'rounded',
             parsedModel,
             modelValue,
@@ -223,16 +215,14 @@ describe('Datepicker component', () => {
           }
         })
 
-        const input = wrapper.findAll('.vk-input__input')[0]
-        await input.trigger('focus')
+        await wrapper.find('.vk-input__input').trigger('focus')
 
-        expect(wrapper.find('.vk-datepicker__content').classes()).toContain('rounded-2xl')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-2xl')
       })
 
       it('should be soft when props.shape is soft', async () => {
         wrapper = mount(VkDatepicker, {
           props: {
-            isOpen: true,
             shape: 'soft',
             parsedModel,
             modelValue,
@@ -240,16 +230,14 @@ describe('Datepicker component', () => {
           }
         })
 
-        const input = wrapper.findAll('.vk-input__input')[0]
-        await input.trigger('focus')
+        await wrapper.find('.vk-input__input').trigger('focus')
 
-        expect(wrapper.find('.vk-datepicker__content').classes()).toContain('rounded-lg')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
 
       it('should be square when props.shape is square', async () => {
         wrapper = mount(VkDatepicker, {
           props: {
-            isOpen: true,
             shape: 'square',
             parsedModel,
             modelValue,
@@ -257,10 +245,9 @@ describe('Datepicker component', () => {
           }
         })
 
-        const input = wrapper.findAll('.vk-input__input')[0]
-        await input.trigger('focus')
+        await wrapper.find('.vk-input__input').trigger('focus')
 
-        expect(wrapper.find('.vk-datepicker__content').classes()).toContain('rounded-none')
+        expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-none')
       })
     })
 
@@ -381,24 +368,6 @@ describe('Datepicker component', () => {
     })
   })
 
-  describe('Methods & Listeners', () => {
-    it('should remove event listeners when the component is unmounted', async () => {
-      const removeSpy = vi.spyOn(document, 'removeEventListener')
-      const wrapper = mount(VkDatepicker, {
-        props: {
-          isOpen: true,
-          modelValue,
-          parsedModel,
-          adapter
-        }
-      })
-
-      wrapper.unmount()
-      expect(removeSpy).toHaveBeenCalledWith('mousedown', expect.any(Function), true)
-      removeSpy.mockRestore()
-    })
-  })
-
   describe('Emits', () => {
     it('should emit update:modelValue event', async () => {
       const wrapper = mount(VkDatepicker, {
@@ -415,7 +384,7 @@ describe('Datepicker component', () => {
       expect(wrapper.emitted()).toHaveProperty('update:modelValue')
     })
 
-    it('should emit open when the input is focused', async () => {
+    it('should emit update:isOpen true when the input is focused', async () => {
       const wrapper = mount(VkDatepicker, {
         props: {
           isOpen: false,
@@ -425,12 +394,12 @@ describe('Datepicker component', () => {
         }
       })
 
-      await wrapper.findAll('.vk-input__input').at(0)?.trigger('focus')
+      await wrapper.find('.vk-input__input').trigger('focus')
 
-      expect(wrapper.emitted()).toHaveProperty('open')
+      expect(wrapper.emitted('update:isOpen')).toEqual([[true]])
     })
 
-    it('should emit close when a click occurs outside the root component', async () => {
+    it('should emit update:isOpen true when the chevron icon is clicked', async () => {
       const wrapper = mount(VkDatepicker, {
         props: {
           isOpen: false,
@@ -440,14 +409,15 @@ describe('Datepicker component', () => {
         }
       })
 
-      await wrapper.findAll('.vk-input__input').at(0)?.trigger('focus')
-      document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
-      await nextTick()
+      await wrapper
+        .findComponent({ name: 'VkInput' })
+        .vm
+        .$emit('right-icon-click')
 
-      expect(wrapper.emitted()).toHaveProperty('close')
+      expect(wrapper.emitted('update:isOpen')).toEqual([[true]])
     })
 
-    it('should emit close when a date is selected', async () => {
+    it('should emit update:isOpen false when selection is finalized', async () => {
       const wrapper = mount(VkDatepicker, {
         props: {
           isOpen: true,
@@ -457,25 +427,57 @@ describe('Datepicker component', () => {
         }
       })
 
-      await wrapper.findAll('.vk-calendar__grid-button').at(0)?.trigger('click')
+      await wrapper.findComponent({ name: 'VkCalendar' }).vm.$emit('finalize-selection')
+      await nextTick()
 
-      expect(wrapper.emitted()).toHaveProperty('close')
+      expect(wrapper.emitted('update:isOpen')).toEqual([[false]])
     })
 
-    it('should close the datepicker when finalize-selection event is emitted from the calendar', async () => {
+    it('should call setOpen(false) when calendar finalizes selection', async () => {
+      const setOpen = vi.fn()
+
       const wrapper = mount(VkDatepicker, {
         props: {
-          isOpen: false,
+          isOpen: true,
           modelValue,
           parsedModel,
           adapter
+        },
+        global: {
+          stubs: {
+            VkPopover: {
+              name: 'VkPopover',
+              template: `
+              <div>
+                <slot
+                  name="panel"
+                  :setOpen="setOpen"
+                  :isOpen="true"
+                />
+              </div>
+            `,
+              setup() {
+                return {
+                  setOpen
+                }
+              }
+            },
+            VkCalendar: {
+              name: 'VkCalendar',
+              emits: ['finalize-selection'],
+              template: `
+              <button @click="$emit('finalize-selection')">
+                finalize
+              </button>
+            `
+            }
+          }
         }
       })
 
-      await wrapper.findAll('.vk-input__input').at(0)?.trigger('focus')
-      await wrapper.findAll('.vk-calendar__grid-button').at(0)?.trigger('click')
+      await wrapper.find('button').trigger('click')
 
-      expect(wrapper.findComponent({ name: 'VkCalendar' }).exists()).toBe(false)
+      expect(setOpen).toHaveBeenCalledWith(false)
     })
   })
 })
