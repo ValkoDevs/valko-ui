@@ -91,6 +91,7 @@
   --animate-progress: progress 1.5s infinite linear;
   --animate-cicle: cicle 1s infinite linear;
   --animate-ripple: ripple 0.4s ease-out;
+  --animate-pop: pop 0.4s ease-in-out;
 
   @keyframes progress {
     0% { clip-path: inset(0 100% 0 0) }
@@ -113,6 +114,21 @@
     100% {
       transform: scale(1);
       opacity: 1;
+    }
+  }
+
+  @keyframes pop {
+    0% {
+      transform: scale(1);
+    }
+    35% {
+      transform: scale(1.35) rotate(-8deg);
+    }
+    70% {
+      transform: scale(0.92);
+    }
+    100% {
+      transform: scale(1);
     }
   }
 }
