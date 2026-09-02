@@ -20,11 +20,11 @@ export interface ListNavigationConfig {
   loop?: boolean
   onMove: (index: number) => void
   onSelect?: (index: number) => void
-  isItemDisabled?: (index: number) => boolean
 }
 
 export interface GridNavigationConfig extends ListNavigationConfig{
   columnCount: MaybeRefOrGetter<number>
+  isItemDisabled?: (index: number) => boolean
 }
 
 export interface RangeNavigationConfig {

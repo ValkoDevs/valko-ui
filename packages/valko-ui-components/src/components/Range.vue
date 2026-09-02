@@ -229,12 +229,11 @@ const thumbStyles = computed(() => {
 })
 
 const stepMarks = computed(() => {
-  const steps = Math.round(
-    (props.max - props.min) / props.step
-  )
+  const steps = Math.max(0, Math.round((props.max - props.min) / props.step))
+  const markCount = Math.max(0, steps - 1)
 
   return Array.from(
-    { length: steps - 1 },
+    { length: markCount },
     (_, index) =>
       ((index + 1) * props.step /
         (props.max - props.min)) *

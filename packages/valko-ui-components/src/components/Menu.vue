@@ -54,7 +54,7 @@ const focusItem = (index: number) => {
   focusedIndex.value = index
 
   nextTick(() => {
-    const allButtons = document.querySelectorAll<HTMLElement>('[role="menuitem"]')
+    const allButtons = document.querySelectorAll<HTMLElement>('[role="menuitem"]:not([aria-disabled="true"])')
     allButtons[index]?.focus()
   })
 }

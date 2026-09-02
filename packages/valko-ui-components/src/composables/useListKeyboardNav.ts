@@ -1,5 +1,5 @@
 import { toValue } from 'vue'
-import type { KeyMap, ListNavigationConfig, NavigationKey } from '../types/keyboardNavigation.ts'
+import type { KeyMap, ListNavigationConfig, NavigationKey } from '../types/keyboardNavigation'
 
 const useListKeyboardNav = (config: ListNavigationConfig) => {
   const move = (delta: number) => {
