@@ -27,20 +27,14 @@ const isSelected = (day: number) =>
   && props.selected.month === props.display.month
   && props.selected.day === day
 
-const isArrowDisabled = (direction: 'min' | 'max') => {
-  const limit = props[direction]
+const isArrowDisabled = computed(() => (direction: 'min' | 'max') =>
+  props[direction]
+  && props[direction].year === props.display.year
+  && props[direction].month === props.display.month
+)
 
-  return !!(
-    limit &&
-    limit.year === props.display.year &&
-    limit.month === props.display.month
-  )
-}
 
-const isWeekend = (index: number) => {
-  const weekday = index % 7
-  return weekday === 0 || weekday === 6
-}
+const isWeekend = (index: number) => [0, 6].includes(index - Math.floor(index / 7) * 7)
 const onSelectDate = (day: number) => emit('selectDay', day)
 const onArrowClick = (operation: 1 | -1) => emit('changeMonth', props.display.month + operation)
 
@@ -50,10 +44,8 @@ const isCellDisabled = (day: number, index: number) => {
 
 const navigableCells = computed(() => {
   return gridCells.value.reduce<Array<{ gridIndex: number, day: number }>>((acc, cell, index) => {
-    if (cell === null) return acc
-    if (isCellDisabled(cell, index)) return acc
-
-    acc.push({ gridIndex: index, day: cell })
+    if (cell && !isCellDisabled(cell, index))
+      acc.push({ gridIndex: index, day: cell })
     return acc
   }, [])
 })
