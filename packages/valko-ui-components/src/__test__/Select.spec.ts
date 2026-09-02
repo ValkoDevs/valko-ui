@@ -9,7 +9,9 @@ describe('Select component', () => {
     { value: 3, label: 'Devon Webb' },
     { value: 4, label: 'Tom Cook' }
   ]
+
   let wrapper: VueWrapper
+
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(async () => {
@@ -296,6 +298,44 @@ describe('Select component', () => {
         })
 
         expect(wrapper.find('.vk-input__helper').text()).toContain('Hello World')
+      })
+    })
+
+    describe('When disableIconClickFocus prop changes', () => {
+      it('should not focus the input when left icon is clicked and disableIconClickFocus is true', async () => {
+        const wrapper = mount(VkSelect, {
+          attachTo: document.body,
+          props: {
+            disableIconClickFocus: true
+          },
+          slots: {
+            'left-icon': '<i class="ti ti-home"></i>'
+          }
+        })
+
+        await wrapper.find('.vk-left-icon').trigger('click')
+
+        expect(wrapper.find('.vk-input__input').element).not.toBe(document.activeElement)
+
+        wrapper.unmount()
+      })
+
+      it('should focus the input when left icon is clicked and disableIconClickFocus is false', async () => {
+        const wrapper = mount(VkSelect, {
+          attachTo: document.body,
+          props: {
+            disableIconClickFocus: false
+          },
+          slots: {
+            'left-icon': '<i class="ti ti-home"></i>'
+          }
+        })
+
+        await wrapper.find('.vk-left-icon').trigger('click')
+
+        expect(wrapper.find('.vk-input__input').element).toBe(document.activeElement)
+
+        wrapper.unmount()
       })
     })
   })
@@ -914,6 +954,19 @@ describe('Select component', () => {
     })
   })
 
+  describe('Slots', () => {
+    it('should render left-icon slot content when provided', () => {
+      const wrapper = mount(VkSelect, {
+        props: { options },
+        slots: {
+          'left-icon': '<i class="test-left-icon"></i>'
+        }
+      })
+
+      expect(wrapper.find('i.test-left-icon').exists()).toBe(true)
+    })
+  })
+
   describe('Emits', () => {
     it('should emit update event', async () => {
       const wrapper = mount(VkSelect, {
@@ -927,6 +980,32 @@ describe('Select component', () => {
       wrapper.find('.vk-select__item:first-child').trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('update:modelValue')
+    })
+
+    it('should emit leftIconClick when left-icon slot content is clicked', async () => {
+      const wrapper = mount(VkSelect, {
+        props: { options },
+        slots: {
+          'left-icon': '<i class="test-left-icon"></i>'
+        }
+      })
+
+      await wrapper.find('i.test-left-icon').trigger('click')
+
+      expect(wrapper.emitted()).toHaveProperty('leftIconClick')
+    })
+
+    it('should not emit leftIconClick when component is disabled', async () => {
+      const wrapper = mount(VkSelect, {
+        props: { options, disabled: true },
+        slots: {
+          'left-icon': '<i class="test-left-icon"></i>'
+        }
+      })
+
+      await wrapper.find('i.test-left-icon').trigger('click')
+
+      expect(wrapper.emitted()).not.toHaveProperty('leftIconClick')
     })
   })
 })

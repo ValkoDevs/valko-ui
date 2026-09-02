@@ -22,6 +22,10 @@ const form = ref<SelectProps>({
   clearable: false
 })
 
+const iconsInForm = ref({
+  left: false
+})
+
 const exampleSectionModel = reactive<Record<string, number>>({ readonly: 1 })
 
 const apiData: PropData[] = [
@@ -62,19 +66,10 @@ const apiData: PropData[] = [
     apiType: 'primitive'
   },
   {
-    key: 'roundedProp',
-    prop: 'rounded',
-    required: false,
-    description: 'Whether the Select is rounded or not.',
-    values: 'boolean',
-    default: 'false',
-    apiType: 'primitive'
-  },
-  {
     key: 'multipleProp',
     prop: 'multiple',
     required: false,
-    description: 'Wheter the Select is enabled to choose multiple options',
+    description: 'Whether the Select is enabled to choose multiple options.',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
@@ -83,7 +78,7 @@ const apiData: PropData[] = [
     key: 'optionsProp',
     prop: 'options',
     required: false,
-    description: 'An array of options for the Select',
+    description: 'An array of options for the Select.',
     values: 'SelectOption[]',
     default: '[]',
     apiType: 'custom-type'
@@ -92,7 +87,7 @@ const apiData: PropData[] = [
     key: 'modelValueProp',
     prop: 'modelValue',
     required: false,
-    description: 'The v-model for the Select',
+    description: 'The v-model for the Select.',
     values: 'string, number, Array<string | number>',
     default: '',
     apiType: 'primitive'
@@ -101,7 +96,7 @@ const apiData: PropData[] = [
     key: 'readonlyProp',
     prop: 'readonly',
     required: false,
-    description: 'Wheter the Select is readonly or not',
+    description: 'Whether the Select is readonly or not.',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
@@ -110,7 +105,7 @@ const apiData: PropData[] = [
     key: 'labelProp',
     prop: 'label',
     required: false,
-    description: 'The label for the Select',
+    description: 'The label for the Select.',
     values: 'string',
     default: '',
     apiType: 'primitive'
@@ -119,34 +114,16 @@ const apiData: PropData[] = [
     key: 'helpertextProp',
     prop: 'helpertext',
     required: false,
-    description: 'A hint for the Select',
+    description: 'A hint for the Select.',
     values: 'string',
     default: '',
-    apiType: 'primitive'
-  },
-  {
-    key: 'iconLeftProp',
-    prop: 'iconLeft',
-    required: false,
-    description: 'A icon on the left side for the Select',
-    values: 'string',
-    default: '',
-    apiType: 'primitive'
-  },
-  {
-    key: 'iconRightProp',
-    prop: 'iconRight',
-    required: false,
-    description: 'A icon on the right side for the Select',
-    values: 'string',
-    default: 'chevron-down',
     apiType: 'primitive'
   },
   {
     key: 'shapeProp',
     prop: 'shape',
     required: false,
-    description: 'The shape of the Button.',
+    description: 'The shape of the Select.',
     values: 'rounded, square, soft',
     default: 'soft',
     apiType: 'custom-string'
@@ -155,7 +132,16 @@ const apiData: PropData[] = [
     key: 'clearableProp',
     prop: 'clearable',
     required: false,
-    description: 'Allows to leave the selection empty and displays an icon that clears the selection when clicked.',
+    description: 'Allows the selection to be empty and displays an icon to clear the current selection.',
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
+  },
+  {
+    key: 'disableIconClickFocusProp',
+    prop: 'disableIconClickFocus',
+    required: false,
+    description: 'Prevents the input from receiving focus when an icon is clicked.',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
@@ -206,7 +192,7 @@ const apiData: PropData[] = [
     apiType: 'primitive'
   },
   {
-    key: 'styleSlotsProps',
+    key: 'styleSlotsProp',
     prop: 'styleSlots',
     required: false,
     description: 'Custom styles for different parts of the Select component.',
@@ -273,14 +259,53 @@ const styleSlotsInterface: PropData[] = [
   }
 ]
 
+const optionsInterface: PropData[] = [
+  {
+    key: 'valueOption',
+    prop: 'value',
+    required: true,
+    description: 'The value of the option, which will be used as the modelValue when the option is selected.',
+    values: 'string | number',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'labelOption',
+    prop: 'label',
+    required: true,
+    description: 'The label displayed for the option.',
+    values: 'string',
+    default: '',
+    apiType: 'primitive'
+  }
+]
+
+const slotData: SlotData[] = [
+  {
+    key: 'leftIconSlot',
+    name: 'left-icon',
+    description: 'Slot for rendering an icon on the left side of the Select.',
+    example: '<template #left-icon>\n  <!-- Your icon component goes here -->\n</template>',
+    apiType: 'slot'
+  }
+]
+
 const emitData: EmitData[] = [
   {
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the selected value(s) in the Select component change.',
-    values: 'any',
-    type: '(value: any) => void',
-    apiType: 'primitive'
+    values: 'string | number | undefined | Array<string | number>',
+    type: '(value: string | number | undefined | Array<string | number>) => void',
+    apiType: 'event'
+  },
+  {
+    key: 'leftIconClickEmit',
+    event: 'leftIconClick',
+    description: 'Emitted when the Select left icon is clicked.',
+    values: '',
+    type: '() => void',
+    apiType: 'event'
   }
 ]
 
@@ -337,7 +362,15 @@ const styles = {
         :size="form.size"
         :multiple="form.multiple"
         :clearable="form.clearable"
-      />
+        @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
+      >
+        <template
+          v-if="iconsInForm.left"
+          #left-icon
+        >
+          <vk-icon name="home" />
+        </template>
+      </vk-select>
     </template>
 
     <template #playground-options>
@@ -390,6 +423,10 @@ const styles = {
       <vk-checkbox
         v-model="form.clearable"
         label="Clearable"
+      />
+      <vk-checkbox
+        v-model="iconsInForm.left"
+        label="Left Icon"
       />
     </template>
 
@@ -489,6 +526,61 @@ const styles = {
           <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('readonly', { values: [true], extraProps })}`" />
         </template>
       </example-section>
+
+      <example-section title="Multiple">
+        <vk-select
+          multiple
+          clearable
+          :options="people"
+          label="Multiple"
+        />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('multiple', { values: [true], extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section title="Clearable">
+        <vk-select
+          clearable
+          :options="people"
+          label="Clearable"
+        />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('clearable', { values: [true], extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section title="Helpertext">
+        <vk-select
+          :options="people"
+          label="With Helpertext"
+          helpertext="Pick a person from the list."
+        />
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>('helpertext', { values: ['Pick a person from the list.'], extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section
+        title="Icons"
+        :style-slots="styles.default"
+      >
+        <vk-select
+          :options="people"
+          label="Left Icon"
+        >
+          <template #left-icon>
+            <vk-icon name="home" />
+          </template>
+        </vk-select>
+
+        <template #code>
+          <code-block :code="`${scriptCode}\n<template>\n  <vk-select :options=&quot;people&quot;>\n    <template #left-icon>\n      <vk-icon name=&quot;home&quot; />\n    </template>\n  </vk-select>\n</template>`" />
+        </template>
+      </example-section>
     </template>
 
     <template #api>
@@ -497,7 +589,9 @@ const styles = {
         :tables="[
           { title: 'Props', data: apiData, headers: 'props' },
           { title: 'Emits', data: emitData, headers: 'emits' },
-          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
+          { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' },
+          { title: 'Options', data: optionsInterface, headers: 'interface' },
+          { title: 'Slots', data: slotData, headers: 'slots' }
         ]"
       />
     </template>

@@ -19,7 +19,9 @@ const form = ref<InputProps>({
   helpertext: 'Helpertext',
   disabled: false,
   readonly: false,
-  clearable: false
+  clearable: false,
+  forceClearable: false,
+  disableIconClickFocus: false
 })
 
 const iconsInForm = ref({
@@ -28,7 +30,8 @@ const iconsInForm = ref({
 })
 
 const inputStates = reactive<Record<string, string>>({
-  readonly: 'Example readonly.'
+  readonly: 'Example readonly.',
+  forceClearable: 'Try clearing me!'
 })
 
 const apiData: PropData[] = [
@@ -64,7 +67,7 @@ const apiData: PropData[] = [
     prop: 'cursor',
     required: false,
     description: 'The displayed cursor type when hovering the input.',
-    values: 'cursor | text',
+    values: 'pointer | text',
     default: 'text',
     apiType: 'custom-string'
   },
@@ -87,10 +90,19 @@ const apiData: PropData[] = [
     apiType: 'primitive'
   },
   {
-    key: 'roundedProp',
-    prop: 'rounded',
+    key: 'clearableProp',
+    prop: 'clearable',
     required: false,
-    description: 'Whether the Input is rounded or not.',
+    description: 'Displays a clear icon that resets the input value when clicked.',
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
+  },
+  {
+    key: 'forceClearableProp',
+    prop: 'forceClearable',
+    required: false,
+    description: 'Allows clearing the input even when readonly is true. Used by components like Select that set the input as readonly but still need clear functionality.',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
@@ -99,7 +111,7 @@ const apiData: PropData[] = [
     key: 'modelValueProp',
     prop: 'modelValue',
     required: false,
-    description: 'The v-model for the Input',
+    description: 'The v-model for the Input.',
     values: 'string, number',
     default: '',
     apiType: 'primitive'
@@ -108,7 +120,7 @@ const apiData: PropData[] = [
     key: 'minProp',
     prop: 'min',
     required: false,
-    description: 'The min value for the Input in type number',
+    description: 'The minimum value for number inputs.',
     values: 'number',
     default: '-Infinity',
     apiType: 'primitive'
@@ -117,7 +129,7 @@ const apiData: PropData[] = [
     key: 'maxProp',
     prop: 'max',
     required: false,
-    description: 'The max value for the Input in type number',
+    description: 'The maximum value for number inputs.',
     values: 'number',
     default: 'Infinity',
     apiType: 'primitive'
@@ -126,7 +138,7 @@ const apiData: PropData[] = [
     key: 'stepProp',
     prop: 'step',
     required: false,
-    description: 'The step value for the Input in type number',
+    description: 'The increment/decrement step for number inputs.',
     values: 'number',
     default: '1',
     apiType: 'primitive'
@@ -135,7 +147,7 @@ const apiData: PropData[] = [
     key: 'readonlyProp',
     prop: 'readonly',
     required: false,
-    description: 'Wheter the Input is readonly or not',
+    description: 'Whether the Input is readonly or not.',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
@@ -144,7 +156,7 @@ const apiData: PropData[] = [
     key: 'labelProp',
     prop: 'label',
     required: false,
-    description: 'The label for the Input',
+    description: 'The label for the Input.',
     values: 'string',
     default: '',
     apiType: 'primitive'
@@ -153,7 +165,7 @@ const apiData: PropData[] = [
     key: 'helpertextProp',
     prop: 'helpertext',
     required: false,
-    description: 'A hint for the Input',
+    description: 'A hint for the Input.',
     values: 'string',
     default: '',
     apiType: 'primitive'
@@ -162,10 +174,19 @@ const apiData: PropData[] = [
     key: 'shapeProp',
     prop: 'shape',
     required: false,
-    description: 'The shape of the Input',
+    description: 'The shape of the Input.',
     values: 'rounded, soft, square',
     default: 'soft',
     apiType: 'custom-string'
+  },
+  {
+    key: 'disableIconClickFocusProp',
+    prop: 'disableIconClickFocus',
+    required: false,
+    description: 'Disables focusing the input when clicking on the icons.',
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
   },
   {
     key: 'ariaLabelProp',
@@ -330,8 +351,8 @@ const emitData: EmitData[] = [
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the value of the input is updated.',
-    values: 'string',
-    type: '(value: string) => void',
+    values: 'string | number',
+    type: '(value: string | number) => void',
     apiType: 'primitive'
   },
   {
@@ -356,7 +377,7 @@ const emitData: EmitData[] = [
     description: 'Emitted when the input is cleared using the clearable icon.',
     values: '',
     type: '() => void',
-    apiType: 'function'
+    apiType: 'event'
   },
   {
     key: 'leftIconClickEmit',
@@ -364,7 +385,7 @@ const emitData: EmitData[] = [
     description: 'Emitted when the left icon of the input is clicked.',
     values: '',
     type: '() => void',
-    apiType: 'function'
+    apiType: 'event'
   },
   {
     key: 'rightIconClickEmit',
@@ -372,7 +393,7 @@ const emitData: EmitData[] = [
     description: 'Emitted when the right icon of the input is clicked.',
     values: '',
     type: '() => void',
-    apiType: 'function'
+    apiType: 'event'
   }
 ]
 
@@ -436,6 +457,8 @@ const styles = {
     ]
   }
 }
+
+const resetForceClearableInput = () => setTimeout(() => { inputStates.forceClearable = 'Try clearing me!' }, 1000)
 </script>
 
 <template>
@@ -459,6 +482,8 @@ const styles = {
         :max="form.max"
         :step="form.step"
         :clearable="form.clearable"
+        :force-clearable="form.forceClearable"
+        :disable-icon-click-focus="form.disableIconClickFocus"
         @left-icon-click="useNotification({ text: 'Left Icon!!', color: 'surface' })"
         @right-icon-click="useNotification({ text: 'Right Icon!!', color: 'surface' })"
       >
@@ -550,6 +575,14 @@ const styles = {
       <vk-checkbox
         v-model="form.clearable"
         label="Clearable"
+      />
+      <vk-checkbox
+        v-model="form.forceClearable"
+        label="Force Clearable"
+      />
+      <vk-checkbox
+        v-model="form.disableIconClickFocus"
+        label="Disable Icon Click Focus"
       />
       <vk-checkbox
         v-model="iconsInForm.left"
@@ -653,6 +686,17 @@ const styles = {
         </template>
       </example-section>
 
+      <example-section title="Helpertext">
+        <vk-input
+          label="With Helpertext"
+          helpertext="This is a helpful hint."
+        />
+
+        <template #code>
+          <code-block :code="generateSnippet<string>('helpertext', { values: ['This is a helpful hint.'] })" />
+        </template>
+      </example-section>
+
       <example-section title="Readonly">
         <vk-input
           v-model="inputStates['readonly']"
@@ -673,6 +717,40 @@ const styles = {
 
         <template #code>
           <code-block :code="generateSnippet<boolean>('clearable', { values: [true] })" />
+        </template>
+      </example-section>
+
+      <example-section title="Force Clearable">
+        <vk-input
+          v-model="inputStates['forceClearable']"
+          readonly
+          force-clearable
+          clearable
+          label="Force Clearable"
+          @clear="resetForceClearableInput"
+        />
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('forceClearable', { values: [true], extraProps: 'readonly clearable' })" />
+        </template>
+      </example-section>
+
+      <example-section title="Disable Icon Click Focus">
+        <vk-input
+          label="Disable Icon Click Focus"
+          clearable
+          disable-icon-click-focus
+        >
+          <template #left-icon>
+            <vk-icon name="home" />
+          </template>
+          <template #right-icon>
+            <vk-icon name="home" />
+          </template>
+        </vk-input>
+
+        <template #code>
+          <code-block :code="generateSnippet<boolean>('disableIconClickFocus', { values: [true], extraProps: 'clearable' })" />
         </template>
       </example-section>
 

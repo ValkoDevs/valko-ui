@@ -378,6 +378,53 @@ describe('Input component', () => {
       })
     })
 
+    describe('When forceClearable prop changes', () => {
+      it('should not clear the input when readonly and forceClearable is false', async () => {
+        wrapper = mount(VkInput, {
+          props: {
+            clearable: true,
+            readonly: true,
+            forceClearable: false,
+            modelValue: 'Hello World'
+          }
+        })
+
+        await wrapper.find('i.ti.ti-x').trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+
+      it('should clear the input when readonly and forceClearable is true', async () => {
+        wrapper = mount(VkInput, {
+          props: {
+            clearable: true,
+            readonly: true,
+            forceClearable: true,
+            modelValue: 'Hello World'
+          }
+        })
+
+        await wrapper.find('i.ti.ti-x').trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toStrictEqual([['']])
+      })
+
+      it('should not clear the input when disabled even if forceClearable is true', async () => {
+        wrapper = mount(VkInput, {
+          props: {
+            clearable: true,
+            disabled: true,
+            forceClearable: true,
+            modelValue: 'Hello World'
+          }
+        })
+
+        await wrapper.find('i.ti.ti-x').trigger('click')
+
+        expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+      })
+    })
+
     describe('When modelValue changes', () => {
       it('should emit update:modelValue when input value changes', async () => {
         wrapper = mount(VkInput, {
@@ -459,6 +506,44 @@ describe('Input component', () => {
         await upArrow.trigger('mouseup')
         await wrapper.vm.$nextTick()
         expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([5])
+      })
+    })
+
+    describe('When disableIconClickFocus prop changes', () => {
+      it('should not focus the input when left icon is clicked and disableIconClickFocus is true', async () => {
+        const wrapper = mount(VkInput, {
+          attachTo: document.body,
+          props: {
+            disableIconClickFocus: true
+          },
+          slots: {
+            'left-icon': '<i class="ti ti-home"></i>'
+          }
+        })
+
+        await wrapper.find('.vk-left-icon').trigger('click')
+
+        expect(wrapper.find('.vk-input__input').element).not.toBe(document.activeElement)
+
+        wrapper.unmount()
+      })
+
+      it('should focus the input when left icon is clicked and disableIconClickFocus is false', async () => {
+        const wrapper = mount(VkInput, {
+          attachTo: document.body,
+          props: {
+            disableIconClickFocus: false
+          },
+          slots: {
+            'left-icon': '<i class="ti ti-home"></i>'
+          }
+        })
+
+        await wrapper.find('.vk-left-icon').trigger('click')
+
+        expect(wrapper.find('.vk-input__input').element).toBe(document.activeElement)
+
+        wrapper.unmount()
       })
     })
   })

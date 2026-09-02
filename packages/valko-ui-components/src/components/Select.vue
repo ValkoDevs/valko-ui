@@ -19,7 +19,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   readonly: false
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'leftIconClick'])
 
 const s = computed(() => styles(props))
 
@@ -165,6 +165,7 @@ onUnmounted(() => {
         :model-value="showValue"
         :clearable="clearable"
         cursor="pointer"
+        :disable-icon-click-focus="disableIconClickFocus"
         :aria-label="ariaLabel"
         :aria-labelledby="ariaLabelledBy"
         :aria-describedby="ariaDescribedBy"
@@ -175,7 +176,14 @@ onUnmounted(() => {
         @clear="clearSelection"
         @keydown="handleKeyDown"
         @keydown.escape="toggleDropdown(false)"
+        @left-icon-click="emit('leftIconClick', $event)"
       >
+        <template
+          #left-icon
+          v-if="$slots['left-icon']"
+        >
+          <slot name="left-icon" />
+        </template>
         <template #right-icon>
           <vk-icon
             name="chevron-down"

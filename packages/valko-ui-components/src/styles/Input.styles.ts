@@ -68,9 +68,11 @@ const input = tv({
       '-translate-y-1/2'
     ],
     rightIcon: [
+      'vk-right-icon',
       'right-3'
     ],
     leftIcon: [
+      'vk-left-icon',
       'left-3'
     ],
     clearIcon: [

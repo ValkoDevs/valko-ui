@@ -52,6 +52,7 @@ const onBlur = (event: Event) => {
 }
 
 const clearInput = () => {
+  if (props.disabled || (props.readonly && !props.forceClearable)) return
   inputValue.value = ''
   emit('update:modelValue', '')
   emit('clear')
@@ -59,10 +60,11 @@ const clearInput = () => {
 }
 
 const handleIconClick = (icon: 'left' | 'right') => {
-  if (!props.disabled && !props.readonly) {
-    emit(`${icon}IconClick`)
-    inputRef.value?.focus()
-  }
+  if (props.disabled) return
+
+  emit(`${icon}IconClick`)
+
+  if (!props.disableIconClickFocus) inputRef.value?.focus()
 }
 
 const changeNumericValue = (action: 'increment' | 'decrement') => {
