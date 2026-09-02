@@ -1,6 +1,12 @@
-import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkPagination from '#valkoui/components/Pagination.vue'
+import useRangeKeyboardNav from '#valkoui/composables/useRangeKeyboardNav.ts'
+
+vi.mock('#valkoui/composables/useRangeKeyboardNav.ts', () => ({
+  default: vi.fn(() => vi.fn())
+}))
+
+const useRangeKeyboardNavMock = vi.mocked(useRangeKeyboardNav)
 
 describe('Pagination component', () => {
   let wrapper: VueWrapper
@@ -297,26 +303,201 @@ describe('Pagination component', () => {
   })
 
   describe('Emits', () => {
-    it('should emit update event on page button', () => {
-      const wrapper = mount(VkPagination, {})
-
-      wrapper.find('.vk-pagination__button').trigger('click')
-      expect(wrapper.emitted('update:modelValue'))
-    })
-
-    it('should emit update event on arrow buttons', async () => {
-      const wrapper = mount(VkPagination, {
+    it('should emit update:modelValue when selecting a different page', async () => {
+      wrapper = mount(VkPagination, {
         props: {
-          pages: 20,
-          modelValue: 10
+          pages: 10,
+          modelValue: 5
         }
       })
 
-      wrapper.find('.vk-pagination__left').trigger('click')
-      expect(wrapper.emitted('update:modelValue'))
-      await nextTick()
-      wrapper.find('.vk-pagination__right').trigger('click')
-      expect(wrapper.emitted('update:modelValue'))
+      await wrapper.findAll('.vk-pagination__button')[0].trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([1])
+    })
+
+    it('should not emit update:modelValue when selecting the current page', async () => {
+      wrapper = mount(VkPagination, {
+        props: {
+          pages: 5,
+          modelValue: 1
+        }
+      })
+
+      await wrapper.findAll('.vk-pagination__button')[0].trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')).toBeFalsy()
+    })
+
+    it('should emit update:modelValue when previous page is selected', async () => {
+      wrapper = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5
+        }
+      })
+
+      await wrapper.find('.vk-pagination__left').trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([4])
+    })
+
+    it('should emit update:modelValue when next page is selected', async () => {
+      wrapper = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5
+        }
+      })
+
+      await wrapper.find('.vk-pagination__right').trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([6])
+    })
+
+    it('should not emit update:modelValue when selected page is disabled', async () => {
+      wrapper = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5,
+          disabled: true
+        }
+      })
+
+      await wrapper.findAll('.vk-pagination__button')[0].trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')).toBeFalsy()
+    })
+
+    it('should not emit update:modelValue when selected page is an ellipsis', () => {
+      wrapper = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5
+        }
+      })
+
+      const config = (wrapper.vm as unknown as {
+        changePage: (page: string | number) => void
+      }).changePage
+
+      config('...')
+
+      expect(wrapper.emitted('update:modelValue')).toBeFalsy()
+    })
+  })
+
+  describe('Keyboard Navigation', () => {
+    beforeEach(() => {
+      useRangeKeyboardNavMock.mockClear()
+    })
+
+    it('should pass pagination boundaries to keyboard navigation', () => {
+      mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5
+        }
+      })
+
+      const config = useRangeKeyboardNavMock.mock.calls[0][0] as {
+        min: () => number
+        max: () => number
+      }
+
+      expect({
+        min: config.min(),
+        max: config.max()
+      }).toEqual({
+        min: 1,
+        max: 10
+      })
+    })
+
+    it('should pass current value and step to keyboard navigation', () => {
+      mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5
+        }
+      })
+
+      const config = useRangeKeyboardNavMock.mock.calls[0][0] as {
+        currentValue: () => number
+        step: () => number
+      }
+
+      expect({
+        currentValue: config.currentValue(),
+        step: config.step()
+      }).toEqual({
+        currentValue: 5,
+        step: 1
+      })
+    })
+
+    it('should disable keyboard navigation when pagination is disabled', () => {
+      mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5,
+          disabled: true
+        }
+      })
+
+      const config = useRangeKeyboardNavMock.mock.calls[0][0] as {
+        enabled: () => boolean
+      }
+
+      expect(config.enabled()).toBe(false)
+    })
+
+    it('should enable keyboard navigation when pagination is enabled', () => {
+      mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5
+        }
+      })
+
+      const config = useRangeKeyboardNavMock.mock.calls[0][0] as {
+        enabled: () => boolean
+      }
+
+      expect(config.enabled()).toBe(true)
+    })
+
+    it('should attach keyboard navigation handler to pagination', async () => {
+      const mockHandler = vi.fn()
+      useRangeKeyboardNavMock.mockReturnValue(mockHandler)
+
+      wrapper = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5
+        }
+      })
+
+      await wrapper.find('.vk-pagination__nav').trigger('keydown')
+
+      expect(mockHandler).toHaveBeenCalled()
+    })
+
+    it('should emit update:modelValue when keyboard navigation updates page', () => {
+      wrapper = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5
+        }
+      })
+
+      const config = useRangeKeyboardNavMock.mock.calls[0][0] as {
+        onUpdate: (value: number) => void
+      }
+
+      config.onUpdate(6)
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([6])
     })
   })
 })

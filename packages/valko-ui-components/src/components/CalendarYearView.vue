@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import type { CalendarYearViewProps } from '#valkoui/types/Calendar'
 import styles from '#valkoui/styles/Calendar.styles.ts'
+import useGridKeyboardNav from '#valkoui/composables/useGridKeyboardNav.ts'
 import VkCalendarHeader from './CalendarHeader.vue'
 import VkButton from './Button.vue'
 
@@ -13,6 +14,7 @@ const emit = defineEmits(['selectYear'])
 const s = computed(() => styles(props))
 
 const jumps = ref(0)
+const panelRef = ref<HTMLElement | null>(null)
 
 const yearList = computed(() => {
   const start = 1970 + 20 * jumps.value
@@ -21,6 +23,55 @@ const yearList = computed(() => {
 })
 
 const onSelectYear = (year: number) => emit('selectYear', year)
+
+const isYearDisabled = (year: number) =>
+  (props.minYear !== undefined && year < props.minYear)
+  || (props.maxYear !== undefined && year > props.maxYear)
+
+const navigableYears = computed(() =>
+  yearList.value
+    .map((year, yearIndex) => ({ year, yearIndex }))
+    .filter(({ year }) => !isYearDisabled(year))
+)
+
+const keyboardIndexByYear = computed<Record<number, number>>(() =>
+  navigableYears.value.reduce<Record<number, number>>((acc, { year }, index) => {
+    acc[year] = index
+    return acc
+  }, {})
+)
+
+const focusedIndex = ref(-1)
+
+const focusYearByKeyboardIndex = (index: number) => {
+  focusedIndex.value = index
+
+  nextTick(() => {
+    panelRef.value?.querySelector<HTMLElement>(`[data-kb-index="${index}"]`)?.focus()
+  })
+}
+
+const syncFocusedYear = () => {
+  const selectedIndex = navigableYears.value.findIndex(item => item.year === props.selected.year)
+  focusedIndex.value = selectedIndex >= 0 ? selectedIndex : (navigableYears.value.length ? 0 : -1)
+}
+
+const handleGridKeyDown = useGridKeyboardNav({
+  currentIndex: focusedIndex,
+  itemCount: () => navigableYears.value.length,
+  columnCount: () => 4,
+  onMove: focusYearByKeyboardIndex,
+  onSelect: (index: number) => {
+    const year = navigableYears.value[index]
+    if (year) onSelectYear(year.year)
+  }
+})
+
+const onYearFocus = (year: number) => {
+  focusedIndex.value = keyboardIndexByYear.value[year] ?? focusedIndex.value
+}
+
+watch([navigableYears, () => props.selected.year], syncFocusedYear, { immediate: true })
 
 onMounted(() => {
   jumps.value = Math.floor((props.startsOn - 1970) / 20)
@@ -32,23 +83,30 @@ onMounted(() => {
     <vk-calendar-header
       v-bind="props"
       :loaded-period="`${yearList[0]} - ${yearList[19]}`"
-      :disabled-left="!!(minYear && yearList.includes(minYear))"
-      :disabled-right="!!(maxYear && yearList.includes(maxYear))"
+      :disabled-left="minYear !== undefined && yearList.includes(minYear)"
+      :disabled-right="maxYear !== undefined && yearList.includes(maxYear)"
       @next-click="jumps++"
       @previous-click="jumps--"
     />
 
-    <div :class="s.panel({ class: styleSlots?.panel })">
+    <div
+      ref="panelRef"
+      :class="s.panel({ class: styleSlots?.panel })"
+    >
       <vk-button
         v-for="(year, index) in yearList"
         :key="`year-cell-${index}`"
-        :disabled="!!(minYear && year < minYear) || !!(maxYear && year > maxYear)"
+        :data-kb-index="keyboardIndexByYear[year]"
+        :disabled="isYearDisabled(year)"
+        :tabindex="keyboardIndexByYear[year] === focusedIndex ? 0 : -1"
         :class="s.gridButton({ class: styleSlots?.gridButton })"
         :size="size"
         :color="selected.year === year ? color : 'surface'"
         :variant="selected.year === year ? variant : 'link'"
         :shape="shape"
         condensed
+        @focus="onYearFocus(year)"
+        @keydown="handleGridKeyDown"
         @click="onSelectYear(year)"
       >
         {{ year }}
