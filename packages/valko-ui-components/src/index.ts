@@ -18,6 +18,9 @@ export { default as useClientSideDataTable } from '#valkoui/composables/useClien
 export { default as useDateAdapter } from '#valkoui/composables/useDateAdapter.ts'
 export { default as useRipple } from '#valkoui/composables/useRipple.ts'
 export { default as useTimeAdapter } from '#valkoui/composables/useTimeAdapter.ts'
+export { default as useListKeyboardNav } from '#valkoui/composables/useListKeyboardNav.ts'
+export { default as useGridKeyboardNav } from '#valkoui/composables/useGridKeyboardNav.ts'
+export { default as useRangeKeyboardNav } from '#valkoui/composables/useRangeKeyboardNav.ts'
 
 ///////////////////
 ////// TYPES //////
@@ -39,6 +42,7 @@ export * from '#valkoui/types/Drawer'
 export * from '#valkoui/types/Dropdown'
 export * from '#valkoui/types/Icon'
 export * from '#valkoui/types/Input'
+export * from '#valkoui/types/keyboardNavigation'
 export * from '#valkoui/types/Menu'
 export * from '#valkoui/types/Modal'
 export * from '#valkoui/types/Navbar'

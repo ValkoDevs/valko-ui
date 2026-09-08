@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref, useId, computed } from 'vue'
+import { type ComponentPublicInstance, ref, useId, computed, watch, nextTick } from 'vue'
 import type { DropdownProps, Item } from '#valkoui/types/Dropdown'
 import styles from '#valkoui/styles/Dropdown.styles.ts'
+import useListKeyboardNav from '#valkoui/composables/useListKeyboardNav.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 import VkPopover from './Popover.vue'
@@ -29,6 +30,8 @@ const s = computed(() => styles(props))
 const dropdownId = useId()
 const menuId = useId()
 const internalOpen = ref(false)
+const focusedIndex = ref(-1)
+const itemRefs = ref<(HTMLElement | null)[]>([])
 
 const open = computed({
   get: () => props.isOpen ?? internalOpen.value,
@@ -37,6 +40,58 @@ const open = computed({
   }
 })
 
+const navigableItems = computed(() => props.items.filter(item => !item.disabled))
+
+const focusedKey = computed(() => navigableItems.value[focusedIndex.value]?.key)
+
+const setItemRef = (index: number) => (el: Element | ComponentPublicInstance | null) => {
+  itemRefs.value[index] = el instanceof HTMLElement ? el : null
+}
+
+const getItemIndex = (item: Item) =>
+  props.items.findIndex(option => option.key === item.key)
+
+const focusItem = (index: number) => {
+  const item = navigableItems.value[index]
+
+  if (!item) return
+
+  focusedIndex.value = index
+
+  nextTick(() => {
+    const domIndex = getItemIndex(item)
+
+    itemRefs.value[domIndex]?.focus()
+  })
+}
+
+const handleItemKeyDown = useListKeyboardNav({
+  currentIndex: focusedIndex,
+  itemCount: () => navigableItems.value.length,
+  loop: true,
+  enabled: () => open.value && !props.disabled,
+  onMove: focusItem,
+  onSelect: (index: number) => {
+    const item = navigableItems.value[index]
+
+    if (item) onItemClick(item)
+  }
+})
+
+const onTriggerKeyDown = (event: KeyboardEvent) => {
+  if (
+    props.disabled ||
+    !['ArrowDown', 'ArrowUp'].includes(event.key) ||
+    !navigableItems.value.length
+  ) return
+
+  event.preventDefault()
+
+  open.value = true
+
+  focusItem(event.key === 'ArrowDown' ? 0 : navigableItems.value.length - 1)
+}
+
 const onClick = (event: MouseEvent) => {
   open.value = !open.value
   emit('click', event)
@@ -44,9 +99,17 @@ const onClick = (event: MouseEvent) => {
 
 const onItemClick = (item: Item) => {
   emit('itemClick', item)
+
   item.onClick?.()
+
   open.value = false
 }
+
+watch(
+  [open, () => props.items.length],
+  () => { focusedIndex.value = open.value && navigableItems.value.length ? 0 : -1 },
+  { immediate: true }
+)
 </script>
 
 <template>
@@ -62,7 +125,7 @@ const onItemClick = (item: Item) => {
   >
     <slot
       name="dropdown-trigger"
-      :v-bind="props"
+      v-bind="props"
       :open="open"
       :toggle="onClick"
     >
@@ -79,8 +142,10 @@ const onItemClick = (item: Item) => {
         :aria-expanded="open"
         :aria-controls="menuId"
         @click.stop="onClick"
+        @keydown="onTriggerKeyDown"
       >
         {{ label }}
+
         <vk-icon
           :class="s.icon({ class: styleSlots?.icon })"
           :name="icon"
@@ -97,23 +162,27 @@ const onItemClick = (item: Item) => {
         :class="s.itemsMenu({ class: styleSlots?.itemsMenu })"
       >
         <button
-          v-for="item in items"
+          v-for="(item, index) in items"
           :key="item.key"
+          :ref="setItemRef(index)"
           role="menuitem"
           type="button"
-          :tabindex="item.disabled ? -1 : 0"
+          :tabindex="item.disabled ? -1 : (focusedKey === item.key ? 0 : -1)"
           :aria-disabled="item.disabled || undefined"
           :disabled="item.disabled"
           :class="s.itemsButton({ class: styleSlots?.itemsButton })"
           :data-disabled="item.disabled"
+          :data-focused="focusedKey === item.key"
           :data-shape="shape"
           @click.prevent="onItemClick(item)"
+          @keydown="!item.disabled && handleItemKeyDown($event)"
         >
           <vk-icon
             v-if="item.icon"
             :class="s.itemsIcon({ class: styleSlots?.itemsIcon })"
             :name="item.icon"
           />
+
           {{ item.title }}
         </button>
       </div>

@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { computed, ref, watch, toValue, useId } from 'vue'
-import type { RangeProps } from '#valkoui/types/Range'
+import type { RangeProps, Thumb, ThumbHandlers } from '#valkoui/types/Range'
 import styles from '#valkoui/styles/Range.styles.ts'
 import diagonalStripes from '#valkoui/img/diagonal-stripes.svg'
+import useRangeKeyboardNav from '#valkoui/composables/useRangeKeyboardNav.ts'
 
 defineOptions({ name: 'VkRange' })
 
@@ -26,97 +27,139 @@ const emit = defineEmits(['update:modelValue'])
 const s = computed(() => styles(props))
 
 const rangeId = useId()
+
 const isDragging = ref(false)
 const sliderRef = ref<HTMLElement | null>(null)
-const draggingThumb = ref<'min' | 'max'>('min')
+const draggingThumb = ref<Thumb>('min')
+
+const getThumbValue = (thumb: Thumb) => {
+  if (Array.isArray(props.modelValue)) {
+    return thumb === 'min'
+      ? props.modelValue[0]
+      : props.modelValue[1]
+  }
+
+  return thumb === 'min'
+    ? props.min
+    : props.modelValue
+}
+
 const thumbRefMap = {
-  min: ref(Array.isArray(props.modelValue) ? props.modelValue[0] : 0),
-  max: ref(Array.isArray(props.modelValue) ? props.modelValue[1] : props.modelValue)
+  min: ref(getThumbValue('min')),
+  max: ref(getThumbValue('max'))
 }
 
 const getNewThumbPosition = (clientX: number): number => {
   if (!sliderRef.value) return 0
+
   const sliderRect = sliderRef.value.getBoundingClientRect()
 
-  let newPosition = ((clientX - sliderRect.left) / sliderRect.width) * (props.max - props.min) + props.min
+  let newPosition =
+    ((clientX - sliderRect.left) / sliderRect.width) *
+      (props.max - props.min) +
+    props.min
+
   newPosition = Math.round(newPosition / props.step) * props.step
 
   return Math.min(props.max, Math.max(props.min, newPosition))
 }
 
-const updateThumbPosition = (newPosition: number, thumb: 'min' | 'max') => {
-  const primaryThumb = thumb === 'min' ? 'min' : 'max'
-  const secondaryThumb = thumb === 'max' ? 'min' : 'max'
-  thumbRefMap[primaryThumb].value = newPosition
+const updateThumbPosition = (newPosition: number, thumb: Thumb) => {
+  thumbRefMap[thumb].value = newPosition
 
   if (props.isDouble) {
-    const isOverlapping = primaryThumb === 'min'
-      ? thumbRefMap[primaryThumb].value > thumbRefMap[secondaryThumb].value
-      : thumbRefMap[primaryThumb].value < thumbRefMap[secondaryThumb].value
+    const otherThumb = thumb === 'min' ? 'max' : 'min'
 
-    thumbRefMap[primaryThumb].value = isOverlapping ? thumbRefMap[secondaryThumb].value : newPosition
+    const overlaps =
+      thumb === 'min'
+        ? newPosition > thumbRefMap[otherThumb].value
+        : newPosition < thumbRefMap[otherThumb].value
 
-    emit('update:modelValue', [thumbRefMap.min.value, thumbRefMap.max.value])
-  } else {
-    emit('update:modelValue', thumbRefMap.max.value)
+    if (overlaps)
+      thumbRefMap[thumb].value = thumbRefMap[otherThumb].value
+
+    emit('update:modelValue', [
+      thumbRefMap.min.value,
+      thumbRefMap.max.value
+    ])
+
+    return
   }
+
+  emit('update:modelValue', thumbRefMap.max.value)
 }
 
 const registerListeners = () => {
-  document.addEventListener('mousemove', onMove)
-  document.addEventListener('touchmove', onMove)
-  document.addEventListener('mouseup', onEnd)
-  document.addEventListener('touchend', onEnd)
+  listeners.forEach(([event, handler]) => {
+    document.addEventListener(event, handler)
+  })
 }
 
 const removeListeners = () => {
-  document.removeEventListener('mousemove', onMove)
-  document.removeEventListener('touchmove', onMove)
-  document.removeEventListener('mouseup', onEnd)
-  document.removeEventListener('touchend', onEnd)
+  listeners.forEach(([event, handler]) => {
+    document.removeEventListener(event, handler)
+  })
 }
 
-const onStart = (event: MouseEvent | TouchEvent, thumb: 'min' | 'max') => {
+const onStart = (event: MouseEvent | TouchEvent, thumb: Thumb) => {
   isDragging.value = true
   draggingThumb.value = thumb
 
-  const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX
-  updateThumbPosition(getNewThumbPosition(clientX), thumb)
+  const clientX =
+    event instanceof MouseEvent
+      ? event.clientX
+      : event.touches[0].clientX
+
+  updateThumbPosition(
+    getNewThumbPosition(clientX),
+    thumb
+  )
 
   registerListeners()
 }
 
-const handleSingleThumb = (newPosition: number) => {
-  updateThumbPosition(newPosition, 'max')
-  isDragging.value = true
-  draggingThumb.value = 'max'
-}
+const selectThumb = (newPosition: number) => {
+  const thumb: Thumb = props.isDouble
+    ? newPosition <=
+      (thumbRefMap.min.value + thumbRefMap.max.value) / 2
+      ? 'min'
+      : 'max'
+    : 'max'
 
-const handleMultipleThumbs = (newPosition: number) => {
-  const middlePoint = (thumbRefMap.min.value + thumbRefMap.max.value) / 2
-  const selectedThumb = newPosition <= middlePoint ? 'min' : 'max'
+  updateThumbPosition(newPosition, thumb)
 
-  updateThumbPosition(newPosition, selectedThumb)
-  draggingThumb.value = selectedThumb
+  draggingThumb.value = thumb
   isDragging.value = true
 }
 
 const onSliderClick = (event: MouseEvent | TouchEvent) => {
-  const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX
-  const newPosition = getNewThumbPosition(clientX)
+  const clientX =
+    event instanceof MouseEvent
+      ? event.clientX
+      : event.touches[0].clientX
 
-  if (!props.isDouble) handleSingleThumb(newPosition)
-  else handleMultipleThumbs(newPosition)
+  selectThumb(getNewThumbPosition(clientX))
 
   registerListeners()
 }
 
+let animationFrame = 0
+
 const onMove = (event: MouseEvent | TouchEvent) => {
   if (!isDragging.value) return
 
-  const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX
-  requestAnimationFrame(() => {
-    updateThumbPosition(getNewThumbPosition(clientX), draggingThumb.value)
+  cancelAnimationFrame(animationFrame)
+
+  const clientX =
+    event instanceof MouseEvent
+      ? event.clientX
+      : event.touches[0].clientX
+
+  animationFrame = requestAnimationFrame(() => {
+    updateThumbPosition(
+      getNewThumbPosition(clientX),
+      draggingThumb.value
+    )
   })
 }
 
@@ -126,18 +169,29 @@ const onEnd = () => {
   removeListeners()
 }
 
+const listeners = [
+  ['mousemove', onMove],
+  ['touchmove', onMove],
+  ['mouseup', onEnd],
+  ['touchend', onEnd]
+] as const
+
 const inlineStyles = computed(() => {
-  const sizeMap: Record<string, string> = {
+  const sizeMap = {
     xs: '1rem',
     sm: '1.25rem',
-    md: '1.50rem',
+    md: '1.5rem',
     lg: '1.75rem'
-  }
+  } as const
 
   const range = props.max - props.min
   const center = ((0 - props.min) / range) * 100
-  const start = props.isDouble ? ((thumbRefMap.min.value - props.min) / range) * 100 : center
-  const end = ((thumbRefMap.max.value - props.min) / range) * 100
+  const start = props.isDouble
+    ? ((thumbRefMap.min.value - props.min) / range) * 100
+    : center
+
+  const end =
+    ((thumbRefMap.max.value - props.min) / range) * 100
 
   const left = Math.min(start, end)
   const width = Math.abs(end - start)
@@ -145,19 +199,27 @@ const inlineStyles = computed(() => {
   let styles = `left: ${left}%; width: ${width}%;`
 
   if (props.striped) {
-    styles += `background-image: url("${diagonalStripes}"); background-size: ${sizeMap[props.size]};`
+    styles +=
+      `background-image: url("${diagonalStripes}");` +
+      `background-size: ${sizeMap[props.size]};`
   }
 
   return styles.trim()
 })
 
 const thumbStyles = computed(() => {
-  const calculateStyles = (thumb: 'min' | 'max') => {
+  const calculateStyles = (thumb: Thumb) => {
     const range = props.max - props.min
-    const position = ((thumbRefMap[thumb].value - props.min) / range) * 100
-    const clampedPosition = Math.min(100, Math.max(0, position))
 
-    return { left: `${clampedPosition}%` }
+    const position =
+      ((thumbRefMap[thumb].value - props.min) / range) * 100
+
+    const clampedPosition =
+      Math.min(100, Math.max(0, position))
+
+    return {
+      left: `${clampedPosition}%`
+    }
   }
 
   return {
@@ -167,43 +229,58 @@ const thumbStyles = computed(() => {
 })
 
 const stepMarks = computed(() => {
-  return Array.from({ length: Math.round((props.max - props.min) / props.step - 1) }, (_, i) => {
-    return ((i + 1) * props.step / (props.max - props.min)) * 100
-  })
+  const steps = Math.max(0, Math.round((props.max - props.min) / props.step))
+  const markCount = Math.max(0, steps - 1)
+
+  return Array.from(
+    { length: markCount },
+    (_, index) =>
+      ((index + 1) * props.step /
+        (props.max - props.min)) *
+      100
+  )
 })
 
 const onLabelClick = (newPosition: number) => {
-  if (!props.isDouble) handleSingleThumb(newPosition)
-  else handleMultipleThumbs(newPosition)
+  selectThumb(newPosition)
 }
 
-const handleKeyDown = (e: KeyboardEvent, thumb: 'min' | 'max') => {
-  type AllowedKeys = 'ArrowRight' | 'ArrowUp' | 'ArrowLeft' | 'ArrowDown' | 'Home' | 'End'
+const buildThumbHandlers = (thumb: Thumb): ThumbHandlers => ({
+  onMouseDown: (event: MouseEvent) =>
+    onStart(event, thumb),
 
-  const allowedKeys: AllowedKeys[] = ['ArrowRight', 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'Home', 'End']
-  const currentKey = e.key as AllowedKeys
+  onTouchStart: (event: TouchEvent) =>
+    onStart(event, thumb),
 
-  if (!allowedKeys.includes(currentKey)) return
-
-  e.preventDefault()
-
-  const formulaMap: Record<AllowedKeys, (value: number) => number> = {
-    ArrowRight: (value: number) => Math.min(value + props.step, props.max),
-    ArrowUp: (value: number) => Math.min(value + props.step, props.max),
-    ArrowLeft: (value: number) => Math.max(value - props.step, props.min),
-    ArrowDown: (value: number) => Math.max(value - props.step, props.min),
-    Home: () => props.min,
-    End: () => props.max
-  }
-
-  updateThumbPosition(formulaMap[currentKey](thumbRefMap[thumb].value), thumb)
-}
-
-watch([() => props.min, () => props.max, () => props.isDouble, () => props.step], ([min, max, isDouble]) => {
-  thumbRefMap.min.value = min
-  thumbRefMap.max.value = max
-  emit('update:modelValue', isDouble ? [min, max] : max)
+  onKeyDown: useRangeKeyboardNav({
+    currentValue: thumbRefMap[thumb],
+    min: () => props.min,
+    max: () => props.max,
+    step: () => props.step,
+    onUpdate: (value: number) =>
+      updateThumbPosition(value, thumb)
+  })
 })
+
+const thumbHandlers: Record<Thumb, ThumbHandlers> = {
+  min: buildThumbHandlers('min'),
+  max: buildThumbHandlers('max')
+}
+
+watch(
+  [() => props.min, () => props.max, () => props.isDouble],
+  ([min, max, isDouble]) => {
+    thumbRefMap.min.value = min
+    thumbRefMap.max.value = max
+
+    emit(
+      'update:modelValue',
+      isDouble
+        ? [min, max]
+        : max
+    )
+  }
+)
 </script>
 
 <template>
@@ -240,9 +317,9 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
         :aria-labelledby="rangeId"
         :aria-describedby="props.ariaDescribedBy"
         aria-label="Minimum value"
-        @mousedown="(event: MouseEvent) => onStart(event, 'min')"
-        @keydown="(event: KeyboardEvent) => handleKeyDown(event, 'min')"
-        @touchstart="(event: TouchEvent) => onStart(event, 'min')"
+        @mousedown="thumbHandlers.min.onMouseDown"
+        @keydown="thumbHandlers.min.onKeyDown"
+        @touchstart="thumbHandlers.min.onTouchStart"
       />
       <div
         :class="s.thumb({ class: styleSlots?.thumb })"
@@ -255,9 +332,9 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
         :aria-labelledby="rangeId"
         :aria-describedby="props.ariaDescribedBy"
         :aria-label="isDouble ? 'Maximum value' : 'Value'"
-        @mousedown="(event: MouseEvent) => onStart(event, 'max')"
-        @keydown="(event: KeyboardEvent) => handleKeyDown(event, 'max')"
-        @touchstart="(event: TouchEvent) => onStart(event, 'max')"
+        @mousedown="thumbHandlers.max.onMouseDown"
+        @keydown="thumbHandlers.max.onKeyDown"
+        @touchstart="thumbHandlers.max.onTouchStart"
       />
     </div>
     <div
