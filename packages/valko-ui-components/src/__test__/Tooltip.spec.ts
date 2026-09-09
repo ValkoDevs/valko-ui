@@ -15,7 +15,8 @@ describe('Tooltip component', () => {
             default: '<button>Hover Me</button>'
           }
         })
-        wrapper.find('.vk-tooltip').trigger('mouseenter')
+
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
       })
 
@@ -44,8 +45,9 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip').trigger('mouseenter')
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
+
         expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-2xl')
       })
 
@@ -60,8 +62,9 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip').trigger('mouseenter')
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
+
         expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-lg')
       })
 
@@ -76,8 +79,9 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip').trigger('mouseenter')
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
+
         expect(wrapper.find('.vk-popover__panel').classes()).toContain('rounded-none')
       })
     })
@@ -94,8 +98,9 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip').trigger('mouseenter')
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
+
         expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('text-xs')
       })
 
@@ -110,8 +115,9 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip').trigger('mouseenter')
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
+
         expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('text-sm')
       })
 
@@ -126,8 +132,9 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip').trigger('mouseenter')
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
+
         expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('text-base')
       })
 
@@ -142,8 +149,9 @@ describe('Tooltip component', () => {
           }
         })
 
-        wrapper.find('.vk-tooltip').trigger('mouseenter')
+        await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
         await nextTick()
+
         expect(wrapper.find('.vk-tooltip_tip').classes()).toContain('text-lg')
       })
     })
@@ -185,7 +193,7 @@ describe('Tooltip component', () => {
         }
       })
 
-      wrapper.find('.vk-tooltip').trigger('mouseenter')
+      await wrapper.find('.vk-tooltip_trigger-container').trigger('mouseenter')
       await nextTick()
 
       expect(wrapper.find('.vk-tooltip_tip').exists()).toBe(true)
@@ -201,10 +209,14 @@ describe('Tooltip component', () => {
         }
       })
 
-      wrapper.find('.vk-tooltip').trigger('mouseenter')
+      const trigger = wrapper.find('.vk-tooltip_trigger-container')
+
+      await trigger.trigger('mouseenter')
       await nextTick()
-      wrapper.find('.vk-tooltip').trigger('mouseleave')
+
+      await trigger.trigger('mouseleave')
       await nextTick()
+
       expect(wrapper.find('.vk-tooltip_tip').exists()).toBe(false)
     })
   })

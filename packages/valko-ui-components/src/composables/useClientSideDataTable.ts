@@ -11,7 +11,7 @@ const useClientSideDataTable = <T extends TableItem>({ data, headers, selectionM
   const result: Ref<DataTableInput> = ref({ data, headers })
   const { result: filteredResult, filters, setFilters } = useClientSideFilter(data)
   const { result: sortedResult, sort, setSort } = useClientSideSort(filteredResult)
-  const { result: reOrderedData, handleDragStart, handleDragOver, handleDrop } = useClientSideDragAndDrop(sortedResult)
+  const { result: reOrderedData, handleDragStart, handleDragOver, handleDrop } = useClientSideDragAndDrop(sortedResult, draggable)
   const { result: paginatedResult, setOffset, setLimit } = useClientSidePagination(reOrderedData)
 
   const dataTable = useDataTable({

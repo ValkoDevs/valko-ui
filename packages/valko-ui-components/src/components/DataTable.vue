@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Ref, computed, ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import type { DataTableProps } from '#valkoui/types/DataTable'
 import type { TableItem } from '#valkoui/types/Table'
 import type { Sort } from '#valkoui/types/common'
@@ -43,7 +43,7 @@ const sortIconMap = {
   none: 'arrows-sort'
 }
 
-const localFilters: Ref<Record<keyof TableItem, string>> = ref({})
+const localFilters = ref<Partial<Record<keyof TableItem, string>>>({})
 const activePopover = ref<string | null>(null)
 const activeFilters = ref<Record<string, boolean>>({})
 
@@ -58,31 +58,15 @@ const selectedItems = computed(
   }
 )
 
-const togglePopover = (headerKey: string) => {
-  activePopover.value = activePopover.value === headerKey ? null : headerKey
-}
-
 const setActiveFilter = (headerKey: string, isActive: boolean) => {
-  if (localFilters.value[headerKey] && localFilters.value[headerKey].trim() !== '') activeFilters.value[headerKey] = isActive
-  else activeFilters.value[headerKey] = false
+  activeFilters.value[headerKey] = isActive
 }
 
 const isSortActive = (field: string) => {
   return props.sort?.field === field && !!props.sort.direction
 }
 
-const handleClickOutside = (event: MouseEvent) => {
-  const popoverElements = document.querySelectorAll('.vk-popover')
-  let isClickInside = false
-
-  popoverElements.forEach((element) => {
-    if (element.contains(event.target as Node)) isClickInside = true
-  })
-
-  if (!isClickInside) activePopover.value = null
-}
-
-const isDataReady = computed(() => Array.isArray(props.data) && props.data.length > 0)
+const isDataReady = computed(() => Array.isArray(props.data))
 const totalPages = computed(() => Math.ceil(props.total / props.limit))
 const currentPage = computed({
   get: () => isDataReady.value ? props.offset / props.limit + 1 : 1,
@@ -113,31 +97,29 @@ const debouncedFilters = useDebounce(() => {
   emit('onFilter', mappedFilters)
 }, 500)
 
-watch(localFilters, debouncedFilters, { deep: true })
+const initializeFilters = () => {
+  props.headers.forEach(({ field }) => {
+    if (!(field in localFilters.value)) {
+      localFilters.value[field] = ''
+    }
+  })
+}
 
-watch(localFilters, (newFilters) => {
-  for (const key in newFilters) {
-    setActiveFilter(key, !!newFilters[key].trim())
-  }
-}, { deep: true })
+const headerFields = computed(() =>
+  props.headers.map(({ field }) => field).join('|')
+)
+
+watch(
+  headerFields,
+  initializeFilters,
+  { immediate: true }
+)
+
+watch(localFilters, debouncedFilters, { deep: true })
 
 watch(isDataReady, (dataUpdate) => {
   if (dataUpdate && currentPage.value !== 1) currentPage.value = 1
 }, { immediate: true })
-
-onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-  emit('onLimitChange', props.limit)
-
-  localFilters.value = props.headers.reduce((acc, { field }) => {
-    acc[field] = ''
-    return acc
-  }, {} as Record<keyof TableItem, string>)
-})
-
-onBeforeUnmount(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
 </script>
 
 <template>
@@ -179,18 +161,21 @@ onBeforeUnmount(() => {
             <vk-popover
               :shape="shape"
               :is-open="activePopover === header.key"
+              @update:is-open="value => {
+                activePopover = value ? header.key : null
+              }"
             >
-              <template #default>
+              <template #trigger="{ isOpen, setOpen }">
                 <vk-icon
                   :size="size"
                   name="search"
                   :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
-                  :data-active="activeFilters[header.key]"
-                  @click="togglePopover(header.key)"
+                  :data-active="activeFilters[header.key] ? 'true' : undefined"
+                  @click="setOpen(!isOpen)"
                 />
               </template>
 
-              <template #popover-content>
+              <template #panel>
                 <slot
                   :name="`filter-content-${header.key}`"
                   :data="data"
@@ -207,7 +192,7 @@ onBeforeUnmount(() => {
                       label="Search..."
                       clearable
                       v-model="localFilters[header.key]"
-                      @input="() => setActiveFilter(header.key, !!localFilters[header.key].trim())"
+                      @input="setActiveFilter(header.key, !!localFilters[header.key]?.trim())"
                     />
                   </div>
                 </slot>

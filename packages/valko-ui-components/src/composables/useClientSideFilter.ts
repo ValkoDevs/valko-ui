@@ -3,21 +3,22 @@ import type { TableItem } from '#valkoui/types/Table'
 import type { Filter } from '#valkoui/types/common'
 
 const useClientSideFilter = <T extends TableItem>(data: T[] | Ref<T[]>) => {
-  const filters: Ref<Filter[]> = shallowRef([])
-  const result: Ref<TableItem[]> = shallowRef(data)
+  const filters = shallowRef<Filter[]>([])
+  const result = shallowRef<T[]>(toValue(data))
 
   const setFilters = (newFilters: Filter[]) => {
     filters.value = newFilters
   }
 
-  watch([() => filters, () => data], () => {
+  watch([filters, data], () => {
     const normalizedData = toValue(data)
-    result.value = normalizedData.filter(
-      item => filters.value
-        .map((filter) => item[filter.field] && `${item[filter.field]}`.includes(filter.value))
-        .every((condition) => condition)
+
+    result.value = normalizedData.filter((item) =>
+      filters.value.every((filter) =>
+        `${item[filter.field] ?? ''}`.includes(filter.value)
+      )
     )
-  }, { deep: true })
+  }, { immediate: true })
 
   return {
     result,

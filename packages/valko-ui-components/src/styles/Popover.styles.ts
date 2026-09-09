@@ -4,8 +4,8 @@ const popover = tv({
   slots: {
     container: [
       'vk-popover',
-      'w-auto',
-      'h-auto',
+      'w-fit',
+      'h-fit',
       'relative'
     ],
     slotContainer: [

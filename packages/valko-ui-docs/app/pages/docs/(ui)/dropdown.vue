@@ -13,6 +13,8 @@ const form = ref<Partial<DropdownProps>>({
   label: 'Dropdown Menu'
 })
 
+const open = ref(false)
+
 const items: Item[] = [
   { key: 'image', title: 'Upload Image', icon: 'photo', onClick: () => useNotification({ text: 'Image Uploaded' }) },
   { key: 'edit', title: 'Edit', icon: 'edit', onClick: () => useNotification({ text: 'Editing' }) },
@@ -62,7 +64,7 @@ const dropdownProps: PropData[] = [
     key: 'isOpenProp',
     prop: 'isOpen',
     required: false,
-    description: 'Controls the open state of the Dropdown, if not provided it will be managed internally.',
+    description: 'Controls whether the Dropdown is open. When omitted, the component manages its own open state (uncontrolled mode). When provided, the consumer controls the state through v-model:is-open.',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
@@ -107,7 +109,7 @@ const dropdownProps: PropData[] = [
     key: 'labelProp',
     prop: 'label',
     required: false,
-    description: 'The default slot button label.',
+    description: 'Label displayed by the default trigger button.',
     values: 'string',
     default: '',
     apiType: 'primitive'
@@ -116,7 +118,7 @@ const dropdownProps: PropData[] = [
     key: 'iconProp',
     prop: 'icon',
     required: false,
-    description: 'The default slot button icon.',
+    description: 'Icon displayed by the default trigger button.',
     values: 'string',
     default: 'chevron-down',
     apiType: 'primitive'
@@ -257,7 +259,7 @@ const styleSlotsInterface: PropData[] = [
 
 const dropdownEmits: EmitData[] = [
   {
-    key: 'itemClickEmit',
+    key: 'itemClick',
     event: 'itemClick',
     description: 'Emitted when an item in the dropdown menu is clicked.',
     values: 'Item',
@@ -265,22 +267,59 @@ const dropdownEmits: EmitData[] = [
     apiType: 'event'
   },
   {
-    key: 'clickEmit',
-    event: 'click',
-    description: 'Emitted when the dropdown trigger is clicked.',
-    values: 'MouseEvent',
-    type: '(event: MouseEvent) => void',
+    key: 'update:isOpen',
+    event: 'update:isOpen',
+    description: 'Emitted when the open state of the dropdown changes.',
+    values: 'boolean',
+    type: '(value: boolean) => void',
     apiType: 'event'
   }
 ]
 
 const dropdownSlots: SlotData[] = [
   {
-    key: 'dropdownTriggerSlot',
-    name: 'dropdown-trigger',
-    description: 'The dropdown-trigger slot for the Dropdown. By default, it renders a `VkButton`.\nIf you use a custom component within this slot, you can access the `props` for binding attributes like color, variant, and size.\nAdditionally, the slot exposes:\n- `toggle`: a function to open or close the dropdown.\n- `open`: a boolean indicating the current open state.\nThis lets you integrate any custom component as the trigger while reacting to the dropdown’s state.',
-    example: '<template #dropdown-trigger="{ toggle }">\n  <!-- Your custom dropdown trigger component here -->\n</template>',
+    key: 'trigger',
+    name: 'trigger',
+    description: 'Slot for the element that triggers the Dropdown. Exposes the current open state, a function to update it and if it is disabled.',
+    example: `<template #trigger="{ isOpen, setOpen, disabled }">
+  <vk-button
+    :disabled="disabled"
+    @click="setOpen(!isOpen)"
+  >
+    Click Me
+  </vk-button>
+</template>`,
     apiType: 'slot'
+  }
+]
+
+const slotPropsInterface: PropData[] = [
+  {
+    key: 'isOpen',
+    prop: 'isOpen',
+    required: false,
+    description: 'Current open state of the Dropdown.',
+    values: 'boolean',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'setOpen',
+    prop: 'setOpen',
+    required: false,
+    description: 'Function used to update the Dropdown open state.',
+    values: '(value: boolean) => void',
+    default: '',
+    apiType: 'function'
+  },
+  {
+    key: 'disabled',
+    prop: 'disabled',
+    required: false,
+    description: 'Whether the Dropdown is disabled or not.',
+    values: 'boolean',
+    default: '',
+    apiType: 'primitive'
   }
 ]
 
@@ -301,6 +340,53 @@ const items: Item[] = [
 const generateSnippet = snippetGeneratorFactory('vk-dropdown')
 
 const extraProps = ':items="items"'
+
+const triggerControlled = `<script>
+import type { Item } from '#valkoui'
+
+const items: Item[] = [
+  { key: 'image', title: 'Upload Image', icon: 'photo' },
+  { key: 'edit', title: 'Edit', icon: 'edit' },
+  { key: 'disabled', title: 'Disabled', icon: 'negative', disabled: true },
+  { key: 'video', title: 'Upload Video', icon: 'video' },
+  { key: 'delete', title: 'Delete', icon: 'trash' }
+]
+
+const open = ref(false)
+<\u002Fscript>
+
+<vk-dropdown
+  v-model:is-open="open"
+  :items="items"
+>
+  <template #trigger>
+    <vk-button
+      class="flex items-center gap-2"
+      @click="open = !open"
+    >
+      Controlled
+      <vk-icon name="heart" />
+    </vk-button>
+  </template>
+</vk-dropdown>
+`
+
+const customTrigger = `${scriptCode}
+<vk-dropdown
+  :items="items"
+>
+  <template #trigger="{ isOpen, setOpen }">
+    <vk-button
+      :variant="isOpen ? 'filled' : 'outlined'"
+      class="flex items-center gap-2"
+      @click="setOpen(!isOpen)"
+    >
+      Custom Trigger
+      <vk-icon name="heart" />
+    </vk-button>
+  </template>
+</vk-dropdown>
+`
 
 const styles = {
   colors: {
@@ -427,7 +513,6 @@ const styles = {
           v-for="color in colorOptions.withSurface"
           :key="color.value"
           :color="color.value"
-          :title="color.label"
           :items="items"
           :label="color.label"
         />
@@ -445,7 +530,6 @@ const styles = {
           v-for="variant in variantOptions.withGradientAndLink"
           :key="variant.value"
           :variant="variant.value"
-          :title="variant.label"
           :items="items"
           :label="variant.label"
         />
@@ -463,7 +547,6 @@ const styles = {
           v-for="shape in shapeOptions.general"
           :key="shape.value"
           :shape="shape.value"
-          :title="shape.label"
           :items="items"
           :label="shape.label"
         />
@@ -481,7 +564,6 @@ const styles = {
           v-for="size in sizeOptions.general"
           :key="size.value"
           :size="size.value"
-          :title="size.label"
           :items="items"
           :label="size.label"
         />
@@ -499,7 +581,6 @@ const styles = {
           v-for="placement in placementOptions.withAuto"
           :key="placement.value"
           :placement="placement.value"
-          :title="placement.label"
           :items="items"
           :label="placement.label"
         />
@@ -517,7 +598,6 @@ const styles = {
           v-for="alignment in alignmentOptions"
           :key="alignment.value"
           :alignment="alignment.value"
-          :title="alignment.label"
           :items="items"
           :label="alignment.label"
         />
@@ -529,7 +609,6 @@ const styles = {
 
       <example-section title="Elevated">
         <vk-dropdown
-          title="Elevated"
           :items="items"
           label="Elevated"
         />
@@ -541,7 +620,6 @@ const styles = {
 
       <example-section title="Disabled">
         <vk-dropdown
-          title="Disabled"
           disabled
           :items="items"
           label="Disabled"
@@ -549,6 +627,48 @@ const styles = {
 
         <template #code>
           <code-block :code="`${scriptCode}\n${generateSnippet<boolean>('disabled', { values: [true], extraProps })}`" />
+        </template>
+      </example-section>
+
+      <example-section title="Controlled">
+        <vk-dropdown
+          v-model:is-open="open"
+          :items="items"
+        >
+          <template #trigger>
+            <vk-button
+              class="flex items-center gap-2"
+              @click="open = !open"
+            >
+              Controlled
+              <vk-icon name="heart" />
+            </vk-button>
+          </template>
+        </vk-dropdown>
+
+        <template #code>
+          <code-block :code="triggerControlled" />
+        </template>
+      </example-section>
+
+      <example-section title="Custom Trigger">
+        <vk-dropdown
+          :items="items"
+        >
+          <template #trigger="{ isOpen, setOpen }">
+            <vk-button
+              :variant="isOpen ? 'filled' : 'outlined'"
+              class="flex items-center gap-2"
+              @click="setOpen(!isOpen)"
+            >
+              Custom Trigger
+              <vk-icon name="heart" />
+            </vk-button>
+          </template>
+        </vk-dropdown>
+
+        <template #code>
+          <code-block :code="customTrigger" />
         </template>
       </example-section>
     </template>
@@ -560,6 +680,7 @@ const styles = {
           { title: 'Props', data: dropdownProps, headers: 'props' },
           { title: 'Emits', data: dropdownEmits, headers: 'emits' },
           { title: 'Slots', data: dropdownSlots, headers: 'slots' },
+          { title: 'Slot Props', data: slotPropsInterface, headers: 'interface' },
           { title: 'Item', data: itemInterface, headers: 'interface' },
           { title: 'Style Slots', data: styleSlotsInterface, headers: 'interface' }
         ]"
