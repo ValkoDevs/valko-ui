@@ -216,7 +216,16 @@ const styleSlotsInterface: PropData[] = [
     key: 'footer',
     prop: 'footer',
     required: false,
-    description: 'Container for the footer content (pagination, select).',
+    description: 'Styles for the table footer container.',
+    values: 'string[]',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'footerControls',
+    prop: 'footerControls',
+    required: false,
+    description: 'Styles for the table footer controls (pagination, select).',
     values: 'string[]',
     default: '',
     apiType: 'primitive'
@@ -372,7 +381,7 @@ const tableSlots: SlotData[] = [
     key: 'tableFooterSlot',
     name: 'table-footer',
     description: 'Slot for customizing the table footer content.',
-    example: '<template #table-footer>\n  <div class="custom-footer">\n    Footer content here!\n  </div>\n</template>',
+    example: '<template #table-footer>\n  <tr>\n    <td>Footer content here!</td>\n  </tr>\n</template>',
     apiType: 'slot'
   },
   {
