@@ -209,6 +209,68 @@ describe('DataTable component', () => {
     })
   })
 
+  describe('Slots', () => {
+    it('should render a custom header-cell-${header.key} slot', () => {
+      wrapper = mount(VkDataTable, {
+        props: {
+          headers,
+          data
+        },
+        slots: {
+          'header-cell-prop': '<span class="custom-header-cell">Custom Property Header</span>'
+        }
+      })
+
+      expect(wrapper.find('.custom-header-cell').exists()).toBe(true)
+      expect(wrapper.text()).toContain('Custom Property Header')
+    })
+
+    it('should render a custom cell-${field} slot', () => {
+      wrapper = mount(VkDataTable, {
+        props: {
+          headers,
+          data
+        },
+        slots: {
+          'cell-prop': '<template #cell-prop="{ item }"><span class="custom-cell-field">{{ item.prop }}</span></template>'
+        }
+      })
+
+      expect(wrapper.find('.custom-cell-field').exists()).toBe(true)
+      expect(wrapper.text()).toContain('headers')
+    })
+
+    it('should render a custom no-data-message slot', () => {
+      wrapper = mount(VkDataTable, {
+        props: {
+          headers,
+          data: []
+        },
+        slots: {
+          'no-data-message': '<div class="custom-no-data">No records available</div>'
+        }
+      })
+
+      expect(wrapper.find('.custom-no-data').exists()).toBe(true)
+      expect(wrapper.text()).toContain('No records available')
+    })
+
+    it('should render a custom table-footer slot', () => {
+      wrapper = mount(VkDataTable, {
+        props: {
+          headers,
+          data
+        },
+        slots: {
+          'table-footer': '<tr class="custom-table-footer"><td colspan="2">Footer content</td></tr>'
+        }
+      })
+
+      expect(wrapper.find('.custom-table-footer').exists()).toBe(true)
+      expect(wrapper.text()).toContain('Footer content')
+    })
+  })
+
   describe('Methods', () => {
     describe('selectedItems', () => {
       it('checks the correct checkboxes when selection is an array', () => {
