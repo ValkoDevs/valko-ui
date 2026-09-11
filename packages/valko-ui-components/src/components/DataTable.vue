@@ -49,6 +49,10 @@ const activeFilters = ref<Record<string, boolean>>({})
 
 const selectSize = computed(() => props.pageSizeOptions.map((i) => ({ value: i, label: `${i}` })))
 
+const forwardedCellHeaders = computed(() => {
+  return props.headers.filter(({ field }) => field !== 'selection' && field !== 'draggable')
+})
+
 const selectedItems = computed(
   () => {
     return props.data.reduce((acc, item) => ({
@@ -83,6 +87,12 @@ const handleClickOutside = (event: MouseEvent) => {
 }
 
 const isDataReady = computed(() => Array.isArray(props.data) && props.data.length > 0)
+const recordsTotal = computed(() => props.total > 0 ? props.total : props.data.length)
+const visibleRangeStart = computed(() => isDataReady.value ? props.offset + 1 : 0)
+const visibleRangeEnd = computed(() => {
+  if (!isDataReady.value) return 0
+  return Math.min(props.offset + props.data.length, recordsTotal.value)
+})
 const totalPages = computed(() => Math.ceil(props.total / props.limit))
 const currentPage = computed({
   get: () => isDataReady.value ? props.offset / props.limit + 1 : 1,
@@ -142,7 +152,6 @@ onBeforeUnmount(() => {
 
 <template>
   <div
-    v-if="isDataReady"
     :class="s.table({ class: styleSlots?.table })"
   >
     <vk-table
@@ -162,74 +171,92 @@ onBeforeUnmount(() => {
         #[`header-cell-${header.key}`]
         :key="header.key"
       >
-        <div :class="s.headerContainer({ class: styleSlots?.headerContainer })">
-          <div :class="s.headerCheckbox({ class: styleSlots?.headerCheckbox })">
-            <vk-checkbox
-              v-if="selectionMode === 'multiple' && header.key === 'selection'"
-              :color="color"
-              :size="size"
-              :model-value="isAllSelected"
-              @update:model-value="(val: boolean) => emit('onSelectAll', val)"
-            />
-            {{ header.key === 'selection' ? '' : header.label }}
-          </div>
-          <div
-            v-if="header.filterable"
-          >
-            <vk-popover
-              :shape="shape"
-              :is-open="activePopover === header.key"
+        <slot
+          :name="`header-cell-${header.key}`"
+          :header="header"
+        >
+          <div :class="s.headerContainer({ class: styleSlots?.headerContainer })">
+            <div :class="s.headerCheckbox({ class: styleSlots?.headerCheckbox })">
+              <vk-checkbox
+                v-if="selectionMode === 'multiple' && header.key === 'selection'"
+                :color="color"
+                :size="size"
+                :model-value="isAllSelected"
+                @update:model-value="(val: boolean) => emit('onSelectAll', val)"
+              />
+              {{ header.key === 'selection' ? '' : header.label }}
+            </div>
+            <div
+              v-if="header.filterable"
             >
-              <template #default>
-                <vk-icon
-                  :size="size"
-                  name="search"
-                  :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
-                  :data-active="activeFilters[header.key]"
-                  @click="togglePopover(header.key)"
-                />
-              </template>
+              <vk-popover
+                :shape="shape"
+                :is-open="activePopover === header.key"
+              >
+                <template #default>
+                  <vk-icon
+                    :size="size"
+                    name="search"
+                    :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
+                    :data-active="activeFilters[header.key]"
+                    @click="togglePopover(header.key)"
+                  />
+                </template>
 
-              <template #popover-content>
-                <slot
-                  :name="`filter-content-${header.key}`"
-                  :data="data"
-                  :headers="headers"
-                  :set-active="(isActive: boolean) => setActiveFilter(header.key, isActive)"
-                  :emit="emit"
-                >
-                  <div class="w-40">
-                    <vk-input
-                      :variant="variant"
-                      :color="color"
-                      type="text"
-                      size="xs"
-                      label="Search..."
-                      clearable
-                      v-model="localFilters[header.key]"
-                      @input="() => setActiveFilter(header.key, !!localFilters[header.key].trim())"
-                    />
-                  </div>
-                </slot>
-              </template>
-            </vk-popover>
-          </div>
-          <div
-            v-if="header.sortable"
-            :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
-          >
-            <vk-icon
-              role="button"
-              :tabindex="0"
-              :aria-label="`Sort by ${header.label}`"
-              :size="size"
-              :name="sortIconMap[sort?.field === header.key && sort.direction ? sort.direction : 'none']"
+                <template #popover-content>
+                  <slot
+                    :name="`filter-content-${header.key}`"
+                    :data="data"
+                    :headers="headers"
+                    :set-active="(isActive: boolean) => setActiveFilter(header.key, isActive)"
+                    :emit="emit"
+                  >
+                    <div class="w-40">
+                      <vk-input
+                        :variant="variant"
+                        :color="color"
+                        type="text"
+                        size="xs"
+                        label="Search..."
+                        clearable
+                        v-model="localFilters[header.key]"
+                        @input="() => setActiveFilter(header.key, !!localFilters[header.key].trim())"
+                      />
+                    </div>
+                  </slot>
+                </template>
+              </vk-popover>
+            </div>
+            <div
+              v-if="header.sortable"
               :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
-              :data-active="isSortActive(header.key)"
-              @click="handleSort(header.field)"
-            />
+            >
+              <vk-icon
+                role="button"
+                :tabindex="0"
+                :aria-label="`Sort by ${header.label}`"
+                :size="size"
+                :name="sortIconMap[sort?.field === header.key && sort.direction ? sort.direction : 'none']"
+                :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
+                :data-active="isSortActive(header.key)"
+                @click="handleSort(header.field)"
+              />
+            </div>
           </div>
-        </div>
+        </slot>
+      </template>
+
+      <template
+        v-for="header in forwardedCellHeaders"
+        #[`cell-${header.field}`]="slotProps"
+        :key="`cell-${header.field}`"
+      >
+        <slot
+          :name="`cell-${header.field}`"
+          v-bind="slotProps"
+        >
+          {{ slotProps.item?.[header.field] }}
+        </slot>
       </template>
 
       <template #cell-draggable="{ rowIndex }">
@@ -261,10 +288,28 @@ onBeforeUnmount(() => {
           @update:model-value="() => emit('onSelect', item)"
         />
       </template>
+
+      <template
+        v-if="$slots['table-footer']"
+        #table-footer
+      >
+        <slot name="table-footer" />
+      </template>
+
+      <template #no-data-message>
+        <slot name="no-data-message">
+          No items found.
+        </slot>
+      </template>
     </vk-table>
 
-    <div :class="s.footer({ class: styleSlots?.footer })">
-      <div>
+    <div
+      v-if="isDataReady"
+      :class="s.footer({ class: styleSlots?.footer })"
+    >
+      <span>{{ visibleRangeStart }} - {{ visibleRangeEnd }} / {{ recordsTotal }}</span>
+
+      <div :class="s.footerControls({ class: styleSlots?.footerControls })">
         <vk-pagination
           :color="color"
           :variant="variant"
@@ -274,9 +319,7 @@ onBeforeUnmount(() => {
           :class="s.pagination({ class: styleSlots?.pagination })"
           v-model="currentPage"
         />
-      </div>
 
-      <div>
         <vk-select
           :label="label"
           :options="selectSize"

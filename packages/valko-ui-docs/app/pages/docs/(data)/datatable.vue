@@ -216,7 +216,16 @@ const styleSlotsInterface: PropData[] = [
     key: 'footer',
     prop: 'footer',
     required: false,
-    description: 'Container for the footer content (pagination, select).',
+    description: 'Styles for the table footer container.',
+    values: 'string[]',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
+    key: 'footerControls',
+    prop: 'footerControls',
+    required: false,
+    description: 'Styles for the table footer controls (pagination, select).',
     values: 'string[]',
     default: '',
     apiType: 'primitive'
@@ -347,6 +356,34 @@ const tableEmits: EmitData[] = [
 ]
 
 const tableSlots: SlotData[] = [
+  {
+    key: 'headerCellSlot',
+    name: 'header-cell-${header.key}',
+    description: 'Slot for customizing each header cell content.',
+    example: '<template #header-cell-name="{ header }">\n  <span>{{ header.label }}</span>\n</template>',
+    apiType: 'slot'
+  },
+  {
+    key: 'cellFieldSlot',
+    name: 'cell-${field}',
+    description: 'Slot for customizing each body cell value.',
+    example: '<template #cell-name="{ item, rowIndex }">\n  {{ rowIndex + 1 }}. {{ item.name }}\n</template>',
+    apiType: 'slot'
+  },
+  {
+    key: 'noDataMessageSlot',
+    name: 'no-data-message',
+    description: 'Slot for customizing the empty state message when there are no rows.',
+    example: '<template #no-data-message>\n  No results available.\n</template>',
+    apiType: 'slot'
+  },
+  {
+    key: 'tableFooterSlot',
+    name: 'table-footer',
+    description: 'Slot for customizing the table footer content.',
+    example: '<template #table-footer>\n  <tr>\n    <td>Footer content here!</td>\n  </tr>\n</template>',
+    apiType: 'slot'
+  },
   {
     key: 'filterContentSlot',
     name: 'filter-content-${header.key}',

@@ -6,7 +6,8 @@ const dataTable = tv({
       'vk-data-table',
       'w-full',
       'flex',
-      'flex-col'
+      'flex-col',
+      'gap-4'
     ],
     headerContainer: [
       'flex',
@@ -25,8 +26,14 @@ const dataTable = tv({
     footer: [
       'flex',
       'justify-between',
+      'gap-4',
       'items-center',
-      'mt-2'
+      'p-4'
+    ],
+    footerControls: [
+      'flex',
+      'justify-between',
+      'gap-4'
     ],
     pagination: [
       'mr-auto'
@@ -41,6 +48,15 @@ const dataTable = tv({
     ]
   },
   variants: {
+    variant: {
+      filled: {
+        table: [
+          'bg-surface-container-low'
+        ]
+      },
+      outlined: [],
+      ghost: []
+    },
     color: {
       primary: {
         headerUtilities: [
@@ -76,6 +92,23 @@ const dataTable = tv({
         headerUtilities: [
           'data-[active=true]:text-negative',
           'hover:text-negative'
+        ]
+      }
+    },
+    shape: {
+      soft: {
+        table: [
+          'rounded-lg'
+        ]
+      },
+      rounded: {
+        table: [
+          'rounded-xl'
+        ]
+      },
+      square: {
+        table: [
+          'rounded-none'
         ]
       }
     }
