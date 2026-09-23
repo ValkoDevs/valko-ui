@@ -1,6 +1,6 @@
 import { Ref, toValue } from 'vue'
 
-const useRipple = (elementRef: Ref<HTMLElement | null> | HTMLElement | null) => {
+const useRipple = (elementRef?: Ref<HTMLElement | null> | HTMLElement | null) => {
   return (event: MouseEvent | TouchEvent) => {
     // Normalize event and target element
     let normalizedEvent: MouseEvent | Touch
@@ -12,7 +12,7 @@ const useRipple = (elementRef: Ref<HTMLElement | null> | HTMLElement | null) => 
       normalizedEvent = event
     }
 
-    const normalizedElement = toValue(elementRef)
+    const normalizedElement = toValue(elementRef) ?? (event.currentTarget as HTMLElement | null)
     if (!normalizedElement) return
 
     // initialize flags to track animation and interaction state

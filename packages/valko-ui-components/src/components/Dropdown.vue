@@ -5,6 +5,7 @@ import styles from '#valkoui/styles/Dropdown.styles.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 import VkPopover from './Popover.vue'
+import useRipple from '#valkoui/composables/useRipple'
 
 defineOptions({ name: 'VkDropdown' })
 
@@ -46,6 +47,12 @@ const onItemClick = (item: Item) => {
   emit('itemClick', item)
   item.onClick?.()
   open.value = false
+}
+
+const createRipple = useRipple()
+
+const onItemMouseDown = (item: Item, event: MouseEvent | TouchEvent) => {
+  if (!item.disabled) createRipple(event)
 }
 </script>
 
@@ -108,6 +115,8 @@ const onItemClick = (item: Item) => {
           :data-disabled="item.disabled"
           :data-shape="shape"
           @click.prevent="onItemClick(item)"
+          @mousedown="onItemMouseDown(item, $event)"
+          @touchstart="onItemMouseDown(item, $event)"
         >
           <vk-icon
             v-if="item.icon"

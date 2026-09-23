@@ -28,6 +28,8 @@ const dropdown = tv({
     ],
     itemsButton: [
       'vk-dropdown__item-button',
+      'relative',
+      'overflow-hidden',
       'w-full',
       'p-2',
       'mb-1',
