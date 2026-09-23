@@ -16,6 +16,8 @@ const menu = tv({
     ],
     content: [
       'vk-menu__content',
+      'relative',
+      'overflow-hidden',
       'w-full',
       'py-2.5',
       'px-4',
