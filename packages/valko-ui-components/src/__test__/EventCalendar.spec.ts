@@ -1,6 +1,6 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkEventCalendar from '#valkoui/components/EventCalendar.vue'
-import type { EventAdapterResult } from '#valkoui/types/EventCalendar'
+import type { CalendarEvent, EventAdapterResult } from '#valkoui/types/EventCalendar'
 
 const { useEventCalendarDrag, useEventCalendarResize } = vi.hoisted(() => ({
   useEventCalendarDrag: vi.fn(() => ({
@@ -79,7 +79,7 @@ const createMockAdapter = (): EventAdapterResult => ({
   getTimeFromPosition: () => ({ hour: 9, minute: 0 })
 })
 
-const sampleEvents = [
+const sampleEvents: CalendarEvent[] = [
   { id: '1', start: new Date(2025, 4, 15, 9, 0), end: new Date(2025, 4, 15, 10, 0), title: 'Meeting', color: 'primary' },
   { id: '2', start: new Date(2025, 4, 15, 14, 0), end: new Date(2025, 4, 15, 15, 0), title: 'Call', color: 'secondary' }
 ]
@@ -378,6 +378,137 @@ describe('EventCalendar component', () => {
         slots: { event: '<div class="custom-event">Custom Event</div>' }
       })
       expect(wrapper.find('.custom-event').exists()).toBe(true)
+    })
+  })
+
+  describe('View switcher', () => {
+    it('should emit update:currentView and switch views when the header dropdown selects a view', async () => {
+      wrapper = mount(VkEventCalendar, {
+        props: { adapter: createMockAdapter(), events: sampleEvents, modelValue: new Date(2025, 4, 15) }
+      })
+
+      await wrapper.findComponent({ name: 'VkDropdown' }).vm.$emit('item-click', { title: 'Week', key: 'week' })
+
+      expect(wrapper.emitted('update:currentView')).toEqual([['week']])
+      expect(wrapper.find('.vk-event-week-view').exists()).toBe(true)
+    })
+  })
+
+  describe('Event forwarding from week and month views', () => {
+    it('should forward eventClick emitted by the week view', async () => {
+      wrapper = mount(VkEventCalendar, {
+        props: { adapter: createMockAdapter(), events: sampleEvents, modelValue: new Date(2025, 4, 15), currentView: 'week' }
+      })
+
+      const payload = { id: 'evt-1', start: new Date(2025, 4, 14), end: new Date(2025, 4, 14) }
+      await wrapper.findComponent({ name: 'VkEventWeekView' }).vm.$emit('eventClick', payload)
+
+      expect(wrapper.emitted('eventClick')).toEqual([[payload]])
+    })
+
+    it('should forward eventClick emitted by the month view', async () => {
+      wrapper = mount(VkEventCalendar, {
+        props: { adapter: createMockAdapter(), events: sampleEvents, modelValue: new Date(2025, 4, 15), currentView: 'month' }
+      })
+
+      const payload = { id: 'evt-1', start: new Date(2025, 4, 15), end: new Date(2025, 4, 15) }
+      await wrapper.findComponent({ name: 'VkEventMonthView' }).vm.$emit('eventClick', payload)
+
+      expect(wrapper.emitted('eventClick')).toEqual([[payload]])
+    })
+
+    it('should forward eventDrop and eventResize emitted by the day view', async () => {
+      wrapper = mount(VkEventCalendar, {
+        props: { adapter: createMockAdapter(), events: sampleEvents, modelValue: new Date(2025, 4, 15) }
+      })
+      const dayView = wrapper.findComponent({ name: 'VkEventDayView' })
+
+      const dropPayload = { event: sampleEvents[0], originalStart: new Date(2025, 4, 15, 9), originalEnd: new Date(2025, 4, 15, 10), newStart: new Date(2025, 4, 15, 11), newEnd: new Date(2025, 4, 15, 12) }
+      await dayView.vm.$emit('eventDrop', dropPayload)
+      expect(wrapper.emitted('eventDrop')).toEqual([[dropPayload]])
+
+      await dayView.vm.$emit('eventResize', dropPayload)
+      expect(wrapper.emitted('eventResize')).toEqual([[dropPayload]])
+    })
+
+    it('should forward eventDrop emitted by the week view', async () => {
+      wrapper = mount(VkEventCalendar, {
+        props: { adapter: createMockAdapter(), events: sampleEvents, modelValue: new Date(2025, 4, 15), currentView: 'week' }
+      })
+
+      const payload = { event: sampleEvents[0], originalStart: sampleEvents[0].start, originalEnd: sampleEvents[0].end, newStart: new Date(2025, 4, 13, 9), newEnd: new Date(2025, 4, 13, 10) }
+      await wrapper.findComponent({ name: 'VkEventWeekView' }).vm.$emit('eventDrop', payload)
+
+      expect(wrapper.emitted('eventDrop')).toEqual([[payload]])
+    })
+
+    it('should forward eventResize emitted by the week view', async () => {
+      wrapper = mount(VkEventCalendar, {
+        props: { adapter: createMockAdapter(), events: sampleEvents, modelValue: new Date(2025, 4, 15), currentView: 'week' }
+      })
+
+      const payload = { event: sampleEvents[0], originalStart: sampleEvents[0].start, originalEnd: sampleEvents[0].end, newStart: new Date(2025, 4, 14, 9), newEnd: new Date(2025, 4, 14, 11) }
+      await wrapper.findComponent({ name: 'VkEventWeekView' }).vm.$emit('eventResize', payload)
+
+      expect(wrapper.emitted('eventResize')).toEqual([[payload]])
+    })
+
+    it('should forward eventDrop emitted by the month view', async () => {
+      wrapper = mount(VkEventCalendar, {
+        props: { adapter: createMockAdapter(), events: sampleEvents, modelValue: new Date(2025, 4, 15), currentView: 'month' }
+      })
+
+      const payload = { event: sampleEvents[0], originalStart: sampleEvents[0].start, originalEnd: sampleEvents[0].end, newStart: new Date(2025, 4, 8, 9), newEnd: new Date(2025, 4, 8, 10) }
+      await wrapper.findComponent({ name: 'VkEventMonthView' }).vm.$emit('eventDrop', payload)
+
+      expect(wrapper.emitted('eventDrop')).toEqual([[payload]])
+    })
+  })
+
+  describe('Slot forwarding to week and month views', () => {
+    it('should forward the event slot to the week view', () => {
+      const mockAdapter = createMockAdapter()
+      mockAdapter.getEventsForDay = () => sampleEvents
+      mockAdapter.getStackedEventPlacements = () => new Map([
+        ['1', { topPercent: 37.5, heightPercent: 4.17, leftPercent: 0, widthPercent: 100, zIndex: 1, isOverlapping: false }]
+      ])
+
+      wrapper = mount(VkEventCalendar, {
+        props: { adapter: mockAdapter, events: sampleEvents, modelValue: new Date(2025, 4, 15), currentView: 'week' },
+        slots: { event: '<div class="custom-week-event">Custom Week Event</div>' }
+      })
+
+      expect(wrapper.find('.custom-week-event').exists()).toBe(true)
+    })
+
+    it('should forward the event slot to the month view', () => {
+      const mockAdapter = createMockAdapter()
+      mockAdapter.getEventsForDay = () => sampleEvents
+
+      wrapper = mount(VkEventCalendar, {
+        props: { adapter: mockAdapter, events: sampleEvents, modelValue: new Date(2025, 4, 15), currentView: 'month' },
+        slots: { event: '<div class="custom-month-event">Custom Month Event</div>' }
+      })
+
+      expect(wrapper.find('.custom-month-event').exists()).toBe(true)
+    })
+
+    it('should forward the more-events slot to the month view', async () => {
+      const mockAdapter = createMockAdapter()
+      mockAdapter.getEventsForDay = () => [
+        ...sampleEvents,
+        { id: '3', start: new Date(2025, 4, 15, 11, 0), end: new Date(2025, 4, 15, 12, 0), title: 'Sync', color: 'primary' },
+        { id: '4', start: new Date(2025, 4, 15, 13, 0), end: new Date(2025, 4, 15, 14, 0), title: 'Retro', color: 'primary' }
+      ]
+
+      wrapper = mount(VkEventCalendar, {
+        props: { adapter: mockAdapter, events: sampleEvents, modelValue: new Date(2025, 4, 15), currentView: 'month' },
+        slots: { 'more-events': '<div class="custom-more-events">Custom More Events</div>' }
+      })
+
+      await wrapper.find('.vk-event-more-indicator').trigger('click')
+
+      expect(wrapper.find('.custom-more-events').exists()).toBe(true)
     })
   })
 })

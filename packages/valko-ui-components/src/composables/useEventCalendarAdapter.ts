@@ -1,5 +1,16 @@
 import type { EventAdapterResult, EventCalendarAdapterOptions, CalendarEvent, EventPlacement, MonthDay, Timezone, ViewMode } from '#valkoui/types/EventCalendar'
 
+/**
+ * Returns the hour offset of `end` measured from the midnight that begins `start`'s day,
+ * so events that end at or past midnight (e.g. 22:00 -> 00:00 next day) keep their full
+ * duration instead of collapsing to a negative/inverted range.
+ */
+export const getEndHourFromStartDay = (start: Date, end: Date): number => {
+  const startOfDay = new Date(start)
+  startOfDay.setHours(0, 0, 0, 0)
+  return (end.getTime() - startOfDay.getTime()) / 3_600_000
+}
+
 const useEventCalendarAdapter = ({ timezones, hourRange }: EventCalendarAdapterOptions): EventAdapterResult => {
   const resolvedHourRange: [number, number] = Array.isArray(hourRange) ? hourRange : [0, 23]
   const [start, end] = resolvedHourRange
@@ -10,11 +21,13 @@ const useEventCalendarAdapter = ({ timezones, hourRange }: EventCalendarAdapterO
     : -new Date().getTimezoneOffset()
 
   const getDisplayHours = (tzOffset: number): string[] => {
-    const hourDiff = Math.floor((tzOffset - localeOffset) / 60)
+    const diffMinutes = tzOffset - localeOffset
     return Array.from({ length: hourCount }, (_, i) => {
-      const hour = start + i + hourDiff
-      const normalized = ((hour % 24) + 24) % 24
-      return String(normalized).padStart(2, '0')
+      const shiftedMinutes = (start + i) * 60 + diffMinutes
+      const normalized = ((shiftedMinutes % 1440) + 1440) % 1440
+      const hour = Math.floor(normalized / 60)
+      const minute = normalized % 60
+      return `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`
     })
   }
 
@@ -120,7 +133,7 @@ const useEventCalendarAdapter = ({ timezones, hourRange }: EventCalendarAdapterO
 
     for (const event of events) {
       const eventStartHour = event.start.getHours() + event.start.getMinutes() / 60
-      const eventEndHour = event.end.getHours() + event.end.getMinutes() / 60
+      const eventEndHour = Math.min(getEndHourFromStartDay(event.start, event.end), end + 1)
 
       const clampedStart = Math.max(eventStartHour, start)
       const clampedEnd = Math.min(eventEndHour, end + 1)
@@ -162,7 +175,7 @@ const useEventCalendarAdapter = ({ timezones, hourRange }: EventCalendarAdapterO
 
     for (const event of sorted) {
       const eventStartHour = event.start.getHours() + event.start.getMinutes() / 60
-      const eventEndHour = event.end.getHours() + event.end.getMinutes() / 60
+      const eventEndHour = Math.min(getEndHourFromStartDay(event.start, event.end), end + 1)
 
       const clampedStart = Math.max(eventStartHour, start)
       const clampedEnd = Math.min(eventEndHour, end + 1)
@@ -239,20 +252,50 @@ const useEventCalendarAdapter = ({ timezones, hourRange }: EventCalendarAdapterO
     return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
   }
 
+  const shiftMonth = (date: Date, delta: number): Date => {
+    const target = new Date(date.getFullYear(), date.getMonth() + delta, 1)
+    const lastDayOfMonth = new Date(target.getFullYear(), target.getMonth() + 1, 0).getDate()
+    return new Date(
+      target.getFullYear(),
+      target.getMonth(),
+      Math.min(date.getDate(), lastDayOfMonth),
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+      date.getMilliseconds()
+    )
+  }
+
   const getPreviousDate = (date: Date, view: ViewMode): Date => {
-    const d = new Date(date)
-    if (view === 'day') d.setDate(d.getDate() - 1)
-    else if (view === 'week') d.setDate(d.getDate() - 7)
-    else d.setMonth(d.getMonth() - 1)
-    return d
+    if (view === 'day') {
+      const d = new Date(date)
+      d.setDate(d.getDate() - 1)
+      return d
+    }
+
+    if (view === 'week') {
+      const d = new Date(date)
+      d.setDate(d.getDate() - 7)
+      return d
+    }
+
+    return shiftMonth(date, -1)
   }
 
   const getNextDate = (date: Date, view: ViewMode): Date => {
-    const d = new Date(date)
-    if (view === 'day') d.setDate(d.getDate() + 1)
-    else if (view === 'week') d.setDate(d.getDate() + 7)
-    else d.setMonth(d.getMonth() + 1)
-    return d
+    if (view === 'day') {
+      const d = new Date(date)
+      d.setDate(d.getDate() + 1)
+      return d
+    }
+
+    if (view === 'week') {
+      const d = new Date(date)
+      d.setDate(d.getDate() + 7)
+      return d
+    }
+
+    return shiftMonth(date, 1)
   }
 
   const snapToQuarterHour = (date: Date): Date => {

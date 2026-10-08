@@ -138,6 +138,14 @@ describe('EventCalendarHeader component', () => {
       })
       expect(getDateLabelSpy).toHaveBeenCalledWith(expect.any(Date), 'day', false)
     })
+
+    it('should show the View fallback label when the current view has no matching item', () => {
+      const wrapper = mount(VkEventCalendarHeader, {
+        props: { adapter: createMockAdapter(), modelValue: new Date(2025, 4, 15), currentView: 'unknown' as never }
+      })
+      const dropdown = wrapper.findComponent({ name: 'VkDropdown' })
+      expect(dropdown.props('label')).toBe('View')
+    })
   })
 
   describe('Custom header slot', () => {

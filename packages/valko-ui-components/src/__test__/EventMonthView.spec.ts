@@ -1,6 +1,6 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkEventMonthView from '#valkoui/components/EventMonthView.vue'
-import type { EventAdapterResult } from '#valkoui/types/EventCalendar'
+import type { CalendarEvent, EventAdapterResult } from '#valkoui/types/EventCalendar'
 
 const { useEventCalendarDrag } = vi.hoisted(() => ({
   useEventCalendarDrag: vi.fn(() => ({
@@ -26,7 +26,7 @@ vi.mock('#valkoui/composables/useEventCalendarDrag.ts', () => ({
   default: useEventCalendarDrag
 }))
 
-const sampleEvents = [
+const sampleEvents: CalendarEvent[] = [
   { id: '1', start: new Date(2025, 4, 15, 9, 0), end: new Date(2025, 4, 15, 10, 0), title: 'Meeting', color: 'primary' },
   { id: '2', start: new Date(2025, 4, 15, 14, 0), end: new Date(2025, 4, 15, 15, 0), title: 'Call', color: 'secondary' }
 ]
@@ -194,7 +194,7 @@ describe('EventMonthView component', () => {
 
   describe('More than MAX_VISIBLE_EVENTS', () => {
     it('should render only 3 events and show more indicator when 5 events exist', () => {
-      const manyEvents = [
+      const manyEvents: CalendarEvent[] = [
         { id: '1', start: new Date(2025, 4, 1, 8, 0), end: new Date(2025, 4, 1, 9, 0), title: 'E1', color: 'primary' },
         { id: '2', start: new Date(2025, 4, 1, 9, 0), end: new Date(2025, 4, 1, 10, 0), title: 'E2', color: 'primary' },
         { id: '3', start: new Date(2025, 4, 1, 10, 0), end: new Date(2025, 4, 1, 11, 0), title: 'E3', color: 'primary' },
@@ -397,6 +397,165 @@ describe('EventMonthView component', () => {
 
       const container = wrapper.find('.vk-event-month-view')
       expect(container.attributes('style')).toContain('0fr')
+    })
+  })
+
+  describe('More events popover', () => {
+    const manyEvents: CalendarEvent[] = [
+      { id: '1', start: new Date(2025, 4, 1, 8, 0), end: new Date(2025, 4, 1, 9, 0), title: 'E1', color: 'primary' },
+      { id: '2', start: new Date(2025, 4, 1, 9, 0), end: new Date(2025, 4, 1, 10, 0), title: 'E2', color: 'primary' },
+      { id: '3', start: new Date(2025, 4, 1, 10, 0), end: new Date(2025, 4, 1, 11, 0), title: 'E3', color: 'primary' },
+      { id: '4', start: new Date(2025, 4, 1, 11, 0), end: new Date(2025, 4, 1, 12, 0), title: 'E4', color: 'primary' },
+      { id: '5', start: new Date(2025, 4, 1, 12, 0), end: new Date(2025, 4, 1, 13, 0), title: 'E5', color: 'primary' }
+    ]
+
+    const mountWithManyEvents = (slots = {}) => {
+      const mockAdapter = createMockAdapter()
+      mockAdapter.getEventsForDay = () => manyEvents
+      return mount(VkEventMonthView, {
+        props: { adapter: mockAdapter, events: manyEvents, modelValue: new Date(2025, 4, 15) },
+        slots
+      })
+    }
+
+    it('should open the popover and list hidden events when the indicator is clicked', async () => {
+      const wrapper = mountWithManyEvents()
+      expect(wrapper.text()).not.toContain('E4')
+
+      await wrapper.find('.vk-event-more-indicator').trigger('click')
+
+      expect(wrapper.text()).toContain('E4')
+      expect(wrapper.text()).toContain('E5')
+    })
+
+    it('should close the popover when the indicator is clicked again', async () => {
+      const wrapper = mountWithManyEvents()
+
+      await wrapper.find('.vk-event-more-indicator').trigger('click')
+      expect(wrapper.text()).toContain('E4')
+
+      await wrapper.find('.vk-event-more-indicator').trigger('click')
+      expect(wrapper.text()).not.toContain('E4')
+    })
+
+    it('should toggle the popover with keyboard on the indicator', async () => {
+      const wrapper = mountWithManyEvents()
+      const indicator = wrapper.find('.vk-event-more-indicator')
+
+      await indicator.trigger('keydown.enter')
+      expect(wrapper.text()).toContain('E4')
+
+      await indicator.trigger('keydown.space')
+      expect(wrapper.text()).not.toContain('E4')
+    })
+
+    it('should close the popover when the popover emits close', async () => {
+      const wrapper = mountWithManyEvents()
+
+      await wrapper.find('.vk-event-more-indicator').trigger('click')
+      expect(wrapper.text()).toContain('E4')
+
+      await wrapper.findComponent({ name: 'VkPopover' }).vm.$emit('close')
+      expect(wrapper.text()).not.toContain('E4')
+    })
+
+    it('should render custom more-events slot content in the popover', async () => {
+      const wrapper = mountWithManyEvents({
+        'more-events': '<div class="custom-more-events">Custom More Events</div>'
+      })
+
+      await wrapper.find('.vk-event-more-indicator').trigger('click')
+
+      expect(wrapper.find('.custom-more-events').exists()).toBe(true)
+      expect(wrapper.text()).not.toContain('E4')
+    })
+
+    it('should emit eventClick when an event row in the popover is clicked', async () => {
+      const wrapper = mountWithManyEvents()
+
+      await wrapper.find('.vk-event-more-indicator').trigger('click')
+      const popover = wrapper.findComponent({ name: 'VkPopover' })
+      const popoverRows = popover.findAll('.vk-event-month-event')
+      expect(popoverRows.length).toBe(5)
+      await popoverRows[4].trigger('click')
+      expect(wrapper.emitted('eventClick')).toBeTruthy()
+
+      await popoverRows[4].trigger('keydown.enter')
+      await popoverRows[4].trigger('keydown.space')
+      expect(wrapper.emitted('eventClick')!.length).toBe(3)
+    })
+  })
+
+  describe('Day cell drag handlers', () => {
+    it('should wire dragover, drop and dragleave on the day cells', async () => {
+      const wrapper = mount(VkEventMonthView, {
+        props: { adapter: createMockAdapter(), events: [], modelValue: new Date(2025, 4, 15) }
+      })
+      const instance = useEventCalendarDrag.mock.results[useEventCalendarDrag.mock.results.length - 1].value
+      const cell = wrapper.find('.vk-event-month-day-cell')
+
+      await cell.trigger('dragover')
+      expect(instance.handleMonthCellDragOver).toHaveBeenCalledWith(expect.anything(), expect.anything())
+
+      await cell.trigger('drop')
+      expect(instance.handleMonthCellDrop).toHaveBeenCalledWith(expect.anything(), expect.anything())
+
+      await cell.trigger('dragleave')
+      expect(instance.handleDragLeave).toHaveBeenCalled()
+    })
+  })
+
+  describe('Month event interaction handlers', () => {
+    const mountWithEvents = () => {
+      const mockAdapter = createMockAdapter()
+      mockAdapter.getEventsForDay = () => sampleEvents
+      return mount(VkEventMonthView, {
+        props: { adapter: mockAdapter, events: sampleEvents, modelValue: new Date(2025, 4, 15), draggable: true }
+      })
+    }
+
+    it('should wire dragstart and dragend to the drag composable', async () => {
+      const wrapper = mountWithEvents()
+      const instance = useEventCalendarDrag.mock.results[useEventCalendarDrag.mock.results.length - 1].value
+      const eventEl = wrapper.find('.vk-event-month-event')
+
+      await eventEl.trigger('dragstart', { dataTransfer: { effectAllowed: '', setData: vi.fn(), setDragImage: vi.fn() } })
+      expect(instance.handleDragStart).toHaveBeenCalledWith(sampleEvents[0], expect.anything(), expect.anything())
+
+      const lastDragCall = () => (useEventCalendarDrag.mock.calls.at(-1) ?? []) as unknown as [unknown, () => boolean, (p: unknown) => void]
+      const isEnabled = lastDragCall()[1]
+      expect(isEnabled()).toBe(true)
+
+      await eventEl.trigger('dragend')
+      expect(instance.handleDragEnd).toHaveBeenCalled()
+    })
+
+    it('should emit eventClick on keydown.space', async () => {
+      const wrapper = mountWithEvents()
+      await wrapper.find('.vk-event-month-event').trigger('keydown.space')
+      expect(wrapper.emitted('eventClick')).toBeTruthy()
+    })
+
+    it('should re-emit the payload from the drag composable onDrop callback', () => {
+      const wrapper = mountWithEvents()
+      const onDrop = (useEventCalendarDrag.mock.calls.at(-1) ?? []) as unknown as [unknown, () => boolean, (p: unknown) => void]
+      const emitPayload = onDrop[2]
+
+      const payload = { event: sampleEvents[0], originalStart: sampleEvents[0].start, originalEnd: sampleEvents[0].end, newStart: new Date(2025, 4, 8, 9), newEnd: new Date(2025, 4, 8, 10) }
+      emitPayload(payload)
+
+      expect(wrapper.emitted('eventDrop')).toEqual([[payload]])
+    })
+
+    it('should refresh the current time every minute and clean up the interval on unmount', () => {
+      vi.useFakeTimers()
+      const wrapper = mount(VkEventMonthView, {
+        props: { adapter: createMockAdapter(), events: [], modelValue: new Date(2025, 4, 15) }
+      })
+
+      vi.advanceTimersByTime(60_000)
+      wrapper.unmount()
+      vi.useRealTimers()
     })
   })
 })

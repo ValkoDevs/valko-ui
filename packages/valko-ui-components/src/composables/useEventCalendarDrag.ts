@@ -1,4 +1,5 @@
 import { ref, computed } from 'vue'
+import { getEndHourFromStartDay } from '#valkoui/composables/useEventCalendarAdapter'
 import type { CalendarEvent, DragContext, EventDropPayload, EventAdapterResult } from '#valkoui/types/EventCalendar'
 
 const useEventCalendarDrag = (
@@ -82,7 +83,7 @@ const useEventCalendarDrag = (
     targetDay.value = dayDate
 
     const startHour = event.start.getHours() + event.start.getMinutes() / 60
-    const endHour = event.end.getHours() + event.end.getMinutes() / 60
+    const endHour = getEndHourFromStartDay(event.start, event.end)
     ghostTopPercent.value = ((startHour - start + 0.5) / hourCount) * 100
     ghostHeightPercent.value = ((endHour - startHour) / hourCount) * 100
   }

@@ -186,7 +186,7 @@ onUnmounted(() => {
         :class="s.timezoneHourLabel({ class: styleSlots?.timezoneHourLabel })"
         :style="{ gridColumn: tzIdx + 1, gridRow: idx + 2 }"
       >
-        {{ displayHour }}:00
+        {{ displayHour }}
       </span>
     </template>
 
@@ -196,7 +196,7 @@ onUnmounted(() => {
       :class="s.timezoneHourLabel({ class: styleSlots?.timezoneHourLabel })"
       :style="{ gridColumn: tzCount, gridRow: idx + 2 }"
     >
-      {{ displayHour }}:00
+      {{ displayHour }}
     </span>
 
     <template

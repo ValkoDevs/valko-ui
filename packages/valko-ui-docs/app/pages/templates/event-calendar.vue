@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useEventCalendarAdapter } from '#valkoui'
 import type { MenuItem, CalendarEvent, EventDropPayload, EventResizePayload, SelectOption } from '#valkoui'
 
 const adapter = useEventCalendarAdapter({

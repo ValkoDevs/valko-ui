@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useEventCalendarAdapter } from '#valkoui'
 import type { TableItem, EventCalendarProps, CalendarEvent, EventDropPayload, EventResizePayload } from '#valkoui'
 
 const form = ref<Partial<EventCalendarProps>>({

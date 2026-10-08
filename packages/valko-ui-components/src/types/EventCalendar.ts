@@ -1,4 +1,4 @@
-import type { Variants, ColorsWithSurface, Sizes, Shapes } from './common'
+import type { Variants, ColorsWithSurface, Sizes, Shapes, ColorWithSurface } from './common'
 import type { EventCalendarSlots } from '../styles/EventCalendar.styles'
 
 export type ViewMode = 'day' | 'week' | 'month'
@@ -7,6 +7,7 @@ export interface Timezone {
   id: string;
   name?: string;
   abbreviation?: string;
+  /** Offset from UTC in minutes (e.g. -240 for UTC-4, 330 for UTC+5:30). */
   offset?: number;
   display?: string[];
 }
@@ -16,7 +17,7 @@ export interface CalendarEvent {
   start: Date;
   end: Date;
   title?: string;
-  color?: string;
+  color?: ColorWithSurface;
   location?: string;
   custom?: Record<string, unknown>;
 }

@@ -1,4 +1,4 @@
-import { nextTick } from 'vue'
+import { nextTick, onUnmounted } from 'vue'
 import { vi } from 'vitest'
 import useEventCalendarResize from '#valkoui/composables/useEventCalendarResize'
 import type { EventAdapterResult, CalendarEvent } from '#valkoui/types/EventCalendar'
@@ -364,6 +364,64 @@ describe('useEventCalendarResize', () => {
       const { resizingEventColor, handleResizeStart } = useEventCalendarResize(createMockAdapter(), () => true, vi.fn())
       handleResizeStart(eventNoColor, 'bottom', createMockMouseEvent(), createMockElement(), dayDate)
       expect(resizingEventColor.value).toBeNull()
+    })
+  })
+
+  describe('overnight events', () => {
+    it('should resize the top edge of an event ending at midnight using a day-relative end hour', () => {
+      const onResize = vi.fn()
+      const { handleResizeStart } = useEventCalendarResize(createMockAdapter(), () => true, onResize)
+      const overnight: CalendarEvent = {
+        id: 'evt-on',
+        start: new Date(2025, 4, 15, 22, 0),
+        end: new Date(2025, 4, 16, 0, 0),
+        title: 'Late shift',
+        color: 'secondary'
+      }
+      handleResizeStart(overnight, 'top', createMockMouseEvent({ clientY: 480 }), createMockElement(), dayDate)
+      document.dispatchEvent(new MouseEvent('mouseup', { clientY: 480 }))
+
+      expect(onResize).toHaveBeenCalledTimes(1)
+      const payload = onResize.mock.calls[0][0]
+      expect(payload.newStart.getHours()).toBe(11)
+      expect(payload.newStart.getMinutes()).toBe(30)
+      expect(payload.newEnd.getTime()).toBe(new Date(2025, 4, 16, 0, 0).getTime())
+    })
+  })
+
+  describe('cleanup on unmount', () => {
+    it('should remove the document listeners when the unmount hook runs', () => {
+      const removeSpy = vi.spyOn(document, 'removeEventListener')
+      useEventCalendarResize(createMockAdapter(), () => true, vi.fn())
+
+      const unmountCallback = vi.mocked(onUnmounted).mock.calls.at(-1)?.[0] as () => void
+      unmountCallback()
+
+      expect(removeSpy).toHaveBeenCalledWith('mousemove', expect.any(Function))
+      expect(removeSpy).toHaveBeenCalledWith('mouseup', expect.any(Function))
+      removeSpy.mockRestore()
+    })
+  })
+
+  describe('guard branches', () => {
+    it('should ignore mousemove and mouseup when there is no active resize', () => {
+      const onResize = vi.fn()
+      useEventCalendarResize(createMockAdapter(), () => true, onResize)
+
+      expect(() => {
+        document.dispatchEvent(new MouseEvent('mousemove', { clientY: 100 }))
+        document.dispatchEvent(new MouseEvent('mouseup', { clientY: 100 }))
+      }).not.toThrow()
+
+      expect(onResize).not.toHaveBeenCalled()
+    })
+
+    it('should not start resizing when the composable is disabled', () => {
+      const { isResizing, resizingEventId, handleResizeStart } = useEventCalendarResize(createMockAdapter(), () => false, vi.fn())
+      handleResizeStart(sampleEvent, 'top', createMockMouseEvent(), createMockElement(), dayDate)
+
+      expect(isResizing.value).toBe(false)
+      expect(resizingEventId.value).toBeNull()
     })
   })
 })

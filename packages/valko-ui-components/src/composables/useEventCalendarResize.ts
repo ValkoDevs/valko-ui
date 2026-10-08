@@ -1,4 +1,5 @@
 import { ref, computed, onUnmounted } from 'vue'
+import { getEndHourFromStartDay } from '#valkoui/composables/useEventCalendarAdapter'
 import type { CalendarEvent, ResizeContext, EventResizePayload, EventAdapterResult } from '#valkoui/types/EventCalendar'
 
 const useEventCalendarResize = (
@@ -38,7 +39,7 @@ const useEventCalendarResize = (
     const rawHour = getHourFromY(clientY, resizeCtx.eventsAreaRect)
 
     const origStartHour = resizeCtx.originalStart.getHours() + resizeCtx.originalStart.getMinutes() / 60
-    const origEndHour = resizeCtx.originalEnd.getHours() + resizeCtx.originalEnd.getMinutes() / 60
+    const origEndHour = getEndHourFromStartDay(resizeCtx.originalStart, resizeCtx.originalEnd)
 
     let newStartHour: number
     let newEndHour: number
@@ -79,7 +80,7 @@ const useEventCalendarResize = (
     const rawHour = getHourFromY(e.clientY, ctx.eventsAreaRect)
 
     const origStartHour = ctx.originalStart.getHours() + ctx.originalStart.getMinutes() / 60
-    const origEndHour = ctx.originalEnd.getHours() + ctx.originalEnd.getMinutes() / 60
+    const origEndHour = getEndHourFromStartDay(ctx.originalStart, ctx.originalEnd)
     const minDuration = 0.25
 
     let newStartHour: number

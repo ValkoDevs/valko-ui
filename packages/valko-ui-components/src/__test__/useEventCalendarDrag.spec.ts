@@ -440,4 +440,20 @@ describe('useEventCalendarDrag composable', () => {
       expect(dragOverDayIdx.value).toBe(5)
     })
   })
+
+  describe('handleDragStart with overnight events', () => {
+    it('should set ghost geometry using the day-relative end hour', () => {
+      const { ghostTopPercent, ghostHeightPercent, handleDragStart } = useEventCalendarDrag(createMockAdapter(), () => true, vi.fn())
+      const overnight: CalendarEvent = {
+        id: 'evt-on',
+        start: new Date(2025, 4, 15, 22, 0),
+        end: new Date(2025, 4, 16, 0, 0),
+        title: 'Late shift',
+        color: 'primary'
+      }
+      handleDragStart(overnight, createMockDragEvent(), dayDate)
+      expect(ghostTopPercent.value).toBeCloseTo(((22 + 0.5) / 24) * 100)
+      expect(ghostHeightPercent.value).toBeCloseTo(((24 - 22) / 24) * 100)
+    })
+  })
 })

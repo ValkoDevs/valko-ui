@@ -1,4 +1,4 @@
-import useEventCalendarAdapter from '#valkoui/composables/useEventCalendarAdapter'
+import useEventCalendarAdapter, { getEndHourFromStartDay } from '#valkoui/composables/useEventCalendarAdapter'
 import type { CalendarEvent } from '#valkoui/types/EventCalendar'
 
 const today = new Date(2025, 4, 15, 0, 0, 0, 0)
@@ -527,6 +527,12 @@ describe('useEventCalendarAdapter composable', () => {
       const { getTimezoneFullName } = useEventCalendarAdapter({})
       expect(getTimezoneFullName({ id: 'America/Los_Angeles' })).toBe('Los Angeles')
     })
+
+    it('should fall back to the raw id when the id has no city segment', () => {
+      const { getTimezoneLabel, getTimezoneFullName } = useEventCalendarAdapter({})
+      expect(getTimezoneLabel({ id: '' })).toBe('')
+      expect(getTimezoneFullName({ id: '' })).toBe('')
+    })
   })
 
   describe('Timezone locale id fallback to Intl', () => {
@@ -551,6 +557,161 @@ describe('useEventCalendarAdapter composable', () => {
     it('should use empty spread when timezones.locale is undefined', () => {
       const adapter = useEventCalendarAdapter({ timezones: {} })
       expect(adapter.timezones.locale.id).toBeTruthy()
+    })
+  })
+
+  describe('getEndHourFromStartDay', () => {
+    it('should return the end hour relative to the start day for same-day events', () => {
+      expect(getEndHourFromStartDay(new Date(2025, 4, 15, 9, 0), new Date(2025, 4, 15, 10, 0))).toBe(10)
+    })
+
+    it('should return 24 for events ending at midnight of the next day', () => {
+      expect(getEndHourFromStartDay(new Date(2025, 4, 15, 22, 0), new Date(2025, 4, 16, 0, 0))).toBe(24)
+    })
+
+    it('should count hours past midnight for overnight events', () => {
+      expect(getEndHourFromStartDay(new Date(2025, 4, 15, 23, 0), new Date(2025, 4, 16, 1, 0))).toBe(25)
+    })
+
+    it('should handle multi-day events', () => {
+      expect(getEndHourFromStartDay(new Date(2025, 4, 15, 10, 0), new Date(2025, 4, 17, 11, 0))).toBe(59)
+    })
+  })
+
+  describe('getEventPlacements with overnight events', () => {
+    const { getEventPlacements } = useEventCalendarAdapter({})
+
+    it('should place events ending at midnight of the next day', () => {
+      const overnight: CalendarEvent[] = [
+        { id: 'on-1', start: new Date(2025, 4, 15, 22, 0), end: new Date(2025, 4, 16, 0, 0), title: 'Late shift' }
+      ]
+      const p = getEventPlacements(overnight).get('on-1')!
+      expect(p).toBeDefined()
+      expect(p.topPercent).toBeCloseTo(((22 + 0.5) / 24) * 100)
+      expect(p.heightPercent).toBeCloseTo(100 - ((22 + 0.5) / 24) * 100)
+    })
+
+    it('should clamp overnight events ending past the hourRange to the range end', () => {
+      const overnight: CalendarEvent[] = [
+        { id: 'on-2', start: new Date(2025, 4, 15, 23, 0), end: new Date(2025, 4, 16, 1, 0), title: 'Night event' }
+      ]
+      const p = getEventPlacements(overnight).get('on-2')!
+      expect(p).toBeDefined()
+      expect(p.heightPercent).toBeCloseTo(100 - ((23 + 0.5) / 24) * 100)
+    })
+
+    it('should place multi-day events on their start day up to the range end', () => {
+      const multiDay: CalendarEvent[] = [
+        { id: 'md-1', start: new Date(2025, 4, 15, 10, 0), end: new Date(2025, 4, 17, 11, 0), title: 'Conference' }
+      ]
+      const p = getEventPlacements(multiDay).get('md-1')!
+      expect(p).toBeDefined()
+      expect(p.topPercent).toBeCloseTo(((10 + 0.5) / 24) * 100)
+      expect(p.heightPercent).toBeCloseTo(100 - ((10 + 0.5) / 24) * 100)
+    })
+
+    it('should still skip inverted same-day events', () => {
+      const inverted: CalendarEvent[] = [
+        { id: 'inv-1', start: new Date(2025, 4, 15, 22, 0), end: new Date(2025, 4, 15, 21, 0), title: 'Invalid' }
+      ]
+      expect(getEventPlacements(inverted).has('inv-1')).toBe(false)
+    })
+  })
+
+  describe('getStackedEventPlacements with overnight events', () => {
+    it('should place events ending at midnight of the next day', () => {
+      const { getStackedEventPlacements } = useEventCalendarAdapter({})
+      const overnight: CalendarEvent[] = [
+        { id: 'son-1', start: new Date(2025, 4, 15, 22, 0), end: new Date(2025, 4, 16, 0, 0), title: 'Late shift' }
+      ]
+      expect(getStackedEventPlacements(overnight).has('son-1')).toBe(true)
+    })
+  })
+
+  describe('Month navigation across month ends', () => {
+    const { getPreviousDate, getNextDate } = useEventCalendarAdapter({})
+
+    it('should clamp to the last day when the previous month is shorter (Mar 31 -> Feb 28)', () => {
+      const result = getPreviousDate(new Date(2025, 2, 31), 'month')
+      expect(result.getMonth()).toBe(1)
+      expect(result.getDate()).toBe(28)
+    })
+
+    it('should handle leap years (Mar 31 2024 -> Feb 29)', () => {
+      const result = getPreviousDate(new Date(2024, 2, 31), 'month')
+      expect(result.getMonth()).toBe(1)
+      expect(result.getDate()).toBe(29)
+    })
+
+    it('should clamp to the last day when the next month is shorter (Jan 31 -> Feb 28)', () => {
+      const result = getNextDate(new Date(2025, 0, 31), 'month')
+      expect(result.getMonth()).toBe(1)
+      expect(result.getDate()).toBe(28)
+    })
+
+    it('should clamp 31 to 30 when navigating from Aug 31 to September', () => {
+      const result = getNextDate(new Date(2025, 7, 31), 'month')
+      expect(result.getMonth()).toBe(8)
+      expect(result.getDate()).toBe(30)
+    })
+
+    it('should wrap to the previous year when navigating back from January', () => {
+      const result = getPreviousDate(new Date(2025, 0, 15), 'month')
+      expect(result.getFullYear()).toBe(2024)
+      expect(result.getMonth()).toBe(11)
+      expect(result.getDate()).toBe(15)
+    })
+
+    it('should preserve the time of day when shifting months', () => {
+      const result = getPreviousDate(new Date(2025, 2, 31, 14, 30), 'month')
+      expect(result.getHours()).toBe(14)
+      expect(result.getMinutes()).toBe(30)
+    })
+
+    it('should keep day and week navigation unchanged', () => {
+      expect(getPreviousDate(new Date(2025, 2, 31), 'day').getDate()).toBe(30)
+      expect(getNextDate(new Date(2025, 2, 31), 'week').getDate()).toBe(7)
+    })
+  })
+
+  describe('Timezone display with minute offsets', () => {
+    it('should include minutes in display labels', () => {
+      const adapter = useEventCalendarAdapter({
+        timezones: { locale: { id: 'UTC', offset: 0 } }
+      })
+      expect(adapter.timezones.locale.display![0]).toBe('00:00')
+      expect(adapter.timezones.locale.display![9]).toBe('09:00')
+    })
+
+    it('should compute half-hour offset displays correctly', () => {
+      const adapter = useEventCalendarAdapter({
+        timezones: {
+          locale: { id: 'UTC', offset: 0 },
+          extras: [{ id: 'Asia/Kolkata', offset: 330 }]
+        }
+      })
+      expect(adapter.timezones.extras[0]!.display![0]).toBe('05:30')
+      expect(adapter.timezones.extras[0]!.display![9]).toBe('14:30')
+    })
+
+    it('should wrap around midnight for large positive offsets', () => {
+      const adapter = useEventCalendarAdapter({
+        timezones: {
+          locale: { id: 'UTC', offset: 0 },
+          extras: [{ id: 'Pacific/Kiritimati', offset: 840 }]
+        }
+      })
+      expect(adapter.timezones.extras[0]!.display![22]).toBe('12:00')
+    })
+
+    it('should handle negative half-hour offsets', () => {
+      const adapter = useEventCalendarAdapter({
+        timezones: {
+          locale: { id: 'UTC', offset: 0 },
+          extras: [{ id: 'Asia/Kathmandu', offset: -345 }]
+        }
+      })
+      expect(adapter.timezones.extras[0]!.display![0]).toBe('18:15')
     })
   })
 })
