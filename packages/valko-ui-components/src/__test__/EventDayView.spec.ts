@@ -419,7 +419,7 @@ describe('EventDayView component', () => {
   })
 
   describe('Hover state', () => {
-    it('should track hovered event on mouseenter and reset on mouseleave', async () => {
+    it('should expose hover affordances through CSS classes instead of inline transforms', async () => {
       const mockAdapter = createMockAdapter()
       mockAdapter.getEventsForDay = () => sampleEvents
       mockAdapter.getEventPlacements = () => new Map([
@@ -427,13 +427,19 @@ describe('EventDayView component', () => {
       ])
 
       const wrapper = mount(VkEventDayView, {
-        props: { adapter: mockAdapter, events: sampleEvents, modelValue: new Date(2025, 4, 15) }
+        props: { adapter: mockAdapter, events: sampleEvents, modelValue: new Date(2025, 4, 15), resizable: true }
       })
 
       const eventEl = wrapper.find('.vk-event-event')
       await eventEl.trigger('mouseenter')
-      await eventEl.trigger('mouseleave')
-      expect(wrapper.find('.vk-event-event').exists()).toBe(true)
+
+      expect(eventEl.classes()).toContain('group')
+      expect(eventEl.classes().some(c => c.includes('hover:ring'))).toBe(true)
+      expect(eventEl.attributes('style')).not.toContain('translate')
+      expect(eventEl.attributes('style')).not.toContain('box-shadow')
+
+      const handle = eventEl.find('.vk-event-resize-handle')
+      expect(handle.classes().some(c => c.includes('group-hover:opacity-100'))).toBe(true)
     })
   })
 
@@ -463,17 +469,6 @@ describe('EventDayView component', () => {
     const lastResizeInstance = () => useEventCalendarResize.mock.results[useEventCalendarResize.mock.results.length - 1].value
     const lastDragCall = () => (useEventCalendarDrag.mock.calls.at(-1) ?? []) as unknown as [unknown, () => boolean, (p: unknown) => void]
     const lastResizeCall = () => (useEventCalendarResize.mock.calls.at(-1) ?? []) as unknown as [unknown, () => boolean, (p: unknown) => void]
-
-    it('should highlight the event style on mouseenter and restore it on mouseleave', async () => {
-      const wrapper = mountWithEvents()
-      const eventEl = wrapper.find('.vk-event-event')
-
-      await eventEl.trigger('mouseenter')
-      expect(eventEl.attributes('style')).toContain('translateY(-6px)')
-
-      await eventEl.trigger('mouseleave')
-      expect(eventEl.attributes('style')).not.toContain('translateY(-6px)')
-    })
 
     it('should apply the dragged opacity style while the event is being dragged', () => {
       useEventCalendarDrag.mockReturnValueOnce({

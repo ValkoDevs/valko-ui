@@ -1,10 +1,5 @@
 import type { EventAdapterResult, EventCalendarAdapterOptions, CalendarEvent, EventPlacement, MonthDay, Timezone, ViewMode } from '#valkoui/types/EventCalendar'
 
-/**
- * Returns the hour offset of `end` measured from the midnight that begins `start`'s day,
- * so events that end at or past midnight (e.g. 22:00 -> 00:00 next day) keep their full
- * duration instead of collapsing to a negative/inverted range.
- */
 export const getEndHourFromStartDay = (start: Date, end: Date): number => {
   const startOfDay = new Date(start)
   startOfDay.setHours(0, 0, 0, 0)

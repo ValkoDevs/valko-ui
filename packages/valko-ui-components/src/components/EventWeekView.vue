@@ -20,7 +20,6 @@ const emit = defineEmits(['eventClick', 'eventDrop', 'eventResize'])
 
 const s = computed(() => styles(props))
 
-const hoveredEventId = ref<string | null>(null)
 const now = ref(new Date())
 let timerId: ReturnType<typeof setInterval> | null = null
 
@@ -50,8 +49,6 @@ const getEventStyle = (event: CalendarEvent, dayIdx: number): Record<string, str
   const placement = eventPlacementsPerDay.value[dayIdx]?.get(event.id)
   if (!placement) return {}
 
-  const isHovered = hoveredEventId.value === event.id
-
   const edgePx = 8
   const indentPx = 6
   const overlapIndex = placement.zIndex - 1
@@ -62,9 +59,7 @@ const getEventStyle = (event: CalendarEvent, dayIdx: number): Record<string, str
     height: `${placement.heightPercent}%`,
     left: `${leftPx}px`,
     right: `${edgePx}px`,
-    zIndex: isHovered ? 99 : placement.zIndex,
-    transform: isHovered ? 'translateY(-6px)' : undefined,
-    boxShadow: isHovered ? '0 8px 25px rgba(0,0,0,0.15)' : undefined
+    zIndex: placement.zIndex
   }
 
   if (drag.draggedEventId.value === event.id) {
@@ -245,15 +240,13 @@ onUnmounted(() => {
           <div
             v-for="event in adapter.getEventsForDay(events, day)"
             :key="event.id"
-            :class="[s.event({ class: styleSlots?.event }), draggable ? (drag.isDragging.value ? 'cursor-grabbing' : 'cursor-grab') : '']"
+            :class="[s.event({ class: styleSlots?.event }), 'group', draggable ? (drag.isDragging.value ? 'cursor-grabbing' : 'cursor-grab') : '']"
             :data-color="event.color || color"
             :style="getEventStyle(event, dayIdx)"
             :aria-label="`${event.title || 'Event'}, ${event.start.toLocaleTimeString()} to ${event.end.toLocaleTimeString()}`"
             :draggable="draggable ? 'true' : undefined"
             role="button"
             tabindex="0"
-            @mouseenter="hoveredEventId = event.id"
-            @mouseleave="hoveredEventId = null"
             @click="onEventClick(event)"
             @keydown.enter="onEventClick(event)"
             @keydown.space.prevent="onEventClick(event)"

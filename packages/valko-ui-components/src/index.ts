@@ -17,6 +17,8 @@ export { default as useClientSideDragAndDrop } from '#valkoui/composables/useCli
 export { default as useClientSideDataTable } from '#valkoui/composables/useClientSideDataTable.ts'
 export { default as useDateAdapter } from '#valkoui/composables/useDateAdapter.ts'
 export { default as useEventCalendarAdapter } from '#valkoui/composables/useEventCalendarAdapter.ts'
+export { default as useEventCalendarDrag } from '#valkoui/composables/useEventCalendarDrag.ts'
+export { default as useEventCalendarResize } from '#valkoui/composables/useEventCalendarResize.ts'
 export { default as useRipple } from '#valkoui/composables/useRipple.ts'
 export { default as useTimeAdapter } from '#valkoui/composables/useTimeAdapter.ts'
 

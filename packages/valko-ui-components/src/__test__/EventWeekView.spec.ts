@@ -303,15 +303,19 @@ describe('EventWeekView component', () => {
     const lastDragCall = () => (useEventCalendarDrag.mock.calls.at(-1) ?? []) as unknown as [unknown, () => boolean, (p: unknown) => void]
     const lastResizeCall = () => (useEventCalendarResize.mock.calls.at(-1) ?? []) as unknown as [unknown, () => boolean, (p: unknown) => void]
 
-    it('should highlight the event style on mouseenter and restore it on mouseleave', async () => {
+    it('should expose hover affordances through CSS classes instead of inline transforms', async () => {
       const wrapper = mountWithEvents()
       const eventEl = wrapper.find('.vk-event-event')
 
       await eventEl.trigger('mouseenter')
-      expect(eventEl.attributes('style')).toContain('translateY(-6px)')
 
-      await eventEl.trigger('mouseleave')
-      expect(eventEl.attributes('style')).not.toContain('translateY(-6px)')
+      expect(eventEl.classes()).toContain('group')
+      expect(eventEl.classes().some(c => c.includes('hover:ring'))).toBe(true)
+      expect(eventEl.attributes('style')).not.toContain('translate')
+      expect(eventEl.attributes('style')).not.toContain('box-shadow')
+
+      const handle = eventEl.find('.vk-event-resize-handle')
+      expect(handle.classes().some(c => c.includes('group-hover:opacity-100'))).toBe(true)
     })
 
     it('should apply the dragged opacity style while the event is being dragged', () => {

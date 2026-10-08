@@ -152,8 +152,18 @@ const eventCalendar = tv({
       'py-0.5',
       'truncate',
       'cursor-pointer',
-      'transition-colors',
-      'duration-150'
+      'transition-all',
+      'duration-150',
+      'hover:shadow-el2',
+      'hover:ring-1',
+      'hover:ring-inset',
+      'data-[color=primary]:hover:ring-primary/40',
+      'data-[color=secondary]:hover:ring-secondary/40',
+      'data-[color=positive]:hover:ring-positive/40',
+      'data-[color=accent]:hover:ring-accent/40',
+      'data-[color=warning]:hover:ring-warning/40',
+      'data-[color=negative]:hover:ring-negative/40',
+      'data-[color=surface]:hover:ring-surface/40'
     ],
     moreIndicator: [
       'vk-event-more-indicator',
@@ -235,6 +245,7 @@ const eventCalendar = tv({
     ],
     event: [
       'vk-event-event',
+      'group',
       'absolute',
       'px-2',
       'py-1',
@@ -244,7 +255,17 @@ const eventCalendar = tv({
       'duration-200',
       'ease-in-out',
       'overflow-hidden',
-      'line-clamp-2'
+      'line-clamp-2',
+      'hover:shadow-el2',
+      'hover:ring-2',
+      'hover:ring-inset',
+      'data-[color=primary]:hover:ring-primary/40',
+      'data-[color=secondary]:hover:ring-secondary/40',
+      'data-[color=positive]:hover:ring-positive/40',
+      'data-[color=accent]:hover:ring-accent/40',
+      'data-[color=warning]:hover:ring-warning/40',
+      'data-[color=negative]:hover:ring-negative/40',
+      'data-[color=surface]:hover:ring-surface/40'
     ],
     dragGhost: [
       'vk-event-drag-ghost',
@@ -264,7 +285,7 @@ const eventCalendar = tv({
       'cursor-ns-resize',
       'z-10',
       'opacity-0',
-      'hover:opacity-100',
+      'group-hover:opacity-100',
       'transition-opacity',
       'duration-150'
     ]
