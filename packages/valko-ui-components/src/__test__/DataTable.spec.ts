@@ -1,10 +1,11 @@
-import { nextTick } from 'vue'
+import { h, nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkDataTable from '#valkoui/components/DataTable.vue'
 import VkInput from '#valkoui/components/Input.vue'
 import VkSelect from '#valkoui/components/Select.vue'
 import VkPagination from '#valkoui/components/Pagination.vue'
 import type { Sort } from '#valkoui/types/common'
+import type { TableItem } from '#valkoui/types/Table'
 
 const headers = [
   {
@@ -206,6 +207,68 @@ describe('DataTable component', () => {
 
         expect(wrapper.find('.vk-table__tr').classes()).toContain('even:bg-surface-container')
       })
+    })
+  })
+
+  describe('Slots', () => {
+    it('should render a custom header-cell-${header.key} slot', () => {
+      wrapper = mount(VkDataTable, {
+        props: {
+          headers,
+          data
+        },
+        slots: {
+          'header-cell-prop': '<span class="custom-header-cell">Custom Property Header</span>'
+        }
+      })
+
+      expect(wrapper.find('.custom-header-cell').exists()).toBe(true)
+      expect(wrapper.text()).toContain('Custom Property Header')
+    })
+
+    it('should render a custom cell-${field} slot', () => {
+      wrapper = mount(VkDataTable, {
+        props: {
+          headers,
+          data
+        },
+        slots: {
+          'cell-prop': ({ item }: { item: TableItem }) => h('span', { class: 'custom-cell-field' }, String(item.prop))
+        }
+      })
+
+      expect(wrapper.find('.custom-cell-field').exists()).toBe(true)
+      expect(wrapper.text()).toContain('headers')
+    })
+
+    it('should render a custom no-data-message slot', () => {
+      wrapper = mount(VkDataTable, {
+        props: {
+          headers,
+          data: []
+        },
+        slots: {
+          'no-data-message': '<div class="custom-no-data">No records available</div>'
+        }
+      })
+
+      expect(wrapper.find('.custom-no-data').exists()).toBe(true)
+      expect(wrapper.text()).toContain('No records available')
+    })
+
+    it('should render a custom table-footer slot', () => {
+      wrapper = mount(VkDataTable, {
+        props: {
+          headers,
+          data
+        },
+        slots: {
+          'table-footer': '<tr class="custom-table-footer"><td colspan="2">Footer content</td></tr>'
+        }
+      })
+
+      expect(wrapper.find('.custom-table-footer').exists()).toBe(true)
+      expect(wrapper.text()).toContain('Footer content')
     })
   })
 
