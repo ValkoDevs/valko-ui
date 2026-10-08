@@ -93,7 +93,7 @@ const visibleRangeEnd = computed(() => {
   if (!isDataReady.value) return 0
   return Math.min(props.offset + props.data.length, recordsTotal.value)
 })
-const totalPages = computed(() => Math.ceil(props.total / props.limit))
+const totalPages = computed(() => Math.ceil(recordsTotal.value / props.limit))
 const currentPage = computed({
   get: () => isDataReady.value ? props.offset / props.limit + 1 : 1,
   set: (page: number) => emit('onPageChange', page * props.limit - props.limit)

@@ -1,10 +1,11 @@
-import { nextTick } from 'vue'
+import { h, nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkDataTable from '#valkoui/components/DataTable.vue'
 import VkInput from '#valkoui/components/Input.vue'
 import VkSelect from '#valkoui/components/Select.vue'
 import VkPagination from '#valkoui/components/Pagination.vue'
 import type { Sort } from '#valkoui/types/common'
+import type { TableItem } from '#valkoui/types/Table'
 
 const headers = [
   {
@@ -232,7 +233,7 @@ describe('DataTable component', () => {
           data
         },
         slots: {
-          'cell-prop': '<template #cell-prop="{ item }"><span class="custom-cell-field">{{ item.prop }}</span></template>'
+          'cell-prop': ({ item }: { item: TableItem }) => h('span', { class: 'custom-cell-field' }, String(item.prop))
         }
       })
 
