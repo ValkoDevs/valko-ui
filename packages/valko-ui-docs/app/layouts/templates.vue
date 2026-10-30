@@ -26,7 +26,8 @@ const menuItems: MenuItem[] = [
   { key: '/templates/user-management', group: 'Data', text: 'User Management' },
   { key: '/templates/user-edit', group: 'Data', text: 'User Edit' },
   { key: '/templates/filters-horizontal', group: 'Filters', text: 'Filters Horizontal' },
-  { key: '/templates/filters-vertical', group: 'Filters', text: 'Filters Vertical' }
+  { key: '/templates/filters-vertical', group: 'Filters', text: 'Filters Vertical' },
+  { key: '/templates/event-calendar', group: 'Data', text: 'Event Calendar' }
 ]
 
 const activeItem = ref<MenuItem['key'] | null>('/templates')

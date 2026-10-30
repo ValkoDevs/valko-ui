@@ -19,7 +19,8 @@ const templates = [
   { key: 17, name: 'Filters Horizontal', image: '/assets/templates/filters-horizontal.webp', link: '/templates/filters-horizontal', tags: ['filters'] },
   { key: 17, name: 'Filters Vertical', image: '/assets/templates/filters-vertical.webp', link: '/templates/filters-vertical', tags: ['filters'] },
   { key: 18, name: 'User Management', image: '/assets/templates/user-management.webp', link: '/templates/user-management', tags: ['data'] },
-  { key: 19, name: 'User Edit', image: '/assets/templates/user-edit.webp', link: '/templates/user-edit', tags: ['data'] }
+  { key: 19, name: 'User Edit', image: '/assets/templates/user-edit.webp', link: '/templates/user-edit', tags: ['data'] },
+  { key: 20, name: 'Event Calendar', image: '/assets/templates/event-calendar.webp', link: '/templates/event-calendar', tags: ['data'] }
 ]
 
 const categorizedTemplates = computed(() =>
