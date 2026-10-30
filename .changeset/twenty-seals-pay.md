@@ -13,6 +13,7 @@
     - `cell-${field}`
     - `no-data-message`
     - `table-footer`
+  - `totalPages` now falls back to the record count when no positive `total` is provided, so client-side data sets still render pagination.
 
 ### Tests
 
@@ -22,6 +23,7 @@
     - `cell-${field}`
     - `no-data-message`
     - `table-footer`
+  - Added unit tests for the `totalPages` record-count fallback.
 
 ---
 

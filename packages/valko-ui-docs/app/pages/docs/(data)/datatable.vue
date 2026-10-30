@@ -222,15 +222,6 @@ const styleSlotsInterface: PropData[] = [
     apiType: 'primitive'
   },
   {
-    key: 'footerControls',
-    prop: 'footerControls',
-    required: false,
-    description: 'Styles for the table footer controls (pagination, select).',
-    values: 'string[]',
-    default: '',
-    apiType: 'primitive'
-  },
-  {
     key: 'pagination',
     prop: 'pagination',
     required: false,

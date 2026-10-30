@@ -87,12 +87,9 @@ const handleClickOutside = (event: MouseEvent) => {
 }
 
 const isDataReady = computed(() => Array.isArray(props.data) && props.data.length > 0)
+// Falls back to the record count when no explicit total is provided, so
+// pagination still works for client-side data sets.
 const recordsTotal = computed(() => props.total > 0 ? props.total : props.data.length)
-const visibleRangeStart = computed(() => isDataReady.value ? props.offset + 1 : 0)
-const visibleRangeEnd = computed(() => {
-  if (!isDataReady.value) return 0
-  return Math.min(props.offset + props.data.length, recordsTotal.value)
-})
 const totalPages = computed(() => Math.ceil(recordsTotal.value / props.limit))
 const currentPage = computed({
   get: () => isDataReady.value ? props.offset / props.limit + 1 : 1,
@@ -307,9 +304,7 @@ onBeforeUnmount(() => {
       v-if="isDataReady"
       :class="s.footer({ class: styleSlots?.footer })"
     >
-      <span>{{ visibleRangeStart }} - {{ visibleRangeEnd }} / {{ recordsTotal }}</span>
-
-      <div :class="s.footerControls({ class: styleSlots?.footerControls })">
+      <div>
         <vk-pagination
           :color="color"
           :variant="variant"
@@ -319,7 +314,9 @@ onBeforeUnmount(() => {
           :class="s.pagination({ class: styleSlots?.pagination })"
           v-model="currentPage"
         />
+      </div>
 
+      <div>
         <vk-select
           :label="label"
           :options="selectSize"

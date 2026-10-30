@@ -272,6 +272,48 @@ describe('DataTable component', () => {
     })
   })
 
+  describe('Total pages', () => {
+    it('should derive pages from the record count when no total is provided', async () => {
+      wrapper = mount(VkDataTable, {
+        props: {
+          headers,
+          data
+        }
+      })
+      await nextTick()
+
+      expect(wrapper.findComponent(VkPagination).props('pages')).toBe(1)
+    })
+
+    it('should derive pages from the record count when total is zero', async () => {
+      wrapper = mount(VkDataTable, {
+        props: {
+          headers,
+          data,
+          total: 0,
+          limit: 2
+        }
+      })
+      await nextTick()
+
+      expect(wrapper.findComponent(VkPagination).props('pages')).toBe(2)
+    })
+
+    it('should use the provided total when it is positive', async () => {
+      wrapper = mount(VkDataTable, {
+        props: {
+          headers,
+          data,
+          total: 100,
+          limit: 10
+        }
+      })
+      await nextTick()
+
+      expect(wrapper.findComponent(VkPagination).props('pages')).toBe(10)
+    })
+  })
+
   describe('Methods', () => {
     describe('selectedItems', () => {
       it('checks the correct checkboxes when selection is an array', () => {
