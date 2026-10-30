@@ -19,6 +19,11 @@
     - `setOpen`
     - `disabled`
   - Removed the previous trigger slot props (`props`, `open`, and `toggle`) in favor of the new standardized API.
+  - Removed the `click` emit. Use `itemClick` for item activations and `update:isOpen` for open-state changes.
+
+- **Datepicker & Timepicker**
+  - Replaced the `open` and `close` emits with `update:isOpen` (controlled through `v-model:isOpen`).
+  - Removed the `styleSlots` prop; popover-related styles are now handled by the shared `VkPopover` component.
 
 ### Components
 
@@ -54,6 +59,7 @@
 
 - **useClientSideDragAndDrop**
   - Added support for an `enabled` parameter to control drag and drop behavior.
+  - Defaults to `false` when not provided, so direct consumers must opt in to drag support.
   - Improved disabled state handling by preserving the original data flow when drag and drop is not enabled.
 
 - **useClientSideFilter**

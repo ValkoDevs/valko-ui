@@ -22,6 +22,7 @@ const emit = defineEmits(['onSelect', 'update:isOpen'])
 
 <template>
   <vk-popover
+    class="vk-timepicker"
     :is-open="isOpen"
     :shape="shape"
     :style-slots="{ panel: ['p-2'] }"
