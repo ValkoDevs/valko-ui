@@ -36,6 +36,18 @@ const formatMap = computed(() => {
   }
 })
 
+const visibleColumnCount = computed(() =>
+  [formatMap.value.hasHours, formatMap.value.hasMinutes, formatMap.value.hasSeconds]
+    .filter(Boolean)
+    .length
+)
+
+const gridStyle = computed(() => {
+  if (visibleColumnCount.value === 0) return undefined
+
+  return { gridTemplateColumns: `repeat(${visibleColumnCount.value}, minmax(0, 1fr))` }
+})
+
 const selectedTime = computed(() => {
   const dates = toValue(props.adapter.formattedTime)
   return dates.display || dates.selected
@@ -50,7 +62,10 @@ const formatHour = (hour: number): number => {
 
 <template>
   <div :class="s.container({ class: styleSlots?.container })">
-    <div :class="s.grid({ class: styleSlots?.grid })">
+    <div
+      :class="s.grid({ class: styleSlots?.grid })"
+      :style="gridStyle"
+    >
       <div
         v-if="formatMap.hasHours"
         :class="s.unitContainer({ class: styleSlots?.unitContainer })"

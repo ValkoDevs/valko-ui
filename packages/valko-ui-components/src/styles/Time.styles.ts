@@ -10,15 +10,15 @@ const time = tv({
     grid: [
       'h-64',
       'grid',
-      'grid-cols-3',
       'grid-rows-[1fr_auto]',
-      'gap-2'
+      'gap-2',
+      'min-w-max'
     ],
     footer: [
       'p-2',
       'border-t',
       'border-outlined',
-      'col-span-3',
+      'col-span-full',
       'flex',
       'flex-row-reverse',
       'justify-between'
@@ -30,6 +30,7 @@ const time = tv({
       'last:border-r-0',
       'p-2',
       'h-64',
+      'min-w-0',
       'overflow-y-auto'
     ],
     unitButton: [
