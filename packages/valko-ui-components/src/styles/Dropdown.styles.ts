@@ -33,6 +33,7 @@ const dropdown = tv({
       'mb-1',
       'flex',
       'items-center',
+      'cursor-pointer',
       'data-[shape=rounded]:rounded-full',
       'data-[shape=soft]:rounded-lg',
       'data-[shape=square]:rounded-none',

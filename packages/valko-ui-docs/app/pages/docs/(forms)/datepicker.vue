@@ -13,9 +13,10 @@ const form = ref<Partial<DatepickerProps>>({
   maxDate: undefined,
   disableWeekends: false,
   locale: 'en-US',
-  label: 'Date',
-  isOpen: false
+  label: 'Date'
 })
+
+const open = ref(false)
 
 const locales: SelectOption[] = [
   { value: 'en-US', label: 'English (United States)' },
@@ -110,7 +111,7 @@ const datepickerProps: PropData[] = [
     key: 'colorProp',
     prop: 'color',
     required: false,
-    description: 'The color theme of the Calendar.',
+    description: 'The color theme of the Datepicker.',
     values: 'primary, secondary, negative, warning, accent, positive, surface',
     default: 'primary',
     apiType: 'custom-string'
@@ -119,7 +120,7 @@ const datepickerProps: PropData[] = [
     key: 'variantProp',
     prop: 'variant',
     required: false,
-    description: 'The variant of the Calendar.',
+    description: 'The variant of the Datepicker.',
     values: 'filled, outlined, ghost',
     default: 'filled',
     apiType: 'custom-string'
@@ -128,7 +129,7 @@ const datepickerProps: PropData[] = [
     key: 'shapeProp',
     prop: 'shape',
     required: false,
-    description: 'The shape of the Calendar.',
+    description: 'The shape of the Datepicker.',
     values: 'rounded, square, soft',
     default: 'soft',
     apiType: 'custom-string'
@@ -137,10 +138,19 @@ const datepickerProps: PropData[] = [
     key: 'sizeProp',
     prop: 'size',
     required: false,
-    description: 'The size of the Calendar.',
+    description: 'The size of the Datepicker.',
     values: 'xs, sm, md, lg',
     default: 'md',
     apiType: 'custom-string'
+  },
+  {
+    key: 'isOpenProp',
+    prop: 'isOpen',
+    required: false,
+    description: 'Controls whether the Datepicker is visible. When omitted, the component manages its own open state internally (uncontrolled mode). When provided, the component becomes controlled and the state must be updated through the update:isOpen event.',
+    values: 'boolean',
+    default: 'undefined',
+    apiType: 'primitive'
   },
   {
     key: 'adapterProp',
@@ -164,7 +174,7 @@ const datepickerProps: PropData[] = [
     key: 'localeProp',
     prop: 'locale',
     required: false,
-    description: 'Defines the language and regional format to use in the calendar, affecting the display of weekdays, month names, etc.',
+    description: 'Defines the locale used to display month names, weekday names, and other localized date values.',
     values: 'string',
     default: 'en-US',
     apiType: 'primitive'
@@ -173,7 +183,7 @@ const datepickerProps: PropData[] = [
     key: 'formatProp',
     prop: 'format',
     required: false,
-    description: 'The format of the selected date, following day-month-year, etc.',
+    description: 'Defines how the selected date is displayed using formatting tokens (for example YYYY-MM-DD or DD/MM/YYYY).',
     values: 'string',
     default: 'YYYY-MM-DD',
     apiType: 'primitive'
@@ -191,7 +201,7 @@ const datepickerProps: PropData[] = [
     key: 'disableWeekendsProp',
     prop: 'disableWeekends',
     required: false,
-    description: 'Allows to disable all weekends (sunday, saturday).',
+    description: 'Disables all weekend dates (Saturday and Sunday).',
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
@@ -258,36 +268,6 @@ const datepickerProps: PropData[] = [
     values: 'boolean',
     default: 'false',
     apiType: 'primitive'
-  },
-  {
-    key: 'styleSlotsProps',
-    prop: 'styleSlots',
-    required: false,
-    description: 'Custom styles for different parts of the Datepicker component.',
-    values: 'DatepickerSlots',
-    default: '',
-    apiType: 'custom-type'
-  }
-]
-
-const styleSlotsInterface: PropData[] = [
-  {
-    key: 'container',
-    prop: 'container',
-    required: false,
-    description: 'Root container for the datepicker.',
-    values: 'string[]',
-    default: '',
-    apiType: 'primitive'
-  },
-  {
-    key: 'content',
-    prop: 'content',
-    required: false,
-    description: 'Dropdown/calendar content container.',
-    values: 'string[]',
-    default: '',
-    apiType: 'primitive'
   }
 ]
 
@@ -296,25 +276,17 @@ const datepickerEmits: EmitData[] = [
     key: 'updateModelValueEmit',
     event: 'update:modelValue',
     description: 'Emitted when the value of the input is updated, typically when the user selects a date.',
-    values: 'string | Date',
-    type: '(value: string | Date) => void',
+    values: 'EpochTimeStamp',
+    type: '(value: EpochTimeStamp) => void',
     apiType: 'primitive'
   },
   {
-    key: 'openEmit',
-    event: 'open',
-    description: 'Emitted when the input is clicked or focused, indicating that the datepicker should open.',
-    values: '',
-    type: '() => void',
-    apiType: 'function'
-  },
-  {
-    key: 'closeEmit',
-    event: 'close',
-    description: 'Emitted when a click outside the root component is detected, or when the user closes the datepicker.',
-    values: '',
-    type: '() => void',
-    apiType: 'function'
+    key: 'updateIsOpenEmit',
+    event: 'update:isOpen',
+    description: 'Emitted when the open state of the datepicker is updated, typically when the user opens or closes the Datepicker.',
+    values: 'boolean',
+    type: '(value: boolean) => void',
+    apiType: 'primitive'
   }
 ]
 
@@ -517,32 +489,23 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
 ] })
 const [ model, parsedModel, adapter ] = useDateAdapter(form)
 
-const datePickerStates = reactive<Record<string, boolean>>({})
-
 const generateSnippet = snippetGeneratorFactory('vk-datepicker')
 
 const scriptCode = `
 <script setup lang="ts">
 import { useDateAdapter } from '#valkoui'
 
-const datePickerStates = reactive<Record<string, boolean>>({})
-
-const [ model, parsedModel, adapter ] = useDateAdapter({ format: 'YYYY-MM-DD' })
+const [ model, parsedModel, adapter ] = useDateAdapter()
 <\u002Fscript>
 `
 
 const extraProps = `v-model="model"
 :parsed-model="parsedModel"
 :adapter="adapter"
-:is-open="datePickerStates['datepickerId']"
-@open="() => datePickerStates['datepickerId'] = true"
-@close="() => datePickerStates['datepickerId'] = false"
 `
 
 const minmaxSnippet = `<script setup lang="ts">
 import { useDateAdapter } from '#valkoui'
-
-const datePickerStates = reactive<Record<string, boolean>>({})
 
 const [ minModel, minParsedModel, minAdapter ] = useDateAdapter({ minDate: 1736953200000 })
 const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 1736953200000 })
@@ -554,9 +517,6 @@ const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 173695
     label="Min Date"
     :adapter="minAdapter"
     :parsed-model="minParsedModel"
-    :is-open="datePickerStates['minDate']"
-    @open="() => datePickerStates['minDate'] = true"
-    @close="() => datePickerStates['minDate'] = false"
   />
 
   <vk-datepicker
@@ -564,17 +524,30 @@ const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 173695
     label="Max Date"
     :adapter="maxAdapter"
     :parsed-model="maxParsedModel"
-    :is-open="datePickerStates['maxDate']"
-    @open="() => datePickerStates['maxDate'] = true"
-    @close="() => datePickerStates['maxDate'] = false"
   />
 </template>
 `
 
+const controlledSnippet = `<script setup lang="ts">
+import { ref } from 'vue'
+
+const open = ref(false)
+
+const [ model, parsedModel, adapter ] = useDateAdapter()
+<\u002Fscript>
+
+<template>
+  <vk-datepicker
+    v-model="model"
+    v-model:is-open="open"
+    label="Controlled Datepicker"
+    :adapter="adapter"
+    :parsed-model="parsedModel"
+  />
+</template>`
+
 const disabledSnippet = `<script setup lang="ts">
 import { useDateAdapter } from '#valkoui'
-
-const isOpen = ref(false)
 
 const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({ disabledDates: [
   1705320000000,
@@ -593,9 +566,6 @@ const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({
     label="Disabled Dates"
     :adapter="disabledAdapter"
     :parsed-model="disabledParsedModel"
-    :is-open="isOpen"
-    @open="() => isOpen = true"
-    @close="() => isOpen = false"
   />
 </template>
 `
@@ -651,10 +621,10 @@ const styles = {
         :size="form.size"
         :shape="form.shape"
         :format="form.format"
+        :locale="form.locale"
+        :min-date="form.minDate"
+        :max-date="form.maxDate"
         :disable-weekends="form.disableWeekends"
-        :is-open="form.isOpen!"
-        @open="() => form.isOpen = true"
-        @close="() => form.isOpen = false"
       />
     </template>
     <template #playground-options>
@@ -729,9 +699,6 @@ const styles = {
           :adapter="adapter"
           :color="color.value"
           :parsed-model="parsedModel"
-          :is-open="datePickerStates[color.value] ?? false"
-          @open="() => datePickerStates[color.value] = true"
-          @close="() => datePickerStates[color.value] = false"
         />
 
         <template #code>
@@ -752,9 +719,6 @@ const styles = {
           :adapter="adapter"
           :variant="variant.value"
           :parsed-model="parsedModel"
-          :is-open="datePickerStates[variant.value] ?? false"
-          @open="() => datePickerStates[variant.value] = true"
-          @close="() => datePickerStates[variant.value] = false"
         />
 
         <template #code>
@@ -775,9 +739,6 @@ const styles = {
           :adapter="adapter"
           :shape="shape.value"
           :parsed-model="parsedModel"
-          :is-open="datePickerStates[shape.value] ?? false"
-          @open="() => datePickerStates[shape.value] = true"
-          @close="() => datePickerStates[shape.value] = false"
         />
 
         <template #code>
@@ -798,9 +759,6 @@ const styles = {
           :adapter="adapter"
           :size="size.value"
           :parsed-model="parsedModel"
-          :is-open="datePickerStates[size.value] ?? false"
-          @open="() => datePickerStates[size.value] = true"
-          @close="() => datePickerStates[size.value] = false"
         />
 
         <template #code>
@@ -814,9 +772,6 @@ const styles = {
           label="Min Date"
           :adapter="minAdapter"
           :parsed-model="minParsedModel"
-          :is-open="datePickerStates['minDate'] ?? false"
-          @open="() => datePickerStates['minDate'] = true"
-          @close="() => datePickerStates['minDate'] = false"
         />
 
         <vk-datepicker
@@ -824,9 +779,6 @@ const styles = {
           label="Max Date"
           :adapter="maxAdapter"
           :parsed-model="maxParsedModel"
-          :is-open="datePickerStates['maxDate'] ?? false"
-          @open="() => datePickerStates['maxDate'] = true"
-          @close="() => datePickerStates['maxDate'] = false"
         />
 
         <template #code>
@@ -841,9 +793,6 @@ const styles = {
           :adapter="adapter"
           :parsed-model="parsedModel"
           disable-weekends
-          :is-open="datePickerStates['disable-weekends'] ?? false"
-          @open="() => datePickerStates['disable-weekends'] = true"
-          @close="() => datePickerStates['disable-weekends'] = false"
         />
 
         <template #code>
@@ -860,9 +809,6 @@ const styles = {
           label="Disabled Dates"
           :adapter="disabledAdapter"
           :parsed-model="disabledParsedModel"
-          :is-open="datePickerStates['disabled'] ?? false"
-          @open="() => datePickerStates['disabled'] = true"
-          @close="() => datePickerStates['disabled'] = false"
         />
 
         <div class="flex flex-col">
@@ -882,6 +828,20 @@ const styles = {
           <code-block :code="disabledSnippet" />
         </template>
       </example-section>
+
+      <example-section title="Controlled">
+        <vk-datepicker
+          v-model="model"
+          v-model:is-open="open"
+          label="Controlled Datepicker"
+          :adapter="adapter"
+          :parsed-model="parsedModel"
+        />
+
+        <template #code>
+          <code-block :code="controlledSnippet" />
+        </template>
+      </example-section>
     </template>
 
     <template #api>
@@ -890,7 +850,6 @@ const styles = {
         :tables="[
           { title: 'Props', data: datepickerProps, headers: 'props' },
           { title: 'Emits', data: datepickerEmits, headers: 'emits' },
-          { title: 'Style Slots', data: styleSlotsInterface , headers: 'interface' },
           { title: 'Calendar Adapter', data: calendarAdapterProps , headers: 'interface' },
           { title: 'Adapter Result Type', data: adapterResultProps , headers: 'interface' },
           { title: 'Formatted Dates', data: formattedDatesProps , headers: 'interface' },

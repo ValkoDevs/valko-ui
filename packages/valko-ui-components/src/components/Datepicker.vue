@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick, computed } from 'vue'
 import type { DatepickerProps } from '#valkoui/types/Datepicker'
-import styles from '#valkoui/styles/Datepicker.styles.ts'
+import VkPopover from './Popover.vue'
 import VkInput from './Input.vue'
 import VkCalendar from './Calendar.vue'
 import VkIcon from './Icon.vue'
@@ -14,69 +13,50 @@ const props = withDefaults(defineProps<DatepickerProps>(), {
   size: 'md',
   shape: 'soft',
   format: 'YYYY-MM-DD',
-  isOpen: false
+  isOpen: undefined
 })
 
-const emit = defineEmits(['update:modelValue', 'open', 'close'])
-
-const s = computed(() => styles(props))
-
-const rootRef = ref<HTMLElement | null>(null)
-
-const handleClickOutside = (event: MouseEvent) => {
-  const target = event.target as HTMLElement
-
-  if (rootRef.value && !rootRef.value.contains(target) && !target.closest('.vk-datepicker__content')) emit('close')
-}
-
-onMounted(() => nextTick(() => document.addEventListener('mousedown', handleClickOutside, true)))
-onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutside, true))
+const emit = defineEmits(['update:modelValue', 'update:isOpen'])
 </script>
 
 <template>
-  <div
-    ref="rootRef"
-    :class="s.container({ class: styleSlots?.container })"
+  <vk-popover
+    class="vk-datepicker"
+    :is-open="isOpen"
+    :shape="shape"
+    :style-slots="{ panel: ['p-2'] }"
+    @update:is-open="emit('update:isOpen', $event)"
   >
-    <vk-input
-      v-bind="props"
-      :model-value="parsedModel"
-      :label="label"
-      readonly
-      cursor="pointer"
-      @focus="emit('open')"
-    >
-      <template #right-icon>
-        <vk-icon name="calendar" />
-      </template>
-    </vk-input>
-
-    <transition
-      enter-active-class="transition-opacity duration-200 ease-out"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-150 ease-in"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div
-        v-show="isOpen"
-        :class="s.content({ class: styleSlots?.content })"
+    <template #trigger="{ setOpen }">
+      <vk-input
+        v-bind="props"
+        :model-value="parsedModel"
+        :label="label"
+        readonly
+        cursor="pointer"
+        @focus="setOpen(true)"
+        @right-icon-click="setOpen(true)"
       >
-        <vk-calendar
-          v-if="isOpen"
-          v-bind="props"
-          :adapter="adapter"
-          :disabled-dates="disabledDates"
-          :locale="locale"
-          :format="format"
-          :min-date="minDate"
-          :max-date="maxDate"
-          :disable-weekends="disableWeekends"
-          @update:model-value="(value: EpochTimeStamp) => emit('update:modelValue', value)"
-          @finalize-selection="emit('close')"
-        />
-      </div>
-    </transition>
-  </div>
+        <template #right-icon>
+          <vk-icon name="calendar" />
+        </template>
+      </vk-input>
+    </template>
+
+    <template #panel="{ setOpen, isOpen }">
+      <vk-calendar
+        v-if="isOpen"
+        v-bind="props"
+        :adapter="adapter"
+        :disabled-dates="disabledDates"
+        :locale="locale"
+        :format="format"
+        :min-date="minDate"
+        :max-date="maxDate"
+        :disable-weekends="disableWeekends"
+        @update:model-value="(value) => emit('update:modelValue', value)"
+        @finalize-selection="setOpen(false)"
+      />
+    </template>
+  </vk-popover>
 </template>
