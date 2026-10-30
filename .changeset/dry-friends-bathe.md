@@ -34,7 +34,7 @@
 - Drag-and-drop support for moving events across time slots and days, with real-time ghost preview.
 - Edge resizing support for changing event start/end times by dragging top or bottom handles.
 - Out-of-range event filtering to prevent rendering events outside the configured `hourRange`.
-- Card-from-deck hover effect on events with `translateY` lift and shadow increase.
+- Hover interaction affordance on events with inset ring highlight and increased shadow (replaces the previous translateY lift).
 - Abbreviated timezone labels with tooltip showing the full timezone name on hover.
 - Interactive "+N more" indicator in month view using `VkPopover` to display hidden events on click.
 - Current time marker with colored dot and line in day and week views.

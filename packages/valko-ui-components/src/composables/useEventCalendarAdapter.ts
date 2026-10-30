@@ -123,8 +123,41 @@ const useEventCalendarAdapter = ({ timezones, hourRange }: EventCalendarAdapterO
     return weeks
   }
 
+  interface PositionedEvent {
+    id: string;
+    clampedStart: number;
+    clampedEnd: number;
+  }
+
+  // Groups events into overlap clusters (transitively connected via time
+  // overlap) so that chains like A→B→C don't get treated as one flat set.
+  const buildOverlapClusters = (events: PositionedEvent[]): PositionedEvent[][] => {
+    const sorted = [...events].sort((a, b) => a.clampedStart - b.clampedStart)
+
+    const clusters: PositionedEvent[][] = []
+    let currentCluster: PositionedEvent[] = []
+    let clusterEnd = -Infinity
+
+    for (const item of sorted) {
+      if (currentCluster.length && item.clampedStart >= clusterEnd) {
+        clusters.push(currentCluster)
+        currentCluster = []
+        clusterEnd = -Infinity
+      }
+
+      currentCluster.push(item)
+      clusterEnd = Math.max(clusterEnd, item.clampedEnd)
+    }
+
+    if (currentCluster.length) clusters.push(currentCluster)
+
+    return clusters
+  }
+
   const getEventPlacements = (events: CalendarEvent[]): Map<string, EventPlacement> => {
     const placements = new Map<string, EventPlacement>()
+
+    const positionedEvents: PositionedEvent[] = []
 
     for (const event of events) {
       const eventStartHour = event.start.getHours() + event.start.getMinutes() / 60
@@ -135,25 +168,45 @@ const useEventCalendarAdapter = ({ timezones, hourRange }: EventCalendarAdapterO
 
       if (clampedStart >= clampedEnd) continue
 
-      const topPercent = ((clampedStart - start + 0.5) / hourCount) * 100
-      const bottomPercent = ((clampedEnd - start + 0.5) / hourCount) * 100
-      const heightPercent = Math.min(bottomPercent, 100) - topPercent
+      positionedEvents.push({ id: event.id, clampedStart, clampedEnd })
+    }
 
-      const overlapping = events
-        .filter(e => e.start < event.end && e.end > event.start)
-        .sort((a, b) => a.start.getTime() - b.start.getTime())
+    for (const cluster of buildOverlapClusters(positionedEvents)) {
+      // Greedy column assignment: overlapping events never share a column,
+      // events that don't overlap can reuse the same one.
+      const columnsEnd: number[] = []
+      const columnByEvent = new Map<string, number>()
 
-      const offsetIdx = overlapping.findIndex(e => e.id === event.id)
-      const isOverlapping = overlapping.length > 1
+      for (const item of cluster) {
+        let column = columnsEnd.findIndex(colEnd => colEnd <= item.clampedStart)
 
-      placements.set(event.id, {
-        topPercent,
-        heightPercent,
-        leftPercent: (offsetIdx / overlapping.length) * 100,
-        widthPercent: (1 / overlapping.length) * 100,
-        zIndex: 10 + offsetIdx,
-        isOverlapping
-      })
+        if (column === -1) {
+          columnsEnd.push(item.clampedEnd)
+          column = columnsEnd.length - 1
+        } else {
+          columnsEnd[column] = item.clampedEnd
+        }
+
+        columnByEvent.set(item.id, column)
+      }
+
+      const columnCount = columnsEnd.length
+
+      for (const item of cluster) {
+        const column = columnByEvent.get(item.id)!
+
+        const topPercent = ((item.clampedStart - start + 0.5) / hourCount) * 100
+        const bottomPercent = Math.min(((item.clampedEnd - start + 0.5) / hourCount) * 100, 100)
+
+        placements.set(item.id, {
+          topPercent,
+          heightPercent: bottomPercent - topPercent,
+          leftPercent: (column / columnCount) * 100,
+          widthPercent: (1 / columnCount) * 100,
+          zIndex: 10 + column,
+          isOverlapping: columnCount > 1
+        })
+      }
     }
 
     return placements

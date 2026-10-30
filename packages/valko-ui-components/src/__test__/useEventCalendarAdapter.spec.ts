@@ -191,6 +191,41 @@ describe('useEventCalendarAdapter composable', () => {
       const placements = getPlacementsNarrow(outOfRange)
       expect(placements.has('x')).toBe(false)
     })
+
+    it('should place overlap chains in consistent non-overlapping columns', () => {
+      // A→B→C chain: A and C don't overlap each other, only B bridges them.
+      const chain: CalendarEvent[] = [
+        { id: 'a', start: new Date(2025, 4, 15, 9, 0), end: new Date(2025, 4, 15, 10, 0), title: 'A' },
+        { id: 'b', start: new Date(2025, 4, 15, 9, 30), end: new Date(2025, 4, 15, 11, 0), title: 'B' },
+        { id: 'c', start: new Date(2025, 4, 15, 10, 30), end: new Date(2025, 4, 15, 12, 0), title: 'C' }
+      ]
+
+      const placements = getEventPlacements(chain)
+
+      // Two columns only: A and C share the first one (they don't overlap).
+      expect(placements.get('a')!.widthPercent).toBeCloseTo(50)
+      expect(placements.get('a')!.leftPercent).toBeCloseTo(0)
+      expect(placements.get('b')!.widthPercent).toBeCloseTo(50)
+      expect(placements.get('b')!.leftPercent).toBeCloseTo(50)
+      expect(placements.get('c')!.widthPercent).toBeCloseTo(50)
+      expect(placements.get('c')!.leftPercent).toBeCloseTo(0)
+    })
+
+    it('should keep non-overlapping events full width after a cluster ends', () => {
+      const events: CalendarEvent[] = [
+        { id: 'a', start: new Date(2025, 4, 15, 9, 0), end: new Date(2025, 4, 15, 10, 0), title: 'A' },
+        { id: 'b', start: new Date(2025, 4, 15, 9, 30), end: new Date(2025, 4, 15, 11, 0), title: 'B' },
+        { id: 'c', start: new Date(2025, 4, 15, 12, 0), end: new Date(2025, 4, 15, 13, 0), title: 'C' }
+      ]
+
+      const placements = getEventPlacements(events)
+
+      expect(placements.get('a')!.isOverlapping).toBe(true)
+      expect(placements.get('b')!.isOverlapping).toBe(true)
+      expect(placements.get('c')!.isOverlapping).toBe(false)
+      expect(placements.get('c')!.widthPercent).toBe(100)
+      expect(placements.get('c')!.leftPercent).toBe(0)
+    })
   })
 
   describe('getStackedEventPlacements', () => {

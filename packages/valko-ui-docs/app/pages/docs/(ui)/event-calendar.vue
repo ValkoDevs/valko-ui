@@ -405,7 +405,7 @@ const calendarEventInterface: TableItem[] = [
     key: 'idProp',
     prop: 'id',
     required: true,
-    description: 'Unique event identifier.',
+    description: 'Unique event identifier. Must be unique across all events; event layout and interactions are keyed by it.',
     values: 'string',
     default: '-'
   },
