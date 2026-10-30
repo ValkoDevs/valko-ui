@@ -585,4 +585,34 @@ describe('Menu component', () => {
       })
     })
   })
+
+  describe('Ripple', () => {
+    it('should create a ripple when an enabled item receives mousedown', async () => {
+      wrapper = mount(VkMenu, {
+        props: { items: menuItems, active: null }
+      })
+
+      const itemButton = wrapper
+        .findAll('.vk-menu__content')
+        .find(button => button.attributes('data-disabled') !== 'true')!
+
+      await itemButton.trigger('mousedown')
+
+      expect(itemButton.find('.vk-ripple__container').exists()).toBe(true)
+    })
+
+    it('should not create a ripple when the item is disabled', async () => {
+      wrapper = mount(VkMenu, {
+        props: { items: menuItems, active: null }
+      })
+
+      const disabledItemButton = wrapper
+        .findAll('.vk-menu__content')
+        .find(button => button.attributes('data-disabled') === 'true')!
+
+      await disabledItemButton.trigger('mousedown')
+
+      expect(disabledItemButton.find('.vk-ripple__container').exists()).toBe(false)
+    })
+  })
 })
