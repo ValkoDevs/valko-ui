@@ -465,4 +465,37 @@ describe('Dropdown component', () => {
       expect(wrapper.find('.vk-dropdown__items-menu').exists()).toBe(false)
     })
   })
+
+  describe('Ripple', () => {
+    const rippleItems = [
+      { key: 'first', title: 'First' },
+      { key: 'off', title: 'Disabled', disabled: true }
+    ]
+
+    it('should create a ripple when an enabled item receives mousedown', async () => {
+      wrapper = mount(VkDropdown, {
+        props: { items: rippleItems }
+      })
+
+      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
+      const itemButton = wrapper.find('.vk-dropdown__item-button')
+      await itemButton.trigger('mousedown')
+
+      expect(itemButton.find('.vk-ripple__container').exists()).toBe(true)
+    })
+
+    it('should not create a ripple when the item is disabled', async () => {
+      wrapper = mount(VkDropdown, {
+        props: { items: rippleItems }
+      })
+
+      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
+      const disabledItemButton = wrapper.findAll('.vk-dropdown__item-button').at(1)!
+      await disabledItemButton.trigger('mousedown')
+
+      expect(disabledItemButton.find('.vk-ripple__container').exists()).toBe(false)
+    })
+  })
 })
