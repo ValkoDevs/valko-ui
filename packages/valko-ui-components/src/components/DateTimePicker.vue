@@ -61,7 +61,7 @@ watch(
     :style-slots="{ panel: ['p-2'] }"
     @update:is-open="handleOpenChange"
   >
-    <template #trigger="{ setOpen, isOpen }">
+    <template #trigger="{ setOpen }">
       <vk-input
         v-bind="props"
         :style-slots="undefined"
@@ -70,7 +70,7 @@ watch(
         readonly
         cursor="pointer"
         @focus="setOpen(true)"
-        @right-icon-click="setOpen(!isOpen)"
+        @right-icon-click="setOpen(true)"
       >
         <template #right-icon>
           <vk-icon name="calendar-clock" />
