@@ -9,7 +9,6 @@ export type NavigationKey =
   | 'End'
   | 'Enter'
   | ' '
-  | 'SpaceBar'
 
 export type KeyMap = Partial<Record<NavigationKey, () => void>>
 
@@ -22,7 +21,7 @@ export interface ListNavigationConfig {
   onSelect?: (index: number) => void
 }
 
-export interface GridNavigationConfig extends ListNavigationConfig{
+export interface GridNavigationConfig extends ListNavigationConfig {
   columnCount: MaybeRefOrGetter<number>
   isItemDisabled?: (index: number) => boolean
 }

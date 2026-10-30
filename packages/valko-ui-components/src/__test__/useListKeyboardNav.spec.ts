@@ -291,7 +291,7 @@ describe('useListKeyboardNav', () => {
       expect(onSelect).toHaveBeenCalledWith(1)
     })
 
-    it('should call onSelect on SpaceBar', () => {
+    it('should ignore the legacy SpaceBar key value and not call onSelect', () => {
       const onSelect = vi.fn()
       const handler = useListKeyboardNav({
         currentIndex: 1,
@@ -300,9 +300,11 @@ describe('useListKeyboardNav', () => {
         onSelect
       })
 
+      // Legacy IE/Edge reported 'Spacebar' (lowercase b) and 'SpaceBar' was never a real
+      // KeyboardEvent.key value; modern browsers send ' ' which is handled above.
       handler(createKeyboardEvent('SpaceBar'))
 
-      expect(onSelect).toHaveBeenCalledWith(1)
+      expect(onSelect).not.toHaveBeenCalled()
     })
 
     it('should not call onSelect if currentIndex is -1', () => {

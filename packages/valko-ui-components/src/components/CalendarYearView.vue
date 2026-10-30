@@ -28,22 +28,9 @@ const isYearDisabled = (year: number) =>
   (props.minYear !== undefined && year < props.minYear)
   || (props.maxYear !== undefined && year > props.maxYear)
 
-const navigableYears = computed(() =>
-  yearList.value
-    .map((year, yearIndex) => ({ year, yearIndex }))
-    .filter(({ year }) => !isYearDisabled(year))
-)
-
-const keyboardIndexByYear = computed<Record<number, number>>(() =>
-  navigableYears.value.reduce<Record<number, number>>((acc, { year }, index) => {
-    acc[year] = index
-    return acc
-  }, {})
-)
-
 const focusedIndex = ref(-1)
 
-const focusYearByKeyboardIndex = (index: number) => {
+const focusYearByIndex = (index: number) => {
   focusedIndex.value = index
 
   nextTick(() => {
@@ -51,27 +38,37 @@ const focusYearByKeyboardIndex = (index: number) => {
   })
 }
 
+const isIndexDisabled = (index: number) => isYearDisabled(yearList.value[index])
+
 const syncFocusedYear = () => {
-  const selectedIndex = navigableYears.value.findIndex(item => item.year === props.selected.year)
-  focusedIndex.value = selectedIndex >= 0 ? selectedIndex : (navigableYears.value.length ? 0 : -1)
+  const selectedIndex = yearList.value.findIndex((year, index) =>
+    year === props.selected.year && !isIndexDisabled(index))
+
+  focusedIndex.value = selectedIndex >= 0
+    ? selectedIndex
+    : yearList.value.findIndex((_, index) => !isIndexDisabled(index))
 }
 
 const handleGridKeyDown = useGridKeyboardNav({
   currentIndex: focusedIndex,
-  itemCount: () => navigableYears.value.length,
+  itemCount: () => yearList.value.length,
   columnCount: () => 4,
-  onMove: focusYearByKeyboardIndex,
+  isItemDisabled: isIndexDisabled,
+  onMove: focusYearByIndex,
   onSelect: (index: number) => {
-    const year = navigableYears.value[index]
-    if (year) onSelectYear(year.year)
+    const isWithinList = index >= 0 && index < yearList.value.length
+    if (isWithinList && !isIndexDisabled(index)) onSelectYear(yearList.value[index])
   }
 })
 
-const onYearFocus = (year: number) => {
-  focusedIndex.value = keyboardIndexByYear.value[year] ?? focusedIndex.value
+const onYearFocus = (index: number) => {
+  if (!isIndexDisabled(index)) focusedIndex.value = index
 }
 
-watch([navigableYears, () => props.selected.year], syncFocusedYear, { immediate: true })
+watch([yearList, () => props.minYear, () => props.maxYear, () => props.selected.year],
+  syncFocusedYear,
+  { immediate: true }
+)
 
 onMounted(() => {
   jumps.value = Math.floor((props.startsOn - 1970) / 20)
@@ -96,16 +93,16 @@ onMounted(() => {
       <vk-button
         v-for="(year, index) in yearList"
         :key="`year-cell-${index}`"
-        :data-kb-index="keyboardIndexByYear[year]"
+        :data-kb-index="index"
         :disabled="isYearDisabled(year)"
-        :tabindex="keyboardIndexByYear[year] === focusedIndex ? 0 : -1"
+        :tabindex="index === focusedIndex ? 0 : -1"
         :class="s.gridButton({ class: styleSlots?.gridButton })"
         :size="size"
         :color="selected.year === year ? color : 'surface'"
         :variant="selected.year === year ? variant : 'link'"
         :shape="shape"
         condensed
-        @focus="onYearFocus(year)"
+        @focus="onYearFocus(index)"
         @keydown="handleGridKeyDown"
         @click="onSelectYear(year)"
       >

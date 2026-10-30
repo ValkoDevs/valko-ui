@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, computed, watch, nextTick, useId } from 'vue'
 import type { MenuProps, MenuItem } from '#valkoui/types/Menu'
 import styles from '#valkoui/styles/Menu.styles.ts'
-import useListKeyboardNav from '#valkoui/composables/useListKeyboardNav'
+import useListKeyboardNav from '#valkoui/composables/useListKeyboardNav.ts'
 
 defineOptions({ name: 'VkMenu' })
 
@@ -17,6 +17,8 @@ const props = withDefaults(defineProps<MenuProps>(), {
 const emit = defineEmits(['itemClick'])
 
 const s = computed(() => styles(props))
+
+const menuScopeId = useId()
 
 const focusedIndex = ref(-1)
 
@@ -54,8 +56,9 @@ const focusItem = (index: number) => {
   focusedIndex.value = index
 
   nextTick(() => {
-    const allButtons = document.querySelectorAll<HTMLElement>('[role="menuitem"]:not([aria-disabled="true"])')
-    allButtons[index]?.focus()
+    const scope = `[data-vk-menu-scope="${menuScopeId}"]`
+    const menuButtons = document.querySelectorAll<HTMLElement>(`${scope} [role="menuitem"]:not([aria-disabled="true"])`)
+    menuButtons[index]?.focus()
   })
 }
 
@@ -77,6 +80,7 @@ const handleKeyDown = useListKeyboardNav({
   <div
     v-for="(items, group) in groupedItems"
     :key="group"
+    :data-vk-menu-scope="menuScopeId"
   >
     <span
       v-if="group !== 'default'"

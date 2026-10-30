@@ -60,8 +60,7 @@ const useGridKeyboardNav = (config: GridNavigationConfig) => {
     Home: () => moveToRowEdge('start'),
     End: () => moveToRowEdge('end'),
     Enter: select,
-    ' ': select,
-    SpaceBar: select
+    ' ': select
   }
 
   return (event: KeyboardEvent) => {

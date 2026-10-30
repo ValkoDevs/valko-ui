@@ -19,27 +19,16 @@ const isSelected = (index: number) => props.selected.year === props.display.year
 const onSelectMonth = (month: number) => emit('selectMonth', month)
 const onArrowClick = (operation: 1 | -1) => emit('changeYear', props.display.year + operation)
 
-const isMonthDisabled = (monthIndex: number) =>
-  (props.min && props.display.year === props.min.year && monthIndex < props.min.month)
-  || (props.max && props.display.year === props.max.year && monthIndex > props.max.month)
+const isMonthDisabled = (monthIndex: number) => {
+  if (props.min && props.display.year === props.min.year && monthIndex < props.min.month) return true
+  if (props.max && props.display.year === props.max.year && monthIndex > props.max.month) return true
 
-const navigableMonths = computed(() => {
-  return props.monthNames.reduce<Array<{ monthIndex: number }>>((acc, _, monthIndex) => {
-    if (!isMonthDisabled(monthIndex)) acc.push({ monthIndex })
-    return acc
-  }, [])
-})
-
-const keyboardIndexByMonth = computed<Record<number, number>>(() => {
-  return navigableMonths.value.reduce<Record<number, number>>((acc, month, index) => {
-    acc[month.monthIndex] = index
-    return acc
-  }, {})
-})
+  return false
+}
 
 const focusedIndex = ref(-1)
 
-const focusMonthByKeyboardIndex = (index: number) => {
+const focusMonthByIndex = (index: number) => {
   focusedIndex.value = index
 
   nextTick(() => {
@@ -48,26 +37,31 @@ const focusMonthByKeyboardIndex = (index: number) => {
 }
 
 const syncFocusedMonth = () => {
-  const selectedIndex = navigableMonths.value.findIndex(month => month.monthIndex === props.selected.month)
-  focusedIndex.value = selectedIndex >= 0 ? selectedIndex : (navigableMonths.value.length ? 0 : -1)
+  focusedIndex.value = isMonthDisabled(props.selected.month)
+    ? props.monthNames.findIndex((_, index) => !isMonthDisabled(index))
+    : props.selected.month
 }
 
 const handleGridKeyDown = useGridKeyboardNav({
   currentIndex: focusedIndex,
-  itemCount: () => navigableMonths.value.length,
+  itemCount: () => props.monthNames.length,
   columnCount: () => 3,
-  onMove: focusMonthByKeyboardIndex,
+  isItemDisabled: isMonthDisabled,
+  onMove: focusMonthByIndex,
   onSelect: (index: number) => {
-    const month = navigableMonths.value[index]
-    if (month) onSelectMonth(month.monthIndex)
+    const isWithinMonth = index >= 0 && index < props.monthNames.length
+    if (isWithinMonth && !isMonthDisabled(index)) onSelectMonth(index)
   }
 })
 
 const onMonthFocus = (monthIndex: number) => {
-  focusedIndex.value = keyboardIndexByMonth.value[monthIndex]!
+  if (!isMonthDisabled(monthIndex)) focusedIndex.value = monthIndex
 }
 
-watch([navigableMonths, () => props.selected.month], syncFocusedMonth, { immediate: true })
+watch([() => props.min, () => props.max, () => props.display, () => props.selected.month],
+  syncFocusedMonth,
+  { immediate: true }
+)
 </script>
 
 <template>
@@ -88,9 +82,9 @@ watch([navigableMonths, () => props.selected.month], syncFocusedMonth, { immedia
       <vk-button
         v-for="(month, index) in monthNames"
         :key="`month-cell-${index}`"
-        :data-kb-index="keyboardIndexByMonth[index]"
+        :data-kb-index="index"
         :disabled="isMonthDisabled(index)"
-        :tabindex="keyboardIndexByMonth[index] === focusedIndex ? 0 : -1"
+        :tabindex="index === focusedIndex ? 0 : -1"
         :class="s.gridButton({ class: styleSlots?.gridButton })"
         :size="size"
         :color="isSelected(index) ? color : 'surface'"

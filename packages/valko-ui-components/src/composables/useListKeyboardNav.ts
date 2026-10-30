@@ -28,8 +28,7 @@ const useListKeyboardNav = (config: ListNavigationConfig) => {
     Home: () => config.onMove(0),
     End: () => config.onMove(toValue(config.itemCount) - 1),
     Enter: select,
-    ' ': select,
-    SpaceBar: select
+    ' ': select
   }
 
   return (event: KeyboardEvent) => {

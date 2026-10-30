@@ -42,24 +42,9 @@ const isCellDisabled = (day: number, index: number) => {
   return props.disabledDays?.includes(day) || !!(props.disableWeekends && isWeekend(index))
 }
 
-const navigableCells = computed(() => {
-  return gridCells.value.reduce<Array<{ gridIndex: number, day: number }>>((acc, cell, index) => {
-    if (cell && !isCellDisabled(cell, index))
-      acc.push({ gridIndex: index, day: cell })
-    return acc
-  }, [])
-})
-
-const keyboardIndexByGridIndex = computed<Record<number, number>>(() => {
-  return navigableCells.value.reduce<Record<number, number>>((acc, cell, index) => {
-    acc[cell.gridIndex] = index
-    return acc
-  }, {})
-})
-
 const focusedIndex = ref(-1)
 
-const focusCellByKeyboardIndex = (index: number) => {
+const focusCellByGridIndex = (index: number) => {
   focusedIndex.value = index
 
   nextTick(() => {
@@ -67,29 +52,39 @@ const focusCellByKeyboardIndex = (index: number) => {
   })
 }
 
-const syncFocusedCell = () => {
-  const selectedIndex = navigableCells.value.findIndex(cell => cell.day === props.selected.day)
-  focusedIndex.value = selectedIndex >= 0 ? selectedIndex : (navigableCells.value.length ? 0 : -1)
+const isIndexDisabled = (index: number) => {
+  const cell = gridCells.value[index]
+  return cell === null || isCellDisabled(cell, index)
 }
 
-watch([navigableCells, () => props.selected.day],
+const firstEnabledIndex = () => gridCells.value.findIndex((_, index) => !isIndexDisabled(index))
+
+const syncFocusedCell = () => {
+  const selectedIndex = gridCells.value.findIndex((cell, index) =>
+    cell === props.selected.day && !isIndexDisabled(index))
+
+  focusedIndex.value = selectedIndex >= 0 ? selectedIndex : firstEnabledIndex()
+}
+
+watch([gridCells, () => props.disabledDays, () => props.disableWeekends, () => props.selected.day],
   syncFocusedCell,
   { immediate: true }
 )
 
 const handleGridKeyDown = useGridKeyboardNav({
   currentIndex: focusedIndex,
-  itemCount: () => navigableCells.value.length,
+  itemCount: () => gridCells.value.length,
   columnCount: () => 7,
-  onMove: focusCellByKeyboardIndex,
+  isItemDisabled: isIndexDisabled,
+  onMove: focusCellByGridIndex,
   onSelect: (index: number) => {
-    const cell = navigableCells.value[index]
-    if (cell) onSelectDate(cell.day)
+    const cell = gridCells.value[index]
+    if (cell !== null && cell !== undefined && !isIndexDisabled(index)) onSelectDate(cell)
   }
 })
 
 const onCellFocus = (gridIndex: number) => {
-  focusedIndex.value = keyboardIndexByGridIndex.value[gridIndex]!
+  if (!isIndexDisabled(gridIndex)) focusedIndex.value = gridIndex
 }
 </script>
 
@@ -127,11 +122,11 @@ const onCellFocus = (gridIndex: number) => {
         <vk-button
           v-else
           :key="`day-cell-${index}`"
-          :data-kb-index="keyboardIndexByGridIndex[index]"
+          :data-kb-index="index"
           :class="s.gridButton({ class: styleSlots?.gridButton })"
           :size="size"
           :disabled="isCellDisabled(cell, index)"
-          :tabindex="keyboardIndexByGridIndex[index] === focusedIndex ? 0 : -1"
+          :tabindex="index === focusedIndex ? 0 : -1"
           :color="isSelected(cell) ? color : 'surface'"
           :variant="isSelected(cell) ? variant : 'link'"
           :shape="shape"

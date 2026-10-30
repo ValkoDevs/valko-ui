@@ -343,6 +343,7 @@ describe('CalendarDayView Component', () => {
             currentIndex: expect.any(Object),
             itemCount: expect.any(Function),
             columnCount: expect.any(Function),
+            isItemDisabled: expect.any(Function),
             onMove: expect.any(Function),
             onSelect: expect.any(Function)
           })
@@ -352,7 +353,7 @@ describe('CalendarDayView Component', () => {
       it('should provide the correct itemCount', () => {
         const config = useGridKeyboardNavMock.mock.calls[0][0]
 
-        expect(toValue(config.itemCount)).toBe(baseProps.daysInMonth)
+        expect(toValue(config.itemCount)).toBe(42)
       })
 
       it('should provide the correct columnCount', () => {
@@ -384,7 +385,8 @@ describe('CalendarDayView Component', () => {
           onSelect: (index: number) => void
         }
 
-        config.onSelect(0)
+        // Day 15 sits at grid index `startsOn + 15 - 1`.
+        config.onSelect(baseProps.startsOn + 14)
 
         expect(wrapper.emitted()).toHaveProperty('selectDay')
       })
@@ -395,6 +397,7 @@ describe('CalendarDayView Component', () => {
         }
 
         config.onSelect(999)
+        config.onSelect(0)
 
         expect(wrapper.emitted('selectDay')).toBeFalsy()
       })
