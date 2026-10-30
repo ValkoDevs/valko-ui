@@ -555,6 +555,58 @@ describe('Time component', () => {
     })
   })
 
+  describe('Columns layout', () => {
+    const getGridStyle = (wrapper: VueWrapper) =>
+      wrapper.find('.vk-time > div').attributes('style')
+
+    it('should render three equal columns for HH:mm:ss', () => {
+      const wrapper = mount(VkTime, {
+        props: { modelValue, adapter, format: 'HH:mm:ss' }
+      })
+
+      expect(wrapper.findAll('.vk-time__unit-container')).toHaveLength(3)
+      expect(getGridStyle(wrapper)).toContain('grid-template-columns: repeat(3, minmax(0, 1fr))')
+    })
+
+    it('should render two equal columns for HH:mm', () => {
+      const wrapper = mount(VkTime, {
+        props: { modelValue, adapter, format: 'HH:mm' }
+      })
+
+      expect(wrapper.findAll('.vk-time__unit-container')).toHaveLength(2)
+      expect(getGridStyle(wrapper)).toContain('grid-template-columns: repeat(2, minmax(0, 1fr))')
+    })
+
+    it('should hide the seconds column when minuteStep is greater than one', () => {
+      const wrapper = mount(VkTime, {
+        props: { modelValue, adapter, format: 'HH:mm:ss', minuteStep: 5 }
+      })
+
+      expect(wrapper.findAll('.vk-time__unit-container')).toHaveLength(2)
+      expect(getGridStyle(wrapper)).toContain('grid-template-columns: repeat(2, minmax(0, 1fr))')
+    })
+
+    it('should render a single column for an hours-only format', () => {
+      const wrapper = mount(VkTime, {
+        props: { modelValue, adapter, format: 'HH' }
+      })
+
+      expect(wrapper.findAll('.vk-time__unit-container')).toHaveLength(1)
+      expect(getGridStyle(wrapper)).toContain('grid-template-columns: repeat(1, minmax(0, 1fr))')
+    })
+
+    it('should span all rendered columns in the footer', () => {
+      const wrapper = mount(VkTime, {
+        props: { modelValue, adapter, format: 'HH:mm' }
+      })
+
+      const footer = wrapper.findAll('.vk-time > div').at(1)
+
+      expect(footer?.classes()).toContain('col-span-full')
+      expect(footer?.classes()).not.toContain('col-span-3')
+    })
+  })
+
   describe('Emits', () => {
     it('should emit onSelect event', async () => {
       const wrapper = mount(VkTime, {
