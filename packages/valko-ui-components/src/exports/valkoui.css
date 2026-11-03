@@ -1,6 +1,10 @@
 @import url("https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css");
 @import "tailwindcss";
 
+/* Generate the utility classes used by ValkoUI components (tailwind-variants),
+   resolved relative to this file wherever the package is installed. */
+@source "./";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
