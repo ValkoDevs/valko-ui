@@ -413,6 +413,25 @@ describe('Select component', () => {
 
         expect(wrapper.emitted('update:modelValue')?.[0][0]).toEqual([2])
       })
+
+      it('should call scrollIntoView on the highlighted item after list re-renders', async () => {
+        const scrollSpy = vi.spyOn(window.HTMLElement.prototype, 'scrollIntoView')
+
+        await input.trigger('keydown', { key: 'ArrowDown' })
+        await nextTick()
+        expect(scrollSpy).toHaveBeenCalledTimes(1)
+
+        // Re-render the option list: with the bug, stale null ref callbacks
+        // would wipe itemRefs and scrollIntoView would no longer be called.
+        wrapper.setProps({ modelValue: 1 })
+        await nextTick()
+
+        await input.trigger('keydown', { key: 'ArrowDown' })
+        await nextTick()
+        expect(scrollSpy).toHaveBeenCalledTimes(2)
+
+        scrollSpy.mockRestore()
+      })
     })
 
     describe('SelectItem functionality', () => {
@@ -910,6 +929,30 @@ describe('Select component', () => {
 
         const inputElement = vkInput.find('input')
         expect(inputElement.element.value).toBe('')
+      })
+
+      it('should skip unknown values in the showMap without leaving leading commas (multiple selection)', async () => {
+        await wrapper.setProps({
+          modelValue: [99, 1],
+          multiple: true
+        })
+        const vkInput = wrapper.findComponent({ name: 'VkInput' })
+        await wrapper.vm.$nextTick()
+
+        const inputElement = vkInput.find('input')
+        expect(inputElement.element.value).toBe('Wade Cooper')
+      })
+
+      it('should keep only known values in the displayed label (multiple selection)', async () => {
+        await wrapper.setProps({
+          modelValue: [99, 2],
+          multiple: true
+        })
+        const vkInput = wrapper.findComponent({ name: 'VkInput' })
+        await wrapper.vm.$nextTick()
+
+        const inputElement = vkInput.find('input')
+        expect(inputElement.element.value).toBe('Arlene Mccoy')
       })
     })
   })
