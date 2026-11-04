@@ -22,14 +22,8 @@ export default defineNuxtConfig({
 })
 `
 
-const valkoUICss = `@import "@valko-ui/components/styles";
-@source "../../node_modules/@valko-ui/components/dist";
-@custom-variant dark (&:where(.dark, .dark *));
-`
-
 const example = `<script setup lang="ts">
 import { ref } from 'vue'
-import '@/valko-ui.css'
 
 const counter = ref(0)
 <\u002Fscript>
@@ -186,48 +180,14 @@ const tsconfig = `{
           :code="tsconfig"
           language="ts"
         />
-      </div>
-
-      <div class=" flex flex-col gap-4">
-        <h3 class="text-lg font-medium">
-          5. Create ValkoUI CSS
-        </h3>
-        <p>Create a CSS file (e.g. <span class="text-primary">valko-ui.css</span>) in your project and add the following:</p>
-        <code-block
-          :code="valkoUICss"
-          language="css"
-        />
         <p>
-          This will import ValkoUI styles, source, and enable dark mode support. (The source is your relative path to the ValkoUI components CSS file, which is usually located in <span class="text-primary">node_modules/@valko-ui/components/dist</span>.)
+          The module automatically registers ValkoUI's stylesheet, so no manual CSS imports are needed in your <span class="text-primary">app.vue</span> — styles load as soon as the module is configured.
         </p>
-        <vk-alert
-          color="accent"
-          variant="ghost"
-        >
-          If you want to override any styles check out the
-          <nuxt-link
-            to="/docs/theme"
-            class="underline"
-          >
-            theme documentation
-          </nuxt-link>.
-        </vk-alert>
       </div>
 
       <div class="flex flex-col gap-4">
         <h3 class="text-lg font-medium">
-          6. Import ValkoUI CSS in app.vue
-        </h3>
-        <p>Import your <span class="text-primary">valko-ui.css</span> file in your <span class="text-primary">app.vue</span> script section:</p>
-        <code-block
-          code="import '@/valko-ui.css'"
-          language="ts"
-        />
-      </div>
-
-      <div class="flex flex-col gap-4">
-        <h3 class="text-lg font-medium">
-          7. You're ready to build!
+          5. You're ready to build!
         </h3>
         <p>Now that everything is set up, you can start using ValkoUI components in your project. Here's a small example to get you started:</p>
         <code-block :code="example" />
@@ -237,7 +197,13 @@ const tsconfig = `{
           variant="ghost"
         >
           <p>
-            Want to see more? Check out our
+            If you want to override any styles check out the
+            <nuxt-link
+              to="/docs/theme"
+              class="underline"
+            >
+              theme documentation
+            </nuxt-link>. Want to see more? Check out our
             <nuxt-link
               to="/templates"
               class="underline"

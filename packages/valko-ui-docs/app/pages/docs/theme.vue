@@ -194,7 +194,7 @@ html.dark {
       How to Override
     </h2>
     <p>
-      To customize the theme, override the variables in your own CSS file. For example:
+      To customize the theme, override the variables in your own CSS file. ValkoUI styles load automatically through the Nuxt module, so make sure your override file is loaded after them — the simplest way is importing it in your <span class="text-primary">app.vue</span>. For example:
     </p>
     <code-block
       :code="overrideExample"
