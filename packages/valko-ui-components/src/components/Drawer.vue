@@ -16,6 +16,7 @@ const props = withDefaults(defineProps<DrawerProps>(), {
   placement: 'right',
   isOpen: false,
   closable: true,
+  stackable: false,
   title: '',
   class: ''
 })
@@ -37,6 +38,7 @@ const closeDrawer = () => { if (props.closable) emit('close') }
 
 watch(() => props.isOpen, (open) => {
   if (open) {
+    if (!props.stackable) stack.closeOthers()
     stackId.value = stack.register({ rootRef: dialogEl, panelRef: panelEl, close: closeDrawer })
   } else if (stackId.value !== null) {
     stack.unregister(stackId.value)
