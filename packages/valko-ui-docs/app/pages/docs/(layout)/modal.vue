@@ -72,6 +72,15 @@ const modalProps: PropData[] = [
     apiType: 'primitive'
   },
   {
+    key: 'stackableProp',
+    prop: 'stackable',
+    required: false,
+    description: 'Allows the Modal to stay open when another Modal is opened on top of it, stacking them. When disabled, opening a new Modal closes the open one.',
+    values: 'boolean',
+    default: 'false',
+    apiType: 'primitive'
+  },
+  {
     key: 'ariaLabelledByProp',
     prop: 'ariaLabelledBy',
     required: false,

@@ -1,7 +1,8 @@
-import { VueWrapper, mount } from '@vue/test-utils'
+import { VueWrapper, enableAutoUnmount, mount } from '@vue/test-utils'
 import { DialogPanel } from '@headlessui/vue'
-import { nextTick } from 'vue'
+import { defineComponent, nextTick, ref } from 'vue'
 import VkModal from '#valkoui/components/Modal.vue'
+import VkDrawer from '#valkoui/components/Drawer.vue'
 
 class ResizeObserver {
   observe() {return}
@@ -11,12 +12,17 @@ class ResizeObserver {
 
 globalThis.ResizeObserver = ResizeObserver
 
+enableAutoUnmount(afterEach)
+
 describe('Modal component', () => {
   let wrapper: VueWrapper
   let modal: VueWrapper
   let backdrop: VueWrapper
 
-  afterEach(() => document.body.innerHTML = '')
+  afterEach(() => {
+    wrapper?.unmount()
+    document.body.innerHTML = ''
+  })
 
   describe('Props', () => {
     describe('With default props', () => {
@@ -421,6 +427,164 @@ describe('Modal component', () => {
       await wrapper.findComponent(DialogStub).trigger('click')
 
       expect(wrapper.emitted()).not.toHaveProperty('close')
+    })
+  })
+
+  describe('Stacking', () => {
+    afterEach(() => document.body.innerHTML = '')
+
+    const clickOn = async (selector: string) => {
+      const target = document.querySelector(selector) as HTMLElement
+      target.dispatchEvent(new Event('pointerdown', { bubbles: true }))
+      target.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
+      await nextTick()
+    }
+
+    const pressEscape = async () => {
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+      await nextTick()
+    }
+
+    const mountStack = (stackable?: boolean) => mount(defineComponent({
+      components: { VkModal },
+      setup(_, { expose }) {
+        const isOpenA = ref(true)
+        const isOpenB = ref(false)
+        expose({ isOpenA, isOpenB })
+        return { isOpenA, isOpenB }
+      },
+      template: `
+        <VkModal
+          :is-open="isOpenA"
+          ${stackable ? ':stackable="true"' : ''}
+          title="Modal A"
+          @close="isOpenA = false"
+        >
+          <span data-test="inside-a">A content</span>
+        </VkModal>
+        <VkModal
+          :is-open="isOpenB"
+          ${stackable ? ':stackable="true"' : ''}
+          title="Modal B"
+          @close="isOpenB = false"
+        >
+          <button data-test="inside-b">B content</button>
+        </VkModal>`
+    }))
+
+    const mountDrawerStack = () => mount(defineComponent({
+      components: { VkModal, VkDrawer },
+      setup(_, { expose }) {
+        const isDrawerOpen = ref(true)
+        const isModalOpen = ref(false)
+        expose({ isDrawerOpen, isModalOpen })
+        return { isDrawerOpen, isModalOpen }
+      },
+      template: `
+        <VkDrawer
+          :is-open="isDrawerOpen"
+          title="Drawer"
+          @close="isDrawerOpen = false"
+        >
+          <span data-test="inside-drawer">Drawer content</span>
+        </VkDrawer>
+        <VkModal
+          :is-open="isModalOpen"
+          stackable
+          title="Modal"
+          @close="isModalOpen = false"
+        >
+          <button data-test="inside-modal">Modal content</button>
+        </VkModal>`
+    }))
+
+    const state = () => wrapper.vm as unknown as {
+      isOpenA: boolean
+      isOpenB: boolean
+      isDrawerOpen: boolean
+      isModalOpen: boolean
+    }
+
+    const openStackedModal = async () => {
+      state().isOpenB = true
+      await nextTick()
+      await nextTick()
+    }
+
+    it('keeps the previous modal open when a stackable modal is opened on top', async () => {
+      wrapper = mountStack(true)
+      await nextTick()
+      await openStackedModal()
+
+      expect(state().isOpenA).toBe(true)
+      expect(state().isOpenB).toBe(true)
+    })
+
+    it('does not close the underlying modal when interacting with the stacked modal', async () => {
+      wrapper = mountStack(true)
+      await nextTick()
+      await openStackedModal()
+      await clickOn('[data-test="inside-b"]')
+
+      expect(state().isOpenA).toBe(true)
+      expect(state().isOpenB).toBe(true)
+    })
+
+    it('closes only the topmost modal when Escape is pressed', async () => {
+      wrapper = mountStack(true)
+      await nextTick()
+      await openStackedModal()
+      await pressEscape()
+
+      expect(state().isOpenB).toBe(false)
+      expect(state().isOpenA).toBe(true)
+    })
+
+    it('closes only the topmost modal when its backdrop is clicked', async () => {
+      wrapper = mountStack(true)
+      await nextTick()
+      await openStackedModal()
+      const topmostBackdrop = [...document.querySelectorAll('[data-headlessui-portal]')].pop() as HTMLElement
+      const backdrop = topmostBackdrop.querySelector('.vk-modal__backdrop') as HTMLElement
+      backdrop.dispatchEvent(new Event('pointerdown', { bubbles: true }))
+      backdrop.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
+      await nextTick()
+
+      expect(state().isOpenB).toBe(false)
+      expect(state().isOpenA).toBe(true)
+    })
+
+    it('closes the open modal by default when another modal is opened without stackable', async () => {
+      wrapper = mountStack()
+      await nextTick()
+      await openStackedModal()
+
+      expect(state().isOpenA).toBe(false)
+      expect(state().isOpenB).toBe(true)
+    })
+
+    it('does not close the drawer when interacting with a stackable modal on top', async () => {
+      wrapper = mountDrawerStack()
+      await nextTick()
+      state().isModalOpen = true
+      await nextTick()
+      await nextTick()
+      await clickOn('[data-test="inside-modal"]')
+
+      expect(state().isModalOpen).toBe(true)
+      expect(state().isDrawerOpen).toBe(true)
+    })
+
+    it('closes only the topmost overlay when Escape is pressed with a drawer open', async () => {
+      wrapper = mountDrawerStack()
+      await nextTick()
+      state().isModalOpen = true
+      await nextTick()
+      await nextTick()
+      await pressEscape()
+
+      expect(state().isModalOpen).toBe(false)
+      expect(state().isDrawerOpen).toBe(true)
     })
   })
 })

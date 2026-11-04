@@ -18,6 +18,7 @@ export { default as useClientSideDataTable } from '#valkoui/composables/useClien
 export { default as useDateAdapter } from '#valkoui/composables/useDateAdapter.ts'
 export { default as useRipple } from '#valkoui/composables/useRipple.ts'
 export { default as useTimeAdapter } from '#valkoui/composables/useTimeAdapter.ts'
+export { default as useOverlayStack } from '#valkoui/composables/useOverlayStack.ts'
 
 ///////////////////
 ////// TYPES //////
