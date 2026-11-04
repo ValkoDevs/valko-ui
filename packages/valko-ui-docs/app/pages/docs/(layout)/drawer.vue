@@ -307,15 +307,15 @@ const stackableSnippet = `${scriptCode}
     >
       Open stacked drawer
     </vk-button>
+  </vk-drawer>
 
-    <vk-drawer
-      :is-open="drawerStates['stacked']"
-      stackable
-      title="Stacked drawer"
-      @close="toggleDrawer('stacked')"
-    >
-      Stacked drawer Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
-    </vk-drawer>
+  <vk-drawer
+    :is-open="drawerStates['stacked']"
+    stackable
+    title="Stacked drawer"
+    @close="toggleDrawer('stacked')"
+  >
+    Stacked drawer Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
   </vk-drawer>`
 
 const styles = {
@@ -369,17 +369,6 @@ const styles = {
             Open stacked drawer
           </vk-button>
 
-          <vk-drawer
-            :is-open="nestedDrawerOpen"
-            :stackable="form.stackable"
-            title="Stacked drawer"
-            @close="() => {nestedDrawerOpen = false}"
-          >
-            <template #default>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus nihil, recusandae, enim sit corporis quia reprehenderit odit obcaecati, voluptas id dolor ipsam maiores at? Dolores incidunt sequi reiciendis nostrum exercitationem.
-            </template>
-          </vk-drawer>
-
           <vk-button
             class="self-end mt-auto"
             color="negative"
@@ -387,6 +376,17 @@ const styles = {
           >
             Close Drawer
           </vk-button>
+        </template>
+      </vk-drawer>
+
+      <vk-drawer
+        :is-open="nestedDrawerOpen"
+        :stackable="form.stackable"
+        title="Stacked drawer"
+        @close="() => {nestedDrawerOpen = false}"
+      >
+        <template #default>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus nihil, recusandae, enim sit corporis quia reprehenderit odit obcaecati, voluptas id dolor ipsam maiores at? Dolores incidunt sequi reiciendis nostrum exercitationem.
         </template>
       </vk-drawer>
     </template>
@@ -594,17 +594,17 @@ const styles = {
             >
               Open stacked drawer
             </vk-button>
+          </template>
+        </vk-drawer>
 
-            <vk-drawer
-              :is-open="drawerStates['stacked'] ?? false"
-              title="Stacked drawer"
-              stackable
-              @close="toggleDrawer('stacked')"
-            >
-              <template #default>
-                Stacked drawer Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
-              </template>
-            </vk-drawer>
+        <vk-drawer
+          :is-open="drawerStates['stacked'] ?? false"
+          title="Stacked drawer"
+          stackable
+          @close="toggleDrawer('stacked')"
+        >
+          <template #default>
+            Stacked drawer Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
           </template>
         </vk-drawer>
 
