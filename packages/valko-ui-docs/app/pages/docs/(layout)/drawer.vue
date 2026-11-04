@@ -363,19 +363,22 @@ const styles = {
         <template #default>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus nihil, recusandae, enim sit corporis quia reprehenderit odit obcaecati, voluptas id dolor ipsam maiores at? Dolores incidunt sequi reiciendis nostrum exercitationem.
 
-          <vk-button
-            @click="() => {nestedDrawerOpen = true}"
-          >
-            Open stacked drawer
-          </vk-button>
+          <div class="flex gap-2 self-end mt-auto">
+            <vk-button
+              size="sm"
+              @click="() => {nestedDrawerOpen = true}"
+            >
+              Open stacked drawer
+            </vk-button>
 
-          <vk-button
-            class="self-end mt-auto"
-            color="negative"
-            @click="toggleDrawer('playground-drawer')"
-          >
-            Close Drawer
-          </vk-button>
+            <vk-button
+              color="negative"
+              size="sm"
+              @click="toggleDrawer('playground-drawer')"
+            >
+              Close
+            </vk-button>
+          </div>
         </template>
       </vk-drawer>
 
@@ -566,7 +569,7 @@ const styles = {
               color="negative"
               @click="toggleDrawer('closable')"
             >
-              Close Drawer
+              Close
             </vk-button>
           </template>
         </vk-drawer>

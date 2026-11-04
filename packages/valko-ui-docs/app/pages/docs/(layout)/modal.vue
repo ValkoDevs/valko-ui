@@ -333,20 +333,22 @@ const styles = {
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
 
-          <vk-button
-            @click="() => {nestedModalOpen = true}"
-          >
-            Open stacked modal
-          </vk-button>
+          <div class="flex gap-2 self-end">
+            <vk-button
+              size="sm"
+              @click="() => {nestedModalOpen = true}"
+            >
+              Open stacked modal
+            </vk-button>
 
-          <vk-button
-            color="positive"
-            size="sm"
-            class="self-end"
-            @click="() => {form.isOpen = false}"
-          >
-            Accept & close
-          </vk-button>
+            <vk-button
+              color="negative"
+              size="sm"
+              @click="() => {form.isOpen = false}"
+            >
+              Close
+            </vk-button>
+          </div>
         </template>
       </vk-modal>
 
@@ -498,12 +500,12 @@ const styles = {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
 
             <vk-button
-              color="positive"
+              color="negative"
               size="sm"
               class="self-end"
               @click="toggleModal('closable')"
             >
-              Accept & close
+              Close
             </vk-button>
           </template>
         </vk-modal>
