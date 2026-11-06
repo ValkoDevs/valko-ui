@@ -1,9 +1,10 @@
 import { ref } from 'vue'
 import useOverlayStack from '#valkoui/composables/useOverlayStack.ts'
+import type { OverlayStackEntry } from '#valkoui/types/OverlayStack.ts'
 
 describe('useOverlayStack composable', () => {
   const stack = useOverlayStack()
-  let ids: number[] = []
+  let entries: OverlayStackEntry[] = []
 
   const createEntry = (close: () => void = () => {}) => {
     const rootRef = ref<HTMLElement | null>(null)
@@ -16,9 +17,9 @@ describe('useOverlayStack composable', () => {
     document.body.appendChild(root)
     rootRef.value = root
     panelRef.value = panel
-    const id = stack.register({ rootRef, panelRef, close })
-    ids.push(id)
-    return { id, root, panel, child }
+    const entry = stack.register({ rootRef, panelRef, close })
+    entries.push(entry)
+    return { entry, root, panel, child }
   }
 
   const clickOn = (target: Element) => {
@@ -30,8 +31,8 @@ describe('useOverlayStack composable', () => {
   }
 
   afterEach(() => {
-    ids.forEach(id => stack.unregister(id))
-    ids = []
+    entries.forEach(entry => stack.unregister(entry))
+    entries = []
     document.body.innerHTML = ''
   })
 
@@ -44,18 +45,6 @@ describe('useOverlayStack composable', () => {
     stack.closeOthers()
 
     expect(closeA).toHaveBeenCalledTimes(1)
-    expect(closeB).toHaveBeenCalledTimes(1)
-  })
-
-  it('closeOthers keeps the given overlay open', () => {
-    const closeA = vi.fn()
-    const closeB = vi.fn()
-    const a = createEntry(closeA)
-    createEntry(closeB)
-
-    stack.closeOthers(a.id)
-
-    expect(closeA).not.toHaveBeenCalled()
     expect(closeB).toHaveBeenCalledTimes(1)
   })
 
@@ -107,11 +96,11 @@ describe('useOverlayStack composable', () => {
     expect(closeA).not.toHaveBeenCalled()
   })
 
-  it('stops reacting to clicks once the last overlay unregisters', async () => {
+  it('stops reacting to clicks once the last overlay unregisters', () => {
     const closeA = vi.fn()
-    const entry = createEntry(closeA)
-    stack.unregister(entry.id)
-    ids = []
+    const { entry } = createEntry(closeA)
+    stack.unregister(entry)
+    entries = []
 
     clickOn(document.body)
 

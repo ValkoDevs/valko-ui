@@ -4,6 +4,7 @@ import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, Dial
 import type { DrawerProps } from '#valkoui/types/Drawer'
 import styles from '#valkoui/styles/Drawer.styles.ts'
 import useOverlayStack from '#valkoui/composables/useOverlayStack.ts'
+import type { OverlayStackEntry } from '#valkoui/types/OverlayStack.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 
@@ -32,24 +33,24 @@ const dialogEl = computed(() => dialogRef.value?.$el ?? null)
 const panelEl = computed(() => panelRef.value?.$el ?? null)
 
 const stack = useOverlayStack()
-const stackId = ref<number | null>(null)
+const stackEntry = ref<OverlayStackEntry | null>(null)
 
 const closeDrawer = () => { if (props.closable) emit('close') }
 
 watch(() => props.isOpen, (open) => {
   if (open) {
     if (!props.stackable) stack.closeOthers()
-    stackId.value = stack.register({ rootRef: dialogEl, panelRef: panelEl, close: closeDrawer })
-  } else if (stackId.value !== null) {
-    stack.unregister(stackId.value)
-    stackId.value = null
+    stackEntry.value = stack.register({ rootRef: dialogEl, panelRef: panelEl, close: closeDrawer })
+  } else if (stackEntry.value !== null) {
+    stack.unregister(stackEntry.value)
+    stackEntry.value = null
   }
 }, { immediate: true })
 
 onBeforeUnmount(() => {
-  if (stackId.value === null) return
-  stack.unregister(stackId.value)
-  stackId.value = null
+  if (stackEntry.value === null) return
+  stack.unregister(stackEntry.value)
+  stackEntry.value = null
 })
 
 const transitionClasses = computed(() => {

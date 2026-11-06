@@ -1,6 +1,6 @@
 import { VueWrapper, enableAutoUnmount, mount } from '@vue/test-utils'
 import { DialogPanel } from '@headlessui/vue'
-import { defineComponent, nextTick, ref } from 'vue'
+import { nextTick } from 'vue'
 import VkModal from '#valkoui/components/Modal.vue'
 import VkDrawer from '#valkoui/components/Drawer.vue'
 
@@ -431,6 +431,11 @@ describe('Modal component', () => {
   })
 
   describe('Stacking', () => {
+    let modalA: VueWrapper
+    let modalB: VueWrapper
+    let drawerWrapper: VueWrapper
+    let stackedModal: VueWrapper
+
     afterEach(() => document.body.innerHTML = '')
 
     const clickOn = async (selector: string) => {
@@ -445,146 +450,107 @@ describe('Modal component', () => {
       await nextTick()
     }
 
-    const mountStack = (stackable?: boolean) => mount(defineComponent({
-      components: { VkModal },
-      setup(_, { expose }) {
-        const isOpenA = ref(true)
-        const isOpenB = ref(false)
-        expose({ isOpenA, isOpenB })
-        return { isOpenA, isOpenB }
-      },
-      template: `
-        <VkModal
-          :is-open="isOpenA"
-          ${stackable ? ':stackable="true"' : ''}
-          title="Modal A"
-          @close="isOpenA = false"
-        >
-          <span data-test="inside-a">A content</span>
-        </VkModal>
-        <VkModal
-          :is-open="isOpenB"
-          ${stackable ? ':stackable="true"' : ''}
-          title="Modal B"
-          @close="isOpenB = false"
-        >
-          <button data-test="inside-b">B content</button>
-        </VkModal>`
-    }))
-
-    const mountDrawerStack = () => mount(defineComponent({
-      components: { VkModal, VkDrawer },
-      setup(_, { expose }) {
-        const isDrawerOpen = ref(true)
-        const isModalOpen = ref(false)
-        expose({ isDrawerOpen, isModalOpen })
-        return { isDrawerOpen, isModalOpen }
-      },
-      template: `
-        <VkDrawer
-          :is-open="isDrawerOpen"
-          title="Drawer"
-          @close="isDrawerOpen = false"
-        >
-          <span data-test="inside-drawer">Drawer content</span>
-        </VkDrawer>
-        <VkModal
-          :is-open="isModalOpen"
-          stackable
-          title="Modal"
-          @close="isModalOpen = false"
-        >
-          <button data-test="inside-modal">Modal content</button>
-        </VkModal>`
-    }))
-
-    const state = () => wrapper.vm as unknown as {
-      isOpenA: boolean
-      isOpenB: boolean
-      isDrawerOpen: boolean
-      isModalOpen: boolean
+    const mountStack = async (stackable?: boolean) => {
+      modalA = mount(VkModal, {
+        props: { isOpen: true, stackable, title: 'Modal A' },
+        slots: { default: '<span data-test="inside-a">A content</span>' }
+      })
+      modalB = mount(VkModal, {
+        props: { isOpen: false, stackable, title: 'Modal B' },
+        slots: { default: '<button data-test="inside-b">B content</button>' }
+      })
+      await nextTick()
+      await nextTick()
     }
 
     const openStackedModal = async () => {
-      state().isOpenB = true
+      await modalB.setProps({ isOpen: true })
+      await nextTick()
+      await nextTick()
+    }
+
+    const mountDrawerStack = async () => {
+      drawerWrapper = mount(VkDrawer, {
+        props: { isOpen: true, title: 'Drawer' },
+        slots: { default: '<span data-test="inside-drawer">Drawer content</span>' }
+      })
+      stackedModal = mount(VkModal, {
+        props: { isOpen: false, stackable: true, title: 'Modal' },
+        slots: { default: '<button data-test="inside-modal">Modal content</button>' }
+      })
+      await nextTick()
+      await nextTick()
+    }
+
+    const openStackedDrawerModal = async () => {
+      await stackedModal.setProps({ isOpen: true })
       await nextTick()
       await nextTick()
     }
 
     it('keeps the previous modal open when a stackable modal is opened on top', async () => {
-      wrapper = mountStack(true)
-      await nextTick()
+      await mountStack(true)
       await openStackedModal()
 
-      expect(state().isOpenA).toBe(true)
-      expect(state().isOpenB).toBe(true)
+      expect(modalA.emitted('close')).toBeUndefined()
+      expect(modalB.emitted('close')).toBeUndefined()
     })
 
     it('does not close the underlying modal when interacting with the stacked modal', async () => {
-      wrapper = mountStack(true)
-      await nextTick()
+      await mountStack(true)
       await openStackedModal()
       await clickOn('[data-test="inside-b"]')
 
-      expect(state().isOpenA).toBe(true)
-      expect(state().isOpenB).toBe(true)
+      expect(modalA.emitted('close')).toBeUndefined()
+      expect(modalB.emitted('close')).toBeUndefined()
     })
 
     it('closes only the topmost modal when Escape is pressed', async () => {
-      wrapper = mountStack(true)
-      await nextTick()
+      await mountStack(true)
       await openStackedModal()
       await pressEscape()
 
-      expect(state().isOpenB).toBe(false)
-      expect(state().isOpenA).toBe(true)
+      expect(modalB.emitted('close')).toHaveLength(1)
+      expect(modalA.emitted('close')).toBeUndefined()
     })
 
     it('closes only the topmost modal when its backdrop is clicked', async () => {
-      wrapper = mountStack(true)
-      await nextTick()
+      await mountStack(true)
       await openStackedModal()
-      const topmostBackdrop = [...document.querySelectorAll('[data-headlessui-portal]')].pop() as HTMLElement
-      const backdrop = topmostBackdrop.querySelector('.vk-modal__backdrop') as HTMLElement
+      const topmostPortal = [...document.querySelectorAll('[data-headlessui-portal]')].pop() as HTMLElement
+      const backdrop = topmostPortal.querySelector('.vk-modal__backdrop') as HTMLElement
       backdrop.dispatchEvent(new Event('pointerdown', { bubbles: true }))
       backdrop.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
       await nextTick()
 
-      expect(state().isOpenB).toBe(false)
-      expect(state().isOpenA).toBe(true)
+      expect(modalB.emitted('close')).toHaveLength(1)
+      expect(modalA.emitted('close')).toBeUndefined()
     })
 
     it('closes the open modal by default when another modal is opened without stackable', async () => {
-      wrapper = mountStack()
-      await nextTick()
+      await mountStack()
       await openStackedModal()
 
-      expect(state().isOpenA).toBe(false)
-      expect(state().isOpenB).toBe(true)
+      expect(modalA.emitted('close')).toHaveLength(1)
+      expect(modalB.emitted('close')).toBeUndefined()
     })
 
     it('does not close the drawer when interacting with a stackable modal on top', async () => {
-      wrapper = mountDrawerStack()
-      await nextTick()
-      state().isModalOpen = true
-      await nextTick()
-      await nextTick()
+      await mountDrawerStack()
+      await openStackedDrawerModal()
       await clickOn('[data-test="inside-modal"]')
 
-      expect(state().isModalOpen).toBe(true)
-      expect(state().isDrawerOpen).toBe(true)
+      expect(drawerWrapper.emitted('close')).toBeUndefined()
+      expect(stackedModal.emitted('close')).toBeUndefined()
     })
 
     it('closes only the topmost overlay when Escape is pressed with a drawer open', async () => {
-      wrapper = mountDrawerStack()
-      await nextTick()
-      state().isModalOpen = true
-      await nextTick()
-      await nextTick()
+      await mountDrawerStack()
+      await openStackedDrawerModal()
       await pressEscape()
 
-      expect(state().isModalOpen).toBe(false)
-      expect(state().isDrawerOpen).toBe(true)
+      expect(stackedModal.emitted('close')).toHaveLength(1)
+      expect(drawerWrapper.emitted('close')).toBeUndefined()
     })
   })
 })

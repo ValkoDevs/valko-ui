@@ -1,6 +1,6 @@
 import { VueWrapper, enableAutoUnmount, mount } from '@vue/test-utils'
 import { DialogPanel } from '@headlessui/vue'
-import { defineComponent, nextTick, ref } from 'vue'
+import { nextTick } from 'vue'
 import VkDrawer from '#valkoui/components/Drawer.vue'
 import VkModal from '#valkoui/components/Modal.vue'
 
@@ -581,6 +581,9 @@ describe('Drawer component', () => {
   })
 
   describe('Stacking', () => {
+    let drawerWrapper: VueWrapper
+    let modalWrapper: VueWrapper
+
     afterEach(() => document.body.innerHTML = '')
 
     const clickOn = async (selector: string) => {
@@ -590,66 +593,48 @@ describe('Drawer component', () => {
       await nextTick()
     }
 
-    const mountDrawerStack = (stackable?: boolean) => mount(defineComponent({
-      components: { VkDrawer, VkModal },
-      setup(_, { expose }) {
-        const isModalOpen = ref(true)
-        const isDrawerOpen = ref(false)
-        expose({ isModalOpen, isDrawerOpen })
-        return { isModalOpen, isDrawerOpen }
-      },
-      template: `
-        <VkModal
-          :is-open="isModalOpen"
-          title="Modal"
-          @close="isModalOpen = false"
-        >
-          <button data-test="inside-modal">Modal content</button>
-        </VkModal>
-        <VkDrawer
-          :is-open="isDrawerOpen"
-          ${stackable ? 'stackable' : ''}
-          title="Drawer"
-          @close="isDrawerOpen = false"
-        >
-          <button data-test="inside-drawer">Drawer content</button>
-        </VkDrawer>`
-    }))
-
-    const state = () => wrapper.vm as unknown as { isModalOpen: boolean, isDrawerOpen: boolean }
+    const mountDrawerStack = async (stackable?: boolean) => {
+      modalWrapper = mount(VkModal, {
+        props: { isOpen: true, title: 'Modal' },
+        slots: { default: '<button data-test="inside-modal">Modal content</button>' }
+      })
+      drawerWrapper = mount(VkDrawer, {
+        props: { isOpen: false, stackable, title: 'Drawer' },
+        slots: { default: '<button data-test="inside-drawer">Drawer content</button>' }
+      })
+      await nextTick()
+      await nextTick()
+    }
 
     const openDrawer = async () => {
-      state().isDrawerOpen = true
+      await drawerWrapper.setProps({ isOpen: true })
       await nextTick()
       await nextTick()
     }
 
     it('keeps the modal open when a stackable drawer is opened on top', async () => {
-      wrapper = mountDrawerStack(true)
-      await nextTick()
+      await mountDrawerStack(true)
       await openDrawer()
 
-      expect(state().isModalOpen).toBe(true)
-      expect(state().isDrawerOpen).toBe(true)
+      expect(modalWrapper.emitted('close')).toBeUndefined()
+      expect(drawerWrapper.emitted('close')).toBeUndefined()
     })
 
     it('closes the open modal by default when a drawer is opened without stackable', async () => {
-      wrapper = mountDrawerStack()
-      await nextTick()
+      await mountDrawerStack()
       await openDrawer()
 
-      expect(state().isModalOpen).toBe(false)
-      expect(state().isDrawerOpen).toBe(true)
+      expect(modalWrapper.emitted('close')).toHaveLength(1)
+      expect(drawerWrapper.emitted('close')).toBeUndefined()
     })
 
     it('does not close the modal when interacting with the stacked drawer', async () => {
-      wrapper = mountDrawerStack(true)
-      await nextTick()
+      await mountDrawerStack(true)
       await openDrawer()
       await clickOn('[data-test="inside-drawer"]')
 
-      expect(state().isModalOpen).toBe(true)
-      expect(state().isDrawerOpen).toBe(true)
+      expect(modalWrapper.emitted('close')).toBeUndefined()
+      expect(drawerWrapper.emitted('close')).toBeUndefined()
     })
   })
 })

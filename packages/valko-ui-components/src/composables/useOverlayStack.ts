@@ -1,10 +1,7 @@
 import type { OverlayStackEntry } from '#valkoui/types/OverlayStack.ts'
 
 const stack: OverlayStackEntry[] = []
-let nextId = 1
 let detachListeners: (() => void) | null = null
-
-const topmostEntry = () => stack[stack.length - 1]
 
 const ownerForPath = (path: EventTarget[]) => {
   for (let i = stack.length - 1; i >= 0; i--) {
@@ -16,17 +13,15 @@ const ownerForPath = (path: EventTarget[]) => {
 
 const handleClick = (event: MouseEvent) => {
   const path = event.composedPath?.() ?? []
-  const owner = ownerForPath(path)
-  const target = owner ?? topmostEntry()
-  if (!target) return
-  const panel = target.panelRef.value
-  if (panel !== null && path.includes(panel)) return
+  const target = ownerForPath(path) ?? stack[stack.length - 1]
+  const panel = target?.panelRef.value
+  if (!target || (panel !== null && path.includes(panel))) return
   target.close()
 }
 
 const handleKeydown = (event: Event) => {
   if ((event as KeyboardEvent).key !== 'Escape') return
-  const topmost = topmostEntry()
+  const topmost = stack[stack.length - 1]
   if (!topmost) return
   event.preventDefault()
   topmost.close()
@@ -45,24 +40,21 @@ const attachListeners = () => {
 }
 
 const useOverlayStack = () => {
-  const register = (entry: Omit<OverlayStackEntry, 'id'>) => {
-    const id = nextId++
-    stack.push({ id, rootRef: entry.rootRef, panelRef: entry.panelRef, close: entry.close })
+  const register = (entry: OverlayStackEntry) => {
+    stack.push(entry)
     attachListeners()
-    return id
+    return entry
   }
 
-  const unregister = (id: number) => {
-    const index = stack.findIndex(entry => entry.id === id)
+  const unregister = (entry: OverlayStackEntry) => {
+    const index = stack.indexOf(entry)
     if (index === -1) return
     stack.splice(index, 1)
     if (!stack.length) detachListeners?.()
   }
 
-  const closeOthers = (exceptId?: number) => {
-    for (const entry of [...stack].reverse()) {
-      if (entry.id !== exceptId) entry.close()
-    }
+  const closeOthers = () => {
+    for (const entry of [...stack]) entry.close()
   }
 
   return { register, unregister, closeOthers }
