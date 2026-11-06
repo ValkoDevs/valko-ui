@@ -3,7 +3,7 @@ import { ref, computed } from 'vue'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
 import type { DrawerProps } from '#valkoui/types/Drawer'
 import styles from '#valkoui/styles/Drawer.styles.ts'
-import { useOverlayStack } from '#valkoui/composables/useOverlayStack.ts'
+import useOverlayStack from '#valkoui/composables/useOverlayStack.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 

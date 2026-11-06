@@ -1,5 +1,5 @@
 import { onBeforeUnmount, watch } from 'vue'
-import type { OverlayStackEntry } from '#valkoui/types/OverlayStack.ts'
+import type { OverlayStackEntry, StackableOverlayOptions } from '#valkoui/types/OverlayStack.ts'
 
 const stack: OverlayStackEntry[] = []
 let detachListeners: (() => void) | null = null
@@ -58,14 +58,6 @@ const closeAll = () => {
   for (const entry of [...stack]) entry.close()
 }
 
-export interface StackableOverlayOptions {
-  isOpen: () => boolean
-  rootRef: OverlayStackEntry['rootRef']
-  panelRef: OverlayStackEntry['panelRef']
-  close: () => void
-  stackable?: () => boolean
-}
-
 const useOverlayStack = ({ isOpen, stackable = () => false, rootRef, panelRef, close }: StackableOverlayOptions) => {
   let entry: OverlayStackEntry | null = null
 
@@ -86,5 +78,4 @@ const useOverlayStack = ({ isOpen, stackable = () => false, rootRef, panelRef, c
   })
 }
 
-export { useOverlayStack, register, unregister, closeAll }
 export default useOverlayStack
