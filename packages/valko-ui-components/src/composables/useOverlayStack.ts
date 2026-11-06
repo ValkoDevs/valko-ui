@@ -1,25 +1,11 @@
-import type { Ref } from 'vue'
+import type { OverlayStackEntry } from '#valkoui/types/OverlayStack.ts'
 
-interface OverlayEntry {
-  id: number
-  rootRef: Ref<HTMLElement | null>
-  panelRef: Ref<HTMLElement | null>
-  close: () => void
-}
-
-// Module-scoped registry shared by every open overlay. It is the single
-// dismissal authority for Dialog-based overlays: Headless UI's per-dialog
-// outside click and Escape handlers don't coordinate stacked instances (and
-// its preventDefault skips the handlers of dialogs registered later), so the
-// stack decides who closes and the components ignore the Dialog close event.
-const stack: OverlayEntry[] = []
+const stack: OverlayStackEntry[] = []
 let nextId = 1
 let detachListeners: (() => void) | null = null
 
 const topmostEntry = () => stack[stack.length - 1]
 
-// The topmost overlay the click belongs to: its own dialog (including the
-// backdrop) when the click landed inside one, otherwise nothing.
 const ownerForPath = (path: EventTarget[]) => {
   for (let i = stack.length - 1; i >= 0; i--) {
     const root = stack[i].rootRef.value
@@ -44,8 +30,6 @@ const handleKeydown = (event: Event) => {
   if (!topmost) return
   event.preventDefault()
   topmost.close()
-  // Matches Headless UI's own Escape behavior of shielding the app while a
-  // dialog is open; only the topmost overlay reacts.
   event.stopImmediatePropagation()
 }
 
@@ -60,8 +44,8 @@ const attachListeners = () => {
   }
 }
 
-export function useOverlayStack() {
-  const register = (entry: { rootRef: Ref<HTMLElement | null>, panelRef: Ref<HTMLElement | null>, close: () => void }) => {
+const useOverlayStack = () => {
+  const register = (entry: Omit<OverlayStackEntry, 'id'>) => {
     const id = nextId++
     stack.push({ id, rootRef: entry.rootRef, panelRef: entry.panelRef, close: entry.close })
     attachListeners()
@@ -75,8 +59,6 @@ export function useOverlayStack() {
     if (!stack.length) detachListeners?.()
   }
 
-  // Single-active policy (stackable: false): opening an overlay closes the
-  // ones already open, topmost first.
   const closeOthers = (exceptId?: number) => {
     for (const entry of [...stack].reverse()) {
       if (entry.id !== exceptId) entry.close()
