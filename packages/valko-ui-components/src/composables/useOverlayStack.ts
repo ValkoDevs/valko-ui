@@ -50,7 +50,7 @@ const unregister = (entry: OverlayStackEntry) => {
   const index = stack.indexOf(entry)
   if (index === -1) return
   stack.splice(index, 1)
-  if (!stack.length) detachListeners()
+  if (!stack.length) detachListeners?.()
 }
 
 const closeAll = () => {
