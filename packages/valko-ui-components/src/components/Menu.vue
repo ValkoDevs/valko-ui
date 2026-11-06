@@ -17,17 +17,13 @@ const emit = defineEmits(['itemClick'])
 
 const s = computed(() => styles(props))
 
-const groupedItems = computed(() => {
-  const groups: Record<string, MenuItem[]> = { default: [] }
-  for (const item of props.items) {
-    const group = item.group || 'default'
-    if (!groups[group]) groups[group] = []
-    groups[group].push(item)
-  }
+const groupedItems = computed(() => props.items.reduce((groups: Record<string, MenuItem[]>, item: MenuItem) => {
+  const group = item.group || 'default'
+  groups[group] ??= []
+  groups[group].push(item)
   return groups
-})
+}, { default: [] }))
 
-// Flattened in the exact order items are rendered in the DOM.
 const orderedItems = computed(() => Object.values(groupedItems.value).flat())
 
 const focusedIndex = ref(-1)
@@ -52,8 +48,6 @@ const onItemClick = (item: MenuItem) => {
 const itemRefs: Ref<Record<string, HTMLElement | null>> = ref({})
 
 const setItemRef = (key: string | number) => (el: Element | ComponentPublicInstance | null) => {
-  // Vue invokes the previous ref callback with null on re-renders, which would
-  // overwrite valid entries; only keep real elements.
   if (el instanceof HTMLElement) itemRefs.value[key] = el
 }
 
@@ -64,7 +58,6 @@ const focusItem = (index: number) => {
     const el = key != null ? itemRefs.value[key] : undefined
     if (el) {
       el.focus()
-      // 'nearest' avoids scrolling when the item is already visible.
       el.scrollIntoView({ block: 'nearest' })
     }
   })
