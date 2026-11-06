@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ref, computed, watch, onBeforeUnmount } from 'vue'
+import { ref, computed } from 'vue'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
 import type { ModalProps } from '#valkoui/types/Modal'
 import styles from '#valkoui/styles/Modal.styles.ts'
-import useOverlayStack from '#valkoui/composables/useOverlayStack.ts'
-import type { OverlayStackEntry } from '#valkoui/types/OverlayStack.ts'
+import { useOverlayStack } from '#valkoui/composables/useOverlayStack.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 
@@ -30,25 +29,14 @@ const panelRef = ref<{ $el: HTMLElement | null } | null>(null)
 const dialogEl = computed(() => dialogRef.value?.$el ?? null)
 const panelEl = computed(() => panelRef.value?.$el ?? null)
 
-const stack = useOverlayStack()
-const stackEntry = ref<OverlayStackEntry | null>(null)
-
 const closeModal = () => { if (props.closable) emit('close') }
 
-watch(() => props.isOpen, (open) => {
-  if (open) {
-    if (!props.stackable) stack.closeAll()
-    stackEntry.value = stack.register({ rootRef: dialogEl, panelRef: panelEl, close: closeModal })
-  } else if (stackEntry.value !== null) {
-    stack.unregister(stackEntry.value)
-    stackEntry.value = null
-  }
-}, { immediate: true })
-
-onBeforeUnmount(() => {
-  if (stackEntry.value === null) return
-  stack.unregister(stackEntry.value)
-  stackEntry.value = null
+useOverlayStack({
+  isOpen: () => props.isOpen,
+  stackable: () => props.stackable,
+  rootRef: dialogEl,
+  panelRef: panelEl,
+  close: closeModal
 })
 </script>
 

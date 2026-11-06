@@ -1,3 +1,4 @@
+import { onBeforeUnmount, watch } from 'vue'
 import type { OverlayStackEntry } from '#valkoui/types/OverlayStack.ts'
 
 const stack: OverlayStackEntry[] = []
@@ -57,6 +58,33 @@ const closeAll = () => {
   for (const entry of [...stack]) entry.close()
 }
 
-const useOverlayStack = () => ({ register, unregister, closeAll })
+export interface StackableOverlayOptions {
+  isOpen: () => boolean
+  rootRef: OverlayStackEntry['rootRef']
+  panelRef: OverlayStackEntry['panelRef']
+  close: () => void
+  stackable?: () => boolean
+}
 
+const useOverlayStack = ({ isOpen, stackable = () => false, rootRef, panelRef, close }: StackableOverlayOptions) => {
+  let entry: OverlayStackEntry | null = null
+
+  watch(isOpen, (open) => {
+    if (open) {
+      if (!stackable()) closeAll()
+      entry = register({ rootRef, panelRef, close })
+    } else if (entry !== null) {
+      unregister(entry)
+      entry = null
+    }
+  }, { immediate: true })
+
+  onBeforeUnmount(() => {
+    if (entry === null) return
+    unregister(entry)
+    entry = null
+  })
+}
+
+export { useOverlayStack, register, unregister, closeAll }
 export default useOverlayStack

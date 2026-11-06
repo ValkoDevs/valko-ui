@@ -1,9 +1,8 @@
 import { ref } from 'vue'
-import useOverlayStack from '#valkoui/composables/useOverlayStack.ts'
+import { closeAll, register, unregister } from '#valkoui/composables/useOverlayStack.ts'
 import type { OverlayStackEntry } from '#valkoui/types/OverlayStack.ts'
 
 describe('useOverlayStack composable', () => {
-  const stack = useOverlayStack()
   let entries: OverlayStackEntry[] = []
 
   const createEntry = (close: () => void = () => {}) => {
@@ -17,7 +16,7 @@ describe('useOverlayStack composable', () => {
     document.body.appendChild(root)
     rootRef.value = root
     panelRef.value = panel
-    const entry = stack.register({ rootRef, panelRef, close })
+    const entry = register({ rootRef, panelRef, close })
     entries.push(entry)
     return { entry, root, panel, child }
   }
@@ -31,7 +30,7 @@ describe('useOverlayStack composable', () => {
   }
 
   afterEach(() => {
-    entries.forEach(entry => stack.unregister(entry))
+    entries.forEach(entry => unregister(entry))
     entries = []
     document.body.innerHTML = ''
   })
@@ -42,7 +41,7 @@ describe('useOverlayStack composable', () => {
     createEntry(closeA)
     createEntry(closeB)
 
-    stack.closeAll()
+    closeAll()
 
     expect(closeA).toHaveBeenCalledTimes(1)
     expect(closeB).toHaveBeenCalledTimes(1)
@@ -99,7 +98,7 @@ describe('useOverlayStack composable', () => {
   it('stops reacting to clicks once the last overlay unregisters', () => {
     const closeA = vi.fn()
     const { entry } = createEntry(closeA)
-    stack.unregister(entry)
+    unregister(entry)
     entries = []
 
     clickOn(document.body)
