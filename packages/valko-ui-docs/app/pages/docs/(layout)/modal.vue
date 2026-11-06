@@ -7,8 +7,11 @@ const form = ref<ModalProps>({
   backdrop: 'opaque',
   title: 'Modal',
   closable: true,
+  stackable: false,
   isOpen: false
 })
+
+const nestedModalOpen = ref(false)
 
 const backdropOptions: SelectOption<Backdrop>[] = [
   { value: 'opaque', label: 'Opaque' },
@@ -69,6 +72,15 @@ const modalProps: PropData[] = [
     description: 'Displays a close button on the Modal and allows to close it by clicking outside or pressing esc',
     values: 'boolean',
     default: 'true',
+    apiType: 'primitive'
+  },
+  {
+    key: 'stackableProp',
+    prop: 'stackable',
+    required: false,
+    description: 'Allows the Modal to stay open when another Modal is opened on top of it, stacking them. When disabled, opening a new Modal closes the open one.',
+    values: 'boolean',
+    default: 'false',
     apiType: 'primitive'
   },
   {
@@ -250,6 +262,37 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<string>(':closable',
   }).replace(/<vk-modal/g, `${triggerSnippet}`)
 }`
 
+const stackableSnippet = `${scriptCode}
+  <vk-button
+    @click="toggleModal('stackable')"
+  >
+    Open modal
+  </vk-button>
+
+  <vk-modal
+    :is-open="modalStates['stackable']"
+    stackable
+    title="Stackable"
+    @close="toggleModal('stackable')"
+  >
+    Stackable Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+
+    <vk-button
+      @click="toggleModal('stacked')"
+    >
+      Open stacked modal
+    </vk-button>
+  </vk-modal>
+
+  <vk-modal
+    :is-open="modalStates['stacked']"
+    stackable
+    title="Stacked modal"
+    @close="toggleModal('stacked')"
+  >
+    Stacked modal Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+  </vk-modal>`
+
 const styles = {
   default: {
     slotContainer: [
@@ -269,7 +312,7 @@ const styles = {
 
 <template>
   <doc-section
-    title="Modal Component"
+    title="Modal"
     description="Popup window that requires user attention before proceeding. Modals are used to display important messages, gather user input, or confirm actions, and typically require user interaction before the underlying content can be accessed."
   >
     <template #playground-view>
@@ -283,20 +326,40 @@ const styles = {
         :backdrop="form.backdrop"
         :title="form.title"
         :closable="form.closable"
+        :stackable="form.stackable"
         @close="() => {form.isOpen = false}"
       >
         <template #default>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
 
-          <vk-button
-            color="positive"
-            size="sm"
-            class="self-end"
-            @click="() => {form.isOpen = false}"
-          >
-            Accept & close
-          </vk-button>
+          <div class="flex gap-2 self-end">
+            <vk-button
+              size="sm"
+              @click="() => {nestedModalOpen = true}"
+            >
+              Open stacked modal
+            </vk-button>
+
+            <vk-button
+              color="negative"
+              size="sm"
+              @click="() => {form.isOpen = false}"
+            >
+              Close
+            </vk-button>
+          </div>
+        </template>
+      </vk-modal>
+
+      <vk-modal
+        :is-open="nestedModalOpen"
+        :stackable="form.stackable"
+        title="Stacked modal"
+        @close="() => {nestedModalOpen = false}"
+      >
+        <template #default>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
         </template>
       </vk-modal>
     </template>
@@ -327,6 +390,10 @@ const styles = {
       <vk-checkbox
         v-model="form.closable"
         label="Closable"
+      />
+      <vk-checkbox
+        v-model="form.stackable"
+        label="Stackable"
       />
     </template>
 
@@ -433,18 +500,55 @@ const styles = {
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
 
             <vk-button
-              color="positive"
+              color="negative"
               size="sm"
               class="self-end"
               @click="toggleModal('closable')"
             >
-              Accept & close
+              Close
             </vk-button>
           </template>
         </vk-modal>
 
         <template #code>
           <code-block :code="closableSnippet" />
+        </template>
+      </example-section>
+
+      <example-section title="Stackable">
+        <vk-button @click="toggleModal('stackable')">
+          Open modal
+        </vk-button>
+        <vk-modal
+          :is-open="modalStates['stackable'] ?? false"
+          title="Stackable"
+          stackable
+          @close="toggleModal('stackable')"
+        >
+          <template #default>
+            Stackable Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+
+            <vk-button
+              @click="toggleModal('stacked')"
+            >
+              Open stacked modal
+            </vk-button>
+          </template>
+        </vk-modal>
+
+        <vk-modal
+          :is-open="modalStates['stacked'] ?? false"
+          title="Stacked modal"
+          stackable
+          @close="toggleModal('stacked')"
+        >
+          <template #default>
+            Stacked modal Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+          </template>
+        </vk-modal>
+
+        <template #code>
+          <code-block :code="stackableSnippet" />
         </template>
       </example-section>
     </template>

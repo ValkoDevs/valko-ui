@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
 import type { DrawerProps } from '#valkoui/types/Drawer'
 import styles from '#valkoui/styles/Drawer.styles.ts'
+import useOverlayStack from '#valkoui/composables/useOverlayStack.ts'
 import VkIcon from './Icon.vue'
 import VkButton from './Button.vue'
 
@@ -15,6 +16,7 @@ const props = withDefaults(defineProps<DrawerProps>(), {
   placement: 'right',
   isOpen: false,
   closable: true,
+  stackable: false,
   title: '',
   class: ''
 })
@@ -24,8 +26,20 @@ const emit = defineEmits(['close'])
 const s = computed(() => styles(props))
 
 const containerRef = ref(null)
+const dialogRef = ref<{ $el: HTMLElement | null } | null>(null)
+const panelRef = ref<{ $el: HTMLElement | null } | null>(null)
+const dialogEl = computed(() => dialogRef.value?.$el ?? null)
+const panelEl = computed(() => panelRef.value?.$el ?? null)
 
 const closeDrawer = () => { if (props.closable) emit('close') }
+
+useOverlayStack({
+  isOpen: () => props.isOpen,
+  stackable: () => props.stackable,
+  rootRef: dialogEl,
+  panelRef: panelEl,
+  close: closeDrawer
+})
 
 const transitionClasses = computed(() => {
   switch (props.placement) {
@@ -85,11 +99,11 @@ const transitionClasses = computed(() => {
     as="template"
   >
     <Dialog
+      ref="dialogRef"
       :class="s.dialog({ class: styleSlots?.dialog })"
       :initial-focus="containerRef"
       :aria-modal="true"
       :aria-labelledby="ariaLabelledBy"
-      @close="closeDrawer"
     >
       <transition-child
         as="template"
@@ -124,6 +138,7 @@ const transitionClasses = computed(() => {
             :leave-to="transitionClasses.leaveTo"
           >
             <dialog-panel
+              ref="panelRef"
               :class="s.panel({ class: styleSlots?.panel })"
               :data-title="!!title"
             >

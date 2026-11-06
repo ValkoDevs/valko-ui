@@ -7,5 +7,6 @@ export interface ModalProps extends Shapes, Pick<AriaAttributes, 'ariaLabelledBy
   backdrop?: Backdrop;
   title?: string;
   closable?: boolean;
+  stackable?: boolean;
   styleSlots?: Partial<ModalSlots>;
 }

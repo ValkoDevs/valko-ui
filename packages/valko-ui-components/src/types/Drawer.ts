@@ -6,5 +6,6 @@ export interface DrawerProps extends Shapes, Sizes, Placements, Pick<AriaAttribu
   backdrop?: Backdrop;
   title?: string;
   closable?: boolean;
+  stackable?: boolean;
   styleSlots?: Partial<DrawerSlots>;
 }

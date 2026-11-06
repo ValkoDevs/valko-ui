@@ -1,7 +1,8 @@
-import { VueWrapper, mount } from '@vue/test-utils'
+import { VueWrapper, enableAutoUnmount, mount } from '@vue/test-utils'
 import { DialogPanel } from '@headlessui/vue'
 import { nextTick } from 'vue'
 import VkModal from '#valkoui/components/Modal.vue'
+import VkDrawer from '#valkoui/components/Drawer.vue'
 
 class ResizeObserver {
   observe() {return}
@@ -11,12 +12,17 @@ class ResizeObserver {
 
 globalThis.ResizeObserver = ResizeObserver
 
+enableAutoUnmount(afterEach)
+
 describe('Modal component', () => {
   let wrapper: VueWrapper
   let modal: VueWrapper
   let backdrop: VueWrapper
 
-  afterEach(() => document.body.innerHTML = '')
+  afterEach(() => {
+    wrapper?.unmount()
+    document.body.innerHTML = ''
+  })
 
   describe('Props', () => {
     describe('With default props', () => {
@@ -421,6 +427,130 @@ describe('Modal component', () => {
       await wrapper.findComponent(DialogStub).trigger('click')
 
       expect(wrapper.emitted()).not.toHaveProperty('close')
+    })
+  })
+
+  describe('Stacking', () => {
+    let modalA: VueWrapper
+    let modalB: VueWrapper
+    let drawerWrapper: VueWrapper
+    let stackedModal: VueWrapper
+
+    afterEach(() => document.body.innerHTML = '')
+
+    const clickOn = async (selector: string) => {
+      const target = document.querySelector(selector) as HTMLElement
+      target.dispatchEvent(new Event('pointerdown', { bubbles: true }))
+      target.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
+      await nextTick()
+    }
+
+    const pressEscape = async () => {
+      window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }))
+      await nextTick()
+    }
+
+    const mountStack = async (stackable?: boolean) => {
+      modalA = mount(VkModal, {
+        props: { isOpen: true, stackable, title: 'Modal A' },
+        slots: { default: '<span data-test="inside-a">A content</span>' }
+      })
+      modalB = mount(VkModal, {
+        props: { isOpen: false, stackable, title: 'Modal B' },
+        slots: { default: '<button data-test="inside-b">B content</button>' }
+      })
+      await nextTick()
+      await nextTick()
+    }
+
+    const openStackedModal = async () => {
+      await modalB.setProps({ isOpen: true })
+      await nextTick()
+      await nextTick()
+    }
+
+    const mountDrawerStack = async () => {
+      drawerWrapper = mount(VkDrawer, {
+        props: { isOpen: true, title: 'Drawer' },
+        slots: { default: '<span data-test="inside-drawer">Drawer content</span>' }
+      })
+      stackedModal = mount(VkModal, {
+        props: { isOpen: false, stackable: true, title: 'Modal' },
+        slots: { default: '<button data-test="inside-modal">Modal content</button>' }
+      })
+      await nextTick()
+      await nextTick()
+    }
+
+    const openStackedDrawerModal = async () => {
+      await stackedModal.setProps({ isOpen: true })
+      await nextTick()
+      await nextTick()
+    }
+
+    it('keeps the previous modal open when a stackable modal is opened on top', async () => {
+      await mountStack(true)
+      await openStackedModal()
+
+      expect(modalA.emitted('close')).toBeUndefined()
+      expect(modalB.emitted('close')).toBeUndefined()
+    })
+
+    it('does not close the underlying modal when interacting with the stacked modal', async () => {
+      await mountStack(true)
+      await openStackedModal()
+      await clickOn('[data-test="inside-b"]')
+
+      expect(modalA.emitted('close')).toBeUndefined()
+      expect(modalB.emitted('close')).toBeUndefined()
+    })
+
+    it('closes only the topmost modal when Escape is pressed', async () => {
+      await mountStack(true)
+      await openStackedModal()
+      await pressEscape()
+
+      expect(modalB.emitted('close')).toHaveLength(1)
+      expect(modalA.emitted('close')).toBeUndefined()
+    })
+
+    it('closes only the topmost modal when its backdrop is clicked', async () => {
+      await mountStack(true)
+      await openStackedModal()
+      const topmostPortal = [...document.querySelectorAll('[data-headlessui-portal]')].pop() as HTMLElement
+      const backdrop = topmostPortal.querySelector('.vk-modal__backdrop') as HTMLElement
+      backdrop.dispatchEvent(new Event('pointerdown', { bubbles: true }))
+      backdrop.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }))
+      await nextTick()
+
+      expect(modalB.emitted('close')).toHaveLength(1)
+      expect(modalA.emitted('close')).toBeUndefined()
+    })
+
+    it('closes the open modal by default when another modal is opened without stackable', async () => {
+      await mountStack()
+      await openStackedModal()
+
+      expect(modalA.emitted('close')).toHaveLength(1)
+      expect(modalB.emitted('close')).toBeUndefined()
+    })
+
+    it('does not close the drawer when interacting with a stackable modal on top', async () => {
+      await mountDrawerStack()
+      await openStackedDrawerModal()
+      await clickOn('[data-test="inside-modal"]')
+
+      expect(drawerWrapper.emitted('close')).toBeUndefined()
+      expect(stackedModal.emitted('close')).toBeUndefined()
+    })
+
+    it('closes only the topmost overlay when Escape is pressed with a drawer open', async () => {
+      await mountDrawerStack()
+      await openStackedDrawerModal()
+      await pressEscape()
+
+      expect(stackedModal.emitted('close')).toHaveLength(1)
+      expect(drawerWrapper.emitted('close')).toBeUndefined()
     })
   })
 })

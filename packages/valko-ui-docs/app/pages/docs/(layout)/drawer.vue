@@ -7,8 +7,11 @@ const form = ref<Omit<DrawerProps, 'isOpen'>>({
   placement: 'right',
   backdrop: 'opaque',
   title: 'Drawer',
-  closable: true
+  closable: true,
+  stackable: false
 })
+
+const nestedDrawerOpen = ref(false)
 
 const backdropOptions: SelectOption<Backdrop>[] = [
   { value: 'opaque', label: 'Opaque' },
@@ -78,6 +81,15 @@ const drawerProps: PropData[] = [
     description: 'Displays a close button on the Drawer and allows to close it by clicking outside or pressing esc',
     values: 'boolean',
     default: 'true',
+    apiType: 'primitive'
+  },
+  {
+    key: 'stackableProp',
+    prop: 'stackable',
+    required: false,
+    description: 'Allows the Drawer to stay open when another Drawer or Modal is opened on top of it, stacking them. When disabled, opening a new Drawer or Modal closes the open one.',
+    values: 'boolean',
+    default: 'false',
     apiType: 'primitive'
   },
   {
@@ -275,6 +287,37 @@ const closableSnippet = `${scriptCode}\n${generateSnippet<boolean>(':closable',
   }).replace(/<vk-drawer/g, `${triggerSnippet}`)
 }`
 
+const stackableSnippet = `${scriptCode}
+  <vk-button
+    @click="toggleDrawer('stackable')"
+  >
+    Open drawer
+  </vk-button>
+
+  <vk-drawer
+    :is-open="drawerStates['stackable']"
+    stackable
+    title="Stackable"
+    @close="toggleDrawer('stackable')"
+  >
+    Stackable Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+
+    <vk-button
+      @click="toggleDrawer('stacked')"
+    >
+      Open stacked drawer
+    </vk-button>
+  </vk-drawer>
+
+  <vk-drawer
+    :is-open="drawerStates['stacked']"
+    stackable
+    title="Stacked drawer"
+    @close="toggleDrawer('stacked')"
+  >
+    Stacked drawer Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+  </vk-drawer>`
+
 const styles = {
   default: {
     slotContainer: [
@@ -312,6 +355,7 @@ const styles = {
         :backdrop="form.backdrop"
         :shape="form.shape"
         :closable="form.closable"
+        :stackable="form.stackable"
         :title="form.title"
         :size="form.size"
         @close="toggleDrawer('playground-drawer')"
@@ -319,13 +363,33 @@ const styles = {
         <template #default>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus nihil, recusandae, enim sit corporis quia reprehenderit odit obcaecati, voluptas id dolor ipsam maiores at? Dolores incidunt sequi reiciendis nostrum exercitationem.
 
-          <vk-button
-            class="self-end mt-auto"
-            color="negative"
-            @click="toggleDrawer('playground-drawer')"
-          >
-            Close Drawer
-          </vk-button>
+          <div class="flex gap-2 self-end mt-auto">
+            <vk-button
+              size="sm"
+              @click="() => {nestedDrawerOpen = true}"
+            >
+              Open stacked drawer
+            </vk-button>
+
+            <vk-button
+              color="negative"
+              size="sm"
+              @click="toggleDrawer('playground-drawer')"
+            >
+              Close
+            </vk-button>
+          </div>
+        </template>
+      </vk-drawer>
+
+      <vk-drawer
+        :is-open="nestedDrawerOpen"
+        :stackable="form.stackable"
+        title="Stacked drawer"
+        @close="() => {nestedDrawerOpen = false}"
+      >
+        <template #default>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus nihil, recusandae, enim sit corporis quia reprehenderit odit obcaecati, voluptas id dolor ipsam maiores at? Dolores incidunt sequi reiciendis nostrum exercitationem.
         </template>
       </vk-drawer>
     </template>
@@ -362,6 +426,10 @@ const styles = {
       <vk-checkbox
         v-model="form.closable"
         label="Closable"
+      />
+      <vk-checkbox
+        v-model="form.stackable"
+        label="Stackable"
       />
     </template>
 
@@ -501,13 +569,50 @@ const styles = {
               color="negative"
               @click="toggleDrawer('closable')"
             >
-              Close Drawer
+              Close
             </vk-button>
           </template>
         </vk-drawer>
 
         <template #code>
           <code-block :code="closableSnippet" />
+        </template>
+      </example-section>
+
+      <example-section title="Stackable">
+        <vk-button @click="toggleDrawer('stackable')">
+          Open drawer
+        </vk-button>
+        <vk-drawer
+          :is-open="drawerStates['stackable'] ?? false"
+          title="Stackable"
+          stackable
+          @close="toggleDrawer('stackable')"
+        >
+          <template #default>
+            Stackable Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+
+            <vk-button
+              @click="toggleDrawer('stacked')"
+            >
+              Open stacked drawer
+            </vk-button>
+          </template>
+        </vk-drawer>
+
+        <vk-drawer
+          :is-open="drawerStates['stacked'] ?? false"
+          title="Stacked drawer"
+          stackable
+          @close="toggleDrawer('stacked')"
+        >
+          <template #default>
+            Stacked drawer Body - Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima laboriosam inventore repellendus blanditiis voluptas incidunt libero sint excepturi quaerat, esse saepe alias doloremque ab quisquam vel voluptate facilis quia. Illo.
+          </template>
+        </vk-drawer>
+
+        <template #code>
+          <code-block :code="stackableSnippet" />
         </template>
       </example-section>
     </template>
