@@ -39,7 +39,7 @@ const closeDrawer = () => { if (props.closable) emit('close') }
 
 watch(() => props.isOpen, (open) => {
   if (open) {
-    if (!props.stackable) stack.closeOthers()
+    if (!props.stackable) stack.closeAll()
     stackEntry.value = stack.register({ rootRef: dialogEl, panelRef: panelEl, close: closeDrawer })
   } else if (stackEntry.value !== null) {
     stack.unregister(stackEntry.value)

@@ -3,25 +3,26 @@ import type { OverlayStackEntry } from '#valkoui/types/OverlayStack.ts'
 const stack: OverlayStackEntry[] = []
 let detachListeners: (() => void) | null = null
 
-const ownerForPath = (path: EventTarget[]) => {
-  for (let i = stack.length - 1; i >= 0; i--) {
-    const root = stack[i].rootRef.value
-    if (root !== null && path.includes(root)) return stack[i]
-  }
-  return null
-}
+const topmostEntry = () => stack[stack.length - 1]
+
+const containingOverlay = (path: EventTarget[]) =>
+  [...stack].reverse().find(entry => {
+    const root = entry.rootRef.value
+    return root !== null && path.includes(root)
+  })
 
 const handleClick = (event: MouseEvent) => {
-  const path = event.composedPath?.() ?? []
-  const target = ownerForPath(path) ?? stack[stack.length - 1]
-  const panel = target?.panelRef.value
-  if (!target || (panel !== null && path.includes(panel))) return
+  const path = event.composedPath()
+  const target = containingOverlay(path) ?? topmostEntry()
+  if (!target) return
+  const panel = target.panelRef.value
+  if (panel && path.includes(panel)) return
   target.close()
 }
 
-const handleKeydown = (event: Event) => {
-  if ((event as KeyboardEvent).key !== 'Escape') return
-  const topmost = stack[stack.length - 1]
+const handleEscape = (event: KeyboardEvent) => {
+  if (event.key !== 'Escape') return
+  const topmost = topmostEntry()
   if (!topmost) return
   event.preventDefault()
   topmost.close()
@@ -30,34 +31,32 @@ const handleKeydown = (event: Event) => {
 
 const attachListeners = () => {
   if (detachListeners || typeof document === 'undefined') return
-  document.addEventListener('click', handleClick, true)
-  window.addEventListener('keydown', handleKeydown, true)
+  document.addEventListener('click', handleClick, { capture: true })
+  window.addEventListener('keydown', handleEscape, { capture: true })
   detachListeners = () => {
-    document.removeEventListener('click', handleClick, true)
-    window.removeEventListener('keydown', handleKeydown, true)
+    document.removeEventListener('click', handleClick, { capture: true })
+    window.removeEventListener('keydown', handleEscape, { capture: true })
     detachListeners = null
   }
 }
 
-const useOverlayStack = () => {
-  const register = (entry: OverlayStackEntry) => {
-    stack.push(entry)
-    attachListeners()
-    return entry
-  }
-
-  const unregister = (entry: OverlayStackEntry) => {
-    const index = stack.indexOf(entry)
-    if (index === -1) return
-    stack.splice(index, 1)
-    if (!stack.length) detachListeners?.()
-  }
-
-  const closeOthers = () => {
-    for (const entry of [...stack]) entry.close()
-  }
-
-  return { register, unregister, closeOthers }
+const register = (entry: OverlayStackEntry) => {
+  stack.push(entry)
+  attachListeners()
+  return entry
 }
+
+const unregister = (entry: OverlayStackEntry) => {
+  const index = stack.indexOf(entry)
+  if (index === -1) return
+  stack.splice(index, 1)
+  if (!stack.length) detachListeners()
+}
+
+const closeAll = () => {
+  for (const entry of [...stack]) entry.close()
+}
+
+const useOverlayStack = () => ({ register, unregister, closeAll })
 
 export default useOverlayStack

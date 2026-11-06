@@ -36,13 +36,13 @@ describe('useOverlayStack composable', () => {
     document.body.innerHTML = ''
   })
 
-  it('closeOthers closes every registered overlay', () => {
+  it('closeAll closes every registered overlay', () => {
     const closeA = vi.fn()
     const closeB = vi.fn()
     createEntry(closeA)
     createEntry(closeB)
 
-    stack.closeOthers()
+    stack.closeAll()
 
     expect(closeA).toHaveBeenCalledTimes(1)
     expect(closeB).toHaveBeenCalledTimes(1)
