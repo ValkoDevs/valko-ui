@@ -4,7 +4,8 @@ const datePicker = tv({
   slots: {
     container: [
       'vk-datepicker',
-      'relative'
+      'relative',
+      'bg-inherit'
     ],
     content: [
       'vk-datepicker__content',
