@@ -383,24 +383,39 @@ describe('Dropdown component', () => {
         expect(wrapper.find('.vk-button__base').classes()).toContain('shadow-el1')
       })
     })
+
+    describe('When isOpen prop changes', () => {
+      it('should keep controlled state when isOpen is true and trigger is clicked', async () => {
+        wrapper = mount(VkDropdown, {
+          props: {
+            isOpen: true,
+            items: []
+          }
+        })
+
+        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
+        expect(wrapper.findComponent({ name: 'VkPopover' }).props('isOpen')).toBe(true)
+      })
+    })
   })
 
   describe('Slots', () => {
-    it('should render custom dropdown-trigger if provided on the slot', async () => {
-      const wrapper = mount(VkDropdown, {
+    it('should render custom dropdown trigger if provided on the slot', () => {
+      wrapper = mount(VkDropdown, {
         props: {
           items
         },
         slots: {
-          'dropdown-trigger': '<button class="custom-trigger">Menu</button>'
+          trigger: '<button class="custom-trigger">Menu</button>'
         }
       })
 
       expect(wrapper.find('.custom-trigger').exists()).toBe(true)
     })
 
-    it('should render default dropdown-trigger if the slot is not modified', async () => {
-      const wrapper = mount(VkDropdown, {
+    it('should render default dropdown trigger if the slot is not modified', () => {
+      wrapper = mount(VkDropdown, {
         props: {
           items
         }
@@ -410,26 +425,9 @@ describe('Dropdown component', () => {
     })
   })
 
-  describe('Computeds', () => {
-    describe('open computed', () => {
-      it('should not update internalOpen when isOpen prop is set (controlled)', async () => {
-        const wrapper = mount(VkDropdown, {
-          props: {
-            isOpen: true,
-            items: []
-          }
-        })
-
-        await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-
-        expect(wrapper.props('isOpen')).toBe(true)
-      })
-    })
-  })
-
   describe('Emits', () => {
-    it('should emit click event', async () => {
-      const wrapper = mount(VkDropdown, {
+    it('should emit itemClick when an item is clicked', async () => {
+      wrapper = mount(VkDropdown, {
         props: {
           items
         }
@@ -438,31 +436,52 @@ describe('Dropdown component', () => {
       await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
       await wrapper.find('.vk-dropdown__item-button').trigger('click')
 
-      expect(wrapper.emitted()).toHaveProperty('itemClick')
+      expect(wrapper.emitted('itemClick')).toBeTruthy()
     })
 
-    it('should not emit click event when the clicked item is disabled', async () => {
-      const wrapper = mount(VkDropdown, {
+    it('should not emit itemClick when a disabled item is clicked', async () => {
+      wrapper = mount(VkDropdown, {
         props: {
-          items: [{ key: 'edit', title: 'Edit', icon: 'edit', disabled: true }]
+          items: [
+            {
+              key: 'edit',
+              title: 'Edit',
+              icon: 'edit',
+              disabled: true
+            }
+          ]
         }
       })
+
       await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
       await wrapper.find('.vk-dropdown__item-button').trigger('click')
 
-      expect(wrapper.emitted()).not.toHaveProperty('itemClick')
+      expect(wrapper.emitted('itemClick')).toBeUndefined()
     })
 
-    it('should close the dropdown when popover emits close', async () => {
-      const wrapper = mount(VkDropdown, {
-        props: { items }
+    it('should emit update:isOpen false when an item is clicked', async () => {
+      wrapper = mount(VkDropdown, {
+        props: {
+          items
+        }
       })
 
       await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
-      await wrapper.findComponent({ name: 'VkPopover' }).vm.$emit('close')
-      await flushPromises()
+      await wrapper.find('.vk-dropdown__item-button').trigger('click')
 
-      expect(wrapper.find('.vk-dropdown__items-menu').exists()).toBe(false)
+      expect(wrapper.emitted('update:isOpen')?.at(-1)).toEqual([false])
+    })
+
+    it('should emit update:isOpen when popover emits update:isOpen', async () => {
+      wrapper = mount(VkDropdown, {
+        props: {
+          items
+        }
+      })
+
+      await wrapper.findComponent({ name: 'VkPopover' }).vm.$emit('update:isOpen', true)
+
+      expect(wrapper.emitted('update:isOpen')).toEqual([[true]])
     })
   })
 })

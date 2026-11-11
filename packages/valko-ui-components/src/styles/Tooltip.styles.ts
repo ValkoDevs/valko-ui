@@ -5,6 +5,9 @@ const tooltip = tv({
     container: [
       'vk-tooltip'
     ],
+    triggerContainer: [
+      'vk-tooltip_trigger-container'
+    ],
     tip: [
       'vk-tooltip_tip',
       'w-fit',

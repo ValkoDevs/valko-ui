@@ -46,7 +46,7 @@ const docSection = tv({
       'border',
       'border-outlined',
       'rounded',
-      'overflow-x-auto'
+      'overflow-x-visible'
     ],
     playgroundForm: [
       'w-full',
