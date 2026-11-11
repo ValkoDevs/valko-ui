@@ -2,6 +2,7 @@
 import { ref, computed, watch, nextTick } from 'vue'
 import type { MenuProps, MenuItem } from '#valkoui/types/Menu'
 import styles from '#valkoui/styles/Menu.styles.ts'
+import useRipple from '#valkoui/composables/useRipple'
 
 defineOptions({ name: 'VkMenu' })
 
@@ -40,6 +41,12 @@ const onItemClick = (item: MenuItem) => {
   if (item.disabled) return
   emit('itemClick', item)
   item.onClick?.()
+}
+
+const createRipple = useRipple()
+
+const onItemMouseDown = (item: MenuItem, event: MouseEvent | TouchEvent) => {
+  if (!item.disabled) createRipple(event)
 }
 
 const focusItem = (index: number) => {
@@ -113,6 +120,8 @@ const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
               role="menuitem"
               :tabindex="focusedKey === item.key ? 0 : -1"
               @click.prevent="onItemClick(item)"
+              @mousedown="onItemMouseDown(item, $event)"
+              @touchstart="onItemMouseDown(item, $event)"
               @keydown="(e: KeyboardEvent) => handleKeyDown(e, item)"
             >
               {{ item.text }}
