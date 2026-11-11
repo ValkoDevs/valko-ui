@@ -12,8 +12,7 @@ const form = ref<NotificationProps>({
   duration: 3000,
   close: false,
   newWindow: false,
-  destination: '',
-  stopOnFocus: false
+  destination: ''
 })
 
 const positionOptions: SelectOption<HorizontalAlign>[] = [
@@ -136,15 +135,6 @@ const notificationProps: PropData[] = [
     apiType: 'custom-string'
   },
   {
-    key: 'stopOnFocusProp',
-    prop: 'stopOnFocus',
-    required: false,
-    description: 'To stop timer when hovered over the Notification (Only if duration is set).',
-    values: 'boolean',
-    default: 'false',
-    apiType: 'primitive'
-  },
-  {
     key: 'offsetProp',
     prop: 'offset',
     required: false,
@@ -216,7 +206,6 @@ const createNotification = (props: NotificationProps) => {
     newWindow: props.newWindow,
     destination: props.destination,
     offset: props.offset,
-    stopOnFocus: props.stopOnFocus,
     duration: props.duration,
     onClick: props.onClick
   })
@@ -226,6 +215,8 @@ const scriptCode = `<script setup lang="ts">
 import type { NotificationProps } from '#valkoui'
 import { useNotification } from '#valkoui'
 
+// Notifications render inside a single <VkNotificationProvider />:
+// mount it once in your app root (registered globally by createValkoUI).
 const createNotification = (props: NotificationProps) => useNotification(props)
 <\u002Fscript>
 `
@@ -300,16 +291,6 @@ const closeSnippet = `
 </template>
 `
 
-const stopOnFocusSnippet = `
-<template>
-  <vk-button
-    @click="createNotification({ text: Stop On Focus, stopOnFocus: true })"
-  >
-    Stop On Focus
-  </vk-button>
-</template>
-`
-
 const styles = {
   colors: {
     slotContainer: [
@@ -364,7 +345,6 @@ const styles = {
           newWindow: form.newWindow,
           destination: form.destination,
           offset: form.offset,
-          stopOnFocus: form.stopOnFocus,
           duration: form.duration
         })"
       >
@@ -420,10 +400,6 @@ const styles = {
       <vk-checkbox
         v-model="form.close"
         label="Close"
-      />
-      <vk-checkbox
-        v-model="form.stopOnFocus"
-        label="Stop on focus"
       />
     </template>
 
@@ -542,16 +518,6 @@ const styles = {
 
         <template #code>
           <code-block :code="`${scriptCode}${closeSnippet}`" />
-        </template>
-      </example-section>
-
-      <example-section title="Stop on Focus">
-        <vk-button @click="createNotification({ text: 'Stop on Focus', stopOnFocus: true })">
-          Stop on Focus
-        </vk-button>
-
-        <template #code>
-          <code-block :code="`${scriptCode}${stopOnFocusSnippet}`" />
         </template>
       </example-section>
     </template>
