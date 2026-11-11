@@ -1,6 +1,14 @@
 import type { VariantsAlt, Sizes, Colors, Shapes, AriaAttributes } from './common'
 import type { RangeSlots } from '../styles/Range.styles'
 
+export type Thumb = 'min' | 'max'
+
+export type ThumbHandlers = {
+  onMouseDown: (event: MouseEvent) => void
+  onTouchStart: (event: TouchEvent) => void
+  onKeyDown: (event: KeyboardEvent) => void
+}
+
 export interface Label {
   value: number;
   label: string;
