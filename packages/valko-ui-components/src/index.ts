@@ -61,6 +61,11 @@ export * from '#valkoui/types/Time'
 export * from '#valkoui/types/Timepicker'
 export * from '#valkoui/types/Tooltip'
 
+////////////////////////
+////// REKA UTILS //////
+////////////////////////
+export { ConfigProvider, useDirection, useId, useLocale } from 'reka-ui'
+
 /////////////////////
 ////// SCRIPTS //////
 /////////////////////
