@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, watch, nextTick } from 'vue'
+import { ref, computed, watch, nextTick, type Ref, type ComponentPublicInstance } from 'vue'
 import type { MenuProps, MenuItem } from '#valkoui/types/Menu'
 import styles from '#valkoui/styles/Menu.styles.ts'
 
@@ -17,15 +17,18 @@ const emit = defineEmits(['itemClick'])
 
 const s = computed(() => styles(props))
 
-const groups = props.items.reduce((acc: Set<string>, item: MenuItem) => {
-  if (item.group) acc.add(item.group)
-  else acc.add('default')
-  return acc
-}, new Set(['default']) as Set<string>)
+const groupedItems = computed(() => props.items.reduce((groups: Record<string, MenuItem[]>, item: MenuItem) => {
+  const group = item.group || 'default'
+  groups[group] ??= []
+  groups[group].push(item)
+  return groups
+}, { default: [] }))
+
+const orderedItems = computed(() => Object.values(groupedItems.value).flat())
 
 const focusedIndex = ref(-1)
 
-const navigableItems = computed(() => props.items.filter(item => !item.disabled))
+const navigableItems = computed(() => orderedItems.value.filter(item => !item.disabled))
 
 watch(
   () => [props.active, props.items],
@@ -42,11 +45,21 @@ const onItemClick = (item: MenuItem) => {
   item.onClick?.()
 }
 
+const itemRefs: Ref<Record<string, HTMLElement | null>> = ref({})
+
+const setItemRef = (key: string | number) => (el: Element | ComponentPublicInstance | null) => {
+  if (el instanceof HTMLElement) itemRefs.value[key] = el
+}
+
 const focusItem = (index: number) => {
   focusedIndex.value = index
   nextTick(() => {
-    const allButtons = document.querySelectorAll('[role="menuitem"]')
-    if (allButtons[index]) (allButtons[index] as HTMLElement).focus()
+    const key = navigableItems.value[index]?.key
+    const el = key != null ? itemRefs.value[key] : undefined
+    if (el) {
+      el.focus()
+      el.scrollIntoView({ block: 'nearest' })
+    }
   })
 }
 
@@ -80,7 +93,7 @@ const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
 <template>
   <div>
     <div
-      v-for="group in groups"
+      v-for="(groupItems, group) in groupedItems"
       :key="group"
     >
       <span
@@ -96,7 +109,7 @@ const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
         :aria-label="group !== 'default' ? group : 'Menu'"
       >
         <li
-          v-for="item in items.filter((i: MenuItem) => i.group === group)"
+          v-for="item in groupItems"
           :key="item.key"
           :class="s.item({ class: styleSlots?.item })"
           role="none"
@@ -106,6 +119,7 @@ const handleKeyDown = (e: KeyboardEvent, item: MenuItem) => {
             :item="item"
           >
             <button
+              :ref="setItemRef(item.key)"
               :class="s.content({ class: styleSlots?.content })"
               :data-active="item.key === active"
               :data-disabled="item.disabled"

@@ -14,6 +14,17 @@ describe('Menu component', () => {
 
   let wrapper: VueWrapper
 
+  // jsdom does not implement scrollIntoView; keyboard navigation triggers it.
+  const originalScrollIntoView = window.HTMLElement.prototype.scrollIntoView
+
+  beforeAll(() => {
+    window.HTMLElement.prototype.scrollIntoView = function () {}
+  })
+
+  afterAll(() => {
+    window.HTMLElement.prototype.scrollIntoView = originalScrollIntoView
+  })
+
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(() => {
@@ -582,6 +593,90 @@ describe('Menu component', () => {
         await nextTick()
 
         expect(focused!.attributes('data-active')).toContain('true')
+      })
+    })
+
+    describe('Render order alignment', () => {
+      afterEach(() => {
+        if (wrapper) wrapper.unmount()
+      })
+
+      it('should navigate in rendered order when groups are interleaved', async () => {
+        const interleaved: MenuItem[] = [
+          { key: 'a1', group: 'A', text: 'A1' },
+          { key: 'b1', group: 'B', text: 'B1' },
+          { key: 'a2', group: 'A', text: 'A2' }
+        ]
+
+        wrapper = mount(VkMenu, {
+          props: {
+            items: interleaved,
+            active: 'a1'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+        expect(buttons.map(b => b.text())).toEqual(['A1', 'A2', 'B1'])
+
+        await buttons[0].trigger('keydown', { key: 'ArrowDown' })
+        await nextTick()
+
+        expect(buttons[1].attributes('tabindex')).toBe('0')
+        expect(buttons[2].attributes('tabindex')).toBe('-1')
+      })
+
+      it('should scroll the focused item into view on keyboard navigation', async () => {
+        const scrollSpy = vi.spyOn(window.HTMLElement.prototype, 'scrollIntoView')
+
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'get-started'
+          }
+        })
+
+        await nextTick()
+        const buttons = wrapper.findAll('.vk-menu__content')
+        await buttons[0].trigger('keydown', { key: 'ArrowDown' })
+        await nextTick()
+
+        expect(scrollSpy).toHaveBeenCalledTimes(1)
+        scrollSpy.mockRestore()
+      })
+
+      it('should recompute groups when items prop changes', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'get-started'
+          }
+        })
+
+        await nextTick()
+        expect(wrapper.findAll('.vk-menu__group').map(g => g.text())).toEqual(['General', 'Layout', 'Forms'])
+
+        await wrapper.setProps({
+          items: [...menuItems, { key: 'new', group: 'New Group', text: 'New Item' }]
+        })
+        await nextTick()
+
+        expect(wrapper.findAll('.vk-menu__group').map(g => g.text())).toEqual(['General', 'Layout', 'Forms', 'New Group'])
+      })
+
+      it('should render items without a group under the default group', async () => {
+        const ungrouped: MenuItem[] = [{ key: 'no-group', text: 'No Group' }]
+
+        wrapper = mount(VkMenu, {
+          props: {
+            items: ungrouped,
+            active: 'no-group'
+          }
+        })
+
+        await nextTick()
+        expect(wrapper.find('.vk-menu__group').exists()).toBe(false)
+        expect(wrapper.find('.vk-menu__content').text()).toBe('No Group')
       })
     })
   })
