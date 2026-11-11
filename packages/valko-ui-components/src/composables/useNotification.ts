@@ -1,111 +1,102 @@
-import Toastify from 'toastify-js'
-import type { NotificationProps } from '#valkoui/types/Notification.ts'
-import styles from '#valkoui/styles/Notification.styles.ts'
+import { createToastManager } from 'reka-ui'
+import type { GlobalToastManager } from 'reka-ui'
+import type { NotificationProps, VerticalAlign, HorizontalAlign } from '#valkoui/types/Notification.ts'
 
-const useNotification = (props: NotificationProps) => {
+export type NotificationPlacement = `${VerticalAlign}-${HorizontalAlign}`
+export type ToastManager = GlobalToastManager
+
+// One manager per viewport corner: Reka's ToastViewport owns the fixed
+// positioning, and each toast's gravity/position pair maps to one of them.
+export const notificationPlacements: NotificationPlacement[] = [
+  'top-left',
+  'top-right',
+  'bottom-left',
+  'bottom-right'
+]
+
+// Managers and provider state live on globalThis because the composable and
+// the provider component can end up in different module instances (bundled
+// package entry vs. per-file dist modules) and must share the same state.
+interface NotificationRegistry {
+  managers: Map<NotificationPlacement, ToastManager>;
+  isProviderMounted: boolean;
+  hasWarnedNoProvider: boolean;
+}
+
+const registryKey = '__valkoUiNotificationRegistry__'
+
+const getRegistry = (): NotificationRegistry => {
+  const host = globalThis as typeof globalThis & { [registryKey]?: NotificationRegistry }
+  return host[registryKey] ??= {
+    managers: new Map(),
+    isProviderMounted: false,
+    hasWarnedNoProvider: false
+  }
+}
+
+export const getToastManager = (placement: NotificationPlacement): ToastManager => {
+  const { managers } = getRegistry()
+  let manager = managers.get(placement)
+  if (!manager) {
+    manager = createToastManager()
+    managers.set(placement, manager)
+  }
+  return manager
+}
+
+export const setNotificationProviderMounted = (value: boolean) => {
+  const registry = getRegistry()
+  registry.isProviderMounted = value
+  if (value) registry.hasWarnedNoProvider = false
+}
+
+const defaultDuration = 3000
+
+export interface NotificationHandle {
+  showToast: () => void;
+  hideToast: () => void;
+}
+
+const useNotification = (props: NotificationProps): NotificationHandle => {
   if (!props.text) throw new Error('Property "text" is required')
 
-  let notification: ReturnType<typeof Toastify> | null = null
+  const gravity: VerticalAlign = props.gravity ?? 'top'
+  const position: HorizontalAlign = props.position ?? 'right'
+  const manager = getToastManager(`${gravity}-${position}`)
 
-  const defaultProps = {
-    color: props.color ?? 'primary',
-    variant: props.variant ?? 'filled',
-    shape: props.shape ?? 'soft',
-    size: props.size ?? 'md'
+  if (!getRegistry().isProviderMounted && !getRegistry().hasWarnedNoProvider) {
+    console.warn('[valko-ui] useNotification was called without a mounted <VkNotificationProvider>. Toasts are queued and shown once the provider is mounted.')
+    getRegistry().hasWarnedNoProvider = true
   }
 
-  const styleProps = {
-    color: defaultProps.color,
-    variant: defaultProps.variant,
-    shape: defaultProps.shape,
-    size: defaultProps.size,
-    styleSlots: props.styleSlots
-  }
-
-  const classes = styles(styleProps)
-
-  const defaultOnClick = () => notification?.hideToast()
-
-  const notificationNode = document.createElement('div')
-  notificationNode.className = classes.container({ class: props.styleSlots?.container })
-
-  const content = document.createElement('div')
-  content.className = classes.content({ class: props.styleSlots?.content })
-  content.innerText = props.text
-  notificationNode.appendChild(content)
-
-  const progressBarContainer = document.createElement('div')
-  progressBarContainer.className = classes.progressbar({ class: props.styleSlots?.progressbar })
-  notificationNode.appendChild(progressBarContainer)
-
-  if (props.close) {
-    const closeButton = document.createElement('button')
-    closeButton.onclick = () => notification?.hideToast()
-
-    const customIcon = document.createElement('i')
-    customIcon.className = classes.icon({ class: props.styleSlots?.icon })
-
-    closeButton.appendChild(customIcon)
-    notificationNode.appendChild(closeButton)
-  }
-
-  notification = Toastify({
-    node: notificationNode,
-    className: classes.notification({ class: props.styleSlots?.notification }),
-    duration: props.duration || 3000,
-    destination: props.destination,
-    newWindow: props.newWindow || false,
-    gravity: props.gravity || 'top',
-    position: props.position || 'right',
-    stopOnFocus: props.stopOnFocus === false ? false : true,
-    offset: props.offset || undefined,
-    close: false,
-    onClick: props.onClick || defaultOnClick
-  })
-
-  let animationStartTime: number
-  let isPaused = false
-
-  const updateProgress = () => {
-    const currentTime = Date.now()
-    const elapsedTime = currentTime - animationStartTime
-    const duration = props.duration || 3000
-    const progress = Math.max(0, 100 - (elapsedTime / duration) * 100)
-
-    if (progressBarContainer) {
-      progressBarContainer.style.width = `${progress}%`
-    }
-
-    if (!isPaused && elapsedTime < duration) {
-      requestAnimationFrame(updateProgress)
+  const options = {
+    duration: props.duration || defaultDuration,
+    data: {
+      color: props.color ?? 'primary',
+      variant: props.variant ?? 'filled',
+      shape: props.shape ?? 'soft',
+      size: props.size ?? 'md',
+      text: props.text,
+      close: props.close ?? false,
+      offset: props.offset,
+      styleSlots: props.styleSlots,
+      click: () => {}
     }
   }
 
-  const startProgress = () => {
-    animationStartTime = Date.now()
-    isPaused = false
-    updateProgress()
+  let id = manager.add(options)
+
+  options.data.click = props.onClick
+    ?? (props.destination
+      ? () => window.open(props.destination, props.newWindow ? '_blank' : '_self')
+      : () => manager.close(id))
+
+  return {
+    // Reka toasts render as soon as they are added; adding the same id
+    // again reopens and restarts it.
+    showToast: () => { id = manager.add(options) },
+    hideToast: () => manager.close(id)
   }
-
-  const stopProgress = () => {
-    animationStartTime = Date.now()
-    isPaused = true
-    updateProgress()
-  }
-
-  if (props.stopOnFocus) {
-    notificationNode.addEventListener('mouseover', () => {
-      stopProgress()
-    })
-
-    notificationNode.addEventListener('mouseleave', () => {
-      startProgress()
-    })
-  }
-
-  notification.showToast()
-  startProgress()
-  return notification
 }
 
 export default useNotification

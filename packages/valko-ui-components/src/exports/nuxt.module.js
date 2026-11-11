@@ -26,7 +26,7 @@ export default defineNuxtModule({
     // Transpile runtime
     const runtimeDir = resolve('./')
     nuxt.options.build.transpile.push(runtimeDir)
-    nuxt.options.build.transpile.push('@popperjs/core', '@headlessui/vue')
+    nuxt.options.build.transpile.push('@headlessui/vue', 'reka-ui')
 
     nuxt.options.alias['#valkoui'] = runtimeDir
 

@@ -32,7 +32,6 @@
     "@nuxt/kit": "^4.4.7",
     "@tailwindcss/postcss": "^4.3.0",
     "@types/node": "^25.9.1",
-    "@types/toastify-js": "^1.12.4",
     "@valko-ui/eslint-config": "*",
     "@vitejs/plugin-vue": "^6.0.8",
     "@vitest/coverage-istanbul": "^4.1.10",
@@ -54,7 +53,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
-    "tailwind-merge": "^3.6.0",
-    "toastify-js": "^1.12.0"
+    "reka-ui": "^2.11.0",
+    "tailwind-merge": "^3.6.0"
   }
 }

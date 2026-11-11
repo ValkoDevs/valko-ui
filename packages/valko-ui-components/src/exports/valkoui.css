@@ -92,6 +92,8 @@
   --animate-cicle: cicle 1s infinite linear;
   --animate-ripple: ripple 0.4s ease-out;
   --animate-pop: pop 0.4s ease-in-out;
+  --animate-vk-toast-in: vk-toast-in 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+  --animate-vk-toast-out: vk-toast-out 0.3s ease-in forwards;
 
   @keyframes progress {
     0% { clip-path: inset(0 100% 0 0) }
@@ -129,6 +131,23 @@
     }
     100% {
       transform: scale(1);
+    }
+  }
+
+  @keyframes vk-toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(var(--vk-toast-enter-y, 0));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes vk-toast-out {
+    to {
+      opacity: 0;
     }
   }
 }
@@ -210,81 +229,29 @@ html.dark {
   --color-disabled-gradient-end: oklch(16.6% 0.034 264.665);
 }
 
-@utility toastify {
-  display: inline-block;
-  position: fixed;
+/* Mobile fallback: center notifications on very narrow screens (kept from
+   the toastify behavior this replaces) */
+@media only screen and (max-width: 360px) {
+  .vk-notification__viewport[data-placement$='-left'],
+  .vk-notification__viewport[data-placement$='-right'] {
+    inset-inline: 0;
+    margin-inline: auto;
+    max-width: fit-content;
+  }
+}
+
+/* Reka Toast swipe states; offsets arrive as CSS variables set by Reka */
+.vk-notification[data-swipe='move'] {
+  transform: translate3d(var(--reka-toast-swipe-move-x, 0), var(--reka-toast-swipe-move-y, 0), 0);
+}
+
+.vk-notification[data-swipe='end'] {
+  transform: translate3d(var(--reka-toast-swipe-end-x, 0), var(--reka-toast-swipe-end-y, 0), 0);
   opacity: 0;
-  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
-  cursor: pointer;
-  z-index: 2147483647;
-
-  &.on {
-    opacity: 1;
-  }
 }
 
-@utility on {
-  &.toastify {
-    opacity: 1;
-  }
-}
-
-@utility toast-close {
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-}
-
-@utility toastify-right {
-  right: 15px;
-
-  @media only screen and (max-width: 360px) {
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    max-width: fit-content;
-  }
-}
-
-@utility toastify-left {
-  left: 15px;
-
-  @media only screen and (max-width: 360px) {
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    max-width: fit-content;
-  }
-}
-
-@utility toastify-top {
-  top: -150px;
-}
-
-@utility toastify-bottom {
-  bottom: -150px;
-}
-
-@utility toastify-rounded {
-  border-radius: 25px;
-}
-
-@utility toastify-avatar {
-  width: 1.5em;
-  height: 1.5em;
-  margin: -7px 5px;
-  border-radius: 2px;
-}
-
-@utility toastify-center {
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  max-width: fit-content;
-  max-width: -moz-fit-content;
+.vk-notification[data-swipe='cancel'] {
+  transform: translate3d(0, 0, 0);
 }
 
 @layer base {

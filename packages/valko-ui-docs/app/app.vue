@@ -13,6 +13,7 @@ const theme = useCookie('theme', {
     </Head>
 
     <Body>
+      <VkNotificationProvider />
       <NuxtLayout>
         <NuxtPage />
       </NuxtLayout>

@@ -1,4 +1,5 @@
 import type { App, Component, Plugin } from 'vue'
+import { ConfigProvider } from 'reka-ui'
 import * as components from '../components/index.ts'
 
 export type ValkoUIOptions = {
@@ -24,6 +25,10 @@ export const createValkoUI = (createOptions: Partial<ValkoUIOptions> = {}): Plug
 
       app.component(`${options.prefix}${name}`, component)
     }
+
+    // Reka ConfigProvider: consumers wrap their app with <VkConfigProvider> to
+    // set dir/locale for all Reka-backed primitives.
+    app.component(`${options.prefix}ConfigProvider`, ConfigProvider)
   }
 })
 
