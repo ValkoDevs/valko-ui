@@ -11,6 +11,7 @@ const timepicker = tv({
     ],
     content: [
       'vk-timepicker__content',
+      'w-max',
       'p-4',
       'bg-surface-container-high',
       'shadow-el2',
@@ -24,7 +25,11 @@ const timepicker = tv({
     variant: {
       filled: {},
       ghost: {},
-      outlined: {}
+      outlined: {
+        container: [
+          'bg-inherit'
+        ]
+      }
     },
     color: {
       primary: {},
