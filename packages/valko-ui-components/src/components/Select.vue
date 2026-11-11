@@ -36,7 +36,7 @@ const showValue = computed(
   () => Array.isArray(props.modelValue)
     ? props.modelValue.map(
       (val: string | number) => showMap[`${val}`]
-    ).join(', ')
+    ).filter(Boolean).join(', ')
     : showMap[`${props.modelValue}`]
 )
 
@@ -90,7 +90,9 @@ const clearSelection = () => {
 const highlightedIndex = ref(-1)
 
 const setItemRef = (index: number) => (el: Element | ComponentPublicInstance | null) => {
-  itemRefs.value[index] = el instanceof HTMLElement ? el : null
+  // Vue invokes the previous ref callback with null on re-renders, which would
+  // overwrite valid entries; only keep real elements.
+  if (el instanceof HTMLElement) itemRefs.value[index] = el
 }
 
 const handleKeyDown = (e: KeyboardEvent) => {
