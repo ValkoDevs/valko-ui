@@ -19,6 +19,7 @@ const radio = tv({
       'cursor-pointer'
     ],
     stateLayer: [
+      'group',
       'hover:bg-state-hover',
       'focus:bg-state-focus',
       'active:bg-state-active'
@@ -153,8 +154,8 @@ const radio = tv({
           'border-disabled',
           'opacity-50',
           'cursor-not-allowed',
-          'data-[checked=true]:border-disabled',
-          'data-[checked=true]:bg-disabled'
+          'group-data-[state=checked]:border-disabled',
+          'group-data-[state=checked]:bg-disabled'
         ],
         icon: [
           'text-on-disabled'
@@ -215,10 +216,8 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-primary',
-          'data-[checked=true]:border-primary',
-          'data-[indeterminate=true]:border-primary',
-          'data-[indeterminate=true]:bg-primary'
+          'group-data-[state=checked]:bg-primary',
+          'group-data-[state=checked]:border-primary'
         ]
       }
     },
@@ -228,10 +227,8 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-secondary',
-          'data-[checked=true]:border-secondary',
-          'data-[indeterminate=true]:border-secondary',
-          'data-[indeterminate=true]:bg-secondary'
+          'group-data-[state=checked]:bg-secondary',
+          'group-data-[state=checked]:border-secondary'
         ]
       }
     },
@@ -241,10 +238,8 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-positive',
-          'data-[checked=true]:border-positive',
-          'data-[indeterminate=true]:border-positive',
-          'data-[indeterminate=true]:bg-positive'
+          'group-data-[state=checked]:bg-positive',
+          'group-data-[state=checked]:border-positive'
         ]
       }
     },
@@ -254,10 +249,8 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-accent',
-          'data-[checked=true]:border-accent',
-          'data-[indeterminate=true]:border-accent',
-          'data-[indeterminate=true]:bg-accent'
+          'group-data-[state=checked]:bg-accent',
+          'group-data-[state=checked]:border-accent'
         ]
       }
     },
@@ -267,10 +260,8 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-warning',
-          'data-[checked=true]:border-warning',
-          'data-[indeterminate=true]:border-warning',
-          'data-[indeterminate=true]:bg-warning'
+          'group-data-[state=checked]:bg-warning',
+          'group-data-[state=checked]:border-warning'
         ]
       }
     },
@@ -280,10 +271,8 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-negative',
-          'data-[checked=true]:border-negative',
-          'data-[indeterminate=true]:border-negative',
-          'data-[indeterminate=true]:bg-negative'
+          'group-data-[state=checked]:bg-negative',
+          'group-data-[state=checked]:border-negative'
         ]
       }
     },
@@ -294,8 +283,7 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-primary',
-          'data-[indeterminate=true]:border-primary'
+          'group-data-[state=checked]:border-primary'
         ],
         icon: [
           'text-primary'
@@ -308,8 +296,7 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-secondary',
-          'data-[indeterminate=true]:border-secondary'
+          'group-data-[state=checked]:border-secondary'
         ],
         icon: [
           'text-secondary'
@@ -322,8 +309,7 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-positive',
-          'data-[indeterminate=true]:border-positive'
+          'group-data-[state=checked]:border-positive'
         ],
         icon: [
           'text-positive'
@@ -336,8 +322,7 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-accent',
-          'data-[indeterminate=true]:border-accent'
+          'group-data-[state=checked]:border-accent'
         ],
         icon: [
           'text-accent'
@@ -350,8 +335,7 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-warning',
-          'data-[indeterminate=true]:border-warning'
+          'group-data-[state=checked]:border-warning'
         ],
         icon: [
           'text-warning'
@@ -364,8 +348,7 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:border-negative',
-          'data-[indeterminate=true]:border-negative'
+          'group-data-[state=checked]:border-negative'
         ],
         icon: [
           'text-negative'
@@ -379,8 +362,7 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-primary-container',
-          'data-[indeterminate=true]:bg-primary-container'
+          'group-data-[state=checked]:bg-primary-container'
         ],
         icon: [
           'text-on-primary-container'
@@ -393,8 +375,7 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-secondary-container',
-          'data-[indeterminate=true]:bg-secondary-container'
+          'group-data-[state=checked]:bg-secondary-container'
         ],
         icon: [
           'text-on-secondary-container'
@@ -407,8 +388,7 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-positive-container',
-          'data-[indeterminate=true]:bg-positive-container'
+          'group-data-[state=checked]:bg-positive-container'
         ],
         icon: [
           'text-on-positive-container'
@@ -421,8 +401,7 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-accent-container',
-          'data-[indeterminate=true]:bg-accent-container'
+          'group-data-[state=checked]:bg-accent-container'
         ],
         icon: [
           'text-on-accent-container'
@@ -435,8 +414,7 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-warning-container',
-          'data-[indeterminate=true]:bg-warning-container'
+          'group-data-[state=checked]:bg-warning-container'
         ],
         icon: [
           'text-on-warning-container'
@@ -449,8 +427,7 @@ const radio = tv({
       disabled: false,
       class: {
         radio: [
-          'data-[checked=true]:bg-negative-container',
-          'data-[indeterminate=true]:bg-negative-container'
+          'group-data-[state=checked]:bg-negative-container'
         ],
         icon: [
           'text-on-negative-container'
