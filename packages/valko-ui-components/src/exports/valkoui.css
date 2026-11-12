@@ -112,6 +112,8 @@
   --animate-vk-drawer-in-right: vk-slide-in-right 300ms ease-out;
   --animate-vk-drawer-out-right: vk-slide-out-right 300ms ease-in;
   --animate-vk-drawer-dialog-leave: vk-dialog-leave 300ms ease-in;
+  --animate-vk-collapse-open: vk-collapse-open 0.2s ease-out;
+  --animate-vk-collapse-out: vk-collapse-out 0.2s ease-in;
 
   @keyframes vk-popover-in {
     0% { opacity: 0; transform: scale(0.95); }
@@ -260,6 +262,28 @@
   @keyframes vk-slide-out-right {
     from { transform: translateX(0); }
     to { transform: translateX(100%); }
+  }
+
+  @keyframes vk-collapse-open {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--reka-collapsible-content-height, auto);
+      opacity: 1;
+    }
+  }
+
+  @keyframes vk-collapse-out {
+    from {
+      height: var(--reka-collapsible-content-height, auto);
+      opacity: 1;
+    }
+    to {
+      height: 0;
+      opacity: 0;
+    }
   }
 }
 

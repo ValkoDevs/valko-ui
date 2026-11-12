@@ -154,6 +154,21 @@ describe('CollapseItem component', () => {
         childWrapper.find('.vk-collapse-item__button').trigger('click')
         await nextTick()
         expect(childWrapper.find('.vk-collapse-item__icon').attributes('data-open')).toBe('true')
+        expect(childWrapper.find('.vk-collapse-item__button').attributes('data-state')).toBe('open')
+      })
+
+      it('should close when clicked again', async () => {
+        wrapper = mount(VkCollapse, {
+          slots: {
+            default: VkCollapseItem
+          }
+        })
+
+        childWrapper = wrapper.findComponent(VkCollapseItem)
+        await childWrapper.find('.vk-collapse-item__button').trigger('click')
+        await childWrapper.find('.vk-collapse-item__button').trigger('click')
+        await nextTick()
+        expect(childWrapper.find('.vk-collapse-item__button').attributes('data-state')).toBe('closed')
       })
     })
 
@@ -217,12 +232,17 @@ describe('CollapseItem component', () => {
       const wrapper = mount(VkCollapseItem, {
         props: {
           title: 'Test'
+        },
+        slots: {
+          default: 'body'
         }
       })
 
       await wrapper.find('button').trigger('click')
+      await nextTick()
+      await nextTick()
 
-      expect(wrapper.find('.vk-collapse-item__panel').exists()).toBe(false)
+      expect(wrapper.find('.vk-collapse-item__panel').text()).not.toContain('body')
     })
   })
 })
