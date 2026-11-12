@@ -226,61 +226,75 @@ describe('Pagination component', () => {
     })
   })
 
-  describe('When visible pages changes', () => {
-    it('should return all pages when total pages are 7 or less', () => {
-      const wrapper = mount(VkPagination, { props: { pages: 5, modelValue: 3 } })
-      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+  describe('When visible pages change', () => {
+    const renderedPages = (target: VueWrapper) => target
+      .findAll('[data-type="page"]')
+      .map(button => +button.text().trim())
 
-      expect(visiblePages).toEqual([1, 2, 3, 4, 5])
+    const ellipsisCount = (target: VueWrapper) => target.findAll('[data-type="ellipsis"]').length
+
+    it('should render all pages when total pages are 7 or less', () => {
+      const target = mount(VkPagination, { props: { pages: 5, modelValue: 3 } })
+
+      expect(renderedPages(target)).toEqual([1, 2, 3, 4, 5])
+      expect(ellipsisCount(target)).toBe(0)
     })
 
-    it('should return the first five pages and an ellipsis when current page is 1', () => {
-      const wrapper = mount(VkPagination, { props: { pages: 10, modelValue: 1 } })
-      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+    it('should render the first five pages and an ellipsis when current page is 1', () => {
+      const target = mount(VkPagination, { props: { pages: 10, modelValue: 1 } })
 
-      expect(visiblePages).toEqual([1, 2, 3, 4, 5, '...', 10])
+      expect(renderedPages(target)).toEqual([1, 2, 3, 4, 5, 10])
+      expect(ellipsisCount(target)).toBe(1)
     })
 
-    it('should return the first five pages and an ellipsis when current page is 3', () => {
-      const wrapper = mount(VkPagination, { props: { pages: 10, modelValue: 3 } })
-      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+    it('should render the first five pages and an ellipsis when current page is 3', () => {
+      const target = mount(VkPagination, { props: { pages: 10, modelValue: 3 } })
 
-      expect(visiblePages).toEqual([1, 2, 3, 4, 5, '...', 10])
+      expect(renderedPages(target)).toEqual([1, 2, 3, 4, 5, 10])
+      expect(ellipsisCount(target)).toBe(1)
     })
 
-    it('should return the last five pages and an ellipsis when current page is close to the end', () => {
-      const wrapper = mount(VkPagination, { props: { pages: 10, modelValue: 9 } })
-      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+    it('should render the last five pages and an ellipsis when current page is close to the end', () => {
+      const target = mount(VkPagination, { props: { pages: 10, modelValue: 9 } })
 
-      expect(visiblePages).toEqual([1, '...', 6, 7, 8, 9, 10])
+      expect(renderedPages(target)).toEqual([1, 6, 7, 8, 9, 10])
+      expect(ellipsisCount(target)).toBe(1)
     })
 
-    it('should return the last five pages and an ellipsis when current page is the last one', () => {
-      const wrapper = mount(VkPagination, { props: { pages: 10, modelValue: 10 } })
-      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+    it('should render the last five pages and an ellipsis when current page is the last one', () => {
+      const target = mount(VkPagination, { props: { pages: 10, modelValue: 10 } })
 
-      expect(visiblePages).toEqual([1, '...', 6, 7, 8, 9, 10])
+      expect(renderedPages(target)).toEqual([1, 6, 7, 8, 9, 10])
+      expect(ellipsisCount(target)).toBe(1)
     })
 
-    it('should return middle pages with ellipses when current page is in the middle', () => {
-      const wrapper = mount(VkPagination, { props: { pages: 10, modelValue: 5 } })
-      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+    it('should render middle pages with two ellipses when current page is in the middle', () => {
+      const target = mount(VkPagination, { props: { pages: 10, modelValue: 5 } })
 
-      expect(visiblePages).toEqual([1, '...', 4, 5, 6, '...', 10])
+      expect(renderedPages(target)).toEqual([1, 4, 5, 6, 10])
+      expect(ellipsisCount(target)).toBe(2)
     })
 
-    it('should return correct pages when total pages are more than 7 and current page is near the start', () => {
-      const wrapper = mount(VkPagination, { props: { pages: 8, modelValue: 2 } })
-      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+    it('should render the first five pages and an ellipsis when current page is near the start', () => {
+      const target = mount(VkPagination, { props: { pages: 8, modelValue: 2 } })
 
-      expect(visiblePages).toEqual([1, 2, 3, 4, 5, '...', 8])
+      expect(renderedPages(target)).toEqual([1, 2, 3, 4, 5, 8])
+      expect(ellipsisCount(target)).toBe(1)
     })
 
-    it('should return correct pages when total pages are more than 7 and current page is near the end', () => {
-      const wrapper = mount(VkPagination, { props: { pages: 8, modelValue: 7 } })
-      const visiblePages = (wrapper.vm as unknown as { visiblePages: (number | string)[] }).visiblePages
+    it('should render the last five pages and an ellipsis when current page is near the end', () => {
+      const target = mount(VkPagination, { props: { pages: 8, modelValue: 5 } })
 
-      expect(visiblePages).toEqual([1, '...', 4, 5, 6, 7, 8])
+      expect(renderedPages(target)).toEqual([1, 4, 5, 6, 7, 8])
+      expect(ellipsisCount(target)).toBe(1)
+    })
+
+    it('should mark the current page with aria-current', () => {
+      const target = mount(VkPagination, { props: { pages: 10, modelValue: 5 } })
+      const current = target.findAll('[data-type="page"]')
+        .find(button => button.attributes('aria-current') === 'page')
+
+      expect(current?.text().trim()).toBe('5')
     })
   })
 
@@ -297,26 +311,61 @@ describe('Pagination component', () => {
   })
 
   describe('Emits', () => {
-    it('should emit update event on page button', () => {
-      const wrapper = mount(VkPagination, {})
+    it('should emit update event on page button', async () => {
+      const target = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5
+        }
+      })
 
-      wrapper.find('.vk-pagination__button').trigger('click')
-      expect(wrapper.emitted('update:modelValue'))
+      const pageSix = target.findAll('[data-type="page"]')
+        .find(button => button.text().trim() === '6')
+
+      await pageSix?.trigger('click')
+      expect(target.emitted('update:modelValue')).toEqual([[6]])
+    })
+
+    it('should not emit update event when clicking the current page', async () => {
+      const target = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5
+        }
+      })
+
+      const current = target.findAll('[data-type="page"]')
+        .find(button => button.attributes('aria-current') === 'page')
+
+      await current?.trigger('click')
+      expect(target.emitted('update:modelValue')).toBeUndefined()
+    })
+
+    it('should not emit update event when clicking an ellipsis', async () => {
+      const target = mount(VkPagination, {
+        props: {
+          pages: 10,
+          modelValue: 5
+        }
+      })
+
+      await target.find('[data-type="ellipsis"]').trigger('click')
+      expect(target.emitted('update:modelValue')).toBeUndefined()
     })
 
     it('should emit update event on arrow buttons', async () => {
-      const wrapper = mount(VkPagination, {
+      const target = mount(VkPagination, {
         props: {
           pages: 20,
           modelValue: 10
         }
       })
 
-      wrapper.find('.vk-pagination__left').trigger('click')
-      expect(wrapper.emitted('update:modelValue'))
+      await target.find('.vk-pagination__left').trigger('click')
+      expect(target.emitted('update:modelValue')).toEqual([[9]])
       await nextTick()
-      wrapper.find('.vk-pagination__right').trigger('click')
-      expect(wrapper.emitted('update:modelValue'))
+      await target.find('.vk-pagination__right').trigger('click')
+      expect(target.emitted('update:modelValue')).toEqual([[9], [11]])
     })
   })
 })
