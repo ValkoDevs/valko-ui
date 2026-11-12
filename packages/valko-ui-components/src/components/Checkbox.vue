@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useId, computed } from 'vue'
+import { CheckboxRoot } from 'reka-ui'
 import type { CheckboxProps } from '#valkoui/types/Checkbox'
 import styles from '#valkoui/styles/Checkbox.styles.ts'
 import VkIcon from './Icon.vue'
@@ -32,27 +33,29 @@ const describedBy = computed(() => {
   return ids.length > 0 ? ids.join(' ') : undefined
 })
 
-const onClick = () => {
-  if (!props.disabled && !props.readonly) emit('update:modelValue', !props.modelValue)
+// Valko's `null` maps to Reka's indeterminate state; Reka owns
+// aria-checked (mixed), data-state and the keyboard/roving-focus behavior.
+const checkedState = computed(() => (props.modelValue === null ? 'indeterminate' : props.modelValue))
+
+const onClick = (value: boolean | 'indeterminate') => {
+  if (!props.disabled && !props.readonly) emit('update:modelValue', value === 'indeterminate' ? true : value)
 }
 </script>
 
 <template>
   <div :class="s.container({ class: styleSlots?.container })">
-    <div
-      role="checkbox"
-      :class="s.checkboxContainer({ class: styleSlots?.checkboxContainer })"
-      :aria-checked="modelValue === null ? 'mixed' : !!modelValue"
-      :aria-disabled="disabled"
-      :aria-label="ariaLabel"
-      :aria-labelledby="ariaLabelledBy"
-      :aria-describedby="describedBy"
-      :tabindex="disabled ? -1 : 0"
-      @click="onClick"
-      @keydown.enter.prevent="onClick"
-      @keydown.space.prevent="onClick"
-    >
-      <div :class="s.stateLayer({ class: styleSlots?.stateLayer })">
+    <div :class="s.checkboxContainer({ class: styleSlots?.checkboxContainer })">
+      <CheckboxRoot
+        :id="inputId"
+        :model-value="checkedState"
+        :disabled="disabled"
+        :name="name"
+        :class="s.stateLayer({ class: styleSlots?.stateLayer })"
+        :aria-label="ariaLabel"
+        :aria-labelledby="ariaLabelledBy"
+        :aria-describedby="describedBy"
+        @update:model-value="onClick"
+      >
         <div
           :class="s.checkbox({ class: styleSlots?.checkbox })"
           :data-checked="!!modelValue"
@@ -64,21 +67,11 @@ const onClick = () => {
             :class="s.icon({ class: styleSlots?.icon })"
           />
         </div>
-      </div>
+      </CheckboxRoot>
 
-      <input
-        type="checkbox"
-        :id="inputId"
-        :checked="!!modelValue"
-        :indeterminate="modelValue === null"
-        :name="name"
-        :disabled="disabled"
-        :class="s.input({ class: styleSlots?.input })"
-      >
       <label
         :for="inputId"
         :class="s.label({ class: styleSlots?.label })"
-        @click="onClick"
       >
         {{ label }}
       </label>

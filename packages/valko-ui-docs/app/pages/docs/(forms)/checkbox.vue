@@ -226,15 +226,6 @@ const styleSlotsInterface: PropData[] = [
     apiType: 'primitive'
   },
   {
-    key: 'input',
-    prop: 'input',
-    required: false,
-    description: 'The classes for the checkbox input element (this is hidden since we use a custom checkbox).',
-    values: 'string[]',
-    default: '',
-    apiType: 'primitive'
-  },
-  {
     key: 'label',
     prop: 'label',
     required: false,
