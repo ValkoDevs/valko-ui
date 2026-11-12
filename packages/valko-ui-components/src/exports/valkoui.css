@@ -114,6 +114,8 @@
   --animate-vk-drawer-dialog-leave: vk-dialog-leave 300ms ease-in;
   --animate-vk-collapse-open: vk-collapse-open 0.2s ease-out;
   --animate-vk-collapse-out: vk-collapse-out 0.2s ease-in;
+  --animate-vk-select-in: vk-select-in 0.2s ease-out;
+  --animate-vk-select-out: vk-select-out 0.2s ease-in forwards;
 
   @keyframes vk-popover-in {
     0% { opacity: 0; transform: scale(0.95); }
@@ -283,6 +285,24 @@
     to {
       height: 0;
       opacity: 0;
+    }
+  }
+
+  @keyframes vk-select-in {
+    from {
+      opacity: 0.5;
+      transform: scaleY(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+  }
+
+  @keyframes vk-select-out {
+    to {
+      opacity: 0.5;
+      transform: scaleY(0.9);
     }
   }
 }

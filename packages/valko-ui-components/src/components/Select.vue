@@ -1,6 +1,16 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted, nextTick, type ComponentPublicInstance, type Ref } from 'vue'
-import type { SelectProps, SelectOption } from '#valkoui/types/Select'
+import { computed, ref } from 'vue'
+import {
+  SelectContent,
+  SelectItem,
+  SelectItemText,
+  SelectPortal,
+  SelectRoot,
+  SelectTrigger,
+  type AcceptableValue,
+  type SelectItemSelectEvent
+} from 'reka-ui'
+import type { SelectOption, SelectProps } from '#valkoui/types/Select'
 import styles from '#valkoui/styles/Select.styles.ts'
 import VkIcon from './Icon.vue'
 import VkInput from './Input.vue'
@@ -23,22 +33,25 @@ const emit = defineEmits(['update:modelValue'])
 
 const s = computed(() => styles(props))
 
-const itemRefs: Ref<(HTMLElement | null)[]> = ref([])
-const selectRef = ref(null)
 const isOpen = ref(false)
 
-const showMap: Record<string, string> = props.options.reduce((acc: Record<string, string>, opt: SelectOption) => ({
+const showMap = computed(() => props.options.reduce((acc: Record<string, string>, opt: SelectOption) => ({
   ...acc,
   [`${opt.value}`]: opt.label
-}), { 'undefined': '' })
+}), { 'undefined': '' }))
 
 const showValue = computed(
   () => Array.isArray(props.modelValue)
     ? props.modelValue.map(
-      (val: string | number) => showMap[`${val}`]
+      (val: string | number) => showMap.value[`${val}`]
     ).join(', ')
-    : showMap[`${props.modelValue}`]
+    : showMap.value[`${props.modelValue}`]
 )
+
+const isSelected = (value: string | number) => {
+  if (Array.isArray(props.modelValue)) return props.modelValue.includes(value)
+  return props.modelValue === value
+}
 
 const updateValue = (value: SelectProps['modelValue']) => {
   if (!props.disabled && !props.readonly) {
@@ -46,180 +59,116 @@ const updateValue = (value: SelectProps['modelValue']) => {
   }
 }
 
-const handleMultipleSelection = (value: string | number) => {
-  const selectedValues = Array.isArray(props.modelValue) ? [...props.modelValue] : []
-  const index = selectedValues.indexOf(value)
-
-  if (index === -1) selectedValues.push(value)
-  else selectedValues.splice(index, 1)
-  if (!props.clearable && selectedValues.length === 0) return
-
-  updateValue(selectedValues)
-}
-
-const handleSingleSelection = (value: string | number) => {
-  const newValue = isSelected(value) ? undefined : value
-
-  if (!props.clearable && newValue === undefined) return
-
-  updateValue(newValue)
-  toggleDropdown(false)
-}
-
-const isSelected = (value: string | number) => {
-  if (Array.isArray(props.modelValue)) return props.modelValue.includes(value)
-  return props.modelValue === value
-}
-
-const closeDropdownOnOutsideClick = (event: MouseEvent) => {
-  const target = event.target as HTMLElement
-  if (target.closest('.vk-select__container') !== selectRef.value) isOpen.value = false
-}
-
-const toggleDropdown = (onFocus: boolean) => {
-  isOpen.value = onFocus && !props.disabled && !props.readonly
+const setOpened = (open: boolean) => {
+  if (props.disabled || props.readonly) return
+  if (!open) {
+    isOpen.value = false
+    return
+  }
+  // Reka returns focus to the trigger while the content is still mounted in
+  // its closing state; ignore that refocus so the select doesn't reopen.
+  const isClosing = document.querySelector<HTMLElement>('.vk-select__dropdown[data-state="closed"]')
+  if (isClosing) return
+  isOpen.value = true
 }
 
 const clearSelection = () => {
   if (!props.clearable) return
-  if (!props.multiple) updateValue(undefined)
-  else updateValue([])
-  toggleDropdown(false)
+  updateValue(props.multiple ? [] : undefined)
+  isOpen.value = false
 }
 
-const highlightedIndex = ref(-1)
+const handleItemSelect = (option: SelectOption, event: SelectItemSelectEvent<AcceptableValue>) => {
+  const selected = isSelected(option.value)
 
-const setItemRef = (index: number) => (el: Element | ComponentPublicInstance | null) => {
-  itemRefs.value[index] = el instanceof HTMLElement ? el : null
-}
+  if (!props.multiple) {
+    if (!selected) return
 
-const handleKeyDown = (e: KeyboardEvent) => {
-  type AllowedKeys = 'ArrowDown' | 'ArrowUp' | 'Home' | 'End' | 'Enter' | 'SpaceBar'
-  const allowedKeys: AllowedKeys[] = ['ArrowDown', 'ArrowUp', 'Home', 'End', 'Enter', 'SpaceBar']
-  const currentKey = e.key === ' ' ? 'SpaceBar' : (e.key as AllowedKeys)
+    if (!props.clearable) {
+      // Re-selecting the selected item keeps the current value and the list open.
+      event.preventDefault()
+      return
+    }
 
-  if (!isOpen.value || !allowedKeys.includes(currentKey)) return
-
-  e.preventDefault()
-
-  const formulaMap = {
-    ArrowDown: () => (highlightedIndex.value + 1) % props.options.length,
-    ArrowUp: () => (highlightedIndex.value - 1 + props.options.length) % props.options.length,
-    Home: () => 0,
-    End: () => props.options.length - 1
+    // Deselect on click, matching the previous behavior for clearable selects.
+    event.preventDefault()
+    updateValue(undefined)
+    isOpen.value = false
+    return
   }
 
-  if (['Enter', 'SpaceBar'].includes(currentKey) && highlightedIndex.value >= 0) {
-    const item = props.options[highlightedIndex.value]
-    if (props.multiple) handleMultipleSelection(item.value)
-    else handleSingleSelection(item.value)
+  if (selected && !props.clearable) {
+    const current = Array.isArray(props.modelValue) ? props.modelValue : []
+    if (current.length === 1) event.preventDefault()
   }
-
-  const move = formulaMap[currentKey as keyof typeof formulaMap]
-  if (!move) return
-
-  highlightedIndex.value = move()
-  nextTick(() => itemRefs.value[highlightedIndex.value]?.scrollIntoView({ block: 'nearest' }))
 }
-
-onMounted(() => {
-  document.addEventListener('click', closeDropdownOnOutsideClick)
-})
-
-onUnmounted(() => {
-  document.removeEventListener('click', closeDropdownOnOutsideClick)
-})
 </script>
 
 <template>
-  <div
-    ref="selectRef"
-    :class="s.container({ class: styleSlots?.container })"
-  >
-    <select
-      hidden
-      :class="s.select({ class: styleSlots?.select })"
-      :value="modelValue"
+  <div :class="s.container({ class: styleSlots?.container })">
+    <select-root
+      :name="name"
       :multiple="multiple"
-      :readonly="readonly"
-      @update="updateValue"
+      :disabled="disabled || readonly"
+      :model-value="modelValue"
+      :open="isOpen"
+      @update:open="setOpened"
+      @update:model-value="updateValue"
     >
-      <option
-        v-for="option in options"
-        :key="option.value"
-        :value="option.value"
-      >
-        {{ option.label }}
-      </option>
-    </select>
-    <div :class="s.field({ class: styleSlots?.field })">
-      <vk-input
-        readonly
-        :helpertext="helpertext"
-        :label="label"
-        :disabled="disabled"
-        :variant="variant"
-        :color="color"
-        :size="size"
-        :shape="shape"
-        :model-value="showValue"
-        :clearable="clearable"
-        cursor="pointer"
-        :aria-label="ariaLabel"
-        :aria-labelledby="ariaLabelledBy"
-        :aria-describedby="ariaDescribedBy"
-        :aria-invalid="ariaInvalid"
-        :aria-required="ariaRequired"
-        @focus="toggleDropdown(true)"
-        @blur="toggleDropdown(false)"
-        @clear="clearSelection"
-        @keydown="handleKeyDown"
-        @keydown.escape="toggleDropdown(false)"
-      >
-        <template #right-icon>
-          <vk-icon
-            name="chevron-down"
-            :data-open="isOpen"
-            :class="s.icon({ class: styleSlots?.icon })"
-            @click.stop="toggleDropdown(!isOpen)"
-          />
-        </template>
-      </vk-input>
-      <transition
-        enter-active-class="transition-all duration-200 ease-out origin-top"
-        enter-from-class="opacity-50 scale-y-90"
-        enter-to-class="opacity-100 scale-y-100"
-        leave-active-class="transition-all duration-200 ease-out origin-top"
-        leave-from-class="opacity-100 scale-y-100"
-        leave-to-class="opacity-50 scale-y-90"
-      >
-        <ul
-          v-if="isOpen"
-          role="listbox"
+      <select-trigger as-child>
+        <vk-input
+          readonly
+          :helpertext="helpertext"
+          :label="label"
+          :disabled="disabled"
+          :variant="variant"
+          :color="color"
+          :size="size"
+          :shape="shape"
+          :model-value="showValue"
+          :clearable="clearable"
+          cursor="pointer"
+          :aria-label="ariaLabel"
+          :aria-labelledby="ariaLabelledBy"
+          :aria-describedby="ariaDescribedBy"
+          :aria-invalid="ariaInvalid"
+          :aria-required="ariaRequired"
+          @focus="setOpened(true)"
+          @clear="clearSelection"
+        >
+          <template #right-icon>
+            <vk-icon
+              name="chevron-down"
+              :data-open="isOpen"
+              :class="s.icon({ class: styleSlots?.icon })"
+            />
+          </template>
+        </vk-input>
+      </select-trigger>
+      <select-portal>
+        <select-content
+          position="popper"
+          align="start"
+          :side-offset="4"
           :data-helper="!!helpertext"
-          :class="s.dropdown({ class: styleSlots?.dropdown })"
           :data-shape="shape"
           :data-variant="variant"
-          :aria-multiselectable="multiple || undefined"
           :aria-label="label || 'Select options'"
+          :class="s.dropdown({ class: styleSlots?.dropdown })"
         >
-          <li
-            v-for="(option, index) in options"
-            role="option"
+          <select-item
+            v-for="option in options"
             :key="option.value"
-            :ref="setItemRef(index)"
-            :data-highlighted="highlightedIndex === index"
-            :data-selected="isSelected(option.value)"
+            :value="option.value"
             :data-shape="shape"
             :data-variant="variant"
             :class="s.item({ class: styleSlots?.item })"
-            :aria-selected="isSelected(option.value)"
-            @click="multiple ? handleMultipleSelection(option.value) : handleSingleSelection(option.value)"
+            @select="handleItemSelect(option, $event)"
           >
-            {{ option.label }}
-          </li>
-        </ul>
-      </transition>
-    </div>
+            <select-item-text>{{ option.label }}</select-item-text>
+          </select-item>
+        </select-content>
+      </select-portal>
+    </select-root>
   </div>
 </template>

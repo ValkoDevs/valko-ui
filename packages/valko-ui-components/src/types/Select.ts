@@ -7,6 +7,8 @@ export interface SelectOption<T = string | number> {
 }
 
 export interface SelectProps extends DefaultComponent, Omit<AriaAttributes, 'ariaDescription'> {
+  /** Name for the hidden native select used on form submission. */
+  name?: string;
   options?: SelectOption[];
   modelValue?: string | number | Array<string | number>;
   label?: string;
