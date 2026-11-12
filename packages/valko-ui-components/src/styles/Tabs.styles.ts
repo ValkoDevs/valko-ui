@@ -237,7 +237,7 @@ const tabs = tv({
           'to-primary-gradient-end'
         ],
         tabSlot: [
-          'data-[headlessui-state=selected]:text-on-primary'
+          'data-[state=active]:text-on-primary'
         ]
       }
     },
@@ -251,7 +251,7 @@ const tabs = tv({
           'to-secondary-gradient-end'
         ],
         tabSlot: [
-          'data-[headlessui-state=selected]:text-on-secondary'
+          'data-[state=active]:text-on-secondary'
         ]
       }
     },
@@ -265,7 +265,7 @@ const tabs = tv({
           'to-positive-gradient-end'
         ],
         tabSlot: [
-          'data-[headlessui-state=selected]:text-on-positive'
+          'data-[state=active]:text-on-positive'
         ]
       }
     },
@@ -279,7 +279,7 @@ const tabs = tv({
           'to-accent-gradient-end'
         ],
         tabSlot: [
-          'data-[headlessui-state=selected]:text-on-accent'
+          'data-[state=active]:text-on-accent'
         ]
       }
     },
@@ -293,7 +293,7 @@ const tabs = tv({
           'to-warning-gradient-end'
         ],
         tabSlot: [
-          'data-[headlessui-state=selected]:text-on-warning'
+          'data-[state=active]:text-on-warning'
         ]
       }
     },
@@ -307,7 +307,7 @@ const tabs = tv({
           'to-negative-gradient-end'
         ],
         tabSlot: [
-          'data-[headlessui-state=selected]:text-on-negative'
+          'data-[state=active]:text-on-negative'
         ]
       }
     },
@@ -376,7 +376,7 @@ const tabs = tv({
           'bg-primary'
         ],
         tabSlot: [
-          'data-[headlessui-state=selected]:text-on-primary'
+          'data-[state=active]:text-on-primary'
         ]
       }
     },
@@ -389,7 +389,7 @@ const tabs = tv({
           'bg-secondary'
         ],
         tabSlot: [
-          'data-[headlessui-state=selected]:text-on-secondary'
+          'data-[state=active]:text-on-secondary'
         ]
       }
     },
@@ -402,7 +402,7 @@ const tabs = tv({
           'bg-positive'
         ],
         tabSlot: [
-          'data-[headlessui-state=selected]:text-on-positive'
+          'data-[state=active]:text-on-positive'
         ]
       }
     },
@@ -415,7 +415,7 @@ const tabs = tv({
           'bg-accent'
         ],
         tabSlot: [
-          'data-[headlessui-state=selected]:text-on-accent'
+          'data-[state=active]:text-on-accent'
         ]
       }
     },
@@ -428,7 +428,7 @@ const tabs = tv({
           'bg-warning'
         ],
         tabSlot: [
-          'data-[headlessui-state=selected]:text-on-warning'
+          'data-[state=active]:text-on-warning'
         ]
       }
     },
@@ -441,7 +441,7 @@ const tabs = tv({
           'bg-negative'
         ],
         tabSlot: [
-          'data-[headlessui-state=selected]:text-on-negative'
+          'data-[state=active]:text-on-negative'
         ]
       }
     },
