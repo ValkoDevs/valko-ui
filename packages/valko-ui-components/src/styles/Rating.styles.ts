@@ -31,6 +31,18 @@ const rating = tv({
       'group-data-[hovering=true]:opacity-75',
       'duration-200',
       'ease-in-out'
+    ],
+    indicator: [
+      'vk-rating_indicator',
+      'absolute',
+      'left-0',
+      'top-0',
+      'h-full',
+      'w-[var(--reka-rating-item-step-width)]',
+      'z-[var(--reka-rating-item-step-z-index)]',
+      'cursor-pointer',
+      'outline-none',
+      'focus-visible:ring-2'
     ]
   },
   variants: {
@@ -129,6 +141,9 @@ const rating = tv({
         iconContainer: [
           'opacity-50',
           'cursor-not-allowed'
+        ],
+        indicator: [
+          'cursor-not-allowed'
         ]
       },
       false: {}
@@ -143,6 +158,9 @@ const rating = tv({
     readonly: {
       true: {
         iconContainer: [
+          'cursor-default'
+        ],
+        indicator: [
           'cursor-default'
         ]
       }

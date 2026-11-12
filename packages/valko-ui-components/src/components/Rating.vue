@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, computed, onBeforeUnmount } from 'vue'
+import { RatingItem, RatingItemIndicator, RatingRoot } from 'reka-ui'
 import type { RatingProps } from '#valkoui/types/Rating.ts'
 import styles from '#valkoui/styles/Rating.styles.ts'
 
@@ -20,6 +21,8 @@ const props = withDefaults(defineProps<RatingProps>(), {
 const emit = defineEmits(['update:modelValue'])
 
 const s = computed(() => styles(props))
+
+const maxLength = computed(() => Math.max(1, props.max))
 
 const state = reactive<{ hover: number | null; animated: number }>({
   hover: null,
@@ -56,6 +59,14 @@ const setValue = (event: MouseEvent, index: number) => {
   emit('update:modelValue', props.modelValue === value ? 0 : value)
 }
 
+const onValueChange = (value: number) => {
+  if (props.readonly) return
+
+  playAnimation(value)
+
+  emit('update:modelValue', value)
+}
+
 const displayValue = computed(() => state.hover ?? props.modelValue)
 
 const onHover = (event: MouseEvent, index: number) => {
@@ -87,14 +98,20 @@ onBeforeUnmount(() => clearTimeout(animationTimeout))
 </script>
 
 <template>
-  <div
+  <RatingRoot
+    :model-value="modelValue"
+    :length="maxLength"
+    :step="half ? 0.5 : 1"
+    :disabled="disabled"
+    clearable
     :class="s.container({ class: styleSlots?.container })"
-    role="radiogroup"
     :aria-disabled="disabled"
     :aria-readonly="readonly"
     :aria-label="ariaLabel"
     :aria-labelledby="ariaLabelledBy"
     :aria-describedby="ariaDescribedBy"
+    @update:model-value="onValueChange"
+    @mouseleave="clearHover()"
   >
     <slot
       :value="modelValue"
@@ -105,31 +122,45 @@ onBeforeUnmount(() => clearTimeout(animationTimeout))
       :is-readonly="readonly"
       :clear-hover="clearHover"
     >
-      <div
+      <RatingItem
         v-for="star in stars"
         :key="star.index"
-        :class="s.iconContainer({ class: styleSlots?.iconContainer })"
-        role="radio"
-        :aria-checked="star.active"
-        :aria-label="`${star.index} of ${max}`"
-        :data-hovering="star.hovering"
-        @mousemove="(e) => onHover(e, star.index)"
-        @mouseleave="clearHover()"
-        @click="(e) => setValue(e, star.index)"
+        :item="star.index"
+        as-child
       >
-        <vk-icon
-          :key="`base-${iconName}-${star.index}`"
-          :name="iconName"
-          :class="s.iconBase({ class: styleSlots?.iconBase })"
-        />
+        <template #default="{ steps }">
+          <div
+            :class="s.iconContainer({ class: styleSlots?.iconContainer })"
+            :data-hovering="star.hovering"
+            @mousemove="(e) => onHover(e, star.index)"
+          >
+            <vk-icon
+              :key="`base-${iconName}-${star.index}`"
+              :name="iconName"
+              :class="s.iconBase({ class: styleSlots?.iconBase })"
+            />
 
-        <vk-icon
-          :key="`overlay-${iconName}-${star.index}`"
-          :name="iconName"
-          :class="s.iconOverlay({ class: styleSlots?.iconOverlay, animate: star.index <= state.animated })"
-          :style="{ width: `${star.fill}%`, transitionDelay: `${star.delay}ms` }"
-        />
-      </div>
+            <vk-icon
+              :key="`overlay-${iconName}-${star.index}`"
+              :name="iconName"
+              :class="s.iconOverlay({ class: styleSlots?.iconOverlay, animate: star.index <= state.animated })"
+              :style="{ width: `${star.fill}%`, transitionDelay: `${star.delay}ms` }"
+            />
+
+            <RatingItemIndicator
+              v-for="step in steps"
+              :key="step"
+              :step="step"
+              as-child
+            >
+              <span
+                :class="s.indicator({ class: styleSlots?.indicator })"
+                :aria-label="`${star.index} of ${maxLength}`"
+              />
+            </RatingItemIndicator>
+          </div>
+        </template>
+      </RatingItem>
     </slot>
-  </div>
+  </RatingRoot>
 </template>
