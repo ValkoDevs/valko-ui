@@ -2,12 +2,4 @@
 '@valko-ui/components': minor
 ---
 
-Migrate `VkSelect` to Reka UI's `SelectRoot`/`SelectTrigger`/`SelectContent`/`SelectItem` for both single and multiple modes, replacing the hand-rolled dropdown, keyboard navigation and outside-click handling. Reka owns positioning, outside-click dismissal, keyboard navigation (arrow keys + typeahead instead of arrow/Home/End) and focus management.
-
-Deltas to be aware of:
-
-* The dropdown now renders in a Reka portal (teleported to `body`) instead of inline next to the input — DOM-location change for consumers styling or querying it in place.
-* The obsolete `styleSlots.select` slot was removed (the component no longer renders its own hidden `<select>`; a hidden native select is provided by Reka when the new optional `name` prop is passed inside a form, restoring genuine form submission).
-* The dropdown no longer closes on input blur (Reka owns open state; Esc and outside click still close it).
-* The select content animates with the new `vk-select-in`/`vk-select-out` keyframes.
-* Re-selecting behavior is preserved: `clearable` deselect on re-select, multiple toggle, and the no-empty guard without `clearable`.
+Migrate `VkSelect` to Reka UI's `SelectRoot`/`SelectTrigger`/`SelectPortal`/`SelectContent`/`SelectItem` for both single and multiple modes. Reka now owns positioning, outside-click dismissal, keyboard navigation (arrow keys + typeahead instead of arrow/Home/End) and focus management; the dropdown renders through a Reka portal (teleported to `body`) instead of inline next to the input — a breaking DOM-location change — and animates with the new `vk-select-in`/`vk-select-out` keyframes. Adds an optional `name` prop that names the hidden native select Reka renders for form submission (the component no longer renders its own hidden select, so the obsolete `styleSlots.select` slot was removed). The hidden select reflects the value in single mode; in multiple mode it renders the element and options but cannot reflect multi-value selection (native `value` setter limitation, pre-existing). Behavior deltas: the dropdown no longer closes on input blur (Reka owns open state; Esc and outside click still close it). Preserved: `clearable` deselect on re-select, multiple toggle with stay-open, the no-empty guard without `clearable`, and the full public prop/event API.
