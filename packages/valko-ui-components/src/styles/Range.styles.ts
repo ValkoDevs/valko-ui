@@ -27,8 +27,6 @@ const range = tv({
     thumb: [
       'vk-range__thumb',
       'absolute',
-      'transform',
-      '-translate-x-1/4',
       '-translate-y-1/2',
       'top-1/2',
       'z-30',
