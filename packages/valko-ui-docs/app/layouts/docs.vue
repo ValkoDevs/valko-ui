@@ -68,7 +68,7 @@ const onItemClick = (item: MenuItem) => {
 const scrollToActiveMenuItem = (menuRef: HTMLElement| null) => {
   if (!menuRef) return
 
-  const activeMenuItem = menuRef?.querySelector('.vk-menu__content[data-active="true"]')
+  const activeMenuItem = menuRef?.querySelector('[data-active]')
   if (!activeMenuItem) return
 
   activeMenuItem.scrollIntoView({ block: 'center', behavior: 'smooth' })
