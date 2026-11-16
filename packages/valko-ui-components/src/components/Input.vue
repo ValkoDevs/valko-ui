@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { useId, ref, watch, computed } from 'vue'
+import { ref, watch, computed } from 'vue'
+import { FieldControl, FieldDescription, FieldLabel, FieldRoot, useForwardExpose } from 'reka-ui'
 import type { InputProps } from '#valkoui/types/Input'
 import styles from '#valkoui/styles/Input.styles.ts'
 import VkIcon from './Icon.vue'
@@ -24,11 +25,9 @@ const emit = defineEmits(['update:modelValue', 'focus', 'clear', 'blur', 'leftIc
 
 const s = computed(() => styles(props))
 
-const inputId = useId()
-const helpertextId = useId()
+const { forwardRef, currentElement } = useForwardExpose()
 const isFilled = ref(false)
 const inputValue = ref(props.modelValue || '')
-const inputRef = ref<HTMLInputElement | null>(null)
 let intervalId: ReturnType<typeof setInterval> | null = null
 
 const updateValue = (e: Event) => {
@@ -61,7 +60,7 @@ const clearInput = () => {
 const handleIconClick = (icon: 'left' | 'right') => {
   if (!props.disabled && !props.readonly) {
     emit(`${icon}IconClick`)
-    inputRef.value?.focus()
+    currentElement.value?.focus()
   }
 }
 
@@ -92,13 +91,6 @@ const handleNumericArrowRelease = () => {
   window.removeEventListener('touchcancel', handleNumericArrowRelease)
 }
 
-const describedBy = computed(() => {
-  const ids = []
-  if (props.helpertext) ids.push(helpertextId)
-  if (props.ariaDescribedBy) ids.push(props.ariaDescribedBy)
-  return ids.length > 0 ? ids.join(' ') : undefined
-})
-
 watch(() => props.modelValue, (newValue) => {
   inputValue.value = newValue
   isFilled.value = newValue !== null && newValue !== undefined && newValue !== ''
@@ -106,16 +98,19 @@ watch(() => props.modelValue, (newValue) => {
 </script>
 
 <template>
-  <div :class="s.container({ class: styleSlots?.container })">
+  <FieldRoot
+    :class="s.container({ class: styleSlots?.container })"
+    :disabled="disabled"
+  >
     <div :class="s.field({ class: styleSlots?.field })">
-      <input
-        ref="inputRef"
+      <FieldControl
+        :ref="forwardRef"
+        as="input"
         :data-left-icon="!!$slots['left-icon']"
         :data-right-icon="!!$slots['right-icon']"
         :data-clear-icon="clearable"
         :class="s.input({ class: styleSlots?.input })"
         :readonly="readonly"
-        :disabled="disabled"
         :type="type"
         placeholder=" "
         :min="min"
@@ -123,22 +118,18 @@ watch(() => props.modelValue, (newValue) => {
         :step="step"
         :value="inputValue"
         :data-filled="isFilled"
-        :id="inputId"
         :aria-label="ariaLabel"
         :aria-labelledby="ariaLabelledBy"
-        :aria-describedby="describedBy"
+        :aria-describedby="ariaDescribedBy"
         :aria-invalid="ariaInvalid"
         :aria-required="ariaRequired"
         @focus="onFocus"
         @input="updateValue"
         @blur="onBlur"
-      >
-      <label
-        :for="inputId"
-        :class="s.label({ class: styleSlots?.label })"
-      >
+      />
+      <FieldLabel :class="s.label({ class: styleSlots?.label })">
         {{ label }}
-      </label>
+      </FieldLabel>
       <span
         v-if="type === 'number'"
         :class="s.numberArrows({ class: styleSlots?.numberArrows })"
@@ -187,12 +178,12 @@ watch(() => props.modelValue, (newValue) => {
         <slot name="right-icon" />
       </span>
     </div>
-    <span
+    <FieldDescription
       v-if="helpertext"
-      :id="helpertextId"
+      as="span"
       :class="s.helper({ class: styleSlots?.helper })"
     >
       {{ helpertext }}
-    </span>
-  </div>
+    </FieldDescription>
+  </FieldRoot>
 </template>
