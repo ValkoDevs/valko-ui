@@ -1,13 +1,16 @@
 import type { ComputedRef, Ref } from 'vue'
+import type { DateValue } from '@internationalized/date'
+
+export type { DateValue } from '@internationalized/date'
 import type { Sizes, ColorsWithSurface, Variants, Shapes } from './common'
 import type { CalendarSlots } from '../styles/Calendar.styles'
 
 export type DisplayView = 'days' | 'months' | 'years'
 export type SelectionType = 'full' | 'month-only' | 'year-only' | 'day-month' | 'month-year'
 export type DayOfWeek = 0 | 1 | 2 | 3 | 4 | 5 | 6
-export type AdapterProps = Pick<CalendarProps, 'minDate' | 'maxDate' | 'format' | 'disabledDates' | 'locale'>
+export type AdapterProps = Pick<CalendarProps, 'minDate' | 'maxDate' | 'format' | 'disabledDates' | 'locale' | 'disableWeekends'>
 export type AdapterResult = [
-  Ref<EpochTimeStamp>,
+  Ref<DateValue>,
   ComputedRef<string>,
   CalendarAdapter
 ]
@@ -22,28 +25,27 @@ export interface FormattedDate<T = any> {
   obj: T;
 }
 
+/** One rendered month of the Reka calendar grid. */
+export interface DayGrid {
+  value: DateValue;
+  rows: DateValue[][];
+}
+
 export interface CalendarProps extends Sizes, ColorsWithSurface, Variants, Shapes {
   adapter: CalendarAdapter;
-  modelValue: EpochTimeStamp;
+  modelValue: DateValue;
   locale?: string;
   format?: string;
-  disabledDates?: EpochTimeStamp[];
+  disabledDates?: DateValue[];
   disableWeekends?: boolean;
-  minDate?: EpochTimeStamp;
-  maxDate?: EpochTimeStamp;
+  minDate?: DateValue;
+  maxDate?: DateValue;
   styleSlots?: Partial<CalendarSlots>;
 }
 
 export interface CalendarDayViewProps extends CalendarProps {
-  daysInMonth: number;
-  startsOn: DayOfWeek;
-  selected: FormattedDate;
-  display: FormattedDate;
+  grid: DayGrid;
   weekDays: string[];
-  monthNames: string[];
-  min?: FormattedDate;
-  max?: FormattedDate;
-  disabledDays?: number[];
 }
 
 export interface CalendarMonthViewProps extends CalendarProps {
@@ -75,10 +77,11 @@ export interface CalendarAdapter<T = any> {
     min?: FormattedDate<T>;
     max?: FormattedDate<T>;
   }>;
-  disabledDates: ComputedRef<number[]>;
-  onSelectDay: (day: number) => number;
-  onSelectMonth: (month: number) => number;
-  onSelectYear: (year: number) => number;
+  isDateDisabled: (date: DateValue) => boolean;
+  onSelectDay: (day: number) => DateValue;
+  onSelectMonth: (month: number) => DateValue;
+  onSelectYear: (year: number) => DateValue;
+  onPlaceholderChange: (date: DateValue) => void;
   getWeekdays: () => string[];
   getMonths: () => string[];
 }

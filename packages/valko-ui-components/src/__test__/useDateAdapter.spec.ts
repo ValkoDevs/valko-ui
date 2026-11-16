@@ -1,3 +1,4 @@
+import { CalendarDate } from '@internationalized/date'
 import useDateAdapter from '#valkoui/composables/useDateAdapter'
 import type { CalendarAdapter } from '#valkoui/types/Calendar'
 
@@ -13,9 +14,9 @@ describe('useDateAdapter composable', () => {
   })
 
   describe('model', () => {
-    it('should return model as an EpochTimeStamp', () => {
+    it('should return model as a DateValue', () => {
       const [ model ] = useDateAdapter({ format: 'YYYY-MM-DD' })
-      expect(model.value).toBe(new Date(2024, 9, 18).getTime())
+      expect(model.value).toEqual(new CalendarDate(2024, 10, 18))
     })
   })
 
@@ -100,23 +101,42 @@ describe('useDateAdapter composable', () => {
   })
 
   describe('formattedDates', () => {
-    it('should fallback to today for day if model is falsy', () => {
-      const [model, , adapter] = useDateAdapter({})
-      model.value = 0
+    it('should default selected to today for day', () => {
+      const [, , adapter] = useDateAdapter({})
       const today = new Date()
       expect(adapter.formattedDates.value.selected.day).toBe(today.getDate())
     })
-    it('should fallback to today for month if model is falsy', () => {
-      const [model, , adapter] = useDateAdapter({})
-      model.value = 0
+    it('should default selected to today for month', () => {
+      const [, , adapter] = useDateAdapter({})
       const today = new Date()
       expect(adapter.formattedDates.value.selected.month).toBe(today.getMonth())
     })
-    it('should fallback to today for year if model is falsy', () => {
-      const [model, , adapter] = useDateAdapter({})
-      model.value = 0
+    it('should default selected to today for year', () => {
+      const [, , adapter] = useDateAdapter({})
       const today = new Date()
       expect(adapter.formattedDates.value.selected.year).toBe(today.getFullYear())
+    })
+    it('should use model for selected when set', () => {
+      const [model, , adapter] = useDateAdapter({})
+      model.value = new CalendarDate(2022, 6, 1)
+      expect(adapter.formattedDates.value.selected).toMatchObject({
+        day: 1,
+        month: 5,
+        year: 2022,
+        lastDayOfMonth: 30,
+        firstWeekDay: 3
+      })
+    })
+    it('should use tempDate for display once navigation starts', () => {
+      const [, , adapter] = useDateAdapter({})
+      adapter.onSelectYear(2022)
+      adapter.onSelectMonth(5)
+      expect(adapter.formattedDates.value.display).toMatchObject({
+        day: 1,
+        month: 5,
+        year: 2022
+      })
+      expect(adapter.formattedDates.value.selected.year).toBe(2024)
     })
   })
 
@@ -145,7 +165,7 @@ describe('useDateAdapter composable', () => {
 
       beforeEach(() => {
         [model, , adapter] = useDateAdapter({ format: 'YYYY-MM-DD' })
-        model.value = new Date(2022, 5, 1).getTime()
+        model.value = new CalendarDate(2022, 6, 1)
       })
 
       it('should set the selected day from tempDate', () => {
@@ -168,12 +188,19 @@ describe('useDateAdapter composable', () => {
         adapter.onSelectDay(10)
         expect(adapter.formattedDates.value.display.year).toBe(2022)
       })
+
+      it('should return the resulting DateValue', () => {
+        adapter.onSelectYear(2022)
+        adapter.onSelectMonth(5)
+        const result = adapter.onSelectDay(10)
+        expect(result).toEqual(new CalendarDate(2022, 6, 10))
+      })
     })
 
     it('should set year to default when format is MM-DD', () => {
       const mockYear = new Date().getFullYear()
       const [model, , adapter] = useDateAdapter({ format: 'MM-DD' })
-      model.value = new Date(mockYear, 5, 1).getTime()
+      model.value = new CalendarDate(mockYear, 6, 1)
       adapter.onSelectMonth(5)
       adapter.onSelectDay(10)
       expect(adapter.formattedDates.value.display.year).toBe(mockYear)
@@ -193,7 +220,7 @@ describe('useDateAdapter composable', () => {
 
       beforeEach(() => {
         [model, , adapter] = useDateAdapter({ format: 'YYYY-MM' })
-        model.value = new Date(2022, 7, 1).getTime()
+        model.value = new CalendarDate(2022, 8, 1)
       })
 
       it('should set the selected year from tempDate', () => {
@@ -218,52 +245,34 @@ describe('useDateAdapter composable', () => {
     it('should set year to default when format is MM', () => {
       const mockYear = new Date().getFullYear()
       const [model, , adapter] = useDateAdapter({ format: 'MM' })
-      model.value = new Date(mockYear, 7, 1).getTime()
+      model.value = new CalendarDate(mockYear, 8, 1)
       adapter.onSelectMonth(7)
       expect(adapter.formattedDates.value.display.year).toBe(mockYear)
     })
   })
 
-  describe('disabledDates', () => {
-    it('should return an empty array if disabledDates is not provided', () => {
+  describe('isDateDisabled', () => {
+    it('should not disable any date when disabledDates is not provided', () => {
       const [, , adapter] = useDateAdapter({ format: 'YYYY-MM-DD' })
-      expect(adapter.disabledDates.value).toEqual([])
+      expect(adapter.isDateDisabled(new CalendarDate(2024, 10, 17))).toBe(false)
     })
 
-    it('should return the correct disabled date for a single day', () => {
-      const disabledTimestamp = new Date(2024, 9, 17).getTime()
+    it('should disable a date included in disabledDates', () => {
       const [, , adapter] = useDateAdapter({
         format: 'YYYY-MM-DD',
-        disabledDates: [disabledTimestamp]
+        disabledDates: [new CalendarDate(2024, 10, 17)]
       })
 
-      const { disabledDates } = adapter
-
-      expect(disabledDates.value).toContain(17)
+      expect(adapter.isDateDisabled(new CalendarDate(2024, 10, 17))).toBe(true)
     })
 
     it('should not disable a day that is not in the disabledDates array', () => {
-      const disabledTimestamp = new Date(2024, 9, 17).getTime()
       const [, , adapter] = useDateAdapter({
         format: 'YYYY-MM-DD',
-        disabledDates: [disabledTimestamp]
+        disabledDates: [new CalendarDate(2024, 10, 17)]
       })
 
-      const { disabledDates } = adapter
-
-      expect(disabledDates.value).not.toContain(18)
-    })
-
-    it('should return the correct disabled date for another day', () => {
-      const disabledTimestamp = new Date(2024, 9, 19).getTime()
-      const [, , adapter] = useDateAdapter({
-        format: 'YYYY-MM-DD',
-        disabledDates: [disabledTimestamp]
-      })
-
-      const { disabledDates } = adapter
-
-      expect(disabledDates.value).toContain(19)
+      expect(adapter.isDateDisabled(new CalendarDate(2024, 10, 18))).toBe(false)
     })
 
     it('should handle an empty disabledDates array', () => {
@@ -272,43 +281,37 @@ describe('useDateAdapter composable', () => {
         disabledDates: []
       })
 
-      const { disabledDates } = adapter
-
-      expect(disabledDates.value.length).toBe(0)
+      expect(adapter.isDateDisabled(new CalendarDate(2024, 10, 17))).toBe(false)
     })
 
-    it('should disable today\'s date correctly', () => {
-      const today = new Date()
-      const todayTimestamp = today.getTime()
+    it('should disable a weekend when disableWeekends is set', () => {
       const [, , adapter] = useDateAdapter({
         format: 'YYYY-MM-DD',
-        disabledDates: [todayTimestamp]
+        disableWeekends: true
       })
 
-      const { disabledDates } = adapter
-
-      expect(disabledDates.value).toContain(today.getDate())
+      expect(adapter.isDateDisabled(new CalendarDate(2024, 10, 19))).toBe(true)
+      expect(adapter.isDateDisabled(new CalendarDate(2024, 10, 20))).toBe(true)
+      expect(adapter.isDateDisabled(new CalendarDate(2024, 10, 21))).toBe(false)
     })
   })
 
   describe('When min & max date funcionality is added or not', () => {
     it('should correctly format minDate in formattedDates', () => {
-      const minDate = new Date(2024, 0, 1)
-      const minTimestamp = minDate.getTime()
+      const minDate = new CalendarDate(2024, 1, 1)
       const [, , adapter] = useDateAdapter({
         format: 'YYYY-MM-DD',
-        minDate: minTimestamp
+        minDate
       })
 
       const { formattedDates } = adapter
 
       expect(formattedDates.value.min).toMatchObject({
-        day: minDate.getDate(),
-        month: minDate.getMonth(),
-        year: minDate.getFullYear(),
+        day: 1,
+        month: 0,
+        year: 2024,
         lastDayOfMonth: 31,
-        firstWeekDay: 1,
-        obj: expect.any(Date)
+        firstWeekDay: 1
       })
     })
 
@@ -323,22 +326,20 @@ describe('useDateAdapter composable', () => {
     })
 
     it('should correctly format maxDate in formattedDates', () => {
-      const maxDate = new Date(2024, 11, 31)
-      const maxTimestamp = maxDate.getTime()
+      const maxDate = new CalendarDate(2024, 12, 31)
       const [, , adapter] = useDateAdapter({
         format: 'YYYY-MM-DD',
-        maxDate: maxTimestamp
+        maxDate
       })
 
       const { formattedDates } = adapter
 
       expect(formattedDates.value.max).toMatchObject({
-        day: maxDate.getDate(),
-        month: maxDate.getMonth(),
-        year: maxDate.getFullYear(),
+        day: 31,
+        month: 11,
+        year: 2024,
         lastDayOfMonth: 31,
-        firstWeekDay: 0,
-        obj: expect.any(Date)
+        firstWeekDay: 0
       })
     })
 
