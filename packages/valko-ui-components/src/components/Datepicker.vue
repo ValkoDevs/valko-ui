@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, nextTick, computed } from 'vue'
+import { computed } from 'vue'
+import { DatePickerRoot, DatePickerAnchor, DatePickerContent } from 'reka-ui'
 import type { DateValue } from '@internationalized/date'
+import type { FocusOutsideEvent, PointerDownOutsideEvent } from 'reka-ui'
 import type { DatepickerProps } from '#valkoui/types/Datepicker'
 import styles from '#valkoui/styles/Datepicker.styles.ts'
 import VkInput from './Input.vue'
@@ -22,50 +24,40 @@ const emit = defineEmits(['update:modelValue', 'open', 'close'])
 
 const s = computed(() => styles(props))
 
-const rootRef = ref<HTMLElement | null>(null)
-
-const handleClickOutside = (event: MouseEvent) => {
-  const target = event.target as HTMLElement
-
-  if (rootRef.value && !rootRef.value.contains(target) && !target.closest('.vk-datepicker__content')) emit('close')
+// Clicks/focus inside the datepicker root (e.g. the input) must not close the panel.
+const onInteractOutside = (event: PointerDownOutsideEvent | FocusOutsideEvent) => {
+  const target = event.target
+  if (target instanceof Element && target.closest('.vk-datepicker')) event.preventDefault()
 }
-
-onMounted(() => nextTick(() => document.addEventListener('mousedown', handleClickOutside, true)))
-onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutside, true))
 </script>
 
 <template>
-  <div
-    ref="rootRef"
-    :class="s.container({ class: styleSlots?.container })"
-  >
-    <vk-input
-      v-bind="props"
-      :model-value="parsedModel"
-      :label="label"
-      readonly
-      cursor="pointer"
-      @focus="emit('open')"
+  <div :class="s.container({ class: styleSlots?.container })">
+    <DatePickerRoot
+      :open="isOpen"
+      @update:open="(open: boolean) => !open && emit('close')"
     >
-      <template #right-icon>
-        <vk-icon name="calendar" />
-      </template>
-    </vk-input>
+      <DatePickerAnchor as-child>
+        <vk-input
+          v-bind="props"
+          :model-value="parsedModel"
+          :label="label"
+          readonly
+          cursor="pointer"
+          @focus="emit('open')"
+        >
+          <template #right-icon>
+            <vk-icon name="calendar" />
+          </template>
+        </vk-input>
+      </DatePickerAnchor>
 
-    <transition
-      enter-active-class="transition-opacity duration-200 ease-out"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition-opacity duration-150 ease-in"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
-    >
-      <div
-        v-show="isOpen"
+      <DatePickerContent
+        :side-offset="4"
         :class="s.content({ class: styleSlots?.content })"
+        @interact-outside="onInteractOutside"
       >
         <vk-calendar
-          v-if="isOpen"
           v-bind="props"
           :adapter="adapter"
           :disabled-dates="disabledDates"
@@ -77,7 +69,7 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutsi
           @update:model-value="(value: DateValue) => emit('update:modelValue', value)"
           @finalize-selection="emit('close')"
         />
-      </div>
-    </transition>
+      </DatePickerContent>
+    </DatePickerRoot>
   </div>
 </template>
