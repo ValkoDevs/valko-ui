@@ -43,6 +43,14 @@ Rules of thumb:
 
 - **Do not** add Vue `<Transition>` around a Reka primitive part that already
   supports `data-state` animations — Reka handles the unmount timing.
+- Reka's `Presence` reads the **computed `animation-name` of the element the
+  primitive renders**, not of its descendants. When the visual panel is a
+  plain descendant (Modal/Drawer keep the headlessui layout), the animated
+  element must be reached through a named group
+  (`group/vk-dialog` on the part, `group-data-[state=…]/vk-dialog:` on the
+  panel), **and** the part itself must carry an opacity-neutral leave
+  keyframe (`vk-dialog-leave`, `data-[state=closed]:animate-…`) so `Presence`
+  keeps the subtree mounted until the panel's leave animation ends.
 - **Vue `<Transition>`** is allowed only around content of a part used with
   `forceMount`, where the consumer/implementation delegates unmounting:
   `<Transition name="fade"><DialogContent /></Transition>` inside the portal.
