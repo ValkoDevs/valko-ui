@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { ProgressRoot } from 'reka-ui'
 import type { ProgressbarProps } from '#valkoui/types/Progressbar'
 import styles from '#valkoui/styles/Progressbar.styles.ts'
 import diagonalStripes from '#valkoui/img/diagonal-stripes.svg'
@@ -45,8 +46,9 @@ const showContent = computed(() => props.shape !== 'line')
 </script>
 
 <template>
-  <div
+  <ProgressRoot
     :class="s.container({ class: styleSlots?.container })"
+    :model-value="indeterminate ? null : progress"
   >
     <div :class="s.background({ class: styleSlots?.background })">
       <div
@@ -77,5 +79,5 @@ const showContent = computed(() => props.shape !== 'line')
         :buffer="buffer"
       />
     </div>
-  </div>
+  </ProgressRoot>
 </template>
