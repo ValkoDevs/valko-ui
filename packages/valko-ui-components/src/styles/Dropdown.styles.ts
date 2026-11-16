@@ -36,11 +36,11 @@ const dropdown = tv({
       'data-[shape=rounded]:rounded-full',
       'data-[shape=soft]:rounded-lg',
       'data-[shape=square]:rounded-none',
-      'data-[disabled=true]:cursor-not-allowed',
-      'data-[disabled=true]:text-on-disabled',
-      'data-[disabled=true]:bg-disabled',
-      'data-[disabled=true]:opacity-30',
-      'data-[disabled=true]:border-transparent'
+      'data-[disabled]:cursor-not-allowed',
+      'data-[disabled]:text-on-disabled',
+      'data-[disabled]:bg-disabled',
+      'data-[disabled]:opacity-30',
+      'data-[disabled]:border-transparent'
     ],
     itemsIcon: [
       'mr-2',
