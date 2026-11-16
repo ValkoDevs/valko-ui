@@ -88,6 +88,13 @@ Proof of concept (verified in this repo's vitest/jsdom environment):
   exposed directly.
 - Prefer `Primitive`/`asChild` when a Valko subcomponent must render as the
   consumer's element.
+- **`asChild` with internal decoration:** Reka's `Slot` merges attrs onto the
+  *first* child only. When a component has internal layers before the
+  consumer's element (e.g. `Button`'s state layer and spinner), `Slot` would
+  merge onto those instead. The pattern used in `Button.vue` (`VkButtonRoot`)
+  clones the consumer's element, merges the button attrs onto it, and injects
+  the decorations as its children. Reuse that pattern instead of re-deriving
+  it; components whose root *is* the consumer element can use `Slot` directly.
 
 ## Keyboard / accessibility policy
 
