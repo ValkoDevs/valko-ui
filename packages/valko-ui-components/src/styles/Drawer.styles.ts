@@ -15,12 +15,17 @@ const drawer = tv({
     backdrop: [
       'vk-drawer__backdrop',
       'fixed',
-      'inset-0'
+      'inset-0',
+      'data-[state=open]:animate-vk-fade-in',
+      'data-[state=closed]:animate-vk-fade-out'
     ],
     dialog: [
       'vk-drawer__dialog',
       'relative',
-      'z-50'
+      'z-50',
+      'group/vk-dialog',
+      // Keeps Reka's Presence mounted while the panel plays its leave animation.
+      'data-[state=closed]:animate-vk-drawer-dialog-leave'
     ],
     content: [
       'p-4',
@@ -116,23 +121,31 @@ const drawer = tv({
       bottom: {
         panel: [
           'right-0',
-          'bottom-0'
+          'bottom-0',
+          'group-data-[state=open]/vk-dialog:animate-vk-drawer-in-bottom',
+          'group-data-[state=closed]/vk-dialog:animate-vk-drawer-out-bottom'
         ]
       },
       top: {
         panel: [
           'right-0',
-          'top-0'
+          'top-0',
+          'group-data-[state=open]/vk-dialog:animate-vk-drawer-in-top',
+          'group-data-[state=closed]/vk-dialog:animate-vk-drawer-out-top'
         ]
       },
       left: {
         panel: [
-          'left-0'
+          'left-0',
+          'group-data-[state=open]/vk-dialog:animate-vk-drawer-in-left',
+          'group-data-[state=closed]/vk-dialog:animate-vk-drawer-out-left'
         ]
       },
       right: {
         panel: [
-          'right-0'
+          'right-0',
+          'group-data-[state=open]/vk-dialog:animate-vk-drawer-in-right',
+          'group-data-[state=closed]/vk-dialog:animate-vk-drawer-out-right'
         ]
       }
     }
