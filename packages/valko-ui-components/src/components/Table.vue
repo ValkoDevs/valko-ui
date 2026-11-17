@@ -26,27 +26,31 @@ const items = computed<TableItem[]>(() => props.data.map((item, index) => ({
 })))
 
 const headers = computed(() => props.headers)
+
+const handleRowKeydown = (event: KeyboardEvent, item: TableItem) => {
+  if (!props.rowEvents) return
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault()
+    emit('onRowClick', item)
+  }
+}
 </script>
 
 <template>
   <div :class="s.container({ class: styleSlots?.container })">
     <table
       :class="s.table({ class: styleSlots?.table })"
-      role="table"
     >
       <thead
         :class="s.thead({ class: styleSlots?.thead })"
-        role="rowgroup"
       >
         <tr
           :class="s.tr({ class: styleSlots?.tr })"
-          role="row"
         >
           <th
             v-for="header in headers"
             :key="header.key"
             :class="s.th({ class: styleSlots?.th })"
-            role="columnheader"
             scope="col"
           >
             <slot
@@ -61,12 +65,10 @@ const headers = computed(() => props.headers)
       </thead>
       <tbody
         :class="s.body({ class: styleSlots?.body })"
-        role="rowgroup"
       >
         <tr
           v-for="(item, index) in items"
           :key="item.key"
-          role="row"
           :class="s.tr({ class: styleSlots?.tr })"
           :data-key="item.key"
           :data-row-events="rowEvents"
@@ -82,11 +84,11 @@ const headers = computed(() => props.headers)
               : selection?.key === item.key
           )"
           @click="rowEvents && emit('onRowClick', item)"
+          @keydown="handleRowKeydown($event, item)"
         >
           <td
             v-for="{ field } in headers"
             :key="`cell-${field}`"
-            role="cell"
             :class="s.td({ class: styleSlots?.td })"
           >
             <slot

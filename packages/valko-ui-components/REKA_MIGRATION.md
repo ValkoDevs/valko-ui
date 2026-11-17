@@ -175,4 +175,5 @@ custom-components audit ticket):
 | Navbar | No Reka primitive exists; Reka's NavigationMenu is a disclosure menu pattern, not a generic nav landmark wrapper | Renders a semantic `<nav>` (implicit `navigation` role, no redundant `role` attribute); `aria-label` passed through from props |
 | Skeleton | Decorative placeholder with no interactivity; no Reka primitive exists (verified against the v2 catalog). Rendered through Reka `Primitive` (defaults to `div`, `as`/`asChild` available) | `aria-hidden="true"`: purely visual pulse placeholder, not announced by screen readers |
 | Spinner | No Reka primitive exists (verified against the v2 catalog); purely decorative animated indicator rendered via `VkIcon`, kept custom | `role="status"`, `aria-live="polite"` on the container; icon is decorative (`aria-hidden="true"`) — same convention as `Button`'s inline loading spinner |
-| Table, Icon | No Reka primitive exists (verified against the v2 catalog) | pending audit ticket |
+| Table | No Reka primitive exists (verified against the v2 catalog) | native semantic table markup without redundant ARIA roles, `scope="col"` headers, `aria-selected`/`data-selected` row selection, keyboard-activatable rows (Enter/Space emit `onRowClick`) when `rowEvents` is on |
+| Icon | No Reka primitive exists (verified against the v2 catalog) | pending audit ticket |
