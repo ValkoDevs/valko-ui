@@ -16,10 +16,15 @@ const s = computed(() => styles(props))
 </script>
 
 <template>
-  <div :class="s.container({ class: styleSlots?.container })">
+  <div
+    :class="s.container({ class: styleSlots?.container })"
+    role="status"
+    aria-live="polite"
+  >
     <vk-icon
       :name="name"
       :class="s.icon({ class: styleSlots?.icon })"
+      aria-hidden="true"
     />
   </div>
 </template>
