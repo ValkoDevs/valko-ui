@@ -33,6 +33,10 @@ const collapseItem = tv({
       'group-data-[compact=true]:p-0'
     ],
     panel: [
+      'vk-collapse-item__panel',
+      'overflow-hidden',
+      'data-[state=open]:animate-vk-collapse-open',
+      'data-[state=closed]:animate-vk-collapse-out',
       'pb-2',
       'bg-transparent',
       'group-data-[size=xs]:text-xs',

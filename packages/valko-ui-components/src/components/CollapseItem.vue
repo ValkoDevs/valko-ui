@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useId, inject, computed } from 'vue'
-import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
+import { CollapsibleRoot, CollapsibleTrigger, CollapsibleContent } from 'reka-ui'
 import type { CollapseItemProps, CollapseItemStates } from '#valkoui/types/Collapse'
 import styles from '#valkoui/styles/CollapseItem.styles.ts'
 import VkIcon from './Icon.vue'
@@ -20,14 +20,13 @@ const itemId = useId()
 </script>
 
 <template>
-  <disclosure
-    as="div"
-    :key="itemId"
+  <CollapsibleRoot
     :class="s.collapseItem({ class: styleSlots?.collapseItem })"
+    :open="items[itemId] ?? false"
+    @update:open="toggleItem(itemId)"
   >
-    <disclosure-button
+    <CollapsibleTrigger
       :class="s.button({ class: styleSlots?.button })"
-      @click="toggleItem(itemId)"
     >
       <slot name="title">
         <div>
@@ -35,26 +34,15 @@ const itemId = useId()
         </div>
         <vk-icon
           name="chevron-left"
-          :data-open="itemId && items[itemId]"
+          :data-open="items[itemId]"
           :class="s.icon({ class: styleSlots?.icon })"
         />
       </slot>
-    </disclosure-button>
-    <transition
-      enter-active-class="transition-all duration-200 ease-out"
-      enter-from-class="transition-all max-h-0 opacity-0"
-      enter-to-class="transition-all max-h-96 opacity-100"
-      leave-active-class="transition-all duration-200 ease-out"
-      leave-from-class="transition-all max-h-96 opacity-100"
-      leave-to-class="transition-all max-h-0 opacity-0"
+    </CollapsibleTrigger>
+    <CollapsibleContent
+      :class="s.panel({ class: styleSlots?.panel })"
     >
-      <disclosure-panel
-        v-if="itemId && items[itemId]"
-        static
-        :class="s.panel({ class: styleSlots?.panel })"
-      >
-        <slot />
-      </disclosure-panel>
-    </transition>
-  </disclosure>
+      <slot />
+    </CollapsibleContent>
+  </CollapsibleRoot>
 </template>
