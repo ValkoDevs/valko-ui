@@ -247,7 +247,7 @@ describe('DataTable component', () => {
           }
         })
 
-        expect(wrapper.findAll('.vk-radio__radio-container').at(0)?.attributes('aria-checked')).toBe('true')
+        expect(wrapper.findAll('.vk-radio__radio-container [role="radio"]').at(0)?.attributes('aria-checked')).toBe('true')
       })
     })
 
@@ -457,7 +457,7 @@ describe('DataTable component', () => {
         })
 
         it('should emit onSelect when a row radio is clicked', () => {
-          wrapper.find('.vk-radio__radio-container').trigger('click')
+          wrapper.find('.vk-radio__radio-container [role="radio"]').trigger('click')
           expect(wrapper.emitted()).toHaveProperty('onSelect')
         })
       })

@@ -14,7 +14,7 @@ describe('Radio component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('group-data-[state=checked]:bg-primary')
       })
 
       it('should be size md', () => {
@@ -22,7 +22,7 @@ describe('Radio component', () => {
       })
 
       it('should be variant filled', () => {
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('group-data-[state=checked]:bg-primary')
       })
 
       it('should be shape rounded', () => {
@@ -50,7 +50,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('group-data-[state=checked]:bg-primary')
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -60,7 +60,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-secondary')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('group-data-[state=checked]:bg-secondary')
       })
 
       it('should be color positive when props.color is positive', () => {
@@ -70,7 +70,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-positive')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('group-data-[state=checked]:bg-positive')
       })
 
       it('should be color accent when props.color is accent', () => {
@@ -80,7 +80,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-accent')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('group-data-[state=checked]:bg-accent')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -90,7 +90,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-warning')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('group-data-[state=checked]:bg-warning')
       })
 
       it('should be color negative when props.color is negative', () => {
@@ -100,7 +100,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-negative')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('group-data-[state=checked]:bg-negative')
       })
     })
 
@@ -186,7 +186,7 @@ describe('Radio component', () => {
           }
         })
 
-        expect(wrapper.find('.vk-radio__radio').classes()).toContain('data-[checked=true]:bg-primary')
+        expect(wrapper.find('.vk-radio__radio').classes()).toContain('group-data-[state=checked]:bg-primary')
       })
 
       it('should be outlined when props.variant is outlined', () => {
@@ -239,7 +239,33 @@ describe('Radio component', () => {
         }
       })
 
-      expect(wrapper.find('.vk-radio__radio-container').attributes('aria-describedby')).toBe('radio-helpertext')
+      expect(wrapper.find('[role="radio"]').attributes('aria-describedby')).toBe('radio-helpertext')
+    })
+  })
+
+  describe('Radiogroup semantics', () => {
+    it('should render a radiogroup root with a radio item', () => {
+      wrapper = mount(VkRadio, {})
+
+      expect(wrapper.find('[role="radiogroup"]').exists()).toBe(true)
+      expect(wrapper.find('[role="radio"]').exists()).toBe(true)
+    })
+
+    it('should be unchecked by default', () => {
+      wrapper = mount(VkRadio, {})
+
+      expect(wrapper.find('[role="radio"]').attributes('aria-checked')).toBe('false')
+    })
+
+    it('should be checked when modelValue matches value', () => {
+      wrapper = mount(VkRadio, {
+        props: {
+          modelValue: 'a',
+          value: 'a'
+        }
+      })
+
+      expect(wrapper.find('[role="radio"]').attributes('aria-checked')).toBe('true')
     })
   })
 
@@ -247,7 +273,7 @@ describe('Radio component', () => {
     it('should emit update event', () => {
       const wrapper = mount(VkRadio, {})
 
-      wrapper.find('.vk-radio__radio-container').trigger('click')
+      wrapper.find('[role="radio"]').trigger('click')
       expect(wrapper.emitted('update:modelValue'))
     })
 
@@ -258,7 +284,7 @@ describe('Radio component', () => {
         }
       })
 
-      await wrapper.find('.vk-radio__radio-container').trigger('click')
+      await wrapper.find('[role="radio"]').trigger('click')
 
       expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     })
