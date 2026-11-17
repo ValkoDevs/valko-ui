@@ -167,4 +167,5 @@ custom-components audit ticket):
 
 | Component | Reason | Aria conventions adopted |
 | --- | --- | --- |
-| Alert, Breadcrumbs, Card family, DataTable, Table, Navbar, Icon, Skeleton, Spinner | No Reka primitive exists (verified against the v2 catalog) | pending audit ticket |
+| Alert | No Reka primitive exists (verified against the v2 catalog); it is a passive live-region container with no behavior Reka could own | `useId` label wiring via `aria-labelledby`, `VisuallyHidden` text on the icon-only close button, `role="alert"`/`aria-live` derived from severity |
+| Breadcrumbs, Card family, DataTable, Table, Navbar, Icon, Skeleton, Spinner | No Reka primitive exists (verified against the v2 catalog) | pending audit ticket |
