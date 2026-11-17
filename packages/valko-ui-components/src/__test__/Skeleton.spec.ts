@@ -21,6 +21,10 @@ describe('Skeleton component', () => {
       it('should be full height by default', () => {
         expect(wrapper.find('.h-full').exists()).toBe(true)
       })
+
+      it('should be hidden from assistive technology', () => {
+        expect(wrapper.find('[aria-hidden="true"]').exists()).toBe(true)
+      })
     })
 
     describe('When shape prop changes', () => {
