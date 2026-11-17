@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { Toggle } from 'reka-ui'
 import type { TagProps } from '#valkoui/types/Tag'
 import styles from '#valkoui/styles/Tag.styles.ts'
 import VkIcon from './Icon.vue'
@@ -36,11 +37,32 @@ const onClose = () => {
 <template>
   <div
     :class="s.container({ class: styleSlots?.container })"
-    :role="isPressable ? 'button' : undefined"
-    :tabindex="isPressable ? 0 : undefined"
     @click="onClick"
   >
-    <div :class="s.contentContainer({ class: styleSlots?.contentContainer })">
+    <!-- Pressable tags render as a real button (Reka `Toggle`) for native
+         keyboard/focus semantics and `aria-pressed`. The close button stays a
+         sibling of the toggle to avoid nested `<button>` elements. -->
+    <Toggle
+      v-if="isPressable"
+      :disabled="disabled"
+      :class="s.contentContainer({ class: styleSlots?.contentContainer })"
+    >
+      <vk-icon
+        v-if="iconLeft"
+        :name="iconLeft"
+        :class="s.icons({ class: styleSlots?.icons })"
+      />
+      <span :class="s.content({ class: styleSlots?.content })">{{ text }}</span>
+      <vk-icon
+        v-if="iconRight"
+        :name="iconRight"
+        :class="s.icons({ class: styleSlots?.icons })"
+      />
+    </Toggle>
+    <div
+      v-else
+      :class="s.contentContainer({ class: styleSlots?.contentContainer })"
+    >
       <vk-icon
         v-if="iconLeft"
         :name="iconLeft"
