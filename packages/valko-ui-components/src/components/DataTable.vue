@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { type Ref, computed, ref, onMounted, onBeforeUnmount, watch } from 'vue'
+import { type Ref, computed, ref, onMounted, watch } from 'vue'
 import type { DataTableProps } from '#valkoui/types/DataTable'
 import type { TableItem } from '#valkoui/types/Table'
 import type { Sort } from '#valkoui/types/common'
@@ -58,8 +58,9 @@ const selectedItems = computed(
   }
 )
 
-const togglePopover = (headerKey: string) => {
-  activePopover.value = activePopover.value === headerKey ? null : headerKey
+const setPopoverOpen = (headerKey: string, isOpen: boolean) => {
+  if (isOpen) activePopover.value = headerKey
+  else if (activePopover.value === headerKey) activePopover.value = null
 }
 
 const setActiveFilter = (headerKey: string, isActive: boolean) => {
@@ -69,17 +70,6 @@ const setActiveFilter = (headerKey: string, isActive: boolean) => {
 
 const isSortActive = (field: string) => {
   return props.sort?.field === field && !!props.sort.direction
-}
-
-const handleClickOutside = (event: MouseEvent) => {
-  const popoverElements = document.querySelectorAll('.vk-popover')
-  let isClickInside = false
-
-  popoverElements.forEach((element) => {
-    if (element.contains(event.target as Node)) isClickInside = true
-  })
-
-  if (!isClickInside) activePopover.value = null
 }
 
 const isDataReady = computed(() => Array.isArray(props.data) && props.data.length > 0)
@@ -126,7 +116,6 @@ watch(isDataReady, (dataUpdate) => {
 }, { immediate: true })
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
   emit('onLimitChange', props.limit)
 
   localFilters.value = props.headers.reduce((acc, { field }) => {
@@ -135,9 +124,6 @@ onMounted(() => {
   }, {} as Record<keyof TableItem, string>)
 })
 
-onBeforeUnmount(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
 </script>
 
 <template>
@@ -179,6 +165,7 @@ onBeforeUnmount(() => {
             <vk-popover
               :shape="shape"
               :is-open="activePopover === header.key"
+              @update:is-open="(isOpen: boolean) => setPopoverOpen(header.key, isOpen)"
             >
               <template #default>
                 <vk-icon
@@ -186,7 +173,6 @@ onBeforeUnmount(() => {
                   name="search"
                   :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
                   :data-active="activeFilters[header.key]"
-                  @click="togglePopover(header.key)"
                 />
               </template>
 
