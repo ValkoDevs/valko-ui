@@ -231,7 +231,7 @@ describe('DataTable component', () => {
           }
         })
 
-        expect(wrapper.findAll('.vk-checkbox__container').at(1)?.attributes('aria-checked')).toBe('true')
+        expect(wrapper.findAll('[role="checkbox"]').at(1)?.attributes('aria-checked')).toBe('true')
       })
 
       it('checks the correct radio when selection is a single object', () => {
@@ -480,12 +480,12 @@ describe('DataTable component', () => {
         })
 
         it('should emit onSelectAll when the header checkbox is clicked', () => {
-          wrapper.find('.vk-checkbox__container').trigger('click')
+          wrapper.find('[role="checkbox"]').trigger('click')
           expect(wrapper.emitted()).toHaveProperty('onSelectAll')
         })
 
         it('should emit onSelect when a row checkbox is clicked', () => {
-          const checkboxs = wrapper.findAll('.vk-checkbox__container')
+          const checkboxs = wrapper.findAll('[role="checkbox"]')
           checkboxs[1].trigger('click')
           expect(wrapper.emitted()).toHaveProperty('onSelect')
         })

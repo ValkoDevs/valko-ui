@@ -33,9 +33,6 @@ const checkbox = tv({
       'items-center',
       'justify-center'
     ],
-    input: [
-      'hidden'
-    ],
     helpertext: [
       'vk-checkbox__helpertext',
       'break-normal',

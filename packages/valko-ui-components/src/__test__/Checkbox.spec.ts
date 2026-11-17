@@ -255,7 +255,7 @@ describe('Checkbox component', () => {
         }
       })
       const helpertextId = wrapper.find('.vk-checkbox__helpertext').attributes('id')
-      const describedby = wrapper.find('.vk-checkbox__container').attributes('aria-describedby')
+      const describedby = wrapper.find('[role="checkbox"]').attributes('aria-describedby')
 
       expect(describedby).toContain(helpertextId)
     })
@@ -267,7 +267,7 @@ describe('Checkbox component', () => {
         }
       })
 
-      expect(wrapper.find('.vk-checkbox__container').attributes('aria-describedby')).toContain('external-id')
+      expect(wrapper.find('[role="checkbox"]').attributes('aria-describedby')).toContain('external-id')
     })
 
     it('should set aria-describedby with both helpertext id and aria-describedby prop', () => {
@@ -278,27 +278,42 @@ describe('Checkbox component', () => {
         }
       })
       const helpertextId = wrapper.find('.vk-checkbox__helpertext').attributes('id')
-      const describedby = wrapper.find('.vk-checkbox__container').attributes('aria-describedby')
+      const describedby = wrapper.find('[role="checkbox"]').attributes('aria-describedby')
 
       expect(describedby).toContain(`${helpertextId} external-id`)
     })
   })
 
-  describe('Tabindex', () => {
-    it('should set tabindex to -1 when disabled', () => {
+  describe('State', () => {
+    it('should be unchecked by default', () => {
+      wrapper = mount(VkCheckbox, {})
+
+      expect(wrapper.find('[role="checkbox"][data-state="unchecked"]').exists()).toBe(true)
+    })
+
+    it('should be checked when props.modelValue is true', () => {
+      wrapper = mount(VkCheckbox, {
+        props: { modelValue: true }
+      })
+
+      expect(wrapper.find('[role="checkbox"][data-state="checked"]').exists()).toBe(true)
+    })
+
+    it('should be indeterminate when props.modelValue is null', () => {
+      wrapper = mount(VkCheckbox, {
+        props: { modelValue: null }
+      })
+
+      expect(wrapper.find('[role="checkbox"][data-state="indeterminate"]').exists()).toBe(true)
+      expect(wrapper.find('[role="checkbox"]').attributes('aria-checked')).toBe('mixed')
+    })
+
+    it('should disable the checkbox when props.disabled is true', () => {
       wrapper = mount(VkCheckbox, {
         props: { disabled: true }
       })
 
-      expect(wrapper.find('.vk-checkbox__container').attributes('tabindex')).toBe('-1')
-    })
-
-    it('should set tabindex to 0 when not disabled', () => {
-      wrapper = mount(VkCheckbox, {
-        props: { disabled: false }
-      })
-
-      expect(wrapper.find('.vk-checkbox__container').attributes('tabindex')).toBe('0')
+      expect(wrapper.find('[role="checkbox"]').attributes('disabled')).toBeDefined()
     })
   })
 
@@ -306,8 +321,17 @@ describe('Checkbox component', () => {
     it('should emit update event', () => {
       const wrapper = mount(VkCheckbox, {})
 
-      wrapper.find('.vk-checkbox__container').trigger('click')
+      wrapper.find('[role="checkbox"]').trigger('click')
       expect(wrapper.emitted('update:modelValue'))
+    })
+
+    it('should emit checked value when toggled from indeterminate', () => {
+      const wrapper = mount(VkCheckbox, {
+        props: { modelValue: null }
+      })
+
+      wrapper.find('[role="checkbox"]').trigger('click')
+      expect(wrapper.emitted('update:modelValue')![0]).toEqual([true])
     })
 
     it('should not emit update event when disabled', () => {
@@ -315,7 +339,7 @@ describe('Checkbox component', () => {
         props: { disabled: true }
       })
 
-      wrapper.find('.vk-checkbox__container').trigger('click')
+      wrapper.find('[role="checkbox"]').trigger('click')
       expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     })
 
@@ -324,7 +348,7 @@ describe('Checkbox component', () => {
         props: { readonly: true }
       })
 
-      wrapper.find('.vk-checkbox__container').trigger('click')
+      wrapper.find('[role="checkbox"]').trigger('click')
       expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     })
   })
