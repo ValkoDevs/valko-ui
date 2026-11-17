@@ -261,7 +261,7 @@ describe('Tabs component', () => {
           }
         })
         const tabButtons = wrapper.findAll('[role="tab"]')
-        await tabButtons[1].trigger('click')
+        await tabButtons[1].trigger('mousedown')
 
         expect(wrapper.emitted('update:modelValue')).toBeDefined()
       })
@@ -322,7 +322,7 @@ describe('Tabs component', () => {
         })
 
         const tabButtons = wrapper.findAll('[role="tab"]')
-        await tabButtons[0].trigger('click')
+        await tabButtons[0].trigger('mousedown')
 
         expect(wrapper.emitted('tabClick')).toBeUndefined()
       })
@@ -333,10 +333,32 @@ describe('Tabs component', () => {
         })
 
         const tabButtons = wrapper.findAll('[role="tab"]')
-        await tabButtons[1].trigger('click')
+        await tabButtons[1].trigger('mousedown')
 
         expect(wrapper.emitted('tabClick')).toBeDefined()
       })
+    })
+  })
+
+  describe('Keyboard navigation', () => {
+    it('should move focus to the next tab on ArrowRight and emit update:modelValue', async () => {
+      wrapper = mount(VkTabs, {
+        props: {
+          tabs,
+          modelValue: 0
+        },
+        attachTo: document.body
+      })
+      await flushPromises()
+      const tabButtons = wrapper.findAll('[role="tab"]')
+      tabButtons[0].element.focus()
+      await flushPromises()
+      await tabButtons[0].trigger('keydown', { key: 'ArrowRight' })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([1])
+
+      wrapper.unmount()
     })
   })
 

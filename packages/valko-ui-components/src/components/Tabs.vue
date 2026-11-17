@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type Ref, ref, watch, nextTick, computed, onUpdated } from 'vue'
-import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
+import { TabsRoot, TabsList, TabsTrigger, TabsContent } from 'reka-ui'
 import type { TabsProps } from '#valkoui/types/Tabs'
 import styles from '#valkoui/styles/Tabs.styles.ts'
 import VkIcon from './Icon.vue'
@@ -22,7 +22,7 @@ const emit = defineEmits(['tabClick', 'update:modelValue'])
 
 const s = computed(() => styles(props))
 
-const internalIndex = ref(0)
+const internalIndex = ref(props.defaultIndex ?? 0)
 const cursorRef: Ref<HTMLElement | null> = ref(null)
 
 const selectedIndex = computed({
@@ -33,13 +33,25 @@ const selectedIndex = computed({
   }
 })
 
+// Reka Tabs is string-valued; the public API stays index-based.
+const selectedKey = computed(() => {
+  const tab = props.tabs[selectedIndex.value]
+  return tab ? String(tab.key) : undefined
+})
+
+const onValueChange = (key: string | number) => {
+  const index = props.tabs.findIndex(item => String(item.key) === String(key))
+  if (index === -1) return
+  onChange(index)
+}
+
 const moveCursor = async () => {
   await nextTick()
   await nextTick()
   if (cursorRef.value) {
     const extraHeight = props.shape === 'line' && props.variant === 'outlined' && !props.vertical ? 2 : 0
     const extraLeft = props.shape === 'line' && props.variant === 'outlined' && props.vertical ? 2 : 0
-    const selectedElement = cursorRef.value.closest('.tab-list')?.querySelector('button[data-headlessui-state=selected]') as HTMLElement
+    const selectedElement = cursorRef.value.closest('.tab-list')?.querySelector('button[data-state=active]') as HTMLElement
     if (selectedElement) {
       cursorRef.value.style.width = `${selectedElement.clientWidth}px`
       cursorRef.value.style.height = `${+selectedElement.clientHeight + extraHeight}px`
@@ -65,15 +77,14 @@ watch(
 
 <template>
   <div :class="s.container({ class: styleSlots?.container })">
-    <tab-group
+    <tabs-root
       as="div"
-      :vertical="vertical"
-      :default-index="defaultIndex"
+      :orientation="vertical ? 'vertical' : 'horizontal'"
+      :model-value="selectedKey"
       :class="s.group({ class: styleSlots?.group })"
-      :selected-index="selectedIndex"
-      @change="onChange"
+      @update:model-value="onValueChange"
     >
-      <tab-list
+      <tabs-list
         :class="s.list({ class: styleSlots?.list })"
         as="nav"
         :aria-label="ariaLabel ?? 'Tab navigation'"
@@ -87,10 +98,11 @@ watch(
             :class="s.cursorGradient({ class: styleSlots?.cursorGradient })"
           />
         </div>
-        <tab
+        <tabs-trigger
           v-for="item in tabs"
           :class="s.tabSlot({ class: styleSlots?.tabSlot })"
           :key="item.key"
+          :value="String(item.key)"
           :disabled="item.disabled"
         >
           <slot :name="`${item.key}-tab`">
@@ -106,19 +118,20 @@ watch(
               :class="s.rightIcon({ class: styleSlots?.rightIcon })"
             />
           </slot>
-        </tab>
-      </tab-list>
+        </tabs-trigger>
+      </tabs-list>
 
-      <tab-panels :class="s.content({ class: styleSlots?.content })">
-        <tab-panel
+      <div :class="s.content({ class: styleSlots?.content })">
+        <tabs-content
           v-for="item in tabs"
           :key="item.key"
+          :value="String(item.key)"
           :data-key="item.key"
           :class="s.content({ class: styleSlots?.content })"
         >
           <slot :name="`${item.key}-content`" />
-        </tab-panel>
-      </tab-panels>
-    </tab-group>
+        </tabs-content>
+      </div>
+    </tabs-root>
   </div>
 </template>
