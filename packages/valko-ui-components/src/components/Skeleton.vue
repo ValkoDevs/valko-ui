@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { Primitive } from 'reka-ui'
 import type { SkeletonProps } from '#valkoui/types/Skeleton'
 import styles from '#valkoui/styles/Skeleton.styles.ts'
 
@@ -13,5 +14,5 @@ const s = computed(() => styles(props))
 </script>
 
 <template>
-  <div :class="s.container({ class: styleSlots?.container })" />
+  <Primitive aria-hidden="true" :class="s.container({ class: styleSlots?.container })" />
 </template>
