@@ -11,10 +11,44 @@ const tooltip = tv({
       'h-fit',
       'p-2',
       'max-w-xs',
-      'truncate'
+      'truncate',
+      'bg-surface-container-highest',
+      'z-40',
+      'data-[state=delayed-open]:animate-vk-popover-in',
+      'data-[state=instant-open]:animate-vk-popover-in',
+      'data-[state=closed]:animate-vk-popover-out'
     ]
   },
   variants: {
+    elevated: {
+      false: {
+        tip: [
+          'shadow-el2'
+        ]
+      },
+      true: {
+        tip: [
+          'shadow-el3'
+        ]
+      }
+    },
+    shape: {
+      rounded: {
+        tip: [
+          'rounded-2xl'
+        ]
+      },
+      soft: {
+        tip: [
+          'rounded-lg'
+        ]
+      },
+      square: {
+        tip: [
+          'rounded-none'
+        ]
+      }
+    },
     size: {
       xs: {
         tip: [
