@@ -11,10 +11,10 @@ const datePicker = tv({
       'p-2',
       'bg-surface-container-high',
       'shadow-el2',
-      'absolute',
       'z-10',
-      'mt-1',
-      'left-0'
+      'outline-none',
+      'data-[state=open]:animate-vk-datepicker-in',
+      'data-[state=closed]:animate-vk-datepicker-out'
     ]
   },
   variants: {
