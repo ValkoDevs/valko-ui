@@ -226,6 +226,26 @@ describe('Switch component', () => {
     })
   })
 
+  describe('State', () => {
+    it('should be unchecked by default', () => {
+      wrapper = mount(VkSwitch, {})
+
+      expect(wrapper.find('[data-state="unchecked"]').exists()).toBe(true)
+      expect(wrapper.find('[data-state="checked"]').exists()).toBe(false)
+    })
+
+    it('should be checked when props.modelValue is true', () => {
+      wrapper = mount(VkSwitch, {
+        props: {
+          modelValue: true
+        }
+      })
+
+      expect(wrapper.find('[data-state="checked"]').exists()).toBe(true)
+      expect(wrapper.find('[data-state="unchecked"]').exists()).toBe(false)
+    })
+  })
+
   describe('Emits', () => {
     it('should emit update event', () => {
       const wrapper = mount(VkSwitch, {})
@@ -243,6 +263,17 @@ describe('Switch component', () => {
 
       // @ts-expect-error: access internal since clicking the wrapper does not trigger the onClick method when disabled
       wrapper.vm.onClick()
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined()
+    })
+
+    it('should not emit update event when readonly', () => {
+      const wrapper = mount(VkSwitch, {
+        props: {
+          readonly: true
+        }
+      })
+
+      wrapper.find('.cursor-pointer').trigger('click')
       expect(wrapper.emitted('update:modelValue')).toBeUndefined()
     })
   })

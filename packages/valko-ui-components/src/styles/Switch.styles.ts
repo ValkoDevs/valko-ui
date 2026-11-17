@@ -30,9 +30,9 @@ const switchStyles = tv({
       'duration-200',
       'ease-in-out',
       'absolute',
-      'data-[selected=false]:left-0',
-      'data-[selected=true]:left-full',
-      'data-[selected=true]:-translate-x-full'
+      'data-[state=unchecked]:left-0',
+      'data-[state=checked]:left-full',
+      'data-[state=checked]:-translate-x-full'
     ],
     content: [
       'flex',
@@ -196,11 +196,11 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:bg-primary',
-          'data-[active=true]:border-primary'
+          'data-[state=checked]:bg-primary',
+          'data-[state=checked]:border-primary'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-primary'
+          'data-[state=checked]:bg-on-primary'
         ]
       }
     },
@@ -210,11 +210,11 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:bg-secondary',
-          'data-[active=true]:border-secondary'
+          'data-[state=checked]:bg-secondary',
+          'data-[state=checked]:border-secondary'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-secondary'
+          'data-[state=checked]:bg-on-secondary'
         ]
       }
     },
@@ -224,11 +224,11 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:bg-positive',
-          'data-[active=true]:border-positive'
+          'data-[state=checked]:bg-positive',
+          'data-[state=checked]:border-positive'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-positive'
+          'data-[state=checked]:bg-on-positive'
         ]
       }
     },
@@ -238,11 +238,11 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:bg-accent',
-          'data-[active=true]:border-accent'
+          'data-[state=checked]:bg-accent',
+          'data-[state=checked]:border-accent'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-accent'
+          'data-[state=checked]:bg-on-accent'
         ]
       }
     },
@@ -252,11 +252,11 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:bg-warning',
-          'data-[active=true]:border-warning'
+          'data-[state=checked]:bg-warning',
+          'data-[state=checked]:border-warning'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-warning'
+          'data-[state=checked]:bg-on-warning'
         ]
       }
     },
@@ -266,11 +266,11 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:bg-negative',
-          'data-[active=true]:border-negative'
+          'data-[state=checked]:bg-negative',
+          'data-[state=checked]:border-negative'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-negative'
+          'data-[state=checked]:bg-on-negative'
         ]
       }
     },
@@ -281,10 +281,10 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:border-primary'
+          'data-[state=checked]:border-primary'
         ],
         thumb: [
-          'data-[selected=true]:bg-primary'
+          'data-[state=checked]:bg-primary'
         ]
       }
     },
@@ -294,10 +294,10 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:border-secondary'
+          'data-[state=checked]:border-secondary'
         ],
         thumb: [
-          'data-[selected=true]:bg-secondary'
+          'data-[state=checked]:bg-secondary'
         ]
       }
     },
@@ -307,10 +307,10 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:border-positive'
+          'data-[state=checked]:border-positive'
         ],
         thumb: [
-          'data-[selected=true]:bg-positive'
+          'data-[state=checked]:bg-positive'
         ]
       }
     },
@@ -320,10 +320,10 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:border-accent'
+          'data-[state=checked]:border-accent'
         ],
         thumb: [
-          'data-[selected=true]:bg-accent'
+          'data-[state=checked]:bg-accent'
         ]
       }
     },
@@ -333,10 +333,10 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:border-warning'
+          'data-[state=checked]:border-warning'
         ],
         thumb: [
-          'data-[selected=true]:bg-warning'
+          'data-[state=checked]:bg-warning'
         ]
       }
     },
@@ -346,10 +346,10 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:border-negative'
+          'data-[state=checked]:border-negative'
         ],
         thumb: [
-          'data-[selected=true]:bg-negative'
+          'data-[state=checked]:bg-negative'
         ]
       }
     },
@@ -360,10 +360,10 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:bg-primary-container'
+          'data-[state=checked]:bg-primary-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-primary-container'
+          'data-[state=checked]:bg-on-primary-container'
         ]
       }
     },
@@ -373,10 +373,10 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:bg-secondary-container'
+          'data-[state=checked]:bg-secondary-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-secondary-container'
+          'data-[state=checked]:bg-on-secondary-container'
         ]
       }
     },
@@ -386,10 +386,10 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:bg-positive-container'
+          'data-[state=checked]:bg-positive-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-positive-container'
+          'data-[state=checked]:bg-on-positive-container'
         ]
       }
     },
@@ -399,10 +399,10 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:bg-accent-container'
+          'data-[state=checked]:bg-accent-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-accent-container'
+          'data-[state=checked]:bg-on-accent-container'
         ]
       }
     },
@@ -412,10 +412,10 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:bg-warning-container'
+          'data-[state=checked]:bg-warning-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-warning-container'
+          'data-[state=checked]:bg-on-warning-container'
         ]
       }
     },
@@ -425,10 +425,10 @@ const switchStyles = tv({
       disabled: false,
       class: {
         switchSlot: [
-          'data-[active=true]:bg-negative-container'
+          'data-[state=checked]:bg-negative-container'
         ],
         thumb: [
-          'data-[selected=true]:bg-on-negative-container'
+          'data-[state=checked]:bg-on-negative-container'
         ]
       }
     }
