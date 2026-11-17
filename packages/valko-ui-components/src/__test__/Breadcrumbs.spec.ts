@@ -408,6 +408,19 @@ describe('Breadcrumbs component', () => {
       itemList[0].trigger('click')
       expect(onClickMock).toHaveBeenCalledTimes(1)
     })
+
+    it('should execute onClick when the crumb is activated with Enter', async () => {
+      onClickMock.mockClear()
+      const wrapper = mount(VkBreadcrumbs, {
+        props: {
+          crumbs
+        }
+      })
+
+      const itemList = wrapper.findAll('.vk-breadcrumbs__a')
+      await itemList[0].trigger('keydown', { key: 'Enter' })
+      expect(onClickMock).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('Emits', () => {
