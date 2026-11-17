@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
+import {
+  DialogContent,
+  DialogDescription,
+  DialogOverlay,
+  DialogPortal,
+  DialogRoot,
+  DialogTitle
+} from 'reka-ui'
 import type { DrawerProps } from '#valkoui/types/Drawer'
 import styles from '#valkoui/styles/Drawer.styles.ts'
 import VkIcon from './Icon.vue'
@@ -23,107 +30,46 @@ const emit = defineEmits(['close'])
 
 const s = computed(() => styles(props))
 
-const containerRef = ref(null)
+const containerRef = ref<HTMLDivElement | null>(null)
 
-const closeDrawer = () => { if (props.closable) emit('close') }
+const closeModal = () => { if (props.closable) emit('close') }
 
-const transitionClasses = computed(() => {
-  switch (props.placement) {
-    case 'top':
-      return {
-        enter: 'duration-300 ease-out transform',
-        enterFrom: '-translate-y-full',
-        enterTo: 'translate-y-0',
-        leave: 'duration-300 ease-in transform',
-        leaveFrom: 'translate-y-0',
-        leaveTo: '-translate-y-full'
-      }
-    case 'bottom':
-      return {
-        enter: 'duration-300 ease-out transform',
-        enterFrom: 'translate-y-full',
-        enterTo: 'translate-y-0',
-        leave: 'duration-300 ease-in transform',
-        leaveFrom: 'translate-y-0',
-        leaveTo: 'translate-y-full'
-      }
-    case 'left':
-      return {
-        enter: 'duration-300 ease-out transform',
-        enterFrom: '-translate-x-full',
-        enterTo: 'translate-x-0',
-        leave: 'duration-300 ease-in transform',
-        leaveFrom: 'translate-x-0',
-        leaveTo: '-translate-x-full'
-      }
-    case 'right':
-      return {
-        enter: 'duration-300 ease-out transform',
-        enterFrom: 'translate-x-full',
-        enterTo: 'translate-x-0',
-        leave: 'duration-300 ease-in transform',
-        leaveFrom: 'translate-x-0',
-        leaveTo: 'translate-x-full'
-      }
-    default:
-      return {
-        enter: 'duration-300 ease-out',
-        enterFrom: 'opacity-0',
-        enterTo: 'opacity-100',
-        leave: 'duration-300 ease-in',
-        leaveFrom: 'opacity-100',
-        leaveTo: 'opacity-0'
-      }
-  }
-})
+// Reka requests close on Esc, outside interaction and dismiss; `closable`
+// gates all of them, mirroring the previous `@close="closeDrawer"` wiring.
+const onRequestClose = (open: boolean) => { if (!open) closeModal() }
+
+// Keep the previous initial-focus behavior: Reka focuses the first focusable
+// part by default; the old implementation focused the (non-focusable)
+// container element instead, leaving focus where it was.
+const onOpenAutoFocus = (event: Event) => {
+  event.preventDefault()
+  containerRef.value?.focus()
+}
 </script>
 
 <template>
-  <transition-root
-    appear
-    :show="isOpen"
-    as="template"
+  <DialogRoot
+    :open="isOpen"
+    @update:open="onRequestClose"
   >
-    <Dialog
-      :class="s.dialog({ class: styleSlots?.dialog })"
-      :initial-focus="containerRef"
-      :aria-modal="true"
-      :aria-labelledby="ariaLabelledBy"
-      @close="closeDrawer"
-    >
-      <transition-child
-        as="template"
-        class="opacity-0"
-        enter="duration-300 ease-out"
-        enter-from="opacity-0"
-        enter-to="opacity-100"
-        leave="duration-200 ease-in"
-        leave-from="opacity-100"
-        leave-to="opacity-0"
+    <DialogPortal>
+      <DialogOverlay
+        :class="s.backdrop({ class: styleSlots?.backdrop })"
+      />
+      <DialogContent
+        :class="s.dialog({ class: styleSlots?.dialog })"
+        :aria-modal="true"
+        :aria-labelledby="ariaLabelledBy || undefined"
+        @open-auto-focus="onOpenAutoFocus"
       >
         <div
-          :class="s.backdrop({ class: styleSlots?.backdrop })"
-        />
-      </transition-child>
-
-      <div
-        :class="s.container({ class: styleSlots?.container })"
-        ref="containerRef"
-      >
-        <div
-          :class="s.content({ class: styleSlots?.content })"
+          :class="s.container({ class: styleSlots?.container })"
+          ref="containerRef"
         >
-          <transition-child
-            as="template"
-            :class="transitionClasses.enterFrom"
-            :enter="transitionClasses.enter"
-            :enter-from="transitionClasses.enterFrom"
-            :enter-to="transitionClasses.enterTo"
-            :leave="transitionClasses.leave"
-            :leave-from="transitionClasses.leaveFrom"
-            :leave-to="transitionClasses.leaveTo"
+          <div
+            :class="s.content({ class: styleSlots?.content })"
           >
-            <dialog-panel
+            <div
               :class="s.panel({ class: styleSlots?.panel })"
               :data-title="!!title"
             >
@@ -131,18 +77,28 @@ const transitionClasses = computed(() => {
                 v-if="title || closable"
                 :class="s.panelChild({ class: styleSlots?.panelChild })"
               >
-                <dialog-title
+                <DialogTitle
+                  v-if="!ariaLabelledBy"
                   :class="s.title({ class: styleSlots?.title })"
-                  :id="ariaLabelledBy"
                 >
                   {{ title }}
-                </dialog-title>
-                <dialog-description
+                </DialogTitle>
+                <!-- Reka's DialogTitle force-overrides custom ids, so when the
+                     consumer provides `ariaLabelledBy` the title renders with
+                     that exact id for the labelledby reference to resolve. -->
+                <h2
+                  v-else
+                  :id="ariaLabelledBy"
+                  :class="s.title({ class: styleSlots?.title })"
+                >
+                  {{ title }}
+                </h2>
+                <DialogDescription
                   v-if="ariaDescription"
                   class="sr-only"
                 >
                   {{ ariaDescription }}
-                </dialog-description>
+                </DialogDescription>
                 <vk-button
                   v-if="closable"
                   tabindex="-1"
@@ -152,7 +108,7 @@ const transitionClasses = computed(() => {
                   color="surface"
                   condensed
                   :class="s.closeButton({ class: styleSlots?.closeButton })"
-                  @click="closeDrawer"
+                  @click="closeModal"
                 >
                   <div :class="s.closeIcon({ class: styleSlots?.closeIcon })">
                     <vk-icon name="x" />
@@ -162,10 +118,10 @@ const transitionClasses = computed(() => {
               <div :class="s.slotContainer({ class: styleSlots?.slotContainer })">
                 <slot />
               </div>
-            </dialog-panel>
-          </transition-child>
+            </div>
+          </div>
         </div>
-      </div>
-    </Dialog>
-  </transition-root>
+      </DialogContent>
+    </DialogPortal>
+  </DialogRoot>
 </template>
