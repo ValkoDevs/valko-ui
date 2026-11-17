@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { CalendarDate } from '@internationalized/date'
 import type { DatepickerProps, SelectOption } from '#valkoui'
 
 const form = ref<Partial<DatepickerProps>>({
@@ -7,7 +8,7 @@ const form = ref<Partial<DatepickerProps>>({
   shape: 'soft',
   size: 'md',
   format: 'YYYY-MM-DD',
-  modelValue: 0,
+  modelValue: new CalendarDate(2024, 10, 5),
   disabledDates: undefined,
   minDate: undefined,
   maxDate: undefined,
@@ -146,7 +147,7 @@ const datepickerProps: PropData[] = [
     key: 'adapterProp',
     prop: 'adapter',
     required: true,
-    description: 'As default we provide an adapter composable that uses native JS Date to provide the dates for the calendar.',
+    description: 'As default we provide an adapter composable that uses `@internationalized/date` to provide the dates for the calendar.',
     values: 'CalendarAdapter',
     default: '',
     apiType: 'custom-type'
@@ -155,8 +156,8 @@ const datepickerProps: PropData[] = [
     key: 'modelValueProp',
     prop: 'modelValue',
     required: true,
-    description: 'The currently selected date, represented as an Epoch timestamp.',
-    values: 'EpochTimeStamp',
+    description: 'The currently selected date, represented as a `DateValue` from `@internationalized/date`.',
+    values: 'DateValue',
     default: '',
     apiType: 'primitive'
   },
@@ -183,7 +184,7 @@ const datepickerProps: PropData[] = [
     prop: 'disabledDates',
     required: false,
     description: 'An array of specific dates to disable.',
-    values: 'EpochTimeStamp[]',
+    values: 'DateValue[]',
     default: '[]',
     apiType: 'primitive'
   },
@@ -200,8 +201,8 @@ const datepickerProps: PropData[] = [
     key: 'minDateProp',
     prop: 'minDate',
     required: false,
-    description: 'The minimum selectable date as an Epoch timestamp.',
-    values: 'EpochTimeStamp',
+    description: 'The minimum selectable date as a `DateValue`.',
+    values: 'DateValue',
     default: '[]',
     apiType: 'primitive'
   },
@@ -209,8 +210,8 @@ const datepickerProps: PropData[] = [
     key: 'maxDateProp',
     prop: 'maxDate',
     required: false,
-    description: 'The maximum selectable date as an Epoch timestamp.',
-    values: 'EpochTimeStamp',
+    description: 'The maximum selectable date as a `DateValue`.',
+    values: 'DateValue',
     default: '[]',
     apiType: 'primitive'
   },
@@ -390,7 +391,7 @@ const adapterResultProps: PropData[] = [
     prop: 'AdapterResult',
     required: true,
     description: 'The return type result of the Adapter containing the model, parsed model, and adapter methods.',
-    values: '[\n Ref<EpochTimeStamp>,\n ComputedRef<string>,\n CalendarAdapter\n]',
+    values: '[\n Ref<DateValue>,\n ComputedRef<string>,\n CalendarAdapter\n]',
     default: '',
     apiType: 'object'
   }
@@ -504,16 +505,16 @@ const dayOfWeekProp: PropData[] = [
   }
 ]
 
-const [ minModel, minParsedModel, minAdapter ] = useDateAdapter({ minDate: 1736953200000 })
-const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 1736953200000 })
+const [ minModel, minParsedModel, minAdapter ] = useDateAdapter({ minDate: new CalendarDate(2025, 1, 15) })
+const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: new CalendarDate(2025, 1, 15) })
 const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({ disabledDates: [
-  1705320000000,
-  1710936000000,
-  1717545600000,
-  1723420800000,
-  1736953200000,
-  1900249200000,
-  2215004400000
+  new CalendarDate(2024, 1, 15),
+  new CalendarDate(2024, 3, 20),
+  new CalendarDate(2024, 6, 5),
+  new CalendarDate(2024, 8, 12),
+  new CalendarDate(2025, 1, 15),
+  new CalendarDate(2030, 3, 20),
+  new CalendarDate(2040, 3, 10)
 ] })
 const [ model, parsedModel, adapter ] = useDateAdapter(form)
 
@@ -540,12 +541,13 @@ const extraProps = `v-model="model"
 `
 
 const minmaxSnippet = `<script setup lang="ts">
+import { CalendarDate } from '@internationalized/date'
 import { useDateAdapter } from '#valkoui'
 
 const datePickerStates = reactive<Record<string, boolean>>({})
 
-const [ minModel, minParsedModel, minAdapter ] = useDateAdapter({ minDate: 1736953200000 })
-const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 1736953200000 })
+const [ minModel, minParsedModel, minAdapter ] = useDateAdapter({ minDate: new CalendarDate(2025, 1, 15) })
+const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: new CalendarDate(2025, 1, 15) })
 <\u002Fscript>
 
 <template>
@@ -572,18 +574,19 @@ const [ maxModel, maxParsedModel, maxAdapter] = useDateAdapter({ maxDate: 173695
 `
 
 const disabledSnippet = `<script setup lang="ts">
+import { CalendarDate } from '@internationalized/date'
 import { useDateAdapter } from '#valkoui'
 
 const isOpen = ref(false)
 
 const [ disabledModel, disabledParsedModel, disabledAdapter ] = useDateAdapter({ disabledDates: [
-  1705320000000,
-  1710936000000,
-  1717545600000,
-  1723420800000,
-  1736953200000,
-  1900249200000,
-  2215004400000
+  new CalendarDate(2024, 1, 15),
+  new CalendarDate(2024, 3, 20),
+  new CalendarDate(2024, 6, 5),
+  new CalendarDate(2024, 8, 12),
+  new CalendarDate(2025, 1, 15),
+  new CalendarDate(2030, 3, 20),
+  new CalendarDate(2040, 3, 10)
 ] })
 <\u002Fscript>
 

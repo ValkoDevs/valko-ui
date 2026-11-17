@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, shallowRef, watch, computed } from 'vue'
+import { CalendarRoot } from 'reka-ui'
+import type { DateValue } from '@internationalized/date'
 import type { CalendarProps, DisplayView, SelectionType } from '#valkoui/types/Calendar'
 import styles from '#valkoui/styles/Calendar.styles.ts'
 import VkCalendarDayView from './CalendarDayView.vue'
@@ -52,10 +54,28 @@ const availableViews = ref<DisplayView[]>(getAvailableViews())
 const currentView = ref<DisplayView>(availableViews.value[0])
 const selectionType = ref<SelectionType>(getSelectionType())
 
+const placeholder = shallowRef<DateValue>(props.modelValue)
+
 const onViewChange = (view: DisplayView) => currentView.value = view
+
+const onPlaceholderChange = (date: DateValue | undefined) => {
+  if (!date) return
+  placeholder.value = date
+  props.adapter.onPlaceholderChange(date)
+}
+
+const isDateDisabled = (date: DateValue) => props.adapter.isDateDisabled(date)
+
+const onSelectDay = (date: DateValue | undefined) => {
+  if (!date) return
+  placeholder.value = date
+  emit('update:modelValue', date)
+  emit('finalizeSelection')
+}
 
 const onSelectYear = (year: number) => {
   const result = props.adapter.onSelectYear(year)
+  onPlaceholderChange(result)
   if (selectionType.value === 'year-only') {
     emit('update:modelValue', result)
     emit('finalizeSelection')
@@ -65,6 +85,7 @@ const onSelectYear = (year: number) => {
 
 const onSelectMonth = (month: number) => {
   const result = props.adapter.onSelectMonth(month)
+  onPlaceholderChange(result)
   if (['month-only', 'month-year'].includes(selectionType.value)) {
     emit('update:modelValue', result)
     emit('finalizeSelection')
@@ -72,26 +93,8 @@ const onSelectMonth = (month: number) => {
   else currentView.value = 'days'
 }
 
-const onSelectDay = (day: number) => {
-  const result = props.adapter.onSelectDay(day)
-  emit('update:modelValue', result)
-  emit('finalizeSelection')
-}
-
-const onChangeMonth = (month: number) => {
-  switch (month) {
-    case -1:
-      onSelectYear(props.adapter.formattedDates.value.display.year - 1)
-      onSelectMonth(11)
-      break
-    case 12:
-      onSelectYear(props.adapter.formattedDates.value.display.year + 1)
-      onSelectMonth(0)
-      break
-    default:
-      onSelectMonth(month)
-      break
-  }
+const onChangeMonth = (operation: 1 | -1) => {
+  onPlaceholderChange(placeholder.value.add({ months: operation }))
 }
 
 watch(() => props.format, () => {
@@ -99,54 +102,64 @@ watch(() => props.format, () => {
   selectionType.value = getSelectionType()
   currentView.value = availableViews.value[0]
 })
+
+watch(() => props.modelValue, (value) => {
+  placeholder.value = value
+  props.adapter.onPlaceholderChange(value)
+})
 </script>
 
 <template>
-  <div
-    :class="s.container({ class: styleSlots?.container })"
-    :data-selection-type="selectionType"
+  <CalendarRoot
+    v-slot="{ grid, weekDays }"
+    :model-value="modelValue"
+    :placeholder="placeholder"
+    :locale="locale"
+    :min-value="minDate"
+    :max-value="maxDate"
+    :is-date-disabled="isDateDisabled"
+    prevent-deselect
+    @update:model-value="onSelectDay"
+    @update:placeholder="onPlaceholderChange"
   >
-    <vk-calendar-day-view
-      v-if="currentView === 'days'"
-      v-bind="props"
-      :days-in-month="adapter.formattedDates.value.display.lastDayOfMonth"
-      :starts-on="adapter.formattedDates.value.display.firstWeekDay"
-      :week-days="adapter.getWeekdays()"
-      :data-current-view="currentView"
-      :selected="adapter.formattedDates.value.selected"
-      :display="adapter.formattedDates.value.display"
-      :month-names="adapter.getMonths()"
-      :min="adapter.formattedDates.value.min"
-      :max="adapter.formattedDates.value.max"
-      :disabled-days="adapter.disabledDates.value"
-      @view-change="onViewChange"
-      @select-day="onSelectDay"
-      @change-month="onChangeMonth"
-    />
+    <div
+      :class="s.container({ class: styleSlots?.container })"
+      :data-selection-type="selectionType"
+    >
+      <vk-calendar-day-view
+        v-if="currentView === 'days'"
+        v-bind="props"
+        :grid="grid[0]"
+        :week-days="weekDays"
+        :data-current-view="currentView"
+        @view-change="onViewChange"
+        @change-month="onChangeMonth"
+      />
 
-    <vk-calendar-month-view
-      v-else-if="currentView === 'months'"
-      v-bind="props"
-      :month-names="adapter.getMonths()"
-      :data-current-view="currentView"
-      :selected="adapter.formattedDates.value.selected"
-      :display="adapter.formattedDates.value.display"
-      :min="adapter.formattedDates.value.min"
-      :max="adapter.formattedDates.value.max"
-      @view-change="onViewChange"
-      @select-month="onSelectMonth"
-      @change-year="onSelectYear"
-    />
+      <vk-calendar-month-view
+        v-else-if="currentView === 'months'"
+        v-bind="props"
+        :month-names="adapter.getMonths()"
+        :data-current-view="currentView"
+        :selected="adapter.formattedDates.value.selected"
+        :display="adapter.formattedDates.value.display"
+        :min="adapter.formattedDates.value.min"
+        :max="adapter.formattedDates.value.max"
+        @view-change="onViewChange"
+        @select-month="onSelectMonth"
+        @change-year="onSelectYear"
+      />
 
-    <vk-calendar-year-view
-      v-else-if="currentView === 'years'"
-      v-bind="props"
-      :starts-on="adapter.formattedDates.value.selected.year"
-      :data-current-view="currentView"
-      :selected="adapter.formattedDates.value.selected"
-      :min-year="adapter.formattedDates.value.min?.year"
-      :max-year="adapter.formattedDates.value.max?.year"
-      @select-year="onSelectYear"
-    />
-  </div>
+      <vk-calendar-year-view
+        v-else-if="currentView === 'years'"
+        v-bind="props"
+        :starts-on="adapter.formattedDates.value.selected.year"
+        :data-current-view="currentView"
+        :selected="adapter.formattedDates.value.selected"
+        :min-year="adapter.formattedDates.value.min?.year"
+        :max-year="adapter.formattedDates.value.max?.year"
+        @select-year="onSelectYear"
+      />
+    </div>
+  </CalendarRoot>
 </template>
