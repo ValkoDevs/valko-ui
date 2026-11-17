@@ -1,5 +1,13 @@
 <script setup lang="ts">
 import { computed, watchEffect } from 'vue'
+import {
+  PaginationRoot,
+  PaginationList,
+  PaginationListItem,
+  PaginationPrev,
+  PaginationNext,
+  PaginationEllipsis
+} from 'reka-ui'
 import type { PaginationProps } from '#valkoui/types/Pagination'
 import styles from '#valkoui/styles/Pagination.styles.ts'
 import VkIcon from './Icon.vue'
@@ -20,22 +28,8 @@ const emit = defineEmits(['update:modelValue'])
 
 const s = computed(() => styles(props))
 
-const visiblePages = computed(() => {
-  const total = +props.pages
-  const current = props.modelValue
-
-  if (total <= 7)
-    return Array.from({ length: total }, (_, i) => i + 1)
-  if (current <= 4)
-    return [1, 2, 3, 4, 5, '...', total]
-  if (current > total - 4)
-    return [1, '...', total - 4, total - 3, total - 2, total - 1, total]
-
-  return [1, '...', current - 1, current, current + 1, '...', total]
-})
-
-const changePage = (page: string | number) => {
-  if (+page !== props.modelValue && page !== '...' && !props.disabled)
+const changePage = (page: number) => {
+  if (page !== props.modelValue)
     emit('update:modelValue', page)
 }
 
@@ -46,56 +40,88 @@ watchEffect(() => {
 </script>
 
 <template>
-  <div>
-    <nav
-      :class="s.nav({ class: styleSlots?.nav })"
-      :aria-label="ariaLabel ?? 'Pagination'"
-    >
+  <PaginationRoot
+    :class="s.nav({ class: styleSlots?.nav })"
+    :aria-label="ariaLabel ?? 'Pagination'"
+    :page="modelValue"
+    :items-per-page="1"
+    :total="+pages"
+    :sibling-count="1"
+    show-edges
+    :disabled="disabled"
+    @update:page="changePage"
+  >
+    <PaginationPrev as-child>
       <vk-button
         variant="link"
-        class="vk-pagination__left"
         color="surface"
+        class="vk-pagination__left"
         :shape="shape"
         :size="size"
         condensed
-        :disabled="modelValue === 1 || disabled"
-        @click="() => changePage(modelValue - 1)"
       >
         <div :class="s.arrows({ class: styleSlots?.arrows })">
-          <span class="sr-only">Previous</span>
           <vk-icon name="chevron-left" />
         </div>
       </vk-button>
-      <vk-button
-        v-for="page in visiblePages"
-        :key="page"
-        :variant="page === modelValue ? variant : 'link'"
-        :color="page === modelValue ? color : 'surface'"
-        :size="size"
-        :shape="shape"
-        condensed
-        :disabled="disabled"
-        @click="() => changePage(page)"
+    </PaginationPrev>
+    <PaginationList
+      v-slot="{ items }"
+      as="template"
+    >
+      <template
+        v-for="(item, index) in items"
+        :key="index"
       >
-        <div :class="s.button({ class: styleSlots?.button })">
-          {{ page }}
-        </div>
-      </vk-button>
+        <PaginationListItem
+          v-if="item.type === 'page'"
+          :value="item.value"
+          as-child
+        >
+          <vk-button
+            :variant="item.value === modelValue ? variant : 'link'"
+            :color="item.value === modelValue ? color : 'surface'"
+            :size="size"
+            :shape="shape"
+            condensed
+          >
+            <div :class="s.button({ class: styleSlots?.button })">
+              {{ item.value }}
+            </div>
+          </vk-button>
+        </PaginationListItem>
+        <PaginationEllipsis
+          v-else
+          as-child
+        >
+          <vk-button
+            variant="link"
+            color="surface"
+            :size="size"
+            :shape="shape"
+            condensed
+            :disabled="disabled"
+          >
+            <div :class="s.button({ class: styleSlots?.button })">
+              ...
+            </div>
+          </vk-button>
+        </PaginationEllipsis>
+      </template>
+    </PaginationList>
+    <PaginationNext as-child>
       <vk-button
         variant="link"
-        class="vk-pagination__right"
         color="surface"
+        class="vk-pagination__right"
         :shape="shape"
         :size="size"
         condensed
-        :disabled="modelValue === +pages || disabled"
-        @click="() => changePage(modelValue + 1)"
       >
         <div :class="s.arrows({ class: styleSlots?.arrows })">
-          <span class="sr-only">Next</span>
           <vk-icon name="chevron-right" />
         </div>
       </vk-button>
-    </nav>
-  </div>
+    </PaginationNext>
+  </PaginationRoot>
 </template>
