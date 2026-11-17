@@ -72,6 +72,7 @@ const isSortActive = (field: string) => {
   return props.sort?.field === field && !!props.sort.direction
 }
 
+
 const isDataReady = computed(() => Array.isArray(props.data) && props.data.length > 0)
 const totalPages = computed(() => Math.ceil(props.total / props.limit))
 const currentPage = computed({
