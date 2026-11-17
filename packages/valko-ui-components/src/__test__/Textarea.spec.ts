@@ -1,3 +1,4 @@
+import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkTextarea from '#valkoui/components/Textarea.vue'
 
@@ -246,12 +247,13 @@ describe('Textarea component', () => {
   })
 
   describe('Arias', () => {
-    it('should set aria-describedby when helpertext is present', () => {
+    it('should set aria-describedby when helpertext is present', async () => {
       wrapper = mount(VkTextarea, {
         props: {
           helpertext: 'Help text'
         }
       })
+      await nextTick()
       const helpertextId = wrapper.find('.vk-textarea__helper').attributes('id')
       const describedby = wrapper.find('textarea').attributes('aria-describedby')
       expect(describedby).toContain(helpertextId)
@@ -266,13 +268,14 @@ describe('Textarea component', () => {
       expect(wrapper.find('textarea').attributes('aria-describedby')).toContain('external-id')
     })
 
-    it('should set aria-describedby with both helpertext id and aria-describedby prop', () => {
+    it('should set aria-describedby with both helpertext id and aria-describedby prop', async () => {
       wrapper = mount(VkTextarea, {
         props: {
           helpertext: 'Help text',
           ariaDescribedBy: 'external-id'
         }
       })
+      await nextTick()
       const helpertextId = wrapper.find('.vk-textarea__helper').attributes('id')
       const describedby = wrapper.find('textarea').attributes('aria-describedby')
       expect(describedby).toContain(helpertextId)

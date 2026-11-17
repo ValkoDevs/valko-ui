@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, useId, watch, computed } from 'vue'
+import { ref, watch, computed } from 'vue'
+import { FieldControl, FieldDescription, FieldLabel, FieldRoot, useForwardExpose } from 'reka-ui'
 import type { TextareaProps } from '#valkoui/types/Textarea'
 import styles from '#valkoui/styles/Textarea.styles.ts'
 
@@ -18,18 +19,9 @@ const emit = defineEmits(['update:modelValue', 'leftIconClick', 'rightIconClick'
 
 const s = computed(() => styles(props))
 
+const { forwardRef, currentElement } = useForwardExpose()
 const isFilled = ref(false)
 const inputValue = ref(props.modelValue || '')
-const inputRef = ref<HTMLInputElement | null>(null)
-const helpertextId = useId()
-const inputId = useId()
-
-const describedBy = computed(() => {
-  const ids: string[] = []
-  if (props.helpertext) ids.push(helpertextId)
-  if (props.ariaDescribedBy) ids.push(props.ariaDescribedBy)
-  return ids.length > 0 ? ids.join(' ') : undefined
-})
 
 const updateValue = (e: Event) => {
   const value = (e.target as HTMLInputElement).value
@@ -44,7 +36,7 @@ const updateValue = (e: Event) => {
 const handleIconClick = (icon: 'left' | 'right') => {
   if (!props.disabled && !props.readonly) {
     emit(`${icon}IconClick`)
-    inputRef.value?.focus()
+    currentElement.value?.focus()
   }
 }
 
@@ -55,20 +47,22 @@ watch(() => props.modelValue, (newValue) => {
 </script>
 
 <template>
-  <div :class="s.container({ class: styleSlots?.container })">
+  <FieldRoot
+    :class="s.container({ class: styleSlots?.container })"
+    :disabled="disabled"
+  >
     <div :class="s.field({ class: styleSlots?.field })">
-      <textarea
-        ref="inputRef"
-        :id="inputId"
+      <FieldControl
+        :ref="forwardRef"
+        as="textarea"
         :class="s.textarea({ class: styleSlots?.textarea })"
-        :disabled="disabled"
         :readonly="readonly"
         :value="inputValue"
-        :data-filled="isFilled"
         :maxlength="maxlength"
+        :data-filled="isFilled"
         :aria-label="ariaLabel"
         :aria-labelledby="ariaLabelledBy"
-        :aria-describedby="describedBy"
+        :aria-describedby="ariaDescribedBy"
         :aria-invalid="ariaInvalid"
         :aria-required="ariaRequired"
         :data-left-icon="!!$slots['left-icon']"
@@ -90,23 +84,22 @@ watch(() => props.modelValue, (newValue) => {
       >
         <slot name="right-icon" />
       </span>
-      <label
-        :for="inputId"
-        :class="s.label({ class: styleSlots?.label })"
-      >
+      <FieldLabel :class="s.label({ class: styleSlots?.label })">
         {{ label }}
-      </label>
+      </FieldLabel>
     </div>
     <div :class="s.footer({ class: styleSlots?.footer })">
-      <span
+      <FieldDescription
         v-if="helpertext"
-        :id="helpertextId"
+        as="span"
         :class="s.helper({ class: styleSlots?.helper })"
-      > {{ helpertext }}</span>
+      >
+        {{ helpertext }}
+      </FieldDescription>
       <span
         v-if="maxlength && maxlength > 0"
         :class="s.counter({ class: styleSlots?.counter })"
       >{{ `${inputValue.length} / ${maxlength}` }}</span>
     </div>
-  </div>
+  </FieldRoot>
 </template>
