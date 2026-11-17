@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, useId } from 'vue'
+import { VisuallyHidden } from 'reka-ui'
 import type { AlertProps } from '#valkoui/types/Alert'
 import styles from '#valkoui/styles/Alert.styles.ts'
 import VkIcon from './Icon.vue'
@@ -43,6 +44,10 @@ const ariaRole = computed(() => {
 const ariaLive = computed(() => {
   return ['warning', 'negative'].includes(props.color) ? 'assertive' : 'polite'
 })
+
+const ariaLabelledBy = computed(() => {
+  return props.ariaLabelledBy ?? (props.title ? titleId : undefined)
+})
 </script>
 
 <template>
@@ -50,7 +55,7 @@ const ariaLive = computed(() => {
     :class="s.container({ class: styleSlots?.container })"
     :role="ariaRole"
     :aria-live="ariaLive"
-    :aria-label="title ? titleId : ariaLabel"
+    :aria-label="ariaLabelledBy ? undefined : ariaLabel"
     :aria-labelledby="ariaLabelledBy"
   >
     <vk-icon
@@ -87,6 +92,7 @@ const ariaLive = computed(() => {
         name="x"
         :class="s.closeIcon({ class: styleSlots?.closeIcon })"
       />
+      <VisuallyHidden>Close</VisuallyHidden>
     </vk-button>
   </div>
 </template>
