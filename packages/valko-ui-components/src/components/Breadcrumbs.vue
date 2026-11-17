@@ -34,7 +34,7 @@ const selectIcon = (separator: string) => separator.length > 2
 <template>
   <nav
     :class="s.nav({ class: styleSlots?.nav })"
-    :aria-label="ariaLabel ?? 'Breadcrumbs'"
+    :aria-label="ariaLabel ?? 'Breadcrumb'"
   >
     <ol :class="s.list({ class: styleSlots?.list })">
       <li
@@ -50,6 +50,7 @@ const selectIcon = (separator: string) => separator.length > 2
           :data-disabled="crumb.disabled"
           :aria-disabled="crumb.disabled || undefined"
           @click.prevent="onCrumbClick(crumb)"
+          @keydown.enter.prevent="onCrumbClick(crumb)"
         >
           <vk-icon
             v-if="crumb.leftIcon"

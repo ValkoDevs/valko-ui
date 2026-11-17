@@ -168,4 +168,5 @@ custom-components audit ticket):
 | Component | Reason | Aria conventions adopted |
 | --- | --- | --- |
 | Alert | No Reka primitive exists (verified against the v2 catalog); it is a passive live-region container with no behavior Reka could own | `useId` label wiring via `aria-labelledby`, `VisuallyHidden` text on the icon-only close button, `role="alert"`/`aria-live` derived from severity |
-| Breadcrumbs, Card family, DataTable, Table, Navbar, Icon, Skeleton, Spinner | No Reka primitive exists (verified against the v2 catalog) | pending audit ticket |
+| Breadcrumbs | No Reka primitive exists (verified against the v2 catalog); crumbs are data-driven triggers with an imperative `onClick` API rather than href links, so Reka's link/`Primitive` patterns don't apply | WAI-ARIA breadcrumb pattern: `nav[aria-label]` (default `Breadcrumb`), `aria-current="page"` on the last crumb, `aria-hidden` separators, `aria-disabled`/`data-disabled` on disabled crumbs, Enter activation on href-less anchors |
+| Card family, DataTable, Table, Navbar, Icon, Skeleton, Spinner | No Reka primitive exists (verified against the v2 catalog) | pending audit ticket |
