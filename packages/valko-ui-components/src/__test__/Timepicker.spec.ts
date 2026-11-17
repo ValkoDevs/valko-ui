@@ -177,7 +177,7 @@ describe('Time component', () => {
         expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-2xl')
       })
 
-      it('should be soft when props.shape is soft', () => {
+      it('should be soft when props.shape is soft', async () => {
         wrapper = mount(VkTimepicker, {
           props: {
             shape: 'soft',
@@ -189,11 +189,11 @@ describe('Time component', () => {
         })
 
         const input = wrapper.find('.vk-timepicker__input')
-        input.trigger('focus')
+        await input.trigger('focusin')
         expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-lg')
       })
 
-      it('should be square when props.shape is square', () => {
+      it('should be square when props.shape is square', async () => {
         wrapper = mount(VkTimepicker, {
           props: {
             shape: 'square',
@@ -205,7 +205,7 @@ describe('Time component', () => {
         })
 
         const input = wrapper.find('.vk-timepicker__input')
-        input.trigger('focus')
+        await input.trigger('focusin')
         expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-none')
       })
     })
@@ -311,6 +311,71 @@ describe('Time component', () => {
         expect(wrapper.find('.vk-input__input').classes()).toContain('bg-transparent')
       })
     })
+
+    describe('When format prop changes', () => {
+      it('should render hour, minute and second segments for a 24-hour format', () => {
+        wrapper = mount(VkTimepicker, {
+          props: {
+            format: 'HH:mm:ss',
+            modelValue,
+            isOpen: true,
+            parsedModel,
+            adapter
+          }
+        })
+
+        expect(wrapper.find('[data-reka-time-field-segment="hour"]').exists()).toBe(true)
+        expect(wrapper.find('[data-reka-time-field-segment="minute"]').exists()).toBe(true)
+        expect(wrapper.find('[data-reka-time-field-segment="second"]').exists()).toBe(true)
+        expect(wrapper.find('[data-reka-time-field-segment="dayPeriod"]').exists()).toBe(false)
+      })
+
+      it('should render the day period segment for a 12-hour format', () => {
+        wrapper = mount(VkTimepicker, {
+          props: {
+            format: 'hh:mm A',
+            modelValue,
+            isOpen: true,
+            parsedModel,
+            adapter
+          }
+        })
+
+        expect(wrapper.find('[data-reka-time-field-segment="dayPeriod"]').exists()).toBe(true)
+      })
+
+      it('should omit the seconds segment when the format has no seconds', () => {
+        wrapper = mount(VkTimepicker, {
+          props: {
+            format: 'HH:mm',
+            modelValue,
+            isOpen: true,
+            parsedModel,
+            adapter
+          }
+        })
+
+        expect(wrapper.find('[data-reka-time-field-segment="second"]').exists()).toBe(false)
+      })
+
+      it('should display the model time in the field segments', () => {
+        wrapper = mount(VkTimepicker, {
+          props: {
+            format: 'HH:mm:ss',
+            modelValue,
+            isOpen: true,
+            parsedModel,
+            adapter
+          }
+        })
+
+        const date = new Date(modelValue)
+
+        expect(wrapper.find('[data-reka-time-field-segment="hour"]').text()).toBe(String(date.getHours()).padStart(2, '0'))
+        expect(wrapper.find('[data-reka-time-field-segment="minute"]').text()).toBe(String(date.getMinutes()).padStart(2, '0'))
+        expect(wrapper.find('[data-reka-time-field-segment="second"]').text()).toBe(String(date.getSeconds()).padStart(2, '0'))
+      })
+    })
   })
 
   describe('Listeners', () => {
@@ -342,8 +407,8 @@ describe('Time component', () => {
         }
       })
 
-      const input = wrapper.findAll('.vk-input__input')[0]
-      await input.trigger('focus')
+      const input = wrapper.find('.vk-timepicker__input')
+      await input.trigger('focusin')
 
       expect(wrapper.emitted()).toHaveProperty('open')
     })
@@ -390,8 +455,8 @@ describe('Time component', () => {
         }
       })
 
-      const input = wrapper.findAll('.vk-input__input')[0]
-      await input.trigger('focus')
+      const input = wrapper.find('.vk-timepicker__input')
+      await input.trigger('focusin')
 
       document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
       await nextTick()
