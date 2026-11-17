@@ -236,15 +236,6 @@ const styleSlotsInterface: PropData[] = [
     apiType: 'primitive'
   },
   {
-    key: 'select',
-    prop: 'select',
-    required: false,
-    description: 'Hidden native select element.',
-    values: 'string[]',
-    default: '',
-    apiType: 'primitive'
-  },
-  {
     key: 'dropdown',
     prop: 'dropdown',
     required: false,
