@@ -97,6 +97,13 @@
   --animate-vk-popover-in: vk-popover-in 200ms ease-out;
   --animate-vk-popover-out: vk-popover-out 150ms ease-in;
 
+  /* Overlays (Reka Dialog, data-state driven) */
+  --animate-vk-fade-in: vk-fade-in 300ms ease-out;
+  --animate-vk-fade-out: vk-fade-out 200ms ease-in;
+  --animate-vk-modal-panel-in: vk-modal-panel-in 300ms ease-out;
+  --animate-vk-modal-panel-out: vk-modal-panel-out 200ms ease-in;
+  --animate-vk-modal-dialog-leave: vk-dialog-leave 200ms ease-in;
+
   @keyframes vk-popover-in {
     0% { opacity: 0; transform: scale(0.95); }
     100% { opacity: 1; transform: scale(1); }
@@ -161,6 +168,49 @@
     to {
       opacity: 0;
     }
+  }
+
+  /* Overlays (Reka Dialog, data-state driven) */
+  @keyframes vk-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes vk-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  @keyframes vk-modal-panel-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes vk-modal-panel-out {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  /*
+   * Opacity-neutral keep-alive for Reka's Presence: the visual panel is a
+   * descendant of DialogContent, so Presence only sees the animation on the
+   * content element itself and waits for it before unmounting.
+   */
+  @keyframes vk-dialog-leave {
+    from { opacity: 1; }
+    to { opacity: 1; }
   }
 }
 

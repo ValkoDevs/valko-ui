@@ -11,12 +11,17 @@ const modal = tv({
     backdrop: [
       'vk-modal__backdrop',
       'fixed',
-      'inset-0'
+      'inset-0',
+      'data-[state=open]:animate-vk-fade-in',
+      'data-[state=closed]:animate-vk-fade-out'
     ],
     dialog: [
       'vk-modal__dialog',
       'relative',
-      'z-50'
+      'z-50',
+      'group/vk-dialog',
+      // Keeps Reka's Presence mounted while the panel plays its leave animation.
+      'data-[state=closed]:animate-vk-modal-dialog-leave'
     ],
     content: [
       'p-4',
@@ -38,8 +43,8 @@ const modal = tv({
       'justify-start',
       'align-middle',
       'gap-4',
-      'transition-all',
-      'transform'
+      'group-data-[state=open]/vk-dialog:animate-vk-modal-panel-in',
+      'group-data-[state=closed]/vk-dialog:animate-vk-modal-panel-out'
     ],
     panelChild: [
       'vk-modal__panel-child',
