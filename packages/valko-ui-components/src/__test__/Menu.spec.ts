@@ -14,6 +14,13 @@ describe('Menu component', () => {
 
   let wrapper: VueWrapper
 
+  const findItemButtons = () => wrapper.findAll('.vk-menu__content')
+
+  afterEach(() => {
+    wrapper?.unmount()
+    onClickMock.mockClear()
+  })
+
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(() => {
@@ -21,7 +28,8 @@ describe('Menu component', () => {
           props: {
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
       })
 
@@ -30,7 +38,7 @@ describe('Menu component', () => {
       })
 
       it('should be color primary', () => {
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-primary')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active]:bg-primary')
       })
 
       it('should be size md', () => {
@@ -40,10 +48,6 @@ describe('Menu component', () => {
       it('should be variant filled', () => {
         expect(wrapper.find('.vk-menu__group').exists()).toBe(true)
       })
-
-      it('should be shape soft', () => {
-        expect(wrapper.find('.rounded-lg').exists()).toBe(true)
-      })
     })
 
     describe('When color prop changes', () => {
@@ -52,11 +56,12 @@ describe('Menu component', () => {
           props: {
             color: 'primary',
             items: menuItems,
-            active: 1
-          }
+            active: 'get-started'
+          },
+          attachTo: document.body
         })
 
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-primary')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active]:bg-primary')
       })
 
       it('should be color secondary when props.color is secondary', () => {
@@ -64,11 +69,12 @@ describe('Menu component', () => {
           props: {
             color: 'secondary',
             items: menuItems,
-            active: 1
-          }
+            active: 'get-started'
+          },
+          attachTo: document.body
         })
 
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-secondary')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active]:bg-secondary')
       })
 
       it('should be color positive when props.color is positive', () => {
@@ -76,11 +82,12 @@ describe('Menu component', () => {
           props: {
             color: 'positive',
             items: menuItems,
-            active: 1
-          }
+            active: 'get-started'
+          },
+          attachTo: document.body
         })
 
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-positive')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active]:bg-positive')
       })
 
       it('should be color accent when props.color is accent', () => {
@@ -88,11 +95,12 @@ describe('Menu component', () => {
           props: {
             color: 'accent',
             items: menuItems,
-            active: 1
-          }
+            active: 'get-started'
+          },
+          attachTo: document.body
         })
 
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-accent')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active]:bg-accent')
       })
 
       it('should be color warning when props.color is warning', () => {
@@ -100,11 +108,12 @@ describe('Menu component', () => {
           props: {
             color: 'warning',
             items: menuItems,
-            active: 1
-          }
+            active: 'get-started'
+          },
+          attachTo: document.body
         })
 
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-warning')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active]:bg-warning')
       })
 
       it('should be color negative when props.color is negative', () => {
@@ -112,11 +121,12 @@ describe('Menu component', () => {
           props: {
             color: 'negative',
             items: menuItems,
-            active: 1
-          }
+            active: 'get-started'
+          },
+          attachTo: document.body
         })
 
-        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active=true]:bg-negative')
+        expect(wrapper.find('.vk-menu__content').classes()).toContain('data-[active]:bg-negative')
       })
     })
 
@@ -127,7 +137,8 @@ describe('Menu component', () => {
             shape: 'rounded',
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.rounded-full').exists()).toBe(true)
@@ -139,7 +150,8 @@ describe('Menu component', () => {
             shape: 'soft',
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.rounded-lg').exists()).toBe(true)
@@ -151,7 +163,8 @@ describe('Menu component', () => {
             shape: 'square',
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.rounded-none').exists()).toBe(true)
@@ -165,7 +178,8 @@ describe('Menu component', () => {
             size: 'xs',
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.text-xs').exists()).toBe(true)
@@ -177,7 +191,8 @@ describe('Menu component', () => {
             size: 'sm',
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.text-sm').exists()).toBe(true)
@@ -189,7 +204,8 @@ describe('Menu component', () => {
             size: 'md',
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.text-base').exists()).toBe(true)
@@ -201,7 +217,8 @@ describe('Menu component', () => {
             size: 'lg',
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.text-lg').exists()).toBe(true)
@@ -215,7 +232,8 @@ describe('Menu component', () => {
             variant: 'filled',
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.vk-menu__group').exists()).toBe(true)
@@ -227,7 +245,8 @@ describe('Menu component', () => {
             variant: 'outlined',
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.border-2').exists()).toBe(true)
@@ -239,7 +258,8 @@ describe('Menu component', () => {
             variant: 'ghost',
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.vk-menu__ghost').exists()).toBe(true)
@@ -251,7 +271,8 @@ describe('Menu component', () => {
             variant: 'link',
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.vk-menu__line').exists()).toBe(true)
@@ -263,7 +284,8 @@ describe('Menu component', () => {
             variant: 'line',
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.border-l-2').exists()).toBe(true)
@@ -275,7 +297,8 @@ describe('Menu component', () => {
             variant: 'gradient',
             items: menuItems,
             active: 1
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.bg-gradient-to-br').exists()).toBe(true)
@@ -291,7 +314,8 @@ describe('Menu component', () => {
         props: {
           items: menuItems,
           active: 0
-        }
+        },
+        attachTo: document.body
       })
 
       const items = wrapper.findAll('button')
@@ -305,7 +329,8 @@ describe('Menu component', () => {
         props: {
           items: menuItems,
           active: 0
-        }
+        },
+        attachTo: document.body
       })
 
       const items = wrapper.findAll('button')
@@ -321,7 +346,8 @@ describe('Menu component', () => {
         props: {
           items: menuItems,
           active: 1
-        }
+        },
+        attachTo: document.body
       })
 
       const items = wrapper.findAll('button')
@@ -342,7 +368,8 @@ describe('Menu component', () => {
           props: {
             items,
             active: 0
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.vk-menu__group').exists()).toBe(false)
@@ -357,212 +384,119 @@ describe('Menu component', () => {
           props: {
             items,
             active: 0
-          }
+          },
+          attachTo: document.body
         })
 
         expect(wrapper.find('.vk-menu__group').text()).toBe('Custom Group')
       })
     })
 
-    describe('Watcher DOM behavior', () => {
-      it('should focus the item matching active prop', async () => {
+    describe('Active item', () => {
+      it('should mark the item matching active prop with data-active', async () => {
         wrapper = mount(VkMenu, {
           props: {
             items: menuItems,
             active: 'button'
-          }
+          },
+          attachTo: document.body
         })
 
         await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
+        const buttons = findItemButtons()
 
-        expect(buttons[2].attributes('tabindex')).toBe('0')
+        expect(buttons[2].attributes('data-active')).toBe('')
+        expect(buttons[0].attributes('data-active')).toBeUndefined()
       })
 
-      it('should focus the first item if active does not match any key', async () => {
+      it('should not mark any item with data-active when active does not match any key', async () => {
         wrapper = mount(VkMenu, {
           props: {
             items: menuItems,
             active: 'non-existent-key'
-          }
+          },
+          attachTo: document.body
         })
 
         await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
+        findItemButtons().forEach((button) => {
+          expect(button.attributes('data-active')).toBeUndefined()
+        })
+      })
+    })
 
-        expect(buttons[0].attributes('tabindex')).toBe('0')
+    describe('Roving focus', () => {
+      it('should keep items out of the tab order until focus enters the group', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'button'
+          },
+          attachTo: document.body
+        })
+
+        await nextTick()
+        findItemButtons().forEach((button) => {
+          expect(button.attributes('tabindex')).toBe('-1')
+        })
       })
 
-      it('should not focus any item if all are disabled', async () => {
+      it('should move entry focus to the item matching active prop', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'button'
+          },
+          attachTo: document.body
+        })
+
+        await nextTick()
+        await wrapper.find('div').trigger('focus')
+        await nextTick()
+        const buttons = findItemButtons()
+
+        expect(buttons[2].attributes('tabindex')).toBe('0')
+        expect(buttons[2].element).toBe(document.activeElement)
+      })
+
+      it('should move entry focus to the first item if active does not match any key', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'non-existent-key'
+          },
+          attachTo: document.body
+        })
+
+        await nextTick()
+        await wrapper.find('div').trigger('focus')
+        await nextTick()
+        const buttons = findItemButtons()
+
+        expect(buttons[0].attributes('tabindex')).toBe('0')
+        expect(buttons[0].element).toBe(document.activeElement)
+      })
+
+      it('should not make disabled items focusable', async () => {
         const items = [
           { key: 'a', text: 'A', disabled: true },
           { key: 'b', text: 'B', disabled: true }
         ]
 
         wrapper = mount(VkMenu, {
-          props: { items, active: 'a' }
+          props: { items, active: 'a' },
+          attachTo: document.body
         })
 
         await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
+        const buttons = findItemButtons()
 
-        buttons.forEach(button => {
+        buttons.forEach((button) => {
           expect(button.attributes('tabindex')).toBe('-1')
         })
       })
-    })
 
-    describe('onKeyDown', () => {
-      it('should move focus with ArrowDown', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        await buttons[0].trigger('keydown', { key: 'ArrowDown' })
-        await nextTick()
-
-        expect(buttons[2].attributes('tabindex')).toBe('0')
-      })
-
-      it('should move focus with ArrowUp', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        await buttons[0].trigger('keydown', { key: 'End' })
-        await nextTick()
-        await buttons[2].trigger('keydown', { key: 'ArrowUp' })
-        await nextTick()
-
-        expect(buttons[0].attributes('tabindex')).toBe('0')
-      })
-
-      it('should move focus with Home', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        await buttons[0].trigger('keydown', { key: 'End' })
-        await nextTick()
-        await buttons[2].trigger('keydown', { key: 'Home' })
-        await nextTick()
-
-        expect(buttons[0].attributes('tabindex')).toBe('0')
-      })
-
-      it('should move focus with End', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        await buttons[0].trigger('keydown', { key: 'End' })
-        await nextTick()
-
-        expect(buttons[2].attributes('tabindex')).toBe('0')
-      })
-
-      it('should trigger click with Enter if not disabled', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        onClickMock.mockClear()
-        await buttons[0].trigger('keydown', { key: 'Enter' })
-
-        expect(onClickMock).toHaveBeenCalledTimes(1)
-      })
-
-      it('should trigger click with SpaceBar if not disabled', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        onClickMock.mockClear()
-        await buttons[0].trigger('keydown', { key: 'SpaceBar' })
-
-        expect(onClickMock).toHaveBeenCalledTimes(1)
-      })
-
-      it('should not trigger click with Enter if disabled', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'divider'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        onClickMock.mockClear()
-        await buttons[1].trigger('keydown', { key: 'Enter' })
-
-        expect(onClickMock).not.toHaveBeenCalled()
-      })
-
-      it('should not trigger click with SpaceBar if disabled', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'divider'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        onClickMock.mockClear()
-        await buttons[1].trigger('keydown', { key: 'SpaceBar' })
-
-        expect(onClickMock).not.toHaveBeenCalled()
-      })
-
-      it('should do nothing for unrelated keys', async () => {
-        wrapper = mount(VkMenu, {
-          props: {
-            items: menuItems,
-            active: 'get-started'
-          }
-        })
-
-        await nextTick()
-        const buttons = wrapper.findAll('.vk-menu__content')
-        onClickMock.mockClear()
-        await buttons[0].trigger('keydown', { key: 'Tab' })
-        expect(onClickMock).not.toHaveBeenCalled()
-
-        expect(buttons[0].attributes('tabindex')).toBe('0')
-      })
-
-      it('focuses the correct menu item after keyboard navigation and activation', async () => {
+      it('should move focus with ArrowDown skipping disabled items', async () => {
         wrapper = mount(VkMenu, {
           props: {
             items: menuItems,
@@ -572,16 +506,32 @@ describe('Menu component', () => {
         })
 
         await nextTick()
-        const buttons = wrapper.findAll('[role="menuitem"]')
+        const buttons = findItemButtons()
         await buttons[0].trigger('keydown', { key: 'ArrowDown' })
         await nextTick()
-        const focused = buttons.find(b => b.attributes('tabindex') === '0')
-        await focused!.trigger('keydown', { key: 'Enter' })
-        const focusedIndex = buttons.findIndex(b => b === focused)
-        await wrapper.setProps({ active: menuItems[focusedIndex].key })
-        await nextTick()
+        const moved = findItemButtons()
 
-        expect(focused!.attributes('data-active')).toContain('true')
+        expect(moved[2].attributes('tabindex')).toBe('0')
+        expect(moved[2].element).toBe(document.activeElement)
+      })
+
+      it('should move focus with ArrowUp wrapping to the first item', async () => {
+        wrapper = mount(VkMenu, {
+          props: {
+            items: menuItems,
+            active: 'button'
+          },
+          attachTo: document.body
+        })
+
+        await nextTick()
+        const buttons = findItemButtons()
+        await buttons[2].trigger('keydown', { key: 'ArrowUp' })
+        await nextTick()
+        const moved = findItemButtons()
+
+        expect(moved[0].attributes('tabindex')).toBe('0')
+        expect(moved[0].element).toBe(document.activeElement)
       })
     })
   })

@@ -45,7 +45,7 @@ const menu = tv({
           'px-[calc(1rem_-_2px)]',
           'border-2',
           'border-transparent',
-          'data-[active=true]:bg-transparent'
+          'data-[active]:bg-transparent'
         ]
       },
       ghost: {
@@ -129,8 +129,8 @@ const menu = tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:bg-primary',
-          'data-[active=true]:text-on-primary'
+          'data-[active]:bg-primary',
+          'data-[active]:text-on-primary'
         ]
       }
     },
@@ -139,8 +139,8 @@ const menu = tv({
       color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:bg-secondary',
-          'data-[active=true]:text-on-secondary'
+          'data-[active]:bg-secondary',
+          'data-[active]:text-on-secondary'
         ]
       }
     },
@@ -149,8 +149,8 @@ const menu = tv({
       color: 'positive',
       class: {
         content: [
-          'data-[active=true]:bg-positive',
-          'data-[active=true]:text-on-positive'
+          'data-[active]:bg-positive',
+          'data-[active]:text-on-positive'
         ]
       }
     },
@@ -159,8 +159,8 @@ const menu = tv({
       color: 'negative',
       class: {
         content: [
-          'data-[active=true]:bg-negative',
-          'data-[active=true]:text-on-negative'
+          'data-[active]:bg-negative',
+          'data-[active]:text-on-negative'
         ]
       }
     },
@@ -169,8 +169,8 @@ const menu = tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:bg-warning',
-          'data-[active=true]:text-on-warning'
+          'data-[active]:bg-warning',
+          'data-[active]:text-on-warning'
         ]
       }
     },
@@ -179,8 +179,8 @@ const menu = tv({
       color: 'accent',
       class: {
         content: [
-          'data-[active=true]:bg-accent',
-          'data-[active=true]:text-on-accent'
+          'data-[active]:bg-accent',
+          'data-[active]:text-on-accent'
         ]
       }
     },
@@ -190,8 +190,8 @@ const menu = tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:text-primary',
-          'data-[active=true]:border-primary'
+          'data-[active]:text-primary',
+          'data-[active]:border-primary'
         ]
       }
     },
@@ -200,8 +200,8 @@ const menu = tv({
       color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:text-secondary',
-          'data-[active=true]:border-secondary'
+          'data-[active]:text-secondary',
+          'data-[active]:border-secondary'
         ]
       }
     },
@@ -210,8 +210,8 @@ const menu = tv({
       color: 'positive',
       class: {
         content: [
-          'data-[active=true]:text-positive',
-          'data-[active=true]:border-positive'
+          'data-[active]:text-positive',
+          'data-[active]:border-positive'
         ]
       }
     },
@@ -220,8 +220,8 @@ const menu = tv({
       color: 'negative',
       class: {
         content: [
-          'data-[active=true]:text-negative',
-          'data-[active=true]:border-negative'
+          'data-[active]:text-negative',
+          'data-[active]:border-negative'
         ]
       }
     },
@@ -230,8 +230,8 @@ const menu = tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:text-warning',
-          'data-[active=true]:border-warning'
+          'data-[active]:text-warning',
+          'data-[active]:border-warning'
         ]
       }
     },
@@ -240,8 +240,8 @@ const menu = tv({
       color: 'accent',
       class: {
         content: [
-          'data-[active=true]:text-accent',
-          'data-[active=true]:border-accent'
+          'data-[active]:text-accent',
+          'data-[active]:border-accent'
         ]
       }
     },
@@ -251,8 +251,8 @@ const menu = tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:text-on-primary-container',
-          'data-[active=true]:bg-primary-container'
+          'data-[active]:text-on-primary-container',
+          'data-[active]:bg-primary-container'
         ]
       }
     },
@@ -261,8 +261,8 @@ const menu = tv({
       color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:text-on-secondary-container',
-          'data-[active=true]:bg-secondary-container'
+          'data-[active]:text-on-secondary-container',
+          'data-[active]:bg-secondary-container'
         ]
       }
     },
@@ -271,8 +271,8 @@ const menu = tv({
       color: 'positive',
       class: {
         content: [
-          'data-[active=true]:text-on-positive-container',
-          'data-[active=true]:bg-positive-container'
+          'data-[active]:text-on-positive-container',
+          'data-[active]:bg-positive-container'
         ]
       }
     },
@@ -281,8 +281,8 @@ const menu = tv({
       color: 'negative',
       class: {
         content: [
-          'data-[active=true]:text-on-negative-container',
-          'data-[active=true]:bg-negative-container'
+          'data-[active]:text-on-negative-container',
+          'data-[active]:bg-negative-container'
         ]
       }
     },
@@ -291,8 +291,8 @@ const menu = tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:text-on-warning-container',
-          'data-[active=true]:bg-warning-container'
+          'data-[active]:text-on-warning-container',
+          'data-[active]:bg-warning-container'
         ]
       }
     },
@@ -301,8 +301,8 @@ const menu = tv({
       color: 'accent',
       class: {
         content: [
-          'data-[active=true]:text-on-accent-container',
-          'data-[active=true]:bg-accent-container'
+          'data-[active]:text-on-accent-container',
+          'data-[active]:bg-accent-container'
         ]
       }
     },
@@ -312,7 +312,7 @@ const menu = tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:text-primary'
+          'data-[active]:text-primary'
         ]
       }
     },
@@ -321,7 +321,7 @@ const menu = tv({
       color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:text-secondary'
+          'data-[active]:text-secondary'
         ]
       }
     },
@@ -330,7 +330,7 @@ const menu = tv({
       color: 'positive',
       class: {
         content: [
-          'data-[active=true]:text-positive'
+          'data-[active]:text-positive'
         ]
       }
     },
@@ -339,7 +339,7 @@ const menu = tv({
       color: 'negative',
       class: {
         content: [
-          'data-[active=true]:text-negative'
+          'data-[active]:text-negative'
         ]
       }
     },
@@ -348,7 +348,7 @@ const menu = tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:text-warning'
+          'data-[active]:text-warning'
         ]
       }
     },
@@ -357,7 +357,7 @@ const menu = tv({
       color: 'accent',
       class: {
         content: [
-          'data-[active=true]:text-accent'
+          'data-[active]:text-accent'
         ]
       }
     },
@@ -367,7 +367,7 @@ const menu = tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:border-primary'
+          'data-[active]:border-primary'
         ]
       }
     },
@@ -376,7 +376,7 @@ const menu = tv({
       color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:border-secondary'
+          'data-[active]:border-secondary'
         ]
       }
     },
@@ -385,7 +385,7 @@ const menu = tv({
       color: 'positive',
       class: {
         content: [
-          'data-[active=true]:border-positive'
+          'data-[active]:border-positive'
         ]
       }
     },
@@ -394,7 +394,7 @@ const menu = tv({
       color: 'negative',
       class: {
         content: [
-          'data-[active=true]:border-negative'
+          'data-[active]:border-negative'
         ]
       }
     },
@@ -403,7 +403,7 @@ const menu = tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:border-warning'
+          'data-[active]:border-warning'
         ]
       }
     },
@@ -412,7 +412,7 @@ const menu = tv({
       color: 'accent',
       class: {
         content: [
-          'data-[active=true]:border-accent'
+          'data-[active]:border-accent'
         ]
       }
     },
@@ -422,9 +422,9 @@ const menu = tv({
       color: 'primary',
       class: {
         content: [
-          'data-[active=true]:from-primary-gradient-start',
-          'data-[active=true]:to-primary-gradient-end',
-          'data-[active=true]:text-on-primary'
+          'data-[active]:from-primary-gradient-start',
+          'data-[active]:to-primary-gradient-end',
+          'data-[active]:text-on-primary'
         ]
       }
     },
@@ -433,9 +433,9 @@ const menu = tv({
       color: 'secondary',
       class: {
         content: [
-          'data-[active=true]:from-secondary-gradient-start',
-          'data-[active=true]:to-secondary-gradient-end',
-          'data-[active=true]:text-on-secondary'
+          'data-[active]:from-secondary-gradient-start',
+          'data-[active]:to-secondary-gradient-end',
+          'data-[active]:text-on-secondary'
         ]
       }
     },
@@ -444,9 +444,9 @@ const menu = tv({
       color: 'positive',
       class: {
         content: [
-          'data-[active=true]:from-positive-gradient-start',
-          'data-[active=true]:to-positive-gradient-end',
-          'data-[active=true]:text-on-positive'
+          'data-[active]:from-positive-gradient-start',
+          'data-[active]:to-positive-gradient-end',
+          'data-[active]:text-on-positive'
         ]
       }
     },
@@ -455,9 +455,9 @@ const menu = tv({
       color: 'accent',
       class: {
         content: [
-          'data-[active=true]:from-accent-gradient-start',
-          'data-[active=true]:to-accent-gradient-end',
-          'data-[active=true]:text-on-accent'
+          'data-[active]:from-accent-gradient-start',
+          'data-[active]:to-accent-gradient-end',
+          'data-[active]:text-on-accent'
         ]
       }
     },
@@ -466,9 +466,9 @@ const menu = tv({
       color: 'warning',
       class: {
         content: [
-          'data-[active=true]:from-warning-gradient-start',
-          'data-[active=true]:to-warning-gradient-end',
-          'data-[active=true]:text-on-warning'
+          'data-[active]:from-warning-gradient-start',
+          'data-[active]:to-warning-gradient-end',
+          'data-[active]:text-on-warning'
         ]
       }
     },
@@ -477,9 +477,9 @@ const menu = tv({
       color: 'negative',
       class: {
         content: [
-          'data-[active=true]:from-negative-gradient-start',
-          'data-[active=true]:to-negative-gradient-end',
-          'data-[active=true]:text-on-negative'
+          'data-[active]:from-negative-gradient-start',
+          'data-[active]:to-negative-gradient-end',
+          'data-[active]:text-on-negative'
         ]
       }
     },
