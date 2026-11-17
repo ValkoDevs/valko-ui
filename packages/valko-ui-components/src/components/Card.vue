@@ -36,6 +36,7 @@ const onClick = (e: MouseEvent) => {
     :class="s"
     :data-layout="layout"
     :data-card-image="hasImageSlot"
+    :disabled="props.isPressable ? (props.disabled || undefined) : undefined"
     @click="onClick"
   >
     <slot />

@@ -206,5 +206,26 @@ describe('Card component', () => {
       wrapper.find('.vk-card').trigger('click')
       expect(wrapper.emitted()).not.toHaveProperty('click')
     })
+
+    it('should set the disabled attribute on the button when disabled is true', () => {
+      const wrapper = mount(VkCard, {
+        props: {
+          isPressable: true,
+          disabled: true
+        }
+      })
+
+      expect(wrapper.find('.vk-card').attributes('disabled')).toBeDefined()
+    })
+
+    it('should not set the disabled attribute when disabled is false', () => {
+      const wrapper = mount(VkCard, {
+        props: {
+          isPressable: true
+        }
+      })
+
+      expect(wrapper.find('.vk-card').attributes('disabled')).toBeUndefined()
+    })
   })
 })
