@@ -149,6 +149,19 @@ describe('Rating component', () => {
 
         expect(wrapper.emitted('update:modelValue')).toEqual([[3]])
       })
+
+      it('should label half-step and whole-step radios distinctly', () => {
+        const labels = wrapper.findAll('[role="radio"]').map(item => item.attributes('aria-label'))
+
+        expect(labels).toEqual([
+          '0.5 of 5', '1 of 5',
+          '1.5 of 5', '2 of 5',
+          '2.5 of 5', '3 of 5',
+          '3.5 of 5', '4 of 5',
+          '4.5 of 5', '5 of 5'
+        ])
+        expect(new Set(labels).size).toBe(labels.length)
+      })
     })
 
     describe('Disabled and readonly', () => {
@@ -438,6 +451,21 @@ describe('Rating component', () => {
         await selectWithArrowKey(3)
 
         expect(wrapper.emitted('update:modelValue')).toEqual([[2.5]])
+
+        wrapper.unmount()
+      })
+
+      it('should render radio items as buttons so the Space key activates them', () => {
+        mountAttached()
+
+        const radios = wrapper.findAll('[role="radio"]')
+
+        // jsdom does not synthesize `click` from the Space key; the native
+        // activation behavior comes from the radio being a real button.
+        radios.forEach((radio) => {
+          expect(radio.element.tagName).toBe('BUTTON')
+          expect(radio.attributes('type')).toBe('button')
+        })
 
         wrapper.unmount()
       })

@@ -153,9 +153,10 @@ onBeforeUnmount(() => clearTimeout(animationTimeout))
               :step="step"
               as-child
             >
-              <span
+              <button
+                type="button"
                 :class="s.indicator({ class: styleSlots?.indicator })"
-                :aria-label="`${star.index} of ${maxLength}`"
+                :aria-label="`${step} of ${maxLength}`"
               />
             </RatingItemIndicator>
           </div>
