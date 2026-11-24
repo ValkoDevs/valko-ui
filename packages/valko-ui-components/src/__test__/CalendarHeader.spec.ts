@@ -1,61 +1,23 @@
 import VkCalendarHeader from '#valkoui/components/CalendarHeader.vue'
-import { ref, computed, toValue } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
-import type { AdapterResult } from '#valkoui/types/Calendar'
+import { CalendarDate } from '@internationalized/date'
+import useDateAdapter from '#valkoui/composables/useDateAdapter'
+import type { CalendarAdapter } from '#valkoui/types/Calendar'
 
-const { useDateAdapter } = vi.hoisted(() => ({
-  useDateAdapter: vi.fn(() => ([
-    ref(1729017518),
-    computed(() => '2024-10-15'),
-    {
-      formattedDates: computed(() => ({
-        selected: {
-          day: 15,
-          month: 9,
-          year: 2024,
-          lastDayOfMonth: 31,
-          firstWeekDay: 2,
-          obj: new Date(2024, 10, 15)
-        },
-        display: {
-          day: 15,
-          month: 9,
-          year: 2024,
-          lastDayOfMonth: 31,
-          firstWeekDay: 2,
-          obj: new Date(2024, 10, 15)
-        }
-      })),
-      disabledDates: computed(() => [
-        1705320000000,
-        1710936000000,
-        1717545600000,
-        1723420800000,
-        1736953200000,
-        1900249200000,
-        2215004400000
-      ]),
-      onSelectDay: vi.fn(() => 1728961200000),
-      onSelectMonth: vi.fn(() => 1727751600000),
-      onSelectYear: vi.fn(() => 1704078000000),
-      getWeekdays: () => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      getMonths: () => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    }
-  ] as AdapterResult))
-}))
+let adapter: CalendarAdapter
+const modelValue = new CalendarDate(2024, 10, 15)
 
-vi.mock('#valkoui/composables/useDateAdapter.ts', () => ({
-  default: useDateAdapter
-}))
+beforeEach(() => {
+  const [ model, , adapterResult ] = useDateAdapter({ format: 'DD-MM-YYYY' })
+  model.value = modelValue
+  adapter = adapterResult
+})
 
-const [ model, , adapter ] = useDateAdapter()
-const modelValue = toValue(model)
-
-const baseProps = {
+const baseProps = () => ({
   modelValue,
   adapter,
   format: 'DD-MM-YYYY'
-}
+})
 
 describe('CalendarHeader Component', () => {
   let wrapper: VueWrapper
@@ -63,7 +25,7 @@ describe('CalendarHeader Component', () => {
   beforeEach(() => {
     wrapper = mount(VkCalendarHeader, {
       props: {
-        ...baseProps
+        ...baseProps()
       }
     })
   })

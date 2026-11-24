@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, nextTick, computed } from 'vue'
+import type { DateValue } from '@internationalized/date'
 import type { DatepickerProps } from '#valkoui/types/Datepicker'
 import styles from '#valkoui/styles/Datepicker.styles.ts'
 import VkInput from './Input.vue'
@@ -73,7 +74,7 @@ onBeforeUnmount(() => document.removeEventListener('mousedown', handleClickOutsi
           :min-date="minDate"
           :max-date="maxDate"
           :disable-weekends="disableWeekends"
-          @update:model-value="(value: EpochTimeStamp) => emit('update:modelValue', value)"
+          @update:model-value="(value: DateValue) => emit('update:modelValue', value)"
           @finalize-selection="emit('close')"
         />
       </div>

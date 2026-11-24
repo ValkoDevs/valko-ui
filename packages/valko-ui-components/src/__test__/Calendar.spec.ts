@@ -1,188 +1,127 @@
-import { ref, computed, toValue } from 'vue'
-import { VueWrapper, mount, shallowMount } from '@vue/test-utils'
+import { mount, VueWrapper } from '@vue/test-utils'
+import { CalendarDate } from '@internationalized/date'
 import VkCalendar from '#valkoui/components/Calendar.vue'
-import type { AdapterResult } from '#valkoui/types/Calendar'
+import useDateAdapter from '#valkoui/composables/useDateAdapter'
+import type { CalendarAdapter, CalendarProps } from '#valkoui/types/Calendar'
 
-const { useDateAdapter } = vi.hoisted(() => ({
-  useDateAdapter: vi.fn(() => ([
-    ref(1729017518),
-    computed(() => '2024-10-15'),
-    {
-      formattedDates: computed(() => ({
-        selected: {
-          day: 15,
-          month: 9,
-          year: 2024,
-          lastDayOfMonth: 31,
-          firstWeekDay: 2,
-          obj: new Date(2024, 10, 15)
-        },
-        display: {
-          day: 15,
-          month: 9,
-          year: 2024,
-          lastDayOfMonth: 31,
-          firstWeekDay: 2,
-          obj: new Date(2024, 10, 15)
-        }
-      })),
-      disabledDates: computed(() => [
-        1705320000000,
-        1710936000000,
-        1717545600000,
-        1723420800000,
-        1736953200000,
-        1900249200000,
-        2215004400000
-      ]),
-      onSelectDay: vi.fn(() => 1728961200000),
-      onSelectMonth: vi.fn(() => 1727751600000),
-      onSelectYear: vi.fn(() => 1704078000000),
-      getWeekdays: () => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      getMonths: () => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    }
-  ] as AdapterResult))
-}))
+let adapter: CalendarAdapter
+const modelValue = new CalendarDate(2024, 10, 15)
 
-vi.mock('#valkoui/composables/useDateAdapter.ts', () => ({
-  default: useDateAdapter
-}))
+beforeEach(() => {
+  const [ model, , adapterResult ] = useDateAdapter({ format: 'YYYY-MM-DD' })
+  model.value = modelValue
+  adapter = adapterResult
+})
 
-const [ model, , adapter ] = useDateAdapter()
-const modelValue = toValue(model)
+const dayButton = (wrapper: VueWrapper, day: string) =>
+  wrapper.findAll('.vk-calendar__grid-button').find(button => button.text() === day)
 
 describe('Calendar component', () => {
-  let wrapper: VueWrapper
-
   describe('Props', () => {
     describe('With default props', () => {
-      beforeEach(() => {
-        wrapper = mount(VkCalendar, {
+      it('should render', () => {
+        const wrapper = mount(VkCalendar, {
           props: {
             modelValue,
             adapter
           }
         })
-      })
 
-      it('should render', () => {
         expect(wrapper.find('.vk-calendar').exists()).toBe(true)
       })
 
-      it('should be color primary', async () => {
-        const button = wrapper.findAll('.vk-calendar__grid-button')[14]
-        await button.trigger('click')
+      it('should be color primary', () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter
+          }
+        })
 
-        expect(button.classes()).toContain('bg-primary')
+        expect(dayButton(wrapper, '15')!.classes()).toContain('bg-primary')
       })
 
       it('should be size md', () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter
+          }
+        })
+
         expect(wrapper.find('.text-base').exists()).toBe(true)
       })
 
-      it('should be variant filled', async () => {
-        const button = wrapper.findAll('.vk-calendar__grid-button')[14]
-        await button.trigger('click')
-        expect(button.classes()).toContain('bg-primary')
+      it('should be variant filled', () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter
+          }
+        })
+
+        expect(wrapper.find('.vk-calendar__filled').exists()).toBe(true)
       })
 
       it('should be shape soft', () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter
+          }
+        })
+
         expect(wrapper.find('.vk-calendar__grid-button').classes()).toContain('rounded-sm')
+      })
+
+      it('should have a root aria-label starting with Calendar by default', () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter
+          }
+        })
+
+        expect(wrapper.element.getAttribute('aria-label')).toMatch(/^Calendar,/)
+      })
+    })
+
+    describe('calendarLabel prop', () => {
+      it('should use the calendarLabel in the root aria-label when set', () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter,
+            calendarLabel: 'Appointment picker'
+          }
+        })
+
+        expect(wrapper.element.getAttribute('aria-label')).toMatch(/^Appointment picker,/)
       })
     })
 
     describe('When color prop changes', () => {
-      it('should be color primary when props.color is primary', async () => {
-        wrapper = mount(VkCalendar, {
+      it.each([
+        ['primary', 'bg-primary'],
+        ['secondary', 'bg-secondary'],
+        ['positive', 'bg-positive'],
+        ['accent', 'bg-accent'],
+        ['warning', 'bg-warning'],
+        ['negative', 'bg-negative']
+      ])('should be color %s when props.color is %s', async (color, colorClass) => {
+        const wrapper = mount(VkCalendar, {
           props: {
-            color: 'primary',
+            color: color as CalendarProps['color'],
             modelValue,
             adapter
           }
         })
 
-        const button = wrapper.findAll('.vk-calendar__grid-button')[14]
-        await button.trigger('click')
-
-        expect(button.classes()).toContain('bg-primary')
+        expect(dayButton(wrapper, '15')!.classes()).toContain(colorClass)
       })
 
-      it('should be color secondary when props.color is secondary', async () => {
-        wrapper = mount(VkCalendar, {
-          props: {
-            color: 'secondary',
-            modelValue,
-            adapter
-          }
-        })
-
-        const button = wrapper.findAll('.vk-calendar__grid-button')[14]
-        await button.trigger('click')
-
-        expect(button.classes()).toContain('bg-secondary')
-      })
-
-      it('should be color positive when props.color is positive', async () => {
-        wrapper = mount(VkCalendar, {
-          props: {
-            color: 'positive',
-            modelValue,
-            adapter
-          }
-        })
-
-        const button = wrapper.findAll('.vk-calendar__grid-button')[14]
-        await button.trigger('click')
-
-        expect(button.classes()).toContain('bg-positive')
-      })
-
-      it('should be color accent when props.color is accent', async () => {
-        wrapper = mount(VkCalendar, {
-          props: {
-            color: 'accent',
-            modelValue,
-            adapter
-          }
-        })
-
-        const button = wrapper.findAll('.vk-calendar__grid-button')[14]
-        await button.trigger('click')
-
-        expect(button.classes()).toContain('bg-accent')
-      })
-
-      it('should be color warning when props.color is warning', async () => {
-        wrapper = mount(VkCalendar, {
-          props: {
-            color: 'warning',
-            modelValue,
-            adapter
-          }
-        })
-        const button = wrapper.findAll('.vk-calendar__grid-button')[14]
-        await button.trigger('click')
-
-        expect(button.classes()).toContain('bg-warning')
-      })
-
-      it('should be color negative when props.color is negative', async () => {
-        wrapper = mount(VkCalendar, {
-          props: {
-            color: 'negative',
-            modelValue,
-            adapter
-          }
-        })
-
-        const button = wrapper.findAll('.vk-calendar__grid-button')[14]
-        await button.trigger('click')
-
-        expect(button.classes()).toContain('bg-negative')
-      })
-
-      it('should be color surface when props.color is surface', async () => {
-        wrapper = mount(VkCalendar, {
+      it('should be color surface when props.color is surface and no day is selected', () => {
+        const wrapper = mount(VkCalendar, {
           props: {
             color: 'surface',
             modelValue,
@@ -190,104 +129,50 @@ describe('Calendar component', () => {
           }
         })
 
-        const button = wrapper.findAll('.vk-calendar__grid-button')[14]
-        await button.trigger('click')
-
-        expect(button.classes()).toContain('bg-surface-container-highest')
+        expect(dayButton(wrapper, '15')!.classes()).toContain('bg-surface-container-highest')
       })
     })
 
     describe('When shape prop changes', () => {
-      it('should be rounded when props.shape is rounded', () => {
-        wrapper = mount(VkCalendar, {
+      it.each([
+        ['rounded', 'rounded-full'],
+        ['soft', 'rounded-sm'],
+        ['square', 'rounded-none']
+      ])('should be %s when props.shape is %s', (shape, shapeClass) => {
+        const wrapper = mount(VkCalendar, {
           props: {
-            shape: 'rounded',
+            shape: shape as CalendarProps['shape'],
             modelValue,
             adapter
           }
         })
 
-        expect(wrapper.find('.vk-calendar__grid-button').classes()).toContain('rounded-full')
-      })
-
-      it('should be soft when props.shape is soft', () => {
-        wrapper = mount(VkCalendar, {
-          props: {
-            shape: 'soft',
-            modelValue,
-            adapter
-          }
-        })
-
-        expect(wrapper.find('.vk-calendar__grid-button').classes()).toContain('rounded-sm')
-      })
-
-      it('should be square when props.shape is square', () => {
-        wrapper = mount(VkCalendar, {
-          props: {
-            shape: 'square',
-            modelValue,
-            adapter
-          }
-        })
-
-        expect(wrapper.find('.vk-calendar__grid-button').classes()).toContain('rounded-none')
+        expect(wrapper.find('.vk-calendar__grid-button').classes()).toContain(shapeClass)
       })
     })
 
     describe('When size prop changes', () => {
-      it('should be xs when props.size is xs', () => {
-        wrapper = mount(VkCalendar, {
+      it.each([
+        ['xs', 'text-xs'],
+        ['sm', 'text-sm'],
+        ['md', 'text-base'],
+        ['lg', 'text-lg']
+      ])('should be %s when props.size is %s', (size, sizeClass) => {
+        const wrapper = mount(VkCalendar, {
           props: {
-            size: 'xs',
+            size: size as CalendarProps['size'],
             modelValue,
             adapter
           }
         })
 
-        expect(wrapper.find('.text-xs').exists()).toBe(true)
-      })
-
-      it('should be sm when props.size is sm', () => {
-        wrapper = mount(VkCalendar, {
-          props: {
-            size: 'sm',
-            modelValue,
-            adapter
-          }
-        })
-
-        expect(wrapper.find('.text-sm').exists()).toBe(true)
-      })
-
-      it('should be md when props.size is md', () => {
-        wrapper = mount(VkCalendar, {
-          props: {
-            size: 'md',
-            modelValue,
-            adapter
-          }
-        })
-
-        expect(wrapper.find('.text-base').exists()).toBe(true)
-      })
-
-      it('should be lg when props.size is lg', () => {
-        wrapper = mount(VkCalendar, {
-          props: {
-            size: 'lg',
-            modelValue,
-            adapter
-          }
-        })
-
-        expect(wrapper.find('.text-lg').exists()).toBe(true)
+        expect(wrapper.find(`.${sizeClass}`).exists()).toBe(true)
       })
     })
 
     describe('When variant prop changes', () => {
       it('should be filled when props.variant is filled', () => {
-        wrapper = mount(VkCalendar, {
+        const wrapper = mount(VkCalendar, {
           props: {
             variant: 'filled',
             modelValue,
@@ -299,7 +184,7 @@ describe('Calendar component', () => {
       })
 
       it('should be outlined when props.variant is outlined', () => {
-        wrapper = mount(VkCalendar, {
+        const wrapper = mount(VkCalendar, {
           props: {
             variant: 'outlined',
             modelValue,
@@ -311,7 +196,7 @@ describe('Calendar component', () => {
       })
 
       it('should be ghost when props.variant is ghost', () => {
-        wrapper = mount(VkCalendar, {
+        const wrapper = mount(VkCalendar, {
           props: {
             variant: 'ghost',
             modelValue,
@@ -324,40 +209,27 @@ describe('Calendar component', () => {
     })
 
     describe('When format prop changes', () => {
-      it('should render the correct view when format prop is YYYY', () => {
-        wrapper = shallowMount(VkCalendar, {
+      it.each([
+        ['YYYY', 'vk-calendar-year-view-stub'],
+        ['MM', 'vk-calendar-month-view-stub'],
+        ['DD', 'vk-calendar-day-view-stub']
+      ])('should render the correct view when format prop is %s', (format, stub) => {
+        const wrapper = mount(VkCalendar, {
           props: {
             modelValue,
             adapter,
-            format: 'YYYY'
+            format
+          },
+          global: {
+            stubs: {
+              VkCalendarDayView: true,
+              VkCalendarMonthView: true,
+              VkCalendarYearView: true
+            }
           }
         })
 
-        expect(wrapper.find('vk-calendar-year-view-stub').exists()).toBe(true)
-      })
-
-      it('should render the correct view when format prop is MM', () => {
-        wrapper = shallowMount(VkCalendar, {
-          props: {
-            modelValue,
-            adapter,
-            format: 'MM'
-          }
-        })
-
-        expect(wrapper.find('vk-calendar-month-view-stub').exists()).toBe(true)
-      })
-
-      it('should render the correct view when format prop is DD', () => {
-        wrapper = shallowMount(VkCalendar, {
-          props: {
-            modelValue,
-            adapter,
-            format: 'DD'
-          }
-        })
-
-        expect(wrapper.find('vk-calendar-day-view-stub').exists()).toBe(true)
+        expect(wrapper.find(stub).exists()).toBe(true)
       })
     })
   })
@@ -478,64 +350,41 @@ describe('Calendar component', () => {
 
         await wrapper.find('.vk-calendar__period-button').trigger('click')
 
-        expect(wrapper.attributes()).toHaveProperty('data-selection-type', 'day-month')
+        expect(wrapper.find('.vk-calendar').attributes()).toHaveProperty('data-selection-type', 'day-month')
       })
     })
 
     describe('onChangeMonth', () => {
-      it('should go to previous year and last month when clicking left arrow in January', async () => {
-        const customAdapter = {
-          ...adapter,
-          formattedDates: computed(() => ({
-            ...adapter.formattedDates.value,
-            display: {
-              ...adapter.formattedDates.value.display,
-              month: 0,
-              year: 2024
-            }
-          }))
-        }
-
+      it('should go to the previous month when clicking the left arrow', async () => {
         const wrapper = mount(VkCalendar, {
           props: {
             modelValue,
-            adapter: customAdapter,
+            adapter,
             format: 'YYYY-MM-DD'
           }
         })
 
         await wrapper.findAll('.vk-calendar__arrows').at(0)?.trigger('click')
 
-        expect(customAdapter.onSelectMonth).toHaveBeenCalledWith(11)
+        expect(wrapper.find('.vk-calendar__period-button').text()).toBe('Sep - 2024')
       })
 
-      it('should go to next year and first month when clicking right arrow in December', async () => {
-        const customAdapter = {
-          ...adapter,
-          formattedDates: computed(() => ({
-            ...adapter.formattedDates.value,
-            display: {
-              ...adapter.formattedDates.value.display,
-              month: 11,
-              year: 2024
-            }
-          }))
-        }
-
+      it('should go to the next month and year when clicking the right arrow in December', async () => {
         const wrapper = mount(VkCalendar, {
           props: {
             modelValue,
-            adapter: customAdapter,
+            adapter,
             format: 'YYYY-MM-DD'
           }
         })
 
+        await wrapper.setProps({ modelValue: new CalendarDate(2024, 12, 15) })
         await wrapper.findAll('.vk-calendar__arrows').at(1)?.trigger('click')
 
-        expect(customAdapter.onSelectMonth).toHaveBeenCalledWith(0)
+        expect(wrapper.find('.vk-calendar__period-button').text()).toBe('Jan - 2025')
       })
 
-      it('should go to the selected month when clicking right arrow in a non-edge month', async () => {
+      it('should go to the next month when clicking the right arrow', async () => {
         const wrapper = mount(VkCalendar, {
           props: {
             modelValue,
@@ -546,8 +395,43 @@ describe('Calendar component', () => {
 
         await wrapper.findAll('.vk-calendar__arrows').at(1)?.trigger('click')
 
-        expect(adapter.onSelectMonth).toHaveBeenCalledWith(10)
+        expect(wrapper.find('.vk-calendar__period-button').text()).toBe('Nov - 2024')
       })
+    })
+  })
+
+  describe('Disabled dates & min/max', () => {
+    it('should disable days outside the min/max range', () => {
+      const wrapper = mount(VkCalendar, {
+        props: {
+          modelValue,
+          adapter,
+          minDate: new CalendarDate(2024, 10, 10),
+          maxDate: new CalendarDate(2024, 10, 20)
+        }
+      })
+
+      expect(dayButton(wrapper, '5')!.attributes('data-disabled')).toBeDefined()
+      expect(dayButton(wrapper, '25')!.attributes('data-disabled')).toBeDefined()
+      expect(dayButton(wrapper, '15')!.attributes('data-disabled')).toBeUndefined()
+    })
+
+    it('should disable days included in disabledDates', () => {
+      const [ model, , disabledAdapter ] = useDateAdapter({
+        format: 'YYYY-MM-DD',
+        disabledDates: [new CalendarDate(2024, 10, 17)]
+      })
+      model.value = modelValue
+
+      const wrapper = mount(VkCalendar, {
+        props: {
+          modelValue,
+          adapter: disabledAdapter
+        }
+      })
+
+      expect(dayButton(wrapper, '17')!.attributes('data-disabled')).toBeDefined()
+      expect(dayButton(wrapper, '18')!.attributes('data-disabled')).toBeUndefined()
     })
   })
 
@@ -560,8 +444,7 @@ describe('Calendar component', () => {
         }
       })
 
-      const button = wrapper.findAll('.vk-calendar__grid-button')[14]
-      await button.trigger('click')
+      await dayButton(wrapper, '20')!.trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('update:modelValue')
     })
@@ -576,10 +459,9 @@ describe('Calendar component', () => {
           }
         })
 
-        const button = wrapper.findAll('.vk-calendar__grid-button')[15]
-        await button.trigger('click')
+        await wrapper.findAll('.vk-calendar__grid-button').at(0)?.trigger('click')
 
-        expect(wrapper.emitted('update:modelValue')![0]).toEqual([1704078000000])
+        expect(wrapper.emitted('update:modelValue')![0]).toEqual([new CalendarDate(2010, 1, 1)])
       })
 
       it('should emit only the month if props format only contains M', async () => {
@@ -591,13 +473,12 @@ describe('Calendar component', () => {
           }
         })
 
-        const button = wrapper.findAll('.vk-calendar__grid-button')[9]
-        await button.trigger('click')
+        await wrapper.findAll('.vk-calendar__grid-button').at(0)?.trigger('click')
 
-        expect(wrapper.emitted('update:modelValue')![0]).toEqual([1727751600000])
+        expect(wrapper.emitted('update:modelValue')![0]).toEqual([new CalendarDate(2024, 1, 1)])
       })
 
-      it('should emit only the day if props format only contains M', async () => {
+      it('should emit only the day if props format only contains D', async () => {
         const wrapper = mount(VkCalendar, {
           props: {
             modelValue,
@@ -606,10 +487,9 @@ describe('Calendar component', () => {
           }
         })
 
-        const button = wrapper.findAll('.vk-calendar__grid-button')[15]
-        await button.trigger('click')
+        await dayButton(wrapper, '20')!.trigger('click')
 
-        expect(wrapper.emitted('update:modelValue')![0]).toEqual([1728961200000])
+        expect(wrapper.emitted('update:modelValue')![0]).toEqual([new CalendarDate(2024, 10, 20)])
       })
     })
   })

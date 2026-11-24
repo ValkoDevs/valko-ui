@@ -1,56 +1,17 @@
-import { ref, computed, toValue, nextTick } from 'vue'
+import { nextTick } from 'vue'
 import { VueWrapper, mount } from '@vue/test-utils'
+import { CalendarDate } from '@internationalized/date'
 import VkDatepicker from '#valkoui/components/Datepicker.vue'
-import type { AdapterResult } from '#valkoui/types/Calendar'
+import useDateAdapter from '#valkoui/composables/useDateAdapter'
+import type { CalendarAdapter } from '#valkoui/types/Calendar'
 
-const { useDateAdapter } = vi.hoisted(() => ({
-  useDateAdapter: vi.fn(() => ([
-    ref(1729017518),
-    computed(() => '2024-10-15'),
-    {
-      formattedDates: computed(() => ({
-        selected: {
-          day: 15,
-          month: 9,
-          year: 2024,
-          lastDayOfMonth: 31,
-          firstWeekDay: 2,
-          obj: new Date(2024, 10, 15)
-        },
-        display: {
-          day: 15,
-          month: 9,
-          year: 2024,
-          lastDayOfMonth: 31,
-          firstWeekDay: 2,
-          obj: new Date(2024, 10, 15)
-        }
-      })),
-      disabledDates: computed(() => [
-        1705320000000,
-        1710936000000,
-        1717545600000,
-        1723420800000,
-        1736953200000,
-        1900249200000,
-        2215004400000
-      ]),
-      onSelectDay: () => 1728961200000,
-      onSelectMonth: () => 1727751600000,
-      onSelectYear: () => 1704078000000,
-      getWeekdays: () => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      getMonths: () => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    }
-  ] as AdapterResult))
-}))
+let adapter: CalendarAdapter
+const modelValue = new CalendarDate(2024, 10, 15)
+const parsedModel = '2024-10-15'
 
-vi.mock('#valkoui/composables/useDateAdapter.ts', () => ({
-  default: useDateAdapter
-}))
-
-const [ model, parsedModelValue, adapter ] = useDateAdapter()
-const modelValue = toValue(model)
-const parsedModel = toValue(parsedModelValue)
+beforeEach(() => {
+  [ , , adapter ] = useDateAdapter({ format: 'YYYY-MM-DD' })
+})
 describe('Datepicker component', () => {
   let wrapper: VueWrapper
 

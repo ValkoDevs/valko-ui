@@ -1,236 +1,220 @@
+import { h } from 'vue'
+import { mount, VueWrapper } from '@vue/test-utils'
+import { CalendarDate } from '@internationalized/date'
+import type { DateValue } from '@internationalized/date'
+import { CalendarRoot } from 'reka-ui'
 import VkCalendarDayView from '#valkoui/components/CalendarDayView.vue'
-import { ref, computed, toValue } from 'vue'
-import { VueWrapper, mount } from '@vue/test-utils'
-import type { AdapterResult } from '#valkoui/types/Calendar'
+import useDateAdapter from '#valkoui/composables/useDateAdapter'
+import type { CalendarAdapter } from '#valkoui/types/Calendar'
 
-const { useDateAdapter } = vi.hoisted(() => ({
-  useDateAdapter: vi.fn(() => ([
-    ref(1729017518),
-    computed(() => '2024-10-15'),
-    {
-      formattedDates: computed(() => ({
-        selected: {
-          day: 15,
-          month: 9,
-          year: 2024,
-          lastDayOfMonth: 31,
-          firstWeekDay: 2,
-          obj: new Date(2024, 10, 15)
-        },
-        display: {
-          day: 15,
-          month: 9,
-          year: 2024,
-          lastDayOfMonth: 31,
-          firstWeekDay: 2,
-          obj: new Date(2024, 10, 15)
-        }
-      })),
-      disabledDates: computed(() => [
-        1705320000000,
-        1710936000000,
-        1717545600000,
-        1723420800000,
-        1736953200000,
-        1900249200000,
-        2215004400000
-      ]),
-      onSelectDay: vi.fn(() => 1728961200000),
-      onSelectMonth: vi.fn(() => 1727751600000),
-      onSelectYear: vi.fn(() => 1704078000000),
-      getWeekdays: () => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      getMonths: () => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    }
-  ] as AdapterResult))
-}))
+const modelValue = new CalendarDate(2024, 10, 15)
+const october = new CalendarDate(2024, 10, 1)
 
-vi.mock('#valkoui/composables/useDateAdapter.ts', () => ({
-  default: useDateAdapter
-}))
+const mountDayView = (options: {
+  adapter: CalendarAdapter
+  modelValue?: DateValue
+  placeholder?: DateValue
+  onUpdateModelValue?: (date: DateValue | undefined) => void
+  onChangeMonth?: (operation: 1 | -1) => void
+  onViewChange?: (view: string) => void
+  attachTo?: HTMLElement
+}) => mount({
+  components: { VkCalendarDayView },
+  setup() {
+    return () => h(CalendarRoot, {
+      modelValue: options.modelValue ?? modelValue,
+      placeholder: options.placeholder ?? october,
+      isDateDisabled: options.adapter.isDateDisabled,
+      'onUpdate:modelValue': options.onUpdateModelValue
+    }, {
+      default: ({ grid, weekDays }: { grid: { value: DateValue, rows: DateValue[][] }[], weekDays: string[] }) => h(VkCalendarDayView, {
+        modelValue: options.modelValue ?? modelValue,
+        adapter: options.adapter,
+        grid: grid[0],
+        weekDays,
+        onChangeMonth: options.onChangeMonth,
+        onViewChange: options.onViewChange
+      })
+    })
+  }
+}, { attachTo: options.attachTo })
 
-const [ model, , adapter ] = useDateAdapter()
-const modelValue = toValue(model)
-
-const baseProps = {
-  modelValue,
-  adapter,
-  selectionType: 'day',
-  format: 'DD-MM-YYYY',
-  daysInMonth: adapter.formattedDates.value.display.lastDayOfMonth,
-  startsOn: adapter.formattedDates.value.display.firstWeekDay,
-  selected: adapter.formattedDates.value.selected,
-  display: adapter.formattedDates.value.display,
-  weekDays: adapter.getWeekdays(),
-  monthNames: adapter.getMonths()
-}
+const dayButtons = (wrapper: VueWrapper) =>
+  wrapper.findAll('.vk-calendar__grid-button').filter(btn => !isNaN(Number(btn.text())))
 
 describe('CalendarDayView Component', () => {
   describe('Rendering', () => {
-    let wrapper: VueWrapper
+    it('should render the component', () => {
+      const [, , adapter] = useDateAdapter({})
+      adapter.onPlaceholderChange(october)
+      const wrapper = mountDayView({ adapter })
 
-    beforeEach(() => {
-      wrapper = mount(VkCalendarDayView, {
-        props: {
-          ...baseProps
-        }
-      })
+      expect(wrapper.exists()).toBe(true)
     })
 
-    it('should render the component', () => {
-      expect(wrapper.exists()).toBe(true)
+    it.each([
+      ['February 2023', new CalendarDate(2023, 2, 1), 28],
+      ['February 2024', new CalendarDate(2024, 2, 1), 29],
+      ['April 2024', new CalendarDate(2024, 4, 1), 30],
+      ['January 2024', new CalendarDate(2024, 1, 1), 31]
+    ])('renders %i day cells for %s', (_label, placeholder, days) => {
+      const [, , adapter] = useDateAdapter({})
+      adapter.onPlaceholderChange(placeholder)
+      const wrapper = mountDayView({ adapter, placeholder })
+
+      expect(dayButtons(wrapper).length).toBe(days)
+    })
+
+    it('should render outside-view days as hidden placeholders', () => {
+      const [, , adapter] = useDateAdapter({})
+      adapter.onPlaceholderChange(october)
+      const wrapper = mountDayView({ adapter })
+
+      // October 2024: 2 leading (Sep 29-30) + 2 trailing (Nov 1-2) outside-view cells
+      expect(wrapper.findAll('[role="gridcell"]').length).toBe(35)
+      expect(wrapper.findAll('[data-reka-calendar-cell-trigger]').length).toBe(31)
     })
   })
 
-  describe('Methods and computeds', () => {
-    let wrapper: VueWrapper
+  describe('Selection styling', () => {
+    it('should grid button render with correct variant if selected', () => {
+      const [, , adapter] = useDateAdapter({})
+      adapter.onPlaceholderChange(october)
+      const wrapper = mountDayView({ adapter })
 
-    beforeEach(() => {
-      wrapper = mount(VkCalendarDayView, {
-        props: {
-          ...baseProps
-        }
+      const selectedDayButton = dayButtons(wrapper).find(btn => btn.text() === '15')!
+
+      expect(selectedDayButton.classes()).toContain('bg-primary')
+    })
+
+    it('should grid button render with correct variant if not selected', () => {
+      const [, , adapter] = useDateAdapter({})
+      adapter.onPlaceholderChange(october)
+      const wrapper = mountDayView({ adapter })
+
+      const unselectedDayButton = dayButtons(wrapper).find(btn => btn.text() === '10')!
+
+      expect(unselectedDayButton.classes()).not.toContain('bg-primary')
+      expect(unselectedDayButton.classes()).toContain('text-on-surface')
+    })
+  })
+
+  describe('isArrowDisabled', () => {
+    it('should disable previous month arrow if min date is reached', () => {
+      const [, , adapter] = useDateAdapter({ minDate: new CalendarDate(2024, 10, 1) })
+      adapter.onPlaceholderChange(october)
+      const wrapper = mountDayView({ adapter })
+
+      const isDisabled = wrapper.findAll('.vk-calendar__arrows').at(0)?.attributes('aria-disabled') === 'true'
+
+      expect(isDisabled).toBe(true)
+    })
+
+    it('should disable next month arrow if max date is reached', () => {
+      const [, , adapter] = useDateAdapter({ maxDate: new CalendarDate(2024, 10, 30) })
+      adapter.onPlaceholderChange(october)
+      const wrapper = mountDayView({ adapter })
+
+      const isDisabled = wrapper.findAll('.vk-calendar__arrows').at(1)?.attributes('aria-disabled') === 'true'
+
+      expect(isDisabled).toBe(true)
+    })
+  })
+
+  describe('isDateDisabled and disable weekends', () => {
+    it('should disable weekend days if disableWeekends is true', () => {
+      const [, , adapter] = useDateAdapter({ disableWeekends: true })
+      adapter.onPlaceholderChange(october)
+      const wrapper = mountDayView({ adapter })
+
+      const weekendDayButtons = dayButtons(wrapper).filter(btn => {
+        const day = Number(btn.text())
+        const date = new Date(2024, 9, day)
+        const dayOfWeek = date.getDay()
+        return dayOfWeek === 0 || dayOfWeek === 6
+      })
+
+      weekendDayButtons.forEach(btn => {
+        expect(btn.attributes('aria-disabled')).toBe('true')
       })
     })
 
-    describe('gridCells', () => {
-      it.each([28, 29, 30, 31])('renders %i day cells for a month with %i days', (days) => {
-        const wrapper = mount(VkCalendarDayView, {
-          props: {
-            ...baseProps,
-            daysInMonth: days,
-            startsOn: 0
-          }
-        })
+    it('should disable days included in disabledDates', () => {
+      const [, , adapter] = useDateAdapter({ disabledDates: [new CalendarDate(2024, 10, 17)] })
+      adapter.onPlaceholderChange(october)
+      const wrapper = mountDayView({ adapter })
 
-        const dayButtons = wrapper.findAll('.vk-calendar__grid-button').filter(btn => !isNaN(Number(btn.text())))
+      const disabledButton = dayButtons(wrapper).find(btn => btn.text() === '17')!
 
-        expect(dayButtons.length).toBe(days)
-      })
+      expect(disabledButton.attributes('aria-disabled')).toBe('true')
+    })
+  })
+
+  describe('onArrowClick', () => {
+    it('should emit changeMonth with -1 when previous arrow is clicked', async () => {
+      const [, , adapter] = useDateAdapter({})
+      adapter.onPlaceholderChange(october)
+      const onChangeMonth = vi.fn()
+      const wrapper = mountDayView({ adapter, onChangeMonth })
+
+      await wrapper.findAll('.vk-calendar__arrows').at(0)?.trigger('click')
+
+      expect(onChangeMonth).toHaveBeenCalledWith(-1)
     })
 
-    describe('isSelected', () => {
-      it('should grid button render with correct variant if selected', () => {
-        const selectedDayButton = wrapper.findAll('.vk-calendar__grid-button').find(btn => btn.text() === '15')
-        const isSelected = selectedDayButton?.classes().includes('bg-primary')
+    it('should emit changeMonth with 1 when next arrow is clicked', async () => {
+      const [, , adapter] = useDateAdapter({})
+      adapter.onPlaceholderChange(october)
+      const onChangeMonth = vi.fn()
+      const wrapper = mountDayView({ adapter, onChangeMonth })
 
-        expect(isSelected).toBe(true)
-      })
+      await wrapper.findAll('.vk-calendar__arrows').at(1)?.trigger('click')
 
-      it('should grid button render with correct variant if not selected', () => {
-        const selectedDayButton = wrapper.findAll('.vk-calendar__grid-button').find(btn => btn.text() === '10')
-        const isSelected = selectedDayButton?.classes().includes('bg-primary')
-
-        expect(isSelected).toBe(false)
-      })
-
-      it('should grid button render with correct variant if not selected', () => {
-        const unselectedDayButton = wrapper.findAll('.vk-calendar__grid-button').find(btn => btn.text() === '10')
-        const isSelected = unselectedDayButton?.classes().includes('text-on-surface')
-
-        expect(isSelected).toBe(true)
-      })
+      expect(onChangeMonth).toHaveBeenCalledWith(1)
     })
+  })
 
-    describe('isArrowDisabled', () => {
-      it('should disable previous month arrow if min date is reached', () => {
-        const wrapper = mount(VkCalendarDayView, {
-          props: {
-            ...baseProps,
-            min: {
-              day: 1,
-              month: 9,
-              year: 2024,
-              lastDayOfMonth: 31,
-              firstWeekDay: 2,
-              obj: new Date(2024, 10, 1)
-            }
-          }
-        })
+  describe('Keyboard', () => {
+    it('should move focus to the next day cell when ArrowRight is pressed', async () => {
+      const [, , adapter] = useDateAdapter({})
+      adapter.onPlaceholderChange(october)
+      const wrapper = mountDayView({ adapter, attachTo: document.body })
 
-        const isDisabled = wrapper.findAll('.vk-calendar__arrows').at(0)?.attributes('aria-disabled') === 'true'
+      const buttons = dayButtons(wrapper)
+      const firstButton = buttons[0].element as HTMLElement
+      firstButton.focus()
 
-        expect(isDisabled).toBe(true)
-      })
+      expect(document.activeElement).toBe(firstButton)
 
-      it('should disable next month arrow if max date is reached', () => {
-        const wrapper = mount(VkCalendarDayView, {
-          props: {
-            ...baseProps,
-            max: {
-              day: 30,
-              month: 9,
-              year: 2024,
-              lastDayOfMonth: 31,
-              firstWeekDay: 2,
-              obj: new Date(2024, 10, 30)
-            }
-          }
-        })
+      await buttons[0].trigger('keydown', { key: 'ArrowRight', code: 'ArrowRight' })
 
-        const isDisabled = wrapper.findAll('.vk-calendar__arrows').at(1)?.attributes('aria-disabled') === 'true'
+      expect(document.activeElement).toBe(buttons[1].element)
 
-        expect(isDisabled).toBe(true)
-      })
-    })
-
-    describe('isWeekend and disable weekends', () => {
-      it('should disable weekend days if disableWeekends is true', () => {
-        const wrapper = mount(VkCalendarDayView, {
-          props: {
-            ...baseProps,
-            disableWeekends: true
-          }
-        })
-
-        const weekendDayButtons = wrapper.findAll('.vk-calendar__grid-button').filter(btn => {
-          const day = Number(btn.text())
-          const date = new Date(2024, 9, day)
-          const dayOfWeek = date.getDay()
-          return dayOfWeek === 0 || dayOfWeek === 6
-        })
-
-        weekendDayButtons.forEach(btn => {
-          expect(btn.attributes('aria-disabled')).toBe('true')
-        })
-      })
-    })
-
-    describe('onArrowClick', () => {
-      it('should emit changeMonth with correct value when previous arrow is clicked', async () => {
-        await wrapper.findAll('.vk-calendar__arrows').at(0)?.trigger('click')
-
-        expect(wrapper.emitted('changeMonth')?.at(0)).toEqual([8])
-      })
-
-      it('should emit changeMonth with correct value when next arrow is clicked', async () => {
-        await wrapper.findAll('.vk-calendar__arrows').at(1)?.trigger('click')
-
-        expect(wrapper.emitted('changeMonth')?.at(0)).toEqual([10])
-      })
+      wrapper.unmount()
     })
   })
 
   describe('Emits', () => {
-    let wrapper: VueWrapper
-
-    beforeEach(() => {
-      wrapper = mount(VkCalendarDayView, {
-        props: {
-          ...baseProps
-        }
-      })
-    })
-
-    it('should emit selectDay when a day is selected', async () => {
-      await wrapper.findAll('.vk-calendar__grid-button').at(14)?.trigger('click')
-
-      expect(wrapper.emitted()).toHaveProperty('selectDay')
-    })
-
     it('should emit viewChange when period button is clicked', async () => {
+      const [, , adapter] = useDateAdapter({})
+      adapter.onPlaceholderChange(october)
+      const onViewChange = vi.fn()
+      const wrapper = mountDayView({ adapter, onViewChange })
+
       await wrapper.find('.vk-calendar__period-button').trigger('click')
 
-      expect(wrapper.emitted()).toHaveProperty('viewChange')
+      expect(onViewChange).toHaveBeenCalledWith('months')
+    })
+
+    it('should emit update:modelValue on the root when a day is clicked', async () => {
+      const [, , adapter] = useDateAdapter({})
+      adapter.onPlaceholderChange(october)
+      const onUpdateModelValue = vi.fn()
+      const wrapper = mountDayView({ adapter, onUpdateModelValue })
+
+      await dayButtons(wrapper).find(btn => btn.text() === '20')?.trigger('click')
+
+      expect(onUpdateModelValue).toHaveBeenCalledWith(new CalendarDate(2024, 10, 20))
     })
   })
 })

@@ -24,6 +24,7 @@ const s = computed(() => styles(props))
       :shape="shape"
       :class="s.arrows({ class: styleSlots?.arrows })"
       :disabled="disabledLeft"
+      aria-label="Previous month"
       @click="() => emit('previousClick')"
     >
       <vk-icon name="chevron-left" />
@@ -49,6 +50,7 @@ const s = computed(() => styles(props))
       :shape="shape"
       :class="s.arrows({ class: styleSlots?.arrows })"
       :disabled="disabledRight"
+      aria-label="Next month"
       @click="() => emit('nextClick')"
     >
       <vk-icon name="chevron-right" />

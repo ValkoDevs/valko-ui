@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { CalendarDate } from '@internationalized/date'
 import type { CalendarProps, SelectOption } from '#valkoui'
 
 const form = ref<Partial<CalendarProps>>({
@@ -7,15 +8,15 @@ const form = ref<Partial<CalendarProps>>({
   shape: 'soft',
   size: 'md',
   format: 'dddd, DD/MM/YYYY',
-  modelValue: 1728076036007,
+  modelValue: new CalendarDate(2024, 10, 5),
   disabledDates: [
-    1705320000000,
-    1710936000000,
-    1717545600000,
-    1723420800000,
-    1736953200000,
-    1900249200000,
-    2215004400000
+    new CalendarDate(2024, 1, 15),
+    new CalendarDate(2024, 3, 20),
+    new CalendarDate(2024, 6, 5),
+    new CalendarDate(2024, 8, 12),
+    new CalendarDate(2025, 1, 15),
+    new CalendarDate(2030, 3, 20),
+    new CalendarDate(2040, 3, 10)
   ],
   disableWeekends: false,
   locale: 'en-US'
@@ -150,7 +151,7 @@ const calendarProp: PropData[] = [
     key: 'adapterProp',
     prop: 'adapter',
     required: true,
-    description: 'As default we provide an adapter composable that uses native JS Date to provide the dates for the calendar.',
+    description: 'As default we provide an adapter composable that uses `@internationalized/date` to provide the dates for the calendar.',
     values: 'CalendarAdapter',
     default: '',
     apiType: 'custom-type'
@@ -159,8 +160,8 @@ const calendarProp: PropData[] = [
     key: 'modelValueProp',
     prop: 'modelValue',
     required: true,
-    description: 'The currently selected date, represented as an Epoch timestamp.',
-    values: 'EpochTimeStamp',
+    description: 'The currently selected date, represented as a `DateValue` from `@internationalized/date`.',
+    values: 'DateValue',
     default: '',
     apiType: 'primitive'
   },
@@ -187,7 +188,7 @@ const calendarProp: PropData[] = [
     prop: 'disabledDates',
     required: false,
     description: 'An array of specific dates to disable.',
-    values: 'EpochTimeStamp[]',
+    values: 'DateValue[]',
     default: '[]',
     apiType: 'primitive'
   },
@@ -204,8 +205,8 @@ const calendarProp: PropData[] = [
     key: 'minDateProp',
     prop: 'minDate',
     required: false,
-    description: 'The minimum selectable date as an Epoch timestamp.',
-    values: 'EpochTimeStamp',
+    description: 'The minimum selectable date as a `DateValue`.',
+    values: 'DateValue',
     default: '[]',
     apiType: 'primitive'
   },
@@ -213,9 +214,18 @@ const calendarProp: PropData[] = [
     key: 'maxDateProp',
     prop: 'maxDate',
     required: false,
-    description: 'The maximum selectable date as an Epoch timestamp.',
-    values: 'EpochTimeStamp',
+    description: 'The maximum selectable date as a `DateValue`.',
+    values: 'DateValue',
     default: '[]',
+    apiType: 'primitive'
+  },
+  {
+    key: 'calendarLabelProp',
+    prop: 'calendarLabel',
+    required: false,
+    description: 'Accessible name for the calendar, used as the prefix of the root `aria-label`.',
+    values: 'string',
+    default: '',
     apiType: 'primitive'
   },
   {
@@ -240,20 +250,20 @@ const calendarAdapterProps: PropData[] = [
     apiType: 'object'
   },
   {
-    key: 'disabledDatesProp',
-    prop: 'disabledDates',
+    key: 'isDateDisabledProp',
+    prop: 'isDateDisabled',
     required: true,
-    description: 'An array of disabled dates represented as timestamps.',
-    values: 'ComputedRef<number[]>',
-    default: '[]',
-    apiType: 'object'
+    description: 'Matcher that returns whether a given `DateValue` is disabled (by `disabledDates` or `disableWeekends`).',
+    values: '(date: DateValue) => boolean',
+    default: '',
+    apiType: 'function'
   },
   {
     key: 'onSelectDayProp',
     prop: 'onSelectDay',
     required: true,
-    description: 'Function to handle day selection. Receives the selected day as a parameter and returns the updated timestamp.',
-    values: '(day: number) => number',
+    description: 'Function to handle day selection. Receives the selected day as a parameter and returns the updated `DateValue`.',
+    values: '(day: number) => DateValue',
     default: '',
     apiType: 'function'
   },
@@ -261,8 +271,8 @@ const calendarAdapterProps: PropData[] = [
     key: 'onSelectMonthProp',
     prop: 'onSelectMonth',
     required: true,
-    description: 'Function to handle month selection. Receives the selected month as a parameter and returns the updated timestamp.',
-    values: '(month: number) => number',
+    description: 'Function to handle month selection. Receives the selected month as a parameter and returns the updated `DateValue`.',
+    values: '(month: number) => DateValue',
     default: '',
     apiType: 'function'
   },
@@ -270,8 +280,17 @@ const calendarAdapterProps: PropData[] = [
     key: 'onSelectYearProp',
     prop: 'onSelectYear',
     required: true,
-    description: 'Function to handle year selection. Receives the selected year as a parameter and returns the updated timestamp.',
-    values: '(year: number) => number',
+    description: 'Function to handle year selection. Receives the selected year as a parameter and returns the updated `DateValue`.',
+    values: '(year: number) => DateValue',
+    default: '',
+    apiType: 'function'
+  },
+  {
+    key: 'onPlaceholderChangeProp',
+    prop: 'onPlaceholderChange',
+    required: true,
+    description: 'Function to sync the displayed month/year (the Reka placeholder) with the adapter state.',
+    values: '(date: DateValue) => void',
     default: '',
     apiType: 'function'
   },
@@ -301,7 +320,7 @@ const adapterResultProps: PropData[] = [
     prop: 'AdapterResult',
     required: true,
     description: 'The return type result of the Adapter containing the model, parsed model, and adapter methods.',
-    values: '[\n Ref<EpochTimeStamp>, \n ComputedRef<string>, \n CalendarAdapter\n]',
+    values: '[\n Ref<DateValue>, \n ComputedRef<string>, \n CalendarAdapter\n]',
     default: '',
     apiType: 'object'
   }
@@ -740,7 +759,7 @@ const styles = {
         </div>
 
         <template #code>
-          <code-block :code="`${scriptCode}\n${generateSnippet<string>(':disabled-dates', { values: ['[1705320000000, 1710936000000]'], extraProps })}`" />
+          <code-block :code="`${scriptCode}\n${generateSnippet<string>(':disabled-dates', { values: ['[new CalendarDate(2024, 1, 15), new CalendarDate(2024, 3, 20)]'], extraProps })}`" />
         </template>
       </example-section>
     </template>

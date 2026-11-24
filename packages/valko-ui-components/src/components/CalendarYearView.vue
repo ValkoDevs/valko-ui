@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import type { CalendarYearViewProps } from '#valkoui/types/Calendar'
 import styles from '#valkoui/styles/Calendar.styles.ts'
 import VkCalendarHeader from './CalendarHeader.vue'
@@ -12,7 +12,7 @@ const emit = defineEmits(['selectYear'])
 
 const s = computed(() => styles(props))
 
-const jumps = ref(0)
+const jumps = ref(Math.floor((props.startsOn - 1970) / 20))
 
 const yearList = computed(() => {
   const start = 1970 + 20 * jumps.value
@@ -21,10 +21,6 @@ const yearList = computed(() => {
 })
 
 const onSelectYear = (year: number) => emit('selectYear', year)
-
-onMounted(() => {
-  jumps.value = Math.floor((props.startsOn - 1970) / 20)
-})
 </script>
 
 <template>
