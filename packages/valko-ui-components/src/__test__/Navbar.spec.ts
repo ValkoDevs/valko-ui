@@ -234,4 +234,24 @@ describe('Navbar component', () => {
       })
     })
   })
+
+  describe('Aria attributes', () => {
+    it('should not have aria-label or role attributes when ariaLabel prop is not provided', () => {
+      wrapper = mount(VkNavbar, {})
+
+      expect(wrapper.find('nav').attributes('aria-label')).toBeUndefined()
+      expect(wrapper.find('nav').attributes('role')).toBeUndefined()
+    })
+
+    it('should have aria-label attribute when ariaLabel prop is provided', () => {
+      wrapper = mount(VkNavbar, {
+        props: {
+          ariaLabel: 'Custom navigation'
+        }
+      })
+
+      expect(wrapper.find('nav').attributes('aria-label')).toBe('Custom navigation')
+      expect(wrapper.find('nav').attributes('role')).toBeUndefined()
+    })
+  })
 })
