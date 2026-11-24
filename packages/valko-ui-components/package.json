@@ -54,6 +54,7 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
+    "reka-ui": "^2.11.0",
     "tailwind-merge": "^3.6.0",
     "toastify-js": "^1.12.0"
   }
