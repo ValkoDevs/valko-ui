@@ -3,24 +3,24 @@ import { tv } from 'tailwind-variants'
 const drawer = tv({
   slots: {
     container: [
-      'vk-drawer__container',
-      'h-screen',
-      'w-screen',
-      'overflow-y-auto',
-      'overflow-x-auto',
-      'fixed',
-      'inset-0',
-      'flex'
+      'vk-drawer__container'
     ],
     backdrop: [
       'vk-drawer__backdrop',
       'fixed',
-      'inset-0'
+      'inset-0',
+      'data-[state=open]:animate-vk-fade-in',
+      'data-[state=closed]:animate-vk-fade-out'
     ],
     dialog: [
       'vk-drawer__dialog',
-      'relative',
-      'z-50'
+      'fixed',
+      'w-full',
+      'h-full',
+      'z-50',
+      'group/vk-dialog',
+      // Keeps Reka's Presence mounted while the panel plays its leave animation.
+      'data-[state=closed]:animate-vk-drawer-dialog-leave'
     ],
     content: [
       'p-4',
@@ -116,23 +116,47 @@ const drawer = tv({
       bottom: {
         panel: [
           'right-0',
-          'bottom-0'
+          'bottom-0',
+          'group-data-[state=open]/vk-dialog:animate-vk-drawer-in-bottom',
+          'group-data-[state=closed]/vk-dialog:animate-vk-drawer-out-bottom'
+        ],
+        dialog: [
+          'bottom-0',
+          'left-0'
         ]
       },
       top: {
         panel: [
           'right-0',
-          'top-0'
+          'top-0',
+          'group-data-[state=open]/vk-dialog:animate-vk-drawer-in-top',
+          'group-data-[state=closed]/vk-dialog:animate-vk-drawer-out-top'
+        ],
+        dialog: [
+          'top-0',
+          'left-0'
         ]
       },
       left: {
         panel: [
-          'left-0'
+          'left-0',
+          'group-data-[state=open]/vk-dialog:animate-vk-drawer-in-left',
+          'group-data-[state=closed]/vk-dialog:animate-vk-drawer-out-left'
+        ],
+        dialog: [
+          'left-0',
+          'top-0'
         ]
       },
       right: {
         panel: [
-          'right-0'
+          'right-0',
+          'group-data-[state=open]/vk-dialog:animate-vk-drawer-in-right',
+          'group-data-[state=closed]/vk-dialog:animate-vk-drawer-out-right'
+        ],
+        dialog: [
+          'right-0',
+          'top-0'
         ]
       }
     }
@@ -143,7 +167,7 @@ const drawer = tv({
       placement: ['top', 'bottom'],
       size: 'xs',
       class: {
-        panel: [
+        dialog: [
           'max-h-[25%]',
           'md:max-h-[14rem]'
         ]
@@ -153,7 +177,7 @@ const drawer = tv({
       placement: ['top', 'bottom'],
       size: 'sm',
       class: {
-        panel: [
+        dialog: [
           'max-h-[50%]',
           'md:max-h-[18rem]'
         ]
@@ -163,7 +187,7 @@ const drawer = tv({
       placement: ['top', 'bottom'],
       size: 'md',
       class: {
-        panel: [
+        dialog: [
           'max-h-[75%]',
           'md:max-h-[22rem]'
         ]
@@ -173,7 +197,7 @@ const drawer = tv({
       placement: ['top', 'bottom'],
       size: 'lg',
       class: {
-        panel: [
+        dialog: [
           'max-h-full',
           'md:max-h-[26rem]'
         ]
@@ -183,7 +207,7 @@ const drawer = tv({
       placement: ['left', 'right'],
       size: 'xs',
       class: {
-        panel: [
+        dialog: [
           'max-w-[25%]',
           'md:max-w-xs'
         ]
@@ -193,7 +217,7 @@ const drawer = tv({
       placement: ['left', 'right'],
       size: 'sm',
       class: {
-        panel: [
+        dialog: [
           'max-w-[50%]',
           'md:max-w-lg'
         ]
@@ -203,7 +227,7 @@ const drawer = tv({
       placement: ['left', 'right'],
       size: 'md',
       class: {
-        panel: [
+        dialog: [
           'max-w-[75%]',
           'md:max-w-xl'
         ]
@@ -213,7 +237,7 @@ const drawer = tv({
       placement: ['left', 'right'],
       size: 'lg',
       class: {
-        panel: [
+        dialog: [
           'max-w-full',
           'md:max-w-2xl'
         ]
