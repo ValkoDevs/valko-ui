@@ -104,11 +104,8 @@ describe('Rating component', () => {
     describe('Single selection', () => {
       it('should emit the selected value when an item is clicked', async () => {
         const item = wrapper.findAll('[role="radio"]')[2]
-        mockElementRect(item.element)
 
-        await item.trigger('click', {
-          clientX: 100
-        })
+        await item.trigger('click')
 
         expect(wrapper.emitted('update:modelValue')).toEqual([[3]])
       })
@@ -119,11 +116,8 @@ describe('Rating component', () => {
         })
 
         const item = wrapper.findAll('[role="radio"]')[2]
-        mockElementRect(item.element)
 
-        await item.trigger('click', {
-          clientX: 100
-        })
+        await item.trigger('click')
 
         expect(wrapper.emitted('update:modelValue')).toEqual([[0]])
       })
@@ -136,26 +130,37 @@ describe('Rating component', () => {
         })
       })
 
-      it('should emit half value when clicking the first half of an item', async () => {
-        const item = wrapper.findAll('[role="radio"]')[2]
-        mockElementRect(item.element)
+      it('should render two radio buttons per item', () => {
+        expect(wrapper.findAll('[role="radio"]')).toHaveLength(10)
+      })
 
-        await item.trigger('click', {
-          clientX: 20
-        })
+      it('should emit half value when clicking the first half of an item', async () => {
+        const item = wrapper.findAll('[role="radio"]')[4]
+
+        await item.trigger('click')
 
         expect(wrapper.emitted('update:modelValue')).toEqual([[2.5]])
       })
 
       it('should emit whole value when clicking the second half of an item', async () => {
-        const item = wrapper.findAll('[role="radio"]')[2]
-        mockElementRect(item.element)
+        const item = wrapper.findAll('[role="radio"]')[5]
 
-        await item.trigger('click', {
-          clientX: 80
-        })
+        await item.trigger('click')
 
         expect(wrapper.emitted('update:modelValue')).toEqual([[3]])
+      })
+
+      it('should label half-step and whole-step radios distinctly', () => {
+        const labels = wrapper.findAll('[role="radio"]').map(item => item.attributes('aria-label'))
+
+        expect(labels).toEqual([
+          '0.5 of 5', '1 of 5',
+          '1.5 of 5', '2 of 5',
+          '2.5 of 5', '3 of 5',
+          '3.5 of 5', '4 of 5',
+          '4.5 of 5', '5 of 5'
+        ])
+        expect(new Set(labels).size).toBe(labels.length)
       })
     })
 
@@ -166,11 +171,8 @@ describe('Rating component', () => {
         })
 
         const item = wrapper.findAll('[role="radio"]')[1]
-        mockElementRect(item.element)
 
-        await item.trigger('click', {
-          clientX: 100
-        })
+        await item.trigger('click')
 
         expect(wrapper.emitted('update:modelValue')).toBeUndefined()
       })
@@ -181,11 +183,8 @@ describe('Rating component', () => {
         })
 
         const item = wrapper.findAll('[role="radio"]')[1]
-        mockElementRect(item.element)
 
-        await item.trigger('click', {
-          clientX: 100
-        })
+        await item.trigger('click')
 
         expect(wrapper.emitted('update:modelValue')).toBeUndefined()
       })
@@ -199,14 +198,16 @@ describe('Rating component', () => {
       })
     })
 
+    const getItems = () => wrapper.findAll('[data-hovering]')
+
     const getOverlayStyle = (index: number) => {
-      const item = wrapper.findAll('[role="radio"]')[index]
+      const item = getItems()[index]
 
       return item.findAllComponents(VkIcon)[1].attributes('style')
     }
 
     it('should update the fill while hovering', async () => {
-      const item = wrapper.findAll('[role="radio"]')[3]
+      const item = getItems()[3]
       mockElementRect(item.element)
 
       await item.trigger('mousemove', {
@@ -217,14 +218,14 @@ describe('Rating component', () => {
     })
 
     it('should restore the selected value after mouseleave', async () => {
-      const item = wrapper.findAll('[role="radio"]')[3]
+      const item = getItems()[3]
       mockElementRect(item.element)
 
       await item.trigger('mousemove', {
         clientX: 100
       })
 
-      await item.trigger('mouseleave')
+      await wrapper.find('.vk-rating').trigger('mouseleave')
 
       expect(getOverlayStyle(3)).toContain('width: 0%')
     })
@@ -234,7 +235,7 @@ describe('Rating component', () => {
         half: true
       })
 
-      const item = wrapper.findAll('[role="radio"]')[2]
+      const item = getItems()[2]
       mockElementRect(item.element)
 
       await item.trigger('mousemove', {
@@ -249,7 +250,7 @@ describe('Rating component', () => {
         disabled: true
       })
 
-      const item = wrapper.findAll('[role="radio"]')[3]
+      const item = getItems()[3]
       mockElementRect(item.element)
 
       await item.trigger('mousemove', {
@@ -264,7 +265,7 @@ describe('Rating component', () => {
         readonly: true
       })
 
-      const item = wrapper.findAll('[role="radio"]')[3]
+      const item = getItems()[3]
       mockElementRect(item.element)
 
       await item.trigger('mousemove', {
@@ -293,22 +294,16 @@ describe('Rating component', () => {
 
     it('should animate selected items after selecting a value', async () => {
       const item = wrapper.findAll('[role="radio"]')[2]
-      mockElementRect(item.element)
 
-      await item.trigger('click', {
-        clientX: 100
-      })
+      await item.trigger('click')
 
       expect(wrapper.findAll('.animate-pop')).toHaveLength(3)
     })
 
     it('should remove animation state after animation timeout', async () => {
       const item = wrapper.findAll('[role="radio"]')[2]
-      mockElementRect(item.element)
 
-      await item.trigger('click', {
-        clientX: 100
-      })
+      await item.trigger('click')
 
       expect(wrapper.findAll('.animate-pop')).toHaveLength(3)
 
@@ -322,18 +317,11 @@ describe('Rating component', () => {
     it('should reset previous animation timeout when selecting quickly', async () => {
       const items = wrapper.findAll('[role="radio"]')
 
-      mockElementRect(items[1].element)
-      mockElementRect(items[3].element)
-
-      await items[1].trigger('click', {
-        clientX: 100
-      })
+      await items[1].trigger('click')
 
       vi.advanceTimersByTime(100)
 
-      await items[3].trigger('click', {
-        clientX: 100
-      })
+      await items[3].trigger('click')
 
       expect(wrapper.findAll('.animate-pop')).toHaveLength(4)
 
@@ -348,11 +336,8 @@ describe('Rating component', () => {
       const clearTimeoutSpy = vi.spyOn(globalThis, 'clearTimeout')
 
       const item = wrapper.findAll('[role="radio"]')[2]
-      mockElementRect(item.element)
 
-      await item.trigger('click', {
-        clientX: 100
-      })
+      await item.trigger('click')
 
       wrapper.unmount()
 
@@ -379,10 +364,10 @@ describe('Rating component', () => {
       expect(wrapper.findAll('[role="radio"]')).toHaveLength(5)
     })
 
-    it('should mark selected items as checked', () => {
+    it('should mark only the selected item as checked', () => {
       const items = wrapper.findAll('[role="radio"]')
 
-      expect(items[0].attributes('aria-checked')).toBe('true')
+      expect(items[0].attributes('aria-checked')).toBe('false')
       expect(items[1].attributes('aria-checked')).toBe('true')
       expect(items[2].attributes('aria-checked')).toBe('false')
     })
@@ -411,6 +396,78 @@ describe('Rating component', () => {
           'aria-labelledby': 'rating-label',
           'aria-describedby': 'rating-description'
         }))
+      })
+    })
+
+    describe('Keyboard navigation', () => {
+      const delay = (ms: number) => new Promise<void>(resolve => {
+        setTimeout(resolve, ms)
+      })
+
+      const selectWithArrowKey = async (index: number) => {
+        const radios = wrapper.findAll('[role="radio"]')
+
+        ;(radios[index].element as HTMLElement).focus()
+        await delay(20)
+
+        await radios[index].trigger('keydown', {
+          key: 'ArrowRight'
+        })
+
+        await delay(20)
+      }
+
+      const mountAttached = (props = {}) => {
+        wrapper = mount(VkRating, {
+          ...globalOptions,
+          attachTo: document.body,
+          props: {
+            modelValue: 0,
+            ...props
+          }
+        })
+
+        return wrapper
+      }
+
+      it('should select the next item with the arrow key', async () => {
+        mountAttached({
+          modelValue: 2
+        })
+
+        await selectWithArrowKey(1)
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[3]])
+
+        wrapper.unmount()
+      })
+
+      it('should select half values with the arrow key in half mode', async () => {
+        mountAttached({
+          modelValue: 2,
+          half: true
+        })
+
+        await selectWithArrowKey(3)
+
+        expect(wrapper.emitted('update:modelValue')).toEqual([[2.5]])
+
+        wrapper.unmount()
+      })
+
+      it('should render radio items as buttons so the Space key activates them', () => {
+        mountAttached()
+
+        const radios = wrapper.findAll('[role="radio"]')
+
+        // jsdom does not synthesize `click` from the Space key; the native
+        // activation behavior comes from the radio being a real button.
+        radios.forEach((radio) => {
+          expect(radio.element.tagName).toBe('BUTTON')
+          expect(radio.attributes('type')).toBe('button')
+        })
+
+        wrapper.unmount()
       })
     })
 
