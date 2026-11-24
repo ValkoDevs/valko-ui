@@ -503,6 +503,89 @@ describe('Table component', () => {
       wrapper.find('.vk-table__td').trigger('click')
       expect(wrapper.emitted()).not.toHaveProperty('onRowClick')
     })
+
+    it('should emit onRowClick event when Enter is pressed on a row and rowEvents is true', async () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data,
+          rowEvents: true
+        }
+      })
+
+      await wrapper.find('[data-key="headersKey"]').trigger('keydown', { key: 'Enter' })
+      expect(wrapper.emitted()).toHaveProperty('onRowClick')
+    })
+
+    it('should emit onRowClick event when Space is pressed on a row and rowEvents is true', async () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data,
+          rowEvents: true
+        }
+      })
+
+      await wrapper.find('[data-key="headersKey"]').trigger('keydown', { key: ' ' })
+      expect(wrapper.emitted()).toHaveProperty('onRowClick')
+    })
+
+    it('should not emit onRowClick event when a key is pressed and rowEvents is false', async () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data,
+          rowEvents: false
+        }
+      })
+
+      await wrapper.find('[data-key="headersKey"]').trigger('keydown', { key: 'Enter' })
+      expect(wrapper.emitted()).not.toHaveProperty('onRowClick')
+    })
+
+    it('should not emit onRowClick event when the keydown originates from a nested element', async () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data,
+          rowEvents: true
+        }
+      })
+
+      const row = wrapper.find('[data-key="headersKey"]')
+      await row.find('.vk-table__td').trigger('keydown', { key: 'Enter' })
+      expect(wrapper.emitted()).not.toHaveProperty('onRowClick')
+    })
+
+    it('should not emit onRowClick event when Ctrl+Enter is pressed on a row', async () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data,
+          rowEvents: true
+        }
+      })
+
+      await wrapper.find('[data-key="headersKey"]').trigger('keydown', { key: 'Enter', ctrlKey: true })
+      expect(wrapper.emitted()).not.toHaveProperty('onRowClick')
+    })
+
+    it('should not emit onRowClick event on repeated keydown events', async () => {
+      const wrapper = mount(VkTable, {
+        props: {
+          headers,
+          data,
+          rowEvents: true
+        }
+      })
+
+      const row = wrapper.find('[data-key="headersKey"]')
+      await row.trigger('keydown', { key: 'Enter' })
+      expect(wrapper.emitted('onRowClick')).toHaveLength(1)
+
+      await row.trigger('keydown', { key: 'Enter', repeat: true })
+      expect(wrapper.emitted('onRowClick')).toHaveLength(1)
+    })
   })
 
   describe('With different data states', () => {
