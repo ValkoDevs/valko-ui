@@ -1,5 +1,5 @@
 import { ref, computed, toValue, nextTick } from 'vue'
-import { VueWrapper, mount } from '@vue/test-utils'
+import { VueWrapper, DOMWrapper, mount, flushPromises } from '@vue/test-utils'
 import VkTimepicker from '#valkoui/components/Timepicker.vue'
 import type { TimeAdapterResult } from '#valkoui/types/Time'
 
@@ -31,7 +31,8 @@ const { useTimeAdapter } = vi.hoisted(() => ({
   ] as TimeAdapterResult))
 }))
 
-vi.mock('#valkoui/composables/useTimeAdapter.ts', () => ({
+vi.mock('#valkoui/composables/useTimeAdapter.ts', async (importOriginal) => ({
+  ...await importOriginal(),
   default: useTimeAdapter
 }))
 
@@ -39,9 +40,26 @@ const [ model, parModel, adapter ] = useTimeAdapter()
 const modelValue = toValue(model)
 const parsedModel = toValue(parModel)
 
-describe('Time component', () => {
-  let wrapper: VueWrapper
+// The timepicker panel is portaled to document.body by Reka's Popover portal,
+// so panel nodes must be looked up outside the wrapper element.
+const contentEl = () => document.querySelector<HTMLElement>('.vk-timepicker__content')
 
+let wrapper: VueWrapper
+
+const mountTimepicker = (props: Record<string, unknown>) => {
+  wrapper = mount(VkTimepicker, {
+    attachTo: document.body,
+    props: {
+      modelValue,
+      parsedModel,
+      adapter,
+      ...props
+    }
+  })
+  return wrapper
+}
+
+describe('Time component', () => {
   describe('Props', () => {
     describe('With default props', () => {
       beforeEach(() => {
@@ -71,8 +89,10 @@ describe('Time component', () => {
         expect(wrapper.find('.vk-input__input').classes()).toContain('bg-surface-container-highest')
       })
 
-      it('should be shape soft', () => {
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-lg')
+      it('should be shape soft', async () => {
+        await flushPromises()
+
+        expect(contentEl()?.className).toContain('rounded-lg')
       })
     })
 
@@ -163,50 +183,29 @@ describe('Time component', () => {
     })
 
     describe('When shape prop changes', () => {
-      it('should be rounded when props.shape is rounded', () => {
-        wrapper = mount(VkTimepicker, {
-          props: {
-            shape: 'rounded',
-            modelValue,
-            isOpen: true,
-            parsedModel,
-            adapter
-          }
-        })
+      it('should be rounded when props.shape is rounded', async () => {
+        mountTimepicker({ shape: 'rounded', isOpen: true })
+        await flushPromises()
 
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-2xl')
+        expect(contentEl()?.className).toContain('rounded-2xl')
       })
 
-      it('should be soft when props.shape is soft', () => {
-        wrapper = mount(VkTimepicker, {
-          props: {
-            shape: 'soft',
-            modelValue,
-            isOpen: true,
-            parsedModel,
-            adapter
-          }
-        })
+      it('should be soft when props.shape is soft', async () => {
+        mountTimepicker({ shape: 'soft', isOpen: true })
+        await flushPromises()
 
         const input = wrapper.find('.vk-timepicker__input')
-        input.trigger('focus')
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-lg')
+        await input.trigger('focusin')
+        expect(contentEl()?.className).toContain('rounded-lg')
       })
 
-      it('should be square when props.shape is square', () => {
-        wrapper = mount(VkTimepicker, {
-          props: {
-            shape: 'square',
-            modelValue,
-            isOpen: true,
-            parsedModel,
-            adapter
-          }
-        })
+      it('should be square when props.shape is square', async () => {
+        mountTimepicker({ shape: 'square', isOpen: true })
+        await flushPromises()
 
         const input = wrapper.find('.vk-timepicker__input')
-        input.trigger('focus')
-        expect(wrapper.find('.vk-timepicker__content').classes()).toContain('rounded-none')
+        await input.trigger('focusin')
+        expect(contentEl()?.className).toContain('rounded-none')
       })
     })
 
@@ -311,10 +310,90 @@ describe('Time component', () => {
         expect(wrapper.find('.vk-input__input').classes()).toContain('bg-transparent')
       })
     })
+
+    describe('When format prop changes', () => {
+      it('should render hour, minute and second segments for a 24-hour format', () => {
+        wrapper = mount(VkTimepicker, {
+          props: {
+            format: 'HH:mm:ss',
+            modelValue,
+            isOpen: true,
+            parsedModel,
+            adapter
+          }
+        })
+
+        expect(wrapper.find('[data-reka-time-field-segment="hour"]').exists()).toBe(true)
+        expect(wrapper.find('[data-reka-time-field-segment="minute"]').exists()).toBe(true)
+        expect(wrapper.find('[data-reka-time-field-segment="second"]').exists()).toBe(true)
+        expect(wrapper.find('[data-reka-time-field-segment="dayPeriod"]').exists()).toBe(false)
+      })
+
+      it('should render the day period segment for a 12-hour format', () => {
+        wrapper = mount(VkTimepicker, {
+          props: {
+            format: 'hh:mm A',
+            modelValue,
+            isOpen: true,
+            parsedModel,
+            adapter
+          }
+        })
+
+        expect(wrapper.find('[data-reka-time-field-segment="dayPeriod"]').exists()).toBe(true)
+      })
+
+      it('should omit the seconds segment when the format has no seconds', () => {
+        wrapper = mount(VkTimepicker, {
+          props: {
+            format: 'HH:mm',
+            modelValue,
+            isOpen: true,
+            parsedModel,
+            adapter
+          }
+        })
+
+        expect(wrapper.find('[data-reka-time-field-segment="second"]').exists()).toBe(false)
+      })
+
+      it('should display the model time in the field segments', () => {
+        wrapper = mount(VkTimepicker, {
+          props: {
+            format: 'HH:mm:ss',
+            modelValue,
+            isOpen: true,
+            parsedModel,
+            adapter
+          }
+        })
+
+        const date = new Date(modelValue)
+
+        expect(wrapper.find('[data-reka-time-field-segment="hour"]').text()).toBe(String(date.getHours()).padStart(2, '0'))
+        expect(wrapper.find('[data-reka-time-field-segment="minute"]').text()).toBe(String(date.getMinutes()).padStart(2, '0'))
+        expect(wrapper.find('[data-reka-time-field-segment="second"]').text()).toBe(String(date.getSeconds()).padStart(2, '0'))
+      })
+    })
   })
 
-  describe('Listeners', () => {
-    it('should remove event listeners when the component is unmounted', async () => {
+  describe('Methods & Listeners', () => {
+    it('should render the panel inside the document body when open', async () => {
+      mountTimepicker({ isOpen: true })
+      await flushPromises()
+
+      const content = contentEl()
+      expect(content).toBeTruthy()
+      expect(wrapper.element.contains(content as HTMLElement)).toBe(false)
+    })
+
+    it('should not render the panel when closed', () => {
+      mountTimepicker({ isOpen: false })
+
+      expect(contentEl()).toBeFalsy()
+    })
+
+    it('should not have document-level listeners after unmount', () => {
       const removeSpy = vi.spyOn(document, 'removeEventListener')
       const wrapper = mount(VkTimepicker, {
         props: {
@@ -326,8 +405,60 @@ describe('Time component', () => {
       })
 
       wrapper.unmount()
-      expect(removeSpy).toHaveBeenCalledWith('mousedown', expect.any(Function), true)
+      expect(removeSpy).not.toHaveBeenCalledWith('mousedown', expect.any(Function), true)
       removeSpy.mockRestore()
+    })
+
+    it('should expose a consumer aria-label on the field group', () => {
+      mountTimepicker({
+        isOpen: true,
+        label: 'Meeting time',
+        ariaLabel: 'Meeting time'
+      })
+
+      expect(wrapper.find('.vk-timepicker__input').attributes('aria-label')).toBe('Meeting time')
+    })
+
+    it('should associate the visible label with the field group', () => {
+      mountTimepicker({
+        isOpen: true,
+        label: 'Meeting time'
+      })
+
+      const field = wrapper.find('.vk-timepicker__input')
+      const labelId = field.attributes('aria-labelledby')
+      expect(labelId).toBeTruthy()
+      expect(wrapper.find(`#${labelId}`).text()).toContain('Meeting time')
+    })
+
+    it('should show invalid styling when the model is outside min/max', async () => {
+      const minTime = 32400 // 09:00:00
+      mountTimepicker({
+        isOpen: true,
+        minTime,
+        maxTime: 61200, // 17:00:00
+        modelValue: new Date(2024, 0, 1, 3, 0, 0).getTime() // 03:00 local, below min
+      })
+      await flushPromises()
+
+      const invalidRoot = wrapper.find('[role="group"]')
+      expect(invalidRoot.attributes('data-invalid')).toBeDefined()
+
+      const input = wrapper.find('.vk-timepicker__input')
+      expect(input.classes()).toContain('group-data-[invalid]:border-negative')
+      expect(input.classes()).toContain('group-data-[invalid]:text-negative')
+    })
+
+    it('should emit close on Escape', async () => {
+      mountTimepicker({ isOpen: true })
+      await flushPromises()
+      await flushPromises()
+
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }))
+      await nextTick()
+      await nextTick()
+
+      expect(wrapper.emitted()).toHaveProperty('close')
     })
   })
 
@@ -342,61 +473,45 @@ describe('Time component', () => {
         }
       })
 
-      const input = wrapper.findAll('.vk-input__input')[0]
-      await input.trigger('focus')
+      const input = wrapper.find('.vk-timepicker__input')
+      await input.trigger('focusin')
 
       expect(wrapper.emitted()).toHaveProperty('open')
     })
 
     it('should emit onSelect event', async () => {
-      const wrapper = mount(VkTimepicker, {
-        props: {
-          modelValue,
-          isOpen: true,
-          parsedModel,
-          adapter
-        }
-      })
+      mountTimepicker({ isOpen: true })
+      await flushPromises()
 
-      const button = wrapper.find('.vk-time__ok-button')
-      await button.trigger('click')
+      await new DOMWrapper(document.querySelector('.vk-time__ok-button') as HTMLElement).trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('onSelect')
     })
 
     it('should emit close event', async () => {
-      const wrapper = mount(VkTimepicker, {
-        props: {
-          modelValue,
-          isOpen: true,
-          parsedModel,
-          adapter
-        }
-      })
+      mountTimepicker({ isOpen: true })
+      await flushPromises()
 
-      const button = wrapper.find('.vk-time__ok-button')
-      await button.trigger('click')
+      await new DOMWrapper(document.querySelector('.vk-time__ok-button') as HTMLElement).trigger('click')
 
       expect(wrapper.emitted()).toHaveProperty('close')
     })
 
     it('should emit close when a click occurs outside the root component', async () => {
-      const wrapper = mount(VkTimepicker, {
-        props: {
-          isOpen: true,
-          modelValue,
-          parsedModel,
-          adapter
-        }
-      })
+      mountTimepicker({ isOpen: true })
+      await flushPromises()
+      await flushPromises()
 
-      const input = wrapper.findAll('.vk-input__input')[0]
-      await input.trigger('focus')
-
-      document.body.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }))
+      document.body.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true }))
+      await nextTick()
       await nextTick()
 
       expect(wrapper.emitted()).toHaveProperty('close')
     })
+  })
+
+  afterEach(() => {
+    wrapper?.unmount()
+    document.body.innerHTML = ''
   })
 })

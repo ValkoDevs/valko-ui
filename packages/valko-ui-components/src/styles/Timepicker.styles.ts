@@ -7,7 +7,9 @@ const timepicker = tv({
       'relative'
     ],
     input: [
-      'vk-timepicker__input'
+      'vk-timepicker__input',
+      'group-data-[invalid]:border-negative',
+      'group-data-[invalid]:text-negative'
     ],
     content: [
       'vk-timepicker__content',
@@ -27,12 +29,24 @@ const timepicker = tv({
       outlined: {}
     },
     color: {
-      primary: {},
-      secondary: {},
-      positive: {},
-      accent: {},
-      warning: {},
-      negative: {}
+      primary: {
+        input: ['focus-within:border-primary']
+      },
+      secondary: {
+        input: ['focus-within:border-secondary']
+      },
+      positive: {
+        input: ['focus-within:border-positive']
+      },
+      accent: {
+        input: ['focus-within:border-accent']
+      },
+      warning: {
+        input: ['focus-within:border-warning']
+      },
+      negative: {
+        input: ['focus-within:border-negative']
+      }
     },
     size: {
       xs: {},
