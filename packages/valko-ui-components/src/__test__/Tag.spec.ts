@@ -369,8 +369,106 @@ describe('Tag component', () => {
         }
       })
 
-      wrapper.find('.vk-tag').trigger('click')
+      wrapper.find('button').trigger('click')
       expect(wrapper.emitted()).toHaveProperty('click')
+    })
+
+    it('should set data-state to on when the toggle is clicked', async () => {
+      const wrapper = mount(VkTag, {
+        props: {
+          text: 'Hello World',
+          isPressable: true
+        }
+      })
+
+      const toggle = wrapper.find('button')
+      expect(toggle.attributes('data-state')).toBe('off')
+
+      await toggle.trigger('click')
+      expect(toggle.attributes('data-state')).toBe('on')
+    })
+
+    it('should emit update:pressed when the toggle is clicked', async () => {
+      const wrapper = mount(VkTag, {
+        props: {
+          text: 'Hello World',
+          isPressable: true,
+          pressed: false
+        }
+      })
+
+      await wrapper.find('button').trigger('click')
+      expect(wrapper.emitted('update:pressed')).toEqual([[true]])
+    })
+
+    it('should reflect the pressed prop in data-state when controlled', async () => {
+      const wrapper = mount(VkTag, {
+        props: {
+          text: 'Hello World',
+          isPressable: true,
+          pressed: true
+        }
+      })
+
+      expect(wrapper.find('button').attributes('data-state')).toBe('on')
+    })
+
+    it('should render aria-pressed as false initially', () => {
+      const wrapper = mount(VkTag, {
+        props: {
+          text: 'Hello World',
+          isPressable: true
+        }
+      })
+
+      expect(wrapper.find('button').attributes('aria-pressed')).toBe('false')
+    })
+
+    it('should toggle via keyboard activation (space and enter)', async () => {
+      const wrapper = mount(VkTag, {
+        props: {
+          text: 'Hello World',
+          isPressable: true
+        }
+      })
+
+      const toggle = wrapper.find('button')
+      expect(toggle.attributes('aria-pressed')).toBe('false')
+
+      // Native button activation behavior: space/enter produce a click event.
+      await toggle.trigger('keydown', { key: ' ', code: 'Space' })
+      await toggle.trigger('click')
+      expect(toggle.attributes('aria-pressed')).toBe('true')
+
+      await toggle.trigger('keydown', { key: 'Enter' })
+      await toggle.trigger('click')
+      expect(toggle.attributes('aria-pressed')).toBe('false')
+    })
+
+    it('should render a button element and no role attribute on the container when pressable', () => {
+      const wrapper = mount(VkTag, {
+        props: {
+          text: 'Hello World',
+          isPressable: true
+        }
+      })
+
+      expect(wrapper.find('.vk-tag button').exists()).toBe(true)
+      expect(wrapper.find('.vk-tag').attributes('role')).toBeUndefined()
+    })
+
+    it('should apply consumer attrs to the toggle button when pressable', () => {
+      const wrapper = mount(VkTag, {
+        props: {
+          text: 'Hello World',
+          isPressable: true
+        },
+        attrs: {
+          'data-testid': 'my-tag'
+        }
+      })
+
+      expect(wrapper.find('button[data-testid="my-tag"]').exists()).toBe(true)
     })
 
     it('should not emit close event when disabled', () => {

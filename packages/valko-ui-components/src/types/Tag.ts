@@ -8,5 +8,6 @@ export interface TagProps extends Shapes, Sizes, VariantsAlt, ColorsWithSurface 
   disabled?: boolean;
   closable?: boolean;
   isPressable?: boolean;
+  pressed?: boolean;
   styleSlots?: Partial<TagSlots>;
 }
