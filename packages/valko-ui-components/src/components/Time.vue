@@ -46,6 +46,16 @@ const formatHour = (hour: number): number => {
   if (is12HourFormat) return hour === 0 ? 12 : hour
   return hour
 }
+
+const minuteValue = (index: number): number => index * props.minuteStep
+
+const clickHour = (hour: number): number => {
+  const is12HourFormat = formatMap.value.hsColItems === 12
+  if (!is12HourFormat) return hour
+  const period = props.adapter.period.value
+  if (hour === 12) return period === 'AM' ? 0 : 12
+  return period === 'PM' ? hour + 12 : hour
+}
 </script>
 
 <template>
@@ -64,7 +74,7 @@ const formatHour = (hour: number): number => {
           :variant="selectedTime.hours === formatHour(H) ? variant : 'link'"
           :color="selectedTime.hours === formatHour(H) ? color : 'surface'"
           :class="s.unitButton({ class: styleSlots?.unitButton })"
-          @click="adapter.setDisplayUnit('h', formatHour(H))"
+          @click="adapter.setDisplayUnit('h', clickHour(formatHour(H)))"
         >
           {{ `${formatHour(H)}`.padStart(2, '0') }}
         </vk-button>
@@ -78,11 +88,11 @@ const formatHour = (hour: number): number => {
           :key="`minutes-button-${m-1}`"
           :size="size"
           :shape="shape"
-          :disabled="adapter.isTimeDisabled(selectedTime.hours, m - 1)"
-          :variant="selectedTime.minutes === (m - 1) ? variant : 'link'"
-          :color="selectedTime.minutes === (m - 1) ? color : 'surface'"
+          :disabled="adapter.isTimeDisabled(selectedTime.hours, minuteValue(m - 1))"
+          :variant="selectedTime.minutes === minuteValue(m - 1) ? variant : 'link'"
+          :color="selectedTime.minutes === minuteValue(m - 1) ? color : 'surface'"
           :class="s.unitButton({ class: styleSlots?.unitButton })"
-          @click="adapter.setDisplayUnit('m', m - 1)"
+          @click="adapter.setDisplayUnit('m', minuteValue(m - 1))"
         >
           {{ `${(m - 1) * minuteStep}`.padStart(2, '0') }}
         </vk-button>
