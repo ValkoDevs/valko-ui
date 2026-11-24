@@ -17,7 +17,10 @@ const dropdown = tv({
       'data-[open=true]:rotate-180'
     ],
     panel: [
-      'bg-surface-container'
+      'bg-surface-container',
+      'z-40',
+      'data-[state=open]:animate-vk-popover-in',
+      'data-[state=closed]:animate-vk-popover-out'
     ],
     itemsMenu: [
       'vk-dropdown__items-menu',
@@ -36,11 +39,11 @@ const dropdown = tv({
       'data-[shape=rounded]:rounded-full',
       'data-[shape=soft]:rounded-lg',
       'data-[shape=square]:rounded-none',
-      'data-[disabled=true]:cursor-not-allowed',
-      'data-[disabled=true]:text-on-disabled',
-      'data-[disabled=true]:bg-disabled',
-      'data-[disabled=true]:opacity-30',
-      'data-[disabled=true]:border-transparent'
+      'data-[disabled]:cursor-not-allowed',
+      'data-[disabled]:text-on-disabled',
+      'data-[disabled]:bg-disabled',
+      'data-[disabled]:opacity-30',
+      'data-[disabled]:border-transparent'
     ],
     itemsIcon: [
       'mr-2',
@@ -56,6 +59,35 @@ const dropdown = tv({
       warning: {},
       negative: {},
       surface: {}
+    },
+    elevated: {
+      false: {
+        panel: [
+          'shadow-el2'
+        ]
+      },
+      true: {
+        panel: [
+          'shadow-el3'
+        ]
+      }
+    },
+    shape: {
+      rounded: {
+        panel: [
+          'rounded-2xl'
+        ]
+      },
+      soft: {
+        panel: [
+          'rounded-lg'
+        ]
+      },
+      square: {
+        panel: [
+          'rounded-none'
+        ]
+      }
     },
     size: {
       xs: {
