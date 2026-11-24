@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { computed, ref, watch, toValue, useId } from 'vue'
+import { computed, getCurrentInstance, ref, watch } from 'vue'
+import type { Ref } from 'vue'
+import { SliderRoot, SliderTrack, SliderRange, SliderThumb } from 'reka-ui'
 import type { RangeProps } from '#valkoui/types/Range'
 import styles from '#valkoui/styles/Range.styles.ts'
 import diagonalStripes from '#valkoui/img/diagonal-stripes.svg'
@@ -25,146 +27,53 @@ const emit = defineEmits(['update:modelValue'])
 
 const s = computed(() => styles(props))
 
-const rangeId = useId()
-const isDragging = ref(false)
-const sliderRef = ref<HTMLElement | null>(null)
-const draggingThumb = ref<'min' | 'max'>('min')
-const thumbRefMap = {
-  min: ref(Array.isArray(props.modelValue) ? props.modelValue[0] : 0),
-  max: ref(Array.isArray(props.modelValue) ? props.modelValue[1] : props.modelValue)
-}
+// reka-ui's slider is fully controlled through `modelValue`, so a static
+// `:model-value` binding (no v-model) would freeze the internal value at its
+// initial render. Track the value internally whenever the parent does not
+// listen for `update:modelValue`.
+const hasModelValueListener = Boolean(getCurrentInstance()?.vnode.props?.['onUpdate:modelValue'])
+const isControlled = hasModelValueListener
 
-const getNewThumbPosition = (clientX: number): number => {
-  if (!sliderRef.value) return 0
-  const sliderRect = sliderRef.value.getBoundingClientRect()
+const internalValue = ref<number | number[]>(props.modelValue as number | number[]) as Ref<number | number[]>
 
-  let newPosition = ((clientX - sliderRect.left) / sliderRect.width) * (props.max - props.min) + props.min
-  newPosition = Math.round(newPosition / props.step) * props.step
-
-  return Math.min(props.max, Math.max(props.min, newPosition))
-}
-
-const updateThumbPosition = (newPosition: number, thumb: 'min' | 'max') => {
-  const primaryThumb = thumb === 'min' ? 'min' : 'max'
-  const secondaryThumb = thumb === 'max' ? 'min' : 'max'
-  thumbRefMap[primaryThumb].value = newPosition
-
-  if (props.isDouble) {
-    const isOverlapping = primaryThumb === 'min'
-      ? thumbRefMap[primaryThumb].value > thumbRefMap[secondaryThumb].value
-      : thumbRefMap[primaryThumb].value < thumbRefMap[secondaryThumb].value
-
-    thumbRefMap[primaryThumb].value = isOverlapping ? thumbRefMap[secondaryThumb].value : newPosition
-
-    emit('update:modelValue', [thumbRefMap.min.value, thumbRefMap.max.value])
-  } else {
-    emit('update:modelValue', thumbRefMap.max.value)
-  }
-}
-
-const registerListeners = () => {
-  document.addEventListener('mousemove', onMove)
-  document.addEventListener('touchmove', onMove)
-  document.addEventListener('mouseup', onEnd)
-  document.addEventListener('touchend', onEnd)
-}
-
-const removeListeners = () => {
-  document.removeEventListener('mousemove', onMove)
-  document.removeEventListener('touchmove', onMove)
-  document.removeEventListener('mouseup', onEnd)
-  document.removeEventListener('touchend', onEnd)
-}
-
-const onStart = (event: MouseEvent | TouchEvent, thumb: 'min' | 'max') => {
-  isDragging.value = true
-  draggingThumb.value = thumb
-
-  const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX
-  updateThumbPosition(getNewThumbPosition(clientX), thumb)
-
-  registerListeners()
-}
-
-const handleSingleThumb = (newPosition: number) => {
-  updateThumbPosition(newPosition, 'max')
-  isDragging.value = true
-  draggingThumb.value = 'max'
-}
-
-const handleMultipleThumbs = (newPosition: number) => {
-  const middlePoint = (thumbRefMap.min.value + thumbRefMap.max.value) / 2
-  const selectedThumb = newPosition <= middlePoint ? 'min' : 'max'
-
-  updateThumbPosition(newPosition, selectedThumb)
-  draggingThumb.value = selectedThumb
-  isDragging.value = true
-}
-
-const onSliderClick = (event: MouseEvent | TouchEvent) => {
-  const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX
-  const newPosition = getNewThumbPosition(clientX)
-
-  if (!props.isDouble) handleSingleThumb(newPosition)
-  else handleMultipleThumbs(newPosition)
-
-  registerListeners()
-}
-
-const onMove = (event: MouseEvent | TouchEvent) => {
-  if (!isDragging.value) return
-
-  const clientX = event instanceof MouseEvent ? event.clientX : event.touches[0].clientX
-  requestAnimationFrame(() => {
-    updateThumbPosition(getNewThumbPosition(clientX), draggingThumb.value)
-  })
-}
-
-const onEnd = () => {
-  isDragging.value = false
-
-  removeListeners()
-}
-
-const inlineStyles = computed(() => {
-  const sizeMap: Record<string, string> = {
-    xs: '1rem',
-    sm: '1.25rem',
-    md: '1.50rem',
-    lg: '1.75rem'
-  }
-
-  const range = props.max - props.min
-  const center = ((0 - props.min) / range) * 100
-  const start = props.isDouble ? ((thumbRefMap.min.value - props.min) / range) * 100 : center
-  const end = ((thumbRefMap.max.value - props.min) / range) * 100
-
-  const left = Math.min(start, end)
-  const width = Math.abs(end - start)
-
-  let styles = `left: ${left}%; width: ${width}%;`
-
-  if (props.striped) {
-    styles += `background-image: url("${diagonalStripes}"); background-size: ${sizeMap[props.size]};`
-  }
-
-  return styles.trim()
+watch(() => props.modelValue, (value) => {
+  internalValue.value = value as number | number[]
 })
 
-const thumbStyles = computed(() => {
-  const calculateStyles = (thumb: 'min' | 'max') => {
-    const range = props.max - props.min
-    const position = ((thumbRefMap[thumb].value - props.min) / range) * 100
-    const clampedPosition = Math.min(100, Math.max(0, position))
+const modelValue = computed<number | number[]>(() => isControlled
+  ? props.modelValue as number | number[]
+  : internalValue.value)
 
-    return { left: `${clampedPosition}%` }
-  }
-
-  return {
-    start: calculateStyles('min'),
-    end: calculateStyles('max')
-  }
+const sliderValues = computed<number[]>(() => {
+  if (!props.isDouble) return [modelValue.value as number]
+  if (Array.isArray(modelValue.value)) return modelValue.value
+  return [props.min, modelValue.value as number]
 })
+
+const onValueChange = (value: number[] | undefined) => {
+  if (!value?.length) return
+
+  const next = props.isDouble ? value : value[0]
+  if (!isControlled) internalValue.value = next
+  emit('update:modelValue', next)
+}
+
+const onLabelClick = (newPosition: number) => {
+  const clamped = Math.min(props.max, Math.max(props.min, newPosition))
+
+  if (!props.isDouble) {
+    if (!isControlled) internalValue.value = clamped
+    emit('update:modelValue', clamped)
+    return
+  }
+
+  const [minValue, maxValue] = sliderValues.value
+  const next: number[] = clamped <= (minValue + maxValue) / 2
+    ? [clamped, maxValue]
+    : [minValue, clamped]
+  if (!isControlled) internalValue.value = next
+  emit('update:modelValue', next)
+}
 
 const stepMarks = computed(() => {
   return Array.from({ length: Math.round((props.max - props.min) / props.step - 1) }, (_, i) => {
@@ -172,92 +81,54 @@ const stepMarks = computed(() => {
   })
 })
 
-const onLabelClick = (newPosition: number) => {
-  if (!props.isDouble) handleSingleThumb(newPosition)
-  else handleMultipleThumbs(newPosition)
-}
-
-const handleKeyDown = (e: KeyboardEvent, thumb: 'min' | 'max') => {
-  type AllowedKeys = 'ArrowRight' | 'ArrowUp' | 'ArrowLeft' | 'ArrowDown' | 'Home' | 'End'
-
-  const allowedKeys: AllowedKeys[] = ['ArrowRight', 'ArrowUp', 'ArrowLeft', 'ArrowDown', 'Home', 'End']
-  const currentKey = e.key as AllowedKeys
-
-  if (!allowedKeys.includes(currentKey)) return
-
-  e.preventDefault()
-
-  const formulaMap: Record<AllowedKeys, (value: number) => number> = {
-    ArrowRight: (value: number) => Math.min(value + props.step, props.max),
-    ArrowUp: (value: number) => Math.min(value + props.step, props.max),
-    ArrowLeft: (value: number) => Math.max(value - props.step, props.min),
-    ArrowDown: (value: number) => Math.max(value - props.step, props.min),
-    Home: () => props.min,
-    End: () => props.max
+const stripedStyles = computed(() => {
+  const sizeMap: Record<string, string> = {
+    xs: '1rem',
+    sm: '1.25rem',
+    md: '1.50rem',
+    lg: '1.75rem'
   }
 
-  updateThumbPosition(formulaMap[currentKey](thumbRefMap[thumb].value), thumb)
-}
+  if (!props.striped) return undefined
 
-watch([() => props.min, () => props.max, () => props.isDouble, () => props.step], ([min, max, isDouble]) => {
-  thumbRefMap.min.value = min
-  thumbRefMap.max.value = max
-  emit('update:modelValue', isDouble ? [min, max] : max)
+  return `background-image: url("${diagonalStripes}"); background-size: ${sizeMap[props.size]};`
 })
 </script>
 
 <template>
-  <div
+  <SliderRoot
     :class="s.container({ class: styleSlots?.container })"
-    ref="sliderRef"
-    :id="rangeId"
-    @mousedown="onSliderClick"
+    :model-value="sliderValues"
+    :min="min"
+    :max="max"
+    :step="step"
+    @update:model-value="onValueChange"
   >
-    <div :class="s.progressContainer({ class: styleSlots?.progressContainer })">
-      <div
+    <SliderTrack :class="s.progressContainer({ class: styleSlots?.progressContainer })">
+      <SliderRange
         :class="s.progress({ class: styleSlots?.progress })"
-        :style="inlineStyles"
+        :style="stripedStyles"
       />
-      <div v-if="showSteps">
+      <template v-if="showSteps">
         <div
           v-for="(position, index) in stepMarks"
           :key="index"
           :style="`left:${position}%`"
           :class="s.stepMark({ class: styleSlots?.stepMark })"
         />
-      </div>
-    </div>
+      </template>
+    </SliderTrack>
     <div :class="s.thumbContainer({ class: styleSlots?.thumbContainer })">
-      <div
+      <SliderThumb
         v-if="isDouble"
         :class="s.thumb({ class: styleSlots?.thumb })"
-        :style="thumbStyles.start"
-        role="slider"
-        tabindex="0"
-        :aria-valuemin="min"
-        :aria-valuemax="max"
-        :aria-valuenow="toValue(thumbRefMap.min)"
-        :aria-labelledby="rangeId"
-        :aria-describedby="props.ariaDescribedBy"
         aria-label="Minimum value"
-        @mousedown="(event: MouseEvent) => onStart(event, 'min')"
-        @keydown="(event: KeyboardEvent) => handleKeyDown(event, 'min')"
-        @touchstart="(event: TouchEvent) => onStart(event, 'min')"
+        :aria-describedby="ariaDescribedBy"
       />
-      <div
+      <SliderThumb
         :class="s.thumb({ class: styleSlots?.thumb })"
-        :style="thumbStyles.end"
-        role="slider"
-        tabindex="0"
-        :aria-valuemin="min"
-        :aria-valuemax="max"
-        :aria-valuenow="toValue(thumbRefMap.max)"
-        :aria-labelledby="rangeId"
-        :aria-describedby="props.ariaDescribedBy"
         :aria-label="isDouble ? 'Maximum value' : 'Value'"
-        @mousedown="(event: MouseEvent) => onStart(event, 'max')"
-        @keydown="(event: KeyboardEvent) => handleKeyDown(event, 'max')"
-        @touchstart="(event: TouchEvent) => onStart(event, 'max')"
+        :aria-describedby="ariaDescribedBy"
       />
     </div>
     <div
@@ -274,5 +145,5 @@ watch([() => props.min, () => props.max, () => props.isDouble, () => props.step]
         {{ el.label }}
       </span>
     </div>
-  </div>
+  </SliderRoot>
 </template>
