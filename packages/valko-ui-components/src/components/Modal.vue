@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
-import { TransitionRoot, TransitionChild, Dialog, DialogPanel, DialogTitle, DialogDescription } from '@headlessui/vue'
+import {
+  DialogContent,
+  DialogDescription,
+  DialogOverlay,
+  DialogPortal,
+  DialogRoot,
+  DialogTitle
+} from 'reka-ui'
 import type { ModalProps } from '#valkoui/types/Modal'
 import styles from '#valkoui/styles/Modal.styles.ts'
 import VkIcon from './Icon.vue'
@@ -21,69 +28,79 @@ const emit = defineEmits(['close'])
 
 const s = computed(() => styles(props))
 
-const containerRef = ref(null)
+const containerRef = ref<HTMLDivElement | null>(null)
 
 const closeModal = () => { if (props.closable) emit('close') }
+
+// Reka requests close on Esc, outside interaction and dismiss; `closable`
+// gates all of them, mirroring the previous `@close="closeModal"` wiring.
+const onRequestClose = (open: boolean) => { if (!open) closeModal() }
+
+// Consumer overrides must only reach the DOM when actually set: binding an
+// attribute key to `undefined` through $attrs would overwrite-and-remove
+// Reka's generated `aria-labelledby`/`aria-describedby` bindings entirely.
+const dialogContentBinds = computed(() => ({
+  ...(props.ariaLabelledBy ? { 'aria-labelledby': props.ariaLabelledBy } : {}),
+  ...(props.ariaDescription ? {} : { 'aria-describedby': null })
+}))
+
+// Keep the previous initial-focus behavior: Reka's default focus jump to the
+// first focusable part is prevented; focus goes to the container element
+// instead (tabindex="-1" makes it focusable so the FocusScope trap engages).
+const onOpenAutoFocus = (event: Event) => {
+  event.preventDefault()
+  containerRef.value?.focus()
+}
 </script>
 
 <template>
-  <transition-root
-    appear
-    :show="isOpen"
-    as="template"
+  <DialogRoot
+    :open="isOpen"
+    @update:open="onRequestClose"
   >
-    <Dialog
-      :class="s.dialog({ class: styleSlots?.dialog })"
-      :initial-focus="containerRef"
-      :aria-modal="true"
-      :aria-labelledby="ariaLabelledBy"
-      @close="closeModal"
-    >
-      <transition-child
-        as="template"
-        class="opacity-0"
-        enter="duration-300 ease-out"
-        enter-from="opacity-0"
-        enter-to="opacity-100"
-        leave="duration-200 ease-in"
-        leave-from="opacity-100"
-        leave-to="opacity-0"
+    <DialogPortal>
+      <DialogOverlay
+        :class="s.backdrop({ class: styleSlots?.backdrop })"
+      />
+      <DialogContent
+        :class="s.dialog({ class: styleSlots?.dialog })"
+        :aria-modal="true"
+        v-bind="dialogContentBinds"
+        @open-auto-focus="onOpenAutoFocus"
       >
-        <div :class="s.backdrop({ class: styleSlots?.backdrop })" />
-      </transition-child>
-
-      <div
-        :class="s.container({ class: styleSlots?.container })"
-        ref="containerRef"
-      >
-        <div :class="s.content({ class: styleSlots?.content })">
-          <transition-child
-            as="template"
-            class="opacity-0"
-            enter="duration-300 ease-out"
-            enter-from="opacity-0 scale-95"
-            enter-to="opacity-100 scale-100"
-            leave="duration-200 ease-in"
-            leave-from="opacity-100 scale-100"
-            leave-to="opacity-0 scale-95"
-          >
-            <dialog-panel :class="s.panel({ class: styleSlots?.panel })">
+        <div
+          :class="s.container({ class: styleSlots?.container })"
+          tabindex="-1"
+          ref="containerRef"
+        >
+          <div :class="s.content({ class: styleSlots?.content })">
+            <div :class="s.panel({ class: styleSlots?.panel })">
               <div
                 v-if="title || closable"
                 :class="s.panelChild({ class: styleSlots?.panelChild })"
               >
-                <dialog-title
+                <DialogTitle
+                  v-if="!ariaLabelledBy"
                   :class="s.title({ class: styleSlots?.title })"
-                  :id="ariaLabelledBy"
                 >
                   {{ title }}
-                </dialog-title>
-                <dialog-description
+                </DialogTitle>
+                <!-- Reka's DialogTitle force-overrides custom ids, so when the
+                     consumer provides `ariaLabelledBy` the title renders with
+                     that exact id for the labelledby reference to resolve. -->
+                <h2
+                  v-else
+                  :id="ariaLabelledBy"
+                  :class="s.title({ class: styleSlots?.title })"
+                >
+                  {{ title }}
+                </h2>
+                <DialogDescription
                   v-if="ariaDescription"
                   class="sr-only"
                 >
                   {{ ariaDescription }}
-                </dialog-description>
+                </DialogDescription>
                 <vk-button
                   v-if="closable"
                   tabindex="-1"
@@ -101,10 +118,10 @@ const closeModal = () => { if (props.closable) emit('close') }
                 </vk-button>
               </div>
               <slot />
-            </dialog-panel>
-          </transition-child>
+            </div>
+          </div>
         </div>
-      </div>
-    </Dialog>
-  </transition-root>
+      </DialogContent>
+    </DialogPortal>
+  </DialogRoot>
 </template>
