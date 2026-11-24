@@ -29,6 +29,8 @@ const headers = computed(() => props.headers)
 
 const handleRowKeydown = (event: KeyboardEvent, item: TableItem) => {
   if (!props.rowEvents) return
+  if (event.target !== event.currentTarget) return
+  if (event.ctrlKey || event.metaKey || event.altKey || event.repeat) return
   if (event.key === 'Enter' || event.key === ' ') {
     event.preventDefault()
     emit('onRowClick', item)
