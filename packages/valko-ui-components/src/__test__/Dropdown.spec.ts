@@ -204,7 +204,7 @@ describe('Dropdown component', () => {
       it('should the item be disabled if has disabled true', async () => {
         await openDropdown({ items: [{ key: 'disabled', title: 'Disabled', icon: 'negative', disabled: true }] })
         expect(findItemButton()!.classList).toContain('data-[disabled]:cursor-not-allowed')
-        expect(findItemButton()!.getAttribute('data-disabled')).toBe('true')
+        expect(findItemButton()!.getAttribute('data-disabled')).toBe('')
       })
     })
 
@@ -333,6 +333,32 @@ describe('Dropdown component', () => {
       await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
 
       expect(wrapper.emitted('click')).toBeTruthy()
+    })
+
+    it('should emit update:isOpen and render the menu when a controlled dropdown is opened', async () => {
+      wrapper = mount(VkDropdown, {
+        props: {
+          items,
+          isOpen: false
+        },
+        attrs: {
+          'onUpdate:isOpen': (value: boolean) => wrapper.setProps({ isOpen: value })
+        },
+        attachTo: document.body
+      })
+
+      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+
+      expect(wrapper.emitted('update:isOpen')).toEqual([[true]])
+      await flushPortals()
+
+      expect(findMenu()).toBeTruthy()
+
+      await wrapper.find('.vk-dropdown__trigger-button').trigger('click')
+      await flushPortals()
+
+      expect(wrapper.emitted('update:isOpen')).toEqual([[true], [false]])
+      expect(findMenu()).toBeFalsy()
     })
 
     it('should not emit itemClick when the clicked item is disabled', async () => {

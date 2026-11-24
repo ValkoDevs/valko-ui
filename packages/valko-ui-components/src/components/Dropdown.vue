@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<DropdownProps>(), {
   items: () => []
 })
 
-const emit = defineEmits(['itemClick', 'click'])
+const emit = defineEmits(['itemClick', 'click', 'update:isOpen'])
 
 const s = computed(() => styles(props))
 
@@ -39,6 +39,7 @@ const open = computed({
   get: () => props.isOpen ?? internalOpen.value,
   set: (val: boolean) => {
     if (props.isOpen === undefined) internalOpen.value = val
+    else emit('update:isOpen', val)
   }
 })
 
@@ -48,6 +49,7 @@ const side = computed(() => (props.placement === 'auto' ? undefined : props.plac
 const align = computed(() => props.alignment ?? 'start')
 
 const onToggle = (event?: MouseEvent) => {
+  if (props.disabled) return
   open.value = !open.value
   if (event) emit('click', event)
 }
@@ -116,8 +118,6 @@ const onItemClick = (item: Item) => {
               type="button"
               :class="s.itemsButton({ class: styleSlots?.itemsButton })"
               :data-shape="shape"
-              :data-disabled="item.disabled || undefined"
-              :aria-disabled="item.disabled || undefined"
             >
               <vk-icon
                 v-if="item.icon"

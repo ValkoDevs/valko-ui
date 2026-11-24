@@ -17,7 +17,10 @@ const dropdown = tv({
       'data-[open=true]:rotate-180'
     ],
     panel: [
-      'bg-surface-container'
+      'bg-surface-container',
+      'z-40',
+      'data-[state=open]:animate-vk-popover-in',
+      'data-[state=closed]:animate-vk-popover-out'
     ],
     itemsMenu: [
       'vk-dropdown__items-menu',
@@ -56,6 +59,35 @@ const dropdown = tv({
       warning: {},
       negative: {},
       surface: {}
+    },
+    elevated: {
+      false: {
+        panel: [
+          'shadow-el2'
+        ]
+      },
+      true: {
+        panel: [
+          'shadow-el3'
+        ]
+      }
+    },
+    shape: {
+      rounded: {
+        panel: [
+          'rounded-2xl'
+        ]
+      },
+      soft: {
+        panel: [
+          'rounded-lg'
+        ]
+      },
+      square: {
+        panel: [
+          'rounded-none'
+        ]
+      }
     },
     size: {
       xs: {
