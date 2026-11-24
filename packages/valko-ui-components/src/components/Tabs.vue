@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { type Ref, ref, watch, nextTick, computed, onUpdated } from 'vue'
-import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/vue'
+import { TabsRoot, TabsList, TabsTrigger, TabsContent } from 'reka-ui'
 import type { TabsProps } from '#valkoui/types/Tabs'
 import styles from '#valkoui/styles/Tabs.styles.ts'
 import VkIcon from './Icon.vue'
@@ -22,7 +22,7 @@ const emit = defineEmits(['tabClick', 'update:modelValue'])
 
 const s = computed(() => styles(props))
 
-const internalIndex = ref(0)
+const internalIndex = ref(props.defaultIndex ?? 0)
 const cursorRef: Ref<HTMLElement | null> = ref(null)
 
 const selectedIndex = computed({
@@ -33,13 +33,23 @@ const selectedIndex = computed({
   }
 })
 
+// Reka Tabs values are strings, and String() collapses distinct keys like 1 and '1';
+// the public API is index-based, so Reka values are the index as a string.
+const selectedValue = computed(() => String(selectedIndex.value))
+
+const onValueChange = (key: string | number) => {
+  const index = Number(key)
+  if (Number.isNaN(index) || index < 0 || index >= props.tabs.length) return
+  onChange(index)
+}
+
 const moveCursor = async () => {
   await nextTick()
   await nextTick()
   if (cursorRef.value) {
     const extraHeight = props.shape === 'line' && props.variant === 'outlined' && !props.vertical ? 2 : 0
     const extraLeft = props.shape === 'line' && props.variant === 'outlined' && props.vertical ? 2 : 0
-    const selectedElement = cursorRef.value.closest('.tab-list')?.querySelector('button[data-headlessui-state=selected]') as HTMLElement
+    const selectedElement = cursorRef.value.closest('.tab-list')?.querySelector('button[data-state=active]') as HTMLElement
     if (selectedElement) {
       cursorRef.value.style.width = `${selectedElement.clientWidth}px`
       cursorRef.value.style.height = `${+selectedElement.clientHeight + extraHeight}px`
@@ -65,15 +75,14 @@ watch(
 
 <template>
   <div :class="s.container({ class: styleSlots?.container })">
-    <tab-group
+    <TabsRoot
       as="div"
-      :vertical="vertical"
-      :default-index="defaultIndex"
+      :orientation="vertical ? 'vertical' : 'horizontal'"
+      :model-value="selectedValue"
       :class="s.group({ class: styleSlots?.group })"
-      :selected-index="selectedIndex"
-      @change="onChange"
+      @update:model-value="onValueChange"
     >
-      <tab-list
+      <TabsList
         :class="s.list({ class: styleSlots?.list })"
         as="nav"
         :aria-label="ariaLabel ?? 'Tab navigation'"
@@ -87,38 +96,40 @@ watch(
             :class="s.cursorGradient({ class: styleSlots?.cursorGradient })"
           />
         </div>
-        <tab
-          v-for="item in tabs"
+        <TabsTrigger
+          v-for="(item, index) in tabs"
           :class="s.tabSlot({ class: styleSlots?.tabSlot })"
           :key="item.key"
+          :value="String(index)"
           :disabled="item.disabled"
         >
           <slot :name="`${item.key}-tab`">
-            <vk-icon
+            <VkIcon
               v-if="item.leftIcon"
               :name="item.leftIcon"
               :class="s.leftIcon({ class: styleSlots?.leftIcon })"
             />
             <span> {{ item.title }} </span>
-            <vk-icon
+            <VkIcon
               v-if="item.rightIcon"
               :name="item.rightIcon"
               :class="s.rightIcon({ class: styleSlots?.rightIcon })"
             />
           </slot>
-        </tab>
-      </tab-list>
+        </TabsTrigger>
+      </TabsList>
 
-      <tab-panels :class="s.content({ class: styleSlots?.content })">
-        <tab-panel
-          v-for="item in tabs"
+      <div :class="s.content({ class: styleSlots?.content })">
+        <TabsContent
+          v-for="(item, index) in tabs"
           :key="item.key"
+          :value="String(index)"
           :data-key="item.key"
           :class="s.content({ class: styleSlots?.content })"
         >
           <slot :name="`${item.key}-content`" />
-        </tab-panel>
-      </tab-panels>
-    </tab-group>
+        </TabsContent>
+      </div>
+    </TabsRoot>
   </div>
 </template>

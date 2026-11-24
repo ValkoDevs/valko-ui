@@ -261,9 +261,30 @@ describe('Tabs component', () => {
           }
         })
         const tabButtons = wrapper.findAll('[role="tab"]')
-        await tabButtons[1].trigger('click')
+        await tabButtons[1].trigger('mousedown')
 
         expect(wrapper.emitted('update:modelValue')).toBeDefined()
+      })
+
+      it('should keep numeric and string keys of the same value distinct', async () => {
+        const mixed = [
+          { key: 1, title: 'One' },
+          { key: '1', title: 'One string' }
+        ]
+        const wrapper = mount(VkTabs, {
+          props: {
+            tabs: mixed,
+            modelValue: 0
+          }
+        })
+        const tabButtons = wrapper.findAll('[role="tab"]')
+        expect(tabButtons.length).toBe(2)
+        await tabButtons[1].trigger('mousedown')
+        await flushPromises()
+
+        expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([1])
+
+        wrapper.unmount()
       })
     })
 
@@ -281,7 +302,7 @@ describe('Tabs component', () => {
 
         await flushPromises()
         const tabButtons = wrapper.findAll('[role="tab"]')
-        await tabButtons[1].trigger('click')
+        await tabButtons[1].trigger('mousedown')
         await flushPromises()
         const cursorEl = wrapper.vm.$refs.cursorRef as HTMLElement
         expect(cursorEl.style.left).not.toBe('')
@@ -301,7 +322,7 @@ describe('Tabs component', () => {
         })
         await flushPromises()
         const tabButtons = wrapper.findAll('[role="tab"]')
-        await tabButtons[1].trigger('click')
+        await tabButtons[1].trigger('mousedown')
         await flushPromises()
         const cursorEl = wrapper.vm.$refs.cursorRef as HTMLElement
         expect(cursorEl.style.width).not.toBe('')
@@ -322,7 +343,7 @@ describe('Tabs component', () => {
         })
 
         const tabButtons = wrapper.findAll('[role="tab"]')
-        await tabButtons[0].trigger('click')
+        await tabButtons[0].trigger('mousedown')
 
         expect(wrapper.emitted('tabClick')).toBeUndefined()
       })
@@ -333,10 +354,140 @@ describe('Tabs component', () => {
         })
 
         const tabButtons = wrapper.findAll('[role="tab"]')
-        await tabButtons[1].trigger('click')
+        await tabButtons[1].trigger('mousedown')
 
         expect(wrapper.emitted('tabClick')).toBeDefined()
       })
+    })
+  })
+
+  describe('Keyboard navigation', () => {
+    it('should move focus to the next tab on ArrowRight and emit update:modelValue', async () => {
+      wrapper = mount(VkTabs, {
+        props: {
+          tabs,
+          modelValue: 0
+        },
+        attachTo: document.body
+      })
+      await flushPromises()
+      const tabButtons = wrapper.findAll('[role="tab"]')
+      const tabElement = tabButtons[0].element as HTMLElement
+      tabElement.focus()
+      await flushPromises()
+      await tabButtons[0].trigger('keydown', { key: 'ArrowRight' })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([1])
+
+      wrapper.unmount()
+    })
+
+    it('should move focus to the previous tab on ArrowLeft and emit update:modelValue', async () => {
+      wrapper = mount(VkTabs, {
+        props: {
+          tabs,
+          modelValue: 1
+        },
+        attachTo: document.body
+      })
+      await flushPromises()
+      const tabButtons = wrapper.findAll('[role="tab"]')
+      const tabElement = tabButtons[1].element as HTMLElement
+      tabElement.focus()
+      await flushPromises()
+      await tabButtons[1].trigger('keydown', { key: 'ArrowLeft' })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([0])
+
+      wrapper.unmount()
+    })
+
+    it('should move focus to the first tab on Home and emit update:modelValue', async () => {
+      wrapper = mount(VkTabs, {
+        props: {
+          tabs,
+          modelValue: 3
+        },
+        attachTo: document.body
+      })
+      await flushPromises()
+      const tabButtons = wrapper.findAll('[role="tab"]')
+      const tabElement = tabButtons[3].element as HTMLElement
+      tabElement.focus()
+      await flushPromises()
+      await tabButtons[3].trigger('keydown', { key: 'Home' })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([0])
+
+      wrapper.unmount()
+    })
+
+    it('should move focus to the last tab on End and emit update:modelValue', async () => {
+      wrapper = mount(VkTabs, {
+        props: {
+          tabs,
+          modelValue: 0
+        },
+        attachTo: document.body
+      })
+      await flushPromises()
+      const tabButtons = wrapper.findAll('[role="tab"]')
+      const tabElement = tabButtons[0].element as HTMLElement
+      tabElement.focus()
+      await flushPromises()
+      await tabButtons[0].trigger('keydown', { key: 'End' })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([tabs.length - 1])
+
+      wrapper.unmount()
+    })
+
+    it('should move focus to the next tab on ArrowDown when vertical', async () => {
+      wrapper = mount(VkTabs, {
+        props: {
+          tabs,
+          modelValue: 0,
+          vertical: true
+        },
+        attachTo: document.body
+      })
+      await flushPromises()
+      const tabButtons = wrapper.findAll('[role="tab"]')
+      const tabElement = tabButtons[0].element as HTMLElement
+      tabElement.focus()
+      await flushPromises()
+      await tabButtons[0].trigger('keydown', { key: 'ArrowDown' })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([1])
+
+      wrapper.unmount()
+    })
+
+    it('should move focus to the previous tab on ArrowUp when vertical', async () => {
+      wrapper = mount(VkTabs, {
+        props: {
+          tabs,
+          modelValue: 1,
+          vertical: true
+        },
+        attachTo: document.body
+      })
+      await flushPromises()
+      const tabButtons = wrapper.findAll('[role="tab"]')
+      const tabElement = tabButtons[1].element as HTMLElement
+      tabElement.focus()
+      await flushPromises()
+      await tabButtons[1].trigger('keydown', { key: 'ArrowUp' })
+      await flushPromises()
+
+      expect(wrapper.emitted('update:modelValue')?.[0]).toEqual([0])
+
+      wrapper.unmount()
     })
   })
 
