@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { VisuallyHidden } from 'reka-ui'
 import { computed } from 'vue'
 import type { SpinnerProps } from '#valkoui/types/Spinner'
 import styles from '#valkoui/styles/Spinner.styles.ts'
@@ -26,5 +27,6 @@ const s = computed(() => styles(props))
       :class="s.icon({ class: styleSlots?.icon })"
       aria-hidden="true"
     />
+    <VisuallyHidden>Loading</VisuallyHidden>
   </div>
 </template>

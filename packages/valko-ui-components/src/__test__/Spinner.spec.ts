@@ -20,6 +20,19 @@ describe('Spinner component', () => {
       it('should be size md', () => {
         expect(wrapper.find('.text-2xl').exists()).toBe(true)
       })
+
+      it('should have role status with polite live region', () => {
+        const status = wrapper.find('[role="status"]')
+        expect(status.attributes('aria-live')).toBe('polite')
+      })
+
+      it('should contain visually hidden loading text', () => {
+        expect(wrapper.find('[role="status"]').text()).toContain('Loading')
+      })
+
+      it('should hide the icon from assistive tech', () => {
+        expect(wrapper.find('.vk-icon').attributes('aria-hidden')).toBe('true')
+      })
     })
 
     describe('When color prop changes', () => {
