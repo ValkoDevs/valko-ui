@@ -80,6 +80,15 @@ const apiData: PropData[] = [
     apiType: 'primitive'
   },
   {
+    key: 'nameProp',
+    prop: 'name',
+    required: false,
+    description: 'The name of the hidden native select used on form submission.',
+    values: 'string',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
     key: 'optionsProp',
     prop: 'options',
     required: false,

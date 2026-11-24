@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import {
   SelectContent,
   SelectItem,
+  SelectViewport,
   SelectItemText,
   SelectPortal,
   SelectRoot,
@@ -35,7 +36,32 @@ const s = computed(() => styles(props))
 
 const isOpen = ref(false)
 
-const showMap = computed(() => props.options.reduce((acc: Record<string, string>, opt: SelectOption) => ({
+// Per-instance handle on the portal content, used to detect this select's own
+// closing state (see setOpened). Reka's exposed component ref resolves to the
+// rendered content's popper wrapper, so read data-state off its root node.
+const contentRef = ref<{ $el?: HTMLElement } | null>(null)
+const contentEl = () => contentRef.value?.$el ?? null
+
+// VkInput exposes the inner <input> element (via reka's useForwardExpose),
+// so a closed dropdown can return focus to the actual focusable element
+// instead of the non-focusable wrapper Reka sees as the trigger. Focusing it
+// programmatically must not reopen the select, so the next focus-triggered
+// open is suppressed exactly once.
+let suppressNextOpen = false
+const inputRef = ref<{ $el?: HTMLElement } | null>(null)
+const focusTriggerInput = () => {
+  suppressNextOpen = true
+  inputRef.value?.$el?.focus()
+}
+
+// reka-ui's SelectItem throws during setup for a `value: ''` option (it
+// requires a non-empty value for the hidden native option it renders), while
+// SelectOption types value as `string | number`, so '' is type-legal. Such an
+// option is indistinguishable from "no selection" anyway, so drop it here
+// rather than forwarding a crashing option to Reka.
+const validOptions = computed(() => props.options.filter(option => option.value !== ''))
+
+const showMap = computed(() => validOptions.value.reduce((acc: Record<string, string>, opt: SelectOption) => ({
   ...acc,
   [`${opt.value}`]: opt.label
 }), { 'undefined': '' }))
@@ -66,9 +92,15 @@ const setOpened = (open: boolean) => {
     return
   }
   // Reka returns focus to the trigger while the content is still mounted in
-  // its closing state; ignore that refocus so the select doesn't reopen.
-  const isClosing = document.querySelector<HTMLElement>('.vk-select__dropdown[data-state="closed"]')
-  if (isClosing) return
+  // its closing state; ignore that refocus so the select doesn't reopen. The
+  // check is scoped to this instance's content element — a global DOM query
+  // would match another select's closed dropdown and wrongly swallow this
+  // instance's reopen.
+  if (contentEl()?.dataset.state === 'closed') return
+  if (suppressNextOpen) {
+    suppressNextOpen = false
+    return
+  }
   isOpen.value = true
 }
 
@@ -106,18 +138,33 @@ const handleItemSelect = (option: SelectOption, event: SelectItemSelectEvent<Acc
 
 <template>
   <div :class="s.container({ class: styleSlots?.container })">
-    <select-root
+      <!-- readonly keeps the root enabled: a fake `disabled` on the root would
+           put data-disabled on the wrapper while the input looks enabled. The
+           readonly signal lives on the input (native readonly + aria-disabled). -->
+      <select-root
       :name="name"
       :multiple="multiple"
-      :disabled="disabled || readonly"
+      :disabled="disabled"
       :model-value="modelValue"
       :open="isOpen"
       @update:open="setOpened"
       @update:model-value="updateValue"
     >
+      <!--
+        The trigger composes onto VkInput, a FieldRoot compound whose actual
+        focusable element is the inner <input>. Reka's `as-child` merges its
+        combobox props onto the compound's root wrapper, so VkInput forwards
+        the combobox semantics (role, aria-expanded, aria-controls) to the
+        inner <input> itself.
+      -->
       <select-trigger as-child>
         <vk-input
+          ref="inputRef"
           readonly
+          role="combobox"
+          :aria-expanded="isOpen"
+          aria-haspopup="listbox"
+          :aria-disabled="readonly || undefined"
           :helpertext="helpertext"
           :label="label"
           :disabled="disabled"
@@ -147,6 +194,8 @@ const handleItemSelect = (option: SelectOption, event: SelectItemSelectEvent<Acc
       </select-trigger>
       <select-portal>
         <select-content
+          :aria-multiselectable="multiple || undefined"
+          @close-auto-focus.prevent="focusTriggerInput"
           position="popper"
           align="start"
           :side-offset="4"
@@ -155,18 +204,21 @@ const handleItemSelect = (option: SelectOption, event: SelectItemSelectEvent<Acc
           :data-variant="variant"
           :aria-label="label || 'Select options'"
           :class="s.dropdown({ class: styleSlots?.dropdown })"
+          ref="contentRef"
         >
-          <select-item
-            v-for="option in options"
-            :key="option.value"
-            :value="option.value"
-            :data-shape="shape"
-            :data-variant="variant"
-            :class="s.item({ class: styleSlots?.item })"
-            @select="handleItemSelect(option, $event)"
-          >
-            <select-item-text>{{ option.label }}</select-item-text>
-          </select-item>
+          <select-viewport>
+            <select-item
+              v-for="option in validOptions"
+              :key="option.value"
+              :value="option.value"
+              :data-shape="shape"
+              :data-variant="variant"
+              :class="s.item({ class: styleSlots?.item })"
+              @select="handleItemSelect(option, $event)"
+            >
+              <select-item-text>{{ option.label }}</select-item-text>
+            </select-item>
+          </select-viewport>
         </select-content>
       </select-portal>
     </select-root>

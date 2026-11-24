@@ -249,6 +249,95 @@ describe('Select component', () => {
     })
   })
 
+  describe('With multiple instances', () => {
+    it('should not swallow opening one select because another is closing', async () => {
+      const hostA = mount(Host, { attachTo: document.body })
+      const hostB = mount(Host, { attachTo: document.body })
+      await flush()
+
+      // Open select B.
+      await hostB.find('input').trigger('focus')
+      await flush()
+      expect(document.querySelectorAll('.vk-select__dropdown[data-state="open"]').length).toBe(1)
+
+      // Close B: Reka's presence keeps the content mounted with
+      // data-state="closed" for one tick before teardown.
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true }))
+      await nextTick()
+      expect(document.querySelector('.vk-select__dropdown[data-state="closed"]')).not.toBeNull()
+
+      // Focusing A while B is still closing must open A, not be swallowed by
+      // B's closing dropdown.
+      await hostA.find('input').trigger('focus')
+      await flush()
+      const open = document.querySelectorAll('.vk-select__dropdown[data-state="open"]')
+      // With the old global closed-dropdown check, focusing A while B was
+      // closing swallowed A's open: no open dropdown would exist at all.
+      expect(open.length).toBe(1)
+
+      hostA.unmount()
+      hostB.unmount()
+      document.body.innerHTML = ''
+    })
+  })
+
+  describe('Accessibility', () => {
+    it('should put the combobox semantics on the focused input', async () => {
+      await mountSelect()
+      const input = wrapper!.find('input')
+      expect(input.attributes('role')).toBe('combobox')
+      expect(input.attributes('aria-expanded')).toBe('false')
+      await openDropdown()
+      expect(input.attributes('aria-expanded')).toBe('true')
+      expect(input.attributes('aria-controls')).toBe(document.querySelector('.vk-select__dropdown')!.id)
+    })
+
+    it('should mark the listbox multiselectable in multiple mode', async () => {
+      await mountSelect({ multiple: true })
+      await openDropdown()
+      expect(getDropdown().attributes('aria-multiselectable')).toBe('true')
+    })
+
+    it('should signal readonly on the input without a fake disabled on the root', async () => {
+      await mountSelect({ readonly: true })
+      const input = wrapper!.find('input')
+      expect(input.attributes('aria-disabled')).toBe('true')
+      expect(input.element.hasAttribute('readonly')).toBe(true)
+      expect(document.querySelector('.vk-select__container [data-disabled]')).toBeNull()
+    })
+  })
+
+  describe('With empty-string option values', () => {
+    it('should drop empty-string options instead of crashing', async () => {
+      wrapper = mount(VkSelect, {
+        props: { options: [...options, { value: '', label: 'Empty' }] },
+        attachTo: document.body
+      })
+      await openDropdown()
+      expect(getItems().length).toBe(options.length)
+    })
+  })
+
+  describe('Props and styles', () => {
+    it('should style items with the checked and highlighted variants', async () => {
+      await mountSelect({ initial: 2 })
+      await openDropdown()
+      const checked = getItems().find(item => item.attributes('data-state') === 'checked')!
+      expect(checked.classes()).toContain('data-[variant=filled]:data-[state=checked]:bg-primary')
+      const highlighted = getItems().find(item => item.attributes('data-highlighted') !== undefined)!
+      expect(highlighted.classes()).toContain('data-[variant=filled]:data-[highlighted]:bg-primary')
+    })
+
+    it('should apply styleSlots overrides', async () => {
+      wrapper = mount(VkSelect, {
+        props: { options, styleSlots: { dropdown: ['my-dropdown'] } },
+        attachTo: document.body
+      })
+      await openDropdown()
+      expect(getDropdown().classes()).toContain('my-dropdown')
+    })
+  })
+
   describe('Form submission parity', () => {
     it('should not render a hidden native select without a name prop', async () => {
       await mountSelect({ initial: 2 })

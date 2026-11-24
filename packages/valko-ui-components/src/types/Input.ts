@@ -17,5 +17,11 @@ export interface InputProps extends Sizes, ColorsWithSurface, Variants, Shapes, 
   loading?: boolean;
   readonly?: boolean;
   clearable?: boolean;
+  /** Role forwarded to the inner input (e.g. combobox for Select triggers). */
+  role?: string;
+  ariaExpanded?: boolean;
+  ariaControls?: string;
+  ariaAutocomplete?: 'none' | 'list' | 'both' | 'inline';
+  ariaDisabled?: boolean;
   styleSlots?: Partial<InputSlots>;
 }
