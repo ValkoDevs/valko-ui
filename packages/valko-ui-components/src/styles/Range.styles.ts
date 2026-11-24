@@ -4,12 +4,14 @@ const range = tv({
   slots: {
     container: [
       'vk-range',
+      'block',
       'w-full',
       'relative',
       'select-none'
     ],
     progressContainer: [
       'vk-range__progress_container',
+      'block',
       'overflow-hidden',
       'relative'
     ],

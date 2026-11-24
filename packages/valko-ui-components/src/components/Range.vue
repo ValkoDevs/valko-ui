@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, getCurrentInstance, ref, watch } from 'vue'
+import type { Ref } from 'vue'
 import { SliderRoot, SliderTrack, SliderRange, SliderThumb } from 'reka-ui'
 import type { RangeProps } from '#valkoui/types/Range'
 import styles from '#valkoui/styles/Range.styles.ts'
@@ -26,30 +27,52 @@ const emit = defineEmits(['update:modelValue'])
 
 const s = computed(() => styles(props))
 
+// reka-ui's slider is fully controlled through `modelValue`, so a static
+// `:model-value` binding (no v-model) would freeze the internal value at its
+// initial render. Track the value internally whenever the parent does not
+// listen for `update:modelValue`.
+const hasModelValueListener = Boolean(getCurrentInstance()?.vnode.props?.['onUpdate:modelValue'])
+const isControlled = hasModelValueListener
+
+const internalValue = ref<number | number[]>(props.modelValue as number | number[]) as Ref<number | number[]>
+
+watch(() => props.modelValue, (value) => {
+  internalValue.value = value as number | number[]
+})
+
+const modelValue = computed<number | number[]>(() => isControlled
+  ? props.modelValue as number | number[]
+  : internalValue.value)
+
 const sliderValues = computed<number[]>(() => {
-  if (!props.isDouble) return [props.modelValue as number]
-  if (Array.isArray(props.modelValue)) return props.modelValue
-  return [props.min, props.modelValue]
+  if (!props.isDouble) return [modelValue.value as number]
+  if (Array.isArray(modelValue.value)) return modelValue.value
+  return [props.min, modelValue.value as number]
 })
 
 const onValueChange = (value: number[] | undefined) => {
   if (!value?.length) return
 
-  emit('update:modelValue', props.isDouble ? value : value[0])
+  const next = props.isDouble ? value : value[0]
+  if (!isControlled) internalValue.value = next
+  emit('update:modelValue', next)
 }
 
 const onLabelClick = (newPosition: number) => {
   const clamped = Math.min(props.max, Math.max(props.min, newPosition))
 
   if (!props.isDouble) {
+    if (!isControlled) internalValue.value = clamped
     emit('update:modelValue', clamped)
     return
   }
 
   const [minValue, maxValue] = sliderValues.value
-  emit('update:modelValue', clamped <= (minValue + maxValue) / 2
+  const next: number[] = clamped <= (minValue + maxValue) / 2
     ? [clamped, maxValue]
-    : [minValue, clamped])
+    : [minValue, clamped]
+  if (!isControlled) internalValue.value = next
+  emit('update:modelValue', next)
 }
 
 const stepMarks = computed(() => {

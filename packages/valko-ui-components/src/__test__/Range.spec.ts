@@ -456,7 +456,7 @@ describe('Range component', () => {
 
         firePointerDown(slider.element, 90)
         await wrapper.vm.$nextTick()
-        expect(wrapper.emitted('update:modelValue')![1]).toEqual([[30, 90]])
+        expect(wrapper.emitted('update:modelValue')![1]).toEqual([[20, 90]])
       })
     })
 
@@ -553,6 +553,56 @@ describe('Range component', () => {
 
         expect(wrapper.find('.vk-range__progress').attributes('style')).not.toContain('background-image')
       })
+    })
+  })
+
+  describe('Layout', () => {
+    it('should render the root slider element as a block element', () => {
+      wrapper = mount(VkRange, {
+        props: { modelValue: 0 }
+      })
+
+      expect(wrapper.find('.vk-range').classes()).toContain('block')
+    })
+
+    it('should render the track element as a block element', () => {
+      wrapper = mount(VkRange, {
+        props: { modelValue: 0 }
+      })
+
+      expect(wrapper.find('.vk-range__progress_container').classes()).toContain('block')
+    })
+  })
+
+  describe('When no v-model listener is provided', () => {
+    it('should update the slider value internally on keyboard interaction', async () => {
+      wrapper = mount(VkRange, {
+        props: { min: 0, max: 100, step: 10, modelValue: 50 }
+      })
+
+      await wrapper.find('.vk-range__thumb').trigger('keydown', { key: 'ArrowRight' })
+
+      expect(wrapper.find('.vk-range__thumb').attributes('aria-valuenow')).toBe('60')
+    })
+
+    it('should update the minimum thumb internally when isDouble is true', async () => {
+      wrapper = mount(VkRange, {
+        props: { min: 0, max: 100, step: 10, modelValue: [20, 80], isDouble: true }
+      })
+
+      await wrapper.findAll('.vk-range__thumb')[0].trigger('keydown', { key: 'ArrowRight' })
+
+      expect(wrapper.findAll('.vk-range__thumb')[0].attributes('aria-valuenow')).toBe('30')
+    })
+
+    it('should still emit update:modelValue events', async () => {
+      wrapper = mount(VkRange, {
+        props: { min: 0, max: 100, step: 10, modelValue: 50 }
+      })
+
+      await wrapper.find('.vk-range__thumb').trigger('keydown', { key: 'ArrowRight' })
+
+      expect(wrapper.emitted('update:modelValue')![0]).toEqual([60])
     })
   })
 })
