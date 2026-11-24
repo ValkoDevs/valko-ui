@@ -12,3 +12,9 @@ export interface RadioProps extends DefaultComponent, Pick<AriaAttributes, 'aria
   readonly?: boolean;
   styleSlots?: Partial<RadioSlots>;
 }
+
+export interface RadioGroupProps {
+  name?: string;
+  modelValue?: string | number;
+  disabled?: boolean;
+}

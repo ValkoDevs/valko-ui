@@ -2,6 +2,13 @@ import { tv } from 'tailwind-variants'
 
 const radio = tv({
   slots: {
+    groupContainer: [
+      'vk-radio-group',
+      'w-fit',
+      'flex',
+      'flex-col',
+      'gap-1'
+    ],
     container: [
       'vk-radio',
       'w-fit',

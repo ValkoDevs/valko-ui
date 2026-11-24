@@ -1,5 +1,6 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import VkRadio from '#valkoui/components/Radio.vue'
+import VkRadioGroup from '#valkoui/components/RadioGroup.vue'
 
 describe('Radio component', () => {
   let wrapper: VueWrapper
@@ -241,6 +242,18 @@ describe('Radio component', () => {
 
       expect(wrapper.find('[role="radio"]').attributes('aria-describedby')).toBe('radio-helpertext')
     })
+
+    it('should not set aria-label when the prop is not provided', () => {
+      const wrapper = mount(VkRadio, { props: { label: 'Option' } })
+
+      expect(wrapper.find('[role="radio"]').attributes('aria-label')).toBeUndefined()
+    })
+
+    it('should set aria-label when the prop is provided', () => {
+      const wrapper = mount(VkRadio, { props: { ariaLabel: 'Custom label' } })
+
+      expect(wrapper.find('[role="radio"]').attributes('aria-label')).toBe('Custom label')
+    })
   })
 
   describe('Radiogroup semantics', () => {
@@ -266,6 +279,71 @@ describe('Radio component', () => {
       })
 
       expect(wrapper.find('[role="radio"]').attributes('aria-checked')).toBe('true')
+    })
+
+    it('should stay checked after clicking when no value prop is set', async () => {
+      const wrapper = mount(VkRadio, {})
+
+      expect(wrapper.find('[role="radio"]').attributes('aria-checked')).toBe('false')
+      expect(wrapper.find('[role="radio"]').attributes('data-state')).toBe('unchecked')
+
+      await wrapper.find('[role="radio"]').trigger('click')
+
+      expect(wrapper.find('[role="radio"]').attributes('aria-checked')).toBe('true')
+      expect(wrapper.find('[role="radio"]').attributes('data-state')).toBe('checked')
+      expect(wrapper.emitted('update:modelValue')![0][0]).toBeUndefined()
+
+      await wrapper.setProps({})
+
+      expect(wrapper.find('[role="radio"]').attributes('aria-checked')).toBe('true')
+      expect(wrapper.find('[role="radio"]').attributes('data-state')).toBe('checked')
+    })
+  })
+
+  describe('When used inside a VkRadioGroup', () => {
+    const GroupConsumer = {
+      components: { VkRadio, VkRadioGroup },
+      props: ['modelValue'],
+      template: `
+        <vk-radio-group name="group" :model-value="modelValue" @update:model-value="$emit('update:modelValue', $event)">
+          <vk-radio value="a" label="A" />
+          <vk-radio value="b" label="B" />
+        </vk-radio-group>
+      `
+    }
+
+    it('should render a single radiogroup root and one named input for the whole group', () => {
+      wrapper = mount({
+        components: { VkRadio, VkRadioGroup },
+        template: `
+          <form>
+            <vk-radio-group name="group">
+              <vk-radio value="a" label="A" />
+              <vk-radio value="b" label="B" />
+            </vk-radio-group>
+          </form>
+        `
+      })
+
+      expect(wrapper.findAll('[role="radiogroup"]')).toHaveLength(1)
+      expect(wrapper.findAll('[role="radio"]')).toHaveLength(2)
+      expect(wrapper.findAll('input[name="group"]')).toHaveLength(1)
+    })
+
+    it('should emit the clicked value through the group model', async () => {
+      wrapper = mount(GroupConsumer)
+
+      await wrapper.findAll('[role="radio"]')[1].trigger('click')
+
+      expect(wrapper.emitted('update:modelValue')![0][0]).toBe('b')
+    })
+
+    it('should check the matching radio when modelValue matches its value', async () => {
+      wrapper = mount(GroupConsumer, { props: { modelValue: 'b' } })
+
+      const radios = wrapper.findAll('[role="radio"]')
+      expect(radios[0].attributes('aria-checked')).toBe('false')
+      expect(radios[1].attributes('aria-checked')).toBe('true')
     })
   })
 
