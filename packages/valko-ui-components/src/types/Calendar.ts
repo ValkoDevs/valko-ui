@@ -40,6 +40,7 @@ export interface CalendarProps extends Sizes, ColorsWithSurface, Variants, Shape
   disableWeekends?: boolean;
   minDate?: DateValue;
   maxDate?: DateValue;
+  calendarLabel?: string;
   styleSlots?: Partial<CalendarSlots>;
 }
 

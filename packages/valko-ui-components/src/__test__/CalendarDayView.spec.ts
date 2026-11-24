@@ -17,6 +17,7 @@ const mountDayView = (options: {
   onUpdateModelValue?: (date: DateValue | undefined) => void
   onChangeMonth?: (operation: 1 | -1) => void
   onViewChange?: (view: string) => void
+  attachTo?: HTMLElement
 }) => mount({
   components: { VkCalendarDayView },
   setup() {
@@ -36,7 +37,7 @@ const mountDayView = (options: {
       })
     })
   }
-})
+}, { attachTo: options.attachTo })
 
 const dayButtons = (wrapper: VueWrapper) =>
   wrapper.findAll('.vk-calendar__grid-button').filter(btn => !isNaN(Number(btn.text())))
@@ -170,6 +171,26 @@ describe('CalendarDayView Component', () => {
       await wrapper.findAll('.vk-calendar__arrows').at(1)?.trigger('click')
 
       expect(onChangeMonth).toHaveBeenCalledWith(1)
+    })
+  })
+
+  describe('Keyboard', () => {
+    it('should move focus to the next day cell when ArrowRight is pressed', async () => {
+      const [, , adapter] = useDateAdapter({})
+      adapter.onPlaceholderChange(october)
+      const wrapper = mountDayView({ adapter, attachTo: document.body })
+
+      const buttons = dayButtons(wrapper)
+      const firstButton = buttons[0].element as HTMLElement
+      firstButton.focus()
+
+      expect(document.activeElement).toBe(firstButton)
+
+      await buttons[0].trigger('keydown', { key: 'ArrowRight', code: 'ArrowRight' })
+
+      expect(document.activeElement).toBe(buttons[1].element)
+
+      wrapper.unmount()
     })
   })
 

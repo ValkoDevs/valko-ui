@@ -118,6 +118,7 @@ watch(() => props.modelValue, (value) => {
     :min-value="minDate"
     :max-value="maxDate"
     :is-date-disabled="isDateDisabled"
+    :calendar-label="calendarLabel ?? 'Calendar'"
     prevent-deselect
     @update:model-value="onSelectDay"
     @update:placeholder="onPlaceholderChange"

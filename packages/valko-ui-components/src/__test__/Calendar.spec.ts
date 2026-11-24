@@ -73,6 +73,31 @@ describe('Calendar component', () => {
 
         expect(wrapper.find('.vk-calendar__grid-button').classes()).toContain('rounded-sm')
       })
+
+      it('should have a root aria-label starting with Calendar by default', () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter
+          }
+        })
+
+        expect(wrapper.element.getAttribute('aria-label')).toMatch(/^Calendar,/)
+      })
+    })
+
+    describe('calendarLabel prop', () => {
+      it('should use the calendarLabel in the root aria-label when set', () => {
+        const wrapper = mount(VkCalendar, {
+          props: {
+            modelValue,
+            adapter,
+            calendarLabel: 'Appointment picker'
+          }
+        })
+
+        expect(wrapper.element.getAttribute('aria-label')).toMatch(/^Appointment picker,/)
+      })
     })
 
     describe('When color prop changes', () => {

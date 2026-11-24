@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import { CalendarCell, CalendarCellTrigger, CalendarGrid } from 'reka-ui'
+import {
+  CalendarCell,
+  CalendarCellTrigger,
+  CalendarGrid,
+  CalendarGridBody,
+  CalendarGridHead,
+  CalendarGridRow,
+  CalendarHeadCell
+} from 'reka-ui'
 import type { DateValue } from '@internationalized/date'
 import type { CalendarDayViewProps } from '#valkoui/types/Calendar'
 import styles from '#valkoui/styles/Calendar.styles.ts'
@@ -45,46 +53,57 @@ const onArrowClick = (operation: 1 | -1) => emit('changeMonth', operation)
     />
 
     <CalendarGrid
-      as="div"
+      as="table"
       :class="s.panel({ class: styleSlots?.panel })"
     >
-      <span
-        v-for="(weekday, index) in weekDays"
-        :key="index"
-        :class="s.weekdaySpan({ class: styleSlots?.weekdaySpan })"
-      >
-        {{ weekday }}
-      </span>
-
-      <CalendarCell
-        v-for="date in props.grid.rows.flat()"
-        :key="date.toString()"
-        :date="date"
-        as="div"
-      >
-        <CalendarCellTrigger
-          v-if="isInsideView(date)"
-          :day="date"
-          :month="props.grid.value"
-          as-child
-        >
-          <vk-button
-            :class="s.gridButton({ class: styleSlots?.gridButton })"
-            :size="size"
-            :disabled="isDayDisabled(date)"
-            :color="isDaySelected(date) ? color : 'surface'"
-            :variant="isDaySelected(date) ? variant : 'link'"
-            :shape="shape"
-            condensed
+      <CalendarGridHead>
+        <CalendarGridRow>
+          <CalendarHeadCell
+            v-for="(weekday, index) in weekDays"
+            :key="index"
+            :class="s.weekdaySpan({ class: styleSlots?.weekdaySpan })"
           >
-            {{ date.day }}
-          </vk-button>
-        </CalendarCellTrigger>
-        <span
-          v-else
-          :class="s.hiddenGridButton({ class: styleSlots?.hiddenGridButton })"
-        />
-      </CalendarCell>
+            {{ weekday }}
+          </CalendarHeadCell>
+        </CalendarGridRow>
+      </CalendarGridHead>
+
+      <CalendarGridBody>
+        <CalendarGridRow
+          v-for="(week, index) in props.grid.rows"
+          :key="index"
+        >
+          <CalendarCell
+            v-for="date in week"
+            :key="date.toString()"
+            :date="date"
+            as="td"
+          >
+            <CalendarCellTrigger
+              v-if="isInsideView(date)"
+              :day="date"
+              :month="props.grid.value"
+              as-child
+            >
+              <vk-button
+                :class="s.gridButton({ class: styleSlots?.gridButton })"
+                :size="size"
+                :disabled="isDayDisabled(date)"
+                :color="isDaySelected(date) ? color : 'surface'"
+                :variant="isDaySelected(date) ? variant : 'link'"
+                :shape="shape"
+                condensed
+              >
+                {{ date.day }}
+              </vk-button>
+            </CalendarCellTrigger>
+            <span
+              v-else
+              :class="s.hiddenGridButton({ class: styleSlots?.hiddenGridButton })"
+            />
+          </CalendarCell>
+        </CalendarGridRow>
+      </CalendarGridBody>
     </CalendarGrid>
   </div>
 </template>

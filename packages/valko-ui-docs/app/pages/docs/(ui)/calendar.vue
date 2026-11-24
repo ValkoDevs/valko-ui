@@ -220,6 +220,15 @@ const calendarProp: PropData[] = [
     apiType: 'primitive'
   },
   {
+    key: 'calendarLabelProp',
+    prop: 'calendarLabel',
+    required: false,
+    description: 'Accessible name for the calendar, used as the prefix of the root `aria-label`.',
+    values: 'string',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
     key: 'styleSlotsProp',
     prop: 'styleSlots',
     required: false,
