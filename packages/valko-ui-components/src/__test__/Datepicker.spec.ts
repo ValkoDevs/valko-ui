@@ -346,6 +346,17 @@ describe('Datepicker component', () => {
       expect(wrapper.emitted()).toHaveProperty('close')
     })
 
+    it('should not emit close when a pointerdown occurs inside the component', async () => {
+      mountDatepicker({ isOpen: true })
+      await flushPromises()
+      await flushPromises()
+
+      await wrapper.find('.vk-input__input').trigger('pointerdown')
+      await nextTick()
+
+      expect(wrapper.emitted()).not.toHaveProperty('close')
+    })
+
     it('should emit close when a date is selected', async () => {
       mountDatepicker({ isOpen: true })
       await flushPromises()

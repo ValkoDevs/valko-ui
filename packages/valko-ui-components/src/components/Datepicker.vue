@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import { DatePickerRoot, DatePickerAnchor, DatePickerContent } from 'reka-ui'
 import type { DateValue } from '@internationalized/date'
 import type { FocusOutsideEvent, PointerDownOutsideEvent } from 'reka-ui'
@@ -24,15 +24,26 @@ const emit = defineEmits(['update:modelValue', 'open', 'close'])
 
 const s = computed(() => styles(props))
 
+const containerRef = ref<HTMLElement | null>(null)
+
 // Clicks/focus inside the datepicker root (e.g. the input) must not close the panel.
 const onInteractOutside = (event: PointerDownOutsideEvent | FocusOutsideEvent) => {
   const target = event.target
-  if (target instanceof Element && target.closest('.vk-datepicker')) event.preventDefault()
+  if (target instanceof Element && containerRef.value?.contains(target)) event.preventDefault()
+}
+
+const onCloseAutoFocus = (event: Event) => {
+  // Keep focus on the input instead of falling back to document.body.
+  event.preventDefault()
+  nextTick(() => containerRef.value?.querySelector('input')?.focus())
 }
 </script>
 
 <template>
-  <div :class="s.container({ class: styleSlots?.container })">
+  <div
+    ref="containerRef"
+    :class="s.container({ class: styleSlots?.container })"
+  >
     <DatePickerRoot
       :open="isOpen"
       @update:open="(open: boolean) => !open && emit('close')"
@@ -53,9 +64,11 @@ const onInteractOutside = (event: PointerDownOutsideEvent | FocusOutsideEvent) =
       </DatePickerAnchor>
 
       <DatePickerContent
+        align="start"
         :side-offset="4"
         :class="s.content({ class: styleSlots?.content })"
         @interact-outside="onInteractOutside"
+        @close-auto-focus="onCloseAutoFocus"
       >
         <vk-calendar
           v-bind="props"

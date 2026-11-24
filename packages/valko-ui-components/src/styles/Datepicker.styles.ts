@@ -11,7 +11,7 @@ const datePicker = tv({
       'p-2',
       'bg-surface-container-high',
       'shadow-el2',
-      'z-10',
+      'z-50',
       'outline-none',
       'data-[state=open]:animate-vk-datepicker-in',
       'data-[state=closed]:animate-vk-datepicker-out'
