@@ -172,6 +172,64 @@ describe('Card component', () => {
     })
   })
 
+  describe('Rendering', () => {
+    it('should render a real button element when isPressable is true', () => {
+      wrapper = mount(VkCard, {
+        props: {
+          isPressable: true
+        }
+      })
+
+      const button = wrapper.find('button.vk-card')
+      expect(button.exists()).toBe(true)
+      expect(button.attributes('type')).toBe('button')
+    })
+
+    it('should render a div element when isPressable is false', () => {
+      wrapper = mount(VkCard, {
+        props: {
+          isPressable: false
+        }
+      })
+
+      expect(wrapper.find('div.vk-card').exists()).toBe(true)
+    })
+
+    it('should set the native disabled attribute on the button when isPressable and disabled are true', () => {
+      wrapper = mount(VkCard, {
+        props: {
+          isPressable: true,
+          disabled: true
+        }
+      })
+
+      const button = wrapper.find('button.vk-card')
+      expect(button.element.disabled).toBe(true)
+    })
+
+    it('should get the disabled visual treatment when isPressable and disabled are true', () => {
+      wrapper = mount(VkCard, {
+        props: {
+          isPressable: true,
+          disabled: true
+        }
+      })
+
+      expect(wrapper.find('.vk-card').classes()).toContain('cursor-not-allowed')
+      expect(wrapper.find('.vk-card').classes()).toContain('opacity-50')
+    })
+
+    it('should not set the disabled attribute when disabled is false', () => {
+      wrapper = mount(VkCard, {
+        props: {
+          isPressable: true
+        }
+      })
+
+      expect(wrapper.find('.vk-card').attributes('disabled')).toBeUndefined()
+    })
+  })
+
   describe('Emits', () => {
     it('should emit click event', () => {
       const wrapper = mount(VkCard, {
