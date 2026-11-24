@@ -1,127 +1,122 @@
-import { type Ref, ref, computed, toValue } from 'vue'
+import { type Ref, ref, shallowRef, computed, toValue } from 'vue'
+import { Time } from '@internationalized/date'
 import type { TimeAdapterProps, TimeAdapterResult } from '#valkoui/types/Time'
+
+const UNIT_FIELDS = { h: 'hour', m: 'minute', s: 'second' } as const
 
 const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAdapterResult => {
   const model = ref<EpochTimeStamp>(+new Date())
-  const tempTime = ref<Date | null>(null)
+  // `shallowRef` keeps the exact `Time` type — deep refs unwrap and flatten the class.
+  const tempTime = shallowRef<Time | null>(null)
 
-  const formatTime = (epoch: number) => {
-    const date = new Date(epoch)
-    return {
-      hours: date.getHours(),
-      minutes: date.getMinutes(),
-      seconds: date.getSeconds(),
-      obj: date
-    }
+  // Legacy constraint semantics: hours in UTC, minutes on the local clock.
+  const timeFromEpochSeconds = (epochSeconds: number): Time => {
+    const date = new Date(+epochSeconds * 1000)
+    return new Time(date.getUTCHours(), date.getMinutes())
   }
 
-  const parsedPeriod = computed<'AM' | 'PM'>(() => {
-    const hours = formatTime(model.value).hours
-    return hours >= 12 ? 'PM' : 'AM'
+  const modelTime = computed(() => {
+    const date = new Date(model.value)
+    return new Time(date.getHours(), date.getMinutes(), date.getSeconds(), date.getMilliseconds())
   })
+
+  const parsedPeriod = computed<'AM' | 'PM'>(() => (modelTime.value.hour >= 12 ? 'PM' : 'AM'))
 
   const userPeriod = ref<'AM' | 'PM'>(parsedPeriod.value)
 
+  const toDateOnModelDate = (time: Time): Date => {
+    const date = new Date(model.value)
+    date.setHours(time.hour, time.minute, time.second, time.millisecond)
+    return date
+  }
+
   const formattedTime = computed(() => {
     const { format } = toValue(props)
-    const selected = formatTime(model.value)
-    const display = tempTime.value ? formatTime(tempTime.value.getTime()) : selected
-
-    const is12HourFormat = /[h]/.test(format || '')
+    const selectedTime = modelTime.value
+    const displayValue = tempTime.value ?? selectedTime
+    const is12 = /[h]/.test(format || '')
 
     return {
-      selected,
+      selected: {
+        hours: selectedTime.hour,
+        minutes: selectedTime.minute,
+        seconds: selectedTime.second,
+        obj: new Date(model.value)
+      },
       display: {
-        ...display,
-        hours: is12HourFormat ? display.hours % 12 || 12 : display.hours
+        hours: is12 ? displayValue.hour % 12 || 12 : displayValue.hour,
+        minutes: displayValue.minute,
+        seconds: displayValue.second,
+        obj: toDateOnModelDate(displayValue)
       }
     }
   })
 
   const parsedModel = computed(() => {
     const { format } = toValue(props)
-    const time = formattedTime.value.selected
+    const time = modelTime.value
     const formatted = format || 'HH:mm:ss'
-    const hours12 = time.hours % 12 || 12
+    const hours12 = time.hour % 12 || 12
 
     return formatted
-      .replace('HH', String(time.hours).padStart(2, '0'))
-      .replace('H', String(time.hours))
+      .replace('HH', String(time.hour).padStart(2, '0'))
+      .replace('H', String(time.hour))
       .replace('hh', String(hours12).padStart(2, '0'))
       .replace('h', String(hours12))
-      .replace('mm', String(time.minutes).padStart(2, '0'))
-      .replace('m', String(time.minutes))
-      .replace('ss', String(time.seconds).padStart(2, '0'))
-      .replace('s', String(time.seconds))
+      .replace('mm', String(time.minute).padStart(2, '0'))
+      .replace('m', String(time.minute))
+      .replace('ss', String(time.second).padStart(2, '0'))
+      .replace('s', String(time.second))
       .replace('A', parsedPeriod.value)
       .replace('a', parsedPeriod.value.toLowerCase())
   })
 
+  const convertTo24Hour = (hours: number, period: 'AM' | 'PM') => {
+    if (hours === 12) return period === 'AM' ? 0 : 12
+    return period === 'PM' ? hours + 12 : hours
+  }
+
   const isTimeDisabled = (hours: number, minutes = 0) => {
     const { minTime, maxTime, disabledTimes, format } = toValue(props)
 
-    const is12HourFormat = /[h]/.test(format || '') || /[A|a]/.test(format || '')
+    const is12 = /[h]/.test(format || '') || /[A|a]/.test(format || '')
 
-    const convertTo24Hour = (h: number, period: 'AM' | 'PM') => {
-      if (h === 12) return period === 'AM' ? 0 : 12
-      return period === 'PM' ? h + 12 : h
-    }
-
-    const minDate = minTime ? new Date(+minTime * 1000) : null
-    const maxDate = maxTime ? new Date(+maxTime * 1000) : null
-
-    const formatTimeNumber = (h: number, m: number) => +(`${h}` + `${m}`.padStart(2, '0'))
-
-    const minNumber = minDate ? formatTimeNumber(minDate.getUTCHours(), minDate.getMinutes()) : -1
-    const maxNumber = maxDate ? formatTimeNumber(maxDate.getUTCHours(), maxDate.getMinutes()) : Infinity
-    const currentNumber = formatTimeNumber(is12HourFormat ? convertTo24Hour(hours, userPeriod.value) : hours, minutes)
+    const minTimeValue = minTime ? timeFromEpochSeconds(minTime) : null
+    const maxTimeValue = maxTime ? timeFromEpochSeconds(maxTime) : null
+    const currentTime = new Time(is12 ? convertTo24Hour(hours, userPeriod.value) : hours, minutes)
 
     const isSpecificallyDisabled = disabledTimes
       ? disabledTimes.some(disabledTime => {
         const disabledDate = new Date(disabledTime * 1000)
-        const disabledHour = is12HourFormat
+        const disabledHour = is12
           ? convertTo24Hour(disabledDate.getUTCHours() % 12 || 12, disabledDate.getUTCHours() >= 12 ? 'PM' : 'AM')
           : disabledDate.getUTCHours()
-        const disabledNumber = formatTimeNumber(disabledHour, disabledDate.getMinutes())
-        return disabledNumber === currentNumber
+        return currentTime.compare(new Time(disabledHour, disabledDate.getMinutes())) === 0
       })
       : false
 
-    return minNumber > currentNumber || maxNumber < currentNumber || isSpecificallyDisabled
+    return (
+      (minTimeValue !== null && minTimeValue.compare(currentTime) > 0) ||
+      (maxTimeValue !== null && maxTimeValue.compare(currentTime) < 0) ||
+      isSpecificallyDisabled
+    )
   }
 
   const onSelectAMPM = (selectedPeriod: 'AM' | 'PM') => {
     userPeriod.value = selectedPeriod
 
-    const hours = tempTime.value
-      ? tempTime.value.getHours()
-      : formatTime(model.value).hours
-
+    const hours = (tempTime.value ?? modelTime.value).hour
     const adjustedHours = selectedPeriod === 'AM' ? hours % 12 : (hours % 12) + 12
 
-    if (tempTime.value) {
-      tempTime.value.setHours(adjustedHours)
-    } else {
-      tempTime.value = new Date(model.value)
-      tempTime.value.setHours(adjustedHours)
-    }
+    tempTime.value = (tempTime.value ?? modelTime.value).set({ hour: adjustedHours })
   }
 
   const setDisplayUnit = (unit: 'h' | 'm' | 's', value: number) => {
-    const unitMap: Record<string, keyof Pick<Date, 'setHours' | 'setMinutes' | 'setSeconds'>> = {
-      h: 'setHours',
-      m: 'setMinutes',
-      s: 'setSeconds'
-    }
-
-    const helperDate = new Date(tempTime.value || model.value)
-    helperDate[unitMap[unit]](value)
-
-    tempTime.value = helperDate
+    tempTime.value = (tempTime.value ?? modelTime.value).set({ [UNIT_FIELDS[unit]]: value })
   }
 
   const onSelectTime = () => {
-    if (tempTime.value) model.value = +tempTime.value
+    if (tempTime.value) model.value = +toDateOnModelDate(tempTime.value)
     tempTime.value = null
   }
 

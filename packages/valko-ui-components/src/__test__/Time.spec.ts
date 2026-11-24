@@ -441,6 +441,43 @@ describe('Time component', () => {
 
       expect(adapter.setDisplayUnit).toHaveBeenCalledWith('s', 3)
     })
+
+    it('should pass the stepped minute value when minuteStep is 5', async () => {
+      const wrapper = mount(VkTime, {
+        props: {
+          modelValue,
+          adapter,
+          minuteStep: 5
+        }
+      })
+
+      const unitContainer = wrapper.findAll('.vk-time__unit-container').at(1)
+      const minuteBtn = unitContainer?.findAll('.vk-time__unit-button').find(btn => btn.text() === '05')
+      await minuteBtn?.trigger('click')
+
+      expect(adapter.setDisplayUnit).toHaveBeenCalledWith('m', 5)
+    })
+
+    it('should convert 12-hour PM hour click to 24-hour value', async () => {
+      const pmAdapter = {
+        ...adapter,
+        period: ref<'AM' | 'PM'>('PM')
+      }
+
+      const wrapper = mount(VkTime, {
+        props: {
+          modelValue,
+          adapter: pmAdapter,
+          format: 'hh:mm:ss A'
+        }
+      })
+
+      const unitContainer = wrapper.findAll('.vk-time__unit-container').at(0)
+      const hourBtn = unitContainer?.findAll('.vk-time__unit-button').find(btn => btn.text() === '01')
+      await hourBtn?.trigger('click')
+
+      expect(adapter.setDisplayUnit).toHaveBeenCalledWith('h', 13)
+    })
   })
 
   describe('Period buttons', () => {
