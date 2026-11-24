@@ -1,5 +1,5 @@
 import { nextTick } from 'vue'
-import { VueWrapper, mount } from '@vue/test-utils'
+import { DOMWrapper, VueWrapper, mount } from '@vue/test-utils'
 import VkDataTable from '#valkoui/components/DataTable.vue'
 import VkInput from '#valkoui/components/Input.vue'
 import VkSelect from '#valkoui/components/Select.vue'
@@ -628,7 +628,16 @@ describe('DataTable component', () => {
         const select = wrapper.findComponent(VkSelect)
         select.find('.vk-input__input').trigger('focus')
         await nextTick()
-        select.find('.vk-select__item:first-child').trigger('click')
+        // Options render in a Reka portal on document.body. Reka arms a
+        // document-level capture `pointerup` listener on open; consume it on
+        // the content first so the item press selects instead of dismissing
+        // (same pattern as Select.spec.ts).
+        document.querySelector<HTMLElement>('.vk-select__dropdown')!
+          .dispatchEvent(new PointerEvent('pointerup', { bubbles: true, cancelable: true }))
+        await nextTick()
+        const firstOption = document.querySelector<HTMLElement>('.vk-select__item')!
+        new DOMWrapper(firstOption)
+          .element.dispatchEvent(new PointerEvent('pointerup', { bubbles: true, cancelable: true }))
         await nextTick()
 
         expect(wrapper.emitted()).toHaveProperty('onLimitChange')

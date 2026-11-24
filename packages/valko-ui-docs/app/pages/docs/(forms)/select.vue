@@ -80,6 +80,15 @@ const apiData: PropData[] = [
     apiType: 'primitive'
   },
   {
+    key: 'nameProp',
+    prop: 'name',
+    required: false,
+    description: 'The name of the hidden native select used on form submission.',
+    values: 'string',
+    default: '',
+    apiType: 'primitive'
+  },
+  {
     key: 'optionsProp',
     prop: 'options',
     required: false,
@@ -231,15 +240,6 @@ const styleSlotsInterface: PropData[] = [
     prop: 'field',
     required: false,
     description: 'Wrapper for the input and dropdown.',
-    values: 'string[]',
-    default: '',
-    apiType: 'primitive'
-  },
-  {
-    key: 'select',
-    prop: 'select',
-    required: false,
-    description: 'Hidden native select element.',
     values: 'string[]',
     default: '',
     apiType: 'primitive'
