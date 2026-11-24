@@ -56,7 +56,7 @@ describe('Drawer component', () => {
       })
 
       it('should be size md', () => {
-        expect(getPanel().classes()).toContain('md:max-w-xl')
+        expect(getDialog().classes()).toContain('md:max-w-xl')
       })
 
       it('should be closable', () => {
@@ -230,7 +230,7 @@ describe('Drawer component', () => {
           attachTo: document.body
         })
         await flushTicks()
-        expect(getPanel().classes()).toContain('md:max-w-xs')
+        expect(getDialog().classes()).toContain('md:max-w-xs')
       })
 
       it('should be sm when props.size is sm', async () => {
@@ -245,7 +245,7 @@ describe('Drawer component', () => {
           attachTo: document.body
         })
         await flushTicks()
-        expect(getPanel().classes()).toContain('md:max-w-lg')
+        expect(getDialog().classes()).toContain('md:max-w-lg')
       })
 
       it('should be md when props.size is md', async () => {
@@ -260,7 +260,7 @@ describe('Drawer component', () => {
           attachTo: document.body
         })
         await flushTicks()
-        expect(getPanel().classes()).toContain('md:max-w-xl')
+        expect(getDialog().classes()).toContain('md:max-w-xl')
       })
 
       it('should be lg when props.size is lg', async () => {
@@ -275,7 +275,7 @@ describe('Drawer component', () => {
           attachTo: document.body
         })
         await flushTicks()
-        expect(getPanel().classes()).toContain('md:max-w-2xl')
+        expect(getDialog().classes()).toContain('md:max-w-2xl')
       })
     })
 
@@ -493,7 +493,9 @@ describe('Drawer component', () => {
       await flushTicks()
       await flushListeners()
 
-      document.dispatchEvent(new Event('pointerdown', { bubbles: true }))
+      // Dispatch on the scrim: it is a real element outside the drawer's
+      // content subtree, mirroring a click on the overlay area.
+      getBackdrop().element.dispatchEvent(new Event('pointerdown', { bubbles: true }))
       await flushTicks()
 
       expect(wrapper.emitted()).toHaveProperty('close')
@@ -526,7 +528,7 @@ describe('Drawer component', () => {
       await flushTicks()
       await flushListeners()
 
-      document.dispatchEvent(new Event('pointerdown', { bubbles: true }))
+      getBackdrop().element.dispatchEvent(new Event('pointerdown', { bubbles: true }))
       await flushTicks()
 
       expect(wrapper.emitted()).not.toHaveProperty('close')
@@ -617,7 +619,7 @@ describe('Drawer component', () => {
   })
 
   describe('Focus', () => {
-    it('should not move focus into the drawer on open', async () => {
+    it('should move focus to the panel root on open, not to the first focusable part', async () => {
       wrapper = mount(VkDrawer, {
         props: {
           isOpen: true
@@ -626,7 +628,10 @@ describe('Drawer component', () => {
       })
       await flushTicks()
 
-      expect(document.activeElement).toBe(document.body)
+      const panelRoot = document.querySelector('.vk-drawer__panel') as HTMLElement
+      const closeButton = panelRoot.querySelector('button') as HTMLElement
+      expect(document.activeElement).toBe(panelRoot)
+      expect(document.activeElement).not.toBe(closeButton)
     })
 
     it('should keep focus trapped inside the drawer', async () => {
