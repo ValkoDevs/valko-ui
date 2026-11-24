@@ -94,6 +94,8 @@
   --animate-pop: pop 0.4s ease-in-out;
   --animate-vk-toast-in: vk-toast-in 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
   --animate-vk-toast-out: vk-toast-out 0.3s ease-in forwards;
+  --animate-vk-datepicker-in: vk-datepicker-in 0.2s ease-out;
+  --animate-vk-datepicker-out: vk-datepicker-out 0.15s ease-in forwards;
   --animate-vk-popover-in: vk-popover-in 200ms ease-out;
   --animate-vk-popover-out: vk-popover-out 150ms ease-in;
 
@@ -178,6 +180,23 @@
   }
 
   @keyframes vk-toast-out {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes vk-datepicker-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes vk-datepicker-out {
     to {
       opacity: 0;
     }
