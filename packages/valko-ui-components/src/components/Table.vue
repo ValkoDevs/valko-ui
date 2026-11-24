@@ -13,6 +13,7 @@ const props = withDefaults(defineProps<TableProps>(), {
   striped: false,
   selection: undefined,
   rowEvents: false,
+  sort: undefined,
   data: () => []
 })
 
@@ -48,6 +49,7 @@ const headers = computed(() => props.headers)
             :class="s.th({ class: styleSlots?.th })"
             role="columnheader"
             scope="col"
+            :aria-sort="sort?.field === header.field && sort?.direction ? (sort.direction === 'asc' ? 'ascending' : 'descending') : undefined"
           >
             <slot
               :name="`header-cell-${header.key}`"

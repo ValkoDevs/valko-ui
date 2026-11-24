@@ -551,12 +551,19 @@ describe('DataTable component', () => {
         expect(wrapper.find('i.ti.ti-search').exists()).toBe(true)
       })
 
+      it('should render the filter trigger as a keyboard-operable button with an aria-label', () => {
+        const trigger = wrapper.find('button[aria-label="Filter by Property"]')
+
+        expect(trigger.exists()).toBe(true)
+        expect(trigger.attributes('type')).toBe('button')
+      })
+
       it('should apply the active filter style when input is used', async () => {
         wrapper.find('i.ti.ti-search').trigger('click')
         const input = wrapper.findComponent(VkInput)
         await input.setValue('some filter')
 
-        expect(wrapper.find('i.ti.ti-search').classes()).toContain('data-[active=true]:text-primary')
+        expect(wrapper.find('button[aria-label="Filter by Property"]').classes()).toContain('data-[active=true]:text-primary')
       })
 
       it('should emit onFilter when the filter is being used', async () => {
@@ -596,6 +603,66 @@ describe('DataTable component', () => {
         })
 
         expect(wrapper.find('i.ti.ti-arrows-sort').exists()).toBe(true)
+      })
+
+      it('should render the sort control as a keyboard-operable button with an aria-label', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers: sortHeaders,
+            data
+          }
+        })
+
+        const trigger = wrapper.find('button[aria-label="Sort by Property"]')
+
+        expect(trigger.exists()).toBe(true)
+        expect(trigger.attributes('type')).toBe('button')
+      })
+
+      it('should announce ascending sort on the sorted column header when sort is set', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers: sortHeaders,
+            data,
+            sort: {
+              field: 'prop',
+              direction: 'asc'
+            }
+          }
+        })
+
+        expect(wrapper.find('th[aria-sort="ascending"]').exists()).toBe(true)
+        expect(wrapper.findAll('th[aria-sort]')).toHaveLength(1)
+      })
+
+      it('should announce descending sort on the sorted column header when sort is desc', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers: sortHeaders,
+            data,
+            sort: {
+              field: 'prop',
+              direction: 'desc'
+            }
+          }
+        })
+
+        expect(wrapper.find('th[aria-sort="descending"]').exists()).toBe(true)
+      })
+
+      it('should not announce aria-sort when no column is sorted', () => {
+        wrapper = mount(VkDataTable, {
+          props: {
+            headers: sortHeaders,
+            data,
+            sort: {
+              field: 'prop',
+              direction: undefined
+            }
+          }
+        })
+
+        expect(wrapper.findAll('th[aria-sort]')).toHaveLength(0)
       })
 
       it('should emit onSort when the sort icon is clicked', async () => {

@@ -76,10 +76,11 @@ Proof of concept (verified in this repo's vitest/jsdom environment):
   component → teleported to `body`.
 - This is a **breaking DOM-location change** for consumers and tests:
   - Specs must mount with `attachTo: document.body`.
-  - `DataTable`'s filter popover lookup via
-    `document.querySelectorAll('.vk-popover')` must be refactored to a scoped
-    mechanism (ref/context, not a global class search) — owned by the
-    floating-components ticket.
+  - `DataTable` (VAL-143) tracks a single active header popover key in an
+    `activePopover` ref that it controls through Popover's `isOpen` prop.
+    It no longer tracks popover instances via scoped refs, and does not need
+    to reach into the exposed instance to close panels: Reka's
+    `PopoverRoot`/`DismissableLayer` handles outside clicks and Escape.
 
 ## Controlled / uncontrolled
 
@@ -170,4 +171,5 @@ custom-components audit ticket):
 | Alert | No Reka primitive exists (verified against the v2 catalog); it is a passive live-region container with no behavior Reka could own | `useId` label wiring via `aria-labelledby`, `VisuallyHidden` text on the icon-only close button, `role="alert"`/`aria-live` derived from severity |
 | Breadcrumbs | No Reka primitive exists (verified against the v2 catalog); crumbs are data-driven triggers with an imperative `onClick` API rather than href links, so Reka's link/`Primitive` patterns don't apply | WAI-ARIA breadcrumb pattern: `nav[aria-label]` (default `Breadcrumb`), `aria-current="page"` on the last crumb, `aria-hidden` separators, `aria-disabled`/`data-disabled` on disabled crumbs, Enter activation on href-less anchors |
 | Card family (Card, CardBody, CardFooter, CardHeader, CardImage) | No Reka primitive exists (verified against the v2 catalog) | Native semantics only: pressable Card renders a `button` (implicit role) with native `disabled` when disabled; CardImage renders `img` with a consumer-provided `alt`; header/body/footer/image containers are presentational `div`s with no roles |
-| DataTable, Table, Navbar, Icon, Skeleton, Spinner | No Reka primitive exists (verified against the v2 catalog) | pending audit ticket |
+| DataTable | No Reka primitive exists (verified against the v2 catalog); stays custom on top of the custom `Table`. Its global `.vk-popover` class lookup is gone — the migrated Reka `Popover` owns outside-click dismissal | pending audit ticket |
+| Table, Navbar, Icon, Skeleton, Spinner | No Reka primitive exists (verified against the v2 catalog) | pending audit ticket |
