@@ -64,7 +64,7 @@ export * from '#valkoui/types/Tooltip'
 ////////////////////////
 ////// REKA UTILS //////
 ////////////////////////
-export { ConfigProvider, useDirection, useId, useLocale } from 'reka-ui'
+export { ConfigProvider as VkConfigProvider, useDirection, useId, useLocale } from 'reka-ui'
 
 /////////////////////
 ////// SCRIPTS //////
