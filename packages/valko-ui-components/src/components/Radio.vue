@@ -1,10 +1,15 @@
 <script setup lang="ts">
-import { useId, computed } from 'vue'
+import { useId, computed, ref, inject } from 'vue'
+import { RadioGroupRoot, RadioGroupItem } from 'reka-ui'
 import type { RadioProps } from '#valkoui/types/Radio'
 import styles from '#valkoui/styles/Radio.styles.ts'
 import VkIcon from './Icon.vue'
 
 defineOptions({ name: 'VkRadio' })
+
+// Reka treats an undefined group model as equal to an undefined item value
+// (checked); the sentinel keeps a radio without `value` unchecked by default.
+const NO_VALUE: Record<string, never> = {}
 
 const props = withDefaults(defineProps<RadioProps>(), {
   color: 'primary',
@@ -16,6 +21,23 @@ const props = withDefaults(defineProps<RadioProps>(), {
 })
 
 const emit = defineEmits(['update:modelValue'])
+
+// When rendered inside a `VkRadioGroup`, the group owns the single
+// `RadioGroupRoot` so a named group submits its value once per form.
+const inGroup = inject<boolean>('vkRadioGroup', false)
+
+// A radio without a `value` prop gets a stable per-instance internal value so
+// Reka can track its checked state after a click, while the public
+// `update:modelValue` emit still reports `props.value` (undefined), matching
+// the pre-migration contract.
+const internalValue = useId()
+const internalSelected = ref(false)
+
+const itemValue = computed(() => props.value ?? internalValue)
+const rootModelValue = computed(() => {
+  if (props.modelValue !== undefined) return props.modelValue
+  return internalSelected.value ? itemValue.value : NO_VALUE
+})
 
 const s = computed(() => styles(props))
 
@@ -29,48 +51,40 @@ const describedBy = computed(() => {
   return ids.length > 0 ? ids.join(' ') : undefined
 })
 
-const onClick = () => {
-  if (!props.disabled && !props.readonly) emit('update:modelValue', props.value)
+const onUpdate = () => {
+  if (props.readonly) return
+  if (props.value === undefined) internalSelected.value = true
+  emit('update:modelValue', props.value as RadioProps['value'])
 }
 </script>
 
 <template>
-  <div :class="s.container({ class: styleSlots?.container })">
-    <div
-      :class="s.radioContainer({ class: styleSlots?.radioContainer })"
-      role="radio"
-      :tabindex="disabled ? -1 : 0"
-      :aria-checked="modelValue === value"
-      :aria-disabled="disabled"
-      :aria-label="ariaLabel"
-      :aria-labelledby="ariaLabelledBy"
-      :aria-describedby="describedBy"
-      @click="onClick"
-      @keydown.enter.prevent="onClick"
-      @keydown.space.prevent="onClick"
-    >
-      <div :class="s.stateLayer({ class: styleSlots?.stateLayer })">
-        <div
-          :class="s.radio({ class: styleSlots?.radio })"
-          :data-checked="value && modelValue === value"
-        >
+  <RadioGroupRoot
+    v-if="!inGroup"
+    :model-value="rootModelValue"
+    :name="name"
+    :disabled="disabled"
+    :class="s.container({ class: styleSlots?.container })"
+    @update:model-value="onUpdate"
+  >
+    <div :class="s.radioContainer({ class: styleSlots?.radioContainer })">
+      <RadioGroupItem
+        v-slot="{ checked }"
+        :id="inputId"
+        :value="itemValue"
+        :aria-label="ariaLabel || undefined"
+        :aria-labelledby="ariaLabelledBy || undefined"
+        :aria-describedby="describedBy"
+        :class="s.stateLayer({ class: styleSlots?.stateLayer })"
+      >
+        <div :class="s.radio({ class: styleSlots?.radio })">
           <vk-icon
-            v-if="value && modelValue === value"
+            v-if="checked"
             name="point-filled"
             :class="s.icon({ class: styleSlots?.icon })"
           />
         </div>
-      </div>
-
-      <input
-        :id="inputId"
-        type="radio"
-        :name="name"
-        :value="value"
-        :checked="modelValue === value"
-        :disabled="disabled"
-        :class="s.input({ class: styleSlots?.input })"
-      >
+      </RadioGroupItem>
       <label
         :for="inputId"
         :class="s.label({ class: styleSlots?.label })"
@@ -85,5 +99,40 @@ const onClick = () => {
     >
       {{ helpertext }}
     </span>
-  </div>
+  </RadioGroupRoot>
+  <template v-else>
+    <div :class="s.radioContainer({ class: styleSlots?.radioContainer })">
+      <RadioGroupItem
+        v-slot="{ checked }"
+        :id="inputId"
+        :value="itemValue"
+        :aria-label="ariaLabel || undefined"
+        :aria-labelledby="ariaLabelledBy || undefined"
+        :aria-describedby="describedBy"
+        :class="s.stateLayer({ class: styleSlots?.stateLayer })"
+        @click="onUpdate"
+      >
+        <div :class="s.radio({ class: styleSlots?.radio })">
+          <vk-icon
+            v-if="checked"
+            name="point-filled"
+            :class="s.icon({ class: styleSlots?.icon })"
+          />
+        </div>
+      </RadioGroupItem>
+      <label
+        :for="inputId"
+        :class="s.label({ class: styleSlots?.label })"
+      >
+        {{ label }}
+      </label>
+    </div>
+    <span
+      v-if="helpertext"
+      :class="s.helpertext({ class: styleSlots?.helpertext })"
+      :id="helpertextId"
+    >
+      {{ helpertext }}
+    </span>
+  </template>
 </template>
