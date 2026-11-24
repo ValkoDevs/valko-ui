@@ -1,4 +1,4 @@
-import type { DefaultComponent } from './common'
+import type { DefaultComponent, Sort } from './common'
 import type { TableSlots } from '../styles/Table.styles'
 
 export interface TableItem {
@@ -20,5 +20,6 @@ export interface TableProps extends DefaultComponent {
   striped?: boolean;
   selection?: TableItem[] | TableItem | undefined;
   rowEvents?: boolean;
+  sort?: Sort;
   styleSlots?: Partial<TableSlots>;
 }

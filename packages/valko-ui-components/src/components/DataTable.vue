@@ -72,7 +72,6 @@ const isSortActive = (field: string) => {
   return props.sort?.field === field && !!props.sort.direction
 }
 
-
 const isDataReady = computed(() => Array.isArray(props.data) && props.data.length > 0)
 const totalPages = computed(() => Math.ceil(props.total / props.limit))
 const currentPage = computed({
@@ -141,6 +140,7 @@ onMounted(() => {
       :size="size"
       :striped="striped"
       :selection="selection"
+      :sort="sort"
       :row-events="selectionMode === 'rowSingle' || selectionMode === 'rowMultiple'"
       @on-row-click="(item: TableItem) => emit('onSelect', item)"
     >
@@ -166,15 +166,21 @@ onMounted(() => {
             <vk-popover
               :shape="shape"
               :is-open="activePopover === header.key"
+              :aria-label="`${header.label} filter options`"
               @update:is-open="(isOpen: boolean) => setPopoverOpen(header.key, isOpen)"
             >
               <template #default>
-                <vk-icon
-                  :size="size"
-                  name="search"
-                  :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
+                <button
+                  type="button"
+                  :aria-label="`Filter by ${header.label}`"
                   :data-active="activeFilters[header.key]"
-                />
+                  :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
+                >
+                  <vk-icon
+                    :size="size"
+                    name="search"
+                  />
+                </button>
               </template>
 
               <template #popover-content>
@@ -205,16 +211,18 @@ onMounted(() => {
             v-if="header.sortable"
             :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
           >
-            <vk-icon
-              role="button"
-              :tabindex="0"
+            <button
+              type="button"
               :aria-label="`Sort by ${header.label}`"
-              :size="size"
-              :name="sortIconMap[sort?.field === header.key && sort.direction ? sort.direction : 'none']"
-              :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
               :data-active="isSortActive(header.key)"
+              :class="s.headerUtilities({ class: styleSlots?.headerUtilities })"
               @click="handleSort(header.field)"
-            />
+            >
+              <vk-icon
+                :size="size"
+                :name="sortIconMap[sort?.field === header.key && sort.direction ? sort.direction : 'none']"
+              />
+            </button>
           </div>
         </div>
       </template>

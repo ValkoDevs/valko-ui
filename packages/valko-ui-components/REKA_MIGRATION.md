@@ -76,11 +76,11 @@ Proof of concept (verified in this repo's vitest/jsdom environment):
   component → teleported to `body`.
 - This is a **breaking DOM-location change** for consumers and tests:
   - Specs must mount with `attachTo: document.body`.
-  - `DataTable`'s filter popover no longer uses
-    `document.querySelectorAll('.vk-popover')` (VAL-143): it tracks its own
-    popover instances via scoped refs and only considers those when closing on
-    outside clicks. Popovers that later teleport (Reka migration) must keep
-    the panel reachable from the exposed instance.
+  - `DataTable` (VAL-143) tracks a single active header popover key in an
+    `activePopover` ref that it controls through Popover's `isOpen` prop.
+    It no longer tracks popover instances via scoped refs, and does not need
+    to reach into the exposed instance to close panels: Reka's
+    `PopoverRoot`/`DismissableLayer` handles outside clicks and Escape.
 
 ## Controlled / uncontrolled
 
