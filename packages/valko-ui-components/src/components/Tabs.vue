@@ -33,15 +33,13 @@ const selectedIndex = computed({
   }
 })
 
-// Reka Tabs is string-valued; the public API stays index-based.
-const selectedKey = computed(() => {
-  const tab = props.tabs[selectedIndex.value]
-  return tab ? String(tab.key) : undefined
-})
+// Reka Tabs values are strings, and String() collapses distinct keys like 1 and '1';
+// the public API is index-based, so Reka values are the index as a string.
+const selectedValue = computed(() => String(selectedIndex.value))
 
 const onValueChange = (key: string | number) => {
-  const index = props.tabs.findIndex(item => String(item.key) === String(key))
-  if (index === -1) return
+  const index = Number(key)
+  if (Number.isNaN(index) || index < 0 || index >= props.tabs.length) return
   onChange(index)
 }
 
@@ -77,14 +75,14 @@ watch(
 
 <template>
   <div :class="s.container({ class: styleSlots?.container })">
-    <tabs-root
+    <TabsRoot
       as="div"
       :orientation="vertical ? 'vertical' : 'horizontal'"
-      :model-value="selectedKey"
+      :model-value="selectedValue"
       :class="s.group({ class: styleSlots?.group })"
       @update:model-value="onValueChange"
     >
-      <tabs-list
+      <TabsList
         :class="s.list({ class: styleSlots?.list })"
         as="nav"
         :aria-label="ariaLabel ?? 'Tab navigation'"
@@ -98,40 +96,40 @@ watch(
             :class="s.cursorGradient({ class: styleSlots?.cursorGradient })"
           />
         </div>
-        <tabs-trigger
-          v-for="item in tabs"
+        <TabsTrigger
+          v-for="(item, index) in tabs"
           :class="s.tabSlot({ class: styleSlots?.tabSlot })"
           :key="item.key"
-          :value="String(item.key)"
+          :value="String(index)"
           :disabled="item.disabled"
         >
           <slot :name="`${item.key}-tab`">
-            <vk-icon
+            <VkIcon
               v-if="item.leftIcon"
               :name="item.leftIcon"
               :class="s.leftIcon({ class: styleSlots?.leftIcon })"
             />
             <span> {{ item.title }} </span>
-            <vk-icon
+            <VkIcon
               v-if="item.rightIcon"
               :name="item.rightIcon"
               :class="s.rightIcon({ class: styleSlots?.rightIcon })"
             />
           </slot>
-        </tabs-trigger>
-      </tabs-list>
+        </TabsTrigger>
+      </TabsList>
 
       <div :class="s.content({ class: styleSlots?.content })">
-        <tabs-content
-          v-for="item in tabs"
+        <TabsContent
+          v-for="(item, index) in tabs"
           :key="item.key"
-          :value="String(item.key)"
+          :value="String(index)"
           :data-key="item.key"
           :class="s.content({ class: styleSlots?.content })"
         >
           <slot :name="`${item.key}-content`" />
-        </tabs-content>
+        </TabsContent>
       </div>
-    </tabs-root>
+    </TabsRoot>
   </div>
 </template>
