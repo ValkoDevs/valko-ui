@@ -77,12 +77,30 @@ const card = tv({
         'transition-all',
         'duration-200',
         'ease-in-out',
-        'active:scale-95',
-        'cursor-pointer'
+        'active:scale-95'
       ]
     }
   },
   compoundVariants: [
+    // isPressable & not disabled
+    {
+      isPressable: true,
+      disabled: false,
+      class: [
+        'cursor-pointer'
+      ]
+    },
+    // disabled & isPressable
+    {
+      disabled: true,
+      isPressable: true,
+      class: [
+        'cursor-not-allowed',
+        'opacity-50',
+        'focus:ring-none',
+        'ring-0'
+      ]
+    },
     // elevated & bg
     {
       elevated: true,

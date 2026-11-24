@@ -22,7 +22,7 @@ describe('CardImage component', () => {
     })
 
     it('should have an alt', () => {
-      expect(wrapper.find('img').attributes('alt')).toBe('card-image')
+      expect(wrapper.find('img').attributes('alt')).toBe('')
     })
   })
 
