@@ -16,7 +16,6 @@ const notification = tv({
       'fixed',
       'z-[2147483000]',
       'flex',
-      'flex-col',
       'gap-2',
       'm-0',
       'p-0',
@@ -162,7 +161,8 @@ const notification = tv({
           '[--vk-toast-enter-y:-2rem]'
         ],
         viewport: [
-          'top-0'
+          'top-0',
+          'flex-col'
         ]
       },
       bottom: {
@@ -170,7 +170,8 @@ const notification = tv({
           '[--vk-toast-enter-y:2rem]'
         ],
         viewport: [
-          'bottom-0'
+          'bottom-0',
+          'flex-col-reverse'
         ]
       }
     },

@@ -70,6 +70,7 @@ const useNotification = (props: NotificationProps): NotificationHandle => {
   }
 
   const options = {
+    // No id here: Reka generates a stable `reka-toast-N` id and returns it.
     duration: props.duration || defaultDuration,
     data: {
       color: props.color ?? 'primary',
@@ -84,7 +85,7 @@ const useNotification = (props: NotificationProps): NotificationHandle => {
     }
   }
 
-  let id = manager.add(options)
+  const id = manager.add(options)
 
   options.data.click = props.onClick
     ?? (props.destination
@@ -92,9 +93,8 @@ const useNotification = (props: NotificationProps): NotificationHandle => {
       : () => manager.close(id))
 
   return {
-    // Reka toasts render as soon as they are added; adding the same id
-    // again reopens and restarts it.
-    showToast: () => { id = manager.add(options) },
+    // Re-adding the same id reopens and restarts the existing toast.
+    showToast: () => { manager.add({ ...options, id }) },
     hideToast: () => manager.close(id)
   }
 }

@@ -20,7 +20,10 @@ onUnmounted(() => setNotificationProviderMounted(false))
     :key="placement"
     :toast-manager="getToastManager(placement)"
   >
-    <VkNotificationGroup :placement="placement" />
+    <VkNotificationGroup
+      :placement="placement"
+      :label="`Notifications ${placement}`"
+    />
   </ToastProvider>
   <slot />
 </template>

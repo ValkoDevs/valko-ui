@@ -8,7 +8,7 @@ import type { NotificationToastData } from '#valkoui/types/Notification.ts'
 
 defineOptions({ name: 'VkNotificationGroup' })
 
-const props = defineProps<{ placement: NotificationPlacement }>()
+const props = defineProps<{ placement: NotificationPlacement; label?: string }>()
 
 const { toasts } = useToastManager()
 
@@ -75,14 +75,15 @@ const progressWidth = (remaining: number, duration: number) => {
   <ToastViewport
     :class="toastClasses().viewport({})"
     :data-placement="placement"
+    :aria-label="props.label"
   >
     <ToastRoot
-      v-for="toast in toasts"
+      v-for="(toast, index) in toasts"
       :key="toast.id"
       :toast="toast"
       :duration="toast.duration"
       :class="notificationClass(toast)"
-      :style="offsetStyle(toast.data)"
+      :style="[{ order: index }, offsetStyle(toast.data)]"
       @click="toast.data?.click?.($event)"
     >
       <template #default="{ remaining, duration: toastDuration }">
@@ -100,8 +101,10 @@ const progressWidth = (remaining: number, duration: number) => {
         <ToastClose
           v-if="toast.data?.close"
           class="cursor-pointer bg-transparent border-0 p-0"
+          aria-label="Close"
+          @click.stop
         >
-          <i :class="iconClass(toast)" />
+          <i :class="iconClass(toast)" aria-hidden="true" />
         </ToastClose>
       </template>
     </ToastRoot>

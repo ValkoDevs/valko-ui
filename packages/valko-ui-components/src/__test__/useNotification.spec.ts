@@ -287,6 +287,41 @@ describe('useNotification composable', () => {
       await flush()
       expect(document.querySelector('.vk-notification')).toBeNull()
     })
+
+    it('should not stack a duplicate when showToast is called twice', async () => {
+      const handles: NotificationHandle[] = []
+      const CaptureHost = defineComponent({
+        name: 'CaptureHost',
+        components: { VkNotificationProvider },
+        setup() {
+          const trigger = () => {
+            handles.push(useNotification({ text: 'Hello World' }))
+          }
+
+          return { trigger }
+        },
+        template: `
+          <VkNotificationProvider>
+            <button data-test="trigger" @click="trigger">Show Notification</button>
+          </VkNotificationProvider>`
+      })
+
+      wrapper = mount(CaptureHost, { attachTo: document.body })
+      await nextTick()
+      await wrapper.find('[data-test="trigger"]').trigger('click')
+      await flush()
+
+      const handle = handles[0]
+      handle?.showToast()
+      await flush()
+
+      expect(document.querySelectorAll('.vk-notification')).toHaveLength(1)
+
+      handle?.showToast()
+      await flush()
+
+      expect(document.querySelectorAll('.vk-notification')).toHaveLength(1)
+    })
   })
 
   describe('When click related props are set', () => {
