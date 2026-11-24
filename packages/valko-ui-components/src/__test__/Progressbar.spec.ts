@@ -234,6 +234,38 @@ describe('Progressbar component', () => {
       })
     })
 
+    describe('When progress prop changes', () => {
+      it('should clamp out-of-range progress to 100 for aria-valuenow', () => {
+        wrapper = mount(VkProgressbar, {
+          props: {
+            progress: 150
+          }
+        })
+
+        expect(wrapper.attributes('aria-valuenow')).toBe('100')
+      })
+
+      it('should clamp negative progress to 0 for aria-valuenow', () => {
+        wrapper = mount(VkProgressbar, {
+          props: {
+            progress: -25
+          }
+        })
+
+        expect(wrapper.attributes('aria-valuenow')).toBe('0')
+      })
+
+      it('should render in-bounds progress unchanged for aria-valuenow', () => {
+        wrapper = mount(VkProgressbar, {
+          props: {
+            progress: 42
+          }
+        })
+
+        expect(wrapper.attributes('aria-valuenow')).toBe('42')
+      })
+    })
+
     describe('When buffer prop changes', () => {
       it('should have buffer when props.buffer is set', () => {
         wrapper = mount(VkProgressbar, {

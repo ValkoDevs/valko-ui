@@ -20,9 +20,11 @@ const props = withDefaults(defineProps<ProgressbarProps>(), {
 
 const s = computed(() => styles(props))
 
+const clampedProgress = computed(() => Math.min(Math.max(props.progress, 0), 100))
+
 const progressStyles = computed(() => {
   return {
-    clipPath: `inset(0 ${100 - props.progress}% 0 0)`
+    clipPath: `inset(0 ${100 - clampedProgress.value}% 0 0)`
   }
 })
 
@@ -48,7 +50,7 @@ const showContent = computed(() => props.shape !== 'line')
 <template>
   <ProgressRoot
     :class="s.container({ class: styleSlots?.container })"
-    :model-value="indeterminate ? null : progress"
+    :model-value="indeterminate ? null : clampedProgress"
   >
     <div :class="s.background({ class: styleSlots?.background })">
       <div
