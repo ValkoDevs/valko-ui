@@ -91,7 +91,7 @@ const navbarProps: PropData[] = [
     required: false,
     description: 'Accessible label for the navbar to describe its purpose to assistive technologies.',
     values: 'string',
-    default: 'Main navigation',
+    default: '',
     apiType: 'primitive'
   },
   {
