@@ -532,7 +532,8 @@ describe('Modal component', () => {
       })
       await flushTicks()
 
-      expect(document.activeElement).toBe(document.body)
+      const container = document.querySelector('.vk-modal__container') as HTMLElement
+      expect(document.activeElement).toBe(container)
     })
 
     it('should keep focus trapped inside the dialog', async () => {

@@ -36,9 +36,17 @@ const closeModal = () => { if (props.closable) emit('close') }
 // gates all of them, mirroring the previous `@close="closeModal"` wiring.
 const onRequestClose = (open: boolean) => { if (!open) closeModal() }
 
-// Keep the previous initial-focus behavior: Reka focuses the first focusable
-// part by default; the old implementation focused the (non-focusable)
-// container element instead, leaving focus where it was.
+// Consumer overrides must only reach the DOM when actually set: binding an
+// attribute key to `undefined` through $attrs would overwrite-and-remove
+// Reka's generated `aria-labelledby`/`aria-describedby` bindings entirely.
+const dialogContentBinds = computed(() => ({
+  ...(props.ariaLabelledBy ? { 'aria-labelledby': props.ariaLabelledBy } : {}),
+  ...(props.ariaDescription ? {} : { 'aria-describedby': null })
+}))
+
+// Keep the previous initial-focus behavior: Reka's default focus jump to the
+// first focusable part is prevented; focus goes to the container element
+// instead (tabindex="-1" makes it focusable so the FocusScope trap engages).
 const onOpenAutoFocus = (event: Event) => {
   event.preventDefault()
   containerRef.value?.focus()
@@ -57,11 +65,12 @@ const onOpenAutoFocus = (event: Event) => {
       <DialogContent
         :class="s.dialog({ class: styleSlots?.dialog })"
         :aria-modal="true"
-        :aria-labelledby="ariaLabelledBy || undefined"
+        v-bind="dialogContentBinds"
         @open-auto-focus="onOpenAutoFocus"
       >
         <div
           :class="s.container({ class: styleSlots?.container })"
+          tabindex="-1"
           ref="containerRef"
         >
           <div :class="s.content({ class: styleSlots?.content })">

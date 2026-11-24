@@ -12,6 +12,7 @@ const modal = tv({
       'vk-modal__backdrop',
       'fixed',
       'inset-0',
+      'z-40',
       'data-[state=open]:animate-vk-fade-in',
       'data-[state=closed]:animate-vk-fade-out'
     ],
