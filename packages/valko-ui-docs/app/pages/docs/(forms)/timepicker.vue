@@ -140,7 +140,7 @@ const timepickerProps: PropData[] = [
     key: 'parsedModelProp',
     prop: 'parsedModel',
     required: false,
-    description: 'The display model for the input.',
+    description: 'Deprecated. No longer used by the component; bind v-model instead.',
     values: 'string',
     default: '',
     apiType: 'primitive'
@@ -497,7 +497,7 @@ const timeAdapterProps: PropData[] = [
 
 watch(disabledRef, (newVal) => form.disabledTimes = newVal ? [1730721658, 1730725258] : undefined)
 
-const [ model, parsedModel, adapter ] = useTimeAdapter(form)
+const [ model, _parsedModel, adapter ] = useTimeAdapter(form)
 
 const timepickerStates = reactive<Record<string, boolean>>({})
 
@@ -511,7 +511,7 @@ const [ model, parsedModel, adapter ] = useTimeAdapter({ format: 'HH:mm:ss' })
 <\u002Fscript>
 `
 
-const extraProps = 'v-model="model" :parsed-model="parsedModel" :adapter="adapter"'
+const extraProps = 'v-model="model" :adapter="adapter"'
 
 const minmaxSnippet = `
 ${scriptCode}
@@ -578,7 +578,6 @@ const styles = {
       <vk-timepicker
         v-model="model"
         :label="form.label"
-        :parsed-model="parsedModel"
         :adapter="adapter"
         :color="form.color"
         :variant="form.variant"
@@ -666,9 +665,9 @@ const styles = {
         <vk-timepicker
           v-for="color in colorOptions.general"
           :key="color.value"
+          v-model="model"
           :label="color.label"
           :adapter="adapter"
-          :parsed-model="parsedModel"
           :color="color.value"
           :is-open="timepickerStates[color.value] ?? false"
           @open="() => timepickerStates[color.value] = true"
@@ -687,8 +686,8 @@ const styles = {
         <vk-timepicker
           v-for="variant in variantOptions.general"
           :key="variant.value"
+          v-model="model"
           :adapter="adapter"
-          :parsed-model="parsedModel"
           :variant="variant.value"
           :is-open="timepickerStates[variant.value] ?? false"
           :label="variant.label"
@@ -708,9 +707,9 @@ const styles = {
         <vk-timepicker
           v-for="shape in shapeOptions.general"
           :key="shape.value"
+          v-model="model"
           :label="shape.label"
           :adapter="adapter"
-          :parsed-model="parsedModel"
           :shape="shape.value"
           :is-open="timepickerStates[shape.value] ?? false"
           @open="() => timepickerStates[shape.value] = true"
@@ -729,9 +728,9 @@ const styles = {
         <vk-timepicker
           v-for="size in sizeOptions.general"
           :key="size.value"
+          v-model="model"
           :label="size.label"
           :adapter="adapter"
-          :parsed-model="parsedModel"
           :size="size.value"
           :is-open="timepickerStates[size.value] ?? false"
           @open="() => timepickerStates[size.value] = true"
@@ -748,18 +747,18 @@ const styles = {
         :style-slots="styles.minmax"
       >
         <vk-timepicker
+          v-model="model"
           label="Min"
           :adapter="adapter"
-          :parsed-model="parsedModel"
           :min-time="1730710858"
           :is-open="timepickerStates['min'] ?? false"
           @open="() => timepickerStates['min'] = true"
           @close="() => timepickerStates['min'] = false"
         />
         <vk-timepicker
+          v-model="model"
           label="Max"
           :adapter="adapter"
-          :parsed-model="parsedModel"
           :max-time="1730739658"
           :is-open="timepickerStates['max'] ?? false"
           @open="() => timepickerStates['max'] = true"
@@ -773,9 +772,9 @@ const styles = {
 
       <example-section title="Disabled Times">
         <vk-timepicker
+          v-model="model"
           label="Disabled Times"
           :adapter="adapter"
-          :parsed-model="parsedModel"
           :disabled-times="form.disabledTimes"
           :is-open="timepickerStates['disabledTimes'] ?? false"
           @open="() => timepickerStates['disabledTimes'] = true"

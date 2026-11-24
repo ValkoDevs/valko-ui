@@ -4,16 +4,16 @@ import type { TimeAdapterProps, TimeAdapterResult } from '#valkoui/types/Time'
 
 const UNIT_FIELDS = { h: 'hour', m: 'minute', s: 'second' } as const
 
+// Legacy constraint semantics: hours in UTC, minutes on the local clock.
+export const timeFromEpochSeconds = (epochSeconds: number): Time => {
+  const date = new Date(+epochSeconds * 1000)
+  return new Time(date.getUTCHours(), date.getMinutes())
+}
+
 const useTimeAdapter = (props: TimeAdapterProps | Ref<TimeAdapterProps>): TimeAdapterResult => {
   const model = ref<EpochTimeStamp>(+new Date())
   // `shallowRef` keeps the exact `Time` type — deep refs unwrap and flatten the class.
   const tempTime = shallowRef<Time | null>(null)
-
-  // Legacy constraint semantics: hours in UTC, minutes on the local clock.
-  const timeFromEpochSeconds = (epochSeconds: number): Time => {
-    const date = new Date(+epochSeconds * 1000)
-    return new Time(date.getUTCHours(), date.getMinutes())
-  }
 
   const modelTime = computed(() => {
     const date = new Date(model.value)

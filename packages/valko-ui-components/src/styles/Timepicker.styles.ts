@@ -7,7 +7,9 @@ const timepicker = tv({
       'relative'
     ],
     input: [
-      'vk-timepicker__input'
+      'vk-timepicker__input',
+      'group-data-[invalid]:border-negative',
+      'group-data-[invalid]:text-negative'
     ],
     content: [
       'vk-timepicker__content',
