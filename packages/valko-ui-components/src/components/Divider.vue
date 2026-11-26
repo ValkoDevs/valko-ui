@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { Separator } from 'reka-ui'
 import type { DividerProps } from '#valkoui/types/Divider'
 import styles from '#valkoui/styles/Divider.styles.ts'
 
@@ -17,11 +18,12 @@ const s = computed(() => styles({ ...props, class: props.styleSlots }))
 </script>
 
 <template>
-  <hr
+  <Separator
+    as="hr"
     :class="s"
-    role="separator"
-    :aria-orientation="direction"
+    :orientation="direction"
+    :decorative="false"
     :aria-label="ariaLabel"
     :aria-labelledby="ariaLabelledBy"
-  >
+  />
 </template>
