@@ -502,6 +502,40 @@ describe('Button component', () => {
     })
   })
 
+  describe('When asChild prop is true', () => {
+    it('should render as the consumer element instead of a button', () => {
+      const wrapper = mount(VkButton, {
+        props: {
+          asChild: true
+        },
+        slots: {
+          default: '<a id="consumer-link" href="#">Hello World</a>'
+        }
+      })
+
+      const link = wrapper.find('#consumer-link')
+      expect(link.exists()).toBe(true)
+      expect(link.classes()).toContain('vk-button__base')
+      expect(wrapper.find('button.vk-button__base').exists()).toBe(false)
+      // internal decorations (state layer) render inside the consumer element
+      expect(link.find('div').exists()).toBe(true)
+    })
+
+    it('should emit click event from the consumer element', async () => {
+      const wrapper = mount(VkButton, {
+        props: {
+          asChild: true
+        },
+        slots: {
+          default: '<a id="consumer-link" href="#">Hello World</a>'
+        }
+      })
+
+      await wrapper.find('#consumer-link').trigger('click')
+      expect(wrapper.emitted()).toHaveProperty('click')
+    })
+  })
+
   describe('Emits', () => {
     it('should emit click event if not disabled or loading', () => {
       const wrapper = mount(VkButton, {})
