@@ -29,7 +29,10 @@ const tag = tv({
       'flex',
       'gap-1',
       'justify-center',
-      'items-center'
+      'items-center',
+      'focus-visible:outline-none',
+      'focus-visible:ring-2',
+      'data-[state=on]:bg-black/10'
     ],
     closeIcon: [
       'vk-tag__close-icon'
@@ -610,8 +613,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-primary'
+        contentContainer: [
+          'focus-visible:ring-primary'
         ]
       }
     },
@@ -621,8 +624,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-secondary'
+        contentContainer: [
+          'focus-visible:ring-secondary'
         ]
       }
     },
@@ -632,8 +635,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-positive'
+        contentContainer: [
+          'focus-visible:ring-positive'
         ]
       }
     },
@@ -643,8 +646,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-accent'
+        contentContainer: [
+          'focus-visible:ring-accent'
         ]
       }
     },
@@ -654,8 +657,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-warning'
+        contentContainer: [
+          'focus-visible:ring-warning'
         ]
       }
     },
@@ -665,8 +668,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-negative'
+        contentContainer: [
+          'focus-visible:ring-negative'
         ]
       }
     },
@@ -677,8 +680,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-primary-container'
+        contentContainer: [
+          'focus-visible:ring-primary-container'
         ]
       }
     },
@@ -688,8 +691,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-secondary-container'
+        contentContainer: [
+          'focus-visible:ring-secondary-container'
         ]
       }
     },
@@ -699,8 +702,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-positive-container'
+        contentContainer: [
+          'focus-visible:ring-positive-container'
         ]
       }
     },
@@ -710,8 +713,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-accent-container'
+        contentContainer: [
+          'focus-visible:ring-accent-container'
         ]
       }
     },
@@ -721,8 +724,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-warning-container'
+        contentContainer: [
+          'focus-visible:ring-warning-container'
         ]
       }
     },
@@ -732,8 +735,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-negative-container'
+        contentContainer: [
+          'focus-visible:ring-negative-container'
         ]
       }
     },
@@ -744,8 +747,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-primary'
+        contentContainer: [
+          'focus-visible:ring-primary'
         ]
       }
     },
@@ -755,8 +758,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-secondary'
+        contentContainer: [
+          'focus-visible:ring-secondary'
         ]
       }
     },
@@ -766,8 +769,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-positive'
+        contentContainer: [
+          'focus-visible:ring-positive'
         ]
       }
     },
@@ -777,8 +780,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-accent'
+        contentContainer: [
+          'focus-visible:ring-accent'
         ]
       }
     },
@@ -788,8 +791,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-warning'
+        contentContainer: [
+          'focus-visible:ring-warning'
         ]
       }
     },
@@ -799,8 +802,8 @@ const tag = tv({
       isPressable: true,
       disabled: false,
       class: {
-        container: [
-          'focus:ring-negative'
+        contentContainer: [
+          'focus-visible:ring-negative'
         ]
       }
     }
