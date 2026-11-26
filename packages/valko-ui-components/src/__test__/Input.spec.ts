@@ -923,6 +923,35 @@ describe('Input component', () => {
 
         expect(wrapper.find('.vk-input__input').attributes('aria-describedby')).toBe('helper-text-id')
       })
+
+      it('should compose aria-describedby from the helpertext description and ariaDescribedBy', async () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            helpertext: 'Helper text',
+            ariaDescribedBy: 'helper-text-id'
+          }
+        })
+        await nextTick()
+
+        const helper = wrapper.find('.vk-input__helper')
+        expect(helper.exists()).toBe(true)
+        expect(wrapper.find('.vk-input__input').attributes('aria-describedby'))
+          .toBe(`helper-text-id ${helper.attributes('id')}`)
+      })
+
+      it('should associate the label with the control', async () => {
+        const wrapper = mount(VkInput, {
+          props: {
+            label: 'Name'
+          }
+        })
+        await nextTick()
+
+        const input = wrapper.find('.vk-input__input')
+        const label = wrapper.find('label')
+        expect(label.attributes('for')).toBe(input.attributes('id'))
+        expect(input.attributes('aria-labelledby')).toBe(label.attributes('id'))
+      })
     })
 
     describe('handleNumericArrowHold', () => {
