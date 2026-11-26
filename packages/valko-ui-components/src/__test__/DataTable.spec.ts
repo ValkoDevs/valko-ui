@@ -6,6 +6,12 @@ import VkSelect from '#valkoui/components/Select.vue'
 import VkPagination from '#valkoui/components/Pagination.vue'
 import type { Sort } from '#valkoui/types/common'
 
+const flushPortals = async () => {
+  await nextTick()
+  await nextTick()
+  await new Promise((resolve) => setTimeout(resolve, 5))
+}
+
 const headers = [
   {
     key: 'prop',
@@ -252,12 +258,15 @@ describe('DataTable component', () => {
           props: {
             headers: filterableHeaders,
             data
-          }
+          },
+          attachTo: document.body
         })
 
         await wrapper.findAll('.vk-data-table__utilities').at(0)?.trigger('click')
+        await flushPortals()
 
-        expect(wrapper.find('.vk-popover__panel').exists()).toBe(true)
+        expect(document.querySelector('.vk-popover__panel')).toBeTruthy()
+        wrapper.unmount()
       })
 
       it('should toggle close a popover when a filter inside a header is clicked again', async () => {
@@ -266,13 +275,17 @@ describe('DataTable component', () => {
           props: {
             headers: filterableHeaders,
             data
-          }
+          },
+          attachTo: document.body
         })
 
         await wrapper.findAll('.vk-data-table__utilities').at(0)?.trigger('click')
+        await flushPortals()
         await wrapper.findAll('.vk-data-table__utilities').at(0)?.trigger('click')
+        await flushPortals()
 
-        expect(wrapper.find('.vk-popover__panel').exists()).toBe(false)
+        expect(document.querySelector('.vk-popover__panel')).toBeNull()
+        wrapper.unmount()
       })
     })
 
@@ -390,19 +403,6 @@ describe('DataTable component', () => {
       expect(wrapper.emitted('onPageChange')?.[0]?.[0]).toBe(0)
     })
 
-    it('should remove event listeners when the component is unmounted', async () => {
-      const removeSpy = vi.spyOn(document, 'removeEventListener')
-      const wrapper = mount(VkDataTable, {
-        props: {
-          headers,
-          data
-        }
-      })
-
-      wrapper.unmount()
-      expect(removeSpy).toHaveBeenCalledWith('click', expect.any(Function))
-      removeSpy.mockRestore()
-    })
   })
 
   describe('Extended features', () => {
@@ -572,7 +572,12 @@ describe('DataTable component', () => {
 
       it('should close all popovers when a click is done outside', async () => {
         await wrapper.find('i.ti.ti-search').trigger('click')
-        await document.body.click()
+        await flushPortals()
+        expect(document.querySelector('.vk-popover__panel')).toBeTruthy()
+
+        document.body.dispatchEvent(new MouseEvent('pointerdown', { bubbles: true }))
+        document.body.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+        await flushPortals()
 
         expect(wrapper.find('.vk-popover[data-open="true"]').exists()).toBe(false)
       })

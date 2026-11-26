@@ -94,6 +94,18 @@
   --animate-pop: pop 0.4s ease-in-out;
   --animate-vk-toast-in: vk-toast-in 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
   --animate-vk-toast-out: vk-toast-out 0.3s ease-in forwards;
+  --animate-vk-popover-in: vk-popover-in 200ms ease-out;
+  --animate-vk-popover-out: vk-popover-out 150ms ease-in;
+
+  @keyframes vk-popover-in {
+    0% { opacity: 0; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes vk-popover-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+  }
 
   @keyframes progress {
     0% { clip-path: inset(0 100% 0 0) }
