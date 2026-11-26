@@ -5,7 +5,22 @@ const notification = tv({
     notification: [
       'vk-notification',
       'shadow-el3',
-      'overflow-hidden'
+      'overflow-hidden',
+      'relative',
+      'cursor-pointer',
+      'data-[state=open]:animate-vk-toast-in',
+      'data-[state=closed]:animate-vk-toast-out'
+    ],
+    viewport: [
+      'vk-notification__viewport',
+      'fixed',
+      'z-[2147483000]',
+      'flex',
+      'gap-2',
+      'm-0',
+      'p-0',
+      'list-none',
+      'outline-none'
     ],
     container: [
       'w-full',
@@ -137,6 +152,38 @@ const notification = tv({
       square: {
         notification: [
           'rounded-none'
+        ]
+      }
+    },
+    gravity: {
+      top: {
+        notification: [
+          '[--vk-toast-enter-y:-2rem]'
+        ],
+        viewport: [
+          'top-0',
+          'flex-col'
+        ]
+      },
+      bottom: {
+        notification: [
+          '[--vk-toast-enter-y:2rem]'
+        ],
+        viewport: [
+          'bottom-0',
+          'flex-col-reverse'
+        ]
+      }
+    },
+    position: {
+      left: {
+        viewport: [
+          'left-[15px]'
+        ]
+      },
+      right: {
+        viewport: [
+          'right-[15px]'
         ]
       }
     }
